@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+/**
+ * @uml.dependency   supplier="gamers.associate.Slime.LevelLayer"
+ */
 public class Slime extends Activity {
 	static {
         System.loadLibrary("gdx");

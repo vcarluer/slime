@@ -12,7 +12,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
 /**
- * @author  vince
+ * @author    vince
+ * @uml.dependency   supplier="gamers.associate.Slime.GameItem"
  */
 public abstract class Level {
 	protected CCNode rootNode;	

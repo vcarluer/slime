@@ -9,6 +9,9 @@ import org.cocos2d.nodes.CCSpriteSheet;
 
 import com.badlogic.gdx.physics.box2d.World;
 
+/**
+ * @uml.dependency   supplier="gamers.associate.Slime.Slimy"
+ */
 public class SlimyFactory {
 	private CCSpriteSheet spriteSheet;
 	private CCNode rootNode;
