@@ -16,6 +16,9 @@ import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
 
+/**
+ * @author  vince
+ */
 public abstract class GameItem {
 	protected CGPoint position;
 	protected float angle;
@@ -38,6 +41,10 @@ public abstract class GameItem {
 		this.rootNode.addChild(this.sprite);
 	}
 		
+	/**
+	 * @param animations
+	 * @uml.property  name="animationList"
+	 */
 	public void setAnimationList(Hashtable<String, CCAnimation> animations) {
 		this.animationList = animations;
 	}

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="Slime" size="1430,1800" id="" metadata="uml2-1.0" initialized="true" zoom="0.75" scrolledY="906" tag="1000" key="32303037303533312D3130303020536C696D652F76696E6365">
+  <children xsi:type="editmodel:ClassEditModel" name="LevelFactory" location="687,789" size="153,81" id="gamers.associate.Slime/LevelFactory" runTimeClassModel="GetLevel(Ljava.lang.String;Lorg.cocos2d.nodes.CCNode;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="78,18">
+      <children xsi:type="editmodel:MethodEditModel" name="GetLevel" id="gamers.associate.Slime/LevelFactory#GetLevel(Ljava.lang.String;Lorg.cocos2d.nodes.CCNode;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Slime" location="401,789" size="236,189" id="gamers.associate.Slime/Slime" runTimeClassModel="onStop(),onPause(),onCreate(Landroid.os.Bundle;),scene,onStart(),mGLSurfaceView,onResume()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="213,36">
+      <children xsi:type="editmodel:AttributeEditModel" name="mGLSurfaceView" id="gamers.associate.Slime/Slime#mGLSurfaceView"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="scene" id="gamers.associate.Slime/Slime#scene"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="88,90">
+      <children xsi:type="editmodel:MethodEditModel" name="onCreate" id="gamers.associate.Slime/Slime#onCreate(Landroid.os.Bundle;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="onPause" id="gamers.associate.Slime/Slime#onPause()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="onResume" id="gamers.associate.Slime/Slime#onResume()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="onStart" id="gamers.associate.Slime/Slime#onStart()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="onStop" id="gamers.associate.Slime/Slime#onStop()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="ContactManager" location="312,166" size="165,99" id="gamers.associate.Slime/ContactManager" runTimeClassModel="endContact(Lcom.badlogic.gdx.physics.box2d.Contact;),beginContact(Lcom.badlogic.gdx.physics.box2d.Contact;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="103,36">
+      <children xsi:type="editmodel:MethodEditModel" name="beginContact" id="gamers.associate.Slime/ContactManager#beginContact(Lcom.badlogic.gdx.physics.box2d.Contact;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="endContact" id="gamers.associate.Slime/ContactManager#endContact(Lcom.badlogic.gdx.physics.box2d.Contact;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="gamers.associate.Slime/ContactManager@contactManager+gamers.associate.Slime/Level@" source="//@children.2" target="//@children.5" targetEnd="//@children.2/@sourceConnections.0/@children.2" label="//@children.2/@sourceConnections.0/@children.0" sourceEnd="//@children.2/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="contactManager" location="155,99" id="gamers.associate.Slime/ContactManager@contactManager+gamers.associate.Slime/Level@|gamers.associate.Slime/ContactManager#contactManager" attachSource="true" multiplicityLabel="//@children.2/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.2/@sourceConnections.0/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" # contactManager" location="355,271" size="104,13" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="473,271" size="20,13" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,10" id="gamers.associate.Slime/ContactManager@contactManager+gamers.associate.Slime/Level@|gamers.associate.Slime/Level#"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="SlimyFactory" location="1096,513" size="301,207" id="gamers.associate.Slime/SlimyFactory" runTimeClassModel="create(),rootNode,createAnim(Ljava.lang.String;I),spriteSheet,worldRatio,SlimyFactory(Lorg.cocos2d.nodes.CCNode;Lcom.badlogic.gdx.physics.box2d.World;F),animationList,world">
+    <children xsi:type="editmodel:CompartmentEditModel" size="278,90">
+      <children xsi:type="editmodel:AttributeEditModel" name="animationList" id="gamers.associate.Slime/SlimyFactory#animationList"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="rootNode" id="gamers.associate.Slime/SlimyFactory#rootNode"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="spriteSheet" id="gamers.associate.Slime/SlimyFactory#spriteSheet"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="world" id="gamers.associate.Slime/SlimyFactory#world"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="worldRatio" id="gamers.associate.Slime/SlimyFactory#worldRatio"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="98,54">
+      <children xsi:type="editmodel:MethodEditModel" name="SlimyFactory" id="gamers.associate.Slime/SlimyFactory#SlimyFactory(Lorg.cocos2d.nodes.CCNode;Lcom.badlogic.gdx.physics.box2d.World;F)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="create" id="gamers.associate.Slime/SlimyFactory#create()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="createAnim" id="gamers.associate.Slime/SlimyFactory#createAnim(Ljava.lang.String;I)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="gamers.associate.Slime/SlimyFactory@slimyFactory+gamers.associate.Slime/Level@" source="//@children.3" target="//@children.5" targetEnd="//@children.3/@sourceConnections.0/@children.2" label="//@children.3/@sourceConnections.0/@children.0" sourceEnd="//@children.3/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="slimyFactory" location="0,38" id="gamers.associate.Slime/SlimyFactory@slimyFactory+gamers.associate.Slime/Level@|gamers.associate.Slime/SlimyFactory#slimyFactory" attachSource="true" multiplicityLabel="//@children.3/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.3/@sourceConnections.0/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" # slimyFactory" location="1007,530" size="82,13" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="1069,557" size="20,13" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="228,240" id="gamers.associate.Slime/SlimyFactory@slimyFactory+gamers.associate.Slime/Level@|gamers.associate.Slime/Level#" roleLabel="//@children.3/@sourceConnections.0/@children.2/@children.0">
+        <children xsi:type="editmodel:LabelEditModel" location="872,530" size="0,13" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="LevelLayer" location="50,50" size="200,225" id="gamers.associate.Slime/LevelLayer" runTimeClassModel="level,init(),tick(F),Scene(),LevelLayer(),tickCallback,onEnter(),ccTouchesBegan(Landroid.view.MotionEvent;),onExit()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="177,36">
+      <children xsi:type="editmodel:AttributeEditModel" name="level" id="gamers.associate.Slime/Level@level+gamers.associate.Slime/LevelLayer@|gamers.associate.Slime/Level#level"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="tickCallback" id="gamers.associate.Slime/LevelLayer#tickCallback"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="122,126">
+      <children xsi:type="editmodel:MethodEditModel" name="LevelLayer" id="gamers.associate.Slime/LevelLayer#LevelLayer()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Scene" id="gamers.associate.Slime/LevelLayer#Scene()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="ccTouchesBegan" id="gamers.associate.Slime/LevelLayer#ccTouchesBegan(Landroid.view.MotionEvent;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="init" id="gamers.associate.Slime/LevelLayer#init()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="onEnter" id="gamers.associate.Slime/LevelLayer#onEnter()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="onExit" id="gamers.associate.Slime/LevelLayer#onExit()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="tick" id="gamers.associate.Slime/LevelLayer#tick(F)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="gamers.associate.Slime/Level@level+gamers.associate.Slime/LevelLayer@" source="//@children.4" target="//@children.5" targetEnd="//@children.4/@sourceConnections.0/@children.2" label="//@children.4/@sourceConnections.0/@children.0" sourceEnd="//@children.4/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="190,225" id="gamers.associate.Slime/Level@level+gamers.associate.Slime/LevelLayer@|gamers.associate.Slime/LevelLayer#" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="level" location="0,10" id="gamers.associate.Slime/Level@level+gamers.associate.Slime/LevelLayer@|gamers.associate.Slime/Level#level" multiplicityLabel="//@children.4/@sourceConnections.0/@children.2/@children.1" roleLabel="//@children.4/@sourceConnections.0/@children.2/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - level" location="594,327" size="36,13" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="610,300" size="20,13" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.6/@sourceConnections.0 //@children.2/@sourceConnections.0 //@children.4/@sourceConnections.0 //@children.3/@sourceConnections.0" name="Level" location="638,311" size="228,279" id="gamers.associate.Slime/Level" runTimeClassModel="contactManager,tick(F),init(),rootNode,items,slimyFactory,Level(Lorg.cocos2d.nodes.CCNode;),SpawnSlime(),worldRatio,backgroundSprite,world,gravity">
+    <children xsi:type="editmodel:CompartmentEditModel" size="205,144">
+      <children xsi:type="editmodel:AttributeEditModel" name="backgroundSprite" id="gamers.associate.Slime/Level#backgroundSprite"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="contactManager" id="gamers.associate.Slime/ContactManager@contactManager+gamers.associate.Slime/Level@|gamers.associate.Slime/ContactManager#contactManager"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="gravity" id="gamers.associate.Slime/Level#gravity"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="items" id="gamers.associate.Slime/Level#items"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="rootNode" id="gamers.associate.Slime/Level#rootNode"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="slimyFactory" id="gamers.associate.Slime/SlimyFactory@slimyFactory+gamers.associate.Slime/Level@|gamers.associate.Slime/SlimyFactory#slimyFactory"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="world" id="gamers.associate.Slime/Level#world"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="worldRatio" id="gamers.associate.Slime/Level#worldRatio"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="97,72">
+      <children xsi:type="editmodel:MethodEditModel" name="Level" id="gamers.associate.Slime/Level#Level(Lorg.cocos2d.nodes.CCNode;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="SpawnSlime" id="gamers.associate.Slime/Level#SpawnSlime()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="init" id="gamers.associate.Slime/Level#init()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="tick" id="gamers.associate.Slime/Level#tick(F)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="HardCodedLevel" location="668,640" size="168,99" id="gamers.associate.Slime/HardCodedLevel" runTimeClassModel="init(),HardCodedLevel(Lorg.cocos2d.nodes.CCNode;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="120,36">
+      <children xsi:type="editmodel:MethodEditModel" name="HardCodedLevel" id="gamers.associate.Slime/HardCodedLevel#HardCodedLevel(Lorg.cocos2d.nodes.CCNode;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="init" id="gamers.associate.Slime/HardCodedLevel#init()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="gamers.associate.Slime/Level&lt;-gamers.associate.Slime/HardCodedLevel" source="//@children.6" target="//@children.5" targetEnd="//@children.6/@sourceConnections.0/@children.1" sourceEnd="//@children.6/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="84,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="114,279"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.9/@sourceConnections.0" name="GameItemPhysic" location="116,1118" size="168,243" id="gamers.associate.Slime/GameItemPhysic" runTimeClassModel="initBody(),body,init(),bodyHeight,contact(),bodyWidth,worldRatio,render(F),world,GameItemPhysic(Lorg.cocos2d.nodes.CCNode;Lcom.badlogic.gdx.physics.box2d.World;F)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="114,90">
+      <children xsi:type="editmodel:AttributeEditModel" name="body" id="gamers.associate.Slime/GameItemPhysic#body"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="bodyHeight" id="gamers.associate.Slime/GameItemPhysic#bodyHeight"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="bodyWidth" id="gamers.associate.Slime/GameItemPhysic#bodyWidth"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="world" id="gamers.associate.Slime/GameItemPhysic#world"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="worldRatio" id="gamers.associate.Slime/GameItemPhysic#worldRatio"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="120,90">
+      <children xsi:type="editmodel:MethodEditModel" name="GameItemPhysic" id="gamers.associate.Slime/GameItemPhysic#GameItemPhysic(Lorg.cocos2d.nodes.CCNode;Lcom.badlogic.gdx.physics.box2d.World;F)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="contact" id="gamers.associate.Slime/GameItemPhysic#contact()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="init" id="gamers.associate.Slime/GameItemPhysic#init()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="initBody" id="gamers.associate.Slime/GameItemPhysic#initBody()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="render" id="gamers.associate.Slime/GameItemPhysic#render(F)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="gamers.associate.Slime/GameItem&lt;-gamers.associate.Slime/GameItemPhysic" source="//@children.7" target="//@children.8" targetEnd="//@children.7/@sourceConnections.0/@children.1" sourceEnd="//@children.7/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="84,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="150,279"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.7/@sourceConnections.0" name="GameItem" location="50,789" size="301,279" id="gamers.associate.Slime/GameItem" runTimeClassModel="position,scale,height,GameItem(Lorg.cocos2d.nodes.CCNode;),rootNode,spriteSheet,createAnim(Ljava.lang.String;I),width,sprite,render(F),animationList,angle">
+    <children xsi:type="editmodel:CompartmentEditModel" size="278,162">
+      <children xsi:type="editmodel:AttributeEditModel" name="angle" id="gamers.associate.Slime/GameItem#angle"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="animationList" id="gamers.associate.Slime/GameItem#animationList"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="height" id="gamers.associate.Slime/GameItem#height"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="position" id="gamers.associate.Slime/GameItem#position"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="rootNode" id="gamers.associate.Slime/GameItem#rootNode"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="scale" id="gamers.associate.Slime/GameItem#scale"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="sprite" id="gamers.associate.Slime/GameItem#sprite"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="spriteSheet" id="gamers.associate.Slime/GameItem#spriteSheet"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="width" id="gamers.associate.Slime/GameItem#width"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="92,54">
+      <children xsi:type="editmodel:MethodEditModel" name="GameItem" id="gamers.associate.Slime/GameItem#GameItem(Lorg.cocos2d.nodes.CCNode;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="createAnim" id="gamers.associate.Slime/GameItem#createAnim(Ljava.lang.String;I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="render" id="gamers.associate.Slime/GameItem#render(F)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Slimy" location="110,1411" size="181,369" id="gamers.associate.Slime/Slimy" runTimeClassModel="initBody(),init(),Slimy(Lorg.cocos2d.nodes.CCNode;Lcom.badlogic.gdx.physics.box2d.World;F),contact(),anim_Landing_V,anim_Wait_H,render(F),anim_Burning,currentAction,anim_Burned_Wait,fall(),anim_Landing_H,isLanded,anim_Falling,land(),anim_Wait_V,waitAnim()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="158,162">
+      <children xsi:type="editmodel:AttributeEditModel" name="anim_Burned_Wait" id="gamers.associate.Slime/Slimy#anim_Burned_Wait"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="anim_Burning" id="gamers.associate.Slime/Slimy#anim_Burning"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="anim_Falling" id="gamers.associate.Slime/Slimy#anim_Falling"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="anim_Landing_H" id="gamers.associate.Slime/Slimy#anim_Landing_H"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="anim_Landing_V" id="gamers.associate.Slime/Slimy#anim_Landing_V"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="anim_Wait_H" id="gamers.associate.Slime/Slimy#anim_Wait_H"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="anim_Wait_V" id="gamers.associate.Slime/Slimy#anim_Wait_V"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="currentAction" id="gamers.associate.Slime/Slimy#currentAction"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="isLanded" id="gamers.associate.Slime/Slimy#isLanded"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="80,144">
+      <children xsi:type="editmodel:MethodEditModel" name="Slimy" id="gamers.associate.Slime/Slimy#Slimy(Lorg.cocos2d.nodes.CCNode;Lcom.badlogic.gdx.physics.box2d.World;F)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="contact" id="gamers.associate.Slime/Slimy#contact()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="fall" id="gamers.associate.Slime/Slimy#fall()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="init" id="gamers.associate.Slime/Slimy#init()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="initBody" id="gamers.associate.Slime/Slimy#initBody()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="land" id="gamers.associate.Slime/Slimy#land()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="render" id="gamers.associate.Slime/Slimy#render(F)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="waitAnim" id="gamers.associate.Slime/Slimy#waitAnim()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="gamers.associate.Slime/GameItemPhysic&lt;-gamers.associate.Slime/Slimy" source="//@children.9" target="//@children.7" targetEnd="//@children.9/@sourceConnections.0/@children.1" sourceEnd="//@children.9/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="90,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="84,243"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=1;Product=eUML2" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
+</editmodel:ClassDiagramEditModel>

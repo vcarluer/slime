@@ -15,8 +15,15 @@ import android.view.MotionEvent;
 
 import com.badlogic.gdx.physics.box2d.Body;
 
+/**
+ * @author  vince
+ */
 public class LevelLayer  extends CCLayer {
 	
+	/**
+	 * @uml.property  name="level"
+	 * @uml.associationEnd  
+	 */
 	private Level level;	
 	
 	public static CCScene Scene()
