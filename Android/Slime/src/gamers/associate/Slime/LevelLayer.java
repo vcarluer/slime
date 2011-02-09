@@ -16,7 +16,8 @@ import android.view.MotionEvent;
 import com.badlogic.gdx.physics.box2d.Body;
 
 /**
- * @author  vince
+ * @author    vince
+ * @uml.dependency   supplier="gamers.associate.Slime.LevelFactory"
  */
 public class LevelLayer  extends CCLayer {
 	
