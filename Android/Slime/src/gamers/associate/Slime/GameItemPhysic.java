@@ -16,13 +16,7 @@ public abstract class GameItemPhysic extends GameItem{
 	public GameItemPhysic(CCNode node, float x, float y, World world, float worldRatio) {		
 		super(node, x, y);
 		this.world = world;
-		this.worldRatio = worldRatio;		
-		this.init();		
-	}
-	
-	protected void init() {		
-		this.sprite.setScale(this.scale);
-		this.initBody();
+		this.worldRatio = worldRatio;
 	}
 	
 	protected abstract void initBody();

@@ -264,10 +264,23 @@
                 <key>sourceSize</key>
                 <string>{24,26}</string>
             </dict>
+            <key>metal.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{36,88},{64,43}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{64,43}}</string>
+                <key>sourceSize</key>
+                <string>{64,43}</string>
+            </dict>
             <key>redportal-1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{36,88},{32,10}}</string>
+                <string>{{0,131},{32,10}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -280,7 +293,7 @@
             <key>redportal-2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{68,88},{32,10}}</string>
+                <string>{{32,131},{32,10}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -293,7 +306,7 @@
             <key>redportal-3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,114},{32,10}}</string>
+                <string>{{64,131},{32,10}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -306,7 +319,7 @@
             <key>redportal-4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{32,114},{32,10}}</string>
+                <string>{{0,141},{32,10}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -319,7 +332,7 @@
             <key>wait-h-1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{64,114},{26,22}}</string>
+                <string>{{32,141},{26,22}}</string>
                 <key>offset</key>
                 <string>{0,-1}</string>
                 <key>rotated</key>
@@ -332,7 +345,7 @@
             <key>wait-h-2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{90,114},{26,22}}</string>
+                <string>{{58,141},{26,22}}</string>
                 <key>offset</key>
                 <string>{0,-1}</string>
                 <key>rotated</key>
@@ -345,7 +358,7 @@
             <key>wait-h-3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,136},{26,22}}</string>
+                <string>{{84,141},{26,22}}</string>
                 <key>offset</key>
                 <string>{0,-1}</string>
                 <key>rotated</key>
@@ -358,7 +371,7 @@
             <key>wait-h-4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{26,136},{26,24}}</string>
+                <string>{{0,163},{26,24}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -371,7 +384,7 @@
             <key>wait-h-5.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{52,136},{26,22}}</string>
+                <string>{{26,163},{26,22}}</string>
                 <key>offset</key>
                 <string>{0,-1}</string>
                 <key>rotated</key>
@@ -384,7 +397,7 @@
             <key>wait-v-1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{78,136},{22,26}}</string>
+                <string>{{52,163},{22,26}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -397,7 +410,7 @@
             <key>wait-v-2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{100,136},{22,26}}</string>
+                <string>{{74,163},{22,26}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -410,7 +423,7 @@
             <key>wait-v-3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,162},{22,26}}</string>
+                <string>{{96,163},{22,26}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -423,7 +436,7 @@
             <key>wait-v-4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{22,162},{22,26}}</string>
+                <string>{{0,189},{22,26}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -436,7 +449,7 @@
             <key>wait-v-5.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{44,162},{24,26}}</string>
+                <string>{{22,189},{24,26}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>

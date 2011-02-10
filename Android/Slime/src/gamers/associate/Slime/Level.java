@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.nodes.CCSpriteFrameCache;
+import org.cocos2d.nodes.CCSpriteSheet;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -55,10 +57,12 @@ public abstract class Level {
 				
 		SlimyFactory.Attach(this.rootNode, this.world, this.worldRatio);
 		SpawnPortalFactory.Attach(this.rootNode);
+		PlatformFactory.Attach(this.rootNode, this.world, this.worldRatio);
+		
 		this.spawnPortal = SpawnPortalFactory.create(
 				CCDirector.sharedDirector().winSize().getWidth() / 2, 
 				CCDirector.sharedDirector().winSize().getHeight() - 32,
-				80,
+				150,
 				5);
 		this.items.add(this.spawnPortal);
 	}

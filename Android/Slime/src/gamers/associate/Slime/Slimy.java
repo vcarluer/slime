@@ -28,18 +28,16 @@ public class Slimy extends GameItemPhysic {
 	protected Boolean isLanded;	
 	
 	public Slimy(CCNode node, float x, float y, World world, float worldRatio) {		
-		super(node, x, y, world, worldRatio);		
-	}
-	
-	@Override
-	protected void init() {
+		super(node, x, y, world, worldRatio);
+		
 		this.width = 26f;
-		this.height = 24f;	
+		this.height = 24f;
 		this.bodyWidth = 16f;
 		this.bodyHeight = 23f;
-		this.scale = 1.5f;
+		// this.scale = 1.5f;
 		this.isLanded = false;
-		super.init();		
+		
+		this.initBody();
 	}
 	
 	@Override

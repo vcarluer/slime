@@ -55,6 +55,9 @@ public class HardCodedLevel extends Level {
 		
 		// right
 		groundBox.setAsEdge(topRight, bottomRight);
-		groundBody.createFixture(groundBox,0);		
+		groundBody.createFixture(groundBox,0);
+		
+		PlatformFactory.create(100, 50, 100, 10);
+		PlatformFactory.create(s.width - 100, s.height - 100, 100, 10);
 	}
 }

@@ -11,6 +11,7 @@ import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
+import org.cocos2d.types.CGRect;
 
 /**
  * @author  vince
@@ -36,13 +37,32 @@ public abstract class GameItem {
 		this.rootNode = node;
 		this.scale = 1.0f;
 		
-		this.sprite = new CCSprite();
-		this.sprite.setPosition(this.position);
-		this.rootNode.addChild(this.sprite);
+		CCSprite sprite = new CCSprite();
+		this.setSprite(sprite);		
 	}
 	
 	public CGPoint getPosition() {
 		return this.position;
+	}
+	
+	public void setSprite(CCSprite affectSprite) {
+		if (this.sprite != null) {
+			this.rootNode.removeChild(this.sprite, true);
+		}
+		
+		this.sprite = affectSprite;
+		this.rootNode.addChild(this.sprite);
+		this.sprite.setPosition(this.position);
+		this.sprite.setRotation(this.angle);
+		this.sprite.setScale(this.scale);
+		if (this.width != 0 && this.height != 0) {
+			float texW = CGRect.width(this.sprite.getTextureRect());
+			float textH = CGRect.height(this.sprite.getTextureRect());
+			float wScale = this.width / texW;
+			float hScale = this.height / textH;
+			this.sprite.setScaleX(wScale);
+			this.sprite.setScaleY(hScale);
+		}		
 	}
 	
 	/**
