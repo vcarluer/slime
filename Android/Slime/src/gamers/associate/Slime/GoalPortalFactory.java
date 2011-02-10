@@ -7,7 +7,9 @@ import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCSpriteSheet;
 
-public class SpawnPortalFactory {
+import com.badlogic.gdx.physics.box2d.World;
+
+public class GoalPortalFactory {
 	private static String plist = "labo.plist";
 	private static String png = "labo.png";	
 	private static Hashtable<String, CCAnimation> sharedAnimations;
@@ -15,9 +17,13 @@ public class SpawnPortalFactory {
 	private static boolean isInit = false;	
 	private static boolean isAttached = false;
 	private static CCNode rootNode;	
+	private static World world;
+	private static float worldRatio;
 	
-	public static void Attach(CCNode attachNode) {
+	public static void Attach(CCNode attachNode, World attachWorld, float attachWorldRatio) {
 		rootNode = attachNode;		
+		world = attachWorld;
+		worldRatio = attachWorldRatio;		
 		init();
 		rootNode.addChild(spriteSheet);
 		isAttached = true;
@@ -28,6 +34,8 @@ public class SpawnPortalFactory {
 			// true here?
 			rootNode.removeChild(spriteSheet, true);
 			rootNode = null;			
+			world = null;
+			worldRatio = 0f;
 			isAttached = false;
 		}
 	}
@@ -38,17 +46,16 @@ public class SpawnPortalFactory {
 			spriteSheet = CCSpriteSheet.spriteSheet(png);			
 			
 			sharedAnimations = new Hashtable<String, CCAnimation>();
-			createAnim(SpawnPortal.Anim_Spawn_Portal, 4);						
+			createAnim(GoalPortal.Anim_Goal_Portal, 4);						
 			isInit = true;
 		}
 	}	
 		
-	public static SpawnPortal create(float x, float y, float moveBy, float speed) {
+	public static GoalPortal create(float x, float y) {
 		if (isAttached) {
-			SpawnPortal portal = new SpawnPortal(spriteSheet, x, y);
+			GoalPortal portal = new GoalPortal(spriteSheet, x, y, world, worldRatio);			
 			portal.setAnimationList(sharedAnimations);
-			portal.createPortal();
-			portal.MovePortalInLine(moveBy, speed);
+			portal.createPortal();			
 			return portal;
 		}
 		else
@@ -60,5 +67,4 @@ public class SpawnPortalFactory {
 	private static void createAnim(String animName, int frameCount) {		
 		sharedAnimations.put(animName, GameItem.createAnim(animName, frameCount));
 	}
-
 }

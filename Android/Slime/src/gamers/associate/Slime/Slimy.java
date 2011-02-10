@@ -26,6 +26,7 @@ public class Slimy extends GameItemPhysic {
 	public static String Anim_Wait_V = "wait-v";
 	
 	protected Boolean isLanded;	
+	protected CCAction waitAction;
 	
 	public Slimy(CCNode node, float x, float y, World world, float worldRatio) {		
 		super(node, x, y, world, worldRatio);
@@ -78,7 +79,8 @@ public class Slimy extends GameItemPhysic {
 		CCDelayTime delay = CCDelayTime.action(3f);
 		CCAnimate reverse = animate.reverse();
 		
-		CCAction action = CCRepeatForever.action(CCSequence.actions(animate, reverse, delay));				
+		CCAction action = CCRepeatForever.action(CCSequence.actions(animate, reverse, delay));
+		this.waitAction = action;
 		this.sprite.runAction(action);
 	}
 	
@@ -110,7 +112,18 @@ public class Slimy extends GameItemPhysic {
 	}
 	
 	@Override
-	public void contact() {
+	public void contact(Object with) {		
 		this.land();
+	}
+	
+	public void win() {
+		if (this.currentAction != null) {
+			this.sprite.stopAction(this.currentAction);
+		}
+		
+		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Burning), false);
+		this.currentAction = animate;
+		this.sprite.stopAction(this.waitAction);
+		this.sprite.runAction(this.currentAction);
 	}
 }

@@ -15,7 +15,7 @@ public class SpawnPortal extends GameItem {
 		super(node, x, y);		
 	}
 	
-	public void createPortal(float x, float y) {
+	public void createPortal() {
 		CCAction animate = CCRepeatForever.action(CCAnimate.action(this.animationList.get(Anim_Spawn_Portal), false));				
 		this.sprite.runAction(animate);		
 	}
@@ -33,5 +33,11 @@ public class SpawnPortal extends GameItem {
 		CCMoveBy moveLeftReverse = moveLeft.reverse();
 		CCAction moveSeq = CCRepeatForever.action(CCSequence.actions(moveRight, moveRightReverse, moveLeft, moveLeftReverse));		
 		this.sprite.runAction(moveSeq);
-	}	
+	}
+	
+	public GameItem spawn() {
+		Slimy slimy = SlimyFactory.create(this.position.x, this.position.y);
+		slimy.fall();
+		return slimy;
+	}
 }

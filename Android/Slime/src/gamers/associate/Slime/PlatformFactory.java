@@ -43,7 +43,7 @@ public class PlatformFactory {
 			CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames(plist);				
 			spriteSheet = CCSpriteSheet.spriteSheet(png);
 			
-			// sharedAnimations = new Hashtable<String, CCAnimation>();			
+			// sharedAnimations = new Hashtable<String, CCAnimation>();
 			isInit = true;
 		}
 	}	

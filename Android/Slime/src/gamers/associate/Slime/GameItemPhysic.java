@@ -31,6 +31,6 @@ public abstract class GameItemPhysic extends GameItem{
 		super.render(delta);
 	}
 	
-	public void contact() {
+	public void contact(Object with) {
 	}
 }

@@ -59,5 +59,8 @@ public class HardCodedLevel extends Level {
 		
 		PlatformFactory.create(100, 50, 100, 10);
 		PlatformFactory.create(s.width - 100, s.height - 100, 100, 10);
+		
+		this.goalPortal = GoalPortalFactory.create(s.width / 2, 20);
+		this.items.add(this.goalPortal);
 	}
 }

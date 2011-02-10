@@ -13,13 +13,13 @@ public class ContactManager implements ContactListener {
 			if (oA instanceof GameItemPhysic)
 			{
 				GameItemPhysic item = (GameItemPhysic)oA;
-				item.contact();
+				item.contact(oB);
 			}
 			
 			if (oB instanceof GameItemPhysic)
 			{
 				GameItemPhysic item = (GameItemPhysic)oB;
-				item.contact();
+				item.contact(oA);
 			}
 		}
 		

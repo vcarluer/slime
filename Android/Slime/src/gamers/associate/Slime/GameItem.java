@@ -29,6 +29,10 @@ public abstract class GameItem {
 	protected CCNode rootNode;
 	
 	public GameItem(CCNode node, float x, float y) {
+		this(node, x, y, 0, 0);
+	}
+	
+	public GameItem(CCNode node, float x, float y, float width, float height) {
 		this.animationList = new Hashtable<String, CCAnimation>();
 		this.position = new CGPoint();
 		this.position.x = x;
@@ -36,9 +40,11 @@ public abstract class GameItem {
 		this.angle = 0f;
 		this.rootNode = node;
 		this.scale = 1.0f;
+		this.width = width;
+		this.height = height;
 		
 		CCSprite sprite = new CCSprite();
-		this.setSprite(sprite);		
+		this.setSprite(sprite);
 	}
 	
 	public CGPoint getPosition() {
