@@ -1,19 +1,11 @@
 package gamers.associate.Slime;
 
-import java.util.Iterator;
-
 import org.cocos2d.actions.UpdateCallback;
-import org.cocos2d.config.ccMacros;
 import org.cocos2d.events.CCTouchDispatcher;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
-import org.cocos2d.nodes.CCDirector;
-import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.types.CGPoint;
 
 import android.view.MotionEvent;
-
-import com.badlogic.gdx.physics.box2d.Body;
 
 /**
  * @author    vince

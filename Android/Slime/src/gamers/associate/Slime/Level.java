@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.nodes.CCSpriteFrameCache;
-import org.cocos2d.nodes.CCSpriteSheet;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -24,14 +22,14 @@ public abstract class Level {
 	/**
 	 * @uml.property  name="slimyFactory"
 	 * @uml.associationEnd  
-	 */
-	protected SlimyFactory slimyFactory;
+	 */	
 	protected CCSprite backgroundSprite;
 	/**
 	 * @uml.property  name="contactManager"
 	 * @uml.associationEnd  
 	 */
 	protected ContactManager contactManager;
+	protected SpawnPortal spawnPortal;
 	
 	public Level(CCNode node) {
 		this.rootNode = node;
@@ -54,8 +52,15 @@ public abstract class Level {
 		this.backgroundSprite.setAnchorPoint(0, 0);
 		this.backgroundSprite.setScale(0.5f);
 		spriteSheet.addChild(this.backgroundSprite);*/
-		
-		this.slimyFactory = new SlimyFactory(this.rootNode, this.world, this.worldRatio);
+				
+		SlimyFactory.Attach(this.rootNode, this.world, this.worldRatio);
+		SpawnPortalFactory.Attach(this.rootNode);
+		this.spawnPortal = SpawnPortalFactory.create(
+				CCDirector.sharedDirector().winSize().getWidth() / 2, 
+				CCDirector.sharedDirector().winSize().getHeight() - 32,
+				80,
+				5);
+		this.items.add(this.spawnPortal);
 	}
 	
 	protected void tick(float delta) {
@@ -69,7 +74,7 @@ public abstract class Level {
 	}
 	
 	public void SpawnSlime() {		
-		Slimy slimy = this.slimyFactory.create();
+		Slimy slimy = SlimyFactory.create(this.spawnPortal.getPosition().x, this.spawnPortal.getPosition().y);
 		slimy.fall();
 		this.items.add(slimy);
 		

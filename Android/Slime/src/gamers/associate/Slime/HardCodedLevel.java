@@ -55,6 +55,6 @@ public class HardCodedLevel extends Level {
 		
 		// right
 		groundBox.setAsEdge(topRight, bottomRight);
-		groundBody.createFixture(groundBox,0);			
+		groundBody.createFixture(groundBox,0);		
 	}
 }

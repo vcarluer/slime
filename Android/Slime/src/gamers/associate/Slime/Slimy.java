@@ -4,13 +4,9 @@ import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCDelayTime;
+import org.cocos2d.actions.interval.CCFadeIn;
 import org.cocos2d.actions.interval.CCSequence;
-import org.cocos2d.config.ccMacros;
-import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCNode;
-import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.nodes.CCSpriteFrameCache;
-import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -29,11 +25,10 @@ public class Slimy extends GameItemPhysic {
 	public static String Anim_Wait_H = "wait-h";
 	public static String Anim_Wait_V = "wait-v";
 	
-	protected Boolean isLanded;
-	protected CCAction currentAction;
+	protected Boolean isLanded;	
 	
-	public Slimy(CCNode node, World world, float worldRatio) {		
-		super(node, world, worldRatio);		
+	public Slimy(CCNode node, float x, float y, World world, float worldRatio) {		
+		super(node, x, y, world, worldRatio);		
 	}
 	
 	@Override
@@ -53,8 +48,8 @@ public class Slimy extends GameItemPhysic {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
 		CGPoint spawnPoint = new CGPoint();
-		spawnPoint.x = CCDirector.sharedDirector().winSize().getWidth() / 2;
-		spawnPoint.y = CCDirector.sharedDirector().winSize().getHeight() - 2 * (this.height * this.scale);
+		spawnPoint.x = this.position.x;
+		spawnPoint.y = this.position.y;
 		bodyDef.position.set(spawnPoint.x/worldRatio, spawnPoint.y/worldRatio);
 		
 		// Define another box shape for our dynamic body.
@@ -75,13 +70,18 @@ public class Slimy extends GameItemPhysic {
     	}  
 	}
 	
+	public void fadeIn() {
+		CCFadeIn fade = CCFadeIn.action(0.5f);
+		this.sprite.runAction(fade);
+	}
+	
 	public void waitAnim() {
 		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Wait_V), false);
 		CCDelayTime delay = CCDelayTime.action(3f);
 		CCAnimate reverse = animate.reverse();
 		
 		CCAction action = CCRepeatForever.action(CCSequence.actions(animate, reverse, delay));				
-		sprite.runAction(action);
+		this.sprite.runAction(action);
 	}
 	
 	public void fall() {
@@ -90,7 +90,7 @@ public class Slimy extends GameItemPhysic {
 		
 		CCAction action = CCRepeatForever.action(CCSequence.actions(animate, reverse));		
 		this.currentAction = action;
-		sprite.runAction(this.currentAction);
+		this.sprite.runAction(this.currentAction);
 	}
 	
 	public void land() {
@@ -101,7 +101,7 @@ public class Slimy extends GameItemPhysic {
 			
 			CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Landing_V), false);
 			this.currentAction = animate;
-			sprite.runAction(this.currentAction);
+			this.sprite.runAction(this.currentAction);
 			this.isLanded = true;
 		}
 	}
