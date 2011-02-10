@@ -29,12 +29,12 @@ public abstract class GameItemPhysic extends GameItem{
 	
 	@Override
 	public void render(float delta) {
-		if (this.sprite != null && this.body != null) {
-			this.position.x = this.body.getPosition().x;
-			this.position.y = this.body.getPosition().y;
+		if (this.sprite != null && this.body != null) {			
 			this.sprite.setPosition(this.body.getPosition().x * this.worldRatio, this.body.getPosition().y * this.worldRatio);
 			this.sprite.setRotation(-1.0f * ccMacros.CC_RADIANS_TO_DEGREES(this.body.getAngle()));
 		}
+		
+		super.render(delta);
 	}
 	
 	public void contact() {

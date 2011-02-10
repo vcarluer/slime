@@ -33,10 +33,5 @@ public class SpawnPortal extends GameItem {
 		CCMoveBy moveLeftReverse = moveLeft.reverse();
 		CCAction moveSeq = CCRepeatForever.action(CCSequence.actions(moveRight, moveRightReverse, moveLeft, moveLeftReverse));		
 		this.sprite.runAction(moveSeq);
-	}
-	
-	@Override
-	public void render(float delta) {
-		this.position = this.sprite.getPosition();
-	}
+	}	
 }

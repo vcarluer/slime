@@ -53,7 +53,10 @@ public abstract class GameItem {
 		this.animationList = animations;
 	}
 	
-	public void render(float delta) {	
+	public void render(float delta) {
+		if (this.sprite != null) {
+			this.position = this.sprite.getPosition();
+		}
 	}
 	
 	protected void addAnim(String animName, int frameCount) {
