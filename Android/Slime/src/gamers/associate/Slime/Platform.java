@@ -11,11 +11,8 @@ import com.badlogic.gdx.physics.box2d.World;
 public class Platform extends GameItemPhysic {	
 	public static String texture = "metal.png"; 
 		
-	public Platform(CCNode node, float x, float y, World world, float worldRatio, float width, float height) {
-		super(node, x, y, world, worldRatio);
-		
-		this.bodyWidth = this.width = width;
-		this.bodyHeight = this.height = height;
+	public Platform(CCNode node, float x, float y, float width, float height, World world, float worldRatio) {
+		super(node, x, y, width, height, world, worldRatio);				
 		this.initBody();
 	}
 	
@@ -30,7 +27,7 @@ public class Platform extends GameItemPhysic {
 		
 		// Define another box shape for our dynamic body.
 		PolygonShape staticBox = new PolygonShape();
-		staticBox.setAsBox((this.bodyWidth * this.scale) / this.worldRatio / 2, (this.bodyHeight * this.scale) / this.worldRatio / 2);
+		staticBox.setAsBox(this.bodyWidth / this.worldRatio / 2, this.bodyHeight / this.worldRatio / 2);
 		
 		synchronized (world) {
     		// Define the dynamic body fixture and set mass so it's dynamic.

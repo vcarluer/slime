@@ -11,8 +11,8 @@ import org.cocos2d.types.CGPoint;
 public class SpawnPortal extends GameItem {
 	public static String Anim_Spawn_Portal = "blueportal";		
 	
-	public SpawnPortal(CCNode node, float x, float y) {
-		super(node, x, y);		
+	public SpawnPortal(CCNode node, float x, float y, float width, float height) {
+		super(node, x, y, width, height);		
 	}
 	
 	public void createPortal() {
@@ -36,7 +36,7 @@ public class SpawnPortal extends GameItem {
 	}
 	
 	public GameItem spawn() {
-		Slimy slimy = SlimyFactory.create(this.position.x, this.position.y);
+		Slimy slimy = SlimeFactory.Slimy.create(this.position.x, this.position.y);
 		slimy.fall();
 		return slimy;
 	}

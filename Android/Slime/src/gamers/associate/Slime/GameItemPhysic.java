@@ -13,10 +13,12 @@ public abstract class GameItemPhysic extends GameItem{
 	protected float bodyHeight;
 	protected float worldRatio;
 	
-	public GameItemPhysic(CCNode node, float x, float y, World world, float worldRatio) {		
-		super(node, x, y);
+	public GameItemPhysic(CCNode node, float x, float y, float width, float height, World world, float worldRatio) {		
+		super(node, x, y, width, height);
 		this.world = world;
 		this.worldRatio = worldRatio;
+		this.bodyWidth = this.width;
+		this.bodyHeight = this.height;
 	}
 	
 	protected abstract void initBody();

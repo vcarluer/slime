@@ -1,64 +1,41 @@
 package gamers.associate.Slime;
 
-import java.util.Hashtable;
 
-import org.cocos2d.nodes.CCAnimation;
-import org.cocos2d.nodes.CCNode;
-import org.cocos2d.nodes.CCSpriteFrameCache;
-import org.cocos2d.nodes.CCSpriteSheet;
-
-public class SpawnPortalFactory {
-	private static String plist = "labo.plist";
-	private static String png = "labo.png";	
-	private static Hashtable<String, CCAnimation> sharedAnimations;
-	private static CCSpriteSheet spriteSheet;	
-	private static boolean isInit = false;	
-	private static boolean isAttached = false;
-	private static CCNode rootNode;	
-	
-	public static void Attach(CCNode attachNode) {
-		rootNode = attachNode;		
-		init();
-		rootNode.addChild(spriteSheet);
-		isAttached = true;
-	}
-	
-	public static void Detach() {
-		if (isAttached && spriteSheet != null && rootNode != null) {
-			// true here?
-			rootNode.removeChild(spriteSheet, true);
-			rootNode = null;			
-			isAttached = false;
-		}
-	}
-	
-	private static void init() {
-		if (!isInit) {
-			CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames(plist);
-			spriteSheet = CCSpriteSheet.spriteSheet(png);			
-			
-			sharedAnimations = new Hashtable<String, CCAnimation>();
-			createAnim(SpawnPortal.Anim_Spawn_Portal, 4);						
-			isInit = true;
-		}
-	}	
+public class SpawnPortalFactory extends GameItemFactory<SpawnPortal> {
 		
-	public static SpawnPortal create(float x, float y, float moveBy, float speed) {
-		if (isAttached) {
-			SpawnPortal portal = new SpawnPortal(spriteSheet, x, y);
-			portal.setAnimationList(sharedAnimations);
-			portal.createPortal();
+	public SpawnPortal createAndMove(float x, float y, float moveBy, float speed) {
+		SpawnPortal portal = this.create(x, y);
+		if (portal != null) {
 			portal.MovePortalInLine(moveBy, speed);
-			return portal;
 		}
-		else
-		{
-			return null;
-		}			
+		
+		return portal;			
 	}
 	
-	private static void createAnim(String animName, int frameCount) {		
-		sharedAnimations.put(animName, GameItem.createAnim(animName, frameCount));
+	@Override
+	protected void createAnimList() {
+		this.createAnim(SpawnPortal.Anim_Spawn_Portal, 4);
+	}
+
+	@Override
+	protected String getPlist() {
+		return "labo.plist";
+	}
+
+	@Override
+	protected String getPng() {
+		return "labo.png";
+	}
+
+	@Override
+	protected SpawnPortal instantiate(float x, float y, float width,
+			float height) {
+		return new SpawnPortal(this.spriteSheet, x, y, width, height);
+	}
+
+	@Override
+	protected void runFirstAnimations(SpawnPortal item) {
+		item.createPortal();		
 	}
 
 }

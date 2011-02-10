@@ -57,10 +57,10 @@ public class HardCodedLevel extends Level {
 		groundBox.setAsEdge(topRight, bottomRight);
 		groundBody.createFixture(groundBox,0);
 		
-		PlatformFactory.create(100, 50, 100, 10);
-		PlatformFactory.create(s.width - 100, s.height - 100, 100, 10);
+		SlimeFactory.Platform.create(100, 50, 100, 10);
+		SlimeFactory.Platform.create(s.width - 100, s.height - 100, 100, 10);
 		
-		this.goalPortal = GoalPortalFactory.create(s.width / 2, 20);
+		this.goalPortal = SlimeFactory.GoalPortal.create(s.width / 2, 20);
 		this.items.add(this.goalPortal);
 	}
 }

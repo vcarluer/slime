@@ -16,9 +16,9 @@ public class GoalPortal extends GameItemPhysic {
 	
 	protected boolean isWon;
 	
-	public GoalPortal(CCNode node, float x, float y, World world,
+	public GoalPortal(CCNode node, float x, float y, float width, float height, World world,
 			float worldRatio) {
-		super(node, x, y, world, worldRatio);
+		super(node, x, y, width, height, world, worldRatio);
 		
 		this.bodyWidth = this.width = 32;
 		this.bodyHeight = this.height = 32;
@@ -37,7 +37,7 @@ public class GoalPortal extends GameItemPhysic {
 		
 		// Define another box shape for our dynamic body.
 		PolygonShape contactBox = new PolygonShape();
-		contactBox.setAsBox((this.bodyWidth * this.scale) / this.worldRatio / 2, (this.bodyHeight * this.scale) / this.worldRatio / 2);
+		contactBox.setAsBox(this.bodyWidth / this.worldRatio / 2, this.bodyHeight / this.worldRatio / 2);
 		
 		synchronized (world) {
     		// Define the dynamic body fixture and set mass so it's dynamic.

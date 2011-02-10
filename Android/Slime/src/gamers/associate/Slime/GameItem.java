@@ -21,17 +21,12 @@ public abstract class GameItem {
 	protected float angle;
 	protected float width;
 	protected float height;
-	protected float scale;
 	protected Hashtable<String, CCAnimation> animationList;
 	protected CCAction currentAction;
 	protected CCSprite sprite;
 	protected CCSpriteSheet spriteSheet;
 	protected CCNode rootNode;
-	
-	public GameItem(CCNode node, float x, float y) {
-		this(node, x, y, 0, 0);
-	}
-	
+		
 	public GameItem(CCNode node, float x, float y, float width, float height) {
 		this.animationList = new Hashtable<String, CCAnimation>();
 		this.position = new CGPoint();
@@ -39,7 +34,6 @@ public abstract class GameItem {
 		this.position.y = y;
 		this.angle = 0f;
 		this.rootNode = node;
-		this.scale = 1.0f;
 		this.width = width;
 		this.height = height;
 		
@@ -60,7 +54,10 @@ public abstract class GameItem {
 		this.rootNode.addChild(this.sprite);
 		this.sprite.setPosition(this.position);
 		this.sprite.setRotation(this.angle);
-		this.sprite.setScale(this.scale);
+		this.transformTexture();		
+	}
+	
+	protected void transformTexture() {
 		if (this.width != 0 && this.height != 0) {
 			float texW = CGRect.width(this.sprite.getTextureRect());
 			float textH = CGRect.height(this.sprite.getTextureRect());
@@ -68,7 +65,7 @@ public abstract class GameItem {
 			float hScale = this.height / textH;
 			this.sprite.setScaleX(wScale);
 			this.sprite.setScaleY(hScale);
-		}		
+		}
 	}
 	
 	/**

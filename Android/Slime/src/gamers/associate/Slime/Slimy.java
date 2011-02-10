@@ -28,8 +28,8 @@ public class Slimy extends GameItemPhysic {
 	protected Boolean isLanded;	
 	protected CCAction waitAction;
 	
-	public Slimy(CCNode node, float x, float y, World world, float worldRatio) {		
-		super(node, x, y, world, worldRatio);
+	public Slimy(CCNode node, float x, float y, float width, float height, World world, float worldRatio) {		
+		super(node, x, y, width, height, world, worldRatio);
 		
 		this.width = 26f;
 		this.height = 24f;
@@ -53,7 +53,7 @@ public class Slimy extends GameItemPhysic {
 		
 		// Define another box shape for our dynamic body.
 		PolygonShape dynamicBox = new PolygonShape();
-		dynamicBox.setAsBox((this.bodyWidth * this.scale) / this.worldRatio / 2, (this.bodyHeight * this.scale) / this.worldRatio / 2);
+		dynamicBox.setAsBox(this.bodyWidth / this.worldRatio / 2, this.bodyHeight / this.worldRatio / 2);
 		
 		synchronized (world) {
     		// Define the dynamic body fixture and set mass so it's dynamic.

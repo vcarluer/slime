@@ -54,17 +54,15 @@ public abstract class Level {
 		this.backgroundSprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("decor.png"));
 		this.backgroundSprite.setAnchorPoint(0, 0);
 		spriteSheet.addChild(this.backgroundSprite);
-				
-		SlimyFactory.Attach(this.rootNode, this.world, this.worldRatio);
-		SpawnPortalFactory.Attach(this.rootNode);
-		PlatformFactory.Attach(this.rootNode, this.world, this.worldRatio);
-		GoalPortalFactory.Attach(this.rootNode, this.world, this.worldRatio);
 		
-		this.spawnPortal = SpawnPortalFactory.create(
+		SlimeFactory.attachAll(this.rootNode, this.world, this.worldRatio);
+		
+		this.spawnPortal = SlimeFactory.SpawnPortal.createAndMove(
 				CCDirector.sharedDirector().winSize().getWidth() / 2, 
 				CCDirector.sharedDirector().winSize().getHeight() - 32,
 				150,
 				5);
+		
 		this.items.add(this.spawnPortal);
 	}
 	
