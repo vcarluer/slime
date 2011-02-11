@@ -39,6 +39,7 @@ public class Platform extends GameItemPhysic {
     		fixtureDef.density = 1.0f;
     		fixtureDef.friction = 1.0f;
     		fixtureDef.restitution = 0f;
+    		fixtureDef.filter.categoryBits = GameItemPhysic.Category_Static;
     		this.body.createFixture(fixtureDef);
     	}  
 	}

@@ -57,4 +57,9 @@ public class LevelLayer extends CCLayer {
         this.level.SpawnSlime();
         return CCTouchDispatcher.kEventHandled;
     }
+	 
+	 // Test
+	 /*public void resetWon() {
+		 this.level.resetWon();
+	 }*/
 }

@@ -70,6 +70,7 @@ public class Slimy extends GameItemPhysic {
     		fixtureDef.density = 1.0f;
     		fixtureDef.friction = 0.3f;
     		fixtureDef.restitution = 0.1f;
+    		fixtureDef.filter.categoryBits = GameItemPhysic.Category_InGame;
     		this.body.createFixture(fixtureDef);
     	}  
 	}
@@ -146,9 +147,8 @@ public class Slimy extends GameItemPhysic {
 			
 			Filter filter = new Filter();
 			
-			/*filter.categoryBits = 0x0002;
-			filter.maskBits = (short) (0xFFFF ^ 0x0002);			
-			filter.maskBits = 0x0003;*/			
+			filter.categoryBits = GameItemPhysic.Category_OutGame;
+			filter.maskBits = GameItemPhysic.Category_Static;					
 			filter.groupIndex = -1;
 			for(Fixture fix : this.body.getFixtureList()) {
 				// Change fixture shape here?

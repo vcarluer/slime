@@ -65,5 +65,9 @@ public class GoalPortal extends GameItemPhysic {
 	public boolean isWon() {
 		return this.isWon;
 	}
+	
+	public void setWon(boolean value) {
+		this.isWon = value;
+	}
 
 }

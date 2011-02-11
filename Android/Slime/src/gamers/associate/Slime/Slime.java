@@ -54,7 +54,7 @@ public class Slime extends Activity {
 		this.scene = LevelFactory.GetLevel("Level1").getScene();		
 		
 		// Make the Scene active
-		CCDirector.sharedDirector().runWithScene(this.scene);
+		CCDirector.sharedDirector().runWithScene(this.scene);		
     }
 
     @Override

@@ -2,6 +2,9 @@ package gamers.associate.Slime;
 
 import java.util.ArrayList;
 
+import org.cocos2d.actions.instant.CCCallFuncN;
+import org.cocos2d.actions.interval.CCScaleBy;
+import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
@@ -39,6 +42,8 @@ public abstract class Level {
 	protected LevelLayer levelLayer;
 	protected HudLayer hudLayer;
 	protected BackgoundLayer backgroundLayer;
+	
+	protected CCLabel label;
 	
 	public Level() {
 		this.scene = CCScene.node();
@@ -84,8 +89,8 @@ public abstract class Level {
 		
 		this.items.add(this.spawnPortal);
 		
-		CCLabel label = CCLabel.makeLabel("Hud !", "DroidSans", 16);
-		this.hudLayer.addChild(label, 0);
+		this.label = CCLabel.makeLabel("Hud !", "DroidSans", 16);		
+		this.hudLayer.addChild(this.label, 0);
 		label.setPosition(
 				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
 				CCDirector.sharedDirector().winSize().getHeight() - 20));
@@ -100,6 +105,28 @@ public abstract class Level {
 			item.render(delta);
 		}
 	}
+	
+		// Test
+		/*if (this.goalPortal.isWon()) {						
+			if (!wonLaunched) {
+				this.label.setString("You win!");
+				CCScaleBy scale = CCScaleBy.action(1, 3);
+				
+				this.label.runAction(CCSequence.actions(scale, scale.reverse(), CCCallFuncN.action(this.levelLayer, "resetWon")));				
+				wonLaunched = true;
+			}
+		}
+	}
+	
+	public void resetWon() {
+		this.goalPortal.setWon(false);
+		this.wonLaunched = false;
+		this.label.setString("Try again");
+	}
+	
+	private Boolean wonLaunched = false;
+	*/
+	// Fin test
 	
 	public void SpawnSlime() {				
 		this.items.add(this.spawnPortal.spawn());		

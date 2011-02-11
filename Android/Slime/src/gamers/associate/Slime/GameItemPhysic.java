@@ -7,6 +7,10 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
 public abstract class GameItemPhysic extends GameItem{
+	public static short Category_Static = 0x0001;
+	public static short Category_InGame = 0x0002;
+	public static short Category_OutGame = 0x0003;
+	
 	protected World world;
 	protected Body body; 
 	protected float bodyWidth;
