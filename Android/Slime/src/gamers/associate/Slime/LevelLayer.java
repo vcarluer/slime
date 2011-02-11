@@ -3,7 +3,6 @@ package gamers.associate.Slime;
 import org.cocos2d.actions.UpdateCallback;
 import org.cocos2d.events.CCTouchDispatcher;
 import org.cocos2d.layers.CCLayer;
-import org.cocos2d.layers.CCScene;
 
 import android.view.MotionEvent;
 
@@ -11,29 +10,18 @@ import android.view.MotionEvent;
  * @author    vince
  * @uml.dependency   supplier="gamers.associate.Slime.LevelFactory"
  */
-public class LevelLayer  extends CCLayer {
+public class LevelLayer extends CCLayer {
 	
 	/**
 	 * @uml.property  name="level"
 	 * @uml.associationEnd  
 	 */
-	private Level level;	
+	private Level level;
 	
-	public static CCScene Scene()
-	{
-		CCScene scene = CCScene.node();
-		scene.addChild(new LevelLayer());
-		return scene;
-	}
-	
-	protected LevelLayer() {
+	public LevelLayer(Level level) {
 		super();
+		this.level = level;
 		this.setIsTouchEnabled(true);
-		this.init();
-	}
-	
-	private void init() {
-		this.level = LevelFactory.GetLevel("Level1", this);
 	}
 	
 	private UpdateCallback tickCallback = new UpdateCallback() {

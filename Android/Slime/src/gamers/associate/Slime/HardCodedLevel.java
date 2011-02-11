@@ -1,7 +1,6 @@
 package gamers.associate.Slime;
 
 import org.cocos2d.nodes.CCDirector;
-import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.CGSize;
 
 import com.badlogic.gdx.math.Vector2;
@@ -10,10 +9,6 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 public class HardCodedLevel extends Level {
-
-	public HardCodedLevel(CCNode node) {
-		super(node);		
-	}
 	
 	@Override
 	protected void init() {
@@ -57,10 +52,30 @@ public class HardCodedLevel extends Level {
 		groundBox.setAsEdge(topRight, bottomRight);
 		groundBody.createFixture(groundBox,0);
 		
-		SlimeFactory.Platform.create(100, 50, 100, 10);
-		SlimeFactory.Platform.create(s.width - 100, s.height - 100, 100, 10);
+		/*SlimeFactory.Platform.create(100, 50, 100, 10);
+		SlimeFactory.Platform.create(s.width - 100, s.height - 100, 100, 10);*/
 		
-		this.goalPortal = SlimeFactory.GoalPortal.create(s.width / 2, 20);
+		float si = 10;
+		float m = si / 2;
+		float w = s.width;
+		float w2 = s.width / 2;
+		float h = s.height;
+		float h2 = s.height / 2;
+		
+		// up
+		SlimeFactory.Platform.create(w2, h - m, w, si);
+		//right
+		SlimeFactory.Platform.create(w - m, h2, si, h);
+		// bottom
+		SlimeFactory.Platform.create(w2, m, w, si);
+		// left
+		SlimeFactory.Platform.create(m, h2, si, h);
+		
+		float goalPlatH = 20f;
+		float goalPlatW = 100f;
+		SlimeFactory.Platform.create(s.width / 2, si + goalPlatH / 2, goalPlatW, goalPlatH);
+		
+		this.goalPortal = SlimeFactory.GoalPortal.create(s.width / 2, si + goalPlatH + 15);
 		this.items.add(this.goalPortal);
 	}
 }

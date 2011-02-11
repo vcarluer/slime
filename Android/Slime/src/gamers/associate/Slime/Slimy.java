@@ -9,7 +9,10 @@ import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.CGPoint;
 
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
@@ -27,6 +30,7 @@ public class Slimy extends GameItemPhysic {
 	
 	protected Boolean isLanded;	
 	protected CCAction waitAction;
+	protected Boolean isBurned;
 	
 	public Slimy(CCNode node, float x, float y, float width, float height, World world, float worldRatio) {		
 		super(node, x, y, width, height, world, worldRatio);
@@ -37,6 +41,7 @@ public class Slimy extends GameItemPhysic {
 		this.bodyHeight = 23f;
 		// this.scale = 1.5f;
 		this.isLanded = false;
+		this.isBurned = false;
 		
 		this.initBody();
 	}
@@ -64,7 +69,7 @@ public class Slimy extends GameItemPhysic {
     		fixtureDef.shape = dynamicBox;	
     		fixtureDef.density = 1.0f;
     		fixtureDef.friction = 0.3f;
-    		fixtureDef.restitution = 0.3f;
+    		fixtureDef.restitution = 0.1f;
     		this.body.createFixture(fixtureDef);
     	}  
 	}
@@ -79,9 +84,8 @@ public class Slimy extends GameItemPhysic {
 		CCDelayTime delay = CCDelayTime.action(3f);
 		CCAnimate reverse = animate.reverse();
 		
-		CCAction action = CCRepeatForever.action(CCSequence.actions(animate, reverse, delay));
-		this.waitAction = action;
-		this.sprite.runAction(action);
+		this.waitAction = CCRepeatForever.action(CCSequence.actions(animate, reverse, delay));		 
+		this.sprite.runAction(this.waitAction);
 	}
 	
 	public void fall() {
@@ -94,7 +98,7 @@ public class Slimy extends GameItemPhysic {
 	}
 	
 	public void land() {
-		if (!this.isLanded && this.sprite != null) {
+		if (!this.isLanded && !this.isBurned && this.sprite != null) {
 			if (this.currentAction != null) {
 				this.sprite.stopAction(this.currentAction);
 			}
@@ -117,13 +121,45 @@ public class Slimy extends GameItemPhysic {
 	}
 	
 	public void win() {
-		if (this.currentAction != null) {
-			this.sprite.stopAction(this.currentAction);
+		this.burn();
+	}
+	
+	public void burn() {
+		if (!this.isBurned) {
+			if (this.currentAction != null) {				
+				this.sprite.stopAction(this.currentAction);				
+			}
+			
+			if (this.waitAction != null) {				
+				this.sprite.stopAction(this.waitAction);
+			}
+					
+			CCAnimate animateBlink = CCAnimate.action(this.animationList.get(Anim_Burned_Wait), false);
+			CCDelayTime delay = CCDelayTime.action(3f);
+			CCSequence blinkSeq = CCSequence.actions(animateBlink, animateBlink.reverse(), delay);
+			this.waitAction = CCRepeatForever.action(blinkSeq);		
+			this.sprite.runAction(this.waitAction);		
+			
+			CCAnimate animBurn = CCAnimate.action(this.animationList.get(Anim_Burning), false);
+			this.currentAction = animBurn;		
+			this.sprite.runAction(this.currentAction);
+			
+			Filter filter = new Filter();
+			
+			/*filter.categoryBits = 0x0002;
+			filter.maskBits = (short) (0xFFFF ^ 0x0002);			
+			filter.maskBits = 0x0003;*/			
+			filter.groupIndex = -1;
+			for(Fixture fix : this.body.getFixtureList()) {
+				// Change fixture shape here?
+				fix.setFilterData(filter);
+				fix.setRestitution(0f);
+				fix.setFriction(1.0f);
+				fix.setDensity(10f);
+				this.body.resetMassData();
+			}
+			
+			this.isBurned = true;
 		}
-		
-		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Burning), false);
-		this.currentAction = animate;
-		this.sprite.stopAction(this.waitAction);
-		this.sprite.runAction(this.currentAction);
 	}
 }
