@@ -35,7 +35,7 @@ public class SpawnPortalFactory extends GameItemFactory<SpawnPortal> {
 
 	@Override
 	protected void runFirstAnimations(SpawnPortal item) {
-		item.createPortal();		
+		item.createPortal();
 	}
 
 }

@@ -79,7 +79,7 @@ public abstract class Level {
 		spriteSheet.addChild(this.backgroundSprite);*/
 		
 		
-		SlimeFactory.attachAll(this.levelLayer, this.world, this.worldRatio);
+		SlimeFactory.attachAll(this.levelLayer, this.world, this.worldRatio);		
 		
 		this.spawnPortal = SlimeFactory.SpawnPortal.createAndMove(
 				CCDirector.sharedDirector().winSize().getWidth() / 2, 

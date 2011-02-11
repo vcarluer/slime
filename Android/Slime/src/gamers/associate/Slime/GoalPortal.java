@@ -3,6 +3,7 @@ package gamers.associate.Slime;
 import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
+import org.cocos2d.nodes.CCAnimation;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.CGPoint;
 
@@ -14,14 +15,22 @@ import com.badlogic.gdx.physics.box2d.World;
 public class GoalPortal extends GameItemPhysic {
 	public static String Anim_Goal_Portal = "redportal";
 	
+	private static float Default_Width = 32f;
+	private static float Default_Height = 10f;
+	
 	protected boolean isWon;
 	
 	public GoalPortal(CCNode node, float x, float y, float width, float height, World world,
 			float worldRatio) {
 		super(node, x, y, width, height, world, worldRatio);
 		
-		this.bodyWidth = this.width = 32;
-		this.bodyHeight = this.height = 32;
+		if (width == 0 && height == 0) {
+			this.width = Default_Width;
+			this.height = Default_Height;
+		}
+		
+		this.bodyWidth = this.width;
+		this.bodyHeight = this.height;
 		this.isWon = false;
 		this.initBody();
 	}
@@ -70,4 +79,8 @@ public class GoalPortal extends GameItemPhysic {
 		this.isWon = value;
 	}
 
+	@Override
+	protected CCAnimation getReferenceAnimation() {
+		return this.animationList.get(GoalPortal.Anim_Goal_Portal);		
+	}
 }

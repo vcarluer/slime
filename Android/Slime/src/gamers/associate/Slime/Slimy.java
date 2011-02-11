@@ -6,6 +6,7 @@ import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCFadeIn;
 import org.cocos2d.actions.interval.CCSequence;
+import org.cocos2d.nodes.CCAnimation;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.CGPoint;
 
@@ -28,6 +29,11 @@ public class Slimy extends GameItemPhysic {
 	public static String Anim_Wait_H = "wait-h";
 	public static String Anim_Wait_V = "wait-v";
 	
+	public static float Default_Width = 24f;
+	public static float Default_Height = 26f;
+	private static float Default_Body_Width = 16f;
+	private static float Default_Body_Height = 23f;
+	
 	protected Boolean isLanded;	
 	protected CCAction waitAction;
 	protected Boolean isBurned;
@@ -35,11 +41,15 @@ public class Slimy extends GameItemPhysic {
 	public Slimy(CCNode node, float x, float y, float width, float height, World world, float worldRatio) {		
 		super(node, x, y, width, height, world, worldRatio);
 		
-		this.width = 26f;
-		this.height = 24f;
-		this.bodyWidth = 16f;
-		this.bodyHeight = 23f;
-		// this.scale = 1.5f;
+		if (width == 0 && this.height == 0) {
+			this.width = Default_Width;
+			this.height = Default_Height;
+			this.transformTexture();
+		}	
+		
+		this.bodyWidth = Default_Body_Width * this.width / Default_Width;
+		this.bodyHeight = Default_Body_Height * this.height / Default_Height;
+
 		this.isLanded = false;
 		this.isBurned = false;
 		
@@ -161,5 +171,10 @@ public class Slimy extends GameItemPhysic {
 			
 			this.isBurned = true;
 		}
+	}
+	
+	@Override
+	protected CCAnimation getReferenceAnimation() {
+		return this.animationList.get(Slimy.Anim_Wait_V);
 	}
 }

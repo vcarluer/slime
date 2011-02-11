@@ -13,10 +13,12 @@ public abstract class ItemFactoryBase<T extends GameItem> {
 	protected boolean isInit;	
 	protected boolean isAttached;
 	protected CCNode rootNode;
+	protected float ratio;
 	
 	protected ItemFactoryBase() {
 		this.isInit = false;
 		this.isAttached = false;
+		this.ratio = 1.0f;
 	}				
 	
 	protected void initAnimation() {

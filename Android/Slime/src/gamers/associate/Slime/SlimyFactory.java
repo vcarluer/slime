@@ -31,10 +31,15 @@ public class SlimyFactory extends GameItemPhysicFactory<Slimy> {
 	@Override
 	protected String getPng() {		
 		return "labo.png";
-	}
+	}	
 
 	@Override
 	protected Slimy instantiate(float x, float y, float width, float height) {		
 		return new Slimy(this.spriteSheet, x, y, width, height, this.world, this.worldRatio);
+	}
+	
+	public Slimy create(float x, float y, float ratio) {		
+		Slimy slimy = this.create(x, y, Slimy.Default_Width * ratio, Slimy.Default_Height * ratio);		
+		return slimy;
 	}
 }

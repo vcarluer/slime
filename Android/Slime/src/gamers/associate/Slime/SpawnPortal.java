@@ -5,6 +5,7 @@ import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCMoveBy;
 import org.cocos2d.actions.interval.CCSequence;
+import org.cocos2d.nodes.CCAnimation;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.CGPoint;
 
@@ -36,8 +37,13 @@ public class SpawnPortal extends GameItem {
 	}
 	
 	public GameItem spawn() {
-		Slimy slimy = SlimeFactory.Slimy.create(this.position.x, this.position.y);
+		Slimy slimy = SlimeFactory.Slimy.create(this.position.x, this.position.y, 1.5f);
 		slimy.fall();
 		return slimy;
+	}
+	
+	@Override
+	protected CCAnimation getReferenceAnimation() {
+		return this.animationList.get(SpawnPortal.Anim_Spawn_Portal);
 	}
 }

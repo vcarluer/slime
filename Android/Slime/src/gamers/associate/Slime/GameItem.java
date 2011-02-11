@@ -12,6 +12,7 @@ import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
+import org.cocos2d.types.CGSize;
 
 /**
  * @author  vince
@@ -24,7 +25,6 @@ public abstract class GameItem {
 	protected Hashtable<String, CCAnimation> animationList;
 	protected CCAction currentAction;
 	protected CCSprite sprite;
-	protected CCSpriteSheet spriteSheet;
 	protected CCNode rootNode;
 		
 	public GameItem(CCNode node, float x, float y, float width, float height) {
@@ -50,22 +50,43 @@ public abstract class GameItem {
 			this.rootNode.removeChild(this.sprite, true);
 		}
 		
-		this.sprite = affectSprite;
+		this.sprite = affectSprite;		
 		this.rootNode.addChild(this.sprite);
 		this.sprite.setPosition(this.position);
 		this.sprite.setRotation(this.angle);
 		this.transformTexture();		
+	}		
+	
+	public CGSize getTextureSize() {
+		CGSize size = CGSize.zero();
+		if (this.sprite.getTextureRect().size.width != 0) {
+			size = this.sprite.getTextureRect().size;
+		}
+		else
+		{		
+			CCAnimation anim = this.getReferenceAnimation();
+			if (anim != null) {
+				size = anim.frames().get(0).getRect().size;
+			}					
+		}
+		
+		return size;
+	}
+	
+	protected CCAnimation getReferenceAnimation() {
+		return null;
 	}
 	
 	protected void transformTexture() {
 		if (this.width != 0 && this.height != 0) {
-			float texW = CGRect.width(this.sprite.getTextureRect());			
-			float textH = CGRect.height(this.sprite.getTextureRect());
+			CGSize size = this.getTextureSize();			
 			
-			float wScale = this.width / texW;
-			float hScale = this.height / textH;
-			this.sprite.setScaleX(wScale);
-			this.sprite.setScaleY(hScale);
+			if (size.width != 0 && size.height != 0) {
+				float wScale = this.width / size.width;
+				float hScale = this.height / size.height;
+				this.sprite.setScaleX(wScale);
+				this.sprite.setScaleY(hScale);
+			}			
 		}
 	}
 	
@@ -75,6 +96,7 @@ public abstract class GameItem {
 	 */
 	public void setAnimationList(Hashtable<String, CCAnimation> animations) {
 		this.animationList = animations;
+		this.transformTexture();
 	}
 	
 	public void render(float delta) {
