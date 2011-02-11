@@ -71,12 +71,12 @@ public abstract class Level {
 		this.world.setContactListener(this.contactManager);
 		
 		// Sprite too big for VM in UbuntuRox
-		CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames("decor.plist");
+		/*CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames("decor.plist");
 		CCSpriteSheet spriteSheet = CCSpriteSheet.spriteSheet("decor.png");
 		this.backgroundLayer.addChild(spriteSheet);
 		this.backgroundSprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("decor.png"));
 		this.backgroundSprite.setAnchorPoint(0, 0);
-		spriteSheet.addChild(this.backgroundSprite);
+		spriteSheet.addChild(this.backgroundSprite);*/
 		
 		
 		SlimeFactory.attachAll(this.levelLayer, this.world, this.worldRatio);

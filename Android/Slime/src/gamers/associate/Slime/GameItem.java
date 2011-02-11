@@ -59,8 +59,9 @@ public abstract class GameItem {
 	
 	protected void transformTexture() {
 		if (this.width != 0 && this.height != 0) {
-			float texW = CGRect.width(this.sprite.getTextureRect());
+			float texW = CGRect.width(this.sprite.getTextureRect());			
 			float textH = CGRect.height(this.sprite.getTextureRect());
+			
 			float wScale = this.width / texW;
 			float hScale = this.height / textH;
 			this.sprite.setScaleX(wScale);

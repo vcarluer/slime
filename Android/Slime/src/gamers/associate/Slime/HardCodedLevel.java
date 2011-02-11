@@ -71,11 +71,18 @@ public class HardCodedLevel extends Level {
 		// left
 		SlimeFactory.Platform.create(m, h2, si, h);
 		
+		// Platform
 		float goalPlatH = 20f;
 		float goalPlatW = 100f;
 		SlimeFactory.Platform.create(s.width / 2, si + goalPlatH / 2, goalPlatW, goalPlatH);
 		
+		// Goal
 		this.goalPortal = SlimeFactory.GoalPortal.create(s.width / 2, si + goalPlatH + 15);
 		this.items.add(this.goalPortal);
+		
+		// Bumper
+		Bumper bumper = SlimeFactory.Bumper.create(this.worldRatio + si, h2, 60, 120, 2.0f);
+		// Bumper bumper = SlimeFactory.Bumper.create(this.worldRatio + si, h2);
+		this.items.add(bumper);
 	}
 }
