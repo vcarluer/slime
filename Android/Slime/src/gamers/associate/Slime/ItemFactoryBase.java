@@ -4,7 +4,6 @@ import java.util.Hashtable;
 
 import org.cocos2d.nodes.CCAnimation;
 import org.cocos2d.nodes.CCNode;
-import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCSpriteSheet;
 
 public abstract class ItemFactoryBase<T extends GameItem> {	
@@ -19,17 +18,16 @@ public abstract class ItemFactoryBase<T extends GameItem> {
 		this.isInit = false;
 		this.isAttached = false;
 		this.ratio = 1.0f;
-	}				
+	}
 	
 	protected void initAnimation() {
 		if (!this.isInit) {
-			CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames(this.getPlist());
-			spriteSheet = CCSpriteSheet.spriteSheet(this.getPng());			
+			this.spriteSheet = SpriteSheetFactory.getSpriteSheet(this.getPlistPng());
 			
-			sharedAnimations = new Hashtable<String, CCAnimation>();
+			this.sharedAnimations = new Hashtable<String, CCAnimation>();
 			this.createAnimList();						
 			
-			isInit = true;
+			this.isInit = true;
 		}
 	}
 	
@@ -39,9 +37,7 @@ public abstract class ItemFactoryBase<T extends GameItem> {
 		this.sharedAnimations.put(animName, GameItem.createAnim(animName, frameCount));
 	}
 	
-	protected abstract String getPlist();
-	
-	protected abstract String getPng();
+	protected abstract String getPlistPng();
 	
 	public T create() {
 		return this.create(0, 0);
@@ -52,9 +48,9 @@ public abstract class ItemFactoryBase<T extends GameItem> {
 	}
 		
 	public T create(float x, float y, float width, float height) {
-		if (isAttached) {			
+		if (this.isAttached) {			
 			T item = this.instantiate(x, y, width, height);		
-			item.setAnimationList(sharedAnimations);
+			item.setAnimationList(this.sharedAnimations);
 			this.runFirstAnimations(item);
 			return item;
 		}

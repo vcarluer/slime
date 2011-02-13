@@ -1,7 +1,6 @@
 package gamers.associate.Slime;
 
 import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.nodes.CCSpriteFrameCache;
 
 public class BumperFactory extends GameItemPhysicFactory<Bumper> {
 
@@ -11,13 +10,8 @@ public class BumperFactory extends GameItemPhysicFactory<Bumper> {
 	}
 
 	@Override
-	protected String getPlist() {
-		return "labo.plist";
-	}
-
-	@Override
-	protected String getPng() {		
-		return "labo.png";
+	protected String getPlistPng() {
+		return "labo";
 	}
 
 	@Override

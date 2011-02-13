@@ -18,13 +18,8 @@ public class SpawnPortalFactory extends GameItemFactory<SpawnPortal> {
 	}
 
 	@Override
-	protected String getPlist() {
-		return "labo.plist";
-	}
-
-	@Override
-	protected String getPng() {
-		return "labo.png";
+	protected String getPlistPng() {
+		return "labo";
 	}
 
 	@Override

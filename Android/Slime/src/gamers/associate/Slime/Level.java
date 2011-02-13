@@ -78,7 +78,7 @@ public abstract class Level {
 		this.backgroundSprite.setAnchorPoint(0, 0);
 		spriteSheet.addChild(this.backgroundSprite);*/
 		
-		
+		SpriteSheetFactory.add("labo");
 		SlimeFactory.attachAll(this.levelLayer, this.world, this.worldRatio);		
 		
 		this.spawnPortal = SlimeFactory.SpawnPortal.createAndMove(

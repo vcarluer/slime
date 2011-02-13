@@ -9,9 +9,7 @@ import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
-import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
-import org.cocos2d.types.CGRect;
 import org.cocos2d.types.CGSize;
 
 /**

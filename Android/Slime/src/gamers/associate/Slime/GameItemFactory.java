@@ -1,8 +1,14 @@
 package gamers.associate.Slime;
 
 import org.cocos2d.nodes.CCNode;
+import org.cocos2d.nodes.CCSpriteSheet;
 
 public abstract class GameItemFactory<T extends GameItem> extends ItemFactoryBase<T> {
+	
+	public void Attach(CCNode attachNode, CCSpriteSheet spriteSheet) {
+		this.spriteSheet = spriteSheet;
+		this.Attach(attachNode);
+	}
 	
 	public void Attach(CCNode attachNode) {
 		this.rootNode = attachNode;		

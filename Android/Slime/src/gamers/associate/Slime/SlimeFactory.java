@@ -10,7 +10,7 @@ public abstract class SlimeFactory {
 	public static PlatformFactory Platform = new PlatformFactory();
 	public static GoalPortalFactory GoalPortal = new GoalPortalFactory();
 	public static BumperFactory Bumper = new BumperFactory();
-	
+		
 	public static void attachAll(CCNode attachNode, World attachWorld, float attachWorldRatio) {
 		Slimy.Attach(attachNode, attachWorld, attachWorldRatio);
 		SpawnPortal.Attach(attachNode);

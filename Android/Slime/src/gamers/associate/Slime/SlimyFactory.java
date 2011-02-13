@@ -24,13 +24,8 @@ public class SlimyFactory extends GameItemPhysicFactory<Slimy> {
 	}
 
 	@Override
-	protected String getPlist() {		
-		return "labo.plist";
-	}
-
-	@Override
-	protected String getPng() {		
-		return "labo.png";
+	protected String getPlistPng() {
+		return "labo";
 	}	
 
 	@Override
