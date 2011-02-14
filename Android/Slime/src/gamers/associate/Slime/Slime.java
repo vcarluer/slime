@@ -32,13 +32,8 @@ public class Slime extends Activity {
         mGLSurfaceView = new CCGLSurfaceView(this);
         
         setContentView(mGLSurfaceView);
-    }
-    
-    @Override
-    public void onStart() {
-        super.onStart();
         
-        // attach the OpenGL to a window
+     // attach the OpenGL to a window
 		CCDirector.sharedDirector().attachInView(mGLSurfaceView);
 		
 		// no effect here because devise orientation is controlled by manifest
@@ -54,7 +49,12 @@ public class Slime extends Activity {
 		this.scene = LevelFactory.GetLevel("Level1").getScene();		
 		
 		// Make the Scene active
-		CCDirector.sharedDirector().runWithScene(this.scene);		
+		CCDirector.sharedDirector().runWithScene(this.scene);
+    }
+    
+    @Override
+    public void onStart() {
+        super.onStart(); 
     }
 
     @Override
@@ -72,8 +72,8 @@ public class Slime extends Activity {
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onDestroy() {
+        super.onDestroy();
 
         CCDirector.sharedDirector().end();
         //CCTextureCache.sharedTextureCache().removeAllTextures();

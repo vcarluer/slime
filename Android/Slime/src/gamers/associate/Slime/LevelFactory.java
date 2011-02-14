@@ -5,7 +5,13 @@ package gamers.associate.Slime;
  * @uml.dependency   supplier="gamers.associate.Slime.HardCodedLevel"
  */
 public class LevelFactory {
+	private static Level currentLevel;
+	
 	public static Level GetLevel(String levelName) {
-		return new HardCodedLevel();
+		if (currentLevel == null) {
+			currentLevel = new HardCodedLevel();
+		}
+		
+		return currentLevel;
 	}
 }
