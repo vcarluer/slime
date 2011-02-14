@@ -39,6 +39,10 @@ public abstract class GameItem {
 		this.setSprite(sprite);
 	}
 	
+	public CCSprite getSprite() {
+		return this.sprite;
+	}
+	
 	public CGPoint getPosition() {
 		return this.position;
 	}

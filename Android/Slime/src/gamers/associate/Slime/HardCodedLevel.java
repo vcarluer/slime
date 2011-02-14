@@ -1,6 +1,8 @@
 package gamers.associate.Slime;
 
+import org.cocos2d.actions.base.CCFollow;
 import org.cocos2d.nodes.CCDirector;
+import org.cocos2d.opengl.CCCamera;
 import org.cocos2d.types.CGSize;
 
 import com.badlogic.gdx.math.Vector2;
@@ -84,5 +86,7 @@ public class HardCodedLevel extends Level {
 		Bumper bumper = SlimeFactory.Bumper.create(this.worldRatio + si, h2, 60, 120, 2.0f);
 		// Bumper bumper = SlimeFactory.Bumper.create(this.worldRatio + si, h2);
 		this.items.add(bumper);
+		
+		// this.levelLayer.getCamera()bottomLeft		
 	}
 }

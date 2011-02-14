@@ -1,6 +1,7 @@
 package gamers.associate.Slime;
 
 import org.cocos2d.actions.base.CCAction;
+import org.cocos2d.actions.base.CCFollow;
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCMoveBy;
@@ -38,7 +39,7 @@ public class SpawnPortal extends GameItem {
 	
 	public GameItem spawn() {
 		Slimy slimy = SlimeFactory.Slimy.create(this.position.x, this.position.y, 1.5f);
-		slimy.fall();
+		slimy.fall();		
 		return slimy;
 	}
 	
