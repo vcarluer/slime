@@ -1,8 +1,6 @@
 package gamers.associate.Slime;
 
-import org.cocos2d.actions.base.CCFollow;
 import org.cocos2d.nodes.CCDirector;
-import org.cocos2d.opengl.CCCamera;
 import org.cocos2d.types.CGSize;
 
 import com.badlogic.gdx.math.Vector2;

@@ -75,7 +75,7 @@ public class LevelLayer extends CCLayer {
 		touch.setLastMoveTime(event.getEventTime());
 		
 		if (this.touchList.size() == 1) {
-			this.level.moveCameraBy(touch.getLastMoveDelta());
+			this.level.getCameraManager().moveCameraBy(touch.getLastMoveDelta());
 		}
 		
 		if (this.isZoomAction) {
@@ -86,7 +86,7 @@ public class LevelLayer extends CCLayer {
 			this.lastZoomDelta = distance - this.lastDistance;
 			this.lastDistance = distance;
 			
-			this.level.zoomCameraBy(this.lastZoomDelta);
+			this.getCameraManager().zoomCameraBy(this.lastZoomDelta);
 		}			
 		
         return CCTouchDispatcher.kEventHandled;
@@ -105,15 +105,8 @@ public class LevelLayer extends CCLayer {
 		}
 		else {						
 			if (!this.isZoomAction) {
-				if (event.getEventTime() - touch.getLastMoveTime() < 300) {
-					// TODO: must be fix based on time (/sec)
-					float maxMove = 10f;
-					float minMove = -10f;
-					if (touch.getLastMoveDelta().x > maxMove) touch.getLastMoveDelta().x = maxMove;
-					if (touch.getLastMoveDelta().x < minMove) touch.getLastMoveDelta().x = minMove;
-					if (touch.getLastMoveDelta().y > maxMove) touch.getLastMoveDelta().y = maxMove;
-					if (touch.getLastMoveDelta().y < minMove) touch.getLastMoveDelta().y = minMove;
-					this.level.continuousMoveCameraBy(touch.getLastMoveDelta());
+				if (event.getEventTime() - touch.getLastMoveTime() < 300) {					
+					this.getCameraManager().continuousMoveCameraBy(touch.getLastMoveDelta());
 				}
 								
 				touch.setMoving(false);
@@ -124,7 +117,7 @@ public class LevelLayer extends CCLayer {
 			this.isZoomAction = false;
 		}
 		
-		this.touchList.remove(event.hashCode());
+		this.touchList.remove(touch.getPointerId());
         return CCTouchDispatcher.kEventHandled;
 	}
 
@@ -137,9 +130,9 @@ public class LevelLayer extends CCLayer {
 		touch.getMoveBeganAt().x = event.getX();
 		touch.getMoveBeganAt().y = event.getY();
 		touch.getLastMoveReference().x = event.getX();
-		touch.getLastMoveReference().y = event.getX();
+		touch.getLastMoveReference().y = event.getY();
 		this.touchList.put(touch.getPointerId(), touch);
-		this.level.stopContinousMoving();
+		this.getCameraManager().stopContinousMoving();
 		
 		if (this.touchList.size() == 2) {
 			this.isZoomAction = true;	
@@ -150,9 +143,12 @@ public class LevelLayer extends CCLayer {
 			this.isZoomAction = false;
 		}
 		
-		// return CCTouchDispatcher.kEventHandled;
-		return false;
+		return CCTouchDispatcher.kEventHandled;		
 	}	
+	
+	private CameraManager getCameraManager() {
+		return this.level.getCameraManager();
+	}
 	 
 	 // Test
 	 /*public void resetWon() {
