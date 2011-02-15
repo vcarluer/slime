@@ -1,5 +1,6 @@
 package gamers.associate.Slime;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.cocos2d.actions.UpdateCallback;
@@ -20,7 +21,7 @@ public class LevelLayer extends CCLayer {
 	 * @uml.associationEnd  
 	 */
 	private Level level;
-	private HashMap<Integer, TouchInfo> touchList;
+	private ArrayList<TouchInfo> touchList;
 	private boolean isZoomAction;
 	private float lastDistance;
 	private float lastZoomDelta;
@@ -29,7 +30,7 @@ public class LevelLayer extends CCLayer {
 		super();
 		this.level = level;
 		this.setIsTouchEnabled(true);
-		this.touchList = new HashMap<Integer, TouchInfo>();		
+		this.touchList = new ArrayList<TouchInfo>();		
 	}
 	
 	private UpdateCallback tickCallback = new UpdateCallback() {
@@ -65,13 +66,13 @@ public class LevelLayer extends CCLayer {
 	 */
 	@Override
 	public boolean ccTouchesMoved(MotionEvent event) {
-		TouchInfo touch = this.touchList.get(event.getPointerId(event.getActionIndex()));
+		TouchInfo touch = this.touchList.get(this.getPId(event));
 		
 		touch.setMoving(true);	
-		touch.getLastMoveDelta().x = touch.getLastMoveReference().x - event.getX();
+		touch.getLastMoveDelta().x = touch.getLastMoveReference().x - event.getX(touch.getPointerId());
 		touch.getLastMoveDelta().y = event.getY() - touch.getLastMoveReference().y;
-		touch.getLastMoveReference().x = event.getX();
-		touch.getLastMoveReference().y = event.getY();
+		touch.getLastMoveReference().x = event.getX(touch.getPointerId());
+		touch.getLastMoveReference().y = event.getY(touch.getPointerId());
 		touch.setLastMoveTime(event.getEventTime());
 		
 		if (this.touchList.size() == 1) {
@@ -86,7 +87,7 @@ public class LevelLayer extends CCLayer {
 			this.lastZoomDelta = distance - this.lastDistance;
 			this.lastDistance = distance;
 			
-			this.getCameraManager().zoomCameraBy(this.lastZoomDelta);
+			this.getCameraManager().zoomCameraByScreenRatio(this.lastZoomDelta);
 		}			
 		
         return CCTouchDispatcher.kEventHandled;
@@ -97,7 +98,7 @@ public class LevelLayer extends CCLayer {
 	 */
 	@Override
 	public boolean ccTouchesEnded(MotionEvent event) {		
-		TouchInfo touch = this.touchList.get(event.getPointerId(event.getActionIndex()));
+		TouchInfo touch = this.touchList.get(this.getPId(event));
 		if (!touch.isMoving()) {
 			if (touch.getPointerId() == 0) {
 				this.level.SpawnSlime();
@@ -117,7 +118,7 @@ public class LevelLayer extends CCLayer {
 			this.isZoomAction = false;
 		}
 		
-		this.touchList.remove(touch.getPointerId());
+		this.touchList.remove(touch);
         return CCTouchDispatcher.kEventHandled;
 	}
 
@@ -126,18 +127,20 @@ public class LevelLayer extends CCLayer {
 	 */
 	@Override
 	public boolean ccTouchesBegan(MotionEvent event) {				
-		TouchInfo touch = new TouchInfo(event.getPointerId(event.getActionIndex()));		
-		touch.getMoveBeganAt().x = event.getX();
-		touch.getMoveBeganAt().y = event.getY();
-		touch.getLastMoveReference().x = event.getX();
-		touch.getLastMoveReference().y = event.getY();
-		this.touchList.put(touch.getPointerId(), touch);
+		TouchInfo touch = new TouchInfo(this.getPId(event));		
+		touch.getMoveBeganAt().x = event.getX(touch.getPointerId());
+		touch.getMoveBeganAt().y = event.getY(touch.getPointerId());
+		touch.getLastMoveReference().x = event.getX(touch.getPointerId());
+		touch.getLastMoveReference().y = event.getY(touch.getPointerId());
+		this.touchList.add(touch);
 		this.getCameraManager().stopContinousMoving();
 		
 		if (this.touchList.size() == 2) {
 			this.isZoomAction = true;	
 			this.lastZoomDelta = 0f;
-			this.lastDistance = CGPoint.ccpDistance(this.touchList.get(0).getLastMoveReference(), touch.getLastMoveReference());
+			this.lastDistance = CGPoint.ccpDistance(
+					this.touchList.get(0).getLastMoveReference(),
+					this.touchList.get(1).getLastMoveReference());
 		}
 		else {
 			this.isZoomAction = false;
@@ -148,6 +151,11 @@ public class LevelLayer extends CCLayer {
 	
 	private CameraManager getCameraManager() {
 		return this.level.getCameraManager();
+	}
+	
+	private int getPId(MotionEvent event) {
+		int pId = event.getAction() >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
+		return pId;
 	}
 	 
 	 // Test

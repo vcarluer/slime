@@ -8,6 +8,11 @@ import org.cocos2d.types.CGRect;
 
 public class CameraManager {
 	
+	private float minScale;
+	private float maxScale;
+	private float screenW2 = CCDirector.sharedDirector().winSize().width * CCDirector.sharedDirector().winSize().width;
+	private float screenH2 = CCDirector.sharedDirector().winSize().height * CCDirector.sharedDirector().winSize().height;
+	
 	private CCLayer gameLayer;
 	private float levelWidth;
 	private float levelHeight;	
@@ -15,7 +20,7 @@ public class CameraManager {
 	private CGPoint moveCameraBy;
 	private CGRect cameraView;
 	private CGPoint virtualCameraPos;
-	private GameItem followed;
+	private GameItem followed;	
 	
 	public CameraManager(CCLayer gameLayer, float levelWidth, float levelHeight, CGPoint levelOrigin) {
 		this.gameLayer = gameLayer;
@@ -25,6 +30,9 @@ public class CameraManager {
 		this.cameraView = CGRect.make(origin, CCDirector.sharedDirector().winSize());
 		this.moveCameraBy = new CGPoint();
 		this.virtualCameraPos = CGPoint.getZero();
+		
+		this.minScale = 1 / (this.levelWidth / CGRect.width(this.cameraView));
+		this.maxScale = 2.0f;
 	}
 	
 	protected void tick(float delta) {
@@ -40,95 +48,44 @@ public class CameraManager {
 	public void follow(GameItem item) {
 		this.followed = item;
 	}
-	
-	public void cameraFollow(GameItem item) {		
-		CCScaleTo scale = CCScaleTo.action(1, 1.5f);
-		this.gameLayer.runAction(scale);
-		//this.backgroundLayer.runAction(scale);
 		
-		/*CCCamera cam = this.levelLayer.getCamera();
-		cam.setEye(0, 0, 1000f);*/
-		
-		/*CCFollow follow = CCFollow.action(item.getSprite());			
-		this.levelLayer.runAction(follow);	*/	
-	}
-	
-	// Always apply scale before calling this method
-	/*public void moveCameraBy(CGPoint deltaIn) {
-		CGPoint delta = CGPoint.make(- deltaIn.x, - deltaIn.y);
-		CGPoint position = this.gameLayer.getPosition();
-		
-		float scale = this.gameLayer.getScale();		
-		
-		float maxLeft = CGRect.minX(this.cameraView);
-		float left = position.x;
-		if (delta.x > 0) {
-			if (left + delta.x > maxLeft) {
-				delta.x = maxLeft - left;
-			}
-		}
-		
-		float minRight = CGRect.maxX(this.cameraView);
-		float right = position.x + this.levelWidth * scale;
-		if (delta.x < 0) {
-			if (right + delta.x < minRight) {
-				delta.x = minRight - right;
-			}
-		}
-		
-		float maxBottom = CGRect.minY(this.cameraView);
-		float bottom = position.y;
-		if (delta.y > 0) {
-			if (bottom + delta.y > maxBottom) {
-				delta.y = maxBottom - bottom;
-			}
-		}
-		
-		float minTop = CGRect.maxY(this.cameraView);
-		float top = position.y + this.levelHeight * scale;
-		if (delta.y < 0) {
-			if (top + delta.y < minTop) {
-				delta.y = minTop - top;				
-			}
-		}		
-		
-		position.x += delta.x;
-		position.y += delta.y;
-		this.gameLayer.setPosition(position);
-		this.virtualCameraPos.set(- position.x, - position.y);
-		if (position.x == 0 && position.y == 0) {
-			this.isCameraOnContinuousMove = false;
-		}
-	}*/
-	
 	public void normalizePosition() {
 		float scale = this.gameLayer.getScale();		
 		
 		CGPoint position = this.gameLayer.getPosition();
+		boolean isLeftNormalized;
+		boolean isRightNormalized;
+		boolean isTopNormalized;
+		boolean isBottomNormalized;
+		
 		float maxLeft = CGRect.minX(this.cameraView);
 		float left = position.x;
 		if (left > maxLeft) {
 			position.x += maxLeft - left;
+			isLeftNormalized = true;
 		}
 		
 		float minRight = CGRect.maxX(this.cameraView);
 		float right = position.x + this.levelWidth * scale;
 		if (right < minRight) {
 			position.x += minRight - right;
+			isRightNormalized = true;
 		}
 		
 		float maxBottom = CGRect.minY(this.cameraView);
 		float bottom = position.y;
 		if (bottom > maxBottom) {
 			position.y += maxBottom - bottom;
+			isBottomNormalized = true;
 		}
 		
 		float minTop = CGRect.maxY(this.cameraView);
 		float top = position.y + this.levelHeight * scale;
 		if (top < minTop) {
 			position.y += minTop - top;
-		}
-				
+			isTopNormalized = true;
+		}						
+		
 		this.gameLayer.setPosition(position);
 		this.virtualCameraPos.set(- position.x, - position.y);
 		if (position.x == 0 && position.y == 0) {
@@ -195,10 +152,24 @@ public class CameraManager {
 	
 	public void stopContinousMoving() {
 		this.isCameraOnContinuousMove = false;
+	}			
+	
+	public void zoomCameraByScreenRatio(float zoomDelta) {		
+		double max = Math.sqrt(screenW2 + screenH2);
+		float zoom = (float) (zoomDelta * maxScale / max);
+		this.zoomCameraBy(zoom);
 	}
 	
 	public void zoomCameraBy(float zoomDelta) {		
 		float scale = this.gameLayer.getScale() + zoomDelta;
+		if (scale <= minScale) {
+			scale = minScale;
+		}
+		
+		if (scale >= maxScale) {
+			scale = maxScale;
+		}
+		
 		this.gameLayer.setScale(scale);
 		this.normalizePosition();
 	}

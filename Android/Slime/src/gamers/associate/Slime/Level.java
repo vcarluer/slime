@@ -151,8 +151,7 @@ public abstract class Level {
 	
 	public void SpawnSlime() {				
 		GameItem gi = this.spawnPortal.spawn();
-		this.items.add(gi);		
-		this.cameraManager.cameraFollow(gi);		
+		this.items.add(gi);			
 	}
 	
 	
