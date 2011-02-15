@@ -4,27 +4,41 @@ import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.types.CGPoint;
+import org.cocos2d.types.CGRect;
 
 public class CameraManager {
 	
 	private CCLayer gameLayer;
-	private float maxWidth;
-	private float maxHeight;
+	private float levelWidth;
+	private float levelHeight;	
 	private boolean isCameraOnContinuousMove;
 	private CGPoint moveCameraBy;
+	private CGRect cameraView;
+	private CGPoint virtualCameraPos;
+	private GameItem followed;
 	
-	public CameraManager(CCLayer gameLayer, float maxWidth, float maxHeight) {
+	public CameraManager(CCLayer gameLayer, float levelWidth, float levelHeight, CGPoint levelOrigin) {
 		this.gameLayer = gameLayer;
-		this.maxWidth = maxWidth;
-		this.maxHeight = maxHeight;
-		
+		this.levelWidth = levelWidth;
+		this.levelHeight = levelHeight;		
+		CGPoint origin = levelOrigin;
+		this.cameraView = CGRect.make(origin, CCDirector.sharedDirector().winSize());
 		this.moveCameraBy = new CGPoint();
+		this.virtualCameraPos = CGPoint.getZero();
 	}
 	
 	protected void tick(float delta) {
 		if (this.isCameraOnContinuousMove) {
 			this.moveCameraBy(this.moveCameraBy);
 		}
+		
+		if (this.followed != null) {
+			this.centerCameraOn(this.followed.getPosition());
+		}
+	}
+	
+	public void follow(GameItem item) {
+		this.followed = item;
 	}
 	
 	public void cameraFollow(GameItem item) {		
@@ -39,43 +53,117 @@ public class CameraManager {
 		this.levelLayer.runAction(follow);	*/	
 	}
 	
-	public void moveCameraBy(CGPoint delta) {
+	// Always apply scale before calling this method
+	/*public void moveCameraBy(CGPoint deltaIn) {
+		CGPoint delta = CGPoint.make(- deltaIn.x, - deltaIn.y);
 		CGPoint position = this.gameLayer.getPosition();
-		float maxLeft = - (this.maxWidth / 2) * this.gameLayer.getScale();				
-		float left = - position.x - CCDirector.sharedDirector().winSize().width / 2;		
+		
+		float scale = this.gameLayer.getScale();		
+		
+		float maxLeft = CGRect.minX(this.cameraView);
+		float left = position.x;
 		if (delta.x > 0) {
-			if ((left - delta.x) < maxLeft) {
-				delta.x = left - maxLeft;
+			if (left + delta.x > maxLeft) {
+				delta.x = maxLeft - left;
 			}
 		}
 		
-		float maxRight = this.maxWidth / 2 * this.gameLayer.getScale();				
-		float right = - position.x + CCDirector.sharedDirector().winSize().width / 2;		
+		float minRight = CGRect.maxX(this.cameraView);
+		float right = position.x + this.levelWidth * scale;
 		if (delta.x < 0) {
-			if ((right - delta.x) > maxRight) {
-				delta.x = right - maxRight;
+			if (right + delta.x < minRight) {
+				delta.x = minRight - right;
 			}
 		}
 		
-		float maxTop = this.maxHeight / 2 * this.gameLayer.getScale();
-		float top = position.y + CCDirector.sharedDirector().winSize().height / 2;
+		float maxBottom = CGRect.minY(this.cameraView);
+		float bottom = position.y;
 		if (delta.y > 0) {
-			if ((top + delta.y) > maxTop) {
-				delta.y = maxTop - top;
-			}
-		}
-		
-		float maxBottom = - this.maxHeight / 2 * this.gameLayer.getScale();
-		float bottom = position.y - CCDirector.sharedDirector().winSize().height / 2;
-		if (delta.y < 0) {
-			if ((bottom + delta.y) < maxBottom) {
+			if (bottom + delta.y > maxBottom) {
 				delta.y = maxBottom - bottom;
 			}
 		}
 		
+		float minTop = CGRect.maxY(this.cameraView);
+		float top = position.y + this.levelHeight * scale;
+		if (delta.y < 0) {
+			if (top + delta.y < minTop) {
+				delta.y = minTop - top;				
+			}
+		}		
+		
 		position.x += delta.x;
 		position.y += delta.y;
-		this.gameLayer.setPosition(position);		
+		this.gameLayer.setPosition(position);
+		this.virtualCameraPos.set(- position.x, - position.y);
+		if (position.x == 0 && position.y == 0) {
+			this.isCameraOnContinuousMove = false;
+		}
+	}*/
+	
+	public void normalizePosition() {
+		float scale = this.gameLayer.getScale();		
+		
+		CGPoint position = this.gameLayer.getPosition();
+		float maxLeft = CGRect.minX(this.cameraView);
+		float left = position.x;
+		if (left > maxLeft) {
+			position.x += maxLeft - left;
+		}
+		
+		float minRight = CGRect.maxX(this.cameraView);
+		float right = position.x + this.levelWidth * scale;
+		if (right < minRight) {
+			position.x += minRight - right;
+		}
+		
+		float maxBottom = CGRect.minY(this.cameraView);
+		float bottom = position.y;
+		if (bottom > maxBottom) {
+			position.y += maxBottom - bottom;
+		}
+		
+		float minTop = CGRect.maxY(this.cameraView);
+		float top = position.y + this.levelHeight * scale;
+		if (top < minTop) {
+			position.y += minTop - top;
+		}
+				
+		this.gameLayer.setPosition(position);
+		this.virtualCameraPos.set(- position.x, - position.y);
+		if (position.x == 0 && position.y == 0) {
+			this.isCameraOnContinuousMove = false;
+		}
+	}
+	
+	public void centerCameraOn(CGPoint center) {		
+		float scale = this.gameLayer.getScale();
+		CGPoint position = CGPoint.make(
+				- (center.x * scale - this.cameraView.size.width / 2),
+				- (center.y * scale - this.cameraView.size.height / 2));
+		this.setLayerPosition(position);
+	}
+	
+	private void setLayerPosition(CGPoint position) {				
+		this.gameLayer.setPosition(position);
+		this.normalizePosition();
+	}
+	
+	public void setCameraPosition(CGPoint origin) {
+		float scale = this.gameLayer.getScale();
+		CGPoint position = CGPoint.make(
+				- origin.x * scale,
+				- origin.y * scale);
+		this.setLayerPosition(position);
+	}
+	
+	public void moveCameraBy(CGPoint move) {
+		float scale = this.gameLayer.getScale();
+		CGPoint position = CGPoint.make(this.gameLayer.getPosition().x, this.gameLayer.getPosition().y);
+		position.x += - move.x * scale;
+		position.y += - move.y * scale;
+		
+		this.setLayerPosition(position);
 	}
 	
 	public void continuousMoveCameraBy(CGPoint delta) {
@@ -109,8 +197,9 @@ public class CameraManager {
 		this.isCameraOnContinuousMove = false;
 	}
 	
-	public void zoomCameraBy(float zoomDelta) {
+	public void zoomCameraBy(float zoomDelta) {		
 		float scale = this.gameLayer.getScale() + zoomDelta;
 		this.gameLayer.setScale(scale);
+		this.normalizePosition();
 	}
 }

@@ -68,8 +68,8 @@ public class LevelLayer extends CCLayer {
 		TouchInfo touch = this.touchList.get(event.getPointerId(event.getActionIndex()));
 		
 		touch.setMoving(true);	
-		touch.getLastMoveDelta().x = event.getX() - touch.getLastMoveReference().x;
-		touch.getLastMoveDelta().y = touch.getLastMoveReference().y - event.getY();
+		touch.getLastMoveDelta().x = touch.getLastMoveReference().x - event.getX();
+		touch.getLastMoveDelta().y = event.getY() - touch.getLastMoveReference().y;
 		touch.getLastMoveReference().x = event.getX();
 		touch.getLastMoveReference().y = event.getY();
 		touch.setLastMoveTime(event.getEventTime());

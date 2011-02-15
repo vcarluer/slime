@@ -1,6 +1,5 @@
 package gamers.associate.Slime;
 
-import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.types.CGSize;
 
 import com.badlogic.gdx.math.Vector2;
@@ -27,7 +26,8 @@ public class HardCodedLevel extends Level {
         // Define the ground box shape.
         PolygonShape groundBox = new PolygonShape();
         
-        CGSize s = CCDirector.sharedDirector().winSize();
+        // CGSize s = CCDirector.sharedDirector().winSize();
+        CGSize s = CGSize.make(this.levelWidth, this.levelHeight);
         float scaledWidth = s.width/worldRatio;
         float scaledHeight = s.height/worldRatio;
         
@@ -84,7 +84,8 @@ public class HardCodedLevel extends Level {
 		Bumper bumper = SlimeFactory.Bumper.create(this.worldRatio + si, h2, 60, 120, 2.0f);
 		// Bumper bumper = SlimeFactory.Bumper.create(this.worldRatio + si, h2);
 		this.items.add(bumper);
-		
-		// this.levelLayer.getCamera()bottomLeft		
+				
+		// this.cameraManager.follow(this.spawnPortal);
+		this.cameraManager.centerCameraOn(this.spawnPortal.getPosition());
 	}
 }

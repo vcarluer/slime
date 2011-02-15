@@ -7,8 +7,6 @@ import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.nodes.CCSpriteFrameCache;
-import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.math.Vector2;
@@ -46,6 +44,7 @@ public abstract class Level {
 	
 	protected float levelWidth;
 	protected float levelHeight;
+	protected CGPoint levelOrigin;
 	
 	protected CameraManager cameraManager;
 	
@@ -58,16 +57,18 @@ public abstract class Level {
 		
 		this.gameLayer.addChild(this.backgroundLayer, 0);
 		this.gameLayer.addChild(this.levelLayer, 1);
+		this.levelOrigin = CGPoint.make(0, 0);
+		this.gameLayer.setAnchorPoint(this.levelOrigin);
 		
 		this.scene.addChild(this.gameLayer, 0);
 		this.scene.addChild(this.hudLayer, 1);
 				
 		this.items = new ArrayList<GameItem>();
 		
-		this.levelWidth = CCDirector.sharedDirector().winSize().getWidth();
-		this.levelHeight = CCDirector.sharedDirector().winSize().getHeight();
+		this.levelWidth = CCDirector.sharedDirector().winSize().getWidth() * 2;
+		this.levelHeight = CCDirector.sharedDirector().winSize().getHeight() * 2;
 		
-		this.cameraManager = new CameraManager(this.gameLayer, this.levelWidth, this.levelHeight);
+		this.cameraManager = new CameraManager(this.gameLayer, this.levelWidth, this.levelHeight, this.levelOrigin);
 		
 		this.init();
 	}
@@ -88,20 +89,20 @@ public abstract class Level {
 		this.world.setContactListener(this.contactManager);
 		
 		// Sprite too big for VM in UbuntuRox
-		CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames("decor.plist");
+		/*CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames("decor.plist");
 		CCSpriteSheet spriteSheet = CCSpriteSheet.spriteSheet("decor.png");
 		this.backgroundLayer.addChild(spriteSheet);
 		this.backgroundSprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("decor.png"));
 		this.backgroundSprite.setAnchorPoint(0, 0);
-		spriteSheet.addChild(this.backgroundSprite);
+		spriteSheet.addChild(this.backgroundSprite);*/
 		
 		SpriteSheetFactory.add("labo");
 		SlimeFactory.attachAll(this.levelLayer, this.world, this.worldRatio);		
 		
 		this.spawnPortal = SlimeFactory.SpawnPortal.createAndMove(
-				CCDirector.sharedDirector().winSize().getWidth() / 2, 
-				CCDirector.sharedDirector().winSize().getHeight() - 32,
-				CCDirector.sharedDirector().winSize().getWidth() / 2,
+				this.levelWidth / 2, 
+				this.levelHeight - 32,
+				this.levelWidth / 2,
 				5);
 		
 		this.items.add(this.spawnPortal);
