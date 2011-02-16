@@ -1,6 +1,5 @@
 package gamers.associate.Slime;
 
-import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.types.CGPoint;

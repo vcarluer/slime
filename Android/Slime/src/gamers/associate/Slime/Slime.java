@@ -46,7 +46,8 @@ public class Slime extends Activity {
 		// frames per second
 		CCDirector.sharedDirector().setAnimationInterval(1.0f / 60);
 		
-		this.scene = LevelFactory.GetLevel("Level1").getScene();		
+		// this.scene = LevelFactory.GetLevel("Level1").getScene();		
+		this.scene = GALogoLayer.scene();
 		
 		// Make the Scene active
 		CCDirector.sharedDirector().runWithScene(this.scene);
