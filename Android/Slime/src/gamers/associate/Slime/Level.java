@@ -7,6 +7,8 @@ import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.nodes.CCSpriteFrameCache;
+import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.math.Vector2;
@@ -89,12 +91,12 @@ public abstract class Level {
 		this.world.setContactListener(this.contactManager);
 		
 		// Sprite too big for VM in UbuntuRox
-		/*CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames("decor.plist");
+		CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames("decor.plist");
 		CCSpriteSheet spriteSheet = CCSpriteSheet.spriteSheet("decor.png");
 		this.backgroundLayer.addChild(spriteSheet);
 		this.backgroundSprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("decor.png"));
 		this.backgroundSprite.setAnchorPoint(0, 0);
-		spriteSheet.addChild(this.backgroundSprite);*/
+		spriteSheet.addChild(this.backgroundSprite);
 		
 		SpriteSheetFactory.add("labo");
 		SlimeFactory.attachAll(this.levelLayer, this.world, this.worldRatio);		

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.cocos2d.actions.UpdateCallback;
 import org.cocos2d.events.CCTouchDispatcher;
 import org.cocos2d.layers.CCLayer;
+import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.types.CGPoint;
 
 import android.view.MotionEvent;
@@ -80,9 +81,11 @@ public class LevelLayer extends CCLayer {
 		}
 		
 		if (this.isZoomAction) {
+			CGPoint touch1Ref =this.touchList.get(0).getLastMoveReference(); 
+			CGPoint touch2Ref =this.touchList.get(1).getLastMoveReference();
 			float distance = CGPoint.ccpDistance(
-					this.touchList.get(0).getLastMoveReference(), 
-					this.touchList.get(1).getLastMoveReference());
+					touch1Ref, 
+					touch2Ref);			
 			
 			this.lastZoomDelta = distance - this.lastDistance;
 			this.lastDistance = distance;
@@ -116,6 +119,8 @@ public class LevelLayer extends CCLayer {
 		
 		if (this.isZoomAction) {
 			this.isZoomAction = false;
+			this.lastDistance = 0f;
+			this.lastZoomDelta = 0f;
 		}
 		
 		this.touchList.remove(touch);
@@ -138,9 +143,15 @@ public class LevelLayer extends CCLayer {
 		if (this.touchList.size() == 2) {
 			this.isZoomAction = true;	
 			this.lastZoomDelta = 0f;
+			CGPoint touch1Ref = this.touchList.get(0).getLastMoveReference();
+			CGPoint touch2Ref = this.touchList.get(1).getLastMoveReference();
 			this.lastDistance = CGPoint.ccpDistance(
-					this.touchList.get(0).getLastMoveReference(),
-					this.touchList.get(1).getLastMoveReference());
+					touch1Ref,
+					touch2Ref);
+			
+			CGPoint midPoint = CGPoint.ccpMidpoint(touch1Ref, touch2Ref);
+			CGPoint anchorZoom = CGPoint.make(midPoint.x, CCDirector.sharedDirector().winSize().height - midPoint.y);
+			this.getCameraManager().setZoomPoint(anchorZoom);
 		}
 		else {
 			this.isZoomAction = false;

@@ -10,6 +10,7 @@ public class CameraManager {
 	
 	private float minScale;
 	private float maxScale;
+	private float zoomSpeed;
 	private float screenW2 = CCDirector.sharedDirector().winSize().width * CCDirector.sharedDirector().winSize().width;
 	private float screenH2 = CCDirector.sharedDirector().winSize().height * CCDirector.sharedDirector().winSize().height;
 	
@@ -33,6 +34,9 @@ public class CameraManager {
 		
 		this.minScale = 1 / (this.levelWidth / CGRect.width(this.cameraView));
 		this.maxScale = 2.0f;
+		this.zoomSpeed = 3.0f;
+		
+		this.normalizePosition();
 	}
 	
 	protected void tick(float delta) {
@@ -53,37 +57,29 @@ public class CameraManager {
 		float scale = this.gameLayer.getScale();		
 		
 		CGPoint position = this.gameLayer.getPosition();
-		boolean isLeftNormalized;
-		boolean isRightNormalized;
-		boolean isTopNormalized;
-		boolean isBottomNormalized;
 		
 		float maxLeft = CGRect.minX(this.cameraView);
 		float left = position.x;
 		if (left > maxLeft) {
 			position.x += maxLeft - left;
-			isLeftNormalized = true;
 		}
 		
 		float minRight = CGRect.maxX(this.cameraView);
 		float right = position.x + this.levelWidth * scale;
 		if (right < minRight) {
 			position.x += minRight - right;
-			isRightNormalized = true;
 		}
 		
 		float maxBottom = CGRect.minY(this.cameraView);
 		float bottom = position.y;
 		if (bottom > maxBottom) {
 			position.y += maxBottom - bottom;
-			isBottomNormalized = true;
 		}
 		
 		float minTop = CGRect.maxY(this.cameraView);
 		float top = position.y + this.levelHeight * scale;
 		if (top < minTop) {
 			position.y += minTop - top;
-			isTopNormalized = true;
 		}						
 		
 		this.gameLayer.setPosition(position);
@@ -94,10 +90,14 @@ public class CameraManager {
 	}
 	
 	public void centerCameraOn(CGPoint center) {		
+		this.keepPointAt(center, CGPoint.make(this.cameraView.size.width / 2, this.cameraView.size.height / 2));
+	}
+	
+	public void keepPointAt(CGPoint gamePoint, CGPoint screenPin) {
 		float scale = this.gameLayer.getScale();
 		CGPoint position = CGPoint.make(
-				- (center.x * scale - this.cameraView.size.width / 2),
-				- (center.y * scale - this.cameraView.size.height / 2));
+				- (gamePoint.x * scale - screenPin.x),
+				- (gamePoint.y * scale - screenPin.y));
 		this.setLayerPosition(position);
 	}
 	
@@ -154,10 +154,25 @@ public class CameraManager {
 		this.isCameraOnContinuousMove = false;
 	}			
 	
-	public void zoomCameraByScreenRatio(float zoomDelta) {		
+	public void zoomCameraByScreenRatio(float zoomDelta) {								
 		double max = Math.sqrt(screenW2 + screenH2);
-		float zoom = (float) (zoomDelta * maxScale / max);
+		float zoom = (float) (zoomDelta * maxScale / max) * this.zoomSpeed;
 		this.zoomCameraBy(zoom);
+	}
+	
+	private CGPoint zoomAnchor;
+	private CGPoint zoomScreenPin;
+	
+	public void setZoomPoint(CGPoint zoomPoint) {
+		// CGPoint zoomScaled = CGPoint.ccpMult(zoomPoint, this.gameLayer.getScale());
+		this.zoomScreenPin = CGPoint.make(zoomPoint.x, zoomPoint.y);
+		float scale = this.gameLayer.getScale();
+		CGPoint zoomScaled = CGPoint.zero();
+		zoomScaled.x = - this.gameLayer.getPosition().x / scale + zoomPoint.x / scale; 
+		zoomScaled.y  = - this.gameLayer.getPosition().y / scale + zoomPoint.y / scale;		
+		//CGPoint zoomNorm = CGPoint.make(zoomScaled.x / (this.levelWidth * scale), zoomScaled.y / (this.levelHeight * scale));
+		//this.gameLayer.setAnchorPoint(zoomNorm);
+		this.zoomAnchor = zoomScaled;
 	}
 	
 	public void zoomCameraBy(float zoomDelta) {		
@@ -171,6 +186,7 @@ public class CameraManager {
 		}
 		
 		this.gameLayer.setScale(scale);
+		this.keepPointAt(this.zoomAnchor, this.zoomScreenPin);
 		this.normalizePosition();
 	}
 }
