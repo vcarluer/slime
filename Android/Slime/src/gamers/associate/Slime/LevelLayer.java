@@ -67,16 +67,20 @@ public class LevelLayer extends CCLayer {
 	 */
 	@Override
 	public boolean ccTouchesMoved(MotionEvent event) {
-		TouchInfo touch = this.touchList.get(this.getPId(event));
-		
-		touch.setMoving(true);	
-		touch.getLastMoveDelta().x = touch.getLastMoveReference().x - event.getX(touch.getPointerId());
-		touch.getLastMoveDelta().y = event.getY() - touch.getLastMoveReference().y;
-		touch.getLastMoveReference().x = event.getX(touch.getPointerId());
-		touch.getLastMoveReference().y = event.getY(touch.getPointerId());
-		touch.setLastMoveTime(event.getEventTime());
+		 for (int i = 0; i < event.getPointerCount(); i++) {			 
+			 TouchInfo touch = this.getTouch(event, i);
+			 if (touch != null) { 
+				touch.setMoving(true);	
+				touch.getLastMoveDelta().x = touch.getLastMoveReference().x - event.getX(touch.getPointerId());
+				touch.getLastMoveDelta().y = event.getY() - touch.getLastMoveReference().y;
+				touch.getLastMoveReference().x = event.getX(touch.getPointerId());
+				touch.getLastMoveReference().y = event.getY(touch.getPointerId());
+				touch.setLastMoveTime(event.getEventTime());
+			 }
+		 }
 		
 		if (this.touchList.size() == 1) {
+			TouchInfo touch = this.getTouch(event, 0);
 			this.level.getCameraManager().moveCameraBy(touch.getLastMoveDelta());
 		}
 		
@@ -167,6 +171,22 @@ public class LevelLayer extends CCLayer {
 	private int getPId(MotionEvent event) {
 		int pId = event.getAction() >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
 		return pId;
+	}
+	
+	private TouchInfo getTouch(MotionEvent event, int idx) {
+		TouchInfo returnTouch = null;
+		
+		if (idx <= event.getPointerCount()) {
+			int pId = event.getPointerId(idx);
+			for	(TouchInfo touch : this.touchList) {
+				if (touch.getPointerId() == pId) {
+					returnTouch = touch;
+					break;
+				}
+			}
+		}
+		
+		return returnTouch;
 	}
 	 
 	 // Test
