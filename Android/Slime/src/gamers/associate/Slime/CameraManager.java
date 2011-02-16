@@ -55,36 +55,40 @@ public class CameraManager {
 		
 	public void normalizePosition() {
 		float scale = this.gameLayer.getScale();		
-		
+		boolean isNormalized = false;
 		CGPoint position = this.gameLayer.getPosition();
 		
 		float maxLeft = CGRect.minX(this.cameraView);
 		float left = position.x;
 		if (left > maxLeft) {
 			position.x += maxLeft - left;
+			isNormalized = true;
 		}
 		
 		float minRight = CGRect.maxX(this.cameraView);
 		float right = position.x + this.levelWidth * scale;
 		if (right < minRight) {
 			position.x += minRight - right;
+			isNormalized = true;
 		}
 		
 		float maxBottom = CGRect.minY(this.cameraView);
 		float bottom = position.y;
 		if (bottom > maxBottom) {
 			position.y += maxBottom - bottom;
+			isNormalized = true;
 		}
 		
 		float minTop = CGRect.maxY(this.cameraView);
 		float top = position.y + this.levelHeight * scale;
 		if (top < minTop) {
 			position.y += minTop - top;
+			isNormalized = true;
 		}						
 		
 		this.gameLayer.setPosition(position);
 		this.virtualCameraPos.set(- position.x, - position.y);
-		if (position.x == 0 && position.y == 0) {
+		if (isNormalized) {
 			this.isCameraOnContinuousMove = false;
 		}
 	}
@@ -164,14 +168,12 @@ public class CameraManager {
 	private CGPoint zoomScreenPin;
 	
 	public void setZoomPoint(CGPoint zoomPoint) {
-		// CGPoint zoomScaled = CGPoint.ccpMult(zoomPoint, this.gameLayer.getScale());
 		this.zoomScreenPin = CGPoint.make(zoomPoint.x, zoomPoint.y);
 		float scale = this.gameLayer.getScale();
 		CGPoint zoomScaled = CGPoint.zero();
-		zoomScaled.x = - this.gameLayer.getPosition().x / scale + zoomPoint.x / scale; 
-		zoomScaled.y  = - this.gameLayer.getPosition().y / scale + zoomPoint.y / scale;		
-		//CGPoint zoomNorm = CGPoint.make(zoomScaled.x / (this.levelWidth * scale), zoomScaled.y / (this.levelHeight * scale));
-		//this.gameLayer.setAnchorPoint(zoomNorm);
+		zoomScaled.x =  (zoomPoint.x - this.gameLayer.getPosition().x) / scale; 
+		zoomScaled.y = (zoomPoint.y - this.gameLayer.getPosition().y) / scale;
+		
 		this.zoomAnchor = zoomScaled;
 	}
 	
