@@ -94,7 +94,9 @@ public abstract class Level {
 		CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames("decor.plist");
 		CCSpriteSheet spriteSheet = CCSpriteSheet.spriteSheet("decor.png");
 		this.backgroundLayer.addChild(spriteSheet);
-		this.backgroundSprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("decor.png"));
+		this.backgroundLayer.setRotation(-90f);				
+		this.backgroundLayer.setScale(2.0f);
+		this.backgroundSprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("decor.png"));		
 		this.backgroundSprite.setAnchorPoint(0, 0);
 		spriteSheet.addChild(this.backgroundSprite);
 		
