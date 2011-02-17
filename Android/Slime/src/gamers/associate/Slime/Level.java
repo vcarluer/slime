@@ -19,9 +19,8 @@ import com.badlogic.gdx.physics.box2d.World;
  * @uml.dependency   supplier="gamers.associate.Slime.GameItem"
  */
 public class Level {	
-	public static String LEVEL_HOME = "Home";
-	
-	protected static Level level; 
+	public static String LEVEL_HOME = "Home";	
+	public static Level currentLevel; 
 	
 	protected World world;
 	protected Vector2 gravity;
@@ -71,10 +70,7 @@ public class Level {
 		this.scene.addChild(this.gameLayer, 0);
 		this.scene.addChild(this.hudLayer, 1);
 				
-		this.items = new ArrayList<GameItem>();
-		
-		this.levelWidth = CCDirector.sharedDirector().winSize().getWidth() * 2;
-		this.levelHeight = CCDirector.sharedDirector().winSize().getHeight() * 2;
+		this.items = new ArrayList<GameItem>();				
 		
 		this.cameraManager = new CameraManager(this.gameLayer, this.levelWidth, this.levelHeight, this.levelOrigin);
 		
@@ -83,27 +79,34 @@ public class Level {
 	
 	public static Level get(String levelName) {
 		// Level singleton  (for box2d and texture performances
-		if (level == null) {
-			level = new Level();
+		if (currentLevel == null) {
+			currentLevel = new Level();
 		}
 		
-		// In case of screen rotation
+		// In case of screen rotation, no more needed anymore here, move to constructor or init?
 		if (!SlimeFactory.isAttached) {
-			level.attachToFactory();
+			currentLevel.attachToFactory();
+		}				
+		
+		// Resume existing level if exists, either reload one
+		if (currentLevel.getCurrentLevelName() != levelName) {
+			currentLevel.loadLevel(levelName);
 		}
 		
-		level.getCameraManager().setCameraView();
+		// Set camera right based on screen size
+		currentLevel.getCameraManager().setCameraView();
 		
-		// Resume existing level, either reload one (miss resuming of cocos animations!)
-		if (level.getCurrentLevelName() != levelName) {
-			level.loadLevel(levelName);
-		}
-		
-		return level;
+		return currentLevel;
 	}
 	
 	protected void attachToFactory() {
 		SlimeFactory.attachAll(this.levelLayer, this.world, this.worldRatio);
+	}
+	
+	public void reload() {
+		currentLevel.loadLevel(this.currentLevelName);
+		// Set camera right based on screen size
+		currentLevel.getCameraManager().setCameraView();
 	}
 	
 	public String getCurrentLevelName() {
@@ -112,7 +115,12 @@ public class Level {
 	
 	// Must be call before running scene with CCDirector
 	public void loadLevel(String levelName) {
-		this.resetLevel();		
+		this.resetLevel();									
+		
+		// Hard coded for now
+		HardCodedLevelBuilder.build(this, levelName);
+		
+		// In level builder?
 		this.spawnPortal = SlimeFactory.SpawnPortal.createAndMove(
 				this.levelWidth / 2, 
 				this.levelHeight - 32,
@@ -120,15 +128,6 @@ public class Level {
 				5);
 		
 		this.items.add(this.spawnPortal);
-		
-		this.label = CCLabel.makeLabel("Hud !", "DroidSans", 16);		
-		this.hudLayer.addChild(this.label, 0);
-		label.setPosition(
-				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
-				CCDirector.sharedDirector().winSize().getHeight() - 20));
-		
-		// Hard coded for now
-		HardCodedLevelBuilder.build(this, levelName);
 		
 		this.currentLevelName = levelName;
 	}
@@ -141,7 +140,7 @@ public class Level {
 		this.items.clear();
 		
 		this.spawnPortal = null;
-		this.goalPortal = null;
+		this.goalPortal = null;				
 	}
 	
 	public CCScene getScene() {		
@@ -154,11 +153,13 @@ public class Level {
 	
 	protected void init()
 	{		
+		// Box2D world
 		this.gravity = new Vector2(0, -10);
 		this.world = new World(this.gravity, true);
 		this.contactManager = new ContactManager();
 		this.world.setContactListener(this.contactManager);
 		
+		// Background
 		// Sprite too big for VM in UbuntuRox
 		CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames("decor.plist");
 		CCSpriteSheet spriteSheet = CCSpriteSheet.spriteSheet("decor.png");
@@ -169,7 +170,15 @@ public class Level {
 		this.backgroundSprite.setAnchorPoint(0, 0);
 		spriteSheet.addChild(this.backgroundSprite);
 		
-		SpriteSheetFactory.add("labo");							
+		// hud
+		this.label = CCLabel.makeLabel("Hud !", "DroidSans", 16);		
+		this.hudLayer.addChild(this.label, 0);
+		label.setPosition(
+				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
+				CCDirector.sharedDirector().winSize().getHeight() - 20));
+		
+		// Main game item spritesheet
+		SpriteSheetFactory.add("labo");			
 	}
 	
 	protected void tick(float delta) {
@@ -239,5 +248,10 @@ public class Level {
 	
 	public SpawnPortal getSpawnPortal() {
 		return this.spawnPortal;
+	}
+	
+	public void setLevelSize(float width, float height) {
+		this.levelWidth = width;
+		this.levelHeight = height;
 	}
 }

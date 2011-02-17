@@ -11,13 +11,17 @@ import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
 
 public class GALogoLayer extends CCLayer {
-	
+	private static CCScene scene;	
 	private long waitLogoSec = 2;
 	private long onEnterTime;
+	private boolean isInit;
 	
 	public static CCScene scene() {
-		CCScene scene = CCScene.node();		
-		scene.addChild(new GALogoLayer());
+		if (scene == null) {
+			scene = CCScene.node();		
+			scene.addChild(new GALogoLayer());
+		}
+		
 		return scene;
 	}
 	
@@ -31,15 +35,18 @@ public class GALogoLayer extends CCLayer {
 	public void onEnter() {		
 		super.onEnter();
 		
-		CCSpriteSheet spriteSheet = SpriteSheetFactory.getSpriteSheet("logo");
-		this.addChild(spriteSheet);
-		CCSpriteFrame spriteFrame = CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("JulenGarciaGA.png");
-		CCSprite sprite = CCSprite.sprite(spriteFrame);
-		spriteSheet.addChild(sprite);		
-		sprite.setPosition(CGPoint.make(
-				CCDirector.sharedDirector().winSize().width / 2,
-				CCDirector.sharedDirector().winSize().height / 2
-				));
+		// Do not construct again if screen is rotated
+		if (!this.isInit) {
+			CCSpriteSheet spriteSheet = SpriteSheetFactory.getSpriteSheet("logo");
+			this.addChild(spriteSheet);
+			CCSpriteFrame spriteFrame = CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("JulenGarciaGA.png");
+			CCSprite sprite = CCSprite.sprite(spriteFrame);
+			spriteSheet.addChild(sprite);		
+			sprite.setPosition(CGPoint.make(
+					CCDirector.sharedDirector().winSize().width / 2,
+					CCDirector.sharedDirector().winSize().height / 2
+					));
+		}
 		
 		// schedule(nextCallback, waitLogoSec); doesn't work?
 		schedule(nextCallback);

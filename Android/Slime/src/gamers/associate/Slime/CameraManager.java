@@ -191,8 +191,9 @@ public class CameraManager {
 		this.normalizePosition();
 	}
 	
-	public void setCameraView() {
-		CGPoint origin = this.levelOrigin;
+	public void setCameraView() {		
+		CGPoint origin = this.levelOrigin;		
+		// Default view is windows size
 		this.cameraView = CGRect.make(origin, CCDirector.sharedDirector().winSize());
 		
 		// By default camera can not be unzoom more than the most little size

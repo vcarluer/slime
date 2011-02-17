@@ -5,6 +5,7 @@ import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.opengl.CCGLSurfaceView;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -46,18 +47,23 @@ public class Slime extends Activity {
 		// frames per second
 		CCDirector.sharedDirector().setAnimationInterval(1.0f / 60);
 		
-		// this.scene = LevelFactory.GetLevel("Level1").getScene();		
+		// First scene after start
+		// Needed, not overriden by ccdirector resume?
 		if (!SlimeLoadingLayer.isInit) {
 			this.scene = GALogoLayer.scene();
 		}
-		else {
-			SlimeLoadingLayer.isInit = false;
+		else {			
 			this.scene = SlimeLoadingLayer.scene();
 		}
-			
-		
+					
 		// Make the Scene active
-		CCDirector.sharedDirector().runWithScene(this.scene);
+		if (CCDirector.sharedDirector().getRunningScene() == null) {
+			CCDirector.sharedDirector().runWithScene(this.scene);
+		}
+		else {
+			CCDirector.sharedDirector().replaceScene(this.scene);
+		}
+			
     }
     
     @Override
@@ -84,10 +90,26 @@ public class Slime extends Activity {
         super.onDestroy();
                 
         CCDirector.sharedDirector().end();
-        SpriteSheetFactory.destroy();
-        SlimeFactory.destroyAll();
+        
+        // Destroy here, world and game items?
+        
+        // No more needed if rotation works:
+        /*SpriteSheetFactory.destroy();
+        SlimeFactory.destroyAll();*/
         //CCTextureCache.sharedTextureCache().removeAllTextures();
-    }  
+    }
     
-    
+    // Called on rotation. 
+    // Does not call onDestroy anymore due to android:configChanges="keyboardHidden|orientation" in manifest
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		// TODO Auto-generated method stub
+		super.onConfigurationChanged(newConfig);
+		
+		// Reinit camera view based on screen size
+		// Not needed, called in Level.get
+		/* if (Level.currentLevel != null) {
+			Level.currentLevel.getCameraManager().setCameraView();
+		}*/
+	}          
 }

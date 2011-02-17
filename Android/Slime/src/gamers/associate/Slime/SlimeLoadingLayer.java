@@ -9,14 +9,18 @@ import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
 
-public class SlimeLoadingLayer extends CCLayer {
+public class SlimeLoadingLayer extends CCLayer {	
 	public static boolean isInit;
+	private static CCScene scene;
 	private Level levelHome;	
 	private Object syncObj;
 	
 	public static CCScene scene() {
-		CCScene scene = CCScene.node();		
-		scene.addChild(new SlimeLoadingLayer());
+		if (scene == null) {
+			scene = CCScene.node();		
+			scene.addChild(new SlimeLoadingLayer());
+		}
+		
 		return scene;
 	}
 	
@@ -30,23 +34,26 @@ public class SlimeLoadingLayer extends CCLayer {
 	@Override
 	public void onEnter() {
 		// TODO Auto-generated method stub
-		super.onEnter();
+		super.onEnter();				
 		
-		CCSpriteSheet spriteSheet = SpriteSheetFactory.getSpriteSheet("logo");
-		this.addChild(spriteSheet);
-		CCSprite sprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("TitleLoading.png"));
-		spriteSheet.addChild(sprite);		
-		sprite.setPosition(CGPoint.make(
-				CCDirector.sharedDirector().winSize().width / 2,
-				CCDirector.sharedDirector().winSize().height / 2
-				));
-		float scaleW = CCDirector.sharedDirector().winSize().width / 240; // size of png image
-		float scaleH = CCDirector.sharedDirector().winSize().height / 400; // size of png image
-		float scale = Math.max(scaleW, scaleH);
-		sprite.setScale(scale);
+		if (isInit == false) {
+			CCSpriteSheet spriteSheet = SpriteSheetFactory.getSpriteSheet("logo");
+			this.addChild(spriteSheet);
+			CCSprite sprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("TitleLoading.png"));
+			spriteSheet.addChild(sprite);		
+			sprite.setPosition(CGPoint.make(
+					CCDirector.sharedDirector().winSize().width / 2,
+					CCDirector.sharedDirector().winSize().height / 2
+					));
+			float scaleW = CCDirector.sharedDirector().winSize().width / 240; // size of png image
+			float scaleH = CCDirector.sharedDirector().winSize().height / 400; // size of png image
+			float scale = Math.max(scaleW, scaleH);
+			sprite.setScale(scale);
+			
+			InitThread initThread = new InitThread();
+			initThread.start();
+		}
 		
-		InitThread initThread = new InitThread();
-		initThread.start();
 		schedule(nextCallback);
 	}		
 	

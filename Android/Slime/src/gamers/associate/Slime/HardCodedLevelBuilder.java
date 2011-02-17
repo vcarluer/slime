@@ -1,5 +1,6 @@
 package gamers.associate.Slime;
 
+import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.types.CGSize;
 
 import com.badlogic.gdx.math.Vector2;
@@ -16,6 +17,10 @@ public class HardCodedLevelBuilder {
 	}
 	
 	public static void buildHome(Level level, String levelName) {
+		level.setLevelSize(
+				CCDirector.sharedDirector().winSize().getWidth() * 2,
+				CCDirector.sharedDirector().winSize().getHeight() * 2);
+		
 		// TEMP
 		// Define the ground body.
         BodyDef bxGroundBodyDef = new BodyDef();
