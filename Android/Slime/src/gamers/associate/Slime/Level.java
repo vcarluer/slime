@@ -44,6 +44,8 @@ public class Level {
 	protected HudLayer hudLayer;
 	protected BackgoundLayer backgroundLayer;
 	protected CCLayer gameLayer;
+	protected CCLayer customOverLayer;
+	protected int customZ = 2;
 	
 	protected CCLabel label;
 	
@@ -140,7 +142,9 @@ public class Level {
 		this.items.clear();
 		
 		this.spawnPortal = null;
-		this.goalPortal = null;				
+		this.goalPortal = null;		
+		
+		this.removeCustomOverLayer();
 	}
 	
 	public CCScene getScene() {		
@@ -253,5 +257,21 @@ public class Level {
 	public void setLevelSize(float width, float height) {
 		this.levelWidth = width;
 		this.levelHeight = height;
+	}
+	
+	public void setIsTouchEnabled(boolean value) {
+		this.levelLayer.setIsTouchEnabled(value);
+	}
+	
+	public void addCustomOverLayer(CCLayer layer) {
+		this.customOverLayer = layer;
+		this.scene.addChild(this.customOverLayer, this.customZ);
+	}
+	
+	public void removeCustomOverLayer() {
+		if (this.customOverLayer != null) {
+			this.scene.removeChild(this.customOverLayer, true);
+			this.customOverLayer = null;
+		}
 	}
 }

@@ -12,7 +12,7 @@ import org.cocos2d.types.CGPoint;
 public class SlimeLoadingLayer extends CCLayer {	
 	public static boolean isInit;
 	private static CCScene scene;
-	private Level levelHome;	
+	private Level currentLevel;	
 	private Object syncObj;
 	
 	public static CCScene scene() {
@@ -53,6 +53,10 @@ public class SlimeLoadingLayer extends CCLayer {
 			InitThread initThread = new InitThread();
 			initThread.start();
 		}
+		else {
+			// Initialize camera view
+			this.currentLevel.getCameraManager().setCameraView();
+		}
 		
 		schedule(nextCallback);
 	}		
@@ -65,7 +69,7 @@ public class SlimeLoadingLayer extends CCLayer {
 				{					
 					if (isInit) {
 						unschedule(nextCallback);						
-						CCDirector.sharedDirector().replaceScene(levelHome.getScene());
+						CCDirector.sharedDirector().replaceScene(currentLevel.getScene());
 					}					
 				}
 			}
@@ -79,7 +83,7 @@ public class SlimeLoadingLayer extends CCLayer {
 		@Override
 		public void run() {
 			// First call to get is long: init physic world and resources
-			levelHome = Level.get(Level.LEVEL_HOME);			
+			currentLevel = Level.get(Level.LEVEL_HOME);			
 			isInit = true;
 		}
 		

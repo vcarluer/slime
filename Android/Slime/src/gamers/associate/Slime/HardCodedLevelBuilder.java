@@ -96,5 +96,7 @@ public class HardCodedLevelBuilder {
 		// this.cameraManager.follow(this.spawnPortal);
 		// level.getCameraManager().centerCameraOn(level.getSpawnPortal().getPosition());
 		level.getCameraManager().zoomCameraTo(0f);
+		
+		level.addCustomOverLayer(HomeLayer.get());	
 	}
 }
