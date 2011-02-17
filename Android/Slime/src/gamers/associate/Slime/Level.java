@@ -18,7 +18,11 @@ import com.badlogic.gdx.physics.box2d.World;
  * @author    vince
  * @uml.dependency   supplier="gamers.associate.Slime.GameItem"
  */
-public abstract class Level {		
+public class Level {	
+	public static String LEVEL_HOME = "Home";
+	
+	protected static Level level; 
+	
 	protected World world;
 	protected Vector2 gravity;
 	protected float worldRatio = 32f;
@@ -50,7 +54,7 @@ public abstract class Level {
 	
 	protected CameraManager cameraManager;
 	
-	public Level() {
+	protected Level() {
 		this.scene = CCScene.node();
 		this.levelLayer = new LevelLayer(this);
 		this.hudLayer = new HudLayer();
@@ -73,6 +77,47 @@ public abstract class Level {
 		this.cameraManager = new CameraManager(this.gameLayer, this.levelWidth, this.levelHeight, this.levelOrigin);
 		
 		this.init();
+	}
+	
+	public static Level get(String levelName) {
+		if (level == null) {
+			level = new Level();
+		}
+		
+		level.loadLevel(levelName);
+		return level;
+	}
+	
+	// Must be call before running scene with CCDirector
+	public void loadLevel(String levelName) {
+		this.resetLevel();		
+		this.spawnPortal = SlimeFactory.SpawnPortal.createAndMove(
+				this.levelWidth / 2, 
+				this.levelHeight - 32,
+				this.levelWidth / 2,
+				5);
+		
+		this.items.add(this.spawnPortal);
+		
+		this.label = CCLabel.makeLabel("Hud !", "DroidSans", 16);		
+		this.hudLayer.addChild(this.label, 0);
+		label.setPosition(
+				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
+				CCDirector.sharedDirector().winSize().getHeight() - 20));
+		
+		// Hard coded for now
+		HardCodedLevelBuilder.build(this, levelName);
+	}
+	
+	private void resetLevel() {		
+		for (GameItem item : this.items) {
+			item.destroy();
+		}
+		
+		this.items.clear();
+		
+		this.spawnPortal = null;
+		this.goalPortal = null;
 	}
 	
 	public CCScene getScene() {		
@@ -101,21 +146,7 @@ public abstract class Level {
 		spriteSheet.addChild(this.backgroundSprite);
 		
 		SpriteSheetFactory.add("labo");
-		SlimeFactory.attachAll(this.levelLayer, this.world, this.worldRatio);		
-		
-		this.spawnPortal = SlimeFactory.SpawnPortal.createAndMove(
-				this.levelWidth / 2, 
-				this.levelHeight - 32,
-				this.levelWidth / 2,
-				5);
-		
-		this.items.add(this.spawnPortal);
-		
-		this.label = CCLabel.makeLabel("Hud !", "DroidSans", 16);		
-		this.hudLayer.addChild(this.label, 0);
-		label.setPosition(
-				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
-				CCDirector.sharedDirector().winSize().getHeight() - 20));
+		SlimeFactory.attachAll(this.levelLayer, this.world, this.worldRatio);						
 	}
 	
 	protected void tick(float delta) {
@@ -158,5 +189,32 @@ public abstract class Level {
 		this.items.add(gi);			
 	}
 	
+	public World getWorld() {
+		return this.world;
+	}
 	
+	public float getWorlRatio () {
+		return this.worldRatio;
+	}
+	
+	public float getLevelWidth() {
+		return this.levelWidth;
+	}
+	
+	public float getLevelHeight() {
+		return this.levelHeight;
+	}
+	
+	public void setGoalPortal(GoalPortal portal) {
+		this.goalPortal = portal;
+		this.items.add(this.goalPortal);
+	}
+	
+	public void addGameItem(GameItem item) {
+		this.items.add(item);
+	}
+	
+	public SpawnPortal getSpawnPortal() {
+		return this.spawnPortal;
+	}
 }

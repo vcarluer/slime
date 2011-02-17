@@ -41,6 +41,10 @@ public class SlimeLoadingLayer extends CCLayer {
 				CCDirector.sharedDirector().winSize().width / 2,
 				CCDirector.sharedDirector().winSize().height / 2
 				));
+		float scaleW = CCDirector.sharedDirector().winSize().width / 240;
+		float scaleH = CCDirector.sharedDirector().winSize().height / 400;
+		float scale = Math.max(scaleW, scaleH);
+		sprite.setScale(scale);
 		
 		InitThread initThread = new InitThread();
 		initThread.start();
@@ -68,7 +72,8 @@ public class SlimeLoadingLayer extends CCLayer {
 		 */
 		@Override
 		public void run() {
-			levelHome = LevelFactory.GetLevel("Home");
+			// First call to get is long: init physic world and resources
+			levelHome = Level.get(Level.LEVEL_HOME);			
 			isInit = true;
 		}
 		

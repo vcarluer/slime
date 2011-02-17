@@ -7,12 +7,15 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
-public class HardCodedLevel extends Level {
+public class HardCodedLevelBuilder {
 	
-	@Override
-	protected void init() {
-		super.init();
-		
+	public static void build(Level level, String levelName) {
+		if (levelName == Level.LEVEL_HOME) {
+			buildHome(level, levelName);
+		}
+	}
+	
+	public static void buildHome(Level level, String levelName) {
 		// TEMP
 		// Define the ground body.
         BodyDef bxGroundBodyDef = new BodyDef();
@@ -21,15 +24,15 @@ public class HardCodedLevel extends Level {
 		// Call the body factory which allocates memory for the ground body
 		// from a pool and creates the ground box shape (also from a pool).
 		// The body is also added to the world.
-        Body groundBody = world.createBody(bxGroundBodyDef);
+        Body groundBody = level.getWorld().createBody(bxGroundBodyDef);
         
         // Define the ground box shape.
         PolygonShape groundBox = new PolygonShape();
         
         // CGSize s = CCDirector.sharedDirector().winSize();
-        CGSize s = CGSize.make(this.levelWidth, this.levelHeight);
-        float scaledWidth = s.width/worldRatio;
-        float scaledHeight = s.height/worldRatio;
+        CGSize s = CGSize.make(level.getLevelWidth(), level.getLevelHeight());
+        float scaledWidth = s.width/level.getWorlRatio();
+        float scaledHeight = s.height/level.getWorlRatio();
         
         Vector2 bottomLeft = new Vector2(0f,0f);
         Vector2 topLeft = new Vector2(0f,scaledHeight);
@@ -77,15 +80,16 @@ public class HardCodedLevel extends Level {
 		SlimeFactory.Platform.create(s.width / 2, si + goalPlatH / 2, goalPlatW, goalPlatH);
 		
 		// Goal
-		this.goalPortal = SlimeFactory.GoalPortal.create(s.width / 2, si + goalPlatH + 15);
-		this.items.add(this.goalPortal);
+		GoalPortal goalPortal = SlimeFactory.GoalPortal.create(s.width / 2, si + goalPlatH + 15);
+		level.setGoalPortal(goalPortal);
 		
 		// Bumper
-		Bumper bumper = SlimeFactory.Bumper.create(this.worldRatio + si, h2, 60, 120, 2.0f);
+		Bumper bumper = SlimeFactory.Bumper.create(level.getWorlRatio() + si, h2, 60, 120, 2.0f);
 		// Bumper bumper = SlimeFactory.Bumper.create(this.worldRatio + si, h2);
-		this.items.add(bumper);
+		level.addGameItem(bumper);
 				
 		// this.cameraManager.follow(this.spawnPortal);
-		this.cameraManager.centerCameraOn(this.spawnPortal.getPosition());
+		// level.getCameraManager().centerCameraOn(level.getSpawnPortal().getPosition());
+		level.getCameraManager().zoomCameraTo(0f);
 	}
 }

@@ -1,7 +1,6 @@
 package gamers.associate.Slime;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.cocos2d.actions.UpdateCallback;
 import org.cocos2d.events.CCTouchDispatcher;

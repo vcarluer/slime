@@ -39,6 +39,12 @@ public abstract class GameItem {
 		this.setSprite(sprite);
 	}
 	
+	public void destroy() {
+		if (this.sprite != null) {
+			this.rootNode.removeChild(this.sprite, true);
+		}
+	}
+	
 	public CCSprite getSprite() {
 		return this.sprite;
 	}

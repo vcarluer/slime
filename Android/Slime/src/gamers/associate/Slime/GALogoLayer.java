@@ -11,7 +11,8 @@ import org.cocos2d.types.CGPoint;
 
 public class GALogoLayer extends CCLayer {
 	
-	private int waitLogoSec = 2;
+	private long waitLogoSec = 2;
+	private long onEnterTime;
 	
 	public static CCScene scene() {
 		CCScene scene = CCScene.node();		
@@ -38,16 +39,21 @@ public class GALogoLayer extends CCLayer {
 				CCDirector.sharedDirector().winSize().height / 2
 				));
 		
-		schedule(nextCallback, waitLogoSec);
-	}
+		// schedule(nextCallback, waitLogoSec); doesn't work?
+		schedule(nextCallback);
+		this.onEnterTime = System.currentTimeMillis();
+	}		
 	
 	private UpdateCallback nextCallback = new UpdateCallback() {
 			
 			@Override
-			public void update(float d) {
-				unschedule(nextCallback);
-				CCScene nextScene = SlimeLoadingLayer.scene();
-				CCDirector.sharedDirector().replaceScene(nextScene);
+			public void update(float d) {		
+				long elapsed = (System.currentTimeMillis() - onEnterTime) / 1000;
+				if (elapsed > waitLogoSec) {
+					unschedule(nextCallback);
+					CCScene nextScene = SlimeLoadingLayer.scene();
+					CCDirector.sharedDirector().replaceScene(nextScene);
+				}
 			}
 		};
 }

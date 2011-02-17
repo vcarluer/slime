@@ -25,6 +25,14 @@ public abstract class GameItemPhysic extends GameItem{
 		this.bodyHeight = this.height;
 	}
 	
+	@Override
+	public void destroy() {
+		super.destroy();
+		this.world.destroyBody(this.body);
+		this.world = null;
+		this.body = null;
+	}
+	
 	protected abstract void initBody();
 	
 	@Override
