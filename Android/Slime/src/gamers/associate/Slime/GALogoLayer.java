@@ -5,6 +5,7 @@ import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
@@ -32,7 +33,8 @@ public class GALogoLayer extends CCLayer {
 		
 		CCSpriteSheet spriteSheet = SpriteSheetFactory.getSpriteSheet("logo");
 		this.addChild(spriteSheet);
-		CCSprite sprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("JulenGarciaGA.png"));
+		CCSpriteFrame spriteFrame = CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("JulenGarciaGA.png");
+		CCSprite sprite = CCSprite.sprite(spriteFrame);
 		spriteSheet.addChild(sprite);		
 		sprite.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,

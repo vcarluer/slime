@@ -54,6 +54,8 @@ public class Level {
 	
 	protected CameraManager cameraManager;
 	
+	protected String currentLevelName;
+	
 	protected Level() {
 		this.scene = CCScene.node();
 		this.levelLayer = new LevelLayer(this);
@@ -80,12 +82,32 @@ public class Level {
 	}
 	
 	public static Level get(String levelName) {
+		// Level singleton  (for box2d and texture performances
 		if (level == null) {
 			level = new Level();
 		}
 		
-		level.loadLevel(levelName);
+		// In case of screen rotation
+		if (!SlimeFactory.isAttached) {
+			level.attachToFactory();
+		}
+		
+		level.getCameraManager().setCameraView();
+		
+		// Resume existing level, either reload one (miss resuming of cocos animations!)
+		if (level.getCurrentLevelName() != levelName) {
+			level.loadLevel(levelName);
+		}
+		
 		return level;
+	}
+	
+	protected void attachToFactory() {
+		SlimeFactory.attachAll(this.levelLayer, this.world, this.worldRatio);
+	}
+	
+	public String getCurrentLevelName() {
+		return this.currentLevelName;
 	}
 	
 	// Must be call before running scene with CCDirector
@@ -107,6 +129,8 @@ public class Level {
 		
 		// Hard coded for now
 		HardCodedLevelBuilder.build(this, levelName);
+		
+		this.currentLevelName = levelName;
 	}
 	
 	private void resetLevel() {		
@@ -145,8 +169,7 @@ public class Level {
 		this.backgroundSprite.setAnchorPoint(0, 0);
 		spriteSheet.addChild(this.backgroundSprite);
 		
-		SpriteSheetFactory.add("labo");
-		SlimeFactory.attachAll(this.levelLayer, this.world, this.worldRatio);						
+		SpriteSheetFactory.add("labo");							
 	}
 	
 	protected void tick(float delta) {

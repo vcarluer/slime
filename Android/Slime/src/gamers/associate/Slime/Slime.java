@@ -15,7 +15,7 @@ import android.view.WindowManager;
 public class Slime extends Activity {
 	static {
         System.loadLibrary("gdx");
-	}
+	}		
 	
 	private CCGLSurfaceView mGLSurfaceView;
 	private CCScene scene;
@@ -47,7 +47,14 @@ public class Slime extends Activity {
 		CCDirector.sharedDirector().setAnimationInterval(1.0f / 60);
 		
 		// this.scene = LevelFactory.GetLevel("Level1").getScene();		
-		this.scene = GALogoLayer.scene();
+		if (!SlimeLoadingLayer.isInit) {
+			this.scene = GALogoLayer.scene();
+		}
+		else {
+			SlimeLoadingLayer.isInit = false;
+			this.scene = SlimeLoadingLayer.scene();
+		}
+			
 		
 		// Make the Scene active
 		CCDirector.sharedDirector().runWithScene(this.scene);
@@ -75,8 +82,12 @@ public class Slime extends Activity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-
+                
         CCDirector.sharedDirector().end();
+        SpriteSheetFactory.destroy();
+        SlimeFactory.destroyAll();
         //CCTextureCache.sharedTextureCache().removeAllTextures();
     }  
+    
+    
 }

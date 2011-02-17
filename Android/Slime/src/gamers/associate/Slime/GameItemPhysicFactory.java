@@ -9,12 +9,12 @@ public abstract class GameItemPhysicFactory<T extends GameItemPhysic> extends It
 	protected World world;
 	protected float worldRatio;		
 	
-	public void Attach(CCNode attachNode, World attachWorld, float attachWorldRatio, CCSpriteSheet spriteSheet) {
+	public void attach(CCNode attachNode, World attachWorld, float attachWorldRatio, CCSpriteSheet spriteSheet) {
 		this.spriteSheet = spriteSheet;
-		this.Attach(attachNode, attachWorld, attachWorldRatio);
+		this.attach(attachNode, attachWorld, attachWorldRatio);
 	}
 	
-	public void Attach(CCNode attachNode, World attachWorld, float attachWorldRatio) {
+	public void attach(CCNode attachNode, World attachWorld, float attachWorldRatio) {
 		this.rootNode = attachNode;
 		this.world = attachWorld;
 		this.worldRatio = attachWorldRatio;
@@ -23,7 +23,7 @@ public abstract class GameItemPhysicFactory<T extends GameItemPhysic> extends It
 		this.isAttached = true;
 	}
 	
-	public void Detach() {
+	public void detach() {
 		if (this.isAttached && this.spriteSheet != null && this.rootNode != null) {
 			// true here?
 			this.rootNode.removeChild(this.spriteSheet, true);

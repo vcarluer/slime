@@ -5,6 +5,7 @@ import org.cocos2d.nodes.CCNode;
 import com.badlogic.gdx.physics.box2d.World;
 
 public abstract class SlimeFactory {
+	public static boolean isAttached;
 	public static SlimyFactory Slimy = new SlimyFactory();
 	public static SpawnPortalFactory SpawnPortal = new SpawnPortalFactory();
 	public static PlatformFactory Platform = new PlatformFactory();
@@ -12,10 +13,20 @@ public abstract class SlimeFactory {
 	public static BumperFactory Bumper = new BumperFactory();
 		
 	public static void attachAll(CCNode attachNode, World attachWorld, float attachWorldRatio) {
-		Slimy.Attach(attachNode, attachWorld, attachWorldRatio);
+		Slimy.attach(attachNode, attachWorld, attachWorldRatio);
 		SpawnPortal.Attach(attachNode);
-		Platform.Attach(attachNode, attachWorld, attachWorldRatio);
-		GoalPortal.Attach(attachNode, attachWorld, attachWorldRatio);
-		Bumper.Attach(attachNode, attachWorld, attachWorldRatio);
+		Platform.attach(attachNode, attachWorld, attachWorldRatio);
+		GoalPortal.attach(attachNode, attachWorld, attachWorldRatio);
+		Bumper.attach(attachNode, attachWorld, attachWorldRatio);
+		isAttached = true;
+	}
+	
+	public static void destroyAll() {
+		Slimy.destroy();
+		SpawnPortal.destroy();
+		Platform.destroy();
+		GoalPortal.destroy();
+		Bumper.destroy();
+		isAttached = false;
 	}
 }

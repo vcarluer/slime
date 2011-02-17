@@ -39,6 +39,10 @@ public abstract class ItemFactoryBase<T extends GameItem> {
 	
 	protected abstract String getPlistPng();
 	
+	public void destroy() {
+		this.isInit = false;
+	}
+	
 	public T create() {
 		return this.create(0, 0);
 	}

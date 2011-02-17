@@ -21,4 +21,8 @@ public class SpriteSheetFactory {
 		add(plistPngName);
 		return SpriteSheetList.get(plistPngName);
 	}
+	
+	public static void destroy() {
+		SpriteSheetList.clear();
+	}
 }

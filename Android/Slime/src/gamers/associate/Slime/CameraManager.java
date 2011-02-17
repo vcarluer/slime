@@ -21,26 +21,17 @@ public class CameraManager {
 	private CGRect cameraView;
 	private CGPoint virtualCameraPos;
 	private GameItem followed;	
+	private CGPoint levelOrigin;
 	
 	public CameraManager(CCLayer gameLayer, float levelWidth, float levelHeight, CGPoint levelOrigin) {
 		this.gameLayer = gameLayer;
 		this.levelWidth = levelWidth;
-		this.levelHeight = levelHeight;		
-		CGPoint origin = levelOrigin;
-		this.cameraView = CGRect.make(origin, CCDirector.sharedDirector().winSize());
+		this.levelHeight = levelHeight;				
+		this.levelOrigin = levelOrigin;		
 		this.moveCameraBy = new CGPoint();
 		this.virtualCameraPos = CGPoint.getZero();
-		
-		// By default camera can not be unzoom more than the most little size
-		this.zoomAnchor = CGPoint.getZero();
-		this.zoomScreenPin = CGPoint.getZero();
-		float minScaleW = 1 / (this.levelWidth / CGRect.width(this.cameraView));
-		float minScaleH = 1 / (this.levelHeight / CGRect.height(this.cameraView));
-		this.minScale = Math.max(minScaleW, minScaleH);
-		this.maxScale = 2.0f;
-		this.zoomSpeed = 3.0f;			
-		
-		this.normalizePosition();
+										
+		this.setCameraView();
 	}
 	
 	protected void tick(float delta) {
@@ -197,6 +188,23 @@ public class CameraManager {
 		
 		this.gameLayer.setScale(zoomValue);
 		this.keepPointAt(this.zoomAnchor, this.zoomScreenPin);
+		this.normalizePosition();
+	}
+	
+	public void setCameraView() {
+		CGPoint origin = this.levelOrigin;
+		this.cameraView = CGRect.make(origin, CCDirector.sharedDirector().winSize());
+		
+		// By default camera can not be unzoom more than the most little size
+		this.zoomAnchor = CGPoint.getZero();
+		this.zoomScreenPin = CGPoint.getZero();
+		float minScaleW = 1 / (this.levelWidth / CGRect.width(this.cameraView));
+		float minScaleH = 1 / (this.levelHeight / CGRect.height(this.cameraView));
+		this.minScale = Math.max(minScaleW, minScaleH);
+		this.maxScale = 2.0f;
+		this.zoomSpeed = 3.0f;
+		// To take into account new limits
+		this.zoomCameraBy(0);
 		this.normalizePosition();
 	}
 }

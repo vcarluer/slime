@@ -10,9 +10,8 @@ import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
 
 public class SlimeLoadingLayer extends CCLayer {
-	
-	private Level levelHome;
-	private boolean isInit;
+	public static boolean isInit;
+	private Level levelHome;	
 	private Object syncObj;
 	
 	public static CCScene scene() {
@@ -41,8 +40,8 @@ public class SlimeLoadingLayer extends CCLayer {
 				CCDirector.sharedDirector().winSize().width / 2,
 				CCDirector.sharedDirector().winSize().height / 2
 				));
-		float scaleW = CCDirector.sharedDirector().winSize().width / 240;
-		float scaleH = CCDirector.sharedDirector().winSize().height / 400;
+		float scaleW = CCDirector.sharedDirector().winSize().width / 240; // size of png image
+		float scaleH = CCDirector.sharedDirector().winSize().height / 400; // size of png image
 		float scale = Math.max(scaleW, scaleH);
 		sprite.setScale(scale);
 		
