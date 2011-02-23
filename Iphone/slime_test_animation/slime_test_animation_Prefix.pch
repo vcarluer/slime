@@ -1,0 +1,8 @@
+//
+// Prefix header for all source files of the 'slime_test_animation' target in the 'slime_test_animation' project
+//
+
+#ifdef __OBJC__
+	#import <Foundation/Foundation.h>
+	#import <UIKit/UIKit.h>
+#endif
