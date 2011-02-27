@@ -6,10 +6,10 @@
 @interface SpawnPortalFactory : GameItemFactory {
 }
 
-- (SpawnPortal *) createAndMove:(float)x y:(float)y moveBy:(float)moveBy speed:(float)speed;
+- (SpawnPortal *) createAndMove:(float)my_x y:(float)my_y moveBy:(float)moveBy speed:(float)speed;
 - (void) createAnimList;
 - (NSString *) getPlist;
 - (NSString *) getPng;
-- (SpawnPortal *) instantiate:(float)x y:(float)y width:(float)width height:(float)height;
+- (SpawnPortal *) instantiate:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height;
 - (void) runFirstAnimations:(SpawnPortal *)item;
 @end

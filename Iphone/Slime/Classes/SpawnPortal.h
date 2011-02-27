@@ -7,7 +7,7 @@ extern NSString * Anim_Spawn_Portal;
 @interface SpawnPortal : GameItem {
 }
 
-- (id) init:(CCNode *)node x:(float)x y:(float)y width:(float)width height:(float)height;
+- (id) init:(CCNode *)node x:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height;
 - (void) createPortal;
 - (void) MovePortalInLine:(float)moveBy speed:(float)speed;
 - (GameItem *) spawn;

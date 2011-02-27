@@ -1,7 +1,7 @@
 #import "Level.h"
-#import "SlimeFactory.h"
+#import "SlimyFactory.h"
 #import "HardCodedLevelBuilder.h"
-//#import "spriteSheetFactory.h"
+#import "spriteSheetFactory.h"
 
 NSString * LEVEL_HOME = @"Home";
 Level * currentLevel;
@@ -25,13 +25,20 @@ Level * currentLevel;
     levelLayer = [[[LevelLayer alloc] initWithLevel:self] autorelease];
     hudLayer = [[[HudLayer alloc] init] autorelease];
     backgroundLayer = [[[BackgoundLayer alloc] init] autorelease];
+	levelOrigin = CGPointMake(0,0);
+    //[scene addChild:backgroundLayer z:0];
+	  
+	  
+	  
+	  
     gameLayer = [CCLayer node];
     [gameLayer addChild:backgroundLayer z:0];
-    [gameLayer addChild:levelLayer z:1];
-    levelOrigin = CGPointMake(0,0);
-    [gameLayer setAnchorPoint:levelOrigin];
-    [scene addChild:gameLayer z:0];
-    [scene addChild:hudLayer z:1];
+	//[gameLayer addChild:levelLayer z:1];
+	[gameLayer setAnchorPoint:levelOrigin];
+	
+	[scene addChild:gameLayer z:0];
+    [scene addChild:levelLayer z:1];
+    [scene addChild:hudLayer z:2];
     items = [[[NSMutableArray alloc] init] autorelease];
     [self initLevel];
   }
@@ -68,9 +75,9 @@ Level * currentLevel;
 - (void) loadLevel:(NSString *)levelName {
   [self resetLevel];
 	//todo
-  [HardCodedLevelBuilder build:self param1:levelName];	
+  [HardCodedLevelBuilder build:self levelName:levelName];	
   //spawnPortal = [SlimeFactory.SpawnPortal createAndMove:levelWidth / 2 param1:levelHeight - 32 param2:levelWidth / 2 param3:5];
-  [items add:spawnPortal];
+  //[items add:spawnPortal];
   currentLevelName = levelName;
 }
 
@@ -94,31 +101,29 @@ Level * currentLevel;
    world = new b2World(gravity, true);		
    contactManager = new ContactManager;
    world->SetContactListener(contactManager);
-  //[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"decor.plist"];
-  //CCSpriteSheet * spriteSheet = [CCSpriteSheet spriteSheet:@"decor.png"];
-	CCSpriteFrameCache * cache = [CCSpriteFrameCache sharedSpriteFrameCache];
-	[cache addSpriteFramesWithFile:@"decor.plist"];
-	CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"decor.png"];  
-	//[self addChild:spriteSheet];
+   CGSize screenSize = [CCDirector sharedDirector].winSize;
+	
+	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"decor.plist"];
+	//CCSpriteSheet * spriteSheet = [CCSpriteSheet spriteSheet:@"decor.png"];
 	
 	
-  [backgroundLayer addChild:spriteSheet];
-  
-	[backgroundLayer setRotation:-90.0f];
-  [backgroundLayer setScale:2.0f];
-  /*
-	backgroundSprite = [CCSprite spriteWithSpriteFrameName:@"decor.png"] ;
-  //[backgroundSprite setAnchorPoint:0 param1:0];
-  [spriteSheet addChild:backgroundSprite];
-	*/
-   label = [CCLabelTTF labelWithString:@"Hud !" fontName:@"Marker Felt" fontSize:16];
-
-  [hudLayer addChild:label z:0];
-	CGSize screenSize = [CCDirector sharedDirector].winSize;
-  
-  label.position = ccp( screenSize.width/2, screenSize.height-20);
-  //todo	
- // [spriteSheetFactory add:@"labo"];
+	CCSprite *spriteSheet = [CCSprite spriteWithFile:@"decor.png"];
+	spriteSheet.position = ccp(500, 0);
+	
+	
+	[backgroundLayer addChild:spriteSheet];
+	//[backgroundLayer setRotation:-90.0f];
+	[backgroundLayer setScale:0.8f];
+	label = [CCLabelTTF labelWithString:@"Hud !" fontName:@"Marker Felt" fontSize:16];	
+	[hudLayer addChild:label z:0];	
+	label.position = ccp( screenSize.width/2, screenSize.height-20);	
+//	[SpriteSheetFactory add:@"labo"];	
+	Slimy * slimy;
+	//todo 
+	slimy  = [Slimy createSlimy:CCScene.node x:screenSize.width/2 y:screenSize.height width:0 height:0 world:world worldRatio:1.5f];
+	[slimy fall];
+	[hudLayer addChild:slimy ];
+	
 				 }
 
 - (void) tick:(float)delta {
@@ -183,7 +188,7 @@ Level * currentLevel;
   [levelLayer release];
   [hudLayer release];
   [backgroundLayer release];
-  [gameLayer release];
+//  [gameLayer release];
   [customOverLayer release];
   [label release];
  // [levelOrigin release];

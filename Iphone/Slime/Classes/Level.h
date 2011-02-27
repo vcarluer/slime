@@ -58,6 +58,7 @@ extern NSString * LEVEL_HOME;
 
 @property(nonatomic, retain, readonly) NSString * currentLevelName;
 @property(nonatomic, retain, readonly) CCScene * scene;
+@property(nonatomic, retain, readonly) CCSprite * backgroundSprite;
 //@property(nonatomic, retain, readonly) CameraManager * cameraManager;
 @property(nonatomic,  readonly) b2World * world;
 @property(nonatomic) float worlRatio;

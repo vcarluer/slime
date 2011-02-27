@@ -31,7 +31,7 @@ class LevelLayer_Anon1 : public UpdateCallback {
  // UpdateCallback * tickCallback;
 }
 
-- (id) initWithLevel:(Level *)level;
+- (id) initWithLevel:(Level *)my_level;
 - (void) onEnter;
 - (void) onExit;
 - (void) tick:(float)delta;

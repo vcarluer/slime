@@ -2,10 +2,10 @@
 
 @implementation LevelLayer
 
-- (id) initWithLevel:(Level *)level {
+- (id) initWithLevel:(Level *)my_level {
   if (self = [super init]) {
 //    tickCallback = [[[LevelLayer_Anon1 alloc] init] autorelease];
-    level = level;
+    level = my_level;
     [self setIsTouchEnabled:YES];
     touchList = [[[NSMutableArray alloc] init] autorelease];
   }
