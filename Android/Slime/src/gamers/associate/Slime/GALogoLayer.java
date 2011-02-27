@@ -8,6 +8,7 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCSpriteSheet;
+import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.types.CGPoint;
 
 public class GALogoLayer extends CCLayer {
@@ -15,6 +16,8 @@ public class GALogoLayer extends CCLayer {
 	private long waitLogoSec = 2;
 	private long onEnterTime;
 	private boolean isInit;
+	private CCSpriteSheet spriteSheet;
+	private CCSprite sprite;
 	
 	public static CCScene scene() {
 		if (scene == null) {
@@ -37,15 +40,21 @@ public class GALogoLayer extends CCLayer {
 		
 		// Do not construct again if screen is rotated
 		if (!this.isInit) {
-			CCSpriteSheet spriteSheet = SpriteSheetFactory.getSpriteSheet("logo");
-			this.addChild(spriteSheet);
+			this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo");
+			this.addChild(this.spriteSheet);
 			CCSpriteFrame spriteFrame = CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("JulenGarciaGA.png");
-			CCSprite sprite = CCSprite.sprite(spriteFrame);
-			spriteSheet.addChild(sprite);		
-			sprite.setPosition(CGPoint.make(
+			this.sprite = CCSprite.sprite(spriteFrame);
+			this.spriteSheet.addChild(this.sprite);		
+			this.sprite.setPosition(CGPoint.make(
 					CCDirector.sharedDirector().winSize().width / 2,
 					CCDirector.sharedDirector().winSize().height / 2
 					));
+			
+			// Scaling to screen height
+			float originalImageHeight = 566f;
+			float targetHeight = CCDirector.sharedDirector().winSize().getHeight();			
+			float scale = targetHeight / originalImageHeight;
+			this.sprite.setScale(scale);
 		}
 		
 		// schedule(nextCallback, waitLogoSec); doesn't work?
@@ -60,6 +69,8 @@ public class GALogoLayer extends CCLayer {
 				long elapsed = (System.currentTimeMillis() - onEnterTime) / 1000;
 				if (elapsed > waitLogoSec) {
 					unschedule(nextCallback);
+					spriteSheet.removeChild(sprite, true);
+					
 					CCScene nextScene = SlimeLoadingLayer.scene();
 					CCDirector.sharedDirector().replaceScene(nextScene);
 				}

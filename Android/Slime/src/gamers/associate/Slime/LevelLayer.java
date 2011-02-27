@@ -103,30 +103,33 @@ public class LevelLayer extends CCLayer {
 	 * @see org.cocos2d.layers.CCLayer#ccTouchesEnded(android.view.MotionEvent)
 	 */
 	@Override
-	public boolean ccTouchesEnded(MotionEvent event) {		
-		TouchInfo touch = this.touchList.get(this.getPId(event));
-		if (!touch.isMoving()) {
-			if (touch.getPointerId() == 0) {
-				this.level.SpawnSlime();
-			}
-		}
-		else {						
-			if (!this.isZoomAction) {
-				if (event.getEventTime() - touch.getLastMoveTime() < 300) {					
-					this.getCameraManager().continuousMoveCameraBy(touch.getLastMoveDelta());
+	public boolean ccTouchesEnded(MotionEvent event) {				
+		TouchInfo touch = this.getTouch(event);
+		if (touch != null) {
+			if (!touch.isMoving()) {
+				if (touch.getPointerId() == 0) {
+					this.level.SpawnSlime();
 				}
-								
+			}
+			else {						
+				if (!this.isZoomAction) {
+					/*if (event.getEventTime() - touch.getLastMoveTime() < 300) {					
+						this.getCameraManager().continuousMoveCameraBy(touch.getLastMoveDelta());
+					}*/
+				}			
+				
 				touch.setMoving(false);
-			}			
+			}
+			
+			if (this.isZoomAction) {
+				this.isZoomAction = false;
+				this.lastDistance = 0f;
+				this.lastZoomDelta = 0f;
+			}
+			
+			this.touchList.remove(touch);
 		}
 		
-		if (this.isZoomAction) {
-			this.isZoomAction = false;
-			this.lastDistance = 0f;
-			this.lastZoomDelta = 0f;
-		}
-		
-		this.touchList.remove(touch);
         return CCTouchDispatcher.kEventHandled;
 	}
 
@@ -134,8 +137,9 @@ public class LevelLayer extends CCLayer {
 	 * @see org.cocos2d.layers.CCLayer#ccTouchesBegan(android.view.MotionEvent)
 	 */
 	@Override
-	public boolean ccTouchesBegan(MotionEvent event) {				
-		TouchInfo touch = new TouchInfo(this.getPId(event));		
+	public boolean ccTouchesBegan(MotionEvent event) {	
+		int pid = this.getPId(event);		
+		TouchInfo touch = new TouchInfo(pid);		
 		touch.getMoveBeganAt().x = event.getX(touch.getPointerId());
 		touch.getMoveBeganAt().y = event.getY(touch.getPointerId());
 		touch.getLastMoveReference().x = event.getX(touch.getPointerId());
@@ -158,7 +162,7 @@ public class LevelLayer extends CCLayer {
 		}
 		else {
 			this.isZoomAction = false;
-		}
+		}		
 		
 		return CCTouchDispatcher.kEventHandled;		
 	}	
@@ -188,6 +192,20 @@ public class LevelLayer extends CCLayer {
 		return returnTouch;
 	}
 	 
+	private TouchInfo getTouch(MotionEvent event) {
+		TouchInfo returnTouch = null;
+		
+		int pId = this.getPId(event);
+		for	(TouchInfo touch : this.touchList) {
+			if (touch.getPointerId() == pId) {
+				returnTouch = touch;
+				break;
+			}
+		}
+		
+		return returnTouch;
+	}
+	
 	 // Test
 	 /*public void resetWon() {
 		 this.level.resetWon();

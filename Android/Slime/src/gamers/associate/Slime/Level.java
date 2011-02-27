@@ -10,6 +10,7 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
+import org.cocos2d.utils.javolution.MathLib;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -19,7 +20,9 @@ import com.badlogic.gdx.physics.box2d.World;
  * @uml.dependency   supplier="gamers.associate.Slime.GameItem"
  */
 public class Level {	
-	public static String LEVEL_HOME = "Home";	
+	public static String LEVEL_HOME = "Home";
+	public static String LEVEL_1 = "1";
+	
 	public static Level currentLevel; 
 	
 	protected World world;
@@ -46,6 +49,8 @@ public class Level {
 	protected CCLayer gameLayer;
 	protected CCLayer customOverLayer;
 	protected int customZ = 2;
+	protected int hudZ = 1;
+	protected boolean isHudEnabled;
 	
 	protected CCLabel label;
 	
@@ -70,33 +75,33 @@ public class Level {
 		this.gameLayer.setAnchorPoint(this.levelOrigin);
 		
 		this.scene.addChild(this.gameLayer, 0);
-		this.scene.addChild(this.hudLayer, 1);
+		this.isHudEnabled = true;
+		this.scene.addChild(this.hudLayer, this.hudZ);
 				
 		this.items = new ArrayList<GameItem>();				
 		
-		this.cameraManager = new CameraManager(this.gameLayer, this.levelWidth, this.levelHeight, this.levelOrigin);
+		this.cameraManager = new CameraManager(this.gameLayer);							
 		
 		this.init();
 	}
 	
 	public static Level get(String levelName) {
+		return get(levelName, false);
+	}
+	
+	public static Level get(String levelName, boolean forceReload) {
 		// Level singleton  (for box2d and texture performances
 		if (currentLevel == null) {
 			currentLevel = new Level();
-		}
-		
-		// In case of screen rotation, no more needed anymore here, move to constructor or init?
-		if (!SlimeFactory.isAttached) {
-			currentLevel.attachToFactory();
-		}				
+		}					
 		
 		// Resume existing level if exists, either reload one
-		if (currentLevel.getCurrentLevelName() != levelName) {
+		if (forceReload || currentLevel.getCurrentLevelName() != levelName) {
 			currentLevel.loadLevel(levelName);
 		}
 		
 		// Set camera right based on screen size
-		currentLevel.getCameraManager().setCameraView();
+		currentLevel.attachLevelToCamera();	
 		
 		return currentLevel;
 	}
@@ -108,7 +113,13 @@ public class Level {
 	public void reload() {
 		currentLevel.loadLevel(this.currentLevelName);
 		// Set camera right based on screen size
-		currentLevel.getCameraManager().setCameraView();
+		currentLevel.getCameraManager().setCameraView();		
+	}
+	
+	public void attachLevelToCamera() {
+		this.cameraManager.attachLevel(this.levelWidth, this.levelHeight, this.levelOrigin);
+		this.cameraManager.setCameraView();
+		this.getCameraManager().zoomCameraTo(0f);
 	}
 	
 	public String getCurrentLevelName() {
@@ -129,12 +140,64 @@ public class Level {
 				this.levelWidth / 2,
 				5);
 		
-		this.items.add(this.spawnPortal);
+		this.items.add(this.spawnPortal);				
 		
 		this.currentLevelName = levelName;
+		
+		if (this.currentLevelName == Level.LEVEL_HOME) {
+			this.handleHomeLevel();
+		}
+	}
+	
+	private long startHome;
+	private HomePlayThread playThread;
+	private boolean runHome;
+	private double nextRand;
+	private int maxSlime = 30;
+	private double minSpawn = 0.5;
+	private double maxSpawn = 3;
+	private int slimeCount;
+	
+	private void handleHomeLevel() {
+		this.startHome = System.currentTimeMillis();
+		this.playThread = new HomePlayThread();
+		this.runHome = true;
+		this.slimeCount = 0;
+		this.playThread.start();
+	}	
+			
+	private class HomePlayThread extends Thread {
+		@Override
+		public void run() {
+			nextRand = MathLib.random(minSpawn, maxSpawn);
+			
+			while (runHome && slimeCount < maxSlime) {
+				Level level = Level.currentLevel;
+				if (level != null) {
+					long elapsed = (System.currentTimeMillis() - startHome) / 1000;
+					
+					if (elapsed > nextRand) {
+						level.SpawnSlime();
+						slimeCount++;
+						startHome = System.currentTimeMillis();
+						nextRand = MathLib.random(minSpawn, maxSpawn);
+					}
+				}
+			}
+		}		
+	}
+	
+	public void stopHomeLevel() {
+		this.runHome = false;
 	}
 	
 	private void resetLevel() {		
+		if (this.currentLevelName == Level.LEVEL_HOME) {
+			this.stopHomeLevel();
+		}
+		
+		this.currentLevelName = "";
+		
 		for (GameItem item : this.items) {
 			item.destroy();
 		}
@@ -145,6 +208,8 @@ public class Level {
 		this.goalPortal = null;		
 		
 		this.removeCustomOverLayer();
+		this.setIsTouchEnabled(true);
+		this.setIsHudEnabled(true);
 	}
 	
 	public CCScene getScene() {		
@@ -162,27 +227,26 @@ public class Level {
 		this.world = new World(this.gravity, true);
 		this.contactManager = new ContactManager();
 		this.world.setContactListener(this.contactManager);
-		
+		// Main game item spritesheet
+		SpriteSheetFactory.add("labo");
 		// Background
-		// Sprite too big for VM in UbuntuRox
-		CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames("decor.plist");
-		CCSpriteSheet spriteSheet = CCSpriteSheet.spriteSheet("decor.png");
+		CCSpriteSheet spriteSheet = SpriteSheetFactory.getSpriteSheet("decor");		
+		// Sprite too big for VM in UbuntuRox		
 		this.backgroundLayer.addChild(spriteSheet);
-		this.backgroundLayer.setRotation(-90f);				
-		this.backgroundLayer.setScale(2.0f);
+		//this.backgroundLayer.setRotation(-90f);				
+		//this.backgroundLayer.setScale(2.0f);
 		this.backgroundSprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("decor.png"));		
 		this.backgroundSprite.setAnchorPoint(0, 0);
-		spriteSheet.addChild(this.backgroundSprite);
+		spriteSheet.addChild(this.backgroundSprite);				
 		
 		// hud
 		this.label = CCLabel.makeLabel("Hud !", "DroidSans", 16);		
-		this.hudLayer.addChild(this.label, 0);
+		this.hudLayer.addChild(this.label);
 		label.setPosition(
-				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
+				CGPoint.ccp(20, 
 				CCDirector.sharedDirector().winSize().getHeight() - 20));
 		
-		// Main game item spritesheet
-		SpriteSheetFactory.add("labo");			
+		this.attachToFactory();
 	}
 	
 	protected void tick(float delta) {
@@ -273,5 +337,20 @@ public class Level {
 			this.scene.removeChild(this.customOverLayer, true);
 			this.customOverLayer = null;
 		}
+	}
+	
+	public void setIsHudEnabled(boolean value) {
+		if (!value) {
+			if (this.isHudEnabled) {
+				this.scene.removeChild(this.hudLayer,  false);
+			}
+		}
+		else {
+			if (!this.isHudEnabled) {
+				this.scene.addChild(this.hudLayer, this.hudZ);
+			}
+		}
+		
+		this.isHudEnabled = value;
 	}
 }

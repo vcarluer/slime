@@ -23,15 +23,11 @@ public class CameraManager {
 	private GameItem followed;	
 	private CGPoint levelOrigin;
 	
-	public CameraManager(CCLayer gameLayer, float levelWidth, float levelHeight, CGPoint levelOrigin) {
+	public CameraManager(CCLayer gameLayer) {
 		this.gameLayer = gameLayer;
-		this.levelWidth = levelWidth;
-		this.levelHeight = levelHeight;				
-		this.levelOrigin = levelOrigin;		
+				
 		this.moveCameraBy = new CGPoint();
 		this.virtualCameraPos = CGPoint.getZero();
-										
-		this.setCameraView();
 	}
 	
 	protected void tick(float delta) {
@@ -207,5 +203,11 @@ public class CameraManager {
 		// To take into account new limits
 		this.zoomCameraBy(0);
 		this.normalizePosition();
+	}
+	
+	public void attachLevel(float levelWidth, float levelHeight, CGPoint levelOrigin) {
+		this.levelWidth = levelWidth;
+		this.levelHeight = levelHeight;				
+		this.levelOrigin = levelOrigin;
 	}
 }

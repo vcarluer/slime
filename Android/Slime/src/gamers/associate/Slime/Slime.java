@@ -48,22 +48,11 @@ public class Slime extends Activity {
 		CCDirector.sharedDirector().setAnimationInterval(1.0f / 60);
 		
 		// First scene after start
-		// Needed, not overriden by ccdirector resume?
-		if (!SlimeLoadingLayer.isInit) {
-			this.scene = GALogoLayer.scene();
-		}
-		else {			
-			this.scene = SlimeLoadingLayer.scene();
-		}
+		// Needed, not overriden by ccdirector resume?		
+		this.scene = GALogoLayer.scene();
 					
-		// Make the Scene active
-		if (CCDirector.sharedDirector().getRunningScene() == null) {
-			CCDirector.sharedDirector().runWithScene(this.scene);
-		}
-		else {
-			CCDirector.sharedDirector().replaceScene(this.scene);
-		}
-			
+		// Make the Scene active		
+		CCDirector.sharedDirector().runWithScene(this.scene);
     }
     
     @Override
@@ -105,6 +94,10 @@ public class Slime extends Activity {
 	public void onConfigurationChanged(Configuration newConfig) {
 		// TODO Auto-generated method stub
 		super.onConfigurationChanged(newConfig);
+		
+		/*this.scene = SlimeLoadingLayer.scene();
+		CCDirector.sharedDirector().replaceScene(this.scene);*/
+		//Level.currentLevel.getCameraManager().setCameraView();
 		
 		// Reinit camera view based on screen size
 		// Not needed, called in Level.get
