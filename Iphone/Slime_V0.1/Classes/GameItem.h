@@ -9,13 +9,12 @@
 
 @interface GameItem : NSObject  {
 	
-	@public
+	@protected
 	CGPoint position;
 	float angle;
 	float width;
 	float height;
 	NSMutableDictionary * animationList;
-	
 	CCAction * currentAction;
 	CCSprite * sprite;
 	CCNode * rootNode;
@@ -33,11 +32,11 @@
 
 
 
-//@property(nonatomic, retain, readonly) CGPoint position;
-//@property(nonatomic, retain, readonly) CGSize * textureSize;
 - (id) init:(CCNode *)my_node x:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height;
+- (void) destroy;
 - (void) setSprite:(CCSprite *)affectSprite;
 - (CCAnimation *) getReferenceAnimation;
+- (CGSize) getTextureSize;
 - (void) transformTexture;
 - (void) setAnimationList:(NSMutableDictionary *)animations;
 - (void) render:(float)delta;

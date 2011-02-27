@@ -9,25 +9,7 @@
 	self = [super init];
 	if (self != nil) {
 		animationList = [[[NSMutableDictionary alloc] init] autorelease];
-		
-		CCSpriteBatchNode * spriteSheet;
-		CCSpriteFrameCache * cache = [CCSpriteFrameCache sharedSpriteFrameCache];
-		[cache addSpriteFramesWithFile:@"labo.plist"];
-		spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"labo.png"];
-		//spriteSheet = testSheet;
-		
-		//[self addChild:spriteSheet];
-		[self addAnim:@"blueportal" frameCount:4];
-		[self addAnim:@"burned-wait" frameCount:2];
-		[self addAnim:@"burning" frameCount:5];
-		[self addAnim:@"falling" frameCount:3];
-		[self addAnim:@"landing-h" frameCount:3];
-		[self addAnim:@"landing-v" frameCount:3];
-		[self addAnim:@"redportal" frameCount:4];
-		[self addAnim:@"wait-h" frameCount:5];
-		[self addAnim:@"wait-v" frameCount:5];
-		
-		
+				
 		CGPoint tempposition;
 		tempposition.x =my_x;
 		tempposition.y =my_y;
@@ -37,32 +19,33 @@
 		rootNode = node;
 		width = my_width;
 		height = my_height;
-		CGRect my_rect = CGRectMake(my_x, 0, my_width, my_y);
-		
-		//CCSprite * my_sprite = [[[CCSprite alloc] initWithBatchNode:node rect:[(CGRect)spriteSheet rect]] retain] ;
-		
-		CCSprite * my_sprite = [CCSprite spriteWithSpriteFrameName:@"labo.plist"];
-		
+			
+		CCSprite * my_sprite = [[[CCSprite alloc] init] autorelease];		
 		
 		[self setSprite:my_sprite];
 	}
 	return self;
 }
 
+- (void) destroy {
+	if (sprite != nil) {
+		[rootNode removeChild:sprite cleanup:YES];
+	}
+}
+
+
 - (void) setSprite:(CCSprite *)affectSprite {
 	if (sprite != nil) {
 		[rootNode removeChild:sprite cleanup:YES];
 	}
 	sprite = affectSprite;
-//	[sprite useBatchNode];
-	//[rootNode addChild:sprite];
+	[rootNode addChild:sprite];
 	[sprite setPosition:position];
 	[sprite setRotation:angle];
 	[self transformTexture];
 }
 
-- (CGSize) textureSize {
-	
+- (CGSize) getTextureSize {
 	
 	
 	CGSize size;
@@ -84,7 +67,7 @@
 
 - (void) transformTexture {
 	if (width != 0 && height != 0) {
-		CGSize size = [self textureSize];
+		CGSize size = [self getTextureSize];
 		if (size.width != 0 && size.height != 0) {
 			float wScale = width / size.width;
 			float hScale = height / size.height;
@@ -130,7 +113,7 @@
 	//CCAnimation *animation = [CCAnimation animationWithFrames:animArray delay:0.1f];
 	CCAnimation *animation = [CCAnimation animationWithName:animName delay:0.1f frames:animArray];
 	
-	CCSprite * sprite = [CCSprite spriteWithSpriteFrameName:[animName stringByAppendingString:@"-1.png"]];
+	//CCSprite * sprite = [CCSprite spriteWithSpriteFrameName:[animName stringByAppendingString:@"-1.png"]];
 	return animation;
 }
 

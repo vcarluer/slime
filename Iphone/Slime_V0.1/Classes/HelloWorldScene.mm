@@ -118,8 +118,8 @@ enum {
 		
 		//Set up sprite
 		
-		CCSpriteBatchNode *batch = [CCSpriteBatchNode batchNodeWithFile:@"blocks.png" capacity:150];
-		[self addChild:batch z:0 tag:kTagBatchNode];
+		//CCSpriteBatchNode *batch = [CCSpriteBatchNode batchNodeWithFile:@"blocks.png" capacity:150];
+		//[self addChild:batch z:0 tag:kTagBatchNode];
 		
 		
 		
@@ -165,13 +165,17 @@ enum {
 -(void) addNewSpriteWithCoords:(CGPoint)p
 {
 	CCLOG(@"Add sprite %0.2f x %02.f",p.x,p.y);
-	CCSpriteBatchNode *batch = (CCSpriteBatchNode*) [self getChildByTag:kTagBatchNode];
+	//CCSpriteBatchNode *batch = (CCSpriteBatchNode*) [self getChildByTag:kTagBatchNode];
+	
+	CCSpriteSheet *my_Sheet = [[CCSpriteSheet alloc] init];
 	
 	 Slimy * my_slimy;
 	 //todo 
-	 my_slimy  = [Slimy createSlimy:batch x:p.x y:p.y width:0.0f height:0.0f world:world worldRatio:PTM_RATIO];
+	 my_slimy  = [Slimy createSlimy:my_Sheet x:p.x y:p.y width:0.0f height:0.0f world:world worldRatio:PTM_RATIO];
 	 [my_slimy fall];
-	[batch addChild:my_slimy->sprite z:1 tag:kTagSlimy];
+	
+	
+//	[batch addChild:my_slimy->sprite z:1 tag:kTagSlimy];
 //	 [batch addChild:my_slimy->sprite];
 	
 	
