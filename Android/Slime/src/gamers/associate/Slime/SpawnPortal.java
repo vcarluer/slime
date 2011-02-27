@@ -38,7 +38,10 @@ public class SpawnPortal extends GameItem {
 	
 	public GameItem spawn() {
 		Slimy slimy = SlimeFactory.Slimy.create(this.position.x, this.position.y, 1.5f);
-		slimy.fall();		
+		if (slimy != null) {			
+			slimy.fall();
+		}
+		
 		return slimy;
 	}
 	

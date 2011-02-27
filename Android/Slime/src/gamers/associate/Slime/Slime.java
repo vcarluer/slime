@@ -1,5 +1,7 @@
 package gamers.associate.Slime;
 
+import java.security.KeyStore.LoadStoreParameter;
+
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.opengl.CCGLSurfaceView;
@@ -79,6 +81,17 @@ public class Slime extends Activity {
         super.onDestroy();
                 
         CCDirector.sharedDirector().end();
+        SpriteSheetFactory.destroy();
+        SlimeFactory.detachAll();
+        SlimeFactory.destroyAll();
+        
+        if (Level.currentLevel != null) {
+        	Level.currentLevel.resetLevel();
+        }
+        
+        GALogoLayer.isInit = false;
+        SlimeLoadingLayer.isInit = false;
+        Level.isInit = false;
         
         // Destroy here, world and game items?
         

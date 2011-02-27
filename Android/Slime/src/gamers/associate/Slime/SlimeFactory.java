@@ -14,11 +14,20 @@ public abstract class SlimeFactory {
 		
 	public static void attachAll(CCNode attachNode, World attachWorld, float attachWorldRatio) {
 		Slimy.attach(attachNode, attachWorld, attachWorldRatio);
-		SpawnPortal.Attach(attachNode);
+		SpawnPortal.attach(attachNode);
 		Platform.attach(attachNode, attachWorld, attachWorldRatio);
 		GoalPortal.attach(attachNode, attachWorld, attachWorldRatio);
 		Bumper.attach(attachNode, attachWorld, attachWorldRatio);
 		isAttached = true;
+	}
+	
+	public static void detachAll() {
+		Slimy.detach();
+		SpawnPortal.detach();
+		Platform.detach();
+		GoalPortal.detach();
+		Bumper.detach();
+		isAttached = false;
 	}
 	
 	public static void destroyAll() {

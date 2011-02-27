@@ -20,6 +20,7 @@ import com.badlogic.gdx.physics.box2d.World;
  * @uml.dependency   supplier="gamers.associate.Slime.GameItem"
  */
 public class Level {	
+	public static boolean isInit;
 	public static String LEVEL_HOME = "Home";
 	public static String LEVEL_1 = "1";
 	
@@ -83,6 +84,8 @@ public class Level {
 		this.cameraManager = new CameraManager(this.gameLayer);							
 		
 		this.init();
+		
+		isInit = true;
 	}
 	
 	public static Level get(String levelName) {
@@ -91,7 +94,7 @@ public class Level {
 	
 	public static Level get(String levelName, boolean forceReload) {
 		// Level singleton  (for box2d and texture performances
-		if (currentLevel == null) {
+		if (currentLevel == null || isInit == false) {
 			currentLevel = new Level();
 		}					
 		
@@ -191,7 +194,7 @@ public class Level {
 		this.runHome = false;
 	}
 	
-	private void resetLevel() {		
+	public void resetLevel() {		
 		if (this.currentLevelName == Level.LEVEL_HOME) {
 			this.stopHomeLevel();
 		}
@@ -286,7 +289,9 @@ public class Level {
 	
 	public void SpawnSlime() {				
 		GameItem gi = this.spawnPortal.spawn();
-		this.items.add(gi);			
+		if (gi != null) {
+			this.items.add(gi);
+		}
 	}
 	
 	public World getWorld() {

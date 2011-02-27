@@ -5,19 +5,19 @@ import org.cocos2d.nodes.CCSpriteSheet;
 
 public abstract class GameItemFactory<T extends GameItem> extends ItemFactoryBase<T> {
 	
-	public void Attach(CCNode attachNode, CCSpriteSheet spriteSheet) {
+	public void attach(CCNode attachNode, CCSpriteSheet spriteSheet) {
 		this.spriteSheet = spriteSheet;
-		this.Attach(attachNode);
+		this.attach(attachNode);
 	}
 	
-	public void Attach(CCNode attachNode) {
+	public void attach(CCNode attachNode) {
 		this.rootNode = attachNode;		
 		this.initAnimation();
 		this.rootNode.addChild(this.spriteSheet);
 		this.isAttached = true;
 	}
 	
-	public void Detach() {
+	public void detach() {
 		if (this.isAttached && this.spriteSheet != null && this.rootNode != null) {
 			// true here?
 			this.rootNode.removeChild(spriteSheet, true);

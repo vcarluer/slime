@@ -12,10 +12,10 @@ import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.types.CGPoint;
 
 public class GALogoLayer extends CCLayer {
+	public static boolean isInit;
 	private static CCScene scene;	
 	private long waitLogoSec = 2;
-	private long onEnterTime;
-	private boolean isInit;
+	private long onEnterTime;	
 	private CCSpriteSheet spriteSheet;
 	private CCSprite sprite;
 	
@@ -39,7 +39,7 @@ public class GALogoLayer extends CCLayer {
 		super.onEnter();
 		
 		// Do not construct again if screen is rotated
-		if (!this.isInit) {
+		if (!isInit) {
 			this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo");
 			this.addChild(this.spriteSheet);
 			CCSpriteFrame spriteFrame = CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("JulenGarciaGA.png");
@@ -55,6 +55,7 @@ public class GALogoLayer extends CCLayer {
 			float targetHeight = CCDirector.sharedDirector().winSize().getHeight();			
 			float scale = targetHeight / originalImageHeight;
 			this.sprite.setScale(scale);
+			isInit = true;
 		}
 		
 		// schedule(nextCallback, waitLogoSec); doesn't work?
