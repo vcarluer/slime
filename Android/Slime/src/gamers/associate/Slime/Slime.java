@@ -66,6 +66,10 @@ public class Slime extends Activity {
     public void onPause() {
         super.onPause();
 
+        if (Level.currentLevel != null) {
+        	Level.currentLevel.setPause(true);
+        }
+        
         CCDirector.sharedDirector().onPause();
     }
 
@@ -74,6 +78,9 @@ public class Slime extends Activity {
         super.onResume();
 
         CCDirector.sharedDirector().onResume();
+        if (Level.currentLevel != null) {
+        	Level.currentLevel.setPause(false);
+        }
     }
 
     @Override

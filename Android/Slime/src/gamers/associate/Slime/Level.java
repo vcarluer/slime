@@ -150,6 +150,8 @@ public class Level {
 		if (this.currentLevelName == Level.LEVEL_HOME) {
 			this.handleHomeLevel();
 		}
+		
+		this.isPaused = false;
 	}
 	
 	private long startHome;
@@ -166,7 +168,7 @@ public class Level {
 		this.playThread = new HomePlayThread();
 		this.runHome = true;
 		this.slimeCount = 0;
-		this.playThread.start();
+		this.playThread.start();		
 	}	
 			
 	private class HomePlayThread extends Thread {
@@ -178,12 +180,12 @@ public class Level {
 				Level level = Level.currentLevel;
 				if (level != null) {
 					long elapsed = (System.currentTimeMillis() - startHome) / 1000;
-					
-					if (elapsed > nextRand) {
+
+					if (elapsed > nextRand && !isPaused) {
 						level.SpawnSlime();
 						slimeCount++;
 						startHome = System.currentTimeMillis();
-						nextRand = MathLib.random(minSpawn, maxSpawn);
+						nextRand = MathLib.random(minSpawn, maxSpawn);						
 					}
 				}
 			}
@@ -253,17 +255,37 @@ public class Level {
 	}
 	
 	protected void tick(float delta) {
-		// TODO: physic step must be fix!
-		synchronized (world) {
-    		world.step(delta, 6, 2);
-    	}
-		
-		for(GameItem item : this.items) {
-			item.render(delta);
+		if (!isPaused) {
+			// TODO: physic step must be fix!
+			synchronized (world) {
+	    		world.step(delta, 6, 2);
+	    	}
+			
+			for(GameItem item : this.items) {
+				item.render(delta);
+			}
+			
+			this.cameraManager.tick(delta);
+		}
+	}
+	
+	public void setPause(boolean value) {		
+		if (value) {			
+			if (!this.isPaused) {
+				this.levelLayer.pauseSchedulerAndActions();
+			}
+		}
+		else
+		{
+			if (this.isPaused) {
+				this.levelLayer.resumeSchedulerAndActions();
+			}
 		}
 		
-		this.cameraManager.tick(delta);
+		this.isPaused = value;
 	}
+	
+	private boolean isPaused;
 	
 		// Test
 		/*if (this.goalPortal.isWon()) {						
