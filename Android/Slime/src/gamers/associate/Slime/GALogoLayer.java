@@ -8,7 +8,6 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCSpriteSheet;
-import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.types.CGPoint;
 
 public class GALogoLayer extends CCLayer {

@@ -1,7 +1,5 @@
 package gamers.associate.Slime;
 
-import java.security.KeyStore.LoadStoreParameter;
-
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.opengl.CCGLSurfaceView;

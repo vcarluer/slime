@@ -1,6 +1,5 @@
 package gamers.associate.Slime;
 
-import org.cocos2d.events.CCTouchDispatcher;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItem;

@@ -5,7 +5,6 @@ import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItem;
 import org.cocos2d.menus.CCMenuItemLabel;
 import org.cocos2d.nodes.CCDirector;
-import org.cocos2d.types.CGPoint;
 
 public class LevelSelectionLayer extends CCLayer {
 	
