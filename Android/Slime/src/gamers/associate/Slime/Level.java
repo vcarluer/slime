@@ -154,6 +154,7 @@ public class Level {
 		this.isPaused = false;
 	}
 	
+	// TODO: Refactor all this into tick method 
 	private long startHome;
 	private HomePlayThread playThread;
 	private boolean runHome;
@@ -273,16 +274,27 @@ public class Level {
 		if (value) {			
 			if (!this.isPaused) {
 				this.levelLayer.pauseSchedulerAndActions();
+				for(GameItem item : this.items) {
+					item.getSprite().pauseSchedulerAndActions();
+				}
 			}
 		}
 		else
 		{
 			if (this.isPaused) {
 				this.levelLayer.resumeSchedulerAndActions();
+				for(GameItem item : this.items) {
+					item.getSprite().resumeSchedulerAndActions();
+				}
 			}
 		}
 		
 		this.isPaused = value;
+		this.setIsTouchEnabled(!this.isPaused);
+	}
+	
+	public void togglePause() {
+		this.setPause(!this.isPaused);
 	}
 	
 	private boolean isPaused;

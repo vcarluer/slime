@@ -10,13 +10,21 @@ import org.cocos2d.types.CGPoint;
 public class HudLayer extends CCLayer {
 	
 	public HudLayer() {
-		CCMenuItem itemBack = CCMenuItemLabel.item("back", this, "goBack");
-		itemBack.setPosition(CGPoint.make(0, CCDirector.sharedDirector().winSize().getHeight() / 2 - 20));
-		CCMenu menu = CCMenu.menu(itemBack);
+		CCMenuItem itemBack = CCMenuItemLabel.item("Back", this, "goBack");		
+		CCMenuItem itemPause = CCMenuItemLabel.item("Pause", this, "goPause");
+		itemBack.setPosition(CGPoint.make(-50, CCDirector.sharedDirector().winSize().getHeight() / 2 - 20));
+		itemPause.setPosition(CGPoint.make(50, CCDirector.sharedDirector().winSize().getHeight() / 2 - 20));
+		
+		
+		CCMenu menu = CCMenu.menu(itemBack, itemPause);		
 		this.addChild(menu);
 	}
 	
 	public void goBack(Object sender) {
 		CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
+	}
+	
+	public void goPause(Object sender) {
+		Level.currentLevel.togglePause();
 	}
 }
