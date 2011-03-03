@@ -1,3 +1,9 @@
+//  Slime
+//
+//  Created by antonio Munoz on 02/03/11.
+//  Copyright none 2011. All rights reserved.
+//
+
 #import "GameItem.h"
 
 @interface CameraManager : NSObject {
@@ -15,6 +21,7 @@
   CGPoint  virtualCameraPos;
   GameItem * followed;
   CGPoint levelOrigin;
+  @private
   CGPoint  zoomAnchor;
   CGPoint  zoomScreenPin;
 }
@@ -35,4 +42,5 @@
 - (void) zoomCameraBy:(float)zoomDelta;
 - (void) zoomCameraTo:(float)zoomValue;
 - (void) setCameraView;
+- (void) attachLevel:(float)levelWidth height:(float)levelHeight origin:(CGPoint) levelOrigin;
 @end

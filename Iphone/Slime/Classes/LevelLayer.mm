@@ -1,13 +1,24 @@
+//  Slime
+//
+//  Created by antonio Munoz on 02/03/11.
+//  Copyright none 2011. All rights reserved.
+//
+
 #import "LevelLayer.h"
+#import "Slimy.h"
+#import "SlimyFactory.h"
 
 @implementation LevelLayer
 
-- (id) initWithLevel:(Level *)level {
+- (id) initWithLevel:(Level *)my_level {
   if (self = [super init]) {
 //    tickCallback = [[[LevelLayer_Anon1 alloc] init] autorelease];
-    level = level;
-    [self setIsTouchEnabled:YES];
+
+    level = my_level;
+    self.isTouchEnabled = YES;
+
     touchList = [[[NSMutableArray alloc] init] autorelease];
+	
   }
   return self;
 }
@@ -15,11 +26,13 @@
 - (void) onEnter {
   [super onEnter];
  // [self schedule:tickCallback];
+	[self schedule: @selector(tick:)];
 }
 
 - (void) onExit {
   [super onExit];
  // [self unschedule:tickCallback];
+	[self unschedule: @selector(tick:)];
 }
 
 - (void) tick:(float)delta {
@@ -130,10 +143,33 @@
   return returnTouch;
 }
 */
+
+- (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	//Add a new body/atlas sprite at the touched location
+	for( UITouch *touch in touches ) {
+		CGPoint location = [touch locationInView: [touch view]];
+		
+		location = [[CCDirector sharedDirector] convertToGL: location];
+		
+		//[self addNewSpriteWithCoords: location];
+		
+		Slimy * slimy;
+		//todo 
+		CGSize screenSize = [CCDirector sharedDirector].winSize;
+		slimy  = [SlimyFactory createSlimy:location.x y:location.y ratio:1.5f];
+		[slimy fall];
+		
+		[self add:slimy];
+	}
+}
+
+
+
 - (void) dealloc {
   [level release];
   [touchList release];
- // [tickCallback release];
+//  [tickCallback release];
   [super dealloc];
 }
 

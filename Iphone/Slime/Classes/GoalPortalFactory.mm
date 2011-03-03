@@ -1,21 +1,23 @@
+//  Slime
+//
+//  Created by antonio Munoz on 02/03/11.
+//  Copyright none 2011. All rights reserved.
+//
+
 #import "GoalPortalFactory.h"
 
 @implementation GoalPortalFactory
 
 - (void) createAnimList {
-  [self createAnim:Anim_Goal_Portal param1:4];
+  [self createAnim:Anim_Goal_Portal framecount:4];
 }
 
-- (NSString *) getPlist {
-  return @"labo.plist";
+- (NSString *) getPlistPng {
+  return @"labo";
 }
 
-- (NSString *) getPng {
-  return @"labo.png";
-}
-
-- (GoalPortal *) instantiate:(float)x y:(float)y width:(float)width height:(float)height {
-  return [[[GoalPortal alloc] init:spriteSheet param1:x param2:y param3:width param4:height param5:world param6:worldRatio] autorelease];
++ (GoalPortal *) instantiate:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height {
+  return [[[GoalPortal alloc] init:spriteSheet x:my_x y:my_y width:my_width height:my_height world:world worldRatio:worldRatio] autorelease];
 }
 
 - (void) runFirstAnimations:(GoalPortal *)item {

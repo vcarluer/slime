@@ -1,3 +1,9 @@
+//  Slime
+//
+//  Created by antonio Munoz on 02/03/11.
+//  Copyright none 2011. All rights reserved.
+//
+
 #import "CCAnimation.h"
 #import "CCNode.h"
 #import "CCSpriteFrameCache.h"
@@ -16,11 +22,10 @@
 - (void) initAnimation;
 - (void) createAnimList;
 - (void) createAnim:(NSString *)animName frameCount:(int)frameCount;
-- (NSString *) getPlist;
-- (NSString *) getPng;
+- (NSString *) getPlistPng;
 - (id) create;
-- (id) create:(float)x y:(float)y;
-- (id) create:(float)x y:(float)y width:(float)width height:(float)height;
-- (id) instantiate:(float)x y:(float)y width:(float)width height:(float)height;
+- (id) create:(float)my_x y:(float)my_y;
+- (id) create:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height;
+- (id) instantiate:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height;
 - (void) runFirstAnimations:(id)item;
 @end

@@ -1,3 +1,9 @@
+//  Slime
+//
+//  Created by antonio Munoz on 02/03/11.
+//  Copyright none 2011. All rights reserved.
+//
+
 #import "ItemFactoryBase.h"
 #import "GameItem.h"
 
@@ -14,8 +20,8 @@
 
 - (void) initAnimation {
   if (!isInit) {
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFrames:[self plist]];
-    spriteSheet = [CCSpriteSheet spriteSheet:[self png]];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFrames:[[self getPlistPng] stringByAppendingString:@".plist"]];
+    spriteSheet = [CCSpriteSheet spriteSheet:[[self getPlistPng] stringByAppendingString:@".png"]];
     sharedAnimations = [[[NSMutableDictionary alloc] init] autorelease];
     [self createAnimList];
     isInit = YES;
@@ -39,13 +45,13 @@
   return [self create:0 y:0];
 }
 
-- (id) create:(float)x y:(float)y {
-  return [self create:x y:y width:0 height:0];
+- (id) create:(float)my_x y:(float)my_y {
+  return [self create:my_x y:my_y width:0 height:0];
 }
 
-- (id) create:(float)x y:(float)y width:(float)width height:(float)height {
+- (id) create:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height {
   if (isAttached) {
-    id item = [self instantiate:x y:y width:width height:height];
+    id item = [self instantiate:my_x y:my_y width:my_width height:my_height];
     [item setAnimationList:sharedAnimations];
     [self runFirstAnimations:item];
     return item;
@@ -55,7 +61,11 @@
   }
 }
 
-- (id) instantiate:(float)x y:(float)y width:(float)width height:(float)height {
+- (NSString *) getPlistPng {
+	return @"labo";
+}
+
+- (id) instantiate:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height {
 }
 
 - (void) runFirstAnimations:(id)item {

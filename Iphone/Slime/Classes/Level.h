@@ -1,3 +1,9 @@
+//  Slime
+//
+//  Created by antonio Munoz on 02/03/11.
+//  Copyright none 2011. All rights reserved.
+//
+
 #import "Box2D.h"
 //#import "cocos2d.h"
 #import "LevelLayer.h"
@@ -7,11 +13,6 @@
 #import "HudLayer.h"
 #import "BackgoundLayer.h"
 //#import "GameItem.h"
-
-/**
- * @author    vince
- * @uml.dependency   supplier="gamers.associate.Slime.GameItem"
- */
 
 extern NSString * LEVEL_HOME;
 //extern Level * currentLevel;
@@ -25,7 +26,7 @@ extern NSString * LEVEL_HOME;
   b2World * world;
   b2Vec2  gravity;
   float worldRatio;
-  NSMutableArray * items;
+  NSMutableArray * my_items;
 
   /**
    * @uml.property  name="slimyFactory"

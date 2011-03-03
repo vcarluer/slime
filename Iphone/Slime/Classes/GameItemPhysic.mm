@@ -1,3 +1,8 @@
+//  Slime
+//
+//  Created by antonio Munoz on 02/03/11.
+//  Copyright none 2011. All rights reserved.
+//
 #import "GameItemPhysic.h"
 //#import "ccMacros.h"
 
@@ -24,9 +29,9 @@ short Category_OutGame = 0x0003;
 
 - (void) render:(float)delta {
   if (sprite != nil && body != nil) {
-	  [sprite position] = ccp([body position].x * worldRatio,[body position].y * worldRatio);
+	  [sprite position] = ccp(body->GetPosition().x * worldRatio,body->GetPosition().y * worldRatio);
 	//  ccMacros *macro = [[ccMacros alloc] init];
-    [sprite setRotation:-1.0f * CC_RADIANS_TO_DEGREES([body angle])];
+    [sprite setRotation:-1.0f * CC_RADIANS_TO_DEGREES(body->GetAngle())];
   }
   [super render:delta];
 }

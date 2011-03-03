@@ -1,3 +1,9 @@
+//  Slime
+//
+//  Created by antonio Munoz on 02/03/11.
+//  Copyright none 2011. All rights reserved.
+//
+
 #import "SlimyFactory.h"
 
 @implementation SlimyFactory
@@ -25,13 +31,16 @@
   return @"labo.png";
 }
 
-- (Slimy *) instantiate:(float)x y:(float)y width:(float)width height:(float)height {
-  return [[[Slimy alloc] init:spriteSheet param1:x param2:y param3:width param4:height param5:world param6:worldRatio] autorelease];
+
++ (Slimy *) instantiate:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height {
+  return [[[Slimy alloc] init:spriteSheet x:my_x y:my_x width:my_width height:my_height world:world worldRatio:worldRatio] autorelease];
 }
 
-- (Slimy *) create:(float)x y:(float)y ratio:(float)ratio {
-  Slimy * slimy = [self create:x param1:y param2:Slimy_Default_Width * ratio param3:Slimy_Default_Height * ratio];
-  return slimy;
++ (Slimy *) createSlimy:(float)my_x y:(float)my_y ratio:(float)my_ratio {
+	Slimy * my_slimy = [SlimyFactory instantiate:my_x y:my_y width:Slimy_Default_Width * my_ratio height:Slimy_Default_Height * my_ratio];
+  return my_slimy;
+
 }
+
 
 @end
