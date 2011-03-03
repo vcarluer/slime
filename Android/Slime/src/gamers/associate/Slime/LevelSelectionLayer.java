@@ -11,7 +11,7 @@ public class LevelSelectionLayer extends CCLayer {
 	public LevelSelectionLayer() {
 		CCMenuItem goBackMenu = CCMenuItemLabel.item("Back", this, "goBack");
 		CCMenuItem testMenu1 = CCMenuItemLabel.item("Level 1", this, "doTest");		
-		CCMenuItem testMenu2 = CCMenuItemLabel.item("Level 2", this, "doTest");
+		CCMenuItem testMenu2 = CCMenuItemLabel.item("Level 2", this, "doTest2");
 		CCMenuItem testMenu3 = CCMenuItemLabel.item("Level 3", this, "doTest");				
 		CCMenu menu = CCMenu.menu(goBackMenu, testMenu3, testMenu2, testMenu1);
 		menu.alignItemsInColumns(new int[] { 1, 3 });
@@ -20,6 +20,11 @@ public class LevelSelectionLayer extends CCLayer {
 	
 	public void doTest(Object sender) {
 		Level level = Level.get(Level.LEVEL_1, true);
+		CCDirector.sharedDirector().replaceScene(level.getScene());
+	}
+	
+	public void doTest2(Object sender) {
+		Level level = Level.get(Level.LEVEL_2, true);
 		CCDirector.sharedDirector().replaceScene(level.getScene());
 	}
 	

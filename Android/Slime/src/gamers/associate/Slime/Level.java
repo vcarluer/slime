@@ -23,6 +23,7 @@ public class Level {
 	public static boolean isInit;
 	public static String LEVEL_HOME = "Home";
 	public static String LEVEL_1 = "1";
+	public static String LEVEL_2 = "2";
 	
 	public static Level currentLevel; 
 	
