@@ -2,6 +2,8 @@ package gamers.associate.Slime;
 
 import java.util.ArrayList;
 
+import javax.microedition.khronos.opengles.GL10;
+
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
@@ -410,5 +412,15 @@ public class Level {
 	public void setSpawnCannon(SpawnCannon cannon) {
 		this.spawnCannon = cannon;
 		this.addGameItem(this.spawnCannon);
+	}
+	
+	public SpawnCannon getSpawnCannon() {
+		return this.spawnCannon;
+	}
+	
+	public void draw(GL10 gl) {
+		for(GameItem item : this.items) {
+			item.draw(gl);
+		}
 	}
 }

@@ -3,6 +3,8 @@ package gamers.associate.Slime;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import javax.microedition.khronos.opengles.GL10;
+
 import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.nodes.CCAnimation;
 import org.cocos2d.nodes.CCNode;
@@ -131,5 +133,9 @@ public abstract class GameItem {
 		
 		CCAnimation animation = CCAnimation.animation(animName, 0.1f, animArray);
 		return animation;
+	}
+	
+	public void draw(GL10 gl) {
+		
 	}
 }

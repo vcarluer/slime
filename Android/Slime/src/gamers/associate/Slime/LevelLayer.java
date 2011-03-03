@@ -2,6 +2,8 @@ package gamers.associate.Slime;
 
 import java.util.ArrayList;
 
+import javax.microedition.khronos.opengles.GL10;
+
 import org.cocos2d.actions.UpdateCallback;
 import org.cocos2d.events.CCTouchDispatcher;
 import org.cocos2d.layers.CCLayer;
@@ -71,9 +73,9 @@ public class LevelLayer extends CCLayer {
 			 if (touch != null) { 
 				touch.setMoving(true);	
 				touch.getLastMoveDelta().x = touch.getLastMoveReference().x - event.getX(touch.getPointerId());
-				touch.getLastMoveDelta().y = event.getY() - touch.getLastMoveReference().y;
+				touch.getLastMoveDelta().y = CCDirector.sharedDirector().winSize().getHeight() - event.getY() - touch.getLastMoveReference().y;
 				touch.getLastMoveReference().x = event.getX(touch.getPointerId());
-				touch.getLastMoveReference().y = event.getY(touch.getPointerId());
+				touch.getLastMoveReference().y = CCDirector.sharedDirector().winSize().getHeight() - event.getY(touch.getPointerId());
 				touch.setLastMoveTime(event.getEventTime());
 			 }
 		 }
@@ -81,6 +83,7 @@ public class LevelLayer extends CCLayer {
 		if (this.touchList.size() == 1) {
 			TouchInfo touch = this.getTouch(event, 0);
 			this.level.getCameraManager().moveCameraBy(touch.getLastMoveDelta());
+			this.level.getSpawnCannon().selectionMove(touch.getLastMoveReference());
 		}
 		
 		if (this.isZoomAction) {
@@ -106,7 +109,7 @@ public class LevelLayer extends CCLayer {
 	public boolean ccTouchesEnded(MotionEvent event) {				
 		TouchInfo touch = this.getTouch(event);
 		if (touch != null) {
-			if (!touch.isMoving()) {
+			/*if (!touch.isMoving()) {*/
 				if (touch.getPointerId() == 0) {
 					this.level.spawnSlime(
 							CGPoint.make(
@@ -115,16 +118,16 @@ public class LevelLayer extends CCLayer {
 									)
 								);
 				}
-			}
-			else {						
-				if (!this.isZoomAction) {
+			/*}*/
+			/*else {						
+				if (!this.isZoomAction) {*/
 					/*if (event.getEventTime() - touch.getLastMoveTime() < 300) {					
 						this.getCameraManager().continuousMoveCameraBy(touch.getLastMoveDelta());
 					}*/
-				}			
+			/*	}		*/	
 				
 				touch.setMoving(false);
-			}
+			/*}*/
 			
 			if (this.isZoomAction) {
 				this.isZoomAction = false;
@@ -146,9 +149,9 @@ public class LevelLayer extends CCLayer {
 		int pid = this.getPId(event);		
 		TouchInfo touch = new TouchInfo(pid);		
 		touch.getMoveBeganAt().x = event.getX(touch.getPointerId());
-		touch.getMoveBeganAt().y = event.getY(touch.getPointerId());
+		touch.getMoveBeganAt().y = CCDirector.sharedDirector().winSize().getHeight() - event.getY(touch.getPointerId());
 		touch.getLastMoveReference().x = event.getX(touch.getPointerId());
-		touch.getLastMoveReference().y = event.getY(touch.getPointerId());
+		touch.getLastMoveReference().y = CCDirector.sharedDirector().winSize().getHeight() - event.getY(touch.getPointerId());
 		this.touchList.add(touch);
 		this.getCameraManager().stopContinousMoving();
 		
@@ -167,6 +170,7 @@ public class LevelLayer extends CCLayer {
 		}
 		else {
 			this.isZoomAction = false;
+			this.level.getSpawnCannon().selectionMove(touch.getLastMoveReference());
 		}		
 		
 		return CCTouchDispatcher.kEventHandled;		
@@ -209,6 +213,15 @@ public class LevelLayer extends CCLayer {
 		}
 		
 		return returnTouch;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.cocos2d.nodes.CCNode#draw(javax.microedition.khronos.opengles.GL10)
+	 */
+	@Override
+	public void draw(GL10 gl) {		
+		super.draw(gl);
+		this.level.draw(gl);
 	}
 	
 	 // Test
