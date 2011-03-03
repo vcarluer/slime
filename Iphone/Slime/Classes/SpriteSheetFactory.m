@@ -1,42 +1,24 @@
-//  Slime
-//
-//  Created by antonio Munoz on 02/03/11.
-//  Copyright none 2011. All rights reserved.
-//
-
 #import "SpriteSheetFactory.h"
 
-
-static NSMutableDictionary *SpriteSheetList()
-{
-    static NSMutableDictionary *dict = NULL;
-    if(dict == NULL)
-    {
-        dict = [[NSMutableDictionary alloc] init];
-    }
-    return [[dict retain] autorelease];
-}
- 
+ //NSMutableDictionary * SpriteSheetList = [[[NSMutableDictionary alloc] init] autorelease];
 
 @implementation SpriteSheetFactory
 
-//static NSMutableDictionary * SpriteSheetList = [[NSMutableDictionary alloc] init];
-
 + (void) add:(NSString *)plistPngName {
-  if ([SpriteSheetList() objectForKey:plistPngName] == nil) {
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:[plistPngName stringByAppendingString:@".plist"]];
-    CCSpriteBatchNode * spriteSheet = [CCSpriteBatchNode batchNodeWithFile:[plistPngName stringByAppendingString:@".png"]];
-	  [SpriteSheetList() setObject:spriteSheet forKey:plistPngName];
+  if ([SpriteSheetList objectForKey:plistPngName] == nil) {
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFrames:[plistPngName stringByAppendingString:@".plist"]];
+    CCSpriteSheet * spriteSheet = [CCSpriteSheet spriteSheet:[plistPngName stringByAppendingString:@".png"]];
+    [SpriteSheetList setObject:plistPngName param1:spriteSheet];
   }
 }
 
-+ (CCSpriteBatchNode *) getSpriteSheet:(NSString *)plistPngName {
++ (CCSpriteSheet *) getSpriteSheet:(NSString *)plistPngName {
   [self add:plistPngName];
-  return [SpriteSheetList() objectForKey:plistPngName];
+  return [SpriteSheetList objectForKey:plistPngName];
 }
 
 + (void) destroy {
-  [SpriteSheetList() removeAllObjects];
+  [SpriteSheetList removeAllObjects];
 }
 
 @end

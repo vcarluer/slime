@@ -1,8 +1,4 @@
-//  Slime
-//
-//  Created by antonio Munoz on 14/02/11.
-//  Copyright none 2011. All rights reserved.
-//
+
 #import "Box2D.h"
 #import "cocos2d.h"
 #import "GameItem.h"

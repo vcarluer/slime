@@ -1,9 +1,3 @@
-//  Slime
-//
-//  Created by antonio Munoz on 02/03/11.
-//  Copyright none 2011. All rights reserved.
-//
-
 #import "CCTouchDispatcher.h"
 #import "CCLayer.h"
 #import "CCDirector.h"
@@ -37,7 +31,7 @@ class LevelLayer_Anon1 : public UpdateCallback {
  // UpdateCallback * tickCallback;
 }
 
-- (id) initWithLevel:(Level *)level;
+- (id) initWithLevel:(Level *)my_level;
 - (void) onEnter;
 - (void) onExit;
 - (void) tick:(float)delta;

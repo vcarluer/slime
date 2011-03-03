@@ -1,8 +1,3 @@
-//  Slime
-//
-//  Created by antonio Munoz on 02/03/11.
-//  Copyright none 2011. All rights reserved.
-//
 #import "SpawnPortal.h"
 #import "SlimeFactory.h"
 #import "Slimy.h"
@@ -12,8 +7,8 @@ NSString * Anim_Spawn_Portal = @"blueportal";
 
 @implementation SpawnPortal
 
-- (id) init:(CCNode *)node x:(float)x y:(float)y width:(float)width height:(float)height {
-  if (self = [super init:node param1:x param2:y param3:width param4:height]) {
+- (id) init:(CCNode *)node x:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height {
+  if (self = [super init:node x:my_x y:my_y width:my_width height:my_height]) {
   }
   return self;
 }
@@ -41,7 +36,7 @@ NSString * Anim_Spawn_Portal = @"blueportal";
 - (GameItem *) spawn {
   Slimy * slimy;
 	//todo 
-	//slimy  = [SlimeFactory.Slimy init:node param1:position.x param2:position.y param3:width param4:height param5:world param6:1.5f]];
+//	slimy  = [SlimeFactory.Slimy create:node x:position.x y:position.y width:width height:height world:world worldRatio:1.5f]];
   [slimy fall];
   return slimy;
 }

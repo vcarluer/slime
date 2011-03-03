@@ -1,16 +1,7 @@
-//  Slime
-//
-//  Created by antonio Munoz on 02/03/11.
-//  Copyright none 2011. All rights reserved.
-//
-
 #import "Level.h"
 #import "SlimyFactory.h"
-#import "SpawnPortalFactory.h"
-#import "SlimeFactory.h"
 #import "HardCodedLevelBuilder.h"
 #import "spriteSheetFactory.h"
-
 
 NSString * LEVEL_HOME = @"Home";
 Level * currentLevel;
@@ -31,23 +22,25 @@ Level * currentLevel;
     worldRatio = 32.0f;
     customZ = 2;
     scene = CCScene.node;
-    levelLayer =[[LevelLayer alloc] initWithLevel:self];
-    hudLayer = [[HudLayer alloc] init];
-    backgroundLayer = [[BackgoundLayer alloc] init];
+    levelLayer = [[[LevelLayer alloc] initWithLevel:self] autorelease];
+    hudLayer = [[[HudLayer alloc] init] autorelease];
+    backgroundLayer = [[[BackgoundLayer alloc] init] autorelease];
 	levelOrigin = CGPointMake(0,0);
     //[scene addChild:backgroundLayer z:0];
-     gameLayer = [CCLayer node];
+	  
+	  
+	  
+	  
+    gameLayer = [CCLayer node];
     [gameLayer addChild:backgroundLayer z:0];
-	[gameLayer addChild:levelLayer z:1];
+	//[gameLayer addChild:levelLayer z:1];
 	[gameLayer setAnchorPoint:levelOrigin];
 	
 	[scene addChild:gameLayer z:0];
-    //[scene addChild:levelLayer z:1];
+    [scene addChild:levelLayer z:1];
     [scene addChild:hudLayer z:2];
-    my_items = [[NSMutableArray alloc] init];
-
+    items = [[[NSMutableArray alloc] init] autorelease];
     [self initLevel];
-	  [self loadLevel:LEVEL_HOME];
   }
   return self;
 }
@@ -82,20 +75,19 @@ Level * currentLevel;
 - (void) loadLevel:(NSString *)levelName {
   [self resetLevel];
 	//todo
-
   [HardCodedLevelBuilder build:self levelName:levelName];	
-  //spawnPortal = [SpawnPortalFactory createAndMove:levelWidth / 2 y:levelHeight - 32 moveBy:levelWidth / 2 speed:5];
-
+  //spawnPortal = [SlimeFactory.SpawnPortal createAndMove:levelWidth / 2 param1:levelHeight - 32 param2:levelWidth / 2 param3:5];
+  //[items add:spawnPortal];
   currentLevelName = levelName;
 }
 
 - (void) resetLevel {
 /*todo
-  for (GameItem * item in my_items) {
+  for (GameItem * item in items) {
     [item destroy];
   }
 
-  [my_items clear];
+  [items clear];
 	*/
   spawnPortal = nil;
   goalPortal = nil;
@@ -109,89 +101,58 @@ Level * currentLevel;
    world = new b2World(gravity, true);		
    contactManager = new ContactManager;
    world->SetContactListener(contactManager);
-  //[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"decor.plist"];
-  //CCSpriteSheet * spriteSheet = [CCSpriteSheet spriteSheet:@"decor.png"];
-	CCSpriteFrameCache * cache = [CCSpriteFrameCache sharedSpriteFrameCache];
-	[cache addSpriteFramesWithFile:@"decor.plist"];
-	CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"decor.png"];  
-	//[self addChild:spriteSheet];
+   CGSize screenSize = [CCDirector sharedDirector].winSize;
+	
+	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"decor.plist"];
+	//CCSpriteSheet * spriteSheet = [CCSpriteSheet spriteSheet:@"decor.png"];
+	
+	
+	CCSprite *spriteSheet = [CCSprite spriteWithFile:@"decor.png"];
+	spriteSheet.position = ccp(500, 0);
+	
 	
 	[backgroundLayer addChild:spriteSheet];
 	//[backgroundLayer setRotation:-90.0f];
 	[backgroundLayer setScale:0.8f];
 	label = [CCLabelTTF labelWithString:@"Hud !" fontName:@"Marker Felt" fontSize:16];	
-	[hudLayer addChild:label z:0];
-	CGSize screenSize = [CCDirector sharedDirector].winSize;
+	[hudLayer addChild:label z:0];	
 	label.position = ccp( screenSize.width/2, screenSize.height-20);	
-	[SpriteSheetFactory  add:@"labo"];	
-//	Slimy * slimy;
+//	[SpriteSheetFactory add:@"labo"];	
+	Slimy * slimy;
 	//todo 
-//	slimy  = [SlimyFactory createSlimy:screenSize.width/2 y:screenSize.height worldRatio:1.5f];
-//	[slimy fall];
-//	[hudLayer addChild:slimy ];
-  //todo	
- // [spriteSheetFactory add:@"labo"];
+	slimy  = [Slimy createSlimy:CCScene.node x:screenSize.width/2 y:screenSize.height width:0 height:0 world:world worldRatio:1.5f];
+	[slimy fall];
+	[hudLayer addChild:slimy ];
+	
 				 }
 
 - (void) tick:(float)delta {
 
 //  @synchronized(world) 
 //  {
-   	world->Step(delta, 6, 2);
+    [world step:delta param1:6 param2:2];
 //  }
-//todo
-	if (my_items != nil){
-		if ([my_items count] != 0) {
-			for (GameItem * item in my_items) {
-				[item render:delta];
-			}
-		}
-	}	
+/*todo
+  for (GameItem * item in items) {
+    [item render:delta];
+  }
 
-  //[cameraManager tick:delta];
-
+  [cameraManager tick:delta];
+ */
 }
 
-/*
--(void) tick: (ccTime) dt
-{
-	//It is recommended that a fixed time step is used with Box2D for stability
-	//of the simulation, however, we are using a variable time step here.
-	//You need to make an informed choice, the following URL is useful
-	//http://gafferongames.com/game-physics/fix-your-timestep/
-	
-	int32 velocityIterations = 8;
-	int32 positionIterations = 1;
-	
-	// Instruct the world to perform a single step of simulation. It is
-	// generally best to keep the time step and iterations fixed.
-	world->Step(dt, velocityIterations, positionIterations);
-	
-	
-	//Iterate over the bodies in the physics world
-	for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
-	{
-		if (b->GetUserData() != NULL) {
-			//Synchronize the AtlasSprites position and rotation with the corresponding body
-			CCSprite *myActor = (CCSprite*)b->GetUserData();
-			myActor.position = CGPointMake( b->GetPosition().x * worlRatio, b->GetPosition().y * worlRatio);
-			myActor.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
-		}	
-	}
-}
-*/
 - (void) SpawnSlime {
   GameItem * gi = [spawnPortal spawn];
-  [my_items add:gi];
+  [items add:gi];
 }
 
 - (void) setGoalPortal:(GoalPortal *)portal {
   goalPortal = portal;
-  [my_items add:goalPortal];
+  [items add:goalPortal];
 }
 
 - (void) addGameItem:(GameItem *)item {
-  [my_items add:item];
+  [items add:item];
 }
 
 - (void) setLevelSize:(float)width height:(float)height {
@@ -205,7 +166,7 @@ Level * currentLevel;
 
 - (void) addCustomOverLayer:(CCLayer *)layer {
   customOverLayer = layer;
-  [scene addChild:customOverLayer z:customZ];
+  [scene addChild:customOverLayer param1:customZ];
 }
 
 - (void) removeCustomOverLayer {
@@ -218,7 +179,7 @@ Level * currentLevel;
 - (void) dealloc {
   [world release];
   //[gravity release];
-  [my_items release];
+  [items release];
   [backgroundSprite release];
   [contactManager release];
   [spawnPortal release];
@@ -227,7 +188,7 @@ Level * currentLevel;
   [levelLayer release];
   [hudLayer release];
   [backgroundLayer release];
-  [gameLayer release];
+//  [gameLayer release];
   [customOverLayer release];
   [label release];
  // [levelOrigin release];

@@ -1,8 +1,3 @@
-//  Slime
-//
-//  Created by antonio Munoz on 02/03/11.
-//  Copyright none 2011. All rights reserved.
-//
 //#import "cocos2d.h"
 //#import "Box2D.h"
 #import "GameItemPhysic.h"
@@ -21,5 +16,4 @@ extern NSString * Anim_Goal_Portal;
 - (void) contact:(NSObject *)with;
 - (void) setWon:(BOOL)value;
 - (CCAnimation *) getReferenceAnimation;
-//TODO public boolean isWon()
 @end

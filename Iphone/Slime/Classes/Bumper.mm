@@ -1,8 +1,3 @@
-//  Slime
-//
-//  Created by antonio Munoz on 02/03/11.
-//  Copyright none 2011. All rights reserved.
-//
 #import "Bumper.h"
 
 float Default_Powa = 1.5f;
@@ -59,12 +54,13 @@ float Default_Bumper_Height = 64.0f;
 	//{
 	bodyDef->userData = self;
     body = world->CreateBody(bodyDef);
-    
+    //body->userData = self;
     b2FixtureDef * fixtureDef = new b2FixtureDef;
     fixtureDef->shape = bumperShape;
     fixtureDef->density = 1.0f;
     fixtureDef->friction = 1.0f;
     fixtureDef->restitution = powa;
+	//  short tempo = GameItemPhysic.bodyCategory_InGame
     fixtureDef->filter.categoryBits = Category_InGame;
     body->CreateFixture(fixtureDef);
 	
