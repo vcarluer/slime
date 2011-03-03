@@ -1,8 +1,8 @@
 #import "cocos2d.h"
 
-//  Slime_V0.1
+//  Slime
 //
-//  Created by antonio Munoz on 18/02/11.
+//  Created by antonio Munoz on 02/03/11.
 //  Copyright none 2011. All rights reserved.
 //
 

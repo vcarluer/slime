@@ -1,3 +1,9 @@
+//  Slime
+//
+//  Created by antonio Munoz on 14/02/11.
+//  Copyright none 2011. All rights reserved.
+//
+
 #import "cocos2d.h"
 
 @interface GALogoLayer : CCLayer {
