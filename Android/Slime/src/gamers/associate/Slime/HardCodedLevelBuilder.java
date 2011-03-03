@@ -264,5 +264,7 @@ public class HardCodedLevelBuilder {
 		Bumper bumper = SlimeFactory.Bumper.create(level.getWorlRatio() + si, h2, 60, 120, 2.0f);
 		// Bumper bumper = SlimeFactory.Bumper.create(this.worldRatio + si, h2);
 		level.addGameItem(bumper);
+		
+		level.setSpawnCannon(SlimeFactory.Cannon.create(60, 60));		
 	}
 }

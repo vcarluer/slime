@@ -108,7 +108,12 @@ public class LevelLayer extends CCLayer {
 		if (touch != null) {
 			if (!touch.isMoving()) {
 				if (touch.getPointerId() == 0) {
-					this.level.SpawnSlime();
+					this.level.spawnSlime(
+							CGPoint.make(
+									event.getX(touch.getPointerId()), 
+									CCDirector.sharedDirector().winSize().getHeight() - event.getY(touch.getPointerId())
+									)
+								);
 				}
 			}
 			else {						

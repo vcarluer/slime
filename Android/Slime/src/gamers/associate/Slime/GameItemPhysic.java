@@ -35,6 +35,10 @@ public abstract class GameItemPhysic extends GameItem{
 	
 	protected abstract void initBody();
 	
+	public Body getBody() {
+		return this.body;
+	}
+	
 	@Override
 	public void render(float delta) {
 		if (this.sprite != null && this.body != null) {			

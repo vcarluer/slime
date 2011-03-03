@@ -42,6 +42,7 @@ public class Level {
 	 */
 	protected ContactManager contactManager;
 	protected SpawnPortal spawnPortal;
+	protected SpawnCannon spawnCannon;
 	protected GoalPortal goalPortal;
 	
 	protected CCScene scene;
@@ -184,7 +185,7 @@ public class Level {
 					long elapsed = (System.currentTimeMillis() - startHome) / 1000;
 
 					if (elapsed > nextRand && !isPaused) {
-						level.SpawnSlime();
+						level.spawnSlime();
 						slimeCount++;
 						startHome = System.currentTimeMillis();
 						nextRand = MathLib.random(minSpawn, maxSpawn);						
@@ -322,8 +323,20 @@ public class Level {
 	*/
 	// Fin test
 	
-	public void SpawnSlime() {				
-		GameItem gi = this.spawnPortal.spawn();
+	public void spawnSlime() {
+		this.spawnSlime(CGPoint.getZero());		
+	}
+	
+	public void spawnSlime(CGPoint target) {						
+		GameItem gi = null;
+		if (this.spawnCannon != null) {
+			gi = this.spawnCannon.spawnSlime(target);			
+		}
+		else
+		{
+			gi = this.spawnPortal.spawn();
+		}
+		
 		if (gi != null) {
 			this.items.add(gi);
 		}
@@ -392,5 +405,10 @@ public class Level {
 		}
 		
 		this.isHudEnabled = value;
+	}
+	
+	public void setSpawnCannon(SpawnCannon cannon) {
+		this.spawnCannon = cannon;
+		this.addGameItem(this.spawnCannon);
 	}
 }

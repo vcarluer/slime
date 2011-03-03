@@ -11,6 +11,7 @@ public abstract class SlimeFactory {
 	public static PlatformFactory Platform = new PlatformFactory();
 	public static GoalPortalFactory GoalPortal = new GoalPortalFactory();
 	public static BumperFactory Bumper = new BumperFactory();
+	public static SpawnCannonFactory Cannon = new SpawnCannonFactory();
 		
 	public static void attachAll(CCNode attachNode, World attachWorld, float attachWorldRatio) {
 		Slimy.attach(attachNode, attachWorld, attachWorldRatio);
@@ -18,6 +19,7 @@ public abstract class SlimeFactory {
 		Platform.attach(attachNode, attachWorld, attachWorldRatio);
 		GoalPortal.attach(attachNode, attachWorld, attachWorldRatio);
 		Bumper.attach(attachNode, attachWorld, attachWorldRatio);
+		Cannon.attach(attachNode, attachWorld, attachWorldRatio);
 		isAttached = true;
 	}
 	
@@ -27,6 +29,7 @@ public abstract class SlimeFactory {
 		Platform.detach();
 		GoalPortal.detach();
 		Bumper.detach();
+		Cannon.detach();
 		isAttached = false;
 	}
 	
@@ -36,6 +39,7 @@ public abstract class SlimeFactory {
 		Platform.destroy();
 		GoalPortal.destroy();
 		Bumper.destroy();
+		Cannon.destroy();
 		isAttached = false;
 	}
 }
