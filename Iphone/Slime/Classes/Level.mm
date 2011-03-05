@@ -117,12 +117,8 @@ Level * currentLevel;
 	label = [CCLabelTTF labelWithString:@"Hud !" fontName:@"Marker Felt" fontSize:16];	
 	[hudLayer addChild:label z:0];	
 	label.position = ccp( screenSize.width/2, screenSize.height-20);	
-//	[SpriteSheetFactory add:@"labo"];	
-	Slimy * slimy;
-	//todo 
-	slimy  = [Slimy createSlimy:CCScene.node x:screenSize.width/2 y:screenSize.height width:0 height:0 world:world worldRatio:1.5f];
-	[slimy fall];
-	[hudLayer addChild:slimy ];
+    [SpriteSheetFactory add:@"labo"];	
+	
 	
 				 }
 

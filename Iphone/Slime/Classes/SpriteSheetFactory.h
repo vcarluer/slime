@@ -7,6 +7,6 @@
 }
 
 + (void) add:(NSString *)plistPngName;
-+ (CCSpriteSheet *) getSpriteSheet:(NSString *)plistPngName;
++ (CCSpriteBatchNode *) getSpriteSheet:(NSString *)plistPngName;
 + (void) destroy;
 @end

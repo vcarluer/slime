@@ -1,6 +1,6 @@
 #import "SpawnPortal.h"
 #import "SlimeFactory.h"
-#import "Slimy.h"
+
 
 
 NSString * Anim_Spawn_Portal = @"blueportal";
@@ -14,7 +14,7 @@ NSString * Anim_Spawn_Portal = @"blueportal";
 }
 
 - (void) createPortal {
-  CCAction * animate = [CCRepeatForever action:[CCAnimate action:[animationList get:Anim_Spawn_Portal] param1:NO]];
+  CCAction * animate = [CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:[animationList objectForKey:Anim_Spawn_Portal] restoreOriginalFrame:NO]];
   [sprite runAction:animate];
 }
 
@@ -25,20 +25,20 @@ NSString * Anim_Spawn_Portal = @"blueportal";
 	CGPoint moveL;
   moveL.x = -moveBy;
   moveL.y = 0;
-  CCMoveBy * moveRight = [CCMoveBy action:speed / 2 param1:moveR];
-  CCMoveBy * moveRightReverse = [moveRight reverse];
-  CCMoveBy * moveLeft = [CCMoveBy action:speed / 2 param1:moveL];
-  CCMoveBy * moveLeftReverse = [moveLeft reverse];
-  CCAction * moveSeq = [CCRepeatForever action:[CCSequence actions:moveRight param1:moveRightReverse param2:moveLeft param3:moveLeftReverse]];
+	CCMoveBy * moveRight = [CCMoveBy actionWithDuration:speed/2 position:moveR];
+  CCMoveBy * moveRightReverse = (CCMoveBy *)[moveRight reverse];
+	CCMoveBy * moveLeft = [CCMoveBy actionWithDuration:speed / 2 position:moveL];
+  CCMoveBy * moveLeftReverse = (CCMoveBy *)[moveLeft reverse];
+  CCAction * moveSeq = [CCRepeatForever actionWithAction:[CCSequence actions:moveRight ,moveRightReverse , moveLeft , moveLeftReverse, nil]];
   [sprite runAction:moveSeq];
 }
 
 - (GameItem *) spawn {
-  Slimy * slimy;
+  Slimy * my_slimy;
 	//todo 
-//	slimy  = [SlimeFactory.Slimy create:node x:position.x y:position.y width:width height:height world:world worldRatio:1.5f]];
-  [slimy fall];
-  return slimy;
+  my_slimy  = [slimy create:position.x y:position.y width:width height:height Ratio:1.5f];
+  [my_slimy fall];
+  return my_slimy;
 }
 
 - (CCAnimation *) getReferenceAnimation {

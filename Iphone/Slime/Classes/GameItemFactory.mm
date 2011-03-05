@@ -11,7 +11,7 @@
 
 - (void) Detach {
   if (isAttached && spriteSheet != nil && rootNode != nil) {
-    [rootNode removeChild:spriteSheet param1:YES];
+    [rootNode removeChild:spriteSheet cleanup:YES];
     rootNode = nil;
     isAttached = NO;
   }

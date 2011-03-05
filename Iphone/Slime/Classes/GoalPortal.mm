@@ -11,7 +11,7 @@ float Default_Height = 10.0f;
 @synthesize won;
 
 - (id) init:(CCNode *)node x:(float)x y:(float)y width:(float)width height:(float)height world:(b2World *)world worldRatio:(float)worldRatio {
-  if (self = [super init:node param1:x param2:y param3:width param4:height param5:world param6:worldRatio]) {
+  if (self = [super init:node x:x y:y width:width height:height world:world worldRatio:worldRatio]) {
     if (width == 0 && height == 0) {
       width = Default_Width;
       height = Default_Height;

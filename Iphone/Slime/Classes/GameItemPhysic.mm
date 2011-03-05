@@ -10,7 +10,8 @@ short Category_OutGame = 0x0003;
 
 
 - (id) init:(CCNode *)node x:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height world:(b2World *)my_world worldRatio:(float)my_worldRatio {
-  if (self = [super init:node x:my_x y:my_y width:my_width height:my_height]) {
+	self = [super init:node x:my_x y:my_y width:my_width height:my_height];
+	if (self != nil) {
     world = my_world;
     worldRatio = my_worldRatio;
     bodyWidth = my_width;
@@ -24,9 +25,10 @@ short Category_OutGame = 0x0003;
 
 - (void) render:(float)delta {
   if (sprite != nil && body != nil) {
-	  [sprite position] = ccp([body position].x * worldRatio,[body position].y * worldRatio);
+	   
+	    [sprite position] = ccp(body->GetPosition().x * worldRatio,body->GetPosition().y * worldRatio);
 	//  ccMacros *macro = [[ccMacros alloc] init];
-    [sprite setRotation:-1.0f * CC_RADIANS_TO_DEGREES([body angle])];
+    [sprite setRotation:-1.0f * CC_RADIANS_TO_DEGREES(body->GetAngle())];
   }
   [super render:delta];
 }
@@ -35,8 +37,8 @@ short Category_OutGame = 0x0003;
 }
 
 - (void) dealloc {
-  [world release];
-  [body release];
+  //[world release];
+  //[body release];
   [super dealloc];
 }
 

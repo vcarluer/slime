@@ -5,8 +5,8 @@ NSString * texture = @"metal.png";
 
 @implementation Platform
 
-- (id) init:(CCNode *)node x:(float)x y:(float)y width:(float)width height:(float)height world:(b2World *)world worldRatio:(float)worldRatio {
-  if (self = [super init:node param1:x param2:y param3:width param4:height param5:world param6:worldRatio]) {
+- (id) init:(CCNode *)node x:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height world:(b2World *)my_world worldRatio:(float)my_worldRatio {
+  if (self = [super init:node x:my_x y:my_y width:my_width height:my_height world:my_world worldRatio:my_worldRatio]) {
     [self initBody];
   }
   return self;
@@ -33,7 +33,7 @@ NSString * texture = @"metal.png";
     fixtureDef->friction = 1.0f;
     fixtureDef->restitution = 0.0f;
     fixtureDef->filter.categoryBits = Category_Static;
-    [body createFixture:fixtureDef];
+    body->CreateFixture(fixtureDef);
 //  }
 }
 

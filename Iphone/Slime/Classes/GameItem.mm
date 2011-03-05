@@ -99,7 +99,9 @@
 		CCSpriteFrame * frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:frameName];
 		if (frame != nil) {
 			[animArray addObject:frame];
-		}
+		}          
+	
+	
 	}
 	CCAnimation *animation = [CCAnimation animationWithFrames:animArray delay:0.1f];
 	return animation;
