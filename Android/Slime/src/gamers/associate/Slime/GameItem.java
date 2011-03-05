@@ -2,6 +2,7 @@ package gamers.associate.Slime;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.UUID;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -26,8 +27,10 @@ public abstract class GameItem {
 	protected CCAction currentAction;
 	protected CCSprite sprite;
 	protected CCNode rootNode;
+	protected UUID id;
 		
 	public GameItem(CCNode node, float x, float y, float width, float height) {
+		this.id = UUID.randomUUID();
 		this.animationList = new Hashtable<String, CCAnimation>();
 		this.position = new CGPoint();
 		this.position.x = x;
@@ -41,9 +44,15 @@ public abstract class GameItem {
 		this.setSprite(sprite);
 	}
 	
+	public UUID getId() {
+		return this.id;
+	}
+	
 	public void destroy() {
 		if (this.sprite != null) {
-			this.rootNode.removeChild(this.sprite, true);
+			if (this.rootNode != null) {
+				this.rootNode.removeChild(this.sprite, true);
+			}			
 		}
 	}
 	
@@ -57,11 +66,16 @@ public abstract class GameItem {
 	
 	public void setSprite(CCSprite affectSprite) {
 		if (this.sprite != null) {
-			this.rootNode.removeChild(this.sprite, true);
+			if (this.rootNode != null) {
+				this.rootNode.removeChild(this.sprite, true);
+			}
 		}
 		
 		this.sprite = affectSprite;		
-		this.rootNode.addChild(this.sprite);
+		if (this.rootNode != null) {
+			this.rootNode.addChild(this.sprite);
+		}
+		
 		this.sprite.setPosition(this.position);
 		this.sprite.setRotation(this.angle);
 		this.transformTexture();		

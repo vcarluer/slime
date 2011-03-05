@@ -10,16 +10,23 @@ public class SpriteSheetFactory {
 	private static Hashtable<String, CCSpriteSheet> SpriteSheetList = new Hashtable<String, CCSpriteSheet>();
 	
 	public static void add(String plistPngName) {
-		if (SpriteSheetList.get(plistPngName) == null) {
-			CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames(plistPngName + ".plist");
-			CCSpriteSheet spriteSheet = CCSpriteSheet.spriteSheet(plistPngName + ".png");
-			SpriteSheetList.put(plistPngName, spriteSheet);
+		if (plistPngName != "") {
+			if (SpriteSheetList.get(plistPngName) == null) {
+				CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames(plistPngName + ".plist");
+				CCSpriteSheet spriteSheet = CCSpriteSheet.spriteSheet(plistPngName + ".png");
+				SpriteSheetList.put(plistPngName, spriteSheet);
+			}
 		}
 	}
 	
 	public static CCSpriteSheet getSpriteSheet(String plistPngName) {		
-		add(plistPngName);
-		return SpriteSheetList.get(plistPngName);
+		if (plistPngName != "") {
+			add(plistPngName);
+			return SpriteSheetList.get(plistPngName);
+		}
+		else {
+			return null;
+		}
 	}
 	
 	public static void destroy() {

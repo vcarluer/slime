@@ -3,14 +3,9 @@ package gamers.associate.Slime;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.types.CGSize;
 
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-
 public class HardCodedLevelBuilder {
 	
-	private static boolean groundBoxInit;
+	public static float LAND_HEIGHT = 64f;
 	
 	public static void build(Level level, String levelName) {
 		if (levelName == Level.LEVEL_HOME) {
@@ -26,77 +21,39 @@ public class HardCodedLevelBuilder {
 		}
 	}
 	
-	private static void createGroundBox(Level level) {
-		//if (!groundBoxInit) {
-			/*
-			// TEMP
-			// Define the ground body.
-	        BodyDef bxGroundBodyDef = new BodyDef();
-	        bxGroundBodyDef.position.set(0.0f, 0.0f);
-			
-			// Call the body factory which allocates memory for the ground body
-			// from a pool and creates the ground box shape (also from a pool).
-			// The body is also added to the world.
-	        Body groundBody = level.getWorld().createBody(bxGroundBodyDef);
-	        
-	        // Define the ground box shape.
-	        PolygonShape groundBox = new PolygonShape();
-	        
-	        // CGSize s = CCDirector.sharedDirector().winSize();
-	        CGSize s = CGSize.make(level.getLevelWidth(), level.getLevelHeight());
-	        float scaledWidth = s.width/level.getWorlRatio();
-	        float scaledHeight = s.height/level.getWorlRatio();
-	        
-	        Vector2 bottomLeft = new Vector2(0f,0f);
-	        Vector2 topLeft = new Vector2(0f,scaledHeight);
-	        Vector2 topRight = new Vector2(scaledWidth,scaledHeight);
-	        Vector2 bottomRight = new Vector2(scaledWidth,0f);
-	        
-	     // bottom
-			groundBox.setAsEdge(bottomLeft, bottomRight);
-			groundBody.createFixture(groundBox,0);
-			
-			// top
-			groundBox.setAsEdge(topLeft, topRight);
-			groundBody.createFixture(groundBox,0);
-			
-			// left
-			groundBox.setAsEdge(topLeft, bottomLeft);
-			groundBody.createFixture(groundBox,0);
-			
-			// right
-			groundBox.setAsEdge(topRight, bottomRight);
-			groundBody.createFixture(groundBox,0);*/
-			
-			CGSize s = CGSize.make(level.getLevelWidth(), level.getLevelHeight());		
-			
-			float si = 10;
-			float m = si / 2;
-			float w = s.width;
-			float w2 = s.width / 2;
-			float h = s.height;
-			float h2 = s.height / 2;
-			
-			// up
-			SlimeFactory.Platform.create(w2, h + m, w, si);
-			//right
-			SlimeFactory.Platform.create(w + m, h2, si, h);
-			// bottom
-			SlimeFactory.Platform.create(w2, -m, w, si);
-			// left
-			SlimeFactory.Platform.create(-m, h2, si, h);
-			
-			//groundBoxInit = true;
-		//}
+	private static void createGroundBox(Level level) {					
+		CGSize s = CGSize.make(level.getLevelWidth(), level.getLevelHeight());		
+		
+		// Creating Level end box which destroys physic objects when then contact it			
+		float si = 10;
+		float m = 64;
+		float w = s.width;
+		float w2 = s.width / 2;
+		float h = s.height;
+		float h2 = s.height / 2;					
+		// up
+		SlimeFactory.LevelEnd.create(w2, h + m, w, si);
+		//right
+		SlimeFactory.LevelEnd.create(w + m, h2, si, h);
+		// bottom
+		SlimeFactory.LevelEnd.create(w2, -m, w, si);
+		// left
+		SlimeFactory.LevelEnd.create(-m, h2, si, h);			
 	}
 	
-	
+	private static void createLand(Level level) {
+		CGSize s = CGSize.make(level.getLevelWidth(), level.getLevelHeight());		
+		
+		SlimeFactory.Platform.create(s.width / 2, LAND_HEIGHT / 2, s.width, LAND_HEIGHT);
+	}
+		
 	public static void buildHome(Level level) {
 		level.setLevelSize(
 				CCDirector.sharedDirector().winSize().getWidth() * 2,
 				CCDirector.sharedDirector().winSize().getHeight() * 2);
 		
-		createGroundBox(level);		
+		createGroundBox(level);
+		createLand(level);
 		CGSize s = CGSize.make(level.getLevelWidth(), level.getLevelHeight());
 		
 		SpawnPortal spawnPortal = SlimeFactory.SpawnPortal.createAndMove(
@@ -109,10 +66,10 @@ public class HardCodedLevelBuilder {
 		// Platform
 		float goalPlatH = 20f;
 		float goalPlatW = 100f;
-		SlimeFactory.Platform.create(s.width / 2,goalPlatH / 2, goalPlatW, goalPlatH);
+		SlimeFactory.Platform.create(s.width / 2,LAND_HEIGHT + goalPlatH / 2, goalPlatW, goalPlatH);
 		
 		// Goal
-		GoalPortal goalPortal = SlimeFactory.GoalPortal.create(s.width / 2, goalPlatH + 15);
+		GoalPortal goalPortal = SlimeFactory.GoalPortal.create(s.width / 2, LAND_HEIGHT + goalPlatH + 15);
 		level.setGoalPortal(goalPortal);
 		
 		// Bumper
@@ -130,6 +87,7 @@ public class HardCodedLevelBuilder {
 				CCDirector.sharedDirector().winSize().getHeight() * 2);
 		
 		createGroundBox(level);
+		createLand(level);
 		CGSize s = CGSize.make(level.getLevelWidth(), level.getLevelHeight());
 		
 		SpawnPortal spawnPortal = SlimeFactory.SpawnPortal.createAndMove(
@@ -142,10 +100,10 @@ public class HardCodedLevelBuilder {
 		// Platform
 		float goalPlatH = 20f;
 		float goalPlatW = 100f;
-		SlimeFactory.Platform.create(s.width / 2, goalPlatH / 2, goalPlatW, goalPlatH);
+		SlimeFactory.Platform.create(s.width / 2, LAND_HEIGHT + goalPlatH / 2, goalPlatW, goalPlatH);
 		
 		// Goal
-		GoalPortal goalPortal = SlimeFactory.GoalPortal.create(s.width / 2, goalPlatH + 15);
+		GoalPortal goalPortal = SlimeFactory.GoalPortal.create(s.width / 2, LAND_HEIGHT + goalPlatH + 15);
 		level.setGoalPortal(goalPortal);
 		
 		// Bumper

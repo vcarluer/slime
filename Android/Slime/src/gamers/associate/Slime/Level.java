@@ -1,6 +1,9 @@
 package gamers.associate.Slime;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.UUID;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -32,7 +35,7 @@ public class Level {
 	protected World world;
 	protected Vector2 gravity;
 	protected float worldRatio = 32f;
-	protected ArrayList<GameItem> items;
+	protected Hashtable<UUID, GameItem> items;
 	/**
 	 * @uml.property  name="slimyFactory"
 	 * @uml.associationEnd  
@@ -67,6 +70,8 @@ public class Level {
 	
 	protected String currentLevelName;
 	
+	protected ArrayList<GameItem> itemsToRemove;
+	
 	protected Level() {
 		this.scene = CCScene.node();
 		this.levelLayer = new LevelLayer(this);
@@ -83,9 +88,11 @@ public class Level {
 		this.isHudEnabled = true;
 		this.scene.addChild(this.hudLayer, this.hudZ);
 				
-		this.items = new ArrayList<GameItem>();				
+		this.items = new Hashtable<UUID, GameItem>();				
 		
 		this.cameraManager = new CameraManager(this.gameLayer);							
+		
+		this.itemsToRemove = new ArrayList<GameItem>();
 		
 		this.init();
 		
@@ -199,7 +206,7 @@ public class Level {
 		
 		this.currentLevelName = "";
 		
-		for (GameItem item : this.items) {
+		for (GameItem item : this.items.values()) {
 			item.destroy();
 		}
 		
@@ -251,13 +258,15 @@ public class Level {
 	}
 	
 	protected void tick(float delta) {
-		if (!isPaused) {
+		if (!isPaused) {			
 			// TODO: physic step must be fix!
 			synchronized (world) {
 	    		world.step(delta, 6, 2);
-	    	}
+	    	}						
 			
-			for(GameItem item : this.items) {
+			this.destroyMarkedItems();
+			
+			for(GameItem item : this.items.values()) {
 				item.render(delta);
 			}
 			
@@ -265,11 +274,23 @@ public class Level {
 		}
 	}
 	
+	protected void destroyMarkedItems() {
+		for(GameItem item : this.itemsToRemove) {
+			this.removeGameItem(item);
+		}
+		
+		this.itemsToRemove.clear();
+	}
+	
+	public void markItemToDestroy(GameItem item) {		
+		this.itemsToRemove.add(item);
+	}
+	
 	public void setPause(boolean value) {		
 		if (value) {			
 			if (!this.isPaused) {
 				this.levelLayer.pauseSchedulerAndActions();
-				for(GameItem item : this.items) {
+				for(GameItem item : this.items.values()) {
 					item.getSprite().pauseSchedulerAndActions();
 				}
 			}
@@ -278,7 +299,7 @@ public class Level {
 		{
 			if (this.isPaused) {
 				this.levelLayer.resumeSchedulerAndActions();
-				for(GameItem item : this.items) {
+				for(GameItem item : this.items.values()) {
 					item.getSprite().resumeSchedulerAndActions();
 				}
 			}
@@ -352,7 +373,16 @@ public class Level {
 	}
 	
 	public void addGameItem(GameItem item) {
-		this.items.add(item);
+		this.items.put(item.getId(), item);
+	}
+	
+	public void removeGameItem(GameItem item) {
+		if (item != null) {
+			if (this.items.containsKey(item.getId())) {
+				item.destroy();
+				this.items.remove(item.getId());
+			}
+		}
 	}
 	
 	public SpawnPortal getSpawnPortal() {
@@ -408,7 +438,7 @@ public class Level {
 	}
 	
 	public void draw(GL10 gl) {
-		for(GameItem item : this.items) {
+		for(GameItem item : this.items.values()) {
 			item.draw(gl);
 		}
 	}
