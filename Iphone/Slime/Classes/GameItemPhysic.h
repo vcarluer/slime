@@ -24,7 +24,7 @@ extern short Category_OutGame;
 @property (nonatomic,assign) b2Body *body;
 @property (nonatomic,assign) b2World *world;
 
-- (id) init:(CCNode *)my_node x:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height;
+- (id) init:(CCNode *)my_node x:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height world:(b2World *)my_world worldRatio:(float)my_worldRatio;
 - (void) initBody;
 - (void) render:(float)delta;
 - (void) contact:(NSObject *)with;

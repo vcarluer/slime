@@ -13,7 +13,7 @@
 
 - (void) Detach {
   if (isAttached && spriteSheet != nil && rootNode != nil) {
-    [rootNode removeChild:spriteSheet param1:YES];
+    [rootNode removeChild:spriteSheet cleanup:YES];
     rootNode = nil;
     world = nil;
     worldRatio = 0.0f;
@@ -22,7 +22,7 @@
 }
 
 - (void) dealloc {
-  [world release];
+ // [world release];
   [super dealloc];
 }
 

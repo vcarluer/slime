@@ -1,7 +1,9 @@
 #import "ItemFactoryBase.h"
 #import "GameItem.h"
+#import "SpriteSheetFactory.h"
 
 @implementation ItemFactoryBase
+@synthesize spriteSheet;
 
 - (id) init {
   if (self = [super init]) {
@@ -14,8 +16,8 @@
 
 - (void) initAnimation {
   if (!isInit) {
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFrames:[self plist]];
-    spriteSheet = [CCSpriteSheet spriteSheet:[self png]];
+	
+	spriteSheet =  [SpriteSheetFactory getSpriteSheet:[self getPlistPng]];
     sharedAnimations = [[[NSMutableDictionary alloc] init] autorelease];
     [self createAnimList];
     isInit = YES;
@@ -26,14 +28,12 @@
 }
 
 - (void) createAnim:(NSString *)animName frameCount:(int)frameCount {
-  [sharedAnimations put:animName param1:[GameItem createAnim:animName param1:frameCount]];
+  [sharedAnimations setObject:[GameItem createAnim:animName frameCount:frameCount] forKey:animName];
 }
 
-- (NSString *) getPlist {
+- (NSString *) getPlistPng {
 }
 
-- (NSString *) getPng {
-}
 
 - (id) create {
   return [self create:0 y:0];

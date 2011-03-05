@@ -28,10 +28,10 @@
 }
 
 - (Bumper *) create:(float)x y:(float)y width:(float)width height:(float)height powa:(float)powa {
-  Bumper * bumper = [Bumper init:x param1:y param2:width param3:height];
+  Bumper * bumper = [[Bumper alloc ] init:rootNode x:x y:y width:width height:height world:world worldRatio:worldRatio];
   [bumper setPowa:powa];
   if (bumper != nil) {
-    CCSprite * sprite = [CCSprite sprite:Texture_Wait];
+    CCSprite * sprite = [CCSprite spriteWithSpriteFrameName:Texture_Wait];
     [bumper setSprite:sprite];
   }
   return bumper;

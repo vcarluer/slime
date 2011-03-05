@@ -59,7 +59,7 @@ float Default_Body_Height = 23.0f;
 	bodyDef.userData = self->sprite;
     body = world->CreateBody(&bodyDef);
     //body->userData = self;
-    
+   
 	
 	b2FixtureDef fixtureDef;
     fixtureDef.shape = &dynamicBox;
