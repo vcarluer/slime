@@ -13,6 +13,7 @@ public abstract class ItemFactoryBase<T extends GameItem> {
 	protected boolean isAttached;
 	protected CCNode rootNode;
 	protected float ratio;
+	protected Level level;
 	
 	protected ItemFactoryBase() {
 		this.isInit = false;
@@ -53,9 +54,10 @@ public abstract class ItemFactoryBase<T extends GameItem> {
 		
 	public T create(float x, float y, float width, float height) {
 		if (this.isAttached) {			
-			T item = this.instantiate(x, y, width, height);		
+			T item = this.instantiate(x, y, width, height);
 			item.setAnimationList(this.sharedAnimations);
 			this.runFirstAnimations(item);
+			this.level.addGameItem(item);			
 			return item;
 		}
 		else

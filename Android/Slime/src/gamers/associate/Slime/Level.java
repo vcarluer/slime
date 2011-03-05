@@ -114,7 +114,7 @@ public class Level {
 	}
 	
 	protected void attachToFactory() {
-		SlimeFactory.attachAll(this.levelLayer, this.world, this.worldRatio);
+		SlimeFactory.attachAll(this, this.levelLayer, this.world, this.worldRatio);
 	}
 	
 	public void reload() {
@@ -138,16 +138,7 @@ public class Level {
 		this.resetLevel();									
 		
 		// Hard coded for now
-		HardCodedLevelBuilder.build(this, levelName);
-		
-		// In level builder?
-		this.spawnPortal = SlimeFactory.SpawnPortal.createAndMove(
-				this.levelWidth / 2, 
-				this.levelHeight - 32,
-				this.levelWidth / 2,
-				5);
-		
-		this.items.add(this.spawnPortal);				
+		HardCodedLevelBuilder.build(this, levelName);													
 		
 		this.currentLevelName = levelName;
 		
@@ -338,10 +329,6 @@ public class Level {
 		{
 			gi = this.spawnPortal.spawn();
 		}
-		
-		if (gi != null) {
-			this.items.add(gi);
-		}
 	}
 	
 	public World getWorld() {
@@ -361,8 +348,7 @@ public class Level {
 	}
 	
 	public void setGoalPortal(GoalPortal portal) {
-		this.goalPortal = portal;
-		this.items.add(this.goalPortal);
+		this.goalPortal = portal;		
 	}
 	
 	public void addGameItem(GameItem item) {
@@ -410,12 +396,15 @@ public class Level {
 	}
 	
 	public void setSpawnCannon(SpawnCannon cannon) {
-		this.spawnCannon = cannon;
-		this.addGameItem(this.spawnCannon);
+		this.spawnCannon = cannon;		
 	}
 	
 	public SpawnCannon getSpawnCannon() {
 		return this.spawnCannon;
+	}
+	
+	public void setSpawnPortal(SpawnPortal portal) {
+		this.spawnPortal = portal;
 	}
 	
 	public void draw(GL10 gl) {
