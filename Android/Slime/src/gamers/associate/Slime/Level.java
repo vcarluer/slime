@@ -72,6 +72,10 @@ public class Level {
 	
 	protected ArrayList<GameItem> itemsToRemove;
 	
+	protected HomeLevelHandler homeLevelHandler;
+	
+	protected boolean isPaused;
+	
 	protected Level() {
 		this.scene = CCScene.node();
 		this.levelLayer = new LevelLayer(this);
@@ -93,6 +97,7 @@ public class Level {
 		this.cameraManager = new CameraManager(this.gameLayer);							
 		
 		this.itemsToRemove = new ArrayList<GameItem>();
+		this.homeLevelHandler = new HomeLevelHandler();
 		
 		this.init();
 		
@@ -150,58 +155,15 @@ public class Level {
 		this.currentLevelName = levelName;
 		
 		if (this.currentLevelName == Level.LEVEL_HOME) {
-			this.handleHomeLevel();
+			this.homeLevelHandler.startHomeLevel();
 		}
 		
 		this.isPaused = false;
 	}
-	
-	// TODO: Refactor all this into tick method 
-	private long startHome;
-	private HomePlayThread playThread;
-	private boolean runHome;
-	private double nextRand;
-	private int maxSlime = 30;
-	private double minSpawn = 0.5;
-	private double maxSpawn = 3;
-	private int slimeCount;
-	
-	private void handleHomeLevel() {
-		this.startHome = System.currentTimeMillis();
-		this.playThread = new HomePlayThread();
-		this.runHome = true;
-		this.slimeCount = 0;
-		this.playThread.start();		
-	}	
 			
-	private class HomePlayThread extends Thread {
-		@Override
-		public void run() {
-			nextRand = MathLib.random(minSpawn, maxSpawn);
-			
-			while (runHome && slimeCount < maxSlime) {
-				Level level = Level.currentLevel;
-				if (level != null) {
-					long elapsed = (System.currentTimeMillis() - startHome) / 1000;
-
-					if (elapsed > nextRand && !isPaused) {
-						level.spawnSlime();
-						slimeCount++;
-						startHome = System.currentTimeMillis();
-						nextRand = MathLib.random(minSpawn, maxSpawn);						
-					}
-				}
-			}
-		}		
-	}
-	
-	public void stopHomeLevel() {
-		this.runHome = false;
-	}
-	
 	public void resetLevel() {		
 		if (this.currentLevelName == Level.LEVEL_HOME) {
-			this.stopHomeLevel();
+			this.homeLevelHandler.stopHomeLevel();
 		}
 		
 		this.currentLevelName = "";
@@ -258,7 +220,8 @@ public class Level {
 	}
 	
 	protected void tick(float delta) {
-		if (!isPaused) {			
+		if (!isPaused) {
+			this.homeLevelHandler.tick();
 			// TODO: physic step must be fix!
 			synchronized (world) {
 	    		world.step(delta, 6, 2);
@@ -307,13 +270,12 @@ public class Level {
 		
 		this.isPaused = value;
 		this.setIsTouchEnabled(!this.isPaused);
+		this.homeLevelHandler.setPause(this.isPaused);
 	}
 	
 	public void togglePause() {
 		this.setPause(!this.isPaused);
 	}
-	
-	private boolean isPaused;
 	
 		// Test
 		/*if (this.goalPortal.isWon()) {						
@@ -341,14 +303,13 @@ public class Level {
 		this.spawnSlime(CGPoint.getZero());		
 	}
 	
-	public void spawnSlime(CGPoint target) {						
-		GameItem gi = null;
+	public void spawnSlime(CGPoint target) {								
 		if (this.spawnCannon != null) {
-			gi = this.spawnCannon.spawnSlime(target);			
+			this.spawnCannon.spawnSlime(target);			
 		}
 		else
 		{
-			gi = this.spawnPortal.spawn();
+			this.spawnPortal.spawn();
 		}
 	}
 	
