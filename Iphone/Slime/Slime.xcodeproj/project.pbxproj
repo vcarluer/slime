@@ -149,7 +149,6 @@
 		7BA11FF3130B4B940065DFC9 /* GameItemPhysicFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BA11FC6130B4B940065DFC9 /* GameItemPhysicFactory.mm */; };
 		7BA11FF4130B4B940065DFC9 /* GoalPortal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BA11FC8130B4B940065DFC9 /* GoalPortal.mm */; };
 		7BA11FF5130B4B940065DFC9 /* GoalPortalFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BA11FCA130B4B940065DFC9 /* GoalPortalFactory.mm */; };
-		7BA11FF6130B4B940065DFC9 /* HardCodedLevel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BA11FCC130B4B940065DFC9 /* HardCodedLevel.mm */; };
 		7BA11FF7130B4B940065DFC9 /* HudLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BA11FCE130B4B940065DFC9 /* HudLayer.mm */; };
 		7BA11FF8130B4B940065DFC9 /* ItemFactoryBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BA11FD0130B4B940065DFC9 /* ItemFactoryBase.mm */; };
 		7BA11FFC130B4B940065DFC9 /* Platform.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BA11FD8130B4B940065DFC9 /* Platform.mm */; };
@@ -518,8 +517,6 @@
 		7BA11FC8130B4B940065DFC9 /* GoalPortal.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GoalPortal.mm; sourceTree = "<group>"; };
 		7BA11FC9130B4B940065DFC9 /* GoalPortalFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalPortalFactory.h; sourceTree = "<group>"; };
 		7BA11FCA130B4B940065DFC9 /* GoalPortalFactory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GoalPortalFactory.mm; sourceTree = "<group>"; };
-		7BA11FCB130B4B940065DFC9 /* HardCodedLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HardCodedLevel.h; sourceTree = "<group>"; };
-		7BA11FCC130B4B940065DFC9 /* HardCodedLevel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HardCodedLevel.mm; sourceTree = "<group>"; };
 		7BA11FCD130B4B940065DFC9 /* HudLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HudLayer.h; sourceTree = "<group>"; };
 		7BA11FCE130B4B940065DFC9 /* HudLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HudLayer.mm; sourceTree = "<group>"; };
 		7BA11FCF130B4B940065DFC9 /* ItemFactoryBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemFactoryBase.h; sourceTree = "<group>"; };
@@ -1133,8 +1130,6 @@
 		7BBFE26013170D490008C24B /* old files */ = {
 			isa = PBXGroup;
 			children = (
-				7BA11FCB130B4B940065DFC9 /* HardCodedLevel.h */,
-				7BA11FCC130B4B940065DFC9 /* HardCodedLevel.mm */,
 				7BA11FB5130B4B940065DFC9 /* AnimationLayer.h */,
 				7BA11FB6130B4B940065DFC9 /* AnimationLayer.mm */,
 			);
@@ -1674,7 +1669,6 @@
 				7BA11FF3130B4B940065DFC9 /* GameItemPhysicFactory.mm in Sources */,
 				7BA11FF4130B4B940065DFC9 /* GoalPortal.mm in Sources */,
 				7BA11FF5130B4B940065DFC9 /* GoalPortalFactory.mm in Sources */,
-				7BA11FF6130B4B940065DFC9 /* HardCodedLevel.mm in Sources */,
 				7BA11FF7130B4B940065DFC9 /* HudLayer.mm in Sources */,
 				7BA11FF8130B4B940065DFC9 /* ItemFactoryBase.mm in Sources */,
 				7BA11FFC130B4B940065DFC9 /* Platform.mm in Sources */,
