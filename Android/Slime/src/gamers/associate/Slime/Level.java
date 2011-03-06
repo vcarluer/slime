@@ -1,6 +1,11 @@
 package gamers.associate.Slime;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.UUID;
+
+import javax.microedition.khronos.opengles.GL10;
 
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
@@ -30,7 +35,7 @@ public class Level {
 	protected World world;
 	protected Vector2 gravity;
 	protected float worldRatio = 32f;
-	protected ArrayList<GameItem> items;
+	protected Hashtable<UUID, GameItem> items;
 	/**
 	 * @uml.property  name="slimyFactory"
 	 * @uml.associationEnd  
@@ -42,6 +47,7 @@ public class Level {
 	 */
 	protected ContactManager contactManager;
 	protected SpawnPortal spawnPortal;
+	protected SpawnCannon spawnCannon;
 	protected GoalPortal goalPortal;
 	
 	protected CCScene scene;
@@ -64,6 +70,12 @@ public class Level {
 	
 	protected String currentLevelName;
 	
+	protected ArrayList<GameItem> itemsToRemove;
+	
+	protected HomeLevelHandler homeLevelHandler;
+	
+	protected boolean isPaused;
+	
 	protected Level() {
 		this.scene = CCScene.node();
 		this.levelLayer = new LevelLayer(this);
@@ -80,9 +92,12 @@ public class Level {
 		this.isHudEnabled = true;
 		this.scene.addChild(this.hudLayer, this.hudZ);
 				
-		this.items = new ArrayList<GameItem>();				
+		this.items = new Hashtable<UUID, GameItem>();				
 		
 		this.cameraManager = new CameraManager(this.gameLayer);							
+		
+		this.itemsToRemove = new ArrayList<GameItem>();
+		this.homeLevelHandler = new HomeLevelHandler();
 		
 		this.init();
 		
@@ -111,7 +126,7 @@ public class Level {
 	}
 	
 	protected void attachToFactory() {
-		SlimeFactory.attachAll(this.levelLayer, this.world, this.worldRatio);
+		SlimeFactory.attachAll(this, this.levelLayer, this.world, this.worldRatio);
 	}
 	
 	public void reload() {
@@ -135,77 +150,25 @@ public class Level {
 		this.resetLevel();									
 		
 		// Hard coded for now
-		HardCodedLevelBuilder.build(this, levelName);
-		
-		// In level builder?
-		this.spawnPortal = SlimeFactory.SpawnPortal.createAndMove(
-				this.levelWidth / 2, 
-				this.levelHeight - 32,
-				this.levelWidth / 2,
-				5);
-		
-		this.items.add(this.spawnPortal);				
+		HardCodedLevelBuilder.build(this, levelName);													
 		
 		this.currentLevelName = levelName;
 		
 		if (this.currentLevelName == Level.LEVEL_HOME) {
-			this.handleHomeLevel();
+			this.homeLevelHandler.startHomeLevel();
 		}
 		
 		this.isPaused = false;
 	}
-	
-	// TODO: Refactor all this into tick method 
-	private long startHome;
-	private HomePlayThread playThread;
-	private boolean runHome;
-	private double nextRand;
-	private int maxSlime = 30;
-	private double minSpawn = 0.5;
-	private double maxSpawn = 3;
-	private int slimeCount;
-	
-	private void handleHomeLevel() {
-		this.startHome = System.currentTimeMillis();
-		this.playThread = new HomePlayThread();
-		this.runHome = true;
-		this.slimeCount = 0;
-		this.playThread.start();		
-	}	
 			
-	private class HomePlayThread extends Thread {
-		@Override
-		public void run() {
-			nextRand = MathLib.random(minSpawn, maxSpawn);
-			
-			while (runHome && slimeCount < maxSlime) {
-				Level level = Level.currentLevel;
-				if (level != null) {
-					long elapsed = (System.currentTimeMillis() - startHome) / 1000;
-
-					if (elapsed > nextRand && !isPaused) {
-						level.SpawnSlime();
-						slimeCount++;
-						startHome = System.currentTimeMillis();
-						nextRand = MathLib.random(minSpawn, maxSpawn);						
-					}
-				}
-			}
-		}		
-	}
-	
-	public void stopHomeLevel() {
-		this.runHome = false;
-	}
-	
 	public void resetLevel() {		
 		if (this.currentLevelName == Level.LEVEL_HOME) {
-			this.stopHomeLevel();
+			this.homeLevelHandler.stopHomeLevel();
 		}
 		
 		this.currentLevelName = "";
 		
-		for (GameItem item : this.items) {
+		for (GameItem item : this.items.values()) {
 			item.destroy();
 		}
 		
@@ -258,12 +221,15 @@ public class Level {
 	
 	protected void tick(float delta) {
 		if (!isPaused) {
+			this.homeLevelHandler.tick();
 			// TODO: physic step must be fix!
 			synchronized (world) {
 	    		world.step(delta, 6, 2);
-	    	}
+	    	}						
 			
-			for(GameItem item : this.items) {
+			this.destroyMarkedItems();
+			
+			for(GameItem item : this.items.values()) {
 				item.render(delta);
 			}
 			
@@ -271,11 +237,23 @@ public class Level {
 		}
 	}
 	
+	protected void destroyMarkedItems() {
+		for(GameItem item : this.itemsToRemove) {
+			this.removeGameItem(item);
+		}
+		
+		this.itemsToRemove.clear();
+	}
+	
+	public void markItemToDestroy(GameItem item) {		
+		this.itemsToRemove.add(item);
+	}
+	
 	public void setPause(boolean value) {		
 		if (value) {			
 			if (!this.isPaused) {
 				this.levelLayer.pauseSchedulerAndActions();
-				for(GameItem item : this.items) {
+				for(GameItem item : this.items.values()) {
 					item.getSprite().pauseSchedulerAndActions();
 				}
 			}
@@ -284,7 +262,7 @@ public class Level {
 		{
 			if (this.isPaused) {
 				this.levelLayer.resumeSchedulerAndActions();
-				for(GameItem item : this.items) {
+				for(GameItem item : this.items.values()) {
 					item.getSprite().resumeSchedulerAndActions();
 				}
 			}
@@ -292,13 +270,12 @@ public class Level {
 		
 		this.isPaused = value;
 		this.setIsTouchEnabled(!this.isPaused);
+		this.homeLevelHandler.setPause(this.isPaused);
 	}
 	
 	public void togglePause() {
 		this.setPause(!this.isPaused);
 	}
-	
-	private boolean isPaused;
 	
 		// Test
 		/*if (this.goalPortal.isWon()) {						
@@ -322,10 +299,17 @@ public class Level {
 	*/
 	// Fin test
 	
-	public void SpawnSlime() {				
-		GameItem gi = this.spawnPortal.spawn();
-		if (gi != null) {
-			this.items.add(gi);
+	public void spawnSlime() {
+		this.spawnSlime(CGPoint.getZero());		
+	}
+	
+	public void spawnSlime(CGPoint target) {								
+		if (this.spawnCannon != null) {
+			this.spawnCannon.spawnSlime(target);			
+		}
+		else
+		{
+			this.spawnPortal.spawn();
 		}
 	}
 	
@@ -346,12 +330,20 @@ public class Level {
 	}
 	
 	public void setGoalPortal(GoalPortal portal) {
-		this.goalPortal = portal;
-		this.items.add(this.goalPortal);
+		this.goalPortal = portal;		
 	}
 	
 	public void addGameItem(GameItem item) {
-		this.items.add(item);
+		this.items.put(item.getId(), item);
+	}
+	
+	public void removeGameItem(GameItem item) {
+		if (item != null) {
+			if (this.items.containsKey(item.getId())) {
+				item.destroy();
+				this.items.remove(item.getId());
+			}
+		}
 	}
 	
 	public SpawnPortal getSpawnPortal() {
@@ -392,5 +384,23 @@ public class Level {
 		}
 		
 		this.isHudEnabled = value;
+	}
+	
+	public void setSpawnCannon(SpawnCannon cannon) {
+		this.spawnCannon = cannon;		
+	}
+	
+	public SpawnCannon getSpawnCannon() {
+		return this.spawnCannon;
+	}
+	
+	public void setSpawnPortal(SpawnPortal portal) {
+		this.spawnPortal = portal;
+	}
+	
+	public void draw(GL10 gl) {
+		for(GameItem item : this.items.values()) {
+			item.draw(gl);
+		}
 	}
 }

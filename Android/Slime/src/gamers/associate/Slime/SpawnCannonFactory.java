@@ -3,7 +3,7 @@ package gamers.associate.Slime;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 
-public class SpawnCannonFactory extends GameItemPhysicFxFactory<SpawnCannon>{
+public class SpawnCannonFactory extends GameItemPhysicFactory<SpawnCannon>{
 		
 	@Override
 	public SpawnCannon create(float x, float y, float width, float height) {		

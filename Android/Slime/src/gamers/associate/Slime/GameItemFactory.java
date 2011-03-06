@@ -4,13 +4,9 @@ import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSpriteSheet;
 
 public abstract class GameItemFactory<T extends GameItem> extends ItemFactoryBase<T> {
-	
-	public void attach(CCNode attachNode, CCSpriteSheet spriteSheet) {
-		this.spriteSheet = spriteSheet;
-		this.attach(attachNode);
-	}
-	
-	public void attach(CCNode attachNode) {
+		
+	public void attach(Level level, CCNode attachNode) {
+		this.level = level;
 		this.rootNode = attachNode;		
 		this.initAnimation();
 		this.rootNode.addChild(this.spriteSheet);
@@ -19,7 +15,7 @@ public abstract class GameItemFactory<T extends GameItem> extends ItemFactoryBas
 	
 	public void detach() {
 		if (this.isAttached && this.spriteSheet != null && this.rootNode != null) {
-			// true here?
+			this.level = null;			
 			this.rootNode.removeChild(spriteSheet, true);
 			this.rootNode = null;			
 			this.isAttached = false;

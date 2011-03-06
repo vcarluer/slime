@@ -11,13 +11,17 @@ public abstract class SlimeFactory {
 	public static PlatformFactory Platform = new PlatformFactory();
 	public static GoalPortalFactory GoalPortal = new GoalPortalFactory();
 	public static BumperFactory Bumper = new BumperFactory();
+	public static SpawnCannonFactory Cannon = new SpawnCannonFactory();
+	public static LevelEndFactory LevelEnd = new LevelEndFactory();
 		
-	public static void attachAll(CCNode attachNode, World attachWorld, float attachWorldRatio) {
-		Slimy.attach(attachNode, attachWorld, attachWorldRatio);
-		SpawnPortal.attach(attachNode);
-		Platform.attach(attachNode, attachWorld, attachWorldRatio);
-		GoalPortal.attach(attachNode, attachWorld, attachWorldRatio);
-		Bumper.attach(attachNode, attachWorld, attachWorldRatio);
+	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {
+		Slimy.attach(level, attachNode, attachWorld, attachWorldRatio);
+		SpawnPortal.attach(level, attachNode);
+		Platform.attach(level, attachNode, attachWorld, attachWorldRatio);
+		GoalPortal.attach(level, attachNode, attachWorld, attachWorldRatio);
+		Bumper.attach(level, attachNode, attachWorld, attachWorldRatio);
+		Cannon.attach(level, attachNode, attachWorld, attachWorldRatio);
+		LevelEnd.attach(level, attachNode, attachWorld, attachWorldRatio);
 		isAttached = true;
 	}
 	
@@ -27,6 +31,8 @@ public abstract class SlimeFactory {
 		Platform.detach();
 		GoalPortal.detach();
 		Bumper.detach();
+		Cannon.detach();
+		LevelEnd.detach();
 		isAttached = false;
 	}
 	
@@ -36,6 +42,8 @@ public abstract class SlimeFactory {
 		Platform.destroy();
 		GoalPortal.destroy();
 		Bumper.destroy();
+		Cannon.destroy();
+		LevelEnd.destroy();
 		isAttached = false;
 	}
 }

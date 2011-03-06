@@ -3,8 +3,9 @@ package gamers.associate.Slime;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 
-public class ContactManager implements ContactListener {
 
+public class ContactManager implements ContactListener {
+	
 	@Override
 	public void beginContact(Contact contact) {
 		if (contact.getFixtureA() != null && contact.getFixtureB() != null) {
@@ -21,8 +22,7 @@ public class ContactManager implements ContactListener {
 				GameItemPhysic item = (GameItemPhysic)oB;
 				item.contact(oA);
 			}
-		}
-		
+		}	
 	}
 
 	@Override

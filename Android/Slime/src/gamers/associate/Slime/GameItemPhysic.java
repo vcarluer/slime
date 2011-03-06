@@ -15,7 +15,7 @@ public abstract class GameItemPhysic extends GameItem{
 	protected Body body; 
 	protected float bodyWidth;
 	protected float bodyHeight;
-	protected float worldRatio;
+	protected float worldRatio;	
 	
 	public GameItemPhysic(CCNode node, float x, float y, float width, float height, World world, float worldRatio) {		
 		super(node, x, y, width, height);
@@ -34,6 +34,10 @@ public abstract class GameItemPhysic extends GameItem{
 	}
 	
 	protected abstract void initBody();
+	
+	public Body getBody() {
+		return this.body;
+	}
 	
 	@Override
 	public void render(float delta) {
