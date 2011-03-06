@@ -63,7 +63,7 @@ public class GoalPortal extends GameItemPhysic {
 	}
 	
 	@Override
-	public void contact(Object with) {		
+	public void addContact(Object with) {		
 		if (with instanceof Slimy) {
 			Slimy slimy = (Slimy) with;
 			slimy.win();

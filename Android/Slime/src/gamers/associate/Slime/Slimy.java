@@ -125,11 +125,6 @@ public class Slimy extends GameItemPhysic {
 		super.render(delta);		
 	}
 	
-	@Override
-	public void contact(Object with) {		
-		this.land();
-	}
-	
 	public void win() {
 		this.burn();
 	}
@@ -175,5 +170,14 @@ public class Slimy extends GameItemPhysic {
 	@Override
 	protected CCAnimation getReferenceAnimation() {
 		return this.animationList.get(Slimy.Anim_Wait_V);
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.GameItemPhysic#handleContact(gamers.associate.Slime.GameItemPhysic)
+	 */
+	@Override
+	protected void handleContact(GameItemPhysic item) {		
+		super.handleContact(item);
+		this.land();
 	}
 }

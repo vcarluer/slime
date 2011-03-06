@@ -44,15 +44,13 @@ public class LevelEnd extends GameItemPhysic {
 	}
 
 	/* (non-Javadoc)
-	 * @see gamers.associate.Slime.GameItemPhysic#contact(java.lang.Object)
+	 * @see gamers.associate.Slime.GameItemPhysic#handleContact(gamers.associate.Slime.GameItemPhysic)
 	 */
 	@Override
-	public void contact(Object with) {		
-		super.contact(with);
-		
-		if (with instanceof GameItemPhysic) {
-			GameItemPhysic item = (GameItemPhysic)with;
-			Level.currentLevel.markItemToDestroy(item);
-		}
+	protected void handleContact(GameItemPhysic item) {		
+		super.handleContact(item);
+		Level.currentLevel.addItemToRemove(item);
 	}
+	
+	
 }

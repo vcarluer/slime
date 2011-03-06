@@ -1,7 +1,11 @@
 package gamers.associate.Slime;
 
+import java.util.ArrayList;
+
 import org.cocos2d.config.ccMacros;
 import org.cocos2d.nodes.CCNode;
+
+import android.test.IsolatedContext;
 
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
@@ -16,6 +20,7 @@ public abstract class GameItemPhysic extends GameItem{
 	protected float bodyWidth;
 	protected float bodyHeight;
 	protected float worldRatio;	
+	protected ArrayList<GameItemPhysic> contacts;
 	
 	public GameItemPhysic(CCNode node, float x, float y, float width, float height, World world, float worldRatio) {		
 		super(node, x, y, width, height);
@@ -23,6 +28,7 @@ public abstract class GameItemPhysic extends GameItem{
 		this.worldRatio = worldRatio;
 		this.bodyWidth = this.width;
 		this.bodyHeight = this.height;
+		this.contacts = new ArrayList<GameItemPhysic>();
 	}
 	
 	@Override
@@ -41,6 +47,8 @@ public abstract class GameItemPhysic extends GameItem{
 	
 	@Override
 	public void render(float delta) {
+		this.handleContacts();
+		
 		if (this.sprite != null && this.body != null) {			
 			this.sprite.setPosition(this.body.getPosition().x * this.worldRatio, this.body.getPosition().y * this.worldRatio);
 			this.sprite.setRotation(-1.0f * ccMacros.CC_RADIANS_TO_DEGREES(this.body.getAngle()));
@@ -49,6 +57,21 @@ public abstract class GameItemPhysic extends GameItem{
 		super.render(delta);
 	}
 	
-	public void contact(Object with) {
+	public void addContact(Object with) {
+		if (with instanceof GameItemPhysic) {
+			GameItemPhysic item = (GameItemPhysic)with;
+			this.contacts.add(item);
+		}
+	}
+	
+	protected void handleContacts() {		
+		for(GameItemPhysic item : this.contacts) {
+			this.handleContact(item);
+		}
+		
+		this.contacts.clear();
+	}
+	
+	protected void handleContact(GameItemPhysic item) {		
 	}
 }

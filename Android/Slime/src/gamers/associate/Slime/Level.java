@@ -226,29 +226,23 @@ public class Level {
 			synchronized (world) {
 	    		world.step(delta, 6, 2);
 	    	}						
-			
-			this.destroyMarkedItems();
-			
+						
 			for(GameItem item : this.items.values()) {
 				item.render(delta);
+			}
+			
+			for(GameItem item : this.itemsToRemove) {
+				this.removeGameItem(item);
 			}
 			
 			this.cameraManager.tick(delta);
 		}
 	}
-	
-	protected void destroyMarkedItems() {
-		for(GameItem item : this.itemsToRemove) {
-			this.removeGameItem(item);
-		}
-		
-		this.itemsToRemove.clear();
-	}
-	
-	public void markItemToDestroy(GameItem item) {		
+			
+	public void addItemToRemove(GameItem item) {
 		this.itemsToRemove.add(item);
 	}
-	
+		
 	public void setPause(boolean value) {		
 		if (value) {			
 			if (!this.isPaused) {
@@ -337,7 +331,7 @@ public class Level {
 		this.items.put(item.getId(), item);
 	}
 	
-	public void removeGameItem(GameItem item) {
+	protected void removeGameItem(GameItem item) {
 		if (item != null) {
 			if (this.items.containsKey(item.getId())) {
 				item.destroy();
