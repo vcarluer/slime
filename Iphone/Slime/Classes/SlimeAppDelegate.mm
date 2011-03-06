@@ -14,6 +14,7 @@
 #import "RootViewController.h"
 #import "Level.h"
 
+
 @implementation SlimeAppDelegate
 
 @synthesize window;
@@ -94,6 +95,7 @@
 	[director setDisplayFPS:YES];
 	
 	
+
 	// make the OpenGLView a child of the view controller
 	[viewController setView:glView];
 	
@@ -112,9 +114,12 @@
 	[self removeStartupFlicker];
 	
 	// Run the intro Scene
-	Level * my_level = [[Level alloc]init];
+	//Level * my_level = [[Level alloc]init];
+	
+	
+	[[CCDirector sharedDirector] runWithScene:[[LevelFactory GetLevel:@"Level1"] scene]];
 	 
-	[[CCDirector sharedDirector] runWithScene: [my_level scene]];		
+	//[[CCDirector sharedDirector] runWithScene: [my_level scene]];		
 }
 
 
