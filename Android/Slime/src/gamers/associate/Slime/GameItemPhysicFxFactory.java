@@ -1,7 +1,6 @@
 package gamers.associate.Slime;
 
 import org.cocos2d.nodes.CCNode;
-import org.cocos2d.nodes.CCSpriteSheet;
 
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -15,14 +14,20 @@ public abstract class GameItemPhysicFxFactory<T extends GameItemPhysicFx> extend
 		this.world = attachWorld;
 		this.worldRatio = attachWorldRatio;
 		this.initAnimation();
-		this.rootNode.addChild(spriteSheet);
+		if (this.spriteSheet != null) {
+			this.rootNode.addChild(this.spriteSheet);
+		}
+		
 		this.isAttached = true;
 	}
 	
 	public void detach() {
 		if (this.isAttached && this.spriteSheet != null && this.rootNode != null) {
 			this.level = null;
-			this.rootNode.removeChild(this.spriteSheet, true);
+			if (this.spriteSheet != null) {
+				this.rootNode.removeChild(this.spriteSheet, true);
+			}
+			
 			this.rootNode = null;
 			this.world = null;
 			this.worldRatio = 0f;

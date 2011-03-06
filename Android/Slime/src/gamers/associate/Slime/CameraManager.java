@@ -160,13 +160,8 @@ public class CameraManager {
 	private CGPoint zoomScreenPin;
 	
 	public void setZoomPoint(CGPoint zoomPoint) {
-		this.zoomScreenPin = CGPoint.make(zoomPoint.x, zoomPoint.y);
-		float scale = this.gameLayer.getScale();
-		CGPoint zoomScaled = CGPoint.zero();
-		zoomScaled.x =  (zoomPoint.x - this.gameLayer.getPosition().x) / scale; 
-		zoomScaled.y = (zoomPoint.y - this.gameLayer.getPosition().y) / scale;
-		
-		this.zoomAnchor = zoomScaled;
+		this.zoomScreenPin = CGPoint.make(zoomPoint.x, zoomPoint.y);				
+		this.zoomAnchor = this.getGamePoint(zoomPoint);
 	}
 	
 	public CGPoint getGamePoint(CGPoint screenPoint) {		

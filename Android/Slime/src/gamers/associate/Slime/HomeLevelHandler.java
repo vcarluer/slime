@@ -2,9 +2,8 @@ package gamers.associate.Slime;
 
 import org.cocos2d.utils.javolution.MathLib;
 
-public class HomeLevelHandler {
-	private long startHome;	
-	private boolean runHome;
+public class HomeLevelHandler extends GameItem {
+	private long startHome;		
 	private double nextRand;
 	private int maxSlime = 30;
 	private double minSpawn = 0.5;
@@ -12,18 +11,15 @@ public class HomeLevelHandler {
 	private int slimeCount;
 	private boolean isPaused;
 	
-	public void startHomeLevel() {
+	public HomeLevelHandler(float x, float y, float width, float height) {
+		super(x, y, width, height);
 		this.startHome = System.currentTimeMillis();		
-		this.runHome = true;
-		this.slimeCount = 0;		
-	}	
-	
-	public void setPause(boolean pause) {
-		this.isPaused = pause;
+		this.slimeCount = 0;
 	}
 				
-	public void tick() {				
-		if (slimeCount < maxSlime && runHome) {
+	@Override
+	public void render(float delta) {				
+		if (slimeCount < maxSlime) {
 			Level level = Level.currentLevel;
 			if (level != null) {
 				long elapsed = (System.currentTimeMillis() - startHome) / 1000;
@@ -35,9 +31,5 @@ public class HomeLevelHandler {
 				}
 			}
 		}
-	}
-	
-	public void stopHomeLevel() {
-		this.runHome = false;
 	}
 }

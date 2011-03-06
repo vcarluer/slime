@@ -9,7 +9,7 @@ import org.cocos2d.nodes.CCAnimation;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.CGPoint;
 
-public class SpawnPortal extends GameItem {
+public class SpawnPortal extends GameItemCocos {
 	public static String Anim_Spawn_Portal = "blueportal";		
 	
 	public SpawnPortal(CCNode node, float x, float y, float width, float height) {

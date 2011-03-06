@@ -4,7 +4,7 @@ import org.cocos2d.nodes.CCNode;
 
 import com.badlogic.gdx.physics.box2d.World;
 
-public abstract class GameItemPhysicFx extends GameItem{	
+public abstract class GameItemPhysicFx extends GameItemCocos {	
 	protected World world;	
 	protected float worldRatio;
 	
@@ -15,8 +15,8 @@ public abstract class GameItemPhysicFx extends GameItem{
 	}
 	
 	@Override
-	public void destroy() {
-		super.destroy();		
-		this.world = null;		
+	public void destroy() {			
+		this.world = null;	
+		super.destroy();
 	}
 }

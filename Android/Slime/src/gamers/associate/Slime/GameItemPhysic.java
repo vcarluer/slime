@@ -5,38 +5,32 @@ import java.util.ArrayList;
 import org.cocos2d.config.ccMacros;
 import org.cocos2d.nodes.CCNode;
 
-import android.test.IsolatedContext;
-
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
-public abstract class GameItemPhysic extends GameItem{
+public abstract class GameItemPhysic extends GameItemPhysicFx {
 	public static short Category_Static = 0x0001;
 	public static short Category_InGame = 0x0002;
 	public static short Category_OutGame = 0x0003;
-	
-	protected World world;
+		
 	protected Body body; 
 	protected float bodyWidth;
-	protected float bodyHeight;
-	protected float worldRatio;	
+	protected float bodyHeight;	
 	protected ArrayList<GameItemPhysic> contacts;
 	
 	public GameItemPhysic(CCNode node, float x, float y, float width, float height, World world, float worldRatio) {		
-		super(node, x, y, width, height);
-		this.world = world;
-		this.worldRatio = worldRatio;
+		super(node, x, y, width, height, world, worldRatio);		
 		this.bodyWidth = this.width;
 		this.bodyHeight = this.height;
 		this.contacts = new ArrayList<GameItemPhysic>();
 	}
 	
 	@Override
-	public void destroy() {
-		super.destroy();
+	public void destroy() {		
 		this.world.destroyBody(this.body);
 		this.world = null;
 		this.body = null;
+		super.destroy();
 	}
 	
 	protected abstract void initBody();

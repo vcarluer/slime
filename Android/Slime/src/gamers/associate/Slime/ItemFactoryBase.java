@@ -6,7 +6,7 @@ import org.cocos2d.nodes.CCAnimation;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSpriteSheet;
 
-public abstract class ItemFactoryBase<T extends GameItem> {	
+public abstract class ItemFactoryBase<T extends GameItemCocos> {	
 	protected Hashtable<String, CCAnimation> sharedAnimations;
 	protected CCSpriteSheet spriteSheet;	
 	protected boolean isInit;	
@@ -35,7 +35,7 @@ public abstract class ItemFactoryBase<T extends GameItem> {
 	protected abstract void createAnimList();
 	
 	protected void createAnim(String animName, int frameCount) {		
-		this.sharedAnimations.put(animName, GameItem.createAnim(animName, frameCount));
+		this.sharedAnimations.put(animName, GameItemCocos.createAnim(animName, frameCount));
 	}
 	
 	protected abstract String getPlistPng();
@@ -57,7 +57,7 @@ public abstract class ItemFactoryBase<T extends GameItem> {
 			T item = this.instantiate(x, y, width, height);
 			item.setAnimationList(this.sharedAnimations);
 			this.runFirstAnimations(item);
-			this.level.addGameItem(item);			
+			this.level.addItemToAdd(item);			
 			return item;
 		}
 		else

@@ -1,7 +1,5 @@
 package gamers.associate.Slime;
 
-import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.nodes.CCSpriteFrameCache;
 
 public class LevelEndFactory extends GameItemPhysicFactory<LevelEnd>{
 		

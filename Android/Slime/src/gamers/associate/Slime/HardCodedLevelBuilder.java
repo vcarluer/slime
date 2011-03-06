@@ -75,6 +75,8 @@ public class HardCodedLevelBuilder {
 		// Bumper
 		SlimeFactory.Bumper.create(30, s.height / 2, 60, 120, 2.0f);
 						
+		SlimeFactory.HomeLevelHandler.create();
+		
 		level.addCustomOverLayer(HomeLayer.get());
 		level.setIsHudEnabled(false);
 		level.setIsTouchEnabled(false);

@@ -5,19 +5,20 @@ import javax.microedition.khronos.opengles.GL10;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.types.CGPoint;
-import org.cocos2d.utils.Util7;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class SpawnCannon extends GameItemPhysic {
 	public static String texture = "metal.png";
 	public static float Default_Width = 32f;
 	public static float Default_Height = 32f;
+	
+	private CGPoint target;
+	private boolean selected;
 	
 	public SpawnCannon(CCNode node, float x, float y, float width, float height,
 			World world, float worldRatio) {
@@ -112,37 +113,5 @@ public class SpawnCannon extends GameItemPhysic {
 	
 	private CGPoint getSpawnPoint() {
 		return CGPoint.make(this.getPosition().x, this.getPosition().y + spawnHeightShift);
-	}
-	
-	private CGPoint target;
-	private boolean selected;
-	
-	/*static void drawDashedLine(GL10 gl, CGPoint origin, CGPoint destination, float dashLength) {
-		float dx = destination.x - origin.x;
-		float dy = destination.y - origin.y;
-		float dist = sqrtf(dx * dx + dy * dy);
-		float x = dx / dist * dashLength;
-		float y = dy / dist * dashLength;
-		
-		CGPoint p1 = origin;
-		int segments = (int)(dist / dashLength);
-		int lines = (int)((float)segments / 2.0);
-
-		CGPoint[] vertices = new CGPoint[segments];
-		for(int i = 0; i < lines; i++)
-		{
-			vertices[i*2] = p1;
-			p1 = CGPoint.make(p1.x + x, p1.y + y);
-			vertices[i*2+1] = p1;
-			p1 = CGPoint.make(p1.x + x, p1.y + y);
-		}
-		
-		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
-		gl.glVertexPointer(2, GL10.GL_FLOAT, 0, vertices);
-		gl.glDrawArrays(GL10.GL_LINES, 0, segments);
-		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
-		
-		free(vertices);
-	}*/
-
+	}		
 }

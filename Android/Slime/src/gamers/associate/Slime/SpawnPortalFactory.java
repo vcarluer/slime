@@ -1,7 +1,7 @@
 package gamers.associate.Slime;
 
 
-public class SpawnPortalFactory extends GameItemFactory<SpawnPortal> {
+public class SpawnPortalFactory extends GameItemCocosFactory<SpawnPortal> {
 		
 	public SpawnPortal createAndMove(float x, float y, float moveBy, float speed) {
 		SpawnPortal portal = this.create(x, y);

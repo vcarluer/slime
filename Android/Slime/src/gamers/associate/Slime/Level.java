@@ -1,7 +1,6 @@
 package gamers.associate.Slime;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.UUID;
 
@@ -15,7 +14,6 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
-import org.cocos2d.utils.javolution.MathLib;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -71,8 +69,7 @@ public class Level {
 	protected String currentLevelName;
 	
 	protected ArrayList<GameItem> itemsToRemove;
-	
-	protected HomeLevelHandler homeLevelHandler;
+	protected ArrayList<GameItem> itemsToAdd;
 	
 	protected boolean isPaused;
 	
@@ -97,7 +94,7 @@ public class Level {
 		this.cameraManager = new CameraManager(this.gameLayer);							
 		
 		this.itemsToRemove = new ArrayList<GameItem>();
-		this.homeLevelHandler = new HomeLevelHandler();
+		this.itemsToAdd = new ArrayList<GameItem>();
 		
 		this.init();
 		
@@ -154,18 +151,10 @@ public class Level {
 		
 		this.currentLevelName = levelName;
 		
-		if (this.currentLevelName == Level.LEVEL_HOME) {
-			this.homeLevelHandler.startHomeLevel();
-		}
-		
 		this.isPaused = false;
 	}
 			
 	public void resetLevel() {		
-		if (this.currentLevelName == Level.LEVEL_HOME) {
-			this.homeLevelHandler.stopHomeLevel();
-		}
-		
 		this.currentLevelName = "";
 		
 		for (GameItem item : this.items.values()) {
@@ -221,12 +210,17 @@ public class Level {
 	
 	protected void tick(float delta) {
 		if (!isPaused) {
-			this.homeLevelHandler.tick();
 			// TODO: physic step must be fix!
 			synchronized (world) {
 	    		world.step(delta, 6, 2);
 	    	}						
-						
+			
+			for(GameItem item : this.itemsToAdd) {
+				this.addGameItem(item);
+			}
+			
+			this.itemsToAdd.clear();
+			
 			for(GameItem item : this.items.values()) {
 				item.render(delta);
 			}
@@ -235,6 +229,8 @@ public class Level {
 				this.removeGameItem(item);
 			}
 			
+			this.itemsToRemove.clear();
+			
 			this.cameraManager.tick(delta);
 		}
 	}
@@ -242,29 +238,30 @@ public class Level {
 	public void addItemToRemove(GameItem item) {
 		this.itemsToRemove.add(item);
 	}
+	
+	public void addItemToAdd(GameItem item) {
+		this.itemsToAdd.add(item);
+	}		
 		
 	public void setPause(boolean value) {		
 		if (value) {			
 			if (!this.isPaused) {
 				this.levelLayer.pauseSchedulerAndActions();
-				for(GameItem item : this.items.values()) {
-					item.getSprite().pauseSchedulerAndActions();
-				}
 			}
 		}
 		else
 		{
 			if (this.isPaused) {
 				this.levelLayer.resumeSchedulerAndActions();
-				for(GameItem item : this.items.values()) {
-					item.getSprite().resumeSchedulerAndActions();
-				}
 			}
+		}
+				
+		for(GameItem item : this.items.values()) {
+			item.setPause(value);
 		}
 		
 		this.isPaused = value;
 		this.setIsTouchEnabled(!this.isPaused);
-		this.homeLevelHandler.setPause(this.isPaused);
 	}
 	
 	public void togglePause() {
@@ -328,11 +325,11 @@ public class Level {
 		this.goalPortal = portal;		
 	}
 	
-	public void addGameItem(GameItem item) {
+	private void addGameItem(GameItem item) {
 		this.items.put(item.getId(), item);
 	}
 	
-	protected void removeGameItem(GameItem item) {
+	private void removeGameItem(GameItem item) {
 		if (item != null) {
 			if (this.items.containsKey(item.getId())) {
 				item.destroy();
