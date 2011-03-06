@@ -1,5 +1,5 @@
 #import "Level.h"
-#import "SlimyFactory.h"
+#import "SlimeFactory.h"
 #import "HardCodedLevelBuilder.h"
 #import "spriteSheetFactory.h"
 
@@ -18,90 +18,90 @@ Level * currentLevel;
 @synthesize spawnPortal;
 
 - (id) init {
-  if (self = [super init]) {
-    worldRatio = 32.0f;
-    customZ = 2;
-    scene = CCScene.node;
-    levelLayer = [[[LevelLayer alloc] initWithLevel:self] autorelease];
-    hudLayer = [[[HudLayer alloc] init] autorelease];
-    backgroundLayer = [[[BackgoundLayer alloc] init] autorelease];
-	levelOrigin = CGPointMake(0,0);
-    //[scene addChild:backgroundLayer z:0];
-	  
-	  
-	  
-	  
-    gameLayer = [CCLayer node];
-    [gameLayer addChild:backgroundLayer z:0];
-	//[gameLayer addChild:levelLayer z:1];
-	[gameLayer setAnchorPoint:levelOrigin];
-	
-	[scene addChild:gameLayer z:0];
-    [scene addChild:levelLayer z:1];
-    [scene addChild:hudLayer z:2];
-    items = [[[NSMutableArray alloc] init] autorelease];
-    [self initLevel];
-  }
-  return self;
+	if (self = [super init]) {
+		worldRatio = 32.0f;
+		customZ = 2;
+		scene = CCScene.node;
+		levelLayer = [[[LevelLayer alloc] initWithLevel:self] autorelease];
+		hudLayer = [[[HudLayer alloc] init] autorelease];
+		backgroundLayer = [[[BackgoundLayer alloc] init] autorelease];
+		levelOrigin = CGPointMake(0,0);
+		//[scene addChild:backgroundLayer z:0];
+		
+		
+		
+		
+		gameLayer = [CCLayer node];
+		[gameLayer addChild:backgroundLayer z:0];
+		//[gameLayer addChild:levelLayer z:1];
+		[gameLayer setAnchorPoint:levelOrigin];
+		
+		[scene addChild:gameLayer z:0];
+		[scene addChild:levelLayer z:1];
+		[scene addChild:hudLayer z:2];
+		items = [[[NSMutableArray alloc] init] autorelease];
+		[self initLevel];
+	}
+	return self;
 }
 
 + (Level *) get:(NSString *)levelName {
-  if (currentLevel == nil) {
-    currentLevel = [[[Level alloc] init] autorelease];
-  }
-/* todo
-	if (!SlimeFactory.isAttached) {
-    [currentLevel attachToFactory];
-  }
- */
-  if ([currentLevel currentLevelName] != levelName) {
-    [currentLevel loadLevel:levelName];
-  }
-  [[currentLevel cameraManager] setCameraView];
-  return currentLevel;
+	if (currentLevel == nil) {
+		currentLevel = [[[Level alloc] init] autorelease];
+	}
+	
+	if (!isAttached) {
+		[currentLevel attachToFactory];
+	}
+	
+	if ([currentLevel currentLevelName] != levelName) {
+		[currentLevel loadLevel:levelName];
+	}
+	// [[currentLevel cameraManager] setCameraView];
+	return currentLevel;
 }
 
 - (void) attachToFactory {
 	//todo
-  //[slimeFactory attachAll:levelLayer param1:world param2:worldRatio];
+	//[slimeFactory attachAll:levelLayer param1:world param2:worldRatio];
 }
 
 - (void) reload {
-  [currentLevel loadLevel:currentLevelName];
+	[currentLevel loadLevel:currentLevelName];
 	//todo
-  //[[currentLevel cameraManager] setCameraView];
+	//[[currentLevel cameraManager] setCameraView];
 }
 
 - (void) loadLevel:(NSString *)levelName {
-  [self resetLevel];
+	[self resetLevel];
 	//todo
-  [HardCodedLevelBuilder build:self levelName:levelName];	
-  //spawnPortal = [SlimeFactory.SpawnPortal createAndMove:levelWidth / 2 param1:levelHeight - 32 param2:levelWidth / 2 param3:5];
-  //[items add:spawnPortal];
-  currentLevelName = levelName;
+	[HardCodedLevelBuilder build:self levelName:levelName];	
+	//spawnPortal = [SlimeFactory.SpawnPortal createAndMove:levelWidth / 2 param1:levelHeight - 32 param2:levelWidth / 2 param3:5];
+	//[items add:spawnPortal];
+	currentLevelName = levelName;
 }
 
 - (void) resetLevel {
-/*todo
-  for (GameItem * item in items) {
-    [item destroy];
-  }
-
-  [items clear];
-	*/
-  spawnPortal = nil;
-  goalPortal = nil;
-  [self removeCustomOverLayer];
+	/*todo
+	 for (GameItem * item in items) {
+	 [item destroy];
+	 }
+	 
+	 [items clear];
+	 */
+	spawnPortal = nil;
+	goalPortal = nil;
+	[self removeCustomOverLayer];
 }
 
 - (void) initLevel {
-  
-   b2Vec2 my_gravity(0, -10);
+	
+	b2Vec2 my_gravity(0, -10);
 	gravity = my_gravity;
-   world = new b2World(gravity, true);		
-   contactManager = new ContactManager;
-   world->SetContactListener(contactManager);
-   CGSize screenSize = [CCDirector sharedDirector].winSize;
+	world = new b2World(gravity, true);		
+	contactManager = new ContactManager;
+	world->SetContactListener(contactManager);
+	CGSize screenSize = [CCDirector sharedDirector].winSize;
 	
 	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"decor.plist"];
 	//CCSpriteSheet * spriteSheet = [CCSpriteSheet spriteSheet:@"decor.png"];
@@ -120,77 +120,78 @@ Level * currentLevel;
     [SpriteSheetFactory add:@"labo"];	
 	
 	
-				 }
+}
 
 - (void) tick:(float)delta {
-
-//  @synchronized(world) 
-//  {
-    [world step:delta param1:6 param2:2];
-//  }
-/*todo
-  for (GameItem * item in items) {
-    [item render:delta];
-  }
-
-  [cameraManager tick:delta];
- */
+	
+	//  @synchronized(world) 
+	//  {
+    //[world step:delta param1:6 param2:2];
+	world->Step(delta, 6, 2);
+	//  }
+	/*todo
+	 for (GameItem * item in items) {
+	 [item render:delta];
+	 }
+	 
+	 [cameraManager tick:delta];
+	 */
 }
 
 - (void) SpawnSlime {
-  GameItem * gi = [spawnPortal spawn];
-  [items add:gi];
+	GameItem * gi = [spawnPortal spawn];
+	[items add:gi];
 }
 
 - (void) setGoalPortal:(GoalPortal *)portal {
-  goalPortal = portal;
-  [items add:goalPortal];
+	goalPortal = portal;
+	[items add:goalPortal];
 }
 
 - (void) addGameItem:(GameItem *)item {
-  [items add:item];
+	[items add:item];
 }
 
 - (void) setLevelSize:(float)width height:(float)height {
-  levelWidth = width;
-  levelHeight = height;
+	levelWidth = width;
+	levelHeight = height;
 }
 
 - (void) setIsTouchEnabled:(BOOL)value {
-  [levelLayer setIsTouchEnabled:value];
+	[levelLayer setIsTouchEnabled:value];
 }
 
 - (void) addCustomOverLayer:(CCLayer *)layer {
-  customOverLayer = layer;
-  [scene addChild:customOverLayer param1:customZ];
+	customOverLayer = layer;
+	[scene addChild:customOverLayer param1:customZ];
 }
 
 - (void) removeCustomOverLayer {
-  if (customOverLayer != nil) {
-    [scene removeChild:customOverLayer param1:YES];
-    customOverLayer = nil;
-  }
+	if (customOverLayer != nil) {
+		[scene removeChild:customOverLayer param1:YES];
+		customOverLayer = nil;
+	}
 }
 
 - (void) dealloc {
-  [world release];
-  //[gravity release];
-  [items release];
-  [backgroundSprite release];
-  [contactManager release];
-  [spawnPortal release];
-  [goalPortal release];
-  [scene release];
-  [levelLayer release];
-  [hudLayer release];
-  [backgroundLayer release];
-//  [gameLayer release];
-  [customOverLayer release];
-  [label release];
- // [levelOrigin release];
- // [cameraManager release];
-  [currentLevelName release];
-  [super dealloc];
+	[world release];
+	//[gravity release];
+	[items release];
+	[backgroundSprite release];
+	[contactManager release];
+	[spawnPortal release];
+	[goalPortal release];
+	[scene release];
+	[levelLayer release];
+	[hudLayer release];
+	[backgroundLayer release];
+	//  [gameLayer release];
+	[customOverLayer release];
+	[label release];
+	// [levelOrigin release];
+	// [cameraManager release];
+	[currentLevelName release];
+	[super dealloc];
 }
 
 @end
