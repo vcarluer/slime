@@ -297,9 +297,10 @@ public class Level {
 		this.spawnSlime(CGPoint.getZero());		
 	}
 	
-	public void spawnSlime(CGPoint target) {								
-		if (this.spawnCannon != null) {
-			this.spawnCannon.spawnSlime(target);			
+	public void spawnSlime(CGPoint screenTarget) {								
+		if (this.spawnCannon != null) {			
+			CGPoint gameTarget = this.cameraManager.getGamePoint(screenTarget);
+			this.spawnCannon.spawnSlime(gameTarget);			
 		}
 		else
 		{

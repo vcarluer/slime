@@ -64,11 +64,19 @@ public class SpawnCannon extends GameItemPhysic {
 	}
 	
 	public Slimy spawnSlime(CGPoint target) {
-		Slimy slimy = SlimeFactory.Slimy.create(this.position.x, this.position.y + 40, 1.0f);		
-		Vector2 targetVec = new Vector2(target.x, target.y);
+		this.target = target;
+		return spawnSlimeToCurrentTarget();
+	}
+	
+	private float spawnHeightShift = 40f;
+	
+	public Slimy spawnSlimeToCurrentTarget() {
+		CGPoint spawn = this.getSpawnPoint();
+		Slimy slimy = SlimeFactory.Slimy.create(spawn.x, spawn.y, 1.0f);
 		Vector2 pos = slimy.getBody().getPosition();
-		Vector2 impulse = targetVec.sub(pos).mul(1 / this.worldRatio);
-		//Vector2 impulse = new Vector2(targetVec.x - pos.x, targetVec.y - pos.y);
+		Vector2 impulse = new Vector2();
+		impulse.x = this.target.x  / this.worldRatio - pos.x;
+		impulse.y = this.target.y / this.worldRatio - pos.y ;
 		slimy.getBody().applyLinearImpulse(impulse, pos);
 		return slimy;
 	}
@@ -82,9 +90,10 @@ public class SpawnCannon extends GameItemPhysic {
 		this.target = null;
 	}
 	
-	public void selectionMove(CGPoint selection) {
+	public void selectionMove(CGPoint screenSelection) {
 		if (this.selected) {
-			this.target = CGPoint.make(selection.x, selection.y);
+			CGPoint gameTarget = Level.currentLevel.getCameraManager().getGamePoint(screenSelection);
+			this.target = CGPoint.make(gameTarget.x, gameTarget.y);
 		}
 	}
 
@@ -96,9 +105,13 @@ public class SpawnCannon extends GameItemPhysic {
 		super.draw(gl);
 		if (this.selected && this.target != null) {
 			gl.glEnable(GL10.GL_LINE_SMOOTH);
-			gl.glColor4f(1.0f, 0.0f, 1.0f, 1.0f);
-	        CCDrawingPrimitives.ccDrawLine(gl, this.getPosition(), this.target);	       
+			gl.glColor4f(1.0f, 0.0f, 1.0f, 1.0f);				        
+			CCDrawingPrimitives.ccDrawLine(gl, this.getSpawnPoint(), this.target);	       
 		}
+	}
+	
+	private CGPoint getSpawnPoint() {
+		return CGPoint.make(this.getPosition().x, this.getPosition().y + spawnHeightShift);
 	}
 	
 	private CGPoint target;

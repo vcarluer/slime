@@ -10,6 +10,7 @@ public class CameraManager {
 	private float minScale;
 	private float maxScale;
 	private float zoomSpeed;
+	private float currentZoom;
 	private float screenW2 = CCDirector.sharedDirector().winSize().width * CCDirector.sharedDirector().winSize().width;
 	private float screenH2 = CCDirector.sharedDirector().winSize().height * CCDirector.sharedDirector().winSize().height;
 	
@@ -21,7 +22,7 @@ public class CameraManager {
 	private CGRect cameraView;
 	private CGPoint virtualCameraPos;
 	private GameItem followed;	
-	private CGPoint levelOrigin;
+	private CGPoint levelOrigin;		
 	
 	public CameraManager(CCLayer gameLayer) {
 		this.gameLayer = gameLayer;
@@ -168,6 +169,15 @@ public class CameraManager {
 		this.zoomAnchor = zoomScaled;
 	}
 	
+	public CGPoint getGamePoint(CGPoint screenPoint) {		
+		float scale = this.gameLayer.getScale();
+		CGPoint gamePoint = CGPoint.zero();
+		gamePoint.x =  (screenPoint.x - this.gameLayer.getPosition().x) / scale; 
+		gamePoint.y = (screenPoint.y - this.gameLayer.getPosition().y) / scale;
+		
+		return gamePoint;
+	}
+	
 	public void zoomCameraBy(float zoomDelta) {		
 		float scale = this.gameLayer.getScale() + zoomDelta;
 		this.zoomCameraTo(scale);
@@ -183,8 +193,13 @@ public class CameraManager {
 		}
 		
 		this.gameLayer.setScale(zoomValue);
+		this.currentZoom = zoomValue;
 		this.keepPointAt(this.zoomAnchor, this.zoomScreenPin);
 		this.normalizePosition();
+	}
+		
+	public float getCurrentZoom() {
+		return this.currentZoom;
 	}
 	
 	public void setCameraView() {		

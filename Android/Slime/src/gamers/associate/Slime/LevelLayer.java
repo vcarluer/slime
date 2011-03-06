@@ -73,9 +73,9 @@ public class LevelLayer extends CCLayer {
 			 if (touch != null) { 
 				touch.setMoving(true);	
 				touch.getLastMoveDelta().x = touch.getLastMoveReference().x - event.getX(touch.getPointerId());
-				touch.getLastMoveDelta().y = CCDirector.sharedDirector().winSize().getHeight() - event.getY() - touch.getLastMoveReference().y;
+				touch.getLastMoveDelta().y = touch.getLastMoveReference().y - this.getGameY(event.getY(touch.getPointerId()));
 				touch.getLastMoveReference().x = event.getX(touch.getPointerId());
-				touch.getLastMoveReference().y = CCDirector.sharedDirector().winSize().getHeight() - event.getY(touch.getPointerId());
+				touch.getLastMoveReference().y = this.getGameY(event.getY(touch.getPointerId()));
 				touch.setLastMoveTime(event.getEventTime());
 			 }
 		 }
@@ -114,7 +114,7 @@ public class LevelLayer extends CCLayer {
 					this.level.spawnSlime(
 							CGPoint.make(
 									event.getX(touch.getPointerId()), 
-									CCDirector.sharedDirector().winSize().getHeight() - event.getY(touch.getPointerId())
+									this.getGameY(event.getY(touch.getPointerId()))
 									)
 								);
 				}
@@ -149,9 +149,9 @@ public class LevelLayer extends CCLayer {
 		int pid = this.getPId(event);		
 		TouchInfo touch = new TouchInfo(pid);		
 		touch.getMoveBeganAt().x = event.getX(touch.getPointerId());
-		touch.getMoveBeganAt().y = CCDirector.sharedDirector().winSize().getHeight() - event.getY(touch.getPointerId());
+		touch.getMoveBeganAt().y = this.getGameY(event.getY(touch.getPointerId()));
 		touch.getLastMoveReference().x = event.getX(touch.getPointerId());
-		touch.getLastMoveReference().y = CCDirector.sharedDirector().winSize().getHeight() - event.getY(touch.getPointerId());
+		touch.getLastMoveReference().y = this.getGameY(event.getY(touch.getPointerId()));
 		this.touchList.add(touch);
 		this.getCameraManager().stopContinousMoving();
 		
@@ -164,9 +164,8 @@ public class LevelLayer extends CCLayer {
 					touch1Ref,
 					touch2Ref);
 			
-			CGPoint midPoint = CGPoint.ccpMidpoint(touch1Ref, touch2Ref);
-			CGPoint anchorZoom = CGPoint.make(midPoint.x, CCDirector.sharedDirector().winSize().height - midPoint.y);
-			this.getCameraManager().setZoomPoint(anchorZoom);
+			CGPoint midPoint = CGPoint.ccpMidpoint(touch1Ref, touch2Ref);			
+			this.getCameraManager().setZoomPoint(midPoint);
 		}
 		else {
 			this.isZoomAction = false;
@@ -222,6 +221,10 @@ public class LevelLayer extends CCLayer {
 	public void draw(GL10 gl) {		
 		super.draw(gl);
 		this.level.draw(gl);
+	}
+	
+	private float getGameY(float touchY) {
+		return CCDirector.sharedDirector().winSize().height - touchY;
 	}
 	
 	 // Test
