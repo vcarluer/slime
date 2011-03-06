@@ -1,5 +1,14 @@
 package gamers.associate.Slime;
 
+import gamers.associate.Slime.items.BumperFactory;
+import gamers.associate.Slime.items.GoalPortalFactory;
+import gamers.associate.Slime.items.HomeLevelHandlerFactory;
+import gamers.associate.Slime.items.LevelEndFactory;
+import gamers.associate.Slime.items.PlatformFactory;
+import gamers.associate.Slime.items.SlimyFactory;
+import gamers.associate.Slime.items.SpawnCannonFactory;
+import gamers.associate.Slime.items.SpawnPortalFactory;
+
 import org.cocos2d.nodes.CCNode;
 
 import com.badlogic.gdx.physics.box2d.World;

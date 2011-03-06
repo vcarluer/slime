@@ -1,7 +1,13 @@
 package gamers.associate.Slime;
 
+import gamers.associate.Slime.items.GoalPortal;
+import gamers.associate.Slime.items.SpawnCannon;
+import gamers.associate.Slime.items.SpawnPortal;
+import gamers.associate.Slime.layers.HomeLayer;
+
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.types.CGSize;
+
 
 public class HardCodedLevelBuilder {
 	

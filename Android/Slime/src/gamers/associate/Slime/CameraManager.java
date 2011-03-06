@@ -1,5 +1,7 @@
 package gamers.associate.Slime;
 
+import gamers.associate.Slime.items.GameItem;
+
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.types.CGPoint;

@@ -1,5 +1,7 @@
 package gamers.associate.Slime;
 
+import gamers.associate.Slime.items.GameItemPhysic;
+
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 

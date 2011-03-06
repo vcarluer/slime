@@ -1,5 +1,13 @@
 package gamers.associate.Slime;
 
+import gamers.associate.Slime.items.GameItem;
+import gamers.associate.Slime.items.GoalPortal;
+import gamers.associate.Slime.items.SpawnCannon;
+import gamers.associate.Slime.items.SpawnPortal;
+import gamers.associate.Slime.layers.BackgoundLayer;
+import gamers.associate.Slime.layers.HudLayer;
+import gamers.associate.Slime.layers.LevelLayer;
+
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.UUID;
@@ -14,6 +22,7 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
+
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -208,18 +217,18 @@ public class Level {
 		this.attachToFactory();
 	}
 	
-	protected void tick(float delta) {
+	public void tick(float delta) {
 		if (!isPaused) {
-			// TODO: physic step must be fix!
-			synchronized (world) {
-	    		world.step(delta, 6, 2);
-	    	}						
-			
 			for(GameItem item : this.itemsToAdd) {
 				this.addGameItem(item);
 			}
 			
 			this.itemsToAdd.clear();
+			
+			// TODO: physic step must be fix!
+			synchronized (world) {
+	    		world.step(delta, 6, 2);
+	    	}												
 			
 			for(GameItem item : this.items.values()) {
 				item.render(delta);
