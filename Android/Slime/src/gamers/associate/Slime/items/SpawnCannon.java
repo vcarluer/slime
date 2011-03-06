@@ -5,9 +5,12 @@ import gamers.associate.Slime.SlimeFactory;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import org.cocos2d.config.ccMacros;
+import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.types.CGPoint;
+import org.cocos2d.types.CGSize;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -81,6 +84,10 @@ public class SpawnCannon extends GameItemPhysic {
 		Vector2 impulse = new Vector2();
 		impulse.x = this.target.x  / this.worldRatio - pos.x;
 		impulse.y = this.target.y / this.worldRatio - pos.y ;
+		if (impulse.len() > 10f) {
+			impulse.nor().mul(10f);
+		}
+		
 		slimy.getBody().applyLinearImpulse(impulse, pos);
 		return slimy;
 	}
@@ -108,9 +115,17 @@ public class SpawnCannon extends GameItemPhysic {
 	public void draw(GL10 gl) {		
 		super.draw(gl);
 		if (this.selected && this.target != null) {
+			/*gl.glDisable(GL10.GL_LINE_SMOOTH);
+			gl.glLineWidth(2.0f);*/
 			gl.glEnable(GL10.GL_LINE_SMOOTH);
 			gl.glColor4f(1.0f, 0.0f, 1.0f, 1.0f);				        
-			CCDrawingPrimitives.ccDrawLine(gl, this.getSpawnPoint(), this.target);	       
+			CGPoint spawnPoint =  this.getSpawnPoint();
+			CCDrawingPrimitives.ccDrawLine(gl, spawnPoint, this.target);
+			CGSize s = CCDirector.sharedDirector().winSize();
+			gl.glDisable(GL10.GL_LINE_SMOOTH);
+			gl.glLineWidth(2);
+            gl.glColor4f(0.0f, 1.0f, 1.0f, 1.0f);
+			CCDrawingPrimitives.ccDrawCircle(gl, this.getSpawnPoint(), 50, ccMacros.CC_DEGREES_TO_RADIANS(90), 50, true);
 		}
 	}
 	

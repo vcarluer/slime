@@ -198,7 +198,7 @@ public class Level {
 		// Main game item spritesheet
 		SpriteSheetFactory.add("labo");
 		// Background
-		CCSpriteSheet spriteSheet = SpriteSheetFactory.getSpriteSheet("decor");		
+		CCSpriteSheet spriteSheet = SpriteSheetFactory.getSpriteSheet("decor", true);		
 		// Sprite too big for VM in UbuntuRox		
 		this.backgroundLayer.addChild(spriteSheet);
 		//this.backgroundLayer.setRotation(-90f);				

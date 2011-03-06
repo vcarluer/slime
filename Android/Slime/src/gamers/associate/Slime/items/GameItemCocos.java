@@ -110,8 +110,6 @@ public abstract class GameItemCocos extends GameItem {
 		}
 	}
 	
-	
-	
 	/**
 	 * @param animations
 	 * @uml.property  name="animationList"

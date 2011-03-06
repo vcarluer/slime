@@ -124,7 +124,7 @@ public class HardCodedLevelBuilder {
 	}
 	
 	public static void buildLevel2(Level level) {
-		float width = 800;
+		float width = 950;
 		level.setLevelSize(
 				width,
 				width * getHeightRatio());
@@ -164,11 +164,11 @@ public class HardCodedLevelBuilder {
 		SlimeFactory.Box.createBL(cX, 120, 40, 40);		
 		SlimeFactory.Platform.createBL(cX, cY, 72, 80);
 		cX += 72;
-		SlimeFactory.Lava.createBL(cX, cY, 50, 50);
-		cX += 50;
+		SlimeFactory.Lava.createBL(cX, cY, 200, 50);
+		cX += 200;
 		SlimeFactory.Platform.createBL(cX, cY, 100, 50);
 		cX += 40;
-		SlimeFactory.Bumper.createBL(cX, 50, 50, 50).setAngle(90);
+		SlimeFactory.Bumper.createBL(cX, 50, 50, 50, 0.8f).setAngle(90);
 		//Bumper bumper = SlimeFactory.Bumper.createBL(cX, 50, 100, 100);		
 		cX += 50;
 		SlimeFactory.Platform.createBL(cX, 50, 10, 128);
@@ -181,11 +181,27 @@ public class HardCodedLevelBuilder {
 		cX += 128;		
 		SlimeFactory.Platform.createBL(cX, cY, 128, 20);
 		SlimeFactory.Platform.createBL(cX, cY + 20, 20, 128);
-		cX += 20;
+		cX += 64;
 		// Goal
-		GoalPortal goalPortal = SlimeFactory.GoalPortal.create(cX + 20, cY + 40);
+		GoalPortal goalPortal = SlimeFactory.GoalPortal.create(cX, cY + 40);
 		level.setGoalPortal(goalPortal);
-		cX += 108;		
+		cX += 108;
+		
+		//Line 3
+		cX = 0;
+		cY = 398;
+		SlimeFactory.Platform.createBL(cX, cY, 128, 20);
+		cX += 128;
+		SlimeFactory.Platform.createBL(cX, cY, 128, 20);
+		cX += 128;
+		SlimeFactory.Box.createBL(cX, cY + 20, 60, 60);
+		SlimeFactory.Platform.createBL(cX, cY, 128, 20);
+		cX += 128;				
+		SlimeFactory.Platform.createBL(cX, cY, 128, 128);
+		cX += 128;
+		SlimeFactory.Platform.createBL(cX, cY, 128, 128);
+		cX += 128;
+		SlimeFactory.Platform.createBL(cX - 20, cY + 128, 20, 128);
 		
 		// Spawn cannon
 		level.setSpawnCannon(spawnCannon);		

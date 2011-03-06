@@ -72,7 +72,7 @@ public class Bumper extends GameItemPhysic {
     		fixtureDef.density = 1.0f;
     		fixtureDef.friction = 1.0f;
     		fixtureDef.restitution = this.powa;
-    		fixtureDef.filter.categoryBits = GameItemPhysic.Category_InGame;
+    		fixtureDef.filter.categoryBits = GameItemPhysic.Category_Static;
     		this.body.createFixture(fixtureDef);
     	}		
 	}

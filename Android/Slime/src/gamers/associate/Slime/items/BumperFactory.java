@@ -44,5 +44,8 @@ public class BumperFactory extends GameItemPhysicFactory<Bumper> {
 		
 		return bumper;
 	}
-
+	
+	public Bumper createBL(float x, float y, float width, float height, float powa) {
+		return this.create(x + width / 2, y + height / 2, width, height, powa);
+	}
 }

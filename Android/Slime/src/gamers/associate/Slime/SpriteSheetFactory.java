@@ -51,6 +51,8 @@ public class SpriteSheetFactory {
 	
 	public static void destroy() {		
 		SpriteSheetList.clear();
+		isAttached = false;
+		rootNode = null;
 	}
 	
 	public static void attachAll(CCNode attachNode) {
