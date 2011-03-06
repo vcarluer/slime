@@ -41,7 +41,7 @@ public class GALogoLayer extends CCLayer {
 		
 		// Do not construct again if screen is rotated
 		if (!isInit) {
-			this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo");
+			this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
 			this.addChild(this.spriteSheet);
 			CCSpriteFrame spriteFrame = CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("JulenGarciaGA.png");
 			this.sprite = CCSprite.sprite(spriteFrame);

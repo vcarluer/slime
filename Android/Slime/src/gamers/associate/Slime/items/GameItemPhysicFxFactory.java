@@ -15,21 +15,13 @@ public abstract class GameItemPhysicFxFactory<T extends GameItemPhysicFx> extend
 		this.rootNode = attachNode;
 		this.world = attachWorld;
 		this.worldRatio = attachWorldRatio;
-		this.initAnimation();
-		if (this.spriteSheet != null) {
-			this.rootNode.addChild(this.spriteSheet);
-		}
-		
+		this.initAnimation();		
 		this.isAttached = true;
 	}
 	
 	public void detach() {
 		if (this.isAttached && this.spriteSheet != null && this.rootNode != null) {
-			this.level = null;
-			if (this.spriteSheet != null) {
-				this.rootNode.removeChild(this.spriteSheet, true);
-			}
-			
+			this.level = null;			
 			this.rootNode = null;
 			this.world = null;
 			this.worldRatio = 0f;

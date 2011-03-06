@@ -1,5 +1,6 @@
 package gamers.associate.Slime;
 
+import gamers.associate.Slime.items.BoxFactory;
 import gamers.associate.Slime.items.BumperFactory;
 import gamers.associate.Slime.items.GoalPortalFactory;
 import gamers.associate.Slime.items.HomeLevelHandlerFactory;
@@ -25,8 +26,9 @@ public abstract class SlimeFactory {
 	public static LevelEndFactory LevelEnd = new LevelEndFactory();
 	public static HomeLevelHandlerFactory HomeLevelHandler = new HomeLevelHandlerFactory();
 	public static LavaFactory Lava = new LavaFactory();
+	public static BoxFactory Box = new BoxFactory();
 		
-	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {
+	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {		
 		Slimy.attach(level, attachNode, attachWorld, attachWorldRatio);
 		SpawnPortal.attach(level, attachNode);
 		Platform.attach(level, attachNode, attachWorld, attachWorldRatio);
@@ -36,6 +38,8 @@ public abstract class SlimeFactory {
 		LevelEnd.attach(level, attachNode, attachWorld, attachWorldRatio);
 		HomeLevelHandler.attach(level);
 		Lava.attach(level, attachNode, attachWorld, attachWorldRatio);
+		Box.attach(level, attachNode, attachWorld, attachWorldRatio);
+		SpriteSheetFactory.attachAll(attachNode);
 		isAttached = true;
 	}
 	
@@ -49,6 +53,8 @@ public abstract class SlimeFactory {
 		LevelEnd.detach();
 		HomeLevelHandler.detach();
 		Lava.detach();
+		Box.detach();
+		SpriteSheetFactory.detachAll();
 		isAttached = false;
 	}
 	
@@ -61,6 +67,8 @@ public abstract class SlimeFactory {
 		Cannon.destroy();
 		LevelEnd.destroy();		
 		Lava.destroy();
+		Box.destroy();
+		SpriteSheetFactory.destroy();
 		isAttached = false;
 	}
 }

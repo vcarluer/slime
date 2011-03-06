@@ -1,6 +1,7 @@
 package gamers.associate.Slime.items;
 
 import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.nodes.CCSpriteFrameCache;
 
 public class BumperFactory extends GameItemPhysicFactory<Bumper> {
 
@@ -35,8 +36,8 @@ public class BumperFactory extends GameItemPhysicFactory<Bumper> {
 		bumper.setPowa(powa);
 		if (bumper != null) {
 			// TODO : use sprite frame here
-			// CCSprite sprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame(Platform.texture));			
-			CCSprite sprite = CCSprite.sprite(Bumper.Texture_Wait);
+			CCSprite sprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame(Bumper.Texture_Wait));			
+			//CCSprite sprite = CCSprite.sprite(Bumper.Texture_Wait);
 			bumper.setSprite(sprite);
 			
 		}

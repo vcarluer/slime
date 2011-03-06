@@ -131,7 +131,7 @@ public class Level {
 		return currentLevel;
 	}
 	
-	protected void attachToFactory() {
+	protected void attachToFactory() {		
 		SlimeFactory.attachAll(this, this.levelLayer, this.world, this.worldRatio);
 	}
 	

@@ -44,7 +44,7 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 		this.handleContacts();
 		
 		if (this.sprite != null && this.body != null) {			
-			this.sprite.setPosition(this.body.getPosition().x * this.worldRatio, this.body.getPosition().y * this.worldRatio);
+			this.sprite.setPosition(this.body.getPosition().x * this.worldRatio, this.body.getPosition().y * this.worldRatio);			
 			this.sprite.setRotation(-1.0f * ccMacros.CC_RADIANS_TO_DEGREES(this.body.getAngle()));
 		}
 		

@@ -62,4 +62,8 @@ public class GameItem {
 	
 	protected void resume() {		
 	}
+	
+	public void setAngle(float angle) {
+		this.angle = angle;
+	}
 }

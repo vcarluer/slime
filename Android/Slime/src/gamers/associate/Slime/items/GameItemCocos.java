@@ -3,12 +3,16 @@ package gamers.associate.Slime.items;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import javax.microedition.khronos.opengles.GL10;
+
 import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.nodes.CCAnimation;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
+import org.cocos2d.types.CCTexParams;
+import org.cocos2d.types.CGRect;
 import org.cocos2d.types.CGSize;
 
 /**
@@ -22,9 +26,9 @@ public abstract class GameItemCocos extends GameItem {
 		
 	public GameItemCocos(CCNode node, float x, float y, float width, float height) {
 		super(x, y, width, height);		
-		this.animationList = new Hashtable<String, CCAnimation>();		
-		this.rootNode = node;		
-		
+		this.animationList = new Hashtable<String, CCAnimation>();				
+		this.rootNode = node;
+		this.textureMode = TextureMode.Scale;
 		CCSprite sprite = new CCSprite();
 		this.setSprite(sprite);
 	}
@@ -81,18 +85,32 @@ public abstract class GameItemCocos extends GameItem {
 		return null;
 	}
 	
+	protected TextureMode textureMode;
+	
 	protected void transformTexture() {
-		if (this.width != 0 && this.height != 0) {
-			CGSize size = this.getTextureSize();			
-			
-			if (size.width != 0 && size.height != 0) {
-				float wScale = this.width / size.width;
-				float hScale = this.height / size.height;
-				this.sprite.setScaleX(wScale);
-				this.sprite.setScaleY(hScale);
-			}			
+		if (this.textureMode == TextureMode.Scale) {
+			if (this.width != 0 && this.height != 0) {
+				CGSize size = this.getTextureSize();			
+				
+				if (size.width != 0 && size.height != 0) {
+					float wScale = this.width / size.width;
+					float hScale = this.height / size.height;
+					this.sprite.setScaleX(wScale);
+					this.sprite.setScaleY(hScale);
+				}			
+			}
+		}		
+		
+		if (this.textureMode == TextureMode.Clip) {
+			if (this.width != 0 && this.height != 0) {
+				CGRect rect = this.sprite.getTextureRect();
+				rect.size = CGSize.make(this.width, this.height);
+				this.sprite.setTextureRect(rect);
+			}
 		}
 	}
+	
+	
 	
 	/**
 	 * @param animations
@@ -107,6 +125,10 @@ public abstract class GameItemCocos extends GameItem {
 	public void render(float delta) {
 		if (this.sprite != null) {
 			this.position = this.sprite.getPosition();
+			this.angle = this.sprite.getRotation();
+			if (this.textureMode == TextureMode.Clip) {
+				this.transformTexture();
+			}
 		}
 	}
 	
@@ -117,6 +139,10 @@ public abstract class GameItemCocos extends GameItem {
 	}
 	
 	public static CCAnimation createAnim(String animName, int frameCount) {
+		return createAnim(animName, frameCount, 0.1f);
+	}
+	
+	public static CCAnimation createAnim(String animName, int frameCount, float interval) {
 		ArrayList<CCSpriteFrame> animArray = new ArrayList<CCSpriteFrame>();
 		for(int i = 0; i < frameCount; i++) {			
 			String frameName = animName + "-" + String.valueOf(i + 1) + ".png";
@@ -126,7 +152,7 @@ public abstract class GameItemCocos extends GameItem {
 			}
 		}
 		
-		CCAnimation animation = CCAnimation.animation(animName, 0.1f, animArray);
+		CCAnimation animation = CCAnimation.animation(animName, interval, animArray);
 		return animation;
 	}
 

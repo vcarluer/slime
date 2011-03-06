@@ -51,7 +51,7 @@ public class SlimeLoadingLayer extends CCLayer {
 		super.onEnter();				
 		
 		if (isInit == false) {
-			this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo");
+			this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
 			this.addChild(this.spriteSheet);
 			
 			this.sprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("SlimeTitle.png"));

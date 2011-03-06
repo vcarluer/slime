@@ -1,5 +1,7 @@
 package gamers.associate.Slime.items;
 
+import org.cocos2d.actions.base.CCRepeatForever;
+import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.CGPoint;
 
@@ -9,12 +11,14 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class Lava extends GameItemPhysic {
-	public static String texture = "lava.png";
+	//public static String texture = "lava.png";
+	public static String Anim_Init = "lava";
 	
 	public Lava(CCNode node, float x, float y, float width, float height,
 			World world, float worldRatio) {
 		super(node, x, y, width, height, world, worldRatio);
 		this.initBody();
+		this.textureMode = TextureMode.Clip;
 	}
 
 	@Override
@@ -53,5 +57,10 @@ public class Lava extends GameItemPhysic {
 			((IBurnable)item).burn();
 		}
 	}
-
+	
+	public void initAnimation() {
+		CCAnimate animation = CCAnimate.action(this.animationList.get(Anim_Init), false);
+		this.currentAction = CCRepeatForever.action(animation);
+		this.sprite.runAction(this.currentAction);
+	}
 }

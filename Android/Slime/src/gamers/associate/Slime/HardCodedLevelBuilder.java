@@ -33,7 +33,7 @@ public class HardCodedLevelBuilder {
 		
 		// Creating Level end box which destroys physic objects when then contact it			
 		float si = 10;
-		float m = 64;
+		float m = level.getWorlRatio() * 2;
 		float w = s.width;
 		float w2 = s.width / 2;
 		float h = s.height;
@@ -143,29 +143,49 @@ public class HardCodedLevelBuilder {
 		SlimeFactory.Lava.create(400, 25, 100, 50);
 		SlimeFactory.Bumper.create(375, 75, 50, 50);*/
 		
+		// Line 1
 		float cX = 0;
 		float cY = 0;
 		SlimeFactory.Platform.createBL(cX, cY, 100, 100);
 		SpawnCannon spawnCannon = SlimeFactory.Cannon.create(100 - SpawnCannon.Default_Width / 2, 100 + SpawnCannon.Default_Height / 2);
-		cX += 100;			
+		cX += 100;
 		SlimeFactory.Lava.createBL(cX, cY, 200, 50);
 		cX += 200;
 		SlimeFactory.Platform.createBL(cX, cY, 50, 100);
-		cX += 50;
-		SlimeFactory.Lava.createBL(cX, cY, 100, 50);
+		cX += 50;		
+		SlimeFactory.Platform.createBL(cX, cY, 50, 50);
 		SlimeFactory.Bumper.createBL(cX, 50, 50, 50);
-		cX += 100;
-		SlimeFactory.Platform.createBL(cX, cY, 250, 80);
-		cX += 250;
+		cX += 50;
+		SlimeFactory.Lava.createBL(cX, cY, 50, 50);
+		cX += 50;
+		SlimeFactory.Platform.createBL(cX, cY, 128, 80);
+		cX += 128;
+		SlimeFactory.Box.createBL(cX, 80, 40, 40);		
+		SlimeFactory.Box.createBL(cX, 120, 40, 40);		
+		SlimeFactory.Platform.createBL(cX, cY, 72, 80);
+		cX += 72;
 		SlimeFactory.Lava.createBL(cX, cY, 50, 50);
 		cX += 50;
 		SlimeFactory.Platform.createBL(cX, cY, 100, 50);
+		cX += 40;
+		SlimeFactory.Bumper.createBL(cX, 50, 50, 50).setAngle(90);
 		//Bumper bumper = SlimeFactory.Bumper.createBL(cX, 50, 100, 100);		
-		cX += 100;
+		cX += 50;
+		SlimeFactory.Platform.createBL(cX, 50, 10, 128);
 		
+		// Line 2
+		cX = 400;
+		cY = 250;
+		SlimeFactory.Platform.createBL(cX, cY, 128, 20);
+		SlimeFactory.Box.createBL(cX, cY + 20, 10, 80);
+		cX += 128;		
+		SlimeFactory.Platform.createBL(cX, cY, 128, 20);
+		SlimeFactory.Platform.createBL(cX, cY + 20, 20, 128);
+		cX += 20;
 		// Goal
-		GoalPortal goalPortal = SlimeFactory.GoalPortal.create(s.width - 15, s.height - 15);
+		GoalPortal goalPortal = SlimeFactory.GoalPortal.create(cX + 20, cY + 40);
 		level.setGoalPortal(goalPortal);
+		cX += 108;		
 		
 		// Spawn cannon
 		level.setSpawnCannon(spawnCannon);		

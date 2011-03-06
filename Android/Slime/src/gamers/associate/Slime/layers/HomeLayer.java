@@ -30,7 +30,7 @@ public class HomeLayer extends CCLayer {
 		super();
 		
 		//this.setIsTouchEnabled(true);
-		CCSpriteSheet spriteSheet = SpriteSheetFactory.getSpriteSheet("logo");
+		CCSpriteSheet spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
 		this.addChild(spriteSheet);
 		
 		CCSprite sprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("SlimeTitle.png"));

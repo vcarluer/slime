@@ -41,6 +41,10 @@ public abstract class ItemFactoryBase<T extends GameItemCocos> {
 		this.sharedAnimations.put(animName, GameItemCocos.createAnim(animName, frameCount));
 	}
 	
+	protected void createAnim(String animName, int frameCount, float interval) {
+		this.sharedAnimations.put(animName, GameItemCocos.createAnim(animName, frameCount, interval));
+	}
+	
 	protected abstract String getPlistPng();
 	
 	public void destroy() {

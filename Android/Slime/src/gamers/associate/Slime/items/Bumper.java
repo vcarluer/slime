@@ -1,5 +1,6 @@
 package gamers.associate.Slime.items;
 
+import org.cocos2d.config.ccMacros;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.CGPoint;
 
@@ -12,7 +13,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class Bumper extends GameItemPhysic {
 	public static float Default_Powa = 1.5f;	
-	public static String Texture_Wait = "metal_tri.png";
+	public static String Texture_Wait = "red_tri.png";
 	public static String Anim_Wait = "bumper_wait";
 	private static float Default_Width = 64f;
 	private static float Default_Height = 64f;
@@ -29,8 +30,7 @@ public class Bumper extends GameItemPhysic {
 			this.width = this.bodyWidth = Default_Width;
 			this.height = this.bodyHeight = Default_Height;
 			this.transformTexture();
-		}
-		
+		}		
 		this.powa = Default_Powa;
 		this.initBody();
 	}
@@ -79,5 +79,12 @@ public class Bumper extends GameItemPhysic {
 	
 	public void waitAnim() {
 		
+	}
+	
+	@Override
+	public void setAngle(float angle) {
+		super.setAngle(angle);
+		float radAngle = ccMacros.CC_DEGREES_TO_RADIANS(this.angle);
+		this.body.setTransform(this.body.getPosition(), radAngle);
 	}
 }
