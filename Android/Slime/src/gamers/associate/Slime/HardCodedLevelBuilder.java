@@ -1,5 +1,6 @@
 package gamers.associate.Slime;
 
+import gamers.associate.Slime.items.Bumper;
 import gamers.associate.Slime.items.GoalPortal;
 import gamers.associate.Slime.items.SpawnCannon;
 import gamers.associate.Slime.items.SpawnPortal;
@@ -123,23 +124,50 @@ public class HardCodedLevelBuilder {
 	}
 	
 	public static void buildLevel2(Level level) {
+		float width = 800;
 		level.setLevelSize(
-				2400,
-				2400 * getHeightRatio());
+				width,
+				width * getHeightRatio());
 		
 		createGroundBox(level);
 		CGSize s = CGSize.make(level.getLevelWidth(), level.getLevelHeight());
 				
 		// Platform
-		float goalPlatW = 100f;
+		/*float goalPlatW = 100f;
 		float goalPlatH = 100f;		
-		SlimeFactory.Platform.create(goalPlatW / 2, goalPlatH / 2, goalPlatW, goalPlatH);
+		SlimeFactory.Platform.create(goalPlatW / 2, goalPlatH / 2, goalPlatW, goalPlatH);*/
+		
+		// Lava
+		/*SlimeFactory.Lava.create(200, 25, 200, 50);
+		SlimeFactory.Platform.create(325, 50, 50, 100);
+		SlimeFactory.Lava.create(400, 25, 100, 50);
+		SlimeFactory.Bumper.create(375, 75, 50, 50);*/
+		
+		float cX = 0;
+		float cY = 0;
+		SlimeFactory.Platform.createBL(cX, cY, 100, 100);
+		SpawnCannon spawnCannon = SlimeFactory.Cannon.create(100 - SpawnCannon.Default_Width / 2, 100 + SpawnCannon.Default_Height / 2);
+		cX += 100;			
+		SlimeFactory.Lava.createBL(cX, cY, 200, 50);
+		cX += 200;
+		SlimeFactory.Platform.createBL(cX, cY, 50, 100);
+		cX += 50;
+		SlimeFactory.Lava.createBL(cX, cY, 100, 50);
+		SlimeFactory.Bumper.createBL(cX, 50, 50, 50);
+		cX += 100;
+		SlimeFactory.Platform.createBL(cX, cY, 250, 80);
+		cX += 250;
+		SlimeFactory.Lava.createBL(cX, cY, 50, 50);
+		cX += 50;
+		SlimeFactory.Platform.createBL(cX, cY, 100, 50);
+		//Bumper bumper = SlimeFactory.Bumper.createBL(cX, 50, 100, 100);		
+		cX += 100;
 		
 		// Goal
-		GoalPortal goalPortal = SlimeFactory.GoalPortal.create(s.width / 2, goalPlatH + 15);
+		GoalPortal goalPortal = SlimeFactory.GoalPortal.create(s.width - 15, s.height - 15);
 		level.setGoalPortal(goalPortal);
 		
 		// Spawn cannon
-		level.setSpawnCannon(SlimeFactory.Cannon.create(goalPlatW - SpawnCannon.Default_Width / 2, goalPlatH + SpawnCannon.Default_Height / 2));		
+		level.setSpawnCannon(spawnCannon);		
 	}
 }

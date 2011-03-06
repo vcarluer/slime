@@ -19,7 +19,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
-public class Slimy extends GameItemPhysic {
+public class Slimy extends GameItemPhysic implements IBurnable {
 	
 	public static String Anim_Burned_Wait = "burned-wait";
 	public static String Anim_Burning = "burning";

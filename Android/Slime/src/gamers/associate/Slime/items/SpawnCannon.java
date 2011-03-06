@@ -16,9 +16,10 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class SpawnCannon extends GameItemPhysic {
-	public static String texture = "metal.png";
+	public static String texture = "red.png";
 	public static float Default_Width = 32f;
 	public static float Default_Height = 32f;
+	private float spawnHeightShift = Slimy.Default_Height / 2;
 	
 	private CGPoint target;
 	private boolean selected;
@@ -71,8 +72,6 @@ public class SpawnCannon extends GameItemPhysic {
 		this.target = target;
 		return spawnSlimeToCurrentTarget();
 	}
-	
-	private float spawnHeightShift = 40f;
 	
 	public Slimy spawnSlimeToCurrentTarget() {
 		CGPoint spawn = this.getSpawnPoint();

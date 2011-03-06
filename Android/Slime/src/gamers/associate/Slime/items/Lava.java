@@ -1,6 +1,5 @@
 package gamers.associate.Slime.items;
 
-
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.CGPoint;
 
@@ -9,14 +8,15 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class Platform extends GameItemPhysic {	
-	public static String texture = "metal2.png"; 
-		
-	public Platform(CCNode node, float x, float y, float width, float height, World world, float worldRatio) {
-		super(node, x, y, width, height, world, worldRatio);				
+public class Lava extends GameItemPhysic {
+	public static String texture = "lava.png";
+	
+	public Lava(CCNode node, float x, float y, float width, float height,
+			World world, float worldRatio) {
+		super(node, x, y, width, height, world, worldRatio);
 		this.initBody();
 	}
-	
+
 	@Override
 	protected void initBody() {
 		// Physic body
@@ -36,12 +36,22 @@ public class Platform extends GameItemPhysic {
     		this.body.setUserData(this);
     		
     		FixtureDef fixtureDef = new FixtureDef();
-    		fixtureDef.shape = staticBox;	
-    		fixtureDef.density = 1.0f;
-    		fixtureDef.friction = 1.0f;
-    		fixtureDef.restitution = 0f;
+    		fixtureDef.shape = staticBox;
+    		fixtureDef.isSensor = true;
     		fixtureDef.filter.categoryBits = GameItemPhysic.Category_Static;
     		this.body.createFixture(fixtureDef);
-    	}  
+    	}		
 	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.GameItemPhysic#handleContact(gamers.associate.Slime.items.GameItemPhysic)
+	 */
+	@Override
+	protected void handleContact(GameItemPhysic item) {
+		super.handleContact(item);
+		if (item instanceof IBurnable) {
+			((IBurnable)item).burn();
+		}
+	}
+
 }

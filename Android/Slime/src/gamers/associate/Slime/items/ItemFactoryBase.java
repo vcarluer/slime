@@ -69,6 +69,10 @@ public abstract class ItemFactoryBase<T extends GameItemCocos> {
 		}
 	}
 	
+	public T createBL(float x, float y, float width, float height) {
+		return this.create(x + width / 2, y + height / 2, width, height);
+	}
+	
 	protected abstract T instantiate(float x, float y, float width, float height);
 	
 	protected abstract void runFirstAnimations(T item);
