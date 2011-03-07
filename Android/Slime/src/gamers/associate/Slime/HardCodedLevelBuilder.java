@@ -1,13 +1,20 @@
 package gamers.associate.Slime;
 
+import gamers.associate.Slime.items.Box;
 import gamers.associate.Slime.items.Bumper;
 import gamers.associate.Slime.items.GoalPortal;
+import gamers.associate.Slime.items.Platform;
 import gamers.associate.Slime.items.SpawnCannon;
 import gamers.associate.Slime.items.SpawnPortal;
 import gamers.associate.Slime.layers.HomeLayer;
 
 import org.cocos2d.nodes.CCDirector;
+import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGSize;
+
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 
 
 public class HardCodedLevelBuilder {
@@ -192,16 +199,50 @@ public class HardCodedLevelBuilder {
 		cY = 398;
 		SlimeFactory.Platform.createBL(cX, cY, 128, 20);
 		cX += 128;
-		SlimeFactory.Platform.createBL(cX, cY, 128, 20);
+		SlimeFactory.Platform.createBL(cX, cY, 128, 20);						
 		cX += 128;
 		SlimeFactory.Box.createBL(cX, cY + 20, 60, 60);
 		SlimeFactory.Platform.createBL(cX, cY, 128, 20);
+				
+		// Chain
+		Platform platform = SlimeFactory.Platform.create(cX, cY - 5, 30, 10);
+		cY -= 10;
+		Box.setChainMode(true);
+		CGSize segSize = CGSize.make(3, 15);
+		RevoluteJointDef joint = new RevoluteJointDef();
+		Body link = platform.getBody();
+		float count = 10;
+		for(int i = 0; i < count; i++) {
+			Box box = SlimeFactory.Box.create(cX, cY - (i + 1) * (segSize.height) + segSize.height / 2, segSize.width, segSize.height);			
+			Vector2 linkPoint = new Vector2();
+			linkPoint.x = box.getBody().getPosition().x;
+			linkPoint.y = box.getBody().getPosition().y + (segSize.height / 2 / level.getWorlRatio());
+			joint.initialize(link, box.getBody(), linkPoint);
+			level.getWorld().createJoint(joint);
+			link = box.getBody();
+		}
+		
+		Box.setChainMode(false);
+		
+		float boxSize = 20f;
+		Box box = SlimeFactory.Box.create(cX, cY - (count * segSize.height) - boxSize / 2, boxSize, boxSize);
+		Vector2 linkPoint = new Vector2();
+		linkPoint.x = box.getBody().getPosition().x;
+		linkPoint.y = box.getBody().getPosition().y + (boxSize / 2 / level.getWorlRatio());
+		joint.initialize(link, box.getBody(), linkPoint);
+		level.getWorld().createJoint(joint);
+		
+		box.getBody().applyLinearImpulse(new Vector2(5.0f, 0f), box.getBody().getPosition());
+		
+		cY += 10;		
+		// end chain
+		
 		cX += 128;				
 		SlimeFactory.Platform.createBL(cX, cY, 128, 128);
 		cX += 128;
 		SlimeFactory.Platform.createBL(cX, cY, 128, 128);
 		cX += 128;
-		SlimeFactory.Platform.createBL(cX - 20, cY + 128, 20, 128);
+		SlimeFactory.Platform.createBL(cX - 20, cY + 128, 20, 128);				
 		
 		// Spawn cannon
 		level.setSpawnCannon(spawnCannon);		

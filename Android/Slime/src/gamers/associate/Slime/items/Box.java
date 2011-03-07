@@ -11,6 +11,11 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class Box extends GameItemPhysic{
 	public static String texture = "wood2.png";
+	public static boolean chainMode;
+	
+	public static void setChainMode(boolean value) {
+		chainMode = value;
+	}
 	
 	public Box(CCNode node, float x, float y, float width, float height,
 			World world, float worldRatio) {
@@ -39,9 +44,17 @@ public class Box extends GameItemPhysic{
     		
     		FixtureDef fixtureDef = new FixtureDef();
     		fixtureDef.shape = dynamicBox;	
-    		fixtureDef.density = 1.0f;
-    		fixtureDef.friction = 1.0f;
-    		fixtureDef.restitution = 0f;
+    		if (chainMode) {
+    			fixtureDef.density = 5.0f;
+    			fixtureDef.friction = 0.5f;
+        		fixtureDef.restitution = 0.2f;
+    		}
+    		else {
+    			fixtureDef.density = 1.0f;
+    			fixtureDef.friction = 0.5f;
+        		fixtureDef.restitution = 0.2f;
+    		}
+    		
     		fixtureDef.filter.categoryBits = GameItemPhysic.Category_InGame;
     		this.body.createFixture(fixtureDef);
     	} 		
