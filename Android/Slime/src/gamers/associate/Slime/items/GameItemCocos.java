@@ -11,6 +11,7 @@ import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
+import org.cocos2d.opengl.CCTexture2D;
 import org.cocos2d.types.CCTexParams;
 import org.cocos2d.types.CGRect;
 import org.cocos2d.types.CGSize;
@@ -23,6 +24,7 @@ public abstract class GameItemCocos extends GameItem {
 	protected CCAction currentAction;
 	protected CCSprite sprite;
 	protected CCNode rootNode;
+	protected CCTexture2D texture;
 		
 	public GameItemCocos(CCNode node, float x, float y, float width, float height) {
 		super(x, y, width, height);		
@@ -101,15 +103,33 @@ public abstract class GameItemCocos extends GameItem {
 			}
 		}		
 		
-		if (this.textureMode == TextureMode.Clip) {
+		/*if (this.textureMode == TextureMode.Clip) {
 			if (this.width != 0 && this.height != 0) {
 				CGRect rect = this.sprite.getTextureRect();
 				rect.size = CGSize.make(this.width, this.height);
 				this.sprite.setTextureRect(rect);
 			}
-		}
+		}*/
 	}
 	
+	public void setTexture(CCTexture2D texture) {
+		this.texture = texture;	
+	}
+
+	@Override
+	public void draw(GL10 gl) {
+		if (this.textureMode == TextureMode.Clip) {
+			if (this.width != 0 && this.height != 0) {
+				if (this.texture != null) {
+					CGRect rect = CGRect.make(this.position.x - this.width / 2, this.position.y - this.height / 2, this.width, this.height);
+					this.texture.drawRepeatInRect(gl, rect);
+				}
+			}
+		}
+		
+		super.draw(gl);
+	}
+
 	/**
 	 * @param animations
 	 * @uml.property  name="animationList"

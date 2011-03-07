@@ -3,6 +3,10 @@ package gamers.associate.Slime.items;
 
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrameCache;
+import org.cocos2d.nodes.CCTextureCache;
+import org.cocos2d.opengl.CCTexture2D;
+
+import android.graphics.Bitmap;
 
 public class PlatformFactory extends GameItemPhysicFactory<Platform>{
 		
@@ -10,8 +14,11 @@ public class PlatformFactory extends GameItemPhysicFactory<Platform>{
 	public Platform create(float x, float y, float width, float height) {		
 		Platform platform = super.create(x, y, width, height);		
 		if (platform != null) {
-			CCSprite sprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame(Platform.texture));			
-			platform.setSprite(sprite);
+			// CCSprite sprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame(Platform.texture));			
+			CCTexture2D tex = CCTextureCache.sharedTextureCache().addImage(Platform.texture);			
+			//CCSprite sprite = CCSprite.sprite(tex);
+			//platform.setSprite(sprite);
+			platform.setTexture(tex);
 		}
 		
 		return platform;				
