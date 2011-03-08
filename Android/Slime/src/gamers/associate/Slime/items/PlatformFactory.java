@@ -1,6 +1,8 @@
 package gamers.associate.Slime.items;
 
 
+import gamers.associate.Slime.CCSpriteRepeat;
+
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCTextureCache;
@@ -13,12 +15,14 @@ public class PlatformFactory extends GameItemPhysicFactory<Platform>{
 	@Override
 	public Platform create(float x, float y, float width, float height) {		
 		Platform platform = super.create(x, y, width, height);		
+		platform.setSprite(null);
 		if (platform != null) {
-			// CCSprite sprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame(Platform.texture));			
-			CCTexture2D tex = CCTextureCache.sharedTextureCache().addImage(Platform.texture);			
+			//CCSprite sprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame(Platform.texture));			
+			//CCTexture2D tex = CCTextureCache.sharedTextureCache().addImage(Platform.texture);			
 			//CCSprite sprite = CCSprite.sprite(tex);
-			//platform.setSprite(sprite);
-			platform.setTexture(tex);
+			CCSprite sprite = CCSpriteRepeat.sprite(Platform.texture);
+			platform.setSprite(sprite);
+			//platform.setTexture(tex);
 		}
 		
 		return platform;				
@@ -35,7 +39,7 @@ public class PlatformFactory extends GameItemPhysicFactory<Platform>{
 
 	@Override
 	protected Platform instantiate(float x, float y, float width, float height) {
-		return new Platform(this.spriteSheet, x, y, width, height, this.world, this.worldRatio);
+		return new Platform(this.rootNode, x, y, width, height, this.world, this.worldRatio);
 	}
 
 	@Override

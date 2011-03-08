@@ -30,7 +30,7 @@ public class SpawnCannon extends GameItemPhysic {
 	public SpawnCannon(CCNode node, float x, float y, float width, float height,
 			World world, float worldRatio) {
 		super(node, x, y, width, height, world, worldRatio);
-		this.textureMode = TextureMode.Clip;
+		this.textureMode = TextureMode.REPEAT;
 		
 		if (width == 0 && this.height == 0) {
 			this.bodyWidth = this.width = Default_Width;

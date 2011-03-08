@@ -18,7 +18,7 @@ public class Lava extends GameItemPhysic {
 			World world, float worldRatio) {
 		super(node, x, y, width, height, world, worldRatio);
 		this.initBody();
-		this.textureMode = TextureMode.Clip;
+		this.textureMode = TextureMode.REPEAT;
 	}
 
 	@Override
