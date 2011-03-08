@@ -263,33 +263,7 @@
                 <string>{{3,0},{18,26}}</string>
                 <key>sourceSize</key>
                 <string>{24,26}</string>
-            </dict>
-            <key>lava-1.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{0,26},{238,247}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{238,247}}</string>
-                <key>sourceSize</key>
-                <string>{238,247}</string>
-            </dict>
-            <key>lava-2.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{238,26},{238,247}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{238,247}}</string>
-                <key>sourceSize</key>
-                <string>{238,247}</string>
-            </dict>
+            </dict>            
             <key>metal.png</key>
             <dict>
                 <key>frame</key>

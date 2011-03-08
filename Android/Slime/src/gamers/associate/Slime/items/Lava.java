@@ -11,14 +11,15 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class Lava extends GameItemPhysic {
-	//public static String texture = "lava.png";
+	public static String texture1 = "lava-1.png";
+	public static String texture2 = "lava-2.png";
 	public static String Anim_Init = "lava";
 	
 	public Lava(CCNode node, float x, float y, float width, float height,
 			World world, float worldRatio) {
 		super(node, x, y, width, height, world, worldRatio);
 		this.initBody();
-		this.textureMode = TextureMode.REPEAT;
+		this.textureMode = TextureMode.REPEAT;			
 	}
 
 	@Override

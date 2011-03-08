@@ -8,6 +8,7 @@ import static javax.microedition.khronos.opengles.GL10.GL_TEXTURE_WRAP_T;
 import javax.microedition.khronos.opengles.GL10;
 
 import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.nodes.CCSpriteFrame;
 
 public class CCSpriteRepeat extends CCSprite {
     
@@ -15,8 +16,20 @@ public class CCSpriteRepeat extends CCSprite {
         return new CCSpriteRepeat(filename);
     }
     
-    protected CCSpriteRepeat(String fileName) {
+    public CCSpriteRepeat(String fileName) {
     	super(fileName);    	
+    }
+    
+    public CCSpriteRepeat() {
+    	super();
+    }
+    
+    public CCSpriteRepeat(String spriteFrameName, boolean isFrame) {
+    	super(spriteFrameName, isFrame);
+    }
+    
+    public CCSpriteRepeat(CCSpriteFrame spriteFrame) {
+    	super(spriteFrame);
     }
 		
 	@Override

@@ -24,7 +24,7 @@ public class GoalPortal extends GameItemPhysic {
 	public GoalPortal(CCNode node, float x, float y, float width, float height, World world,
 			float worldRatio) {
 		super(node, x, y, width, height, world, worldRatio);
-		
+		this.textureMode = TextureMode.REPEAT;
 		if (width == 0 && height == 0) {
 			this.width = Default_Width;
 			this.height = Default_Height;

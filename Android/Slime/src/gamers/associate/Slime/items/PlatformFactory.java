@@ -17,7 +17,7 @@ public class PlatformFactory extends GameItemPhysicFactory<Platform>{
 		Platform platform = super.create(x, y, width, height);		
 		platform.setSprite(null);
 		if (platform != null) {
-			//CCSprite sprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame(Platform.texture));			
+			// CCSprite sprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame(Platform.texture));			
 			//CCTexture2D tex = CCTextureCache.sharedTextureCache().addImage(Platform.texture);			
 			//CCSprite sprite = CCSprite.sprite(tex);
 			CCSprite sprite = CCSpriteRepeat.sprite(Platform.texture);

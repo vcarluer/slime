@@ -27,7 +27,6 @@ public abstract class GameItemCocos extends GameItem {
 	protected CCAction currentAction;
 	protected CCSprite sprite;
 	protected CCNode rootNode;
-	protected CCSpriteRepeat textureNode;
 		
 	public GameItemCocos(CCNode node, float x, float y, float width, float height) {
 		super(x, y, width, height);		
@@ -111,8 +110,11 @@ public abstract class GameItemCocos extends GameItem {
 		if (this.textureMode == TextureMode.REPEAT) {
 			if (this.width != 0 && this.height != 0) {
 				CGRect rect = this.sprite.getTextureRect();
-				rect.size = CGSize.make(this.width, this.height);
-				this.sprite.setTextureRect(rect);
+				
+				if (rect.size.width != 0 && rect.size.height != 0) {				
+					rect.size = CGSize.make(this.width, this.height);
+					this.sprite.setTextureRect(rect);
+				}
 			}
 		}
 	}

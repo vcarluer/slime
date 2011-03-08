@@ -165,11 +165,10 @@ public class HardCodedLevelBuilder {
 		cX += 50;
 		SlimeFactory.Lava.createBL(cX, cY, 50, 50);
 		cX += 50;
-		SlimeFactory.Platform.createBL(cX, cY, 128, 80);
+		SlimeFactory.Platform.createBL(cX, cY, 200, 80);
 		cX += 128;
 		SlimeFactory.Box.createBL(cX, 80, 40, 40);		
-		SlimeFactory.Box.createBL(cX, 120, 40, 40);		
-		SlimeFactory.Platform.createBL(cX, cY, 72, 80);
+		SlimeFactory.Box.createBL(cX, 120, 40, 40);				
 		cX += 72;
 		SlimeFactory.Lava.createBL(cX, cY, 200, 50);
 		cX += 200;
@@ -183,10 +182,9 @@ public class HardCodedLevelBuilder {
 		// Line 2
 		cX = 400;
 		cY = 250;
-		SlimeFactory.Platform.createBL(cX, cY, 128, 20);
+		SlimeFactory.Platform.createBL(cX, cY, 256, 20);
 		SlimeFactory.Box.createBL(cX, cY + 20, 10, 80);
-		cX += 128;		
-		SlimeFactory.Platform.createBL(cX, cY, 128, 20);
+		cX += 128;				
 		SlimeFactory.Platform.createBL(cX, cY + 20, 20, 128);
 		cX += 64;
 		// Goal
@@ -197,10 +195,8 @@ public class HardCodedLevelBuilder {
 		//Line 3
 		cX = 0;
 		cY = 398;
-		SlimeFactory.Platform.createBL(cX, cY, 128, 20);
-		cX += 128;
-		SlimeFactory.Platform.createBL(cX, cY, 128, 20);						
-		cX += 128;
+		SlimeFactory.Platform.createBL(cX, cY, 256, 20);
+		cX += 256;		
 		SlimeFactory.Box.createBL(cX, cY + 20, 60, 60);
 		SlimeFactory.Platform.createBL(cX, cY, 128, 20);
 				
@@ -238,10 +234,8 @@ public class HardCodedLevelBuilder {
 		// end chain
 		
 		cX += 128;				
-		SlimeFactory.Platform.createBL(cX, cY, 128, 128);
-		cX += 128;
-		SlimeFactory.Platform.createBL(cX, cY, 128, 128);
-		cX += 128;
+		SlimeFactory.Platform.createBL(cX, cY, 256, 128);		
+		cX += 256;
 		SlimeFactory.Platform.createBL(cX - 20, cY + 128, 20, 128);				
 		
 		// Spawn cannon
