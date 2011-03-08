@@ -26,13 +26,21 @@ static NSMutableDictionary *SpriteSheetList()
 	if ([SpriteSheetList() objectForKey:plistPngName] == nil) {
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:[plistPngName stringByAppendingString:@".plist"]];
 		CCSpriteBatchNode * spriteSheet = [CCSpriteBatchNode batchNodeWithFile:[plistPngName stringByAppendingString:@".png"]];
-		[SpriteSheetList() setObject:spriteSheet forKey:plistPngName];
+		[SpriteSheetList() setObject:spriteSheet forKey:plistPngName];	
+
 	}
 }
 
 + (CCSpriteBatchNode *) getSpriteSheet:(NSString *)plistPngName {
 	[self add:plistPngName];
 	return [SpriteSheetList() objectForKey:plistPngName];
+}
+
+
++ (void) Attach:(CCNode *)attachNode {
+	rootNode = attachNode;
+	[rootNode addChild:spriteSheet];
+	isAttached = YES;
 }
 
 + (void) destroy {

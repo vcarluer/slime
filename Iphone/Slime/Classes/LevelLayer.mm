@@ -8,6 +8,8 @@
 #import "Slimy.h"
 #import "SlimeFactory.h"
 
+
+CCScene * scene;
 @implementation LevelLayer
 
 - (id) initWithLevel:(Level *)my_level {
@@ -22,6 +24,8 @@
 	}
 	return self;
 }
+
+
 
 - (void) onEnter {
 	[super onEnter];
@@ -50,7 +54,7 @@
   [level world]->Step(dt, velocityIterations, positionIterations);
 	
 	
-	//Iterate over the bodies in the physics world
+	/*//Iterate over the bodies in the physics world
 	for (b2Body* b = [level world]->GetBodyList(); b; b = b->GetNext())
 	{
 		if (b->GetUserData() != NULL) {
@@ -60,6 +64,7 @@
 			//myActor.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
 		}	
 	}
+	 */
 }
 /*
  

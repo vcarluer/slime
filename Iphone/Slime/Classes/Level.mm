@@ -45,6 +45,8 @@ Level * currentLevel;
 	return self;
 }
 
+
+
 + (Level *) get:(NSString *)levelName {
 	if (currentLevel == nil) {
 		currentLevel = [[[Level alloc] init] autorelease];
@@ -63,7 +65,7 @@ Level * currentLevel;
 
 - (void) attachToFactory {
 	//todo
-	//[slimeFactory attachAll:levelLayer param1:world param2:worldRatio];
+	[SlimeFactory attachAll:levelLayer attachWorld:world attachWorldRatio:worldRatio];
 }
 
 - (void) reload {
@@ -73,12 +75,12 @@ Level * currentLevel;
 }
 
 - (void) loadLevel:(NSString *)levelName {
-	[self resetLevel];
+	//[self resetLevel];
 	//todo
 	[HardCodedLevelBuilder build:self levelName:levelName];	
 	//spawnPortal = [SlimeFactory.SpawnPortal createAndMove:levelWidth / 2 param1:levelHeight - 32 param2:levelWidth / 2 param3:5];
 	//[items add:spawnPortal];
-	currentLevelName = levelName;
+	//currentLevelName = levelName;
 }
 
 - (void) resetLevel {
@@ -107,17 +109,19 @@ Level * currentLevel;
 	//CCSpriteSheet * spriteSheet = [CCSpriteSheet spriteSheet:@"decor.png"];
 	
 	
-	CCSprite *spriteSheet = [CCSprite spriteWithFile:@"decor.png"];
-	spriteSheet.position = ccp(500, 0);
+	CCSprite *my_spriteSheet = [CCSprite spriteWithFile:@"decor.png"];
+	my_spriteSheet.position = ccp(500, 0);
 	
 	
-	[backgroundLayer addChild:spriteSheet];
+	[backgroundLayer addChild:my_spriteSheet];
 	//[backgroundLayer setRotation:-90.0f];
 	[backgroundLayer setScale:0.8f];
 	label = [CCLabelTTF labelWithString:@"Hud !" fontName:@"Marker Felt" fontSize:16];	
 	[hudLayer addChild:label z:0];	
 	label.position = ccp( screenSize.width/2, screenSize.height-20);	
-    [SpriteSheetFactory add:@"labo"];	
+    [SpriteSheetFactory add:@"labo"];
+//	[levelLayer addChild:spriteSheet];
+	
 	
 	
 }
@@ -163,12 +167,12 @@ Level * currentLevel;
 
 - (void) addCustomOverLayer:(CCLayer *)layer {
 	customOverLayer = layer;
-	[scene addChild:customOverLayer param1:customZ];
+	[scene addChild:customOverLayer z:customZ];
 }
 
 - (void) removeCustomOverLayer {
 	if (customOverLayer != nil) {
-		[scene removeChild:customOverLayer param1:YES];
+		[scene removeChild:customOverLayer z:YES];
 		customOverLayer = nil;
 	}
 }

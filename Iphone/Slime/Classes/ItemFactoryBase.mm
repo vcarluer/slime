@@ -32,6 +32,7 @@
 }
 
 - (NSString *) getPlistPng {
+	return @"labo";
 }
 
 

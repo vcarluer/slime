@@ -3,31 +3,66 @@
 @implementation GameItem
 
 @synthesize position, angle, width, height;
-@synthesize currentAction, sprite, rootNode, animationList;
 
-- (id) init:(CCNode *)node x:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height {
+- (id) init:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height {
 	self = [super init];
 	if (self != nil) {
-		animationList = [[[NSMutableDictionary alloc] init] autorelease];
 		CGPoint tempposition;
 		tempposition.x =my_x;
 		tempposition.y =my_y;
 		position = tempposition;
-		
 		angle = 0.0f;
-		rootNode = node;
-		width = width;
-		height = height;
-		CCSprite * my_sprite = [[[CCSprite alloc] init] autorelease];
-		[self setSprite:my_sprite];
+		width = my_width;
+		height = my_height;
+
 	}
 	return self;
 }
 
+- (void) destroy {
+}
+
+- (void) render:(float)delta {
+}
+
+//TODO
+/*
+- (void) draw:(GL10 *)gl {
+}
+*/
+- (void) setPause:(BOOL)value {
+	if (value) {
+		if (!isPaused) {
+			[self pause];
+		}
+	}
+	else {
+		if (isPaused) {
+			[self resume];
+		}
+	}
+	isPaused = value;
+}
+
+- (void) pause {
+}
+
+- (void) resume {
+}
+
+- (void) dealloc {
+  [super dealloc];
+}
+
+@end
+
+/*
 - (void) setSprite:(CCSprite *)affectSprite {
+	/*
 	if (sprite != nil) {
 		[rootNode removeChild:sprite cleanup:YES];
 	}
+	 
 	sprite = affectSprite;
 	[rootNode addChild:sprite];
 	[sprite setPosition:position];
@@ -72,7 +107,7 @@
 /**
  * @param animations
  * @uml.property  name="animationList"
- */
+ 
 - (void) setAnimationList:(NSMutableDictionary *)animations {
 	animationList = animations;
 	[self transformTexture];
@@ -117,3 +152,4 @@
 }
 
 @end
+*/

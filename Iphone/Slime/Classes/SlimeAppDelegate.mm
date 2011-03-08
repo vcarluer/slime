@@ -13,6 +13,7 @@
 #import "HelloWorldScene.h"
 #import "RootViewController.h"
 #import "Level.h"
+#import "GALogoLayer.h"
 
 
 @implementation SlimeAppDelegate
@@ -114,12 +115,12 @@
 	[self removeStartupFlicker];
 	
 	// Run the intro Scene
-	//Level * my_level = [[Level alloc]init];
-	
-	
-	[[CCDirector sharedDirector] runWithScene:[[LevelFactory GetLevel:@"Level1"] scene]];
-	 
-	//[[CCDirector sharedDirector] runWithScene: [my_level scene]];		
+	Level * my_level = [Level get:@"Home"];;
+	//CCScene *my_scene = [my_level scene];
+	//isInit = YES;
+	[[CCDirector sharedDirector] runWithScene: [my_level scene]];		
+	//[[CCDirector sharedDirector] runWithScene: [HelloWorld scene]];
+
 }
 
 
@@ -136,7 +137,7 @@
 }
 
 -(void) applicationDidEnterBackground:(UIApplication*)application {
-	[[CCDirector sharedDirector] stopAnimation];
+	[[CCDirector sharedDirector] stopAnimation]; 
 }
 
 -(void) applicationWillEnterForeground:(UIApplication*)application {

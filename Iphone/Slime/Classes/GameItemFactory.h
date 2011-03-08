@@ -1,9 +1,16 @@
 #import "CCNode.h"
-#import "ItemFactoryBase.h"
+#import "Level.h"
 
-@interface GameItemFactory : ItemFactoryBase {
+@interface GameItemFactory : NSObject {
+	BOOL isAttached;
+	Level * level;
 }
 
-- (void) Attach:(CCNode *)attachNode;
-- (void) Detach;
+- (void) attach:(Level *)my_level;
+- (void) detach;
+- (id) create;
+- (id) create:(float)x y:(float)y;
+- (id) create:(float)x y:(float)y width:(float)width height:(float)height;
+- (id) instantiate:(float)x y:(float)y width:(float)width height:(float)height;
 @end
+
