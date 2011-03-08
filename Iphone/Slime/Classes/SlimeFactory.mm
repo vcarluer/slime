@@ -10,6 +10,7 @@ BumperFactory * bumper = [[[BumperFactory alloc] init] autorelease];
 @implementation SlimeFactory
 
 + (void) attachAll:(CCNode *)attachNode attachWorld:(b2World *)attachWorld attachWorldRatio:(float)attachWorldRatio {
+	
 	[slimy Attach:attachNode attachWorld:attachWorld attachWorldRatio:attachWorldRatio];
 	[spawnPortal Attach:attachNode];
 	[platform Attach:attachNode attachWorld:attachWorld attachWorldRatio:attachWorldRatio];

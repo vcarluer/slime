@@ -28,6 +28,9 @@ float Default_Body_Height = 23.0f;
 		bodyHeight = Default_Body_Height * my_height / Slimy_Default_Height;
 		isLanded = NO;
 		isBurned = NO;
+		//CCSprite * my_sprite = [[[CCSprite alloc] init] autorelease];
+		[self fall];
+		[self setSprite:sprite];
 		[self initBody];
 	}
 	return self;
@@ -90,12 +93,15 @@ float Default_Body_Height = 23.0f;
 }
 
 - (void) fall {
-	//CCAnimate * animate = [CCAnimate actionWithAnimation:[self wecreateAnim:Anim_Falling frameCount:3] restoreOriginalFrame:NO];
+	[self createAnim:Anim_Falling frameCount:3];
+	/*
+	
 	CCAnimate * animate = [CCAnimate actionWithAnimation:[animationList objectForKey:Anim_Falling] restoreOriginalFrame:NO];
 	CCAnimate * reverse = (CCAnimate *)[animate reverse];
 	CCAction * action = [CCRepeatForever actionWithAction:[CCSequence actionOne:animate two:reverse]];
-	currentAction = action;
-	[sprite runAction:currentAction];
+	 */
+	//currentAction = action;
+	//[sprite runAction:currentAction];
 }
 
 
@@ -156,6 +162,41 @@ float Default_Body_Height = 23.0f;
 		
 		isBurned = YES;
 	}
+}
+
+
+
+- (CCSprite *) createAnim:(NSString *)animName frameCount:(int)frameCount {
+	
+	//CCSpriteBatchNode *spriteSheet = (CCSpriteBatchNode*) [self getChildByTag:kTagAnimation1];
+	NSMutableArray * animArray = [[[NSMutableArray alloc] init] autorelease];
+	
+	for (int i = 0; i < frameCount; i++) {
+		NSString* myNewString = [NSString stringWithFormat:@"%d", i + 1];
+		NSString * frameName = [[[animName stringByAppendingString:@"-"] stringByAppendingString:myNewString] stringByAppendingString:@".png"];
+		//CCSpriteFrameCache * tempcache = [CCSpriteFrameCache sharedSpriteFrameCache];
+		// [animArray addObject:[tempcache getSpriteFrame:frameName]];
+		[animArray addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:frameName]];
+		//[animArray addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] getSpriteFrame:frameName]];
+	}
+	int spriteCount;
+	int size = 32;
+	//CCAnimation * animation = [CCAnimation animation:animName param1:0.1f param2:animArray];
+	CCAnimation *animation = [CCAnimation  animationWithName:animName delay:0.1f frames:animArray];
+	
+	sprite = [CCSprite spriteWithSpriteFrameName:[animName stringByAppendingString:@"-1.png"]];
+	
+	float left = (spriteCount + 1) * size - size / 2;
+	float top = [[CCDirector sharedDirector] winSize].height - size / 2;
+	sprite.position = ccp(left, top); 
+  	CCAnimate * animate = [CCAnimate actionWithAnimation:animation restoreOriginalFrame:NO];
+	CCAnimate * reverse = animate.reverse;
+	
+	CCAction * action = [CCRepeatForever actionWithAction:animate];
+	[sprite runAction:action];
+	//[spriteSheet addChild:sprite];
+	spriteCount++;
+	return sprite;
 }
 
 - (CCAnimation *) getReferenceAnimation {

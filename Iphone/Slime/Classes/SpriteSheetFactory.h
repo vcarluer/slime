@@ -6,8 +6,10 @@
 
 #import "CCSpriteFrameCache.h"
 #import "CCSpriteSheet.h"
+#import	"ItemFactoryBase.h"
 
-@interface SpriteSheetFactory : NSObject {
+
+@interface SpriteSheetFactory : ItemFactoryBase {
 	//NSMutableDictionary * SpriteSheetList;
 }
 

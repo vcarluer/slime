@@ -7,7 +7,7 @@
   world = attachWorld;
   worldRatio = attachWorldRatio;
   [self initAnimation];
-  [rootNode addChild:spriteSheet];
+  //[rootNode addChild:spriteSheet];
   isAttached = YES;
 }
 
