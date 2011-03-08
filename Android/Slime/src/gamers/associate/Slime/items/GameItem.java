@@ -66,4 +66,8 @@ public class GameItem {
 	public void setAngle(float angle) {
 		this.angle = angle;
 	}
+
+	public void setPosition(CGPoint position) {
+		this.position = position;
+	}
 }

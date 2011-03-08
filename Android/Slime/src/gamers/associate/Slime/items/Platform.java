@@ -19,16 +19,7 @@ public class Platform extends GameItemPhysic {
 	public Platform(CCNode node, float x, float y, float width, float height, World world, float worldRatio) {
 		super(node, x, y, width, height, world, worldRatio);				
 		this.initBody();
-		this.textureMode = TextureMode.REPEAT;
-		/*this.textureNode = CCTextureRepeatNode.sprite(Platform.texture);
-		this.textureNode.setWidth(this.width);
-		this.textureNode.setHeight(this.height);		
-		this.textureNode.setTextureRect(x - width / 2, y - height / 2, width, height, false);
-		//this.textureNode.setFlipY(true);
-		this.rootNode.addChild(this.textureNode);
-		//this.textureNode = new CCTextureNode();
-		//this.textureNode.setTexture(CCTextureCache.sharedTextureCache().addImage(Platform.texture));
-		//this.rootNode.addChild(this.textureNode, 0);*/
+		this.textureMode = TextureMode.REPEAT;		
 	}
 	
 	@Override

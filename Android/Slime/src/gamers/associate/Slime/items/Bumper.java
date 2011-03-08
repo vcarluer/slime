@@ -79,12 +79,5 @@ public class Bumper extends GameItemPhysic {
 	
 	public void waitAnim() {
 		
-	}
-	
-	@Override
-	public void setAngle(float angle) {
-		super.setAngle(angle);
-		float radAngle = ccMacros.CC_DEGREES_TO_RADIANS(this.angle);
-		this.body.setTransform(this.body.getPosition(), radAngle);
-	}
+	}		
 }

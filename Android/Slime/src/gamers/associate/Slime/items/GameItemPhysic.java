@@ -68,4 +68,11 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 	
 	protected void handleContact(GameItemPhysic item) {		
 	}
+	
+	@Override
+	public void setAngle(float angle) {
+		super.setAngle(angle);
+		float radAngle = -1.0f * ccMacros.CC_DEGREES_TO_RADIANS(this.angle);
+		this.body.setTransform(this.body.getPosition(), radAngle);
+	}
 }

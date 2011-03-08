@@ -165,12 +165,12 @@ public class HardCodedLevelBuilder {
 		cX += 50;
 		SlimeFactory.Lava.createBL(cX, cY, 50, 50);
 		cX += 50;
-		SlimeFactory.Platform.createBL(cX, cY, 200, 80);
+		SlimeFactory.Platform.createBL(cX, cY, 200, 80).setAngle(45f);
 		cX += 128;
 		SlimeFactory.Box.createBL(cX, 80, 40, 40);		
 		SlimeFactory.Box.createBL(cX, 120, 40, 40);				
 		cX += 72;
-		SlimeFactory.Lava.createBL(cX, cY, 200, 50);
+		SlimeFactory.Lava.createBL(cX, cY, 200, 50).setAngle(45f);;
 		cX += 200;
 		SlimeFactory.Platform.createBL(cX, cY, 100, 50);
 		cX += 40;

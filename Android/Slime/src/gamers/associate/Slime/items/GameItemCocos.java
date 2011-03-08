@@ -8,6 +8,7 @@ import java.util.Hashtable;
 import javax.microedition.khronos.opengles.GL10;
 
 import org.cocos2d.actions.base.CCAction;
+import org.cocos2d.config.ccMacros;
 import org.cocos2d.nodes.CCAnimation;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
@@ -16,6 +17,7 @@ import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCTextureNode;
 import org.cocos2d.opengl.CCTexture2D;
 import org.cocos2d.types.CCTexParams;
+import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 import org.cocos2d.types.CGSize;
 
@@ -131,8 +133,9 @@ public abstract class GameItemCocos extends GameItem {
 	@Override
 	public void render(float delta) {
 		if (this.sprite != null) {
-			this.position = this.sprite.getPosition();
-			this.angle = this.sprite.getRotation();
+			this.position = this.sprite.getPosition();			
+			this.angle = this.sprite.getRotation();						
+			
 			if (this.textureMode == TextureMode.REPEAT) {
 				this.transformTexture();
 			}
@@ -183,5 +186,5 @@ public abstract class GameItemCocos extends GameItem {
 		if (this.sprite != null) {
 			this.sprite.resumeSchedulerAndActions();
 		}
-	}	
+	}
 }
