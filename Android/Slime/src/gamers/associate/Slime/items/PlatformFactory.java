@@ -20,7 +20,7 @@ public class PlatformFactory extends GameItemPhysicFactory<Platform>{
 			//CCSprite sprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame(Platform.texture));			
 			//CCTexture2D tex = CCTextureCache.sharedTextureCache().addImage(Platform.texture);			
 			//CCSprite sprite = CCSprite.sprite(tex);
-			CCSprite sprite = CCSpriteRepeat.sprite(Platform.texture);
+			CCSprite sprite = CCSpriteRepeat.sprite(Platform.texture, width, height);
 			platform.setSprite(sprite);
 			//platform.setTexture(tex);
 		}
