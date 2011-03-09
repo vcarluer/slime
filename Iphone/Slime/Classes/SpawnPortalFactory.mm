@@ -23,7 +23,8 @@
 }
 
 - (SpawnPortal *) instantiate:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height {
-  return [[[SpawnPortal alloc] init:spriteSheet x:my_x y:my_y width:my_width height:my_height] autorelease];
+ // return [[[SpawnPortal alloc] init:spriteSheet x:my_x y:my_y width:my_width height:my_height] autorelease];
+    return nil;
 }
 
 - (void) runFirstAnimations:(SpawnPortal *)item {

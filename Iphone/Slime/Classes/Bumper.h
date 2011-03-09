@@ -15,4 +15,5 @@ extern NSString * Anim_Wait;
 - (void) setPowa:(float)apowa;
 - (void) initBody;
 - (void) waitAnim;
+- (void) setAngle:(float)angle;
 @end

@@ -9,11 +9,11 @@
 #import "SlimeFactory.h"
 
 
-CCScene * scene;
+
 @implementation LevelLayer
 
 - (id) initWithLevel:(Level *)my_level {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		//    tickCallback = [[[LevelLayer_Anon1 alloc] init] autorelease];
 		
 		level = my_level;

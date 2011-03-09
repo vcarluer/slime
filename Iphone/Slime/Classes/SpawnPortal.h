@@ -1,10 +1,10 @@
 //#import "cocos2d.h"
 //#import "Box2D.h"
-#import "GameItem.h"
+#import "GameItemCocos.h"
 
 extern NSString * Anim_Spawn_Portal;
 
-@interface SpawnPortal : GameItem {
+@interface SpawnPortal : GameItemCocos {
 }
 
 - (id) init:(CCNode *)node x:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height;

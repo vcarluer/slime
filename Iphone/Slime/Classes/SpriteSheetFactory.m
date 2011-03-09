@@ -37,7 +37,7 @@ static NSMutableDictionary *SpriteSheetList()
 }
 
 
-+ (void) Attach:(CCNode *)attachNode {
+- (void) Attach:(CCNode *)attachNode {
 	rootNode = attachNode;
 	[rootNode addChild:spriteSheet];
 	isAttached = YES;

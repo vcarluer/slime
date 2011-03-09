@@ -5,5 +5,3 @@
 class ContactManager : public b2ContactListener {
 	
 };
-
-

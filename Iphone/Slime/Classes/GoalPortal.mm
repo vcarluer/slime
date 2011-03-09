@@ -10,14 +10,14 @@ float Default_Height = 10.0f;
 
 @synthesize won;
 
-- (id) init:(CCNode *)node x:(float)x y:(float)y width:(float)width height:(float)height world:(b2World *)world worldRatio:(float)worldRatio {
-  if (self = [super init:node x:x y:y width:width height:height world:world worldRatio:worldRatio]) {
-    if (width == 0 && height == 0) {
+- (id) init:(CCNode *)node x:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height world:(b2World *)my_world worldRatio:(float)my_worldRatio {
+  if ((self = [super init:node x:my_x y:my_y width:my_width height:my_height world:my_world worldRatio:my_worldRatio])) {
+    if (my_width == 0 && my_height == 0) {
       width = Default_Width;
       height = Default_Height;
     }
-	  super.bodyWidth = width;
-	  super.bodyHeight = height;
+	  super.bodyWidth = my_width;
+	  super.bodyHeight = my_height;
      
     isWon = NO;
     [self initBody];
@@ -36,10 +36,10 @@ float Default_Height = 10.0f;
 
   //@synchronized(world) 
   //{
-	bodyDef->userData = self;
-    super.body = super.world->CreateBody(bodyDef);
-    b2Fixture * fix = super.body->CreateFixture(contactBox,1.0f);
-    fix->SetSensor(YES);
+   super.body = super.world->CreateBody(bodyDef);
+   bodyDef->userData = self;
+   b2Fixture * fix = super.body->CreateFixture(contactBox,1.0f);
+   fix->SetSensor(YES);
   //}
 }
 
@@ -49,8 +49,7 @@ float Default_Height = 10.0f;
 }
 
 - (void) contact:(NSObject *)with {
-	//if ([oB isKindOfClass:[GameItemPhysic class]]){
-  if ([with conformsToProtocol:@protocol(Slimy)]) {
+  if ([with isKindOfClass:[Slimy class]]) {
     Slimy * slimy = (Slimy *)with;
     [slimy win];
     isWon = YES;

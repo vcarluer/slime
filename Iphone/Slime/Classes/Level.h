@@ -14,6 +14,8 @@
  */
 
 extern NSString * LEVEL_HOME;
+extern NSString * LEVEL_1;
+extern NSString * LEVEL_2;
 //extern Level * currentLevel;
 
 @class SpawnPortal;

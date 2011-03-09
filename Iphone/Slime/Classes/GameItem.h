@@ -12,7 +12,7 @@
 
 
 @interface GameItem : NSObject  {
-	
+  	NSString * my_id;	
 	
 	CGPoint position;
 	float angle;
@@ -27,6 +27,7 @@
 	 */
 }
 
+//@property(nonatomic, retain, readonly) UUID * id;
 @property (nonatomic,readwrite) CGPoint position;
 @property (nonatomic,readwrite) float angle;
 @property (nonatomic,readwrite) float width;

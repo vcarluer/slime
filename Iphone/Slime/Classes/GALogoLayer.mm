@@ -2,10 +2,11 @@
 #import "SpriteSheetFactory.h"
 
 CCScene * scene;
+bool isInit;
 
 @implementation GALogoLayer
 
-+ (CCScene *) scene {
++ (id) scene {
   if (scene == nil) {
     scene = [CCScene node];
     [scene addChild:[[[GALogoLayer alloc] init] autorelease]];
@@ -14,7 +15,7 @@ CCScene * scene;
 }
 
 - (id) init {
-  if (self = [super init]) {
+  if ((self = [super init])) {
     waitLogoSec = 2;
 //    nextCallback = [[[GALogoLayer_Anon1 alloc] init] autorelease];
   }
@@ -24,12 +25,18 @@ CCScene * scene;
 - (void) onEnter {
   [super onEnter];
   if (!isInit) {
-    CCSpriteBatchNode * spriteSheet = [SpriteSheetFactory getSpriteSheet:@"logo"];
-    [self addChild:spriteSheet];
+    CCSpriteBatchNode * my_spriteSheet = [SpriteSheetFactory getSpriteSheet:@"logo"];
+    [self addChild:my_spriteSheet];
     CCSpriteFrame * spriteFrame = [[CCSpriteFrameCache sharedSpriteFrameCache]  spriteFrameByName:@"JulenGarciaGA.png"];
-    CCSprite * sprite = [CCSprite spriteWithSpriteFrame:spriteFrame];
-    [spriteSheet addChild:sprite];
+    CCSprite * my_sprite = [CCSprite spriteWithSpriteFrame:spriteFrame];
+    [spriteSheet addChild:my_sprite];
 	[sprite setPosition:ccp([[CCDirector sharedDirector] winSize].width / 2 ,[[CCDirector sharedDirector] winSize].height / 2)];
+    float originalImageHeight = 566.0f;
+    CGSize s = [[CCDirector sharedDirector] winSize];  
+    float targetHeight = s.height;
+    float scale = targetHeight / originalImageHeight;
+    [sprite setScale:scale];
+    isInit = YES;
   }
 	
  // [self schedule:nextCallback];
