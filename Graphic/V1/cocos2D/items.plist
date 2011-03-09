@@ -7,7 +7,7 @@
             <key>bumper-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,0},{40,40}}</string>
+                <string>{{40,107},{40,40}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -20,7 +20,7 @@
             <key>bumper-02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{40,0},{40,36}}</string>
+                <string>{{80,107},{40,36}}</string>
                 <key>offset</key>
                 <string>{0,-2}</string>
                 <key>rotated</key>
@@ -33,7 +33,7 @@
             <key>bunsen-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{80,0},{20,65}}</string>
+                <string>{{40,0},{20,65}}</string>
                 <key>offset</key>
                 <string>{0,-1}</string>
                 <key>rotated</key>
@@ -46,7 +46,7 @@
             <key>bunsen-02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{100,0},{20,67}}</string>
+                <string>{{0,0},{20,67}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -59,7 +59,7 @@
             <key>bunsen-03.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,67},{20,67}}</string>
+                <string>{{60,0},{20,67}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -72,7 +72,7 @@
             <key>bunsen-04.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{20,67},{20,65}}</string>
+                <string>{{20,0},{20,65}}</string>
                 <key>offset</key>
                 <string>{0,-1}</string>
                 <key>rotated</key>
@@ -85,7 +85,7 @@
             <key>bunsen-05.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{40,67},{20,65}}</string>
+                <string>{{80,0},{20,65}}</string>
                 <key>offset</key>
                 <string>{0,-1}</string>
                 <key>rotated</key>
@@ -95,10 +95,36 @@
                 <key>sourceSize</key>
                 <string>{20,67}</string>
             </dict>
+            <key>button-01.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,147},{40,27}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{40,27}}</string>
+                <key>sourceSize</key>
+                <string>{40,27}</string>
+            </dict>
+            <key>button-02.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,107},{40,23}}</string>
+                <key>offset</key>
+                <string>{0,-2}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,4},{40,23}}</string>
+                <key>sourceSize</key>
+                <string>{40,27}</string>
+            </dict>
             <key>laser-firing-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,134},{75,20}}</string>
+                <string>{{40,147},{75,20}}</string>
                 <key>offset</key>
                 <string>{6,0}</string>
                 <key>rotated</key>
@@ -111,7 +137,7 @@
             <key>laser-firing-02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,154},{75,20}}</string>
+                <string>{{0,194},{75,20}}</string>
                 <key>offset</key>
                 <string>{6,0}</string>
                 <key>rotated</key>
@@ -124,7 +150,7 @@
             <key>laser-firing-03.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,174},{81,20}}</string>
+                <string>{{0,214},{81,20}}</string>
                 <key>offset</key>
                 <string>{3,0}</string>
                 <key>rotated</key>
@@ -137,7 +163,7 @@
             <key>laser-firing-04.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,194},{87,20}}</string>
+                <string>{{0,234},{87,20}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -150,7 +176,7 @@
             <key>laser-wait-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,214},{75,20}}</string>
+                <string>{{0,174},{75,20}}</string>
                 <key>offset</key>
                 <string>{6,0}</string>
                 <key>rotated</key>
@@ -160,13 +186,52 @@
                 <key>sourceSize</key>
                 <string>{87,20}</string>
             </dict>
+            <key>saw-running-01.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{40,67},{40,40}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{40,40}}</string>
+                <key>sourceSize</key>
+                <string>{40,40}</string>
+            </dict>
+            <key>saw-running-02.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,67},{40,40}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{40,40}}</string>
+                <key>sourceSize</key>
+                <string>{40,40}</string>
+            </dict>
+            <key>saw-wait.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{80,67},{40,40}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{40,40}}</string>
+                <key>sourceSize</key>
+                <string>{40,40}</string>
+            </dict>
         </dict>
         <key>metadata</key>
         <dict>
             <key>format</key>
             <integer>2</integer>
             <key>size</key>
-            <string>{120,234}</string>
+            <string>{120,254}</string>
             <key>textureFileName</key>
             <string>items.png</string>
         </dict>
