@@ -109,7 +109,7 @@ public abstract class GameItemCocos extends GameItem {
 			}
 		}		
 		
-		if (this.textureMode == TextureMode.REPEAT) {
+		/*if (this.textureMode == TextureMode.REPEAT) {
 			if (this.width != 0 && this.height != 0) {
 				CGRect rect = this.sprite.getTextureRect();
 				
@@ -118,7 +118,7 @@ public abstract class GameItemCocos extends GameItem {
 					this.sprite.setTextureRect(rect);
 				}
 			}
-		}
+		}*/
 	}
 	
 	/**
@@ -136,9 +136,9 @@ public abstract class GameItemCocos extends GameItem {
 			this.position = this.sprite.getPosition();			
 			this.angle = this.sprite.getRotation();						
 			
-			if (this.textureMode == TextureMode.REPEAT) {
+			/*if (this.textureMode == TextureMode.REPEAT) {
 				this.transformTexture();
-			}
+			}*/
 		}
 	}
 	
