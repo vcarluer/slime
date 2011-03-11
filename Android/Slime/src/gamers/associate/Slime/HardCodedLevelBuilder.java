@@ -165,16 +165,49 @@ public class HardCodedLevelBuilder {
 		cX += 50;
 		SlimeFactory.Lava.createBL(cX, cY, 50, 50);
 		cX += 50;
-		SlimeFactory.Platform.createBL(cX, cY, 200, 80).setAngle(45f);
-		cX += 128;
+		SlimeFactory.Platform.createBL(cX, cY, 200, 80);
+		cX += 70;
 		SlimeFactory.Box.createBL(cX, 80, 40, 40);		
-		SlimeFactory.Box.createBL(cX, 120, 40, 40);				
-		cX += 72;
-		SlimeFactory.Lava.createBL(cX, cY, 200, 50).setAngle(45f);;
+		SlimeFactory.Box.createBL(cX, 120, 40, 40);
+		cX += 50;
+		/*CGPoint[] vertices = new CGPoint[4];
+		vertices[0] = CGPoint.make(0, 50);
+		vertices[1] = CGPoint.make(0, 0);
+		vertices[2] = CGPoint.make(50, 50);
+		vertices[3] = CGPoint.make(50, 0);
+		
+		CGPoint[] body = new CGPoint[4];
+		body[0] = CGPoint.make(0, 50);
+		body[1] = CGPoint.make(0, 0);
+		body[2] = CGPoint.make(50, 0);
+		body[3] = CGPoint.make(50, 50);*/
+		
+		CGPoint[] vertices = new CGPoint[9];
+		vertices[0] = CGPoint.make(0, 0);
+		vertices[1] = CGPoint.make(20, 40);
+		vertices[2] = CGPoint.make(20, 0);
+		vertices[3] = CGPoint.make(50, 50);
+		vertices[4] = CGPoint.make(50, 0);
+		vertices[5] = CGPoint.make(70, 35);
+		vertices[6] = CGPoint.make(70, 0);
+		vertices[7] = CGPoint.make(78, 20);
+		vertices[8] = CGPoint.make(80, 0);		
+		
+		CGPoint[] body = new CGPoint[6];
+		body[0] = CGPoint.make(0, 0);
+		body[1] = CGPoint.make(80, 0);
+		body[2] = CGPoint.make(77, 20);
+		body[3] = CGPoint.make(70, 35);
+		body[4] = CGPoint.make(50, 50);
+		body[5] = CGPoint.make(20, 40);
+		
+		SlimeFactory.Polygon.create(cX, 80, 0, 0, false, body, vertices);
+		cX += 80;
+		SlimeFactory.Lava.createBL(cX, cY, 200, 50);
 		cX += 200;
 		SlimeFactory.Platform.createBL(cX, cY, 100, 50);
 		cX += 40;
-		SlimeFactory.Bumper.createBL(cX, 50, 50, 50, 0.8f).setAngle(90);
+		SlimeFactory.Bumper.createBL(cX, 50, 50, 50, 0.8f).setAngle(-90);
 		//Bumper bumper = SlimeFactory.Bumper.createBL(cX, 50, 100, 100);		
 		cX += 50;
 		SlimeFactory.Platform.createBL(cX, 50, 10, 128);

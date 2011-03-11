@@ -34,8 +34,12 @@ public class CCSpriteRepeat extends CCSprite {
 		
 	@Override
 	public void draw(GL10 gl) {
-		gl.glTexParameterx(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        gl.glTexParameterx(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		this.enableTextureRepeat(gl);
 		super.draw(gl);
 	}	
+	
+	protected void enableTextureRepeat(GL10 gl) {
+		gl.glTexParameterx(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        gl.glTexParameterx(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	}
 }
