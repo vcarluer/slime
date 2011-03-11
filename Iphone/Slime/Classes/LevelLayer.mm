@@ -9,11 +9,11 @@
 #import "SlimeFactory.h"
 
 
-CCScene * scene;
+
 @implementation LevelLayer
 
 - (id) initWithLevel:(Level *)my_level {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		//    tickCallback = [[[LevelLayer_Anon1 alloc] init] autorelease];
 		
 		level = my_level;
@@ -189,9 +189,14 @@ CCScene * scene;
 		
 		//[self addChild:my_slimy];
 	}
+- (void) draw:(GL10 *)gl {
+  [super draw:gl];
+  [level draw:gl];
 }
 
-
+- (float) getGameY:(float)touchY {
+  return [[CCDirector sharedDirector] winSize].height - touchY;
+}
 
 - (void) dealloc {
 	[level release];

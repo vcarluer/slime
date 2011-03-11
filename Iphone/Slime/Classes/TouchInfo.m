@@ -10,10 +10,10 @@
  @synthesize moving;
 @synthesize pointerId;
 
-- (id) initWithPointerId:(int)pointerId {
-  if (self = [super init]) {
+- (id) initWithPointerId:(int)my_pointerId {
+  if ((self = [super init])) {
 	  
-    pointerId = pointerId;
+    pointerId = my_pointerId;
     /*
 	moveBeganAt = [[[CGPoint alloc] init] autorelease];
     lastMoveReference = [[[CGPoint alloc] init] autorelease];

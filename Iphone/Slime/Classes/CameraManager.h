@@ -4,6 +4,7 @@
   float minScale;
   float maxScale;
   float zoomSpeed;
+  float currentZoom;
   float screenW2;
   float screenH2;
   CCLayer * gameLayer;
@@ -14,12 +15,13 @@
   CGRect  cameraView;
   CGPoint  virtualCameraPos;
   GameItem * followed;
-  CGPoint levelOrigin;
+  CGPoint  levelOrigin;
   CGPoint  zoomAnchor;
   CGPoint  zoomScreenPin;
 }
 
-- (id) init:(CCLayer *)my_gameLayer levelWidth:(float)my_levelWidth levelHeight:(float)my_levelHeight levelOrigin:(CGPoint)my_levelOrigin;
+@property(nonatomic, readonly) float currentZoom;
+- (id) initWithGameLayer:(CCLayer *)gameLayer;
 - (void) tick:(float)delta;
 - (void) follow:(GameItem *)item;
 - (void) normalizePosition;
@@ -32,7 +34,9 @@
 - (void) stopContinousMoving;
 - (void) zoomCameraByScreenRatio:(float)zoomDelta;
 - (void) setZoomPoint:(CGPoint )zoomPoint;
+- (CGPoint) getGamePoint:(CGPoint )screenPoint;
 - (void) zoomCameraBy:(float)zoomDelta;
 - (void) zoomCameraTo:(float)zoomValue;
 - (void) setCameraView;
+- (void) attachLevel:(float)levelWidth levelHeight:(float)levelHeight levelOrigin:(CGPoint *)levelOrigin;
 @end

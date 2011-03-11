@@ -3,19 +3,15 @@
 
 @implementation CameraManager
 
+@synthesize currentZoom;
 
-- (id) init:(CCLayer *)my_gameLayer levelWidth:(float)my_levelWidth levelHeight:(float)my_levelHeight levelOrigin:(CGPoint )my_levelOrigin {
-	self = [super init];
-	if (self != nil) {
+- (id) initWithGameLayer:(CCLayer *)my_gameLayer {
+  if ((self = [super init])) {
     screenW2 = [[CCDirector sharedDirector] winSize].width * [[CCDirector sharedDirector] winSize].width;
     screenH2 = [[CCDirector sharedDirector] winSize].height * [[CCDirector sharedDirector] winSize].height;
     gameLayer = my_gameLayer;
-    levelWidth = my_levelWidth;
-    levelHeight = my_levelHeight;
-    levelOrigin = my_levelOrigin;
     //moveCameraBy = [[[CGPoint alloc] init] autorelease];
     virtualCameraPos = CGPointZero;
-    [self setCameraView];
   }
   return self;
 }
@@ -134,13 +130,17 @@
   [self zoomCameraBy:zoom];
 }
 
-- (void) setZoomPoint:(CGPoint )zoomPoint {
+- (void) setZoomPoint:(CGPoint)zoomPoint {
   zoomScreenPin = ccp(zoomPoint.x, zoomPoint.y);
+  zoomAnchor = [self getGamePoint:zoomPoint];
+}
+
+- (CGPoint) getGamePoint:(CGPoint)screenPoint {
   float scale = [gameLayer scale];
-  CGPoint zoomScaled = CGPointZero;
-  zoomScaled.x = (zoomPoint.x - [gameLayer position].x) / scale;
-  zoomScaled.y = (zoomPoint.y - [gameLayer position].y) / scale;
-  zoomAnchor = zoomScaled;
+  CGPoint gamePoint = CGPointZero;;
+  gamePoint.x = (screenPoint.x - [gameLayer position].x) / scale;
+  gamePoint.y = (screenPoint.y - [gameLayer position].y) / scale;
+  return gamePoint;
 }
 
 - (void) zoomCameraBy:(float)zoomDelta {
@@ -156,6 +156,7 @@
     zoomValue = maxScale;
   }
   [gameLayer setScale:zoomValue];
+  currentZoom = zoomValue;
   [self keepPointAt:zoomAnchor screenPin:zoomScreenPin];
   [self normalizePosition];
 }
@@ -174,11 +175,22 @@
   [self normalizePosition];
 }
 
+- (void) attachLevel:(float)my_levelWidth levelHeight:(float)my_levelHeight levelOrigin:(CGPoint)my_levelOrigin {
+  levelWidth = my_levelWidth;
+  levelHeight = my_levelHeight;
+  levelOrigin = my_levelOrigin;
+}
+
 - (void) dealloc {
   [gameLayer release];
- 
+//  [moveCameraBy release];
+//  [cameraView release];
+//  [virtualCameraPos release];
   [followed release];
-    [super dealloc];
+//  [levelOrigin release];
+//  [zoomAnchor release];
+//  [zoomScreenPin release];
+  [super dealloc];
 }
 
 @end

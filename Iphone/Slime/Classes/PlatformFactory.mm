@@ -15,12 +15,8 @@
 - (void) createAnimList {
 }
 
-- (NSString *) getPlist {
-  return @"labo.plist";
-}
-
-- (NSString *) getPng {
-  return @"labo.png";
+- (NSString *) getPlistPng {
+  return @"labo";
 }
 
 - (Platform *) instantiate:(float)x y:(float)y width:(float)width height:(float)height {

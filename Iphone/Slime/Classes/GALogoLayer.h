@@ -1,14 +1,25 @@
 #import "cocos2d.h"
-
-@interface GALogoLayer : CCLayer {
-  long waitLogoSec;
-  long onEnterTime;
-  BOOL isInit;
-	//todo
-  //UpdateCallback * nextCallback;
+/*
+@interface GALogoLayer_Anon1 : NSObject <UpdateCallback> {
 }
 
-+ (CCScene *) scene;
+
+
+
+- (void) update:(float)d;
+@end
+*/
+extern BOOL isInit;
+@interface GALogoLayer : CCLayer {
+    long waitLogoSec;
+    long onEnterTime;
+    CCSpriteBatchNode * spriteSheet;
+    CCSprite * sprite;
+    //TODO
+    //  UpdateCallback * nextCallback;
+}
+
++ (id) scene;
 - (id) init;
 - (void) onEnter;
 - (void) update:(float)d;
