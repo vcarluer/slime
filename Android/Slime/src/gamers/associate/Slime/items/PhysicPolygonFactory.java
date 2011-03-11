@@ -12,7 +12,7 @@ public class PhysicPolygonFactory extends GameItemPhysicFactory<PhysicPolygon> {
 		
 		if (polygon != null) {
 			//CCSpritePolygon sprite = CCSpritePolygon.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame(PhysicPolygon.texture));
-			CCSpritePolygon sprite = CCSpritePolygon.sprite(PhysicPolygon.texture);
+			CCSpritePolygon sprite = CCSpritePolygon.sprite(PhysicPolygon.texture, width, height);
 			sprite.setVertices(glVertices);
 			polygon.setSprite(sprite);
 		}

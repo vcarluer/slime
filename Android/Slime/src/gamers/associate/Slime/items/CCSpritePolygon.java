@@ -17,8 +17,6 @@ public class CCSpritePolygon extends CCSpriteRepeat {
 	protected FloatBuffer texCoords;
 	protected FloatBuffer colors;
 	protected CGPoint[] baseArray;
-	protected float texWidth;
-	protected float texHeight;
 	
 	/* (non-Javadoc)
 	 * @see gamers.associate.Slime.CCSpriteRepeat#draw(javax.microedition.khronos.opengles.GL10)
@@ -28,8 +26,8 @@ public class CCSpritePolygon extends CCSpriteRepeat {
 		this.polyInit();		
 	}
 	
-	public CCSpritePolygon(String fileName) {
-		super(fileName);
+	public CCSpritePolygon(String fileName, float textureWidth, float textureHeight) {
+		super(fileName, textureWidth, textureHeight);		
 		this.polyInit();		
 	}
 	
@@ -47,14 +45,12 @@ public class CCSpritePolygon extends CCSpriteRepeat {
         return new CCSpritePolygon(spriteFrame);
     }
 	
-	public static CCSpritePolygon sprite(String fileName) {
-        return new CCSpritePolygon(fileName);
+	public static CCSpritePolygon sprite(String fileName, float textureWidth, float textureHeight) {
+        return new CCSpritePolygon(fileName, textureWidth, textureHeight);
     }
 	
 	@Override
 	public void draw(GL10 gl) {		
-		this.enableTextureRepeat(gl);
-		
 		boolean newBlend = false;
         if( blendFunc_.src != ccConfig.CC_BLEND_SRC || blendFunc_.dst != ccConfig.CC_BLEND_DST ) {
             newBlend = true;
@@ -74,9 +70,9 @@ public class CCSpritePolygon extends CCSpriteRepeat {
         /*float[] verticesArray = this.getVertexArray();
         float[] textArray = this.getTexCoordsArray();*/
         
-        /*float textX = 50f / 128f;        
-        float textY = 50f / 128f;
-        this.vertices.position(0);
+        /*float textX = (80f / 128f) % 128f;        
+        float textY = (50f / 128f) % 128f;
+
         this.texCoords.position(0);
         this.texCoords.clear();
         this.texCoords.put(0);
@@ -91,7 +87,7 @@ public class CCSpritePolygon extends CCSpriteRepeat {
 
         /*float offsetX = 64;
         float offsetY = 64;
-        
+        this.vertices.position(0);
         this.vertices.clear();
         this.vertices.put(offsetX);
         this.vertices.put(offsetY + 50);
