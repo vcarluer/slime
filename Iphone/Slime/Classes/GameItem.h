@@ -29,11 +29,13 @@
 
 //@property(nonatomic, retain, readonly) UUID * id;
 @property (nonatomic,readwrite) CGPoint position;
+
+/*
 @property (nonatomic,readwrite) float angle;
 @property (nonatomic,readwrite) float width;
 @property (nonatomic,readwrite) float height;
 
-/*	
+	
 @property (nonatomic,assign) NSMutableDictionary *animationList;
 @property (nonatomic,assign) CCAction *currentAction;
 @property (nonatomic,assign) CCSprite *sprite;

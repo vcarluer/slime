@@ -8,8 +8,7 @@
 
 - (Platform *) create:(float)x y:(float)y width:(float)width height:(float)height;
 - (void) createAnimList;
-- (NSString *) getPlist;
-- (NSString *) getPng;
+- (NSString *) getPlistPng;
 - (Platform *) instantiate:(float)x y:(float)y width:(float)width height:(float)height;
 - (void) runFirstAnimations:(Platform *)item;
 @end
