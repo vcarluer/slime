@@ -1,7 +1,7 @@
 #import "GameItemPhysicFactory.h"
 
 @implementation GameItemPhysicFactory
-/*
+
 - (void) Attach:(CCNode *)attachNode attachWorld:(b2World *)attachWorld attachWorldRatio:(float)attachWorldRatio {
   rootNode = attachNode;
   world = attachWorld;
@@ -25,5 +25,5 @@
  // [world release];
   [super dealloc];
 }
-*/
+
 @end

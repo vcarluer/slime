@@ -165,7 +165,6 @@ float Default_Body_Height = 23.0f;
 }
 
 
-
 - (CCSprite *) createAnim:(NSString *)animName frameCount:(int)frameCount {
 	
 	//CCSpriteBatchNode *spriteSheet = (CCSpriteBatchNode*) [self getChildByTag:kTagAnimation1];
@@ -198,6 +197,12 @@ float Default_Body_Height = 23.0f;
 	spriteCount++;
 	return sprite;
 }
+
+- (void) handleContact:(GameItemPhysic *)item {
+  [super handleContact:item];
+  [self land];
+}
+
 
 - (CCAnimation *) getReferenceAnimation {
 	return [animationList objectForKey:Anim_Wait_V];

@@ -184,8 +184,16 @@ public class LevelLayer extends CCLayer {
 	}
 	
 	private int getPId(MotionEvent event) {		
-		int pId = event.getPointerId(event.getActionIndex());
+		// int pId = event.getPointerId(event.getActionIndex());		
+		int pId = event.getPointerId(this.getPointerIndex(event));
 		return pId;
+	}
+	
+	private int getPointerIndex(MotionEvent event) {
+		int action = event.getAction();
+		final int pointerIndex = (action & MotionEvent.ACTION_POINTER_ID_MASK) 
+        >> MotionEvent.ACTION_POINTER_ID_SHIFT;
+		 return pointerIndex;
 	}
 	
 	private TouchInfo getTouch(MotionEvent event, int idx) {
@@ -207,7 +215,8 @@ public class LevelLayer extends CCLayer {
 	private TouchInfo getTouch(MotionEvent event) {
 		TouchInfo returnTouch = null;
 				
-		int pId = event.getPointerId(event.getActionIndex());
+		// int pId = event.getPointerId(event.getActionIndex());
+		int pId = event.getPointerId(this.getPointerIndex(event));
 		for	(TouchInfo touch : this.touchList) {
 			if (touch.getPointerId() == pId) {
 				returnTouch = touch;

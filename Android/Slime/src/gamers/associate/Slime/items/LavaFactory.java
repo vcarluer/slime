@@ -28,7 +28,7 @@ public class LavaFactory extends GameItemPhysicFactory<Lava> {
 					
 		lava.setSprite(null);
 		if (lava != null) {
-			CCSprite sprite = CCSpriteRepeat.sprite(Lava.texture1, true);			
+			CCSprite sprite = CCSpriteRepeat.sprite(Lava.texture1, true, width, height);			
 			lava.setSprite(sprite);					
 		}
 		

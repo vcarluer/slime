@@ -28,13 +28,15 @@
 }
 
 - (void) createAnim:(NSString *)animName frameCount:(int)frameCount {
-  [sharedAnimations setObject:[GameItem createAnim:animName frameCount:frameCount] forKey:animName];
+  [sharedAnimations put:animName param1:[GameItemCocos createAnim:animName param1:frameCount]];
 }
 
 - (NSString *) getPlistPng {
-	return @"labo";
 }
 
+- (void) destroy {
+  isInit = NO;
+}
 
 - (id) create {
   return [self create:0 y:0];
@@ -49,11 +51,16 @@
     id item = [self instantiate:x y:y width:width height:height];
     [item setAnimationList:sharedAnimations];
     [self runFirstAnimations:item];
+    [level addItemToAdd:item];
     return item;
   }
    else {
     return nil;
   }
+}
+
+- (id) createBL:(float)x y:(float)y width:(float)width height:(float)height {
+  return [self create:x + width / 2 y:y + height / 2 width:width height:height];
 }
 
 - (id) instantiate:(float)x y:(float)y width:(float)width height:(float)height {
@@ -66,6 +73,7 @@
   [sharedAnimations release];
   [spriteSheet release];
   [rootNode release];
+  [level release];
   [super dealloc];
 }
 
