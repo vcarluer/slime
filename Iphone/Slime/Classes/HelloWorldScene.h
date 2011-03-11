@@ -1,8 +1,8 @@
 //
 //  HelloWorldScene.h
-//  test_slime
+//  Slime
 //
-//  Created by antonio Munoz on 06/03/11.
+//  Created by antonio Munoz on 14/02/11.
 //  Copyright none 2011. All rights reserved.
 //
 
@@ -24,7 +24,5 @@
 
 // adds a new sprite at a given coordinate
 -(void) addNewSpriteWithCoords:(CGPoint)p;
-
-- (CCSprite *) createAnim:(NSString *)animName frameCount:(int)frameCount;
 
 @end

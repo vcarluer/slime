@@ -15,7 +15,7 @@ CCScene * scene;
 }
 
 - (id) init {
-  if (self = [super init]) {
+  if ((self = [super init])) {
     //nextCallback = [[[SlimeLoadingLayer_Anon1 alloc] init] autorelease];
     syncObj = [[[NSObject alloc] init] autorelease];
   }
@@ -25,9 +25,9 @@ CCScene * scene;
 - (void) onEnter {
   [super onEnter];
   if (isInit == NO) {
-    CCSpriteSheet * spriteSheet = [SpriteSheetFactory getSpriteSheet:@"logo"];
+    CCSpriteBatchNode * spriteSheet = [SpriteSheetFactory getSpriteSheet:@"logo"];
     [self addChild:spriteSheet];
-    CCSprite * sprite = [CCSprite sprite:[[CCSpriteFrameCache sharedSpriteFrameCache] getSpriteFrame:@"TitleLoading.png"]];
+    CCSprite * sprite = [CCSprite sprite:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"TitleLoading.png"]];
     [spriteSheet addChild:sprite];
 	sprite.position = ccp([[CCDirector sharedDirector] winSize].width / 2 ,[[CCDirector sharedDirector] winSize].height / 2);
     float scaleW = [[CCDirector sharedDirector] winSize].width / 240;

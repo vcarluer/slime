@@ -2,8 +2,8 @@
 
 @implementation GameItemCocosFactory
 
-- (void) attach:(Level *)level attachNode:(CCNode *)attachNode {
-  level = level;
+- (void) attach:(Level *)my_level attachNode:(CCNode *)attachNode {
+  //level = my_level;
   rootNode = attachNode;
   [self initAnimation];
   isAttached = YES;
@@ -11,7 +11,7 @@
 
 - (void) detach {
   if (isAttached && spriteSheet != nil && rootNode != nil) {
-    level = nil;
+    //level = nil;
     rootNode = nil;
     isAttached = NO;
   }

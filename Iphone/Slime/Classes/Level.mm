@@ -4,6 +4,8 @@
 #import "spriteSheetFactory.h"
 
 NSString * LEVEL_HOME = @"Home";
+NSString * LEVEL_1 = @"Home";
+NSString * LEVEL_2 = @"Home";
 Level * currentLevel;
 
 @implementation Level

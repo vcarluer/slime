@@ -1,7 +1,7 @@
 #import "Bumper.h"
 
 float Default_Powa = 1.5f;
-NSString * Texture_Wait = @"metal_tri.png";
+NSString * Texture_Wait = @"red_tri.png";
 NSString * Anim_Wait = @"bumper_wait";
 float Default_Bumper_Width = 64.0f;
 float Default_Bumper_Height = 64.0f;
@@ -68,6 +68,12 @@ float Default_Bumper_Height = 64.0f;
 }
 
 - (void) waitAnim {
+}
+
+- (void) setAngle:(float)angle {
+//  [super setAngle:angle];
+//  float radAngle = [ccMacros CC_DEGREES_TO_RADIANS:angle];
+//  [body setTransform:[body position] param1:radAngle];
 }
 
 @end

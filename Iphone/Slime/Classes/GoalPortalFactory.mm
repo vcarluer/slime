@@ -6,16 +6,12 @@
   [self createAnim:Anim_Goal_Portal frameCount:4];
 }
 
-- (NSString *) getPlist {
-  return @"labo.plist";
+- (NSString *) getPlistPng {
+  return @"labo";
 }
 
-- (NSString *) getPng {
-  return @"labo.png";
-}
-
-- (GoalPortal *) instantiate:(float)x y:(float)y width:(float)width height:(float)height {
-  return [[[GoalPortal alloc] init:spriteSheet x:x y:y width:width height:height world:world worldRatio:worldRatio] autorelease];
+- (GoalPortal *) instantiate:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height {
+  return [[[GoalPortal alloc] init:spriteSheet x:my_x y:my_y width:my_width height:my_height world:world worldRatio:worldRatio] autorelease];
 }
 
 - (void) runFirstAnimations:(GoalPortal *)item {

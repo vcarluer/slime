@@ -3,12 +3,13 @@
 
 
 
+
 NSString * Anim_Spawn_Portal = @"blueportal";
 
 @implementation SpawnPortal
 
 - (id) init:(CCNode *)node x:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height {
-  if (self = [super init:node x:my_x y:my_y width:my_width height:my_height]) {
+  if ((self = [super init:node x:my_x y:my_y width:my_width height:my_height])) {
   }
   return self;
 }
@@ -36,7 +37,7 @@ NSString * Anim_Spawn_Portal = @"blueportal";
 - (GameItem *) spawn {
   Slimy * my_slimy;
 	//todo 
-  my_slimy  = [slimy create:position.x y:position.y width:width height:height Ratio:1.5f];
+  my_slimy  = [slimy create:position.x y:position.y Ratio:1.5f];
   [my_slimy fall];
   return my_slimy;
 }

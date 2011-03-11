@@ -29,9 +29,9 @@
   return [[[Slimy alloc] init:spriteSheet x:my_x y:my_x width:my_width height:my_height world:world worldRatio:worldRatio] autorelease];
 }
 
-- (Slimy *) create:(float)x y:(float)y ratio:(float)my_ratio {
-  Slimy * slimy = [self create:x y:y width:Slimy_Default_Width * ratio height:Slimy_Default_Height * ratio];
-  return slimy;
++ (Slimy *) create:(float)x y:(float)y ratio:(float)my_ratio {
+  Slimy * my_slimy = [self  instantiate:x y:y width:Slimy_Default_Width * my_ratio height:Slimy_Default_Height * my_ratio];
+  return my_slimy;
 }
 
 @end

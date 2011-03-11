@@ -41,7 +41,7 @@ short Category_OutGame = 0x0003;
 }
 
 - (void) addContact:(NSObject *)with {
-	if ([with conformsToProtocol:@protocol(GameItemPhysic)]) {
+	if ([with isKindOfClass:[GameItemPhysic class]]) {
 		GameItemPhysic * item = (GameItemPhysic *)with;
 		[contacts add:item];
 	}
