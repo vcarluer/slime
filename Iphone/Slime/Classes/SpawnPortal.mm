@@ -35,9 +35,9 @@ NSString * Anim_Spawn_Portal = @"blueportal";
 }
 
 - (GameItem *) spawn {
-  Slimy * my_slimy;
+  Slimy * my_slimy= [slimy create:position.x y:position.y Ratio:1.5f];
 	//todo 
-  my_slimy  = [slimy create:position.x y:position.y Ratio:1.5f];
+  my_slimy  ;
   [my_slimy fall];
   return my_slimy;
 }

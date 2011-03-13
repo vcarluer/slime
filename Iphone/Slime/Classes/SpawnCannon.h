@@ -6,9 +6,9 @@
 #import "Box2D.h"
 
 
-extern NSString * texture;
-extern float Default_Width;
-extern float Default_Height;
+extern NSString * spawncannon_texture;
+extern float spawncannon_Default_Width;
+extern float spawncannon_Default_Height;
 
 @interface SpawnCannon : GameItemPhysic {
   float spawnHeightShift;
@@ -18,7 +18,7 @@ extern float Default_Height;
 
 - (id) init:(CCNode *)node x:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height world:(b2World *)my_world worldRatio:(float)my_worldRatio;
 - (void) initBody;
-- (Slimy *) spawnSlime:(CGPoint )my_target;
+- (Slimy *) spawnSlime:(CGPoint)my_target;
 - (Slimy *) spawnSlimeToCurrentTarget;
 - (void) select;
 - (void) unselect;

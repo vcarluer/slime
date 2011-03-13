@@ -9,7 +9,7 @@
 - (void) update:(float)d;
 @end
 */
-extern BOOL isInit;
+extern BOOL GA_isInit;
 @interface GALogoLayer : CCLayer {
     long waitLogoSec;
     long onEnterTime;

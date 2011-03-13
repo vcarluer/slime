@@ -1,5 +1,6 @@
 #import "cocos2d.h"
 #import "GameItemPhysic.h"
+#import "Box2D.h"
 
 extern NSString * Anim_Init;
 

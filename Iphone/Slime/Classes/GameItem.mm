@@ -59,7 +59,7 @@
 
 /*
 - (void) setSprite:(CCSprite *)affectSprite {
-	/*
+	
 	if (sprite != nil) {
 		[rootNode removeChild:sprite cleanup:YES];
 	}

@@ -1,5 +1,5 @@
 #import "Bumper.h"
-
+#import "Box2D.h"
 float Default_Powa = 1.5f;
 NSString * Texture_Wait = @"red_tri.png";
 NSString * Anim_Wait = @"bumper_wait";

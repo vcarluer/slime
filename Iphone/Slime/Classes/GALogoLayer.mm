@@ -16,7 +16,7 @@
  
  */
 
-BOOL isInit;
+BOOL GA_isInit;
 
 @implementation GALogoLayer
 

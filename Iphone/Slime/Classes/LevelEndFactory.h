@@ -1,4 +1,5 @@
 #import "LevelEnd.h"
+#import "GameItemPhysicFactory.h"
 
 @interface LevelEndFactory : GameItemPhysicFactory {
 }

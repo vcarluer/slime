@@ -2,11 +2,11 @@
 
 @implementation GameItemCocos
 
-@synthesize sprite, rootNode, currentAction, animationList;
+@synthesize sprite, rootNode, currentAction, animationList, texture;
 
 
 - (id) init:(CCNode *)node x:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height {
-	if (self = [super init:my_x y:my_y width:my_width height:my_height]) {
+	if ((self = [super init:my_x y:my_y width:my_width height:my_height])) {
 		animationList = [[[NSMutableDictionary alloc] init] autorelease];
 		rootNode = node;
 		textureMode = Scale;
@@ -110,7 +110,7 @@
 
 - (void) addAnim:(NSString *)animName frameCount:(int)frameCount {
 	if (animationList != nil) {
-		[animationList put:animName param1:[GameItemCocos createAnim:animName frameCount:frameCount]];
+		[animationList setObject:[GameItemCocos createAnim:animName frameCount:frameCount] forKey:animName];
 	}
 }
 

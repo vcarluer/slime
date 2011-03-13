@@ -1,6 +1,6 @@
 #import "Box.h"
 
-NSString * texture = @"wood2.png";
+NSString * box_texture = @"wood2.png";
 BOOL chainMode;
 
 @implementation Box
@@ -9,29 +9,31 @@ BOOL chainMode;
   chainMode = value;
 }
 
-- (id) init:(CCNode *)node x:(float)x y:(float)y width:(float)width height:(float)height world:(World *)world worldRatio:(float)worldRatio {
-  if (self = [super init:node param1:x param2:y param3:width param4:height param5:world param6:worldRatio]) {
+- (id) init:(CCNode *)node x:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height world:(b2World *)my_world worldRatio:(float)my_worldRatio {
+  if ((self = [super init:node x:my_x y:my_y width:my_width height:my_height world:my_world worldRatio:my_worldRatio])) {
     [self initBody];
   }
   return self;
 }
 
 - (void) initBody {
-  BodyDef * bodyDef = [[[BodyDef alloc] init] autorelease];
-  bodyDef.type = BodyType.DynamicBody;
-  CGPoint * spawnPoint = [[[CGPoint alloc] init] autorelease];
-  spawnPoint.x = position.x;
-  spawnPoint.y = position.y;
-  [bodyDef.position set:spawnPoint.x / worldRatio param1:spawnPoint.y / worldRatio];
-  PolygonShape * dynamicBox = [[[PolygonShape alloc] init] autorelease];
-  [dynamicBox setAsBox:bodyWidth / worldRatio / 2 param1:bodyHeight / worldRatio / 2];
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_dynamicBody;
+	
+	CGPoint spawnPoint;
+	spawnPoint.x = position.x;
+	spawnPoint.y = position.y;
+	
+	bodyDef.position.Set(spawnPoint.x / worldRatio,spawnPoint.y / worldRatio);	
+	b2PolygonShape  dynamicBox;
+    dynamicBox.SetAsBox(bodyWidth / worldRatio / 2 ,bodyHeight / worldRatio / 2);
 
-  @synchronized(world) 
-  {
-    body = [world createBody:bodyDef];
-    [body setUserData:self];
-    FixtureDef * fixtureDef = [[[FixtureDef alloc] init] autorelease];
-    fixtureDef.shape = dynamicBox;
+ // @synchronized(world) 
+ // {
+	bodyDef.userData = self;
+    body = world->CreateBody(&bodyDef);
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &dynamicBox;
     if (chainMode) {
       fixtureDef.density = 5.0f;
       fixtureDef.friction = 0.5f;
@@ -42,9 +44,9 @@ BOOL chainMode;
       fixtureDef.friction = 0.5f;
       fixtureDef.restitution = 0.2f;
     }
-    fixtureDef.filter.categoryBits = GameItemPhysic.Category_InGame;
-    [body createFixture:fixtureDef];
-  }
+    fixtureDef.filter.categoryBits = Category_InGame;
+   body->CreateFixture(&fixtureDef);
+  //}
 }
 
 @end

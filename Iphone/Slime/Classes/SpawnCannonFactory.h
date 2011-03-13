@@ -1,5 +1,6 @@
 #import "CCSprite.h"
 #import "CCSpriteFrameCache.h"
+#import "GameItemPhysicFactory.h"
 
 @interface SpawnCannonFactory : GameItemPhysicFactory {
 }

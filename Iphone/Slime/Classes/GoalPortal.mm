@@ -1,5 +1,6 @@
 #import "GoalPortal.h"
 #import "Slimy.h"
+#import "Box2D.h"
 
 
 NSString * Anim_Goal_Portal = @"redportal";

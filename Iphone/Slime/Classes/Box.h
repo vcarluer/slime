@@ -1,13 +1,14 @@
 #import "cocos2d.h"
 #import "GameItemPhysic.h"
+#import "Box2D.h"
 
-extern NSString * texture;
+extern NSString * box_texture;
 extern BOOL chainMode;
 
 @interface Box : GameItemPhysic {
 }
 
 + (void) setChainMode:(BOOL)value;
-- (id) init:(CCNode *)node x:(float)x y:(float)y width:(float)width height:(float)height world:(b2World *)world worldRatio:(float)worldRatio;
+- (id) init:(CCNode *)node x:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height world:(b2World *)my_world worldRatio:(float)my_worldRatio;
 - (void) initBody;
 @end

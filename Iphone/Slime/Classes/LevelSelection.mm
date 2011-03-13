@@ -14,7 +14,7 @@ LevelSelection * levelSelection;
 }
 
 - (id) init {
-  if (self = [super init]) {
+  if ((self = [super init])) {
     scene = [CCScene node];
     selectionLayer = [[[LevelSelectionLayer alloc] init] autorelease];
     [scene addChild:selectionLayer];

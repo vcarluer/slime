@@ -1,9 +1,5 @@
 #import "Level.h"
-#import "CCLayer.h"
-#import "CCMenu.h"
-#import "CCMenuItem.h"
-#import "CCMenuItemLabel.h"
-#import "CCDirector.h"
+#import "cocos2d.h"
 
 @interface LevelSelectionLayer : CCLayer {
 }

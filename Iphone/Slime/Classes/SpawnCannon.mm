@@ -1,9 +1,10 @@
 #import "SpawnCannon.h"
 #import "SlimeFactory.h"
 
-NSString * texture = @"metal1.png";
-float Default_Width = 32.0f;
-float Default_Height = 32.0f;
+
+NSString * spawncannon_texture = @"metal1.png";
+float spawncannon_Default_Width = 32.0f;
+float spawncannon_Default_Height = 32.0f;
 
 @implementation SpawnCannon
 
@@ -12,8 +13,8 @@ float Default_Height = 32.0f;
     spawnHeightShift = Slimy_Default_Height / 2;
     textureMode = Clip;
     if (width == 0 && height == 0) {
-      bodyWidth = width = Default_Width;
-      bodyHeight = height = Default_Height;
+      bodyWidth = width = spawncannon_Default_Width;
+      bodyHeight = height = spawncannon_Default_Height;
       [self transformTexture];
     }
     [self select];
@@ -47,23 +48,27 @@ float Default_Height = 32.0f;
 //  }
 }
 
-- (Slimy *) spawnSlime:(CGPoint *)my_target {
+- (Slimy *) spawnSlime:(CGPoint)my_target {
   target = my_target;
   return [self spawnSlimeToCurrentTarget];
 }
 
 - (Slimy *) spawnSlimeToCurrentTarget {
   CGPoint spawn = [self  position];
-  Slimy * my_slimy = [slimy  create:spawn.x param1:spawn.y param2:1.0f];
-  b2Vec2 * pos = [[slimy body] position];
-  b2Vec2 * impulse = [[[Vector2 alloc] init] autorelease];
+  Slimy * my_slimy = [slimy create:spawn.x y:spawn.y ratio:1.0f];
+   
+  b2Vec2 pos = my_slimy.body->GetPosition();
+  b2Vec2 impulse;
   impulse.x = target.x / worldRatio - pos.x;
   impulse.y = target.y / worldRatio - pos.y;
-  if ([impulse len] > 10f) {
-    [[impulse nor] mul:10f];
+  if (impulse.Length() > 10.0f) {
+      impulse.Normalize();
+      impulse *= 10.0f;
+      
+   // [[impulse nor] mul:10.0f];
   }
-  [[slimy body] applyLinearImpulse:impulse param1:pos];
-  return slimy;
+  my_slimy.body->ApplyLinearImpulse(impulse, pos);
+  return my_slimy;
 }
 
 - (void) select {
@@ -72,16 +77,18 @@ float Default_Height = 32.0f;
 
 - (void) unselect {
   selected = NO;
-  target = nil;
+//  target = nil;
 }
 
 - (void) selectionMove:(CGPoint *)screenSelection {
   if (selected) {
-    CGPoint * gameTarget = [[Level.currentLevel cameraManager] getGamePoint:screenSelection];
-    target = [CGPoint make:gameTarget.x param1:gameTarget.y];
+  //todo
+      //  CGPoint gameTarget = Level.currentLevel->cameraManager  
+  //  CGPoint gameTarget = [[Level.currentLevel cameraManager] getGamePoint:screenSelection];
+  //  target = ccp(gameTarget.x, gameTarget.y);
   }
 }
-
+/*
 - (void) draw:(GL10 *)gl {
   [super draw:gl];
   if (selected && target != nil) {
@@ -96,13 +103,13 @@ float Default_Height = 32.0f;
     [CCDrawingPrimitives ccDrawCircle:gl param1:[self spawnPoint] param2:50 param3:[ccMacros CC_DEGREES_TO_RADIANS:90] param4:50 param5:YES];
   }
 }
-
-- (CGPoint *) getSpawnPoint {
-  return [CGPoint make:[self position].x param1:[self position].y + spawnHeightShift];
+*/
+- (CGPoint) getSpawnPoint {
+  return ccp(self->position.x, self->position.y + spawnHeightShift);
 }
 
 - (void) dealloc {
-  [target release];
+//  [target release];
   [super dealloc];
 }
 
