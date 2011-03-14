@@ -12,7 +12,7 @@
 
 
 @interface GameItem : NSObject  {
-	
+  	NSString * my_id;	
 	
 	CGPoint position;
 	float angle;
@@ -27,12 +27,15 @@
 	 */
 }
 
+//@property(nonatomic, retain, readonly) UUID * id;
 @property (nonatomic,readwrite) CGPoint position;
+
+/*
 @property (nonatomic,readwrite) float angle;
 @property (nonatomic,readwrite) float width;
 @property (nonatomic,readwrite) float height;
 
-/*	
+	
 @property (nonatomic,assign) NSMutableDictionary *animationList;
 @property (nonatomic,assign) CCAction *currentAction;
 @property (nonatomic,assign) CCSprite *sprite;
@@ -49,14 +52,6 @@
 - (void) resume;
 
 
-/*
-- (void) setSprite:(CCSprite *)affectSprite;
-- (CCAnimation *) getReferenceAnimation;
-- (void) transformTexture;
-- (void) setAnimationList:(NSMutableDictionary *)animations;
-- (void) render:(float)delta;
-- (void) addAnim:(NSString *)animName frameCount:(int)frameCount;
-+ (CCAnimation *) createAnim:(NSString *)animName frameCount:(int)frameCount;
-*/
+
 
 @end

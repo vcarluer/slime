@@ -1,5 +1,6 @@
 //#import "cocos2d.h"
 //#import "Box2D.h"
+#import "b2World.h"
 #import "GameItemPhysic.h"
 
 extern NSString * Anim_Goal_Portal;
@@ -10,7 +11,7 @@ extern NSString * Anim_Goal_Portal;
 }
 
 @property(nonatomic) BOOL won;
-- (id) init:(CCNode *)node x:(float)x y:(float)y width:(float)width height:(float)height world:(b2World *)world worldRatio:(float)worldRatio;
+- (id) init:(CCNode *)node x:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height world:(b2World *)my_world worldRatio:(float)my_worldRatio;
 - (void) initBody;
 - (void) createPortal;
 - (void) contact:(NSObject *)with;

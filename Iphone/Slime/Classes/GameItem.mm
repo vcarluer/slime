@@ -2,11 +2,12 @@
 
 @implementation GameItem
 
-@synthesize position, angle, width, height;
+@synthesize position;
 
 - (id) init:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height {
 	self = [super init];
 	if (self != nil) {
+	  	my_id =  [[NSProcessInfo processInfo] globallyUniqueString];
 		CGPoint tempposition;
 		tempposition.x =my_x;
 		tempposition.y =my_y;
@@ -58,7 +59,7 @@
 
 /*
 - (void) setSprite:(CCSprite *)affectSprite {
-	/*
+	
 	if (sprite != nil) {
 		[rootNode removeChild:sprite cleanup:YES];
 	}

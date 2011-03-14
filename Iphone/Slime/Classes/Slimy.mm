@@ -93,15 +93,15 @@ float Default_Body_Height = 23.0f;
 }
 
 - (void) fall {
-	[self createAnim:Anim_Falling frameCount:3];
-	/*
+	//[self createAnim:Anim_Falling frameCount:3];
+	
 	
 	CCAnimate * animate = [CCAnimate actionWithAnimation:[animationList objectForKey:Anim_Falling] restoreOriginalFrame:NO];
 	CCAnimate * reverse = (CCAnimate *)[animate reverse];
 	CCAction * action = [CCRepeatForever actionWithAction:[CCSequence actionOne:animate two:reverse]];
-	 */
-	//currentAction = action;
-	//[sprite runAction:currentAction];
+	 
+	currentAction = action;
+	[sprite runAction:currentAction];
 }
 
 
@@ -165,7 +165,6 @@ float Default_Body_Height = 23.0f;
 }
 
 
-
 - (CCSprite *) createAnim:(NSString *)animName frameCount:(int)frameCount {
 	
 	//CCSpriteBatchNode *spriteSheet = (CCSpriteBatchNode*) [self getChildByTag:kTagAnimation1];
@@ -198,6 +197,12 @@ float Default_Body_Height = 23.0f;
 	spriteCount++;
 	return sprite;
 }
+
+- (void) handleContact:(GameItemPhysic *)item {
+  [super handleContact:item];
+  [self land];
+}
+
 
 - (CCAnimation *) getReferenceAnimation {
 	return [animationList objectForKey:Anim_Wait_V];

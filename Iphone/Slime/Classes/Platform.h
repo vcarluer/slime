@@ -1,9 +1,9 @@
-#import "Box2D.h"
+#import "b2World.h"
 #import "cocos2d.h"
 #import "GameItemPhysic.h"
 
 
-extern NSString * texture;
+extern NSString * platform_texture;
 
 @interface Platform : GameItemPhysic {
 }

@@ -4,6 +4,8 @@
 #import "spriteSheetFactory.h"
 
 NSString * LEVEL_HOME = @"Home";
+NSString * LEVEL_1 = @"Home";
+NSString * LEVEL_2 = @"Home";
 Level * currentLevel;
 
 @implementation Level
@@ -16,31 +18,32 @@ Level * currentLevel;
 @synthesize levelWidth;
 @synthesize levelHeight;
 @synthesize spawnPortal;
+@synthesize spawnCannon;
 
 - (id) init {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		worldRatio = 32.0f;
 		customZ = 2;
-		scene = CCScene.node;
-		levelLayer = [[[LevelLayer alloc] initWithLevel:self] autorelease];
-		hudLayer = [[[HudLayer alloc] init] autorelease];
-		backgroundLayer = [[[BackgoundLayer alloc] init] autorelease];
-		levelOrigin = CGPointMake(0,0);
-		//[scene addChild:backgroundLayer z:0];
-		
-		
-		
-		
-		gameLayer = [CCLayer node];
-		[gameLayer addChild:backgroundLayer z:0];
-		//[gameLayer addChild:levelLayer z:1];
-		[gameLayer setAnchorPoint:levelOrigin];
-		
-		[scene addChild:gameLayer z:0];
-		[scene addChild:levelLayer z:1];
-		[scene addChild:hudLayer z:2];
-		items = [[[NSMutableArray alloc] init] autorelease];
+    hudZ = 1;
+    scene = [CCScene node];
+    levelLayer = [[[LevelLayer alloc] initWithLevel:self] autorelease];
+    hudLayer = [[[HudLayer alloc] init] autorelease];
+    backgroundLayer = [[[BackgoundLayer alloc] init] autorelease];
+    gameLayer = [CCLayer node];
+    [gameLayer addChild:backgroundLayer z:0];
+    [gameLayer addChild:levelLayer z:1];
+        levelOrigin = CGPointZero;
+    [gameLayer setAnchorPoint:levelOrigin];
+    [scene addChild:gameLayer z:0];
+    isHudEnabled = YES;
+    [scene addChild:hudLayer z:hudZ];
+    items = [[[NSMutableDictionary alloc] init] autorelease];
+//todo
+        //    cameraManager = [[[CameraManager alloc] init:gameLayer] autorelease];
+    itemsToRemove = [[[NSMutableArray alloc] init] autorelease];
+    itemsToAdd = [[[NSMutableArray alloc] init] autorelease];
 		[self initLevel];
+    isInit = YES;
 	}
 	return self;
 }
@@ -48,52 +51,56 @@ Level * currentLevel;
 
 
 + (Level *) get:(NSString *)levelName {
-	if (currentLevel == nil) {
-		currentLevel = [[[Level alloc] init] autorelease];
-	}
-	
-	if (!isAttached) {
-		[currentLevel attachToFactory];
-	}
-	
-	if ([currentLevel currentLevelName] != levelName) {
-		[currentLevel loadLevel:levelName];
-	}
-	// [[currentLevel cameraManager] setCameraView];
-	return currentLevel;
+  return [self get:levelName forceReload:NO];
+}
+
++ (Level *) get:(NSString *)levelName forceReload:(BOOL)forceReload {
+  if (currentLevel == nil || isInit == NO) {
+    currentLevel = [[[Level alloc] init] autorelease];
+  }
+  if (forceReload || [currentLevel currentLevelName] != levelName) {
+    [currentLevel loadLevel:levelName];
+  }
+  [currentLevel attachLevelToCamera];
+  return currentLevel;
 }
 
 - (void) attachToFactory {
-	//todo
-	[SlimeFactory attachAll:levelLayer attachWorld:world attachWorldRatio:worldRatio];
+  [SlimeFactory attachAll:self attachNode:levelLayer attachWorld:world attachWorldRatio:worldRatio ];
 }
 
 - (void) reload {
-	[currentLevel loadLevel:currentLevelName];
-	//todo
-	//[[currentLevel cameraManager] setCameraView];
+  [currentLevel loadLevel:currentLevelName];
+   //TODO 
+ // [[currentLevel cameraManager] setCameraView];
+}
+
+- (void) attachLevelToCamera {
+ // [cameraManager attachLevel:levelWidth param1:levelHeight param2:levelOrigin];
+ // [cameraManager setCameraView];
+ // [[self cameraManager] zoomCameraTo:0f];
 }
 
 - (void) loadLevel:(NSString *)levelName {
-	//[self resetLevel];
-	//todo
-	[HardCodedLevelBuilder build:self levelName:levelName];	
-	//spawnPortal = [SlimeFactory.SpawnPortal createAndMove:levelWidth / 2 param1:levelHeight - 32 param2:levelWidth / 2 param3:5];
-	//[items add:spawnPortal];
-	//currentLevelName = levelName;
+  [self resetLevel];
+  [HardCodedLevelBuilder build:self levelName:levelName];
+  currentLevelName = levelName;
+  isPaused = NO;
 }
 
 - (void) resetLevel {
-	/*todo
-	 for (GameItem * item in items) {
-	 [item destroy];
-	 }
-	 
-	 [items clear];
-	 */
-	spawnPortal = nil;
-	goalPortal = nil;
-	[self removeCustomOverLayer];
+  currentLevelName = @"";
+
+  for (GameItem * item in items) {
+    [item destroy];
+  }
+
+  [items release];
+  spawnPortal = nil;
+  goalPortal = nil;
+  [self removeCustomOverLayer];
+  [self setIsTouchEnabled:YES];
+  [self setIsHudEnabled:YES];
 }
 
 - (void) initLevel {
@@ -103,23 +110,25 @@ Level * currentLevel;
 	world = new b2World(gravity, true);		
 	contactManager = new ContactManager;
 	world->SetContactListener(contactManager);
-	CGSize screenSize = [CCDirector sharedDirector].winSize;
-	
-	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"decor.plist"];
-	//CCSpriteSheet * spriteSheet = [CCSpriteSheet spriteSheet:@"decor.png"];
-	
-	
-	CCSprite *my_spriteSheet = [CCSprite spriteWithFile:@"decor.png"];
-	my_spriteSheet.position = ccp(500, 0);
+  [SpriteSheetFactory add:@"labo"];
+		CGSize screenSize = [CCDirector sharedDirector].winSize;
+//	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"decor.plist"];
+  CCSpriteBatchNode * my_spriteSheet = [SpriteSheetFactory getSpriteSheet:@"decor" isExcluded:YES];
 	
 	
-	[backgroundLayer addChild:my_spriteSheet];
-	//[backgroundLayer setRotation:-90.0f];
-	[backgroundLayer setScale:0.8f];
-	label = [CCLabelTTF labelWithString:@"Hud !" fontName:@"Marker Felt" fontSize:16];	
-	[hudLayer addChild:label z:0];	
-	label.position = ccp( screenSize.width/2, screenSize.height-20);	
-    [SpriteSheetFactory add:@"labo"];
+	CCSprite *my_sprite = [CCSprite spriteWithFile:@"decor.png"];
+	my_sprite.position = ccp(500, 0);
+	
+	
+  [backgroundLayer addChild:my_spriteSheet];
+   // backgroundSprite = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"decor"]   
+  //backgroundSprite = [CCSprite sprite:[[CCSpriteFrameCache sharedSpriteFrameCache]  getSpriteFrame:@"decor.png"]];
+  //[backgroundSprite setAnchorPoint:CGPointZero];
+  //[spriteSheet addChild:backgroundSprite];
+  label = [CCLabelTTF labelWithString:@"Hud !" fontName:@"Marker Felt" fontSize:16];	
+  [hudLayer addChild:label];
+  label.position = ccp( screenSize.width/2, screenSize.height-20);
+  [self attachToFactory];
 //	[levelLayer addChild:spriteSheet];
 	
 	
@@ -127,24 +136,77 @@ Level * currentLevel;
 }
 
 - (void) tick:(float)delta {
-	
-	//  @synchronized(world) 
-	//  {
-    //[world step:delta param1:6 param2:2];
-	world->Step(delta, 6, 2);
-	//  }
-	/*todo
-	 for (GameItem * item in items) {
-	 [item render:delta];
-	 }
-	 
-	 [cameraManager tick:delta];
-	 */
+  if (!isPaused) {
+
+    for (GameItem * item in itemsToAdd) {
+      [self addGameItem:item];
+    }
+
+    [itemsToAdd release];
+
+    //@synchronized(world) 
+    //{
+     world->Step(delta, 6, 2);
+    //}
+
+    for (GameItem * item in items) {
+      [item render:delta];
+    }
+
+
+    for (GameItem * item in itemsToRemove) {
+      [self removeGameItem:item];
+    }
+
+    [itemsToRemove clear];
+    //[cameraManager tick:delta];
+  }
 }
 
-- (void) SpawnSlime {
-	GameItem * gi = [spawnPortal spawn];
-	[items add:gi];
+- (void) addItemToRemove:(GameItem *)item {
+  [itemsToRemove add:item];
+}
+
+- (void) addItemToAdd:(GameItem *)item {
+  [itemsToAdd addObject:item];
+}
+
+- (void) setPause:(BOOL)value {
+  if (value) {
+    if (!isPaused) {
+      [levelLayer pauseSchedulerAndActions];
+    }
+  }
+   else {
+    if (isPaused) {
+      [levelLayer resumeSchedulerAndActions];
+    }
+  }
+
+  for (GameItem * item in [items values]) {
+    [item setPause:value];
+  }
+
+  isPaused = value;
+  [self setIsTouchEnabled:!isPaused];
+}
+
+- (void) togglePause {
+  [self setPause:!isPaused];
+}
+
+- (void) spawnSlime {
+  [self spawnSlime:ccp(0,0)];
+}
+
+- (void) spawnSlime:(CGPoint)screenTarget {
+  if (spawnCannon != nil) {
+      CGPoint gameTarget;// = [cameraManager getGamePoint:screenTarget];
+    [spawnCannon spawnSlime:gameTarget];
+  }
+   else {
+    [spawnPortal spawn];
+  }
 }
 
 - (void) setGoalPortal:(GoalPortal *)portal {
@@ -153,7 +215,16 @@ Level * currentLevel;
 }
 
 - (void) addGameItem:(GameItem *)item {
-	[items add:item];
+  [items put:[item id] param1:item];
+}
+
+- (void) removeGameItem:(GameItem *)item {
+  if (item != nil) {
+    if ([items containsKey:[item id]]) {
+      [item destroy];
+      [items remove:[item id]];
+    }
+  }
 }
 
 - (void) setLevelSize:(float)width height:(float)height {
@@ -172,30 +243,55 @@ Level * currentLevel;
 
 - (void) removeCustomOverLayer {
 	if (customOverLayer != nil) {
-		[scene removeChild:customOverLayer z:YES];
+		[scene  removeChild:customOverLayer cleanup:YES];
 		customOverLayer = nil;
 	}
 }
 
+- (void) setIsHudEnabled:(BOOL)value {
+  if (!value) {
+    if (isHudEnabled) {
+      [scene removeChild:hudLayer cleanup:NO];
+    }
+  }
+   else {
+    if (!isHudEnabled) {
+      [scene addChild:hudLayer z:hudZ];
+    }
+  }
+  isHudEnabled = value;
+}
+/*TODO
+- (void) draw:(GL10 *)gl {
+
+  for (GameItem * item in items values) {
+    [item draw:gl];
+  }
+
+}
+*/
 - (void) dealloc {
-	[world release];
-	//[gravity release];
-	[items release];
-	[backgroundSprite release];
-	[contactManager release];
-	[spawnPortal release];
-	[goalPortal release];
-	[scene release];
-	[levelLayer release];
-	[hudLayer release];
-	[backgroundLayer release];
-	//  [gameLayer release];
-	[customOverLayer release];
-	[label release];
-	// [levelOrigin release];
-	// [cameraManager release];
-	[currentLevelName release];
-	[super dealloc];
+  //[world release];
+ // [gravity release];
+  [items release];
+  [backgroundSprite release];
+ // [contactManager release];
+  [spawnPortal release];
+  [spawnCannon release];
+  [goalPortal release];
+  [scene release];
+  [levelLayer release];
+  [hudLayer release];
+  [backgroundLayer release];
+  [gameLayer release];
+  [customOverLayer release];
+  [label release];
+  //[levelOrigin release];
+  //[cameraManager release];
+  [currentLevelName release];
+  [itemsToRemove release];
+  [itemsToAdd release];
+  [super dealloc];
 }
 
 @end

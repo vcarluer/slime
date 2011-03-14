@@ -3,21 +3,32 @@
 //#import "Level.h"
 #import "SpriteSheetFactory.h"
 
+#import "CCLayer.h"
+#import "CCScene.h"
+#import "CCDirector.h"
+#import "CCSprite.h"
+#import "CCSpriteFrameCache.h"
+#import "CCSpriteSheet.h"
 
-@class	Level;
+
+
+
 extern BOOL isInit;
 
 @interface SlimeLoadingLayer : CCLayer {
   Level * currentLevel;
   NSObject * syncObj;
-  //UpdateCallback * nextCallback;
+  CCSpriteBatchNode * spriteSheet;
+  CCSprite * sprite;
+ // UpdateCallback * nextCallback;
 }
 
 + (CCScene *) scene;
 - (id) init;
 - (void) onEnter;
-- (void) update:(float)d;
 - (void) run;
+-(void) update: (ccTime) dt;
+
 
 @end
 

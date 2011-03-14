@@ -6,8 +6,7 @@
 }
 
 - (void) createAnimList;
-- (NSString *) getPlist;
-- (NSString *) getPng;
-- (GoalPortal *) instantiate:(float)x y:(float)y width:(float)width height:(float)height;
+- (NSString *) getPlistPng;
+- (GoalPortal *) instantiate:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height;
 - (void) runFirstAnimations:(GoalPortal *)item;
 @end
