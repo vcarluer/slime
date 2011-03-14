@@ -212,10 +212,75 @@
                 <key>sourceSize</key>
                 <string>{32,35}</string>
             </dict>
+            <key>splashed-01.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,70},{32,35}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{32,35}}</string>
+                <key>sourceSize</key>
+                <string>{32,35}</string>
+            </dict>
+            <key>splashed-02.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{32,70},{32,35}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{32,35}}</string>
+                <key>sourceSize</key>
+                <string>{32,35}</string>
+            </dict>
+            <key>splashed-03.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{64,70},{32,35}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{32,35}}</string>
+                <key>sourceSize</key>
+                <string>{32,35}</string>
+            </dict>
+            <key>splashed-04.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{96,70},{32,31}}</string>
+                <key>offset</key>
+                <string>{0,-2}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,4},{32,31}}</string>
+                <key>sourceSize</key>
+                <string>{32,35}</string>
+            </dict>
+            <key>splashed-05.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{128,70},{32,19}}</string>
+                <key>offset</key>
+                <string>{0,-8}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,16},{32,19}}</string>
+                <key>sourceSize</key>
+                <string>{32,35}</string>
+            </dict>
             <key>success-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,70},{30,35}}</string>
+                <string>{{160,70},{30,35}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -228,7 +293,7 @@
             <key>success-02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{30,70},{30,35}}</string>
+                <string>{{190,70},{30,35}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -241,7 +306,7 @@
             <key>success-03.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{60,70},{30,35}}</string>
+                <string>{{220,70},{30,35}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -254,7 +319,7 @@
             <key>success-04.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{90,70},{30,35}}</string>
+                <string>{{0,105},{30,35}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -267,7 +332,7 @@
             <key>success-05.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{120,70},{30,35}}</string>
+                <string>{{30,105},{30,35}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -280,7 +345,7 @@
             <key>success-06.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{150,70},{30,35}}</string>
+                <string>{{60,105},{30,35}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -293,7 +358,7 @@
             <key>success-07.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{180,70},{30,35}}</string>
+                <string>{{90,105},{30,35}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -306,7 +371,7 @@
             <key>wait-h-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{210,70},{35,28}}</string>
+                <string>{{120,105},{35,28}}</string>
                 <key>offset</key>
                 <string>{0,-1}</string>
                 <key>rotated</key>
@@ -319,7 +384,7 @@
             <key>wait-h-02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,105},{35,28}}</string>
+                <string>{{155,105},{35,28}}</string>
                 <key>offset</key>
                 <string>{0,-1}</string>
                 <key>rotated</key>
@@ -332,7 +397,7 @@
             <key>wait-h-03.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{35,105},{35,28}}</string>
+                <string>{{190,105},{35,28}}</string>
                 <key>offset</key>
                 <string>{0,-1}</string>
                 <key>rotated</key>
@@ -345,7 +410,7 @@
             <key>wait-h-04.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{70,105},{35,30}}</string>
+                <string>{{0,140},{35,30}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -358,7 +423,7 @@
             <key>wait-h-05.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{105,105},{35,30}}</string>
+                <string>{{35,140},{35,30}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -371,7 +436,7 @@
             <key>wait-v-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{140,105},{30,35}}</string>
+                <string>{{70,140},{30,35}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -384,7 +449,7 @@
             <key>wait-v-02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{170,105},{30,35}}</string>
+                <string>{{100,140},{30,35}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -397,7 +462,7 @@
             <key>wait-v-03.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{200,105},{30,35}}</string>
+                <string>{{130,140},{30,35}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -410,7 +475,7 @@
             <key>wait-v-04.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,140},{30,35}}</string>
+                <string>{{160,140},{30,35}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -423,7 +488,7 @@
             <key>wait-v-05.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{30,140},{30,35}}</string>
+                <string>{{190,140},{30,35}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
@@ -439,7 +504,7 @@
             <key>format</key>
             <integer>2</integer>
             <key>size</key>
-            <string>{245,175}</string>
+            <string>{250,175}</string>
             <key>textureFileName</key>
             <string>slime.png</string>
         </dict>
