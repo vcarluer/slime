@@ -1,5 +1,7 @@
 package gamers.associate.Slime;
 
+import gamers.associate.Slime.items.GameItemPhysic;
+
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 
@@ -14,13 +16,13 @@ public class ContactManager implements ContactListener {
 			if (oA instanceof GameItemPhysic)
 			{
 				GameItemPhysic item = (GameItemPhysic)oA;
-				item.contact(oB);
+				item.addContact(oB);
 			}
 			
 			if (oB instanceof GameItemPhysic)
 			{
 				GameItemPhysic item = (GameItemPhysic)oB;
-				item.contact(oA);
+				item.addContact(oA);
 			}
 		}	
 	}

@@ -1,7 +1,14 @@
 package gamers.associate.Slime;
 
+import gamers.associate.Slime.items.GameItem;
+import gamers.associate.Slime.items.GoalPortal;
+import gamers.associate.Slime.items.SpawnCannon;
+import gamers.associate.Slime.items.SpawnPortal;
+import gamers.associate.Slime.layers.BackgoundLayer;
+import gamers.associate.Slime.layers.HudLayer;
+import gamers.associate.Slime.layers.LevelLayer;
+
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.UUID;
 
@@ -15,7 +22,7 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
-import org.cocos2d.utils.javolution.MathLib;
+
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -71,8 +78,7 @@ public class Level {
 	protected String currentLevelName;
 	
 	protected ArrayList<GameItem> itemsToRemove;
-	
-	protected HomeLevelHandler homeLevelHandler;
+	protected ArrayList<GameItem> itemsToAdd;
 	
 	protected boolean isPaused;
 	
@@ -97,7 +103,7 @@ public class Level {
 		this.cameraManager = new CameraManager(this.gameLayer);							
 		
 		this.itemsToRemove = new ArrayList<GameItem>();
-		this.homeLevelHandler = new HomeLevelHandler();
+		this.itemsToAdd = new ArrayList<GameItem>();
 		
 		this.init();
 		
@@ -125,7 +131,7 @@ public class Level {
 		return currentLevel;
 	}
 	
-	protected void attachToFactory() {
+	protected void attachToFactory() {		
 		SlimeFactory.attachAll(this, this.levelLayer, this.world, this.worldRatio);
 	}
 	
@@ -154,18 +160,10 @@ public class Level {
 		
 		this.currentLevelName = levelName;
 		
-		if (this.currentLevelName == Level.LEVEL_HOME) {
-			this.homeLevelHandler.startHomeLevel();
-		}
-		
 		this.isPaused = false;
 	}
 			
 	public void resetLevel() {		
-		if (this.currentLevelName == Level.LEVEL_HOME) {
-			this.homeLevelHandler.stopHomeLevel();
-		}
-		
 		this.currentLevelName = "";
 		
 		for (GameItem item : this.items.values()) {
@@ -200,7 +198,7 @@ public class Level {
 		// Main game item spritesheet
 		SpriteSheetFactory.add("labo");
 		// Background
-		CCSpriteSheet spriteSheet = SpriteSheetFactory.getSpriteSheet("decor");		
+		CCSpriteSheet spriteSheet = SpriteSheetFactory.getSpriteSheet("decor", true);		
 		// Sprite too big for VM in UbuntuRox		
 		this.backgroundLayer.addChild(spriteSheet);
 		//this.backgroundLayer.setRotation(-90f);				
@@ -219,58 +217,60 @@ public class Level {
 		this.attachToFactory();
 	}
 	
-	protected void tick(float delta) {
+	public void tick(float delta) {
 		if (!isPaused) {
-			this.homeLevelHandler.tick();
+			for(GameItem item : this.itemsToAdd) {
+				this.addGameItem(item);
+			}
+			
+			this.itemsToAdd.clear();
+			
 			// TODO: physic step must be fix!
 			synchronized (world) {
 	    		world.step(delta, 6, 2);
-	    	}						
-			
-			this.destroyMarkedItems();
+	    	}												
 			
 			for(GameItem item : this.items.values()) {
 				item.render(delta);
 			}
 			
+			for(GameItem item : this.itemsToRemove) {
+				this.removeGameItem(item);
+			}
+			
+			this.itemsToRemove.clear();
+			
 			this.cameraManager.tick(delta);
 		}
 	}
-	
-	protected void destroyMarkedItems() {
-		for(GameItem item : this.itemsToRemove) {
-			this.removeGameItem(item);
-		}
-		
-		this.itemsToRemove.clear();
-	}
-	
-	public void markItemToDestroy(GameItem item) {		
+			
+	public void addItemToRemove(GameItem item) {
 		this.itemsToRemove.add(item);
 	}
 	
+	public void addItemToAdd(GameItem item) {
+		this.itemsToAdd.add(item);
+	}		
+		
 	public void setPause(boolean value) {		
 		if (value) {			
 			if (!this.isPaused) {
 				this.levelLayer.pauseSchedulerAndActions();
-				for(GameItem item : this.items.values()) {
-					item.getSprite().pauseSchedulerAndActions();
-				}
 			}
 		}
 		else
 		{
 			if (this.isPaused) {
 				this.levelLayer.resumeSchedulerAndActions();
-				for(GameItem item : this.items.values()) {
-					item.getSprite().resumeSchedulerAndActions();
-				}
 			}
+		}
+				
+		for(GameItem item : this.items.values()) {
+			item.setPause(value);
 		}
 		
 		this.isPaused = value;
 		this.setIsTouchEnabled(!this.isPaused);
-		this.homeLevelHandler.setPause(this.isPaused);
 	}
 	
 	public void togglePause() {
@@ -303,9 +303,10 @@ public class Level {
 		this.spawnSlime(CGPoint.getZero());		
 	}
 	
-	public void spawnSlime(CGPoint target) {								
-		if (this.spawnCannon != null) {
-			this.spawnCannon.spawnSlime(target);			
+	public void spawnSlime(CGPoint screenTarget) {								
+		if (this.spawnCannon != null) {			
+			CGPoint gameTarget = this.cameraManager.getGamePoint(screenTarget);
+			this.spawnCannon.spawnSlime(gameTarget);			
 		}
 		else
 		{
@@ -333,11 +334,11 @@ public class Level {
 		this.goalPortal = portal;		
 	}
 	
-	public void addGameItem(GameItem item) {
+	private void addGameItem(GameItem item) {
 		this.items.put(item.getId(), item);
 	}
 	
-	public void removeGameItem(GameItem item) {
+	private void removeGameItem(GameItem item) {
 		if (item != null) {
 			if (this.items.containsKey(item.getId())) {
 				item.destroy();

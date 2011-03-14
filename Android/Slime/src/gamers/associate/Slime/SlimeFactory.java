@@ -1,5 +1,16 @@
 package gamers.associate.Slime;
 
+import gamers.associate.Slime.items.BoxFactory;
+import gamers.associate.Slime.items.BumperFactory;
+import gamers.associate.Slime.items.GoalPortalFactory;
+import gamers.associate.Slime.items.HomeLevelHandlerFactory;
+import gamers.associate.Slime.items.LavaFactory;
+import gamers.associate.Slime.items.LevelEndFactory;
+import gamers.associate.Slime.items.PlatformFactory;
+import gamers.associate.Slime.items.SlimyFactory;
+import gamers.associate.Slime.items.SpawnCannonFactory;
+import gamers.associate.Slime.items.SpawnPortalFactory;
+
 import org.cocos2d.nodes.CCNode;
 
 import com.badlogic.gdx.physics.box2d.World;
@@ -13,8 +24,11 @@ public abstract class SlimeFactory {
 	public static BumperFactory Bumper = new BumperFactory();
 	public static SpawnCannonFactory Cannon = new SpawnCannonFactory();
 	public static LevelEndFactory LevelEnd = new LevelEndFactory();
+	public static HomeLevelHandlerFactory HomeLevelHandler = new HomeLevelHandlerFactory();
+	public static LavaFactory Lava = new LavaFactory();
+	public static BoxFactory Box = new BoxFactory();
 		
-	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {
+	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {		
 		Slimy.attach(level, attachNode, attachWorld, attachWorldRatio);
 		SpawnPortal.attach(level, attachNode);
 		Platform.attach(level, attachNode, attachWorld, attachWorldRatio);
@@ -22,6 +36,10 @@ public abstract class SlimeFactory {
 		Bumper.attach(level, attachNode, attachWorld, attachWorldRatio);
 		Cannon.attach(level, attachNode, attachWorld, attachWorldRatio);
 		LevelEnd.attach(level, attachNode, attachWorld, attachWorldRatio);
+		HomeLevelHandler.attach(level);
+		Lava.attach(level, attachNode, attachWorld, attachWorldRatio);
+		Box.attach(level, attachNode, attachWorld, attachWorldRatio);
+		SpriteSheetFactory.attachAll(attachNode);
 		isAttached = true;
 	}
 	
@@ -33,6 +51,10 @@ public abstract class SlimeFactory {
 		Bumper.detach();
 		Cannon.detach();
 		LevelEnd.detach();
+		HomeLevelHandler.detach();
+		Lava.detach();
+		Box.detach();
+		SpriteSheetFactory.detachAll();
 		isAttached = false;
 	}
 	
@@ -43,7 +65,10 @@ public abstract class SlimeFactory {
 		GoalPortal.destroy();
 		Bumper.destroy();
 		Cannon.destroy();
-		LevelEnd.destroy();
+		LevelEnd.destroy();		
+		Lava.destroy();
+		Box.destroy();
+		SpriteSheetFactory.destroy();
 		isAttached = false;
 	}
 }

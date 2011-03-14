@@ -1,5 +1,7 @@
 package gamers.associate.Slime;
 
+import gamers.associate.Slime.items.GameItem;
+
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.types.CGPoint;
@@ -10,6 +12,7 @@ public class CameraManager {
 	private float minScale;
 	private float maxScale;
 	private float zoomSpeed;
+	private float currentZoom;
 	private float screenW2 = CCDirector.sharedDirector().winSize().width * CCDirector.sharedDirector().winSize().width;
 	private float screenH2 = CCDirector.sharedDirector().winSize().height * CCDirector.sharedDirector().winSize().height;
 	
@@ -21,7 +24,7 @@ public class CameraManager {
 	private CGRect cameraView;
 	private CGPoint virtualCameraPos;
 	private GameItem followed;	
-	private CGPoint levelOrigin;
+	private CGPoint levelOrigin;		
 	
 	public CameraManager(CCLayer gameLayer) {
 		this.gameLayer = gameLayer;
@@ -159,13 +162,17 @@ public class CameraManager {
 	private CGPoint zoomScreenPin;
 	
 	public void setZoomPoint(CGPoint zoomPoint) {
-		this.zoomScreenPin = CGPoint.make(zoomPoint.x, zoomPoint.y);
+		this.zoomScreenPin = CGPoint.make(zoomPoint.x, zoomPoint.y);				
+		this.zoomAnchor = this.getGamePoint(zoomPoint);
+	}
+	
+	public CGPoint getGamePoint(CGPoint screenPoint) {		
 		float scale = this.gameLayer.getScale();
-		CGPoint zoomScaled = CGPoint.zero();
-		zoomScaled.x =  (zoomPoint.x - this.gameLayer.getPosition().x) / scale; 
-		zoomScaled.y = (zoomPoint.y - this.gameLayer.getPosition().y) / scale;
+		CGPoint gamePoint = CGPoint.zero();
+		gamePoint.x =  (screenPoint.x - this.gameLayer.getPosition().x) / scale; 
+		gamePoint.y = (screenPoint.y - this.gameLayer.getPosition().y) / scale;
 		
-		this.zoomAnchor = zoomScaled;
+		return gamePoint;
 	}
 	
 	public void zoomCameraBy(float zoomDelta) {		
@@ -183,8 +190,13 @@ public class CameraManager {
 		}
 		
 		this.gameLayer.setScale(zoomValue);
+		this.currentZoom = zoomValue;
 		this.keepPointAt(this.zoomAnchor, this.zoomScreenPin);
 		this.normalizePosition();
+	}
+		
+	public float getCurrentZoom() {
+		return this.currentZoom;
 	}
 	
 	public void setCameraView() {		

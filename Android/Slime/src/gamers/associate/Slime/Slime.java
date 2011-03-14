@@ -1,5 +1,8 @@
 package gamers.associate.Slime;
 
+import gamers.associate.Slime.layers.GALogoLayer;
+import gamers.associate.Slime.layers.SlimeLoadingLayer;
+
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.opengl.CCGLSurfaceView;

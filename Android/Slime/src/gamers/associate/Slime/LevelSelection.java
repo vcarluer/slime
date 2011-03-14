@@ -1,5 +1,7 @@
 package gamers.associate.Slime;
 
+import gamers.associate.Slime.layers.LevelSelectionLayer;
+
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 
@@ -25,7 +27,7 @@ public class LevelSelection {
 		this.scene.addChild(this.selectionLayer);
 	}
 	
-	protected CCScene getScene()
+	public CCScene getScene()
 	{
 		return this.scene;
 	}
