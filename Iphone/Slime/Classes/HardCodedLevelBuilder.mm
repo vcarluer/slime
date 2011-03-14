@@ -30,16 +30,12 @@ float LAND_HEIGHT = 64.0f;
     float w2 = s.width / 2;
     float h = s.height;
     float h2 = s.height / 2;
-    /* probleme with levelend
+    // probleme with levelend
     [levelEnd  create:w2 y:h + m width:w height:si];
     [levelEnd create:w + m y:h2 width:si height:h];
     [levelEnd create:w2 y:-m width:w height:si];
     [levelEnd create:-m y:h2 width:si height:h];
-     */
-    
-    
-    
-    
+     
     
 }
 
@@ -60,12 +56,12 @@ float LAND_HEIGHT = 64.0f;
     [level setSpawnPortal:my_spawnPortal];
     float goalPlatH = 20.0f;
     float goalPlatW = 100.0f;
- //   [platform create:s1.width / 2 y:LAND_HEIGHT + goalPlatH / 2 width:goalPlatW height:goalPlatH];
- //   GoalPortal * my_goalPortal = [goalPortal  create:s1.width / 2 y:LAND_HEIGHT + goalPlatH + 15];
- //   [level setGoalPortal:my_goalPortal];
- //   [bumper create:30 y:s1.height / 2 width:60 height:120 powa:2.0f];
+    [platform create:s1.width / 2 y:LAND_HEIGHT + goalPlatH / 2 width:goalPlatW height:goalPlatH];
+    GoalPortal * my_goalPortal = [goalPortal  create:s1.width / 2 y:LAND_HEIGHT + goalPlatH + 15];
+    [level setGoalPortal:my_goalPortal];
+    [bumper create:30 y:s1.height / 2 width:60 height:120 powa:2.0f];
     [homeLevelHandler create];
-  //  [level addCustomOverLayer:[HomeLayer get]];
+    [level addCustomOverLayer:[HomeLayer get]];
     [level setIsHudEnabled:NO];
     [level setIsTouchEnabled:NO];
 }
