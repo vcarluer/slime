@@ -130,8 +130,10 @@
 		}    
 		
 	}
-	CCAnimation *animation = [CCAnimation animationWithName:animName delay:interval frames:animArray];
-	return animation;
+	//CCAnimation *animation = [CCAnimation animationWithName:animName delay:interval frames:animArray];
+    CCAnimation * my_animation = [CCAnimation animationWithFrames:animArray delay:interval];
+    my_animation.name = animName;
+	return my_animation;
 	
 }
 
