@@ -1,5 +1,5 @@
 #import "SlimeFactory.h"
-#import "SpriteSheetFactory.h"
+
 
 BOOL isAttached;
 SlimyFactory * slimy = [[[SlimyFactory alloc] init] autorelease];
@@ -10,25 +10,24 @@ BumperFactory * bumper = [[[BumperFactory alloc] init] autorelease];
 SpawnCannonFactory * cannon = [[[SpawnCannonFactory alloc] init] autorelease];
 LevelEndFactory * levelEnd = [[[LevelEndFactory alloc] init] autorelease];
 HomeLevelHandlerFactory * homeLevelHandler = [[[HomeLevelHandlerFactory alloc] init] autorelease];
-LavaFactory * lava = [[[LavaFactory alloc] init] autorelease];
-BoxFactory * box = [[[BoxFactory alloc] init] autorelease];
+//LavaFactory * lava = [[[LavaFactory alloc] init] autorelease];
+//BoxFactory * box = [[[BoxFactory alloc] init] autorelease];
+SpriteSheetFactory * spriteSheetFactory = [[[SpriteSheetFactory alloc] init] autorelease];
 
 @implementation SlimeFactory
 
 + (void) attachAll:(Level *)level attachNode:(CCNode *)attachNode attachWorld:(b2World *)attachWorld attachWorldRatio:(float)attachWorldRatio {
   [slimy attach:level attachNode:attachNode attachWorld:attachWorld attachWorldRatio:attachWorldRatio];
     [spawnPortal attach:level];
-    //TODO
-    //attach:level param1:attachNode];
   [platform attach:level attachNode:attachNode attachWorld:attachWorld attachWorldRatio:attachWorldRatio];
   [goalPortal attach:level attachNode:attachNode attachWorld:attachWorld attachWorldRatio:attachWorldRatio];
   [bumper attach:level attachNode:attachNode attachWorld:attachWorld attachWorldRatio:attachWorldRatio];
   [cannon attach:level attachNode:attachNode attachWorld:attachWorld attachWorldRatio:attachWorldRatio];
   [levelEnd attach:level attachNode:attachNode attachWorld:attachWorld attachWorldRatio:attachWorldRatio];
   [homeLevelHandler attach:level];
-  [lava attach:level attachNode:attachNode attachWorld:attachWorld attachWorldRatio:attachWorldRatio];
-  [box attach:level attachNode:attachNode attachWorld:attachWorld attachWorldRatio:attachWorldRatio];
-  [SpriteSheetFactory attachAll:attachNode];
+  //[lava attach:level attachNode:attachNode attachWorld:attachWorld attachWorldRatio:attachWorldRatio];
+  //[box attach:level attachNode:attachNode attachWorld:attachWorld attachWorldRatio:attachWorldRatio];
+  [spriteSheetFactory attachAll:attachNode];
   isAttached = YES;
 }
 
@@ -41,9 +40,9 @@ BoxFactory * box = [[[BoxFactory alloc] init] autorelease];
   [cannon detach];
   [levelEnd detach];
   [homeLevelHandler detach];
-  [lava detach];
-  [box detach];
-  [SpriteSheetFactory detachAll];
+ // [lava detach];
+ // [box detach];
+  [spriteSheetFactory detachAll];
   isAttached = NO;
 }
 
@@ -59,7 +58,7 @@ BoxFactory * box = [[[BoxFactory alloc] init] autorelease];
   [lava destroy];
   [box destroy];
      */
-  [SpriteSheetFactory destroy];
+ // [SpriteSheetFactory destroy];
   isAttached = NO;
 }
 

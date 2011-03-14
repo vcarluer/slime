@@ -37,4 +37,6 @@ extern float Slimy_Default_Height;
 - (void) burn;
 - (CCAnimation *) getReferenceAnimation;
 - (void) handleContact:(GameItemPhysic *)item;
+
+
 @end

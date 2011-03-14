@@ -10,7 +10,7 @@
         
         CCLabelTTF *backLabel = [CCLabelTTF labelWithString:@"Back" fontName:@"Marker Felt" fontSize:32];
         CCMenuItem * itemBack = [CCMenuItemLabel itemWithLabel:backLabel target:self selector:@selector(goBack:)];
-        CCLabelTTF *pauseLabel = [CCLabelTTF labelWithString:@"Back" fontName:@"Marker Felt" fontSize:32];
+        CCLabelTTF *pauseLabel = [CCLabelTTF labelWithString:@"Pause" fontName:@"Marker Felt" fontSize:32];
         
         CCMenuItem * itemPause = [CCMenuItemLabel itemWithLabel:pauseLabel target:self selector:@selector(goPause:)];
         CGSize s = [[CCDirector sharedDirector] winSize];

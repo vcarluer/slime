@@ -13,6 +13,8 @@
 #import "HelloWorldScene.h"
 #import "RootViewController.h"
 #import "Level.h"
+#import "SlimeLoadingLayer.h"
+
 
 @implementation SlimeAppDelegate
 
@@ -112,9 +114,13 @@
 	[self removeStartupFlicker];
 	
 	// Run the intro Scene
-	Level * my_level = [[Level alloc]init];
+//	Level * my_level = [[Level alloc]init];
 	 
-	[[CCDirector sharedDirector] runWithScene: [my_level scene]];		
+//	[[CCDirector sharedDirector] runWithScene: [my_level scene]];	
+	
+    
+    //scene = [[LevelFactory GetLevel:@"Level1"] scene];
+    [[CCDirector sharedDirector] runWithScene:[SlimeLoadingLayer scene]];
 }
 
 

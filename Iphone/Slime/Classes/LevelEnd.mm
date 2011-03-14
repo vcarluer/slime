@@ -14,6 +14,8 @@
     CGPoint spawnPoint;
     spawnPoint.x = position.x;
     spawnPoint.y = position.y;
+    //TEMP AMZ 
+    worldRatio = 32;
     bodyDef.position.Set(spawnPoint.x / worldRatio,spawnPoint.y / worldRatio);
     b2PolygonShape staticBox;
     

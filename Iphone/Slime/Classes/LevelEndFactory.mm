@@ -10,7 +10,7 @@
 }
 
 - (LevelEnd *) instantiate:(float)x y:(float)y width:(float)width height:(float)height {
-  return [[[LevelEnd alloc] init:spriteSheet param1:x param2:y param3:width param4:height param5:world param6:worldRatio] autorelease];
+  return [[[LevelEnd alloc]  init:spriteSheet x:x y:y width:width height:height world:world worldRatio:32] autorelease];
 }
 
 - (void) runFirstAnimations:(LevelEnd *)item {

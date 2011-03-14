@@ -170,7 +170,7 @@
  return returnTouch;
  }
  */
-/*
+
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	//Add a new body/atlas sprite at the touched location
@@ -180,15 +180,17 @@
 		location = [[CCDirector sharedDirector] convertToGL: location];
 		
 		//[self addNewSpriteWithCoords: location];
-		/*
+		
 		Slimy * my_slimy;
 		//todo 
-		CGSize screenSize = [CCDirector sharedDirector].winSize;
+		//CGSize screenSize = [CCDirector sharedDirector].winSize;
 		my_slimy  = [slimy  create:location.x y:location.y ratio:1.5f];
 		[my_slimy fall];
 		
-		//[self addChild:my_slimy];
+//		[self addChild:my_slimy];
 	}
+}
+        /*
 - (void) draw:(GL10 *)gl {
   [super draw:gl];
   [level draw:gl];

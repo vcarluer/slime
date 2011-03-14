@@ -39,6 +39,8 @@ BOOL GA_isInit;
 - (id) init {
     if ((self = [super init])) {
         waitLogoSec = 2;
+       
+        
         //    nextCallback = [[[GALogoLayer_Anon1 alloc] init] autorelease];
     }
     return self;
@@ -60,10 +62,22 @@ BOOL GA_isInit;
         [sprite setScale:scale];
         isInit = YES;
     }
-	
+	 [self scheduleUpdate: @selector(update:)];
     // [self schedule:nextCallback];
     // onEnterTime = [System currentTimeMillis];
 }
+
+/*
+- (void) update:(float)d {
+    long elapsed = ([system currentTimeMillis] - onEnterTime) / 1000;
+    if (elapsed > waitLogoSec) {
+        [self unschedule:nextCallback];
+        [spriteSheet removeChild:sprite param1:YES];
+        CCScene * nextScene = [SlimeLoadingLayer scene];
+        [[CCDirector sharedDirector] replaceScene:nextScene];
+    }
+}
+*/
 
 
 - (void) tick:(ccTime) dt{

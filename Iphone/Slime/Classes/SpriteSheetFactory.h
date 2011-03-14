@@ -20,6 +20,6 @@ extern int Excluded_For_Attach;
 + (CCSpriteBatchNode *) getSpriteSheet:(NSString *)plistPngName;
 + (CCSpriteBatchNode *) getSpriteSheet:(NSString *)plistPngName isExcluded:(BOOL)isExcluded;
 + (void) destroy;
-+ (void) attachAll:(CCNode *)attachNode;
+- (void) attachAll:(CCNode *)attachNode;
 + (void) detachAll;
 @end

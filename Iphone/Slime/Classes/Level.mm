@@ -66,7 +66,7 @@ Level * currentLevel;
 }
 
 - (void) attachToFactory {
-  [SlimeFactory attachAll:levelLayer attachWorld:world attachWorldRatio:worldRatio];
+  [SlimeFactory attachAll:self attachNode:levelLayer attachWorld:world attachWorldRatio:worldRatio ];
 }
 
 - (void) reload {
@@ -168,7 +168,7 @@ Level * currentLevel;
 }
 
 - (void) addItemToAdd:(GameItem *)item {
-  [itemsToAdd add:item];
+  [itemsToAdd addObject:item];
 }
 
 - (void) setPause:(BOOL)value {

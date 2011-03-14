@@ -11,6 +11,7 @@
 #import "GoalPortalFactory.h"
 #import "BumperFactory.h"
 #import "PlatformFactory.h"
+#import "SpriteSheetFactory.h"
 
 
 extern BOOL isAttached;
@@ -22,13 +23,14 @@ extern BumperFactory * bumper;
 extern SpawnCannonFactory * cannon;
 extern LevelEndFactory * levelEnd;
 extern HomeLevelHandlerFactory * homeLevelHandler;
-extern LavaFactory * lava;
-extern BoxFactory * box;
+//extern LavaFactory * lava;
+//extern BoxFactory * box;
+extern SpriteSheetFactory * spriteSheetFactory;
 
 @interface SlimeFactory : NSObject {
 }
 
-+ (void) attachAll:(CCNode *)attachNode attachWorld:(b2World *)attachWorld attachWorldRatio:(float)attachWorldRatio;
++ (void) attachAll: (Level *)level attachNode:(CCNode *)attachNode attachWorld:(b2World *)attachWorld attachWorldRatio:(float)attachWorldRatio;
 + (void) detachAll;
 + (void) destroyAll;
 @end

@@ -10,20 +10,9 @@
 #import "CCSpriteFrameCache.h"
 #import "CCSpriteSheet.h"
 
-/* todo
-@interface SlimeLoadingLayer_Anon1 : NSObject <UpdateCallback> {
-}
 
-- (void) update:(float)d;
-@end
 
-@interface InitThread : Thread {
-}
 
-- (void) run;
-@end
-
- */
 extern BOOL isInit;
 
 @interface SlimeLoadingLayer : CCLayer {
@@ -37,8 +26,9 @@ extern BOOL isInit;
 + (CCScene *) scene;
 - (id) init;
 - (void) onEnter;
-- (void) update:(float)d;
 - (void) run;
+-(void) update: (ccTime) dt;
+
 
 @end
 

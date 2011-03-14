@@ -1,5 +1,6 @@
 #import "HomeLayer.h"
 #import "SpriteSheetFactory.h"
+#import "LevelSelection.h"
 
 
 HomeLayer * layer;
@@ -43,8 +44,7 @@ HomeLayer * layer;
 }
 
 - (void) selectPlay:(NSObject *)sender {
-    //TODO
-    // [[CCDirector sharedDirector] replaceScene:[[LevelSelection get] scene]];
+     [[CCDirector sharedDirector] replaceScene:[[LevelSelection get] scene]];
 }
 
 @end

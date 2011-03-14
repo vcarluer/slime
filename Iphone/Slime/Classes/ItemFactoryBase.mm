@@ -6,7 +6,7 @@
 @synthesize spriteSheet;
 
 - (id) init {
-  if (self = [super init]) {
+  if ((self = [super init])) {
     isInit = NO;
     isAttached = NO;
     ratio = 1.0f;
@@ -28,7 +28,11 @@
 }
 
 - (void) createAnim:(NSString *)animName frameCount:(int)frameCount {
-  [sharedAnimations put:animName param1:[GameItemCocos createAnim:animName param1:frameCount]];
+  [sharedAnimations setObject:[GameItemCocos createAnim:animName frameCount:frameCount] forKey:animName];
+}
+
+- (void) createAnim:(NSString *)animName frameCount:(int)frameCount interval:(float)interval{
+    
 }
 
 - (NSString *) getPlistPng {

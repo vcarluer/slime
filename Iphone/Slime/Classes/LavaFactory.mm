@@ -3,7 +3,7 @@
 @implementation LavaFactory
 
 - (void) createAnimList {
-  [self createAnim:@"lava" param1:1 param2:0.5f];
+  [Lava createAnim:@"lava" frameCount:1 interval:0.5f];
 }
 
 - (NSString *) getPlistPng {
@@ -11,7 +11,7 @@
 }
 
 - (Lava *) instantiate:(float)x y:(float)y width:(float)width height:(float)height {
-  return [[[Lava alloc] init:spriteSheet param1:x param2:y param3:width param4:height param5:world param6:worldRatio] autorelease];
+  return [[[Lava alloc] init:spriteSheet x:x y:y width:width height:height world:world worldRatio:worldRatio] autorelease];
 }
 
 - (void) runFirstAnimations:(Lava *)item {
