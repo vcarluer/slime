@@ -68,9 +68,11 @@
 }
 
 - (void) dealloc {
+    /*
 	[spriteSheet release];
 	[slime release];
 	[super dealloc];
+     */
 }
 
 @end

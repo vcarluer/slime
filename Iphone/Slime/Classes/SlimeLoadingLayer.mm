@@ -37,23 +37,23 @@ CCScene * scene;
     if (isInit == NO) {
         spriteSheet = [SpriteSheetFactory getSpriteSheet:@"logo" isExcluded:YES];
         [self addChild:spriteSheet];
-        CCSpriteFrame * spriteFrame = [[CCSpriteFrameCache sharedSpriteFrameCache]  spriteFrameByName:@"SlimeTitle.png"];
+        //CCSpriteFrame * spriteFrame = [[CCSpriteFrameCache sharedSpriteFrameCache]  spriteFrameByName:@"SlimeTitle.png"];
         
         
         //   sprite = [CCSprite sprite:[[CCSpriteFrameCache sharedSpriteFrameCache] getSpriteFrame:@"SlimeTitle.png"]];
-        CCSprite * my_sprite = [CCSprite spriteWithSpriteFrame:spriteFrame];
-        [spriteSheet addChild:my_sprite];
-        [sprite setPosition:ccp(0 ,0)];
+        //CCSprite * my_sprite = [CCSprite spriteWithSpriteFrame:spriteFrame];
+        //[spriteSheet addChild:my_sprite];
+        //[sprite setPosition:ccp(-200 ,0)];
         
         // [sprite setPosition:ccp([[CCDirector sharedDirector] winSize].width / 2 ,[[CCDirector sharedDirector] winSize].height / 2)];
-        
-        [NSThread detachNewThreadSelector:@selector(run) toTarget:self withObject:nil];
-
+        [self unscheduleUpdate]; 
+        //[NSThread detachNewThreadSelector:@selector(run) toTarget:self withObject:nil];
+        [self run];
     }
     else {
         //[[currentLevel cameraManager] setCameraView];
     }
-    //[self scheduleUpdate];
+    [self scheduleUpdate];
 }
 
 - (void) update:(float)d {
@@ -61,8 +61,9 @@ CCScene * scene;
 //    [slimeLoadingLock lock];
     if (isInit) {
         [self unscheduleUpdate]; 
-         [spriteSheet removeChild:sprite cleanup:YES];
-        [[CCDirector sharedDirector] replaceScene:[currentLevel scene]];
+        // [spriteSheet removeChild:sprite cleanup:YES];
+        [[CCDirector sharedDirector] pushScene:[currentLevel scene]];
+        [self scheduleUpdate];
     }
 //    [slimeLoadingLock unlock];
 }
@@ -77,12 +78,14 @@ CCScene * scene;
 }
 
 - (void) dealloc {
+    /*
     [currentLevel release];
     [syncObj release];
     [spriteSheet release];
     [sprite release];
     //[nextCallback release];
     [super dealloc];
-}
+*/
+     }
 
 @end

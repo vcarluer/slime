@@ -24,10 +24,12 @@
 }
 
 - (void) dealloc {
+    /*
   [moveBeganAt release];
   [lastMoveReference release];
   [lastMoveDelta release];
   [super dealloc];
+     */
 }
 
 @end

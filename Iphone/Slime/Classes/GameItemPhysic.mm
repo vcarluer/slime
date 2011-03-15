@@ -10,7 +10,7 @@ short Category_OutGame = 0x0003;
 
 
 - (id) init:(CCNode *)node x:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height world:(b2World *)my_world worldRatio:(float)my_worldRatio {
-	self = [super init:node x:my_x y:my_y width:my_width height:my_height];
+	self = [super init:node x:my_x y:my_y width:my_width height:my_height world:my_world worldRatio:my_worldRatio];
 	if (self != nil) {
 		bodyWidth = my_width;
 		bodyHeight = my_height;
@@ -20,15 +20,16 @@ short Category_OutGame = 0x0003;
 }
 
 - (void) destroy {
-	[world destroyBody:body];
+	world->DestroyBody(body);
 	world = nil;
 	body = nil;
 	[super destroy];
 }
 
+/*
 - (void) initBody {
 }
-
+*/
 
 
 - (void) render:(float)delta {
@@ -43,7 +44,7 @@ short Category_OutGame = 0x0003;
 - (void) addContact:(NSObject *)with {
 	if ([with isKindOfClass:[GameItemPhysic class]]) {
 		GameItemPhysic * item = (GameItemPhysic *)with;
-		[contacts add:item];
+		[contacts addObject:item];
 	}
 }
 
@@ -55,14 +56,15 @@ short Category_OutGame = 0x0003;
 	
 	[contacts release];
 }
-
+/*
 - (void) handleContact:(GameItemPhysic *)item {
 }
+*/
 
 - (void) dealloc {
-	[body release];
-	[contacts release];
-	[super dealloc];
+	//[body release];
+//	[contacts release];
+//	[super dealloc];
 }
 
 

@@ -12,19 +12,13 @@
 
 
 @interface GameItem : NSObject  {
-  	NSString * my_id;	
-	
-	CGPoint position;
+  	NSString * my_id;
+    CGPoint position;
 	float angle;
 	float width;
 	float height;
 	BOOL  isPaused;
-	/*
-	NSMutableDictionary * animationList;
-	CCAction * currentAction;
-	CCSprite * sprite;
-	CCNode * rootNode;
-	 */
+
 }
 
 //@property(nonatomic, retain, readonly) UUID * id;

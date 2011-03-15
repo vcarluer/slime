@@ -90,6 +90,7 @@ extern Level * currentLevel;
 - (void) spawnSlime:(CGPoint)screenTarget;
 - (void) setGoalPortal:(GoalPortal *)portal;
 - (void) addGameItem:(GameItem *)item;
+- (void) removeGameItem:(GameItem *)item;
 - (void) setLevelSize:(float)width height:(float)height;
 - (void) setIsTouchEnabled:(BOOL)value;
 - (void) addCustomOverLayer:(CCLayer *)layer;

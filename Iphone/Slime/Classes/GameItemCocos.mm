@@ -130,8 +130,7 @@
 		}    
 		
 	}
-	//CCAnimation *animation = [CCAnimation animationWithName:animName delay:interval frames:animArray];
-    CCAnimation * my_animation = [CCAnimation animationWithFrames:animArray delay:interval];
+	CCAnimation * my_animation = [CCAnimation animationWithFrames:animArray delay:interval];
     my_animation.name = animName;
 	return my_animation;
 	
@@ -152,12 +151,14 @@
 }
 
 - (void) dealloc {
+    /*
 	[animationList release];
 	[currentAction release];
 	[sprite release];
 	[rootNode release];
 	[texture release];
 	[super dealloc];
+     */
 }
 
 @end

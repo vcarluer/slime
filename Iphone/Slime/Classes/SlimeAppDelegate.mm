@@ -116,7 +116,7 @@
 	// Run the intro Scene
 //	Level * my_level = [[Level alloc]init];
 	 
-//	[[CCDirector sharedDirector] runWithScene: [my_level scene]];	
+//[[CCDirector sharedDirector] runWithScene: [[Level get:LEVEL_HOME] scene] ];	
 	
     
     //scene = [[LevelFactory GetLevel:@"Level1"] scene];

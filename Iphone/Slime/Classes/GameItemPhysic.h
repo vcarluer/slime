@@ -13,8 +13,7 @@ extern short Category_OutGame;
   b2Body *body;
   float bodyWidth;
   float bodyHeight;
- // float worldRatio;
-	NSMutableArray * contacts;
+  NSMutableArray * contacts;
 }
 @property (nonatomic,readwrite) float bodyWidth;
 @property (nonatomic,readwrite) float bodyHeight;

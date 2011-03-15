@@ -44,15 +44,15 @@
 	}
 	isPaused = value;
 }
-
+/*
 - (void) pause {
 }
 
 - (void) resume {
 }
-
+*/
 - (void) dealloc {
-  [super dealloc];
+  //[super dealloc];
 }
 
 @end

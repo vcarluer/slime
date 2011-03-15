@@ -209,8 +209,8 @@ float Default_Body_Height = 23.0f;
 }
 
 - (void) dealloc {
-	[waitAction release];
-	[super dealloc];
+	//[waitAction release];
+	//[super dealloc];
 }
 
 @end

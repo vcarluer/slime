@@ -37,7 +37,7 @@ Level * currentLevel;
     [scene addChild:gameLayer z:0];
     isHudEnabled = YES;
     [scene addChild:hudLayer z:hudZ];
-    items = [[[NSMutableDictionary alloc] init] autorelease];
+    items = [[[NSMutableArray alloc] init] autorelease];
 //todo
         //    cameraManager = [[[CameraManager alloc] init:gameLayer] autorelease];
     itemsToRemove = [[[NSMutableArray alloc] init] autorelease];
@@ -95,7 +95,7 @@ Level * currentLevel;
     [item destroy];
   }
 
-  [items release];
+  //[items release];
   spawnPortal = nil;
   goalPortal = nil;
   [self removeCustomOverLayer];
@@ -158,13 +158,13 @@ Level * currentLevel;
       [self removeGameItem:item];
     }
 
-    [itemsToRemove clear];
+    [itemsToRemove removeAllObjects];
     //[cameraManager tick:delta];
   }
 }
 
 - (void) addItemToRemove:(GameItem *)item {
-  [itemsToRemove add:item];
+  [itemsToRemove addObject:item];
 }
 
 - (void) addItemToAdd:(GameItem *)item {
@@ -183,7 +183,7 @@ Level * currentLevel;
     }
   }
 
-  for (GameItem * item in [items values]) {
+  for (GameItem * item in items) {
     [item setPause:value];
   }
 
@@ -211,18 +211,18 @@ Level * currentLevel;
 
 - (void) setGoalPortal:(GoalPortal *)portal {
 	goalPortal = portal;
-	[items add:goalPortal];
+	[items addObject:goalPortal];
 }
 
 - (void) addGameItem:(GameItem *)item {
-  [items put:[item id] param1:item];
+  [items addObject:item];
 }
 
 - (void) removeGameItem:(GameItem *)item {
   if (item != nil) {
-    if ([items containsKey:[item id]]) {
+    if ([items containsObject:item]) {
       [item destroy];
-      [items remove:[item id]];
+      [items removeObject:item];
     }
   }
 }
@@ -271,6 +271,7 @@ Level * currentLevel;
 }
 */
 - (void) dealloc {
+    /*
   //[world release];
  // [gravity release];
   [items release];
@@ -292,6 +293,7 @@ Level * currentLevel;
   [itemsToRemove release];
   [itemsToAdd release];
   [super dealloc];
+     */
 }
 
 @end

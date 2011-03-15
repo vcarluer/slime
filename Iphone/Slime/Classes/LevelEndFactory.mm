@@ -9,8 +9,8 @@
   return @"";
 }
 
-- (LevelEnd *) instantiate:(float)x y:(float)y width:(float)width height:(float)height {
-  return [[[LevelEnd alloc]  init:spriteSheet x:x y:y width:width height:height world:world worldRatio:32] autorelease];
+- (LevelEnd *) instantiate:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height {
+  return [[[LevelEnd alloc]  init:spriteSheet x:my_x y:my_y width:my_width height:my_height world:world worldRatio:worldRatio] autorelease];
 }
 
 - (void) runFirstAnimations:(LevelEnd *)item {

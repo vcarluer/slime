@@ -32,15 +32,19 @@ float Default_Height = 10.0f;
   spawnPoint.x = position.x;
   spawnPoint.y = position.y;
   bodyDef.position.Set(spawnPoint.x / 32, spawnPoint.y / 32);
-  b2PolygonShape * contactBox;
-  contactBox->SetAsBox(bodyWidth / 32 / 2 ,bodyHeight / 32 / 2);
+  b2PolygonShape contactBox;
+  contactBox.SetAsBox(bodyWidth / 32 / 2 ,bodyHeight / 32 / 2);
 
   //@synchronized(world) 
   //{
-  
+   bodyDef.userData = self; 
    body = world->CreateBody(&bodyDef);
-    bodyDef.userData = self;
-   b2Fixture * fix = body->CreateFixture((b2Shape *)contactBox ,1.0f);
+    b2FixtureDef def;
+	def.shape = &contactBox;
+	def.density = 1.0f;
+    
+	 
+   b2Fixture * fix = body->CreateFixture(&def);
    fix->SetSensor(YES);
   //}
 }

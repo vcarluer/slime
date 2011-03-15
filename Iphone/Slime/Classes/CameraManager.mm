@@ -182,6 +182,7 @@
 }
 
 - (void) dealloc {
+    /*
   [gameLayer release];
 //  [moveCameraBy release];
 //  [cameraView release];
@@ -191,6 +192,7 @@
 //  [zoomAnchor release];
 //  [zoomScreenPin release];
   [super dealloc];
+     */
 }
 
 @end

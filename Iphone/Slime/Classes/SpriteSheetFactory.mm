@@ -19,6 +19,7 @@ static NSMutableDictionary *SpriteSheetList()
         dict = [[NSMutableDictionary alloc] init];
     }
     return [[dict retain] autorelease];
+    
 }
 
 
@@ -33,18 +34,24 @@ static NSMutableDictionary *SpriteSheetList()
 
 
 + (void) add:(NSString *)plistPngName isExcluded:(BOOL)isExcluded {
-	if ([SpriteSheetList() objectForKey:plistPngName] == nil) {
-		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:[plistPngName stringByAppendingString:@".plist"]];
-		CCSpriteBatchNode * spriteSheet = [CCSpriteBatchNode batchNodeWithFile:[plistPngName stringByAppendingString:@".png"]];
-		[SpriteSheetList() setObject:spriteSheet forKey:plistPngName];	
+    
+    if(plistPngName !=@"")
+    {
+        if ([SpriteSheetList() objectForKey:plistPngName] == nil) {
+            [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:[plistPngName stringByAppendingString:@".plist"]];
+            CCSpriteBatchNode * spriteSheet = [CCSpriteBatchNode batchNodeWithFile:[plistPngName stringByAppendingString:@".png"]];
+            int tag = Included_For_Attach;
+            if (isExcluded){
+                tag = Excluded_For_Attach;
+            }
+            spriteSheet.tag = tag;
+            [SpriteSheetList() setObject:spriteSheet forKey:plistPngName];	
+            
+        }
+    }
+}
 
-	}
-}
-/*
-+ (CCSpriteBatchNode *) getSpriteSheet:(NSString *)plistPngName {
-  return [self getSpriteSheet:plistPngName isExcluded:NO];
-}
-*/
+
 + (CCSpriteBatchNode *) getSpriteSheet:(NSString *)plistPngName {
 	[self add:plistPngName];
 	return [SpriteSheetList() objectForKey:plistPngName];
@@ -63,16 +70,32 @@ static NSMutableDictionary *SpriteSheetList()
 
 - (void) attachAll:(CCNode *)attachNode {
 	rootNode = attachNode;
-//	[rootNode addChild:spriteSheet];
+    if (rootNode != nil) {
+        [SpriteSheetFactory detachAll];
+       // NSMutableDictionary * temp_SpriteSheetList = SpriteSheetList();
+        /*
+        int i;
+        for (i=0; i<= [temp_SpriteSheetList count]; i++) {
+            CCSpriteBatchNode * my_spriteSheet = [temp_SpriteSheetList 
+        }
+         */
+        for (id key in SpriteSheetList()) {
+            CCSpriteBatchNode * my_spriteSheet = [SpriteSheetList() objectForKey:key];
+            if ([my_spriteSheet tag] == Included_For_Attach) {
+                [rootNode addChild:my_spriteSheet];
+            }
+        }
+    }
+	
 	isAttached = YES;
 }
 
 + (void) detachAll {
   if (spritsheet_isAttached && rootNode != nil) {
 
-    for (CCSpriteBatchNode * spriteSheet in [SpriteSheetList() allValues]) {
-      if ([spriteSheet tag] == Included_For_Attach) {
-        [rootNode removeChild:spriteSheet cleanup:YES];
+    for (CCSpriteBatchNode * my_spriteSheet in [SpriteSheetList() allValues]) {
+      if ([my_spriteSheet tag] == Included_For_Attach) {
+        [rootNode removeChild:my_spriteSheet cleanup:YES];
       }
     }
 

@@ -15,6 +15,8 @@
 - (id) create;
 - (id) create:(float)my_x y:(float)my_y;
 - (id) create:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height;
+
 - (id) instantiate:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height;
+ 
 @end
 

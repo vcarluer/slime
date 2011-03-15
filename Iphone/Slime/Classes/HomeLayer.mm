@@ -16,10 +16,11 @@ HomeLayer * layer;
 
 - (id) init {
     if ((self = [super init])) {
-        CCSpriteBatchNode  * spriteSheet = [SpriteSheetFactory getSpriteSheet:@"logo" ];
-        [self addChild:spriteSheet];
+        //AMZ remove
+        CCSpriteBatchNode  * my_spriteSheet = [SpriteSheetFactory getSpriteSheet:@"logo" isExcluded:YES ];
+        //[self addChild:my_spriteSheet];
         CCSprite * sprite = [CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"SlimeTitle.png"]];     
-        [spriteSheet addChild:sprite];
+        [my_spriteSheet addChild:sprite];
         CGSize s = [[CCDirector sharedDirector] winSize];
         [sprite setPosition:ccp(s.width / 2, s.height / 2)];
         float shiftMenu = -100.0f;

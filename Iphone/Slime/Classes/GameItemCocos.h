@@ -2,16 +2,13 @@
 #import "GameItem.h"
 #import "TextureMode.h"
 
-/**
- * @author  vince
- */
-
 @interface GameItemCocos : GameItem {
   NSMutableDictionary * animationList;
   CCAction * currentAction;
   CCSprite * sprite;
   CCNode * rootNode;
   CCTexture2D * texture;
+  //AMZ pas sure pour texturmode    
   TextureMode textureMode;
 }
 

@@ -109,8 +109,9 @@ float spawncannon_Default_Height = 32.0f;
 }
 
 - (void) dealloc {
+    
 //  [target release];
-  [super dealloc];
+ // [super dealloc];
 }
 
 @end

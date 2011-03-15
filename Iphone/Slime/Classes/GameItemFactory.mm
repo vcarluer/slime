@@ -22,10 +22,10 @@
 - (id) create:(float)my_x y:(float)my_y {
 	return [self create:my_x y:my_y width:0 height:0];
 }
-
+/*
 - (id) create:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height {
 	if (isAttached) {
-		SpawnPortal * item = [self instantiate:my_x y:my_y width:my_width height:my_height];
+		id * item = [self instantiate:my_x y:my_y width:my_width height:my_height];
 		[level addItemToAdd:item];
 		return item;
 	}
@@ -36,10 +36,10 @@
 
 - (id) instantiate:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height {
 }
-
+*/
 - (void) dealloc {
-	[level release];
-  [super dealloc];
+//	[level release];
+//  [super dealloc];
 }
 
 @end

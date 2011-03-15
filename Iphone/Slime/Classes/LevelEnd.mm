@@ -24,8 +24,9 @@
 
  // @synchronized(world) 
  // {
+      bodyDef.userData = self.sprite;
       body = world->CreateBody(&bodyDef);
-      bodyDef.userData = self;
+      
       
       b2FixtureDef fixtureDef;
     fixtureDef.shape = &staticBox;
