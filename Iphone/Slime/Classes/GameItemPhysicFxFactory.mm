@@ -2,10 +2,11 @@
 
 @implementation GameItemPhysicFxFactory
 - (void) attach:(Level *)my_level attachNode:(CCNode *)attachNode attachWorld:(b2World *)attachWorld attachWorldRatio:(float)attachWorldRatio {
-  //level = level;
+  level = my_level;
   rootNode = attachNode;
-  world = attachWorld;
-  worldRatio = attachWorldRatio;
+  world = attachWorld;	
+  //worldRatio = attachWorldRatio;
+    worldRatio = 32;
   [self initAnimation];
   //[rootNode addChild:spriteSheet];
   isAttached = YES;
@@ -23,7 +24,7 @@
 
 - (void) dealloc {
  // [world release];
-  [super dealloc];
+ // [super dealloc];
 }
 
 

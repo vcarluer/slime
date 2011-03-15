@@ -1,7 +1,8 @@
 #import "Platform.h"
+#import "Box2D.h"
 
 
-NSString * texture = @"metal.png";
+NSString * platform_texture = @"metal.png";
 
 @implementation Platform
 

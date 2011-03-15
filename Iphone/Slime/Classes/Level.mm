@@ -37,7 +37,7 @@ Level * currentLevel;
     [scene addChild:gameLayer z:0];
     isHudEnabled = YES;
     [scene addChild:hudLayer z:hudZ];
-    items = [[[NSMutableDictionary alloc] init] autorelease];
+    items = [[[NSMutableArray alloc] init] autorelease];
 //todo
         //    cameraManager = [[[CameraManager alloc] init:gameLayer] autorelease];
     itemsToRemove = [[[NSMutableArray alloc] init] autorelease];
@@ -66,12 +66,13 @@ Level * currentLevel;
 }
 
 - (void) attachToFactory {
-  [SlimeFactory attachAll:self attachWorld:levelLayer attachWorldRatio:worldRatio];
+  [SlimeFactory attachAll:self attachNode:levelLayer attachWorld:world attachWorldRatio:worldRatio ];
 }
 
 - (void) reload {
   [currentLevel loadLevel:currentLevelName];
-  [[currentLevel cameraManager] setCameraView];
+   //TODO 
+ // [[currentLevel cameraManager] setCameraView];
 }
 
 - (void) attachLevelToCamera {
@@ -90,11 +91,11 @@ Level * currentLevel;
 - (void) resetLevel {
   currentLevelName = @"";
 
-  for (GameItem * item in [items values]) {
+  for (GameItem * item in items) {
     [item destroy];
   }
 
-  [items clear];
+  //[items release];
   spawnPortal = nil;
   goalPortal = nil;
   [self removeCustomOverLayer];
@@ -110,22 +111,23 @@ Level * currentLevel;
 	contactManager = new ContactManager;
 	world->SetContactListener(contactManager);
   [SpriteSheetFactory add:@"labo"];
-	
+		CGSize screenSize = [CCDirector sharedDirector].winSize;
 //	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"decor.plist"];
-  CCSpriteSheet * spriteSheet = [SpriteSheetFactory getSpriteSheet:@"decor" param1:YES];
+  CCSpriteBatchNode * my_spriteSheet = [SpriteSheetFactory getSpriteSheet:@"decor" isExcluded:YES];
 	
 	
-	CCSprite *my_spriteSheet = [CCSprite spriteWithFile:@"decor.png"];
-	my_spriteSheet.position = ccp(500, 0);
+	CCSprite *my_sprite = [CCSprite spriteWithFile:@"decor.png"];
+	my_sprite.position = ccp(500, 0);
 	
 	
-  [backgroundLayer addChild:spriteSheet];
-  backgroundSprite = [CCSprite sprite:[[CCSpriteFrameCache sharedSpriteFrameCache] getSpriteFrame:@"decor.png"]];
-  [backgroundSprite setAnchorPoint:0 param1:0];
-  [spriteSheet addChild:backgroundSprite];
-  label = [CCLabel makeLabel:@"Hud !" param1:@"DroidSans" param2:16];
+  [backgroundLayer addChild:my_spriteSheet];
+   // backgroundSprite = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"decor"]   
+  //backgroundSprite = [CCSprite sprite:[[CCSpriteFrameCache sharedSpriteFrameCache]  getSpriteFrame:@"decor.png"]];
+  //[backgroundSprite setAnchorPoint:CGPointZero];
+  //[spriteSheet addChild:backgroundSprite];
+  label = [CCLabelTTF labelWithString:@"Hud !" fontName:@"Marker Felt" fontSize:16];	
   [hudLayer addChild:label];
-  [label setPosition:[CGPoint ccp:20 param1:[[[CCDirector sharedDirector] winSize] height] - 20]];
+  label.position = ccp( screenSize.width/2, screenSize.height-20);
   [self attachToFactory];
 //	[levelLayer addChild:spriteSheet];
 	
@@ -140,14 +142,14 @@ Level * currentLevel;
       [self addGameItem:item];
     }
 
-    [itemsToAdd clear];
+    [itemsToAdd release];
 
-    @synchronized(world) 
-    {
-      [world step:delta param1:6 param2:2];
-    }
+    //@synchronized(world) 
+    //{
+     world->Step(delta, 6, 2);
+    //}
 
-    for (GameItem * item in [items values]) {
+    for (GameItem * item in items) {
       [item render:delta];
     }
 
@@ -156,17 +158,17 @@ Level * currentLevel;
       [self removeGameItem:item];
     }
 
-    [itemsToRemove clear];
-    [cameraManager tick:delta];
+    [itemsToRemove removeAllObjects];
+    //[cameraManager tick:delta];
   }
 }
 
 - (void) addItemToRemove:(GameItem *)item {
-  [itemsToRemove add:item];
+  [itemsToRemove addObject:item];
 }
 
 - (void) addItemToAdd:(GameItem *)item {
-  [itemsToAdd add:item];
+  [itemsToAdd addObject:item];
 }
 
 - (void) setPause:(BOOL)value {
@@ -181,7 +183,7 @@ Level * currentLevel;
     }
   }
 
-  for (GameItem * item in [items values]) {
+  for (GameItem * item in items) {
     [item setPause:value];
   }
 
@@ -194,12 +196,12 @@ Level * currentLevel;
 }
 
 - (void) spawnSlime {
-  [self spawnSlime:[CGPoint zero]];
+  [self spawnSlime:ccp(0,0)];
 }
 
-- (void) spawnSlime:(CGPoint *)screenTarget {
+- (void) spawnSlime:(CGPoint)screenTarget {
   if (spawnCannon != nil) {
-    CGPoint * gameTarget = [cameraManager getGamePoint:screenTarget];
+      CGPoint gameTarget;// = [cameraManager getGamePoint:screenTarget];
     [spawnCannon spawnSlime:gameTarget];
   }
    else {
@@ -209,18 +211,18 @@ Level * currentLevel;
 
 - (void) setGoalPortal:(GoalPortal *)portal {
 	goalPortal = portal;
-	[items add:goalPortal];
+	[items addObject:goalPortal];
 }
 
 - (void) addGameItem:(GameItem *)item {
-  [items put:[item id] param1:item];
+  [items addObject:item];
 }
 
 - (void) removeGameItem:(GameItem *)item {
   if (item != nil) {
-    if ([items containsKey:[item id]]) {
+    if ([items containsObject:item]) {
       [item destroy];
-      [items remove:[item id]];
+      [items removeObject:item];
     }
   }
 }
@@ -241,7 +243,7 @@ Level * currentLevel;
 
 - (void) removeCustomOverLayer {
 	if (customOverLayer != nil) {
-		[scene removeChild:customOverLayer z:YES];
+		[scene  removeChild:customOverLayer cleanup:YES];
 		customOverLayer = nil;
 	}
 }
@@ -249,31 +251,32 @@ Level * currentLevel;
 - (void) setIsHudEnabled:(BOOL)value {
   if (!value) {
     if (isHudEnabled) {
-      [scene removeChild:hudLayer param1:NO];
+      [scene removeChild:hudLayer cleanup:NO];
     }
   }
    else {
     if (!isHudEnabled) {
-      [scene addChild:hudLayer param1:hudZ];
+      [scene addChild:hudLayer z:hudZ];
     }
   }
   isHudEnabled = value;
 }
-
+/*TODO
 - (void) draw:(GL10 *)gl {
 
-  for (GameItem * item in [items values]) {
+  for (GameItem * item in items values) {
     [item draw:gl];
   }
 
 }
-
+*/
 - (void) dealloc {
-  [world release];
-  [gravity release];
+    /*
+  //[world release];
+ // [gravity release];
   [items release];
   [backgroundSprite release];
-  [contactManager release];
+ // [contactManager release];
   [spawnPortal release];
   [spawnCannon release];
   [goalPortal release];
@@ -284,12 +287,13 @@ Level * currentLevel;
   [gameLayer release];
   [customOverLayer release];
   [label release];
-  [levelOrigin release];
-  [cameraManager release];
+  //[levelOrigin release];
+  //[cameraManager release];
   [currentLevelName release];
   [itemsToRemove release];
   [itemsToAdd release];
   [super dealloc];
+     */
 }
 
 @end

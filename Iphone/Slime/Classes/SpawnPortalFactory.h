@@ -8,8 +8,7 @@
 
 - (SpawnPortal *) createAndMove:(float)my_x y:(float)my_y moveBy:(float)moveBy speed:(float)speed;
 - (void) createAnimList;
-- (NSString *) getPlist;
-- (NSString *) getPng;
+- (NSString *) getPlistPng;
 - (SpawnPortal *) instantiate:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height;
 - (void) runFirstAnimations:(SpawnPortal *)item;
 @end

@@ -6,7 +6,7 @@
 @synthesize spriteSheet;
 
 - (id) init {
-  if (self = [super init]) {
+  if ((self = [super init])) {
     isInit = NO;
     isAttached = NO;
     ratio = 1.0f;
@@ -23,17 +23,21 @@
     isInit = YES;
   }
 }
-
+/*
 - (void) createAnimList {
 }
-
+*/
 - (void) createAnim:(NSString *)animName frameCount:(int)frameCount {
-  [sharedAnimations put:animName param1:[GameItemCocos createAnim:animName param1:frameCount]];
+  [sharedAnimations setObject:[GameItemCocos createAnim:animName frameCount:frameCount] forKey:animName];
+}
+/*
+- (void) createAnim:(NSString *)animName frameCount:(int)frameCount interval:(float)interval{
+    
 }
 
 - (NSString *) getPlistPng {
 }
-
+*/
 - (void) destroy {
   isInit = NO;
 }
@@ -62,19 +66,21 @@
 - (id) createBL:(float)x y:(float)y width:(float)width height:(float)height {
   return [self create:x + width / 2 y:y + height / 2 width:width height:height];
 }
-
+/*
 - (id) instantiate:(float)x y:(float)y width:(float)width height:(float)height {
 }
 
 - (void) runFirstAnimations:(id)item {
 }
-
+*/
 - (void) dealloc {
+    /*
   [sharedAnimations release];
   [spriteSheet release];
   [rootNode release];
   [level release];
   [super dealloc];
+     */
 }
 
 @end

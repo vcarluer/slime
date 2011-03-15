@@ -9,10 +9,7 @@
 #import "BackgoundLayer.h"
 //#import "GameItem.h"
 
-/**
- * @author    vince
- * @uml.dependency   supplier="gamers.associate.Slime.GameItem"
- */
+
 
 extern BOOL isInit;
 extern NSString * LEVEL_HOME;
@@ -90,9 +87,10 @@ extern Level * currentLevel;
 - (void) setPause:(BOOL)value;
 - (void) togglePause;
 - (void) spawnSlime;
-- (void) spawnSlime:(CGPoint *)screenTarget;
+- (void) spawnSlime:(CGPoint)screenTarget;
 - (void) setGoalPortal:(GoalPortal *)portal;
 - (void) addGameItem:(GameItem *)item;
+- (void) removeGameItem:(GameItem *)item;
 - (void) setLevelSize:(float)width height:(float)height;
 - (void) setIsTouchEnabled:(BOOL)value;
 - (void) addCustomOverLayer:(CCLayer *)layer;

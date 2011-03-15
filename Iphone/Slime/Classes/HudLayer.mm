@@ -1,25 +1,33 @@
 #import "HudLayer.h"
+#import "cocos2d.h"
+#import "LevelSelection.h"
+
 
 @implementation HudLayer
 
 - (id) init {
-  if (self = [super init]) {
-    CCMenuItem * itemBack = [CCMenuItemLabel item:@"Back" param1:self param2:@"goBack"];
-    CCMenuItem * itemPause = [CCMenuItemLabel item:@"Pause" param1:self param2:@"goPause"];
-    [itemBack setPosition:[CGPoint make:-50 param1:[[[CCDirector sharedDirector] winSize] height] / 2 - 20]];
-    [itemPause setPosition:[CGPoint make:50 param1:[[[CCDirector sharedDirector] winSize] height] / 2 - 20]];
-    CCMenu * menu = [CCMenu menu:itemBack param1:itemPause];
-    [self addChild:menu];
-  }
-  return self;
+    if ((self = [super init])) {
+        
+        CCLabelTTF *backLabel = [CCLabelTTF labelWithString:@"Back" fontName:@"Marker Felt" fontSize:32];
+        CCMenuItem * itemBack = [CCMenuItemLabel itemWithLabel:backLabel target:self selector:@selector(goBack:)];
+        CCLabelTTF *pauseLabel = [CCLabelTTF labelWithString:@"Pause" fontName:@"Marker Felt" fontSize:32];
+        
+        CCMenuItem * itemPause = [CCMenuItemLabel itemWithLabel:pauseLabel target:self selector:@selector(goPause:)];
+        CGSize s = [[CCDirector sharedDirector] winSize];
+        [itemBack setPosition:ccp(-50, s.height/ 2 - 20)];
+        [itemPause setPosition:ccp(50, s.height / 2 - 20)];
+        CCMenu * menu = [CCMenu menuWithItems:itemBack, itemPause, nil];
+        [self addChild:menu];
+    }
+    return self;
 }
 
 - (void) goBack:(NSObject *)sender {
-  [[CCDirector sharedDirector] replaceScene:[[LevelSelection get] scene]];
+    [[CCDirector sharedDirector] replaceScene:[[LevelSelection get] scene]];
 }
 
 - (void) goPause:(NSObject *)sender {
-  [Level.currentLevel togglePause];
+    [currentLevel togglePause];
 }
 
 @end

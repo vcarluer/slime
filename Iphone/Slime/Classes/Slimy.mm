@@ -93,15 +93,15 @@ float Default_Body_Height = 23.0f;
 }
 
 - (void) fall {
-	[self createAnim:Anim_Falling frameCount:3];
-	/*
+	//[self createAnim:Anim_Falling frameCount:3];
+	
 	
 	CCAnimate * animate = [CCAnimate actionWithAnimation:[animationList objectForKey:Anim_Falling] restoreOriginalFrame:NO];
 	CCAnimate * reverse = (CCAnimate *)[animate reverse];
 	CCAction * action = [CCRepeatForever actionWithAction:[CCSequence actionOne:animate two:reverse]];
-	 */
-	//currentAction = action;
-	//[sprite runAction:currentAction];
+	 
+	currentAction = action;
+	[sprite runAction:currentAction];
 }
 
 
@@ -209,8 +209,8 @@ float Default_Body_Height = 23.0f;
 }
 
 - (void) dealloc {
-	[waitAction release];
-	[super dealloc];
+	//[waitAction release];
+	//[super dealloc];
 }
 
 @end

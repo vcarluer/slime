@@ -10,9 +10,11 @@
   double maxSpawn;
   int slimeCount;
   //TODO
-    //BOOL isPaused;
+  //  BOOL isPaused;
 }
 
 - (id) init:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height;
 - (void) render:(float)delta;
+-(int)getRandomNumber:(int)from to:(int)to;
+
 @end

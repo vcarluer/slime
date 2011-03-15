@@ -183,12 +183,14 @@
 		
 		Slimy * my_slimy;
 		//todo 
-		CGSize screenSize = [CCDirector sharedDirector].winSize;
-		my_slimy  = [slimy create:location.x y:location.y ratio:1.5f];
+		//CGSize screenSize = [CCDirector sharedDirector].winSize;
+		my_slimy  = [slimy  create:location.x y:location.y ratio:1.5f];
 		[my_slimy fall];
 		
-		//[self addChild:my_slimy];
+//		[self addChild:my_slimy];
 	}
+}
+        /*
 - (void) draw:(GL10 *)gl {
   [super draw:gl];
   [level draw:gl];
@@ -204,5 +206,5 @@
 	//  [tickCallback release];
 	[super dealloc];
 }
-
+*/
 @end

@@ -1,5 +1,5 @@
 //#import "cocos2d.h"
-//#import "Box2D.h"
+#import "Box2D.h"
 #import "GameItemPhysic.h"
 
 extern NSString * Anim_Burned_Wait;
@@ -37,4 +37,6 @@ extern float Slimy_Default_Height;
 - (void) burn;
 - (CCAnimation *) getReferenceAnimation;
 - (void) handleContact:(GameItemPhysic *)item;
+
+
 @end

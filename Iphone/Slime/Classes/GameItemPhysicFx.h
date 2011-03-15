@@ -1,4 +1,4 @@
-#import "Box2D.h"
+#import "b2World.h"
 #import "cocos2d.h"
 #import	"GameItemCocos.h"
 

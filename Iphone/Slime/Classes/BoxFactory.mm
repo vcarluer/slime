@@ -10,19 +10,19 @@
 }
 
 - (Box *) instantiate:(float)x y:(float)y width:(float)width height:(float)height {
-  return [[[Box alloc] init:spriteSheet param1:x param2:y param3:width param4:height param5:world param6:worldRatio] autorelease];
+  return [[[Box alloc] init:spriteSheet x:x y:y width:width height:height world:world worldRatio:worldRatio] autorelease];
 }
 
 - (void) runFirstAnimations:(Box *)item {
 }
 
 - (Box *) create:(float)x y:(float)y width:(float)width height:(float)height {
-  Box * box = [super create:x param1:y param2:width param3:height];
-  if (box != nil) {
-    CCSprite * sprite = [CCSprite sprite:[[CCSpriteFrameCache sharedSpriteFrameCache] getSpriteFrame:Box.texture]];
-    [box setSprite:sprite];
+  Box * my_box = [super create:x y:y width:width height:height];
+  if (my_box != nil) {
+      CCSprite * sprite = [CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:box_texture]];
+    [my_box setSprite:sprite];
   }
-  return box;
+  return my_box;
 }
 
 @end
