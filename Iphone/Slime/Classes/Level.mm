@@ -122,14 +122,20 @@ float worldRatio = 32.0f;
     
     // Background
     CGSize screenSize = [CCDirector sharedDirector].winSize;
-    CCSpriteBatchNode * my_spriteSheet = [SpriteSheetFactory getSpriteSheet:@"decor" isExcluded:YES]; 
-    [self->backgroundLayer addChild:my_spriteSheet];
-    // Sprite too big for VM in UbuntuRox
+    //CCSpriteBatchNode * my_spriteSheet = [SpriteSheetFactory getSpriteSheet:@"decor" isExcluded:YES]; 
+    //[self->backgroundLayer addChild:my_spriteSheet];
     
+    /*    
     backgroundSprite = [CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"decor.png"]];
     [backgroundSprite setAnchorPoint:CGPointZero];
     [my_spriteSheet addChild:backgroundSprite];
-
+     */
+    
+    CCSprite * sprite = [CCSprite spriteWithFile:@"decor.png"];     
+    //[my_spriteSheet addChild:sprite];
+    [sprite setPosition:ccp(400, 0)];
+    [self->backgroundLayer addChild:sprite];
+    
     //hud
     label = [CCLabelTTF labelWithString:@"Hud !" fontName:@"Marker Felt" fontSize:16];	
     [hudLayer addChild:label];

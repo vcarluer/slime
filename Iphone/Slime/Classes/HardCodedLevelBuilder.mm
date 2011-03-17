@@ -41,7 +41,7 @@ float LAND_HEIGHT = 64.0f;
 
 + (void) createLand:(Level *)level {
     CGSize s = CGSizeMake([level levelWidth],[level levelHeight]);
-  //  [platform create:s.width / 2 y:LAND_HEIGHT / 2 width:s.width height:LAND_HEIGHT];
+    [platform create:s.width / 2 y:LAND_HEIGHT / 2 width:s.width height:LAND_HEIGHT];
 }
 
 
@@ -52,13 +52,13 @@ float LAND_HEIGHT = 64.0f;
     [self createLand:level];
     
     CGSize s1 = CGSizeMake([level levelWidth],[level levelHeight]);
-    SpawnPortal * my_spawnPortal = [spawnPortal createAndMove:level.levelWidth / 2 y:level.levelHeight - 32 moveBy:level.levelWidth / 2 speed:5];
+    SpawnPortal * my_spawnPortal = [spawnPortal createAndMove:30 y:200 moveBy:level.levelWidth / 2 speed:5];
     [level setSpawnPortal:my_spawnPortal];
     float goalPlatH = 20.0f;
     float goalPlatW = 100.0f;
-    //[platform create:s1.width / 2 y:LAND_HEIGHT + goalPlatH / 2 width:goalPlatW height:goalPlatH];
-  //  GoalPortal * my_goalPortal = [goalPortal  create:s1.width / 2 y:LAND_HEIGHT + goalPlatH + 15];
-   // [level setGoalPortal:my_goalPortal];
+    [platform create:0 y:35  width:480 height:10];
+    //GoalPortal * my_goalPortal = [goalPortal  create:s1.width / 2 y:LAND_HEIGHT + goalPlatH + 15];
+    //[level setGoalPortal:my_goalPortal];
     [bumper create:30 y:s1.height / 2 width:60 height:120 powa:2.0f];
     [homeLevelHandler create];
     [level addCustomOverLayer:[HomeLayer get]];

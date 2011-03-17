@@ -2,7 +2,7 @@
 
 @implementation GameItemCocos
 
-@synthesize sprite, rootNode, currentAction, animationList, texture;
+@synthesize sprite, rootNode, currentAction, animationList;
 
 
 - (id) init:(CCNode *)node x:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height {
