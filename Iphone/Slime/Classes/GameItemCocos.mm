@@ -7,10 +7,10 @@
 
 - (id) init:(CCNode *)node x:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height {
 	if ((self = [super init:my_x y:my_y width:my_width height:my_height])) {
-		animationList = [[[NSMutableDictionary alloc] init] autorelease];
+		animationList = [[NSMutableDictionary alloc] init] ;
 		rootNode = node;
 		textureMode = Scale;
-		CCSprite * my_sprite = [[[CCSprite alloc] init] autorelease];
+		CCSprite * my_sprite = [[CCSprite alloc] init] ;
 		[self setSprite:my_sprite];
 	}
 	return self;
@@ -119,7 +119,7 @@
 }
 
 + (CCAnimation *) createAnim:(NSString *)animName frameCount:(int)frameCount interval:(float)interval {
-	NSMutableArray * animArray = [[[NSMutableArray alloc] init] autorelease];
+	NSMutableArray * animArray = [[NSMutableArray alloc] init] ;
 	
 	for (int i = 0; i < frameCount; i++) {
 		NSString* myNewString = [NSString stringWithFormat:@"%d", i + 1];

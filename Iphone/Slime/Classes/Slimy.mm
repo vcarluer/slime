@@ -59,10 +59,10 @@ float Default_Body_Height = 23.0f;
 	dynamicBox.SetAsBox(.5f, .5f);//These are mid points for our 1m box  //@synchronized(world) 
 	
 	//{
-	bodyDef.userData = self->sprite;
+	
     body = world->CreateBody(&bodyDef);
-    //body->userData = self;
-   
+    body->SetUserData(self);
+    
 	
 	b2FixtureDef fixtureDef;
     fixtureDef.shape = &dynamicBox;
@@ -164,7 +164,7 @@ float Default_Body_Height = 23.0f;
 	}
 }
 
-
+/*
 - (CCSprite *) createAnim:(NSString *)animName frameCount:(int)frameCount {
 	
 	//CCSpriteBatchNode *spriteSheet = (CCSpriteBatchNode*) [self getChildByTag:kTagAnimation1];
@@ -189,7 +189,7 @@ float Default_Body_Height = 23.0f;
 	float top = [[CCDirector sharedDirector] winSize].height - size / 2;
 	sprite.position = ccp(left, top); 
   	CCAnimate * animate = [CCAnimate actionWithAnimation:animation restoreOriginalFrame:NO];
-	CCAnimate * reverse = animate.reverse;
+	//CCAnimate * reverse = animate.reverse;
 	
 	CCAction * action = [CCRepeatForever actionWithAction:animate];
 	[sprite runAction:action];
@@ -198,6 +198,7 @@ float Default_Body_Height = 23.0f;
 	return sprite;
 }
 
+ */
 - (void) handleContact:(GameItemPhysic *)item {
   [super handleContact:item];
   [self land];

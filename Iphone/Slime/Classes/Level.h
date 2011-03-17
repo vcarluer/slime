@@ -27,17 +27,9 @@ extern Level * currentLevel;
   b2Vec2  gravity;
   float worldRatio;
   NSMutableArray * items;
-
-  /**
-   * @uml.property  name="slimyFactory"
-   * @uml.associationEnd
- */
+ 
   CCSprite * backgroundSprite;
 
-  /**
-   * @uml.property  name="contactManager"
-   * @uml.associationEnd
- */
   ContactManager * contactManager;
   SpawnPortal * spawnPortal;
   SpawnCannon * spawnCannon;
@@ -64,9 +56,10 @@ extern Level * currentLevel;
 }
 
 @property(nonatomic, retain, readonly) NSString * currentLevelName;
-@property(nonatomic, retain, readonly) CCScene * scene;
+@property(nonatomic, retain, readwrite) CCScene * scene;
 //@property(nonatomic, retain, readonly) CameraManager * cameraManager;
 @property(nonatomic, readwrite ) b2World * world;
+@property(nonatomic, readwrite ) CCSprite * backgroundSprite;
 @property(nonatomic, readonly) float worlRatio;
 @property(nonatomic, readonly) float levelWidth;
 @property(nonatomic, readonly) float levelHeight;

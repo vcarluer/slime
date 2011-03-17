@@ -11,14 +11,14 @@ float LAND_HEIGHT = 64.0f;
 @synthesize heightRatio;
 
 + (void) build:(Level *)level levelName:(NSString *)levelName {
-    if (levelName == LEVEL_HOME) {
+    if ([levelName isEqualToString:LEVEL_HOME]) {
         [self buildHome:level];
     }
-    if (levelName == LEVEL_1) {
-  //      [self buildLevel1:level];
+    if ([levelName isEqualToString:LEVEL_1]) {
+        [self buildLevel1:level];
     }
-    if (levelName == LEVEL_2) {
-    //    [self buildLevel2:level];
+    if ([levelName isEqualToString:LEVEL_2]) {
+        [self buildLevel2:level];
     }
 }
 
@@ -47,7 +47,7 @@ float LAND_HEIGHT = 64.0f;
 
 + (void) buildHome:(Level *)level {
     CGSize s = [[CCDirector sharedDirector] winSize]; 
-    [level setLevelSize:s.width * 2 height:s.height * 2];
+    [level setLevelSize:s.width  height:s.height];
     [self createGroundBox:level];
     [self createLand:level];
     

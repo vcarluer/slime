@@ -7,6 +7,7 @@ BOOL isInit;
 CCScene * scene;
 
 @implementation SlimeLoadingLayer
+@synthesize currentLevel;
 
 + (CCScene *) scene {
     if (scene == nil) {
@@ -17,7 +18,7 @@ CCScene * scene;
         
         CCLayerColor * colorLayer = [CCLayerColor layerWithColor:ccc4(0,0,0,255) width:width height:height];
         [scene addChild:colorLayer];
-        [scene addChild:[[[SlimeLoadingLayer alloc] init] autorelease]];
+        [scene addChild:[[SlimeLoadingLayer alloc] init] ];
     }
     return scene;
 }
@@ -35,8 +36,8 @@ CCScene * scene;
 - (void) onEnter {
     [super onEnter];
     if (isInit == NO) {
-        spriteSheet = [SpriteSheetFactory getSpriteSheet:@"logo" isExcluded:YES];
-        [self addChild:spriteSheet];
+        //spriteSheet = [SpriteSheetFactory getSpriteSheet:@"logo" isExcluded:YES];
+        //[self addChild:spriteSheet];
         //CCSpriteFrame * spriteFrame = [[CCSpriteFrameCache sharedSpriteFrameCache]  spriteFrameByName:@"SlimeTitle.png"];
         
         
@@ -62,7 +63,7 @@ CCScene * scene;
     if (isInit) {
         [self unscheduleUpdate]; 
         // [spriteSheet removeChild:sprite cleanup:YES];
-        [[CCDirector sharedDirector] pushScene:[currentLevel scene]];
+      
         [self scheduleUpdate];
     }
 //    [slimeLoadingLock unlock];
@@ -72,6 +73,8 @@ CCScene * scene;
     //NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];  
     [slimeLoadingLock lock];
     currentLevel = [Level get:LEVEL_HOME];
+    [currentLevel retain];
+      [[CCDirector sharedDirector] replaceScene:[currentLevel scene]];
     isInit = YES;
     [slimeLoadingLock unlock];
 //    [pool release];

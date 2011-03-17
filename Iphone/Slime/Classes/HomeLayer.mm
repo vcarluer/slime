@@ -17,17 +17,18 @@ HomeLayer * layer;
 - (id) init {
     if ((self = [super init])) {
         //AMZ remove
-        CCSpriteBatchNode  * my_spriteSheet = [SpriteSheetFactory getSpriteSheet:@"logo" isExcluded:YES ];
-        //[self addChild:my_spriteSheet];
+        CCSpriteBatchNode  * spriteSheet = [SpriteSheetFactory getSpriteSheet:@"logo" isExcluded:YES ];
+        [self addChild:spriteSheet];
         CCSprite * sprite = [CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"SlimeTitle.png"]];     
-        [my_spriteSheet addChild:sprite];
+        [spriteSheet addChild:sprite];
         CGSize s = [[CCDirector sharedDirector] winSize];
         [sprite setPosition:ccp(s.width / 2, s.height / 2)];
-        float shiftMenu = -100.0f;
+        float shiftMenu = -120.0f;
         CCLabelTTF *playLabel = [CCLabelTTF labelWithString:@"Play" fontName:@"Marker Felt" fontSize:32];
         CCMenuItem * playMenu = [CCMenuItemLabel itemWithLabel:playLabel target:self selector:@selector(selectPlay:)];
         [playMenu setPosition:ccp(0, shiftMenu)];
         CCMenu * menu = [CCMenu menuWithItems:playMenu , nil];
+       
         [self addChild:menu];
     }
     return self;
