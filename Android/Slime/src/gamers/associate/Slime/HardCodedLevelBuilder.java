@@ -190,7 +190,7 @@ public class HardCodedLevelBuilder {
 		vertices[4] = CGPoint.make(50, 0);
 		vertices[5] = CGPoint.make(70, 35);
 		vertices[6] = CGPoint.make(70, 0);
-		vertices[7] = CGPoint.make(78, 20);
+		vertices[7] = CGPoint.make(77, 20);
 		vertices[8] = CGPoint.make(80, 0);		
 		
 		CGPoint[] body = new CGPoint[6];

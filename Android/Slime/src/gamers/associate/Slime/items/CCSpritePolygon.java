@@ -32,13 +32,7 @@ public class CCSpritePolygon extends CCSpriteRepeat {
 	}
 	
 	private void polyInit() {
-		colors = BufferProvider.createFloatBuffer(4 * 4);
-		// Atlas: Color
-		colors.put(1.0f).put(1.0f).put(1.0f).put(1.0f);
-		colors.put(1.0f).put(1.0f).put(1.0f).put(1.0f);
-		colors.put(1.0f).put(1.0f).put(1.0f).put(1.0f);
-		colors.put(1.0f).put(1.0f).put(1.0f).put(1.0f);
-		colors.position(0);
+		
 	}
 	
 	public static CCSpritePolygon sprite(CCSpriteFrame spriteFrame) {
@@ -106,6 +100,23 @@ public class CCSpritePolygon extends CCSpriteRepeat {
         this.vertices.put(0);
         this.vertices.position(0);*/
         
+        /*this.texCoords = BufferProvider.createFloatBuffer(6 * 2);
+        this.texCoords.position(0);
+        this.texCoords.clear();
+        this.texCoords.put(0);
+        this.texCoords.put(0);
+        this.texCoords.put(0);
+        this.texCoords.put(1);
+        this.texCoords.put(1);
+        this.texCoords.put(0);
+        this.texCoords.put(1);
+        this.texCoords.put(1);
+        this.texCoords.put(0);
+        this.texCoords.put(0);
+        this.texCoords.put(0);
+        this.texCoords.put(1);
+        this.texCoords.position(0);*/
+                
         // vertex
         // int diff = offsetof( ccV3F_C4B_T2F, vertices);
         gl.glVertexPointer(3, GL10.GL_FLOAT, 0 , this.vertices);
@@ -150,16 +161,21 @@ public class CCSpritePolygon extends CCSpriteRepeat {
 		// , float textureWidth, float textureHeight, CGPoint textureFPOffset
 		int len = vertexPoints.length;
 		texCoords = BufferProvider.createFloatBuffer(len * 2);
-						
+		colors = BufferProvider.createFloatBuffer(len * 4);
+		
+		float originX = vertexPoints[0].x;
 		float originY = vertexPoints[0].y;
 		
 		texCoords.position(0);		
 		for(CGPoint point : vertexPoints) {
-			texCoords.put(point.x / this.getTexture().pixelsWide());
-			texCoords.put((originY - point.y) / this.getTexture().pixelsHigh());			
+			texCoords.put((point.x - originX) / this.getTexture().pixelsWide());
+			texCoords.put((originY - point.y) / this.getTexture().pixelsHigh());
+			
+			colors.put(1.0f).put(1.0f).put(1.0f).put(1.0f);
 		}
 		
-		texCoords.position(0);		
+		texCoords.position(0);						
+		colors.position(0);
 	}
 	
 	@Override
