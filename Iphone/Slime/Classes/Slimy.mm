@@ -1,4 +1,5 @@
 #import "Slimy.h"
+#import "Level.h"
 
 NSString * Anim_Burned_Wait = @"burned-wait";
 NSString * Anim_Burning = @"burning";
@@ -7,6 +8,7 @@ NSString * Anim_Landing_H = @"landing-h";
 NSString * Anim_Landing_V = @"landing-v";
 NSString * Anim_Wait_H = @"wait-h";
 NSString * Anim_Wait_V = @"wait-v";
+NSString * Frame_Default = @"wait-v-1.png";
 
 float Slimy_Default_Width = 24.0f;
 float Slimy_Default_Height = 26.0f;
@@ -29,8 +31,8 @@ float Default_Body_Height = 23.0f;
 		isLanded = NO;
 		isBurned = NO;
 		//CCSprite * my_sprite = [[[CCSprite alloc] init] autorelease];
-		[self fall];
-		[self setSprite:sprite];
+		/*[self fall];
+		[self setSprite:sprite];*/
 		[self initBody];
 	}
 	return self;
@@ -39,7 +41,7 @@ float Default_Body_Height = 23.0f;
 
 + (id) createSlimy:(CCNode *)node x:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height world:(b2World *)my_world worldRatio:(float)my_worldRatio{
 	
-	return [[[self alloc] init:node x:my_x y:my_y width:my_width height:my_height world:my_world worldRatio:my_worldRatio] autorelease];
+	return [[self alloc] init:node x:my_x y:my_y width:my_width height:my_height world:my_world worldRatio:my_worldRatio];
 }
 
 
@@ -60,6 +62,7 @@ float Default_Body_Height = 23.0f;
 	
 	//{
 	
+    [worldLock lock];
     body = world->CreateBody(&bodyDef);
     body->SetUserData(self);
     
@@ -71,7 +74,7 @@ float Default_Body_Height = 23.0f;
     fixtureDef.restitution = 0.1f;
     fixtureDef.filter.categoryBits = Category_InGame;
     body->CreateFixture(&fixtureDef);
-	//}
+	[worldLock unlock];
 	
 	
 	
@@ -150,6 +153,7 @@ float Default_Body_Height = 23.0f;
 		filter.categoryBits = Category_OutGame;
 		filter.maskBits = Category_Static;
 		filter.groupIndex = -1;
+        [worldLock lock];
 		for (b2Fixture* fix = body->GetFixtureList(); fix; fix = fix->GetNext()){
 			// for (b2Fixture * fix in [body fixtureList]) {
 			fix->SetFilterData(filter);
@@ -159,6 +163,8 @@ float Default_Body_Height = 23.0f;
 			body->ResetMassData();
 			
 		}
+        
+        [worldLock unlock];
 		
 		isBurned = YES;
 	}
@@ -211,7 +217,7 @@ float Default_Body_Height = 23.0f;
 
 - (void) dealloc {
 	//[waitAction release];
-	//[super dealloc];
+	[super dealloc];
 }
 
 @end

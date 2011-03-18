@@ -8,16 +8,17 @@ LevelSelection * levelSelection;
 
 + (LevelSelection *) get {
   if (levelSelection == nil) {
-    levelSelection = [[[LevelSelection alloc] init] autorelease];
+    levelSelection = [[LevelSelection alloc] init];
   }
   return levelSelection;
 }
 
 - (id) init {
   if ((self = [super init])) {
-    scene = [CCScene node];
-    selectionLayer = [[[LevelSelectionLayer alloc] init] autorelease];
-    [scene addChild:selectionLayer];
+      scene = [CCScene node];
+      [scene retain];
+      selectionLayer = [[LevelSelectionLayer alloc] init];
+      [scene addChild:selectionLayer];
   }
   return self;
 }

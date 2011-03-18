@@ -13,8 +13,8 @@
 }
 
 - (void) runFirstAnimations:(Slimy *)item {
-  [item waitAnim];
-  [item fadeIn];
+  //[item waitAnim];
+  //[item fadeIn];
 }
 
 - (NSString *) getPlistPng {
@@ -22,12 +22,18 @@
 }
 
 - (Slimy *) instantiate:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height {
-  return [[[Slimy alloc] init:spriteSheet x:my_x y:my_x width:my_width height:my_height world:world worldRatio:worldRatio] autorelease];
+  return [[Slimy alloc] init:spriteSheet x:my_x y:my_y width:my_width height:my_height world:world worldRatio:worldRatio];
 }
 
 - (Slimy *) create:(float)x y:(float)y ratio:(float)my_ratio {
   Slimy * my_slimy = [self create:x y:y width:Slimy_Default_Width*my_ratio height:Slimy_Default_Height*my_ratio];
   return my_slimy;
+}
+
+- (void) createSprite:(GameItemCocos *)gameItem {
+    CCSprite * sprite = [CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:Frame_Default]];
+    
+    [gameItem setSprite:sprite];
 }
 
 @end

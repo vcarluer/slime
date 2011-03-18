@@ -10,8 +10,8 @@
 		animationList = [[NSMutableDictionary alloc] init] ;
 		rootNode = node;
 		textureMode = Scale;
-		CCSprite * my_sprite = [[CCSprite alloc] init] ;
-		[self setSprite:my_sprite];
+		/*CCSprite * my_sprite = [[CCSprite alloc] init] ;
+		[self setSprite:my_sprite];*/
 	}
 	return self;
 }

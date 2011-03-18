@@ -9,6 +9,7 @@ extern NSString * Anim_Landing_H;
 extern NSString * Anim_Landing_V;
 extern NSString * Anim_Wait_H;
 extern NSString * Anim_Wait_V;
+extern NSString * Frame_Default;
 extern float Slimy_Default_Width;
 extern float Slimy_Default_Height;
 @protocol Slimy;

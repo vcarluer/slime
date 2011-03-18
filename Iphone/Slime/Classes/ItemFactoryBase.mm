@@ -18,7 +18,7 @@
   if (!isInit) {
 	
 	spriteSheet =  [SpriteSheetFactory getSpriteSheet:[self getPlistPng]];
-    sharedAnimations = [[[NSMutableDictionary alloc] init] autorelease];
+    sharedAnimations = [[NSMutableDictionary alloc] init];
     [self createAnimList];
     isInit = YES;
   }
@@ -52,7 +52,8 @@
 
 - (id) create:(float)x y:(float)y width:(float)width height:(float)height {
   if (isAttached) {
-    id item = [self instantiate:x y:y width:width height:height];
+    GameItemCocos * item = [self instantiate:x y:y width:width height:height];
+    [self createSprite:item];
     [item setAnimationList:sharedAnimations];
     [self runFirstAnimations:item];
     [level addItemToAdd:item];
@@ -61,6 +62,10 @@
    else {
     return nil;
   }
+}
+
+- (void) createSprite:(GameItemCocos *)gameItem  {
+    
 }
 
 - (id) createBL:(float)x y:(float)y width:(float)width height:(float)height {

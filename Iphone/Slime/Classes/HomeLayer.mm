@@ -9,7 +9,7 @@ HomeLayer * layer;
 
 + (HomeLayer *) get {
     if (layer == nil) {
-        layer = [[[HomeLayer alloc] init] autorelease];
+        layer = [[HomeLayer alloc] init];
     }
     return layer;
 }

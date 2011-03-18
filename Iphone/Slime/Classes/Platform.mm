@@ -1,6 +1,6 @@
 #import "Platform.h"
 #import "Box2D.h"
-
+#import "Level.h"
 
 NSString * platform_texture = @"metal2.png";
 
@@ -12,7 +12,7 @@ NSString * platform_texture = @"metal2.png";
       height = my_height;
       
     [self initBody];
-    textureMode = Clip;
+    textureMode = Scale;
   }
   return self;
 }
@@ -26,8 +26,7 @@ NSString * platform_texture = @"metal2.png";
 	b2PolygonShape * staticBox = new b2PolygonShape;
   staticBox->SetAsBox(bodyWidth / worldRatio / 2, bodyHeight / worldRatio / 2);
 
-//  @synchronized(world) 
-//  {
+    [worldLock lock];
 	  bodyDef->userData = self;
 	  super.body = world->CreateBody(bodyDef);
 	  
@@ -39,7 +38,7 @@ NSString * platform_texture = @"metal2.png";
     fixtureDef->restitution = 0.0f;
     fixtureDef->filter.categoryBits = Category_Static;
     body->CreateFixture(fixtureDef);
-//  }
+    [worldLock unlock];
 }
 
 @end

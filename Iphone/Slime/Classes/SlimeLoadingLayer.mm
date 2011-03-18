@@ -59,14 +59,14 @@ CCScene * scene;
 
 - (void) update:(float)d {
     
-//    [slimeLoadingLock lock];
+    [slimeLoadingLock lock];
     if (isInit) {
         [self unscheduleUpdate]; 
         // [spriteSheet removeChild:sprite cleanup:YES];
       
         [self scheduleUpdate];
     }
-//    [slimeLoadingLock unlock];
+    [slimeLoadingLock unlock];
 }
 
 - (void) run {

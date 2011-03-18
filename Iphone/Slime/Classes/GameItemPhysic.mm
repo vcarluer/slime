@@ -33,9 +33,9 @@ short Category_OutGame = 0x0003;
 
 
 - (void) render:(float)delta {
-	[self handleContacts];
+	[self handleContacts]		;
 	if (sprite != nil && body != nil) {
-		[sprite position] = ccp(body->GetPosition().x * worldRatio,body->GetPosition().y * worldRatio);
+		[sprite setPosition:ccp(body->GetPosition().x * worldRatio,body->GetPosition().y * worldRatio)];
 		[sprite setRotation:-1.0f * CC_RADIANS_TO_DEGREES(body->GetAngle())];
 	}
 	[super render:delta];
@@ -54,7 +54,7 @@ short Category_OutGame = 0x0003;
 		[self handleContact:item];
 	}
 	
-	[contacts release];
+	[contacts removeAllObjects];
 }
 /*
 - (void) handleContact:(GameItemPhysic *)item {

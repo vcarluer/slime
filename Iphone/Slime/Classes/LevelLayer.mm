@@ -46,12 +46,12 @@
 	//You need to make an informed choice, the following URL is useful
 	//http://gafferongames.com/game-physics/fix-your-timestep/
 	
-	int32 velocityIterations = 8;
-	int32 positionIterations = 1;
+	//int32 velocityIterations = 8;
+	//int32 positionIterations = 1;
 	
 	// Instruct the world to perform a single step of simulation. It is
 	// generally best to keep the time step and iterations fixed.
-  [level world]->Step(dt, velocityIterations, positionIterations);
+  //[level world]->Step(dt, velocityIterations, positionIterations);
 	
 	
 	/*//Iterate over the bodies in the physics world
@@ -65,6 +65,8 @@
 		}	
 	}
 	 */
+    
+    [level tick:dt];
 }
 /*
  
@@ -177,17 +179,21 @@
 	for( UITouch *touch in touches ) {
 		CGPoint location = [touch locationInView: [touch view]];
 		
-		location = [[CCDirector sharedDirector] convertToGL: location];
+		//location = [[CCDirector sharedDirector] convertToGL: location];
 		
 		//[self addNewSpriteWithCoords: location];
 		
-		Slimy * my_slimy;
+		//Slimy * my_slimy;
 		//todo 
 		//CGSize screenSize = [CCDirector sharedDirector].winSize;
-		my_slimy  = [slimy  create:location.x y:location.y ratio:1.5f];
-		[my_slimy fall];
+		//my_slimy  = [slimy  create:location.x y:location.y ratio:1.5f];
+		//[my_slimy fall];
 		
 //		[self addChild:my_slimy];
+        
+        CGPoint p = ccp(location.x, [CCDirector sharedDirector].winSize.height - location.y);
+        
+        [level spawnSlime:p]; 
 	}
 }
         /*

@@ -5,6 +5,7 @@
 extern NSString * Anim_Spawn_Portal;
 
 @interface SpawnPortal : GameItemCocos {
+    
 }
 
 - (id) init:(CCNode *)node x:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height;

@@ -31,10 +31,10 @@ float LAND_HEIGHT = 64.0f;
     float h = s.height;
     float h2 = s.height / 2;
     // probleme with levelend
-    [levelEnd  create:w2 y:h + m width:w height:si];
+    /*[levelEnd  create:w2 y:h + m width:w height:si];
     [levelEnd create:w + m y:h2 width:si height:h];
     [levelEnd create:w2 y:-m width:w height:si];
-    [levelEnd create:-m y:h2 width:si height:h];
+    [levelEnd create:-m y:h2 width:si height:h];*/
      
     
 }
@@ -60,7 +60,7 @@ float LAND_HEIGHT = 64.0f;
     //GoalPortal * my_goalPortal = [goalPortal  create:s1.width / 2 y:LAND_HEIGHT + goalPlatH + 15];
     //[level setGoalPortal:my_goalPortal];
     [bumper create:30 y:s1.height / 2 width:60 height:120 powa:2.0f];
-    [homeLevelHandler create];
+    // [homeLevelHandler create];
     [level addCustomOverLayer:[HomeLayer get]];
     [level setIsHudEnabled:NO];
     [level setIsTouchEnabled:NO];
@@ -95,7 +95,7 @@ float LAND_HEIGHT = 64.0f;
     float cX = 0;
     float cY = 0;
     [platform  createBL:cX y:cY width:100 height:100];
-    SpawnCannon * my_spawnCannon = [cannon  create:100 - spawncannon_Default_Width / 2 y:100 + spawncannon_Default_Height / 2];
+    /*SpawnCannon * my_spawnCannon = [cannon  create:100 - spawncannon_Default_Width / 2 y:100 + spawncannon_Default_Height / 2];*/
     cX += 100;
   //  [lava createBL:cX y:cY width:200 height:50];
     cX += 200;
@@ -127,8 +127,8 @@ float LAND_HEIGHT = 64.0f;
     //[platform createBL:cX y:cY width:128 height:20];
     //[platform createBL:cX y:cY + 20 width:20 height:128];
     cX += 64;
-    GoalPortal * my_goalPortal = [goalPortal create:cX y:cY + 40];
-    [level setGoalPortal:my_goalPortal];
+    /*GoalPortal * my_goalPortal = [goalPortal create:cX y:cY + 40];
+    [level setGoalPortal:my_goalPortal];*/
     cX += 108;
     cX = 0;
     cY = 398;
@@ -174,7 +174,7 @@ float LAND_HEIGHT = 64.0f;
     [platform createBL:cX y:cY width:128 height:128];
     cX += 128;
     [platform createBL:cX - 20 y:cY + 128 width:20 height:128];
-    [level setSpawnCannon:my_spawnCannon];
+    //[level setSpawnCannon:my_spawnCannon];
 }
 
 @end

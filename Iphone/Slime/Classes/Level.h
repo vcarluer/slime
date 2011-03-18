@@ -8,7 +8,7 @@
 #import "HudLayer.h"
 #import "BackgoundLayer.h"
 //#import "GameItem.h"
-
+#import "CameraManager.h"
 
 
 extern BOOL isInit;
@@ -16,6 +16,7 @@ extern NSString * LEVEL_HOME;
 extern NSString * LEVEL_1;
 extern NSString * LEVEL_2;
 extern Level * currentLevel;
+extern NSLock * worldLock;
 
 //@class SpawnPortal;
 //@class GameItem;
@@ -48,7 +49,7 @@ extern Level * currentLevel;
   float levelHeight;
   CGPoint levelOrigin;
   //todo
-  //CameraManager * cameraManager;
+  CameraManager * cameraManager;
   NSString * currentLevelName;
   NSMutableArray * itemsToRemove;
   NSMutableArray * itemsToAdd;
@@ -57,7 +58,7 @@ extern Level * currentLevel;
 
 @property(nonatomic, retain, readonly) NSString * currentLevelName;
 @property(nonatomic, retain, readwrite) CCScene * scene;
-//@property(nonatomic, retain, readonly) CameraManager * cameraManager;
+@property(nonatomic, retain, readonly) CameraManager * cameraManager;
 @property(nonatomic, readwrite ) b2World * world;
 @property(nonatomic, readwrite ) CCSprite * backgroundSprite;
 @property(nonatomic, readonly) float worlRatio;

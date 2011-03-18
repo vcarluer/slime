@@ -10,7 +10,7 @@
 }
 
 - (Bumper *) instantiate:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height {
-  return [[[Bumper alloc] init:rootNode x:my_x y:my_y width:my_width height:my_height world:world worldRatio:worldRatio ] autorelease];
+  return [[Bumper alloc] init:rootNode x:my_x y:my_y width:my_width height:my_height world:world worldRatio:worldRatio ];
 }
 
 

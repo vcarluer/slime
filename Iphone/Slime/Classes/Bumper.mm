@@ -1,5 +1,7 @@
 #import "Bumper.h"
 #import "Box2D.h"
+#import "Level.h"
+
 float Default_Powa = 1.5f;
 NSString * Texture_Wait = @"red_tri.png";
 NSString * Anim_Wait = @"bumper_wait";
@@ -50,8 +52,7 @@ float Default_Bumper_Height = 64.0f;
 	bumperShape->m_vertices[2].Set(-bw2, -bh2);
 	
 	
-	//@synchronized(world) 
-	//{
+	[worldLock lock];
 	bodyDef->userData = self;
     body = world->CreateBody(bodyDef);
     //body->userData = self;
@@ -64,7 +65,7 @@ float Default_Bumper_Height = 64.0f;
     fixtureDef->filter.categoryBits = Category_InGame;
     body->CreateFixture(fixtureDef);
 	
-	//}
+	[worldLock unlock];
 }
 
 - (void) waitAnim {

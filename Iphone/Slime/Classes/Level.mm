@@ -10,12 +10,13 @@ Level * currentLevel;
 int customZ = 2;
 int hudZ = 1;
 float worldRatio = 32.0f;
+NSLock * worldLock;
 
 @implementation Level
 
 @synthesize currentLevelName;
 @synthesize scene;
-//@synthesize cameraManager;
+@synthesize cameraManager;
 @synthesize world;
 @synthesize worlRatio;
 @synthesize levelWidth;
@@ -28,10 +29,12 @@ float worldRatio = 32.0f;
 	if ((self = [super init])) {
 		
         scene = [CCScene node];
+        [scene retain];
         levelLayer = [[LevelLayer alloc] initWithLevel:self];
         hudLayer = [[HudLayer alloc] init] ;
         backgroundLayer = [[BackgoundLayer alloc] init] ;
         gameLayer = [CCLayer node];
+        [gameLayer retain];
         [gameLayer addChild:backgroundLayer z:0];
         [gameLayer addChild:levelLayer z:1];        
         levelOrigin = ccp(0,0);
@@ -41,7 +44,7 @@ float worldRatio = 32.0f;
         [scene addChild:hudLayer z:hudZ];
         items = [[NSMutableArray alloc] init] ;
         //todo
-        //    cameraManager = [[[CameraManager alloc] init:gameLayer] autorelease];
+        cameraManager = [[CameraManager alloc] initWithGameLayer:gameLayer];
         itemsToRemove = [[NSMutableArray alloc] init] ;
         itemsToAdd = [[NSMutableArray alloc] init] ;
 		[self initLevel];
@@ -76,13 +79,13 @@ float worldRatio = 32.0f;
 - (void) reload {
     [currentLevel loadLevel:currentLevelName];
     //TODO 
-    // [[currentLevel cameraManager] setCameraView];
+    [[currentLevel cameraManager] setCameraView];
 }
 
 - (void) attachLevelToCamera {
-    // [cameraManager attachLevel:levelWidth param1:levelHeight param2:levelOrigin];
-    // [cameraManager setCameraView];
-    // [[self cameraManager] zoomCameraTo:0f];
+    [cameraManager attachLevel:levelWidth levelHeight:levelHeight levelOrigin:levelOrigin];
+    [cameraManager setCameraView];
+    [[self cameraManager] zoomCameraTo:0.0f];
 }
 
 - (void) loadLevel:(NSString *)levelName {
@@ -113,6 +116,7 @@ float worldRatio = 32.0f;
 	b2Vec2 my_gravity(0, -10);
 	gravity = my_gravity;
 	world = new b2World(gravity, true);		
+    worldLock = [[NSLock alloc] init];
 	contactManager = new ContactManager;
 	world->SetContactListener(contactManager);
     
@@ -121,25 +125,25 @@ float worldRatio = 32.0f;
     [SpriteSheetFactory add:@"labo"];
     
     // Background
-    CGSize screenSize = [CCDirector sharedDirector].winSize;
-    //CCSpriteBatchNode * my_spriteSheet = [SpriteSheetFactory getSpriteSheet:@"decor" isExcluded:YES]; 
-    //[self->backgroundLayer addChild:my_spriteSheet];
+    CGSize s = [CCDirector sharedDirector].winSize;
+    CCSpriteBatchNode * my_spriteSheet = [SpriteSheetFactory getSpriteSheet:@"decor" isExcluded:YES]; 
+    [self->backgroundLayer addChild:my_spriteSheet];
     
-    /*    
+        
     backgroundSprite = [CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"decor.png"]];
-    [backgroundSprite setAnchorPoint:CGPointZero];
+    //[backgroundSprite setAnchorPoint:ccp(1, 1)];
+    [backgroundSprite setPosition:ccp(s.width *2 ,0)];
     [my_spriteSheet addChild:backgroundSprite];
-     */
     
-    CCSprite * sprite = [CCSprite spriteWithFile:@"decor.png"];     
+    //CCSprite * sprite = [CCSprite spriteWithFile:@"decor.png"];     
     //[my_spriteSheet addChild:sprite];
-    [sprite setPosition:ccp(400, 0)];
-    [self->backgroundLayer addChild:sprite];
+    //[sprite setPosition:ccp(400, 0)];
+    //[self->backgroundLayer addChild:sprite];
     
     //hud
     label = [CCLabelTTF labelWithString:@"Hud !" fontName:@"Marker Felt" fontSize:16];	
     [hudLayer addChild:label];
-    label.position = ccp( screenSize.width/2, screenSize.height-20);
+    label.position = ccp( s.width/2, s.height-20);
     [self attachToFactory];
   
 	
@@ -154,12 +158,11 @@ float worldRatio = 32.0f;
             [self addGameItem:item];
         }
         
-        [itemsToAdd release];
+        [itemsToAdd removeAllObjects];
         
-        //@synchronized(world) 
-        //{
+        [worldLock lock];
         world->Step(delta, 6, 2);
-        //}
+        [worldLock unlock];
         
         for (GameItem * item in items) {
             [item render:delta];
@@ -171,7 +174,7 @@ float worldRatio = 32.0f;
         }
         
         [itemsToRemove removeAllObjects];
-        //[cameraManager tick:delta];
+        [cameraManager tick:delta];
     }
 }
 
@@ -217,7 +220,17 @@ float worldRatio = 32.0f;
         [spawnCannon spawnSlime:gameTarget];
     }
     else {
-        [spawnPortal spawn];
+        if (spawnPortal != nil) {
+            [spawnPortal spawn];
+        }
+        else {
+            Slimy * my_slimy;
+            CGPoint gamePoint = [cameraManager getGamePoint:screenTarget];
+            my_slimy  = [slimy  create:gamePoint.x y:gamePoint.y ratio:1.5f];
+            [my_slimy fall];   
+            [my_slimy fadeIn];
+            [items addObject:my_slimy];
+        }
     }
 }
 
@@ -256,7 +269,7 @@ float worldRatio = 32.0f;
 
 - (void) removeCustomOverLayer {
 	if (customOverLayer != nil) {
-		[scene  removeChild:customOverLayer cleanup:YES];
+		[scene  removeChild:customOverLayer cleanup:NO];
 		customOverLayer = nil;
 	}
 }
@@ -325,6 +338,11 @@ float worldRatio = 32.0f;
      [itemsToAdd release];
      [super dealloc];
      */
+    
+    [gameLayer release];
+    [scene release];
+    [super dealloc];
+    
 }
 
 @end
