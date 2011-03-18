@@ -14,7 +14,7 @@ short Category_OutGame = 0x0003;
 	if (self != nil) {
 		bodyWidth = my_width;
 		bodyHeight = my_height;
-		contacts = [[[NSMutableArray alloc] init] autorelease];
+		contacts = [[NSMutableArray alloc] init] ;
 	}
 	return self;
 }

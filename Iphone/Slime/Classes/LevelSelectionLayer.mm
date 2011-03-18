@@ -17,6 +17,10 @@
         CCLabelTTF *level3Label = [CCLabelTTF labelWithString:@"Level 3" fontName:@"Marker Felt" fontSize:32];
         CCMenuItem * testMenu3 = [CCMenuItemLabel itemWithLabel:level3Label target:self selector:@selector(doTest:)];
           CCMenu * menu = [CCMenu menuWithItems:goBackMenu, testMenu1, testMenu2, testMenu3, nil];
+        NSNumber * prem = [[NSNumber alloc] initWithInt:1];
+        NSNumber * trois = [[NSNumber alloc] initWithInt:3];
+
+        [menu alignItemsInColumns:prem,trois, nil, nil, nil];
         //todo
         // 
        // [menu alignItemsInColumns:[NSArray arrayWithObjects:1, 3, nil]];

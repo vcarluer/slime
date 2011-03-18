@@ -22,6 +22,8 @@ extern BOOL isInit;
   CCSprite * sprite;
  // UpdateCallback * nextCallback;
 }
+@property(nonatomic, retain, readwrite) Level * currentLevel;
+
 
 + (CCScene *) scene;
 - (id) init;

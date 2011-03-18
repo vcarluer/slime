@@ -6,9 +6,9 @@
 @interface PlatformFactory : GameItemPhysicFactory {
 }
 
-- (Platform *) create:(float)x y:(float)y width:(float)width height:(float)height;
+- (Platform *) create:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height;
 - (void) createAnimList;
 - (NSString *) getPlistPng;
-- (Platform *) instantiate:(float)x y:(float)y width:(float)width height:(float)height;
+- (Platform *) instantiate:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height;
 - (void) runFirstAnimations:(Platform *)item;
 @end

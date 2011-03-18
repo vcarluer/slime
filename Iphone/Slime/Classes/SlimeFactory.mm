@@ -2,17 +2,17 @@
 
 
 BOOL isAttached;
-SlimyFactory * slimy = [[[SlimyFactory alloc] init] autorelease];
-SpawnPortalFactory * spawnPortal = [[[SpawnPortalFactory alloc] init] autorelease];
-PlatformFactory * platform = [[[PlatformFactory alloc] init] autorelease];
-GoalPortalFactory * goalPortal = [[[GoalPortalFactory alloc] init] autorelease];
-BumperFactory * bumper = [[[BumperFactory alloc] init] autorelease];
-SpawnCannonFactory * cannon = [[[SpawnCannonFactory alloc] init] autorelease];
-LevelEndFactory * levelEnd = [[[LevelEndFactory alloc] init] autorelease];
+SlimyFactory * slimy = [[SlimyFactory alloc] init] ;
+SpawnPortalFactory * spawnPortal = [[SpawnPortalFactory alloc] init] ;
+PlatformFactory * platform = [[PlatformFactory alloc] init] ;
+GoalPortalFactory * goalPortal = [[GoalPortalFactory alloc] init] ;
+BumperFactory * bumper = [[BumperFactory alloc] init] ;
+SpawnCannonFactory * cannon = [[SpawnCannonFactory alloc] init] ;
+LevelEndFactory * levelEnd = [[LevelEndFactory alloc] init] ;
 HomeLevelHandlerFactory * homeLevelHandler = [[[HomeLevelHandlerFactory alloc] init] autorelease];
 //LavaFactory * lava = [[[LavaFactory alloc] init] autorelease];
 //BoxFactory * box = [[[BoxFactory alloc] init] autorelease];
-SpriteSheetFactory * spriteSheetFactory = [[[SpriteSheetFactory alloc] init] autorelease];
+SpriteSheetFactory * spriteSheetFactory = [[SpriteSheetFactory alloc] init] ;
 
 @implementation SlimeFactory
 

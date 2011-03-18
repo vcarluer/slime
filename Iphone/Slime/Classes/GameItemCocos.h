@@ -16,7 +16,7 @@
 @property (nonatomic,assign) NSMutableDictionary *animationList;
 @property (nonatomic,assign) CCAction *currentAction;
 @property (nonatomic,assign) CCNode *rootNode;
-@property (nonatomic,assign) CCTexture2D *texture;
+//@property (nonatomic,retain, readwrite) CCTexture2D *texture;
 
 
 - (id) init:(CCNode *)node x:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height;
