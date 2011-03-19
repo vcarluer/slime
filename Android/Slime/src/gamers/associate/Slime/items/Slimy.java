@@ -40,6 +40,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	
 	public Slimy(CCNode node, float x, float y, float width, float height, World world, float worldRatio) {		
 		super(node, x, y, width, height, world, worldRatio);
+		this.spriteType = SpriteType.ANIM;
 		
 		if (width == 0 && this.height == 0) {
 			this.width = Default_Width;
@@ -52,8 +53,6 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 
 		this.isLanded = false;
 		this.isBurned = false;
-		
-		this.initBody();
 	}
 	
 	@Override
@@ -169,8 +168,8 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	}
 	
 	@Override
-	protected CCAnimation getReferenceAnimation() {
-		return this.animationList.get(Slimy.Anim_Wait_V);
+	protected String getReferenceAnimationName() {
+		return Slimy.Anim_Wait_V;
 	}
 
 	/* (non-Javadoc)
@@ -181,4 +180,18 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 		super.handleContact(item);
 		this.land();
 	}
+	
+	@Override
+	protected void runReferenceAction() {
+		this.waitAnim();
+		this.fadeIn();
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.GameItemCocos#getReferenceTexture()
+	 */
+	/*@Override
+	protected String getReferenceTexture() {		
+		return super.getReferenceTexture();
+	}*/
 }

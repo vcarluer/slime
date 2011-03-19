@@ -201,7 +201,7 @@ public class HardCodedLevelBuilder {
 		body[4] = CGPoint.make(50, 50);
 		body[5] = CGPoint.make(20, 40);
 		
-		SlimeFactory.Polygon.create(cX, 80, 0, 0, false, body, vertices);
+		SlimeFactory.Polygon.create(cX, 80, 0, 0, true, body, vertices);
 		cX += 80;
 		SlimeFactory.Lava.createBL(cX, cY, 200, 50);
 		cX += 200;

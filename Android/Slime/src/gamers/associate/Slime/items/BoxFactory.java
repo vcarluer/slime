@@ -1,7 +1,5 @@
 package gamers.associate.Slime.items;
 
-import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.nodes.CCSpriteFrameCache;
 
 public class BoxFactory extends GameItemPhysicFactory<Box>{
 
@@ -21,16 +19,5 @@ public class BoxFactory extends GameItemPhysicFactory<Box>{
 
 	@Override
 	protected void runFirstAnimations(Box item) {
-	}
-	
-	@Override
-	public Box create(float x, float y, float width, float height) {		
-		Box box = super.create(x, y, width, height);		
-		if (box != null) {
-			CCSprite sprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame(Box.texture));			
-			box.setSprite(sprite);
-		}
-		
-		return box;				
 	}
 }

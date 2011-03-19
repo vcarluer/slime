@@ -4,7 +4,6 @@ package gamers.associate.Slime.items;
 import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
-import org.cocos2d.nodes.CCAnimation;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.CGPoint;
 
@@ -33,7 +32,6 @@ public class GoalPortal extends GameItemPhysic {
 		this.bodyWidth = this.width;
 		this.bodyHeight = this.height;
 		this.isWon = false;
-		this.initBody();
 	}
 
 	@Override
@@ -81,7 +79,12 @@ public class GoalPortal extends GameItemPhysic {
 	}
 
 	@Override
-	protected CCAnimation getReferenceAnimation() {
-		return this.animationList.get(GoalPortal.Anim_Goal_Portal);		
+	protected String getReferenceAnimationName() {
+		return GoalPortal.Anim_Goal_Portal;		
+	}
+	
+	@Override
+	protected void initSprite() {						
+		this.setSprite(GameItemCocos.createSpriteFromFirstFrame(Anim_Goal_Portal));
 	}
 }

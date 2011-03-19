@@ -63,6 +63,8 @@ public abstract class ItemFactoryBase<T extends GameItemCocos> {
 		if (this.isAttached) {			
 			T item = this.instantiate(x, y, width, height);
 			item.setAnimationList(this.sharedAnimations);
+			this.preInit(item);
+			this.initItem(item);			
 			this.runFirstAnimations(item);
 			this.level.addItemToAdd(item);			
 			return item;
@@ -75,6 +77,13 @@ public abstract class ItemFactoryBase<T extends GameItemCocos> {
 	
 	public T createBL(float x, float y, float width, float height) {
 		return this.create(x + width / 2, y + height / 2, width, height);
+	}
+	
+	protected void preInit(T item) {		
+	}
+	
+	protected void initItem(T item) {
+		item.initItem();
 	}
 	
 	protected abstract T instantiate(float x, float y, float width, float height);

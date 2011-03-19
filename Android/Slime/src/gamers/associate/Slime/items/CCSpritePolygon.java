@@ -1,16 +1,15 @@
 package gamers.associate.Slime.items;
 
+import gamers.associate.Slime.CCSpriteRepeat;
+
 import java.nio.FloatBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 
 import org.cocos2d.config.ccConfig;
-import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.utils.BufferProvider;
-
-import gamers.associate.Slime.CCSpriteRepeat;
 
 public class CCSpritePolygon extends CCSpriteRepeat {
 	protected FloatBuffer vertices;
@@ -22,17 +21,11 @@ public class CCSpritePolygon extends CCSpriteRepeat {
 	 * @see gamers.associate.Slime.CCSpriteRepeat#draw(javax.microedition.khronos.opengles.GL10)
 	 */
 	public CCSpritePolygon(CCSpriteFrame spriteFrame) {
-		super(spriteFrame);
-		this.polyInit();		
+		super(spriteFrame);		
 	}
 	
 	public CCSpritePolygon(String fileName, float textureWidth, float textureHeight) {
-		super(fileName, textureWidth, textureHeight);		
-		this.polyInit();		
-	}
-	
-	private void polyInit() {
-		
+		super(fileName, textureWidth, textureHeight);					
 	}
 	
 	public static CCSpritePolygon sprite(CCSpriteFrame spriteFrame) {
@@ -56,77 +49,16 @@ public class CCSpritePolygon extends CCSpriteRepeat {
         // #define kQuadSize sizeof(quad_.bl)
         gl.glBindTexture(GL10.GL_TEXTURE_2D, this.getTexture().name());
 
-        // int offset = (int)&quad_;
-
         this.vertices.position(0);
         this.texCoords.position(0);
         
-        /*float[] verticesArray = this.getVertexArray();
-        float[] textArray = this.getTexCoordsArray();*/
-        
-        /*float textX = (80f / 128f) % 128f;        
-        float textY = (50f / 128f) % 128f;
-
-        this.texCoords.position(0);
-        this.texCoords.clear();
-        this.texCoords.put(0);
-        this.texCoords.put(0);
-        this.texCoords.put(0);
-        this.texCoords.put(textY);
-        this.texCoords.put(textX);
-        this.texCoords.put(0);
-        this.texCoords.put(textX);
-        this.texCoords.put(textY);
-        this.texCoords.position(0);*/
-
-        /*float offsetX = 64;
-        float offsetY = 64;
-        this.vertices.position(0);
-        this.vertices.clear();
-        this.vertices.put(offsetX);
-        this.vertices.put(offsetY + 50);
-        this.vertices.put(0);
-        
-        this.vertices.put(offsetX);
-        this.vertices.put(offsetY);
-        this.vertices.put(0);
-        
-        this.vertices.put(offsetX + 50);
-        this.vertices.put(offsetY + 50);
-        this.vertices.put(0);
-        
-        this.vertices.put(offsetX + 50);
-        this.vertices.put(offsetY);
-        this.vertices.put(0);
-        this.vertices.position(0);*/
-        
-        /*this.texCoords = BufferProvider.createFloatBuffer(6 * 2);
-        this.texCoords.position(0);
-        this.texCoords.clear();
-        this.texCoords.put(0);
-        this.texCoords.put(0);
-        this.texCoords.put(0);
-        this.texCoords.put(1);
-        this.texCoords.put(1);
-        this.texCoords.put(0);
-        this.texCoords.put(1);
-        this.texCoords.put(1);
-        this.texCoords.put(0);
-        this.texCoords.put(0);
-        this.texCoords.put(0);
-        this.texCoords.put(1);
-        this.texCoords.position(0);*/
-                
-        // vertex
-        // int diff = offsetof( ccV3F_C4B_T2F, vertices);
+        // vertex        
         gl.glVertexPointer(3, GL10.GL_FLOAT, 0 , this.vertices);
 
-        // color
-        // diff = offsetof( ccV3F_C4B_T2F, colors);
+        // color        
         gl.glColorPointer(4, GL10.GL_FLOAT, 0, colors);
 
-        // tex coords
-        // diff = offsetof( ccV3F_C4B_T2F, texCoords);
+        // tex coords        
         gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, this.texCoords);
 
         gl.glDrawArrays(GL10.GL_TRIANGLE_STRIP, 0, this.baseArray.length);

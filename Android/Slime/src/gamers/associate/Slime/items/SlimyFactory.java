@@ -20,8 +20,8 @@ public class SlimyFactory extends GameItemPhysicFactory<Slimy> {
 	
 	@Override
 	protected void runFirstAnimations(Slimy item) {
-		item.waitAnim();
-		item.fadeIn();
+		/*item.waitAnim();
+		item.fadeIn();*/
 	}
 
 	@Override

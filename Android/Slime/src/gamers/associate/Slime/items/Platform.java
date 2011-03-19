@@ -1,11 +1,7 @@
 package gamers.associate.Slime.items;
 
 
-import gamers.associate.Slime.CCSpriteRepeat;
-
 import org.cocos2d.nodes.CCNode;
-import org.cocos2d.nodes.CCTextureCache;
-import org.cocos2d.nodes.CCTextureNode;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -17,9 +13,8 @@ public class Platform extends GameItemPhysic {
 	public static String texture = "metal2.png"; 
 		
 	public Platform(CCNode node, float x, float y, float width, float height, World world, float worldRatio) {
-		super(node, x, y, width, height, world, worldRatio);				
-		this.initBody();
-		this.textureMode = TextureMode.REPEAT;		
+		super(node, x, y, width, height, world, worldRatio);
+		this.spriteType = SpriteType.SINGLE_REPEAT;		
 	}
 	
 	@Override
@@ -49,4 +44,14 @@ public class Platform extends GameItemPhysic {
     		this.body.createFixture(fixtureDef);
     	}  
 	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.GameItemCocos#getReferenceTexture()
+	 */
+	@Override
+	protected String getReferenceTexture() {		
+		return texture;
+	}
+	
+	
 }

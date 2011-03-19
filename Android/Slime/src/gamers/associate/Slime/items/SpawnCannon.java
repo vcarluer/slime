@@ -40,8 +40,6 @@ public class SpawnCannon extends GameItemPhysic {
 		
 		// Todo: remove this
 		this.select();
-		
-		this.initBody();
 	}
 	
 	@Override

@@ -18,8 +18,8 @@ public class Lava extends GameItemPhysic {
 	public Lava(CCNode node, float x, float y, float width, float height,
 			World world, float worldRatio) {
 		super(node, x, y, width, height, world, worldRatio);
-		this.initBody();
-		this.textureMode = TextureMode.REPEAT;			
+		this.textureMode = TextureMode.REPEAT;
+		this.spriteType = SpriteType.ANIM_REPEAT;
 	}
 
 	@Override
@@ -63,5 +63,21 @@ public class Lava extends GameItemPhysic {
 		CCAnimate animation = CCAnimate.action(this.animationList.get(Anim_Init), false);
 		this.currentAction = CCRepeatForever.action(animation);
 		this.sprite.runAction(this.currentAction);
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.GameItemCocos#runReferenceAction()
+	 */
+	@Override
+	protected void runReferenceAction() {
+		this.initAnimation();
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.GameItemCocos#getReferenceAnimationName()
+	 */
+	@Override
+	protected String getReferenceAnimationName() {		
+		return Anim_Init;
 	}
 }

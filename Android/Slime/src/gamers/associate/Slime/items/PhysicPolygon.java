@@ -24,12 +24,10 @@ public class PhysicPolygon extends GameItemPhysic {
 		this.textureMode = TextureMode.REPEAT;
 	}
 	
-	public void init(boolean isDynamic, CGPoint[] bodyPoints, CGPoint[] glVertices) {
+	public void initPoly(boolean isDynamic, CGPoint[] bodyPoints, CGPoint[] glVertices) {
 		this.bodyPoints = bodyPoints;
 		this.vertices = glVertices;
-		this.isDynamic = isDynamic;
-		
-		this.initBody();
+		this.isDynamic = isDynamic;		
 	}
 
 	@Override

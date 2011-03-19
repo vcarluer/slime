@@ -1,6 +1,8 @@
 package gamers.associate.Slime.items;
 
 import org.cocos2d.nodes.CCNode;
+import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -20,7 +22,6 @@ public class Box extends GameItemPhysic{
 	public Box(CCNode node, float x, float y, float width, float height,
 			World world, float worldRatio) {
 		super(node, x, y, width, height, world, worldRatio);
-		this.initBody();
 	}
 
 	@Override
@@ -59,5 +60,10 @@ public class Box extends GameItemPhysic{
     		this.body.createFixture(fixtureDef);
     	} 		
 	}
-
+	
+	@Override
+	protected void initSprite() {
+		CCSprite sprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame(Box.texture));			
+		this.setSprite(sprite);
+	}
 }

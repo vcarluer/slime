@@ -70,4 +70,7 @@ public class GameItem {
 	public void setPosition(CGPoint position) {
 		this.position = position;
 	}
+	
+	public void initItem() {		
+	}
 }

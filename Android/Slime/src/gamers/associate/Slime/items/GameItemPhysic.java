@@ -33,6 +33,12 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 		super.destroy();
 	}
 	
+	@Override
+	public void initItem() {
+		super.initItem();
+		this.initBody();
+	}
+	
 	protected abstract void initBody();
 	
 	public Body getBody() {

@@ -8,7 +8,6 @@ import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCMoveBy;
 import org.cocos2d.actions.interval.CCSequence;
-import org.cocos2d.nodes.CCAnimation;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.CGPoint;
 
@@ -49,7 +48,7 @@ public class SpawnPortal extends GameItemCocos {
 	}
 	
 	@Override
-	protected CCAnimation getReferenceAnimation() {
-		return this.animationList.get(SpawnPortal.Anim_Spawn_Portal);
+	protected String getReferenceAnimationName() {
+		return SpawnPortal.Anim_Spawn_Portal;
 	}
 }

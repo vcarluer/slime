@@ -1,7 +1,6 @@
 package gamers.associate.Slime.items;
 
-
-
+import org.cocos2d.nodes.CCSprite;
 
 public class SpawnPortalFactory extends GameItemCocosFactory<SpawnPortal> {
 		
@@ -34,5 +33,4 @@ public class SpawnPortalFactory extends GameItemCocosFactory<SpawnPortal> {
 	protected void runFirstAnimations(SpawnPortal item) {
 		item.createPortal();
 	}
-
 }

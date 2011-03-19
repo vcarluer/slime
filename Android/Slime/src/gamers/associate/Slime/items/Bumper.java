@@ -1,7 +1,8 @@
 package gamers.associate.Slime.items;
 
-import org.cocos2d.config.ccMacros;
 import org.cocos2d.nodes.CCNode;
+import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.math.Vector2;
@@ -32,7 +33,6 @@ public class Bumper extends GameItemPhysic {
 			this.transformTexture();
 		}		
 		this.powa = Default_Powa;
-		this.initBody();
 	}
 	
 	public void setPowa(float powa) {
@@ -77,7 +77,13 @@ public class Bumper extends GameItemPhysic {
     	}		
 	}
 	
-	public void waitAnim() {
-		
-	}		
+	public void waitAnim() {		
+	}
+	
+	@Override
+	protected void initSprite() {
+		CCSprite sprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame(Bumper.Texture_Wait));			
+		//CCSprite sprite = CCSprite.sprite(Bumper.Texture_Wait);
+		this.setSprite(sprite);
+	}
 }

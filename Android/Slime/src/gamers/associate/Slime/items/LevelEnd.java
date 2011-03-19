@@ -15,8 +15,6 @@ public class LevelEnd extends GameItemPhysic {
 	public LevelEnd(CCNode node, float x, float y, float width, float height,
 			World world, float worldRatio) {
 		super(node, x, y, width, height, world, worldRatio);
-		
-		this.initBody();
 	}
 
 	@Override

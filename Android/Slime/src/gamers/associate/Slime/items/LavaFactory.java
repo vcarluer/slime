@@ -3,17 +3,11 @@ package gamers.associate.Slime.items;
 import java.io.IOException;
 import java.io.InputStream;
 
-import gamers.associate.Slime.CCSpriteRepeat;
-
-import javax.microedition.khronos.opengles.GL10;
-
 import org.cocos2d.nodes.CCDirector;
-import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.opengl.CCTexture2D;
 import org.cocos2d.opengl.GLResourceHelper;
-import org.cocos2d.types.CCTexParams;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 
@@ -21,23 +15,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 public class LavaFactory extends GameItemPhysicFactory<Lava> {
-	@Override
-	public Lava create(float x, float y, float width, float height) {		
-		Lava lava = this.instantiate(x, y, width, height);
-		lava.setAnimationList(this.sharedAnimations);						
-					
-		lava.setSprite(null);
-		if (lava != null) {
-			CCSprite sprite = CCSpriteRepeat.sprite(Lava.texture1, true, width, height);			
-			lava.setSprite(sprite);					
-		}
-		
-		this.runFirstAnimations(lava);
-		this.level.addItemToAdd(lava);		
-		
-		return lava;				
-	}
-	
+
 	private static CCTexture2D createTextureFromFilePath(final String path) {
         
     	final CCTexture2D tex = new CCTexture2D();

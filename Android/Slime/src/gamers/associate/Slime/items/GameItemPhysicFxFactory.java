@@ -27,5 +27,5 @@ public abstract class GameItemPhysicFxFactory<T extends GameItemPhysicFx> extend
 			this.worldRatio = 0f;
 			this.isAttached = false;
 		}
-	}		
+	}
 }
