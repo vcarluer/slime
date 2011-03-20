@@ -1,8 +1,7 @@
 package gamers.associate.Slime.layers;
 
-import gamers.associate.Slime.CameraManager;
-import gamers.associate.Slime.Level;
-import gamers.associate.Slime.TouchInfo;
+import gamers.associate.Slime.game.CameraManager;
+import gamers.associate.Slime.game.Level;
 
 import java.util.ArrayList;
 

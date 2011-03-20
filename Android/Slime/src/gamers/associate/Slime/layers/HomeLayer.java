@@ -1,7 +1,7 @@
 package gamers.associate.Slime.layers;
 
-import gamers.associate.Slime.LevelSelection;
-import gamers.associate.Slime.SpriteSheetFactory;
+import gamers.associate.Slime.game.LevelSelection;
+import gamers.associate.Slime.items.base.SpriteSheetFactory;
 
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;

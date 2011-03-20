@@ -1,7 +1,7 @@
 package gamers.associate.Slime.layers;
 
-import gamers.associate.Slime.Level;
-import gamers.associate.Slime.LevelSelection;
+import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.LevelSelection;
 
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;

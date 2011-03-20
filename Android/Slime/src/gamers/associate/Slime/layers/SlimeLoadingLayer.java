@@ -1,7 +1,7 @@
 package gamers.associate.Slime.layers;
 
-import gamers.associate.Slime.Level;
-import gamers.associate.Slime.SpriteSheetFactory;
+import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.items.base.SpriteSheetFactory;
 
 import org.cocos2d.actions.UpdateCallback;
 import org.cocos2d.layers.CCColorLayer;
