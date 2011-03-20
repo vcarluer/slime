@@ -85,8 +85,12 @@ public class LevelLayer extends CCLayer {
 		
 		if (this.touchList.size() == 1) {
 			TouchInfo touch = this.getTouch(event, 0);
-			this.level.getCameraManager().moveCameraBy(touch.getLastMoveDelta());
-			this.level.getSpawnCannon().selectionMove(touch.getLastMoveReference());
+			if (this.level.getSpawnCannon().isSelected()) {
+				this.level.getSpawnCannon().selectionMove(touch.getLastMoveReference());
+			}
+			else {
+				this.level.getCameraManager().moveCameraBy(touch.getLastMoveDelta());
+			}						
 		}
 		
 		if (this.isZoomAction) {

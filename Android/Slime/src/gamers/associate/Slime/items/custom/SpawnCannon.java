@@ -22,15 +22,20 @@ public class SpawnCannon extends GameItemPhysic {
 	public static String Anim_Base = "metal1";
 	public static float Default_Width = 64f;
 	public static float Default_Height = 64f;
+	public static float Default_Powa = 1.5f;
+	public static float Max_Impulse = 10f;
 	private float spawnHeightShift = Slimy.Default_Height / 2;
 	
 	private CGPoint target;
+	private Vector2 targetImpulse;
 	private boolean selected;
+	private float powa;
 	
 	public SpawnCannon(float x, float y, float width, float height,
 			World world, float worldRatio) {
 		super(x, y, width, height, world, worldRatio);
 		this.spriteType = SpriteType.SINGLE_SCALE;
+		this.powa = Default_Powa;
 		
 		if (width == 0 && this.height == 0) {
 			this.bodyWidth = this.width = Default_Width;
@@ -42,6 +47,7 @@ public class SpawnCannon extends GameItemPhysic {
 	protected void initBody() {
 		// Physic body
 		BodyDef bodyDef = new BodyDef();		
+		
 		CGPoint spawnPoint = new CGPoint();
 		spawnPoint.x = this.position.x;
 		spawnPoint.y = this.position.y;
@@ -57,6 +63,7 @@ public class SpawnCannon extends GameItemPhysic {
     		this.body.setUserData(this);
     		
     		FixtureDef fixtureDef = new FixtureDef();
+    		fixtureDef.isSensor = true;
     		fixtureDef.shape = staticBox;	
     		fixtureDef.density = 1.0f;
     		fixtureDef.friction = 1.0f;
@@ -66,23 +73,27 @@ public class SpawnCannon extends GameItemPhysic {
     	}  
 	}
 	
-	public Slimy spawnSlime(CGPoint target) {
-		this.target = target;
+	public Slimy spawnSlime(CGPoint gameTarget) {		
+		this.computeTarget(gameTarget);
 		return spawnSlimeToCurrentTarget();
 	}
 	
 	public Slimy spawnSlimeToCurrentTarget() {
-		CGPoint spawn = this.getSpawnPoint();
-		Slimy slimy = SlimeFactory.Slimy.create(spawn.x, spawn.y, 1.0f);
-		Vector2 pos = slimy.getBody().getPosition();
-		Vector2 impulse = new Vector2();
-		impulse.x = -(this.target.x  / this.worldRatio - pos.x);
-		impulse.y = -(this.target.y / this.worldRatio - pos.y);
-		if (impulse.len() > 10f) {
-			impulse.nor().mul(10f);
+		Slimy slimy = null;
+		if (this.selected) {			
+			CGPoint spawn = this.getSpawnPoint();
+			slimy = SlimeFactory.Slimy.create(spawn.x, spawn.y, 1.0f);
+			Vector2 pos = slimy.getBody().getPosition();
+			Vector2 impulse = new Vector2();
+			impulse.x = this.targetImpulse.x  / this.worldRatio;
+			impulse.y = this.targetImpulse.y / this.worldRatio;
+			if (impulse.len() > Max_Impulse) {
+				impulse.nor().mul(Max_Impulse);
+			}
+			
+			slimy.getBody().applyLinearImpulse(impulse, pos);
 		}
 		
-		slimy.getBody().applyLinearImpulse(impulse, pos);
 		return slimy;
 	}
 	
@@ -92,13 +103,22 @@ public class SpawnCannon extends GameItemPhysic {
 	
 	public void unselect() {
 		this.selected = false;
-		this.target = null;
+		this.targetImpulse = null;
 	}
 	
 	public void selectionMove(CGPoint screenSelection) {
 		if (this.selected) {
 			CGPoint gameTarget = Level.currentLevel.getCameraManager().getGamePoint(screenSelection);
-			this.target = CGPoint.make(gameTarget.x, gameTarget.y);
+			this.computeTarget(gameTarget);
+		}
+	}
+	
+	protected void computeTarget(CGPoint gameTouch) {
+		if (this.selected) {
+			CGPoint spawnPoint =  this.getSpawnPoint();
+			this.targetImpulse = new Vector2((spawnPoint.x - gameTouch.x) * this.powa, (spawnPoint.y - gameTouch.y) * this.powa);
+			
+			this.target = CGPoint.make(spawnPoint.x + this.targetImpulse.x, spawnPoint.y + this.targetImpulse.y);
 		}
 	}
 
@@ -108,12 +128,12 @@ public class SpawnCannon extends GameItemPhysic {
 	@Override
 	public void draw(GL10 gl) {		
 		super.draw(gl);
-		if (this.selected && this.target != null) {
+		if (this.selected && this.targetImpulse != null) {
 			/*gl.glDisable(GL10.GL_LINE_SMOOTH);
 			gl.glLineWidth(2.0f);*/
 			gl.glEnable(GL10.GL_LINE_SMOOTH);
 			gl.glColor4f(1.0f, 0.0f, 1.0f, 1.0f);				        
-			CGPoint spawnPoint =  this.getSpawnPoint();
+			CGPoint spawnPoint =  this.getSpawnPoint();			
 			CCDrawingPrimitives.ccDrawLine(gl, spawnPoint, this.target);
 			// CGSize s = CCDirector.sharedDirector().winSize();
 			gl.glDisable(GL10.GL_LINE_SMOOTH);
@@ -142,6 +162,10 @@ public class SpawnCannon extends GameItemPhysic {
 			this.select();
 		}
 		
+		return this.selected;
+	}
+		
+	public boolean isSelected() {
 		return this.selected;
 	}
 }
