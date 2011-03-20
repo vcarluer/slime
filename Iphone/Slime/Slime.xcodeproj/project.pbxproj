@@ -170,7 +170,6 @@
 		7BAA862313242130000B5C20 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BAA862213242130000B5C20 /* Default.png */; };
 		7BACBC511326EA1300A66291 /* JulenGarciaGA.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BACBC501326EA1300A66291 /* JulenGarciaGA.png */; };
 		7BACBC531326EA3900A66291 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BACBC521326EA3900A66291 /* Default@2x.png */; };
-		7BACBC5E1326EADC00A66291 /* AnimationLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BACBC551326EADB00A66291 /* AnimationLayer.mm */; };
 		7BACBC5F1326EADC00A66291 /* BackgoundLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BACBC571326EADB00A66291 /* BackgoundLayer.mm */; };
 		7BACBC601326EADC00A66291 /* Bumper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BACBC591326EADB00A66291 /* Bumper.mm */; };
 		7BACBC611326EADC00A66291 /* BumperFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7BACBC5B1326EADB00A66291 /* BumperFactory.mm */; };
@@ -591,8 +590,6 @@
 		7BAA862213242130000B5C20 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		7BACBC501326EA1300A66291 /* JulenGarciaGA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JulenGarciaGA.png; sourceTree = "<group>"; };
 		7BACBC521326EA3900A66291 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		7BACBC541326EADB00A66291 /* AnimationLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationLayer.h; sourceTree = "<group>"; };
-		7BACBC551326EADB00A66291 /* AnimationLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AnimationLayer.mm; sourceTree = "<group>"; };
 		7BACBC561326EADB00A66291 /* BackgoundLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgoundLayer.h; sourceTree = "<group>"; };
 		7BACBC571326EADB00A66291 /* BackgoundLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BackgoundLayer.mm; sourceTree = "<group>"; };
 		7BACBC581326EADB00A66291 /* Bumper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bumper.h; sourceTree = "<group>"; };
@@ -1293,8 +1290,6 @@
 				7B05D8EB1326ED78006DAEDE /* LevelLayer.mm */,
 				7B05D8F61326ED78006DAEDE /* SlimeLoadingLayer.h */,
 				7B05D8F71326ED78006DAEDE /* SlimeLoadingLayer.mm */,
-				7BACBC541326EADB00A66291 /* AnimationLayer.h */,
-				7BACBC551326EADB00A66291 /* AnimationLayer.mm */,
 				7BACBC561326EADB00A66291 /* BackgoundLayer.h */,
 				7BACBC571326EADB00A66291 /* BackgoundLayer.mm */,
 				7BAD4AFB132978720022C79C /* LevelSelection.h */,
@@ -1793,7 +1788,6 @@
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				50F4143910692D7D002A0D5E /* GLES-Render.mm in Sources */,
-				7BACBC5E1326EADC00A66291 /* AnimationLayer.mm in Sources */,
 				7BACBC5F1326EADC00A66291 /* BackgoundLayer.mm in Sources */,
 				7BACBC601326EADC00A66291 /* Bumper.mm in Sources */,
 				7BACBC611326EADC00A66291 /* BumperFactory.mm in Sources */,

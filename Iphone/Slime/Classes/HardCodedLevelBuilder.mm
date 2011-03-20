@@ -41,7 +41,7 @@ float LAND_HEIGHT = 64.0f;
 
 + (void) createLand:(Level *)level {
     CGSize s = CGSizeMake([level levelWidth],[level levelHeight]);
-    [platform create:s.width / 2 y:LAND_HEIGHT / 2 width:s.width height:LAND_HEIGHT];
+    //[platform create:s.width / 2 y:LAND_HEIGHT / 2 width:s.width height:LAND_HEIGHT];
 }
 
 
@@ -56,11 +56,11 @@ float LAND_HEIGHT = 64.0f;
     [level setSpawnPortal:my_spawnPortal];
     float goalPlatH = 20.0f;
     float goalPlatW = 100.0f;
-    [platform create:0 y:35  width:480 height:10];
+    //[platform create:0 y:35  width:480 height:10];
     //GoalPortal * my_goalPortal = [goalPortal  create:s1.width / 2 y:LAND_HEIGHT + goalPlatH + 15];
     //[level setGoalPortal:my_goalPortal];
-    [bumper create:30 y:s1.height / 2 width:60 height:120 powa:2.0f];
-    // [homeLevelHandler create];
+    //[bumper create:30 y:s1.height / 2 width:60 height:120 powa:2.0f];
+    //[homeLevelHandler create];
     [level addCustomOverLayer:[HomeLayer get]];
     [level setIsHudEnabled:NO];
     [level setIsTouchEnabled:NO];
@@ -73,14 +73,18 @@ float LAND_HEIGHT = 64.0f;
     [self createGroundBox:level];
     [self createLand:level];
      CGSize s = CGSizeMake([level levelWidth],[level levelHeight]);
-    SpawnPortal * my_spawnPortal = [spawnPortal createAndMove:level.levelWidth / 2 y:level.levelHeight - 32 moveBy:level.levelWidth / 2 speed:5];
-    [level setSpawnPortal:my_spawnPortal];
+    //SpawnPortal * my_spawnPortal = [spawnPortal createAndMove:level.levelWidth / 2 y:level.levelHeight - 32 moveBy:level.levelWidth / 2 speed:5];
+    //[level setSpawnPortal:my_spawnPortal];
     float goalPlatH = 20.0f;
     float goalPlatW = 100.0f;
+    [platform create:0 y:10  width:s.width * 2 height:10];
+    [platform create:0 y:s.height -20  width:s.width * 2 height:10];
     //[platform create:s.width / 2 y:LAND_HEIGHT + goalPlatH / 2 width:goalPlatW height:goalPlatH];
-    GoalPortal * my_goalPortal = [goalPortal  create:s1.width / 2 y:LAND_HEIGHT + goalPlatH + 15];
-    [level setGoalPortal:my_goalPortal];
-    [bumper create:30 y:s.height / 2 width:60 height:120 powa:2.0f];
+    //GoalPortal * my_goalPortal = [goalPortal  create:s1.width / 2 y:LAND_HEIGHT + goalPlatH + 15];
+   // [level setGoalPortal:my_goalPortal];
+    [bumper create:30 y:50 width:60 height:30 powa:2.0f];
+    [bumper create:410 y:30 width:60 height:20 powa:2.5f];
+    //[bumper create:30 y:s.height / 2 width:60 height:120 powa:2.0f];
 }
 
 + (float) heightRatio {
@@ -95,7 +99,7 @@ float LAND_HEIGHT = 64.0f;
     float cX = 0;
     float cY = 0;
     [platform  createBL:cX y:cY width:100 height:100];
-    /*SpawnCannon * my_spawnCannon = [cannon  create:100 - spawncannon_Default_Width / 2 y:100 + spawncannon_Default_Height / 2];*/
+    //SpawnCannon * my_spawnCannon = [cannon  create:100 - spawncannon_Default_Width / 2 y:100 + spawncannon_Default_Height / 2];
     cX += 100;
   //  [lava createBL:cX y:cY width:200 height:50];
     cX += 200;

@@ -182,17 +182,11 @@
 }
 
 - (void) dealloc {
-    /*
+    
   [gameLayer release];
-//  [moveCameraBy release];
-//  [cameraView release];
-//  [virtualCameraPos release];
   [followed release];
-//  [levelOrigin release];
-//  [zoomAnchor release];
-//  [zoomScreenPin release];
   [super dealloc];
-     */
+    
 }
 
 @end

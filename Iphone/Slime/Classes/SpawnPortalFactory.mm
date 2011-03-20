@@ -43,4 +43,10 @@
 	}
 }
 
+- (void) createSprite:(GameItemCocos *)gameItem {
+    CCSprite * sprite = [CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:Anim_Spawn_Portal]];
+    
+    [gameItem setSprite:sprite];
+}
+
 @end

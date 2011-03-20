@@ -1,5 +1,6 @@
 #import "SpawnCannon.h"
 #import "SlimeFactory.h"
+#import "Level.h"
 
 
 NSString * spawncannon_texture = @"metal1.png";
@@ -34,8 +35,8 @@ float spawncannon_Default_Height = 32.0f;
     staticBox.SetAsBox(bodyWidth / worldRatio / 2, bodyHeight / worldRatio / 2);
    
 
-//  @synchronized(world) 
-//  {
+    [worldLock lock];
+    
     body = world->CreateBody(&bodyDef);
     bodyDef.userData = self;
     
@@ -45,7 +46,7 @@ float spawncannon_Default_Height = 32.0f;
     fixtureDef.restitution = 0.0f;
     fixtureDef.filter.categoryBits = Category_Static;
     body->CreateFixture(&fixtureDef);
-//  }
+    [worldLock unlock];
 }
 
 - (Slimy *) spawnSlime:(CGPoint)my_target {
@@ -109,9 +110,8 @@ float spawncannon_Default_Height = 32.0f;
 }
 
 - (void) dealloc {
-    
-//  [target release];
- // [super dealloc];
+  //  [target release];
+  [super dealloc];
 }
 
 @end

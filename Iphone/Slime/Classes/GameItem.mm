@@ -7,7 +7,7 @@
 - (id) init:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height {
 	self = [super init];
 	if (self != nil) {
-	  	my_id =  [[NSProcessInfo processInfo] globallyUniqueString];
+	  	//my_id =  [[NSProcessInfo processInfo] globallyUniqueString];
 		CGPoint tempposition;
 		tempposition.x =my_x;
 		tempposition.y =my_y;
@@ -44,15 +44,15 @@
 	}
 	isPaused = value;
 }
-/*
+
 - (void) pause {
 }
 
 - (void) resume {
 }
-*/
+
 - (void) dealloc {
-  //[super dealloc];
+  [super dealloc];
 }
 
 @end

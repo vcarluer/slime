@@ -43,7 +43,6 @@ NSLock * worldLock;
         isHudEnabled = YES;
         [scene addChild:hudLayer z:hudZ];
         items = [[NSMutableArray alloc] init] ;
-        //todo
         cameraManager = [[CameraManager alloc] initWithGameLayer:gameLayer];
         itemsToRemove = [[NSMutableArray alloc] init] ;
         itemsToAdd = [[NSMutableArray alloc] init] ;
@@ -99,10 +98,13 @@ NSLock * worldLock;
     currentLevelName = @"";
     
     for (GameItem * item in items) {
-        [item destroy];
+        //[self addItemToRemove: item ];
+        //[items removeObject:item];
+       // [item dealloc];
+        
     }
     
-    //[items release];
+    //[items removeAllObjects];
     spawnPortal = nil;
     goalPortal = nil;
     [self removeCustomOverLayer];
@@ -117,12 +119,11 @@ NSLock * worldLock;
 	gravity = my_gravity;
 	world = new b2World(gravity, true);		
     worldLock = [[NSLock alloc] init];
-	contactManager = new ContactManager;
-	world->SetContactListener(contactManager);
+	world->SetContactListener(new ContactManager);
     
     // Main game item spritesheet
-    //amz remove
     [SpriteSheetFactory add:@"labo"];
+   
     
     // Background
     CGSize s = [CCDirector sharedDirector].winSize;
@@ -161,12 +162,14 @@ NSLock * worldLock;
         [itemsToAdd removeAllObjects];
         
         [worldLock lock];
-        world->Step(delta, 6, 2);
+        world->Step(delta, 8, 4);
         [worldLock unlock];
-        
-        for (GameItem * item in items) {
+        if([items count] !=0){
+                 for (GameItem * item in items) {
             [item render:delta];
+                 }   
         }
+
         
         
         for (GameItem * item in itemsToRemove) {
@@ -216,7 +219,7 @@ NSLock * worldLock;
 
 - (void) spawnSlime:(CGPoint)screenTarget {
     if (spawnCannon != nil) {
-        CGPoint gameTarget;// = [cameraManager getGamePoint:screenTarget];
+        CGPoint gameTarget = [cameraManager getGamePoint:screenTarget];
         [spawnCannon spawnSlime:gameTarget];
     }
     else {
@@ -295,25 +298,26 @@ NSLock * worldLock;
  }
  
  }
- */
+ 
 
 -(void) draw
 {
 	// Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
 	// Needed states:  GL_VERTEX_ARRAY, 
 	// Unneeded states: GL_TEXTURE_2D, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
-	glDisable(GL_TEXTURE_2D);
-	glDisableClientState(GL_COLOR_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	//glDisable(GL_TEXTURE_2D);
+	//glDisableClientState(GL_COLOR_ARRAY);
+	//glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	
 	world->DrawDebugData();
 	
 	// restore default GL states
-	glEnable(GL_TEXTURE_2D);
-	glEnableClientState(GL_COLOR_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	//glEnable(GL_TEXTURE_2D);
+	//glEnableClientState(GL_COLOR_ARRAY);
+	//glEnableClientState(GL_TEXTURE_COORD_ARRAY);
     
 }
+ */
 - (void) dealloc {
     /*
      //[world release];

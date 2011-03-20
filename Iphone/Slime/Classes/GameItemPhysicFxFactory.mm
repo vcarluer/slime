@@ -24,7 +24,7 @@
 
 - (void) dealloc {
  // [world release];
- // [super dealloc];
+  [super dealloc];
 }
 
 

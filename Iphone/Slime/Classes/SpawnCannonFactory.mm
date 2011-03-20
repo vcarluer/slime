@@ -26,4 +26,10 @@
 - (void) runFirstAnimations:(SpawnCannon *)item {
 }
 
+- (void) createSprite:(GameItemCocos *)gameItem {
+    CCSprite * sprite = [CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:spawncannon_texture]];
+    
+    [gameItem setSprite:sprite];
+}
+
 @end
