@@ -1,7 +1,6 @@
 package gamers.associate.Slime.items;
 
 
-import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -10,10 +9,10 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class Platform extends GameItemPhysic {	
-	public static String texture = "metal2.png"; 
+	public static String Anim_Base = "metal2"; 
 		
-	public Platform(CCNode node, float x, float y, float width, float height, World world, float worldRatio) {
-		super(node, x, y, width, height, world, worldRatio);
+	public Platform(float x, float y, float width, float height, World world, float worldRatio) {
+		super(x, y, width, height, world, worldRatio);
 		this.spriteType = SpriteType.SINGLE_REPEAT;		
 	}
 	
@@ -46,12 +45,10 @@ public class Platform extends GameItemPhysic {
 	}
 
 	/* (non-Javadoc)
-	 * @see gamers.associate.Slime.items.GameItemCocos#getReferenceTexture()
+	 * @see gamers.associate.Slime.items.GameItemCocos#getReferenceAnimationName()
 	 */
 	@Override
-	protected String getReferenceTexture() {		
-		return texture;
-	}
-	
-	
+	protected String getReferenceAnimationName() {		
+		return Platform.Anim_Base;
+	}	
 }

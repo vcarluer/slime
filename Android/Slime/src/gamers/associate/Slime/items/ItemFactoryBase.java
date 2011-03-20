@@ -60,11 +60,11 @@ public abstract class ItemFactoryBase<T extends GameItemCocos> {
 	}
 		
 	public T create(float x, float y, float width, float height) {
-		if (this.isAttached) {			
+		if (this.isAttached) {						
 			T item = this.instantiate(x, y, width, height);
 			item.setAnimationList(this.sharedAnimations);
 			this.preInit(item);
-			this.initItem(item);			
+			this.initItem(item);
 			this.runFirstAnimations(item);
 			this.level.addItemToAdd(item);			
 			return item;
@@ -80,6 +80,7 @@ public abstract class ItemFactoryBase<T extends GameItemCocos> {
 	}
 	
 	protected void preInit(T item) {		
+		item.setRootNode(this.getSpriteRootNode(item));
 	}
 	
 	protected void initItem(T item) {
@@ -89,4 +90,24 @@ public abstract class ItemFactoryBase<T extends GameItemCocos> {
 	protected abstract T instantiate(float x, float y, float width, float height);
 	
 	protected abstract void runFirstAnimations(T item);
+	
+	protected CCNode getSpriteRootNode(T item) {
+		SpriteType spriteType = item.getSpriteType();
+		CCNode node = null;
+		switch(spriteType) {
+		case UNKNOWN:	
+		case ANIM:
+		case SINGLE:
+		default:
+			node = this.spriteSheet;
+			break;
+		case ANIM_REPEAT:
+		case SINGLE_REPEAT:
+		case POLYGON_REPEAT:
+			node = this.rootNode;
+			break;
+		}
+		
+		return node;
+	}
 }

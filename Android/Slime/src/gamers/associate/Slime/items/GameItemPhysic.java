@@ -3,7 +3,6 @@ package gamers.associate.Slime.items;
 import java.util.ArrayList;
 
 import org.cocos2d.config.ccMacros;
-import org.cocos2d.nodes.CCNode;
 
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
@@ -18,8 +17,8 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 	protected float bodyHeight;	
 	protected ArrayList<GameItemPhysic> contacts;
 	
-	public GameItemPhysic(CCNode node, float x, float y, float width, float height, World world, float worldRatio) {		
-		super(node, x, y, width, height, world, worldRatio);		
+	public GameItemPhysic(float x, float y, float width, float height, World world, float worldRatio) {		
+		super(x, y, width, height, world, worldRatio);		
 		this.bodyWidth = this.width;
 		this.bodyHeight = this.height;
 		this.contacts = new ArrayList<GameItemPhysic>();

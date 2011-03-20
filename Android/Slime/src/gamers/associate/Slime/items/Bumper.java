@@ -1,6 +1,5 @@
 package gamers.associate.Slime.items;
 
-import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.types.CGPoint;
@@ -23,14 +22,14 @@ public class Bumper extends GameItemPhysic {
 	
 	
 	
-	public Bumper(CCNode node, float x, float y, float width, float height,
+	public Bumper(float x, float y, float width, float height,
 			World world, float worldRatio) {
-		super(node, x, y, width, height, world, worldRatio);		
+		super(x, y, width, height, world, worldRatio);		
 		
 		if (width == 0 && height == 0) {
 			this.width = this.bodyWidth = Default_Width;
 			this.height = this.bodyHeight = Default_Height;
-			this.transformTexture();
+			// this.transformTexture();
 		}		
 		this.powa = Default_Powa;
 	}

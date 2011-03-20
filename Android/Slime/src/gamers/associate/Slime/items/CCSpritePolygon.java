@@ -28,12 +28,20 @@ public class CCSpritePolygon extends CCSpriteRepeat {
 		super(fileName, textureWidth, textureHeight);					
 	}
 	
+	public CCSpritePolygon(CCSpriteFrame spriteFrame, float textureWidth, float textureHeight) {
+		super(spriteFrame, textureWidth, textureHeight);					
+	}
+	
 	public static CCSpritePolygon sprite(CCSpriteFrame spriteFrame) {
         return new CCSpritePolygon(spriteFrame);
     }
 	
 	public static CCSpritePolygon sprite(String fileName, float textureWidth, float textureHeight) {
         return new CCSpritePolygon(fileName, textureWidth, textureHeight);
+    }
+	
+	public static CCSpritePolygon sprite(CCSpriteFrame spriteFrame, float textureWidth, float textureHeight) {
+        return new CCSpritePolygon(spriteFrame, textureWidth, textureHeight);
     }
 	
 	@Override

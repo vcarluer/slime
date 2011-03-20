@@ -19,5 +19,5 @@ public abstract class GameItemCocosFactory<T extends GameItemCocos> extends Item
 			this.rootNode = null;			
 			this.isAttached = false;
 		}
-	}
+	}		
 }

@@ -15,7 +15,7 @@ public class LevelEndFactory extends GameItemPhysicFactory<LevelEnd>{
 
 	@Override
 	protected LevelEnd instantiate(float x, float y, float width, float height) {
-		return new LevelEnd(this.spriteSheet, x, y, width, height, this.world, this.worldRatio);
+		return new LevelEnd(x, y, width, height, this.world, this.worldRatio);
 	}
 
 	@Override

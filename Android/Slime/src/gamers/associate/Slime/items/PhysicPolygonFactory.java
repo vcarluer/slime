@@ -15,18 +15,12 @@ public class PhysicPolygonFactory extends GameItemPhysicFactory<PhysicPolygon> {
 		
 		PhysicPolygon polygon = super.create(x, y, width, height);
 		
-		if (polygon != null) {
-			//CCSpritePolygon sprite = CCSpritePolygon.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame(PhysicPolygon.texture));
-			CCSpritePolygon sprite = CCSpritePolygon.sprite(PhysicPolygon.texture, width, height);
-			sprite.setVertices(glVertices);
-			polygon.setSprite(sprite);
-		}
-		
-		return polygon;				
+		return polygon;
 	}
 	
 	@Override
 	protected void preInit(PhysicPolygon item) {
+		super.preInit(item);
 		item.initPoly(this.isDynamic, this.bodyPoints, this.glVertices);
 		this.isDynamic = false;
 		this.bodyPoints = null;
@@ -35,17 +29,18 @@ public class PhysicPolygonFactory extends GameItemPhysicFactory<PhysicPolygon> {
 	
 	@Override
 	protected void createAnimList() {
+		TextureAnimation.createFramesFromFiles(PhysicPolygon.Anim_Base, 1);		
 	}
 
 	@Override
 	protected String getPlistPng() {
-		return "labo"; 
+		return ""; 
 	}
 
 	@Override
 	protected PhysicPolygon instantiate(float x, float y, float width,
 			float height) {
-		return new PhysicPolygon(this.rootNode, x, y, width, height, this.world, this.worldRatio);
+		return new PhysicPolygon(x, y, width, height, this.world, this.worldRatio);
 	}
 
 	@Override

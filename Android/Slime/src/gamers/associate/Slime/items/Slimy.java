@@ -7,8 +7,6 @@ import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCFadeIn;
 import org.cocos2d.actions.interval.CCSequence;
-import org.cocos2d.nodes.CCAnimation;
-import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -38,14 +36,14 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	protected CCAction waitAction;
 	protected Boolean isBurned;
 	
-	public Slimy(CCNode node, float x, float y, float width, float height, World world, float worldRatio) {		
-		super(node, x, y, width, height, world, worldRatio);
+	public Slimy(float x, float y, float width, float height, World world, float worldRatio) {		
+		super(x, y, width, height, world, worldRatio);
 		this.spriteType = SpriteType.ANIM;
 		
 		if (width == 0 && this.height == 0) {
 			this.width = Default_Width;
 			this.height = Default_Height;
-			this.transformTexture();
+			// this.transformTexture();
 		}	
 		
 		this.bodyWidth = Default_Body_Width * this.width / Default_Width;

@@ -30,7 +30,7 @@ public class SpawnCannonFactory extends GameItemPhysicFactory<SpawnCannon>{
 
 	@Override
 	protected SpawnCannon instantiate(float x, float y, float width, float height) {
-		return new SpawnCannon(this.spriteSheet, x, y, width, height, this.world, this.worldRatio);
+		return new SpawnCannon(x, y, width, height, this.world, this.worldRatio);
 	}
 
 	@Override

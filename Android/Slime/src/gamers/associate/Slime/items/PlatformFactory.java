@@ -4,16 +4,17 @@ public class PlatformFactory extends GameItemPhysicFactory<Platform>{
 	
 	@Override
 	protected void createAnimList() {
+		TextureAnimation.createFramesFromFiles(Platform.Anim_Base, 1);		
 	}
 
 	@Override
 	protected String getPlistPng() {
-		return "labo";
+		return "";
 	}
 
 	@Override
 	protected Platform instantiate(float x, float y, float width, float height) {
-		return new Platform(this.rootNode, x, y, width, height, this.world, this.worldRatio);
+		return new Platform(x, y, width, height, this.world, this.worldRatio);
 	}
 
 	@Override

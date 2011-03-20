@@ -14,7 +14,7 @@ public class GoalPortalFactory extends GameItemPhysicFactory<GoalPortal> {
 
 	@Override
 	protected GoalPortal instantiate(float x, float y, float width, float height) {
-		return new GoalPortal(this.spriteSheet, x, y, width, height, this.world, this.worldRatio);
+		return new GoalPortal(x, y, width, height, this.world, this.worldRatio);
 	}
 
 	@Override

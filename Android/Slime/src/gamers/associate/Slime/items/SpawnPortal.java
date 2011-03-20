@@ -8,14 +8,13 @@ import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCMoveBy;
 import org.cocos2d.actions.interval.CCSequence;
-import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.CGPoint;
 
 public class SpawnPortal extends GameItemCocos {
 	public static String Anim_Spawn_Portal = "blueportal";		
 	
-	public SpawnPortal(CCNode node, float x, float y, float width, float height) {
-		super(node, x, y, width, height);		
+	public SpawnPortal(float x, float y, float width, float height) {
+		super(x, y, width, height);		
 	}
 	
 	public void createPortal() {

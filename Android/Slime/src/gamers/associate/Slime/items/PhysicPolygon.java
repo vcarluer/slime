@@ -1,6 +1,6 @@
 package gamers.associate.Slime.items;
 
-import org.cocos2d.nodes.CCNode;
+import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.math.Vector2;
@@ -11,23 +11,33 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class PhysicPolygon extends GameItemPhysic {
-	public static String texture = "metal2.png";
+	public static String Anim_Base = "metal2";
 	protected CGPoint[] vertices;
 	protected CGPoint[] bodyPoints;
 	protected boolean isDynamic;	
 	
 	// Vertices counter clockwise base on 0, 0
-	public PhysicPolygon(CCNode node, float x, float y, float width,
+	public PhysicPolygon(float x, float y, float width,
 			float height, World world, float worldRatio) {
-		super(node, x, y, width, height, world, worldRatio);
+		super(x, y, width, height, world, worldRatio);
 		
-		this.textureMode = TextureMode.REPEAT;
+		this.spriteType = SpriteType.POLYGON_REPEAT;		
 	}
 	
 	public void initPoly(boolean isDynamic, CGPoint[] bodyPoints, CGPoint[] glVertices) {
 		this.bodyPoints = bodyPoints;
 		this.vertices = glVertices;
-		this.isDynamic = isDynamic;		
+		this.isDynamic = isDynamic;				
+	}
+	
+	public void initPolySprite(CCSprite createdSprite) {
+		CCSpritePolygon spritePoly = (CCSpritePolygon)createdSprite;
+		spritePoly.setVertices(this.vertices);
+	}
+	
+	@Override
+	protected void postCreateSprite(CCSprite createdSprite) {
+		this.initPolySprite(createdSprite);
 	}
 
 	@Override
@@ -78,5 +88,13 @@ public class PhysicPolygon extends GameItemPhysic {
 		}
 		
 		return vectors;
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.GameItemCocos#getReferenceAnimationName()
+	 */
+	@Override
+	protected String getReferenceAnimationName() {
+		return PhysicPolygon.Anim_Base;
 	}
 }

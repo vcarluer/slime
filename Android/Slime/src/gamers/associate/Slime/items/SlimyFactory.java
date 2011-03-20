@@ -31,7 +31,7 @@ public class SlimyFactory extends GameItemPhysicFactory<Slimy> {
 
 	@Override
 	protected Slimy instantiate(float x, float y, float width, float height) {		
-		return new Slimy(this.spriteSheet, x, y, width, height, this.world, this.worldRatio);
+		return new Slimy(x, y, width, height, this.world, this.worldRatio);
 	}
 	
 	public Slimy create(float x, float y, float ratio) {		

@@ -1,6 +1,5 @@
 package gamers.associate.Slime.items;
 
-import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.types.CGPoint;
@@ -19,9 +18,9 @@ public class Box extends GameItemPhysic{
 		chainMode = value;
 	}
 	
-	public Box(CCNode node, float x, float y, float width, float height,
+	public Box(float x, float y, float width, float height,
 			World world, float worldRatio) {
-		super(node, x, y, width, height, world, worldRatio);
+		super(x, y, width, height, world, worldRatio);
 	}
 
 	@Override

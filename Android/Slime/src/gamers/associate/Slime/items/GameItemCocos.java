@@ -25,10 +25,9 @@ public abstract class GameItemCocos extends GameItem {
 	protected SpriteType spriteType;
 	protected boolean attachedToRoot;
 		
-	public GameItemCocos(CCNode node, float x, float y, float width, float height) {
+	public GameItemCocos(float x, float y, float width, float height) {
 		super(x, y, width, height);		
-		this.animationList = new Hashtable<String, CCAnimation>();				
-		this.rootNode = node;
+		this.animationList = new Hashtable<String, CCAnimation>();		
 		this.textureMode = TextureMode.SCALE;
 		this.spriteType = SpriteType.UNKNOWN;
 	}
@@ -129,10 +128,6 @@ public abstract class GameItemCocos extends GameItem {
 		return null;
 	}
 	
-	protected String getReferenceTexture() {
-		return null;
-	}
-	
 	protected void transformTexture() {
 		if (this.spriteType == SpriteType.ANIM || this.textureMode == TextureMode.SCALE) {
 			if (this.width != 0 && this.height != 0) {
@@ -178,7 +173,7 @@ public abstract class GameItemCocos extends GameItem {
 	public static CCAnimation createAnim(String animName, int frameCount, float interval) {
 		ArrayList<CCSpriteFrame> animArray = new ArrayList<CCSpriteFrame>();
 		for(int i = 0; i < frameCount; i++) {			
-			String frameName = animName + "-" + String.valueOf(i + 1) + ".png";
+			String frameName = TextureAnimation.keyName(animName, i + 1);
 			CCSpriteFrame frame = CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame(frameName);
 			if (frame != null) {
 				animArray.add(frame);
@@ -247,16 +242,22 @@ public abstract class GameItemCocos extends GameItem {
 			case ANIM:
 				// Todo: Works on iphone?
 				// Problem: If sprite frame setted here => Shown during 1 frame before animation begins...
-				sprite = new CCSprite();											
+				// sprite = CCSprite.sprite(this.getReferenceFirstFrame());
+				// If a texture for CCSprite is needed here create a dummy transparent texture?
+				sprite = new CCSprite();				
 				break;
 			case SINGLE:
 				sprite = CCSprite.sprite(this.getReferenceFirstFrame());
 				break;
 			case SINGLE_REPEAT:
-				sprite = CCSpriteRepeat.sprite(this.getReferenceTexture(), width, height);								
+				sprite = CCSpriteRepeat.sprite(this.getReferenceFirstFrame(), width, height);								
 				break;
 			case ANIM_REPEAT:
 				sprite = CCSpriteRepeat.sprite(this.getReferenceFirstFrame(), width, height);											
+				break;
+			case POLYGON_REPEAT:
+				sprite = CCSpritePolygon.sprite(this.getReferenceFirstFrame(), width, height);
+				this.postCreateSprite(sprite);
 				break;
 			default:								
 				break;
@@ -270,5 +271,16 @@ public abstract class GameItemCocos extends GameItem {
 	}
 	
 	protected void runReferenceAction() {		
+	}
+	
+	protected void postCreateSprite(CCSprite createdSprite) {	
+	}
+	
+	public SpriteType getSpriteType() {
+		return this.spriteType;
+	}
+	
+	public void setRootNode(CCNode node) {
+		this.rootNode = node;
 	}
 }

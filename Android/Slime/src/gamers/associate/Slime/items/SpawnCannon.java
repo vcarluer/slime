@@ -6,11 +6,8 @@ import gamers.associate.Slime.SlimeFactory;
 import javax.microedition.khronos.opengles.GL10;
 
 import org.cocos2d.config.ccMacros;
-import org.cocos2d.nodes.CCDirector;
-import org.cocos2d.nodes.CCNode;
 import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.types.CGPoint;
-import org.cocos2d.types.CGSize;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -27,15 +24,15 @@ public class SpawnCannon extends GameItemPhysic {
 	private CGPoint target;
 	private boolean selected;
 	
-	public SpawnCannon(CCNode node, float x, float y, float width, float height,
+	public SpawnCannon(float x, float y, float width, float height,
 			World world, float worldRatio) {
-		super(node, x, y, width, height, world, worldRatio);
+		super(x, y, width, height, world, worldRatio);
 		this.textureMode = TextureMode.REPEAT;
 		
 		if (width == 0 && this.height == 0) {
 			this.bodyWidth = this.width = Default_Width;
 			this.bodyHeight = this.height = Default_Height;
-			this.transformTexture();
+			// this.transformTexture();
 		}				
 		
 		// Todo: remove this
@@ -119,7 +116,7 @@ public class SpawnCannon extends GameItemPhysic {
 			gl.glColor4f(1.0f, 0.0f, 1.0f, 1.0f);				        
 			CGPoint spawnPoint =  this.getSpawnPoint();
 			CCDrawingPrimitives.ccDrawLine(gl, spawnPoint, this.target);
-			CGSize s = CCDirector.sharedDirector().winSize();
+			// CGSize s = CCDirector.sharedDirector().winSize();
 			gl.glDisable(GL10.GL_LINE_SMOOTH);
 			gl.glLineWidth(2);
             gl.glColor4f(0.0f, 1.0f, 1.0f, 1.0f);

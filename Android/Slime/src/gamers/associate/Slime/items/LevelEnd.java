@@ -2,7 +2,6 @@ package gamers.associate.Slime.items;
 
 import gamers.associate.Slime.Level;
 
-import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -12,9 +11,9 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class LevelEnd extends GameItemPhysic {
 
-	public LevelEnd(CCNode node, float x, float y, float width, float height,
+	public LevelEnd(float x, float y, float width, float height,
 			World world, float worldRatio) {
-		super(node, x, y, width, height, world, worldRatio);
+		super(x, y, width, height, world, worldRatio);
 	}
 
 	@Override

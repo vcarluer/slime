@@ -4,7 +4,6 @@ package gamers.associate.Slime.items;
 import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
-import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -20,9 +19,9 @@ public class GoalPortal extends GameItemPhysic {
 	
 	protected boolean isWon;
 	
-	public GoalPortal(CCNode node, float x, float y, float width, float height, World world,
+	public GoalPortal(float x, float y, float width, float height, World world,
 			float worldRatio) {
-		super(node, x, y, width, height, world, worldRatio);
+		super(x, y, width, height, world, worldRatio);
 		this.textureMode = TextureMode.REPEAT;
 		if (width == 0 && height == 0) {
 			this.width = Default_Width;

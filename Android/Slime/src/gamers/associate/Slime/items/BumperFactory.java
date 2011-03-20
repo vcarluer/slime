@@ -16,7 +16,7 @@ public class BumperFactory extends GameItemPhysicFactory<Bumper> {
 	@Override
 	protected Bumper instantiate(float x, float y, float width, float height) {
 		// TODO: change this to spriteSheet when using compressed texture file
-		return new Bumper(this.rootNode, x, y, width, height, this.world, this.worldRatio);
+		return new Bumper(x, y, width, height, this.world, this.worldRatio);
 	}
 
 	@Override

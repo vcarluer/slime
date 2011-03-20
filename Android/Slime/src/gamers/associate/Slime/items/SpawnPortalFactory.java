@@ -1,6 +1,5 @@
 package gamers.associate.Slime.items;
 
-import org.cocos2d.nodes.CCSprite;
 
 public class SpawnPortalFactory extends GameItemCocosFactory<SpawnPortal> {
 		
@@ -26,7 +25,7 @@ public class SpawnPortalFactory extends GameItemCocosFactory<SpawnPortal> {
 	@Override
 	protected SpawnPortal instantiate(float x, float y, float width,
 			float height) {
-		return new SpawnPortal(this.spriteSheet, x, y, width, height);
+		return new SpawnPortal(x, y, width, height);
 	}
 
 	@Override

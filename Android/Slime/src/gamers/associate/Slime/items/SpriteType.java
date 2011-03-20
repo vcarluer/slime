@@ -5,5 +5,6 @@ public enum SpriteType {
 	ANIM,
 	SINGLE,
 	ANIM_REPEAT,	
-	SINGLE_REPEAT
+	SINGLE_REPEAT,
+	POLYGON_REPEAT
 }

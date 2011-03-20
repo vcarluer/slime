@@ -2,7 +2,6 @@ package gamers.associate.Slime.items;
 
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
-import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -15,9 +14,9 @@ public class Lava extends GameItemPhysic {
 	public static String texture2 = "lava-2.png";
 	public static String Anim_Init = "lava";
 	
-	public Lava(CCNode node, float x, float y, float width, float height,
+	public Lava(float x, float y, float width, float height,
 			World world, float worldRatio) {
-		super(node, x, y, width, height, world, worldRatio);
+		super(x, y, width, height, world, worldRatio);
 		this.textureMode = TextureMode.REPEAT;
 		this.spriteType = SpriteType.ANIM_REPEAT;
 	}

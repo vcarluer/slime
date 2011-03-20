@@ -14,7 +14,7 @@ public class BoxFactory extends GameItemPhysicFactory<Box>{
 
 	@Override
 	protected Box instantiate(float x, float y, float width, float height) {
-		return new Box(this.spriteSheet, x, y, width, height, this.world, this.worldRatio);
+		return new Box(x, y, width, height, this.world, this.worldRatio);
 	}
 
 	@Override
