@@ -141,6 +141,8 @@ public class LevelLayer extends CCLayer {
 			this.touchList.remove(touch);
 		}
 		
+		this.level.getSpawnCannon().unselect();
+		
         return CCTouchDispatcher.kEventHandled;
 	}
 
@@ -169,10 +171,11 @@ public class LevelLayer extends CCLayer {
 			
 			CGPoint midPoint = CGPoint.ccpMidpoint(touch1Ref, touch2Ref);			
 			this.getCameraManager().setZoomPoint(midPoint);
+			this.level.getSpawnCannon().unselect();
 		}
 		else {
 			this.isZoomAction = false;
-			this.level.getSpawnCannon().selectionMove(touch.getLastMoveReference());
+			this.level.getSpawnCannon().trySelect(touch.getLastMoveReference());
 		}		
 		
 		return CCTouchDispatcher.kEventHandled;		

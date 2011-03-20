@@ -151,13 +151,13 @@ public class HardCodedLevelBuilder {
 		// Line 1
 		float cX = 0;
 		float cY = 0;
-		SlimeFactory.Platform.createBL(cX, cY, 100, 100);
-		SpawnCannon spawnCannon = SlimeFactory.Cannon.create(100 - SpawnCannon.Default_Width / 2, 100 + SpawnCannon.Default_Height / 2);
-		cX += 100;
-		// SlimeFactory.Lava.createBL(cX, cY, 200, 50);
-		SlimeFactory.Platform.createBL(cX, cY, 200, 50);
-		GoalPortal goalPortal = SlimeFactory.GoalPortal.create(cX + 40, cY + 90);
+		SlimeFactory.Platform.createBL(cX, cY, 200, 200);
+		SpawnCannon spawnCannon = SlimeFactory.Cannon.create(200 - SpawnCannon.Default_Width / 2, 200 + SpawnCannon.Default_Height / 2);
 		cX += 200;
+		// SlimeFactory.Lava.createBL(cX, cY, 200, 50);
+		SlimeFactory.Platform.createBL(cX, cY, 100, 50);
+		GoalPortal goalPortal = SlimeFactory.GoalPortal.create(cX + 40, cY + 90);
+		cX += 100;
 		SlimeFactory.Platform.createBL(cX, cY, 50, 100);
 		cX += 50;		
 		SlimeFactory.Platform.createBL(cX, cY, 50, 50);

@@ -10,6 +10,7 @@ import javax.microedition.khronos.opengles.GL10;
 import org.cocos2d.config.ccMacros;
 import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.types.CGPoint;
+import org.cocos2d.types.CGRect;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -19,8 +20,8 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class SpawnCannon extends GameItemPhysic {
 	public static String Anim_Base = "metal1";
-	public static float Default_Width = 32f;
-	public static float Default_Height = 32f;
+	public static float Default_Width = 64f;
+	public static float Default_Height = 64f;
 	private float spawnHeightShift = Slimy.Default_Height / 2;
 	
 	private CGPoint target;
@@ -34,10 +35,7 @@ public class SpawnCannon extends GameItemPhysic {
 		if (width == 0 && this.height == 0) {
 			this.bodyWidth = this.width = Default_Width;
 			this.bodyHeight = this.height = Default_Height;			
-		}				
-		
-		// Todo: remove this
-		this.select();
+		}		
 	}
 	
 	@Override
@@ -78,8 +76,8 @@ public class SpawnCannon extends GameItemPhysic {
 		Slimy slimy = SlimeFactory.Slimy.create(spawn.x, spawn.y, 1.0f);
 		Vector2 pos = slimy.getBody().getPosition();
 		Vector2 impulse = new Vector2();
-		impulse.x = this.target.x  / this.worldRatio - pos.x;
-		impulse.y = this.target.y / this.worldRatio - pos.y ;
+		impulse.x = -(this.target.x  / this.worldRatio - pos.x);
+		impulse.y = -(this.target.y / this.worldRatio - pos.y);
 		if (impulse.len() > 10f) {
 			impulse.nor().mul(10f);
 		}
@@ -135,5 +133,15 @@ public class SpawnCannon extends GameItemPhysic {
 	@Override
 	protected String getReferenceAnimationName() {
 		return SpawnCannon.Anim_Base;
-	}		
+	}
+
+	public boolean trySelect(CGPoint lastTouchReference) {
+		CGPoint gameTarget = Level.currentLevel.getCameraManager().getGamePoint(lastTouchReference);
+		CGRect rect = CGRect.make(this.position.x - this.width / 2, this.position.y - this.height / 2, this.width, this.height);
+		if (CGRect.containsPoint(rect, gameTarget)) {
+			this.select();
+		}
+		
+		return this.selected;
+	}
 }

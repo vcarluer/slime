@@ -32,7 +32,8 @@ public class PhysicPolygonFactory extends GameItemPhysicFactory<PhysicPolygon> {
 	
 	@Override
 	protected void createAnimList() {
-		TextureAnimation.createFramesFromFiles(PhysicPolygon.Anim_Base, 1);		
+		TextureAnimation.createFramesFromFiles(PhysicPolygon.Anim_Base, 2);
+		this.createAnim(PhysicPolygon.Anim_Base, 2, 0.5f);
 	}
 
 	@Override

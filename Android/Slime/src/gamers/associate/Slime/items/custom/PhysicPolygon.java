@@ -5,6 +5,8 @@ import gamers.associate.Slime.items.base.CCSpritePolygon;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.SpriteType;
 
+import org.cocos2d.actions.base.CCRepeatForever;
+import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.CGPoint;
 
@@ -16,7 +18,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class PhysicPolygon extends GameItemPhysic {
-	public static String Anim_Base = "metal2";
+	public static String Anim_Base = "lava"; //metal2
 	protected CGPoint[] vertices;
 	protected CGPoint[] bodyPoints;
 	protected boolean isDynamic;	
@@ -102,5 +104,19 @@ public class PhysicPolygon extends GameItemPhysic {
 	@Override
 	protected String getReferenceAnimationName() {
 		return PhysicPolygon.Anim_Base;
+	}
+	
+	public void initAnimation() {
+		CCAnimate animation = CCAnimate.action(this.animationList.get(Anim_Base), false);
+		this.currentAction = CCRepeatForever.action(animation);
+		this.sprite.runAction(this.currentAction);
+	}
+	
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.GameItemCocos#runReferenceAction()
+	 */
+	@Override
+	protected void runReferenceAction() {
+		this.initAnimation();
 	}
 }
