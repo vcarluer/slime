@@ -40,7 +40,7 @@ public class LevelEnd extends GameItemPhysic {
     		FixtureDef fixtureDef = new FixtureDef();
     		fixtureDef.shape = staticBox;
     		fixtureDef.isSensor = true;
-    		fixtureDef.filter.categoryBits = GameItemPhysic.Category_Static;
+    		fixtureDef.filter.categoryBits = GameItemPhysic.Category_Level;
     		this.body.createFixture(fixtureDef);
     	}		
 	}

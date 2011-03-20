@@ -1,6 +1,7 @@
 package gamers.associate.Slime.items.custom;
 
 
+import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.SpriteType;
 
@@ -17,6 +18,7 @@ public class Platform extends GameItemPhysic {
 	public Platform(float x, float y, float width, float height, World world, float worldRatio) {
 		super(x, y, width, height, world, worldRatio);
 		this.spriteType = SpriteType.SINGLE_REPEAT;		
+		this.zOrder = Level.zBack;
 	}
 	
 	@Override
@@ -42,7 +44,7 @@ public class Platform extends GameItemPhysic {
     		fixtureDef.density = 1.0f;
     		fixtureDef.friction = 1.0f;
     		fixtureDef.restitution = 0f;
-    		fixtureDef.filter.categoryBits = GameItemPhysic.Category_Static;
+    		fixtureDef.filter.categoryBits = GameItemPhysic.Category_Level;
     		this.body.createFixture(fixtureDef);
     	}  
 	}

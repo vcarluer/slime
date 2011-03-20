@@ -18,6 +18,8 @@ public class SlimyFactory extends GameItemPhysicFactory<Slimy> {
 		this.createAnim(Slimy.Anim_Landing_V, 3);		
 		this.createAnim(Slimy.Anim_Wait_H, 5);
 		this.createAnim(Slimy.Anim_Wait_V, 5);
+		this.createAnim(Slimy.Anim_Splash, 5);
+		this.createAnim(Slimy.Anim_Success, 7);
 	}
 	
 	@Override
@@ -28,7 +30,7 @@ public class SlimyFactory extends GameItemPhysicFactory<Slimy> {
 
 	@Override
 	protected String getPlistPng() {
-		return "labo";
+		return "slime";
 	}	
 
 	@Override

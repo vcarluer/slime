@@ -19,13 +19,11 @@ public class Bumper extends GameItemPhysic {
 	private static float Default_Height = 64f;
 	
 	private float powa;
-	
-	
-	
+		
 	public Bumper(float x, float y, float width, float height,
 			World world, float worldRatio) {
 		super(x, y, width, height, world, worldRatio);		
-		this.spriteType = SpriteType.SINGLE_SCALE;
+		this.spriteType = SpriteType.SINGLE_SCALE;		
 		
 		if (width == 0 && height == 0) {
 			this.width = this.bodyWidth = Default_Width;
@@ -71,7 +69,7 @@ public class Bumper extends GameItemPhysic {
     		fixtureDef.density = 1.0f;
     		fixtureDef.friction = 1.0f;
     		fixtureDef.restitution = this.powa;
-    		fixtureDef.filter.categoryBits = GameItemPhysic.Category_Static;
+    		fixtureDef.filter.categoryBits = GameItemPhysic.Category_Level;
     		this.body.createFixture(fixtureDef);
     	}		
 	}

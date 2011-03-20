@@ -22,6 +22,7 @@ public abstract class GameItemCocos extends GameItem {
 	protected CCNode rootNode;	
 	protected SpriteType spriteType;
 	protected boolean attachedToRoot;
+	protected int zOrder;
 		
 	public GameItemCocos(float x, float y, float width, float height) {
 		super(x, y, width, height);		
@@ -79,7 +80,7 @@ public abstract class GameItemCocos extends GameItem {
 		
 		if (this.sprite != null) {
 			if (this.rootNode != null) {
-				this.rootNode.addChild(this.sprite);
+				this.rootNode.addChild(this.sprite, this.zOrder);
 				this.attachedToRoot = true;
 			}						
 		}
@@ -182,12 +183,12 @@ public abstract class GameItemCocos extends GameItem {
 	}
 	
 	public static CCSpriteFrame getAnimFirstFrame(String animName) {
-		String frameName = animName + "-1.png";
+		String frameName = animName + "-" + TextureAnimation.formatFrameNumber(1) + ".png";
 		return CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame(frameName);
 	}
 	
 	public static CCSprite createSpriteFromFirstFrame(String animName) {
-		String frameName = animName + "-1.png";
+		String frameName = animName + "-" + TextureAnimation.formatFrameNumber(1) + ".png";
 		return CCSprite.sprite(frameName, true);
 	}
 	

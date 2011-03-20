@@ -40,6 +40,10 @@ public class Level {
 	
 	public static Level currentLevel; 
 	
+	public static int zBack = 0;
+	public static int zMid = 1;
+	public static int zFront = 2;
+	
 	protected World world;
 	protected Vector2 gravity;
 	protected float worldRatio = 32f;
@@ -56,7 +60,6 @@ public class Level {
 	protected ContactManager contactManager;
 	protected SpawnPortal spawnPortal;
 	protected SpawnCannon spawnCannon;
-	protected GoalPortal goalPortal;
 	
 	protected CCScene scene;
 	protected LevelLayer levelLayer;
@@ -174,7 +177,6 @@ public class Level {
 		this.items.clear();
 		
 		this.spawnPortal = null;
-		this.goalPortal = null;		
 		
 		this.removeCustomOverLayer();
 		this.setIsTouchEnabled(true);
@@ -196,8 +198,9 @@ public class Level {
 		this.world = new World(this.gravity, true);
 		this.contactManager = new ContactManager();
 		this.world.setContactListener(this.contactManager);
-		// Main game item spritesheet
-		SpriteSheetFactory.add("labo");
+		// Main game item spritesheet		
+		SpriteSheetFactory.add("labo", Level.zMid);
+		SpriteSheetFactory.add("slime", Level.zFront);
 		// Background
 		CCSpriteSheet spriteSheet = SpriteSheetFactory.getSpriteSheet("decor", true);		
 		// Sprite too big for VM in UbuntuRox		
@@ -329,10 +332,6 @@ public class Level {
 	
 	public float getLevelHeight() {
 		return this.levelHeight;
-	}
-	
-	public void setGoalPortal(GoalPortal portal) {
-		this.goalPortal = portal;		
 	}
 	
 	private void addGameItem(GameItem item) {

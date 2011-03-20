@@ -10,7 +10,8 @@ import org.cocos2d.nodes.CCSpriteSheet;
 
 public abstract class ItemFactoryBase<T extends GameItemCocos> {	
 	protected Hashtable<String, CCAnimation> sharedAnimations;
-	protected CCSpriteSheet spriteSheet;	
+	protected CCSpriteSheet spriteSheet;
+	protected int zOrder;
 	protected boolean isInit;	
 	protected boolean isAttached;
 	protected CCNode rootNode;

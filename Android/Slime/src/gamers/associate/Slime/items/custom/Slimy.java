@@ -30,6 +30,8 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	public static String Anim_Landing_V = "landing-v";
 	public static String Anim_Wait_H = "wait-h";
 	public static String Anim_Wait_V = "wait-v";
+	public static String Anim_Splash = "splashed";
+	public static String Anim_Success = "success";	
 	
 	public static float Default_Width = 24f;
 	public static float Default_Height = 26f;
@@ -38,7 +40,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	
 	protected Boolean isLanded;	
 	protected CCAction waitAction;
-	protected Boolean isBurned;
+	protected Boolean isDead;
 	
 	public Slimy(float x, float y, float width, float height, World world, float worldRatio) {		
 		super(x, y, width, height, world, worldRatio);
@@ -53,7 +55,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 		this.bodyHeight = Default_Body_Height * this.height / Default_Height;
 
 		this.isLanded = false;
-		this.isBurned = false;
+		this.isDead = false;
 	}
 	
 	@Override
@@ -109,7 +111,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	}
 	
 	public void land() {
-		if (!this.isLanded && !this.isBurned && this.sprite != null) {
+		if (!this.isLanded && !this.isDead && this.sprite != null) {
 			if (this.currentAction != null) {
 				this.sprite.stopAction(this.currentAction);
 			}
@@ -127,11 +129,11 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	}
 	
 	public void win() {
-		this.burn();
+		this.success();
 	}
 	
 	public void burn() {
-		if (!this.isBurned) {
+		if (!this.isDead) {
 			if (this.currentAction != null) {				
 				this.sprite.stopAction(this.currentAction);				
 			}
@@ -150,22 +152,62 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 			this.currentAction = animBurn;		
 			this.sprite.runAction(this.currentAction);
 			
-			Filter filter = new Filter();
-			
-			filter.categoryBits = GameItemPhysic.Category_OutGame;
-			filter.maskBits = GameItemPhysic.Category_Static;					
-			filter.groupIndex = -1;
-			for(Fixture fix : this.body.getFixtureList()) {
-				// Change fixture shape here?
-				fix.setFilterData(filter);
-				fix.setRestitution(0f);
-				fix.setFriction(1.0f);
-				fix.setDensity(10f);
-				this.body.resetMassData();
+			this.kill();			
+		}
+	}
+	
+	public void splash() {
+		if (!this.isDead) {
+			if (this.currentAction != null) {				
+				this.sprite.stopAction(this.currentAction);				
 			}
 			
-			this.isBurned = true;
+			if (this.waitAction != null) {				
+				this.sprite.stopAction(this.waitAction);
+			}
+			
+			CCAnimate animSplash = CCAnimate.action(this.animationList.get(Anim_Splash), false);
+			this.currentAction = animSplash;		
+			this.sprite.runAction(this.currentAction);
+			
+			this.kill();
 		}
+	}
+	
+	public void success() {
+		if (!this.isDead) {
+			if (this.currentAction != null) {				
+				this.sprite.stopAction(this.currentAction);				
+			}
+			
+			if (this.waitAction != null) {				
+				this.sprite.stopAction(this.waitAction);
+			}
+					
+			CCAnimate animSuccess = CCAnimate.action(this.animationList.get(Anim_Success), false);			
+			CCDelayTime delay = CCDelayTime.action(2f);			
+			CCSequence succSeq = CCSequence.actions(animSuccess , delay);
+			this.currentAction = CCRepeatForever.action(succSeq);				
+			this.sprite.runAction(this.currentAction);
+		}
+	}
+	
+	protected void kill() {
+		Filter filter = new Filter();
+		
+		filter.categoryBits = GameItemPhysic.Category_OutGame;
+		filter.maskBits = GameItemPhysic.Category_Level;					
+		filter.groupIndex = -1;
+		for(Fixture fix : this.body.getFixtureList()) {
+			// Change fixture shape here?
+			fix.setFilterData(filter);
+			fix.setRestitution(0f);
+			fix.setFriction(1.0f);
+			fix.setDensity(10f);
+			this.body.resetMassData();
+		}
+		
+		this.isDead = true;
 	}
 	
 	@Override
@@ -179,7 +221,13 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	@Override
 	protected void handleContact(GameItemPhysic item) {		
 		super.handleContact(item);
-		this.land();
+		if (item instanceof Slimy) {
+			Slimy kSlimy = (Slimy)item;
+			kSlimy.splash();
+		}
+		else {
+			this.land();
+		}
 	}
 	
 	@Override

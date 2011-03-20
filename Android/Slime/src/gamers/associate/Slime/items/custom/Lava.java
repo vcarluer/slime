@@ -1,5 +1,6 @@
 package gamers.associate.Slime.items.custom;
 
+import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.IBurnable;
 import gamers.associate.Slime.items.base.SpriteType;
@@ -22,6 +23,7 @@ public class Lava extends GameItemPhysic {
 			World world, float worldRatio) {
 		super(x, y, width, height, world, worldRatio);		
 		this.spriteType = SpriteType.ANIM_REPEAT;
+		this.zOrder = Level.zBack;
 	}
 
 	@Override
@@ -45,7 +47,7 @@ public class Lava extends GameItemPhysic {
     		FixtureDef fixtureDef = new FixtureDef();
     		fixtureDef.shape = staticBox;
     		fixtureDef.isSensor = true;
-    		fixtureDef.filter.categoryBits = GameItemPhysic.Category_Static;
+    		fixtureDef.filter.categoryBits = GameItemPhysic.Category_Level;
     		this.body.createFixture(fixtureDef);
     	}		
 	}

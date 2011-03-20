@@ -56,7 +56,13 @@ public class TextureAnimation {
 	}*/
 	
 	public static String keyName(String animName, int frameNumber) {
-		return animName + "-" + String.valueOf(frameNumber) + ".png";
+		String numberFormat = formatFrameNumber(frameNumber); 
+		return animName + "-" + numberFormat + ".png";
+	}
+	
+	public static String formatFrameNumber(int frameNumber) {
+		String numberFormat = String.format("%02d", frameNumber);
+		return numberFormat;
 	}
 	
 	public static CCTexture2D createTextureFromFilePath(final String path) {

@@ -84,7 +84,6 @@ public class HardCodedLevelBuilder {
 		
 		// Goal
 		GoalPortal goalPortal = SlimeFactory.GoalPortal.create(s.width / 2, LAND_HEIGHT + goalPlatH + 15);
-		level.setGoalPortal(goalPortal);
 		
 		// Bumper
 		SlimeFactory.Bumper.create(30, s.height / 2, 60, 120, 2.0f);
@@ -120,7 +119,6 @@ public class HardCodedLevelBuilder {
 		
 		// Goal
 		GoalPortal goalPortal = SlimeFactory.GoalPortal.create(s.width / 2, LAND_HEIGHT + goalPlatH + 15);
-		level.setGoalPortal(goalPortal);
 		
 		// Bumper
 		SlimeFactory.Bumper.create(30, s.height / 2, 60, 120, 2.0f);		
@@ -156,7 +154,9 @@ public class HardCodedLevelBuilder {
 		SlimeFactory.Platform.createBL(cX, cY, 100, 100);
 		SpawnCannon spawnCannon = SlimeFactory.Cannon.create(100 - SpawnCannon.Default_Width / 2, 100 + SpawnCannon.Default_Height / 2);
 		cX += 100;
-		SlimeFactory.Lava.createBL(cX, cY, 200, 50);
+		// SlimeFactory.Lava.createBL(cX, cY, 200, 50);
+		SlimeFactory.Platform.createBL(cX, cY, 200, 50);
+		GoalPortal goalPortal = SlimeFactory.GoalPortal.create(cX + 40, cY + 90);
 		cX += 200;
 		SlimeFactory.Platform.createBL(cX, cY, 50, 100);
 		cX += 50;		
@@ -221,8 +221,8 @@ public class HardCodedLevelBuilder {
 		SlimeFactory.Platform.createBL(cX, cY + 20, 20, 128);
 		cX += 64;
 		// Goal
-		GoalPortal goalPortal = SlimeFactory.GoalPortal.create(cX, cY + 40);
-		level.setGoalPortal(goalPortal);
+		/*GoalPortal goalPortal = SlimeFactory.GoalPortal.create(cX, cY + 40);
+		level.setGoalPortal(goalPortal);*/
 		cX += 108;
 		
 		//Line 3
@@ -234,7 +234,7 @@ public class HardCodedLevelBuilder {
 		SlimeFactory.Platform.createBL(cX, cY, 128, 20);
 				
 		// Chain
-		Platform platform = SlimeFactory.Platform.create(cX, cY - 5, 30, 10);
+		/*Platform platform = SlimeFactory.Platform.create(cX, cY - 5, 30, 10);
 		cY -= 10;
 		Box.setChainMode(true);
 		CGSize segSize = CGSize.make(3, 15);
@@ -265,7 +265,7 @@ public class HardCodedLevelBuilder {
 		
 		cY += 10;		
 		// end chain
-		
+		*/
 		cX += 128;				
 		SlimeFactory.Platform.createBL(cX, cY, 256, 128);		
 		cX += 256;

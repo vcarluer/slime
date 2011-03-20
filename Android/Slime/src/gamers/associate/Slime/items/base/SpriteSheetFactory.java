@@ -7,29 +7,28 @@ import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCSpriteSheet;
 
 public class SpriteSheetFactory {
-	public static int Included_For_Attach = 0;
-	public static int Excluded_For_Attach = 1;
-	
-	private static Hashtable<String, CCSpriteSheet> SpriteSheetList = new Hashtable<String, CCSpriteSheet>();
+		
+	private static Hashtable<String, SpriteSheetCacheInfo> SpriteSheetList = new Hashtable<String, SpriteSheetCacheInfo>();
 	private static CCNode rootNode;
 	private static boolean isAttached;
 	
-	public static void add(String plistPngName) {
-		add(plistPngName, false);
+	public static void add(String plistPngName, int zOrder) {
+		add(plistPngName, false, zOrder);
 	}
 	
-	public static void add(String plistPngName, boolean isExcluded) {
+	public static void add(String plistPngName, boolean isExcluded, int zOrder) {
 		if (plistPngName != "") {
 			if (SpriteSheetList.get(plistPngName) == null) {
 				CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames(plistPngName + ".plist");
 				CCSpriteSheet spriteSheet = CCSpriteSheet.spriteSheet(plistPngName + ".png");
-				int tag = Included_For_Attach;
+				int tag = SpriteSheetCacheInfo.Included_For_Attach;
 				if (isExcluded) {
-					tag = Excluded_For_Attach;
+					tag = SpriteSheetCacheInfo.Excluded_For_Attach;
 				}
 				
-				spriteSheet.setTag(tag);
-				SpriteSheetList.put(plistPngName, spriteSheet);
+				SpriteSheetCacheInfo sci = new SpriteSheetCacheInfo(plistPngName, spriteSheet, zOrder, tag);
+				
+				SpriteSheetList.put(sci.getName(), sci);
 			}
 		}
 	}
@@ -40,8 +39,8 @@ public class SpriteSheetFactory {
 	
 	public static CCSpriteSheet getSpriteSheet(String plistPngName, boolean isExcluded) {		
 		if (plistPngName != "") {
-			add(plistPngName, isExcluded);
-			return SpriteSheetList.get(plistPngName);
+			add(plistPngName, isExcluded, 0);
+			return SpriteSheetList.get(plistPngName).getSpriteSheet();
 		}
 		else {
 			return null;
@@ -57,10 +56,10 @@ public class SpriteSheetFactory {
 	public static void attachAll(CCNode attachNode) {
 		rootNode = attachNode;		
 		if (rootNode != null) {
-			detachAll();
-			for(CCSpriteSheet spriteSheet : SpriteSheetList.values()) {
-				if (spriteSheet.getTag() == Included_For_Attach) {
-					rootNode.addChild(spriteSheet);
+			detachAll();			
+			for(SpriteSheetCacheInfo sci : SpriteSheetList.values()) {
+				if (sci.getAttachType() == SpriteSheetCacheInfo.Included_For_Attach) {										
+					rootNode.addChild(sci.getSpriteSheet(), sci.getZOrder());
 				}
 			}
 			
@@ -70,9 +69,9 @@ public class SpriteSheetFactory {
 	
 	public static void detachAll() {
 		if (isAttached && rootNode != null) {
-			for(CCSpriteSheet spriteSheet : SpriteSheetList.values()) {
-				if (spriteSheet.getTag() == Included_For_Attach) {
-					rootNode.removeChild(spriteSheet, true);
+			for(SpriteSheetCacheInfo sci : SpriteSheetList.values()) {
+				if (sci.getAttachType() == SpriteSheetCacheInfo.Included_For_Attach) {
+					rootNode.removeChild(sci.getSpriteSheet(), true);
 				}				
 			}
 		}		

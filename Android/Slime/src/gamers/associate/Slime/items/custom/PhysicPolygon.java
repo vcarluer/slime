@@ -1,5 +1,6 @@
 package gamers.associate.Slime.items.custom;
 
+import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.items.base.CCSpritePolygon;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.SpriteType;
@@ -26,6 +27,7 @@ public class PhysicPolygon extends GameItemPhysic {
 		super(x, y, width, height, world, worldRatio);
 		
 		this.spriteType = SpriteType.POLYGON_REPEAT;		
+		this.zOrder = Level.zBack;
 	}
 	
 	public void initPoly(boolean isDynamic, CGPoint[] bodyPoints, CGPoint[] glVertices) {
@@ -76,7 +78,7 @@ public class PhysicPolygon extends GameItemPhysic {
 	    			fixtureDef.filter.categoryBits = GameItemPhysic.Category_InGame;
 	    		}
 	    		else {
-	    			fixtureDef.filter.categoryBits = GameItemPhysic.Category_Static;
+	    			fixtureDef.filter.categoryBits = GameItemPhysic.Category_Level;
 	    		}
 	    			    		
 	    		this.body.createFixture(fixtureDef);

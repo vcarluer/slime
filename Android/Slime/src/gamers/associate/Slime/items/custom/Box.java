@@ -1,5 +1,6 @@
 package gamers.associate.Slime.items.custom;
 
+import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.SpriteType;
 
@@ -24,6 +25,7 @@ public class Box extends GameItemPhysic{
 		super(x, y, width, height, world, worldRatio);
 		
 		this.spriteType = SpriteType.SINGLE_SCALE;
+		this.zOrder = Level.zMid;
 	}
 
 	@Override
