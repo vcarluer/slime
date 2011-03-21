@@ -9,6 +9,11 @@ import gamers.associate.Slime.items.base.GameItemPhysicFactory;
  */
 public class SlimyFactory extends GameItemPhysicFactory<Slimy> {	
 		
+	public static final int Type_Simple = 0;
+	public static final int Type_Grow = 1;
+	
+	private int currentType;
+			
 	@Override
 	protected void createAnimList() {
 		this.createAnim(Slimy.Anim_Burned_Wait, 2);
@@ -35,10 +40,29 @@ public class SlimyFactory extends GameItemPhysicFactory<Slimy> {
 
 	@Override
 	protected Slimy instantiate(float x, float y, float width, float height) {		
-		return new Slimy(x, y, width, height, this.world, this.worldRatio);
+		Slimy slimy = null;
+		switch(this.currentType) {
+			case Type_Simple:
+				slimy = new Slimy(x, y, width, height, this.world, this.worldRatio);
+				break;
+			case Type_Grow:
+				slimy = new SlimyGrow(x, y, width, height, this.world, this.worldRatio);
+				break;
+		}
+		
+		return slimy;
 	}
 	
-	public Slimy create(float x, float y, float ratio) {		
+	public Slimy create(float x, float y, float ratio) {
+		return this.create(x, y, ratio, Type_Simple);
+	}
+	
+	public SlimyGrow createGrow(float x, float y, float ratio) {
+		return (SlimyGrow)this.create(x, y, ratio, Type_Grow);
+	}
+	
+	public Slimy create(float x, float y, float ratio, int slimyType) {		
+		this.currentType = slimyType;
 		Slimy slimy = this.create(x, y, Slimy.Default_Width * ratio, Slimy.Default_Height * ratio);		
 		return slimy;
 	}

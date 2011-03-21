@@ -124,6 +124,7 @@ public class LevelLayer extends CCLayer {
 									this.getGameY(event.getY(touch.getPointerId()))
 									)
 								);
+					this.level.getSpawnCannon().unselect();
 				}
 			/*}*/
 			/*else {						
@@ -143,9 +144,7 @@ public class LevelLayer extends CCLayer {
 			}
 			
 			this.touchList.remove(touch);
-		}
-		
-		this.level.getSpawnCannon().unselect();
+		}				
 		
         return CCTouchDispatcher.kEventHandled;
 	}

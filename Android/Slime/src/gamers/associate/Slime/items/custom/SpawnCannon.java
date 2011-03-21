@@ -24,23 +24,34 @@ public class SpawnCannon extends GameItemPhysic {
 	public static float Default_Height = 64f;
 	public static float Default_Powa = 1.5f;
 	public static float Max_Impulse = 10f;
+	public static int Max_Slimy = 3;
+	private static long Increment_Time_Sec = 2;	
 	private float spawnHeightShift = Slimy.Default_Height / 2;
 	
 	private CGPoint target;
 	private Vector2 targetImpulse;
+	private Vector2 worldImpulse;
 	private boolean selected;
 	private float powa;
+	private CGRect cannonRect;
+	private long selectStart;
+	private int slimyCounter;
 	
 	public SpawnCannon(float x, float y, float width, float height,
 			World world, float worldRatio) {
 		super(x, y, width, height, world, worldRatio);
 		this.spriteType = SpriteType.SINGLE_SCALE;
 		this.powa = Default_Powa;
+		this.target = CGPoint.getZero();
+		this.targetImpulse = new Vector2();
+		this.worldImpulse = new Vector2();		
 		
 		if (width == 0 && this.height == 0) {
 			this.bodyWidth = this.width = Default_Width;
 			this.bodyHeight = this.height = Default_Height;			
-		}		
+		}
+		
+		this.cannonRect = CGRect.make(this.position.x - this.width / 2, this.position.y - this.height / 2, this.width, this.height);
 	}
 	
 	@Override
@@ -79,19 +90,19 @@ public class SpawnCannon extends GameItemPhysic {
 	}
 	
 	public Slimy spawnSlimeToCurrentTarget() {
-		Slimy slimy = null;
+		SlimyGrow slimy = null;
 		if (this.selected) {			
 			CGPoint spawn = this.getSpawnPoint();
-			slimy = SlimeFactory.Slimy.create(spawn.x, spawn.y, 1.0f);
-			Vector2 pos = slimy.getBody().getPosition();
-			Vector2 impulse = new Vector2();
-			impulse.x = this.targetImpulse.x  / this.worldRatio;
-			impulse.y = this.targetImpulse.y / this.worldRatio;
-			if (impulse.len() > Max_Impulse) {
-				impulse.nor().mul(Max_Impulse);
+			slimy = SlimeFactory.Slimy.createGrow(spawn.x, spawn.y, this.slimyCounter);
+			slimy.setTargetGrowDif(this.slimyCounter - 1);
+			Vector2 pos = slimy.getBody().getPosition();			
+			this.worldImpulse.x = (this.targetImpulse.x  / this.worldRatio) * this.slimyCounter;
+			this.worldImpulse.y = (this.targetImpulse.y / this.worldRatio) * this.slimyCounter;
+			if (this.worldImpulse.len() > (Max_Impulse * this.slimyCounter)) {
+				this.worldImpulse.nor().mul(Max_Impulse * this.slimyCounter);
 			}
 			
-			slimy.getBody().applyLinearImpulse(impulse, pos);
+			slimy.getBody().applyLinearImpulse(this.worldImpulse, pos);
 		}
 		
 		return slimy;
@@ -99,11 +110,14 @@ public class SpawnCannon extends GameItemPhysic {
 	
 	public void select() {
 		this.selected = true;
+		this.slimyCounter = 1;
+		this.selectStart = System.currentTimeMillis();
 	}
 	
 	public void unselect() {
-		this.selected = false;
-		this.targetImpulse = null;
+		if (this.selected) {
+			this.selected = false;			
+		}
 	}
 	
 	public void selectionMove(CGPoint screenSelection) {
@@ -116,9 +130,11 @@ public class SpawnCannon extends GameItemPhysic {
 	protected void computeTarget(CGPoint gameTouch) {
 		if (this.selected) {
 			CGPoint spawnPoint =  this.getSpawnPoint();
-			this.targetImpulse = new Vector2((spawnPoint.x - gameTouch.x) * this.powa, (spawnPoint.y - gameTouch.y) * this.powa);
+			this.targetImpulse.x = (spawnPoint.x - gameTouch.x) * this.powa;
+			this.targetImpulse.y = (spawnPoint.y - gameTouch.y) * this.powa;
 			
-			this.target = CGPoint.make(spawnPoint.x + this.targetImpulse.x, spawnPoint.y + this.targetImpulse.y);
+			this.target.x = spawnPoint.x + this.targetImpulse.x;
+			this.target.y = spawnPoint.y + this.targetImpulse.y;
 		}
 	}
 
@@ -128,7 +144,7 @@ public class SpawnCannon extends GameItemPhysic {
 	@Override
 	public void draw(GL10 gl) {		
 		super.draw(gl);
-		if (this.selected && this.targetImpulse != null) {
+		if (this.selected && this.target != null) {
 			/*gl.glDisable(GL10.GL_LINE_SMOOTH);
 			gl.glLineWidth(2.0f);*/
 			gl.glEnable(GL10.GL_LINE_SMOOTH);
@@ -156,16 +172,39 @@ public class SpawnCannon extends GameItemPhysic {
 	}
 
 	public boolean trySelect(CGPoint lastTouchReference) {
-		CGPoint gameTarget = Level.currentLevel.getCameraManager().getGamePoint(lastTouchReference);
-		CGRect rect = CGRect.make(this.position.x - this.width / 2, this.position.y - this.height / 2, this.width, this.height);
-		if (CGRect.containsPoint(rect, gameTarget)) {
+		CGPoint gameTarget = Level.currentLevel.getCameraManager().getGamePoint(lastTouchReference);		
+		if (this.isInCannon(gameTarget)) {			
 			this.select();
+			this.computeTarget(gameTarget);
 		}
 		
 		return this.selected;
 	}
+	
+	private boolean isInCannon(CGPoint gameTarget) {
+		return CGRect.containsPoint(this.cannonRect, gameTarget);			
+	}
 		
 	public boolean isSelected() {
 		return this.selected;
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.base.GameItemPhysic#render(float)
+	 */
+	@Override
+	public void render(float delta) {
+		if (this.selected) {
+			long time = System.currentTimeMillis();
+			if (time - this.selectStart > Increment_Time_Sec * 1000) {
+				if (this.slimyCounter < Max_Slimy) {
+					this.slimyCounter++;
+				}
+				
+				this.selectStart = time;
+			}
+		}
+		
+		super.render(delta);
 	}
 }

@@ -1,6 +1,8 @@
 package gamers.associate.Slime.items.custom;
 
 
+import java.util.ArrayList;
+
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.IBurnable;
 import gamers.associate.Slime.items.base.SpriteType;
@@ -35,12 +37,12 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	
 	public static float Default_Width = 24f;
 	public static float Default_Height = 26f;
-	private static float Default_Body_Width = 16f;
-	private static float Default_Body_Height = 23f;
+	protected static float Default_Body_Width = 20f; //16f
+	protected static float Default_Body_Height = 26f; //23f
 	
 	protected Boolean isLanded;	
 	protected CCAction waitAction;
-	protected Boolean isDead;
+	protected Boolean isDead;	
 	
 	public Slimy(float x, float y, float width, float height, World world, float worldRatio) {		
 		super(x, y, width, height, world, worldRatio);
@@ -68,24 +70,29 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 		spawnPoint.y = this.position.y;
 		bodyDef.position.set(spawnPoint.x/worldRatio, spawnPoint.y/worldRatio);
 		
+		synchronized (world) {
+			// Define the dynamic body fixture and set mass so it's dynamic.
+			this.body = world.createBody(bodyDef);
+			this.body.setUserData(this);
+			
+			this.createFixture();
+    	}  
+	}
+	
+	protected void createFixture() {
 		// Define another box shape for our dynamic body.
 		PolygonShape dynamicBox = new PolygonShape();
 		dynamicBox.setAsBox(this.bodyWidth / this.worldRatio / 2, this.bodyHeight / this.worldRatio / 2);
+
 		
-		synchronized (world) {
-    		// Define the dynamic body fixture and set mass so it's dynamic.
-    		this.body = world.createBody(bodyDef);
-    		this.body.setUserData(this);
-    		
-    		FixtureDef fixtureDef = new FixtureDef();
-    		fixtureDef.shape = dynamicBox;	
-    		fixtureDef.density = 1.0f;
-    		fixtureDef.friction = 0.3f;
-    		fixtureDef.restitution = 0.1f;
-    		fixtureDef.filter.categoryBits = GameItemPhysic.Category_InGame;
-    		this.body.createFixture(fixtureDef);
-    	}  
-	}
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = dynamicBox;	
+		fixtureDef.density = 1.0f;
+		fixtureDef.friction = 0.3f;
+		fixtureDef.restitution = 0.1f;
+		fixtureDef.filter.categoryBits = GameItemPhysic.Category_InGame;
+		this.body.createFixture(fixtureDef);
+	}		
 	
 	public void fadeIn() {
 		CCFadeIn fade = CCFadeIn.action(0.5f);
@@ -221,6 +228,10 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	@Override
 	protected void handleContact(GameItemPhysic item) {		
 		super.handleContact(item);
+		this.contactInternal(item);
+	}
+	
+	protected void contactInternal(GameItemPhysic item) {
 		if (item instanceof Slimy) {
 			Slimy kSlimy = (Slimy)item;
 			kSlimy.splash();
