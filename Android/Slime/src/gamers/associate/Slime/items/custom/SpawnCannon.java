@@ -25,7 +25,7 @@ public class SpawnCannon extends GameItemPhysic {
 	public static float Default_Powa = 1.5f;
 	public static float Max_Impulse = 10f;
 	public static int Max_Slimy = 3;
-	private static long Increment_Time_Sec = 2;	
+	private static long Increment_Time_Sec = 1;	
 	private float spawnHeightShift = Slimy.Default_Height / 2;
 	
 	private CGPoint target;
@@ -36,6 +36,7 @@ public class SpawnCannon extends GameItemPhysic {
 	private CGRect cannonRect;
 	private long selectStart;
 	private int slimyCounter;
+	private CGPoint lastGameTarget;
 	
 	public SpawnCannon(float x, float y, float width, float height,
 			World world, float worldRatio) {
@@ -93,13 +94,13 @@ public class SpawnCannon extends GameItemPhysic {
 		SlimyGrow slimy = null;
 		if (this.selected) {			
 			CGPoint spawn = this.getSpawnPoint();
-			slimy = SlimeFactory.Slimy.createGrow(spawn.x, spawn.y, this.slimyCounter);
+			slimy = SlimeFactory.Slimy.createGrow(spawn.x, spawn.y, 1);
 			slimy.setTargetGrowDif(this.slimyCounter - 1);
 			Vector2 pos = slimy.getBody().getPosition();			
-			this.worldImpulse.x = (this.targetImpulse.x  / this.worldRatio) * this.slimyCounter;
-			this.worldImpulse.y = (this.targetImpulse.y / this.worldRatio) * this.slimyCounter;
-			if (this.worldImpulse.len() > (Max_Impulse * this.slimyCounter)) {
-				this.worldImpulse.nor().mul(Max_Impulse * this.slimyCounter);
+			this.worldImpulse.x = (this.targetImpulse.x  / this.worldRatio);
+			this.worldImpulse.y = (this.targetImpulse.y / this.worldRatio);
+			if (this.worldImpulse.len() > (Max_Impulse)) {
+				this.worldImpulse.nor().mul(Max_Impulse);
 			}
 			
 			slimy.getBody().applyLinearImpulse(this.worldImpulse, pos);
@@ -135,6 +136,8 @@ public class SpawnCannon extends GameItemPhysic {
 			
 			this.target.x = spawnPoint.x + this.targetImpulse.x;
 			this.target.y = spawnPoint.y + this.targetImpulse.y;
+			
+			this.lastGameTarget = gameTouch;
 		}
 	}
 
@@ -194,17 +197,26 @@ public class SpawnCannon extends GameItemPhysic {
 	 */
 	@Override
 	public void render(float delta) {
-		if (this.selected) {
+		if (this.selected) {			
 			long time = System.currentTimeMillis();
-			if (time - this.selectStart > Increment_Time_Sec * 1000) {
-				if (this.slimyCounter < Max_Slimy) {
-					this.slimyCounter++;
+			if (this.isInCannon(this.lastGameTarget)) {
+				if (time - this.selectStart > Increment_Time_Sec * 1000) {				
+					if (this.slimyCounter < Max_Slimy) {
+						this.slimyCounter++;
+					}									
+					
+					this.selectStart = time;
 				}
-				
+			}
+			else {
 				this.selectStart = time;
 			}
 		}
 		
 		super.render(delta);
+	}
+	
+	public int getSlimyCounter() {
+		return this.slimyCounter;
 	}
 }

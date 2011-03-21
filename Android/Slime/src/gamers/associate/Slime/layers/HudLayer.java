@@ -8,9 +8,13 @@ import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItem;
 import org.cocos2d.menus.CCMenuItemLabel;
 import org.cocos2d.nodes.CCDirector;
+import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.types.CGPoint;
 
 public class HudLayer extends CCLayer {
+	private static String Count_Text = "Slimy: ";
+	
+	private CCLabel countLabel;
 	
 	public HudLayer() {
 		CCMenuItem itemBack = CCMenuItemLabel.item("Back", this, "goBack");		
@@ -21,6 +25,13 @@ public class HudLayer extends CCLayer {
 		
 		CCMenu menu = CCMenu.menu(itemBack, itemPause);		
 		this.addChild(menu);
+		
+		this.countLabel = CCLabel.makeLabel(Count_Text, "DroidSans", 24);		
+		this.addChild(this.countLabel);
+		this.countLabel.setPosition(
+				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - 100, 
+				CCDirector.sharedDirector().winSize().getHeight() - 20));
+		this.hideSlimyCount();
 	}
 	
 	public void goBack(Object sender) {
@@ -29,5 +40,14 @@ public class HudLayer extends CCLayer {
 	
 	public void goPause(Object sender) {
 		Level.currentLevel.togglePause();
+	}
+	
+	public void setSlimyCount(int count) {
+		this.countLabel.setVisible(true);
+		this.countLabel.setString(Count_Text + String.valueOf(count));
+	}
+	
+	public void hideSlimyCount() {
+		this.countLabel.setVisible(false);
 	}
 }

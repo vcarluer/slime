@@ -245,6 +245,15 @@ public class Level {
 			this.itemsToRemove.clear();
 			
 			this.cameraManager.tick(delta);
+			
+			if (this.hudLayer != null && this.spawnCannon != null) {
+				if (this.spawnCannon.isSelected()) {
+					this.hudLayer.setSlimyCount(this.spawnCannon.getSlimyCounter());
+				}
+				else {
+					this.hudLayer.hideSlimyCount();
+				}
+			}
 		}
 	}
 			
