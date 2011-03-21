@@ -52,19 +52,21 @@ short Category_OutGame = 0x0003;
 	
 	for (GameItemPhysic * item in contacts) {
 		[self handleContact:item];
-	}
-	
+	}	
 	[contacts removeAllObjects];
 }
-/*
+
 - (void) handleContact:(GameItemPhysic *)item {
+
+
+    
 }
-*/
+
 
 - (void) dealloc {
 	//[body release];
-//	[contacts release];
-//	[super dealloc];
+	[contacts release];
+	[super dealloc];
 }
 
 

@@ -38,8 +38,8 @@
 }
 */
 - (void) dealloc {
-//	[level release];
-//  [super dealloc];
+    [level release];
+    [super dealloc];
 }
 
 @end

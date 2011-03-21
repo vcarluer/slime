@@ -12,7 +12,7 @@
 
 
 @interface GameItem : NSObject  {
-  	NSString * my_id;
+  	//NSString * my_id;
     CGPoint position;
 	float angle;
 	float width;

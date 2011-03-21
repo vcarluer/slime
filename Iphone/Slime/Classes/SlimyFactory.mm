@@ -13,8 +13,8 @@
 }
 
 - (void) runFirstAnimations:(Slimy *)item {
-  //[item waitAnim];
-  //[item fadeIn];
+  [item waitAnim];
+  [item fadeIn];
 }
 
 - (NSString *) getPlistPng {
@@ -31,7 +31,7 @@
 }
 
 - (void) createSprite:(GameItemCocos *)gameItem {
-    CCSprite * sprite = [CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:Frame_Default]];
+    CCSprite * sprite = [CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:Slimy_Frame_Default]];
     
     [gameItem setSprite:sprite];
 }

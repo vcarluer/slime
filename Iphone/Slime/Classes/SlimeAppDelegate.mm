@@ -10,7 +10,6 @@
 
 #import "SlimeAppDelegate.h"
 #import "GameConfig.h"
-#import "HelloWorldScene.h"
 #import "RootViewController.h"
 #import "Level.h"
 #import "SlimeLoadingLayer.h"

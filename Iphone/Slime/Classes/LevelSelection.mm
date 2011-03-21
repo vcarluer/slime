@@ -24,12 +24,12 @@ LevelSelection * levelSelection;
 }
 
 - (void) dealloc {
- /*
-    [scene release];
+
+  [scene release];
   [selectionLayer release];
   [backgroundLayer release];
   [super dealloc];
-*/
+
   }
 
 @end

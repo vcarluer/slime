@@ -11,4 +11,5 @@
 - (NSString *) getPlistPng;
 - (SpawnPortal *) instantiate:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height;
 - (void) runFirstAnimations:(SpawnPortal *)item;
+
 @end

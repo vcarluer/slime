@@ -81,14 +81,13 @@ CCScene * scene;
 }
 
 - (void) dealloc {
-    /*
+    
     [currentLevel release];
     [syncObj release];
     [spriteSheet release];
     [sprite release];
     //[nextCallback release];
     [super dealloc];
-*/
      }
 
 @end

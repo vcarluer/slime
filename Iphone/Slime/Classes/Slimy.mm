@@ -8,7 +8,7 @@ NSString * Anim_Landing_H = @"landing-h";
 NSString * Anim_Landing_V = @"landing-v";
 NSString * Anim_Wait_H = @"wait-h";
 NSString * Anim_Wait_V = @"wait-v";
-NSString * Frame_Default = @"wait-v-1.png";
+NSString * Slimy_Frame_Default = @"wait-v-1.png";
 
 float Slimy_Default_Width = 24.0f;
 float Slimy_Default_Height = 26.0f;
@@ -57,10 +57,7 @@ float Default_Body_Height = 23.0f;
 	
 	bodyDef.position.Set(spawnPoint.x / worldRatio,spawnPoint.y / worldRatio);	
 	b2PolygonShape  dynamicBox;
-	//dynamicBox.SetAsBox(bodyWidth / worldRatio / 2, bodyHeight / worldRatio / 2) ;
-	dynamicBox.SetAsBox(.5f, .5f);//These are mid points for our 1m box  //@synchronized(world) 
-	
-	//{
+	dynamicBox.SetAsBox(bodyWidth / worldRatio / 2, bodyHeight / worldRatio / 2) ;
 	
     [worldLock lock];
     body = world->CreateBody(&bodyDef);
@@ -87,18 +84,18 @@ float Default_Body_Height = 23.0f;
 
 - (void) waitAnim {
 	
-	
+	if (currentAction != nil) {
+        [sprite stopAction:currentAction];
+    }
 	CCAnimate * animate = [CCAnimate actionWithAnimation:[animationList objectForKey:Anim_Wait_V] restoreOriginalFrame:NO];
-	CCAnimate * reverse = [CCAnimate actionWithDuration:3.0f animation:(CCAnimation *)[animate reverse] restoreOriginalFrame:NO];
-	waitAction = [CCSequence actions:animate,  reverse, nil];
-    
-	[sprite runAction:waitAction];
+	CCDelayTime * delay =  [CCDelayTime actionWithDuration:3.0f];
+    CCActionInterval * reverse = [animate reverse];
+    currentAction = [CCRepeatForever actionWithAction:[CCSequence actions: animate, reverse, delay, nil]];
+    [sprite runAction:currentAction];
 }
 
 - (void) fall {
-	//[self createAnim:Anim_Falling frameCount:3];
-	
-	
+
 	CCAnimate * animate = [CCAnimate actionWithAnimation:[animationList objectForKey:Anim_Falling] restoreOriginalFrame:NO];
 	CCAnimate * reverse = (CCAnimate *)[animate reverse];
 	CCAction * action = [CCRepeatForever actionWithAction:[CCSequence actionOne:animate two:reverse]];
@@ -116,13 +113,22 @@ float Default_Body_Height = 23.0f;
 		}
 		CCAnimate * animate = [CCAnimate actionWithAnimation:[animationList objectForKey:Anim_Landing_V] restoreOriginalFrame:NO];
 		currentAction = animate;
+       
 		[sprite runAction:currentAction];
+        
 		isLanded = YES;
-	}
+        
+    }
+    
 }
 
 - (void) render:(float)delta {
-	[super render:delta];
+    /*
+    if (isLanded ){
+        [self waitAnim];
+    }
+     */
+        [super render:delta];
 }
 
 - (void) contact:(NSObject *)with {
@@ -208,6 +214,9 @@ float Default_Body_Height = 23.0f;
 - (void) handleContact:(GameItemPhysic *)item {
   [super handleContact:item];
   [self land];
+   
+ 
+   // [self burn];
 }
 
 

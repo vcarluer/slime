@@ -13,20 +13,23 @@ float Default_Height = 10.0f;
 
 - (id) init:(CCNode *)node x:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height world:(b2World *)my_world worldRatio:(float)my_worldRatio {
   if ((self = [super init:node x:my_x y:my_y width:my_width height:my_height world:my_world worldRatio:my_worldRatio])) {
+      /*
     if (my_width == 0 && my_height == 0) {
       width = Default_Width;
       height = Default_Height;
     }
 	  super.bodyWidth = width;
 	  super.bodyHeight = height;
-     
+     */
     isWon = NO;
     [self initBody];
   }
+       
   return self;
 }
 
 - (void) initBody {
+    /*
   b2BodyDef bodyDef;
   CGPoint spawnPoint;
   spawnPoint.x = position.x;
@@ -47,6 +50,7 @@ float Default_Height = 10.0f;
    b2Fixture * fix = body->CreateFixture(&def);
    fix->SetSensor(YES);
   //}
+    */ 
 }
 
 - (void) createPortal {

@@ -60,7 +60,7 @@ extern NSLock * worldLock;
 @property(nonatomic, retain, readwrite) CCScene * scene;
 @property(nonatomic, retain, readonly) CameraManager * cameraManager;
 @property(nonatomic, readwrite ) b2World * world;
-@property(nonatomic, readwrite ) CCSprite * backgroundSprite;
+@property(nonatomic, retain, readwrite ) CCSprite * backgroundSprite;
 @property(nonatomic, readonly) float worlRatio;
 @property(nonatomic, readonly) float levelWidth;
 @property(nonatomic, readonly) float levelHeight;

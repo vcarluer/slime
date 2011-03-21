@@ -4,31 +4,17 @@
 @class Level;
 
 
-/*
-class LevelLayer_Anon1 : public UpdateCallback {
-};
-
-- (void) update:(float)d;
-//@end
-*/
-/**
- * @author    vince
- * @uml.dependency   supplier="gamers.associate.Slime.LevelFactory"
- */
 
 @interface LevelLayer : CCLayer {
 
-  /**
-   * @uml.property  name="level"
-   * @uml.associationEnd
- */
+ 
 	
   Level * level;
   NSMutableArray * touchList;
   BOOL isZoomAction;
   float lastDistance;
   float lastZoomDelta;
- // UpdateCallback * tickCallback;
+
 }
 
 

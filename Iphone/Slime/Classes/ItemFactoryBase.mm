@@ -79,13 +79,13 @@
 }
 */
 - (void) dealloc {
-    /*
+    
   [sharedAnimations release];
   [spriteSheet release];
   [rootNode release];
   [level release];
   [super dealloc];
-     */
+    
 }
 
 @end

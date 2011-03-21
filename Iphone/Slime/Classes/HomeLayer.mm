@@ -16,7 +16,7 @@ HomeLayer * layer;
 
 - (id) init {
     if ((self = [super init])) {
-        //AMZ remove
+       
         CCSpriteBatchNode  * spriteSheet = [SpriteSheetFactory getSpriteSheet:@"logo" isExcluded:YES ];
         [self addChild:spriteSheet];
         CCSprite * sprite = [CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"SlimeTitle.png"]];     
