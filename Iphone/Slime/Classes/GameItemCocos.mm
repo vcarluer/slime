@@ -155,7 +155,7 @@
     //AMZ to remove in order to have resetLevel
 	//[animationList release];
 	//[currentAction release];
-	[sprite release];
+	//[sprite release];
 	//[rootNode release];
 	[texture release];
 	[super dealloc];

@@ -178,6 +178,7 @@
 - (float) getGameY:(float)touchY {
   return [[CCDirector sharedDirector] winSize].height - touchY;
 }
+*/
 
 - (void) dealloc {
 	[level release];
@@ -185,5 +186,5 @@
 	//  [tickCallback release];
 	[super dealloc];
 }
-*/
+
 @end

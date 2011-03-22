@@ -98,15 +98,19 @@ NSLock * worldLock;
     currentLevelName = @"";
     
     for (GameItem * item in items) {
-        //[self addItemToRemove: item ];
+        [self addItemToRemove: item ];
         //[items removeObject:item];
-       // [item dealloc];
+        //[item release];
         
     }
-    
-    //[items removeAllObjects];
+    if(items != nil){
+        //items release];
+        //items = [[NSMutableArray alloc] init] ;
+    }
+        //[items removeAllObjects];
     spawnPortal = nil;
     goalPortal = nil;
+   
     [self removeCustomOverLayer];
     [self setIsTouchEnabled:YES];
     [self setIsHudEnabled:YES];
@@ -155,6 +159,18 @@ NSLock * worldLock;
 - (void) tick:(float)delta {
     if (!isPaused) {
         
+        
+        for (GameItem * item in itemsToRemove) {
+            [self removeGameItem:item];
+        }
+        
+        [itemsToRemove removeAllObjects];
+//        items = [[NSMutableArray alloc] init] ;
+        [cameraManager tick:delta];
+
+        
+        
+        
         for (GameItem * item in itemsToAdd) {
             [self addGameItem:item];
         }
@@ -162,7 +178,7 @@ NSLock * worldLock;
         [itemsToAdd removeAllObjects];
         
         [worldLock lock];
-        world->Step(delta, 8, 4);
+        world->Step(delta, 6, 2);
         [worldLock unlock];
         if([items count] !=0){
                  for (GameItem * item in items) {
@@ -172,12 +188,6 @@ NSLock * worldLock;
 
         
         
-        for (GameItem * item in itemsToRemove) {
-            [self removeGameItem:item];
-        }
-        
-        [itemsToRemove removeAllObjects];
-        [cameraManager tick:delta];
     }
 }
 
@@ -187,6 +197,8 @@ NSLock * worldLock;
 
 - (void) addItemToAdd:(GameItem *)item {
     [itemsToAdd addObject:item];
+   // [item release];
+    
 }
 
 - (void) setPause:(BOOL)value {
@@ -233,6 +245,7 @@ NSLock * worldLock;
             [my_slimy fall];   
             [my_slimy fadeIn];
             [items addObject:my_slimy];
+            [my_slimy release];
         }
     }
 }
@@ -244,6 +257,8 @@ NSLock * worldLock;
 
 - (void) addGameItem:(GameItem *)item {
     [items addObject:item];
+    //[item release];
+    
 }
 
 - (void) removeGameItem:(GameItem *)item {
@@ -329,8 +344,8 @@ NSLock * worldLock;
      [spawnCannon release];
      [goalPortal release];
      [scene release];
-     [levelLayer release];
-     [hudLayer release];
+     
+     
      [backgroundLayer release];
      [gameLayer release];
      [customOverLayer release];
@@ -343,6 +358,8 @@ NSLock * worldLock;
      [super dealloc];
      */
     
+    [levelLayer dealloc];
+    [hudLayer release];
     [gameLayer release];
     [scene release];
     [super dealloc];

@@ -30,9 +30,6 @@ float Default_Body_Height = 23.0f;
 		bodyHeight = Default_Body_Height * my_height / Slimy_Default_Height;
 		isLanded = NO;
 		isBurned = NO;
-		//CCSprite * my_sprite = [[[CCSprite alloc] init] autorelease];
-		/*[self fall];
-		[self setSprite:sprite];*/
 		[self initBody];
 	}
 	return self;

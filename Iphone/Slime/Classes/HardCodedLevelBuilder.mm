@@ -31,10 +31,10 @@ float LAND_HEIGHT = 64.0f;
     float h = s.height;
     float h2 = s.height / 2;
     // probleme with levelend
-    /*[levelEnd  create:w2 y:h + m width:w height:si];
+    [levelEnd  create:w2 y:h + m width:w height:si];
     [levelEnd create:w + m y:h2 width:si height:h];
     [levelEnd create:w2 y:-m width:w height:si];
-    [levelEnd create:-m y:h2 width:si height:h];*/
+    [levelEnd create:-m y:h2 width:si height:h];
      
     
 }
@@ -73,8 +73,8 @@ float LAND_HEIGHT = 64.0f;
     [self createGroundBox:level];
     [self createLand:level];
      CGSize s = CGSizeMake([level levelWidth],[level levelHeight]);
-    //SpawnPortal * my_spawnPortal = [spawnPortal createAndMove:level.levelWidth / 2 y:level.levelHeight - 32 moveBy:level.levelWidth / 2 speed:5];
-    //[level setSpawnPortal:my_spawnPortal];
+    SpawnPortal * my_spawnPortal = [spawnPortal createAndMove:level.levelWidth / 2 y:level.levelHeight - 32 moveBy:level.levelWidth / 2 speed:5];
+    [level setSpawnPortal:my_spawnPortal];
     float goalPlatH = 20.0f;
     float goalPlatW = 100.0f;
     [platform create:0 y:10  width:s.width * 2 height:10];

@@ -197,7 +197,7 @@ enum {
 	
 	// Instruct the world to perform a single step of simulation. It is
 	// generally best to keep the time step and iterations fixed.
-	world->Step(dt, velocityIterations, positionIterations);
+	//world->Step(dt, velocityIterations, positionIterations);
 
 	
 	//Iterate over the bodies in the physics world

@@ -3,7 +3,8 @@
 @implementation SpawnPortalFactory
 
 - (SpawnPortal *) createAndMove:(float)my_x y:(float)my_y moveBy:(float)moveBy speed:(float)speed {
-  SpawnPortal * portal = [self create:my_x y:my_y];
+    SpawnPortal * portal = [self instantiate:my_x y:my_y width:0 height:0];
+    //SpawnPortal * portal = [self create:my_x y:my_y];
   if (portal != nil) {
     [portal MovePortalInLine:moveBy speed:speed];
   }
@@ -31,10 +32,11 @@
 - (SpawnPortal *) create:(float)my_x y:(float)my_y {
 	return [self create:my_x y:my_y width:0 height:0];
 }
-
+/*
 - (SpawnPortal *) create:(float)my_x y:(float)my_y width:(float)my_width height:(float)my_height {
 	if (isAttached) {
 		SpawnPortal * item = [self instantiate:my_x y:my_y width:my_width height:my_height];
+        //[self createSprite:(GameItemCocos *)item];
 		[level addItemToAdd:item];
 		return item;
 	}
@@ -42,7 +44,7 @@
 		return nil;
 	}
 }
-
+*/
 - (void) createSprite:(GameItemCocos *)gameItem {
     CCSprite * sprite = [CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:Anim_Spawn_Portal]];
     
