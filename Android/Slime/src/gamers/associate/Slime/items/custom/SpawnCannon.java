@@ -37,6 +37,7 @@ public class SpawnCannon extends GameItemPhysic {
 	private long selectStart;
 	private int slimyCounter;
 	private CGPoint lastGameTarget;
+	private CGPoint spawnPoint;
 	
 	public SpawnCannon(float x, float y, float width, float height,
 			World world, float worldRatio) {
@@ -52,7 +53,8 @@ public class SpawnCannon extends GameItemPhysic {
 			this.bodyHeight = this.height = Default_Height;			
 		}
 		
-		this.cannonRect = CGRect.make(this.position.x - this.width / 2, this.position.y - this.height / 2, this.width, this.height);
+		this.spawnPoint = CGPoint.make(this.position.x, this.position.y + spawnHeightShift);
+		this.cannonRect = CGRect.make(this.position.x - this.width / 2, this.position.y - this.height / 2, this.width, this.height);		
 	}
 	
 	@Override
@@ -163,7 +165,7 @@ public class SpawnCannon extends GameItemPhysic {
 	}
 	
 	private CGPoint getSpawnPoint() {
-		return CGPoint.make(this.getPosition().x, this.getPosition().y + spawnHeightShift);
+		return this.spawnPoint;
 	}
 
 	/* (non-Javadoc)

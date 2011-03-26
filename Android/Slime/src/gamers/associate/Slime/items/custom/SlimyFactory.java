@@ -2,8 +2,6 @@ package gamers.associate.Slime.items.custom;
 
 import gamers.associate.Slime.items.base.GameItemPhysicFactory;
 
-
-
 /**
  * @uml.dependency   supplier="gamers.associate.Slime.Slimy"
  */
@@ -11,6 +9,7 @@ public class SlimyFactory extends GameItemPhysicFactory<Slimy> {
 		
 	public static final int Type_Simple = 0;
 	public static final int Type_Grow = 1;
+	public static final int Type_Elastic = 2;
 	
 	private int currentType;
 			
