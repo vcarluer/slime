@@ -8,6 +8,7 @@ import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.opengl.CCTexture2D;
 import org.cocos2d.opengl.GLResourceHelper;
+import org.cocos2d.opengl.GLResourceHelper.Resource;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 
@@ -71,12 +72,12 @@ public class TextureAnimation {
         tex.setLoader(new GLResourceHelper.GLResourceLoader() {
 			
 			@Override
-			public void load() {
+			public void load(Resource res) {
 	            try {
 		        	InputStream is = CCDirector.sharedDirector().getActivity().getAssets().open(path);
 		            Bitmap bmp = BitmapFactory.decodeStream(is);
 					is.close();
-					tex.initWithImage(bmp);
+					((CCTexture2D)res).initWithImage(bmp);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

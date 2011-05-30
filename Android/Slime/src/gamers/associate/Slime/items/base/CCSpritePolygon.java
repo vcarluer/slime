@@ -9,11 +9,12 @@ import org.cocos2d.config.ccConfig;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.utils.BufferProvider;
+import org.cocos2d.utils.FastFloatBuffer;
 
 public class CCSpritePolygon extends CCSpriteRepeat {
-	protected FloatBuffer vertices;
-	protected FloatBuffer texCoords;
-	protected FloatBuffer colors;
+	protected FastFloatBuffer vertices;
+	protected FastFloatBuffer texCoords;
+	protected FastFloatBuffer colors;
 	protected CGPoint[] baseArray;
 	
 	/* (non-Javadoc)
@@ -60,13 +61,13 @@ public class CCSpritePolygon extends CCSpriteRepeat {
         this.texCoords.position(0);
         
         // vertex        
-        gl.glVertexPointer(3, GL10.GL_FLOAT, 0 , this.vertices);
+        gl.glVertexPointer(3, GL10.GL_FLOAT, 0 , this.vertices.bytes);
 
         // color        
-        gl.glColorPointer(4, GL10.GL_FLOAT, 0, colors);
+        gl.glColorPointer(4, GL10.GL_FLOAT, 0, colors.bytes);
 
         // tex coords        
-        gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, this.texCoords);
+        gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, this.texCoords.bytes);
 
         gl.glDrawArrays(GL10.GL_TRIANGLE_STRIP, 0, this.baseArray.length);
 

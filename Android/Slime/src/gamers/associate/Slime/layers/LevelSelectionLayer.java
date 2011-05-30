@@ -7,11 +7,14 @@ import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItem;
 import org.cocos2d.menus.CCMenuItemLabel;
 import org.cocos2d.nodes.CCDirector;
+import org.cocos2d.nodes.CCLabel;
 
 public class LevelSelectionLayer extends CCLayer {
 	
 	public LevelSelectionLayer() {
-		CCMenuItem goBackMenu = CCMenuItemLabel.item("Back", this, "goBack");
+		CCLabel labelGoBack = CCLabel.makeLabel("Back", "fonts/Slime.ttf", 20.0f);
+		// CCMenuItem goBackMenu = CCMenuItemLabel.item("Back", this, "goBack");
+		CCMenuItem goBackMenu = CCMenuItemLabel.item(labelGoBack, this, "goBack");
 		CCMenuItem testMenu1 = CCMenuItemLabel.item("Level 1", this, "doTest");		
 		CCMenuItem testMenu2 = CCMenuItemLabel.item("Level 2", this, "doTest2");
 		CCMenuItem testMenu3 = CCMenuItemLabel.item("Level 3", this, "doTest");				
