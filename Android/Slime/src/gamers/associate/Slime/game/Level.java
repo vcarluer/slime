@@ -199,8 +199,9 @@ public class Level {
 		this.contactManager = new ContactManager();
 		this.world.setContactListener(this.contactManager);
 		// Main game item spritesheet		
-		SpriteSheetFactory.add("labo", Level.zMid);
-		SpriteSheetFactory.add("slime", Level.zFront);
+		/*SpriteSheetFactory.add("labo", Level.zMid);
+		SpriteSheetFactory.add("slime", Level.zFront);*/
+		
 		// Background
 		/*CCSpriteSheet spriteSheet = SpriteSheetFactory.getSpriteSheet("decor", true);		
 		// Sprite too big for VM in UbuntuRox		

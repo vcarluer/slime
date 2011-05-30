@@ -17,22 +17,31 @@ import org.cocos2d.nodes.CCSpriteSheet;
 
 public class LevelSelectionLayer extends CCLayer {
 	
-	public LevelSelectionLayer() {
+	public LevelSelectionLayer() {								
+	}
 		
-		CCSpriteSheet menuSheet = SpriteSheetFactory.getSpriteSheet("controls");
-		this.addChild(menuSheet);
-		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);		
+	private CCMenu menu;
+	
+	@Override
+	public void onEnter() {		
+		super.onEnter();
 		
+		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);
 		CCMenuItemSprite goBackMenu = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goBack");
-				
+		
 		CCMenuItem testMenu1 = CCMenuItemLabel.item(getMenuLabel("Level 1"), this, "doTest");		
 		CCMenuItem testMenu2 = CCMenuItemLabel.item(getMenuLabel("Level 2"), this, "doTest2");
 		CCMenuItem testMenu3 = CCMenuItemLabel.item(getMenuLabel("Level 3"), this, "doTest");				
-		CCMenu menu = CCMenu.menu(goBackMenu, testMenu3, testMenu2, testMenu1);
+		menu = CCMenu.menu(goBackMenu, testMenu3, testMenu2, testMenu1);
 		menu.alignItemsInColumns(new int[] { 1, 3 });
 		this.addChild(menu);
 	}
-	
+
+	@Override
+	public void onExit() {		
+		super.onExit();
+	}
+
 	public void doTest(Object sender) {
 		Level level = Level.get(Level.LEVEL_1, true);
 		CCDirector.sharedDirector().replaceScene(level.getScene());

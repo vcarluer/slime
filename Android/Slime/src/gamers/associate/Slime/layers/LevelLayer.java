@@ -33,8 +33,7 @@ public class LevelLayer extends CCLayer {
 	
 	public LevelLayer(Level level) {
 		super();
-		this.level = level;
-		this.setIsTouchEnabled(true);
+		this.level = level;		
 		this.touchList = new ArrayList<TouchInfo>();		
 	}
 	
@@ -49,6 +48,7 @@ public class LevelLayer extends CCLayer {
 	@Override
 	public void onEnter() {
 		super.onEnter();
+		this.setIsTouchEnabled(true);
 		
 		// start ticking (for physics simulation)
 		schedule(tickCallback);

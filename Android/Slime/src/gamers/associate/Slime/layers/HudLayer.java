@@ -16,7 +16,13 @@ public class HudLayer extends CCLayer {
 	
 	private CCLabel countLabel;
 	
-	public HudLayer() {
+	public HudLayer() {		
+	}
+	
+	@Override
+	public void onEnter() {		
+		super.onEnter();
+		
 		CCMenuItem itemBack = CCMenuItemLabel.item("Back", this, "goBack");		
 		CCMenuItem itemPause = CCMenuItemLabel.item("Pause", this, "goPause");
 		itemBack.setPosition(CGPoint.make(-50, CCDirector.sharedDirector().winSize().getHeight() / 2 - 20));
@@ -33,7 +39,13 @@ public class HudLayer extends CCLayer {
 				CCDirector.sharedDirector().winSize().getHeight() - 20));
 		this.hideSlimyCount();
 	}
-	
+
+	@Override
+	public void onExit() {
+		// TODO Auto-generated method stub
+		super.onExit();
+	}
+
 	public void goBack(Object sender) {
 		CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
 	}

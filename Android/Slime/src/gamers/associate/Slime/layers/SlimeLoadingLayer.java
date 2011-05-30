@@ -50,19 +50,30 @@ public class SlimeLoadingLayer extends CCLayer {
 		// TODO Auto-generated method stub
 		super.onEnter();				
 		
-		if (isInit == false) {			
+		if (isInit == false) {
+			// Pre-loading menu controls
+			SpriteSheetFactory.add("controls", true, SpriteSheetFactory.zDefault);
+			SpriteSheetFactory.add("logo", true, SpriteSheetFactory.zDefault);
+			SpriteSheetFactory.add("decor", true, SpriteSheetFactory.zDefault);
+			SpriteSheetFactory.add("items", true, SpriteSheetFactory.zDefault);
+			
+			SpriteSheetFactory.add("labo", Level.zMid);
+			SpriteSheetFactory.add("slime", Level.zFront);
+			
 			this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
 			this.addChild(this.spriteSheet);
 			
-			this.sprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("SlimeTitle.png"));
+			this.sprite = CCSprite.sprite("SlimeTitle.png", true);
 			this.spriteSheet.addChild(sprite);		
 			this.sprite.setPosition(CGPoint.make(
 					CCDirector.sharedDirector().winSize().width / 2,
 					CCDirector.sharedDirector().winSize().height / 2
 					));
-						
+			
+			
 			InitThread initThread = new InitThread();
-			initThread.start();
+			initThread.start();			
+			// this.initNotThread();
 		}
 		else {
 			// Initialize camera view
@@ -95,16 +106,21 @@ public class SlimeLoadingLayer extends CCLayer {
 		 * @see java.lang.Thread#run()
 		 */
 		@Override
-		public void run() {
-			// Pre-loading menu controls
-			SpriteSheetFactory.add("controls", true, SpriteSheetFactory.zDefault);
-			
+		public void run() {			
 			// First call to get is long: init physic world and resources									
 			currentLevel = Level.get(Level.LEVEL_HOME);
 			synchronized (syncObj) {
 				isInit = true;
-			}			
+			}
 		}
 		
 	}
+	
+	/*private void initNotThread() {		
+		// First call to get is long: init physic world and resources									
+		currentLevel = Level.get(Level.LEVEL_HOME);
+		synchronized (syncObj) {
+			isInit = true;
+		}
+	}*/
 }

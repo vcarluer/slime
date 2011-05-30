@@ -7,6 +7,7 @@ import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItem;
 import org.cocos2d.menus.CCMenuItemLabel;
+import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrameCache;
@@ -27,29 +28,7 @@ public class HomeLayer extends CCLayer {
 	}
 	
 	protected HomeLayer() {
-		super();
-		
-		//this.setIsTouchEnabled(true);
-		CCSpriteSheet spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
-		this.addChild(spriteSheet);
-		
-		CCSprite sprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("SlimeTitle.png"));
-		spriteSheet.addChild(sprite);		
-		sprite.setPosition(CGPoint.make(
-				CCDirector.sharedDirector().winSize().width / 2,
-				CCDirector.sharedDirector().winSize().height / 2
-				));
-		
-		float shiftMenu = - 100f; // Slime height = 160 / 2 + 20
-		CCMenuItem playMenu = CCMenuItemLabel.item("Play", this, "selectPlay");
-		playMenu.setPosition(CGPoint.make(
-				0,
-				shiftMenu
-				));
-		
-		CCMenu menu = CCMenu.menu(playMenu);
-		
-		this.addChild(menu);
+		super();		
 	}
 
 	@Override
@@ -59,16 +38,46 @@ public class HomeLayer extends CCLayer {
 		//CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
 		//return CCTouchDispatcher.kEventHandled;
 	}
-
+	
+	private CCMenu menu;
+	
 	/* (non-Javadoc)
 	 * @see org.cocos2d.layers.CCLayer#onEnter()
 	 */
 	@Override
-	public void onEnter() {
-		// TODO Auto-generated method stub
+	public void onEnter() {		
 		super.onEnter();
-	}		
+		
+		//this.setIsTouchEnabled(true);
+		CCSpriteSheet spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
+		this.addChild(spriteSheet);
+		
+		CCSprite sprite = CCSprite.sprite("SlimeTitle.png", true);		
+		spriteSheet.addChild(sprite);
+		sprite.setPosition(CGPoint.make(
+				CCDirector.sharedDirector().winSize().width / 2,
+				CCDirector.sharedDirector().winSize().height / 2
+				));
+		
+		float shiftMenu = - 100f; // Slime height = 160 / 2 + 20
+		CCSprite playSprite = CCSprite.sprite("control-play.png", true);
+		CCMenuItemSprite playMenu = CCMenuItemSprite.item(playSprite, playSprite, this, "selectPlay");			
+		
+		playMenu.setPosition(CGPoint.make(
+				0,
+				shiftMenu
+				));
+		
+		this.menu = CCMenu.menu(playMenu);
+		
+		this.addChild(this.menu);										
+	}
 	
+	@Override
+	public void onExit() {
+		super.onExit();
+	}
+
 	public void selectPlay(Object sender) {
 		CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
 	}
