@@ -11,6 +11,7 @@ public class SpriteSheetFactory {
 	private static Hashtable<String, SpriteSheetCacheInfo> SpriteSheetList = new Hashtable<String, SpriteSheetCacheInfo>();
 	private static CCNode rootNode;
 	private static boolean isAttached;
+	public static int zDefault = 1;
 	
 	public static void add(String plistPngName, int zOrder) {
 		add(plistPngName, false, zOrder);
@@ -39,7 +40,7 @@ public class SpriteSheetFactory {
 	
 	public static CCSpriteSheet getSpriteSheet(String plistPngName, boolean isExcluded) {		
 		if (plistPngName != "") {
-			add(plistPngName, isExcluded, 0);
+			add(plistPngName, isExcluded, SpriteSheetFactory.zDefault);
 			return SpriteSheetList.get(plistPngName).getSpriteSheet();
 		}
 		else {

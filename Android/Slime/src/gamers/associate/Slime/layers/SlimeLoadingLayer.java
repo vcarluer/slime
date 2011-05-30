@@ -50,7 +50,7 @@ public class SlimeLoadingLayer extends CCLayer {
 		// TODO Auto-generated method stub
 		super.onEnter();				
 		
-		if (isInit == false) {
+		if (isInit == false) {			
 			this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
 			this.addChild(this.spriteSheet);
 			
@@ -96,8 +96,10 @@ public class SlimeLoadingLayer extends CCLayer {
 		 */
 		@Override
 		public void run() {
-			// First call to get is long: init physic world and resources			
+			// Pre-loading menu controls
+			SpriteSheetFactory.add("controls", true, SpriteSheetFactory.zDefault);
 			
+			// First call to get is long: init physic world and resources									
 			currentLevel = Level.get(Level.LEVEL_HOME);
 			synchronized (syncObj) {
 				isInit = true;
