@@ -22,7 +22,7 @@ public class HomeLevelHandler extends GameItem {
 				
 	@Override
 	public void render(float delta) {				
-		if (slimeCount < maxSlime) {
+		if (slimeCount < maxSlime && !this.isPaused) {
 			Level level = Level.currentLevel;
 			if (level != null) {
 				long elapsed = (System.currentTimeMillis() - startHome) / 1000;

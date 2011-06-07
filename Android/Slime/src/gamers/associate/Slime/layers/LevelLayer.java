@@ -47,9 +47,7 @@ public class LevelLayer extends CCLayer {
 	
 	@Override
 	public void onEnter() {
-		super.onEnter();
-		this.setIsTouchEnabled(true);
-		
+		super.onEnter();		
 		// start ticking (for physics simulation)
 		schedule(tickCallback);
 	}

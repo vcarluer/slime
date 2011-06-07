@@ -2,7 +2,6 @@ package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
-import gamers.associate.Slime.items.custom.GoalPortal;
 import gamers.associate.Slime.items.custom.SpawnCannon;
 import gamers.associate.Slime.items.custom.SpawnPortal;
 import gamers.associate.Slime.layers.BackgoundLayer;
@@ -23,7 +22,6 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
-
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -203,14 +201,14 @@ public class Level {
 		SpriteSheetFactory.add("slime", Level.zFront);*/
 		
 		// Background
-		/*CCSpriteSheet spriteSheet = SpriteSheetFactory.getSpriteSheet("decor", true);		
+		CCSpriteSheet spriteSheet = SpriteSheetFactory.getSpriteSheet("decor", true);		
 		// Sprite too big for VM in UbuntuRox		
 		this.backgroundLayer.addChild(spriteSheet);
 		//this.backgroundLayer.setRotation(-90f);				
 		//this.backgroundLayer.setScale(2.0f);
 		this.backgroundSprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("decor.png"));		
 		this.backgroundSprite.setAnchorPoint(0, 0);
-		spriteSheet.addChild(this.backgroundSprite);*/				
+		spriteSheet.addChild(this.backgroundSprite);				
 		
 		// hud
 		this.label = CCLabel.makeLabel("Hud !", "DroidSans", 16);		

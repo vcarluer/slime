@@ -1,7 +1,6 @@
 package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.game.Level;
-import gamers.associate.Slime.items.base.SpriteSheetFactory;
 
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
@@ -11,9 +10,6 @@ import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.nodes.CCSpriteFrame;
-import org.cocos2d.nodes.CCSpriteFrameCache;
-import org.cocos2d.nodes.CCSpriteSheet;
 
 public class LevelSelectionLayer extends CCLayer {
 	

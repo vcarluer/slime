@@ -5,12 +5,9 @@ import gamers.associate.Slime.items.base.SpriteSheetFactory;
 
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
-import org.cocos2d.menus.CCMenuItem;
-import org.cocos2d.menus.CCMenuItemLabel;
 import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
 
@@ -41,6 +38,8 @@ public class HomeLayer extends CCLayer {
 	
 	private CCMenu menu;
 	
+	private CCSpriteSheet spriteSheet;
+	
 	/* (non-Javadoc)
 	 * @see org.cocos2d.layers.CCLayer#onEnter()
 	 */
@@ -49,11 +48,11 @@ public class HomeLayer extends CCLayer {
 		super.onEnter();
 		
 		//this.setIsTouchEnabled(true);
-		CCSpriteSheet spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
-		this.addChild(spriteSheet);
+		this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
+		this.addChild(this.spriteSheet);
 		
 		CCSprite sprite = CCSprite.sprite("SlimeTitle.png", true);		
-		spriteSheet.addChild(sprite);
+		this.spriteSheet.addChild(sprite);
 		sprite.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,
 				CCDirector.sharedDirector().winSize().height / 2
@@ -74,7 +73,7 @@ public class HomeLayer extends CCLayer {
 	}
 	
 	@Override
-	public void onExit() {
+	public void onExit() {		
 		super.onExit();
 	}
 

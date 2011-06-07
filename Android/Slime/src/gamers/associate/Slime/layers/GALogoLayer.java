@@ -12,8 +12,7 @@ import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
 
-public class GALogoLayer extends CCLayer {
-	public static boolean isInit;
+public class GALogoLayer extends CCLayer {	
 	private static CCScene scene;	
 	private long waitLogoSec = 2;
 	private long onEnterTime;	
@@ -38,27 +37,23 @@ public class GALogoLayer extends CCLayer {
 	@Override
 	public void onEnter() {		
 		super.onEnter();
+				
+		this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
+		this.addChild(this.spriteSheet);
+		CCSpriteFrame spriteFrame = CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("JulenGarciaGA.png");
+		this.sprite = CCSprite.sprite(spriteFrame);
+		this.spriteSheet.addChild(this.sprite);		
+		this.sprite.setPosition(CGPoint.make(
+				CCDirector.sharedDirector().winSize().width / 2,
+				CCDirector.sharedDirector().winSize().height / 2
+				));
 		
-		// Do not construct again if screen is rotated
-		if (!isInit) {
-			this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
-			this.addChild(this.spriteSheet);
-			CCSpriteFrame spriteFrame = CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("JulenGarciaGA.png");
-			this.sprite = CCSprite.sprite(spriteFrame);
-			this.spriteSheet.addChild(this.sprite);		
-			this.sprite.setPosition(CGPoint.make(
-					CCDirector.sharedDirector().winSize().width / 2,
-					CCDirector.sharedDirector().winSize().height / 2
-					));
-			
-			// Scaling to screen height
-			float originalImageHeight = 566f;
-			float targetHeight = CCDirector.sharedDirector().winSize().getHeight();			
-			float scale = targetHeight / originalImageHeight;
-			this.sprite.setScale(scale);
-			isInit = true;
-		}
-		
+		// Scaling to screen height
+		float originalImageHeight = 566f;
+		float targetHeight = CCDirector.sharedDirector().winSize().getHeight();			
+		float scale = targetHeight / originalImageHeight;
+		this.sprite.setScale(scale);
+
 		// schedule(nextCallback, waitLogoSec); doesn't work?
 		schedule(nextCallback);
 		this.onEnterTime = System.currentTimeMillis();

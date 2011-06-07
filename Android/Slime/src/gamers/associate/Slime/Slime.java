@@ -100,8 +100,6 @@ public class Slime extends Activity {
         	Level.currentLevel.resetLevel();
         }
         
-        GALogoLayer.isInit = false;
-        SlimeLoadingLayer.isInit = false;
         Level.isInit = false;
         
         // Destroy here, world and game items?

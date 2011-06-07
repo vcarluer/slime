@@ -1,9 +1,6 @@
 package gamers.associate.Slime.game;
 
-import gamers.associate.Slime.items.custom.Box;
-import gamers.associate.Slime.items.custom.Bumper;
 import gamers.associate.Slime.items.custom.GoalPortal;
-import gamers.associate.Slime.items.custom.Platform;
 import gamers.associate.Slime.items.custom.SpawnCannon;
 import gamers.associate.Slime.items.custom.SpawnPortal;
 import gamers.associate.Slime.layers.HomeLayer;
@@ -11,10 +8,6 @@ import gamers.associate.Slime.layers.HomeLayer;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGSize;
-
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 
 
 public class HardCodedLevelBuilder {

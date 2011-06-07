@@ -9,16 +9,13 @@ import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor4B;
 
-public class SlimeLoadingLayer extends CCLayer {	
-	public static boolean isInit;
+public class SlimeLoadingLayer extends CCLayer {		
 	private static CCScene scene;
-	private Level currentLevel;	
-	private Object syncObj;
+	private Level currentLevel;		
 	private CCSpriteSheet spriteSheet;
 	private CCSprite sprite;
 	
@@ -38,8 +35,7 @@ public class SlimeLoadingLayer extends CCLayer {
 		return scene;
 	}
 	
-	protected SlimeLoadingLayer() {
-		this.syncObj = new Object();
+	protected SlimeLoadingLayer() {		
 	}
 
 	/* (non-Javadoc)
@@ -48,79 +44,48 @@ public class SlimeLoadingLayer extends CCLayer {
 	@Override
 	public void onEnter() {
 		// TODO Auto-generated method stub
-		super.onEnter();				
+		super.onEnter();
+		this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
+		this.addChild(this.spriteSheet);
 		
-		if (isInit == false) {
-			// Pre-loading menu controls
-			SpriteSheetFactory.add("controls", true, SpriteSheetFactory.zDefault);
-			SpriteSheetFactory.add("logo", true, SpriteSheetFactory.zDefault);
-			SpriteSheetFactory.add("decor", true, SpriteSheetFactory.zDefault);
-			SpriteSheetFactory.add("items", true, SpriteSheetFactory.zDefault);
-			
-			SpriteSheetFactory.add("labo", Level.zMid);
-			SpriteSheetFactory.add("slime", Level.zFront);
-			
-			this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
-			this.addChild(this.spriteSheet);
-			
-			this.sprite = CCSprite.sprite("SlimeTitle.png", true);
-			this.spriteSheet.addChild(sprite);		
-			this.sprite.setPosition(CGPoint.make(
-					CCDirector.sharedDirector().winSize().width / 2,
-					CCDirector.sharedDirector().winSize().height / 2
-					));
-			
-			
-			InitThread initThread = new InitThread();
-			initThread.start();			
-			// this.initNotThread();
-		}
-		else {
-			// Initialize camera view
-			this.currentLevel.getCameraManager().setCameraView();
-		}					
+		this.sprite = CCSprite.sprite("SlimeTitle.png", true);
+		this.spriteSheet.addChild(this.sprite);		
+		this.sprite.setPosition(CGPoint.make(
+				CCDirector.sharedDirector().winSize().width / 2,
+				CCDirector.sharedDirector().winSize().height / 2
+				));
 		
-		schedule(nextCallback);
+		this.schedule(nextCallback);
 	}		
 	
 	private UpdateCallback nextCallback = new UpdateCallback() {
 			
 			@Override
-			public void update(float d) {				
-				synchronized (syncObj) {					
-					if (isInit) {
-						unschedule(nextCallback);
-						
-						spriteSheet.removeChild(sprite, true);						
-						// CCTransitionScene transition = CCTurnOffTilesTransition.transition(1.0f, currentLevel.getScene());
-						// CCTransitionScene transition = CCFadeTransition.transition(1.0f, currentLevel.getScene());
-						CCDirector.sharedDirector().replaceScene(currentLevel.getScene());
-					}					
-				}
+			public void update(float d) {
+				SpriteSheetFactory.add("controls", true, SpriteSheetFactory.zDefault);
+				SpriteSheetFactory.add("logo", true, SpriteSheetFactory.zDefault);
+				SpriteSheetFactory.add("decor", true, SpriteSheetFactory.zDefault);
+				SpriteSheetFactory.add("items", true, SpriteSheetFactory.zDefault);
+				
+				SpriteSheetFactory.add("labo", Level.zMid);
+				SpriteSheetFactory.add("slime", Level.zFront);
+				
+				
+				currentLevel = Level.get(Level.LEVEL_HOME);					
+				unschedule(nextCallback);
+				
+				spriteSheet.removeChild(sprite, true);						
+				// CCTransitionScene transition = CCTurnOffTilesTransition.transition(1.0f, currentLevel.getScene());
+				// CCTransitionScene transition = CCFadeTransition.transition(1.0f, currentLevel.getScene());
+				CCDirector.sharedDirector().replaceScene(currentLevel.getScene());
 			}
 		};
-	
-	private class InitThread extends Thread {
 
-		/* (non-Javadoc)
-		 * @see java.lang.Thread#run()
-		 */
-		@Override
-		public void run() {			
-			// First call to get is long: init physic world and resources									
-			currentLevel = Level.get(Level.LEVEL_HOME);
-			synchronized (syncObj) {
-				isInit = true;
-			}
-		}
-		
+	/* (non-Javadoc)
+	 * @see org.cocos2d.layers.CCLayer#onExit()
+	 */
+	@Override
+	public void onExit() {		
+		super.onExit();
 	}
-	
-	/*private void initNotThread() {		
-		// First call to get is long: init physic world and resources									
-		currentLevel = Level.get(Level.LEVEL_HOME);
-		synchronized (syncObj) {
-			isInit = true;
-		}
-	}*/
 }

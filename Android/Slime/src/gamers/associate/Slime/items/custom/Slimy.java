@@ -1,8 +1,6 @@
 package gamers.associate.Slime.items.custom;
 
 
-import java.util.ArrayList;
-
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.IBurnable;
 import gamers.associate.Slime.items.base.SpriteType;
