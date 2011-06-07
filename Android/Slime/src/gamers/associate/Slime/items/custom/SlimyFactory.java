@@ -9,7 +9,7 @@ public class SlimyFactory extends GameItemPhysicFactory<Slimy> {
 		
 	public static final int Type_Simple = 0;
 	public static final int Type_Grow = 1;
-	public static final int Type_Elastic = 2;
+	public static final int Type_Jump = 2;	
 	
 	private int currentType;
 			
@@ -47,6 +47,9 @@ public class SlimyFactory extends GameItemPhysicFactory<Slimy> {
 			case Type_Grow:
 				slimy = new SlimyGrow(x, y, width, height, this.world, this.worldRatio);
 				break;
+			case Type_Jump:
+				slimy = new SlimyJump(x, y, width, height, this.world, this.worldRatio);
+				break;
 		}
 		
 		return slimy;
@@ -58,6 +61,10 @@ public class SlimyFactory extends GameItemPhysicFactory<Slimy> {
 	
 	public SlimyGrow createGrow(float x, float y, float ratio) {
 		return (SlimyGrow)this.create(x, y, ratio, Type_Grow);
+	}
+	
+	public SlimyJump createJump(float x, float y, float ratio) {
+		return (SlimyJump)this.create(x, y, ratio, Type_Jump);
 	}
 	
 	public Slimy create(float x, float y, float ratio, int slimyType) {		

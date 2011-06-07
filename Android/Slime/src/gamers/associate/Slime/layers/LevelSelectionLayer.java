@@ -13,15 +13,7 @@ import org.cocos2d.nodes.CCSprite;
 
 public class LevelSelectionLayer extends CCLayer {
 	
-	public LevelSelectionLayer() {								
-	}
-		
-	private CCMenu menu;
-	
-	@Override
-	public void onEnter() {		
-		super.onEnter();
-		
+	public LevelSelectionLayer() {
 		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);
 		CCMenuItemSprite goBackMenu = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goBack");
 		
@@ -31,6 +23,13 @@ public class LevelSelectionLayer extends CCLayer {
 		menu = CCMenu.menu(goBackMenu, testMenu3, testMenu2, testMenu1);
 		menu.alignItemsInColumns(new int[] { 1, 3 });
 		this.addChild(menu);
+	}
+		
+	private CCMenu menu;
+	
+	@Override
+	public void onEnter() {		
+		super.onEnter();
 	}
 
 	@Override

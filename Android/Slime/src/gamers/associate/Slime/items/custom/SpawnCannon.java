@@ -25,6 +25,7 @@ public class SpawnCannon extends GameItemPhysic {
 	public static float Default_Powa = 1.5f;
 	public static float Max_Impulse = 10f;
 	public static int Max_Slimy = 3;
+	// Used to grow in canon
 	private static long Increment_Time_Sec = 1;	
 	private float spawnHeightShift = Slimy.Default_Height / 2;
 	
@@ -93,11 +94,13 @@ public class SpawnCannon extends GameItemPhysic {
 	}
 	
 	public Slimy spawnSlimeToCurrentTarget() {
-		SlimyGrow slimy = null;
+		// SlimyGrow slimy = null;
+		SlimyJump slimy = null;
 		if (this.selected) {			
 			CGPoint spawn = this.getSpawnPoint();
-			slimy = SlimeFactory.Slimy.createGrow(spawn.x, spawn.y, 1);
-			slimy.setTargetGrowDif(this.slimyCounter - 1);
+			/*slimy = SlimeFactory.Slimy.createGrow(spawn.x, spawn.y, 1);
+			slimy.setTargetGrowDif(this.slimyCounter - 1);*/
+			slimy = SlimeFactory.Slimy.createJump(spawn.x, spawn.y, 1);
 			Vector2 pos = slimy.getBody().getPosition();			
 			this.worldImpulse.x = (this.targetImpulse.x  / this.worldRatio);
 			this.worldImpulse.y = (this.targetImpulse.y / this.worldRatio);

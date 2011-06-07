@@ -1,6 +1,7 @@
 package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.items.custom.GoalPortal;
+import gamers.associate.Slime.items.custom.SlimyFactory;
 import gamers.associate.Slime.items.custom.SpawnCannon;
 import gamers.associate.Slime.items.custom.SpawnPortal;
 import gamers.associate.Slime.layers.HomeLayer;
@@ -141,11 +142,17 @@ public class HardCodedLevelBuilder {
 		SlimeFactory.Lava.create(400, 25, 100, 50);
 		SlimeFactory.Bumper.create(375, 75, 50, 50);*/
 		
-		// Line 1
 		float cX = 0;
 		float cY = 0;
+		// Line 0
+		SlimeFactory.Platform.createBL(cX, cY, level.getLevelWidth(), 50);
+		cY+=50;
+		
+		// Line 1
+		
 		SlimeFactory.Platform.createBL(cX, cY, 200, 150);
-		SpawnCannon spawnCannon = SlimeFactory.Cannon.create(200 - SpawnCannon.Default_Width / 2, 150 + SpawnCannon.Default_Height / 2);
+		// SpawnCannon spawnCannon = SlimeFactory.Cannon.create(200 - SpawnCannon.Default_Width / 2, 150 + SpawnCannon.Default_Height / 2);
+		SlimeFactory.Slimy.createJump(cX + 150, cY + 200, 1.0f);
 		cX += 200;
 		// SlimeFactory.Lava.createBL(cX, cY, 200, 50);
 		SlimeFactory.Platform.createBL(cX, cY, 100, 50);
@@ -154,14 +161,14 @@ public class HardCodedLevelBuilder {
 		SlimeFactory.Platform.createBL(cX, cY, 50, 100);
 		cX += 50;		
 		SlimeFactory.Platform.createBL(cX, cY, 50, 50);
-		SlimeFactory.Bumper.createBL(cX, 50, 50, 50);
+		SlimeFactory.Bumper.createBL(cX, cY + 50, 50, 50);
 		cX += 50;
 		SlimeFactory.Lava.createBL(cX, cY, 50, 50);
 		cX += 50;
 		SlimeFactory.Platform.createBL(cX, cY, 200, 80);
 		cX += 70;
-		SlimeFactory.Box.createBL(cX, 80, 40, 40);		
-		SlimeFactory.Box.createBL(cX, 120, 40, 40);
+		SlimeFactory.Box.createBL(cX, cY + 80, 40, 40);		
+		SlimeFactory.Box.createBL(cX, cY + 120, 40, 40);
 		cX += 50;
 		/*CGPoint[] vertices = new CGPoint[4];
 		vertices[0] = CGPoint.make(0, 50);
@@ -194,16 +201,16 @@ public class HardCodedLevelBuilder {
 		body[4] = CGPoint.make(50, 50);
 		body[5] = CGPoint.make(20, 40);
 		
-		SlimeFactory.Polygon.create(cX, 80, 0, 0, true, body, vertices);
+		SlimeFactory.Polygon.create(cX, cY + 80, 0, 0, true, body, vertices);
 		cX += 80;
 		SlimeFactory.Lava.createBL(cX, cY, 200, 50);
 		cX += 200;
 		SlimeFactory.Platform.createBL(cX, cY, 100, 50);
 		cX += 40;
-		SlimeFactory.Bumper.createBL(cX, 50, 50, 50, 0.8f).setAngle(-90);
+		SlimeFactory.Bumper.createBL(cX, cY + 50, 50, 50, 0.8f).setAngle(-90);
 		//Bumper bumper = SlimeFactory.Bumper.createBL(cX, 50, 100, 100);		
 		cX += 50;
-		SlimeFactory.Platform.createBL(cX, 50, 10, 128);
+		SlimeFactory.Platform.createBL(cX, cY + 50, 10, 128);
 		
 		// Line 2
 		cX = 400;
@@ -219,12 +226,12 @@ public class HardCodedLevelBuilder {
 		cX += 108;
 		
 		//Line 3
-		cX = 0;
+		/*cX = 0;
 		cY = 398;
 		SlimeFactory.Platform.createBL(cX, cY, 256, 20);
 		cX += 256;		
 		SlimeFactory.Box.createBL(cX, cY + 20, 60, 60);
-		SlimeFactory.Platform.createBL(cX, cY, 128, 20);
+		SlimeFactory.Platform.createBL(cX, cY, 128, 20);*/
 				
 		// Chain
 		/*Platform platform = SlimeFactory.Platform.create(cX, cY - 5, 30, 10);
@@ -265,6 +272,6 @@ public class HardCodedLevelBuilder {
 		SlimeFactory.Platform.createBL(cX - 20, cY + 128, 20, 128);				
 		
 		// Spawn cannon
-		level.setSpawnCannon(spawnCannon);		
+		// level.setSpawnCannon(spawnCannon);
 	}
 }

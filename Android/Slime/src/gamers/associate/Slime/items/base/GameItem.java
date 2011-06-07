@@ -5,6 +5,7 @@ import java.util.UUID;
 import javax.microedition.khronos.opengles.GL10;
 
 import org.cocos2d.types.CGPoint;
+import org.cocos2d.types.CGRect;
 
 public class GameItem {
 	protected UUID id;
@@ -72,5 +73,9 @@ public class GameItem {
 	}
 	
 	public void initItem() {		
+	}
+	
+	protected CGRect getRect() {
+		return CGRect.make(this.position.x - this.width / 2, this.position.y - this.height / 2, this.width, this.height);
 	}
 }

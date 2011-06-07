@@ -25,28 +25,7 @@ public class HomeLayer extends CCLayer {
 	}
 	
 	protected HomeLayer() {
-		super();		
-	}
-
-	@Override
-	public boolean ccTouchesEnded(MotionEvent event) {
-		// TODO: Go to level selection		
-		return super.ccTouchesEnded(event);
-		//CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
-		//return CCTouchDispatcher.kEventHandled;
-	}
-	
-	private CCMenu menu;
-	
-	private CCSpriteSheet spriteSheet;
-	
-	/* (non-Javadoc)
-	 * @see org.cocos2d.layers.CCLayer#onEnter()
-	 */
-	@Override
-	public void onEnter() {		
-		super.onEnter();
-		
+		super();
 		//this.setIsTouchEnabled(true);
 		this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
 		this.addChild(this.spriteSheet);
@@ -69,7 +48,27 @@ public class HomeLayer extends CCLayer {
 		
 		this.menu = CCMenu.menu(playMenu);
 		
-		this.addChild(this.menu);										
+		this.addChild(this.menu);
+	}
+
+	@Override
+	public boolean ccTouchesEnded(MotionEvent event) {
+		// TODO: Go to level selection		
+		return super.ccTouchesEnded(event);
+		//CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
+		//return CCTouchDispatcher.kEventHandled;
+	}
+	
+	private CCMenu menu;
+	
+	private CCSpriteSheet spriteSheet;
+	
+	/* (non-Javadoc)
+	 * @see org.cocos2d.layers.CCLayer#onEnter()
+	 */
+	@Override
+	public void onEnter() {		
+		super.onEnter();										
 	}
 	
 	@Override

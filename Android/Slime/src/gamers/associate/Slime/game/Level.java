@@ -1,7 +1,10 @@
 package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.items.base.GameItem;
+import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
+import gamers.associate.Slime.items.custom.Slimy;
+import gamers.associate.Slime.items.custom.SlimyJump;
 import gamers.associate.Slime.items.custom.SpawnCannon;
 import gamers.associate.Slime.items.custom.SpawnPortal;
 import gamers.associate.Slime.layers.BackgoundLayer;
@@ -46,6 +49,8 @@ public class Level {
 	protected Vector2 gravity;
 	protected float worldRatio = 32f;
 	protected Hashtable<UUID, GameItem> items;
+	protected ArrayList<SlimyJump> slimies;
+	
 	/**
 	 * @uml.property  name="slimyFactory"
 	 * @uml.associationEnd  
@@ -84,6 +89,8 @@ public class Level {
 	
 	protected boolean isPaused;
 	
+	protected SlimyJump selectedSlimy; 
+	
 	protected Level() {
 		this.scene = CCScene.node();
 		this.levelLayer = new LevelLayer(this);
@@ -101,6 +108,7 @@ public class Level {
 		this.scene.addChild(this.hudLayer, this.hudZ);
 				
 		this.items = new Hashtable<UUID, GameItem>();				
+		this.slimies = new ArrayList<SlimyJump>();
 		
 		this.cameraManager = new CameraManager(this.gameLayer);							
 		
@@ -173,6 +181,9 @@ public class Level {
 		}
 		
 		this.items.clear();
+		this.slimies.clear();
+		this.itemsToAdd.clear();
+		this.itemsToRemove.clear();
 		
 		this.spawnPortal = null;
 		
@@ -322,7 +333,9 @@ public class Level {
 		}
 		else
 		{
-			this.spawnPortal.spawn();
+			if (this.spawnPortal != null) {
+				this.spawnPortal.spawn();
+			}
 		}
 	}
 	
@@ -344,6 +357,11 @@ public class Level {
 	
 	private void addGameItem(GameItem item) {
 		this.items.put(item.getId(), item);
+		if (item instanceof SlimyJump)
+		{
+			SlimyJump slimy = (SlimyJump)item;
+			this.slimies.add(slimy);
+		}
 	}
 	
 	private void removeGameItem(GameItem item) {
@@ -351,6 +369,12 @@ public class Level {
 			if (this.items.containsKey(item.getId())) {
 				item.destroy();
 				this.items.remove(item.getId());
+			}
+			
+			if (item instanceof SlimyJump)
+			{
+				SlimyJump slimy = (SlimyJump)item;
+				this.slimies.remove(slimy);
 			}
 		}
 	}
@@ -410,6 +434,39 @@ public class Level {
 	public void draw(GL10 gl) {
 		for(GameItem item : this.items.values()) {
 			item.draw(gl);
+		}
+	}
+	
+	public SlimyJump getSelectedSlimy() {
+		return this.selectedSlimy;
+	}
+	
+	public void setSelectedSlimy(SlimyJump toSelect) {
+		this.selectedSlimy = toSelect;
+	}
+	
+	public void unselectSlimy() {
+		if(this.selectedSlimy != null) {
+			this.selectedSlimy.unselect();
+			this.selectedSlimy = null;
+		}
+	}
+	
+	public void slimyJump(CGPoint screenTarget) {
+		if (this.selectedSlimy != null) {
+			CGPoint gameTarget = this.cameraManager.getGamePoint(screenTarget);
+			this.selectedSlimy.jump(gameTarget);
+		}
+	}
+	
+	public void trySelect(CGPoint touchReference) {
+		if (this.selectedSlimy == null) {
+			for(SlimyJump slimy : this.slimies) {
+				if (slimy.trySelect(touchReference)) {
+					this.selectedSlimy = slimy;
+					break;
+				}
+			}
 		}
 	}
 }

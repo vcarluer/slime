@@ -10,6 +10,8 @@ import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteSheet;
+import org.cocos2d.transitions.CCFadeTransition;
+import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor4B;
 
@@ -76,8 +78,8 @@ public class SlimeLoadingLayer extends CCLayer {
 				
 				spriteSheet.removeChild(sprite, true);						
 				// CCTransitionScene transition = CCTurnOffTilesTransition.transition(1.0f, currentLevel.getScene());
-				// CCTransitionScene transition = CCFadeTransition.transition(1.0f, currentLevel.getScene());
-				CCDirector.sharedDirector().replaceScene(currentLevel.getScene());
+				CCTransitionScene transition = CCFadeTransition.transition(1.0f, currentLevel.getScene());
+				CCDirector.sharedDirector().replaceScene(transition);
 			}
 		};
 
