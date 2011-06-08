@@ -186,6 +186,7 @@ public class Level {
 		this.itemsToRemove.clear();
 		
 		this.spawnPortal = null;
+		this.spawnCannon = null;
 		
 		this.removeCustomOverLayer();
 		this.setIsTouchEnabled(true);
