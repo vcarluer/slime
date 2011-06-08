@@ -80,10 +80,12 @@ public class SlimyJump extends Slimy {
 	}
 	
 	public boolean trySelect(CGPoint lastTouchReference) {
-		CGPoint gameTarget = Level.currentLevel.getCameraManager().getGamePoint(lastTouchReference);		
-		if (this.isInSlimy(gameTarget)) {			
-			this.select();
-			this.computeTarget(gameTarget);
+		if (!this.isDead) {
+			CGPoint gameTarget = Level.currentLevel.getCameraManager().getGamePoint(lastTouchReference);		
+			if (this.isInSlimy(gameTarget)) {			
+				this.select();
+				this.computeTarget(gameTarget);
+			}
 		}
 		
 		return this.selected;
