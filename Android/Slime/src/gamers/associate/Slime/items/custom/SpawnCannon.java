@@ -18,6 +18,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
+// Must be refactor with ISelectable
 public class SpawnCannon extends GameItemPhysic {
 	public static String Anim_Base = "metal1";
 	public static float Default_Width = 64f;

@@ -69,7 +69,6 @@ public class HardCodedLevelBuilder {
 				level.levelHeight - 32,
 				level.levelWidth / 2,
 				5);
-		level.setSpawnPortal(spawnPortal);
 		
 		// Platform
 		float goalPlatH = 20f;
@@ -82,7 +81,7 @@ public class HardCodedLevelBuilder {
 		// Bumper
 		SlimeFactory.Bumper.create(30, s.height / 2, 60, 120, 2.0f);
 						
-		SlimeFactory.HomeLevelHandler.create();
+		SlimeFactory.HomeLevelHandler.create().setPortal(spawnPortal);
 		
 		level.addCustomOverLayer(HomeLayer.get());
 		level.setIsHudEnabled(false);
@@ -104,7 +103,6 @@ public class HardCodedLevelBuilder {
 				level.levelHeight - 32,
 				level.levelWidth / 2,
 				5);
-		level.setSpawnPortal(spawnPortal);
 		
 		// Platform
 		float goalPlatH = 20f;

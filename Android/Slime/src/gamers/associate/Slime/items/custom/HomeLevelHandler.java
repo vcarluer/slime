@@ -13,24 +13,31 @@ public class HomeLevelHandler extends GameItem {
 	private double maxSpawn = 3;
 	private int slimeCount;
 	private boolean isPaused;
+	private SpawnPortal spawnPortal;
 	
 	public HomeLevelHandler(float x, float y, float width, float height) {
 		super(x, y, width, height);
 		this.startHome = System.currentTimeMillis();		
 		this.slimeCount = 0;
 	}
+	
+	public void setPortal(SpawnPortal portal) {
+		this.spawnPortal = portal;
+	}
 				
 	@Override
-	public void render(float delta) {				
-		if (slimeCount < maxSlime && !this.isPaused) {
-			Level level = Level.currentLevel;
-			if (level != null) {
-				long elapsed = (System.currentTimeMillis() - startHome) / 1000;
-				nextRand = MathLib.random(minSpawn, maxSpawn);
-				if (elapsed > nextRand && !this.isPaused) {
-					level.spawnSlime();
-					this.slimeCount++;
-					this.startHome = System.currentTimeMillis();										
+	public void render(float delta) {
+		if (this.spawnPortal != null) {
+			if (slimeCount < maxSlime && !this.isPaused) {
+				Level level = Level.currentLevel;
+				if (level != null) {
+					long elapsed = (System.currentTimeMillis() - startHome) / 1000;
+					nextRand = MathLib.random(minSpawn, maxSpawn);
+					if (elapsed > nextRand && !this.isPaused) {
+						this.spawnPortal.spawn();
+						this.slimeCount++;
+						this.startHome = System.currentTimeMillis();										
+					}
 				}
 			}
 		}

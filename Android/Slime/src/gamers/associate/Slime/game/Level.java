@@ -1,12 +1,8 @@
 package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.items.base.GameItem;
-import gamers.associate.Slime.items.base.GameItemPhysic;
+import gamers.associate.Slime.items.base.ISelectable;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
-import gamers.associate.Slime.items.custom.Slimy;
-import gamers.associate.Slime.items.custom.SlimyJump;
-import gamers.associate.Slime.items.custom.SpawnCannon;
-import gamers.associate.Slime.items.custom.SpawnPortal;
 import gamers.associate.Slime.layers.BackgoundLayer;
 import gamers.associate.Slime.layers.HudLayer;
 import gamers.associate.Slime.layers.LevelLayer;
@@ -49,7 +45,7 @@ public class Level {
 	protected Vector2 gravity;
 	protected float worldRatio = 32f;
 	protected Hashtable<UUID, GameItem> items;
-	protected ArrayList<SlimyJump> slimies;
+	protected ArrayList<ISelectable> selectables;
 	
 	/**
 	 * @uml.property  name="slimyFactory"
@@ -61,8 +57,6 @@ public class Level {
 	 * @uml.associationEnd  
 	 */
 	protected ContactManager contactManager;
-	protected SpawnPortal spawnPortal;
-	protected SpawnCannon spawnCannon;
 	
 	protected CCScene scene;
 	protected LevelLayer levelLayer;
@@ -89,7 +83,7 @@ public class Level {
 	
 	protected boolean isPaused;
 	
-	protected SlimyJump selectedSlimy; 
+	protected ISelectable selectedItem; 
 	
 	protected Level() {
 		this.scene = CCScene.node();
@@ -108,7 +102,7 @@ public class Level {
 		this.scene.addChild(this.hudLayer, this.hudZ);
 				
 		this.items = new Hashtable<UUID, GameItem>();				
-		this.slimies = new ArrayList<SlimyJump>();
+		this.selectables = new ArrayList<ISelectable>();
 		
 		this.cameraManager = new CameraManager(this.gameLayer);							
 		
@@ -181,12 +175,9 @@ public class Level {
 		}
 		
 		this.items.clear();
-		this.slimies.clear();
+		this.selectables.clear();
 		this.itemsToAdd.clear();
 		this.itemsToRemove.clear();
-		
-		this.spawnPortal = null;
-		this.spawnCannon = null;
 		
 		this.removeCustomOverLayer();
 		this.setIsTouchEnabled(true);
@@ -255,16 +246,7 @@ public class Level {
 			
 			this.itemsToRemove.clear();
 			
-			this.cameraManager.tick(delta);
-			
-			if (this.hudLayer != null && this.spawnCannon != null) {
-				if (this.spawnCannon.isSelected()) {
-					this.hudLayer.setSlimyCount(this.spawnCannon.getSlimyCounter());
-				}
-				else {
-					this.hudLayer.hideSlimyCount();
-				}
-			}
+			this.cameraManager.tick(delta);						
 		}
 	}
 			
@@ -322,24 +304,7 @@ public class Level {
 	private Boolean wonLaunched = false;
 	*/
 	// Fin test
-	
-	public void spawnSlime() {
-		this.spawnSlime(CGPoint.getZero());		
-	}
-	
-	public void spawnSlime(CGPoint screenTarget) {								
-		if (this.spawnCannon != null) {			
-			CGPoint gameTarget = this.cameraManager.getGamePoint(screenTarget);
-			this.spawnCannon.spawnSlime(gameTarget);			
-		}
-		else
-		{
-			if (this.spawnPortal != null) {
-				this.spawnPortal.spawn();
-			}
-		}
-	}
-	
+		
 	public World getWorld() {
 		return this.world;
 	}
@@ -358,10 +323,10 @@ public class Level {
 	
 	private void addGameItem(GameItem item) {
 		this.items.put(item.getId(), item);
-		if (item instanceof SlimyJump)
+		if (item instanceof ISelectable)
 		{
-			SlimyJump slimy = (SlimyJump)item;
-			this.slimies.add(slimy);
+			ISelectable selectable = (ISelectable)item;
+			this.selectables.add(selectable);
 		}
 	}
 	
@@ -372,16 +337,12 @@ public class Level {
 				this.items.remove(item.getId());
 			}
 			
-			if (item instanceof SlimyJump)
+			if (item instanceof ISelectable)
 			{
-				SlimyJump slimy = (SlimyJump)item;
-				this.slimies.remove(slimy);
+				ISelectable selectable = (ISelectable)item;
+				this.selectables.remove(selectable);
 			}
 		}
-	}
-	
-	public SpawnPortal getSpawnPortal() {
-		return this.spawnPortal;
 	}
 	
 	public void setLevelSize(float width, float height) {
@@ -420,51 +381,52 @@ public class Level {
 		this.isHudEnabled = value;
 	}
 	
-	public void setSpawnCannon(SpawnCannon cannon) {
-		this.spawnCannon = cannon;		
-	}
-	
-	public SpawnCannon getSpawnCannon() {
-		return this.spawnCannon;
-	}
-	
-	public void setSpawnPortal(SpawnPortal portal) {
-		this.spawnPortal = portal;
-	}
-	
 	public void draw(GL10 gl) {
 		for(GameItem item : this.items.values()) {
 			item.draw(gl);
 		}
 	}
 	
-	public SlimyJump getSelectedSlimy() {
-		return this.selectedSlimy;
+	public ISelectable getSelectedItem() {
+		return this.selectedItem;
 	}
 	
-	public void setSelectedSlimy(SlimyJump toSelect) {
-		this.selectedSlimy = toSelect;
+	public void setSelectedSlimy(ISelectable toSelect) {
+		this.unselectCurrent();
+		toSelect.select();
+		this.selectedItem = toSelect;		
 	}
 	
-	public void unselectSlimy() {
-		if(this.selectedSlimy != null) {
-			this.selectedSlimy.unselect();
-			this.selectedSlimy = null;
+	public void unselectCurrent() {
+		if(this.selectedItem != null) {
+			this.selectedItem.unselect();
+			this.selectedItem = null;
 		}
 	}
 	
-	public void slimyJump(CGPoint screenTarget) {
-		if (this.selectedSlimy != null) {
-			CGPoint gameTarget = this.cameraManager.getGamePoint(screenTarget);
-			this.selectedSlimy.jump(gameTarget);
+	public void stopSelection(CGPoint gameReference) {
+		if (this.selectedItem != null) {
+			// CGPoint gameTarget = this.cameraManager.getGamePoint(screenTarget);
+			this.selectedItem.selectionStop(gameReference);
+			this.unselectCurrent();
 		}
 	}
 	
-	public void trySelect(CGPoint touchReference) {
-		if (this.selectedSlimy == null) {
-			for(SlimyJump slimy : this.slimies) {
-				if (slimy.trySelect(touchReference)) {
-					this.selectedSlimy = slimy;
+	public boolean moveSelection(CGPoint gameReference) {
+		if (this.selectedItem != null) {			
+			this.selectedItem.selectionMove(gameReference);
+			return true;
+		}
+		else {
+			return false;
+		}						
+	}
+
+	public void trySelect(CGPoint gameReference) {
+		if (this.selectedItem == null) {
+			for(ISelectable selectable : this.selectables) {
+				if (selectable.trySelect(gameReference)) {
+					this.selectedItem = selectable;
 					break;
 				}
 			}

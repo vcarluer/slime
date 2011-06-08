@@ -2,7 +2,6 @@ package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.game.CameraManager;
 import gamers.associate.Slime.game.Level;
-import gamers.associate.Slime.items.custom.SlimyJump;
 
 import java.util.ArrayList;
 
@@ -84,14 +83,9 @@ public class LevelLayer extends CCLayer {
 		
 		if (this.touchList.size() == 1) {
 			TouchInfo touch = this.getTouch(event, 0);
-			SlimyJump slimy = this.level.getSelectedSlimy();
-			if (slimy != null)
-			{
-				slimy.selectionMove(touch.getLastMoveReference());
-			}
-			else {
+			if (!this.level.moveSelection(this.getGamePoint(touch))) {
 				this.level.getCameraManager().moveCameraBy(touch.getLastMoveDelta());
-			}						
+			}								
 		}
 		
 		if (this.isZoomAction) {
@@ -126,10 +120,12 @@ public class LevelLayer extends CCLayer {
 									)
 								);
 					this.level.getSpawnCannon().unselect();*/
-					this.level.slimyJump(CGPoint.make(
-								event.getX(touch.getPointerId()), 
-								this.getGameY(event.getY(touch.getPointerId()))));
-					this.level.unselectSlimy();					
+					
+					CGPoint touchPoint = CGPoint.make(
+							event.getX(touch.getPointerId()), 
+							this.getGameY(event.getY(touch.getPointerId())));					
+										
+					this.level.stopSelection(this.getGamePoint(touchPoint));					
 				}
 			/*}*/
 			/*else {						
@@ -179,16 +175,23 @@ public class LevelLayer extends CCLayer {
 			
 			CGPoint midPoint = CGPoint.ccpMidpoint(touch1Ref, touch2Ref);			
 			this.getCameraManager().setZoomPoint(midPoint);
-			this.level.unselectSlimy();
+			this.level.unselectCurrent();
 		}
 		else {
-			this.isZoomAction = false;
-			// this.level.getSpawnCannon().trySelect(touch.getLastMoveReference());
-			this.level.trySelect(touch.getLastMoveReference());
+			this.isZoomAction = false;					
+			this.level.trySelect(this.getGamePoint(touch));
 		}		
 		
 		return CCTouchDispatcher.kEventHandled;		
 	}	
+	
+	private CGPoint getGamePoint(TouchInfo touch) {
+		return this.getGamePoint(touch.getLastMoveReference());
+	}
+	
+	private CGPoint getGamePoint(CGPoint screenPoint) {
+		return Level.currentLevel.getCameraManager().getGamePoint(screenPoint);
+	}
 	
 	private CameraManager getCameraManager() {
 		return this.level.getCameraManager();

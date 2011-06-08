@@ -1,6 +1,6 @@
 package gamers.associate.Slime.items.custom;
 
-import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.items.base.ISelectable;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -12,7 +12,7 @@ import org.cocos2d.types.CGRect;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class SlimyJump extends Slimy {
+public class SlimyJump extends Slimy implements ISelectable {
 
 	public static float Default_Powa = 2.0f;
 	public static float Max_Impulse = 10f;
@@ -34,10 +34,9 @@ public class SlimyJump extends Slimy {
 		this.worldImpulse = new Vector2();				
 	}
 	
-	public void selectionMove(CGPoint screenSelection) {
-		if (this.selected) {
-			CGPoint gameTarget = Level.currentLevel.getCameraManager().getGamePoint(screenSelection);
-			this.computeTarget(gameTarget);
+	public void selectionMove(CGPoint gameReference) {
+		if (this.selected) {			
+			this.computeTarget(gameReference);
 		}
 	}
 	
@@ -79,12 +78,11 @@ public class SlimyJump extends Slimy {
 		}
 	}
 	
-	public boolean trySelect(CGPoint lastTouchReference) {
-		if (!this.isDead) {
-			CGPoint gameTarget = Level.currentLevel.getCameraManager().getGamePoint(lastTouchReference);		
-			if (this.isInSlimy(gameTarget)) {			
+	public boolean trySelect(CGPoint gameReference) {
+		if (!this.isDead) {				
+			if (this.isInSlimy(gameReference)) {			
 				this.select();
-				this.computeTarget(gameTarget);
+				this.computeTarget(gameReference);
 			}
 		}
 		
@@ -109,9 +107,10 @@ public class SlimyJump extends Slimy {
 		return this.selected;
 	}
 	
-	public void jump(CGPoint gameTarget) {
+	@Override
+	public void selectionStop(CGPoint gameReference) {
 		if (this.selected) {
-			this.computeTarget(gameTarget);
+			this.computeTarget(gameReference);
 
 			Vector2 pos = this.getBody().getPosition();
 			this.worldImpulse.x = (this.targetImpulse.x  / this.worldRatio);
