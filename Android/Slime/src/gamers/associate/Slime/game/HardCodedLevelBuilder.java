@@ -121,7 +121,8 @@ public class HardCodedLevelBuilder {
 	}
 	
 	public static void buildLevel2(Level level) {
-		float width = 950;
+		// float width = 950;
+		float width = 2950;
 		level.setLevelSize(
 				width,
 				width * getHeightRatio());
@@ -143,8 +144,8 @@ public class HardCodedLevelBuilder {
 		float cX = 0;
 		float cY = 0;
 		// Line 0
-		SlimeFactory.Platform.createBL(cX, cY, level.getLevelWidth(), 50);
-		cY+=50;
+		SlimeFactory.Platform.createBL(cX, cY, level.getLevelWidth(), 200);
+		cY+=200;
 		
 		// Line 1
 		

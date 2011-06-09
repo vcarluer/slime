@@ -221,5 +221,5 @@ public class CameraManager {
 		this.levelWidth = levelWidth;
 		this.levelHeight = levelHeight;				
 		this.levelOrigin = levelOrigin;
-	}
+	}	
 }
