@@ -1,6 +1,7 @@
 package gamers.associate.Slime.items.custom;
 
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.ISelectable;
 
@@ -87,22 +88,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 		
 		if (this.scaledRect != null) {			
 			// Drawing selection rectangle
-			gl.glDisable(GL10.GL_LINE_SMOOTH);
-			gl.glLineWidth(2.0f);
-			gl.glColor4f(0.0f, 1.0f, 0.0f, 1.0f);            
-			
-			float x1 = this.scaledRect.origin.x;
-			float y1 = this.scaledRect.origin.y;
-			float x2 = this.scaledRect.origin.x + CGRect.width(this.scaledRect);
-			float y2 = this.scaledRect.origin.y + CGRect.height(this.scaledRect);
-			
-			CGPoint vertices[] = {
-					this.scaledRect.origin, 
-					CGPoint.ccp(x2, y1),
-					CGPoint.ccp(x2, y2),
-					CGPoint.ccp(x1, y2)
-					};
-            CCDrawingPrimitives.ccDrawPoly(gl, vertices, 4, true);
+			Util.draw(gl, this.scaledRect, 2.0f, 0, 1, 0, 1);
 		}
 	}
 	
@@ -175,24 +161,28 @@ public class SlimyJump extends Slimy implements ISelectable {
 		super.render(delta);		
 		float zoom = Level.currentLevel.getCameraManager().getCurrentZoom();
 		if (zoom != 0) {			
-			CGRect spriteRect = this.getSelectionRect();
-			if (zoom < 1) {								
-				float baseX1 = spriteRect.origin.x;
-				float baseY1 = spriteRect.origin.y;			
-				
-				float baseW = Default_Selection_Width;
-				float baseH = Default_Selection_Height;
-				float scaledW = baseW / zoom; 
-				float scaledH = baseH / zoom;
-				
-				float targX1 = baseX1 - (scaledW - baseW) / 2;
-				float targY1 = baseY1 - (scaledH - baseH) / 2;
-				
-				this.scaledRect.set(targX1, targY1, scaledW, scaledH);
+			CGRect spriteRect = this.getSelectionRect();										
+			float baseX1 = spriteRect.origin.x;
+			float baseY1 = spriteRect.origin.y;			
+			
+			float baseW = Default_Selection_Width;
+			float baseH = Default_Selection_Height;
+			float scaledW = baseW / zoom; 
+			float scaledH = baseH / zoom;
+			if (scaledW < this.width) {
+				baseW = this.width;
+				scaledW = this.width;
 			}
-			else {
-				this.scaledRect = spriteRect;
-			}									
+			
+			if (scaledH < this.height) {
+				baseH = this.height;
+				scaledH = this.height;
+			}
+			
+			float targX1 = baseX1 - (scaledW - baseW) / 2;
+			float targY1 = baseY1 - (scaledH - baseH) / 2;
+			
+			this.scaledRect.set(targX1, targY1, scaledW, scaledH);								
 		}
 	}
 	

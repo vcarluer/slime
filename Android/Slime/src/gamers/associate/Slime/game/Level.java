@@ -386,6 +386,8 @@ public class Level {
 		for(GameItem item : this.items.values()) {
 			item.draw(gl);
 		}
+		
+		this.cameraManager.draw(gl);
 	}
 	
 	public ISelectable getSelectedItem() {
@@ -409,6 +411,12 @@ public class Level {
 		if (this.selectedItem != null) {
 			// CGPoint gameTarget = this.cameraManager.getGamePoint(screenTarget);
 			this.selectedItem.selectionStop(gameReference);
+			
+			if (this.selectedItem instanceof GameItem) {
+				GameItem follow = (GameItem)this.selectedItem;
+				this.cameraManager.followZoom(follow);
+			}
+			
 			this.unselectCurrent();
 		}
 	}
