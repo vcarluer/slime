@@ -31,7 +31,12 @@ public class CameraManager {
 	private GameItem followed;	
 	private CGPoint levelOrigin;	
 	private float cameraMargin;
-	private CGRect margeRect;
+	private CGRect margeRect;	
+	
+	private GameItem targetAction;
+	private float elapsedTimeAction;
+	private float targetTimeAction;
+	private CGPoint pointAction;
 	
 	public CameraManager(CCLayer gameLayer) {
 		this.gameLayer = gameLayer;
@@ -40,6 +45,7 @@ public class CameraManager {
 		this.virtualCamera = CGRect.getZero();
 		this.cameraMargin = 50f;
 		this.margeRect = CGRect.zero();
+		this.pointAction = CGPoint.zero();
 	}
 	
 	protected void tick(float delta) {
@@ -55,9 +61,43 @@ public class CameraManager {
 				this.tryFollowUnzoom();
 			}				
 		}
+		
+		if (this.targetAction != null) {
+			this.moveInterpolate(delta);
+		}
 	}
 	
-	public void tryFollowUnzoom() {
+	private void moveInterpolate(float delta) {
+		float remainingTime = this.targetTimeAction - this.elapsedTimeAction;
+		float compareDelta = delta;
+		if (remainingTime < compareDelta) {
+			compareDelta = remainingTime;
+		}
+		
+		// Work directly with float for performance		
+		float cameraX = this.virtualCamera.origin.x + this.virtualCamera.size.width / 2;
+		float cameraY = this.virtualCamera.origin.y + this.virtualCamera.size.height / 2;
+		float targetX = this.targetAction.getPosition().x;
+		float targetY = this.targetAction.getPosition().y;
+		
+		float interpolation = delta / remainingTime;
+		
+		this.pointAction.x = cameraX + ((targetX - cameraX) * interpolation);
+		this.pointAction.y = cameraY + ((targetY - cameraY) * interpolation);
+		
+//		CGPoint fullVector = CGPoint.ccpSub(this.targetAction.getPosition(), Util.mid(this.virtualCamera));
+//		
+//		CGPoint interpolated = CGPoint.ccpMult(fullVector, interpolation);
+//		CGPoint targetMove = CGPoint.ccpAdd(Util.mid(this.virtualCamera), interpolated);
+		this.centerCameraOn(this.pointAction);
+		
+		this.elapsedTimeAction += delta;		
+		if (elapsedTimeAction >= this.targetTimeAction) {
+			this.cancelAction();
+		}
+	}
+	
+	private void tryFollowUnzoom() {
 		if (this.followed != null) {
 			CGPoint position = this.followed.getPosition();
 			if (!CGRect.containsPoint(this.margeRect, position)) {
@@ -310,5 +350,16 @@ public class CameraManager {
 	
 	public void cancelFollow() {
 		this.followed = null;		
+	}
+	
+	public void cancelAction() {
+		this.targetAction = null;
+	}
+	
+	public void moveInterpolateTo(GameItem target, float time) {
+		this.cancelFollow();
+		this.targetAction = target;
+		this.elapsedTimeAction = 0f;
+		this.targetTimeAction = time;
 	}
 }

@@ -423,7 +423,12 @@ public class Level {
 	
 	public void simpleSelect() {
 		if (this.selectedItem != null) {
-			this.cameraManager.centerCameraOn(this.selectedItem.getPosition());
+			// this.cameraManager.centerCameraOn(this.selectedItem.getPosition());
+			if (this.selectedItem instanceof GameItem) {
+				GameItem center = (GameItem)this.selectedItem;
+				this.cameraManager.moveInterpolateTo(center, 0.3f);
+			}
+			
 			this.unselectCurrent();
 		}
 	}

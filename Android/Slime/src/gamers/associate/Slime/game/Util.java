@@ -26,4 +26,8 @@ public class Util {
 				};
         CCDrawingPrimitives.ccDrawPoly(gl, vertices, 4, true);
 	}
+	
+	public static CGPoint mid(CGRect rect) {
+		return CGPoint.make(CGRect.midX(rect), CGRect.midY(rect));
+	}
 }
