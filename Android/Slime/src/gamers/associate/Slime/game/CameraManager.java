@@ -63,36 +63,31 @@ public class CameraManager {
 			if (!CGRect.containsPoint(this.margeRect, position)) {
 				float anchorX = 0;
 				float anchorY = 0;								
-				if (position.x < CGRect.minX(this.margeRect)) {
-					anchorX = CGRect.maxX(this.margeRect);
+				if (position.x < CGRect.midX(this.margeRect)) {
+					anchorX = CGRect.maxX(this.screenView);
 				}
 				
-				if (position.y < CGRect.minY(this.margeRect)) {
-					anchorY = CGRect.maxY(this.margeRect);
+				if (position.y < CGRect.midY(this.margeRect)) {
+					anchorY = CGRect.maxY(this.screenView);
 				}
 				
 				this.setZoomPoint(CGPoint.make(anchorX, anchorY));
 				// Just unzoom 
 				float targetZoom = this.currentZoom;
-				if (position.x > CGRect.maxX(this.margeRect))
-				{					
+				if (position.x > CGRect.maxX(this.margeRect)) {					
 					targetZoom = this.currentZoom * (CGRect.width(this.margeRect) / (position.x - this.margeRect.origin.x));					
-				}				
-				
-				if (position.y > CGRect.maxY(this.margeRect))
-				{					
+				}
+								
+				if (position.y > CGRect.maxY(this.margeRect)) {					
 					targetZoom = this.currentZoom * (CGRect.height(this.margeRect) / (position.y - this.margeRect.origin.y));				
 				}
-				
-				if (position.y < CGRect.minY(this.margeRect))
-				{					
+				if (position.x < CGRect.minX(this.margeRect)) {					
+					targetZoom = this.currentZoom * (CGRect.width(this.margeRect) / (CGRect.maxX(this.margeRect) - position.x));
+				}
+		
+				if (position.y < CGRect.minY(this.margeRect)) {					
 					targetZoom = this.currentZoom * (CGRect.height(this.margeRect) / (CGRect.maxY(this.margeRect) - position.y));				
 				}
-				
-				if (position.x < CGRect.minX(this.margeRect))
-				{					
-					targetZoom = this.currentZoom * (CGRect.width(this.margeRect) / (CGRect.maxX(this.margeRect) - position.x));
-				}	
 				
 				if (targetZoom > this.minFollowScale && targetZoom < this.currentZoom) {
 					this.zoomCameraTo(targetZoom);
