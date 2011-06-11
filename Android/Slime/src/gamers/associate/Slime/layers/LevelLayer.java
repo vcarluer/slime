@@ -80,10 +80,10 @@ public class LevelLayer extends CCLayer {
 				touch.setLastMoveTime(event.getEventTime());
 			 }
 		 }
-		
+				 
 		if (this.touchList.size() == 1) {
 			TouchInfo touch = this.getTouch(event, 0);
-			if (!this.level.moveSelection(this.getGamePoint(touch))) {
+			if (!this.level.moveSelection(this.getGamePoint(touch))) {				
 				this.level.getCameraManager().moveCameraBy(touch.getLastMoveDelta());
 			}								
 		}
@@ -171,6 +171,7 @@ public class LevelLayer extends CCLayer {
 		touch.setFirstMoveTime(event.getEventTime());
 		this.touchList.add(touch);
 		this.getCameraManager().stopContinousMoving();
+		this.level.getCameraManager().cancelFollow();
 		
 		if (this.touchList.size() == 2) {
 			this.isZoomAction = true;	

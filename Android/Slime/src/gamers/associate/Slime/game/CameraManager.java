@@ -313,4 +313,8 @@ public class CameraManager {
 		// Drawing marge rectangle
 		Util.draw(gl, this.margeRect, 2, 1, 0, 0, 1);
 	}
+	
+	public void cancelFollow() {
+		this.followed = null;		
+	}
 }
