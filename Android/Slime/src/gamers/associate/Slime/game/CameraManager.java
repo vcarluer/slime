@@ -61,43 +61,42 @@ public class CameraManager {
 		if (this.followed != null) {
 			CGPoint position = this.followed.getPosition();
 			if (!CGRect.containsPoint(this.margeRect, position)) {
-				float scale = this.gameLayer.getScale();				
+				float anchorX = 0;
+				float anchorY = 0;								
+				if (position.x < CGRect.minX(this.margeRect)) {
+					anchorX = CGRect.maxX(this.margeRect);
+				}
+				
+				if (position.y < CGRect.minY(this.margeRect)) {
+					anchorY = CGRect.maxY(this.margeRect);
+				}
+				
+				this.setZoomPoint(CGPoint.make(anchorX, anchorY));
 				// Just unzoom 
+				float targetZoom = this.currentZoom;
 				if (position.x > CGRect.maxX(this.margeRect))
-				{
-					this.setZoomPoint(CGPoint.zero());
-					float targetZoom = this.currentZoom * (CGRect.width(this.margeRect) / (position.x - this.margeRect.origin.x));
-					if (targetZoom > this.minFollowScale && targetZoom < this.currentZoom) {
-						this.zoomCameraTo(targetZoom);
-					}
+				{					
+					targetZoom = this.currentZoom * (CGRect.width(this.margeRect) / (position.x - this.margeRect.origin.x));					
 				}				
 				
 				if (position.y > CGRect.maxY(this.margeRect))
-				{
-					this.setZoomPoint(CGPoint.zero());
-					float targetZoom = this.currentZoom * (CGRect.height(this.margeRect) / (position.y - this.margeRect.origin.y));
-					if (targetZoom > this.minFollowScale && targetZoom < this.currentZoom) {
-						this.zoomCameraTo(targetZoom);
-					}
+				{					
+					targetZoom = this.currentZoom * (CGRect.height(this.margeRect) / (position.y - this.margeRect.origin.y));				
 				}
 				
 				if (position.y < CGRect.minY(this.margeRect))
-				{
-					this.setZoomPoint(CGPoint.make(CGRect.maxX(this.virtualCamera), CGRect.maxY(this.virtualCamera)));
-					float targetZoom = this.currentZoom * (CGRect.height(this.margeRect) / (CGRect.maxY(this.margeRect) - position.y));
-					if (targetZoom > this.minFollowScale && targetZoom < this.currentZoom) {
-						this.zoomCameraTo(targetZoom);
-					}
+				{					
+					targetZoom = this.currentZoom * (CGRect.height(this.margeRect) / (CGRect.maxY(this.margeRect) - position.y));				
 				}
 				
 				if (position.x < CGRect.minX(this.margeRect))
-				{
-					this.setZoomPoint(CGPoint.make(CGRect.maxX(this.virtualCamera), CGRect.maxY(this.virtualCamera)));
-					float targetZoom = this.currentZoom * (CGRect.width(this.margeRect) / (CGRect.maxX(this.margeRect) - position.x));
-					if (targetZoom > this.minFollowScale && targetZoom < this.currentZoom) {
-						this.zoomCameraTo(targetZoom);
-					}
+				{					
+					targetZoom = this.currentZoom * (CGRect.width(this.margeRect) / (CGRect.maxX(this.margeRect) - position.x));
 				}	
+				
+				if (targetZoom > this.minFollowScale && targetZoom < this.currentZoom) {
+					this.zoomCameraTo(targetZoom);
+				}
 			}
 		}
 	}		
