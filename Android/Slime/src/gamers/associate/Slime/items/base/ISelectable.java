@@ -1,9 +1,12 @@
 package gamers.associate.Slime.items.base;
 
 import org.cocos2d.types.CGPoint;
+import org.cocos2d.types.CGRect;
 
 public interface ISelectable {
 	boolean trySelect(CGPoint gameReference);
+		
+	boolean canSelect(CGPoint gameReference);
 	
 	void selectionMove(CGPoint gameReference);
 	
@@ -11,9 +14,13 @@ public interface ISelectable {
 	
 	void select();
 	
+	void select(CGPoint gameReference);
+	
 	void unselect();
 	
 	boolean isSelected();
 	
 	CGPoint getPosition();
+	
+	CGRect getSelectionRect();
 }

@@ -1,6 +1,7 @@
 package gamers.associate.Slime.items.custom;
 
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.ISelectable;
 
 import javax.microedition.khronos.opengles.GL10;
@@ -116,8 +117,24 @@ public class SlimyJump extends Slimy implements ISelectable {
 		return this.selected;
 	}
 	
+	public boolean canSelect(CGPoint gameReference) {
+		boolean can = false;
+		if (!this.isDead) {				
+			if (this.isInSlimy(gameReference)) {			
+				can = true;
+			}
+		}
+		
+		return can;
+	}
+	
 	public void select() {
 		this.selected = true;		
+	}
+	
+	public void select(CGPoint gameReference) {
+		this.select();
+		this.computeTarget(gameReference);
 	}
 	
 	public void unselect() {
@@ -179,7 +196,12 @@ public class SlimyJump extends Slimy implements ISelectable {
 		}
 	}
 	
-	private CGRect getSelectionRect() {
+	public CGRect getSelectionRect() {
 		return CGRect.make(this.position.x - Default_Selection_Width / 2, this.position.y - Default_Selection_Height / 2, Default_Selection_Width, Default_Selection_Height);
+	}
+	
+	@Override
+	protected void contactInternal(GameItemPhysic item) {		
+		this.land();		
 	}
 }

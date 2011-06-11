@@ -21,6 +21,7 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
+import org.cocos2d.types.CGRect;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -432,10 +433,20 @@ public class Level {
 	public void trySelect(CGPoint gameReference) {
 		if (this.selectedItem == null) {
 			for(ISelectable selectable : this.selectables) {
-				if (selectable.trySelect(gameReference)) {
-					this.selectedItem = selectable;
-					break;
+				if (selectable.canSelect(gameReference)) {
+					if (this.selectedItem != null) {
+						if (CGPoint.ccpDistance(selectable.getPosition(), gameReference) < CGPoint.ccpDistance(this.selectedItem.getPosition(), gameReference)) {
+							this.selectedItem = selectable;
+						}
+					}
+					else {
+						this.selectedItem = selectable;
+					}									
 				}
+			}
+			
+			if (this.selectedItem != null) {
+				this.selectedItem.select(gameReference);
 			}
 		}
 	}

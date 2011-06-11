@@ -152,6 +152,7 @@ public class HardCodedLevelBuilder {
 		SlimeFactory.Platform.createBL(cX, cY, 200, 150);
 		// SpawnCannon spawnCannon = SlimeFactory.Cannon.create(200 - SpawnCannon.Default_Width / 2, 150 + SpawnCannon.Default_Height / 2);
 		SlimeFactory.Slimy.createJump(cX + 150, cY + 200, 1.0f);
+		SlimeFactory.Slimy.createJump(cX + 150, cY + 250, 1.0f);
 		cX += 200;
 		// SlimeFactory.Lava.createBL(cX, cY, 200, 50);
 		SlimeFactory.Platform.createBL(cX, cY, 100, 50);
