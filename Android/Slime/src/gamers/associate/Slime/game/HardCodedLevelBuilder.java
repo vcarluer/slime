@@ -213,7 +213,7 @@ public class HardCodedLevelBuilder {
 		
 		// Line 2
 		cX = 400;
-		cY = 250;
+		cY += 250;
 		SlimeFactory.Platform.createBL(cX, cY, 256, 20);
 		SlimeFactory.Box.createBL(cX, cY + 20, 10, 80);
 		cX += 128;				
@@ -223,7 +223,7 @@ public class HardCodedLevelBuilder {
 		/*GoalPortal goalPortal = SlimeFactory.GoalPortal.create(cX, cY + 40);
 		level.setGoalPortal(goalPortal);*/
 		cX += 108;
-		
+		cY += 150;
 		//Line 3
 		/*cX = 0;
 		cY = 398;

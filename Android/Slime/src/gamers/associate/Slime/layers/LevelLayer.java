@@ -121,11 +121,17 @@ public class LevelLayer extends CCLayer {
 								);
 					this.level.getSpawnCannon().unselect();*/
 					
-					CGPoint touchPoint = CGPoint.make(
-							event.getX(touch.getPointerId()), 
-							this.getGameY(event.getY(touch.getPointerId())));					
-										
-					this.level.stopSelection(this.getGamePoint(touchPoint));					
+					float delta = event.getEventTime() - touch.getFirstMoveTime();
+					if (delta < 100) {
+						this.level.simpleSelect();
+					}
+					else {
+						CGPoint touchPoint = CGPoint.make(
+								event.getX(touch.getPointerId()), 
+								this.getGameY(event.getY(touch.getPointerId())));					
+											
+						this.level.activateSelection(this.getGamePoint(touchPoint));					
+					}
 				}
 			/*}*/
 			/*else {						
@@ -161,6 +167,8 @@ public class LevelLayer extends CCLayer {
 		touch.getMoveBeganAt().y = this.getGameY(event.getY(touch.getPointerId()));
 		touch.getLastMoveReference().x = event.getX(touch.getPointerId());
 		touch.getLastMoveReference().y = this.getGameY(event.getY(touch.getPointerId()));
+		touch.setLastMoveTime(event.getEventTime());
+		touch.setFirstMoveTime(event.getEventTime());
 		this.touchList.add(touch);
 		this.getCameraManager().stopContinousMoving();
 		

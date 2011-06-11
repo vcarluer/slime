@@ -404,10 +404,17 @@ public class Level {
 		}
 	}
 	
-	public void stopSelection(CGPoint gameReference) {
+	public void activateSelection(CGPoint gameReference) {
 		if (this.selectedItem != null) {
 			// CGPoint gameTarget = this.cameraManager.getGamePoint(screenTarget);
 			this.selectedItem.selectionStop(gameReference);
+			this.unselectCurrent();
+		}
+	}
+	
+	public void simpleSelect() {
+		if (this.selectedItem != null) {
+			this.cameraManager.centerCameraOn(this.selectedItem.getPosition());
 			this.unselectCurrent();
 		}
 	}

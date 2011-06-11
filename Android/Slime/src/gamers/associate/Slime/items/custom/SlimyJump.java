@@ -10,6 +10,7 @@ import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.types.CGAffineTransform;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
+import org.cocos2d.types.CGSize;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -18,7 +19,9 @@ public class SlimyJump extends Slimy implements ISelectable {
 
 	public static float Default_Powa = 2.0f;
 	public static float Max_Impulse = 10f;
-	
+	private static float Default_Selection_Width = 48f;
+	private static float Default_Selection_Height = 52f;
+
 	private CGPoint target;
 	private Vector2 targetImpulse;
 	private Vector2 worldImpulse;
@@ -35,7 +38,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 		this.target = CGPoint.getZero();
 		this.targetImpulse = new Vector2();
 		this.worldImpulse = new Vector2();
-		this.scaledRect = CGRect.zero();
+		this.scaledRect = CGRect.zero();		
 	}
 	
 	public void selectionMove(CGPoint gameReference) {
@@ -81,7 +84,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 			CCDrawingPrimitives.ccDrawCircle(gl, this.getPosition(), 50, ccMacros.CC_DEGREES_TO_RADIANS(90), 50, true);						
 		}
 		
-		if (this.scaledRect != null) {
+		if (this.scaledRect != null) {			
 			// Drawing selection rectangle
 			gl.glDisable(GL10.GL_LINE_SMOOTH);
 			gl.glLineWidth(2.0f);
@@ -152,20 +155,18 @@ public class SlimyJump extends Slimy implements ISelectable {
 	 */
 	@Override
 	public void render(float delta) {		
-		super.render(delta);
+		super.render(delta);		
 		float zoom = Level.currentLevel.getCameraManager().getCurrentZoom();
-		if (zoom != 0) {
-			float ratio = 1;
-			CGRect spriteRect = this.getRect();
-			if (zoom < 1) {
-				ratio = 1 / zoom;
+		if (zoom != 0) {			
+			CGRect spriteRect = this.getSelectionRect();
+			if (zoom < 1) {								
 				float baseX1 = spriteRect.origin.x;
 				float baseY1 = spriteRect.origin.y;			
 				
-				float baseW = CGRect.width(spriteRect);
-				float baseH = CGRect.height(spriteRect);
-				float scaledW = baseW * ratio; 
-				float scaledH = baseH * ratio;
+				float baseW = Default_Selection_Width;
+				float baseH = Default_Selection_Height;
+				float scaledW = baseW / zoom; 
+				float scaledH = baseH / zoom;
 				
 				float targX1 = baseX1 - (scaledW - baseW) / 2;
 				float targY1 = baseY1 - (scaledH - baseH) / 2;
@@ -176,5 +177,9 @@ public class SlimyJump extends Slimy implements ISelectable {
 				this.scaledRect = spriteRect;
 			}									
 		}
+	}
+	
+	private CGRect getSelectionRect() {
+		return CGRect.make(this.position.x - Default_Selection_Width / 2, this.position.y - Default_Selection_Height / 2, Default_Selection_Width, Default_Selection_Height);
 	}
 }

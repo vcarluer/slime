@@ -14,4 +14,6 @@ public interface ISelectable {
 	void unselect();
 	
 	boolean isSelected();
+	
+	CGPoint getPosition();
 }

@@ -5,9 +5,10 @@ import org.cocos2d.types.CGPoint;
 public class TouchInfo {
 	private CGPoint moveBeganAt;
 	private CGPoint lastMoveReference;
-	private float lastMoveTime;
+	private long lastMoveTime;
 	private CGPoint lastMoveDelta;
 	private boolean isMoving;
+	private long firstMoveTime;
 		
 	private int pointerId;
 
@@ -49,15 +50,23 @@ public class TouchInfo {
 	/**
 	 * @return the lastMoveTime
 	 */
-	public float getLastMoveTime() {
+	public long getLastMoveTime() {
 		return lastMoveTime;
 	}
 
 	/**
 	 * @param lastMoveTime the lastMoveTime to set
 	 */
-	public void setLastMoveTime(float lastMoveTime) {
+	public void setLastMoveTime(long lastMoveTime) {
 		this.lastMoveTime = lastMoveTime;
+	}
+	
+	public void setFirstMoveTime(long firstMoveTime) {
+		this.firstMoveTime = firstMoveTime;
+	}
+	
+	public long getFirstMoveTime() {
+		return this.firstMoveTime;
 	}
 
 	/**

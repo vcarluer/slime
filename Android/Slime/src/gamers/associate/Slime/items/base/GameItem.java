@@ -75,7 +75,7 @@ public class GameItem {
 	public void initItem() {		
 	}
 	
-	protected CGRect getRect() {
+	public CGRect getRect() {
 		return CGRect.make(this.position.x - this.width / 2, this.position.y - this.height / 2, this.width, this.height);
 	}
 }

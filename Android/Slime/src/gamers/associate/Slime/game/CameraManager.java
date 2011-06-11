@@ -13,6 +13,8 @@ public class CameraManager {
 	private float maxScale;
 	private float zoomSpeed;
 	private float currentZoom;
+	private float minFollowScale;
+	private boolean followZoom;
 	private float screenW2 = CCDirector.sharedDirector().winSize().width * CCDirector.sharedDirector().winSize().width;
 	private float screenH2 = CCDirector.sharedDirector().winSize().height * CCDirector.sharedDirector().winSize().height;
 	
@@ -22,15 +24,17 @@ public class CameraManager {
 	private boolean isCameraOnContinuousMove;
 	private CGPoint moveCameraBy;
 	private CGRect cameraView;
-	private CGPoint virtualCameraPos;
+	private CGRect virtualCamera;
 	private GameItem followed;	
-	private CGPoint levelOrigin;		
+	private CGPoint levelOrigin;
+	private CGRect margeRect;
 	
 	public CameraManager(CCLayer gameLayer) {
 		this.gameLayer = gameLayer;
 				
 		this.moveCameraBy = new CGPoint();
-		this.virtualCameraPos = CGPoint.getZero();
+		this.virtualCamera = CGRect.getZero();
+		this.margeRect = CGRect.zero();
 	}
 	
 	protected void tick(float delta) {
@@ -39,12 +43,34 @@ public class CameraManager {
 		}
 		
 		if (this.followed != null) {
-			this.centerCameraOn(this.followed.getPosition());
+			if (!this.followZoom) {
+				this.centerCameraOn(this.followed.getPosition());
+			}
+			else {
+				
+			}
+				
+		}
+	}
+	
+	public void tryFollowUnzoom() {
+		if (this.followed != null) {
+			this.margeRect.set(this.virtualCamera);
+			//this.margeRect.size.
+			if (!CGRect.containsRect(this.virtualCamera, this.followed.getRect())) {
+				// this.zoomCameraByScreenRatio(zoomDelta);
+			}
 		}
 	}
 	
 	public void follow(GameItem item) {
 		this.followed = item;
+		this.followZoom = false;
+	}
+	
+	public void followZoom(GameItem item) {
+		this.followed = item;
+		this.followZoom = true;
 	}
 		
 	public void normalizePosition() {
@@ -81,7 +107,7 @@ public class CameraManager {
 		}						
 		
 		this.gameLayer.setPosition(position);
-		this.virtualCameraPos.set(- position.x, - position.y);
+		this.virtualCamera.origin.set(- position.x, - position.y);
 		if (isNormalized) {
 			this.isCameraOnContinuousMove = false;
 		}
@@ -193,16 +219,35 @@ public class CameraManager {
 		this.currentZoom = zoomValue;
 		this.keepPointAt(this.zoomAnchor, this.zoomScreenPin);
 		this.normalizePosition();
+		this.defineVirtualCameraRect();
 	}
 		
 	public float getCurrentZoom() {
 		return this.currentZoom;
 	}
 	
+	private void defineVirtualCameraRect() {
+		float zoom = this.minScale;
+		if (this.currentZoom != 0) {
+			zoom = this.currentZoom;
+		}
+		float ratio = 1 / this.currentZoom;
+		this.virtualCamera.size.width = CGRect.width(this.cameraView) * ratio;
+		this.virtualCamera.size.height = CGRect.height(this.cameraView) * ratio;		
+	}
+	
+	private void initVirtualCamera() {
+		this.cameraView.origin.x = this.levelOrigin.x;
+		this.cameraView.origin.y = this.levelOrigin.y;
+		this.defineVirtualCameraRect();
+	}
+	
 	public void setCameraView() {		
 		CGPoint origin = this.levelOrigin;		
 		// Default view is windows size
-		this.cameraView = CGRect.make(origin, CCDirector.sharedDirector().winSize());
+		this.cameraView = CGRect.make(origin, CCDirector.sharedDirector().winSize());				
+		this.defineVirtualCameraRect();
+		this.initVirtualCamera();
 		
 		// By default camera can not be unzoom more than the most little size
 		this.zoomAnchor = CGPoint.getZero();
@@ -211,6 +256,7 @@ public class CameraManager {
 		float minScaleH = 1 / (this.levelHeight / CGRect.height(this.cameraView));
 		this.minScale = Math.max(minScaleW, minScaleH);
 		this.maxScale = 2.0f;
+		this.minFollowScale = 0.5f;
 		this.zoomSpeed = 3.0f;
 		// To take into account new limits
 		this.zoomCameraBy(0);
@@ -221,5 +267,5 @@ public class CameraManager {
 		this.levelWidth = levelWidth;
 		this.levelHeight = levelHeight;				
 		this.levelOrigin = levelOrigin;
-	}	
+	}		
 }
