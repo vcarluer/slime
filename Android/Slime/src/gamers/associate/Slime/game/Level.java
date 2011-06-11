@@ -86,6 +86,8 @@ public class Level {
 	
 	protected ISelectable selectedItem; 
 	
+	protected GameItem startItem;
+	
 	protected Level() {
 		this.scene = CCScene.node();
 		this.levelLayer = new LevelLayer(this);
@@ -427,6 +429,7 @@ public class Level {
 			if (this.selectedItem instanceof GameItem) {
 				GameItem center = (GameItem)this.selectedItem;
 				this.cameraManager.moveInterpolateTo(center, 0.3f);
+				this.cameraManager.zoomInterpolateTo(center, 1.0f, 0.3f);
 			}
 			
 			this.unselectCurrent();
@@ -462,5 +465,13 @@ public class Level {
 				this.selectedItem.select(gameReference);
 			}
 		}
+	}
+	
+	public GameItem getStartItem() {
+		return this.startItem;
+	}
+	
+	public void setStartItem(GameItem start) {
+		this.startItem = start;
 	}
 }

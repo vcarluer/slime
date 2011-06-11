@@ -50,6 +50,10 @@ public class LevelLayer extends CCLayer {
 		super.onEnter();		
 		// start ticking (for physics simulation)
 		schedule(tickCallback);
+		if(this.level.getStartItem() != null) {			
+			this.level.getCameraManager().zoomInterpolateTo(this.level.getStartItem(), 1.0f, 0.3f);
+			this.level.getCameraManager().moveInterpolateTo(this.level.getStartItem(), 0.3f);
+		}
 	}
 
 	@Override
@@ -172,7 +176,7 @@ public class LevelLayer extends CCLayer {
 		this.touchList.add(touch);
 		this.getCameraManager().stopContinousMoving();
 		this.level.getCameraManager().cancelFollow();
-		this.level.getCameraManager().cancelAction();
+		this.level.getCameraManager().cancelActions();
 		
 		if (this.touchList.size() == 2) {
 			this.isZoomAction = true;	

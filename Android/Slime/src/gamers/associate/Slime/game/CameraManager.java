@@ -1,5 +1,7 @@
 package gamers.associate.Slime.game;
 
+import java.util.ArrayList;
+
 import javax.microedition.khronos.opengles.GL10;
 
 import gamers.associate.Slime.items.base.GameItem;
@@ -31,12 +33,11 @@ public class CameraManager {
 	private GameItem followed;	
 	private CGPoint levelOrigin;	
 	private float cameraMargin;
-	private CGRect margeRect;	
+	private CGRect margeRect;
 	
-	private GameItem targetAction;
-	private float elapsedTimeAction;
-	private float targetTimeAction;
-	private CGPoint pointAction;
+	private CGPoint layerAnchor;
+	
+	private ArrayList<CameraAction> actions;
 	
 	public CameraManager(CCLayer gameLayer) {
 		this.gameLayer = gameLayer;
@@ -45,7 +46,8 @@ public class CameraManager {
 		this.virtualCamera = CGRect.getZero();
 		this.cameraMargin = 50f;
 		this.margeRect = CGRect.zero();
-		this.pointAction = CGPoint.zero();
+		this.actions = new ArrayList<CameraAction>();
+		this.layerAnchor = this.gameLayer.getAnchorPoint();
 	}
 	
 	protected void tick(float delta) {
@@ -53,6 +55,7 @@ public class CameraManager {
 			this.moveCameraBy(this.moveCameraBy);
 		}
 		
+		// Todo: transform this to action
 		if (this.followed != null) {
 			if (!this.followZoom) {
 				this.centerCameraOn(this.followed.getPosition());
@@ -62,38 +65,15 @@ public class CameraManager {
 			}				
 		}
 		
-		if (this.targetAction != null) {
-			this.moveInterpolate(delta);
-		}
-	}
-	
-	private void moveInterpolate(float delta) {
-		float remainingTime = this.targetTimeAction - this.elapsedTimeAction;
-		float compareDelta = delta;
-		if (remainingTime < compareDelta) {
-			compareDelta = remainingTime;
+		ArrayList<CameraAction> toRemove = new ArrayList<CameraAction>(); 
+		for(CameraAction action : this.actions) {
+			if (action.action(delta)) {
+				toRemove.add(action);
+			}				
 		}
 		
-		// Work directly with float for performance		
-		float cameraX = this.virtualCamera.origin.x + this.virtualCamera.size.width / 2;
-		float cameraY = this.virtualCamera.origin.y + this.virtualCamera.size.height / 2;
-		float targetX = this.targetAction.getPosition().x;
-		float targetY = this.targetAction.getPosition().y;
-		
-		float interpolation = delta / remainingTime;
-		
-		this.pointAction.x = cameraX + ((targetX - cameraX) * interpolation);
-		this.pointAction.y = cameraY + ((targetY - cameraY) * interpolation);
-		
-//		CGPoint fullVector = CGPoint.ccpSub(this.targetAction.getPosition(), Util.mid(this.virtualCamera));
-//		
-//		CGPoint interpolated = CGPoint.ccpMult(fullVector, interpolation);
-//		CGPoint targetMove = CGPoint.ccpAdd(Util.mid(this.virtualCamera), interpolated);
-		this.centerCameraOn(this.pointAction);
-		
-		this.elapsedTimeAction += delta;		
-		if (elapsedTimeAction >= this.targetTimeAction) {
-			this.cancelAction();
+		for(CameraAction action : toRemove)  {
+			this.actions.remove(action);
 		}
 	}
 	
@@ -279,6 +259,11 @@ public class CameraManager {
 		this.zoomCameraTo(scale);
 	}
 	
+	public void zoomCameraCenterBy(float zoomDelta) {		
+		float scale = this.gameLayer.getScale() + zoomDelta;
+		this.zoomCameraCenterTo(scale);
+	}
+	
 	public void zoomCameraTo(float zoomValue) {
 		if (zoomValue <= minScale) {
 			zoomValue = minScale;
@@ -290,7 +275,31 @@ public class CameraManager {
 		
 		this.gameLayer.setScale(zoomValue);
 		this.currentZoom = zoomValue;
-		this.keepPointAt(this.zoomAnchor, this.zoomScreenPin);
+		if (this.zoomAnchor != null) {
+			this.keepPointAt(this.zoomAnchor, this.zoomScreenPin);
+		}
+		
+		this.normalizePosition();
+	}
+	
+	public void zoomCameraCenterTo(float zoomValue) {
+		if (zoomValue <= minScale) {
+			zoomValue = minScale;
+		}
+		
+		if (zoomValue >= maxScale) {
+			zoomValue = maxScale;
+		}
+		
+		this.zoomScreenPin = CGPoint.make(CGRect.midX(this.screenView), CGRect.midY(this.screenView));
+		this.zoomAnchor = this.getGamePoint(this.zoomScreenPin);
+				
+		this.gameLayer.setScale(zoomValue);		
+		this.currentZoom = zoomValue;
+		if (this.zoomScreenPin != null) {
+			this.keepPointAt(this.zoomAnchor, this.zoomScreenPin);
+		}				
+		
 		this.normalizePosition();
 	}
 		
@@ -321,9 +330,7 @@ public class CameraManager {
 		// Default view is windows size
 		this.screenView = CGRect.make(origin, CCDirector.sharedDirector().winSize());					
 		
-		// By default camera can not be unzoom more than the most little size
-		this.zoomAnchor = CGPoint.getZero();
-		this.zoomScreenPin = CGPoint.getZero();
+		// By default camera can not be unzoom more than the most little size		
 		float minScaleW = 1 / (this.levelWidth / CGRect.width(this.screenView));
 		float minScaleH = 1 / (this.levelHeight / CGRect.height(this.screenView));
 		this.minScale = Math.max(minScaleW, minScaleH);
@@ -352,14 +359,29 @@ public class CameraManager {
 		this.followed = null;		
 	}
 	
-	public void cancelAction() {
-		this.targetAction = null;
+	public void cancelActions() {
+		this.actions.clear();
 	}
 	
-	public void moveInterpolateTo(GameItem target, float time) {
+	public void moveInterpolateTo(GameItem target, float time) {						
+		this.addAction(new MoveInterpolateAction(this, time, target));
+	}
+	
+	public CGRect getVirtualCamera() {
+		return this.virtualCamera;
+	}
+	
+	public void addAction(CameraAction action) {
 		this.cancelFollow();
-		this.targetAction = target;
-		this.elapsedTimeAction = 0f;
-		this.targetTimeAction = time;
+		this.actions.add(action);
+	}
+	
+	public void zoomInterpolateTo(GameItem target, float targetZoom, float time) {
+		this.addAction(new ZoomInterpolateAction(this, time, target, targetZoom));
+	}
+	
+	public void cancelZoomAnchor() {
+		this.zoomAnchor = null;
+		this.zoomScreenPin = null;
 	}
 }
