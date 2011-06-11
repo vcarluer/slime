@@ -181,6 +181,7 @@ public class Level {
 		this.selectables.clear();
 		this.itemsToAdd.clear();
 		this.itemsToRemove.clear();
+		this.startItem = null;
 		
 		this.removeCustomOverLayer();
 		this.setIsTouchEnabled(true);
