@@ -74,7 +74,7 @@ public class CameraManager {
 	}
 	
 	private void tryFollowUnzoom() {
-		if (this.followed != null) {
+		if (this.followed != null && this.followed.isActive()) {
 			CGPoint position = this.followed.getPosition();
 			if (!CGRect.containsPoint(this.margeRect, position)) {				
 				

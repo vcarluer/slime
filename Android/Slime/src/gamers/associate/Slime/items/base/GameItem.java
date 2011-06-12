@@ -78,4 +78,8 @@ public class GameItem {
 	public CGRect getRect() {
 		return CGRect.make(this.position.x - this.width / 2, this.position.y - this.height / 2, this.width, this.height);
 	}
+	
+	public boolean isActive() {
+		return true;
+	}
 }
