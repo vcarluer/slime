@@ -90,7 +90,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 			CCDrawingPrimitives.ccDrawCircle(gl, this.getPosition(), 50, ccMacros.CC_DEGREES_TO_RADIANS(90), 50, true);						
 		}
 		
-		if (this.scaledRect != null) {			
+		if (this.scaledRect != null && this.isActive()) {			
 			// Drawing selection rectangle
 			Util.draw(gl, this.scaledRect, 2.0f, 0, 1, 0, 1);
 		}
