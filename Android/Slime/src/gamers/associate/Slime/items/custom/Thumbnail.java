@@ -6,23 +6,35 @@ import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.ISelectable;
 import gamers.associate.Slime.items.base.SpriteType;
 
+import org.cocos2d.config.ccMacros;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 
 public class Thumbnail extends GameItemCocos implements ISelectable {	
+	public static String Thumbnail_back = "thumbnail_back";
 	
 	private ISelectable target;	
 	private boolean isSelected;
+	private CCSprite targetThumbnail;
 	
-	public Thumbnail(float x, float y, float width, float height, ISelectable target) {
+	public Thumbnail(float x, float y, float width, float height) {
 		super(x, y, width, height);
 		// this.spriteType = SpriteType.UNKNOWN;
-		this.spriteType = SpriteType.SINGLE_SCALE;
+		this.spriteType = SpriteType.SINGLE_SCALE_DIRECT;
+		this.zOrder = Level.zFront;
+	}
+	
+	public Thumbnail(float x, float y, float width, float height, ISelectable target) {
+		this(x, y, width, height);		
+		this.setTarget(target);
+	}
+	
+	public void setTarget(ISelectable target) {
 		this.target = target;
-		this.setRootNode(this.target.getRootNode());
-		this.setSprite(this.target.getThumbail());		
+		this.targetThumbnail = this.target.getThumbail();
+		target.getRootNode().addChild(this.targetThumbnail, Level.zFront);
 	}
 
 	@Override
@@ -89,4 +101,53 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 	public CCNode getRootNode() {
 		return target.getRootNode();
 	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.base.GameItemCocos#setPosition(org.cocos2d.types.CGPoint)
+	 */
+	@Override
+	public void setPosition(CGPoint position) {		
+		super.setPosition(position);
+		this.targetThumbnail.setPosition(position);
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.base.GameItem#setAngle(float)
+	 */
+	@Override
+	public void setAngle(float angle) {
+		float degreeAngle = -1.0f * ccMacros.CC_RADIANS_TO_DEGREES(angle) + 90;		
+		super.setAngle(degreeAngle);
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.base.GameItemCocos#destroy()
+	 */
+	@Override
+	public void destroy() {		
+		super.destroy();
+		this.target.getRootNode().removeChild(this.targetThumbnail, true);
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.base.GameItemCocos#setScale(float)
+	 */
+	@Override
+	public void setScale(float scale) {
+		super.setScale(scale);
+		this.targetThumbnail.setScale(scale);
+	}
+	
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.GameItemCocos#getReferenceAnimationName()
+	 */
+	@Override
+	protected String getReferenceAnimationName() {		
+		return Thumbnail.Thumbnail_back;
+	}
+
+	@Override
+	public boolean isActive() {
+		return this.target.isActive();
+	}	
 }

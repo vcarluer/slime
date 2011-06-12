@@ -1,14 +1,13 @@
 package gamers.associate.Slime.game;
 
+import gamers.associate.Slime.items.base.GameItem;
+
 import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL10;
 
-import gamers.associate.Slime.items.base.GameItem;
-
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.nodes.CCDirector;
-import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 
@@ -35,8 +34,6 @@ public class CameraManager {
 	private float cameraMargin;
 	private CGRect margeRect;
 	
-	private CGPoint layerAnchor;
-	
 	private ArrayList<CameraAction> actions;
 	
 	public CameraManager(CCLayer gameLayer) {
@@ -47,7 +44,6 @@ public class CameraManager {
 		this.cameraMargin = 50f;
 		this.margeRect = CGRect.zero();
 		this.actions = new ArrayList<CameraAction>();
-		this.layerAnchor = this.gameLayer.getAnchorPoint();
 	}
 	
 	protected void tick(float delta) {

@@ -12,6 +12,7 @@ import gamers.associate.Slime.items.custom.PlatformFactory;
 import gamers.associate.Slime.items.custom.SlimyFactory;
 import gamers.associate.Slime.items.custom.SpawnCannonFactory;
 import gamers.associate.Slime.items.custom.SpawnPortalFactory;
+import gamers.associate.Slime.items.custom.ThumbnailFactory;
 
 import org.cocos2d.nodes.CCNode;
 
@@ -30,6 +31,7 @@ public abstract class SlimeFactory {
 	public static LavaFactory Lava = new LavaFactory();
 	public static BoxFactory Box = new BoxFactory();
 	public static PhysicPolygonFactory Polygon = new PhysicPolygonFactory();
+	public static ThumbnailFactory Thumbnail = new ThumbnailFactory();
 		
 	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {		
 		Slimy.attach(level, attachNode, attachWorld, attachWorldRatio);
@@ -43,6 +45,7 @@ public abstract class SlimeFactory {
 		Lava.attach(level, attachNode, attachWorld, attachWorldRatio);
 		Box.attach(level, attachNode, attachWorld, attachWorldRatio);
 		Polygon.attach(level, attachNode, attachWorld, attachWorldRatio);
+		Thumbnail.attach(level, attachNode);
 		SpriteSheetFactory.attachAll(attachNode);
 		isAttached = true;
 	}
@@ -59,6 +62,7 @@ public abstract class SlimeFactory {
 		Lava.detach();
 		Box.detach();
 		Polygon.detach();
+		Thumbnail.detach();
 		SpriteSheetFactory.detachAll();
 		isAttached = false;
 	}
@@ -74,6 +78,7 @@ public abstract class SlimeFactory {
 		Lava.destroy();
 		Box.destroy();
 		Polygon.destroy();
+		Thumbnail.destroy();
 		SpriteSheetFactory.destroy();
 		isAttached = false;
 	}

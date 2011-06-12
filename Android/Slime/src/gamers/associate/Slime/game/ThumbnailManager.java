@@ -31,67 +31,72 @@ public class ThumbnailManager {
 		}
 	}
 	
-	private void manage(ISelectable selectable) {
-		if (!CGRect.containsPoint(this.cameraManager.getVirtualCamera(), Util.mid(selectable.getSelectionRect()))) {
+	private void manage(ISelectable selectable) {		
+		if (!CGRect.containsPoint(this.cameraManager.getVirtualCamera(), Util.mid(selectable.getSelectionRect())) && selectable.isActive()) {
 			float x = selectable.getPosition().x;
-			float y = selectable.getPosition().y;
-			float maxX = CGRect.maxX(this.cameraManager.getVirtualCamera());
-			float maxY = CGRect.maxY(this.cameraManager.getVirtualCamera());
-			float minX = CGRect.minX(this.cameraManager.getVirtualCamera());
-			float minY = CGRect.minY(this.cameraManager.getVirtualCamera());
+			float y = selectable.getPosition().y;						
+			
+			CGRect camera = this.cameraManager.getVirtualCamera();
+			
 			float reverseScale = 1;
 			if (this.level.getCameraManager().getCurrentZoom() != 0) {
 				reverseScale = 1 / this.level.getCameraManager().getCurrentZoom();
+			}	
+			
+			float maxMargeX = CGRect.maxX(camera) - (Thumbnail_Margin_Width * reverseScale) / 2;
+			float maxMargeY = CGRect.maxY(camera) - (Thumbnail_Margin_Height * reverseScale) / 2;
+			float minMargeX = CGRect.minX(camera) + (Thumbnail_Margin_Width * reverseScale) / 2;
+			float minMargeY = CGRect.minY(camera) + (Thumbnail_Margin_Height * reverseScale) / 2;
+			
+			CGPoint centerScreen = Util.mid(camera);
+			CGPoint target = selectable.getPosition();
+			CGPoint tl = CGPoint.make(CGRect.minX(camera), CGRect.maxY(camera));
+			CGPoint tr = CGPoint.make(CGRect.maxX(camera), CGRect.maxY(camera));
+			CGPoint br = CGPoint.make(CGRect.maxX(camera), CGRect.minY(camera));
+			CGPoint bl = CGPoint.make(CGRect.minX(camera), CGRect.minY(camera));
+			CGPoint result = CGPoint.zero();
+			
+			if (!this.intersect(centerScreen, target, tl, tr, result)){
+				if (!this.intersect(centerScreen, target, tr, br, result)){
+					if (!this.intersect(centerScreen, target, br, bl, result)){
+						this.intersect(centerScreen, target, bl, tl, result);
+					}
+				}
 			}
 			
-			if (selectable.getPosition().x > maxX) {
-				x = maxX - (Thumbnail_Margin_Width * reverseScale) / 2;
+			x = result.x;
+			y = result.y;
+			
+			if (x > maxMargeX) {
+				x = maxMargeX;
 			}
 			
-			if (selectable.getPosition().y > maxY) {
-				y = maxY - (Thumbnail_Margin_Height * reverseScale) / 2;
+			if (y > maxMargeY) {
+				y = maxMargeY;
 			}
 			
-			if (selectable.getPosition().x < minX) {
-				x = minX + (Thumbnail_Margin_Width * reverseScale) / 2;
+			if (x < minMargeX) {
+				x = minMargeX;
 			}
 			
-			if (selectable.getPosition().y < minY) {
-				y = minY + (Thumbnail_Margin_Height * reverseScale) / 2;
+			if (y < minMargeY) {
+				y = minMargeY;
 			}
-			
+						
 			if (!this.thumbnails.containsKey(selectable)) {								
-				Thumbnail tn = new Thumbnail(x, y, Thumbnail_Margin_Width, Thumbnail_Margin_Height, selectable);
+				Thumbnail tn = SlimeFactory.Thumbnail.create(x, y, selectable);
 				this.level.addItemToAdd(tn);
 				this.thumbnails.put(selectable, tn);
 			}
-			else {
-				// reLimit boundaries
-				maxX = maxX - (Thumbnail_Margin_Width * reverseScale) / 2;
-				maxY = maxY - (Thumbnail_Margin_Height * reverseScale) / 2;
-				minX = minX + (Thumbnail_Margin_Width * reverseScale) / 2;
-				minY = minY + (Thumbnail_Margin_Height * reverseScale) / 2;
-				
-				if (x > maxX) {
-					x = maxX;
-				}
-				
-				if (y > maxY) {
-					y = maxY;
-				}
-				
-				if (x < minX) {
-					x = minX;
-				}
-				
-				if (y < minY) {
-					y = minY;
-				}
-				
+			else {			
 				this.thumbnails.get(selectable).setPosition(CGPoint.make(x, y));
 			}
 			
-			this.thumbnails.get(selectable).getSprite().setScale(reverseScale);
+			this.thumbnails.get(selectable).setScale(reverseScale);
+			
+			CGPoint vector = CGPoint.ccpSub(selectable.getPosition(), this.thumbnails.get(selectable).getPosition());
+			float angle = CGPoint.ccpToAngle(vector);
+			this.thumbnails.get(selectable).setAngle(angle);
 		}
 		else {
 			if (this.thumbnails.containsKey(selectable)) {
@@ -99,5 +104,24 @@ public class ThumbnailManager {
 				this.thumbnails.remove(selectable);
 			}
 		}
-	}	
+	}
+	
+	private boolean intersect(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4, CGPoint result) {
+		CGPoint st = CGPoint.zero();
+		boolean intersected = false;
+		if (CGPoint.ccpLineIntersect(p1, p2, p3, p4, st)) {
+			if (st.x > 0 && st.y > 0 && st.x < 1 && st.y < 1)
+			{
+				CGPoint s = CGPoint.ccpSub(p4, p3);
+				CGPoint m = CGPoint.ccpMult(s, st.y);								
+				CGPoint intersect =  CGPoint.ccpAdd(p3, m);				
+				
+				result.x = intersect.x;
+				result.y = intersect.y;
+				intersected = true;
+			}
+		}
+		
+		return intersected;
+	}
 }

@@ -4,7 +4,6 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.layers.GALogoLayer;
-import gamers.associate.Slime.layers.SlimeLoadingLayer;
 
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;

@@ -1,8 +1,6 @@
 package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.items.custom.GoalPortal;
-import gamers.associate.Slime.items.custom.SlimyFactory;
-import gamers.associate.Slime.items.custom.SpawnCannon;
 import gamers.associate.Slime.items.custom.SpawnPortal;
 import gamers.associate.Slime.layers.HomeLayer;
 

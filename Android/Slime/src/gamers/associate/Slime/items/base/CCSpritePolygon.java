@@ -1,8 +1,6 @@
 package gamers.associate.Slime.items.base;
 
 
-import java.nio.FloatBuffer;
-
 import javax.microedition.khronos.opengles.GL10;
 
 import org.cocos2d.config.ccConfig;

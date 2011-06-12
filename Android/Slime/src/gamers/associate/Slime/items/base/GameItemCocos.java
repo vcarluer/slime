@@ -128,7 +128,7 @@ public abstract class GameItemCocos extends GameItem {
 	}
 	
 	protected void transformTexture() {
-		if (this.spriteType == SpriteType.ANIM_SCALE || this.spriteType == SpriteType.SINGLE_SCALE) {
+		if (this.spriteType == SpriteType.ANIM_SCALE || this.spriteType == SpriteType.SINGLE_SCALE || this.spriteType == SpriteType.SINGLE_SCALE_DIRECT) {
 			if (this.width != 0 && this.height != 0) {
 				CGSize size = this.getTextureSize();			
 				
@@ -246,6 +246,7 @@ public abstract class GameItemCocos extends GameItem {
 				sprite = new CCSprite();				
 				break;
 			case SINGLE_SCALE:
+			case SINGLE_SCALE_DIRECT:
 				sprite = CCSprite.sprite(this.getReferenceFirstFrame());
 				break;
 			case SINGLE_REPEAT:
@@ -292,6 +293,21 @@ public abstract class GameItemCocos extends GameItem {
 		super.setPosition(position);
 		if (this.sprite != null) {
 			this.sprite.setPosition(this.position);
+		}
+	}
+	
+	public void setScale(float scale) {
+		if (this.sprite != null) {
+			this.sprite.setScale(scale);
+		}
+	}
+	
+	@Override
+	// In degree
+	public void setAngle(float angle) {		
+		super.setAngle(angle);
+		if (this.sprite != null) {
+			this.sprite.setRotation(angle);
 		}
 	}
 }

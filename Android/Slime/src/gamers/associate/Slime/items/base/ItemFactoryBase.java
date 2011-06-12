@@ -103,6 +103,7 @@ public abstract class ItemFactoryBase<T extends GameItemCocos> {
 			break;
 		case ANIM_REPEAT:
 		case SINGLE_REPEAT:
+		case SINGLE_SCALE_DIRECT:
 		case POLYGON_REPEAT:
 			node = this.rootNode;
 			break;

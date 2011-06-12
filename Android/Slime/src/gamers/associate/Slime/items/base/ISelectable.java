@@ -2,7 +2,6 @@ package gamers.associate.Slime.items.base;
 
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 
@@ -30,4 +29,6 @@ public interface ISelectable {
 	CCSprite getThumbail();
 	
 	CCNode getRootNode();
+	
+	boolean isActive();
 }

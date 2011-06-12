@@ -212,4 +212,9 @@ public class SlimyJump extends Slimy implements ISelectable {
 	public CCNode getRootNode() {
 		return this.rootNode;		
 	}
+
+	@Override
+	public boolean isActive() {
+		return !this.isDead;
+	}
 }

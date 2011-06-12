@@ -223,7 +223,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	/* (non-Javadoc)
 	 * @see gamers.associate.Slime.GameItemPhysic#handleContact(gamers.associate.Slime.GameItemPhysic)
 	 */
-	@Override
+	@Override 
 	protected void handleContact(GameItemPhysic item) {		
 		super.handleContact(item);
 		this.contactInternal(item);

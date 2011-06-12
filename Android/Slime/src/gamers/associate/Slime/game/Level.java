@@ -1,7 +1,6 @@
 package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.items.base.GameItem;
-import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.ISelectable;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.items.custom.Thumbnail;
@@ -23,7 +22,6 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
-import org.cocos2d.types.CGRect;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -487,9 +485,5 @@ public class Level {
 	
 	public void setStartItem(GameItem start) {
 		this.startItem = start;
-	}
-	
-	public CCLayer getGameLayer() {
-		return this.gameLayer;
 	}
 }
