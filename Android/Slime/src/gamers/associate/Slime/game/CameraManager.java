@@ -91,6 +91,9 @@ public class CameraManager {
 					anchorY = CGRect.maxY(this.screenView);
 				}
 				
+				anchorX = CGRect.maxX(this.margeRect) - position.x;
+				anchorY = CGRect.maxY(this.margeRect) - position.y;
+				
 				this.setZoomPoint(CGPoint.make(anchorX, anchorY));
 				// Just unzoom 
 				float targetZoom = this.currentZoom;
