@@ -309,11 +309,49 @@ public class CameraManager {
 		this.virtualCamera.size.width = CGRect.width(this.screenView) * ratio;
 		this.virtualCamera.size.height = CGRect.height(this.screenView) * ratio;
 		float ratioMarge = this.cameraMargin * ratio;
+		float wRatioMarge = ratioMarge * 2;
+		float hRationMarge = ratioMarge * 2;
+		float extBound = 100f;
+		// Handle special case on level boudary limits
+		float xMarge = this.virtualCamera.origin.x;
+		if (xMarge != this.levelOrigin.x) {
+			xMarge += ratioMarge;
+		}
+		else {
+			xMarge -= extBound;
+			wRatioMarge -= ratioMarge + extBound;
+		}
+		
+		float yMarge = this.virtualCamera.origin.y;
+		if (yMarge != this.levelOrigin.y) {
+			yMarge += ratioMarge;
+		}
+		else {
+			yMarge -= extBound;
+			hRationMarge -= ratioMarge + extBound;
+		}
+		
+		float wMarge = this.virtualCamera.size.width;
+		if (this.virtualCamera.origin.x + wMarge != this.levelWidth) {
+			wMarge -= wRatioMarge;
+		}
+		else {
+			wMarge += extBound;
+		}
+		
+		float hMarge = this.virtualCamera.size.height;
+		if (this.virtualCamera.origin.y + hMarge != this.levelHeight) {
+			hMarge -= hRationMarge;
+		}
+		else {
+			hMarge += extBound;
+		}
+		
 		this.margeRect.set(
-				this.virtualCamera.origin.x + ratioMarge, 
-				this.virtualCamera.origin.y + ratioMarge,
-				this.virtualCamera.size.width - (ratioMarge * 2),
-				this.virtualCamera.size.height - (ratioMarge * 2));
+				xMarge, 
+				yMarge,
+				wMarge,
+				hMarge);
 	}
 	
 	public void setCameraView() {		
