@@ -13,6 +13,7 @@ import org.cocos2d.opengl.CCGLSurfaceView;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -44,7 +45,7 @@ public class Slime extends Activity {
 		CCDirector.sharedDirector().attachInView(mGLSurfaceView);
 		
 		// no effect here because devise orientation is controlled by manifest
-		CCDirector.sharedDirector().setDeviceOrientation(CCDirector.kCCDeviceOrientationPortrait);
+		CCDirector.sharedDirector().setDeviceOrientation(CCDirector.kCCDeviceOrientationLandscapeLeft);
 		
 		// show FPS
 		// set false to disable FPS display, but don't delete fps_image.png!!
@@ -126,5 +127,17 @@ public class Slime extends Activity {
 		/* if (Level.currentLevel != null) {
 			Level.currentLevel.getCameraManager().setCameraView();
 		}*/
+	}
+
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
+	 */
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+	        // moveTaskToBack(true);
+	        return true;
+	    }	    
+		return super.onKeyDown(keyCode, event);
 	}          
 }

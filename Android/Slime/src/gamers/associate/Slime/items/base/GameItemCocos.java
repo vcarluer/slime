@@ -10,6 +10,7 @@ import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
+import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGSize;
 
 /**
@@ -281,5 +282,16 @@ public abstract class GameItemCocos extends GameItem {
 	
 	public void setRootNode(CCNode node) {
 		this.rootNode = node;
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.base.GameItem#setPosition(org.cocos2d.types.CGPoint)
+	 */
+	@Override
+	public void setPosition(CGPoint position) {		
+		super.setPosition(position);
+		if (this.sprite != null) {
+			this.sprite.setPosition(this.position);
+		}
 	}
 }

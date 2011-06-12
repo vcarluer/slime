@@ -8,21 +8,23 @@ import gamers.associate.Slime.items.base.ISelectable;
 import javax.microedition.khronos.opengles.GL10;
 
 import org.cocos2d.config.ccMacros;
+import org.cocos2d.nodes.CCNode;
+import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.opengl.CCDrawingPrimitives;
-import org.cocos2d.types.CGAffineTransform;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
-import org.cocos2d.types.CGSize;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class SlimyJump extends Slimy implements ISelectable {
 
+	public static String thumbSprite = "wait-v-01.png";
+	
 	public static float Default_Powa = 2.0f;
-	public static float Max_Impulse = 10f;
+	public static float Max_Impulse = 10f;	
 	private static float Default_Selection_Width = 48f;
-	private static float Default_Selection_Height = 52f;
+	private static float Default_Selection_Height = 52f;	
 
 	private CGPoint target;
 	private Vector2 targetImpulse;
@@ -31,6 +33,8 @@ public class SlimyJump extends Slimy implements ISelectable {
 	private CGPoint worldSelect;
 	private float powa;
 	private CGRect scaledRect;
+	
+	private CCSprite thumbnail;
 	
 	public SlimyJump(float x, float y, float width, float height, World world,
 			float worldRatio) {
@@ -193,5 +197,19 @@ public class SlimyJump extends Slimy implements ISelectable {
 	@Override
 	protected void contactInternal(GameItemPhysic item) {		
 		this.land();		
+	}
+
+	@Override
+	public CCSprite getThumbail() {
+		if (this.thumbnail == null) {
+			this.thumbnail = CCSprite.sprite(thumbSprite, true);			
+		}
+		
+		return this.thumbnail; 
+	}
+
+	@Override
+	public CCNode getRootNode() {
+		return this.rootNode;		
 	}
 }

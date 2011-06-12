@@ -99,7 +99,7 @@ public class CameraManager {
 				if (position.x < CGRect.minX(this.margeRect)) {					
 					targetZoom = this.currentZoom * (CGRect.width(this.margeRect) / (CGRect.maxX(this.margeRect) - position.x));
 				}
-		
+
 				if (position.y < CGRect.minY(this.margeRect)) {					
 					targetZoom = this.currentZoom * (CGRect.height(this.margeRect) / (CGRect.maxY(this.margeRect) - position.y));				
 				}

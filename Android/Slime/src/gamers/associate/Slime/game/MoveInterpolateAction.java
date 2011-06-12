@@ -7,11 +7,11 @@ import gamers.associate.Slime.items.base.GameItem;
 
 public class MoveInterpolateAction extends CameraAction {
 
-	private CGPoint pointAction;
+	private CGPoint pointAction;	
 	
 	public MoveInterpolateAction(CameraManager manager, float time, GameItem target) {
 		super(manager, time);
-		this.pointAction = CGPoint.zero();
+		this.pointAction = CGPoint.zero();		
 		this.setTargetAction(target);
 	}
 

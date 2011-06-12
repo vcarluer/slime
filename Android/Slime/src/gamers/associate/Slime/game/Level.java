@@ -1,8 +1,10 @@
 package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.items.base.GameItem;
+import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.ISelectable;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
+import gamers.associate.Slime.items.custom.Thumbnail;
 import gamers.associate.Slime.layers.BackgoundLayer;
 import gamers.associate.Slime.layers.HudLayer;
 import gamers.associate.Slime.layers.LevelLayer;
@@ -88,6 +90,8 @@ public class Level {
 	
 	protected GameItem startItem;
 	
+	protected ThumbnailManager thumbnailManager;
+	
 	protected Level() {
 		this.scene = CCScene.node();
 		this.levelLayer = new LevelLayer(this);
@@ -111,6 +115,8 @@ public class Level {
 		
 		this.itemsToRemove = new ArrayList<GameItem>();
 		this.itemsToAdd = new ArrayList<GameItem>();
+		
+		this.thumbnailManager = new ThumbnailManager(this);
 		
 		this.init();
 		
@@ -250,7 +256,9 @@ public class Level {
 			
 			this.itemsToRemove.clear();
 			
-			this.cameraManager.tick(delta);						
+			this.cameraManager.tick(delta);
+			
+			this.thumbnailManager.handle(this.selectables);
 		}
 	}
 			
@@ -428,9 +436,14 @@ public class Level {
 		if (this.selectedItem != null) {
 			// this.cameraManager.centerCameraOn(this.selectedItem.getPosition());
 			if (this.selectedItem instanceof GameItem) {
-				GameItem center = (GameItem)this.selectedItem;
-				this.cameraManager.moveInterpolateTo(center, 0.3f);
-				this.cameraManager.zoomInterpolateTo(center, 1.0f, 0.3f);
+				if (this.selectedItem instanceof Thumbnail) {
+					((Thumbnail)this.selectedItem).selectionStop(null);
+				}
+				else {
+					GameItem center = (GameItem)this.selectedItem;
+					this.cameraManager.moveInterpolateTo(center, 0.3f);
+					this.cameraManager.zoomInterpolateTo(center, 1.0f, 0.3f);
+				}				
 			}
 			
 			this.unselectCurrent();
@@ -474,5 +487,9 @@ public class Level {
 	
 	public void setStartItem(GameItem start) {
 		this.startItem = start;
+	}
+	
+	public CCLayer getGameLayer() {
+		return this.gameLayer;
 	}
 }
