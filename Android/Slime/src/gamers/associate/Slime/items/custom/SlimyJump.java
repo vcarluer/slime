@@ -34,7 +34,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	private float powa;
 	private CGRect scaledRect;
 	
-	private CCSprite thumbnail;
+	private CCSprite thumbnailSprite;	
 	
 	public SlimyJump(float x, float y, float width, float height, World world,
 			float worldRatio) {
@@ -201,11 +201,11 @@ public class SlimyJump extends Slimy implements ISelectable {
 
 	@Override
 	public CCSprite getThumbail() {
-		if (this.thumbnail == null) {
-			this.thumbnail = CCSprite.sprite(thumbSprite, true);			
+		if (this.thumbnailSprite == null) {
+			this.thumbnailSprite = CCSprite.sprite(thumbSprite, true);			
 		}
 		
-		return this.thumbnail; 
+		return this.thumbnailSprite; 
 	}
 
 	@Override

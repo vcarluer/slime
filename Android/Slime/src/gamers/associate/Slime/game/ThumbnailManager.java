@@ -99,10 +99,7 @@ public class ThumbnailManager {
 			this.thumbnails.get(selectable).setAngle(angle);
 		}
 		else {
-			if (this.thumbnails.containsKey(selectable)) {
-				this.level.addItemToRemove(this.thumbnails.get(selectable));
-				this.thumbnails.remove(selectable);
-			}
+			this.removeThumbnail(selectable);
 		}
 	}
 	
@@ -123,5 +120,14 @@ public class ThumbnailManager {
 		}
 		
 		return intersected;
+	}
+	
+	public void removeThumbnail(ISelectable selectable) {
+		if (selectable != null) {
+			if (this.thumbnails.containsKey(selectable)) {
+				this.level.addItemToRemove(this.thumbnails.get(selectable));
+				this.thumbnails.remove(selectable);
+			}
+		}
 	}
 }

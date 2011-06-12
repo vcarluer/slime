@@ -262,6 +262,11 @@ public class Level {
 			
 	public void addItemToRemove(GameItem item) {
 		this.itemsToRemove.add(item);
+		if (item instanceof ISelectable)
+		{
+			ISelectable selectable = (ISelectable)item;			
+			this.thumbnailManager.removeThumbnail(selectable);
+		}
 	}
 	
 	public void addItemToAdd(GameItem item) {
@@ -342,16 +347,16 @@ public class Level {
 	
 	private void removeGameItem(GameItem item) {
 		if (item != null) {
-			if (this.items.containsKey(item.getId())) {
-				item.destroy();
-				this.items.remove(item.getId());
-			}
-			
 			if (item instanceof ISelectable)
 			{
 				ISelectable selectable = (ISelectable)item;
-				this.selectables.remove(selectable);
+				this.selectables.remove(selectable);				
 			}
+			
+			if (this.items.containsKey(item.getId())) {
+				item.destroy();
+				this.items.remove(item.getId());
+			}						
 		}
 	}
 	
