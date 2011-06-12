@@ -41,6 +41,7 @@ public class Level {
 	public static int zBack = 0;
 	public static int zMid = 1;
 	public static int zFront = 2;
+	public static int zTop = 3;
 	
 	protected World world;
 	protected Vector2 gravity;
@@ -90,6 +91,8 @@ public class Level {
 	
 	protected ThumbnailManager thumbnailManager;
 	
+	protected CCNodeDraw nodeDraw;
+	
 	protected Level() {
 		this.scene = CCScene.node();
 		this.levelLayer = new LevelLayer(this);
@@ -115,6 +118,8 @@ public class Level {
 		this.itemsToAdd = new ArrayList<GameItem>();
 		
 		this.thumbnailManager = new ThumbnailManager(this);
+		this.nodeDraw = new CCNodeDraw(this);
+		this.gameLayer.addChild(this.nodeDraw, zTop);
 		
 		this.init();
 		

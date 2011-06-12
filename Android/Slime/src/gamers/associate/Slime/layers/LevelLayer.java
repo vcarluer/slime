@@ -254,15 +254,6 @@ public class LevelLayer extends CCLayer {
 		
 		return returnTouch;
 	}
-
-	/* (non-Javadoc)
-	 * @see org.cocos2d.nodes.CCNode#draw(javax.microedition.khronos.opengles.GL10)
-	 */
-	@Override
-	public void draw(GL10 gl) {		
-		super.draw(gl);
-		this.level.draw(gl);
-	}
 	
 	private float getGameY(float touchY) {
 		return CCDirector.sharedDirector().winSize().height - touchY;
