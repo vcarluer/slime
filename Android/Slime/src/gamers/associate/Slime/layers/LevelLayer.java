@@ -125,8 +125,11 @@ public class LevelLayer extends CCLayer {
 								);
 					this.level.getSpawnCannon().unselect();*/
 					
-					float delta = event.getEventTime() - touch.getFirstMoveTime();
-					if (delta < 100) {
+					CGPoint deltaMove = CGPoint.zero();
+					deltaMove.x = event.getX(touch.getPointerId()) - touch.getFirstMoveReference().x;
+					deltaMove.y = this.getGameY(event.getY(touch.getPointerId())) - touch.getFirstMoveReference().y;					
+										
+					if (CGPoint.ccpLength(deltaMove) < 5) {
 						this.level.simpleSelect();
 					}
 					else {
@@ -169,10 +172,14 @@ public class LevelLayer extends CCLayer {
 		TouchInfo touch = new TouchInfo(pid);		
 		touch.getMoveBeganAt().x = event.getX(touch.getPointerId());
 		touch.getMoveBeganAt().y = this.getGameY(event.getY(touch.getPointerId()));
-		touch.getLastMoveReference().x = event.getX(touch.getPointerId());
-		touch.getLastMoveReference().y = this.getGameY(event.getY(touch.getPointerId()));
+		float x = event.getX(touch.getPointerId());
+		float y = this.getGameY(event.getY(touch.getPointerId())); 		
+		touch.getLastMoveReference().x = x;
+		touch.getLastMoveReference().y = y;
+		touch.getFirstMoveReference().x = x;
+		touch.getFirstMoveReference().y = y;
 		touch.setLastMoveTime(event.getEventTime());
-		touch.setFirstMoveTime(event.getEventTime());
+		touch.setFirstMoveTime(event.getEventTime());		
 		this.touchList.add(touch);
 		this.getCameraManager().stopContinousMoving();
 		this.level.getCameraManager().cancelFollow();

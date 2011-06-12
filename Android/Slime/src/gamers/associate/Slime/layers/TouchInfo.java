@@ -9,6 +9,7 @@ public class TouchInfo {
 	private CGPoint lastMoveDelta;
 	private boolean isMoving;
 	private long firstMoveTime;
+	private CGPoint firstMoveReference;
 		
 	private int pointerId;
 
@@ -17,6 +18,7 @@ public class TouchInfo {
 		this.moveBeganAt = new CGPoint();
 		this.lastMoveReference = new CGPoint();
 		this.lastMoveDelta = new CGPoint();
+		this.firstMoveReference = new CGPoint();
 	}
 	
 	/**
@@ -109,5 +111,13 @@ public class TouchInfo {
 	 */
 	public void setPointerId(int pointerId) {
 		this.pointerId = pointerId;
+	}
+	
+	public void setFirstMoveReference(CGPoint reference) {
+		this.firstMoveReference = reference;
+	}
+	
+	public CGPoint getFirstMoveReference() {
+		return this.firstMoveReference;
 	}
 }
