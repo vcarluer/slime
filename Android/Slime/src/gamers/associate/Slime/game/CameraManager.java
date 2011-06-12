@@ -80,19 +80,11 @@ public class CameraManager {
 	private void tryFollowUnzoom() {
 		if (this.followed != null) {
 			CGPoint position = this.followed.getPosition();
-			if (!CGRect.containsPoint(this.margeRect, position)) {
-				float anchorX = 0;
-				float anchorY = 0;								
-				if (position.x < CGRect.midX(this.margeRect)) {
-					anchorX = CGRect.maxX(this.screenView);
-				}
+			if (!CGRect.containsPoint(this.margeRect, position)) {				
 				
-				if (position.y < CGRect.midY(this.margeRect)) {
-					anchorY = CGRect.maxY(this.screenView);
-				}
-				
-				anchorX = CGRect.maxX(this.margeRect) - position.x;
-				anchorY = CGRect.maxY(this.margeRect) - position.y;
+				// Opposite point anchor
+				float anchorX = CGRect.maxX(this.margeRect) - position.x;
+				float anchorY = CGRect.maxY(this.margeRect) - position.y;
 				
 				this.setZoomPoint(CGPoint.make(anchorX, anchorY));
 				// Just unzoom 
