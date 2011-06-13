@@ -42,7 +42,9 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	
 	protected Boolean isLanded;	
 	protected CCAction waitAction;
-	protected Boolean isDead;	
+	protected Boolean isDead;
+	
+	protected boolean hasLanded;
 	
 	public Slimy(float x, float y, float width, float height, World world, float worldRatio) {		
 		super(x, y, width, height, world, worldRatio);
@@ -100,15 +102,27 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	}
 	
 	public void waitAnim() {
-		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Wait_V), false);
-		CCDelayTime delay = CCDelayTime.action(3f);
-		CCAnimate reverse = animate.reverse();
+		if (this.waitAction != null && this.sprite != null) {
+			this.sprite.stopAction(this.waitAction);
+		}
 		
-		this.waitAction = CCRepeatForever.action(CCSequence.actions(animate, reverse, delay));		 
+		if (this.hasLanded) {
+			CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Wait_V), false);
+			CCDelayTime delay = CCDelayTime.action(3f);
+			CCAnimate reverse = animate.reverse();
+		
+			this.waitAction = CCRepeatForever.action(CCSequence.actions(animate, reverse, delay));
+		}
+		else {
+			CCAnimate animateSpawnFalling = CCAnimate.action(this.animationList.get(Anim_Spawn_Falling), false);
+			CCAnimate reverse = animateSpawnFalling.reverse();
+			this.waitAction = CCRepeatForever.action(CCSequence.actions(animateSpawnFalling, reverse));
+		}
+		
 		this.sprite.runAction(this.waitAction);
 	}
 	
-	public void fall() {
+	public void fall() {		
 		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Falling), false);
 		CCAnimate reverse = animate.reverse();
 		
@@ -118,17 +132,20 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	}
 	
 	public void spawn() {
-		CCAnimate animateSpawn = CCAnimate.action(this.animationList.get(Anim_Spawn), false);
-		CCAnimate animateSpawnFalling = CCAnimate.action(this.animationList.get(Anim_Spawn_Falling), false);		
-		
-		CCSequence sequence = CCSequence.actions(animateSpawn, animateSpawnFalling);
-		this.currentAction = sequence;
+		CCAnimate animateSpawn = CCAnimate.action(this.animationList.get(Anim_Spawn), false);			
+				
+		this.currentAction = animateSpawn;
 		this.sprite.runAction(this.currentAction);
 		
 	}
 	
 	public void land() {
 		if (!this.isLanded && !this.isDead && this.sprite != null) {
+			if (!this.hasLanded) {
+				this.hasLanded = true;
+				this.waitAnim();
+			}
+			
 			if (this.currentAction != null) {
 				this.sprite.stopAction(this.currentAction);
 			}
@@ -254,7 +271,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	@Override
 	protected void runReferenceAction() {
 		this.waitAnim();
-		// this.fadeIn();
+		this.fadeIn();
 		this.spawn();
 	}
 
