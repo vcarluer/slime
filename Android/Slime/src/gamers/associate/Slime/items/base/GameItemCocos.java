@@ -268,6 +268,8 @@ public abstract class GameItemCocos extends GameItem {
 			this.setSpriteInternal(sprite);
 			this.runReferenceAction();
 			this.attachToRoot();
+			
+			this.setPosition(this.position);			
 		}
 	}
 	
@@ -301,7 +303,7 @@ public abstract class GameItemCocos extends GameItem {
 			this.sprite.setScale(scale);
 		}
 	}
-	
+
 	@Override
 	// In degree
 	public void setAngle(float angle) {		

@@ -17,9 +17,7 @@ public class GameItem {
 	
 	public GameItem(float x, float y, float width, float height) {		
 		this.id = UUID.randomUUID();		
-		this.position = new CGPoint();
-		this.position.x = x;
-		this.position.y = y;
+		this.position = CGPoint.make(x, y);		
 		this.angle = 0f;		
 		this.width = width;
 		this.height = height;		

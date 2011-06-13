@@ -35,6 +35,7 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 		this.target = target;
 		this.targetThumbnail = this.target.getThumbail();
 		target.getRootNode().addChild(this.targetThumbnail, Level.zFront);
+		this.targetThumbnail.setPosition(this.position);		
 	}
 
 	@Override
@@ -108,7 +109,9 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 	@Override
 	public void setPosition(CGPoint position) {		
 		super.setPosition(position);
-		this.targetThumbnail.setPosition(position);
+		if (this.targetThumbnail != null) {
+			this.targetThumbnail.setPosition(position);
+		}
 	}
 
 	/* (non-Javadoc)
@@ -135,7 +138,9 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 	@Override
 	public void setScale(float scale) {
 		super.setScale(scale);
-		this.targetThumbnail.setScale(scale);
+		if (this.targetThumbnail != null) {
+			this.targetThumbnail.setScale(scale);
+		}
 	}
 	
 	/* (non-Javadoc)
