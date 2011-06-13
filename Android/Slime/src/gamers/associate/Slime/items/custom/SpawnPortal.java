@@ -44,9 +44,9 @@ public class SpawnPortal extends GameItemCocos {
 	
 	public GameItem spawn() {
 		Slimy slimy = SlimeFactory.Slimy.create(this.position.x, this.position.y, 1.5f);
-		if (slimy != null) {			
-			slimy.fall();
-		}
+//		if (slimy != null) {			
+//			slimy.fall();
+//		}
 		
 		return slimy;
 	}

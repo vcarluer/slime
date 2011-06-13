@@ -26,7 +26,10 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 	
 	@Override
 	public void destroy() {		
-		this.world.destroyBody(this.body);
+		if (this.body != null) {
+			this.world.destroyBody(this.body);
+		}
+		
 		this.world = null;
 		this.body = null;
 		super.destroy();
@@ -77,7 +80,9 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 	@Override
 	public void setAngle(float angle) {
 		super.setAngle(angle);
-		float radAngle = -1.0f * ccMacros.CC_DEGREES_TO_RADIANS(this.angle);
-		this.body.setTransform(this.body.getPosition(), radAngle);
+		if (this.body != null) {
+			float radAngle = -1.0f * ccMacros.CC_DEGREES_TO_RADIANS(this.angle);
+			this.body.setTransform(this.body.getPosition(), radAngle);
+		}
 	}
 }

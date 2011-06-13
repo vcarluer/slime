@@ -7,6 +7,7 @@ import gamers.associate.Slime.items.base.SpriteType;
 
 import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.base.CCRepeatForever;
+import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCFadeIn;
@@ -64,6 +65,10 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	
 	@Override
 	protected void initBody() {
+		
+	}
+	
+	protected void spawnBody() {
 		// Physic body
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
@@ -132,11 +137,17 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	}
 	
 	public void spawn() {
-		CCAnimate animateSpawn = CCAnimate.action(this.animationList.get(Anim_Spawn), false);			
+		CCAnimate animateSpawn = CCAnimate.action(this.animationList.get(Anim_Spawn), false);
+		CCCallFunc callback = CCCallFunc.action(this, "spawnDone");
+		CCSequence sequence = CCSequence.actions(animateSpawn, callback);
 				
-		this.currentAction = animateSpawn;
+		this.currentAction = sequence;
 		this.sprite.runAction(this.currentAction);
 		
+	}
+	
+	public void spawnDone() {
+		this.spawnBody();
 	}
 	
 	public void land() {
