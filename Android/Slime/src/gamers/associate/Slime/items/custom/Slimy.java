@@ -31,7 +31,9 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	public static String Anim_Wait_H = "wait-h";
 	public static String Anim_Wait_V = "wait-v";
 	public static String Anim_Splash = "splashed";
-	public static String Anim_Success = "success";	
+	public static String Anim_Success = "success";
+	public static String Anim_Spawn = "spawn";
+	public static String Anim_Spawn_Falling = "spawn-falling";
 	
 	public static float Default_Width = 24f;
 	public static float Default_Height = 26f;
@@ -113,6 +115,16 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 		CCAction action = CCRepeatForever.action(CCSequence.actions(animate, reverse));		
 		this.currentAction = action;
 		this.sprite.runAction(this.currentAction);
+	}
+	
+	public void spawn() {
+		CCAnimate animateSpawn = CCAnimate.action(this.animationList.get(Anim_Spawn), false);
+		CCAnimate animateSpawnFalling = CCAnimate.action(this.animationList.get(Anim_Spawn_Falling), false);		
+		
+		CCSequence sequence = CCSequence.actions(animateSpawn, animateSpawnFalling);
+		this.currentAction = sequence;
+		this.sprite.runAction(this.currentAction);
+		
 	}
 	
 	public void land() {
@@ -242,7 +254,8 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	@Override
 	protected void runReferenceAction() {
 		this.waitAnim();
-		this.fadeIn();
+		// this.fadeIn();
+		this.spawn();
 	}
 
 	/* (non-Javadoc)
