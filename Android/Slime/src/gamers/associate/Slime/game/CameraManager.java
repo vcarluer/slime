@@ -33,8 +33,10 @@ public class CameraManager {
 	private CGPoint levelOrigin;	
 	private float cameraMargin;
 	private CGRect margeRect;
+	private CGPoint layerPosition;
 	
 	private ArrayList<CameraAction> actions;
+	private ArrayList<CameraAction> actionsToRemove;
 	
 	public CameraManager(CCLayer gameLayer) {
 		this.gameLayer = gameLayer;
@@ -44,6 +46,8 @@ public class CameraManager {
 		this.cameraMargin = 50f;
 		this.margeRect = CGRect.zero();
 		this.actions = new ArrayList<CameraAction>();
+		this.actionsToRemove = new ArrayList<CameraAction>();
+		this.layerPosition = CGPoint.zero();
 	}
 	
 	protected void tick(float delta) {
@@ -60,16 +64,19 @@ public class CameraManager {
 				this.tryFollowUnzoom();
 			}				
 		}
-		
-		ArrayList<CameraAction> toRemove = new ArrayList<CameraAction>(); 
+				
 		for(CameraAction action : this.actions) {
 			if (action.action(delta)) {
-				toRemove.add(action);
+				this.actionsToRemove.add(action);
 			}				
-		}
+		}				
 		
-		for(CameraAction action : toRemove)  {
-			this.actions.remove(action);
+		if (this.actionsToRemove.size() > 0) {
+			for(CameraAction action : this.actionsToRemove)  {
+				this.actions.remove(action);
+			}
+			
+			this.actionsToRemove.clear();
 		}
 	}
 	
@@ -163,10 +170,9 @@ public class CameraManager {
 	
 	public void keepPointAt(CGPoint gamePoint, CGPoint screenPin) {
 		float scale = this.gameLayer.getScale();
-		CGPoint position = CGPoint.make(
-				- (gamePoint.x * scale - screenPin.x),
-				- (gamePoint.y * scale - screenPin.y));
-		this.setLayerPosition(position);
+		this.layerPosition.x = - (gamePoint.x * scale - screenPin.x);
+		this.layerPosition.y = - (gamePoint.y * scale - screenPin.y);
+		this.setLayerPosition(this.layerPosition);
 	}
 	
 	private void setLayerPosition(CGPoint position) {				
@@ -176,19 +182,19 @@ public class CameraManager {
 	
 	public void setCameraPosition(CGPoint origin) {
 		float scale = this.gameLayer.getScale();
-		CGPoint position = CGPoint.make(
-				- origin.x * scale,
-				- origin.y * scale);
-		this.setLayerPosition(position);
+		this.layerPosition.x = - origin.x * scale;
+		this.layerPosition.y = - origin.y * scale;
+		this.setLayerPosition(this.layerPosition);
 	}
 	
 	public void moveCameraBy(CGPoint move) {
 		float scale = this.gameLayer.getScale();
-		CGPoint position = CGPoint.make(this.gameLayer.getPosition().x, this.gameLayer.getPosition().y);
-		position.x += - move.x * scale;
-		position.y += - move.y * scale;
+		this.layerPosition.x  = this.gameLayer.getPosition().x;
+		this.layerPosition.y = this.gameLayer.getPosition().y;
+		this.layerPosition.x += - move.x * scale;
+		this.layerPosition.y += - move.y * scale;
 		
-		this.setLayerPosition(position);
+		this.setLayerPosition(this.layerPosition);
 	}
 	
 	public void continuousMoveCameraBy(CGPoint delta) {

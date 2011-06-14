@@ -17,10 +17,25 @@ public class ThumbnailManager {
 	private HashMap<ISelectable, Thumbnail> thumbnails;
 	private Level level;
 	
+	private CGPoint tl;
+	private CGPoint tr;
+	private CGPoint br;
+	private CGPoint bl;
+	private CGPoint result;
+	private CGPoint vector;
+	private CGPoint st;
+	
 	public ThumbnailManager(Level level) {
 		this.level = level;
 		this.cameraManager = this.level.getCameraManager();
 		this.thumbnails = new HashMap<ISelectable, Thumbnail>();
+		this.tl = CGPoint.zero();
+		this.tr = CGPoint.zero();
+		this.br = CGPoint.zero();
+		this.bl = CGPoint.zero();
+		this.result = CGPoint.zero();
+		this.vector = CGPoint.zero();
+		this.st = CGPoint.zero();
 	}
 	
 	public void handle(ArrayList<ISelectable> selectables) {
@@ -50,11 +65,10 @@ public class ThumbnailManager {
 			
 			CGPoint centerScreen = Util.mid(camera);
 			CGPoint target = selectable.getPosition();
-			CGPoint tl = CGPoint.make(CGRect.minX(camera), CGRect.maxY(camera));
-			CGPoint tr = CGPoint.make(CGRect.maxX(camera), CGRect.maxY(camera));
-			CGPoint br = CGPoint.make(CGRect.maxX(camera), CGRect.minY(camera));
-			CGPoint bl = CGPoint.make(CGRect.minX(camera), CGRect.minY(camera));
-			CGPoint result = CGPoint.zero();
+			tl.set(CGRect.minX(camera), CGRect.maxY(camera));
+			tr.set(CGRect.maxX(camera), CGRect.maxY(camera));
+			br.set(CGRect.maxX(camera), CGRect.minY(camera));
+			bl.set(CGRect.minX(camera), CGRect.minY(camera));			
 			
 			if (!this.intersect(centerScreen, target, tl, tr, result)){
 				if (!this.intersect(centerScreen, target, tr, br, result)){
@@ -94,7 +108,9 @@ public class ThumbnailManager {
 			
 			this.thumbnails.get(selectable).setScale(reverseScale);
 			
-			CGPoint vector = CGPoint.ccpSub(selectable.getPosition(), this.thumbnails.get(selectable).getPosition());
+			this.vector.x = selectable.getPosition().x - this.thumbnails.get(selectable).getPosition().x;
+			this.vector.y = selectable.getPosition().y - this.thumbnails.get(selectable).getPosition().y;
+			
 			float angle = CGPoint.ccpToAngle(vector);
 			this.thumbnails.get(selectable).setAngle(angle);
 		}
@@ -103,18 +119,17 @@ public class ThumbnailManager {
 		}
 	}
 	
-	private boolean intersect(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4, CGPoint result) {
-		CGPoint st = CGPoint.zero();
+	private boolean intersect(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4, CGPoint result) {		
 		boolean intersected = false;
-		if (CGPoint.ccpLineIntersect(p1, p2, p3, p4, st)) {
-			if (st.x > 0 && st.y > 0 && st.x < 1 && st.y < 1)
+		if (CGPoint.ccpLineIntersect(p1, p2, p3, p4, this.st)) {
+			if (this.st.x > 0 && this.st.y > 0 && this.st.x < 1 && this.st.y < 1)
 			{
-				CGPoint s = CGPoint.ccpSub(p4, p3);
-				CGPoint m = CGPoint.ccpMult(s, st.y);								
-				CGPoint intersect =  CGPoint.ccpAdd(p3, m);				
+//				CGPoint s = CGPoint.ccpSub(p4, p3);
+//				CGPoint m = CGPoint.ccpMult(s, st.y);								
+//				CGPoint intersect =  CGPoint.ccpAdd(p3, m);				
 				
-				result.x = intersect.x;
-				result.y = intersect.y;
+				result.x = p3.x + st.y * (p4.x - p3.x);
+				result.y = p3.y + st.y * (p4.y - p3.y);				
 				intersected = true;
 			}
 		}

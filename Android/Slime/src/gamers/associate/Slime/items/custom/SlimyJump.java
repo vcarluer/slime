@@ -33,6 +33,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	private CGPoint worldSelect;
 	private float powa;
 	private CGRect scaledRect;
+	private CGRect selectionRect;
 	
 	private CCSprite thumbnailSprite;	
 	
@@ -44,7 +45,10 @@ public class SlimyJump extends Slimy implements ISelectable {
 		this.target = CGPoint.getZero();
 		this.targetImpulse = new Vector2();
 		this.worldImpulse = new Vector2();
-		this.scaledRect = CGRect.zero();		
+		this.scaledRect = CGRect.zero();
+		this.selectionRect = CGRect.zero();
+		this.selectionRect.size.width = Default_Selection_Width;
+		this.selectionRect.size.height = Default_Selection_Height;
 	}
 	
 	public void selectionMove(CGPoint gameReference) {
@@ -191,7 +195,10 @@ public class SlimyJump extends Slimy implements ISelectable {
 	}
 	
 	public CGRect getSelectionRect() {
-		return CGRect.make(this.position.x - Default_Selection_Width / 2, this.position.y - Default_Selection_Height / 2, Default_Selection_Width, Default_Selection_Height);
+		this.selectionRect.origin.x = this.position.x - Default_Selection_Width / 2;
+		this.selectionRect.origin.y = this.position.y - Default_Selection_Height / 2;		
+		
+		return this.selectionRect;
 	}
 	
 	@Override

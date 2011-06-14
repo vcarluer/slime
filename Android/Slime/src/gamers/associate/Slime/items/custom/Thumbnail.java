@@ -18,12 +18,14 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 	private ISelectable target;	
 	private boolean isSelected;
 	private CCSprite targetThumbnail;
+	private CGRect selectionRect;
 	
 	public Thumbnail(float x, float y, float width, float height) {
 		super(x, y, width, height);
 		// this.spriteType = SpriteType.UNKNOWN;
 		this.spriteType = SpriteType.SINGLE_SCALE_DIRECT;
 		this.zOrder = Level.zFront;
+		this.selectionRect = CGRect.zero();		
 	}
 	
 	public Thumbnail(float x, float y, float width, float height, ISelectable target) {
@@ -44,8 +46,13 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 	}
 
 	@Override
-	public CGRect getSelectionRect() {		
-		return CGRect.make(this.position.x - this.width / 2, this.position.y - this.height / 2, this.width, this.height);
+	public CGRect getSelectionRect() {
+		this.selectionRect.origin.x = this.position.x - this.width / 2;
+		this.selectionRect.origin.y = this.position.y - this.height / 2;
+		this.selectionRect.size.width = width;
+		this.selectionRect.size.height = height;
+		
+		return this.selectionRect;
 	}
 
 	@Override

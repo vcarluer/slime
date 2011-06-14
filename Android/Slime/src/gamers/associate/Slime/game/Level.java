@@ -35,6 +35,7 @@ public class Level {
 	public static String LEVEL_HOME = "Home";
 	public static String LEVEL_1 = "1";
 	public static String LEVEL_2 = "2";
+	public static float Gravity = -10;
 	
 	public static Level currentLevel; 
 	
@@ -208,10 +209,10 @@ public class Level {
 	protected void init()
 	{		
 		// Box2D world
-		this.gravity = new Vector2(0, -10);
+		this.gravity = new Vector2(0, Gravity);
 		this.world = new World(this.gravity, true);
 		this.contactManager = new ContactManager();
-		this.world.setContactListener(this.contactManager);
+		//this.world.setContactListener(this.contactManager);
 		// Main game item spritesheet		
 		/*SpriteSheetFactory.add("labo", Level.zMid);
 		SpriteSheetFactory.add("slime", Level.zFront);*/
@@ -237,12 +238,14 @@ public class Level {
 	}
 	
 	public void tick(float delta) {
-		if (!isPaused) {
-			for(GameItem item : this.itemsToAdd) {
-				this.addGameItem(item);
+		if (!isPaused) {						
+			if (this.itemsToAdd.size() > 0) {
+				for(GameItem item : this.itemsToAdd) {
+					this.addGameItem(item);
+				}
+				
+				this.itemsToAdd.clear();
 			}
-			
-			this.itemsToAdd.clear();
 			
 			// TODO: physic step must be fix!
 			synchronized (world) {
@@ -252,12 +255,14 @@ public class Level {
 			for(GameItem item : this.items.values()) {
 				item.render(delta);
 			}
-			
-			for(GameItem item : this.itemsToRemove) {
-				this.removeGameItem(item);
+									
+			if (this.itemsToRemove.size() > 0) {
+				for(GameItem item : this.itemsToRemove) {
+					this.removeGameItem(item);
+				}
+				
+				this.itemsToRemove.clear();
 			}
-			
-			this.itemsToRemove.clear();
 			
 			this.cameraManager.tick(delta);
 			

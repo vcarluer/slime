@@ -51,12 +51,17 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 	public void render(float delta) {
 		this.handleContacts();
 		
-		if (this.sprite != null && this.body != null) {			
-			this.sprite.setPosition(this.body.getPosition().x * this.worldRatio, this.body.getPosition().y * this.worldRatio);			
-			this.sprite.setRotation(-1.0f * ccMacros.CC_RADIANS_TO_DEGREES(this.body.getAngle()));
+		if (this.sprite != null && this.body != null) {
+			float x = this.body.getPosition().x * this.worldRatio;
+			float y = this.body.getPosition().y * this.worldRatio;
+			float rotation = -1.0f * ccMacros.CC_RADIANS_TO_DEGREES(this.body.getAngle());
+			this.sprite.setPosition(x, y);			
+			this.sprite.setRotation(rotation);
+			this.position.set(x, y);
+			this.angle = rotation;
 		}
 		
-		super.render(delta);
+		// super.render(delta);
 	}
 	
 	public void addContact(Object with) {
@@ -67,11 +72,13 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 	}
 	
 	protected void handleContacts() {		
-		for(GameItemPhysic item : this.contacts) {
-			this.handleContact(item);
+		if (this.contacts.size() > 0) {
+			for(GameItemPhysic item : this.contacts) {
+				this.handleContact(item);
+			}
+			
+			this.contacts.clear();
 		}
-		
-		this.contacts.clear();
 	}
 	
 	protected void handleContact(GameItemPhysic item) {		
