@@ -212,7 +212,7 @@ public class Level {
 		this.gravity = new Vector2(0, Gravity);
 		this.world = new World(this.gravity, true);
 		this.contactManager = new ContactManager();
-		//this.world.setContactListener(this.contactManager);
+		this.world.setContactListener(this.contactManager);
 		// Main game item spritesheet		
 		/*SpriteSheetFactory.add("labo", Level.zMid);
 		SpriteSheetFactory.add("slime", Level.zFront);*/
