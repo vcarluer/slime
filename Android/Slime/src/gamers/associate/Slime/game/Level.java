@@ -238,7 +238,8 @@ public class Level {
 	}
 	
 	public void tick(float delta) {
-		if (!isPaused) {						
+		if (!isPaused) {
+			delta = delta * 2;
 			if (this.itemsToAdd.size() > 0) {
 				for(GameItem item : this.itemsToAdd) {
 					this.addGameItem(item);
@@ -246,7 +247,7 @@ public class Level {
 				
 				this.itemsToAdd.clear();
 			}
-			
+									
 			// TODO: physic step must be fix!
 			synchronized (world) {
 	    		world.step(delta, 6, 2);
