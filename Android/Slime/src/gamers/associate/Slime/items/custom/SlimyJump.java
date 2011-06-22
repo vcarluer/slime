@@ -21,10 +21,10 @@ public class SlimyJump extends Slimy implements ISelectable {
 
 	public static String thumbSprite = "wait-v-01.png";
 	
-	public static float Default_Powa = 2.0f;
+	public static float Default_Powa = 2.5f;
 	public static float Max_Impulse = 10f;	
-	private static float Default_Selection_Width = 48f;
-	private static float Default_Selection_Height = 52f;	
+	private static float Default_Selection_Width = 72f; // 48f
+	private static float Default_Selection_Height = 78f; // 52f	
 
 	private CGPoint target;
 	private Vector2 targetImpulse;
@@ -169,28 +169,31 @@ public class SlimyJump extends Slimy implements ISelectable {
 		super.render(delta);		
 		float zoom = Level.currentLevel.getCameraManager().getCurrentZoom();
 		if (zoom != 0) {			
-			CGRect spriteRect = this.getSelectionRect();										
-			float baseX1 = spriteRect.origin.x;
-			float baseY1 = spriteRect.origin.y;			
+//			CGRect spriteRect = this.getSelectionRect();										
+//			float baseX1 = spriteRect.origin.x;
+//			float baseY1 = spriteRect.origin.y;			
+//			
+//			float baseW = Default_Selection_Width;
+//			float baseH = Default_Selection_Height;
+//			float scaledW = baseW / zoom; 
+//			float scaledH = baseH / zoom;
+//			if (scaledW < this.width) {
+//				baseW = this.width;
+//				scaledW = this.width;
+//			}
+//			
+//			if (scaledH < this.height) {
+//				baseH = this.height;
+//				scaledH = this.height;
+//			}
+//			
+//			float targX1 = baseX1 - (scaledW - baseW) / 2;
+//			float targY1 = baseY1 - (scaledH - baseH) / 2;
+//			
+//			this.scaledRect.set(targX1, targY1, scaledW, scaledH);
 			
-			float baseW = Default_Selection_Width;
-			float baseH = Default_Selection_Height;
-			float scaledW = baseW / zoom; 
-			float scaledH = baseH / zoom;
-			if (scaledW < this.width) {
-				baseW = this.width;
-				scaledW = this.width;
-			}
-			
-			if (scaledH < this.height) {
-				baseH = this.height;
-				scaledH = this.height;
-			}
-			
-			float targX1 = baseX1 - (scaledW - baseW) / 2;
-			float targY1 = baseY1 - (scaledH - baseH) / 2;
-			
-			this.scaledRect.set(targX1, targY1, scaledW, scaledH);								
+			//Todo: Compute only on canSelect?
+			Util.getScaledRect(this.getSelectionRect(), this.width, this.height, zoom, this.scaledRect);
 		}
 	}
 	

@@ -30,4 +30,29 @@ public class Util {
 	public static CGPoint mid(CGRect rect) {
 		return CGPoint.make(CGRect.midX(rect), CGRect.midY(rect));
 	}
+	
+	public static void mid(CGRect rect, CGPoint target) {
+		target.set(CGRect.midX(rect), CGRect.midY(rect));
+	}
+	
+	public static void getScaledRect(CGRect selectionRect, float minW, float minH, float zoom, CGRect targetRect) {		
+		float baseW = selectionRect.size.width ;
+		float baseH = selectionRect.size.height;
+		float scaledW = selectionRect.size.width / zoom; 
+		float scaledH = selectionRect.size.height / zoom;
+		if (scaledW < minW) {
+			baseW = minW;
+			scaledW = minW;
+		}
+		
+		if (scaledH < minH) {
+			baseH = minH;
+			scaledH = minH;
+		}
+		
+		float targX1 = selectionRect.origin.x - (scaledW - baseW) / 2;
+		float targY1 = selectionRect.origin.y - (scaledH - baseH) / 2;
+		
+		targetRect.set(targX1, targY1, scaledW, scaledH);					
+	}
 }

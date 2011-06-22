@@ -6,12 +6,16 @@ import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import org.cocos2d.config.ccMacros;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.nodes.CCDirector;
+import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 
 public class CameraManager {
+	private static float margeFollowUnzoom = 50f;
+	private static float margeSelectUnzoom = 100f;
 	
 	private float minScale;
 	private float maxScale;
@@ -41,16 +45,37 @@ public class CameraManager {
 	private ArrayList<CameraAction> actions;
 	private ArrayList<CameraAction> actionsToRemove;
 	
+	private CGPoint st;
+	private CGPoint tl;
+	private CGPoint tr;
+	private CGPoint br;
+	private CGPoint bl;
+	private CGPoint result1;
+	private CGPoint result2;
+	private CGPoint centerScreen;
+	private CGPoint currentOpposite;
+	private CGPoint screenPoint;
+	
 	public CameraManager(CCLayer gameLayer) {
 		this.gameLayer = gameLayer;
 				
 		this.moveCameraBy = new CGPoint();
 		this.virtualCamera = CGRect.getZero();
-		this.cameraMargin = 50f;
+		this.cameraMargin = margeFollowUnzoom;
 		this.margeRect = CGRect.zero();
 		this.actions = new ArrayList<CameraAction>();
 		this.actionsToRemove = new ArrayList<CameraAction>();
 		this.layerPosition = CGPoint.zero();
+		this.st = CGPoint.zero();
+		this.tl = CGPoint.zero();
+		this.tr = CGPoint.zero();
+		this.br = CGPoint.zero();
+		this.bl = CGPoint.zero();
+		this.result1 = CGPoint.zero();
+		this.result2 = CGPoint.zero();
+		this.centerScreen = CGPoint.zero();
+		this.currentOpposite = CGPoint.zero();
+		this.screenPoint = CGPoint.zero();
 	}
 	
 	protected void tick(float delta) {
@@ -86,35 +111,46 @@ public class CameraManager {
 	private void tryFollowUnzoom() {
 		if (this.followed != null && this.followed.isActive()) {
 			CGPoint position = this.followed.getPosition();
-			if (!CGRect.containsPoint(this.margeRect, position)) {				
+			if (!CGRect.containsPoint(this.margeRect, position)) {
+				this.setZoomPoint(this.getTargetAnchorForMargin(position), true);
 				
-				// Opposite point anchor
-				float anchorX = CGRect.maxX(this.margeRect) - position.x;
-				float anchorY = CGRect.maxY(this.margeRect) - position.y;
-				
-				this.setZoomPoint(CGPoint.make(anchorX, anchorY));
 				// Just unzoom 
-				float targetZoom = this.currentZoom;
-				if (position.x > CGRect.maxX(this.margeRect)) {					
-					targetZoom = this.currentZoom * (CGRect.width(this.margeRect) / (position.x - this.margeRect.origin.x));					
-				}
-								
-				if (position.y > CGRect.maxY(this.margeRect)) {					
-					targetZoom = this.currentZoom * (CGRect.height(this.margeRect) / (position.y - this.margeRect.origin.y));				
-				}
-				if (position.x < CGRect.minX(this.margeRect)) {					
-					targetZoom = this.currentZoom * (CGRect.width(this.margeRect) / (CGRect.maxX(this.margeRect) - position.x));
-				}
-
-				if (position.y < CGRect.minY(this.margeRect)) {					
-					targetZoom = this.currentZoom * (CGRect.height(this.margeRect) / (CGRect.maxY(this.margeRect) - position.y));				
-				}
+				float targetZoom = this.getTargetZoomForMargin(position);
 				
 				if (targetZoom > this.minFollowScale && targetZoom < this.currentZoom) {
 					this.zoomCameraTo(targetZoom);
 				}
 			}
 		}
+	}
+	
+	private CGPoint getTargetAnchorForMargin(CGPoint targetPosition) {
+		// Opposite point anchor
+//		float anchorX = (CGRect.maxX(this.margeRect) - targetPosition.x);
+//		float anchorY = (CGRect.maxY(this.margeRect) - targetPosition.y);
+//		return CGPoint.make(anchorX, anchorY);
+		this.findOppositePointOnCamera(targetPosition, this.currentOpposite);
+		return this.currentOpposite;
+	}
+	
+	private float getTargetZoomForMargin(CGPoint targetPosition) {
+		float targetZoom = this.currentZoom;
+		if (targetPosition.x > CGRect.maxX(this.margeRect)) {					
+			targetZoom = this.currentZoom * (CGRect.width(this.margeRect) / (targetPosition.x - this.margeRect.origin.x));					
+		}
+						
+		if (targetPosition.y > CGRect.maxY(this.margeRect)) {					
+			targetZoom = this.currentZoom * (CGRect.height(this.margeRect) / (targetPosition.y - this.margeRect.origin.y));				
+		}
+		if (targetPosition.x < CGRect.minX(this.margeRect)) {					
+			targetZoom = this.currentZoom * (CGRect.width(this.margeRect) / (CGRect.maxX(this.margeRect) - targetPosition.x));
+		}
+
+		if (targetPosition.y < CGRect.minY(this.margeRect)) {					
+			targetZoom = this.currentZoom * (CGRect.height(this.margeRect) / (CGRect.maxY(this.margeRect) - targetPosition.y));				
+		}
+		
+		return targetZoom;
 	}		
 	
 	public void follow(GameItem item) {
@@ -123,6 +159,7 @@ public class CameraManager {
 	}
 	
 	public void followZoom(GameItem item) {
+		this.cameraMargin = margeFollowUnzoom;
 		this.followed = item;
 		this.followZoom = true;
 	}
@@ -247,15 +284,11 @@ public class CameraManager {
 		this.zoomAnchor = zoomGamePoint;
 	}
 	
-	private CGPoint getScreenPoint(CGPoint gamePoint) {
-		CGPoint point = CGPoint.zero();
+	private CGPoint getScreenPoint(CGPoint gamePoint) {						
+		this.screenPoint.x = (gamePoint.x - this.virtualCamera.origin.x) * this.getCurrentZoom();
+		this.screenPoint.y = (gamePoint.y - this.virtualCamera.origin.y) * this.getCurrentZoom();	
 		
-		if (CGRect.containsPoint(this.virtualCamera, gamePoint)) {
-			point.x = (gamePoint.x - this.virtualCamera.origin.x) * this.getCurrentZoom();
-			point.x = (gamePoint.y - this.virtualCamera.origin.y) * this.getCurrentZoom();
-		}
-		
-		return point;
+		return this.screenPoint;
 	}
 	
 	public CGPoint getGamePoint(CGPoint screenPoint) {		
@@ -330,6 +363,17 @@ public class CameraManager {
 		float ratio = 1 / zoom;
 		this.virtualCamera.size.width = CGRect.width(this.screenView) * ratio;
 		this.virtualCamera.size.height = CGRect.height(this.screenView) * ratio;
+		
+		this.computeMargeRect();
+	}
+	
+	private void computeMargeRect() {
+		float zoom = this.minScale;
+		if (this.currentZoom != 0) {
+			zoom = this.currentZoom;
+		}
+		float ratio = 1 / zoom;
+		
 		float ratioMarge = this.cameraMargin * ratio;
 		float wRatioMarge = ratioMarge * 2;
 		float hRationMarge = ratioMarge * 2;
@@ -404,6 +448,29 @@ public class CameraManager {
 	public void draw(GL10 gl) {
 		// Drawing marge rectangle
 		Util.draw(gl, this.margeRect, 2, 1, 0, 0, 1);
+		if (this.zoomAnchor != null) {
+			gl.glDisable(GL10.GL_LINE_SMOOTH);
+			gl.glLineWidth(2.0f);
+			gl.glColor4f(0.0f, 0.0f, 1.0f, 1.0f);
+			float size = 10;
+			if (this.getCurrentZoom() != 0) {
+				size = size / this.getCurrentZoom();
+			}
+			
+			CCDrawingPrimitives.ccDrawCircle(gl, this.zoomAnchor, size, ccMacros.CC_DEGREES_TO_RADIANS(90), 10, true);			
+		}
+		
+		if (this.zoomScreenPin != null) {
+			CGPoint pinGame = this.getGamePoint(this.zoomScreenPin);
+			gl.glDisable(GL10.GL_LINE_SMOOTH);
+			gl.glLineWidth(1.0f);
+			gl.glColor4f(1.0f, 1.0f, 0.0f, 1.0f);
+			float size = 5;
+			if (this.getCurrentZoom() != 0) {
+				size = size / this.getCurrentZoom();
+			}
+			CCDrawingPrimitives.ccDrawCircle(gl, pinGame, size, ccMacros.CC_DEGREES_TO_RADIANS(90), 5, true);
+		}
 	}
 	
 	public void cancelFollow() {
@@ -435,8 +502,77 @@ public class CameraManager {
 		this.addAction(new ZoomInterpolateAction(this, time, targetZoom));
 	}
 	
+	public void unzoomForMargin(CGPoint targetPosition, float time) {
+		this.cancelFollow();
+		this.cameraMargin = margeSelectUnzoom;
+		this.computeMargeRect();
+		float targetZoom = this.getTargetZoomForMargin(targetPosition);
+		if (targetZoom != this.currentZoom) {
+			CGPoint anchor = this.getTargetAnchorForMargin(targetPosition);			
+			this.addAction(new ZoomInterpolateAction(this, time, anchor, targetZoom));
+		}
+	}
+	
 	public void cancelZoomAnchor() {
 		this.zoomAnchor = null;
 		this.zoomScreenPin = null;
+	}
+	
+	private void findOppositePointOnCamera(CGPoint itemPoint, CGPoint result) {
+		tl.set(CGRect.minX(this.virtualCamera), CGRect.maxY(this.virtualCamera));
+		tr.set(CGRect.maxX(this.virtualCamera), CGRect.maxY(this.virtualCamera));
+		br.set(CGRect.maxX(this.virtualCamera), CGRect.minY(this.virtualCamera));
+		bl.set(CGRect.minX(this.virtualCamera), CGRect.minY(this.virtualCamera));
+		
+		CGPoint centerScreen = this.getCenterScreen();
+		
+		CGPoint tempResult = null;
+		float du = this.intersect(itemPoint, centerScreen, tl, tr, this.result1);
+		if (du != -1) {
+			float db = this.intersect(itemPoint, centerScreen, br, bl, this.result2);
+			if (du > db) {
+				tempResult = this.result1;				
+			}
+			else {
+				tempResult = this.result2;
+			}
+		}
+		else
+		{
+			float dr = this.intersect(itemPoint, centerScreen, tr, br, this.result1);			
+			float dl = this.intersect(itemPoint, centerScreen, bl, tl, this.result2);
+			if (dr > dl) {
+				tempResult = this.result1;
+			}
+			else {
+				tempResult = this.result2;
+			}		
+		}
+		
+		if (tempResult != null) {
+			result.x = tempResult.x;
+			result.y = tempResult.y;
+		}
+	}
+	
+	// p1, p2 = item, center
+	// p3, p4 = screen array
+	private float intersect(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4, CGPoint result) {		
+		float length = -1;
+		if (CGPoint.ccpLineIntersect(p1, p2, p3, p4, this.st)) {
+			if (this.st.y > 0 && this.st.y < 1)
+			{			
+				result.x = p3.x + st.y * (p4.x - p3.x);
+				result.y = p3.y + st.y * (p4.y - p3.y);				
+				length = CGPoint.ccpDistance(p1, result);
+			}
+		}
+		
+		return length;
+	}
+	
+	public CGPoint getCenterScreen() {
+		Util.mid(this.virtualCamera, this.centerScreen);
+		return this.centerScreen;
 	}
 }

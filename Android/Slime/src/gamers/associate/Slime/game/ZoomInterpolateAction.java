@@ -1,5 +1,7 @@
 package gamers.associate.Slime.game;
 
+import org.cocos2d.types.CGPoint;
+
 import gamers.associate.Slime.items.base.GameItem;
 
 public class ZoomInterpolateAction extends CameraAction {
@@ -13,6 +15,13 @@ public class ZoomInterpolateAction extends CameraAction {
 		super(manager, time);
 		this.setTargetAction(target);
 		this.setTargetValue(targetZoom);
+		// this.getManager().setZoomPoint(this.getTargetAction().getPosition(), true);
+	}
+	
+	public ZoomInterpolateAction(CameraManager manager, float time, CGPoint screenTarget, float targetZoom) {
+		super(manager, time);
+		this.setTargetValue(targetZoom);
+		this.getManager().setZoomPoint(screenTarget, true);
 	}
 
 	@Override
@@ -22,12 +31,11 @@ public class ZoomInterpolateAction extends CameraAction {
 		}
 		else {
 			// Set zoom point center of screen?
-		}
-			
-			
+		}					
 		
 		float zoomBy = (this.getTargetValue() - this.getManager().getCurrentZoom()) * this.getInterpolation();
-		this.getManager().zoomCameraCenterBy(zoomBy);
+		// this.getManager().zoomCameraCenterBy(zoomBy);
+		this.getManager().zoomCameraBy(zoomBy);
 	}
 
 }

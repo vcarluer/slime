@@ -491,6 +491,9 @@ public class Level {
 			
 			if (this.selectedItem != null) {
 				this.selectedItem.select(gameReference);
+				if (!(this.selectedItem instanceof Thumbnail)) {
+					this.cameraManager.unzoomForMargin(this.selectedItem.getPosition(), 1.0f);
+				}
 			}
 		}
 	}

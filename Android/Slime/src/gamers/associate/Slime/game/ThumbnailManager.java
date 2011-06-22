@@ -63,7 +63,7 @@ public class ThumbnailManager {
 			float minMargeX = CGRect.minX(camera) + (Thumbnail_Margin_Width * reverseScale) / 2;
 			float minMargeY = CGRect.minY(camera) + (Thumbnail_Margin_Height * reverseScale) / 2;
 			
-			CGPoint centerScreen = Util.mid(camera);
+			CGPoint centerScreen = this.cameraManager.getCenterScreen();
 			CGPoint target = selectable.getPosition();
 			tl.set(CGRect.minX(camera), CGRect.maxY(camera));
 			tr.set(CGRect.maxX(camera), CGRect.maxY(camera));

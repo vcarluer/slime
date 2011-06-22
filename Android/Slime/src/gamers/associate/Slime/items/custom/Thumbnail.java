@@ -1,6 +1,9 @@
 package gamers.associate.Slime.items.custom;
 
+import javax.microedition.khronos.opengles.GL10;
+
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.ISelectable;
@@ -19,13 +22,18 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 	private boolean isSelected;
 	private CCSprite targetThumbnail;
 	private CGRect selectionRect;
+	private CGRect scaledRect;
+	
+	private static float Default_Selection_Width = 50f;
+	private static float Default_Selection_Height = 50f;
 	
 	public Thumbnail(float x, float y, float width, float height) {
 		super(x, y, width, height);
 		// this.spriteType = SpriteType.UNKNOWN;
 		this.spriteType = SpriteType.SINGLE_SCALE_DIRECT;
 		this.zOrder = Level.zFront;
-		this.selectionRect = CGRect.zero();		
+		this.selectionRect = CGRect.make(0, 0, Default_Selection_Width, Default_Selection_Height);
+		this.scaledRect = CGRect.zero();
 	}
 	
 	public Thumbnail(float x, float y, float width, float height, ISelectable target) {
@@ -47,12 +55,12 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 
 	@Override
 	public CGRect getSelectionRect() {
-		this.selectionRect.origin.x = this.position.x - this.width / 2;
-		this.selectionRect.origin.y = this.position.y - this.height / 2;
-		this.selectionRect.size.width = width;
-		this.selectionRect.size.height = height;
+		this.selectionRect.origin.x = this.position.x - Default_Selection_Width / 2;
+		this.selectionRect.origin.y = this.position.y - Default_Selection_Height / 2;		
 		
-		return this.selectionRect;
+		Util.getScaledRect(this.selectionRect, this.width, this.height, Level.currentLevel.getCameraManager().getCurrentZoom(), this.scaledRect);
+		
+		return this.scaledRect;
 	}
 
 	@Override
@@ -161,5 +169,17 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 	@Override
 	public boolean isActive() {
 		return this.target.isActive();
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.base.GameItem#draw(javax.microedition.khronos.opengles.GL10)
+	 */
+	@Override
+	public void draw(GL10 gl) {		
+		super.draw(gl);
+		if (this.scaledRect != null && this.isActive()) {			
+			// Drawing selection rectangle
+			Util.draw(gl, this.scaledRect, 1.0f, 0, 0, 1, 1);
+		}
 	}	
 }
