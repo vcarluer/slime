@@ -56,6 +56,8 @@ public class CameraManager {
 	private CGPoint currentOpposite;
 	private CGPoint screenPoint;
 	
+	private float zoomStart;
+	
 	public CameraManager(CCLayer gameLayer) {
 		this.gameLayer = gameLayer;
 				
@@ -111,16 +113,16 @@ public class CameraManager {
 	private void tryFollowUnzoom() {
 		if (this.followed != null && this.followed.isActive()) {
 			CGPoint position = this.followed.getPosition();
-			if (!CGRect.containsPoint(this.margeRect, position)) {
+			//if (!CGRect.containsPoint(this.margeRect, position)) {
 				this.setZoomPoint(this.getTargetAnchorForMargin(position), true);
 				
 				// Just unzoom 
 				float targetZoom = this.getTargetZoomForMargin(position);
 				
-				if (targetZoom > this.minFollowScale && targetZoom < this.currentZoom) {
+				if (targetZoom > this.minFollowScale && targetZoom < this.zoomStart) {
 					this.zoomCameraTo(targetZoom);
 				}
-			}
+			//}
 		}
 	}
 	
@@ -162,6 +164,7 @@ public class CameraManager {
 		this.cameraMargin = margeFollowUnzoom;
 		this.followed = item;
 		this.followZoom = true;
+		this.zoomStart = this.getCurrentZoom();
 	}
 		
 	public void normalizePosition() {
@@ -527,9 +530,9 @@ public class CameraManager {
 		CGPoint centerScreen = this.getCenterScreen();
 		
 		CGPoint tempResult = null;
-		float du = this.intersect(itemPoint, centerScreen, tl, tr, this.result1);
+		float du = this.intersectCameraView(itemPoint, centerScreen, tl, tr, this.result1);
 		if (du != -1) {
-			float db = this.intersect(itemPoint, centerScreen, br, bl, this.result2);
+			float db = this.intersectCameraView(itemPoint, centerScreen, br, bl, this.result2);
 			if (du > db) {
 				tempResult = this.result1;				
 			}
@@ -539,8 +542,8 @@ public class CameraManager {
 		}
 		else
 		{
-			float dr = this.intersect(itemPoint, centerScreen, tr, br, this.result1);			
-			float dl = this.intersect(itemPoint, centerScreen, bl, tl, this.result2);
+			float dr = this.intersectCameraView(itemPoint, centerScreen, tr, br, this.result1);			
+			float dl = this.intersectCameraView(itemPoint, centerScreen, bl, tl, this.result2);
 			if (dr > dl) {
 				tempResult = this.result1;
 			}
@@ -557,7 +560,7 @@ public class CameraManager {
 	
 	// p1, p2 = item, center
 	// p3, p4 = screen array
-	private float intersect(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4, CGPoint result) {		
+	private float intersectCameraView(CGPoint p1, CGPoint p2, CGPoint p3, CGPoint p4, CGPoint result) {		
 		float length = -1;
 		if (CGPoint.ccpLineIntersect(p1, p2, p3, p4, this.st)) {
 			if (this.st.y > 0 && this.st.y < 1)
