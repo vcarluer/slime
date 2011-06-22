@@ -35,6 +35,9 @@ public class CameraManager {
 	private CGRect margeRect;
 	private CGPoint layerPosition;
 	
+	private CGPoint zoomAnchor;
+	private CGPoint zoomScreenPin;
+	
 	private ArrayList<CameraAction> actions;
 	private ArrayList<CameraAction> actionsToRemove;
 	
@@ -232,14 +235,27 @@ public class CameraManager {
 		double max = Math.sqrt(screenW2 + screenH2);
 		float zoom = (float) (zoomDelta * maxScale / max) * this.zoomSpeed;
 		this.zoomCameraBy(zoom);
+	}	
+	
+	public void setZoomPoint(CGPoint zoomScreenPoint) {
+		this.zoomScreenPin = CGPoint.make(zoomScreenPoint.x, zoomScreenPoint.y);				
+		this.zoomAnchor = this.getGamePoint(zoomScreenPoint);
 	}
 	
-	private CGPoint zoomAnchor;
-	private CGPoint zoomScreenPin;
+	public void setZoomPoint(CGPoint zoomGamePoint, boolean isGamePoint) {
+		this.zoomScreenPin = this.getScreenPoint(zoomGamePoint);				
+		this.zoomAnchor = zoomGamePoint;
+	}
 	
-	public void setZoomPoint(CGPoint zoomPoint) {
-		this.zoomScreenPin = CGPoint.make(zoomPoint.x, zoomPoint.y);				
-		this.zoomAnchor = this.getGamePoint(zoomPoint);
+	private CGPoint getScreenPoint(CGPoint gamePoint) {
+		CGPoint point = CGPoint.zero();
+		
+		if (CGRect.containsPoint(this.virtualCamera, gamePoint)) {
+			point.x = (gamePoint.x - this.virtualCamera.origin.x) * this.getCurrentZoom();
+			point.x = (gamePoint.y - this.virtualCamera.origin.y) * this.getCurrentZoom();
+		}
+		
+		return point;
 	}
 	
 	public CGPoint getGamePoint(CGPoint screenPoint) {		
@@ -413,6 +429,10 @@ public class CameraManager {
 	
 	public void zoomInterpolateTo(GameItem target, float targetZoom, float time) {
 		this.addAction(new ZoomInterpolateAction(this, time, target, targetZoom));
+	}
+	
+	public void zoomInterpolateTo(float targetZoom, float time) {
+		this.addAction(new ZoomInterpolateAction(this, time, targetZoom));
 	}
 	
 	public void cancelZoomAnchor() {
