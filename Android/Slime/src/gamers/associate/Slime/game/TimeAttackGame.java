@@ -2,7 +2,12 @@ package gamers.associate.Slime.game;
 
 import java.text.DecimalFormat;
 
+import org.cocos2d.actions.base.CCAction;
+import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCBlink;
+import org.cocos2d.actions.interval.CCFadeIn;
+import org.cocos2d.actions.interval.CCFadeOut;
+import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.types.ccColor3B;
 
@@ -20,6 +25,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	private Level level;
 	private float LocalRender;
 	private boolean isCritic;
+	private CCAction criticAction;
 	
 	public static TimeAttackGame NewGame() {
 		return new TimeAttackGame(0, 0, 0, 0);				
@@ -55,8 +61,8 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	
 	private static String getFormatTimeCritic(float millis) {		
 		DecimalFormat df = new DecimalFormat ( ) ; 
-		df.setMaximumFractionDigits ( 2 ) ; //arrondi à 2 chiffres apres la virgules 
-		df.setMinimumFractionDigits ( 2 ) ; 
+		df.setMaximumFractionDigits ( 0 ) ; //arrondi à 2 chiffres apres la virgules 
+		df.setMinimumFractionDigits ( 0 ) ; 
 		df.setDecimalSeparatorAlwaysShown ( false ) ; 
 		return df.format(millis);		
 	}
@@ -77,6 +83,9 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 				this.isGameOver = true;
 				this.level.gameOver();
 				this.level.setHudText("Game Over");				
+				this.level.getHudLabel().stopAction(this.criticAction);
+				this.criticAction = CCFadeIn.action(0.5f);
+				this.level.getHudLabel().runAction(this.criticAction);
 			}			
 			
 			if (!this.isGameOver) {								
@@ -84,13 +93,18 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 					if (this.leftTime < this.criticTime) {
 						CCLabel label = this.level.getHudLabel();
 						// label.runAction(CCBlink.action(this.criticTime, 1));
+						CCFadeIn in = CCFadeIn.action(0.5f);
+						CCFadeOut out = CCFadeOut.action(0.5f);
+						CCSequence seq = CCSequence.actions(in, out);
+						this.criticAction = CCRepeatForever.action(seq);
+						label.runAction(this.criticAction);
 						label.setColor(ccColor3B.ccc3( 255,0,0));
 						this.isCritic = true;
 					}
 				}
 					
 				if (this.isCritic) {
-					if (this.LocalRender >= 0.2f) {						
+					if (this.LocalRender >= 1f) {						
 						this.level.setHudText(getFormatTimeCritic(this.leftTime));
 						this.LocalRender = 0;
 					}						
