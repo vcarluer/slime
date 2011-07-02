@@ -5,12 +5,18 @@ import gamers.associate.Slime.game.Level;
 public abstract class LevelDefinition {
 	private String id;
 	private boolean isSpecial;
+	private GamePlay gamePlay;
 	
 	protected LevelDefinition() {
+		this.gamePlay = GamePlay.None;
 		this.init();
 	}
 	
-	protected abstract void init();
+	protected void init() {
+		this.initLevel();
+	}
+	
+	protected abstract void initLevel();
 	
 	/**
 	 * @return the id
@@ -40,5 +46,19 @@ public abstract class LevelDefinition {
 	 */
 	protected void setSpecial(boolean isSpecial) {
 		this.isSpecial = isSpecial;
+	}
+
+	/**
+	 * @return the gamePlay
+	 */
+	public GamePlay getGamePlay() {
+		return gamePlay;
+	}
+
+	/**
+	 * @param gamePlay the gamePlay to set
+	 */
+	protected void setGamePlay(GamePlay gamePlay) {
+		this.gamePlay = gamePlay;
 	}
 }

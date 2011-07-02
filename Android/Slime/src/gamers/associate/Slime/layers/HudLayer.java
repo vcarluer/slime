@@ -2,36 +2,48 @@ package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelSelection;
+import gamers.associate.Slime.items.custom.MenuSprite;
 
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItem;
 import org.cocos2d.menus.CCMenuItemLabel;
+import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
+import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.CGPoint;
+import org.cocos2d.types.ccColor3B;
 
 public class HudLayer extends CCLayer {
-	private static String Count_Text = "Slimy: ";
+	private static String Count_Text = "Hud";
 	
 	private CCLabel countLabel;
 	
-	public HudLayer() {	
-		CCMenuItem itemBack = CCMenuItemLabel.item("Back", this, "goBack");		
-		CCMenuItem itemPause = CCMenuItemLabel.item("Pause", this, "goPause");
-		itemBack.setPosition(CGPoint.make(-50, CCDirector.sharedDirector().winSize().getHeight() / 2 - 20));
-		itemPause.setPosition(CGPoint.make(50, CCDirector.sharedDirector().winSize().getHeight() / 2 - 20));
+	public HudLayer() {
+		
+		CCSprite pauseSprite = CCSprite.sprite("control-pause.png", true);
+		CCMenuItemSprite pauseMenu = CCMenuItemSprite.item(pauseSprite, pauseSprite, this, "goPause");
+		
+		float left = - CCDirector.sharedDirector().winSize().getWidth() / 2 + (MenuSprite.Width + 5) / 2 ;
+		float top = CCDirector.sharedDirector().winSize().getHeight() / 2 - (MenuSprite.Height + 5) / 2;
+		pauseMenu.setPosition(CGPoint.make(left, top));
 		
 		
-		CCMenu menu = CCMenu.menu(itemBack, itemPause);		
+		CCMenu menu = CCMenu.menu(pauseMenu);		
 		this.addChild(menu);
 		
-		this.countLabel = CCLabel.makeLabel(Count_Text, "DroidSans", 24);		
+		this.countLabel = getMenuLabel(Count_Text);		
+		this.countLabel.setAnchorPoint(0, 0);
 		this.addChild(this.countLabel);
 		this.countLabel.setPosition(
-				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - 100, 
-				CCDirector.sharedDirector().winSize().getHeight() - 20));
+				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - 200, 
+				CCDirector.sharedDirector().winSize().getHeight() - 35));
 		this.hideSlimyCount();
+	}
+	
+	private static CCLabel getMenuLabel(String text) {
+		return CCLabel.makeLabel(text.toUpperCase(), "fonts/Slime.ttf", 30.0f);
 	}
 	
 	@Override
@@ -56,6 +68,15 @@ public class HudLayer extends CCLayer {
 	public void setSlimyCount(int count) {
 		this.countLabel.setVisible(true);
 		this.countLabel.setString(Count_Text + String.valueOf(count));
+	}
+	
+	public void setHudText(String text) {
+		this.countLabel.setVisible(true);
+		this.countLabel.setString(text);		
+	}
+	
+	public CCLabel getLabel() {
+		return this.countLabel;
 	}
 	
 	public void hideSlimyCount() {

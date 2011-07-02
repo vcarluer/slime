@@ -7,7 +7,7 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.custom.GoalPortal;
 
-public class LevelBeta extends LevelDefinition {
+public class LevelBeta extends LevelTimeAttack {
 	@Override
 	public void buildLevel(Level level) {
 		// float width = 950;
@@ -167,7 +167,7 @@ public class LevelBeta extends LevelDefinition {
 	}
 
 	@Override
-	protected void init() {
+	protected void initLevel() {
 		this.setId("Beta");		
 	}
 

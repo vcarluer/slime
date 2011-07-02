@@ -28,6 +28,14 @@ public class HardCodedLevelBuilder {
 		LevelDefinition levelDef = levels.get(levelName);
 		if (levelDef != null) {
 			levelDef.buildLevel(level);
+			
+			switch(levelDef.getGamePlay()) {
+			case TimeAttack:
+				level.addGamePlay(TimeAttackGame.NewGame());
+				break;
+			default:
+				break;
+			}
 		}
 	}
 	

@@ -2,7 +2,7 @@ package gamers.associate.Slime.levels;
 
 import gamers.associate.Slime.game.Level;
 
-public class Level11 extends LevelDefinition {
+public class Level11 extends LevelTimeAttack {
 
 	@Override
 	public void buildLevel(Level level) {
@@ -11,7 +11,7 @@ public class Level11 extends LevelDefinition {
 	}
 
 	@Override
-	protected void init() {
+	protected void initLevel() {
 		this.setId("1-1");
 	}
 }

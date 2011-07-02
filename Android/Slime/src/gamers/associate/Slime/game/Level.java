@@ -91,6 +91,8 @@ public class Level {
 	
 	protected CCNodeDraw nodeDraw;
 	
+	protected IGamePlay gamePlay;
+	
 	protected Level() {
 		this.scene = CCScene.node();
 		this.levelLayer = new LevelLayer(this);
@@ -171,7 +173,7 @@ public class Level {
 		
 		// Hard coded for now
 		HardCodedLevelBuilder.build(this, levelName);													
-		
+				
 		this.currentLevelName = levelName;
 		
 		this.isPaused = false;
@@ -225,11 +227,11 @@ public class Level {
 		spriteSheet.addChild(this.backgroundSprite);				
 		
 		// hud
-		this.label = CCLabel.makeLabel("Hud !", "DroidSans", 16);		
-		this.hudLayer.addChild(this.label);
-		label.setPosition(
-				CGPoint.ccp(20, 
-				CCDirector.sharedDirector().winSize().getHeight() - 20));
+//		this.label = CCLabel.makeLabel("Hud !", "DroidSans", 16);		
+//		this.hudLayer.addChild(this.label);
+//		label.setPosition(
+//				CGPoint.ccp(20, 
+//				CCDirector.sharedDirector().winSize().getHeight() - 20));
 		
 		// Items
 		this.attachToFactory();
@@ -238,9 +240,13 @@ public class Level {
 		HardCodedLevelBuilder.init();
 	}
 	
+	public float getTimeRatio() {
+		return 2.0f;
+	}
+	
 	public void tick(float delta) {
 		if (!isPaused) {
-			delta = delta * 2;
+			delta = delta * this.getTimeRatio();
 			if (this.itemsToAdd.size() > 0) {
 				for(GameItem item : this.itemsToAdd) {
 					this.addGameItem(item);
@@ -444,6 +450,9 @@ public class Level {
 			}
 			
 			this.unselectCurrent();
+			if (this.gamePlay != null) {
+				this.gamePlay.start();
+			}
 		}
 	}
 	
@@ -509,5 +518,27 @@ public class Level {
 	
 	public Vector2 getGravity() {
 		return this.gravity;
+	}
+	
+	public void addGamePlay(IGamePlay gamePlay) {
+		if (gamePlay instanceof GameItem) {
+			GameItem item = (GameItem) gamePlay;
+			this.addGameItem(item);
+		}
+		
+		this.gamePlay = gamePlay;
+		this.gamePlay.setLevel(this);
+	}
+	
+	public void gameOver() {
+		
+	}
+	
+	public void setHudText(String text) {
+		this.hudLayer.setHudText(text);
+	}
+	
+	public CCLabel getHudLabel() {
+		return this.hudLayer.getLabel();
 	}
 }

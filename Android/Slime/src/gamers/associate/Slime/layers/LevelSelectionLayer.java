@@ -2,6 +2,7 @@ package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.game.HardCodedLevelBuilder;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.levels.LevelDefinition;
 import gamers.associate.Slime.levels.LevelHome;
 
@@ -22,7 +23,7 @@ public class LevelSelectionLayer extends CCLayer {
 		menu = CCMenu.menu();
 		menuCommand = CCMenu.menu();
 		
-		menuCommand.setPosition((127 + 5) / 2, (91 + 5) / 2);
+		menuCommand.setPosition((MenuSprite.Width + 5) / 2, (MenuSprite.Height + 5) / 2);
 		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);
 		CCMenuItemSprite goBackMenu = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goBack");
 		
@@ -58,7 +59,7 @@ public class LevelSelectionLayer extends CCLayer {
 	}
 
 	public void goBack(Object sender) {
-		Level level = Level.get(LevelHome.id, true);		
+		Level level = Level.get(LevelHome.Id, true);		
 		CCDirector.sharedDirector().replaceScene(level.getScene());
 	}
 	

@@ -10,7 +10,7 @@ import gamers.associate.Slime.items.custom.SpawnPortal;
 import gamers.associate.Slime.layers.HomeLayer;
 
 public class LevelHome extends LevelDefinition {
-	public static String id = "Home";
+	public static String Id = "Home";
 	
 	@Override
 	public void buildLevel(Level level) {
@@ -47,8 +47,8 @@ public class LevelHome extends LevelDefinition {
 	}
 
 	@Override
-	protected void init() {
-		this.setId(id);
+	protected void initLevel() {
+		this.setId(Id);
 		this.setSpecial(true);
 	}
 }

@@ -74,7 +74,7 @@ public class SlimeLoadingLayer extends CCLayer {
 				SpriteSheetFactory.add("slime", Level.zFront);
 				
 				
-				currentLevel = Level.get(LevelHome.id);					
+				currentLevel = Level.get(LevelHome.Id);					
 				unschedule(nextCallback);
 				
 				spriteSheet.removeChild(sprite, true);						
