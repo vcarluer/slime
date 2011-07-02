@@ -1,6 +1,9 @@
 package gamers.associate.Slime.layers;
 
+import gamers.associate.Slime.game.HardCodedLevelBuilder;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.levels.LevelDefinition;
+import gamers.associate.Slime.levels.LevelHome;
 
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
@@ -12,20 +15,30 @@ import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
 
 public class LevelSelectionLayer extends CCLayer {
+	private CCMenu menu;
+	private CCMenu menuCommand;
 	
 	public LevelSelectionLayer() {
+		menu = CCMenu.menu();
+		menuCommand = CCMenu.menu();
+		
+		menuCommand.setPosition((127 + 5) / 2, (91 + 5) / 2);
 		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);
 		CCMenuItemSprite goBackMenu = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goBack");
 		
-		CCMenuItem testMenu1 = CCMenuItemLabel.item(getMenuLabel("Level 1"), this, "doTest");		
-		CCMenuItem testMenu2 = CCMenuItemLabel.item(getMenuLabel("Level 2"), this, "doTest2");
-		CCMenuItem testMenu3 = CCMenuItemLabel.item(getMenuLabel("Level 3"), this, "doTest");				
-		menu = CCMenu.menu(goBackMenu, testMenu3, testMenu2, testMenu1);
-		menu.alignItemsInColumns(new int[] { 1, 3 });
-		this.addChild(menu);
-	}
+		menuCommand.addChild(goBackMenu);		
 		
-	private CCMenu menu;
+		for(LevelDefinition levelDef : HardCodedLevelBuilder.getNormalLevels()) {
+			CCMenuItem levelItem = CCMenuItemLabel.item(getMenuLabel(levelDef.getId()), this, "selectLevel");
+			levelItem.setUserData(levelDef.getId());
+			menu.addChild(levelItem);
+		}
+				
+		menu.alignItemsInColumns(new int[] { 7, 7 });
+		
+		this.addChild(menuCommand);
+		this.addChild(menu);
+	}		
 	
 	@Override
 	public void onEnter() {		
@@ -36,19 +49,16 @@ public class LevelSelectionLayer extends CCLayer {
 	public void onExit() {		
 		super.onExit();
 	}
+	
+	public void selectLevel(Object sender) {
+		CCMenuItem item = (CCMenuItem)sender;		
+		String levelName = (String)item.getUserData();
+		Level level = Level.get(levelName, true);
+		CCDirector.sharedDirector().replaceScene(level.getScene());
+	}
 
-	public void doTest(Object sender) {
-		Level level = Level.get(Level.LEVEL_1, true);
-		CCDirector.sharedDirector().replaceScene(level.getScene());
-	}
-	
-	public void doTest2(Object sender) {
-		Level level = Level.get(Level.LEVEL_2, true);
-		CCDirector.sharedDirector().replaceScene(level.getScene());
-	}
-	
 	public void goBack(Object sender) {
-		Level level = Level.get(Level.LEVEL_HOME, true);		
+		Level level = Level.get(LevelHome.id, true);		
 		CCDirector.sharedDirector().replaceScene(level.getScene());
 	}
 	

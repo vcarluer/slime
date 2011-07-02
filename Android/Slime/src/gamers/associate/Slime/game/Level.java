@@ -31,10 +31,7 @@ import com.badlogic.gdx.physics.box2d.World;
  * @uml.dependency   supplier="gamers.associate.Slime.GameItem"
  */
 public class Level {	
-	public static boolean isInit;
-	public static String LEVEL_HOME = "Home";
-	public static String LEVEL_1 = "1";
-	public static String LEVEL_2 = "2";
+	public static boolean isInit;	
 	public static float Gravity = -10;
 	
 	public static Level currentLevel; 
@@ -234,7 +231,11 @@ public class Level {
 				CGPoint.ccp(20, 
 				CCDirector.sharedDirector().winSize().getHeight() - 20));
 		
+		// Items
 		this.attachToFactory();
+		
+		// Levels
+		HardCodedLevelBuilder.init();
 	}
 	
 	public void tick(float delta) {
@@ -504,5 +505,9 @@ public class Level {
 	
 	public void setStartItem(GameItem start) {
 		this.startItem = start;
+	}
+	
+	public Vector2 getGravity() {
+		return this.gravity;
 	}
 }

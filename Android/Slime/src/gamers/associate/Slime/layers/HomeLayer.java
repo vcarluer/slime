@@ -9,6 +9,9 @@ import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteSheet;
+import org.cocos2d.transitions.CCFadeTransition;
+import org.cocos2d.transitions.CCMoveInRTransition;
+import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 
 import android.view.MotionEvent;
@@ -37,7 +40,7 @@ public class HomeLayer extends CCLayer {
 				CCDirector.sharedDirector().winSize().height / 2
 				));
 		
-		float shiftMenu = - 100f; // Slime height = 160 / 2 + 20
+		float shiftMenu = - 150f; // Slime height = 160 / 2 + 20
 		CCSprite playSprite = CCSprite.sprite("control-play.png", true);
 		CCMenuItemSprite playMenu = CCMenuItemSprite.item(playSprite, playSprite, this, "selectPlay");			
 		
@@ -78,5 +81,7 @@ public class HomeLayer extends CCLayer {
 
 	public void selectPlay(Object sender) {
 		CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
+//		CCTransitionScene transition = CCMoveInRTransition.transition(0.5f, LevelSelection.get().getScene());
+//		CCDirector.sharedDirector().replaceScene(transition);
 	}
 }

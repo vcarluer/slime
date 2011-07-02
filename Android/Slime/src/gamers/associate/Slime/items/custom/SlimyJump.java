@@ -127,7 +127,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	}
 	
 	public void select(CGPoint gameReference) {
-		this.select();
+		this.select();		
 		this.computeTarget(gameReference);
 	}
 	
@@ -167,6 +167,23 @@ public class SlimyJump extends Slimy implements ISelectable {
 	@Override
 	public void render(float delta) {		
 		super.render(delta);		
+//		if (this.selected) {
+//			Vector2 antigravity = new Vector2();
+//			antigravity.x = - Level.currentLevel.getGravity().x * 1.1f * this.getBody().getMass();
+//			antigravity.y = - Level.currentLevel.getGravity().y * 1.1f * this.getBody().getMass();
+//			float shift = 0;
+//			if (this.angle != 0) {
+//				if (this.angle <= 180) {
+//					shift = this.angle / 180;
+//				}
+//				else {
+//					shift = (this.angle - 360) / 180;
+//				}
+//			}
+//			
+//			this.getBody().applyForce(antigravity, new Vector2(this.body.getPosition().x + shift / 100, this.body.getPosition().y));			
+//		}
+		
 		float zoom = Level.currentLevel.getCameraManager().getCurrentZoom();
 		if (zoom != 0) {			
 //			CGRect spriteRect = this.getSelectionRect();										

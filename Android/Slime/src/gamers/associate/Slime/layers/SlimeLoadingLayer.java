@@ -2,6 +2,7 @@ package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
+import gamers.associate.Slime.levels.LevelHome;
 
 import org.cocos2d.actions.UpdateCallback;
 import org.cocos2d.layers.CCColorLayer;
@@ -73,7 +74,7 @@ public class SlimeLoadingLayer extends CCLayer {
 				SpriteSheetFactory.add("slime", Level.zFront);
 				
 				
-				currentLevel = Level.get(Level.LEVEL_HOME);					
+				currentLevel = Level.get(LevelHome.id);					
 				unschedule(nextCallback);
 				
 				spriteSheet.removeChild(sprite, true);						
