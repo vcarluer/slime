@@ -50,16 +50,7 @@ public class LevelLayer extends CCLayer {
 		super.onEnter();		
 		// start ticking (for physics simulation)
 		schedule(tickCallback);
-		
-		if (this.level.getGamePlay() != null) {
-			this.level.getGamePlay().startLevel();
-		}
-		else {
-			if(this.level.getStartItem() != null) {						
-				this.level.getCameraManager().zoomInterpolateTo(this.level.getStartItem(), 1.0f, 1.0f);
-				this.level.getCameraManager().follow(this.level.getStartItem());
-			}
-		}
+		this.level.setStartCamera();
 		
 //		if(this.level.getStartItem() != null) {						
 //			this.level.getCameraManager().zoomInterpolateTo(this.level.getStartItem(), 1.0f, 1.0f);

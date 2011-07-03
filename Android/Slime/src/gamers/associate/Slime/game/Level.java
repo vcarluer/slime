@@ -7,6 +7,7 @@ import gamers.associate.Slime.items.custom.Thumbnail;
 import gamers.associate.Slime.layers.BackgoundLayer;
 import gamers.associate.Slime.layers.HudLayer;
 import gamers.associate.Slime.layers.LevelLayer;
+import gamers.associate.Slime.layers.PauseLayer;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -65,6 +66,7 @@ public class Level {
 	protected BackgoundLayer backgroundLayer;
 	protected CCLayer gameLayer;
 	protected CCLayer customOverLayer;
+	protected PauseLayer pauseLayer;
 	protected int customZ = 2;
 	protected int hudZ = 1;
 	protected boolean isHudEnabled;
@@ -100,15 +102,17 @@ public class Level {
 		this.hudLayer = new HudLayer();
 		this.backgroundLayer = new BackgoundLayer();
 		this.gameLayer = CCLayer.node();
+		this.pauseLayer = new PauseLayer();
 		
 		this.gameLayer.addChild(this.backgroundLayer, 0);
-		this.gameLayer.addChild(this.levelLayer, 1);
+		this.gameLayer.addChild(this.levelLayer, 1);			
 		this.levelOrigin = CGPoint.make(0, 0);
 		this.gameLayer.setAnchorPoint(this.levelOrigin);
 		
 		this.scene.addChild(this.gameLayer, 0);
 		this.isHudEnabled = true;
 		this.scene.addChild(this.hudLayer, this.hudZ);
+		this.scene.addChild(this.pauseLayer, this.hudZ);
 				
 		this.items = new Hashtable<UUID, GameItem>();				
 		this.selectables = new ArrayList<ISelectable>();
@@ -155,7 +159,8 @@ public class Level {
 	public void reload() {
 		currentLevel.loadLevel(this.currentLevelName);
 		// Set camera right based on screen size
-		currentLevel.getCameraManager().setCameraView();		
+		currentLevel.getCameraManager().setCameraView();
+		this.setStartCamera();
 	}
 	
 	public void attachLevelToCamera() {
@@ -177,7 +182,7 @@ public class Level {
 				
 		this.currentLevelName = levelName;
 		
-		this.isPaused = false;
+		this.resume();
 	}
 			
 	public void resetLevel() {		
@@ -196,6 +201,22 @@ public class Level {
 		this.removeCustomOverLayer();
 		this.setIsTouchEnabled(true);
 		this.setIsHudEnabled(true);
+		// this.disablePauseLayer();		
+	}
+	
+	public void disablePauseLayer() {
+		this.pauseLayer.disable();		
+		if (this.hudLayer != null) {
+			this.hudLayer.getMenu().setVisible(true);
+		}
+	}
+	
+	public void enablePauseLayer() {
+		if (this.hudLayer != null) {
+			this.hudLayer.getMenu().setVisible(false);
+		}
+		
+		this.pauseLayer.enable();
 	}
 	
 	public CCScene getScene() {		
@@ -315,6 +336,16 @@ public class Level {
 	
 	public void togglePause() {
 		this.setPause(!this.isPaused);
+	}
+	
+	public void pause() {
+		this.setPause(true);
+		this.enablePauseLayer();
+	}
+	
+	public void resume() {
+		this.setPause(false);
+		this.disablePauseLayer();		
 	}
 	
 		// Test
@@ -557,11 +588,31 @@ public class Level {
 		this.hudLayer.setHudText(text);
 	}
 	
+	public void hideHudText() {
+		this.hudLayer.hideHudText();
+	}
+	
 	public CCLabel getHudLabel() {
 		return this.hudLayer.getLabel();
 	}
 	
 	public IGamePlay getGamePlay() {
 		return this.gamePlay;
+	}		
+	
+	public void goHome() {
+		CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
+	}
+	
+	public void setStartCamera() {
+		if (this.getGamePlay() != null) {
+			this.getGamePlay().startLevel();
+		}
+		else {
+			if(this.getStartItem() != null) {						
+				this.getCameraManager().zoomInterpolateTo(this.getStartItem(), 1.0f, 1.0f);
+				this.getCameraManager().follow(this.getStartItem());
+			}
+		}
 	}
 }

@@ -9,4 +9,5 @@ public interface IGamePlay {
 	void activateSelection(CGPoint gameReference);
 	void simpleSelect();
 	void selectBegin(CGPoint gameReference);	
+	void reset();
 }

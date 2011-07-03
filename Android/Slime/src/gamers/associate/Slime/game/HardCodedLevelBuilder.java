@@ -1,6 +1,7 @@
 package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.levels.ITimeAttackLevel;
+import gamers.associate.Slime.levels.Level11;
 import gamers.associate.Slime.levels.LevelBeta;
 import gamers.associate.Slime.levels.LevelDefinition;
 import gamers.associate.Slime.levels.LevelHome;
@@ -17,6 +18,7 @@ public class HardCodedLevelBuilder {
 		
 		add(new LevelHome());
 		add(new LevelBeta());
+		// add(new Level11());
 	}
 	
 	private static void add(LevelDefinition levelDef) {

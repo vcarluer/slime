@@ -43,7 +43,17 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	}
 	
 	public void reset()	{
+		if (this.level != null) {
+			this.level.hideHudText();
+			CCLabel label = this.level.getHudLabel();
+			label.setColor(ccColor3B.ccc3( 255,255,255));
+			label.stopAllActions();
+			label.setOpacity(255);
+		}
+		
 		this.leftTime = this.startTime;
+		this.isGameOver = false;
+		this.LocalRender = 0;		
 	}
 		
 	public boolean getGameOver() {

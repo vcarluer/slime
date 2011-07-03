@@ -20,6 +20,8 @@ public class HudLayer extends CCLayer {
 	
 	private CCLabel countLabel;
 	
+	private CCMenu menu;
+	
 	public HudLayer() {
 		
 		float pauseScale = 0.5f;
@@ -32,8 +34,8 @@ public class HudLayer extends CCLayer {
 		pauseMenu.setPosition(CGPoint.make(left, top));
 		
 		
-		CCMenu menu = CCMenu.menu(pauseMenu);		
-		this.addChild(menu);
+		this.menu = CCMenu.menu(pauseMenu);		
+		this.addChild(this.menu);
 		
 		this.countLabel = getMenuLabel(Count_Text);		
 		this.countLabel.setAnchorPoint(0, 0);
@@ -64,7 +66,8 @@ public class HudLayer extends CCLayer {
 	}
 	
 	public void goPause(Object sender) {
-		Level.currentLevel.togglePause();
+		// Level.currentLevel.togglePause();
+		Level.currentLevel.pause();
 	}
 	
 	public void setSlimyCount(int count) {
@@ -77,11 +80,21 @@ public class HudLayer extends CCLayer {
 		this.countLabel.setString(text);		
 	}
 	
+	public void hideHudText() {
+		if (this.countLabel != null) {
+			this.countLabel.setVisible(false);
+		}
+	}
+	
 	public CCLabel getLabel() {
 		return this.countLabel;
 	}
 	
 	public void hideSlimyCount() {
 		this.countLabel.setVisible(false);
+	}
+	
+	public CCMenu getMenu() {
+		return this.menu;
 	}
 }
