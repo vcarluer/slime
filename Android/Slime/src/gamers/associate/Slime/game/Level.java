@@ -224,7 +224,7 @@ public class Level {
 			this.hudLayer.getMenu().setVisible(false);
 		}
 		
-		this.pauseLayer.enable();
+		this.pauseLayer.enable();		
 	}
 	
 	public void disableEndLevelLayer() {
@@ -650,5 +650,7 @@ public class Level {
 		if (this.gamePlay != null) {
 			this.endLevelLayer.setScore(score);
 		}
+		
+		this.setIsTouchEnabled(false);
 	}
 }
