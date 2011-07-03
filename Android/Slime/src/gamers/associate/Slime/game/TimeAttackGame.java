@@ -16,7 +16,7 @@ import gamers.associate.Slime.items.base.GameItem;
 
 
 public class TimeAttackGame extends GameItem implements IGamePlay {
-	private static float defaultTime = 20;
+	private static float defaultTime = 60;
 	private static float defaultCritic = 10;
 	private static float stepNormal = 1.0f;
 	private static float stepCritic = 1.0f;
@@ -146,7 +146,24 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 
 	@Override
 	public void simpleSelect() {
-		GameItem center = (GameItem)this.level.getSelectedItem();
-		this.level.getCameraManager().moveInterpolateTo(center, 0.5f);
+		this.level.getCameraManager().moveInterpolateTo(this.level.getSelectedGameItem(), 0.5f);
+	}
+
+	@Override
+	public void startLevel() {
+		if(this.level.getStartItem() != null) {						
+			this.level.getCameraManager().centerCameraOn(this.level.getStartItem().getPosition());
+			this.level.getCameraManager().zoomInterpolateTo(this.level.getStartItem(), 1.0f, 1.0f);			
+			this.level.getCameraManager().follow(this.level.getStartItem());
+			this.reset();
+		}
+	}
+	
+	public void setStartTime(int startTime) {
+		this.startTime = (float) startTime;
+	}
+	
+	public void setCriticTime(int criticTime) {
+		this.criticTime = (float) criticTime;
 	}
 }

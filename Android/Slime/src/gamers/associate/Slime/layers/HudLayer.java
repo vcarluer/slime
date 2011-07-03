@@ -22,11 +22,13 @@ public class HudLayer extends CCLayer {
 	
 	public HudLayer() {
 		
+		float pauseScale = 0.5f;
 		CCSprite pauseSprite = CCSprite.sprite("control-pause.png", true);
 		CCMenuItemSprite pauseMenu = CCMenuItemSprite.item(pauseSprite, pauseSprite, this, "goPause");
+		pauseMenu.setScale(pauseScale);
 		
-		float left = - CCDirector.sharedDirector().winSize().getWidth() / 2 + (MenuSprite.Width + 5) / 2 ;
-		float top = CCDirector.sharedDirector().winSize().getHeight() / 2 - (MenuSprite.Height + 5) / 2;
+		float left = - CCDirector.sharedDirector().winSize().getWidth() / 2 + ((MenuSprite.Width * pauseScale) + 5) / 2 ;
+		float top = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((MenuSprite.Height * pauseScale) + 5) / 2;
 		pauseMenu.setPosition(CGPoint.make(left, top));
 		
 		
@@ -38,12 +40,12 @@ public class HudLayer extends CCLayer {
 		this.addChild(this.countLabel);
 		this.countLabel.setPosition(
 				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - 200, 
-				CCDirector.sharedDirector().winSize().getHeight() - 35));
+				CCDirector.sharedDirector().winSize().getHeight() - 65));
 		this.hideSlimyCount();
 	}
 	
 	private static CCLabel getMenuLabel(String text) {
-		return CCLabel.makeLabel(text.toUpperCase(), "fonts/Slime.ttf", 30.0f);
+		return CCLabel.makeLabel(text.toUpperCase(), "fonts/Slime.ttf", 60.0f);
 	}
 	
 	@Override

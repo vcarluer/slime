@@ -1,5 +1,6 @@
 package gamers.associate.Slime.game;
 
+import gamers.associate.Slime.levels.ITimeAttackLevel;
 import gamers.associate.Slime.levels.LevelBeta;
 import gamers.associate.Slime.levels.LevelDefinition;
 import gamers.associate.Slime.levels.LevelHome;
@@ -31,7 +32,16 @@ public class HardCodedLevelBuilder {
 			
 			switch(levelDef.getGamePlay()) {
 			case TimeAttack:
-				level.addGamePlay(TimeAttackGame.NewGame());
+				TimeAttackGame taGame = TimeAttackGame.NewGame();
+				level.addGamePlay(taGame);
+				ITimeAttackLevel taLevel = (ITimeAttackLevel) levelDef;
+				if (taLevel.getLevelTime() != 0) {
+					taGame.setStartTime(taLevel.getLevelTime());
+				}
+								
+				if (taLevel.getLevelCriticTime() != 0) {
+					taGame.setCriticTime(taLevel.getLevelCriticTime());
+				}				
 				break;
 			default:
 				break;

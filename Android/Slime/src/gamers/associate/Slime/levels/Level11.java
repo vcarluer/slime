@@ -14,4 +14,16 @@ public class Level11 extends LevelTimeAttack {
 	protected void initLevel() {
 		this.setId("1-1");
 	}
+
+	@Override
+	public int getLevelCriticTime() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getLevelTime() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

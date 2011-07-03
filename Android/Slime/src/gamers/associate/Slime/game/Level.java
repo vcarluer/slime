@@ -557,4 +557,8 @@ public class Level {
 	public CCLabel getHudLabel() {
 		return this.hudLayer.getLabel();
 	}
+	
+	public IGamePlay getGamePlay() {
+		return this.gamePlay;
+	}
 }

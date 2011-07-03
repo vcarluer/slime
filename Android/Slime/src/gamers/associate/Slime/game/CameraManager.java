@@ -136,6 +136,7 @@ public class CameraManager {
 	}
 	
 	private float getTargetZoomForMargin(CGPoint targetPosition) {
+		// Todo: This is bad compute. good compute is ratio between segment of center/slimy & center/cross point.
 		float targetZoom = this.currentZoom;
 		if (targetPosition.x > CGRect.maxX(this.margeRect)) {					
 			targetZoom = this.currentZoom * (CGRect.width(this.margeRect) / (targetPosition.x - this.margeRect.origin.x));					
