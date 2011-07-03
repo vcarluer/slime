@@ -1,6 +1,7 @@
 package gamers.associate.Slime.items.custom;
 
 
+import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.SpriteType;
@@ -69,7 +70,7 @@ public class GoalPortal extends GameItemPhysic {
 		if (with instanceof Slimy) {
 			Slimy slimy = (Slimy) with;
 			slimy.win();
-			this.isWon = true;
+			this.setWon(true);
 		}
 	}
 	
@@ -79,6 +80,9 @@ public class GoalPortal extends GameItemPhysic {
 	
 	public void setWon(boolean value) {
 		this.isWon = value;
+		if (this.isWon()) {
+			Level.currentLevel.win();
+		}
 	}
 
 	@Override

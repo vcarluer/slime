@@ -5,6 +5,7 @@ import gamers.associate.Slime.items.base.ISelectable;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.items.custom.Thumbnail;
 import gamers.associate.Slime.layers.BackgoundLayer;
+import gamers.associate.Slime.layers.EndLevelLayer;
 import gamers.associate.Slime.layers.HudLayer;
 import gamers.associate.Slime.layers.LevelLayer;
 import gamers.associate.Slime.layers.PauseLayer;
@@ -67,6 +68,7 @@ public class Level {
 	protected CCLayer gameLayer;
 	protected CCLayer customOverLayer;
 	protected PauseLayer pauseLayer;
+	protected EndLevelLayer endLevelLayer;
 	protected int customZ = 2;
 	protected int hudZ = 1;
 	protected boolean isHudEnabled;
@@ -103,6 +105,7 @@ public class Level {
 		this.backgroundLayer = new BackgoundLayer();
 		this.gameLayer = CCLayer.node();
 		this.pauseLayer = new PauseLayer();
+		this.endLevelLayer = new EndLevelLayer();
 		
 		this.gameLayer.addChild(this.backgroundLayer, 0);
 		this.gameLayer.addChild(this.levelLayer, 1);			
@@ -113,6 +116,7 @@ public class Level {
 		this.isHudEnabled = true;
 		this.scene.addChild(this.hudLayer, this.hudZ);
 		this.scene.addChild(this.pauseLayer, this.hudZ);
+		this.scene.addChild(this.endLevelLayer, this.hudZ);	
 				
 		this.items = new Hashtable<UUID, GameItem>();				
 		this.selectables = new ArrayList<ISelectable>();
@@ -201,6 +205,7 @@ public class Level {
 		this.removeCustomOverLayer();
 		this.setIsTouchEnabled(true);
 		this.setIsHudEnabled(true);
+		this.endLevelLayer.setVisible(false);
 		// this.disablePauseLayer();		
 	}
 	
@@ -578,11 +583,7 @@ public class Level {
 		
 		this.gamePlay = gamePlay;
 		this.gamePlay.setLevel(this);
-	}
-	
-	public void gameOver() {
-		
-	}
+	}	
 	
 	public void setHudText(String text) {
 		this.hudLayer.setHudText(text);
@@ -614,5 +615,15 @@ public class Level {
 				this.getCameraManager().follow(this.getStartItem());
 			}
 		}
+	}
+	
+	public void win() {
+		this.endLevelLayer.setVisible(true);
+		this.endLevelLayer.setText("Victory");
+	}
+	
+	public void gameOver() {
+		this.endLevelLayer.setVisible(true);
+		this.endLevelLayer.setText("Game Over");
 	}
 }

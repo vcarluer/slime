@@ -95,7 +95,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 				this.leftTime = 0;
 				this.isGameOver = true;
 				this.level.gameOver();
-				this.level.setHudText("Game Over");				
+				// this.level.setHudText("Game Over");				
 				this.level.getHudLabel().stopAction(this.criticAction);
 				this.criticAction = CCFadeIn.action(0.5f);
 				this.level.getHudLabel().runAction(this.criticAction);
