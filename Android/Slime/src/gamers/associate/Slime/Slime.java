@@ -47,8 +47,8 @@ public class Slime extends Activity {
 		CCDirector.sharedDirector().setDeviceOrientation(CCDirector.kCCDeviceOrientationLandscapeLeft);
 		
 		// show FPS
-		// set false to disable FPS display, but don't delete fps_image.png!!
-		CCDirector.sharedDirector().setDisplayFPS(true);
+		// set false to disable FPS display, but don't delete fps_image.png!!		
+		CCDirector.sharedDirector().setDisplayFPS(Level.DebugMode);
 		
 		// frames per second
 		CCDirector.sharedDirector().setAnimationInterval(1.0f / 60);

@@ -93,7 +93,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 			
 			if (!this.isGameOver) {								
 				if (!this.isCritic) {
-					if (this.leftTime < this.criticTime) {
+					if (this.leftTime <= this.criticTime) {
 						CCLabel label = this.level.getHudLabel();
 						// label.runAction(CCBlink.action(this.criticTime, 1));
 						CCFadeIn in = CCFadeIn.action(0.5f);
@@ -114,12 +114,16 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 				}
 				else {
 					if (this.LocalRender >= stepNormal) {						
-						this.level.setHudText(getFormatTime(this.leftTime));
-						this.LocalRender = 0;
+						this.setNormalTime();
 					}						
 				}												
 			}
 		}
+	}
+	
+	private void setNormalTime() {
+		this.level.setHudText(getFormatTime(this.leftTime));
+		this.LocalRender = 0;
 	}
 
 	@Override
@@ -130,7 +134,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	@Override
 	public void activateSelection(CGPoint gameReference) {
 		this.isStarted = true;
-		this.LocalRender = stepNormal;
+		this.setNormalTime();
 		this.level.getCameraManager().follow(this.level.getSelectedGameItem());
 	}
 

@@ -39,7 +39,7 @@ public class HudLayer extends CCLayer {
 		this.countLabel.setAnchorPoint(0, 0);
 		this.addChild(this.countLabel);
 		this.countLabel.setPosition(
-				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - 200, 
+				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - 65, 
 				CCDirector.sharedDirector().winSize().getHeight() - 65));
 		this.hideSlimyCount();
 	}

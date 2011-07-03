@@ -31,6 +31,7 @@ import com.badlogic.gdx.physics.box2d.World;
  * @uml.dependency   supplier="gamers.associate.Slime.GameItem"
  */
 public class Level {	
+	public static boolean DebugMode = true;
 	public static boolean isInit;	
 	public static float Gravity = -10;
 	
@@ -415,11 +416,13 @@ public class Level {
 	}
 	
 	public void draw(GL10 gl) {
-		for(GameItem item : this.items.values()) {
-			item.draw(gl);
+		if (Level.DebugMode) {
+			for(GameItem item : this.items.values()) {
+				item.draw(gl);
+			}
+			
+			this.cameraManager.draw(gl);
 		}
-		
-		this.cameraManager.draw(gl);
 	}
 	
 	public ISelectable getSelectedItem() {
