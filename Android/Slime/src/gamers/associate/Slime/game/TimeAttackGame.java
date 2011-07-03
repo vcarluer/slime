@@ -9,6 +9,7 @@ import org.cocos2d.actions.interval.CCFadeIn;
 import org.cocos2d.actions.interval.CCFadeOut;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.nodes.CCLabel;
+import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
 
 import gamers.associate.Slime.items.base.GameItem;
@@ -17,6 +18,8 @@ import gamers.associate.Slime.items.base.GameItem;
 public class TimeAttackGame extends GameItem implements IGamePlay {
 	private static float defaultTime = 20;
 	private static float defaultCritic = 10;
+	private static float stepNormal = 1.0f;
+	private static float stepCritic = 1.0f;
 	private float startTime;
 	private float leftTime;
 	private float criticTime;
@@ -104,13 +107,13 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 				}
 					
 				if (this.isCritic) {
-					if (this.LocalRender >= 1f) {						
+					if (this.LocalRender >= stepCritic) {						
 						this.level.setHudText(getFormatTimeCritic(this.leftTime));
 						this.LocalRender = 0;
 					}						
 				}
 				else {
-					if (this.LocalRender >= 1f) {						
+					if (this.LocalRender >= stepNormal) {						
 						this.level.setHudText(getFormatTime(this.leftTime));
 						this.LocalRender = 0;
 					}						
@@ -120,12 +123,30 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	}
 
 	@Override
-	public void start() {
-		this.isStarted = true;
+	public void setLevel(Level level) {
+		this.level = level;
 	}
 
 	@Override
-	public void setLevel(Level level) {
-		this.level = level;
+	public void activateSelection(CGPoint gameReference) {
+		this.isStarted = true;
+		this.LocalRender = stepNormal;
+		this.level.getCameraManager().follow(this.level.getSelectedGameItem());
+	}
+
+	@Override
+	public int getScore() {		
+		return (int) this.leftTime;
+	}
+
+	@Override
+	public void selectBegin(CGPoint gameReference) {		
+		this.level.getCameraManager().moveInterpolateTo(this.level.getSelectedGameItem(), 0.5f);
+	}
+
+	@Override
+	public void simpleSelect() {
+		GameItem center = (GameItem)this.level.getSelectedItem();
+		this.level.getCameraManager().moveInterpolateTo(center, 0.5f);
 	}
 }

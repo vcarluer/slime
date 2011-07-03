@@ -426,6 +426,10 @@ public class Level {
 		return this.selectedItem;
 	}
 	
+	public GameItem getSelectedGameItem() {
+		return (GameItem) this.selectedItem;
+	}
+	
 	public void setSelectedSlimy(ISelectable toSelect) {
 		this.unselectCurrent();
 		toSelect.select();
@@ -445,14 +449,16 @@ public class Level {
 			this.selectedItem.selectionStop(gameReference);
 			
 			if (this.selectedItem instanceof GameItem) {
-				GameItem follow = (GameItem)this.selectedItem;
-				this.cameraManager.followZoom(follow);
+				if (this.gamePlay != null) {
+					this.gamePlay.activateSelection(gameReference);
+				}
+				else {
+					GameItem follow = (GameItem)this.selectedItem;
+					this.cameraManager.followZoom(follow);
+				}				
 			}
 			
-			this.unselectCurrent();
-			if (this.gamePlay != null) {
-				this.gamePlay.start();
-			}
+			this.unselectCurrent();			
 		}
 	}
 	
@@ -464,9 +470,14 @@ public class Level {
 					((Thumbnail)this.selectedItem).selectionStop(null);
 				}
 				else {
-					GameItem center = (GameItem)this.selectedItem;
-					this.cameraManager.moveInterpolateTo(center, 0.3f);
-					this.cameraManager.zoomInterpolateTo(center, 1.0f, 0.3f);
+					if (this.gamePlay == null) {
+						GameItem center = (GameItem)this.selectedItem;
+						this.cameraManager.moveInterpolateTo(center, 0.3f);
+						// this.cameraManager.zoomInterpolateTo(center, 1.0f, 0.3f);
+					}
+					else {
+						this.gamePlay.simpleSelect();
+					}
 				}				
 			}
 			
@@ -502,7 +513,12 @@ public class Level {
 			if (this.selectedItem != null) {
 				this.selectedItem.select(gameReference);
 				if (!(this.selectedItem instanceof Thumbnail)) {
-					this.cameraManager.unzoomForMargin(this.selectedItem.getPosition(), 1.0f);
+					if (this.gamePlay == null) {
+						this.cameraManager.unzoomForMargin(this.selectedItem.getPosition(), 1.0f);
+					}
+					else {
+						this.gamePlay.selectBegin(gameReference);
+					}
 				}
 			}
 		}
