@@ -44,6 +44,9 @@ public class Level {
 	public static int zFront = 2;
 	public static int zTop = 3;
 	
+	private static String winTxt = "VICTORY";
+	private static String gameOverTxt = "GAME OVER";
+	
 	protected World world;
 	protected Vector2 gravity;
 	protected float worldRatio = 32f;
@@ -224,6 +227,21 @@ public class Level {
 		this.pauseLayer.enable();
 	}
 	
+	public void disableEndLevelLayer() {
+		this.endLevelLayer.disable();		
+		if (this.hudLayer != null) {
+			this.hudLayer.getMenu().setVisible(true);
+		}
+	}
+	
+	public void enableEndLevelLayer() {
+		if (this.hudLayer != null) {
+			this.hudLayer.getMenu().setVisible(false);
+		}
+		
+		this.endLevelLayer.enable();
+	}
+	
 	public CCScene getScene() {		
 		return this.scene;
 	}
@@ -351,6 +369,7 @@ public class Level {
 	public void resume() {
 		this.setPause(false);
 		this.disablePauseLayer();		
+		this.disableEndLevelLayer();
 	}
 	
 		// Test
@@ -618,12 +637,18 @@ public class Level {
 	}
 	
 	public void win() {
-		this.endLevelLayer.setVisible(true);
-		this.endLevelLayer.setText("Victory");
+		this.endLevel(winTxt, this.gamePlay.getScore());
 	}
 	
 	public void gameOver() {
-		this.endLevelLayer.setVisible(true);
-		this.endLevelLayer.setText("Game Over");
+		this.endLevel(gameOverTxt, 0);
+	}
+	
+	private void endLevel(String text, int score) {
+		this.enableEndLevelLayer();
+		this.endLevelLayer.setText(text);
+		if (this.gamePlay != null) {
+			this.endLevelLayer.setScore(score);
+		}
 	}
 }
