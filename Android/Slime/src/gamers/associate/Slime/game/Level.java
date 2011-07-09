@@ -104,6 +104,8 @@ public class Level {
 	
 	protected LevelDefinition levelDefinition;
 	
+	protected boolean isActivated;
+	
 	protected Level() {
 		this.scene = CCScene.node();
 		this.levelLayer = new LevelLayer(this);
@@ -693,4 +695,19 @@ public class Level {
 			this.gamePlay.stopScoring();
 		}
 	}
+	
+	public void activate()
+	{
+		this.isActivated = true;
+	}
+	
+	public void desactivate()
+	{
+		this.isActivated = false;		
+	}
+	
+	public boolean getActivated() {
+		return this.isActivated;
+	}
+	
 }

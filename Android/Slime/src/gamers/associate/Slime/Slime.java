@@ -1,9 +1,11 @@
 package gamers.associate.Slime;
 
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.LevelSelection;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.layers.GALogoLayer;
+import gamers.associate.Slime.levels.LevelHome;
 
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
@@ -133,10 +135,29 @@ public class Slime extends Activity {
 	 */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-	        // moveTaskToBack(true);
-	        return true;
-	    }	    
+		if (keyCode == KeyEvent.KEYCODE_BACK) {			
+			return true;			
+	    }	
+		
 		return super.onKeyDown(keyCode, event);
-	}          
+	}
+
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onKeyUp(int, android.view.KeyEvent)
+	 */
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if (Level.currentLevel != null && Level.currentLevel.getActivated() && (Level.currentLevel.getCurrentLevelName() == LevelHome.Id)) {
+				this.finish();
+				return true;
+			}			
+			
+			if (LevelSelection.get() != null && LevelSelection.get().getActivated()) {
+				LevelSelection.get().goBack();
+			}
+	    }	
+		
+		return super.onKeyUp(keyCode, event);
+	}       
 }

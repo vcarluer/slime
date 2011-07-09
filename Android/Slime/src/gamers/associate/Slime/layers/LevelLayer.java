@@ -50,6 +50,7 @@ public class LevelLayer extends CCLayer {
 		super.onEnter();		
 		// start ticking (for physics simulation)
 		schedule(tickCallback);
+		this.level.activate();
 		//this.level.setStartCamera();
 		
 //		if(this.level.getStartItem() != null) {						
@@ -64,6 +65,7 @@ public class LevelLayer extends CCLayer {
 		
 		// stop ticking (for physics simulation)			
 		unschedule(tickCallback);
+		this.level.desactivate();
 	}
 		
 	public synchronized void tick(float delta) {

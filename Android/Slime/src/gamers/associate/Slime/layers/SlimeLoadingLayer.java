@@ -48,15 +48,7 @@ public class SlimeLoadingLayer extends CCLayer {
 		float scale = sW / originalW;
 		spriteBg.setScale(scale);
 		this.addChild(spriteBg, 0);
-	}
-
-	/* (non-Javadoc)
-	 * @see org.cocos2d.layers.CCLayer#onEnter()
-	 */
-	@Override
-	public void onEnter() {
-		// TODO Auto-generated method stub
-		super.onEnter();
+		
 		//this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
 		//this.addChild(this.spriteSheet);
 		
@@ -68,7 +60,16 @@ public class SlimeLoadingLayer extends CCLayer {
 				CCDirector.sharedDirector().winSize().width / 2,
 				CCDirector.sharedDirector().winSize().height / 2
 				));
-		
+	}
+
+	/* (non-Javadoc)
+	 * @see org.cocos2d.layers.CCLayer#onEnter()
+	 */
+	@Override
+	public void onEnter() {
+		// TODO Auto-generated method stub
+		super.onEnter();
+				
 		this.schedule(nextCallback);
 	}		
 	
@@ -89,7 +90,7 @@ public class SlimeLoadingLayer extends CCLayer {
 				unschedule(nextCallback);
 				
 //				spriteSheet.removeChild(sprite, true);						
-				removeChild(sprite, true);
+				// removeChild(sprite, true);
 				// CCTransitionScene transition = CCTurnOffTilesTransition.transition(1.0f, currentLevel.getScene());
 				CCTransitionScene transition = CCFadeTransition.transition(1.0f, currentLevel.getScene());
 				CCDirector.sharedDirector().replaceScene(transition);

@@ -9,8 +9,9 @@ public class LevelSelection {
 	private static LevelSelection levelSelection;
 	
 	private CCScene scene;	
-	private CCLayer selectionLayer;
+	private LevelSelectionLayer selectionLayer;
 	private CCLayer backgroundLayer;
+	private boolean isActivated;
 	
 	public static LevelSelection get()
 	{
@@ -23,12 +24,28 @@ public class LevelSelection {
 	
 	protected LevelSelection() {
 		this.scene = CCScene.node();
-		this.selectionLayer = new LevelSelectionLayer();
+		this.selectionLayer = new LevelSelectionLayer(this);
 		this.scene.addChild(this.selectionLayer);
+	}
+	
+	public void goBack() {
+		this.selectionLayer.goBack();
 	}
 	
 	public CCScene getScene()
 	{
 		return this.scene;
+	}
+	
+	public void activate(){
+		this.isActivated = true;
+	}
+	
+	public void desactivate() {
+		this.isActivated = false;
+	}
+	
+	public boolean getActivated() {
+		return this.isActivated;
 	}
 }

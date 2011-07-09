@@ -2,6 +2,7 @@ package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.game.HardCodedLevelBuilder;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.LevelSelection;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.levels.LevelDefinition;
@@ -26,8 +27,10 @@ public class LevelSelectionLayer extends CCLayer {
 	
 	private static float bgButtonScale = 2;
 	private static float originalMenuBgCenter = 82.5f;
+	private LevelSelection levelSelection;
 	
-	public LevelSelectionLayer() {
+	public LevelSelectionLayer(LevelSelection selection) {
+		this.levelSelection = selection;
 		int originalW = 800;		
 		CCSprite spriteBg = CCSprite.sprite("splash-level.png");
 		spriteBg.setAnchorPoint(0, 0);
@@ -43,7 +46,7 @@ public class LevelSelectionLayer extends CCLayer {
 		
 		menuCommand.setPosition((MenuSprite.Width + 5) / 2, (MenuSprite.Height + 5) / 2);
 		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);
-		CCMenuItemSprite goBackMenu = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goBack");
+		CCMenuItemSprite goBackMenu = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goBackEvent");
 		
 		menuCommand.addChild(goBackMenu);		
 		
@@ -67,16 +70,22 @@ public class LevelSelectionLayer extends CCLayer {
 		
 		this.addChild(menuCommand, 1);
 		this.addChild(menu, 1);
-	}		
+	}
+	
+	public void goBack() {
+		this.goBackEvent(this);
+	}
 	
 	@Override
 	public void onEnter() {		
 		super.onEnter();
+		this.levelSelection.activate();
 	}
 
 	@Override
 	public void onExit() {		
 		super.onExit();
+		this.levelSelection.desactivate();
 	}
 	
 	public void selectLevel(Object sender) {
@@ -86,7 +95,7 @@ public class LevelSelectionLayer extends CCLayer {
 		CCDirector.sharedDirector().replaceScene(level.getScene());
 	}
 
-	public void goBack(Object sender) {
+	public void goBackEvent(Object sender) {
 		Level level = Level.get(LevelHome.Id, true);		
 		CCDirector.sharedDirector().replaceScene(level.getScene());
 	}
