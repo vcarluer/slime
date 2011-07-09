@@ -29,16 +29,25 @@ public class SlimeLoadingLayer extends CCLayer {
 			float width = CCDirector.sharedDirector().winSize().getWidth();
 			float height = CCDirector.sharedDirector().winSize().getHeight();
 			
-			CCColorLayer colorLayer = CCColorLayer.node(new ccColor4B(0, 0, 0, 255), width, height);
+			/*CCColorLayer colorLayer = CCColorLayer.node(new ccColor4B(0, 0, 0, 255), width, height);
 			
-			scene.addChild(colorLayer);
+			scene.addChild(colorLayer);*/
 			scene.addChild(new SlimeLoadingLayer());
 		}
 		
 		return scene;
 	}
 	
-	protected SlimeLoadingLayer() {		
+	protected SlimeLoadingLayer() {
+		int originalW = 800;		
+		CCSprite spriteBg = CCSprite.sprite("splash-level.png");
+		spriteBg.setAnchorPoint(0, 0);
+		spriteBg.setPosition(0, 0);
+		float sW = CCDirector.sharedDirector().winSize().width;
+		// Scale for full width, no deformation
+		float scale = sW / originalW;
+		spriteBg.setScale(scale);
+		this.addChild(spriteBg, 0);
 	}
 
 	/* (non-Javadoc)
@@ -54,7 +63,7 @@ public class SlimeLoadingLayer extends CCLayer {
 		// this.sprite = CCSprite.sprite("slime-attack.png", true);
 		this.sprite = CCSprite.sprite("slime-attack.png");
 		// this.spriteSheet.addChild(this.sprite);
-		this.addChild(this.sprite);
+		this.addChild(this.sprite, 1);
 		this.sprite.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,
 				CCDirector.sharedDirector().winSize().height / 2

@@ -67,6 +67,7 @@ public class HardCodedLevelBuilder {
 				}
 				break;
 			default:
+				level.addGamePlay(null);
 				break;
 			}
 		}

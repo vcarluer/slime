@@ -29,6 +29,8 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	private float LocalRender;
 	private boolean isCritic;
 	private CCAction criticAction;
+	private boolean isScoringStop;
+	private boolean isScoringStopDone;
 	
 	public static TimeAttackGame NewGame() {
 		return new TimeAttackGame(0, 0, 0, 0);				
@@ -53,7 +55,9 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		
 		this.leftTime = this.startTime;
 		this.isGameOver = false;
-		this.LocalRender = 0;		
+		this.LocalRender = 0;
+		this.isScoringStop = false;
+		this.isScoringStopDone = false;
 	}
 		
 	public boolean getGameOver() {
@@ -64,20 +68,22 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		return getFormatTime(this.leftTime);
 	}
 	
-	private static String getFormatTime(float millis) {		
+	private static String getFormatTime(float millis) {
+		float base = Math.round(millis);
 		DecimalFormat df = new DecimalFormat ( ) ; 
 		df.setMaximumFractionDigits ( 0 ) ; //arrondi à 2 chiffres apres la virgules 
 		df.setMinimumFractionDigits ( 0 ) ; 
 		df.setDecimalSeparatorAlwaysShown ( false ) ; 
-		return df.format(millis);		
+		return df.format(base);		
 	}
 	
-	private static String getFormatTimeCritic(float millis) {		
+	private static String getFormatTimeCritic(float millis) {
+		float base = Math.round(millis);
 		DecimalFormat df = new DecimalFormat ( ) ; 
 		df.setMaximumFractionDigits ( 0 ) ; //arrondi à 2 chiffres apres la virgules 
 		df.setMinimumFractionDigits ( 0 ) ; 
 		df.setDecimalSeparatorAlwaysShown ( false ) ; 
-		return df.format(millis);		
+		return df.format(base);		
 	}
 
 	/* (non-Javadoc)
@@ -89,8 +95,11 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		
 		float deltaReal = delta  / this.level.getTimeRatio();
 		if (this.isStarted && !this.isGameOver) {
-			this.leftTime -= deltaReal;
-			this.LocalRender += deltaReal;
+			if (!this.isScoringStop) {
+				this.leftTime -= deltaReal;
+				this.LocalRender += deltaReal;
+			}
+			
 			if (this.leftTime <= 0) {
 				this.leftTime = 0;
 				this.isGameOver = true;
@@ -101,7 +110,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 				this.level.getHudLabel().runAction(this.criticAction);
 			}			
 			
-			if (!this.isGameOver) {								
+			if (!this.isGameOver) {				
 				if (!this.isCritic) {
 					if (this.leftTime <= this.criticTime) {
 						CCLabel label = this.level.getHudLabel();
@@ -115,18 +124,26 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 						this.isCritic = true;
 					}
 				}
-					
-				if (this.isCritic) {
-					if (this.LocalRender >= stepCritic) {						
-						this.level.setHudText(getFormatTimeCritic(this.leftTime));
-						this.LocalRender = 0;
-					}						
+				
+				if (this.isScoringStop) {
+					if (!this.isScoringStopDone) {
+						this.setNormalTime();
+						this.isScoringStopDone = true;
+					}
 				}
 				else {
-					if (this.LocalRender >= stepNormal) {						
-						this.setNormalTime();
-					}						
-				}												
+					if (this.isCritic) {
+						if (this.LocalRender >= stepCritic) {						
+							this.level.setHudText(getFormatTimeCritic(this.leftTime));
+							this.LocalRender = 0;
+						}						
+					}
+					else {
+						if (this.LocalRender >= stepNormal) {						
+							this.setNormalTime();
+						}						
+					}
+				}																
 			}
 		}
 	}
@@ -150,7 +167,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 
 	@Override
 	public int getScore() {		
-		return (int) this.leftTime;
+		return (int) Math.round(this.leftTime);
 	}
 
 	@Override
@@ -185,5 +202,10 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	@Override
 	public void stop() {		
 		this.isStarted = false;
+	}
+
+	@Override
+	public void stopScoring() {
+		this.isScoringStop = true;
 	}
 }

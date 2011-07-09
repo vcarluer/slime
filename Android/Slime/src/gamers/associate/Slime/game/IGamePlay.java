@@ -11,4 +11,5 @@ public interface IGamePlay {
 	void simpleSelect();
 	void selectBegin(CGPoint gameReference);	
 	void reset();
+	void stopScoring();
 }

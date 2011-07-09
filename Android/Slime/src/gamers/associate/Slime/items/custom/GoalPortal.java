@@ -2,13 +2,22 @@ package gamers.associate.Slime.items.custom;
 
 
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.SpriteType;
 
 import org.cocos2d.actions.base.CCAction;
+import org.cocos2d.actions.base.CCFiniteTimeAction;
 import org.cocos2d.actions.base.CCRepeatForever;
+import org.cocos2d.actions.grid.CCTwirl;
+import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCAnimate;
+import org.cocos2d.actions.interval.CCFadeOut;
+import org.cocos2d.actions.interval.CCRotateBy;
+import org.cocos2d.actions.interval.CCScaleTo;
+import org.cocos2d.actions.interval.CCSequence;
+import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -64,16 +73,7 @@ public class GoalPortal extends GameItemPhysic {
 		CCAction animate = CCRepeatForever.action(CCAnimate.action(this.animationList.get(Anim_Goal_Portal), false));				
 		this.sprite.runAction(animate);		
 	}
-	
-	@Override
-	public void addContact(Object with) {		
-		if (with instanceof Slimy) {
-			Slimy slimy = (Slimy) with;
-			slimy.win();
-			this.setWon(true);
-		}
-	}
-	
+		
 	public boolean isWon() {
 		return this.isWon;
 	}
@@ -93,5 +93,42 @@ public class GoalPortal extends GameItemPhysic {
 	@Override
 	protected void initSprite() {						
 		this.setSprite(GameItemCocos.createSpriteFromFirstFrame(Anim_Goal_Portal));
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.base.GameItemPhysic#handleContact(gamers.associate.Slime.items.base.GameItemPhysic)
+	 */
+	@Override
+	protected void handleContact(GameItemPhysic item) {		
+		super.handleContact(item);
+		
+		if (item instanceof Slimy) {
+			Slimy slimy = (Slimy) item;
+			slimy.win();
+			slimy.destroyBodyOnly();			
+			
+			CCCallFunc callback = CCCallFunc.action(this, "endAnimDone");
+			CCSequence sequence = CCSequence.actions(this.getAnimatePortalEnterReference(), callback);
+			slimy.getSprite().runAction(sequence);
+			this.applyOtherPortalEnterAction(slimy);
+			
+			Level.currentLevel.stopScoring();
+		}				
+	}
+	
+	public void endAnimDone() {
+		this.setWon(true);
+	}
+	
+	private CCFiniteTimeAction getAnimatePortalEnterReference() {		
+		return CCFadeOut.action(1.0f);
+	}
+	
+	private void applyOtherPortalEnterAction(GameItemCocos item) {
+		CCScaleTo scale = CCScaleTo.action(1.0f, 0);
+		CCRotateBy rotateBy = CCRotateBy.action(1.0f, 720);
+		
+		item.getSprite().runAction(scale);
+		item.getSprite().runAction(rotateBy);
 	}
 }

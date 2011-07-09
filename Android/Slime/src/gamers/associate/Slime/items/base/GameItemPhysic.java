@@ -35,6 +35,14 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 		super.destroy();
 	}
 	
+	public void destroyBodyOnly() {
+		if (this.body != null) {
+			this.world.destroyBody(this.body);
+		}
+
+		this.body = null;
+	}
+	
 	@Override
 	public void initItem() {
 		super.initItem();

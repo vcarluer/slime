@@ -606,7 +606,9 @@ public class Level {
 		}
 		
 		this.gamePlay = gamePlay;
-		this.gamePlay.setLevel(this);
+		if (this.gamePlay != null) {
+			this.gamePlay.setLevel(this);
+		}		
 	}	
 	
 	public void setHudText(String text) {
@@ -648,17 +650,18 @@ public class Level {
 		}
 	}
 	
-	public void win() {
-		int score = 0;
+	public void win() {		
 		if (this.gamePlay != null) {
+			int score = 0;
 			score = this.gamePlay.getScore();
-		}
-		
-		this.endLevel(winTxt, score);
+			this.endLevel(winTxt, score);
+		}				
 	}
 	
 	public void gameOver() {
-		this.endLevel(gameOverTxt, 0);
+		if (this.gamePlay != null) {
+			this.endLevel(gameOverTxt, 0);
+		}
 	}
 	
 	private void endLevel(String text, int score) {
@@ -683,5 +686,11 @@ public class Level {
 	
 	public Boolean hasNext() {
 		return HardCodedLevelBuilder.getNext(this.currentLevelName) != null;
+	}
+	
+	public void stopScoring() {
+		if (this.gamePlay != null) {
+			this.gamePlay.stopScoring();
+		}
 	}
 }
