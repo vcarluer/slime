@@ -59,8 +59,14 @@ public class SlimyJump extends Slimy implements ISelectable {
 	
 	protected void computeTarget(CGPoint gameTouch) {
 		if (this.selected) {
-			this.targetImpulse.x = (this.getPosition().x - gameTouch.x) * this.powa;
-			this.targetImpulse.y = (this.getPosition().y - gameTouch.y) * this.powa;
+			float zoom = Level.currentLevel.getCameraManager().getCurrentZoom();
+			float scale = 0;
+			if (zoom != 0) {
+				scale = 1 / zoom;
+			}
+			
+			this.targetImpulse.x = ((this.getPosition().x - gameTouch.x) * scale) * this.powa;
+			this.targetImpulse.y = ((this.getPosition().y - gameTouch.y) * scale) * this.powa;
 			
 			this.target.x = this.getPosition().x + this.targetImpulse.x;
 			this.target.y = this.getPosition().y + this.targetImpulse.y;
