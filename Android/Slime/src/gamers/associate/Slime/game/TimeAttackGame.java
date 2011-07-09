@@ -208,4 +208,16 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	public void stopScoring() {
 		this.isScoringStop = true;
 	}
+
+	@Override
+	public boolean isGameOver() {
+		return this.isGameOver;
+	}
+
+	@Override
+	public void setNewAliveSlimyCount(int count) {
+		if (count == 0) {
+			this.level.gameOver();
+		}
+	}
 }

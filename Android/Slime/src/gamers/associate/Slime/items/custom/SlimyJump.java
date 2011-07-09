@@ -2,14 +2,19 @@ package gamers.associate.Slime.items.custom;
 
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Util;
+import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.ISelectable;
+import gamers.associate.Slime.items.base.SpriteSheetFactory;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import org.cocos2d.actions.base.CCRepeatForever;
+import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.config.ccMacros;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
@@ -20,12 +25,14 @@ import com.badlogic.gdx.physics.box2d.World;
 public class SlimyJump extends Slimy implements ISelectable {
 
 	public static String thumbSprite = "wait-v-01.png";
+	public static String Anim_Dbz_Aura = "aura";
+	public static String Anim_Arrow = "greenarrow";
 	
-	public static float Default_Powa = 2.5f;
-	public static float Max_Impulse = 10f;	
+	public static float Default_Powa = 1.5f;
+	public static float Max_Impulse = 7f;
 	private static float Default_Selection_Width = 72f; // 48f
-	private static float Default_Selection_Height = 78f; // 52f	
-
+	private static float Default_Selection_Height = 78f; // 52f
+	
 	private CGPoint target;
 	private Vector2 targetImpulse;
 	private Vector2 worldImpulse;
@@ -36,6 +43,15 @@ public class SlimyJump extends Slimy implements ISelectable {
 	private CGRect selectionRect;
 	
 	private CCSprite thumbnailSprite;	
+	private CCSprite auraSprite;
+	private CCSpriteSheet auraSheet;
+	private CGPoint auraPosition;
+	private static float startAuraScale = 0.35f;
+	private static float endAuraScale = 1.0f;
+	private float auraScale;
+	private CCSprite arrowSprite;
+	private static float arrowScale = 1.5f;
+	private static float arrowAngleShift = -90;
 	
 	public SlimyJump(float x, float y, float width, float height, World world,
 			float worldRatio) {
@@ -49,6 +65,8 @@ public class SlimyJump extends Slimy implements ISelectable {
 		this.selectionRect = CGRect.zero();
 		this.selectionRect.size.width = Default_Selection_Width;
 		this.selectionRect.size.height = Default_Selection_Height;
+		this.auraPosition = CGPoint.zero();
+		this.auraScale = endAuraScale - startAuraScale;
 	}
 	
 	public void selectionMove(CGPoint gameReference) {
@@ -60,18 +78,20 @@ public class SlimyJump extends Slimy implements ISelectable {
 	protected void computeTarget(CGPoint gameTouch) {
 		if (this.selected) {
 			float zoom = Level.currentLevel.getCameraManager().getCurrentZoom();
-			float scale = 0;
-			if (zoom != 0) {
-				scale = 1 / zoom;
-			}
 			
-			this.targetImpulse.x = ((this.getPosition().x - gameTouch.x) * scale) * this.powa;
-			this.targetImpulse.y = ((this.getPosition().y - gameTouch.y) * scale) * this.powa;
+			this.targetImpulse.x = ((this.getPosition().x - gameTouch.x) * zoom) * this.powa;
+			this.targetImpulse.y = ((this.getPosition().y - gameTouch.y) * zoom) * this.powa;						
 			
 			this.target.x = this.getPosition().x + this.targetImpulse.x;
 			this.target.y = this.getPosition().y + this.targetImpulse.y;
 			
 			this.worldSelect = gameTouch;
+			
+			this.worldImpulse.x = (this.targetImpulse.x  / this.worldRatio);
+			this.worldImpulse.y = (this.targetImpulse.y / this.worldRatio);
+			if (this.worldImpulse.len() > (Max_Impulse)) {
+				this.worldImpulse.nor().mul(Max_Impulse);
+			}
 		}
 	}
 	
@@ -129,7 +149,12 @@ public class SlimyJump extends Slimy implements ISelectable {
 	}
 	
 	public void select() {
-		this.selected = true;		
+		this.selected = true;
+		this.auraSprite.setVisible(true);
+		this.arrowSprite.setVisible(true);
+		CCAnimate animation = CCAnimate.action(this.animationList.get(Anim_Dbz_Aura), false);
+		CCRepeatForever repeat = CCRepeatForever.action(animation);
+		this.auraSprite.runAction(repeat);
 	}
 	
 	public void select(CGPoint gameReference) {
@@ -139,7 +164,8 @@ public class SlimyJump extends Slimy implements ISelectable {
 	
 	public void unselect() {
 		if (this.selected) {
-			this.selected = false;			
+			this.selected = false;	
+			this.stopAura();
 		}
 	}
 	
@@ -156,23 +182,40 @@ public class SlimyJump extends Slimy implements ISelectable {
 		if (this.selected) {
 			this.computeTarget(gameReference);
 
-			Vector2 pos = this.getBody().getPosition();
-			this.worldImpulse.x = (this.targetImpulse.x  / this.worldRatio);
-			this.worldImpulse.y = (this.targetImpulse.y / this.worldRatio);
-			if (this.worldImpulse.len() > (Max_Impulse)) {
-				this.worldImpulse.nor().mul(Max_Impulse);
+			if (this.getBody() != null) {
+				Vector2 pos = this.getBody().getPosition();						
+				this.getBody().applyLinearImpulse(this.worldImpulse, pos);
 			}
-			
-			this.getBody().applyLinearImpulse(this.worldImpulse, pos);
 		}		
-	}
+	}		
 
 	/* (non-Javadoc)
 	 * @see gamers.associate.Slime.items.custom.Slimy#render(float)
 	 */
 	@Override
 	public void render(float delta) {		
-		super.render(delta);		
+		super.render(delta);
+		if (this.isSelected()) {
+			this.auraPosition.x = this.getPosition().x;
+			this.auraPosition.y = this.getPosition().y - this.height / 2;
+			this.auraSprite.setPosition(this.auraPosition);
+			float scale = this.worldImpulse.len() / Max_Impulse;
+			// scale go from 0 to 10, reajust to aura scale			
+			scale = scale * this.auraScale + startAuraScale;
+			
+			this.auraSprite.setScale(scale);
+			this.arrowSprite.setPosition(this.getPosition());
+			float radians = (float)Math.atan2(this.worldImpulse.x, this.worldImpulse.y);
+			float degrees = ccMacros.CC_RADIANS_TO_DEGREES(radians) + arrowAngleShift;
+			float zoom = Level.currentLevel.getCameraManager().getCurrentZoom();
+			float cameraScale = 0;
+			if (zoom != 0) {
+				cameraScale = 1 / zoom;
+			}
+			this.arrowSprite.setScale(arrowScale * cameraScale);
+			this.arrowSprite.setRotation(degrees);
+		}		
+		
 //		if (this.selected) {
 //			Vector2 antigravity = new Vector2();
 //			antigravity.x = - Level.currentLevel.getGravity().x * 1.1f * this.getBody().getMass();
@@ -249,5 +292,38 @@ public class SlimyJump extends Slimy implements ISelectable {
 	@Override
 	public boolean isActive() {
 		return !this.isDead;
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.base.GameItemCocos#postSpriteInit()
+	 */
+	@Override
+	protected void postSpriteInit() {		
+		super.postSpriteInit();
+		this.auraSheet = SpriteSheetFactory.getSpriteSheet("slimydbz");		
+		this.auraSprite = CCSprite.sprite(GameItemCocos.getAnimFirstFrame(Anim_Dbz_Aura));
+		this.auraSprite.setVisible(false);
+		this.auraSprite.setAnchorPoint(0.5f, 0f);
+		this.auraSheet.addChild(this.auraSprite);
+		
+		this.arrowSprite = CCSprite.sprite(GameItemCocos.getAnimFirstFrame(Anim_Arrow));
+		this.arrowSprite.setVisible(false);		
+		this.auraSheet.addChild(this.arrowSprite);		
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.base.GameItemPhysic#destroy()
+	 */
+	@Override
+	public void destroy() {
+		this.auraSheet.removeChild(this.auraSprite, true);
+		this.auraSheet.removeChild(this.arrowSprite, true);
+		super.destroy();
+	}
+	
+	private void stopAura() {
+		this.auraSprite.setVisible(false);
+		this.auraSprite.stopAllActions();
+		this.arrowSprite.setVisible(false);
 	}
 }

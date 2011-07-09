@@ -3,6 +3,7 @@ package gamers.associate.Slime.game;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.ISelectable;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
+import gamers.associate.Slime.items.custom.Slimy;
 import gamers.associate.Slime.items.custom.Thumbnail;
 import gamers.associate.Slime.layers.BackgoundLayer;
 import gamers.associate.Slime.layers.EndLevelLayer;
@@ -34,7 +35,7 @@ import com.badlogic.gdx.physics.box2d.World;
  * @uml.dependency   supplier="gamers.associate.Slime.GameItem"
  */
 public class Level {	
-	public static boolean DebugMode = true;
+	public static boolean DebugMode = false;
 	public static boolean isInit;	
 	public static float Gravity = -10;
 	
@@ -105,6 +106,8 @@ public class Level {
 	protected LevelDefinition levelDefinition;
 	
 	protected boolean isActivated;
+	
+	protected int aliveSlimyCount;
 	
 	protected Level() {
 		this.scene = CCScene.node();
@@ -202,6 +205,8 @@ public class Level {
 		for (GameItem item : this.items.values()) {
 			item.destroy();
 		}
+		
+		this.aliveSlimyCount = 0;
 		
 		this.items.clear();
 		this.selectables.clear();
@@ -423,6 +428,13 @@ public class Level {
 		{
 			ISelectable selectable = (ISelectable)item;
 			this.selectables.add(selectable);
+		}
+		
+		if (item instanceof Slimy) {
+			this.aliveSlimyCount++;
+			if (this.gamePlay != null) {
+				this.gamePlay.setNewAliveSlimyCount(this.aliveSlimyCount);
+			}
 		}
 	}
 	
@@ -653,15 +665,15 @@ public class Level {
 	}
 	
 	public void win() {		
-		if (this.gamePlay != null) {
+		if (this.gamePlay != null && !this.gamePlay.isGameOver()) {			
 			int score = 0;
 			score = this.gamePlay.getScore();
-			this.endLevel(winTxt, score);
+			this.endLevel(winTxt, score);			
 		}				
 	}
 	
 	public void gameOver() {
-		if (this.gamePlay != null) {
+		if (this.gamePlay != null && !this.gamePlay.isGameOver()) {
 			this.endLevel(gameOverTxt, 0);
 		}
 	}
@@ -711,4 +723,10 @@ public class Level {
 		return this.isActivated;
 	}
 	
+	public void slimyKilled() {
+		this.aliveSlimyCount--;
+		if (this.gamePlay != null) {
+			this.gamePlay.setNewAliveSlimyCount(this.aliveSlimyCount);
+		}
+	}
 }

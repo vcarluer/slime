@@ -26,6 +26,7 @@ public class SlimyFactory extends GameItemPhysicFactory<Slimy> {
 		this.createAnim(Slimy.Anim_Success, 7);
 		this.createAnim(Slimy.Anim_Spawn, 8);
 		this.createAnim(Slimy.Anim_Spawn_Falling, 3);
+		this.createAnim(SlimyJump.Anim_Dbz_Aura, 3, 0.1f);
 	}
 	
 	@Override

@@ -90,10 +90,10 @@ public class GoalPortal extends GameItemPhysic {
 		return GoalPortal.Anim_Goal_Portal;		
 	}
 	
-	@Override
-	protected void initSprite() {						
-		this.setSprite(GameItemCocos.createSpriteFromFirstFrame(Anim_Goal_Portal));
-	}
+//	@Override
+//	protected void initSprite() {						
+//		this.setSprite(GameItemCocos.createSpriteFromFirstFrame(Anim_Goal_Portal));
+//	}
 
 	/* (non-Javadoc)
 	 * @see gamers.associate.Slime.items.base.GameItemPhysic#handleContact(gamers.associate.Slime.items.base.GameItemPhysic)

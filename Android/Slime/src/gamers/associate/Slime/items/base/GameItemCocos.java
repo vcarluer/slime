@@ -271,6 +271,11 @@ public abstract class GameItemCocos extends GameItem {
 			
 			this.setPosition(this.position);			
 		}
+		
+		this.postSpriteInit();
+	}
+	
+	protected void postSpriteInit() {		
 	}
 	
 	protected void runReferenceAction() {		

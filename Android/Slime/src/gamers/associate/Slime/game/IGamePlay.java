@@ -12,4 +12,6 @@ public interface IGamePlay {
 	void selectBegin(CGPoint gameReference);	
 	void reset();
 	void stopScoring();
+	boolean isGameOver();
+	void setNewAliveSlimyCount(int count);
 }
