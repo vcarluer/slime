@@ -26,11 +26,9 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	private boolean isStarted;
 	private boolean isGameOver;
 	private Level level;
-	private float LocalRender;
+	private float localRender;
 	private boolean isCritic;
 	private CCAction criticAction;
-	private boolean isScoringStop;
-	private boolean isScoringStopDone;
 	
 	public static TimeAttackGame NewGame() {
 		return new TimeAttackGame(0, 0, 0, 0);				
@@ -55,9 +53,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		
 		this.leftTime = this.startTime;
 		this.isGameOver = false;
-		this.LocalRender = 0;
-		this.isScoringStop = false;
-		this.isScoringStopDone = false;
+		this.localRender = 0;
 	}
 		
 	public boolean getGameOver() {
@@ -94,67 +90,50 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		super.render(delta);
 		
 		float deltaReal = delta  / this.level.getTimeRatio();
-		if (this.isStarted && !this.isGameOver) {
-			if (!this.isScoringStop) {
-				this.leftTime -= deltaReal;
-				this.LocalRender += deltaReal;
-			}
+		if (this.isStarted && !this.isGameOver) {			
+			this.leftTime -= deltaReal;
+			this.localRender += deltaReal;			
 			
 			if (this.leftTime <= 0) {
 				this.leftTime = 0;
-				this.isGameOver = true;
-				this.level.gameOver();
-				// this.level.setHudText("Game Over");				
-				this.level.getHudLabel().stopAction(this.criticAction);
-				this.criticAction = CCFadeIn.action(0.5f);
-				this.level.getHudLabel().runAction(this.criticAction);
+				this.lose();
 			}			
 			
 			if (!this.isGameOver) {				
 				if (!this.isCritic) {
-					if (this.leftTime <= this.criticTime) {
+					if (this.leftTime <= this.criticTime) {						
+						this.isCritic = true;
+					}
+				}				
+				
+				if (this.isCritic) {
+					if (this.localRender >= stepCritic) {
 						CCLabel label = this.level.getHudLabel();
-						// label.runAction(CCBlink.action(this.criticTime, 1));
-						CCFadeIn in = CCFadeIn.action(0.5f);
-						CCFadeOut out = CCFadeOut.action(0.5f);
+						float fadeInTime = (stepCritic / 2) - (this.localRender - stepCritic);
+						float fadeOutTime = stepCritic / 2;
+						CCFadeIn in = CCFadeIn.action(fadeInTime);
+						CCFadeOut out = CCFadeOut.action(fadeOutTime);
 						CCSequence seq = CCSequence.actions(in, out);
 						this.criticAction = CCRepeatForever.action(seq);
 						label.runAction(this.criticAction);
 						label.setColor(ccColor3B.ccc3( 255,0,0));
-						this.isCritic = true;
-					}
-				}
-				
-				if (this.isScoringStop) {
-					if (!this.isScoringStopDone) {
-						CCLabel label = this.level.getHudLabel();
-						label.setColor(ccColor3B.ccc3( 255,255,255));
-						label.stopAllActions();
-						label.setOpacity(255);
-						this.setNormalTime();
-						this.isScoringStopDone = true;
-					}
+						
+						this.level.setHudText(getFormatTimeCritic(this.leftTime));
+						this.localRender = 0;
+					}						
 				}
 				else {
-					if (this.isCritic) {
-						if (this.LocalRender >= stepCritic) {						
-							this.level.setHudText(getFormatTimeCritic(this.leftTime));
-							this.LocalRender = 0;
-						}						
-					}
-					else {
-						if (this.LocalRender >= stepNormal) {						
-							this.setNormalTime();
-						}						
-					}
-				}																
+					if (this.localRender >= stepNormal) {						
+						this.setNormalTime();
+					}						
+				}														
 			}
 		}
 	}
 	
 	private void setNormalTime() {
 		this.level.setHudText(getFormatTime(this.leftTime));
-		this.LocalRender = 0;
+		this.localRender = 0;
 	}
 
 	@Override
@@ -204,13 +183,13 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	}
 
 	@Override
-	public void stop() {		
+	public void stop() {
+		CCLabel label = this.level.getHudLabel();
+		label.setColor(ccColor3B.ccc3( 255,255,255));
+		label.stopAllActions();
+		label.setOpacity(255);
+		this.setNormalTime();
 		this.isStarted = false;
-	}
-
-	@Override
-	public void stopScoring() {
-		this.isScoringStop = true;
 	}
 
 	@Override
@@ -221,7 +200,14 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	@Override
 	public void setNewAliveSlimyCount(int count) {
 		if (count == 0) {
-			this.level.gameOver();
+			this.lose();
 		}
+	}
+	
+	private void lose() {
+		this.isGameOver = true;
+		if (this.level.lose()) {						
+			this.level.getHudLabel().stopAction(this.criticAction);
+		}			
 	}
 }

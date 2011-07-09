@@ -31,8 +31,6 @@ public class GoalPortal extends GameItemPhysic {
 	private static float Default_Width = 32f;
 	private static float Default_Height = 10f;
 	
-	protected boolean isWon;
-	
 	public GoalPortal(float x, float y, float width, float height, World world,
 			float worldRatio) {
 		super(x, y, width, height, world, worldRatio);
@@ -44,7 +42,6 @@ public class GoalPortal extends GameItemPhysic {
 		
 		this.bodyWidth = this.width;
 		this.bodyHeight = this.height;
-		this.isWon = false;
 	}
 
 	@Override
@@ -73,17 +70,6 @@ public class GoalPortal extends GameItemPhysic {
 		CCAction animate = CCRepeatForever.action(CCAnimate.action(this.animationList.get(Anim_Goal_Portal), false));				
 		this.sprite.runAction(animate);		
 	}
-		
-	public boolean isWon() {
-		return this.isWon;
-	}
-	
-	public void setWon(boolean value) {
-		this.isWon = value;
-		if (this.isWon()) {
-			Level.currentLevel.win();
-		}
-	}
 
 	@Override
 	protected String getReferenceAnimationName() {
@@ -107,17 +93,21 @@ public class GoalPortal extends GameItemPhysic {
 			slimy.win();
 			slimy.destroyBodyOnly();			
 			
-			CCCallFunc callback = CCCallFunc.action(this, "endAnimDone");
-			CCSequence sequence = CCSequence.actions(this.getAnimatePortalEnterReference(), callback);
-			slimy.getSprite().runAction(sequence);
-			this.applyOtherPortalEnterAction(slimy);
+			if (Level.currentLevel.win(false)) {
+				CCCallFunc callback = CCCallFunc.action(this, "endAnimDone");
+				CCSequence sequence = CCSequence.actions(this.getAnimatePortalEnterReference(), callback);
+				slimy.getSprite().runAction(sequence);				
+			}
+			else {
+				slimy.getSprite().runAction(this.getAnimatePortalEnterReference());
+			}
 			
-			Level.currentLevel.stopScoring();
+			this.applyOtherPortalEnterAction(slimy);				
 		}				
 	}
 	
 	public void endAnimDone() {
-		this.setWon(true);
+		Level.currentLevel.showEndLevel();
 	}
 	
 	private CCFiniteTimeAction getAnimatePortalEnterReference() {		

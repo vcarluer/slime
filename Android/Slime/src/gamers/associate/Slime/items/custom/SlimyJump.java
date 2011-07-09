@@ -52,6 +52,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	private CCSprite arrowSprite;
 	private static float arrowScale = 1.5f;
 	private static float arrowAngleShift = -90;
+	private boolean isDisabled;
 	
 	public SlimyJump(float x, float y, float width, float height, World world,
 			float worldRatio) {
@@ -127,7 +128,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	}
 	
 	public boolean trySelect(CGPoint gameReference) {
-		if (!this.isDead) {				
+		if (this.isActive()) {				
 			if (this.isInSlimy(gameReference)) {			
 				this.select();
 				this.computeTarget(gameReference);
@@ -139,7 +140,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	
 	public boolean canSelect(CGPoint gameReference) {
 		boolean can = false;
-		if (!this.isDead) {				
+		if (this.isActive()) {				
 			if (this.isInSlimy(gameReference)) {			
 				can = true;
 			}
@@ -291,7 +292,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 
 	@Override
 	public boolean isActive() {
-		return !this.isDead;
+		return !this.isDead && !this.isDisabled;
 	}
 
 	/* (non-Javadoc)
@@ -325,5 +326,14 @@ public class SlimyJump extends Slimy implements ISelectable {
 		this.auraSprite.setVisible(false);
 		this.auraSprite.stopAllActions();
 		this.arrowSprite.setVisible(false);
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.custom.Slimy#win()
+	 */
+	@Override
+	public void win() {
+		this.isDisabled = true;
+		super.win();
 	}
 }

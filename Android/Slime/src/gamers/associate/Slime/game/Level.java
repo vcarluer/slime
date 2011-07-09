@@ -107,7 +107,13 @@ public class Level {
 	
 	protected boolean isActivated;
 	
-	protected int aliveSlimyCount;
+	protected ArrayList<Slimy> slimyList;
+	
+	protected boolean isGameOver;
+	
+	protected int lastScore;
+	
+	protected boolean isVictory;
 	
 	protected boolean endLevelShown;
 	
@@ -142,6 +148,8 @@ public class Level {
 		this.thumbnailManager = new ThumbnailManager(this);
 		this.nodeDraw = new CCNodeDraw(this);
 		this.gameLayer.addChild(this.nodeDraw, zTop);
+		
+		this.slimyList = new ArrayList<Slimy>();
 		
 		this.init();
 		
@@ -208,7 +216,10 @@ public class Level {
 			item.destroy();
 		}
 		
-		this.aliveSlimyCount = 0;
+		this.slimyList.clear();
+		this.isGameOver = false;
+		this.lastScore = 0;		
+		this.isVictory = false;
 		this.endLevelShown = false;
 		
 		this.items.clear();
@@ -434,9 +445,10 @@ public class Level {
 		}
 		
 		if (item instanceof Slimy) {
-			this.aliveSlimyCount++;
+			Slimy slimy = (Slimy) item;
+			this.slimyList.add(slimy);
 			if (this.gamePlay != null) {
-				this.gamePlay.setNewAliveSlimyCount(this.aliveSlimyCount);
+				this.gamePlay.setNewAliveSlimyCount(this.slimyList.size());
 			}
 		}
 	}
@@ -667,36 +679,87 @@ public class Level {
 		}
 	}
 	
-	public void win() {		
-		if (this.gamePlay != null && !this.endLevelShown) {			
-			int score = 0;
-			score = this.gamePlay.getScore();
-			this.endLevel(winTxt, score);			
-		}				
+	public boolean win() {		
+		return this.win(true);				
 	}
 	
-	public void gameOver() {
-		if (this.gamePlay != null && !this.endLevelShown) {
-			this.endLevel(gameOverTxt, 0);
+	public boolean lose() {
+		return this.lose(true);
+	}
+	
+	public boolean win(boolean showEndLevel) {				
+		if (this.gamePlay != null && !this.isGameOver) {						
+			this.lastScore = this.gamePlay.getScore();
+			this.isVictory = true;
+			this.endLevel();
+			if (showEndLevel) {
+				this.showEndLevel();
+			}
+			
+			return true;
 		}
+		
+		return false;
 	}
 	
-	private void endLevel(String text, int score) {
-		this.enableEndLevelLayer();
-		this.endLevelLayer.setText(text);
+	public boolean lose(boolean showEndLevel) {
+		if (this.gamePlay != null && !this.isGameOver) {
+			this.lastScore = 0;
+			this.isVictory = false;
+			this.endLevel();
+			
+			ArrayList<Slimy> toLose = new ArrayList<Slimy>(this.slimyList);
+			for(Slimy slimy : toLose) {
+				slimy.lose();
+			}
+			
+			if (showEndLevel) {
+				this.showEndLevel();
+			}
+			
+			return true;
+		}
+		
+		return false;
+	}
+	
+	private void endLevel() {
 		if (this.gamePlay != null) {
 			this.gamePlay.stop();
-			this.endLevelLayer.setScore(score);			
 		}
 		
-		if (this.levelDefinition != null) {
-			this.levelDefinition.setLastScore(score);
-			this.endLevelLayer.setNextEnabled(this.levelDefinition.getMaxScore() > 0);
+		this.isGameOver = true;
+	}
+	
+	public void showEndLevel() {
+		if (!this.endLevelShown) {
+			if (this.isVictory) {
+				this.showEndLevel(winTxt);
+			}
+			else {
+				this.showEndLevel(gameOverTxt);
+			}
 		}
-		
-		this.setIsHudEnabled(false);
-		this.setIsTouchEnabled(false);
-		this.endLevelShown = true;
+	}
+			
+	private void showEndLevel(String text) {
+		if (!this.endLevelShown) {
+			this.enableEndLevelLayer();
+			this.endLevelLayer.setText(text);		
+			if (this.gamePlay != null) {			
+				this.endLevelLayer.setScore(this.lastScore);			
+			}
+			
+			if (this.levelDefinition != null) {
+				this.levelDefinition.setLastScore(this.lastScore);
+				this.endLevelLayer.setNextEnabled(this.levelDefinition.getMaxScore() > 0);
+			}
+			
+			this.setIsHudEnabled(false);
+			this.setIsTouchEnabled(false);
+			
+			this.endLevelShown = true;
+		}
 	}
 	
 	public void setLevelDefinition(LevelDefinition definition) {
@@ -705,12 +768,6 @@ public class Level {
 	
 	public Boolean hasNext() {
 		return HardCodedLevelBuilder.getNext(this.currentLevelName) != null;
-	}
-	
-	public void stopScoring() {
-		if (this.gamePlay != null) {
-			this.gamePlay.stopScoring();
-		}
 	}
 	
 	public void activate()
@@ -727,10 +784,10 @@ public class Level {
 		return this.isActivated;
 	}
 	
-	public void slimyKilled() {
-		this.aliveSlimyCount--;
+	public void slimyKilled(Slimy slimy) {
+		this.slimyList.remove(slimy);
 		if (this.gamePlay != null) {
-			this.gamePlay.setNewAliveSlimyCount(this.aliveSlimyCount);
+			this.gamePlay.setNewAliveSlimyCount(this.slimyList.size());
 		}
 	}
 }

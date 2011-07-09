@@ -178,6 +178,10 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 		this.success();
 	}
 	
+	public void lose() {
+		this.splash();
+	}
+	
 	public void burn() {
 		if (!this.isDead) {
 			if (this.currentAction != null) {				
@@ -254,7 +258,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 		}
 		
 		this.isDead = true;
-		Level.currentLevel.slimyKilled();
+		Level.currentLevel.slimyKilled(this);
 	}
 	
 	@Override

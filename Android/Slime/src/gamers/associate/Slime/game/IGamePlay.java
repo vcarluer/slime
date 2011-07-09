@@ -10,8 +10,7 @@ public interface IGamePlay {
 	void activateSelection(CGPoint gameReference);
 	void simpleSelect();
 	void selectBegin(CGPoint gameReference);	
-	void reset();
-	void stopScoring();
+	void reset();	
 	boolean isGameOver();
 	void setNewAliveSlimyCount(int count);
 }
