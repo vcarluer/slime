@@ -9,6 +9,7 @@ import gamers.associate.Slime.layers.EndLevelLayer;
 import gamers.associate.Slime.layers.HudLayer;
 import gamers.associate.Slime.layers.LevelLayer;
 import gamers.associate.Slime.layers.PauseLayer;
+import gamers.associate.Slime.levels.LevelDefinition;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -101,6 +102,8 @@ public class Level {
 	
 	protected IGamePlay gamePlay;
 	
+	protected LevelDefinition levelDefinition;
+	
 	protected Level() {
 		this.scene = CCScene.node();
 		this.levelLayer = new LevelLayer(this);
@@ -167,7 +170,7 @@ public class Level {
 		currentLevel.loadLevel(this.currentLevelName);
 		// Set camera right based on screen size
 		currentLevel.getCameraManager().setCameraView();
-		this.setStartCamera();
+		//this.setStartCamera();
 	}
 	
 	public void attachLevelToCamera() {
@@ -185,11 +188,10 @@ public class Level {
 		this.resetLevel();									
 		
 		// Hard coded for now
-		HardCodedLevelBuilder.build(this, levelName);													
+		HardCodedLevelBuilder.build(this, levelName);			
 				
 		this.currentLevelName = levelName;
-		
-		this.resume();
+		this.startLevel();				
 	}
 			
 	public void resetLevel() {		
@@ -209,8 +211,10 @@ public class Level {
 		this.setIsTouchEnabled(true);
 		this.setIsHudEnabled(true);
 		this.endLevelLayer.setVisible(false);
-		this.levelLayer.reset();
-		// this.disablePauseLayer();				
+		this.levelLayer.reset();		
+		// this.disablePauseLayer();
+		
+		this.resume();
 	}
 	
 	public void disablePauseLayer() {
@@ -625,7 +629,14 @@ public class Level {
 		CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
 	}
 	
-	public void setStartCamera() {
+	public void goNext() {
+		String next = HardCodedLevelBuilder.getNext(this.currentLevelName);
+		if (next != null) {
+			this.loadLevel(next);
+		}
+	}
+	
+	public void startLevel() {
 		if (this.getGamePlay() != null) {
 			this.getGamePlay().startLevel();
 		}
@@ -657,8 +668,16 @@ public class Level {
 			this.gamePlay.stop();
 			this.endLevelLayer.setScore(score);
 		}
-				
+		
+		if (this.levelDefinition != null) {
+			this.levelDefinition.setLastScore(score);
+		}
+		
 		this.setIsHudEnabled(false);
 		this.setIsTouchEnabled(false);
-	}	
+	}
+	
+	public void setLevelDefinition(LevelDefinition definition) {
+		this.levelDefinition = definition;
+	}
 }

@@ -168,9 +168,10 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		if(this.level.getStartItem() != null) {						
 			this.level.getCameraManager().centerCameraOn(this.level.getStartItem().getPosition());
 			this.level.getCameraManager().zoomInterpolateTo(this.level.getStartItem(), 1.0f, 1.0f);			
-			this.level.getCameraManager().follow(this.level.getStartItem());
-			this.reset();
+			this.level.getCameraManager().follow(this.level.getStartItem());			
 		}
+		
+		this.reset();
 	}
 	
 	public void setStartTime(int startTime) {
@@ -182,7 +183,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	}
 
 	@Override
-	public void stop() {
+	public void stop() {		
 		this.isStarted = false;
 	}
 }

@@ -40,6 +40,10 @@ public class EndLevelLayer extends CCLayer {
 		this.addChild(this.menu);		
 	}
 	
+	public void goNext(Object sender) {
+		Level.currentLevel.goNext();
+	}
+	
 	public void goRestart(Object sender) {
 		Level.currentLevel.reload();
 	}

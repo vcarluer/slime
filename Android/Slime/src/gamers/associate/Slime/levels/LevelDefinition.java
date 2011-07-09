@@ -6,6 +6,8 @@ public abstract class LevelDefinition {
 	private String id;
 	private boolean isSpecial;
 	private GamePlay gamePlay;
+	private int lastScore;
+	private int maxScore;
 	
 	protected LevelDefinition() {
 		this.gamePlay = GamePlay.None;
@@ -60,5 +62,20 @@ public abstract class LevelDefinition {
 	 */
 	protected void setGamePlay(GamePlay gamePlay) {
 		this.gamePlay = gamePlay;
+	}
+
+	public void setLastScore(int lastScore) {
+		this.lastScore = lastScore;
+		if (this.lastScore > this.maxScore) {
+			this.maxScore = this.lastScore;
+		}
+	}
+
+	public int getLastScore() {
+		return lastScore;
+	}
+	
+	public int getMaxScore() {
+		return this.maxScore;
 	}
 }
