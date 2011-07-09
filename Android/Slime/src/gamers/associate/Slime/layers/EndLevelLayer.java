@@ -1,5 +1,6 @@
 package gamers.associate.Slime.layers;
 
+import gamers.associate.Slime.game.HardCodedLevelBuilder;
 import gamers.associate.Slime.game.Level;
 
 import org.cocos2d.actions.base.CCAction;
@@ -17,16 +18,21 @@ import org.cocos2d.types.ccGridSize;
 
 public class EndLevelLayer extends CCLayer {
 	private static String scoreTxt = "SCORE: "; 
+	private static String endPackTxt = "END OF PACK!";
 	private CCMenuItemLabel textLabel;
 	private CCMenuItemLabel scoreLabel;
+	private CCMenuItemLabel endPackLabel;
 	private CCMenu menu;
+	private CCMenu menuEndPack;
+	private CCMenuItemSprite nextMenu;
 	
 	public EndLevelLayer() {		
 		this.textLabel = CCMenuItemLabel.item(getMenuLabel("EMPTY"), this, "");
 		this.scoreLabel = CCMenuItemLabel.item(getMenuLabel(scoreTxt), this, "");
+		this.endPackLabel = CCMenuItemLabel.item(getMenuLabel(endPackTxt), this, "");
 		
 		CCSprite nextSprite = CCSprite.sprite("control-fastforward.png", true);
-		CCMenuItemSprite nextMenu = CCMenuItemSprite.item(nextSprite, nextSprite, this, "goNext");
+		this.nextMenu = CCMenuItemSprite.item(nextSprite, nextSprite, this, "goNext");
 		
 		CCSprite restartSprite = CCSprite.sprite("control-restart.png", true);
 		CCMenuItemSprite restartMenu = CCMenuItemSprite.item(restartSprite, restartSprite, this, "goRestart");
@@ -34,10 +40,14 @@ public class EndLevelLayer extends CCLayer {
 		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);
 		CCMenuItemSprite homeMenu = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goHome");
 		
-		this.menu = CCMenu.menu(this.textLabel, this.scoreLabel, nextMenu, restartMenu, homeMenu);
+		this.menu = CCMenu.menu(this.textLabel, this.scoreLabel, this.nextMenu, restartMenu, homeMenu);
 		this.menu.alignItemsVertically();
 		
+		this.menuEndPack = CCMenu.menu(this.textLabel, this.scoreLabel, this.endPackLabel, restartMenu, homeMenu);
+		this.menuEndPack.alignItemsVertically();
+		
 		this.addChild(this.menu);		
+		this.addChild(this.menuEndPack);
 	}
 	
 	public void goNext(Object sender) {
@@ -84,9 +94,20 @@ public class EndLevelLayer extends CCLayer {
 	}
 		
 	public void enable() {
+		CCMenu currentMenu = null;
+		Boolean hasNext = Level.currentLevel.hasNext();
+		if (hasNext) {
+			currentMenu = this.menu;
+		}
+		else {
+			currentMenu = this.menuEndPack;
+		}
+		
 		this.setIsTouchEnabled(true);
-		this.menu.setIsTouchEnabled(true);
+		currentMenu.setIsTouchEnabled(true);
+		currentMenu.setVisible(true);
 		this.setVisible(true);
+
 //		CCAction action = CCFadeIn.action(1.0f);
 //		this.menu.runAction(action);
 	}
@@ -94,6 +115,9 @@ public class EndLevelLayer extends CCLayer {
 	public void disable() {
 		this.setIsTouchEnabled(false);
 		this.menu.setIsTouchEnabled(false);
+		this.menuEndPack.setIsTouchEnabled(false);
+		this.menu.setVisible(false);
+		this.menuEndPack.setVisible(false);
 		this.setVisible(false);
 	}
 	

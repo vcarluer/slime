@@ -680,4 +680,8 @@ public class Level {
 	public void setLevelDefinition(LevelDefinition definition) {
 		this.levelDefinition = definition;
 	}
+	
+	public Boolean hasNext() {
+		return HardCodedLevelBuilder.getNext(this.currentLevelName) != null;
+	}
 }
