@@ -18,10 +18,14 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.nodes.CCSpriteSheet;
+import org.cocos2d.types.ccColor3B;
 
 public class LevelSelectionLayer extends CCLayer {
 	private CCMenu menu;
 	private CCMenu menuCommand;
+	
+	private static float bgButtonScale = 2;
+	private static float originalMenuBgCenter = 82.5f;
 	
 	public LevelSelectionLayer() {
 		int originalW = 800;		
@@ -44,9 +48,19 @@ public class LevelSelectionLayer extends CCLayer {
 		menuCommand.addChild(goBackMenu);		
 		
 		for(LevelDefinition levelDef : HardCodedLevelBuilder.getNormalLevels()) {
-			CCMenuItem levelItem = CCMenuItemLabel.item(getMenuLabel(levelDef.getId()), this, "selectLevel");
-			levelItem.setUserData(levelDef.getId());
-			menu.addChild(levelItem);
+			CCSprite menuSprite = CCSprite.sprite("control-square-screen.png", true);			
+			CCMenuItemSprite menuItemSprite = CCMenuItemSprite.item(menuSprite, menuSprite, this, "selectLevel");
+			menuItemSprite.setScale(1 / bgButtonScale);
+			menuItemSprite.setUserData(levelDef.getId());
+			menuItemSprite.setAnchorPoint(0.5f, 0.5f);
+			// CCMenuItemLabel levelItem = CCMenuItemLabel.item(getMenuLabel(levelDef.getId()), this, "selectLevel");			
+			CCLabel levelItem = getMenuLabel(levelDef.getId());
+			levelItem.setAnchorPoint(0.5f, 0.5f);
+			levelItem.setPosition(originalMenuBgCenter, originalMenuBgCenter);
+			menuItemSprite.addChild(levelItem);
+			// levelItem.setUserData(levelDef.getId());
+			
+			menu.addChild(menuItemSprite);
 		}
 				
 		menu.alignItemsInColumns(new int[] { 7, 7 });
@@ -78,6 +92,8 @@ public class LevelSelectionLayer extends CCLayer {
 	}
 	
 	private static CCLabel getMenuLabel(String text) {
-		return CCLabel.makeLabel(text.toUpperCase(), "fonts/Slime.ttf", 30.0f);
+		CCLabel label = CCLabel.makeLabel(text.toUpperCase(), "fonts/Slime.ttf", 30.0f * bgButtonScale);
+		label.setColor(ccColor3B.ccBLACK);
+		return label;
 	}
 }
