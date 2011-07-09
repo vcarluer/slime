@@ -54,6 +54,7 @@ public class SlimeLoadingLayer extends CCLayer {
 		
 		// this.sprite = CCSprite.sprite("slime-attack.png", true);
 		this.sprite = CCSprite.sprite("slime-attack.png");
+		this.sprite.setScale(1.0f);
 		// this.spriteSheet.addChild(this.sprite);
 		this.addChild(this.sprite, 1);
 		this.sprite.setPosition(CGPoint.make(

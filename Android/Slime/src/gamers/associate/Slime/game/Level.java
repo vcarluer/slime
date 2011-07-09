@@ -671,11 +671,12 @@ public class Level {
 		this.endLevelLayer.setText(text);
 		if (this.gamePlay != null) {
 			this.gamePlay.stop();
-			this.endLevelLayer.setScore(score);
+			this.endLevelLayer.setScore(score);			
 		}
 		
 		if (this.levelDefinition != null) {
 			this.levelDefinition.setLastScore(score);
+			this.endLevelLayer.setNextEnabled(this.levelDefinition.getMaxScore() > 0);
 		}
 		
 		this.setIsHudEnabled(false);
