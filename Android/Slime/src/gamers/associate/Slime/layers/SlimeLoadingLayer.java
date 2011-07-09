@@ -48,11 +48,13 @@ public class SlimeLoadingLayer extends CCLayer {
 	public void onEnter() {
 		// TODO Auto-generated method stub
 		super.onEnter();
-		this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
-		this.addChild(this.spriteSheet);
+		//this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
+		//this.addChild(this.spriteSheet);
 		
-		this.sprite = CCSprite.sprite("SlimeTitle.png", true);
-		this.spriteSheet.addChild(this.sprite);		
+		// this.sprite = CCSprite.sprite("slime-attack.png", true);
+		this.sprite = CCSprite.sprite("slime-attack.png");
+		// this.spriteSheet.addChild(this.sprite);
+		this.addChild(this.sprite);
 		this.sprite.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,
 				CCDirector.sharedDirector().winSize().height / 2
@@ -66,7 +68,7 @@ public class SlimeLoadingLayer extends CCLayer {
 			@Override
 			public void update(float d) {
 				SpriteSheetFactory.add("controls", true, SpriteSheetFactory.zDefault);
-				SpriteSheetFactory.add("logo", true, SpriteSheetFactory.zDefault);
+				// SpriteSheetFactory.add("logo", true, SpriteSheetFactory.zDefault);
 				SpriteSheetFactory.add("decor", true, SpriteSheetFactory.zDefault);
 				SpriteSheetFactory.add("items", true, SpriteSheetFactory.zDefault);
 				
@@ -77,7 +79,8 @@ public class SlimeLoadingLayer extends CCLayer {
 				currentLevel = Level.get(LevelHome.Id);					
 				unschedule(nextCallback);
 				
-				spriteSheet.removeChild(sprite, true);						
+//				spriteSheet.removeChild(sprite, true);						
+				removeChild(sprite, true);
 				// CCTransitionScene transition = CCTurnOffTilesTransition.transition(1.0f, currentLevel.getScene());
 				CCTransitionScene transition = CCFadeTransition.transition(1.0f, currentLevel.getScene());
 				CCDirector.sharedDirector().replaceScene(transition);

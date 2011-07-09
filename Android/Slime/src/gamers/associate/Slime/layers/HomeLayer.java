@@ -30,11 +30,13 @@ public class HomeLayer extends CCLayer {
 	protected HomeLayer() {
 		super();
 		//this.setIsTouchEnabled(true);
-		this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
-		this.addChild(this.spriteSheet);
+//		this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
+//		this.addChild(this.spriteSheet);
 		
-		CCSprite sprite = CCSprite.sprite("SlimeTitle.png", true);		
-		this.spriteSheet.addChild(sprite);
+//		CCSprite sprite = CCSprite.sprite("slime-attack.png", true);		
+		CCSprite sprite = CCSprite.sprite("slime-attack.png");
+//		this.spriteSheet.addChild(sprite);
+		this.addChild(sprite);
 		sprite.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,
 				CCDirector.sharedDirector().winSize().height / 2

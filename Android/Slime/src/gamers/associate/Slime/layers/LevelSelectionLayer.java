@@ -2,6 +2,7 @@ package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.game.HardCodedLevelBuilder;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.levels.LevelDefinition;
 import gamers.associate.Slime.levels.LevelHome;
@@ -14,12 +15,25 @@ import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.nodes.CCSpriteFrame;
+import org.cocos2d.nodes.CCSpriteFrameCache;
+import org.cocos2d.nodes.CCSpriteSheet;
 
 public class LevelSelectionLayer extends CCLayer {
 	private CCMenu menu;
 	private CCMenu menuCommand;
 	
 	public LevelSelectionLayer() {
+		int originalW = 800;		
+		CCSprite spriteBg = CCSprite.sprite("splash-level.png");
+		spriteBg.setAnchorPoint(0, 0);
+		spriteBg.setPosition(0, 0);
+		float sW = CCDirector.sharedDirector().winSize().width;
+		// Scale for full width, no deformation
+		float scale = sW / originalW;
+		spriteBg.setScale(scale);
+		this.addChild(spriteBg, 0);
+		
 		menu = CCMenu.menu();
 		menuCommand = CCMenu.menu();
 		
@@ -37,8 +51,8 @@ public class LevelSelectionLayer extends CCLayer {
 				
 		menu.alignItemsInColumns(new int[] { 7, 7 });
 		
-		this.addChild(menuCommand);
-		this.addChild(menu);
+		this.addChild(menuCommand, 1);
+		this.addChild(menu, 1);
 	}		
 	
 	@Override

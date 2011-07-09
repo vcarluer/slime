@@ -17,18 +17,31 @@
                 <key>sourceSize</key>
                 <string>{400,566}</string>
             </dict>
-            <key>SlimeTitle.png</key>
+            <key>slime-attack.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,566},{341,124}}</string>
+                <string>{{400,0},{267,139}}</string>
                 <key>offset</key>
-                <string>{-1,3}</string>
+                <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{6,15},{341,124}}</string>
+                <string>{{33,14},{267,139}}</string>
                 <key>sourceSize</key>
-                <string>{355,160}</string>
+                <string>{333,167}</string>
+            </dict>
+            <key>splash-level.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,566},{800,480}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{800,480}}</string>
+                <key>sourceSize</key>
+                <string>{800,480}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -36,7 +49,7 @@
             <key>format</key>
             <integer>2</integer>
             <key>size</key>
-            <string>{512,1024}</string>
+            <string>{1024,2048}</string>
             <key>textureFileName</key>
             <string>logo.png</string>
         </dict>

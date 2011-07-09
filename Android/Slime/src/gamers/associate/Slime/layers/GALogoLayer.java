@@ -38,11 +38,13 @@ public class GALogoLayer extends CCLayer {
 	public void onEnter() {		
 		super.onEnter();
 				
-		this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
-		this.addChild(this.spriteSheet);
-		CCSpriteFrame spriteFrame = CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("JulenGarciaGA.png");
-		this.sprite = CCSprite.sprite(spriteFrame);
-		this.spriteSheet.addChild(this.sprite);		
+//		this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
+//		this.addChild(this.spriteSheet);
+//		CCSpriteFrame spriteFrame = CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("JulenGarciaGA.png");
+//		this.sprite = CCSprite.sprite(spriteFrame);
+//		this.spriteSheet.addChild(this.sprite);
+		this.sprite = CCSprite.sprite("JulenGarciaGA.png");
+		this.addChild(this.sprite);
 		this.sprite.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,
 				CCDirector.sharedDirector().winSize().height / 2
@@ -66,7 +68,8 @@ public class GALogoLayer extends CCLayer {
 				long elapsed = (System.currentTimeMillis() - onEnterTime) / 1000;
 				if (elapsed > waitLogoSec) {
 					unschedule(nextCallback);
-					spriteSheet.removeChild(sprite, true);
+					// spriteSheet.removeChild(sprite, true);
+					removeChild(sprite, true);
 					
 					CCScene nextScene = SlimeLoadingLayer.scene();
 					CCDirector.sharedDirector().replaceScene(nextScene);
