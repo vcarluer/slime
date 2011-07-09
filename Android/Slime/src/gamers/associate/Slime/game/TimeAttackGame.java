@@ -180,4 +180,9 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	public void setCriticTime(int criticTime) {
 		this.criticTime = (float) criticTime;
 	}
+
+	@Override
+	public void stop() {
+		this.isStarted = false;
+	}
 }

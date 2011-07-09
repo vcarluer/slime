@@ -272,4 +272,8 @@ public class LevelLayer extends CCLayer {
 	 /*public void resetWon() {
 		 this.level.resetWon();
 	 }*/
+	
+	public void reset() {
+		this.touchList.clear();
+	}
 }

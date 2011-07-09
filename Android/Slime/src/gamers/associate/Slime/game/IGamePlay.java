@@ -5,6 +5,7 @@ import org.cocos2d.types.CGPoint;
 public interface IGamePlay {	
 	void setLevel(Level level);
 	void startLevel();
+	void stop();
 	int getScore();
 	void activateSelection(CGPoint gameReference);
 	void simpleSelect();

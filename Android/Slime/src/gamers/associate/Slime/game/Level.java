@@ -209,7 +209,8 @@ public class Level {
 		this.setIsTouchEnabled(true);
 		this.setIsHudEnabled(true);
 		this.endLevelLayer.setVisible(false);
-		// this.disablePauseLayer();		
+		this.levelLayer.reset();
+		// this.disablePauseLayer();				
 	}
 	
 	public void disablePauseLayer() {
@@ -637,7 +638,12 @@ public class Level {
 	}
 	
 	public void win() {
-		this.endLevel(winTxt, this.gamePlay.getScore());
+		int score = 0;
+		if (this.gamePlay != null) {
+			score = this.gamePlay.getScore();
+		}
+		
+		this.endLevel(winTxt, score);
 	}
 	
 	public void gameOver() {
@@ -648,9 +654,11 @@ public class Level {
 		this.enableEndLevelLayer();
 		this.endLevelLayer.setText(text);
 		if (this.gamePlay != null) {
+			this.gamePlay.stop();
 			this.endLevelLayer.setScore(score);
 		}
-		
+				
+		this.setIsHudEnabled(false);
 		this.setIsTouchEnabled(false);
-	}
+	}	
 }
