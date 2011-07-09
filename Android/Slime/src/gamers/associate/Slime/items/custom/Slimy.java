@@ -261,6 +261,10 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 		Level.currentLevel.slimyKilled(this);
 	}
 	
+	public boolean isDead() {
+		return this.isDead;
+	}
+	
 	@Override
 	protected String getReferenceAnimationName() {
 		return Slimy.Anim_Wait_V;

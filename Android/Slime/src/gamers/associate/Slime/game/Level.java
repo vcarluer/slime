@@ -107,7 +107,7 @@ public class Level {
 	
 	protected boolean isActivated;
 	
-	protected ArrayList<Slimy> slimyList;
+	protected ArrayList<Slimy> aliveSlimyList;
 	
 	protected boolean isGameOver;
 	
@@ -149,7 +149,7 @@ public class Level {
 		this.nodeDraw = new CCNodeDraw(this);
 		this.gameLayer.addChild(this.nodeDraw, zTop);
 		
-		this.slimyList = new ArrayList<Slimy>();
+		this.aliveSlimyList = new ArrayList<Slimy>();
 		
 		this.init();
 		
@@ -216,7 +216,7 @@ public class Level {
 			item.destroy();
 		}
 		
-		this.slimyList.clear();
+		this.aliveSlimyList.clear();
 		this.isGameOver = false;
 		this.lastScore = 0;		
 		this.isVictory = false;
@@ -446,9 +446,11 @@ public class Level {
 		
 		if (item instanceof Slimy) {
 			Slimy slimy = (Slimy) item;
-			this.slimyList.add(slimy);
-			if (this.gamePlay != null) {
-				this.gamePlay.setNewAliveSlimyCount(this.slimyList.size());
+			if (!slimy.isDead()) {
+				this.aliveSlimyList.add(slimy);
+				if (this.gamePlay != null) {
+					this.gamePlay.setNewAliveSlimyCount(this.aliveSlimyList.size());
+				}
 			}
 		}
 	}
@@ -464,7 +466,17 @@ public class Level {
 			if (this.items.containsKey(item.getId())) {
 				item.destroy();
 				this.items.remove(item.getId());
-			}						
+			}
+			
+			if (item instanceof Slimy) {
+				Slimy slimy = (Slimy) item;
+				if (this.aliveSlimyList.contains(slimy)) {
+					this.aliveSlimyList.remove(slimy);
+					if (this.gamePlay != null) {
+						this.gamePlay.setNewAliveSlimyCount(this.aliveSlimyList.size());
+					}
+				}
+			}
 		}
 	}
 	
@@ -708,7 +720,7 @@ public class Level {
 			this.isVictory = false;
 			this.endLevel();
 			
-			ArrayList<Slimy> toLose = new ArrayList<Slimy>(this.slimyList);
+			ArrayList<Slimy> toLose = new ArrayList<Slimy>(this.aliveSlimyList);
 			for(Slimy slimy : toLose) {
 				slimy.lose();
 			}
@@ -785,9 +797,9 @@ public class Level {
 	}
 	
 	public void slimyKilled(Slimy slimy) {
-		this.slimyList.remove(slimy);
+		this.aliveSlimyList.remove(slimy);
 		if (this.gamePlay != null) {
-			this.gamePlay.setNewAliveSlimyCount(this.slimyList.size());
+			this.gamePlay.setNewAliveSlimyCount(this.aliveSlimyList.size());
 		}
 	}
 }
