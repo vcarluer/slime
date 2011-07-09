@@ -127,6 +127,10 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 				
 				if (this.isScoringStop) {
 					if (!this.isScoringStopDone) {
+						CCLabel label = this.level.getHudLabel();
+						label.setColor(ccColor3B.ccc3( 255,255,255));
+						label.stopAllActions();
+						label.setOpacity(255);
 						this.setNormalTime();
 						this.isScoringStopDone = true;
 					}

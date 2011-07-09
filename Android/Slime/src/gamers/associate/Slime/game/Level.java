@@ -109,6 +109,8 @@ public class Level {
 	
 	protected int aliveSlimyCount;
 	
+	protected boolean endLevelShown;
+	
 	protected Level() {
 		this.scene = CCScene.node();
 		this.levelLayer = new LevelLayer(this);
@@ -207,6 +209,7 @@ public class Level {
 		}
 		
 		this.aliveSlimyCount = 0;
+		this.endLevelShown = false;
 		
 		this.items.clear();
 		this.selectables.clear();
@@ -665,7 +668,7 @@ public class Level {
 	}
 	
 	public void win() {		
-		if (this.gamePlay != null && !this.gamePlay.isGameOver()) {			
+		if (this.gamePlay != null && !this.endLevelShown) {			
 			int score = 0;
 			score = this.gamePlay.getScore();
 			this.endLevel(winTxt, score);			
@@ -673,7 +676,7 @@ public class Level {
 	}
 	
 	public void gameOver() {
-		if (this.gamePlay != null && !this.gamePlay.isGameOver()) {
+		if (this.gamePlay != null && !this.endLevelShown) {
 			this.endLevel(gameOverTxt, 0);
 		}
 	}
@@ -693,6 +696,7 @@ public class Level {
 		
 		this.setIsHudEnabled(false);
 		this.setIsTouchEnabled(false);
+		this.endLevelShown = true;
 	}
 	
 	public void setLevelDefinition(LevelDefinition definition) {
