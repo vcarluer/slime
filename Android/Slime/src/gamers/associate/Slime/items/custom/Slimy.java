@@ -168,6 +168,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 			this.currentAction = animate;
 			this.sprite.runAction(this.currentAction);
 			this.isLanded = true;
+			Sounds.playEffect(R.raw.slimyland);
 		}
 	}
 	
@@ -297,6 +298,15 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 		this.waitAnim();
 		this.fadeIn();
 		this.spawn();
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.base.GameItemPhysic#handlePreRemove()
+	 */
+	@Override
+	public void handleSpecialRemove() {
+		Sounds.playEffect(R.raw.slimydeath);
+		super.handleSpecialRemove();
 	}
 
 	/* (non-Javadoc)

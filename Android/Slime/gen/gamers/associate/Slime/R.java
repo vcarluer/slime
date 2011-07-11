@@ -17,15 +17,18 @@ public final class R {
         public static final int main=0x7f030000;
     }
     public static final class raw {
-        public static final int lose=0x7f040000;
-        public static final int menumusic=0x7f040001;
-        public static final int menuselect=0x7f040002;
-        public static final int portalgoal=0x7f040003;
-        public static final int slimyfire=0x7f040004;
-        public static final int slimyjump=0x7f040005;
-        public static final int slimyselect=0x7f040006;
-        public static final int tick=0x7f040007;
-        public static final int victory=0x7f040008;
+        public static final int bump=0x7f040000;
+        public static final int lose=0x7f040001;
+        public static final int menumusic=0x7f040002;
+        public static final int menuselect=0x7f040003;
+        public static final int portalgoal=0x7f040004;
+        public static final int slimydeath=0x7f040005;
+        public static final int slimyfire=0x7f040006;
+        public static final int slimyjump=0x7f040007;
+        public static final int slimyland=0x7f040008;
+        public static final int slimyselect=0x7f040009;
+        public static final int tick=0x7f04000a;
+        public static final int victory=0x7f04000b;
     }
     public static final class string {
         public static final int app_name=0x7f050001;

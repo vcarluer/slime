@@ -190,6 +190,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 				Vector2 pos = this.getBody().getPosition();						
 				this.getBody().applyLinearImpulse(this.worldImpulse, pos);
 				Sounds.playEffect(R.raw.slimyjump);
+				this.isLanded = false;
 			}
 		}		
 	}		

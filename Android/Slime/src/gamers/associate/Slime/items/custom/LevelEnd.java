@@ -52,6 +52,7 @@ public class LevelEnd extends GameItemPhysic {
 	protected void handleContact(GameItemPhysic item) {		
 		super.handleContact(item);
 		Level.currentLevel.addItemToRemove(item);
+		item.handleSpecialRemove();
 	}
 	
 	

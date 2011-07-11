@@ -17,6 +17,9 @@ public class Sounds {
 		preloadEffect(R.raw.slimyselect);
 		preloadEffect(R.raw.portalgoal);
 		preloadEffect(R.raw.tick);
+		preloadEffect(R.raw.slimyland);
+		preloadEffect(R.raw.bump);
+		preloadEffect(R.raw.slimydeath);
 	}
 	
 	private static void preloadEffect(int soundId) {

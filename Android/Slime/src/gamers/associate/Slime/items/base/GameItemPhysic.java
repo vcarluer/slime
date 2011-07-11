@@ -100,4 +100,7 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 			this.body.setTransform(this.body.getPosition(), radAngle);
 		}
 	}
+	
+	public void handleSpecialRemove() {		
+	}
 }

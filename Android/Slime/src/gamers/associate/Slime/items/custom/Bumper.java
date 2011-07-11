@@ -1,5 +1,7 @@
 package gamers.associate.Slime.items.custom;
 
+import gamers.associate.Slime.R;
+import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.SpriteType;
 
@@ -83,5 +85,14 @@ public class Bumper extends GameItemPhysic {
 	@Override
 	protected String getReferenceAnimationName() {
 		return Bumper.Anim_Base;
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.base.GameItemPhysic#handleContact(gamers.associate.Slime.items.base.GameItemPhysic)
+	 */
+	@Override
+	protected void handleContact(GameItemPhysic item) {
+		Sounds.playEffect(R.raw.bump);
+		super.handleContact(item);
 	}		
 }
