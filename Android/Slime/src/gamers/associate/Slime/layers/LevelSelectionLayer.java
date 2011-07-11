@@ -81,6 +81,7 @@ public class LevelSelectionLayer extends CCLayer {
 	@Override
 	public void onEnter() {		
 		super.onEnter();
+		
 		this.levelSelection.activate();
 	}
 
@@ -95,6 +96,7 @@ public class LevelSelectionLayer extends CCLayer {
 		CCMenuItem item = (CCMenuItem)sender;		
 		String levelName = (String)item.getUserData();
 		Level level = Level.get(levelName, true);
+		Sounds.pauseMusic();
 		CCDirector.sharedDirector().replaceScene(level.getScene());
 	}
 

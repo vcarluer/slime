@@ -1,5 +1,6 @@
 package gamers.associate.Slime.game;
 
+import gamers.associate.Slime.R;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.ISelectable;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
@@ -670,6 +671,7 @@ public class Level {
 	
 	public void goHome() {
 		CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
+		Sounds.resumeMusic();
 	}
 	
 	public void goNext() {
@@ -707,7 +709,7 @@ public class Level {
 			if (showEndLevel) {
 				this.showEndLevel();
 			}
-			
+						
 			return true;
 		}
 		
@@ -746,9 +748,11 @@ public class Level {
 	public void showEndLevel() {
 		if (!this.endLevelShown) {
 			if (this.isVictory) {
+				Sounds.playEffect(R.raw.victory);
 				this.showEndLevel(winTxt);
 			}
 			else {
+				Sounds.playEffect(R.raw.lose);
 				this.showEndLevel(gameOverTxt);
 			}
 		}

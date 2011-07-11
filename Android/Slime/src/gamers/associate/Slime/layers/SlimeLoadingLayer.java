@@ -1,5 +1,6 @@
 package gamers.associate.Slime.layers;
 
+import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
@@ -98,6 +99,7 @@ public class SlimeLoadingLayer extends CCLayer {
 				// CCTransitionScene transition = CCTurnOffTilesTransition.transition(1.0f, currentLevel.getScene());
 				CCTransitionScene transition = CCFadeTransition.transition(1.0f, currentLevel.getScene());
 				CCDirector.sharedDirector().replaceScene(transition);
+				Sounds.playMusic(R.raw.menumusic, true);
 			}
 		};
 

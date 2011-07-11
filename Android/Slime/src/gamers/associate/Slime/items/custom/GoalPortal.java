@@ -1,7 +1,9 @@
 package gamers.associate.Slime.items.custom;
 
 
+import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.GameItemPhysic;
@@ -96,7 +98,8 @@ public class GoalPortal extends GameItemPhysic {
 			if (Level.currentLevel.win(false)) {
 				CCCallFunc callback = CCCallFunc.action(this, "endAnimDone");
 				CCSequence sequence = CCSequence.actions(this.getAnimatePortalEnterReference(), callback);
-				slimy.getSprite().runAction(sequence);				
+				slimy.getSprite().runAction(sequence);
+				Sounds.playEffect(R.raw.portalgoal);
 			}
 			else {
 				slimy.getSprite().runAction(this.getAnimatePortalEnterReference());

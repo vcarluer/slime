@@ -12,6 +12,7 @@ import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
 
+import gamers.associate.Slime.R;
 import gamers.associate.Slime.items.base.GameItem;
 
 
@@ -120,6 +121,8 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 						
 						this.level.setHudText(getFormatTimeCritic(this.leftTime));
 						this.localRender = 0;
+						
+						Sounds.playEffect(R.raw.tick);
 					}						
 				}
 				else {

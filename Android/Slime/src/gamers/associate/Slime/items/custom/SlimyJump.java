@@ -1,6 +1,8 @@
 package gamers.associate.Slime.items.custom;
 
+import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.GameItemPhysic;
@@ -156,6 +158,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 		CCAnimate animation = CCAnimate.action(this.animationList.get(Anim_Dbz_Aura), false);
 		CCRepeatForever repeat = CCRepeatForever.action(animation);
 		this.auraSprite.runAction(repeat);
+		Sounds.playEffect(R.raw.slimyselect);
 	}
 	
 	public void select(CGPoint gameReference) {
@@ -186,6 +189,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 			if (this.getBody() != null) {
 				Vector2 pos = this.getBody().getPosition();						
 				this.getBody().applyLinearImpulse(this.worldImpulse, pos);
+				Sounds.playEffect(R.raw.slimyjump);
 			}
 		}		
 	}		
