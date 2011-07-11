@@ -1,6 +1,8 @@
 package gamers.associate.Slime.layers;
 
+import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.LevelSelection;
+import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 
 import org.cocos2d.layers.CCLayer;
@@ -9,10 +11,12 @@ import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteSheet;
+import org.cocos2d.sound.SoundEngine;
 import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCMoveInRTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
+
 
 import android.view.MotionEvent;
 
@@ -29,7 +33,7 @@ public class HomeLayer extends CCLayer {
 	
 	protected HomeLayer() {
 		super();
-		//this.setIsTouchEnabled(true);
+		this.setIsTouchEnabled(true);
 //		this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
 //		this.addChild(this.spriteSheet);
 		
@@ -59,7 +63,9 @@ public class HomeLayer extends CCLayer {
 	@Override
 	public boolean ccTouchesEnded(MotionEvent event) {
 		// TODO: Go to level selection		
-		return super.ccTouchesEnded(event);
+		// return super.ccTouchesEnded(event);
+		this.selectPlay(this);
+		return true;
 		//CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
 		//return CCTouchDispatcher.kEventHandled;
 	}
@@ -82,6 +88,7 @@ public class HomeLayer extends CCLayer {
 	}
 
 	public void selectPlay(Object sender) {
+		Sounds.playEffect(R.raw.menuselect);		
 		CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
 //		CCTransitionScene transition = CCMoveInRTransition.transition(0.5f, LevelSelection.get().getScene());
 //		CCDirector.sharedDirector().replaceScene(transition);

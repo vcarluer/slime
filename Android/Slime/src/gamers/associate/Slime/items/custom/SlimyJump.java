@@ -309,7 +309,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 		
 		this.arrowSprite = CCSprite.sprite(GameItemCocos.getAnimFirstFrame(Anim_Arrow));
 		this.arrowSprite.setVisible(false);		
-		this.auraSheet.addChild(this.arrowSprite);		
+		this.auraSheet.addChild(this.arrowSprite);					
 	}
 
 	/* (non-Javadoc)

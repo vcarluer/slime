@@ -1,7 +1,9 @@
 package gamers.associate.Slime.layers;
 
+import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.HardCodedLevelBuilder;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.Sounds;
 
 import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.grid.CCFlipY3D;
@@ -51,14 +53,17 @@ public class EndLevelLayer extends CCLayer {
 	}
 	
 	public void goNext(Object sender) {
+		Sounds.playEffect(R.raw.menuselect);
 		Level.currentLevel.goNext();
 	}
 	
 	public void goRestart(Object sender) {
+		Sounds.playEffect(R.raw.menuselect);
 		Level.currentLevel.reload();
 	}
 
 	public void goHome(Object sender) {
+		Sounds.playEffect(R.raw.menuselect);
 		Level.currentLevel.goHome();
 	}
 	

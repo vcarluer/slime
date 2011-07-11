@@ -1,7 +1,9 @@
 package gamers.associate.Slime.layers;
 
+import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelSelection;
+import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.custom.MenuSprite;
 
 import org.cocos2d.layers.CCLayer;
@@ -66,7 +68,7 @@ public class HudLayer extends CCLayer {
 	}
 	
 	public void goPause(Object sender) {
-		// Level.currentLevel.togglePause();
+		Sounds.playEffect(R.raw.menuselect);		
 		Level.currentLevel.pause();
 	}
 	

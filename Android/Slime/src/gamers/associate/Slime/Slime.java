@@ -3,6 +3,7 @@ package gamers.associate.Slime;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelSelection;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.layers.GALogoLayer;
 import gamers.associate.Slime.levels.LevelHome;
@@ -10,9 +11,12 @@ import gamers.associate.Slime.levels.LevelHome;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.opengl.CCGLSurfaceView;
+import org.cocos2d.sound.SoundEngine;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Configuration;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Window;
@@ -28,6 +32,7 @@ public class Slime extends Activity {
 	
 	private CCGLSurfaceView mGLSurfaceView;
 	private CCScene scene;
+	private AudioManager audio;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -58,7 +63,9 @@ public class Slime extends Activity {
 		// First scene after start
 		// Needed, not overriden by ccdirector resume?		
 		this.scene = GALogoLayer.scene();
-					
+		
+		audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+		
 		// Make the Scene active		
 		CCDirector.sharedDirector().runWithScene(this.scene);
     }
@@ -137,7 +144,19 @@ public class Slime extends Activity {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {			
 			return true;			
-	    }	
+	    }
+		
+		if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
+			 audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,
+		                AudioManager.ADJUST_LOWER, AudioManager.FLAG_SHOW_UI); 
+			return true;
+		}
+	    
+		if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) { 
+			audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,
+	                AudioManager.ADJUST_RAISE, AudioManager.FLAG_SHOW_UI);
+			return true;
+	    }		   
 		
 		return super.onKeyDown(keyCode, event);
 	}
@@ -154,9 +173,10 @@ public class Slime extends Activity {
 			}			
 			
 			if (LevelSelection.get() != null && LevelSelection.get().getActivated()) {
+				Sounds.playEffect(R.raw.menuselect);
 				LevelSelection.get().goBack();
 			}
-	    }	
+	    }				
 		
 		return super.onKeyUp(keyCode, event);
 	}       

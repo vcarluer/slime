@@ -1,6 +1,7 @@
 package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.levels.LevelHome;
 
@@ -87,6 +88,7 @@ public class SlimeLoadingLayer extends CCLayer {
 				SpriteSheetFactory.add("slime", Level.zFront);
 				SpriteSheetFactory.add("slimydbz", Level.zFront);
 				
+				Sounds.preload();
 				
 				currentLevel = Level.get(LevelHome.Id);					
 				unschedule(nextCallback);

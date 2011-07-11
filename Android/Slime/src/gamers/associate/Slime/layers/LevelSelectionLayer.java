@@ -1,8 +1,10 @@
 package gamers.associate.Slime.layers;
 
+import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.HardCodedLevelBuilder;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelSelection;
+import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.levels.LevelDefinition;
@@ -89,6 +91,7 @@ public class LevelSelectionLayer extends CCLayer {
 	}
 	
 	public void selectLevel(Object sender) {
+		Sounds.playEffect(R.raw.menuselect);
 		CCMenuItem item = (CCMenuItem)sender;		
 		String levelName = (String)item.getUserData();
 		Level level = Level.get(levelName, true);
@@ -96,6 +99,7 @@ public class LevelSelectionLayer extends CCLayer {
 	}
 
 	public void goBackEvent(Object sender) {
+		Sounds.playEffect(R.raw.menuselect);
 		Level level = Level.get(LevelHome.Id, true);		
 		CCDirector.sharedDirector().replaceScene(level.getScene());
 	}
