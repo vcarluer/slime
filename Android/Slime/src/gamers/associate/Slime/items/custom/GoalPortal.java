@@ -15,6 +15,7 @@ import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.grid.CCTwirl;
 import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCAnimate;
+import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCFadeOut;
 import org.cocos2d.actions.interval.CCRotateBy;
 import org.cocos2d.actions.interval.CCScaleTo;
@@ -114,14 +115,20 @@ public class GoalPortal extends GameItemPhysic {
 	}
 	
 	private CCFiniteTimeAction getAnimatePortalEnterReference() {		
-		return CCFadeOut.action(1.0f);
+		return CCRotateBy.action(2.5f, 2160);		
 	}
 	
 	private void applyOtherPortalEnterAction(GameItemCocos item) {
-		CCScaleTo scale = CCScaleTo.action(1.0f, 0);
-		CCRotateBy rotateBy = CCRotateBy.action(1.0f, 720);
+		CCScaleTo scaleUp = CCScaleTo.action(1.0f, 3.0f);
+		CCDelayTime delay = CCDelayTime.action(1.0f);
+		CCScaleTo scaleDown = CCScaleTo.action(0.5f, 0.0f);
+		CCSequence action1 = CCSequence.actions(scaleUp, delay, scaleDown);
+		CCDelayTime delay2 = CCDelayTime.action(2.0f);				
+		CCFadeOut fade = CCFadeOut.action(0.5f);
+		CCSequence action2 = CCSequence.actions(delay2, fade);
 		
-		item.getSprite().runAction(scale);
-		item.getSprite().runAction(rotateBy);
+		
+		item.getSprite().runAction(action1);
+		item.getSprite().runAction(action2);
 	}
 }

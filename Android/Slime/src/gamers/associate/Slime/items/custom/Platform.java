@@ -1,7 +1,9 @@
 package gamers.associate.Slime.items.custom;
 
 
+import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.SpriteType;
 
@@ -55,5 +57,13 @@ public class Platform extends GameItemPhysic {
 	@Override
 	protected String getReferenceAnimationName() {		
 		return Platform.Anim_Base;
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.base.GameItemPhysic#handleContact(gamers.associate.Slime.items.base.GameItemPhysic)
+	 */
+	@Override
+	protected void handleContact(GameItemPhysic item) {		
+		super.handleContact(item);
 	}	
 }
