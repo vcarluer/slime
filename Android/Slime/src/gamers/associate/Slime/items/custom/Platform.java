@@ -2,6 +2,7 @@ package gamers.associate.Slime.items.custom;
 
 
 import gamers.associate.Slime.R;
+import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.GameItemPhysic;
@@ -63,7 +64,7 @@ public class Platform extends GameItemPhysic {
 	 * @see gamers.associate.Slime.items.base.GameItemPhysic#handleContact(gamers.associate.Slime.items.base.GameItemPhysic)
 	 */
 	@Override
-	protected void handleContact(GameItemPhysic item) {		
+	protected void handleContact(ContactInfo item) {		
 		super.handleContact(item);
 	}	
 }

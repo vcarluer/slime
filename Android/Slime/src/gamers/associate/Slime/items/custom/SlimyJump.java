@@ -1,6 +1,7 @@
 package gamers.associate.Slime.items.custom;
 
 import gamers.associate.Slime.R;
+import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.Util;
@@ -22,7 +23,11 @@ import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Joint;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.JointDef.JointType;
+import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
+import com.badlogic.gdx.physics.box2d.joints .WeldJointDef;
 
 public class SlimyJump extends Slimy implements ISelectable {
 
@@ -55,6 +60,11 @@ public class SlimyJump extends Slimy implements ISelectable {
 	private static float arrowScale = 1.5f;
 	private static float arrowAngleShift = -90;
 	private boolean isDisabled;
+	
+	private boolean stickHandled;
+	
+	private RevoluteJointDef currentJointDef;	
+	private Joint currentJoint;
 	
 	public SlimyJump(float x, float y, float width, float height, World world,
 			float worldRatio) {
@@ -183,14 +193,16 @@ public class SlimyJump extends Slimy implements ISelectable {
 	
 	@Override
 	public void selectionStop(CGPoint gameReference) {
-		if (this.selected) {
-			this.computeTarget(gameReference);
-
+		if (this.selected && this.isLanded) {
+			this.computeTarget(gameReference);			
 			if (this.getBody() != null) {
 				Vector2 pos = this.getBody().getPosition();						
 				this.getBody().applyLinearImpulse(this.worldImpulse, pos);
 				Sounds.playEffect(R.raw.slimyjump);
 				this.isLanded = false;
+				this.stickHandled = false;
+				this.world.destroyJoint(this.currentJoint);
+				this.currentJoint = null;
 			}
 		}		
 	}		
@@ -199,7 +211,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	 * @see gamers.associate.Slime.items.custom.Slimy#render(float)
 	 */
 	@Override
-	public void render(float delta) {		
+	public void render(float delta) {
 		super.render(delta);
 		if (this.isSelected()) {
 			this.auraPosition.x = this.getPosition().x;
@@ -277,8 +289,43 @@ public class SlimyJump extends Slimy implements ISelectable {
 	}
 	
 	@Override
-	protected void contactInternal(GameItemPhysic item) {		
-		this.land();		
+	protected void contactInternal(ContactInfo item) {		
+		this.land(item);	
+	}
+	
+	public void land(ContactInfo contact) {		
+		if (!this.isLanded && !this.stickHandled && !contact.getContactWith().isNoStick()) {
+													
+			Vector2 normal = contact.getManifold().getNormal();
+			if (normal != null) {
+				if (this.getBody().getPosition().x - contact.getContactWith().getBody().getPosition().x > 0) {
+					if (normal.x < 0) {
+						normal.x = - normal.x;
+					}
+				}
+				if (this.getBody().getPosition().y - contact.getContactWith().getBody().getPosition().y > 0) {
+					if (normal.y < 0) {
+						normal.y = - normal.y;
+					}
+				}
+				
+				float radians = (float)Math.atan2(normal.x, normal.y);
+				float degrees = ccMacros.CC_RADIANS_TO_DEGREES(radians);				
+				this.setAngle(degrees);
+			}
+			
+			if (this.currentJointDef == null) {
+				this.currentJointDef = new RevoluteJointDef();									
+			}
+											
+			this.currentJointDef.initialize(this.getBody(), contact.getContactWith().getBody(), this.getBody().getPosition());
+			this.currentJointDef.collideConnected = true;			
+			this.currentJoint = this.world.createJoint(this.currentJointDef);
+			
+			this.stickHandled = true;
+		}
+		
+		this.land();
 	}
 
 	@Override
@@ -322,6 +369,10 @@ public class SlimyJump extends Slimy implements ISelectable {
 	 */
 	@Override
 	public void destroy() {
+		if (this.currentJoint != null) {
+			this.world.destroyJoint(this.currentJoint);
+			this.currentJoint = null;
+		}
 		this.auraSheet.removeChild(this.auraSprite, true);
 		this.auraSheet.removeChild(this.arrowSprite, true);
 		super.destroy();

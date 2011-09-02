@@ -2,6 +2,7 @@ package gamers.associate.Slime.items.custom;
 
 
 import gamers.associate.Slime.R;
+import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.GameItemPhysic;
@@ -15,8 +16,10 @@ import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCFadeIn;
 import org.cocos2d.actions.interval.CCSequence;
+import org.cocos2d.config.ccMacros;
 import org.cocos2d.types.CGPoint;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
@@ -79,6 +82,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 		spawnPoint.x = this.position.x;
 		spawnPoint.y = this.position.y;
 		bodyDef.position.set(spawnPoint.x/worldRatio, spawnPoint.y/worldRatio);
+		bodyDef.angle = -1.0f * ccMacros.CC_DEGREES_TO_RADIANS(this.getAngle());		
 		
 		synchronized (world) {
 			// Define the dynamic body fixture and set mass so it's dynamic.
@@ -173,7 +177,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 		if (!this.isDead()) {
 			Sounds.playEffect(R.raw.slimyland);
 		}
-	}
+	}		
 	
 	@Override
 	public void render(float delta) {
@@ -250,18 +254,20 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	}
 	
 	protected void kill() {
-		Filter filter = new Filter();
-		
-		filter.categoryBits = GameItemPhysic.Category_OutGame;
-		filter.maskBits = GameItemPhysic.Category_Level;					
-		filter.groupIndex = -1;
-		for(Fixture fix : this.body.getFixtureList()) {
-			// Change fixture shape here?
-			fix.setFilterData(filter);
-			fix.setRestitution(0f);
-			fix.setFriction(1.0f);
-			fix.setDensity(10f);
-			this.body.resetMassData();
+		if (this.body != null) {
+			Filter filter = new Filter();
+			
+			filter.categoryBits = GameItemPhysic.Category_OutGame;
+			filter.maskBits = GameItemPhysic.Category_Level;					
+			filter.groupIndex = -1;
+			for(Fixture fix : this.body.getFixtureList()) {
+				// Change fixture shape here?
+				fix.setFilterData(filter);
+				fix.setRestitution(0f);
+				fix.setFriction(1.0f);
+				fix.setDensity(10f);
+				this.body.resetMassData();
+			}
 		}
 		
 		this.isDead = true;
@@ -281,14 +287,14 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	 * @see gamers.associate.Slime.GameItemPhysic#handleContact(gamers.associate.Slime.GameItemPhysic)
 	 */
 	@Override 
-	protected void handleContact(GameItemPhysic item) {		
+	protected void handleContact(ContactInfo item) {		
 		super.handleContact(item);
 		this.contactInternal(item);
 	}
 	
-	protected void contactInternal(GameItemPhysic item) {
-		if (item instanceof Slimy) {
-			Slimy kSlimy = (Slimy)item;
+	protected void contactInternal(ContactInfo item) {
+		if (item.getContactWith() instanceof Slimy) {
+			Slimy kSlimy = (Slimy)item.getContactWith();
 			kSlimy.splash();
 		}
 		else {

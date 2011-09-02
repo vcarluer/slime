@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.cocos2d.actions.interval.CCScaleTo;
 
+import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 
@@ -39,10 +40,10 @@ public class SlimyGrow extends Slimy{
 	}
 	
 	@Override
-	protected void contactInternal(GameItemPhysic item) {
-		if (item instanceof SlimyGrow) {
+	protected void contactInternal(ContactInfo item) {
+		if (item.getContactWith() instanceof SlimyGrow) {
 			if (!isEaten) {				
-				SlimyGrow kSlimy = (SlimyGrow)item;
+				SlimyGrow kSlimy = (SlimyGrow)item.getContactWith();
 				if (this.counter >= kSlimy.getCounter()) {					
 					this.eat(kSlimy);
 				}

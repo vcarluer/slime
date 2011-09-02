@@ -1,11 +1,14 @@
 package gamers.associate.Slime.items.base;
 
+import gamers.associate.Slime.game.ContactInfo;
+
 import java.util.ArrayList;
 
 import org.cocos2d.config.ccMacros;
 
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.WorldManifold;
 
 public abstract class GameItemPhysic extends GameItemPhysicFx {
 	public static short Category_Level = 0x0001;
@@ -15,13 +18,14 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 	protected Body body; 
 	protected float bodyWidth;
 	protected float bodyHeight;	
-	protected ArrayList<GameItemPhysic> contacts;
+	protected ArrayList<ContactInfo> contacts;
+	protected boolean noStick;
 	
 	public GameItemPhysic(float x, float y, float width, float height, World world, float worldRatio) {		
 		super(x, y, width, height, world, worldRatio);		
 		this.bodyWidth = this.width;
 		this.bodyHeight = this.height;
-		this.contacts = new ArrayList<GameItemPhysic>();
+		this.contacts = new ArrayList<ContactInfo>();
 	}
 	
 	@Override
@@ -72,24 +76,27 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 		// super.render(delta);
 	}
 	
-	public void addContact(Object with) {
+	public void addContact(Object with, WorldManifold manifold) {
 		if (with instanceof GameItemPhysic) {
 			GameItemPhysic item = (GameItemPhysic)with;
-			this.contacts.add(item);
+			ContactInfo contact = new ContactInfo();
+			contact.setContactWith(item);
+			contact.setManifold(manifold);
+			this.contacts.add(contact);
 		}
 	}
 	
 	protected void handleContacts() {		
 		if (this.contacts.size() > 0) {
-			for(GameItemPhysic item : this.contacts) {
-				this.handleContact(item);
+			for(ContactInfo contact : this.contacts) {
+				this.handleContact(contact);
 			}
 			
 			this.contacts.clear();
 		}
 	}
 	
-	protected void handleContact(GameItemPhysic item) {		
+	protected void handleContact(ContactInfo contact) {		
 	}
 	
 	@Override
@@ -102,5 +109,19 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 	}
 	
 	public void handleSpecialRemove() {		
+	}
+
+	/**
+	 * @return the noStick
+	 */
+	public boolean isNoStick() {
+		return noStick;
+	}
+
+	/**
+	 * @param noStick the noStick to set
+	 */
+	public void setNoStick(boolean noStick) {
+		this.noStick = noStick;
 	}
 }

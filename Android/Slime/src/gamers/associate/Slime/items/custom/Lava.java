@@ -1,5 +1,6 @@
 package gamers.associate.Slime.items.custom;
 
+import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.IBurnable;
@@ -54,10 +55,10 @@ public class Lava extends GameItemPhysic {
 	 * @see gamers.associate.Slime.items.GameItemPhysic#handleContact(gamers.associate.Slime.items.GameItemPhysic)
 	 */
 	@Override
-	protected void handleContact(GameItemPhysic item) {
+	protected void handleContact(ContactInfo item) {
 		super.handleContact(item);
-		if (item instanceof IBurnable) {
-			((IBurnable)item).burn();
+		if (item.getContactWith() instanceof IBurnable) {
+			((IBurnable)item.getContactWith()).burn();
 		}
 	}
 	

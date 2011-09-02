@@ -1,5 +1,6 @@
 package gamers.associate.Slime.items.custom;
 
+import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.SpriteType;
@@ -49,10 +50,10 @@ public class LevelEnd extends GameItemPhysic {
 	 * @see gamers.associate.Slime.GameItemPhysic#handleContact(gamers.associate.Slime.GameItemPhysic)
 	 */
 	@Override
-	protected void handleContact(GameItemPhysic item) {		
+	protected void handleContact(ContactInfo item) {		
 		super.handleContact(item);
-		Level.currentLevel.addItemToRemove(item);
-		item.handleSpecialRemove();
+		Level.currentLevel.addItemToRemove(item.getContactWith());
+		item.getContactWith().handleSpecialRemove();
 	}
 	
 	
