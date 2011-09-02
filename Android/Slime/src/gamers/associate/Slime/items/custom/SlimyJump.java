@@ -327,6 +327,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 											
 			this.currentJointDef.initialize(this.getBody(), contact.getContactWith().getBody(), this.getBody().getPosition());
 			this.currentJointDef.collideConnected = true;
+			this.currentJointDef.enableMotor = false;
 						
 			this.currentJoint = this.world.createJoint(this.currentJointDef);
 			
