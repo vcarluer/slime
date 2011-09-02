@@ -29,9 +29,9 @@ public class EndLevelLayer extends CCLayer {
 	private CCMenuItemSprite nextMenu;
 	
 	public EndLevelLayer() {		
-		this.textLabel = CCMenuItemLabel.item(getMenuLabel("EMPTY"), this, "");
-		this.scoreLabel = CCMenuItemLabel.item(getMenuLabel(scoreTxt), this, "");
-		this.endPackLabel = CCMenuItemLabel.item(getMenuLabel(endPackTxt), this, "");
+		this.textLabel = CCMenuItemLabel.item(getMenuLabel("EMPTY"), null, "");
+		this.scoreLabel = CCMenuItemLabel.item(getMenuLabel(scoreTxt), null, "");
+		this.endPackLabel = CCMenuItemLabel.item(getMenuLabel(endPackTxt), null, "");
 		
 		CCSprite nextSprite = CCSprite.sprite("control-fastforward.png", true);
 		this.nextMenu = CCMenuItemSprite.item(nextSprite, nextSprite, this, "goNext");

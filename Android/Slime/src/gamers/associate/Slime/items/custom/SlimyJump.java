@@ -201,8 +201,10 @@ public class SlimyJump extends Slimy implements ISelectable {
 				Sounds.playEffect(R.raw.slimyjump);
 				this.isLanded = false;
 				this.stickHandled = false;
-				this.world.destroyJoint(this.currentJoint);
-				this.currentJoint = null;
+				if (this.currentJoint != null) {
+					this.world.destroyJoint(this.currentJoint);
+					this.currentJoint = null;
+				}
 			}
 		}		
 	}		
@@ -294,19 +296,24 @@ public class SlimyJump extends Slimy implements ISelectable {
 	}
 	
 	public void land(ContactInfo contact) {		
-		if (!this.isLanded && !this.stickHandled && !contact.getContactWith().isNoStick()) {
+		if (!this.isLanded && !this.stickHandled && !contact.getContactWith().isNoStick() && this.currentJoint == null) {
 													
 			Vector2 normal = contact.getManifold().getNormal();
 			if (normal != null) {
-				if (this.getBody().getPosition().x - contact.getContactWith().getBody().getPosition().x > 0) {
-					if (normal.x < 0) {
-						normal.x = - normal.x;
-					}
+				float diffX = this.getBody().getPosition().x - contact.getContactWith().getBody().getPosition().x;
+				if (diffX > 0 && normal.x < 0) {					
+					normal.x = - normal.x;					
 				}
-				if (this.getBody().getPosition().y - contact.getContactWith().getBody().getPosition().y > 0) {
-					if (normal.y < 0) {
-						normal.y = - normal.y;
-					}
+				if (diffX < 0 && normal.x > 0) {
+					normal.x = - normal.x;
+				}
+				
+				float diffY = this.getBody().getPosition().y - contact.getContactWith().getBody().getPosition().y;
+				if (diffY > 0 && normal.y < 0) {					
+					normal.y = - normal.y;					
+				}
+				if (diffY < 0 && normal.y > 0) {					
+					normal.y = - normal.y;					
 				}
 				
 				float radians = (float)Math.atan2(normal.x, normal.y);
@@ -319,7 +326,8 @@ public class SlimyJump extends Slimy implements ISelectable {
 			}
 											
 			this.currentJointDef.initialize(this.getBody(), contact.getContactWith().getBody(), this.getBody().getPosition());
-			this.currentJointDef.collideConnected = true;			
+			this.currentJointDef.collideConnected = true;
+						
 			this.currentJoint = this.world.createJoint(this.currentJointDef);
 			
 			this.stickHandled = true;
@@ -369,10 +377,11 @@ public class SlimyJump extends Slimy implements ISelectable {
 	 */
 	@Override
 	public void destroy() {
-		if (this.currentJoint != null) {
-			this.world.destroyJoint(this.currentJoint);
-			this.currentJoint = null;
-		}
+//		if (this.currentJoint != null) {
+//			this.world.destroyJoint(this.currentJoint);
+//			this.currentJoint = null;
+//			this.currentJointDef = null;
+//		}
 		this.auraSheet.removeChild(this.auraSprite, true);
 		this.auraSheet.removeChild(this.arrowSprite, true);
 		super.destroy();
