@@ -56,7 +56,7 @@ public class Box extends GameItemPhysic{
     		}
     		else {
     			fixtureDef.density = 1.0f;
-    			fixtureDef.friction = 1.0f;
+    			fixtureDef.friction = 3.0f;
         		fixtureDef.restitution = 0f;
     		}
     		

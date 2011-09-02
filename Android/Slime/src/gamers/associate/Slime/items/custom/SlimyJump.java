@@ -295,8 +295,14 @@ public class SlimyJump extends Slimy implements ISelectable {
 		this.land(item);	
 	}
 	
-	public void land(ContactInfo contact) {		
-		if (!this.isLanded && !this.stickHandled && !contact.getContactWith().isNoStick() && this.currentJoint == null) {
+	public void land(ContactInfo contact) {	
+		this.land();
+		if (this.isLanded 
+				&& !this.stickHandled 
+				&& !contact.getContactWith().isNoStick()
+				&& !contact.getContactWith().isIsAllSensor()
+				&& !this.isDead
+				&& this.currentJoint == null) {
 													
 			Vector2 normal = contact.getManifold().getNormal();
 			if (normal != null) {
@@ -328,13 +334,14 @@ public class SlimyJump extends Slimy implements ISelectable {
 			this.currentJointDef.initialize(this.getBody(), contact.getContactWith().getBody(), this.getBody().getPosition());
 			this.currentJointDef.collideConnected = true;
 			this.currentJointDef.enableMotor = false;
+			this.currentJointDef.enableLimit = true;
+			this.currentJointDef.lowerAngle = 0;
+			this.currentJointDef.upperAngle = 0;
 						
 			this.currentJoint = this.world.createJoint(this.currentJointDef);
 			
 			this.stickHandled = true;
-		}
-		
-		this.land();
+		}				
 	}
 
 	@Override
@@ -401,5 +408,16 @@ public class SlimyJump extends Slimy implements ISelectable {
 	public void win() {
 		this.isDisabled = true;
 		super.win();
+	}
+	
+	@Override
+	protected void kill() {
+		super.kill();
+		this.unselect();
+		if (this.currentJoint != null) {
+			this.world.destroyJoint(this.currentJoint);
+			this.currentJoint = null;
+			this.currentJointDef = null;
+		}
 	}
 }

@@ -20,6 +20,7 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 	protected float bodyHeight;	
 	protected ArrayList<ContactInfo> contacts;
 	protected boolean noStick;
+	protected boolean IsAllSensor;
 	
 	public GameItemPhysic(float x, float y, float width, float height, World world, float worldRatio) {		
 		super(x, y, width, height, world, worldRatio);		
@@ -123,5 +124,19 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 	 */
 	public void setNoStick(boolean noStick) {
 		this.noStick = noStick;
+	}
+
+	/**
+	 * @return the isAllSensor
+	 */
+	public boolean isIsAllSensor() {
+		return IsAllSensor;
+	}
+
+	/**
+	 * @param isAllSensor the isAllSensor to set
+	 */
+	public void setIsAllSensor(boolean isAllSensor) {
+		IsAllSensor = isAllSensor;
 	}
 }

@@ -46,6 +46,7 @@ public class Lava extends GameItemPhysic {
     		FixtureDef fixtureDef = new FixtureDef();
     		fixtureDef.shape = staticBox;
     		fixtureDef.isSensor = true;
+    		this.IsAllSensor = true;
     		fixtureDef.filter.categoryBits = GameItemPhysic.Category_Level;
     		this.body.createFixture(fixtureDef);
     	}		

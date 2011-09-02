@@ -75,7 +75,7 @@ public class PhysicPolygon extends GameItemPhysic {
 	    		FixtureDef fixtureDef = new FixtureDef();
 	    		fixtureDef.shape = polygonShape;	
 	    		fixtureDef.density = 1.0f;
-	    		fixtureDef.friction = 1.0f;	    
+	    		fixtureDef.friction = 5.0f;	    
 	    		fixtureDef.restitution = 0f;
 	    		if (this.isDynamic) {
 	    			fixtureDef.filter.categoryBits = GameItemPhysic.Category_InGame;
