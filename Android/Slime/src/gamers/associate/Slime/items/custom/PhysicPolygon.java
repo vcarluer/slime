@@ -55,6 +55,7 @@ public class PhysicPolygon extends GameItemPhysic {
 			BodyDef bodyDef = new BodyDef();		
 			if (this.isDynamic) {
 				bodyDef.type = BodyType.DynamicBody;
+				this.noStick = true;
 			}
 			
 			CGPoint spawnPoint = new CGPoint();

@@ -20,10 +20,12 @@ public class Platform extends GameItemPhysic {
 	public static final int Sticky = 0;
 	public static final int Bump = 1;
 	public static final int NoSticky = 2;
+	public static final int Icy = 3;
 	
 	public static String Anim_Base_Sticky = "sticky";
 	public static String Anim_Base_Bump = "bumper";
 	public static String Anim_Base_NoSticky = "nosticky";
+	public static String Anim_Base_Icy = "ice";
 	
 	private int type;
 		
@@ -59,7 +61,11 @@ public class Platform extends GameItemPhysic {
     		FixtureDef fixtureDef = new FixtureDef();
     		fixtureDef.shape = staticBox;	
     		fixtureDef.density = 1.0f;
-    		fixtureDef.friction = 1.0f;
+    		fixtureDef.friction = 0f;
+    		if (this.type != Icy ) {    			
+    			fixtureDef.friction = 1.0f;
+    		}
+    		
     		fixtureDef.restitution = 0f;
     		if (this.type == Bump) {
     			fixtureDef.restitution = 1.5f;
@@ -75,6 +81,8 @@ public class Platform extends GameItemPhysic {
 	@Override
 	protected String getReferenceAnimationName() {		
 		switch (this.type) {		
+		case Icy:
+			return Anim_Base_Icy;
 		case Bump:
 			return Anim_Base_Bump;
 		case NoSticky:

@@ -26,6 +26,7 @@ public class Box extends GameItemPhysic{
 		
 		this.spriteType = SpriteType.SINGLE_SCALE;
 		this.zOrder = Level.zMid;
+		this.noStick = true;
 	}
 
 	@Override

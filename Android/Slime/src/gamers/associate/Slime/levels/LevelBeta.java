@@ -34,7 +34,8 @@ public class LevelBeta extends LevelTimeAttack {
 		float cX = 0;
 		float cY = 0;
 		// Line 0
-		SlimeFactory.Platform.createBL(cX, cY, level.getLevelWidth(), 200);
+		SlimeFactory.Platform.createBL(cX, cY, level.getLevelWidth() / 2, 200);
+		SlimeFactory.Platform.createIcyBL(cX + level.getLevelWidth() / 2, cY, level.getLevelWidth() / 2, 200);
 		cY+=200;
 		
 		cX += 100;

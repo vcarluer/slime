@@ -240,14 +240,15 @@ public class SlimyJump extends Slimy implements ISelectable {
 	@Override
 	public void render(float delta) {
 		super.render(delta);
-		if (this.isSelected()) {
+		if (this.isSelected() && this.isLanded) {			
 			this.auraPosition.x = this.getPosition().x;
 			this.auraPosition.y = this.getPosition().y - this.height / 2;
-			this.auraSprite.setPosition(this.auraPosition);
+			this.auraSprite.setPosition(this.auraPosition);			
+			// this.auraSprite.setRotation(this.getAngle());
 			float scale = this.worldImpulse.len() / Max_Impulse;
 			// scale go from 0 to 10, reajust to aura scale			
 			scale = scale * this.auraScale + startAuraScale;
-			
+						
 			this.auraSprite.setScale(scale);
 			this.arrowSprite.setPosition(this.getPosition());
 			float radians = (float)Math.atan2(this.worldImpulse.x, this.worldImpulse.y);
