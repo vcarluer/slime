@@ -23,9 +23,14 @@ import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Joint;
+import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.JointDef.JointType;
+import com.badlogic.gdx.physics.box2d.joints.DistanceJointDef;
+import com.badlogic.gdx.physics.box2d.joints.LineJointDef;
+import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import com.badlogic.gdx.physics.box2d.joints .WeldJointDef;
 
@@ -63,7 +68,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	
 	private boolean stickHandled;
 	
-	private RevoluteJointDef currentJointDef;	
+	private WeldJointDef currentJointDef;	
 	private Joint currentJoint;
 	
 	public SlimyJump(float x, float y, float width, float height, World world,
@@ -136,6 +141,26 @@ public class SlimyJump extends Slimy implements ISelectable {
 		if (this.scaledRect != null && this.isActive()) {			
 			// Drawing selection rectangle
 			Util.draw(gl, this.scaledRect, 2.0f, 0, 1, 0, 1);
+		}
+		
+		if (this.currentJoint != null) {
+			gl.glDisable(GL10.GL_LINE_SMOOTH);
+			gl.glColor4f(0.0f, 0.0f, 1.0f, 1.0f);
+			gl.glLineWidth(5.0f);
+			gl.glPointSize(2.0f);			
+			CGPoint jointS = CGPoint.ccp(this.currentJoint.getAnchorA().x * this.worldRatio, this.currentJoint.getAnchorA().y * this.worldRatio);
+			CGPoint jointE = CGPoint.ccp(this.currentJoint.getAnchorB().x * this.worldRatio, this.currentJoint.getAnchorB().y * this.worldRatio);
+			//CCDrawingPrimitives.ccDrawLine(gl, jointS, jointE);
+			CCDrawingPrimitives.ccDrawPoint(gl, jointS);
+			CCDrawingPrimitives.ccDrawPoint(gl, jointE);
+		}
+		
+		if (this.getBody() != null) {						
+			CGRect spriteBody = CGRect.make(this.getPosition().x - this.bodyWidth / 2, this.getPosition().y - this.bodyHeight / 2, this.bodyWidth, this.bodyHeight);
+			Util.draw(gl, spriteBody, 2.0f, 1, 0, 0, 1);
+			CGRect spriteRect = CGRect.make(this.getPosition().x - this.width / 2, this.getPosition().y - this.height / 2, this.width, this.height);
+			Util.draw(gl, spriteRect, 2.0f, 0, 0, 1, 1);
+			
 		}
 	}
 	
@@ -303,9 +328,16 @@ public class SlimyJump extends Slimy implements ISelectable {
 				&& !contact.getContactWith().isIsAllSensor()
 				&& !this.isDead
 				&& this.currentJoint == null) {
-													
-			Vector2 normal = contact.getManifold().getNormal();
-			if (normal != null) {
+			
+			int contactCount = contact.getManifold().getNumberOfContactPoints();
+			if (contactCount > 0) {
+				Vector2 contactPoint = null;
+				for (int i = 0; i < contactCount; i++) {
+					contactPoint = contact.getManifold().getPoints()[i];
+					break;
+				}
+				
+				Vector2 normal = contact.getManifold().getNormal();
 				float diffX = this.getBody().getPosition().x - contact.getContactWith().getBody().getPosition().x;
 				if (diffX > 0 && normal.x < 0) {					
 					normal.x = - normal.x;					
@@ -320,27 +352,44 @@ public class SlimyJump extends Slimy implements ISelectable {
 				}
 				if (diffY < 0 && normal.y > 0) {					
 					normal.y = - normal.y;					
-				}
+				}					
 				
 				float radians = (float)Math.atan2(normal.x, normal.y);
 				float degrees = ccMacros.CC_RADIANS_TO_DEGREES(radians);				
 				this.setAngle(degrees);
+//					float radAngle = -1.0f * ccMacros.CC_DEGREES_TO_RADIANS(this.angle);				
+
+//				
+//				Vector2 jointB = new Vector2();
+//				jointB.x = this.getBody().getPosition().x - (normal.x * ((this.bodyWidth / 2) / this.worldRatio));
+//				jointB.y = this.getBody().getPosition().y - (normal.y * ((this.bodyHeight / 2) / this.worldRatio));
+//				jointB.x = anchor.x + normal.x * ((this.bodyWidth / 2) / this.worldRatio);
+//				jointB.y = anchor.y + normal.y * ((this.bodyHeight / 2) / this.worldRatio);
+//				this.body.setTransform(jointB, radians);
+				
+				if (this.currentJointDef == null) {
+					this.currentJointDef = new WeldJointDef();									
+				}
+				
+				// contact.getContactWith().getBody(), this.getBody(), contactPoint, normal);
+				// this.currentJointDef.bodyA = contact.getContactWith().getBody();
+				// this.currentJointDef.bodyB = this.getBody();
+				this.currentJointDef.initialize(contact.getContactWith().getBody(), this.getBody(), contactPoint);
+				
+//				this.currentJointDef.target.set(contactPoint);
+//				this.currentJointDef.maxForce = 3000.0f * this.getBody().getMass();
+				this.currentJointDef.collideConnected = true;
+				// this.currentJointDef.collideConnected = true;
+//				this.currentJointDef.dampingRatio = 1.0f;
+	//			this.currentJointDef.enableMotor = false;
+	//			this.currentJointDef.enableLimit = true;
+	//			this.currentJointDef.lowerAngle = 0;
+	//			this.currentJointDef.upperAngle = 0;
+							
+				this.currentJoint = this.world.createJoint(this.currentJointDef);
+				
+				this.stickHandled = true;
 			}
-			
-			if (this.currentJointDef == null) {
-				this.currentJointDef = new RevoluteJointDef();									
-			}
-											
-			this.currentJointDef.initialize(this.getBody(), contact.getContactWith().getBody(), this.getBody().getPosition());
-			this.currentJointDef.collideConnected = true;
-			this.currentJointDef.enableMotor = false;
-			this.currentJointDef.enableLimit = true;
-			this.currentJointDef.lowerAngle = 0;
-			this.currentJointDef.upperAngle = 0;
-						
-			this.currentJoint = this.world.createJoint(this.currentJointDef);
-			
-			this.stickHandled = true;
 		}				
 	}
 
@@ -413,11 +462,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	@Override
 	protected void kill() {
 		super.kill();
-		this.unselect();
-		if (this.currentJoint != null && this.getBody() != null) {
-			this.world.destroyJoint(this.currentJoint);			
-		}
-		
+		this.unselect();		
 		this.currentJoint = null;
 		this.currentJointDef = null;
 	}

@@ -14,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class Platform extends GameItemPhysic {	
 	public static String Anim_Base = "metal2"; 
@@ -27,7 +28,8 @@ public class Platform extends GameItemPhysic {
 	@Override
 	protected void initBody() {
 		// Physic body
-		BodyDef bodyDef = new BodyDef();		
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyType.StaticBody;
 		CGPoint spawnPoint = new CGPoint();
 		spawnPoint.x = this.position.x;
 		spawnPoint.y = this.position.y;

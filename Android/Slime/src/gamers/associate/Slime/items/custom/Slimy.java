@@ -45,7 +45,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	public static float Default_Width = 24f;
 	public static float Default_Height = 26f;
 	protected static float Default_Body_Width = 20f; //16f
-	protected static float Default_Body_Height = 26f; //23f
+	protected static float Default_Body_Height = 23f; //23f
 	
 	protected Boolean isLanded;	
 	protected CCAction waitAction;

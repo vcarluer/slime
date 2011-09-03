@@ -36,7 +36,7 @@ import com.badlogic.gdx.physics.box2d.World;
  * @uml.dependency   supplier="gamers.associate.Slime.GameItem"
  */
 public class Level {	
-	public static boolean DebugMode = false;
+	public static boolean DebugMode = true;
 	public static boolean isInit;	
 	public static float Gravity = -10;
 	
@@ -329,7 +329,7 @@ public class Level {
 									
 			// TODO: physic step must be fix!
 			synchronized (world) {
-	    		world.step(delta, 6, 2);
+	    		world.step(delta, 8, 4); // 6 2
 	    	}												
 			
 			for(GameItem item : this.items.values()) {
