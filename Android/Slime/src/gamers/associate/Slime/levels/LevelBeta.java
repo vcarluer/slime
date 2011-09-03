@@ -6,6 +6,7 @@ import org.cocos2d.types.CGSize;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.custom.GoalPortal;
+import gamers.associate.Slime.items.custom.Platform;
 
 public class LevelBeta extends LevelTimeAttack {
 	@Override
@@ -46,7 +47,7 @@ public class LevelBeta extends LevelTimeAttack {
 		// SlimeFactory.Slimy.createJump(cX + 200, cY + 550, 1.0f);
 		cX += 200;
 		// SlimeFactory.Lava.createBL(cX, cY, 200, 50);
-		SlimeFactory.Platform.createBL(cX, cY, 100, 50);		
+		SlimeFactory.Platform.createBumpBL(cX, cY, 100, 50);		
 		cX += 100;
 		SlimeFactory.Platform.createBL(cX, cY, 50, 100);
 		cX += 50;		
@@ -56,6 +57,7 @@ public class LevelBeta extends LevelTimeAttack {
 		SlimeFactory.Lava.createBL(cX, cY, 50, 50);
 		cX += 50;
 		SlimeFactory.Platform.createBL(cX, cY, 200, 80);
+		SlimeFactory.Platform.setCurrentType(Platform.Sticky);
 		cX += 70;
 		SlimeFactory.Box.createBL(cX, cY + 80, 40, 40);		
 		SlimeFactory.Box.createBL(cX, cY + 120, 40, 40);
@@ -105,12 +107,14 @@ public class LevelBeta extends LevelTimeAttack {
 		// Line 2
 		cX = 0;
 		cY += 350;
-		SlimeFactory.Platform.createBL(cX, cY, 656, 20);
+		SlimeFactory.Platform.createBL(cX, cY, 400, 20);
 		cX += 400;
 		SlimeFactory.Box.createBL(cX, cY + 20, 10, 80);
+		SlimeFactory.Platform.createNoStickyBL(cX, cY, 128, 20);
 		cX += 28;
 		GoalPortal goalPortal = SlimeFactory.GoalPortal.create(cX + 40, cY + 90);
-		cX += 100;				
+		cX += 100;
+		SlimeFactory.Platform.createBL(cX, cY, 128, 20);
 		SlimeFactory.Platform.createBL(cX, cY + 20, 20, 128);
 		cX += 64;
 		// Goal

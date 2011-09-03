@@ -17,12 +17,24 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class Platform extends GameItemPhysic {	
-	public static String Anim_Base = "metal2"; 
+	public static final int Sticky = 0;
+	public static final int Bump = 1;
+	public static final int NoSticky = 2;
+	
+	public static String Anim_Base_Sticky = "sticky";
+	public static String Anim_Base_Bump = "bumper";
+	public static String Anim_Base_NoSticky = "nosticky";
+	
+	private int type;
 		
-	public Platform(float x, float y, float width, float height, World world, float worldRatio) {
+	public Platform(float x, float y, float width, float height, World world, float worldRatio, int platformType) {
 		super(x, y, width, height, world, worldRatio);
 		this.spriteType = SpriteType.SINGLE_REPEAT;		
 		this.zOrder = Level.zBack;
+		this.type = platformType;
+		if (this.type != Sticky) {
+			this.noStick = true;
+		}
 	}
 	
 	@Override
@@ -49,6 +61,9 @@ public class Platform extends GameItemPhysic {
     		fixtureDef.density = 1.0f;
     		fixtureDef.friction = 1.0f;
     		fixtureDef.restitution = 0f;
+    		if (this.type == Bump) {
+    			fixtureDef.restitution = 1.5f;
+    		}    		
     		fixtureDef.filter.categoryBits = GameItemPhysic.Category_Level;
     		this.body.createFixture(fixtureDef);
     	}  
@@ -59,7 +74,15 @@ public class Platform extends GameItemPhysic {
 	 */
 	@Override
 	protected String getReferenceAnimationName() {		
-		return Platform.Anim_Base;
+		switch (this.type) {		
+		case Bump:
+			return Anim_Base_Bump;
+		case NoSticky:
+			return Anim_Base_NoSticky;
+		case Sticky:
+			default:
+			return Anim_Base_Sticky;
+		}
 	}
 
 	/* (non-Javadoc)
