@@ -414,10 +414,11 @@ public class SlimyJump extends Slimy implements ISelectable {
 	protected void kill() {
 		super.kill();
 		this.unselect();
-		if (this.currentJoint != null) {
-			this.world.destroyJoint(this.currentJoint);
-			this.currentJoint = null;
-			this.currentJointDef = null;
+		if (this.currentJoint != null && this.getBody() != null) {
+			this.world.destroyJoint(this.currentJoint);			
 		}
+		
+		this.currentJoint = null;
+		this.currentJointDef = null;
 	}
 }
