@@ -66,7 +66,8 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	}
 	
 	private static String getFormatTime(float millis) {
-		float base = Math.round(millis);
+		// float base = Math.round(millis);
+		double base = Math.ceil((double)millis);
 		DecimalFormat df = new DecimalFormat ( ) ; 
 		df.setMaximumFractionDigits ( 0 ) ; //arrondi à 2 chiffres apres la virgules 
 		df.setMinimumFractionDigits ( 0 ) ; 
@@ -75,7 +76,8 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	}
 	
 	private static String getFormatTimeCritic(float millis) {
-		float base = Math.round(millis);
+		// float base = Math.round(millis);
+		double base = Math.ceil((double)millis);
 		DecimalFormat df = new DecimalFormat ( ) ; 
 		df.setMaximumFractionDigits ( 0 ) ; //arrondi à 2 chiffres apres la virgules 
 		df.setMinimumFractionDigits ( 0 ) ; 
@@ -153,7 +155,8 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 
 	@Override
 	public int getScore() {		
-		return (int) Math.round(this.leftTime);
+		// return (int) Math.round(this.leftTime);
+		return (int) Math.ceil((double)this.leftTime);
 	}
 
 	@Override
