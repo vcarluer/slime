@@ -9,7 +9,7 @@ import android.media.MediaPlayer;
 import gamers.associate.Slime.R;;
 
 public class Sounds {
-//	private static IntMap<MediaPlayer> soundsMap = new IntMap<MediaPlayer>();
+	private static IntMap<MediaPlayer> soundsMap = new IntMap<MediaPlayer>();
 	
 	public static boolean isMusicPlaying;
 	public static void preload() {		
@@ -29,26 +29,31 @@ public class Sounds {
 	
 	private static void preloadEffect(int soundId) {
 		SoundEngine.sharedEngine().preloadEffect(CCDirector.sharedDirector().getActivity(), soundId);
-//		synchronized(soundsMap) {			
-//			MediaPlayer mp = soundsMap.get(soundId);
-//			if (mp != null)
-//				return;
-//			
-//			mp = MediaPlayer.create(CCDirector.sharedDirector().getActivity(), soundId);
-////			mp.prepareAsync();
-//			soundsMap.put(soundId, mp);
-//		}
 	}
 	
 	// < 5 sec
 	public static void playEffect(int soundId) {
-		SoundEngine.sharedEngine().playEffect(CCDirector.sharedDirector().getActivity(), soundId);
-//		synchronized(soundsMap) {
-//			MediaPlayer mp = soundsMap.get(soundId);
-//			if (mp != null) {
-//				mp.start();
-//			}
-//		}
+		synchronized(soundsMap) {
+			MediaPlayer mp = soundsMap.get(soundId);
+			if (mp != null) {
+				mp.start();
+			}
+			else {
+				SoundEngine.sharedEngine().playEffect(CCDirector.sharedDirector().getActivity(), soundId);
+			}
+		}
+	}
+	
+	private static void preloadEffectAsSound(int soundId) {		
+		synchronized(soundsMap) {			
+			MediaPlayer mp = soundsMap.get(soundId);
+			if (mp != null)
+				return;
+			
+			mp = MediaPlayer.create(CCDirector.sharedDirector().getActivity(), soundId);
+//			mp.prepareAsync();
+			soundsMap.put(soundId, mp);
+		}
 	}
 	
 	private static void preloadMusic(int soundId) {

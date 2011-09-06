@@ -150,7 +150,8 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	public void activateSelection(CGPoint gameReference) {
 		this.isStarted = true;
 		this.setNormalTime();
-		this.level.getCameraManager().follow(this.level.getSelectedGameItem());
+		this.level.getCameraManager().follow(this.level.getSelectedGameItem());		
+		this.level.desactivateCameraMoveAndZoomByUser();
 	}
 
 	@Override
@@ -162,6 +163,8 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	@Override
 	public void selectBegin(CGPoint gameReference) {		
 		this.level.getCameraManager().moveInterpolateTo(this.level.getSelectedGameItem(), 0.5f);
+		this.level.getCameraManager().zoomInterpolateTo(this.level.getSelectedGameItem(), 1.0f, 0.5f);			
+		//this.level.getCameraManager().follow(this.level.getSelectedGameItem());		
 	}
 
 	@Override
@@ -178,6 +181,8 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		}
 		
 		this.reset();
+		
+		this.level.activateCameraMoveAndZoomByUser();
 	}
 	
 	public void setStartTime(int startTime) {

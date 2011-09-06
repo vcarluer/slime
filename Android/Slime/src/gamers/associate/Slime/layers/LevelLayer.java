@@ -30,6 +30,8 @@ public class LevelLayer extends CCLayer {
 	private boolean isZoomAction;
 	private float lastDistance;
 	private float lastZoomDelta;
+	private boolean isMoveCameraActivated;
+	private boolean isZoomCameraActivated;
 	
 	public LevelLayer(Level level) {
 		super();
@@ -91,12 +93,12 @@ public class LevelLayer extends CCLayer {
 				 
 		if (this.touchList.size() == 1) {
 			TouchInfo touch = this.getTouch(event, 0);
-			if (!this.level.moveSelection(this.getGamePoint(touch))) {				
+			if (!this.level.moveSelection(this.getGamePoint(touch)) && this.isMoveCameraActivated) {				
 				this.level.getCameraManager().moveCameraBy(touch.getLastMoveDelta());
 			}								
 		}
 		
-		if (this.isZoomAction) {
+		if (this.isZoomAction && this.isZoomCameraActivated) {
 			CGPoint touch1Ref =this.touchList.get(0).getLastMoveReference(); 
 			CGPoint touch2Ref =this.touchList.get(1).getLastMoveReference();
 			float distance = CGPoint.ccpDistance(
@@ -189,7 +191,7 @@ public class LevelLayer extends CCLayer {
 		this.level.getCameraManager().cancelFollow();
 		this.level.getCameraManager().cancelActions();
 		
-		if (this.touchList.size() == 2) {
+		if (this.touchList.size() == 2 && this.isZoomCameraActivated) {
 			this.isZoomAction = true;	
 			this.lastZoomDelta = 0f;
 			CGPoint touch1Ref = this.touchList.get(0).getLastMoveReference();
@@ -277,5 +279,33 @@ public class LevelLayer extends CCLayer {
 	
 	public void reset() {
 		this.touchList.clear();
+	}
+
+	/**
+	 * @return the isMoveCameraActivated
+	 */
+	public boolean isMoveCameraActivated() {
+		return isMoveCameraActivated;
+	}
+
+	/**
+	 * @param isMoveCameraActivated the isMoveCameraActivated to set
+	 */
+	public void setMoveCameraActivated(boolean isMoveCameraActivated) {
+		this.isMoveCameraActivated = isMoveCameraActivated;
+	}
+
+	/**
+	 * @return the isZoomCameraActivated
+	 */
+	public boolean isZoomCameraActivated() {
+		return isZoomCameraActivated;
+	}
+
+	/**
+	 * @param isZoomCameraActivated the isZoomCameraActivated to set
+	 */
+	public void setZoomCameraActivated(boolean isZoomCameraActivated) {
+		this.isZoomCameraActivated = isZoomCameraActivated;
 	}
 }

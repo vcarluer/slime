@@ -806,4 +806,14 @@ public class Level {
 			this.gamePlay.setNewAliveSlimyCount(this.aliveSlimyList.size());
 		}
 	}
+	
+	public void activateCameraMoveAndZoomByUser() {
+		this.levelLayer.setMoveCameraActivated(true);
+		this.levelLayer.setZoomCameraActivated(true);
+	}
+	
+	public void desactivateCameraMoveAndZoomByUser() {
+		this.levelLayer.setMoveCameraActivated(false);
+		this.levelLayer.setZoomCameraActivated(false);
+	}
 }
