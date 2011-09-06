@@ -83,6 +83,7 @@ public class Slime extends Activity {
         	Level.currentLevel.setPause(true);
         }
         
+        Sounds.pauseMusic();
         CCDirector.sharedDirector().onPause();
     }
 
@@ -94,6 +95,8 @@ public class Slime extends Activity {
         if (Level.currentLevel != null) {
         	Level.currentLevel.setPause(false);
         }
+        
+        Sounds.resumeMusic();
     }
 
     @Override

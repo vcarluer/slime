@@ -171,12 +171,12 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 			CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Landing_V), false);
 			this.currentAction = animate;
 			this.sprite.runAction(this.currentAction);
-			this.isLanded = true;			
-		}
-		
-		if (!this.isDead()) {
-			Sounds.playEffect(R.raw.slimyland);
-		}
+			this.isLanded = true;
+			
+			if (!this.isDead()) {
+				Sounds.playEffect(R.raw.slimyland);
+			}
+		}		
 	}		
 	
 	@Override

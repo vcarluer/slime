@@ -221,6 +221,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 		if (this.selected && this.isLanded) {
 			this.computeTarget(gameReference);			
 			if (this.getBody() != null) {
+				// this.getBody().setAwake(true);
 				Vector2 pos = this.getBody().getPosition();						
 				this.getBody().applyLinearImpulse(this.worldImpulse, pos);
 				Sounds.playEffect(R.raw.slimyjump);
@@ -390,6 +391,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 				this.currentJoint = this.world.createJoint(this.currentJointDef);
 				
 				this.stickHandled = true;
+				//this.getBody().setAwake(false);
 			}
 		}				
 	}

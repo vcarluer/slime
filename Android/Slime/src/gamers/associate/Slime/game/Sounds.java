@@ -2,10 +2,15 @@ package gamers.associate.Slime.game;
 
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.sound.SoundEngine;
+import org.cocos2d.utils.collections.IntMap;
+
+import android.media.MediaPlayer;
 
 import gamers.associate.Slime.R;;
 
 public class Sounds {
+//	private static IntMap<MediaPlayer> soundsMap = new IntMap<MediaPlayer>();
+	
 	public static boolean isMusicPlaying;
 	public static void preload() {		
 		preloadMusic(R.raw.menumusic);
@@ -24,11 +29,26 @@ public class Sounds {
 	
 	private static void preloadEffect(int soundId) {
 		SoundEngine.sharedEngine().preloadEffect(CCDirector.sharedDirector().getActivity(), soundId);
+//		synchronized(soundsMap) {			
+//			MediaPlayer mp = soundsMap.get(soundId);
+//			if (mp != null)
+//				return;
+//			
+//			mp = MediaPlayer.create(CCDirector.sharedDirector().getActivity(), soundId);
+////			mp.prepareAsync();
+//			soundsMap.put(soundId, mp);
+//		}
 	}
 	
 	// < 5 sec
 	public static void playEffect(int soundId) {
 		SoundEngine.sharedEngine().playEffect(CCDirector.sharedDirector().getActivity(), soundId);
+//		synchronized(soundsMap) {
+//			MediaPlayer mp = soundsMap.get(soundId);
+//			if (mp != null) {
+//				mp.start();
+//			}
+//		}
 	}
 	
 	private static void preloadMusic(int soundId) {
