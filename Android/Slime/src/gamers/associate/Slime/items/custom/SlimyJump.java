@@ -165,11 +165,9 @@ public class SlimyJump extends Slimy implements ISelectable {
 	}
 	
 	public boolean trySelect(CGPoint gameReference) {
-		if (this.isActive()) {				
-			if (this.isInSlimy(gameReference)) {			
-				this.select();
-				this.computeTarget(gameReference);
-			}
+		if (this.canSelect(gameReference)) {			
+			this.select();
+			this.computeTarget(gameReference);			
 		}
 		
 		return this.selected;
@@ -177,7 +175,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	
 	public boolean canSelect(CGPoint gameReference) {
 		boolean can = false;
-		if (this.isActive()) {				
+		if (this.isActive() && this.isLanded) {				
 			if (this.isInSlimy(gameReference)) {			
 				can = true;
 			}
@@ -241,7 +239,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	@Override
 	public void render(float delta) {
 		super.render(delta);
-		if (this.isSelected() && this.isLanded) {			
+		if (this.isSelected()) {			
 			this.auraPosition.x = this.getPosition().x;
 			this.auraPosition.y = this.getPosition().y - this.height / 2;
 			this.auraSprite.setPosition(this.auraPosition);			

@@ -187,9 +187,11 @@ public class LevelLayer extends CCLayer {
 		touch.setLastMoveTime(event.getEventTime());
 		touch.setFirstMoveTime(event.getEventTime());		
 		this.touchList.add(touch);
-		this.getCameraManager().stopContinousMoving();
-		this.level.getCameraManager().cancelFollow();
-		this.level.getCameraManager().cancelActions();
+		if (this.isMoveCameraActivated || this.isZoomCameraActivated) {
+			this.getCameraManager().stopContinousMoving();
+			this.level.getCameraManager().cancelFollow();
+			this.level.getCameraManager().cancelActions();
+		}		
 		
 		if (this.touchList.size() == 2 && this.isZoomCameraActivated) {
 			this.isZoomAction = true;	
