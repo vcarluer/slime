@@ -1,0 +1,135 @@
+package gamers.associate.Slime.levels.itemdef;
+
+import gamers.associate.Slime.Slime;
+import gamers.associate.Slime.game.Level;
+
+import java.util.ArrayList;
+
+import android.util.Log;
+
+public abstract class ItemDefinition {		
+	protected String itemType;
+	protected float x;
+	protected float y;
+	protected float width;
+	protected float height;
+	protected ArrayList<String> typesHandled;
+	
+	public ItemDefinition() {
+		this.typesHandled = new ArrayList<String>();
+		this.initTypeHandled();
+	}
+	
+	protected abstract void initTypeHandled();
+	
+	/**
+	 * @return the type
+	 */
+	public String getType() {
+		return itemType;
+	}
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(String type) {
+		itemType = type;
+	}
+	/**
+	 * @return the x
+	 */
+	public float getX() {
+		return x;
+	}
+	/**
+	 * @param x the x to set
+	 */
+	public void setX(float x) {
+		this.x = x;
+	}
+	/**
+	 * @return the y
+	 */
+	public float getY() {
+		return y;
+	}
+	/**
+	 * @param y the y to set
+	 */
+	public void setY(float y) {
+		this.y = y;
+	}
+	/**
+	 * @return the width
+	 */
+	public float getWidth() {
+		return width;
+	}
+	/**
+	 * @param width the width to set
+	 */
+	public void setWidth(float width) {
+		this.width = width;
+	}
+	/**
+	 * @return the height
+	 */
+	public float getHeight() {
+		return height;
+	}
+	/**
+	 * @param height the height to set
+	 */
+	public void setHeight(float height) {
+		this.height = height;
+	}
+	
+	public void parse(String line) throws Exception {
+		try
+		{
+			String[] infos = line.split(";");
+			this.itemType = infos[0];
+			this.x = Float.valueOf(infos[1]).floatValue();
+			this.y = Float.valueOf(infos[2]).floatValue();
+			this.width = Float.valueOf(infos[3]).floatValue();
+			this.height = Float.valueOf(infos[4]).floatValue();
+			this.parseNext(infos);
+		}
+		catch (Exception ex) {
+			Log.e(Slime.TAG, "BAD FORMAT for item definition " + this.getType());
+			throw ex;
+		}
+	}
+	
+	// Start to 5
+	protected abstract void parseNext(String[] infos);
+	
+	public abstract void createItem(Level level);
+	
+	public void parseAndCreate(String line, Level level) throws Exception {
+		this.parse(line);
+		this.createItem(level);
+	}
+	
+	protected void registerHandledType(String typeName) {
+		this.typesHandled.add(typeName);
+	}
+	
+	public boolean isHandlerFor(String itemType) {
+		boolean found = false;
+		for (String regType : this.typesHandled) {
+			if (itemType.toUpperCase().equals(regType.toUpperCase())) {
+				found = true;
+				break;
+			}
+		}
+		
+		return found;
+	}
+
+	/**
+	 * @return the typesHandled
+	 */
+	public ArrayList<String> getTypesHandled() {
+		return typesHandled;
+	}
+}

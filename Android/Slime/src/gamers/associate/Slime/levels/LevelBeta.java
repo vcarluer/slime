@@ -1,12 +1,10 @@
 package gamers.associate.Slime.levels;
 
-import org.cocos2d.types.CGPoint;
-import org.cocos2d.types.CGSize;
-
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
-import gamers.associate.Slime.items.custom.GoalPortal;
 import gamers.associate.Slime.items.custom.Platform;
+
+import org.cocos2d.types.CGPoint;
 
 public class LevelBeta extends LevelTimeAttack {
 	@Override
@@ -18,7 +16,6 @@ public class LevelBeta extends LevelTimeAttack {
 				width * LevelUtil.getHeightRatio());
 		
 		LevelUtil.createGroundBox(level);
-		CGSize s = CGSize.make(level.getLevelWidth(), level.getLevelHeight());
 				
 		// Platform
 		/*float goalPlatW = 100f;
@@ -113,7 +110,7 @@ public class LevelBeta extends LevelTimeAttack {
 		SlimeFactory.Box.createBL(cX, cY + 20, 10, 80);
 		SlimeFactory.Platform.createNoStickyBL(cX, cY, 128, 20);
 		cX += 28;
-		GoalPortal goalPortal = SlimeFactory.GoalPortal.create(cX + 40, cY + 90);
+		SlimeFactory.GoalPortal.create(cX + 40, cY + 90);
 		cX += 100;
 		SlimeFactory.Platform.createBL(cX, cY, 128, 20);
 		SlimeFactory.Platform.createBL(cX, cY + 20, 20, 128);

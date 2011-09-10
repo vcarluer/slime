@@ -1,22 +1,15 @@
 package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.R;
-import gamers.associate.Slime.game.HardCodedLevelBuilder;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Sounds;
 
-import org.cocos2d.actions.base.CCAction;
-import org.cocos2d.actions.grid.CCFlipY3D;
-import org.cocos2d.actions.interval.CCFadeIn;
-import org.cocos2d.actions.interval.CCMoveTo;
-import org.cocos2d.actions.tile.CCWavesTiles3D;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItemLabel;
 import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.types.ccGridSize;
 
 public class EndLevelLayer extends CCLayer {
 	private static String scoreTxt = "SCORE: "; 

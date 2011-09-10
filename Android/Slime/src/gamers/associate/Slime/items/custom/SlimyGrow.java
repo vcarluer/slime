@@ -1,12 +1,11 @@
 package gamers.associate.Slime.items.custom;
 
+import gamers.associate.Slime.game.ContactInfo;
+import gamers.associate.Slime.game.Level;
+
 import java.util.ArrayList;
 
 import org.cocos2d.actions.interval.CCScaleTo;
-
-import gamers.associate.Slime.game.ContactInfo;
-import gamers.associate.Slime.game.Level;
-import gamers.associate.Slime.items.base.GameItemPhysic;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;

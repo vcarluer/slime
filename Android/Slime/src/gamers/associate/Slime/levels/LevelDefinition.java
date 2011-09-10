@@ -3,22 +3,15 @@ package gamers.associate.Slime.levels;
 import gamers.associate.Slime.game.Level;
 
 public abstract class LevelDefinition {
-	private String id;
-	private boolean isSpecial;
-	private GamePlay gamePlay;
-	private int lastScore;
-	private int maxScore;
+	protected String id;
+	protected boolean isSpecial;
+	protected GamePlay gamePlay;
+	protected int lastScore;
+	protected int maxScore;
 	
 	protected LevelDefinition() {
-		this.gamePlay = GamePlay.None;
-		this.init();
+		this.gamePlay = GamePlay.None;	
 	}
-	
-	protected void init() {
-		this.initLevel();
-	}
-	
-	protected abstract void initLevel();
 	
 	/**
 	 * @return the id
@@ -30,11 +23,9 @@ public abstract class LevelDefinition {
 	/**
 	 * @param id the id to set
 	 */
-	protected void setId(String id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-	
-	public abstract void buildLevel(Level level);
 
 	/**
 	 * @return the isSpecial
@@ -46,7 +37,7 @@ public abstract class LevelDefinition {
 	/**
 	 * @param isSpecial the isSpecial to set
 	 */
-	protected void setSpecial(boolean isSpecial) {
+	public void setSpecial(boolean isSpecial) {
 		this.isSpecial = isSpecial;
 	}
 
@@ -60,7 +51,7 @@ public abstract class LevelDefinition {
 	/**
 	 * @param gamePlay the gamePlay to set
 	 */
-	protected void setGamePlay(GamePlay gamePlay) {
+	public void setGamePlay(GamePlay gamePlay) {
 		this.gamePlay = gamePlay;
 	}
 
@@ -78,4 +69,6 @@ public abstract class LevelDefinition {
 	public int getMaxScore() {
 		return this.maxScore;
 	}
+	
+	public abstract void buildLevel(Level level);
 }

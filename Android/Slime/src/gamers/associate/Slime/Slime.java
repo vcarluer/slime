@@ -26,6 +26,8 @@ import android.view.WindowManager;
  * @uml.dependency   supplier="gamers.associate.Slime.LevelLayer"
  */
 public class Slime extends Activity {
+	public static final String TAG = "Slime";
+	
 	static {
         System.loadLibrary("gdx");
 	}		
@@ -46,6 +48,8 @@ public class Slime extends Activity {
         mGLSurfaceView = new CCGLSurfaceView(this);
         
         setContentView(mGLSurfaceView);
+        
+        SlimeFactory.ContextActivity = this;
         
      // attach the OpenGL to a window
 		CCDirector.sharedDirector().attachInView(mGLSurfaceView);

@@ -1,22 +1,16 @@
 package gamers.associate.Slime.layers;
 
-import gamers.associate.Slime.items.base.SpriteSheetFactory;
-
 import org.cocos2d.actions.UpdateCallback;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.nodes.CCSpriteFrame;
-import org.cocos2d.nodes.CCSpriteFrameCache;
-import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
 
 public class GALogoLayer extends CCLayer {	
 	private static CCScene scene;	
 	private long waitLogoSec = 2;
-	private long onEnterTime;	
-	private CCSpriteSheet spriteSheet;
+	private long onEnterTime;
 	private CCSprite sprite;
 	
 	public static CCScene scene() {

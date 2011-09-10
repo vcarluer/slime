@@ -201,10 +201,8 @@ public class Level {
 	
 	// Must be call before running scene with CCDirector
 	public void loadLevel(String levelName) {
-		this.resetLevel();									
-		
-		// Hard coded for now
-		HardCodedLevelBuilder.build(this, levelName);			
+		this.resetLevel();		
+		SlimeFactory.LevelBuilder.build(this, levelName);			
 				
 		this.currentLevelName = levelName;
 		this.startLevel();				
@@ -309,7 +307,7 @@ public class Level {
 		this.attachToFactory();
 		
 		// Levels
-		HardCodedLevelBuilder.init();
+		SlimeFactory.LevelBuilder.init();
 	}
 	
 	public float getTimeRatio() {
@@ -675,7 +673,7 @@ public class Level {
 	}
 	
 	public void goNext() {
-		String next = HardCodedLevelBuilder.getNext(this.currentLevelName);
+		String next = SlimeFactory.LevelBuilder.getNext(this.currentLevelName);
 		if (next != null) {
 			this.loadLevel(next);
 		}
@@ -783,7 +781,7 @@ public class Level {
 	}
 	
 	public Boolean hasNext() {
-		return HardCodedLevelBuilder.getNext(this.currentLevelName) != null;
+		return SlimeFactory.LevelBuilder.getNext(this.currentLevelName) != null;
 	}
 	
 	public void activate()

@@ -19,7 +19,6 @@ import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.config.ccMacros;
 import org.cocos2d.types.CGPoint;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;

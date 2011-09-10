@@ -7,29 +7,25 @@ import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.levels.LevelHome;
 
 import org.cocos2d.actions.UpdateCallback;
-import org.cocos2d.layers.CCColorLayer;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
-import org.cocos2d.types.ccColor4B;
 
 public class SlimeLoadingLayer extends CCLayer {		
 	private static CCScene scene;
-	private Level currentLevel;		
-	private CCSpriteSheet spriteSheet;
+	private Level currentLevel;
 	private CCSprite sprite;
 	
 	public static CCScene scene() {
 		if (scene == null) {
 			scene = CCScene.node();		
 			
-			float width = CCDirector.sharedDirector().winSize().getWidth();
-			float height = CCDirector.sharedDirector().winSize().getHeight();
+			// float width = CCDirector.sharedDirector().winSize().getWidth();
+			// float height = CCDirector.sharedDirector().winSize().getHeight();
 			
 			/*CCColorLayer colorLayer = CCColorLayer.node(new ccColor4B(0, 0, 0, 255), width, height);
 			

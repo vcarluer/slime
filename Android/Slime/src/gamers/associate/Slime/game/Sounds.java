@@ -1,12 +1,12 @@
 package gamers.associate.Slime.game;
 
+import gamers.associate.Slime.R;
+
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.sound.SoundEngine;
 import org.cocos2d.utils.collections.IntMap;
 
 import android.media.MediaPlayer;
-
-import gamers.associate.Slime.R;;
 
 public class Sounds {
 	private static IntMap<MediaPlayer> soundsMap = new IntMap<MediaPlayer>();

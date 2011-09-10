@@ -5,8 +5,6 @@ import gamers.associate.Slime.game.Level;
 
 import java.util.ArrayList;
 
-import javax.microedition.khronos.opengles.GL10;
-
 import org.cocos2d.actions.UpdateCallback;
 import org.cocos2d.events.CCTouchDispatcher;
 import org.cocos2d.layers.CCLayer;

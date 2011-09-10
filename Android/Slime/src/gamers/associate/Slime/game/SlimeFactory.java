@@ -13,12 +13,17 @@ import gamers.associate.Slime.items.custom.SlimyFactory;
 import gamers.associate.Slime.items.custom.SpawnCannonFactory;
 import gamers.associate.Slime.items.custom.SpawnPortalFactory;
 import gamers.associate.Slime.items.custom.ThumbnailFactory;
+import gamers.associate.Slime.levels.ILevelBuilder;
 
 import org.cocos2d.nodes.CCNode;
+
+import android.app.Activity;
 
 import com.badlogic.gdx.physics.box2d.World;
 
 public abstract class SlimeFactory {
+	public static Activity ContextActivity;
+	public static ILevelBuilder LevelBuilder;
 	public static boolean isAttached;
 	public static SlimyFactory Slimy = new SlimyFactory();
 	public static SpawnPortalFactory SpawnPortal = new SpawnPortalFactory();
@@ -34,6 +39,8 @@ public abstract class SlimeFactory {
 	public static ThumbnailFactory Thumbnail = new ThumbnailFactory();
 		
 	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {		
+		LevelBuilder = new LevelBuilder();
+		
 		Slimy.attach(level, attachNode, attachWorld, attachWorldRatio);
 		SpawnPortal.attach(level, attachNode);
 		Platform.attach(level, attachNode, attachWorld, attachWorldRatio);

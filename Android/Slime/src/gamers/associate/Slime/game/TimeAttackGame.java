@@ -1,19 +1,18 @@
 package gamers.associate.Slime.game;
 
+import gamers.associate.Slime.R;
+import gamers.associate.Slime.items.base.GameItem;
+
 import java.text.DecimalFormat;
 
 import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.base.CCRepeatForever;
-import org.cocos2d.actions.interval.CCBlink;
 import org.cocos2d.actions.interval.CCFadeIn;
 import org.cocos2d.actions.interval.CCFadeOut;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
-
-import gamers.associate.Slime.R;
-import gamers.associate.Slime.items.base.GameItem;
 
 
 public class TimeAttackGame extends GameItem implements IGamePlay {

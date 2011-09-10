@@ -6,7 +6,6 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.items.base.GameItemCocos;
-import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.ISelectable;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 
@@ -23,16 +22,9 @@ import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Joint;
-import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.physics.box2d.JointDef.JointType;
-import com.badlogic.gdx.physics.box2d.joints.DistanceJointDef;
-import com.badlogic.gdx.physics.box2d.joints.LineJointDef;
-import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
-import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
-import com.badlogic.gdx.physics.box2d.joints .WeldJointDef;
+import com.badlogic.gdx.physics.box2d.joints.WeldJointDef;
 
 public class SlimyJump extends Slimy implements ISelectable {
 

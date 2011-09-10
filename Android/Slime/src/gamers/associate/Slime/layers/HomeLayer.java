@@ -3,20 +3,13 @@ package gamers.associate.Slime.layers;
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.LevelSelection;
 import gamers.associate.Slime.game.Sounds;
-import gamers.associate.Slime.items.base.SpriteSheetFactory;
 
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.nodes.CCSpriteSheet;
-import org.cocos2d.sound.SoundEngine;
-import org.cocos2d.transitions.CCFadeTransition;
-import org.cocos2d.transitions.CCMoveInRTransition;
-import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
-
 
 import android.view.MotionEvent;
 
@@ -71,8 +64,6 @@ public class HomeLayer extends CCLayer {
 	}
 	
 	private CCMenu menu;
-	
-	private CCSpriteSheet spriteSheet;
 	
 	/* (non-Javadoc)
 	 * @see org.cocos2d.layers.CCLayer#onEnter()
