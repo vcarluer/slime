@@ -22,7 +22,7 @@ public class BumperFactory extends GameItemPhysicFactory<Bumper> {
 	}
 
 	@Override
-	protected void runFirstAnimations(Bumper item) {
+	protected void runFirstAnimations(Bumper item) {		
 		item.waitAnim();		
 	}
 

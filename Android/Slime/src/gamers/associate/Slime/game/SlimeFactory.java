@@ -4,6 +4,7 @@ import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.items.custom.BecBunsenFactory;
 import gamers.associate.Slime.items.custom.BoxFactory;
 import gamers.associate.Slime.items.custom.BumperFactory;
+import gamers.associate.Slime.items.custom.ButtonFactory;
 import gamers.associate.Slime.items.custom.GoalPortalFactory;
 import gamers.associate.Slime.items.custom.HomeLevelHandlerFactory;
 import gamers.associate.Slime.items.custom.LavaFactory;
@@ -39,6 +40,7 @@ public abstract class SlimeFactory {
 	public static PhysicPolygonFactory Polygon = new PhysicPolygonFactory();
 	public static ThumbnailFactory Thumbnail = new ThumbnailFactory();
 	public static BecBunsenFactory BecBunsen = new BecBunsenFactory();
+	public static ButtonFactory Button = new ButtonFactory();
 		
 	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {		
 		LevelBuilder = new LevelBuilder();
@@ -56,6 +58,7 @@ public abstract class SlimeFactory {
 		Polygon.attach(level, attachNode, attachWorld, attachWorldRatio);
 		Thumbnail.attach(level, attachNode);
 		BecBunsen.attach(level, attachNode, attachWorld, attachWorldRatio);
+		Button.attach(level, attachNode, attachWorld, attachWorldRatio);
 		
 		SpriteSheetFactory.attachAll(attachNode);
 		isAttached = true;
@@ -75,6 +78,7 @@ public abstract class SlimeFactory {
 		Polygon.detach();
 		Thumbnail.detach();
 		BecBunsen.detach();
+		Button.detach();
 		
 		SpriteSheetFactory.detachAll();
 		isAttached = false;
@@ -93,6 +97,7 @@ public abstract class SlimeFactory {
 		Polygon.destroy();
 		Thumbnail.destroy();
 		BecBunsen.destroy();
+		Button.destroy();
 		
 		SpriteSheetFactory.destroy();
 		isAttached = false;

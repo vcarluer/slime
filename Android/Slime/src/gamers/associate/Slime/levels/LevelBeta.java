@@ -40,6 +40,7 @@ public class LevelBeta extends LevelTimeAttack {
 		// Line 1
 		
 		SlimeFactory.Platform.createBL(cX, cY, 200, 150);
+		SlimeFactory.Button.createBL(cX + 20, cY + 170, 40, 40, "ramp1", 2f);
 		// SpawnCannon spawnCannon = SlimeFactory.Cannon.create(200 - SpawnCannon.Default_Width / 2, 150 + SpawnCannon.Default_Height / 2);
 		level.setStartItem(SlimeFactory.Slimy.createJump(cX + 150, cY + 250, 1.0f));
 		// SlimeFactory.Slimy.createJump(cX + 200, cY + 550, 1.0f);
@@ -107,7 +108,7 @@ public class LevelBeta extends LevelTimeAttack {
 		cY += 350;
 		SlimeFactory.Platform.createBL(cX, cY, 400, 20);
 		cX += 100;
-		SlimeFactory.BecBunsen.createBL(cX, cY + 20, 20, 67, 5);
+		SlimeFactory.BecBunsen.createBL(cX, cY + 20, 20, 67, 5, "ramp1");
 		cX += 300;
 		SlimeFactory.Box.createBL(cX, cY + 20, 10, 80);
 		SlimeFactory.Platform.createNoStickyBL(cX, cY, 128, 20);

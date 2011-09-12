@@ -4,11 +4,13 @@ import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.IBurnable;
+import gamers.associate.Slime.items.base.ITrigerable;
 import gamers.associate.Slime.items.base.SpriteType;
 
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCAnimate;
+import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.types.CGPoint;
 
@@ -18,7 +20,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
-public class BecBunsen extends GameItemPhysic{
+public class BecBunsen extends GameItemPhysic implements ITrigerable {
 	public static String Anim_Base = "bunsen";
 	public static String Anim_Wait = "bunsen-wait";
 	public static String Anim_Starting = "bunsen-starting";
@@ -28,6 +30,12 @@ public class BecBunsen extends GameItemPhysic{
 	
 	private static float Reference_Width = 20f;
 	private static float Reference_Height = 67f;
+	
+	private boolean isOn;
+	
+	private String name;
+	
+	private float animDelay = 0f;
 	
 	public BecBunsen(float x, float y, float width, float height,
 			World world, float worldRatio) {
@@ -44,6 +52,12 @@ public class BecBunsen extends GameItemPhysic{
 		
 		this.referenceSize.width = Reference_Width;
 		this.referenceSize.height = Reference_Height;
+		
+		this.name = "";
+	}
+	
+	public void setAnimDelay(float delay) {
+		this.animDelay = delay;
 	}
 
 	@Override
@@ -85,16 +99,37 @@ public class BecBunsen extends GameItemPhysic{
 	}
 	
 	public void turnOn() {
-		CCAnimate animateStart = CCAnimate.action(this.animationList.get(Anim_Starting), false);
-		CCCallFunc callStartEnded = CCCallFunc.action(this, "turnedOn");
-		CCSequence sequence = CCSequence.actions(animateStart, callStartEnded);
-		this.sprite.runAction(sequence);
+		if (!this.isOn) {			
+			CCDelayTime delay = CCDelayTime.action(this.animDelay);
+			CCAnimate animateStart = CCAnimate.action(this.animationList.get(Anim_Starting), false);
+			CCCallFunc callStartEnded = CCCallFunc.action(this, "turnedOn");
+			CCSequence sequence = CCSequence.actions(delay, animateStart, callStartEnded);
+			this.sprite.runAction(sequence);
+		}
 	}
 	
 	public void turnedOn() {
 		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Base), false);
 		CCRepeatForever repeat = CCRepeatForever.action(animate);
 		this.sprite.runAction(repeat);
+		this.isOn = true;
+	}
+	
+	public void turnOff() {
+		if (this.isOn) {
+			CCDelayTime delay = CCDelayTime.action(this.animDelay);
+			CCAnimate animateStart = CCAnimate.action(this.animationList.get(Anim_Starting), false);		
+			CCCallFunc callStartEnded = CCCallFunc.action(this, "turnedOff");
+			CCSequence sequence = CCSequence.actions(delay, animateStart.reverse(), callStartEnded);
+			this.sprite.runAction(sequence);
+		}
+	}
+	
+	public void turnedOff() {
+		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Wait), false);
+		CCRepeatForever repeat = CCRepeatForever.action(animate);
+		this.sprite.runAction(repeat);
+		this.isOn = false;
 	}
 
 	/* (non-Javadoc)
@@ -103,8 +138,29 @@ public class BecBunsen extends GameItemPhysic{
 	@Override
 	protected void handleContact(ContactInfo contact) {		
 		super.handleContact(contact);
-		if (contact.getContactWith() instanceof IBurnable) {
-			((IBurnable)contact.getContactWith()).burn();
+		if (this.isOn) {
+			if (contact.getContactWith() instanceof IBurnable) {
+				((IBurnable)contact.getContactWith()).burn();
+			}
+		}
+	}
+
+	@Override
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public void trigger(Object source, String data) {
+		if (this.isOn) {
+			this.turnOff();
+		}
+		else {
+			this.turnOn();
 		}
 	}
 }

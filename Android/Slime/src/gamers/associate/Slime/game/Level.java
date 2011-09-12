@@ -3,6 +3,7 @@ package gamers.associate.Slime.game;
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.ISelectable;
+import gamers.associate.Slime.items.base.ITrigerable;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.items.custom.Slimy;
 import gamers.associate.Slime.items.custom.Thumbnail;
@@ -118,6 +119,8 @@ public class Level {
 	
 	protected boolean endLevelShown;
 	
+	protected ArrayList<ITrigerable> trigerables;
+	
 	protected Level() {
 		this.scene = CCScene.node();
 		this.levelLayer = new LevelLayer(this);
@@ -151,6 +154,7 @@ public class Level {
 		this.gameLayer.addChild(this.nodeDraw, zTop);
 		
 		this.aliveSlimyList = new ArrayList<Slimy>();
+		this.trigerables = new ArrayList<ITrigerable>();
 		
 		this.init();
 		
@@ -215,6 +219,7 @@ public class Level {
 			item.destroy();
 		}
 		
+		this.trigerables.clear();
 		this.aliveSlimyList.clear();
 		this.isGameOver = false;
 		this.lastScore = 0;		
@@ -441,6 +446,12 @@ public class Level {
 		{
 			ISelectable selectable = (ISelectable)item;
 			this.selectables.add(selectable);
+		}
+		
+		if (item instanceof ITrigerable)
+		{
+			ITrigerable trigerable = (ITrigerable)item;
+			this.trigerables.add(trigerable);
 		}
 		
 		if (item instanceof Slimy) {
@@ -813,5 +824,16 @@ public class Level {
 	public void desactivateCameraMoveAndZoomByUser() {
 		this.levelLayer.setMoveCameraActivated(false);
 		this.levelLayer.setZoomCameraActivated(false);
+	}
+	
+	public ArrayList<ITrigerable> getTrigerables(String name) {
+		ArrayList<ITrigerable> list = new ArrayList<ITrigerable>();
+		for (ITrigerable trigerable : this.trigerables) {
+			if (trigerable.getName().equals(name)) {
+				list.add(trigerable);
+			}
+		}
+		
+		return list;
 	}
 }
