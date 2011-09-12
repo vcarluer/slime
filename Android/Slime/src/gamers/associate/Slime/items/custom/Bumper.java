@@ -8,8 +8,6 @@ import gamers.associate.Slime.items.base.SpriteType;
 
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
-import org.cocos2d.actions.interval.CCDelayTime;
-import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.math.Vector2;
@@ -25,6 +23,8 @@ public class Bumper extends GameItemPhysic {
 	public static String Anim_Bump = "bumper-2";	
 	private static float Default_Width = 47f;
 	private static float Default_Height = 47f;
+	private static float Reference_Width = 53f;
+	private static float Reference_Height = 53f;
 	
 	private float powa;
 		
@@ -39,8 +39,8 @@ public class Bumper extends GameItemPhysic {
 		}		
 		this.powa = Default_Powa;
 		this.setNoStick(true);
-		this.referenceSize.width = 53f;
-		this.referenceSize.height = 53f;
+		this.referenceSize.width = Reference_Width;
+		this.referenceSize.height = Reference_Height;
 	}
 	
 	public void setPowa(float powa) {
