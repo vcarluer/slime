@@ -113,6 +113,7 @@ public class BecBunsen extends GameItemPhysic implements ITrigerable {
 		CCRepeatForever repeat = CCRepeatForever.action(animate);
 		this.sprite.runAction(repeat);
 		this.isOn = true;
+		this.body.setActive(true);
 	}
 	
 	public void turnOff() {
@@ -130,6 +131,7 @@ public class BecBunsen extends GameItemPhysic implements ITrigerable {
 		CCRepeatForever repeat = CCRepeatForever.action(animate);
 		this.sprite.runAction(repeat);
 		this.isOn = false;
+		this.body.setActive(false);
 	}
 
 	/* (non-Javadoc)

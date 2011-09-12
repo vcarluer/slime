@@ -2,6 +2,7 @@ package gamers.associate.Slime.levels;
 
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.items.custom.BecBunsen;
 import gamers.associate.Slime.items.custom.Platform;
 
 import org.cocos2d.types.CGPoint;
@@ -108,7 +109,10 @@ public class LevelBeta extends LevelTimeAttack {
 		cY += 350;
 		SlimeFactory.Platform.createBL(cX, cY, 400, 20);
 		cX += 100;
-		SlimeFactory.BecBunsen.createBL(cX, cY + 20, 20, 67, 5, "ramp1");
+		for (BecBunsen bec : SlimeFactory.BecBunsen.createBL(cX, cY - 67, 20, 67, 5, "ramp1")) {
+			bec.setAngle(180);
+		}
+		
 		cX += 300;
 		SlimeFactory.Box.createBL(cX, cY + 20, 10, 80);
 		SlimeFactory.Platform.createNoStickyBL(cX, cY, 128, 20);
