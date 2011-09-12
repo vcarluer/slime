@@ -6,6 +6,10 @@ import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.SpriteType;
 
+import org.cocos2d.actions.base.CCRepeatForever;
+import org.cocos2d.actions.interval.CCAnimate;
+import org.cocos2d.actions.interval.CCDelayTime;
+import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.math.Vector2;
@@ -17,16 +21,17 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class Bumper extends GameItemPhysic {
 	public static float Default_Powa = 1.5f;	
-	public static String Anim_Base = "red_tri";	
-	private static float Default_Width = 64f;
-	private static float Default_Height = 64f;
+	public static String Anim_Wait = "bumper-2-wait";
+	public static String Anim_Bump = "bumper-2";	
+	private static float Default_Width = 47f;
+	private static float Default_Height = 47f;
 	
 	private float powa;
 		
 	public Bumper(float x, float y, float width, float height,
 			World world, float worldRatio) {
 		super(x, y, width, height, world, worldRatio);		
-		this.spriteType = SpriteType.SINGLE_SCALE;		
+		this.spriteType = SpriteType.ANIM_SCALE;		
 		
 		if (width == 0 && height == 0) {
 			this.width = this.bodyWidth = Default_Width;
@@ -34,6 +39,8 @@ public class Bumper extends GameItemPhysic {
 		}		
 		this.powa = Default_Powa;
 		this.setNoStick(true);
+		this.referenceSize.width = 53f;
+		this.referenceSize.height = 53f;
 	}
 	
 	public void setPowa(float powa) {
@@ -78,7 +85,10 @@ public class Bumper extends GameItemPhysic {
     	}		
 	}
 	
-	public void waitAnim() {		
+	public void waitAnim() {
+		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Wait), false);
+		CCRepeatForever repeat = CCRepeatForever.action(animate);
+		this.sprite.runAction(repeat);
 	}
 
 	/* (non-Javadoc)
@@ -86,7 +96,7 @@ public class Bumper extends GameItemPhysic {
 	 */
 	@Override
 	protected String getReferenceAnimationName() {
-		return Bumper.Anim_Base;
+		return Bumper.Anim_Wait;
 	}
 
 	/* (non-Javadoc)
@@ -95,6 +105,8 @@ public class Bumper extends GameItemPhysic {
 	@Override
 	protected void handleContact(ContactInfo item) {
 		Sounds.playEffect(R.raw.bump);
+		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Bump), false);				
+		this.sprite.runAction(animate);
 		super.handleContact(item);
 	}		
 }

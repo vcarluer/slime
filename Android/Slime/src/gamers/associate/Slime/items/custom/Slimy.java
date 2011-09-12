@@ -66,6 +66,9 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 
 		this.isLanded = false;
 		this.isDead = false;
+		
+		this.referenceSize.width = 32f;
+		this.referenceSize.height = 35f;
 	}
 	
 	@Override

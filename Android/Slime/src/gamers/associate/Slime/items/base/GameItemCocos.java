@@ -11,6 +11,7 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.nodes.CCSpriteFrameCache;
 import org.cocos2d.types.CGPoint;
+import org.cocos2d.types.CGRect;
 import org.cocos2d.types.CGSize;
 
 /**
@@ -24,11 +25,13 @@ public abstract class GameItemCocos extends GameItem {
 	protected SpriteType spriteType;
 	protected boolean attachedToRoot;
 	protected int zOrder;
+	protected CGSize referenceSize;
 		
 	public GameItemCocos(float x, float y, float width, float height) {
 		super(x, y, width, height);		
 		this.animationList = new Hashtable<String, CCAnimation>();				
 		this.spriteType = SpriteType.UNKNOWN;
+		this.referenceSize = CGSize.zero();
 	}
 	
 	@Override
@@ -130,11 +133,17 @@ public abstract class GameItemCocos extends GameItem {
 	protected void transformTexture() {
 		if (this.spriteType == SpriteType.ANIM_SCALE || this.spriteType == SpriteType.SINGLE_SCALE || this.spriteType == SpriteType.SINGLE_SCALE_DIRECT) {
 			if (this.width != 0 && this.height != 0) {
-				CGSize size = this.getTextureSize();			
+				CGSize size = null;
+				if (this.referenceSize.width != 0 && this.referenceSize.height != 0) {
+					size = this.referenceSize;
+				}
+				else {
+					size = this.getTextureSize();
+				}			
 				
 				if (size.width != 0 && size.height != 0) {
 					float wScale = this.width / size.width;
-					float hScale = this.height / size.height;
+					float hScale = this.height / size.height;					
 					this.sprite.setScaleX(wScale);
 					this.sprite.setScaleY(hScale);
 				}			

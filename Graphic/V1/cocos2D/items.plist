@@ -30,6 +30,19 @@
                 <key>sourceSize</key>
                 <string>{40,40}</string>
             </dict>
+			<key>bumper-2-wait-01.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{80,0},{47,47}}</string>
+                <key>offset</key>
+                <string>{-3,-3}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,6},{47,47}}</string>
+                <key>sourceSize</key>
+                <string>{53,53}</string>
+            </dict>
             <key>bumper-2-01.png</key>
             <dict>
                 <key>frame</key>

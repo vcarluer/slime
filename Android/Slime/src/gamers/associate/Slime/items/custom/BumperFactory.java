@@ -7,12 +7,13 @@ public class BumperFactory extends GameItemPhysicFactory<Bumper> {
 
 	@Override
 	protected void createAnimList() {
-		// this.createAnim(Bumper.Anim_Wait, 1);
+		this.createAnim(Bumper.Anim_Wait, 1, 0.5f);
+		this.createAnim(Bumper.Anim_Bump, 2);
 	}
 
 	@Override
 	protected String getPlistPng() {
-		return "labo";
+		return "items";
 	}
 
 	@Override
@@ -22,7 +23,7 @@ public class BumperFactory extends GameItemPhysicFactory<Bumper> {
 
 	@Override
 	protected void runFirstAnimations(Bumper item) {
-		// item.waitAnim();		
+		item.waitAnim();		
 	}
 
 	@Override
