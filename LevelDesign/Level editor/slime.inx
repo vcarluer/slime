@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <_name>Slime Level</_name>
+    <id>com.gamersassociate.Slime.level-compiler</id>
+    <dependency type="executable" location="extensions">slime-level-compiler.py</dependency>
+	<output>
+        <extension>.slime</extension>
+        <mimetype>text/plain</mimetype>
+        <_filetypename>Slime level (*.slime)</_filetypename>
+        <_filetypetooltip>Slime!</_filetypetooltip>
+    </output>
+    <script>
+        <command reldir="extensions" interpreter="python">slime-level-compiler.py</command>
+    </script>
+</inkscape-extension>
