@@ -33,6 +33,8 @@ public class BecBunsen extends GameItemPhysic implements ITrigerable {
 	
 	private boolean isOn;
 	
+	private boolean startOn;
+	
 	private String name;
 	
 	private float animDelay = 0f;
@@ -162,6 +164,17 @@ public class BecBunsen extends GameItemPhysic implements ITrigerable {
 			this.turnOff();
 		}
 		else {
+			this.turnOn();
+		}
+	}
+	
+	public void setStartOn(boolean startOn) {
+		this.startOn = startOn;
+	}
+	
+	public void initanimation() {
+		this.turnedOff();
+		if (this.startOn) {
 			this.turnOn();
 		}
 	}

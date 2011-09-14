@@ -23,10 +23,10 @@ public class TimeAttackDef extends ItemDefinition {
 	}
 
 	@Override
-	protected void parseNext(String[] infos) {
-		this.levelTime = Integer.valueOf(infos[5]).intValue();
+	protected void parseNext(String[] infos, int start) {
+		this.levelTime = Integer.valueOf(infos[start]).intValue();
 		if (infos.length > 5) {
-			this.criticTime = Integer.valueOf(infos[6]).intValue();
+			this.criticTime = Integer.valueOf(infos[start + 1]).intValue();
 		}
 		else {
 			this.criticTime = 0;

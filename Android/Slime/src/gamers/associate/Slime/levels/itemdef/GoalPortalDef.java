@@ -17,7 +17,7 @@ public class GoalPortalDef extends ItemDefinition {
 	}
 
 	@Override
-	protected void parseNext(String[] infos) {
+	protected void parseNext(String[] infos, int start) {
 		// NONE	
 	}
 

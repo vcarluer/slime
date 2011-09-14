@@ -37,7 +37,7 @@ public class PlatformDef extends ItemDefinition {
 	}
 
 	@Override
-	protected void parseNext(String[] infos) {
+	protected void parseNext(String[] infos, int start) {
 		// None
 	}
 }

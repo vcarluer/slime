@@ -11,6 +11,7 @@ public abstract class ItemDefinition {
 	protected static String None = "None";
 	
 	protected String itemType;
+
 	protected float x;
 	protected float y;
 	protected float width;
@@ -94,7 +95,7 @@ public abstract class ItemDefinition {
 			this.y = ZeroIfNone(infos[2]);
 			this.width = ZeroIfNone(infos[3]);
 			this.height = ZeroIfNone(infos[4]);
-			this.parseNext(infos);
+			this.parseNext(infos, 5);
 		}
 		catch (Exception ex) {
 			Log.e(Slime.TAG, "BAD FORMAT for item definition " + this.getType());
@@ -111,8 +112,7 @@ public abstract class ItemDefinition {
 		}
 	}
 	
-	// Start to 5
-	protected abstract void parseNext(String[] infos);
+	protected abstract void parseNext(String[] infos, int start);
 	
 	public abstract void createItem(Level level);
 	
