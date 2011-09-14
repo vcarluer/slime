@@ -42,7 +42,7 @@ public abstract class SlimeFactory {
 	public static ThumbnailFactory Thumbnail = new ThumbnailFactory();
 	public static BecBunsenFactory BecBunsen = new BecBunsenFactory();
 	public static ButtonFactory Button = new ButtonFactory();
-	//public static CircularSawFactory CircularSaw = new CircularSawFactory();
+	public static CircularSawFactory CircularSaw = new CircularSawFactory();
 		
 	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {		
 		LevelBuilder = new LevelBuilder();
@@ -61,7 +61,7 @@ public abstract class SlimeFactory {
 		Thumbnail.attach(level, attachNode);
 		BecBunsen.attach(level, attachNode, attachWorld, attachWorldRatio);
 		Button.attach(level, attachNode, attachWorld, attachWorldRatio);
-		//CircularSaw.attach(level, attachNode, attachWorld, attachWorldRatio);
+		CircularSaw.attach(level, attachNode, attachWorld, attachWorldRatio);
 		
 		SpriteSheetFactory.attachAll(attachNode);
 		isAttached = true;
@@ -82,7 +82,7 @@ public abstract class SlimeFactory {
 		Thumbnail.detach();
 		BecBunsen.detach();
 		Button.detach();
-		//CircularSaw.detach();
+		CircularSaw.detach();
 		
 		SpriteSheetFactory.detachAll();
 		isAttached = false;
@@ -102,7 +102,7 @@ public abstract class SlimeFactory {
 		Thumbnail.destroy();
 		BecBunsen.destroy();
 		Button.destroy();
-		//CircularSaw.destroy();
+		CircularSaw.destroy();
 		
 		SpriteSheetFactory.destroy();
 		isAttached = false;

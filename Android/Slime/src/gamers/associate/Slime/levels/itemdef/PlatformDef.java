@@ -7,7 +7,7 @@ public class PlatformDef extends ItemDefinition {
 	private static String Handled_Platform = "Platform";
 	private static String Handled_Bumper = "Platform_Bumper";
 	private static String Handled_NoSticky = "Platform_NoSticky";
-	private static String Handled_Ice = "Platfom_Ice";
+	private static String Handled_Ice = "Platform_Ice";
 	
 	@Override
 	public void createItem(Level level) {

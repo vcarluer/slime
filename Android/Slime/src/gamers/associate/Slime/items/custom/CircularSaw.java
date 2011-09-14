@@ -91,23 +91,31 @@ public class CircularSaw extends GameItemPhysic implements ITrigerable {
 	}
 	
 	public void turnOn() {
-		if (!this.isOn) {
-			this.sprite.stopAllActions();
-			CCAnimate animateStart = CCAnimate.action(this.animationList.get(Anim_Running), false);			
-			CCRepeatForever repeat = CCRepeatForever.action(animateStart);
-			this.sprite.runAction(repeat);
+		if (!this.isOn) {			
+			this.animateOn();
 			this.isOn = true;
 		}
 	}	
 	
+	private void animateOn() {
+		this.sprite.stopAllActions();
+		CCAnimate animateStart = CCAnimate.action(this.animationList.get(Anim_Running), false);			
+		CCRepeatForever repeat = CCRepeatForever.action(animateStart);
+		this.sprite.runAction(repeat);
+	}
+	
 	public void turnOff() {
 		if (this.isOn) {
-			this.sprite.stopAllActions();			
-			CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Wait), false);		
-			CCRepeatForever repeat = CCRepeatForever.action(animate);
-			this.sprite.runAction(repeat);
+			this.animateOff();
 			this.isOn = false;
 		}
+	}
+	
+	private void animateOff() {
+		this.sprite.stopAllActions();			
+		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Wait), false);		
+		CCRepeatForever repeat = CCRepeatForever.action(animate);
+		this.sprite.runAction(repeat);
 	}
 
 	/* (non-Javadoc)
@@ -117,8 +125,8 @@ public class CircularSaw extends GameItemPhysic implements ITrigerable {
 	protected void handleContact(ContactInfo contact) {		
 		super.handleContact(contact);
 		if (this.isOn) {
-			if (contact.getContactWith() instanceof IBurnable) {
-				((IBurnable)contact.getContactWith()).burn();
+			if (contact.getContactWith() instanceof Slimy) {
+				((Slimy)contact.getContactWith()).splash();
 			}
 		}
 	}
@@ -146,12 +154,14 @@ public class CircularSaw extends GameItemPhysic implements ITrigerable {
 		this.startOn = startOn;
 	}
 	
-	public void initanimation() {
+	public void initAnimation() {
 		if (this.startOn) {
-			this.turnOn();
+			this.animateOn();
 		}
 		else {
-			this.turnOff();
+			this.animateOff();
 		}
+		
+		this.isOn = this.startOn;
 	}
 }

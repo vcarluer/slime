@@ -25,7 +25,7 @@ public class CircularSawFactory extends GameItemPhysicFactory<CircularSaw>{
 
 	@Override
 	protected void runFirstAnimations(CircularSaw item) {
-		item.initanimation();
+		item.initAnimation();
 	}
 		
 	
