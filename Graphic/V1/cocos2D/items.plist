@@ -303,7 +303,7 @@
                 <key>sourceSize</key>
                 <string>{40,40}</string>
             </dict>
-            <key>saw-wait.png</key>
+            <key>saw-wait-01.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{80,147},{40,40}}</string>

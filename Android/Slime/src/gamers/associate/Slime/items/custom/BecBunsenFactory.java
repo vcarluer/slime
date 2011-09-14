@@ -4,7 +4,8 @@ import gamers.associate.Slime.items.base.GameItemPhysicFactory;
 
 
 public class BecBunsenFactory extends GameItemPhysicFactory<BecBunsen>{
-	
+	private boolean isOn;
+	private float delay;
 	@Override
 	protected void createAnimList() {
 		this.createAnim(BecBunsen.Anim_Base, 5);
@@ -34,8 +35,8 @@ public class BecBunsenFactory extends GameItemPhysicFactory<BecBunsen>{
 		for (int i = 0; i < number; i++) {
 			BecBunsen becBunsen = super.create(x + i * width, y, width, height);
 			becBunsen.setName(name);
-			becBunsen.setStartOn(isOn);
-			becBunsen.setAnimDelay(delay + (i / 2f));
+			this.isOn = isOn;
+			this.delay = delay + (i / 2f);		
 			created[i] = becBunsen;
 		}
 				
@@ -45,8 +46,8 @@ public class BecBunsenFactory extends GameItemPhysicFactory<BecBunsen>{
 	public BecBunsen create(float x, float y, float width, float height, String name, float delay, boolean isOn) {		
 		BecBunsen becBunsen = super.create(x, y, width, height);
 		becBunsen.setName(name);
-		becBunsen.setStartOn(isOn);
-		becBunsen.setAnimDelay(delay);
+		this.isOn = isOn;
+		this.delay = delay;		
 				
 		return becBunsen;
 	}
@@ -61,5 +62,15 @@ public class BecBunsenFactory extends GameItemPhysicFactory<BecBunsen>{
 	
 	public BecBunsen[] createBL(float x, float y, float width, float height, int number) {
 		return this.createBL(x, y, width, height, number);
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.base.ItemFactoryBase#initItem(gamers.associate.Slime.items.base.GameItemCocos)
+	 */
+	@Override
+	protected void initItem(BecBunsen item) {
+		item.setStartOn(this.isOn);
+		item.setAnimDelay(this.delay);
+		super.initItem(item);
 	}
 }

@@ -7,8 +7,8 @@ public class BumperAngleFactory extends GameItemPhysicFactory<BumperAngle> {
 
 	@Override
 	protected void createAnimList() {
-		this.createAnim(BumperAngle.Anim_Wait, 1, 0.5f);
-		this.createAnim(BumperAngle.Anim_Bump, 2);
+		this.createAnim(BumperAngle.Anim_Wait, 1);
+		this.createAnim(BumperAngle.Anim_Bump, 2, 0.5f);
 	}
 
 	@Override

@@ -47,11 +47,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.70000001"
-     inkscape:cx="333.87253"
-     inkscape:cy="268.93546"
+     inkscape:zoom="1.4"
+     inkscape:cx="-340.98323"
+     inkscape:cy="336.36617"
      inkscape:document-units="px"
-     inkscape:current-layer="MAP"
+     inkscape:current-layer="Template"
      showgrid="true"
      inkscape:snap-grids="true"
      inkscape:snap-page="false"
@@ -349,6 +349,30 @@
          id="tspan3995"
          x="-437.53387"
          y="410.14633">Button</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="-440"
+       y="470"
+       id="text3824-0-3-6-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3070">Circular Saw</tspan></text>
+    <rect
+       style="fill:#f86e26;fill-opacity:1;stroke:none"
+       id="circularsaw"
+       width="40"
+       height="40"
+       x="-290"
+       y="440"
+       inkscape:label="#rect3794"
+       type="CircularSaw"
+       att_isOn="true">
+      <desc
+         id="desc3798-0-9">slimy start</desc>
+      <title
+         id="title3796-4-9">slimy_start</title>
+    </rect>
   </g>
   <g
      inkscape:groupmode="layer"

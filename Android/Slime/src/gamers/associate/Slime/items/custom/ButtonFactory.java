@@ -7,8 +7,8 @@ public class ButtonFactory extends GameItemPhysicFactory<Button> {
 
 	@Override
 	protected void createAnimList() {
-		this.createAnim(Button.Anim_Wait, 1, 0.5f);
-		this.createAnim(Button.Anim_Bump, 2);
+		this.createAnim(Button.Anim_Wait, 1);
+		this.createAnim(Button.Anim_Bump, 2, 0.5f);
 	}
 
 	@Override
