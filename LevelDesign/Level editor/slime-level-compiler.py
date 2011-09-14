@@ -40,12 +40,14 @@ class Smile( inkex.Effect ):
 		# Creation d'un nouveau calque
 		#root = inkex.etree.Element("MAP")
 		root = self.getElementById("MAP")
-		self.generateNodeAndChilds(root)
+		self.generateNodeAndChilds(root, True)
 		
-	def generateNodeAndChilds(self, root):
+	# For now do only one level in xml tree with isRootMap
+	def generateNodeAndChilds(self, root, isRootMap):
 		self.printNode(root)
-		for child in root:
-			self.generateNodeAndChilds(child)
+		if isRootMap == True:
+			for child in root:
+				self.generateNodeAndChilds(child, False)
 	
 	def printNode(self, child):
 		if child.get("type") is not None:
