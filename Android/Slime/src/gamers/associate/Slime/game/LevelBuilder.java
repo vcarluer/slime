@@ -30,7 +30,7 @@ public class LevelBuilder implements ILevelBuilder {
 		add(new Level11());
 		
 		Context context = SlimeFactory.ContextActivity;	
-		add(new LevelDefinitionParser("test.txt", context));
+		add(new LevelDefinitionParser("test.slime", context));
 	}
 	
 	private void add(LevelDefinition levelDef) {

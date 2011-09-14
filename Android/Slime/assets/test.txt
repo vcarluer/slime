@@ -1,8 +1,0 @@
-LevelInfo;0;0;800;0
-TimeAttack;0;0;0;0;20;5
-Platform;0;0;200;100
-Bumper;200;0;200;100
-NoSticky;400;0;200;100
-Ice;600;0;200;100
-Spawn;200;300;0;0
-GoalPortal;400;400;0;0

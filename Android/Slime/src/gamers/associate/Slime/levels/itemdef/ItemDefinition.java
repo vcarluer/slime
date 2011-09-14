@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import android.util.Log;
 
 public abstract class ItemDefinition {		
+	protected static String None = "None";
+	
 	protected String itemType;
 	protected float x;
 	protected float y;
@@ -88,15 +90,24 @@ public abstract class ItemDefinition {
 		{
 			String[] infos = line.split(";");
 			this.itemType = infos[0];
-			this.x = Float.valueOf(infos[1]).floatValue();
-			this.y = Float.valueOf(infos[2]).floatValue();
-			this.width = Float.valueOf(infos[3]).floatValue();
-			this.height = Float.valueOf(infos[4]).floatValue();
+			this.x = ZeroIfNone(infos[1]);
+			this.y = ZeroIfNone(infos[2]);
+			this.width = ZeroIfNone(infos[3]);
+			this.height = ZeroIfNone(infos[4]);
 			this.parseNext(infos);
 		}
 		catch (Exception ex) {
 			Log.e(Slime.TAG, "BAD FORMAT for item definition " + this.getType());
 			throw ex;
+		}
+	}
+	
+	protected static float ZeroIfNone(String value) {
+		if (value.equals(None)) {
+			return 0f;
+		}
+		else {
+			return Float.valueOf(value).floatValue();
 		}
 	}
 	
