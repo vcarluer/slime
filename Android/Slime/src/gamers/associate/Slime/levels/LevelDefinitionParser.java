@@ -4,6 +4,7 @@ import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.levels.itemdef.BecBunsenDef;
 import gamers.associate.Slime.levels.itemdef.BumperAngleDef;
+import gamers.associate.Slime.levels.itemdef.ButtonDef;
 import gamers.associate.Slime.levels.itemdef.GoalPortalDef;
 import gamers.associate.Slime.levels.itemdef.ItemDefinition;
 import gamers.associate.Slime.levels.itemdef.LevelInfoDef;
@@ -58,6 +59,7 @@ public class LevelDefinitionParser extends LevelDefinition
 		this.itemDefinitions.add(new SpawnDef());
 		this.itemDefinitions.add(new BecBunsenDef());
 		this.itemDefinitions.add(new BumperAngleDef());
+		this.itemDefinitions.add(new ButtonDef());
 	}
 	
 	private void buildItemTypeMap() {
