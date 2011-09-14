@@ -41,25 +41,35 @@ class Smile( inkex.Effect ):
 		for child in root:
 			i = i+1			
 			if child.get("type") is not None:
+				# LevelInfo
 				if str(child.get("type")) == 'LevelInfo':
 					referenceY = float(child.get("y"))
 					referenceHeight = float(child.get("height"))
 					print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(child.get("y"))+";"+str(child.get("width"))+";"+str(child.get("height"))
 					continue
-							
+				
+				# Calculate reference Y to inverse items coordinate for GameItem
 				if child.get("height") is not None:
 					y = referenceY + referenceHeight - (float(child.get("y")) + float(child.get("height")))
 				else:
 					y = float(child.get("y"))
 
+				# TimeAttack
 				if str(child.get("type")) == 'TimeAttack':
 					print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+str(child.get("att_levelTime"))+";"+str(child.get("att_criticTime"))
 					continue
 				
+				# BecBunsen
 				if str(child.get("type")) == 'BecBunsen':
 					print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+str(child.get("att_isOn"))+";"+str(child.get("att_delay"))+";"+str(child.get("id"))
 					continue
-				
+
+				# Button
+				if str(child.get("type")) == 'Button':
+					print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+str(child.get("att_target"))+";"+str(child.get("att_resetTime"))
+					continue
+
+				# Standard Item
 				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))
 				continue
 						

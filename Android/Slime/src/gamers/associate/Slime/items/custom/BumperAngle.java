@@ -21,8 +21,8 @@ public class BumperAngle extends GameItemPhysic {
 	public static float Default_Powa = 0.5f;	
 	public static String Anim_Wait = "bumper-2-wait";
 	public static String Anim_Bump = "bumper-2";	
-	private static float Default_Width = 47f;
-	private static float Default_Height = 47f;
+	private static float Default_Width = 50f;
+	private static float Default_Height = 50f;
 	private static float Reference_Width = 53f;
 	private static float Reference_Height = 53f;
 	

@@ -7,6 +7,7 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="800"
@@ -14,9 +15,30 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.0 r9654"
-   sodipodi:docname="Slime_level.svg">
+   sodipodi:docname="Slime_level.slime">
   <defs
-     id="defs4" />
+     id="defs4">
+    <linearGradient
+       id="linearGradient3942">
+      <stop
+         style="stop-color:#f82693;stop-opacity:1;"
+         offset="0"
+         id="stop3944" />
+      <stop
+         style="stop-color:#f82693;stop-opacity:0;"
+         offset="1"
+         id="stop3946" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3942"
+       id="linearGradient3948"
+       x1="-300"
+       y1="420"
+       x2="-272.32886"
+       y2="392.80331"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -25,10 +47,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="-146.0783"
-     inkscape:cy="568.98057"
+     inkscape:cx="-268.60995"
+     inkscape:cy="186.97916"
      inkscape:document-units="px"
-     inkscape:current-layer="MAP"
+     inkscape:current-layer="Template"
      showgrid="true"
      inkscape:snap-grids="true"
      inkscape:snap-page="false"
@@ -38,7 +60,8 @@
      inkscape:window-x="0"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
-     showguides="false">
+     showguides="false"
+     inkscape:snap-global="true">
     <inkscape:grid
        type="xygrid"
        id="grid3053"
@@ -59,7 +82,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -73,10 +96,10 @@
      id="Template"
      inkscape:label="Template">
     <rect
-       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.367504px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.96659124px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        id="rect2995"
        width="406.724"
-       height="304.69858"
+       height="630.1463"
        x="-462.46613"
        y="69.853668" />
     <rect
@@ -101,7 +124,7 @@
        x="-350"
        y="120"
        inkscape:label="#rect3779"
-       type="Bumper">
+       type="Platform_Bumper">
       <desc
          id="desc3788">platform bumper</desc>
       <title
@@ -115,14 +138,14 @@
        width="100"
        id="platform_ice"
        style="fill:#00ffff;fill-opacity:1;stroke:none"
-       type="Ice">
+       type="Platform_Ice">
       <desc
          id="desc3830">platform bumper</desc>
       <title
          id="title3832">platform_bumper</title>
     </rect>
     <rect
-       type="NoSticky"
+       type="Platform_NoSticky"
        style="fill:#ff7f2a;fill-opacity:1;stroke:none"
        id="platform_NoSticky"
        width="100"
@@ -273,6 +296,58 @@
       <title
          id="title3796-4">slimy_start</title>
     </rect>
+    <text
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="-450"
+       y="400"
+       id="text3824-0-3"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3932">Bumper Angle</tspan></text>
+    <rect
+       style="fill:url(#linearGradient3948);fill-opacity:1;stroke:none"
+       id="bumper_angle"
+       width="50"
+       height="50"
+       x="-300"
+       y="370"
+       inkscape:label="#rect3794"
+       type="Bumper_Angle">
+      <desc
+         id="desc3798-0-6"
+         style="fill-opacity:1;fill:url(#linearGradient3948)">slimy start</desc>
+      <title
+         id="title3796-4-2"
+         style="fill-opacity:1;fill:url(#linearGradient3948)">slimy_start</title>
+    </rect>
+    <rect
+       style="fill:#3926f8;fill-opacity:1;stroke:none"
+       id="button"
+       width="40"
+       height="40"
+       x="-300"
+       y="450"
+       inkscape:label="#rect3794"
+       type="Button"
+       att_target=""
+       att_resetTime="2">
+      <desc
+         id="desc3798-0-61">slimy start</desc>
+      <title
+         id="title3796-4-1">slimy_start</title>
+    </rect>
+    <text
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="-450"
+       y="480"
+       id="text3824-0-3-6"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3995"
+         x="-450"
+         y="480">Button</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
