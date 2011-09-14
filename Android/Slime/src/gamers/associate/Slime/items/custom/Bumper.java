@@ -18,7 +18,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class Bumper extends GameItemPhysic {
-	public static float Default_Powa = 1.5f;	
+	public static float Default_Powa = 0.5f;	
 	public static String Anim_Wait = "bumper-2-wait";
 	public static String Anim_Bump = "bumper-2";	
 	private static float Default_Width = 47f;
