@@ -26,13 +26,13 @@ public class LevelBuilder implements ILevelBuilder {
 		
 		add(new LevelHome());
 		// Levels are queued in order of add calls
-		add(new LevelBeta());
-		add(new Level11());
+		add(new LevelBeta());		
 		
 		Context context = SlimeFactory.ContextActivity;	
 		// Bad menu is more level
 		// add(new LevelDefinitionParser("test.slime", context));
 		add(new LevelDefinitionParser("Level0.slime", context));
+		add(new LevelDefinitionParser("LevelSaw.slime", context));
 	}
 	
 	private void add(LevelDefinition levelDef) {

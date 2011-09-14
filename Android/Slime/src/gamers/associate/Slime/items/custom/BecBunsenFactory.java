@@ -45,10 +45,11 @@ public class BecBunsenFactory extends GameItemPhysicFactory<BecBunsen>{
 	}
 	
 	public BecBunsen create(float x, float y, float width, float height, String name, float delay, boolean isOn) {		
-		BecBunsen becBunsen = super.create(x, y, width, height);
-		becBunsen.setName(name);
 		this.isOn = isOn;
-		this.delay = delay;		
+		this.delay = delay;
+
+		BecBunsen becBunsen = super.create(x, y, width, height);
+		becBunsen.setName(name);			
 				
 		return becBunsen;
 	}
