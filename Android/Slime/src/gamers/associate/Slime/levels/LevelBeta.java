@@ -104,7 +104,9 @@ public class LevelBeta extends LevelTimeAttack {
 		cX += 50;
 		SlimeFactory.Platform.createBL(cX, cY + 50, 10, 128);
 		cX += 50;
-		SlimeFactory.CircularSaw.createBL(cX, cY, 50, 50, "", true);
+		SlimeFactory.CircularSaw.createBL(cX, cY, 50, 50, "saw1", true);
+		cX += 100;
+		SlimeFactory.Button.createBL(cX, cY, 50, 50, "saw1", 2f);
 		
 		// Line 2
 		cX = 0;
