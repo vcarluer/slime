@@ -268,8 +268,8 @@
        id="TimeAttack"
        sodipodi:linespacing="125%"
        type="TimeAttack"
-       levelTime="50"
-       criticTime="20"><tspan
+       att_criticTime="20"
+       att_levelTime="50"><tspan
          sodipodi:role="line"
          id="tspan4745"
          x="0"
@@ -338,14 +338,14 @@
        x="250"
        y="450"
        inkscape:label="#rect3779"
-       type="Bumper">
+       type="Platform_Bumper">
       <desc
          id="desc3788-7">platform bumper</desc>
       <title
          id="title3786-4">platform_bumper</title>
     </rect>
     <rect
-       type="NoSticky"
+       type="Platform_NoSticky"
        style="fill:#ff7f2a;fill-opacity:1;stroke:none"
        id="platform_NoSticky-5"
        width="50"
@@ -366,14 +366,14 @@
        width="50"
        id="platform_ice-5"
        style="fill:#00ffff;fill-opacity:1;stroke:none"
-       type="Ice">
+       type="Platform_Ice">
       <desc
          id="desc3830-4">platform bumper</desc>
       <title
          id="title3832-2">platform_bumper</title>
     </rect>
     <rect
-       type="NoSticky"
+       type="Platform_NoSticky"
        style="fill:#ff7f2a;fill-opacity:1;stroke:none"
        id="platform_NoSticky-4"
        width="10"
@@ -394,14 +394,14 @@
        x="510"
        y="450"
        inkscape:label="#rect3779"
-       type="Bumper">
+       type="Platform_Bumper">
       <desc
          id="desc3788-7-2">platform bumper</desc>
       <title
          id="title3786-4-1">platform_bumper</title>
     </rect>
     <rect
-       type="NoSticky"
+       type="Platform_NoSticky"
        style="fill:#ff7f2a;fill-opacity:1;stroke:none"
        id="platform_NoSticky-2"
        width="400"
@@ -436,7 +436,7 @@
        x="740"
        y="60"
        inkscape:label="#rect3779"
-       type="Bumper">
+       type="Platform_Bumper">
       <desc
          id="desc3788-6">platform bumper</desc>
       <title
@@ -450,14 +450,14 @@
        width="140"
        id="platform_ice-5-2"
        style="fill:#00ffff;fill-opacity:1;stroke:none;display:inline"
-       type="Ice">
+       type="Platform_Ice">
       <desc
          id="desc3830-4-1">platform bumper</desc>
       <title
          id="title3832-2-2">platform_bumper</title>
     </rect>
     <rect
-       type="NoSticky"
+       type="Platform_NoSticky"
        style="fill:#ff7f2a;fill-opacity:1;stroke:none"
        id="platform_NoSticky-8"
        width="50"
@@ -492,7 +492,7 @@
        width="50"
        id="platform_ice-8"
        style="fill:#00ffff;fill-opacity:1;stroke:none"
-       type="Ice">
+       type="Platform_Ice">
       <desc
          id="desc3830-8">platform bumper</desc>
       <title
@@ -520,7 +520,7 @@
        x="500"
        y="50"
        inkscape:label="#rect3779"
-       type="Bumper">
+       type="Platform_Bumper">
       <desc
          id="desc3788-6-0">platform bumper</desc>
       <title
@@ -548,7 +548,7 @@
        width="510"
        id="platform_ice-5-9"
        style="fill:#00ffff;fill-opacity:1;stroke:none;display:inline"
-       type="Ice">
+       type="Platform_Ice">
       <desc
          id="desc3830-4-2">platform bumper</desc>
       <title
