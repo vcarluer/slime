@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 "
-   sodipodi:docname="levelSaw.svg">
+   sodipodi:docname="LevelSaw.slime">
   <defs
      id="defs4">
     <linearGradient
@@ -39,6 +39,37 @@
        y2="392.80331"
        gradientUnits="userSpaceOnUse"
        gradientTransform="translate(12.466126,-69.853668)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3942-3"
+       id="linearGradient3948-2"
+       x1="-300"
+       y1="420"
+       x2="-272.32886"
+       y2="392.80331"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(12.466126,-69.853668)" />
+    <linearGradient
+       id="linearGradient3942-3">
+      <stop
+         style="stop-color:#f82693;stop-opacity:1;"
+         offset="0"
+         id="stop3944-2" />
+      <stop
+         style="stop-color:#f82693;stop-opacity:0;"
+         offset="1"
+         id="stop3946-3" />
+    </linearGradient>
+    <linearGradient
+       y2="392.80331"
+       x2="-272.32886"
+       y1="420"
+       x1="-300"
+       gradientTransform="translate(350,29.999998)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4151"
+       xlink:href="#linearGradient3942-3"
+       inkscape:collect="always" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -48,8 +79,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="242.29761"
-     inkscape:cy="263.41959"
+     inkscape:cx="242.23938"
+     inkscape:cy="304.07502"
      inkscape:document-units="px"
      inkscape:current-layer="MAP"
      showgrid="true"
@@ -391,9 +422,9 @@
        style="fill:#97a975;fill-opacity:1;stroke:none"
        id="platform-9"
        width="800"
-       height="100"
+       height="150"
        x="0"
-       y="500"
+       y="450"
        inkscape:label="#rect3767"
        type="Platform">
       <desc
@@ -406,7 +437,7 @@
        id="slimy_start-1"
        width="24"
        height="26"
-       x="100"
+       x="150"
        y="374"
        inkscape:label="#rect3794"
        type="Spawn">
@@ -418,8 +449,8 @@
     <rect
        type="GoalPortal"
        inkscape:label="#rect3794"
-       y="210"
-       x="630"
+       y="220"
+       x="678"
        height="10"
        width="32"
        id="slimy_goal-4"
@@ -447,8 +478,8 @@
        style="fill:#97a975;fill-opacity:1;stroke:none"
        id="platform-8"
        width="100"
-       height="250"
-       x="600"
+       height="200"
+       x="650"
        y="250"
        inkscape:label="#rect3767"
        type="Platform">
@@ -462,8 +493,8 @@
        id="circularsaw-3"
        width="40"
        height="40"
-       x="560"
-       y="460"
+       x="610"
+       y="410"
        inkscape:label="#rect3794"
        type="CircularSaw"
        att_isOn="true">
@@ -477,8 +508,8 @@
        id="circularsaw-9"
        width="40"
        height="40"
-       x="520"
-       y="460"
+       x="570"
+       y="410"
        inkscape:label="#rect3794"
        type="CircularSaw"
        att_isOn="true">
@@ -492,8 +523,8 @@
        id="circularsaw-5"
        width="40"
        height="40"
-       x="480"
-       y="460"
+       x="530"
+       y="410"
        inkscape:label="#rect3794"
        type="CircularSaw"
        att_isOn="true">
@@ -507,8 +538,8 @@
        id="circularsaw-0"
        width="40"
        height="40"
-       x="440"
-       y="460"
+       x="490"
+       y="410"
        inkscape:label="#rect3794"
        type="CircularSaw"
        att_isOn="true">
@@ -519,41 +550,11 @@
     </rect>
     <rect
        style="fill:#f86e26;fill-opacity:1;stroke:none"
-       id="circularsaw-1"
-       width="40"
-       height="40"
-       x="400"
-       y="460"
-       inkscape:label="#rect3794"
-       type="CircularSaw"
-       att_isOn="true">
-      <desc
-         id="desc3798-0-9-0">slimy start</desc>
-      <title
-         id="title3796-4-9-4">slimy_start</title>
-    </rect>
-    <rect
-       style="fill:#f86e26;fill-opacity:1;stroke:none"
-       id="circularsaw-6"
-       width="40"
-       height="40"
-       x="360"
-       y="460"
-       inkscape:label="#rect3794"
-       type="CircularSaw"
-       att_isOn="true">
-      <desc
-         id="desc3798-0-9-7">slimy start</desc>
-      <title
-         id="title3796-4-9-8">slimy_start</title>
-    </rect>
-    <rect
-       style="fill:#f86e26;fill-opacity:1;stroke:none"
        id="circularsaw-66"
        width="40"
        height="40"
-       x="320"
-       y="460"
+       x="370"
+       y="410"
        inkscape:label="#rect3794"
        type="CircularSaw"
        att_isOn="true">
@@ -567,8 +568,8 @@
        id="circularsaw-7"
        width="40"
        height="40"
-       x="280"
-       y="460"
+       x="330"
+       y="410"
        inkscape:label="#rect3794"
        type="CircularSaw"
        att_isOn="true">
@@ -582,8 +583,8 @@
        id="circularsaw-30"
        width="40"
        height="40"
-       x="240"
-       y="460"
+       x="290"
+       y="410"
        inkscape:label="#rect3794"
        type="CircularSaw"
        att_isOn="true">
@@ -597,8 +598,8 @@
        id="circularsaw-68"
        width="40"
        height="40"
-       x="200"
-       y="460"
+       x="250"
+       y="410"
        inkscape:label="#rect3794"
        type="CircularSaw"
        att_isOn="true">
@@ -612,8 +613,8 @@
        id="circularsaw-07"
        width="40"
        height="40"
-       x="160"
-       y="460"
+       x="210"
+       y="410"
        inkscape:label="#rect3794"
        type="CircularSaw"
        att_isOn="true">
@@ -621,6 +622,100 @@
          id="desc3798-0-9-2">slimy start</desc>
       <title
          id="title3796-4-9-32">slimy_start</title>
+    </rect>
+    <rect
+       style="fill:url(#linearGradient4151);fill-opacity:1;stroke:none"
+       id="bumper_angle-5"
+       width="50"
+       height="50"
+       x="50"
+       y="400"
+       inkscape:label="#rect3794"
+       type="Bumper_Angle">
+      <desc
+         id="desc3798-0-6-8">slimy start</desc>
+      <title
+         id="title3796-4-2-5">slimy_start</title>
+    </rect>
+    <rect
+       style="fill:#3926f8;fill-opacity:1;stroke:none"
+       id="button-6"
+       width="40"
+       height="40"
+       x="750"
+       y="410"
+       inkscape:label="#rect3794"
+       type="Button"
+       att_target=""
+       att_resetTime="2">
+      <desc
+         id="desc3798-0-61-6">slimy start</desc>
+      <title
+         id="title3796-4-1-1">slimy_start</title>
+    </rect>
+    <rect
+       style="fill:#f86e26;fill-opacity:1;stroke:none"
+       id="becbunsen-4"
+       width="20"
+       height="67"
+       x="410"
+       y="383"
+       inkscape:label="#rect3794"
+       type="BecBunsen"
+       att_delay="0"
+       att_isOn="true">
+      <desc
+         id="desc3798-0-0">slimy start</desc>
+      <title
+         id="title3796-4-96">slimy_start</title>
+    </rect>
+    <rect
+       style="fill:#f86e26;fill-opacity:1;stroke:none"
+       id="becbunsen-1"
+       width="20"
+       height="67"
+       x="450"
+       y="383"
+       inkscape:label="#rect3794"
+       type="BecBunsen"
+       att_delay="0"
+       att_isOn="true">
+      <desc
+         id="desc3798-0-4">slimy start</desc>
+      <title
+         id="title3796-4-98">slimy_start</title>
+    </rect>
+    <rect
+       style="fill:#f86e26;fill-opacity:1;stroke:none"
+       id="becbunsen-8"
+       width="20"
+       height="67"
+       x="470"
+       y="383"
+       inkscape:label="#rect3794"
+       type="BecBunsen"
+       att_delay="0"
+       att_isOn="true">
+      <desc
+         id="desc3798-0-7">slimy start</desc>
+      <title
+         id="title3796-4-7">slimy_start</title>
+    </rect>
+    <rect
+       style="fill:#f86e26;fill-opacity:1;stroke:none"
+       id="becbunsen-2"
+       width="20"
+       height="67"
+       x="430"
+       y="383"
+       inkscape:label="#rect3794"
+       type="BecBunsen"
+       att_delay="0"
+       att_isOn="true">
+      <desc
+         id="desc3798-0-5">slimy start</desc>
+      <title
+         id="title3796-4-5">slimy_start</title>
     </rect>
   </g>
 </svg>
