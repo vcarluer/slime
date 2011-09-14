@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 "
-   sodipodi:docname="Slime_level.svg">
+   sodipodi:docname="test.slime">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="29.723866"
-     inkscape:cy="539.65121"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="-200.64196"
+     inkscape:cy="474.6917"
      inkscape:document-units="px"
      inkscape:current-layer="MAP"
      showgrid="true"
@@ -59,7 +59,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -152,10 +152,10 @@
     <rect
        type="GoalPortal"
        inkscape:label="#rect3794"
-       y="238"
+       y="250"
        x="-300"
-       height="32"
-       width="10"
+       height="10"
+       width="32"
        id="slimy_goal"
        style="fill:#ffff00;fill-opacity:1;stroke:none">
       <desc
@@ -232,6 +232,20 @@
          id="tspan3826"
          x="-450"
          y="260">goal</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="-210"
+       y="100"
+       id="TimeAttack-9"
+       sodipodi:linespacing="125%"
+       type="TimeAttack"
+       levelTime="50"
+       criticTime="20"><tspan
+         sodipodi:role="line"
+         id="tspan4745-6"
+         x="-210"
+         y="100">TimeAttack</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -248,28 +262,18 @@
        type="LevelInfo" />
     <text
        xml:space="preserve"
-       style="font-size:37.217556px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="-519.97522"
-       y="-92.136391"
-       id="text4739"
-       sodipodi:linespacing="125%"
-       transform="scale(0.78369365,1.2760088)"><tspan
-         sodipodi:role="line"
-         id="tspan4741"
-         x="-519.97522"
-         y="-92.136391">Time attack</tspan></text>
-    <text
-       xml:space="preserve"
        style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
-       x="-211.57211"
-       y="-121.5304"
+       x="0"
+       y="-10"
        id="TimeAttack"
        sodipodi:linespacing="125%"
-       type="TimeAttack"><tspan
+       type="TimeAttack"
+       levelTime="50"
+       criticTime="20"><tspan
          sodipodi:role="line"
          id="tspan4745"
-         x="-211.57211"
-         y="-121.5304">50</tspan></text>
+         x="0"
+         y="-10">TimeAttack</tspan></text>
     <rect
        style="fill:#97a975;fill-opacity:1;stroke:none"
        id="platform-9"
@@ -289,8 +293,8 @@
        id="slimy_start-1"
        width="24"
        height="26"
-       x="50"
-       y="-76"
+       x="100"
+       y="374"
        inkscape:label="#rect3794"
        type="Spawn">
       <desc
@@ -301,16 +305,16 @@
     <rect
        type="GoalPortal"
        inkscape:label="#rect3794"
-       y="468"
-       x="400"
-       height="32"
-       width="10"
-       id="slimy_goal-2"
+       y="440"
+       x="350"
+       height="10"
+       width="32"
+       id="slimy_goal-4"
        style="fill:#ffff00;fill-opacity:1;stroke:none">
       <desc
-         id="desc3839-8">slimy start</desc>
+         id="desc3839-6">slimy start</desc>
       <title
-         id="title3841-0">slimy_start</title>
+         id="title3841-1">slimy_start</title>
     </rect>
   </g>
 </svg>
