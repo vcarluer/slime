@@ -66,7 +66,7 @@ public class Platform extends GameItemPhysic {
     		
     		fixtureDef.restitution = 0f;
     		if (this.type == Bump) {
-    			fixtureDef.restitution = 1.5f;
+    			fixtureDef.restitution = 0.5f;
     		}    		
     		fixtureDef.filter.categoryBits = GameItemPhysic.Category_Level;
     		this.body.createFixture(fixtureDef);
