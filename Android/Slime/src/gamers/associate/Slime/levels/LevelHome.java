@@ -36,7 +36,7 @@ public class LevelHome extends LevelDefinitionHardCoded {
 		SlimeFactory.GoalPortal.create(s.width / 2, LevelUtil.LAND_HEIGHT + goalPlatH + 15);
 		
 		// Bumper
-		SlimeFactory.Bumper.create(30, s.height / 2, 60, 120, 2.0f);
+		SlimeFactory.BumperAngle.create(30, s.height / 2, 60, 120, 2.0f);
 						
 		SlimeFactory.HomeLevelHandler.create().setPortal(spawnPortal);
 		

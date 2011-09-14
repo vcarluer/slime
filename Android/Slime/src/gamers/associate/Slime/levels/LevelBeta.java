@@ -52,7 +52,7 @@ public class LevelBeta extends LevelTimeAttack {
 		SlimeFactory.Platform.createBL(cX, cY, 50, 100);
 		cX += 50;		
 		SlimeFactory.Platform.createBL(cX, cY, 50, 50);
-		SlimeFactory.Bumper.createBL(cX, cY + 50, 50, 50);
+		SlimeFactory.BumperAngle.createBL(cX, cY + 50, 50, 50);
 		cX += 50;
 		SlimeFactory.Lava.createBL(cX, cY, 50, 50);
 		cX += 50;
@@ -99,7 +99,7 @@ public class LevelBeta extends LevelTimeAttack {
 		cX += 200;
 		SlimeFactory.Platform.createBL(cX, cY, 100, 50);
 		cX += 40;
-		SlimeFactory.Bumper.createBL(cX, cY + 50, 50, 50, 0.8f).setAngle(-90);
+		SlimeFactory.BumperAngle.createBL(cX, cY + 50, 50, 50, 0.8f).setAngle(-90);
 		//Bumper bumper = SlimeFactory.Bumper.createBL(cX, 50, 100, 100);		
 		cX += 50;
 		SlimeFactory.Platform.createBL(cX, cY + 50, 10, 128);

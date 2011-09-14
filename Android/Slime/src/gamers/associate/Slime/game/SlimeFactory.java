@@ -3,7 +3,7 @@ package gamers.associate.Slime.game;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.items.custom.BecBunsenFactory;
 import gamers.associate.Slime.items.custom.BoxFactory;
-import gamers.associate.Slime.items.custom.BumperFactory;
+import gamers.associate.Slime.items.custom.BumperAngleFactory;
 import gamers.associate.Slime.items.custom.ButtonFactory;
 import gamers.associate.Slime.items.custom.GoalPortalFactory;
 import gamers.associate.Slime.items.custom.HomeLevelHandlerFactory;
@@ -31,7 +31,7 @@ public abstract class SlimeFactory {
 	public static SpawnPortalFactory SpawnPortal = new SpawnPortalFactory();
 	public static PlatformFactory Platform = new PlatformFactory();
 	public static GoalPortalFactory GoalPortal = new GoalPortalFactory();
-	public static BumperFactory Bumper = new BumperFactory();
+	public static BumperAngleFactory BumperAngle = new BumperAngleFactory();
 	public static SpawnCannonFactory Cannon = new SpawnCannonFactory();
 	public static LevelEndFactory LevelEnd = new LevelEndFactory();
 	public static HomeLevelHandlerFactory HomeLevelHandler = new HomeLevelHandlerFactory();
@@ -49,7 +49,7 @@ public abstract class SlimeFactory {
 		SpawnPortal.attach(level, attachNode);
 		Platform.attach(level, attachNode, attachWorld, attachWorldRatio);
 		GoalPortal.attach(level, attachNode, attachWorld, attachWorldRatio);
-		Bumper.attach(level, attachNode, attachWorld, attachWorldRatio);
+		BumperAngle.attach(level, attachNode, attachWorld, attachWorldRatio);
 		Cannon.attach(level, attachNode, attachWorld, attachWorldRatio);
 		LevelEnd.attach(level, attachNode, attachWorld, attachWorldRatio);
 		HomeLevelHandler.attach(level);
@@ -69,7 +69,7 @@ public abstract class SlimeFactory {
 		SpawnPortal.detach();
 		Platform.detach();
 		GoalPortal.detach();
-		Bumper.detach();
+		BumperAngle.detach();
 		Cannon.detach();
 		LevelEnd.detach();
 		HomeLevelHandler.detach();
@@ -89,7 +89,7 @@ public abstract class SlimeFactory {
 		SpawnPortal.destroy();
 		Platform.destroy();
 		GoalPortal.destroy();
-		Bumper.destroy();
+		BumperAngle.destroy();
 		Cannon.destroy();
 		LevelEnd.destroy();		
 		Lava.destroy();

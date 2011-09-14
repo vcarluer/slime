@@ -17,7 +17,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class Bumper extends GameItemPhysic {
+public class BumperAngle extends GameItemPhysic {
 	public static float Default_Powa = 0.5f;	
 	public static String Anim_Wait = "bumper-2-wait";
 	public static String Anim_Bump = "bumper-2";	
@@ -28,7 +28,7 @@ public class Bumper extends GameItemPhysic {
 	
 	private float powa;
 		
-	public Bumper(float x, float y, float width, float height,
+	public BumperAngle(float x, float y, float width, float height,
 			World world, float worldRatio) {
 		super(x, y, width, height, world, worldRatio);		
 		this.spriteType = SpriteType.ANIM_SCALE;		
@@ -96,7 +96,7 @@ public class Bumper extends GameItemPhysic {
 	 */
 	@Override
 	protected String getReferenceAnimationName() {
-		return Bumper.Anim_Wait;
+		return BumperAngle.Anim_Wait;
 	}
 
 	/* (non-Javadoc)
