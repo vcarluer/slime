@@ -62,7 +62,7 @@ public class Button extends GameItemPhysic {
 	protected void initBody() {
 		// Physic body
 		BodyDef bodyDef = new BodyDef();		
-		bodyDef.type = BodyType.DynamicBody;
+		bodyDef.type = BodyType.StaticBody;
 		CGPoint spawnPoint = new CGPoint();
 		spawnPoint.x = this.position.x;
 		spawnPoint.y = this.position.y;

@@ -1,5 +1,5 @@
 LevelInfo;0;0;800;600
-TimeAttack;0;-10.0;None;None;None;None
+TimeAttack;0;-10.0;None;None;50;20
 Platform;510;0.0;290;100
 Spawn;156;430.0;24;26
 GoalPortal;600;470.0;32;10

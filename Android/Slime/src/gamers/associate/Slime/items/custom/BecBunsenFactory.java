@@ -29,14 +29,15 @@ public class BecBunsenFactory extends GameItemPhysicFactory<BecBunsen>{
 		item.initanimation();
 	}
 	
-	public BecBunsen[] create(float x, float y, float width, float height, int number, String name, float delay, boolean isOn) {
+	public BecBunsen[] create(float x, float y, float width, float height, int number, String name, boolean isOn) {
 		BecBunsen[] created = new BecBunsen[number];
 		
 		for (int i = 0; i < number; i++) {
-			BecBunsen becBunsen = super.create(x + i * width, y, width, height);
-			becBunsen.setName(name);
 			this.isOn = isOn;
-			this.delay = delay + (i / 2f);		
+			this.delay = i / 2f;
+
+			BecBunsen becBunsen = super.create(x + i * width, y, width, height);
+			becBunsen.setName(name);				
 			created[i] = becBunsen;
 		}
 				
@@ -57,7 +58,7 @@ public class BecBunsenFactory extends GameItemPhysicFactory<BecBunsen>{
 	}
 	
 	public BecBunsen[] createBL(float x, float y, float width, float height, int number, String name) {
-		return this.create(x + width / 2, y + height / 2, width, height, number, name, 0f, true);
+		return this.create(x + width / 2, y + height / 2, width, height, number, name, true);
 	}
 	
 	public BecBunsen[] createBL(float x, float y, float width, float height, int number) {
