@@ -30,7 +30,9 @@ public class LevelBuilder implements ILevelBuilder {
 		add(new Level11());
 		
 		Context context = SlimeFactory.ContextActivity;	
-		add(new LevelDefinitionParser("test.slime", context));
+		// Bad menu is more level
+		// add(new LevelDefinitionParser("test.slime", context));
+		add(new LevelDefinitionParser("Level0.slime", context));
 	}
 	
 	private void add(LevelDefinition levelDef) {

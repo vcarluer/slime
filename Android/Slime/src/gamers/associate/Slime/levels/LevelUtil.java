@@ -38,4 +38,8 @@ public class LevelUtil {
 	public static float getHeightRatio() {
 		return CCDirector.sharedDirector().winSize().height / CCDirector.sharedDirector().winSize().width;
 	}
+	
+	public static float getWidthRatio() {
+		return CCDirector.sharedDirector().winSize().width / CCDirector.sharedDirector().winSize().height;
+	}
 }

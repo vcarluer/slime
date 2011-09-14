@@ -8,9 +8,17 @@ public class LevelInfoDef extends ItemDefinition {
 
 	@Override
 	public void createItem(Level level) {
-		level.setLevelSize(
-				this.width,
-				this.width * LevelUtil.getHeightRatio());
+		float heightRatio = this.height / this.width;
+		if (LevelUtil.getHeightRatio() >= heightRatio) {
+			level.setLevelSize(
+					this.width,
+					this.width * LevelUtil.getHeightRatio());
+		}
+		else {
+			level.setLevelSize(
+					this.height * LevelUtil.getWidthRatio(),
+					this.height);
+		}
 		
 		LevelUtil.createGroundBox(level);
 	}

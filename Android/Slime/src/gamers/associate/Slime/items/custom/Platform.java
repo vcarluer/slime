@@ -21,7 +21,7 @@ public class Platform extends GameItemPhysic {
 	public static final int Icy = 3;
 	
 	public static String Anim_Base_Sticky = "grey01";
-	public static String Anim_Base_Bump = "grey02";
+	public static String Anim_Base_Bump = "bumper";
 	public static String Anim_Base_NoSticky = "nosticky";
 	public static String Anim_Base_Icy = "ice";
 	
