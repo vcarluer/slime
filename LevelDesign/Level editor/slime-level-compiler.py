@@ -78,6 +78,11 @@ class Smile( inkex.Effect ):
 			if str(child.get("type")) == 'Button':
 				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+str(child.get("att_target"))+";"+str(child.get("att_resetTime"))
 				return True;
+				
+			# Button
+			if str(child.get("type")) == 'CircularSaw':
+				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+str(child.get("id"))+";"+str(child.get("att_isOn"))
+				return True;
 
 			# Standard Item
 			print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))

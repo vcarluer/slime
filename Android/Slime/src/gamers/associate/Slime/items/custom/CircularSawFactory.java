@@ -29,15 +29,15 @@ public class CircularSawFactory extends GameItemPhysicFactory<CircularSaw>{
 	}
 		
 	
-	public CircularSaw create(float x, float y, float width, float height, String name, boolean isOn) {		
+	public CircularSaw create(float x, float y, float width, float height, String name, boolean startOn) {		
 		CircularSaw saw = super.create(x, y, width, height);
 		saw.setName(name);		
-		this.isOn = isOn;
+		this.isOn = startOn;
 		return saw;
 	}
 	
-	public CircularSaw createBL(float x, float y, float width, float height, String name, boolean isOn) {
-		return this.create(x + width / 2, y + height / 2, width, height, name, isOn);
+	public CircularSaw createBL(float x, float y, float width, float height, String name, boolean startOn) {
+		return this.create(x + width / 2, y + height / 2, width, height, name, startOn);
 	}
 
 	/* (non-Javadoc)
