@@ -39,12 +39,26 @@ class Smile( inkex.Effect ):
 		root = self.getElementById("MAP")
 		i=0
 		for child in root:
-			i = i+1
+			i = i+1			
 			if child.get("type") is not None:
-				if str(child.get("type")) == 'TimeAttack':
-					print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(child.get("y"))+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+"50"
-				else:
+				if str(child.get("type")) == 'LevelInfo':
+					referenceY = float(child.get("y"))
+					referenceHeight = float(child.get("height"))
 					print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(child.get("y"))+";"+str(child.get("width"))+";"+str(child.get("height"))
+					continue
+							
+				if child.get("height") is not None:
+					y = referenceY + referenceHeight - (float(child.get("y")) + float(child.get("height")))
+				else:
+					y = float(child.get("y"))
+
+				if str(child.get("type")) == 'TimeAttack':
+					print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+str(child.get("levelTime"))+";"+str(child.get("criticTime"))
+					continue
+				
+				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))
+				continue
+						
 	def affect(self, args=sys.argv[1:]):
 		"""Affect an SVG document with a callback effect"""
 		self.svg_file = args[-1]
