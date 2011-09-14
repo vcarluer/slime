@@ -1,6 +1,5 @@
 package gamers.associate.Slime.levels.itemdef;
 
-import android.location.Address;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 

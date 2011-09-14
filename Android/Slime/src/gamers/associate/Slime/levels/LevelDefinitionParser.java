@@ -2,6 +2,7 @@ package gamers.associate.Slime.levels;
 
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.levels.itemdef.BecBunsenDef;
 import gamers.associate.Slime.levels.itemdef.GoalPortalDef;
 import gamers.associate.Slime.levels.itemdef.ItemDefinition;
 import gamers.associate.Slime.levels.itemdef.LevelInfoDef;
@@ -54,6 +55,7 @@ public class LevelDefinitionParser extends LevelDefinition
 		this.itemDefinitions.add(new TimeAttackDef());
 		this.itemDefinitions.add(new GoalPortalDef());
 		this.itemDefinitions.add(new SpawnDef());
+		this.itemDefinitions.add(new BecBunsenDef());
 	}
 	
 	private void buildItemTypeMap() {

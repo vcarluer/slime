@@ -13,8 +13,8 @@
    height="600"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.1 "
-   sodipodi:docname="test.slime">
+   inkscape:version="0.48.0 r9654"
+   sodipodi:docname="Slime_level.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -24,19 +24,19 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="-200.64196"
-     inkscape:cy="474.6917"
+     inkscape:zoom="1.979899"
+     inkscape:cx="-146.0783"
+     inkscape:cy="568.98057"
      inkscape:document-units="px"
      inkscape:current-layer="MAP"
      showgrid="true"
      inkscape:snap-grids="true"
      inkscape:snap-page="false"
      width="800px"
-     inkscape:window-width="1680"
-     inkscape:window-height="988"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
+     inkscape:window-width="1280"
+     inkscape:window-height="655"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
      inkscape:window-maximized="1"
      showguides="false">
     <inkscape:grid
@@ -59,7 +59,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -214,13 +214,13 @@
        xml:space="preserve"
        style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
        x="-450"
-       y="220"
+       y="230"
        id="text3820"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3822"
          x="-450"
-         y="220">slime spawn</tspan></text>
+         y="230">slime spawn</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -237,15 +237,42 @@
        style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
        x="-210"
        y="100"
-       id="TimeAttack-9"
+       id="TimeAttack"
        sodipodi:linespacing="125%"
        type="TimeAttack"
-       levelTime="50"
-       criticTime="20"><tspan
+       att_criticTime="20"
+       att_levelTime="50"><tspan
          sodipodi:role="line"
          id="tspan4745-6"
          x="-210"
          y="100">TimeAttack</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="-450"
+       y="320"
+       id="text3824-0"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3051"
+         x="-450"
+         y="320">Bec bunsen</tspan></text>
+    <rect
+       style="fill:#f86e26;fill-opacity:1;stroke:none"
+       id="becbunsen"
+       width="20"
+       height="67"
+       x="-300"
+       y="273"
+       inkscape:label="#rect3794"
+       type="BecBunsen"
+       att_delay="0"
+       att_isOn="true">
+      <desc
+         id="desc3798-0">slimy start</desc>
+      <title
+         id="title3796-4">slimy_start</title>
+    </rect>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -260,20 +287,6 @@
        x="0"
        y="0"
        type="LevelInfo" />
-    <text
-       xml:space="preserve"
-       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
-       x="0"
-       y="-10"
-       id="TimeAttack"
-       sodipodi:linespacing="125%"
-       type="TimeAttack"
-       levelTime="50"
-       criticTime="20"><tspan
-         sodipodi:role="line"
-         id="tspan4745"
-         x="0"
-         y="-10">TimeAttack</tspan></text>
     <rect
        style="fill:#97a975;fill-opacity:1;stroke:none"
        id="platform-9"
@@ -316,5 +329,19 @@
       <title
          id="title3841-1">slimy_start</title>
     </rect>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="0"
+       y="0"
+       id="TimeAttack-7"
+       sodipodi:linespacing="125%"
+       type="TimeAttack"
+       att_criticTime="20"
+       att_levelTime="50"><tspan
+         sodipodi:role="line"
+         id="tspan4745-6-6"
+         x="0"
+         y="0">TimeAttack</tspan></text>
   </g>
 </svg>

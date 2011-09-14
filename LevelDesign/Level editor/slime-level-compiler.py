@@ -53,7 +53,11 @@ class Smile( inkex.Effect ):
 					y = float(child.get("y"))
 
 				if str(child.get("type")) == 'TimeAttack':
-					print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+str(child.get("levelTime"))+";"+str(child.get("criticTime"))
+					print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+str(child.get("att_levelTime"))+";"+str(child.get("att_criticTime"))
+					continue
+				
+				if str(child.get("type")) == 'BecBunsen':
+					print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+str(child.get("att_isOn"))+";"+str(child.get("att_delay"))+";"+str(child.get("id"))
 					continue
 				
 				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))
