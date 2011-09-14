@@ -453,7 +453,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	}
 	
 	@Override
-	protected void kill() {
+	public void kill() {
 		super.kill();
 		this.unselect();		
 		this.currentJoint = null;

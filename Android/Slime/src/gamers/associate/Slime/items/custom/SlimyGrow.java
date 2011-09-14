@@ -105,7 +105,7 @@ public class SlimyGrow extends Slimy{
 	 * @see gamers.associate.Slime.items.custom.Slimy#kill()
 	 */
 	@Override
-	protected void kill() {		
+	public void kill() {		
 		this.scale(1);		
 		super.kill();
 	}

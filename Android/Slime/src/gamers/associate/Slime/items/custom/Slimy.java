@@ -52,6 +52,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	protected Boolean isLanded;	
 	protected CCAction waitAction;
 	protected Boolean isDead;
+	protected Boolean isDying;
 	
 	protected boolean hasLanded;
 	
@@ -198,7 +199,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	}
 	
 	public void burn() {
-		if (!this.isDead) {
+		if (!this.isDead && !this.isDying) {
 			if (this.currentAction != null) {				
 				this.sprite.stopAction(this.currentAction);				
 			}
@@ -214,16 +215,16 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 			this.sprite.runAction(this.waitAction);		
 			
 			CCAnimate animBurn = CCAnimate.action(this.animationList.get(Anim_Burning), false);
-			this.currentAction = animBurn;		
-			this.sprite.runAction(this.currentAction);
-			
-			Sounds.playEffect(R.raw.slimyfire);
-			this.kill();			
+			CCCallFunc kill = CCCallFunc.action(this, "kill");
+			CCSequence sequence = CCSequence.actions(animBurn, kill);
+			this.currentAction = sequence;
+			this.isDying = true;
+			Sounds.playEffect(R.raw.slimyfire);		
 		}
 	}
 	
 	public void splash() {
-		if (!this.isDead) {
+		if (!this.isDead && !this.isDying) {
 			if (this.currentAction != null) {				
 				this.sprite.stopAction(this.currentAction);				
 			}
@@ -232,11 +233,12 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 				this.sprite.stopAction(this.waitAction);
 			}
 			
-			CCAnimate animSplash = CCAnimate.action(this.animationList.get(Anim_Splash), false);
-			this.currentAction = animSplash;		
+			CCAnimate animSplash = CCAnimate.action(this.animationList.get(Anim_Splash), false);			
+			CCCallFunc kill = CCCallFunc.action(this, "kill");
+			CCSequence sequence = CCSequence.actions(animSplash, kill);
+			this.currentAction = sequence;		
 			this.sprite.runAction(this.currentAction);
-			
-			this.kill();
+			this.isDying = true;
 		}
 	}
 	
@@ -258,7 +260,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 		}
 	}
 	
-	protected void kill() {
+	public void kill() {
 		if (this.body != null) {
 			Filter filter = new Filter();
 			
