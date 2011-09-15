@@ -8,6 +8,7 @@ import gamers.associate.Slime.items.base.SpriteType;
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCAnimate;
+import org.cocos2d.actions.interval.CCRotateTo;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.types.CGPoint;
 
@@ -77,6 +78,10 @@ public class Star extends GameItemPhysic {
 		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Wait), false);
 		CCRepeatForever repeat = CCRepeatForever.action(animate);
 		this.sprite.runAction(repeat);
+		
+		CCRotateTo rotate = CCRotateTo.action(5f, 360);
+		CCRepeatForever repeatRotate = CCRepeatForever.action(rotate);
+		this.sprite.runAction(repeatRotate);
 	}
 
 	/* (non-Javadoc)
@@ -97,7 +102,7 @@ public class Star extends GameItemPhysic {
 			CCAnimate animate = CCAnimate.action(this.animationList.get(Star.Anim_Fade), false);			
 			CCCallFunc activate = CCCallFunc.action(this, "starTaken");
 			CCSequence sequence = CCSequence.actions(animate, activate);
-			this.sprite.runAction(sequence);					
+			this.sprite.runAction(sequence);						
 		}
 		
 		super.handleContact(item);
