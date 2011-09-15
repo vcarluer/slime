@@ -1,4 +1,4 @@
-LevelInfo;0;0;800;600
+LevelInfo;0;0;800;480
 Platform;0.0;0.0;800.0;150.0;0.0
 Spawn;150.0;200.0;24.0;26.0;0.0
 GoalPortal;678.0;370.0;32.0;10.0;0.0
@@ -19,4 +19,4 @@ BecBunsen;410.0;150.0;20.0;67.0;0.0;true;0;becbunsen-4
 BecBunsen;450.0;150.0;20.0;67.0;0.0;true;0;becbunsen-1
 BecBunsen;470.0;150.0;20.0;67.0;0.0;true;0;becbunsen-8
 BecBunsen;430.0;150.0;20.0;67.0;0.0;true;0;becbunsen-2
-Platform;50.0;540.0;100.0;10.0;30.0
+CircularSaw;610.0;250.0;40.0;40.0;-90.0;circularsaw-3-0;true

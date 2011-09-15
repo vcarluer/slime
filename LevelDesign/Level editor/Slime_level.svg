@@ -38,7 +38,7 @@
        x2="-272.32886"
        y2="392.80331"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(12.466126,-69.853668)" />
+       gradientTransform="matrix(0.96,0,0,0.96,-31.999999,-59.2)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -47,11 +47,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.70000001"
-     inkscape:cx="-8.9955684"
-     inkscape:cy="346.12453"
+     inkscape:zoom="2.8"
+     inkscape:cx="-172.35852"
+     inkscape:cy="359.02625"
      inkscape:document-units="px"
-     inkscape:current-layer="MAP"
+     inkscape:current-layer="Template"
      showgrid="true"
      inkscape:snap-grids="true"
      inkscape:snap-page="false"
@@ -70,8 +70,8 @@
        visible="true"
        enabled="true"
        snapvisiblegridlinesonly="true"
-       spacingx="10px"
-       spacingy="10px"
+       spacingx="8px"
+       spacingy="8px"
        originx="0px"
        originy="0px" />
   </sodipodi:namedview>
@@ -97,19 +97,19 @@
      id="Template"
      inkscape:label="Template">
     <rect
-       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.96659124px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.08468175px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        id="rect2995"
-       width="406.724"
-       height="630.1463"
-       x="-450"
+       width="400"
+       height="720"
+       x="-480"
        y="0" />
     <rect
        style="fill:#97a975;fill-opacity:1;stroke:none"
        id="platform"
-       width="100"
-       height="10"
-       x="-337.53387"
-       y="20.146332"
+       width="96"
+       height="8"
+       x="-360"
+       y="24"
        inkscape:label="#rect3767"
        type="Platform">
       <desc
@@ -120,10 +120,10 @@
     <rect
        style="fill:#ff3434;fill-opacity:1;stroke:none"
        id="platform_bumper"
-       width="100"
-       height="10"
-       x="-337.53387"
-       y="50.146332"
+       width="96"
+       height="8"
+       x="-360"
+       y="48"
        inkscape:label="#rect3779"
        type="Platform_Bumper">
       <desc
@@ -133,10 +133,10 @@
     </rect>
     <rect
        inkscape:label="#rect3779"
-       y="80.146332"
-       x="-337.53387"
-       height="10"
-       width="100"
+       y="80"
+       x="-360"
+       height="8"
+       width="96"
        id="platform_ice"
        style="fill:#00ffff;fill-opacity:1;stroke:none"
        type="Platform_Ice">
@@ -149,10 +149,10 @@
        type="Platform_NoSticky"
        style="fill:#ff7f2a;fill-opacity:1;stroke:none"
        id="platform_NoSticky"
-       width="100"
-       height="10"
-       x="-337.53387"
-       y="110.14633"
+       width="96"
+       height="8"
+       x="-360"
+       y="112"
        inkscape:label="#rect3779">
       <desc
          id="desc4528">platform bumper</desc>
@@ -164,8 +164,8 @@
        id="slimy_start"
        width="24"
        height="26"
-       x="-287.53387"
-       y="130.14633"
+       x="-328"
+       y="142"
        inkscape:label="#rect3794"
        type="Spawn">
       <desc
@@ -176,8 +176,8 @@
     <rect
        type="GoalPortal"
        inkscape:label="#rect3794"
-       y="180.14633"
-       x="-287.53387"
+       y="182"
+       x="-328"
        height="10"
        width="32"
        id="slimy_goal"
@@ -190,77 +190,77 @@
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:124.00000095%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="-437.53387"
-       y="30.146332"
+       x="-472"
+       y="32"
        id="text3808"
        sodipodi:linespacing="124%"><tspan
          sodipodi:role="line"
          id="tspan3810"
-         x="-437.53387"
-         y="30.146332"
+         x="-472"
+         y="32"
          style="font-size:20px;line-height:124.00000095%">platform</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="-437.53387"
-       y="60.146332"
+       x="-472"
+       y="64"
        id="text3812"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3814"
-         x="-437.53387"
-         y="60.146332">bumper</tspan></text>
+         x="-472"
+         y="64">bumper</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="-437.53387"
-       y="90.146332"
+       x="-472"
+       y="96"
        id="text3816"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3818"
-         x="-437.53387"
-         y="90.146332"
+         x="-472"
+         y="96"
          style="font-size:20px">ice</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4532"
-       y="120.14633"
-       x="-437.53387"
+       y="128"
+       x="-472"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
        xml:space="preserve"><tspan
          style="font-size:20px"
-         y="120.14633"
-         x="-437.53387"
+         y="128"
+         x="-472"
          id="tspan4534"
          sodipodi:role="line">Nosticky</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="-437.53387"
-       y="160.14633"
+       x="-472"
+       y="168"
        id="text3820"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3822"
-         x="-437.53387"
-         y="160.14633">slime spawn</tspan></text>
+         x="-472"
+         y="168">slime spawn</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="-437.53387"
-       y="190.14633"
+       x="-472"
+       y="200"
        id="text3824"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3826"
-         x="-437.53387"
-         y="190.14633">goal</tspan></text>
+         x="-472"
+         y="200">goal</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
-       x="-197.53387"
-       y="30.146332"
+       x="-232"
+       y="32"
        id="TimeAttack"
        sodipodi:linespacing="125%"
        type="TimeAttack"
@@ -268,26 +268,26 @@
        att_levelTime="50"><tspan
          sodipodi:role="line"
          id="tspan4745-6"
-         x="-197.53387"
-         y="30.146332">TimeAttack</tspan></text>
+         x="-232"
+         y="32">TimeAttack</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
-       x="-437.53387"
-       y="250.14633"
+       x="-472"
+       y="248"
        id="text3824-0"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3051"
-         x="-437.53387"
-         y="250.14633">Bec bunsen</tspan></text>
+         x="-472"
+         y="248">Bec bunsen</tspan></text>
     <rect
        style="fill:#f86e26;fill-opacity:1;stroke:none"
        id="becbunsen"
        width="20"
        height="67"
-       x="-287.53387"
-       y="203.14633"
+       x="-328"
+       y="205"
        inkscape:label="#rect3794"
        type="BecBunsen"
        att_delay="0"
@@ -300,21 +300,21 @@
     <text
        xml:space="preserve"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
-       x="-437.53387"
-       y="330.14633"
+       x="-472"
+       y="320"
        id="text3824-0-3"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3932"
-         x="-437.53387"
-         y="330.14633">Bumper Angle</tspan></text>
+         x="-472"
+         y="320">Bumper Angle</tspan></text>
     <rect
        style="fill:url(#linearGradient3948);fill-opacity:1;stroke:none"
        id="bumper_angle"
-       width="50"
-       height="50"
-       x="-287.53387"
-       y="300.14633"
+       width="48"
+       height="48"
+       x="-320"
+       y="296"
        inkscape:label="#rect3794"
        type="Bumper_Angle">
       <desc
@@ -327,8 +327,8 @@
        id="button"
        width="40"
        height="40"
-       x="-287.53387"
-       y="380.14633"
+       x="-320"
+       y="376"
        inkscape:label="#rect3794"
        type="Button"
        att_target=""
@@ -341,29 +341,31 @@
     <text
        xml:space="preserve"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
-       x="-437.53387"
-       y="410.14633"
+       x="-472"
+       y="408"
        id="text3824-0-3-6"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3995"
-         x="-437.53387"
-         y="410.14633">Button</tspan></text>
+         x="-472"
+         y="408">Button</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
-       x="-440"
-       y="470"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="-472"
+       y="464"
        id="text3824-0-3-6-1"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan3070">Circular Saw</tspan></text>
+         id="tspan3070"
+         x="-472"
+         y="464">Circular Saw</tspan></text>
     <rect
        style="fill:#f86e26;fill-opacity:1;stroke:none"
        id="circularsaw"
        width="40"
        height="40"
-       x="-290"
+       x="-320"
        y="440"
        inkscape:label="#rect3794"
        type="CircularSaw"
@@ -385,7 +387,7 @@
        width="800"
        height="480"
        x="0"
-       y="120"
+       y="0"
        type="LevelInfo" />
     <rect
        style="fill:#97a975;fill-opacity:1;stroke:none"
@@ -393,7 +395,7 @@
        width="800"
        height="100"
        x="0"
-       y="500"
+       y="380"
        inkscape:label="#rect3767"
        type="Platform">
       <desc
@@ -406,8 +408,8 @@
        id="slimy_start-1"
        width="24"
        height="26"
-       x="100"
-       y="374"
+       x="96"
+       y="246"
        inkscape:label="#rect3794"
        type="Spawn">
       <desc
@@ -418,8 +420,8 @@
     <rect
        type="GoalPortal"
        inkscape:label="#rect3794"
-       y="440"
-       x="350"
+       y="318"
+       x="360"
        height="10"
        width="32"
        id="slimy_goal-4"

@@ -217,6 +217,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 			CCCallFunc kill = CCCallFunc.action(this, "kill");
 			CCSequence sequence = CCSequence.actions(animBurn, kill);
 			this.currentAction = sequence;
+			this.sprite.runAction(this.currentAction);
 			this.isDying = true;
 			Sounds.playEffect(R.raw.slimyfire);		
 		}
