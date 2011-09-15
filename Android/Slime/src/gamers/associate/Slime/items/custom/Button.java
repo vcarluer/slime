@@ -22,12 +22,12 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class Button extends GameItemPhysic {
-	public static String Anim_Wait = "bumper-wait";
-	public static String Anim_Bump = "bumper-push";	
+	public static String Anim_Wait = "button-wait";
+	public static String Anim_Bump = "button";	
 	private static float Default_Width = 40f;
-	private static float Default_Height = 40f;
+	private static float Default_Height = 27f;
 	private static float Reference_Width = 40f;
-	private static float Reference_Height = 40f;
+	private static float Reference_Height = 27f;
 	
 	private String target;
 	private float resetTime;

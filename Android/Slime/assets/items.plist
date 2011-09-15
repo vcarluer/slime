@@ -199,6 +199,19 @@
                 <key>sourceSize</key>
                 <string>{20,67}</string>
             </dict>
+            <key>button-wait-01.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{100,67},{40,27}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{40,27}}</string>
+                <key>sourceSize</key>
+                <string>{40,27}</string>
+            </dict>
             <key>button-01.png</key>
             <dict>
                 <key>frame</key>

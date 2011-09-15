@@ -14,7 +14,7 @@ CircularSaw;290.0;150.0;40.0;40.0;0.0;circularsaw-30;true
 CircularSaw;250.0;150.0;40.0;40.0;0.0;circularsaw-68;true
 CircularSaw;210.0;150.0;40.0;40.0;0.0;circularsaw-07;true
 Bumper_Angle;50.0;150.0;50.0;50.0;0.0
-Button;750.0;150.0;40.0;40.0;0.0;;2
+Button;750.0;150.0;40.0;27.0;0.0;;2
 BecBunsen;410.0;150.0;20.0;67.0;0.0;true;0;becbunsen-4
 BecBunsen;450.0;150.0;20.0;67.0;0.0;true;0;becbunsen-1
 BecBunsen;470.0;150.0;20.0;67.0;0.0;true;0;becbunsen-8
