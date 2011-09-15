@@ -16,6 +16,7 @@ public abstract class ItemDefinition {
 	protected float y;
 	protected float width;
 	protected float height;
+	protected float angle;
 	protected ArrayList<String> typesHandled;
 	
 	public ItemDefinition() {
@@ -95,7 +96,8 @@ public abstract class ItemDefinition {
 			this.y = ZeroIfNone(infos[2]);
 			this.width = ZeroIfNone(infos[3]);
 			this.height = ZeroIfNone(infos[4]);
-			this.parseNext(infos, 5);
+			this.angle = ZeroIfNone(infos[5]);
+			this.parseNext(infos, 6);
 		}
 		catch (Exception ex) {
 			Log.e(Slime.TAG, "BAD FORMAT for item definition " + this.getType());
@@ -142,5 +144,19 @@ public abstract class ItemDefinition {
 	 */
 	public ArrayList<String> getTypesHandled() {
 		return typesHandled;
+	}
+
+	/**
+	 * @return the angle
+	 */
+	public float getAngle() {
+		return angle;
+	}
+
+	/**
+	 * @param angle the angle to set
+	 */
+	public void setAngle(float angle) {
+		this.angle = angle;
 	}
 }

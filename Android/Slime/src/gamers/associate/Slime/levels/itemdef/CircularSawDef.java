@@ -11,7 +11,7 @@ public class CircularSawDef extends ItemDefinition {
 	
 	@Override
 	public void createItem(Level level) {
-		SlimeFactory.CircularSaw.createBL(this.x, this.y, this.width, this.height, this.name, this.isOn);
+		SlimeFactory.CircularSaw.createBL(this.x, this.y, this.width, this.height, this.name, this.isOn).setAngle(this.angle);
 	}
 
 	@Override

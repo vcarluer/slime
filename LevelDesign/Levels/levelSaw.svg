@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 "
-   sodipodi:docname="LevelSaw.slime">
+   sodipodi:docname="test.slime">
   <defs
      id="defs4">
     <linearGradient
@@ -78,9 +78,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="242.23938"
-     inkscape:cy="304.07502"
+     inkscape:zoom="1.979899"
+     inkscape:cx="554.37486"
+     inkscape:cy="324.26324"
      inkscape:document-units="px"
      inkscape:current-layer="MAP"
      showgrid="true"
@@ -716,6 +716,22 @@
          id="desc3798-0-5">slimy start</desc>
       <title
          id="title3796-4-5">slimy_start</title>
+    </rect>
+    <rect
+       style="fill:#f86e26;fill-opacity:1;stroke:none;display:inline"
+       id="circularsaw-3-0"
+       width="40"
+       height="40"
+       x="-350"
+       y="610"
+       inkscape:label="#rect3794"
+       type="CircularSaw"
+       att_isOn="true"
+       transform="matrix(0,-1,1,0,0,0)">
+      <desc
+         id="desc3798-0-9-4-7">slimy start</desc>
+      <title
+         id="title3796-4-9-1-9">slimy_start</title>
     </rect>
   </g>
 </svg>

@@ -319,6 +319,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 				&& !contact.getContactWith().isNoStick()
 				&& !contact.getContactWith().isIsAllSensor()
 				&& !this.isDead
+				&& !this.isDying
 				&& this.currentJoint == null) {
 			
 			int contactCount = contact.getManifold().getNumberOfContactPoints();
@@ -402,7 +403,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 
 	@Override
 	public boolean isActive() {
-		return !this.isDead && !this.isDisabled;
+		return !this.isDead && !this.isDisabled && !this.isDying;
 	}
 
 	/* (non-Javadoc)

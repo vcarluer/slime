@@ -9,6 +9,7 @@ import sys
 import inkex 
 # Le module simplestyle fournit des fonctions pour le parsing des styles
 from simplestyle import *
+import math
 
 class Smile( inkex.Effect ):
 	"""
@@ -63,29 +64,50 @@ class Smile( inkex.Effect ):
 				y = self.__yReference + self.__heightReference - (float(child.get("y")) + float(child.get("height")))
 			else:
 				y = float(child.get("y"))
+				
+			transform = ""
+			transform = str(child.get("transform"))
+			angle = 0
+			if transform is not None:
+				if transform.startswith("matrix"):
+					val1 = transform[7:]
+					values = val1[:-1]
+					splited = values.split(',')
+					cosa = float(splited[0])
+					sina = float(splited[1])
+					angleRad = math.acos(cosa)
+					if sina > 0:
+						angle = math.degrees(angleRad)
+					else:
+						angle = - math.degrees(angleRad)
+				
+				if transform.startswith("scale"):
+					angle = 180
+
+				
 
 			# TimeAttack
 			if str(child.get("type")) == 'TimeAttack':
-				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+str(child.get("att_levelTime"))+";"+str(child.get("att_criticTime"))
+				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+str(angle)+";"+str(child.get("att_levelTime"))+";"+str(child.get("att_criticTime"))
 				return True;
 			
 			# BecBunsen
 			if str(child.get("type")) == 'BecBunsen':
-				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+str(child.get("att_isOn"))+";"+str(child.get("att_delay"))+";"+str(child.get("id"))
+				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+str(angle)+";"+str(child.get("att_isOn"))+";"+str(child.get("att_delay"))+";"+str(child.get("id"))
 				return True;
 
 			# Button
 			if str(child.get("type")) == 'Button':
-				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+str(child.get("att_target"))+";"+str(child.get("att_resetTime"))
+				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+str(angle)+";"+str(child.get("att_target"))+";"+str(child.get("att_resetTime"))
 				return True;
 				
 			# Button
 			if str(child.get("type")) == 'CircularSaw':
-				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+str(child.get("id"))+";"+str(child.get("att_isOn"))
+				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+str(angle)+";"+str(child.get("id"))+";"+str(child.get("att_isOn"))
 				return True;
 
 			# Standard Item
-			print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))
+			print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+str(angle)
 			return True;
 	
 	def affect(self, args=sys.argv[1:]):

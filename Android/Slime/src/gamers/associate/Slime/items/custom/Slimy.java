@@ -70,6 +70,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 
 		this.isLanded = false;
 		this.isDead = false;
+		this.isDying = false;
 		
 		this.referenceSize.width = Reference_Width;
 		this.referenceSize.height = Reference_Height;
@@ -164,7 +165,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	}
 	
 	public void land() {
-		if (!this.isLanded && !this.isDead && this.sprite != null) {
+		if (!this.isLanded && !this.isDead && this.sprite != null && !this.isDying) {
 			if (!this.hasLanded) {
 				this.hasLanded = true;
 				this.waitAnim();
@@ -178,10 +179,8 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 			this.currentAction = animate;
 			this.sprite.runAction(this.currentAction);
 			this.isLanded = true;
-			
-			if (!this.isDead()) {
-				Sounds.playEffect(R.raw.slimyland);
-			}
+						
+			Sounds.playEffect(R.raw.slimyland);			
 		}		
 	}		
 	
@@ -243,7 +242,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	}
 	
 	public void success() {
-		if (!this.isDead) {
+		if (!this.isDead && !this.isDying) {
 			if (this.currentAction != null) {				
 				this.sprite.stopAction(this.currentAction);				
 			}
@@ -278,6 +277,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 		}
 		
 		this.isDead = true;
+		this.isDying = false;
 		Level.currentLevel.slimyKilled(this);
 	}
 	
