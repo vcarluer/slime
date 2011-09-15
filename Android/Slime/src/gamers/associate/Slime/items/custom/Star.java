@@ -79,9 +79,9 @@ public class Star extends GameItemPhysic {
 		CCRepeatForever repeat = CCRepeatForever.action(animate);
 		this.sprite.runAction(repeat);
 		
-		CCRotateTo rotate = CCRotateTo.action(5f, 360);
-		CCRepeatForever repeatRotate = CCRepeatForever.action(rotate);
-		this.sprite.runAction(repeatRotate);
+//		CCRotateTo rotate = CCRotateTo.action(5f, 359);
+//		CCRepeatForever repeatRotate = CCRepeatForever.action(rotate);
+//		this.sprite.runAction(repeatRotate);
 	}
 
 	/* (non-Javadoc)
