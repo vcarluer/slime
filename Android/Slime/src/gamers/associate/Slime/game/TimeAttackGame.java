@@ -224,7 +224,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	@Override
 	public void setNewBonus() {
 		if (!this.isGameOver) {
-			this.leftTime += 10000;
+			this.leftTime += 10;
 		}
 	}
 }
