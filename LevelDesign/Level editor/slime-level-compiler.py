@@ -54,16 +54,23 @@ class Smile( inkex.Effect ):
 		if child.get("type") is not None:
 			# LevelInfo
 			if str(child.get("type")) == 'LevelInfo':
-				self.__yReference = float(child.get("y"))
-				self.__heightReference = float(child.get("height"))
+				self.__yReference = round(float(child.get("y")))
+				self.__heightReference = round(float(child.get("height")))
 				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(child.get("y"))+";"+str(child.get("width"))+";"+str(child.get("height"))
 				return True;
 			
-			# Calculate new Y based on LevelInfo reference Y and height: Inverse items coordinate for GameItem, origin bottom left
-			if child.get("height") is not None:
-				y = self.__yReference + self.__heightReference - (float(child.get("y")) + float(child.get("height")))
+			
+			x = float(str(child.get("x")))
+			y = float(str(child.get("y")))
+			if child.get("width") is not None:
+				width = float(str(child.get("width")))
 			else:
-				y = float(child.get("y"))
+				width = float(0)
+
+			if child.get("height") is not None:
+				height = float(str(child.get("height")))
+			else:
+				height = float(0)
 				
 			transform = ""
 			transform = str(child.get("transform"))
@@ -80,34 +87,51 @@ class Smile( inkex.Effect ):
 						angle = math.degrees(angleRad)
 					else:
 						angle = - math.degrees(angleRad)
+					tM = [[float(splited[0]), float(splited[2])], [float(splited[1]), float(splited[3])]]
+					cX = float(x) + width / 2
+					cY = float(y) + height / 2
+					tX = tM[0][0]*cX + tM[0][1]*cY
+					tY = tM[1][0]*cX + tM[1][1]*cY
+					x = tX - width / 2
+					y = tY - height / 2
 				
 				if transform.startswith("scale"):
 					angle = 180
+					x = - x - width
+					y = -y - height
+			
+			x = round(x)
+			y = round(y)
+			width = round(width)
+			height = round(height)
+			angle = round(angle)
 
-				
+			# Calculate new Y based on LevelInfo reference Y and height: Inverse items coordinate for GameItem, origin bottom left
+			if child.get("height") is not None:
+				y = self.__yReference + self.__heightReference - (y + height)
 
 			# TimeAttack
 			if str(child.get("type")) == 'TimeAttack':
-				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+str(angle)+";"+str(child.get("att_levelTime"))+";"+str(child.get("att_criticTime"))
+				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_levelTime"))+";"+str(child.get("att_criticTime"))
 				return True;
 			
 			# BecBunsen
 			if str(child.get("type")) == 'BecBunsen':
-				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+str(angle)+";"+str(child.get("att_isOn"))+";"+str(child.get("att_delay"))+";"+str(child.get("id"))
+				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_isOn"))+";"+str(child.get("att_delay"))+";"+str(child.get("id"))
 				return True;
 
 			# Button
 			if str(child.get("type")) == 'Button':
-				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+str(angle)+";"+str(child.get("att_target"))+";"+str(child.get("att_resetTime"))
+				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_target"))+";"+str(child.get("att_resetTime"))
 				return True;
 				
 			# Button
 			if str(child.get("type")) == 'CircularSaw':
-				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+str(angle)+";"+str(child.get("id"))+";"+str(child.get("att_isOn"))
+				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("id"))+";"+str(child.get("att_isOn"))
 				return True;
 
 			# Standard Item
-			print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(y)+";"+str(child.get("width"))+";"+str(child.get("height"))+";"+str(angle)
+			print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)
 			return True;
 	
 	def affect(self, args=sys.argv[1:]):
@@ -118,8 +142,7 @@ class Smile( inkex.Effect ):
 		self.getposinlayer()
 		self.getselected()
 		self.getdocids()
-		self.effect()        
-		
+		self.effect()
 
 # Execute la fonction "effect" de la classe "CHello"
 smile = Smile()
