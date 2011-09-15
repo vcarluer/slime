@@ -96,7 +96,9 @@ public class LevelBeta extends LevelTimeAttack {
 		SlimeFactory.Polygon.create(cX, cY + 80, 0, 0, true, body, vertices);
 		cX += 80;
 		SlimeFactory.Lava.createBL(cX, cY, 200, 50);
-		cX += 200;
+		cX += 100;
+		SlimeFactory.Star.createBL(cX, cY + 150, 0, 0);
+		cX += 100;
 		SlimeFactory.Platform.createBL(cX, cY, 100, 50);
 		cX += 40;
 		SlimeFactory.BumperAngle.createBL(cX, cY + 50, 50, 50, 0.8f).setAngle(-90);

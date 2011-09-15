@@ -220,4 +220,11 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 			this.level.getHudLabel().stopAction(this.criticAction);
 		}			
 	}
+
+	@Override
+	public void setNewBonus() {
+		if (!this.isGameOver) {
+			this.leftTime += 10000;
+		}
+	}
 }
