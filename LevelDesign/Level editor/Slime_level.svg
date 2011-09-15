@@ -16,7 +16,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 "
-   sodipodi:docname="Slime_level.svg">
+   sodipodi:docname="Nouveau document 3">
   <defs
      id="defs4">
     <linearGradient
@@ -80,6 +80,28 @@
        x2="-75"
        y2="300"
        gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       gradientTransform="translate(0,7.9999775)"
+       inkscape:collect="always"
+       xlink:href="#linearGradient5394-7"
+       id="linearGradient5402-1"
+       x1="-480"
+       y1="-389.71378"
+       x2="800.00122"
+       y2="-389.71378"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient5394-7">
+      <stop
+         style="stop-color:#93ff00;stop-opacity:1;"
+         offset="0"
+         id="stop5396-4" />
+      <stop
+         style="stop-color:#93ff00;stop-opacity:0;"
+         offset="1"
+         id="stop5398-0" />
+    </linearGradient>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -88,9 +110,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="-72.531381"
-     inkscape:cy="739.53486"
+     inkscape:zoom="0.7"
+     inkscape:cx="215.35173"
+     inkscape:cy="401.36395"
      inkscape:document-units="px"
      inkscape:current-layer="Template"
      showgrid="true"
@@ -435,6 +457,45 @@
        id="path5458"
        d="m -488.94879,-262.02923 c 1.97779,-0.2442 4.05325,-0.31167 5.94818,-1.0047 0.007,-0.002 2.42697,-1.2338 2.45882,-1.25 -21.27565,14.17139 -12.04088,6.68384 -7.23306,3.36563 2.11857,-1.18996 3.82001,-2.86834 5.5366,-4.55077 1.59847,-1.53529 3.30991,-2.92838 4.77215,-4.5998 1.65581,-2.18031 3.21413,-4.42695 4.94286,-6.5513 1.5685,-1.76395 2.78185,-3.71519 3.70767,-5.87431 0.98976,-1.61182 1.70924,-3.29037 2.24854,-5.09632 0.47354,-1.52158 1.36065,-2.83385 1.82401,-4.35734 0.43425,-1.848 0.43395,-3.75873 0.47642,-5.64607 0.0247,-2.27577 0.007,-4.55175 -0.002,-6.82758 -0.0744,-2.36563 0.18068,-4.7498 -0.16859,-7.09532 -0.39971,-2.4464 -1.56978,-4.60048 -2.54855,-6.83834 -0.66756,-1.88593 -1.13994,-3.83396 -1.67695,-5.76224 -0.63969,-1.4131 -1.06403,-2.89885 -1.64618,-4.33358 -0.43222,-1.34359 -1.10685,-2.60768 -2.06077,-3.6507 -0.96765,-1.16359 -1.63414,-2.52237 -2.42527,-3.79969 -0.30931,-0.53857 -0.60713,-1.23195 -1.21389,-1.51745 -0.126,-0.0593 -0.28879,-0.12358 -0.41325,-0.0611 -0.10732,0.0538 -0.23742,0.39328 -0.13248,0.33495 4.30347,-2.39229 8.53194,-4.91709 12.79791,-7.37563 0.16176,1.38934 1.10987,2.74695 1.98235,3.80099 1.08058,1.50722 2.52548,2.68884 3.55735,4.22901 0.76253,0.73836 1.2156,1.82094 2.04413,2.49147 0.43943,0.35563 0.96215,0.59493 1.42509,0.91935 1.64166,1.16247 3.37505,2.0604 4.92108,3.36891 1.41851,1.85123 3.44749,2.90959 5.34535,4.17084 1.75178,1.43854 3.38883,3.00319 5.07926,4.50913 1.62327,1.16639 3.4135,1.9923 5.13851,2.99009 2.15369,1.26092 4.23954,2.62028 6.28728,4.04903 2.63113,1.30815 5.25807,2.59654 7.7965,4.08647 2.47486,1.03924 4.82898,2.37376 7.31414,3.38384 2.2981,1.09 4.72627,1.86394 7.14972,2.62122 2.98337,0.76411 5.84784,1.90874 8.81652,2.72253 2.33651,0.87839 4.76935,1.41503 7.18179,2.02736 2.72998,0.73444 5.52519,1.18151 8.21877,2.05636 2.60763,0.92352 5.33224,1.38467 8.01931,2.00252 2.72041,0.63414 5.41329,1.23019 8.19818,1.51793 2.77989,0.23482 5.57108,0.24353 8.35867,0.25925 2.3485,0.38255 4.70325,0.69338 7.07696,0.86082 2.23824,-0.0673 4.38994,0.29547 6.57825,0.69212 1.89923,0.32744 3.82812,0.38654 5.75044,0.42769 2.09515,0.025 4.19058,0.0246 6.28587,0.026 0.39316,-4.1e-4 0.78633,-8.2e-4 1.17949,-0.001 0,0 -12.11165,8.80149 -12.11165,8.80149 l 0,0 c -0.39341,3.9e-4 -0.78683,7.7e-4 -1.18025,0.001 -2.11239,0.004 -4.22539,0.0202 -6.33708,-0.0479 -1.97073,-0.0806 -3.9415,-0.21951 -5.87944,-0.60824 -2.14867,-0.3887 -4.30005,-0.4854 -6.47909,-0.58646 -2.33421,-0.22526 -4.64698,-0.63091 -6.9867,-0.78617 -2.81439,-0.0275 -5.63175,-0.10954 -8.43242,-0.40703 -2.81191,-0.36888 -5.54896,-1.03019 -8.31591,-1.63836 -2.69907,-0.63257 -5.42562,-1.1498 -8.03751,-2.10846 -2.71994,-0.75823 -5.51063,-1.22665 -8.23494,-1.97521 -2.4091,-0.64311 -4.83555,-1.21056 -7.17815,-2.08026 -2.94316,-0.90177 -5.837,-1.96425 -8.81524,-2.75168 -2.48352,-0.75122 -4.92873,-1.62842 -7.28093,-2.72997 -2.47859,-1.12989 -4.91592,-2.35918 -7.36253,-3.55388 -2.59811,-1.45305 -5.29868,-2.69805 -7.87997,-4.17518 -2.04699,-1.37742 -4.13459,-2.68499 -6.26694,-3.92628 -1.80284,-1.04315 -3.74957,-1.8545 -5.32233,-3.25669 -1.59481,-1.49268 -3.20713,-2.97231 -4.92741,-4.32025 -1.95707,-1.2617 -3.91614,-2.50019 -5.45165,-4.28897 -1.54983,-1.21432 -3.30548,-2.07927 -4.87443,-3.26745 -1.51804,-1.06023 -2.71794,-2.34361 -3.77177,-3.87003 -1.01456,-1.48443 -2.43436,-2.64633 -3.46216,-4.12728 -1.20069,-1.48653 -2.00371,-3.1408 -2.69307,-4.91805 6.33536,-3.98914 11.64777,-12.5627 15.54382,-5.52486 0.7373,1.21566 1.37964,2.49559 2.3042,3.58931 0.99699,1.21279 1.8356,2.56828 2.29898,4.07818 0.60572,1.49316 1.04707,3.03309 1.7213,4.50078 0.48975,1.87411 0.98097,3.74416 1.53444,5.59729 0.99271,2.35126 2.24016,4.59221 2.68665,7.14223 0.52026,2.40607 0.26463,4.86648 0.32716,7.31888 0.001,2.2823 0.003,4.56461 0.006,6.84691 0.003,1.97965 -0.004,3.96936 -0.28705,5.93284 -0.15957,0.84421 -0.32187,1.66667 -0.68829,2.45163 -1.47884,3.16799 0.72258,-1.70619 -0.78471,1.2575 -0.12778,0.25125 -0.19116,0.53036 -0.28674,0.79553 -0.74573,1.74153 -0.88702,3.74098 -2.20476,5.23421 -1.11085,2.15009 -1.85534,4.46516 -3.61007,6.24984 -1.77167,2.06344 -3.34489,4.26121 -4.95293,6.44903 -1.19538,1.94928 -2.97305,3.32951 -4.66277,4.83049 -1.74622,1.6739 -3.2903,3.60035 -5.44246,4.78365 -6.06102,4.14819 -10.82756,8.88618 -18.40313,11.42027 -2.80873,1.21924 -5.79823,1.67943 -8.8538,1.76691 0,0 12.13891,-8.81944 12.13891,-8.81944 z"
        inkscape:connector-curvature="0" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot5357"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#930000;fill-opacity:1;stroke:none;display:inline;font-family:Wide Latin;-inkscape-font-specification:Wide Latin"
+       transform="translate(256.65625,78.218352)"><flowRegion
+         id="flowRegion5359"><rect
+           id="rect5361"
+           width="1024.6702"
+           height="72.375885"
+           x="-464.67017"
+           y="-432.37589"
+           style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#930000;fill-opacity:1;font-family:Wide Latin;-inkscape-font-specification:Wide Latin" /></flowRegion><flowPara
+         id="flowPara5365">MAJ + CTRL + X pour le XML !</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot5379"
+       style="font-size:64px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Wide Latin;-inkscape-font-specification:Wide Latin Italic"
+       transform="translate(0,155.68667)"><flowRegion
+         id="flowRegion5381"><rect
+           id="rect5383"
+           width="1360"
+           height="80"
+           x="-520"
+           y="-600"
+           style="font-size:64px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;font-family:Wide Latin;-inkscape-font-specification:Wide Latin Italic" /></flowRegion><flowPara
+         id="flowPara5387">Slime Level Designer</flowPara></flowRoot>    <rect
+       style="fill:url(#linearGradient5402-1);fill-opacity:1;stroke:none;display:inline"
+       id="rect5392"
+       width="1280.0012"
+       height="11.427549"
+       x="-480"
+       y="-387.42755" />
+    <rect
+       style="fill:#d11f3b;fill-opacity:1;stroke:none;display:inline"
+       id="target"
+       width="16"
+       height="16"
+       x="-296"
+       y="264"
+       type="Target" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -494,44 +555,5 @@
        x="360"
        y="270"
        type="GoalPortal" />
-    <rect
-       style="fill:#d11f3b;fill-opacity:1;stroke:none"
-       id="target"
-       width="16"
-       height="16"
-       x="-296"
-       y="264"
-       type="Target" />
-    <flowRoot
-       xml:space="preserve"
-       id="flowRoot5357"
-       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#930000;fill-opacity:1;stroke:none;font-family:Wide Latin;-inkscape-font-specification:Wide Latin"
-       transform="translate(264.65625,86.218352)"><flowRegion
-         id="flowRegion5359"><rect
-           id="rect5361"
-           width="1024.6702"
-           height="72.375885"
-           x="-464.67017"
-           y="-432.37589"
-           style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#930000;fill-opacity:1;font-family:Wide Latin;-inkscape-font-specification:Wide Latin" /></flowRegion><flowPara
-         id="flowPara5365">MAJ + CTRL + X pour le XML !</flowPara></flowRoot>    <flowRoot
-       xml:space="preserve"
-       id="flowRoot5379"
-       style="font-size:64px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Wide Latin;-inkscape-font-specification:Wide Latin Italic"
-       transform="translate(0,147.6867)"><flowRegion
-         id="flowRegion5381"><rect
-           id="rect5383"
-           width="1360"
-           height="80"
-           x="-520"
-           y="-600"
-           style="font-size:64px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr;text-anchor:middle;font-family:Wide Latin;-inkscape-font-specification:Wide Latin Italic" /></flowRegion><flowPara
-         id="flowPara5387">Slime Level Designer</flowPara></flowRoot>    <rect
-       style="fill:url(#linearGradient5402);fill-opacity:1;stroke:none"
-       id="rect5392"
-       width="1280.0012"
-       height="11.427549"
-       x="-480"
-       y="-395.42755" />
   </g>
 </svg>
