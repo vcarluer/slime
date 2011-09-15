@@ -1,4 +1,4 @@
-LevelInfo;0;0;800;480
+LevelInfo;0;-500;800;980;0;Width
 Platform;0.0;0.0;800.0;150.0;0.0
 Spawn;150.0;200.0;24.0;26.0;0.0
 GoalPortal;678.0;370.0;32.0;10.0;0.0
@@ -14,7 +14,7 @@ CircularSaw;290.0;150.0;40.0;40.0;0.0;circularsaw-30;true
 CircularSaw;250.0;150.0;40.0;40.0;0.0;circularsaw-68;true
 CircularSaw;210.0;150.0;40.0;40.0;0.0;circularsaw-07;true
 Bumper_Angle;50.0;150.0;50.0;50.0;0.0
-Button;750.0;150.0;40.0;27.0;0.0;;2
+Button;750.0;150.0;40.0;40.0;0.0;;2
 BecBunsen;410.0;150.0;20.0;67.0;0.0;true;0;becbunsen-4
 BecBunsen;450.0;150.0;20.0;67.0;0.0;true;0;becbunsen-1
 BecBunsen;470.0;150.0;20.0;67.0;0.0;true;0;becbunsen-8

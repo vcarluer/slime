@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 "
-   sodipodi:docname="LevelSaw.slime">
+   sodipodi:docname="levelSaw.svg">
   <defs
      id="defs4">
     <linearGradient
@@ -80,7 +80,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.9899495"
      inkscape:cx="675.89655"
-     inkscape:cy="275.43841"
+     inkscape:cy="517.87502"
      inkscape:document-units="px"
      inkscape:current-layer="MAP"
      showgrid="true"
@@ -414,10 +414,11 @@
        style="fill:#e6e6e6;fill-rule:evenodd;stroke:none"
        id="LevelInfo"
        width="800"
-       height="480"
+       height="980"
        x="0"
-       y="0"
-       type="LevelInfo" />
+       y="-500"
+       type="LevelInfo"
+       att_maxDimension="Width" />
     <rect
        style="fill:#97a975;fill-opacity:1;stroke:none"
        id="platform-9"

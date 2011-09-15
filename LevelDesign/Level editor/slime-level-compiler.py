@@ -56,7 +56,7 @@ class Smile( inkex.Effect ):
 			if str(child.get("type")) == 'LevelInfo':
 				self.__yReference = round(float(child.get("y")))
 				self.__heightReference = round(float(child.get("height")))
-				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(child.get("y"))+";"+str(child.get("width"))+";"+str(child.get("height"))
+				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(child.get("y"))+";"+str(child.get("width"))+";"+str(child.get("height"))+";0;"+str(child.get("att_maxDimension"))
 				return True;
 			
 			
