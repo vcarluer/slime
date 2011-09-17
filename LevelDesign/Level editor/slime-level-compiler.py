@@ -129,6 +129,11 @@ class Smile( inkex.Effect ):
 			if str(child.get("type")) == 'CircularSaw':
 				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("id"))+";"+str(child.get("att_isOn"))
 				return True;
+				
+			# MenuNode
+			if str(child.get("type")) == 'MenuNode':
+				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("id"))+";"+str(child.get("att_targetLevel"))+";"+str(child.get("att_targetN1"))+";"+str(child.get("att_targetN2"))+";"+str(child.get("att_targetN3"))+";"+str(child.get("att_targetN4"))
+				return True;
 
 			# Standard Item
 			print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)

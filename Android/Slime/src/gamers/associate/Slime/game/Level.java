@@ -121,6 +121,8 @@ public class Level {
 	
 	protected ArrayList<ITrigerable> trigerables;
 	
+	protected boolean isPhysicDisabled;
+	
 	protected Level() {
 		this.scene = CCScene.node();
 		this.levelLayer = new LevelLayer(this);
@@ -213,6 +215,7 @@ public class Level {
 	}
 			
 	public void resetLevel() {		
+		this.isPhysicDisabled = false;
 		this.currentLevelName = "";
 		
 		for (GameItem item : this.items.values()) {
@@ -292,14 +295,16 @@ public class Level {
 		SpriteSheetFactory.add("slime", Level.zFront);*/
 		
 		// Background
-		CCSpriteSheet spriteSheet = SpriteSheetFactory.getSpriteSheet("decor", true);		
+		// CCSpriteSheet spriteSheet = SpriteSheetFactory.getSpriteSheet("decor", true);		
 		// Sprite too big for VM in UbuntuRox		
-		this.backgroundLayer.addChild(spriteSheet);
+		// this.backgroundLayer.addChild(spriteSheet);
 		//this.backgroundLayer.setRotation(-90f);				
 		//this.backgroundLayer.setScale(2.0f);
-		this.backgroundSprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("decor.png"));		
+		// this.backgroundSprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("decor.png"));		
+		this.backgroundSprite = CCSprite.sprite("background-level-01.png");
 		this.backgroundSprite.setAnchorPoint(0, 0);
-		spriteSheet.addChild(this.backgroundSprite);				
+		this.backgroundLayer.addChild(this.backgroundSprite);
+		// spriteSheet.addChild(this.backgroundSprite);				
 		
 		// hud
 //		this.label = CCLabel.makeLabel("Hud !", "DroidSans", 16);		
@@ -330,10 +335,12 @@ public class Level {
 				this.itemsToAdd.clear();
 			}
 									
-			// TODO: physic step must be fix!
-			synchronized (world) {
-	    		world.step(delta, 8, 4); // 6 2
-	    	}												
+			if (!this.isPhysicDisabled) {
+				// TODO: physic step must be fix!
+				synchronized (this.world) {
+					this.world.step(delta, 8, 4); // 6 2
+		    	}
+			}
 			
 			for(GameItem item : this.items.values()) {
 				item.render(delta);
@@ -835,5 +842,19 @@ public class Level {
 		}
 		
 		return list;
+	}
+
+	/**
+	 * @return the isPhysicDisabled
+	 */
+	public boolean isPhysicDisabled() {
+		return isPhysicDisabled;
+	}
+
+	/**
+	 * @param isPhysicDisabled the isPhysicDisabled to set
+	 */
+	public void setPhysicDisabled(boolean isPhysicDisabled) {
+		this.isPhysicDisabled = isPhysicDisabled;
 	}
 }

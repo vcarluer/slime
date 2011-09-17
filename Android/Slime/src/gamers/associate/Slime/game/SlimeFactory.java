@@ -10,6 +10,7 @@ import gamers.associate.Slime.items.custom.GoalPortalFactory;
 import gamers.associate.Slime.items.custom.HomeLevelHandlerFactory;
 import gamers.associate.Slime.items.custom.LavaFactory;
 import gamers.associate.Slime.items.custom.LevelEndFactory;
+import gamers.associate.Slime.items.custom.MenuNodeFactory;
 import gamers.associate.Slime.items.custom.PhysicPolygonFactory;
 import gamers.associate.Slime.items.custom.PlatformFactory;
 import gamers.associate.Slime.items.custom.SlimyFactory;
@@ -45,6 +46,7 @@ public abstract class SlimeFactory {
 	public static ButtonFactory Button = new ButtonFactory();
 	public static CircularSawFactory CircularSaw = new CircularSawFactory();
 	public static StarFactory Star = new StarFactory();
+	public static MenuNodeFactory MenuNode = new MenuNodeFactory();
 		
 	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {		
 		LevelBuilder = new LevelBuilder();
@@ -65,6 +67,7 @@ public abstract class SlimeFactory {
 		Button.attach(level, attachNode, attachWorld, attachWorldRatio);
 		CircularSaw.attach(level, attachNode, attachWorld, attachWorldRatio);
 		Star.attach(level, attachNode, attachWorld, attachWorldRatio);
+		MenuNode.attach(level, attachNode);
 		
 		SpriteSheetFactory.attachAll(attachNode);
 		isAttached = true;
@@ -87,6 +90,7 @@ public abstract class SlimeFactory {
 		Button.detach();
 		CircularSaw.detach();
 		Star.detach();
+		MenuNode.detach();
 		
 		SpriteSheetFactory.detachAll();
 		isAttached = false;
@@ -108,6 +112,7 @@ public abstract class SlimeFactory {
 		Button.destroy();
 		CircularSaw.destroy();
 		Star.destroy();
+		MenuNode.destroy();
 		
 		SpriteSheetFactory.destroy();
 		isAttached = false;

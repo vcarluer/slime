@@ -9,6 +9,8 @@ import gamers.associate.Slime.levels.itemdef.CircularSawDef;
 import gamers.associate.Slime.levels.itemdef.GoalPortalDef;
 import gamers.associate.Slime.levels.itemdef.ItemDefinition;
 import gamers.associate.Slime.levels.itemdef.LevelInfoDef;
+import gamers.associate.Slime.levels.itemdef.MenuNodeDef;
+import gamers.associate.Slime.levels.itemdef.MetaMenuDef;
 import gamers.associate.Slime.levels.itemdef.PlatformDef;
 import gamers.associate.Slime.levels.itemdef.SpawnDef;
 import gamers.associate.Slime.levels.itemdef.TimeAttackDef;
@@ -62,6 +64,8 @@ public class LevelDefinitionParser extends LevelDefinition
 		this.itemDefinitions.add(new BumperAngleDef());
 		this.itemDefinitions.add(new ButtonDef());
 		this.itemDefinitions.add(new CircularSawDef());
+		this.itemDefinitions.add(new MetaMenuDef());
+		this.itemDefinitions.add(new MenuNodeDef());
 	}
 	
 	private void buildItemTypeMap() {
@@ -104,7 +108,7 @@ public class LevelDefinitionParser extends LevelDefinition
 	}
 	
 	private void HandleLine(Level level, String line) throws Exception {
-		String[] items = line.split(";");		
+		String[] items = line.split(";", -1);		
 		String itemType = items[0];
 		ItemDefinition itemDef = this.typeHandler.get(itemType);
 		itemDef.parseAndCreate(line, level);		

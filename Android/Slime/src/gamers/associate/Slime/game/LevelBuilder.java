@@ -32,7 +32,8 @@ public class LevelBuilder implements ILevelBuilder {
 		// Bad menu is more level
 		// add(new LevelDefinitionParser("test.slime", context));
 		add(new LevelDefinitionParser("Level0.slime", context));
-		add(new LevelDefinitionParser("LevelSaw.slime", context));
+		// add(new LevelDefinitionParser("LevelSaw.slime", context));
+		add(new LevelDefinitionParser("LevelMenu.slime", context));
 	}
 	
 	private void add(LevelDefinition levelDef) {

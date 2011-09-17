@@ -90,7 +90,7 @@ public abstract class ItemDefinition {
 	public void parse(String line) throws Exception {
 		try
 		{
-			String[] infos = line.split(";");
+			String[] infos = line.split(";", -1);
 			this.itemType = infos[0];
 			this.x = ZeroIfNone(infos[1]);
 			this.y = ZeroIfNone(infos[2]);
