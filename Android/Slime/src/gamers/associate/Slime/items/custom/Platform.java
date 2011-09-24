@@ -26,12 +26,14 @@ public class Platform extends GameItemPhysic {
 	public static String Anim_Base_Icy = "ice";
 	
 	private int type;
+	private boolean move;
 		
-	public Platform(float x, float y, float width, float height, World world, float worldRatio, int platformType) {
+	public Platform(float x, float y, float width, float height, World world, float worldRatio, int platformType, boolean platformMove) {
 		super(x, y, width, height, world, worldRatio);
 		this.spriteType = SpriteType.SINGLE_REPEAT;		
 		this.zOrder = Level.zBack;
 		this.type = platformType;
+		this.move = platformMove;
 		if (this.type != Sticky) {
 			this.noStick = true;
 		}
@@ -41,7 +43,12 @@ public class Platform extends GameItemPhysic {
 	protected void initBody() {
 		// Physic body
 		BodyDef bodyDef = new BodyDef();
-		bodyDef.type = BodyType.StaticBody;
+		if(this.move){
+			bodyDef.type = BodyType.DynamicBody;	
+		}
+		else{
+			bodyDef.type = BodyType.StaticBody;
+		}
 		CGPoint spawnPoint = new CGPoint();
 		spawnPoint.x = this.position.x;
 		spawnPoint.y = this.position.y;

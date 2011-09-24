@@ -6,6 +6,7 @@ import gamers.associate.Slime.items.base.TextureAnimation;
 public class PlatformFactory extends GameItemPhysicFactory<Platform>{
 	
 	private int currentType = Platform.Sticky;
+	private boolean currentMove = false;
 	
 	@Override
 	protected void createAnimList() {
@@ -22,7 +23,7 @@ public class PlatformFactory extends GameItemPhysicFactory<Platform>{
 
 	@Override
 	protected Platform instantiate(float x, float y, float width, float height) {
-		return new Platform(x, y, width, height, this.world, this.worldRatio, this.currentType);
+		return new Platform(x, y, width, height, this.world, this.worldRatio, this.currentType, this.currentMove);
 	}	
 
 	@Override
@@ -36,6 +37,7 @@ public class PlatformFactory extends GameItemPhysicFactory<Platform>{
 	
 	private Platform create(float x, float y, float width, float height, int platformType) {		
 		this.currentType = platformType;
+		this.currentMove = false;
 		Platform platform = this.create(x, y, width, height);		
 		return platform;
 	}
@@ -59,4 +61,34 @@ public class PlatformFactory extends GameItemPhysicFactory<Platform>{
 	public void setCurrentType(int platformType) {
 		this.currentType = platformType;
 	}
+	
+	//add moving parameter
+	
+	public Platform createMoveBL(float x, float y, float width, float height) {		
+		return this.createMove(x + width / 2, y + height / 2, width, height, Platform.Sticky);
+	}
+	
+	private Platform createMove(float x, float y, float width, float height, int platformType) {		
+		this.currentType = platformType;
+		this.currentMove = true;
+		Platform platform = this.create(x, y, width, height);		
+		return platform;
+	}
+		
+	public Platform createMoveStickyBL(float x, float y, float width, float height) {
+		return this.createMove(x + width / 2, y + height / 2, width, height, Platform.Sticky);
+	}
+	
+	public Platform createMoveBumpBL(float x, float y, float width, float height) {
+		return this.createMove(x + width / 2, y + height / 2, width, height, Platform.Bump);
+	}
+	
+	public Platform createMoveNoStickyBL(float x, float y, float width, float height) {
+		return this.createMove(x + width / 2, y + height / 2, width, height, Platform.NoSticky);
+	}
+	
+	public Platform createMoveIcyBL(float x, float y, float width, float height) {
+		return this.createMove(x + width / 2, y + height / 2, width, height, Platform.Icy);
+	}
+	
 }
