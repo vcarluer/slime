@@ -19,11 +19,15 @@ public class Platform extends GameItemPhysic {
 	public static final int Bump = 1;
 	public static final int NoSticky = 2;
 	public static final int Icy = 3;
+	public static final int Wall = 4;
+	public static final int Corner = 5;
 	
-	public static String Anim_Base_Sticky = "grey01";
-	public static String Anim_Base_Bump = "bumper";
-	public static String Anim_Base_NoSticky = "nosticky";
+	public static String Anim_Base_Sticky = "pf";
+	public static String Anim_Base_Bump = "pf-bump";
+	public static String Anim_Base_NoSticky = "pf-nosticky";
 	public static String Anim_Base_Icy = "ice";
+	public static String Anim_Base_Wall = "wall";
+	public static String Anim_Base_Corner = "pf-corner";
 	
 	private int type;
 	private boolean move;
@@ -34,7 +38,7 @@ public class Platform extends GameItemPhysic {
 		this.zOrder = Level.zBack;
 		this.type = platformType;
 		this.move = platformMove;
-		if (this.type != Sticky) {
+		if (this.type != Sticky && this.type != Wall) {
 			this.noStick = true;
 		}
 	}
@@ -92,6 +96,10 @@ public class Platform extends GameItemPhysic {
 			return Anim_Base_Bump;
 		case NoSticky:
 			return Anim_Base_NoSticky;
+		case Wall:
+			return Anim_Base_Wall;
+		case Corner:
+			return Anim_Base_Corner;
 		case Sticky:
 			default:
 			return Anim_Base_Sticky;

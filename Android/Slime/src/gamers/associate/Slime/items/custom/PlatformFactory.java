@@ -14,6 +14,8 @@ public class PlatformFactory extends GameItemPhysicFactory<Platform>{
 		TextureAnimation.createFramesFromFiles(Platform.Anim_Base_Bump, 1);
 		TextureAnimation.createFramesFromFiles(Platform.Anim_Base_NoSticky, 1);
 		TextureAnimation.createFramesFromFiles(Platform.Anim_Base_Icy, 1);
+		TextureAnimation.createFramesFromFiles(Platform.Anim_Base_Wall, 1);
+		TextureAnimation.createFramesFromFiles(Platform.Anim_Base_Corner, 1);
 	}
 
 	@Override
@@ -56,6 +58,14 @@ public class PlatformFactory extends GameItemPhysicFactory<Platform>{
 	
 	public Platform createIcyBL(float x, float y, float width, float height) {
 		return this.create(x + width / 2, y + height / 2, width, height, Platform.Icy);
+	}
+	
+	public Platform createWallBL(float x, float y, float width, float height) {
+		return this.create(x + width / 2, y + height / 2, width, height, Platform.Wall);
+	}
+	
+	public Platform createCornerBL(float x, float y, float width, float height) {
+		return this.create(x + width / 2, y + height / 2, width, height, Platform.Corner);
 	}
 	
 	public void setCurrentType(int platformType) {

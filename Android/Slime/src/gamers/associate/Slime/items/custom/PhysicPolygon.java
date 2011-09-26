@@ -18,7 +18,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class PhysicPolygon extends GameItemPhysic {
-	public static String Anim_Base = "lava"; //metal2
+	public static String Anim_Base = "wall"; //metal2
 	protected CGPoint[] vertices;
 	protected CGPoint[] bodyPoints;
 	protected boolean isDynamic;	

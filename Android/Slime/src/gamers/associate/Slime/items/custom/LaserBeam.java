@@ -52,8 +52,11 @@ public class LaserBeam extends GameItemPhysic {
 	private void refresh() {
 		if (this.source != null && this.target != null) {
 			this.bodyWidth = this.width = CGPoint.ccpDistance(this.source, this.target);
-			this.setAngle(ccMacros.CC_RADIANS_TO_DEGREES(CGPoint.ccpAngle(this.source, this.target)));
 			this.setPosition(CGPoint.ccpMidpoint(this.source, this.target));
+			CGPoint base = CGPoint.make(1, 0);
+			CGPoint diff = CGPoint.make(this.target.x - this.source.x, this.target.y - this.source.y);
+			float newAngle = - ccMacros.CC_RADIANS_TO_DEGREES(CGPoint.ccpAngle(base, diff));
+			this.setAngle(newAngle);			
 		}
 	}
 	

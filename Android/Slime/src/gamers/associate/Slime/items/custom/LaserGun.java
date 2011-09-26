@@ -182,7 +182,7 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 				this.beam = new ArrayList<LaserBeam>();
 				float xFire = 0;
 				float yFire = 0;
-				float radAngle = ccMacros.CC_DEGREES_TO_RADIANS(this.angle);
+				float radAngle = - ccMacros.CC_DEGREES_TO_RADIANS(this.angle);
 				// (x'-xc) = Kc*(x-xc) - Ks*(y-yc)
 				// (y'-yc) = Ks*(x-xc) + Kc*(y-yc)
 				xFire = (float) (Math.cos(radAngle)*((this.position.x - this.width / 2 + this.beamOffset) - this.position.x)) + this.position.x;

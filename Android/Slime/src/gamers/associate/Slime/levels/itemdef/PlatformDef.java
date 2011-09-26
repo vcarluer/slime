@@ -8,6 +8,8 @@ public class PlatformDef extends ItemDefinition {
 	private static String Handled_Bumper = "Platform_Bumper";
 	private static String Handled_NoSticky = "Platform_NoSticky";
 	private static String Handled_Ice = "Platform_Ice";
+	private static String Handled_Wall = "Platform_Wall";
+	private static String Handled_Corner = "Platform_Corner";
 	
 	@Override
 	public void createItem(Level level) {
@@ -26,6 +28,14 @@ public class PlatformDef extends ItemDefinition {
 		if (this.itemType.toUpperCase().equals(Handled_Ice.toUpperCase())) {
 			SlimeFactory.Platform.createIcyBL(this.x, this.y, this.width, this.height).setAngle(this.angle);
 		}
+		
+		if (this.itemType.toUpperCase().equals(Handled_Wall.toUpperCase())) {
+			SlimeFactory.Platform.createWallBL(this.x, this.y, this.width, this.height).setAngle(this.angle);
+		}
+		
+		if (this.itemType.toUpperCase().equals(Handled_Corner.toUpperCase())) {
+			SlimeFactory.Platform.createCornerBL(this.x, this.y, this.width, this.height).setAngle(this.angle);
+		}
 	}
 
 	@Override
@@ -34,6 +44,8 @@ public class PlatformDef extends ItemDefinition {
 		this.typesHandled.add(Handled_Bumper);
 		this.typesHandled.add(Handled_NoSticky);
 		this.typesHandled.add(Handled_Ice);
+		this.typesHandled.add(Handled_Wall);
+		this.typesHandled.add(Handled_Corner);
 	}
 
 	@Override
