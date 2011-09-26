@@ -8,12 +8,14 @@ import gamers.associate.Slime.levels.itemdef.ButtonDef;
 import gamers.associate.Slime.levels.itemdef.CircularSawDef;
 import gamers.associate.Slime.levels.itemdef.GoalPortalDef;
 import gamers.associate.Slime.levels.itemdef.ItemDefinition;
+import gamers.associate.Slime.levels.itemdef.LaserGunDef;
 import gamers.associate.Slime.levels.itemdef.LevelInfoDef;
 import gamers.associate.Slime.levels.itemdef.MenuNodeDef;
 import gamers.associate.Slime.levels.itemdef.MetaMenuDef;
 import gamers.associate.Slime.levels.itemdef.PlatformDef;
 import gamers.associate.Slime.levels.itemdef.PolygonDef;
 import gamers.associate.Slime.levels.itemdef.SpawnDef;
+import gamers.associate.Slime.levels.itemdef.TargetDef;
 import gamers.associate.Slime.levels.itemdef.TimeAttackDef;
 
 import java.io.BufferedReader;
@@ -68,6 +70,8 @@ public class LevelDefinitionParser extends LevelDefinition
 		this.itemDefinitions.add(new MetaMenuDef());
 		this.itemDefinitions.add(new MenuNodeDef());
 		this.itemDefinitions.add(new PolygonDef());
+		this.itemDefinitions.add(new LaserGunDef());
+		this.itemDefinitions.add(new TargetDef());
 	}
 	
 	private void buildItemTypeMap() {

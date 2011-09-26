@@ -177,7 +177,17 @@ class Smile( inkex.Effect ):
 				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(self.__yReference)+";"+str(self.__heightReference)+";"+path+";"+str(child.get("att_isDynamic"))
 				
 				return True;
+			
+			# LaserGun
+			if str(child.get("type")) == 'LaserGun':
+				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("id"))+";"+str(child.get("att_target"))+";"+str(child.get("att_isOn"))
+				return True;
 
+			# Target
+			if str(child.get("type")) == 'Target':
+				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("id"))
+				return True;
+			
 			# Standard Item
 			print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)
 			return True;

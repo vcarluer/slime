@@ -11,6 +11,7 @@ import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCSequence;
+import org.cocos2d.config.ccMacros;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -30,6 +31,8 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 	private static float Reference_Width = 65f;
 	private static float Reference_Height = 15f;
 	
+	private static float Default_Beam_Offset = 12f;
+	
 	private boolean isOn;
 	
 	private boolean startOn;
@@ -38,6 +41,8 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 	private String target;
 	
 	private LaserBeam beam;
+	
+	private float beamOffset;
 	
 	public LaserGun(float x, float y, float width, float height,
 			World world, float worldRatio) {
@@ -49,8 +54,10 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 		
 		if (width == 0 && height == 0) {
 			this.width = this.bodyWidth = Default_Width;
-			this.height = this.bodyHeight = Default_Height; 
+			this.height = this.bodyHeight = Default_Height;
 		}
+		
+		this.beamOffset = this.width * Default_Beam_Offset / Default_Width;
 		
 		this.referenceSize.width = Reference_Width;
 		this.referenceSize.height = Reference_Height;
@@ -186,7 +193,13 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 			if (this.target != null && this.target != "") {
 				// Only one beam for now
 				for (ITrigerable targetBeam : Level.currentLevel.getTrigerables(this.target)) {
-					this.beam = SlimeFactory.LaserBeam.create(this.getPosition(), targetBeam.getPosition(), false);
+					float xFire = 0;
+					float yFire = 0;
+					float radAngle = ccMacros.CC_DEGREES_TO_RADIANS(this.angle);
+					xFire = (float) (Math.cos(radAngle)*((this.position.x - this.width / 2 + this.beamOffset) - this.position.x)) + this.position.x;
+					yFire = (float) (Math.sin(radAngle)*((this.position.x - this.width / 2 + this.beamOffset) - this.position.x)) + this.position.y;
+					
+					this.beam = SlimeFactory.LaserBeam.create(CGPoint.make(xFire, yFire), targetBeam.getPosition(), false);
 					break;
 				}
 			}

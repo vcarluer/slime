@@ -111,8 +111,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="88.573747"
-     inkscape:cy="370.70401"
+     inkscape:cx="58.308898"
+     inkscape:cy="423.70469"
      inkscape:document-units="px"
      inkscape:current-layer="Template"
      showgrid="true"
@@ -343,9 +343,7 @@
        y="265"
        type="Laser"
        att_isOn="true"
-       att_target=""
-       att_pulseTime="0"
-       att_waitTime="0" />
+       att_target="" />
     <image
        width="30"
        height="31"

@@ -1,18 +1,11 @@
 package gamers.associate.Slime.items.custom;
 
-import javax.microedition.khronos.opengles.GL10;
-
 import gamers.associate.Slime.game.ContactInfo;
-import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.items.base.GameItemPhysic;
-import gamers.associate.Slime.items.base.ITrigerable;
 import gamers.associate.Slime.items.base.SpriteType;
 
-import org.cocos2d.actions.base.CCRepeatForever;
-import org.cocos2d.actions.instant.CCCallFunc;
-import org.cocos2d.actions.interval.CCAnimate;
-import org.cocos2d.actions.interval.CCRotateTo;
-import org.cocos2d.actions.interval.CCSequence;
+import javax.microedition.khronos.opengles.GL10;
+
 import org.cocos2d.config.ccMacros;
 import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.types.CGPoint;
@@ -24,18 +17,18 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class LaserBeam extends GameItemPhysic {
-	private static float Default_Height = 3f;
+	private static float Default_Height = 5f;
 	private CGPoint source;
 	private CGPoint target;
 	private boolean isOn;
-	
+
 	public LaserBeam(float x, float y, float width, float height,
 			World world, float worldRatio) {
 		super(x, y, width, height, world, worldRatio);		
 		this.spriteType = SpriteType.NONE;		
 				
 		if (this.height == 0) {
-			this.height = Default_Height;
+			this.bodyHeight = this.height = Default_Height;			
 		}		
 	}
 	
@@ -58,7 +51,7 @@ public class LaserBeam extends GameItemPhysic {
 	
 	private void refresh() {
 		if (this.source != null && this.target != null) {
-			this.width = CGPoint.ccpDistance(this.source, this.target);
+			this.bodyWidth = this.width = CGPoint.ccpDistance(this.source, this.target);
 			this.setAngle(ccMacros.CC_RADIANS_TO_DEGREES(CGPoint.ccpAngle(this.source, this.target)));
 			this.setPosition(CGPoint.ccpMidpoint(this.source, this.target));
 		}
@@ -140,7 +133,7 @@ public class LaserBeam extends GameItemPhysic {
 	public void draw(GL10 gl) {
 		if (this.isOn) {
 			gl.glDisable(GL10.GL_LINE_SMOOTH);
-			gl.glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
+			gl.glColor4f(1.0f, 0.043f, 0.149f, 0.63f);
 			gl.glLineWidth(this.height);								
 			CCDrawingPrimitives.ccDrawLine(gl, this.source, this.target);
 		}

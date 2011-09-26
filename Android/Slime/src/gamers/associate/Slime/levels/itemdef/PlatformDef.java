@@ -12,19 +12,19 @@ public class PlatformDef extends ItemDefinition {
 	@Override
 	public void createItem(Level level) {
 		if (this.itemType.toUpperCase().equals(Handled_Platform.toUpperCase())) {
-			SlimeFactory.Platform.createBL(this.x, this.y, this.width, this.height);
+			SlimeFactory.Platform.createBL(this.x, this.y, this.width, this.height).setAngle(this.angle);
 		}
 		
 		if (this.itemType.toUpperCase().equals(Handled_Bumper.toUpperCase())) {
-			SlimeFactory.Platform.createBumpBL(this.x, this.y, this.width, this.height);
+			SlimeFactory.Platform.createBumpBL(this.x, this.y, this.width, this.height).setAngle(this.angle);
 		}
 		
 		if (this.itemType.toUpperCase().equals(Handled_NoSticky.toUpperCase())) {
-			SlimeFactory.Platform.createNoStickyBL(this.x, this.y, this.width, this.height);
+			SlimeFactory.Platform.createNoStickyBL(this.x, this.y, this.width, this.height).setAngle(this.angle);
 		}
 		
 		if (this.itemType.toUpperCase().equals(Handled_Ice.toUpperCase())) {
-			SlimeFactory.Platform.createIcyBL(this.x, this.y, this.width, this.height);
+			SlimeFactory.Platform.createIcyBL(this.x, this.y, this.width, this.height).setAngle(this.angle);
 		}
 	}
 
