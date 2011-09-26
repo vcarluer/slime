@@ -177,9 +177,11 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 	@Override
 	public void draw(GL10 gl) {		
 		super.draw(gl);
-		if (this.scaledRect != null && this.isActive()) {			
-			// Drawing selection rectangle
-			Util.draw(gl, this.scaledRect, 1.0f, 0, 0, 1, 1);
+		if (Level.DebugMode) {
+			if (this.scaledRect != null && this.isActive()) {			
+				// Drawing selection rectangle
+				Util.draw(gl, this.scaledRect, 1.0f, 0, 0, 1, 1);
+			}
 		}
 	}	
 }
