@@ -67,7 +67,8 @@ public class CCSpritePolygon extends CCSpriteRepeat {
         // tex coords        
         gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, this.texCoords.bytes);
 
-        gl.glDrawArrays(GL10.GL_TRIANGLE_STRIP, 0, this.baseArray.length);
+        // gl.glDrawArrays(GL10.GL_TRIANGLE_STRIP, 0, this.baseArray.length);
+        gl.glDrawArrays(GL10.GL_TRIANGLES, 0, this.baseArray.length);
 
         if( newBlend )
             gl.glBlendFunc(ccConfig.CC_BLEND_SRC, ccConfig.CC_BLEND_DST);

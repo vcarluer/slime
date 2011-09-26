@@ -60,8 +60,16 @@ class Smile( inkex.Effect ):
 				return True;
 			
 			
-			x = float(str(child.get("x")))
-			y = float(str(child.get("y")))
+			if child.get("x") is not None:
+				x = float(str(child.get("x")))
+			else:
+				x = float(0)
+			
+			if child.get("y") is not None:
+				y = float(str(child.get("y")))
+			else:
+				y = float(0)
+						
 			if child.get("width") is not None:
 				width = float(str(child.get("width")))
 			else:
@@ -132,7 +140,42 @@ class Smile( inkex.Effect ):
 				
 			# MenuNode
 			if str(child.get("type")) == 'MenuNode':
-				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("id"))+";"+str(child.get("att_targetLevel"))+";"+str(child.get("att_targetN1"))+";"+str(child.get("att_targetN2"))+";"+str(child.get("att_targetN3"))+";"+str(child.get("att_targetN4"))
+				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("id"))+";"+str(child.get("att_targetLevel"))+";"+str(child.get("att_targetR"))+";"+str(child.get("att_targetB"))+";"+str(child.get("att_targetL"))+";"+str(child.get("att_targetT"))
+				return True;
+			
+			# Polygon
+			if str(child.get("type")) == 'Polygon':
+				path = child.get("d");
+				# We verify it is a closing path
+				if " z" in path:
+					path = path.replace(" z", "")
+				else:
+					return False;
+				
+				# We removed ununsed transformations
+				if path.startswith("m "):
+					path = path.replace("m ", "")
+				if path.startswith("M "):
+					path = path.replace("M ", "")
+				if "l " in path:
+					path = path.replace("l ", "")
+				if "h " in path:
+					path = path.replace("h ", "")
+				if "v " in path:
+					path = path.replace("v ", "")
+				if "c " in path:
+					path = path.replace("c ", "")
+				if "s " in path:
+					path = path.replace("s ", "")
+				if "q " in path:
+					path = path.replace("q ", "")
+				if "t " in path:
+					path = path.replace("t ", "")
+				if "a " in path:
+					path = path.replace("a ", "")
+					
+				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(self.__yReference)+";"+str(self.__heightReference)+";"+path+";"+str(child.get("att_isDynamic"))
+				
 				return True;
 
 			# Standard Item

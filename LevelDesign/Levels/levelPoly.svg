@@ -16,7 +16,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 "
-   sodipodi:docname="Slime_level.svg">
+   sodipodi:docname="LevelPoly.slime">
   <defs
      id="defs4">
     <linearGradient
@@ -111,10 +111,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="88.573747"
-     inkscape:cy="370.70401"
+     inkscape:cx="203.13078"
+     inkscape:cy="300.5106"
      inkscape:document-units="px"
-     inkscape:current-layer="Template"
+     inkscape:current-layer="MAP"
      showgrid="true"
      inkscape:snap-grids="true"
      inkscape:snap-page="false"
@@ -146,7 +146,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -526,8 +526,7 @@
        d="m -200,112 96,-40 -40,-56 -96,8 z"
        id="path3094"
        inkscape:connector-curvature="0"
-       type="Polygon"
-       att_isDynamic="false" />
+       type="Polygon" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -587,5 +586,13 @@
        x="360"
        y="270"
        type="GoalPortal" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
+       d="m 600,376 200,0 0,-192 -104,-64 -96,72 -24,104 z"
+       id="path3094-2"
+       inkscape:connector-curvature="0"
+       type="Polygon"
+       sodipodi:nodetypes="ccccccc"
+       att_isDynamic="true" />
   </g>
 </svg>
