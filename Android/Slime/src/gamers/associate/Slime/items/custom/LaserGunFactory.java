@@ -5,6 +5,8 @@ import gamers.associate.Slime.items.base.GameItemPhysicFactory;
 
 public class LaserGunFactory extends GameItemPhysicFactory<LaserGun>{
 	private boolean isOn;
+	private String name;
+	private String target;
 	@Override
 	protected void createAnimList() {
 		this.createAnim(LaserGun.Anim_Firing, 4);
@@ -30,10 +32,9 @@ public class LaserGunFactory extends GameItemPhysicFactory<LaserGun>{
 	
 	public LaserGun create(float x, float y, float width, float height, String name, String target, boolean isOn) {		
 		this.isOn = isOn;
-
-		LaserGun laser = super.create(x, y, width, height);
-		laser.setName(name);	
-		laser.setTarget(target);	
+		this.name = name;
+		this.target = target;
+		LaserGun laser = super.create(x, y, width, height);			
 		return laser;
 	}
 	
@@ -47,6 +48,8 @@ public class LaserGunFactory extends GameItemPhysicFactory<LaserGun>{
 	@Override
 	protected void initItem(LaserGun item) {
 		item.setStartOn(this.isOn);
+		item.setName(this.name);	
+		item.setTarget(this.target);
 		super.initItem(item);
 	}
 }

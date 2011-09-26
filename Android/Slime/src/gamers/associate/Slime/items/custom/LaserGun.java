@@ -2,18 +2,15 @@ package gamers.associate.Slime.items.custom;
 
 import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.base.GameItemPhysic;
-import gamers.associate.Slime.items.base.IBurnable;
 import gamers.associate.Slime.items.base.ITrigerable;
 import gamers.associate.Slime.items.base.SpriteType;
-
-import javax.microedition.khronos.opengles.GL10;
 
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCSequence;
-import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -39,6 +36,8 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 	
 	private String name;
 	private String target;
+	
+	private LaserBeam beam;
 	
 	public LaserGun(float x, float y, float width, float height,
 			World world, float worldRatio) {
@@ -110,8 +109,7 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_On), false);
 		CCRepeatForever repeat = CCRepeatForever.action(animate);
 		this.sprite.runAction(repeat);
-		this.isOn = true;
-		this.body.setActive(true);
+		this.isOn = true;		
 	}
 	
 	public void turnOff() {
@@ -129,7 +127,6 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 		CCRepeatForever repeat = CCRepeatForever.action(animate);
 		this.sprite.runAction(repeat);
 		this.isOn = false;
-		this.body.setActive(false);
 	}
 
 	/* (non-Javadoc)
@@ -183,19 +180,29 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 	public String getTarget() {
 		return target;
 	}
-
-	/* (non-Javadoc)
-	 * @see gamers.associate.Slime.items.base.GameItem#draw(javax.microedition.khronos.opengles.GL10)
-	 */
+	
+	private LaserBeam getBeam()	{
+		if (this.beam == null) {
+			if (this.target != null && this.target != "") {
+				// Only one beam for now
+				for (ITrigerable targetBeam : Level.currentLevel.getTrigerables(this.target)) {
+					this.beam = SlimeFactory.LaserBeam.create(this.getPosition(), targetBeam.getPosition(), false);
+					break;
+				}
+			}
+		}
+		
+		return this.beam;
+	}
+	
 	@Override
-	public void draw(GL10 gl) {		
-		super.draw(gl);
-		if (this.isOn && this.target != null && this.target != "") {
-			gl.glEnable(GL10.GL_LINE_SMOOTH);
-			gl.glColor4f(1.0f, 0.0f, 0.0f, 1.0f);				        
-			CGPoint spawnPoint =  this.getPosition();
-			for (ITrigerable targetBeam : Level.currentLevel.getTrigerables(this.target)) {			
-				CCDrawingPrimitives.ccDrawLine(gl, spawnPoint, targetBeam.getPosition());
+	public void render(float delta) {
+		if (this.getBeam() != null) {
+			if (this.isOn) {
+				this.getBeam().switchOn();
+			}
+			else {
+				this.getBeam().switchOff();
 			}
 		}
 	}
