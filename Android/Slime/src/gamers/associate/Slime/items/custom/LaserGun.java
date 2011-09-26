@@ -1,5 +1,7 @@
 package gamers.associate.Slime.items.custom;
 
+import java.util.ArrayList;
+
 import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
@@ -40,7 +42,7 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 	private String name;
 	private String target;
 	
-	private LaserBeam beam;
+	private ArrayList<LaserBeam> beam;
 	
 	private float beamOffset;
 	
@@ -136,20 +138,6 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 		this.isOn = false;
 	}
 
-	/* (non-Javadoc)
-	 * @see gamers.associate.Slime.items.base.GameItemPhysic#handleContact(gamers.associate.Slime.game.ContactInfo)
-	 */
-	@Override
-	protected void handleContact(ContactInfo contact) {		
-		super.handleContact(contact);
-		// todo: on laser beam contact
-		/*if (this.isOn) {
-			if (contact.getContactWith() instanceof IBurnable) {
-				((IBurnable)contact.getContactWith()).burn();
-			}
-		}*/
-	}
-
 	@Override
 	public String getName() {
 		return this.name;
@@ -188,19 +176,19 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 		return target;
 	}
 	
-	private LaserBeam getBeam()	{
+	private ArrayList<LaserBeam> getBeam()	{
 		if (this.beam == null) {
 			if (this.target != null && this.target != "") {
-				// Only one beam for now
+				this.beam = new ArrayList<LaserBeam>();
+				float xFire = 0;
+				float yFire = 0;
+				float radAngle = ccMacros.CC_DEGREES_TO_RADIANS(this.angle);
+				xFire = (float) (Math.cos(radAngle)*((this.position.x - this.width / 2 + this.beamOffset) - this.position.x)) + this.position.x;
+				yFire = (float) (Math.sin(radAngle)*((this.position.x - this.width / 2 + this.beamOffset) - this.position.x)) + this.position.y;
+				CGPoint startFire = CGPoint.make(xFire, yFire);
 				for (ITrigerable targetBeam : Level.currentLevel.getTrigerables(this.target)) {
-					float xFire = 0;
-					float yFire = 0;
-					float radAngle = ccMacros.CC_DEGREES_TO_RADIANS(this.angle);
-					xFire = (float) (Math.cos(radAngle)*((this.position.x - this.width / 2 + this.beamOffset) - this.position.x)) + this.position.x;
-					yFire = (float) (Math.sin(radAngle)*((this.position.x - this.width / 2 + this.beamOffset) - this.position.x)) + this.position.y;
-					
-					this.beam = SlimeFactory.LaserBeam.create(CGPoint.make(xFire, yFire), targetBeam.getPosition(), false);
-					break;
+					LaserBeam b = SlimeFactory.LaserBeam.create(startFire, targetBeam.getPosition(), false);
+					this.beam.add(b);
 				}
 			}
 		}
@@ -210,13 +198,15 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 	
 	@Override
 	public void render(float delta) {
-		if (this.getBeam() != null) {
-			if (this.isOn) {
-				this.getBeam().switchOn();
-			}
-			else {
-				this.getBeam().switchOff();
-			}
+		if (this.getBeam() != null) {			
+			for (LaserBeam b : this.getBeam()) {
+				if (this.isOn) {
+					b.switchOn();
+				}
+				else {
+					b.switchOff();
+				}
+			}						
 		}
 	}
 }

@@ -308,7 +308,8 @@
        y="213"
        type="BecBunsen"
        att_delay="0"
-       att_isOn="true" />
+       att_isOn="true"
+       att_name="becbunsen" />
     <image
        width="48"
        height="48"
@@ -325,7 +326,8 @@
        x="-384"
        y="240"
        type="CircularSaw"
-       att_isOn="true" />
+       att_isOn="true"
+       att_name="circularsaw" />
     <image
        width="40"
        height="27"
@@ -341,9 +343,10 @@
        id="laser"
        x="-264"
        y="265"
-       type="Laser"
+       type="LaserGun"
        att_isOn="true"
-       att_target="" />
+       att_target=""
+       att_name="lasergun" />
     <image
        width="30"
        height="31"

@@ -110,9 +110,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="427.64836"
-     inkscape:cy="252.88197"
+     inkscape:zoom="1.979899"
+     inkscape:cx="561.01121"
+     inkscape:cy="342.74368"
      inkscape:document-units="px"
      inkscape:current-layer="MAP"
      showgrid="true"
@@ -146,7 +146,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -612,6 +612,16 @@
        height="16"
        x="568"
        y="288"
-       type="Target" />
+       type="Target"
+       att_name="targetBeam" />
+    <rect
+       style="fill:#d11f3b;fill-opacity:1;stroke:none;display:inline"
+       id="rect3105"
+       width="16"
+       height="16"
+       x="592"
+       y="368"
+       type="Target"
+       att_name="targetBeam" />
   </g>
 </svg>

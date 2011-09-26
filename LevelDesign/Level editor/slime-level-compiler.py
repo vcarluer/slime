@@ -125,7 +125,7 @@ class Smile( inkex.Effect ):
 			
 			# BecBunsen
 			if str(child.get("type")) == 'BecBunsen':
-				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_isOn"))+";"+str(child.get("att_delay"))+";"+str(child.get("id"))
+				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_isOn"))+";"+str(child.get("att_delay"))+";"+str(child.get("att_name"))
 				return True;
 
 			# Button
@@ -135,7 +135,7 @@ class Smile( inkex.Effect ):
 				
 			# Button
 			if str(child.get("type")) == 'CircularSaw':
-				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("id"))+";"+str(child.get("att_isOn"))
+				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_name"))+";"+str(child.get("att_isOn"))
 				return True;
 				
 			# MenuNode
@@ -180,12 +180,12 @@ class Smile( inkex.Effect ):
 			
 			# LaserGun
 			if str(child.get("type")) == 'LaserGun':
-				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("id"))+";"+str(child.get("att_target"))+";"+str(child.get("att_isOn"))
+				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_name"))+";"+str(child.get("att_target"))+";"+str(child.get("att_isOn"))
 				return True;
 
 			# Target
 			if str(child.get("type")) == 'Target':
-				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("id"))
+				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_name"))
 				return True;
 			
 			# Standard Item
