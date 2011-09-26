@@ -109,50 +109,52 @@ public class SlimyJump extends Slimy implements ISelectable {
 	 * @see gamers.associate.Slime.GameItem#draw(javax.microedition.khronos.opengles.GL10)
 	 */
 	@Override
-	public void draw(GL10 gl) {		
+	public void draw(GL10 gl) {				
 		super.draw(gl);
-		if (this.selected && this.target != null) {
-			/*gl.glDisable(GL10.GL_LINE_SMOOTH);
-			gl.glLineWidth(2.0f);*/
-			gl.glEnable(GL10.GL_LINE_SMOOTH);
-			gl.glColor4f(1.0f, 0.0f, 0.0f, 1.0f);				        
-			CGPoint spawnPoint =  this.getPosition();			
-			CCDrawingPrimitives.ccDrawLine(gl, spawnPoint, this.target);
-			// Not compatible with glLineWidth > 1; 
-			gl.glDisable(GL10.GL_LINE_SMOOTH);
-			gl.glColor4f(0.0f, 1.0f, 0.0f, 1.0f);
-			gl.glLineWidth(3.0f);
-			CCDrawingPrimitives.ccDrawLine(gl, spawnPoint, this.worldSelect);
-			// CGSize s = CCDirector.sharedDirector().winSize();
-			gl.glEnable(GL10.GL_LINE_SMOOTH);
-			gl.glLineWidth(1.0f);
-            gl.glColor4f(1.0f, 0.0f, 1.0f, 1.0f);
-			CCDrawingPrimitives.ccDrawCircle(gl, this.getPosition(), 50, ccMacros.CC_DEGREES_TO_RADIANS(90), 50, true);						
-		}
-		
-		if (this.scaledRect != null && this.isActive()) {			
-			// Drawing selection rectangle
-			Util.draw(gl, this.scaledRect, 2.0f, 0, 1, 0, 1);
-		}
-		
-		if (this.currentJoint != null) {
-			gl.glDisable(GL10.GL_LINE_SMOOTH);
-			gl.glColor4f(0.0f, 0.0f, 1.0f, 1.0f);
-			gl.glLineWidth(5.0f);
-			gl.glPointSize(2.0f);			
-			CGPoint jointS = CGPoint.ccp(this.currentJoint.getAnchorA().x * this.worldRatio, this.currentJoint.getAnchorA().y * this.worldRatio);
-			CGPoint jointE = CGPoint.ccp(this.currentJoint.getAnchorB().x * this.worldRatio, this.currentJoint.getAnchorB().y * this.worldRatio);
-			//CCDrawingPrimitives.ccDrawLine(gl, jointS, jointE);
-			CCDrawingPrimitives.ccDrawPoint(gl, jointS);
-			CCDrawingPrimitives.ccDrawPoint(gl, jointE);
-		}
-		
-		if (this.getBody() != null) {						
-			CGRect spriteBody = CGRect.make(this.getPosition().x - this.bodyWidth / 2, this.getPosition().y - this.bodyHeight / 2, this.bodyWidth, this.bodyHeight);
-			Util.draw(gl, spriteBody, 2.0f, 1, 0, 0, 1);
-			CGRect spriteRect = CGRect.make(this.getPosition().x - this.width / 2, this.getPosition().y - this.height / 2, this.width, this.height);
-			Util.draw(gl, spriteRect, 2.0f, 0, 0, 1, 1);
+		if (Level.DebugMode) {
+			if (this.selected && this.target != null) {
+				/*gl.glDisable(GL10.GL_LINE_SMOOTH);
+				gl.glLineWidth(2.0f);*/
+				gl.glEnable(GL10.GL_LINE_SMOOTH);
+				gl.glColor4f(1.0f, 0.0f, 0.0f, 1.0f);				        
+				CGPoint spawnPoint =  this.getPosition();			
+				CCDrawingPrimitives.ccDrawLine(gl, spawnPoint, this.target);
+				// Not compatible with glLineWidth > 1; 
+				gl.glDisable(GL10.GL_LINE_SMOOTH);
+				gl.glColor4f(0.0f, 1.0f, 0.0f, 1.0f);
+				gl.glLineWidth(3.0f);
+				CCDrawingPrimitives.ccDrawLine(gl, spawnPoint, this.worldSelect);
+				// CGSize s = CCDirector.sharedDirector().winSize();
+				gl.glEnable(GL10.GL_LINE_SMOOTH);
+				gl.glLineWidth(1.0f);
+	            gl.glColor4f(1.0f, 0.0f, 1.0f, 1.0f);
+				CCDrawingPrimitives.ccDrawCircle(gl, this.getPosition(), 50, ccMacros.CC_DEGREES_TO_RADIANS(90), 50, true);						
+			}
 			
+			if (this.scaledRect != null && this.isActive()) {			
+				// Drawing selection rectangle
+				Util.draw(gl, this.scaledRect, 2.0f, 0, 1, 0, 1);
+			}
+			
+			if (this.currentJoint != null) {
+				gl.glDisable(GL10.GL_LINE_SMOOTH);
+				gl.glColor4f(0.0f, 0.0f, 1.0f, 1.0f);
+				gl.glLineWidth(5.0f);
+				gl.glPointSize(2.0f);			
+				CGPoint jointS = CGPoint.ccp(this.currentJoint.getAnchorA().x * this.worldRatio, this.currentJoint.getAnchorA().y * this.worldRatio);
+				CGPoint jointE = CGPoint.ccp(this.currentJoint.getAnchorB().x * this.worldRatio, this.currentJoint.getAnchorB().y * this.worldRatio);
+				//CCDrawingPrimitives.ccDrawLine(gl, jointS, jointE);
+				CCDrawingPrimitives.ccDrawPoint(gl, jointS);
+				CCDrawingPrimitives.ccDrawPoint(gl, jointE);
+			}
+			
+			if (this.getBody() != null) {						
+				CGRect spriteBody = CGRect.make(this.getPosition().x - this.bodyWidth / 2, this.getPosition().y - this.bodyHeight / 2, this.bodyWidth, this.bodyHeight);
+				Util.draw(gl, spriteBody, 2.0f, 1, 0, 0, 1);
+				CGRect spriteRect = CGRect.make(this.getPosition().x - this.width / 2, this.getPosition().y - this.height / 2, this.width, this.height);
+				Util.draw(gl, spriteRect, 2.0f, 0, 0, 1, 1);
+				
+			}
 		}
 	}
 	

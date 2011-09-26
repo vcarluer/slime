@@ -74,6 +74,7 @@ public class LevelBeta extends LevelTimeAttack {
 		body[2] = CGPoint.make(50, 0);
 		body[3] = CGPoint.make(50, 50);*/
 		
+		/* Does not work anymore => GL_TRIANGLES 
 		CGPoint[] vertices = new CGPoint[9];
 		vertices[0] = CGPoint.make(0, 0);
 		vertices[1] = CGPoint.make(20, 40);
@@ -93,7 +94,7 @@ public class LevelBeta extends LevelTimeAttack {
 		body[4] = CGPoint.make(50, 50);
 		body[5] = CGPoint.make(20, 40);
 		
-		SlimeFactory.Polygon.create(cX, cY + 80, 0, 0, true, body, vertices);
+		SlimeFactory.Polygon.create(cX, cY + 80, 0, 0, true, body, vertices);*/
 		cX += 80;
 		SlimeFactory.Lava.createBL(cX, cY, 200, 50);
 		cX += 100;
@@ -104,7 +105,9 @@ public class LevelBeta extends LevelTimeAttack {
 		SlimeFactory.BumperAngle.createBL(cX, cY + 50, 50, 50, 0.8f).setAngle(-90);
 		//Bumper bumper = SlimeFactory.Bumper.createBL(cX, 50, 100, 100);		
 		cX += 50;
-		SlimeFactory.Platform.createBL(cX, cY + 50, 10, 128);
+		SlimeFactory.Platform.createBL(cX, cY + 50, 10, 128);				
+		SlimeFactory.LaserGun.createBL(cX - 32.5f, cY + 100, 0, 0, "", "targetBeam", true);	
+		SlimeFactory.Target.createBL(cX - 165, cY + 100, 0, 0, "targetBeam");
 		cX += 50;
 		SlimeFactory.CircularSaw.createBL(cX, cY, 50, 50, "saw1", true);
 		cX += 100;

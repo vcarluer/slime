@@ -534,13 +534,11 @@ public class Level {
 	}
 	
 	public void draw(GL10 gl) {
-		if (Level.DebugMode) {
-			for(GameItem item : this.items.values()) {
-				item.draw(gl);
-			}
-			
-			this.cameraManager.draw(gl);
+		for(GameItem item : this.items.values()) {
+			item.draw(gl);
 		}
+			
+		this.cameraManager.draw(gl);
 	}
 	
 	public ISelectable getSelectedItem() {

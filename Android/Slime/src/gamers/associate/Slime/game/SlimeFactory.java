@@ -8,6 +8,7 @@ import gamers.associate.Slime.items.custom.ButtonFactory;
 import gamers.associate.Slime.items.custom.CircularSawFactory;
 import gamers.associate.Slime.items.custom.GoalPortalFactory;
 import gamers.associate.Slime.items.custom.HomeLevelHandlerFactory;
+import gamers.associate.Slime.items.custom.LaserGunFactory;
 import gamers.associate.Slime.items.custom.LavaFactory;
 import gamers.associate.Slime.items.custom.LevelEndFactory;
 import gamers.associate.Slime.items.custom.MenuNodeFactory;
@@ -17,6 +18,7 @@ import gamers.associate.Slime.items.custom.SlimyFactory;
 import gamers.associate.Slime.items.custom.SpawnCannonFactory;
 import gamers.associate.Slime.items.custom.SpawnPortalFactory;
 import gamers.associate.Slime.items.custom.StarFactory;
+import gamers.associate.Slime.items.custom.TargetFactory;
 import gamers.associate.Slime.items.custom.ThumbnailFactory;
 import gamers.associate.Slime.levels.ILevelBuilder;
 
@@ -47,6 +49,8 @@ public abstract class SlimeFactory {
 	public static CircularSawFactory CircularSaw = new CircularSawFactory();
 	public static StarFactory Star = new StarFactory();
 	public static MenuNodeFactory MenuNode = new MenuNodeFactory();
+	public static LaserGunFactory LaserGun = new LaserGunFactory();
+	public static TargetFactory Target = new TargetFactory();
 		
 	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {		
 		LevelBuilder = new LevelBuilder();
@@ -68,6 +72,8 @@ public abstract class SlimeFactory {
 		CircularSaw.attach(level, attachNode, attachWorld, attachWorldRatio);
 		Star.attach(level, attachNode, attachWorld, attachWorldRatio);
 		MenuNode.attach(level, attachNode);
+		LaserGun.attach(level, attachNode, attachWorld, attachWorldRatio);
+		Target.attach(level);
 		
 		SpriteSheetFactory.attachAll(attachNode);
 		isAttached = true;
@@ -91,6 +97,8 @@ public abstract class SlimeFactory {
 		CircularSaw.detach();
 		Star.detach();
 		MenuNode.detach();
+		LaserGun.detach();
+		Target.detach();
 		
 		SpriteSheetFactory.detachAll();
 		isAttached = false;
@@ -113,6 +121,8 @@ public abstract class SlimeFactory {
 		CircularSaw.destroy();
 		Star.destroy();
 		MenuNode.destroy();
+		LaserGun.destroy();
+		// No destroy for target
 		
 		SpriteSheetFactory.destroy();
 		isAttached = false;

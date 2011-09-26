@@ -450,30 +450,32 @@ public class CameraManager {
 	}
 	
 	public void draw(GL10 gl) {
-		// Drawing marge rectangle
-		Util.draw(gl, this.margeRect, 2, 1, 0, 0, 1);
-		if (this.zoomAnchor != null) {
-			gl.glDisable(GL10.GL_LINE_SMOOTH);
-			gl.glLineWidth(2.0f);
-			gl.glColor4f(0.0f, 0.0f, 1.0f, 1.0f);
-			float size = 10;
-			if (this.getCurrentZoom() != 0) {
-				size = size / this.getCurrentZoom();
+		if (Level.DebugMode) {
+			// Drawing marge rectangle
+			Util.draw(gl, this.margeRect, 2, 1, 0, 0, 1);
+			if (this.zoomAnchor != null) {
+				gl.glDisable(GL10.GL_LINE_SMOOTH);
+				gl.glLineWidth(2.0f);
+				gl.glColor4f(0.0f, 0.0f, 1.0f, 1.0f);
+				float size = 10;
+				if (this.getCurrentZoom() != 0) {
+					size = size / this.getCurrentZoom();
+				}
+				
+				CCDrawingPrimitives.ccDrawCircle(gl, this.zoomAnchor, size, ccMacros.CC_DEGREES_TO_RADIANS(90), 10, true);			
 			}
 			
-			CCDrawingPrimitives.ccDrawCircle(gl, this.zoomAnchor, size, ccMacros.CC_DEGREES_TO_RADIANS(90), 10, true);			
-		}
-		
-		if (this.zoomScreenPin != null) {
-			CGPoint pinGame = this.getGamePoint(this.zoomScreenPin);
-			gl.glDisable(GL10.GL_LINE_SMOOTH);
-			gl.glLineWidth(1.0f);
-			gl.glColor4f(1.0f, 1.0f, 0.0f, 1.0f);
-			float size = 5;
-			if (this.getCurrentZoom() != 0) {
-				size = size / this.getCurrentZoom();
+			if (this.zoomScreenPin != null) {
+				CGPoint pinGame = this.getGamePoint(this.zoomScreenPin);
+				gl.glDisable(GL10.GL_LINE_SMOOTH);
+				gl.glLineWidth(1.0f);
+				gl.glColor4f(1.0f, 1.0f, 0.0f, 1.0f);
+				float size = 5;
+				if (this.getCurrentZoom() != 0) {
+					size = size / this.getCurrentZoom();
+				}
+				CCDrawingPrimitives.ccDrawCircle(gl, pinGame, size, ccMacros.CC_DEGREES_TO_RADIANS(90), 5, true);
 			}
-			CCDrawingPrimitives.ccDrawCircle(gl, pinGame, size, ccMacros.CC_DEGREES_TO_RADIANS(90), 5, true);
 		}
 	}
 	
