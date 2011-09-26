@@ -15,6 +15,7 @@ import gamers.associate.Slime.levels.itemdef.MetaMenuDef;
 import gamers.associate.Slime.levels.itemdef.PlatformDef;
 import gamers.associate.Slime.levels.itemdef.PolygonDef;
 import gamers.associate.Slime.levels.itemdef.SpawnDef;
+import gamers.associate.Slime.levels.itemdef.StarDef;
 import gamers.associate.Slime.levels.itemdef.TargetDef;
 import gamers.associate.Slime.levels.itemdef.TimeAttackDef;
 
@@ -72,6 +73,7 @@ public class LevelDefinitionParser extends LevelDefinition
 		this.itemDefinitions.add(new PolygonDef());
 		this.itemDefinitions.add(new LaserGunDef());
 		this.itemDefinitions.add(new TargetDef());
+		this.itemDefinitions.add(new StarDef());
 	}
 	
 	private void buildItemTypeMap() {

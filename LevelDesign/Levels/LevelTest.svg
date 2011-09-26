@@ -110,9 +110,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8"
-     inkscape:cx="166.86878"
-     inkscape:cy="656.2332"
+     inkscape:zoom="1.4"
+     inkscape:cx="345.17101"
+     inkscape:cy="307.2663"
      inkscape:document-units="px"
      inkscape:current-layer="MAP"
      showgrid="true"
@@ -594,14 +594,6 @@
        y="32"
        type="GoalPortal" />
     <image
-       width="800"
-       height="96"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAj1JREFU WIXNlk2O2zAMhT8q7GIKZLqNs8k5Zppi0NN20UN0PckpZhPnEBbZhfwf58dyW/QBhpFYIimS4nvy 4+cvdwd3Bxz3/sMkzAwz43A8fgB82+93IQREQESA3nu0tzHptXGNMdaOkkO/5vUGYqwwGwWA9Lz3 w+jsu4PGaLMd9o10xrw9yByEDO+Y+c3fc6Bm8zIwtd7McPc2/X81gGtoGncuskrwJ6HNVcpBWZYK sMSGnsqTFpttlbN5sykq4Oq8uIfyfFItNttq//qyWz+vUV21H9tr1QwlHLPxoHLcHHMb/JduxXRU Zt428vvh+KEAz1/WfH56AhGaRm6GUjJoA2dtIGZY73t3Gxyv140RggwaVgFWq3RyEQgSkGaROeaO QHKEETwAhjsYgWAGIWBmhPYNZoEQpoMQkWEAZkaMEfGAiSMGaXzW47nZiOB4bYB0UhGECQ4QTzvk 9nhXgBiNKkTE7HKWO3gdQr/ug9E76aDefAd1ALFHJE0fyASF1LXr98e4Kdv6XmfTiwCqKnZx1ylF 5A6V+qBRbz0PZSB173w+b0oxR09MBJDP512q8/SEdsby+DwPnY8Ay/g8B31/7RzI5fP5zof0PyrB v80E/A96oDyf9P2Qz+dLUJ5PqtsiTwtAJ0iKosiysS22lX5/e9slPgf3hlYf4/NGCX19ydcTqp+0 x+cym89hmZ7QILKIz2GZnlAW8nkqS76e0JZiL8/Jo2N5iZ7QSaE5g89TAPl6QtsGyeRzWKYnfgOZ weLnZYGwWgAAAABJRU5ErkJggg== "
-       id="platform_wall-4"
-       x="0"
-       y="384"
-       type="Platform_Wall" />
-    <image
        width="416"
        height="16"
        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAFRJREFU OI1jTM1q+M9AAWAREuSnRD8Di5AgH4UGCFFqAMVeoNQFb958oMgAxus3blMWjX///qPIBSxXrt6h zABxcWHKDHj37hOFBrz/OOAuGGAvAACJyB2YZglWcgAAAABJRU5ErkJggg== "
@@ -609,14 +601,6 @@
        x="0"
        y="368"
        type="Platform" />
-    <image
-       width="120"
-       height="64"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAj1JREFU WIXNlk2O2zAMhT8q7GIKZLqNs8k5Zppi0NN20UN0PckpZhPnEBbZhfwf58dyW/QBhpFYIimS4nvy 4+cvdwd3Bxz3/sMkzAwz43A8fgB82+93IQREQESA3nu0tzHptXGNMdaOkkO/5vUGYqwwGwWA9Lz3 w+jsu4PGaLMd9o10xrw9yByEDO+Y+c3fc6Bm8zIwtd7McPc2/X81gGtoGncuskrwJ6HNVcpBWZYK sMSGnsqTFpttlbN5sykq4Oq8uIfyfFItNttq//qyWz+vUV21H9tr1QwlHLPxoHLcHHMb/JduxXRU Zt428vvh+KEAz1/WfH56AhGaRm6GUjJoA2dtIGZY73t3Gxyv140RggwaVgFWq3RyEQgSkGaROeaO QHKEETwAhjsYgWAGIWBmhPYNZoEQpoMQkWEAZkaMEfGAiSMGaXzW47nZiOB4bYB0UhGECQ4QTzvk 9nhXgBiNKkTE7HKWO3gdQr/ug9E76aDefAd1ALFHJE0fyASF1LXr98e4Kdv6XmfTiwCqKnZx1ylF 5A6V+qBRbz0PZSB173w+b0oxR09MBJDP512q8/SEdsby+DwPnY8Ay/g8B31/7RzI5fP5zof0PyrB v80E/A96oDyf9P2Qz+dLUJ5PqtsiTwtAJ0iKosiysS22lX5/e9slPgf3hlYf4/NGCX19ydcTqp+0 x+cym89hmZ7QILKIz2GZnlAW8nkqS76e0JZiL8/Jo2N5iZ7QSaE5g89TAPl6QtsGyeRzWKYnfgOZ weLnZYGwWgAAAABJRU5ErkJggg== "
-       id="platform_wall-1"
-       x="432"
-       y="320"
-       type="Platform_Wall" />
     <image
        width="104"
        height="16"
@@ -626,15 +610,6 @@
        y="304"
        type="Platform_Bumper" />
     <image
-       style="display:inline"
-       width="136"
-       height="128"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAj1JREFU WIXNlk2O2zAMhT8q7GIKZLqNs8k5Zppi0NN20UN0PckpZhPnEBbZhfwf58dyW/QBhpFYIimS4nvy 4+cvdwd3Bxz3/sMkzAwz43A8fgB82+93IQREQESA3nu0tzHptXGNMdaOkkO/5vUGYqwwGwWA9Lz3 w+jsu4PGaLMd9o10xrw9yByEDO+Y+c3fc6Bm8zIwtd7McPc2/X81gGtoGncuskrwJ6HNVcpBWZYK sMSGnsqTFpttlbN5sykq4Oq8uIfyfFItNttq//qyWz+vUV21H9tr1QwlHLPxoHLcHHMb/JduxXRU Zt428vvh+KEAz1/WfH56AhGaRm6GUjJoA2dtIGZY73t3Gxyv140RggwaVgFWq3RyEQgSkGaROeaO QHKEETwAhjsYgWAGIWBmhPYNZoEQpoMQkWEAZkaMEfGAiSMGaXzW47nZiOB4bYB0UhGECQ4QTzvk 9nhXgBiNKkTE7HKWO3gdQr/ug9E76aDefAd1ALFHJE0fyASF1LXr98e4Kdv6XmfTiwCqKnZx1ylF 5A6V+qBRbz0PZSB173w+b0oxR09MBJDP512q8/SEdsby+DwPnY8Ay/g8B31/7RzI5fP5zof0PyrB v80E/A96oDyf9P2Qz+dLUJ5PqtsiTwtAJ0iKosiysS22lX5/e9slPgf3hlYf4/NGCX19ydcTqp+0 x+cym89hmZ7QILKIz2GZnlAW8nkqS76e0JZiL8/Jo2N5iZ7QSaE5g89TAPl6QtsGyeRzWKYnfgOZ weLnZYGwWgAAAABJRU5ErkJggg== "
-       id="platform_wall-1-4"
-       x="552"
-       y="256"
-       type="Platform_Wall" />
-    <image
        width="120"
        height="16"
        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAL5JREFU OI3Fkr0OAVEQhb9NLlaDvVHgEfw9jVfQeAqPI6JVi07tP9Gj2Fy7GovYq5ANm1BNYcozc07mS47T 7fUtglHaK0r8KO0VhAFaGiBGkH7g+wEA5uqyMFUAWvqAzkWpQz/KszpVAGh4R8ruBQBns91ZgNG8 RCabA+B+u9JpB6mAX3v1eMQAxNaSFCK2lkTnQ/u2dwbDsU0QlkENgGZp/xVhHb4Q68XDG2Eyncma aMxZ4keZUygMkH/wZ4QnJ95Y9+rbe4kAAAAASUVORK5CYII= "
@@ -642,15 +617,6 @@
        x="552"
        y="240"
        type="Platform_NoSticky" />
-    <image
-       style="display:inline"
-       width="112"
-       height="256"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAj1JREFU WIXNlk2O2zAMhT8q7GIKZLqNs8k5Zppi0NN20UN0PckpZhPnEBbZhfwf58dyW/QBhpFYIimS4nvy 4+cvdwd3Bxz3/sMkzAwz43A8fgB82+93IQREQESA3nu0tzHptXGNMdaOkkO/5vUGYqwwGwWA9Lz3 w+jsu4PGaLMd9o10xrw9yByEDO+Y+c3fc6Bm8zIwtd7McPc2/X81gGtoGncuskrwJ6HNVcpBWZYK sMSGnsqTFpttlbN5sykq4Oq8uIfyfFItNttq//qyWz+vUV21H9tr1QwlHLPxoHLcHHMb/JduxXRU Zt428vvh+KEAz1/WfH56AhGaRm6GUjJoA2dtIGZY73t3Gxyv140RggwaVgFWq3RyEQgSkGaROeaO QHKEETwAhjsYgWAGIWBmhPYNZoEQpoMQkWEAZkaMEfGAiSMGaXzW47nZiOB4bYB0UhGECQ4QTzvk 9nhXgBiNKkTE7HKWO3gdQr/ug9E76aDefAd1ALFHJE0fyASF1LXr98e4Kdv6XmfTiwCqKnZx1ylF 5A6V+qBRbz0PZSB173w+b0oxR09MBJDP512q8/SEdsby+DwPnY8Ay/g8B31/7RzI5fP5zof0PyrB v80E/A96oDyf9P2Qz+dLUJ5PqtsiTwtAJ0iKosiysS22lX5/e9slPgf3hlYf4/NGCX19ydcTqp+0 x+cym89hmZ7QILKIz2GZnlAW8nkqS76e0JZiL8/Jo2N5iZ7QSaE5g89TAPl6QtsGyeRzWKYnfgOZ weLnZYGwWgAAAABJRU5ErkJggg== "
-       id="platform_wall-1-4-5"
-       x="688"
-       y="128"
-       type="Platform_Wall" />
     <image
        width="16"
        height="16"
@@ -832,5 +798,13 @@
        type="Button"
        att_target="circularsaw"
        att_resetTime="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2.67261243px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
+       d="m 0,480 800,0 0,-352 -112,0 0,128 -136,0 0,64 -120,0 0,64 -432,0 z"
+       id="path3094-5-6"
+       inkscape:connector-curvature="0"
+       type="Polygon"
+       att_isDynamic="false"
+       sodipodi:nodetypes="ccccccccccc" />
   </g>
 </svg>

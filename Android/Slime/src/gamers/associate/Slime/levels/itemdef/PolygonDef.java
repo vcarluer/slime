@@ -52,18 +52,7 @@ public class PolygonDef extends ItemDefinition {
 			i++;
 		}
 
-		ArrayList<CGPoint> contour = new ArrayList<CGPoint>(Arrays.asList(polygon));
-		ArrayList<CGPoint> body = new ArrayList<CGPoint>();
-		Triangulate.process(contour, body);		
-		
-		CGPoint[] points = new CGPoint[body.size()];
-		int j = 0;
-		for(CGPoint point : body) {
-			points[j] = point;
-			j++;
-		}
-		
-		SlimeFactory.Polygon.create(this.x, this.y, this.width, this.height, this.isdynamic, polygon, points);
+		SlimeFactory.Polygon.create(this.x, this.y, this.width, this.height, this.isdynamic, polygon);
 	}
 
 	@Override
