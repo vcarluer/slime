@@ -153,38 +153,38 @@ class Smile( inkex.Effect ):
 					return False;
 				
 				# We removed ununsed transformations
-				if "l " in path:
-					path = path.replace("l ", "")
-				if "L " in path:
-					path = path.replace("L ", "")
-				if "h " in path:
-					path = path.replace("h ", "")
-				if "H " in path:
-					path = path.replace("H ", "")
-				if "v " in path:
-					path = path.replace("v ", "")
-				if "V " in path:
-					path = path.replace("V ", "")
-				if "c " in path:
-					path = path.replace("c ", "")
-				if "C " in path:
-					path = path.replace("C ", "")
-				if "s " in path:
-					path = path.replace("s ", "")
-				if "S " in path:
-					path = path.replace("S ", "")
-				if "q " in path:
-					path = path.replace("q ", "")
-				if "Q " in path:
-					path = path.replace("Q ", "")
-				if "t " in path:
-					path = path.replace("t ", "")
-				if "T " in path:
-					path = path.replace("T ", "")
-				if "a " in path:
-					path = path.replace("a ", "")
-				if "A " in path:
-					path = path.replace("A ", "")
+				# if "l " in path:
+				# 	path = path.replace("l ", "")
+				# if "L " in path:
+				# 	path = path.replace("L ", "")
+				# if "h " in path:
+				# 	path = path.replace("h ", "")
+				# if "H " in path:
+				# 	path = path.replace("H ", "")
+				# if "v " in path:
+				# 	path = path.replace("v ", "")
+				# if "V " in path:
+				# 	path = path.replace("V ", "")
+				# if "c " in path:
+				# 	path = path.replace("c ", "")
+				# if "C " in path:
+				# 	path = path.replace("C ", "")
+				# if "s " in path:
+				# 	path = path.replace("s ", "")
+				# if "S " in path:
+				# 	path = path.replace("S ", "")
+				# if "q " in path:
+				# 	path = path.replace("q ", "")
+				# if "Q " in path:
+				# 	path = path.replace("Q ", "")
+				# if "t " in path:
+				# 	path = path.replace("t ", "")
+				# if "T " in path:
+				# 	path = path.replace("T ", "")
+				# if "a " in path:
+				# 	path = path.replace("a ", "")
+				# if "A " in path:
+				# 	path = path.replace("A ", "")
 					
 				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(self.__yReference)+";"+str(self.__heightReference)+";"+path+";"+str(child.get("att_isDynamic"))
 				

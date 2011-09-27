@@ -34,7 +34,7 @@ public class PhysicPolygon extends GameItemPhysic {
 		
 		this.spriteType = SpriteType.POLYGON_REPEAT;		
 		this.zOrder = Level.zBack;
-		this.setNoStick(true);
+		this.setNoStick(false);
 	}
 	
 	public void initPoly(boolean isDynamic, CGPoint[] bodyPoints) {

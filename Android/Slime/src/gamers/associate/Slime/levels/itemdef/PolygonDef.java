@@ -3,6 +3,7 @@ package gamers.associate.Slime.levels.itemdef;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Triangulate;
+import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.items.custom.SlimyFactory;
 
 import java.util.ArrayList;
@@ -21,19 +22,20 @@ public class PolygonDef extends ItemDefinition {
 	@Override
 	public void createItem(Level level) {		
 		String[] pathBase = this.path.split(" ");
-		CGPoint[] polygon = new CGPoint[pathBase.length - 1];
-		int i = 0;
+		ArrayList<CGPoint> polygon = new ArrayList<CGPoint>();
 		float cumulX = 0;
 		float cumulY = 0;
+		int i = 0;
 		boolean isRelative = false;
-		boolean first = true;
-		for (String coordSvgBase : pathBase) {						 
-			if (first) {
-				if (coordSvgBase.equals(Relative)) {
+		for (String coordSvgBase : pathBase) {			
+			if (coordSvgBase.length() == 1) {
+				char ch = coordSvgBase.charAt(0);
+				if (Character.isLowerCase(ch)) {				
 					isRelative = true;
 				}
-				
-				first = false;
+				else {
+					isRelative = false;
+				}
 			}
 			else {
 				String[] coordSvg = coordSvgBase.split(",");			
@@ -46,17 +48,13 @@ public class PolygonDef extends ItemDefinition {
 					this.y = y;
 					x = 0;
 					y = 0;
-					cumulX = 0;
-					cumulY = 0;
 				}
 				else {
 					if (isRelative) {
-						cumulX = cumulX + x;
-						x = cumulX;
+						x = cumulX + x;
 						
-						y = - y;						
-						cumulY = cumulY + y;
-						y = cumulY;
+						y = - y;
+						y = cumulY + y;
 					}
 					else {
 						x = x - this.x;
@@ -66,12 +64,21 @@ public class PolygonDef extends ItemDefinition {
 				}			
 				
 				CGPoint point = CGPoint.make(x, y);
-				polygon[i] = point;
+				cumulX = x;
+				cumulY = y;
+				polygon.add(point);
 				i++;
 			}						
 		}
 
-		SlimeFactory.Polygon.create(this.x, this.y, this.width, this.height, this.isdynamic, polygon);
+		CGPoint[] realPoints = new CGPoint[polygon.size()];
+		int j = 0;
+		for(CGPoint point : polygon) {
+			realPoints[j] = point;
+			j++;
+		}
+		
+		SlimeFactory.Polygon.create(this.x, this.y, this.width, this.height, this.isdynamic, realPoints);
 	}
 
 	@Override
