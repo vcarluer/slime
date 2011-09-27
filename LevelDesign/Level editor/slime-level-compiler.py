@@ -153,10 +153,6 @@ class Smile( inkex.Effect ):
 					return False;
 				
 				# We removed ununsed transformations
-				if path.startswith("m "):
-					path = path.replace("m ", "")
-				if path.startswith("M "):
-					path = path.replace("M ", "")
 				if "l " in path:
 					path = path.replace("l ", "")
 				if "L " in path:

@@ -111,8 +111,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="214.52269"
-     inkscape:cy="495.06715"
+     inkscape:cx="236.03071"
+     inkscape:cy="407.01062"
      inkscape:document-units="px"
      inkscape:current-layer="MAP"
      showgrid="true"
@@ -560,7 +560,7 @@
        width="800"
        height="480"
        x="0"
-       y="0"
+       y="-8"
        type="LevelInfo"
        att_maxDimension="Auto" />
     <text
@@ -806,21 +806,13 @@
        type="Polygon"
        att_isDynamic="false"
        sodipodi:nodetypes="ccccccccccc" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
-       d="m 104,144 8,-48 88,0 L 176,64 216,48 144,32 136,88 64,56 80.966732,93.32681 z"
-       id="path3094-1"
-       inkscape:connector-curvature="0"
-       type="Polygon"
-       att_isDynamic="false"
-       sodipodi:nodetypes="cccccccccc" />
     <rect
        style="fill:#d11f3b;fill-opacity:1;stroke:none;display:inline"
        id="target-8-7"
        width="15"
        height="16"
-       x="73"
-       y="80"
+       x="57"
+       y="48"
        type="Target"
        att_name="laserTarget" />
     <rect
@@ -832,5 +824,13 @@
        y="136"
        type="Target"
        att_name="laserTarget" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
+       d="m 104,144 48,-40 64,-8 24,-48 -80,24 -40,-32 -56,16 56,32 z"
+       id="path3094-7"
+       inkscape:connector-curvature="0"
+       type="Polygon"
+       att_isDynamic="false"
+       sodipodi:nodetypes="ccccccccc" />
   </g>
 </svg>
