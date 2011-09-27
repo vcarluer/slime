@@ -114,7 +114,7 @@ public class Button extends GameItemPhysic {
 			Sounds.playEffect(R.raw.bump);
 			CCAnimate animate = CCAnimate.action(this.animationList.get(Button.Anim_Bump), false);
 			float reset = this.resetTime;
-			if (this.resetTime != Only_Once) {
+			if (this.resetTime == Only_Once) {
 				reset = 0;
 			}
 			
