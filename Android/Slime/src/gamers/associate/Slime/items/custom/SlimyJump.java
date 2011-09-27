@@ -24,6 +24,7 @@ import org.cocos2d.types.CGRect;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Joint;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.joints.DistanceJointDef;
 import com.badlogic.gdx.physics.box2d.joints.WeldJointDef;
 
 public class SlimyJump extends Slimy implements ISelectable {
@@ -60,8 +61,12 @@ public class SlimyJump extends Slimy implements ISelectable {
 	
 	private boolean stickHandled;
 	
-	private WeldJointDef currentJointDef;	
+	private DistanceJointDef currentJointDef;	
 	private Joint currentJoint;
+	private CGPoint jointStart;
+	private CGPoint selectStart;
+	
+	private boolean hasJumped;
 	
 	public SlimyJump(float x, float y, float width, float height, World world,
 			float worldRatio) {
@@ -77,6 +82,8 @@ public class SlimyJump extends Slimy implements ISelectable {
 		this.selectionRect.size.height = Default_Selection_Height;
 		this.auraPosition = CGPoint.zero();
 		this.auraScale = endAuraScale - startAuraScale;
+		
+		this.jointStart = CGPoint.zero();
 	}
 	
 	public void selectionMove(CGPoint gameReference) {
@@ -89,11 +96,18 @@ public class SlimyJump extends Slimy implements ISelectable {
 		if (this.selected) {
 			float zoom = Level.currentLevel.getCameraManager().getCurrentZoom();
 			
-			this.targetImpulse.x = ((this.getPosition().x - gameTouch.x) * zoom) * this.powa;
-			this.targetImpulse.y = ((this.getPosition().y - gameTouch.y) * zoom) * this.powa;						
-			
-			this.target.x = this.getPosition().x + this.targetImpulse.x;
-			this.target.y = this.getPosition().y + this.targetImpulse.y;
+			if (this.selectStart == null) {
+				this.targetImpulse.x = ((this.getPosition().x - gameTouch.x) * zoom) * this.powa;
+				this.targetImpulse.y = ((this.getPosition().y - gameTouch.y) * zoom) * this.powa;
+				this.target.x = this.getPosition().x + this.targetImpulse.x;
+				this.target.y = this.getPosition().y + this.targetImpulse.y;
+			}
+			else {
+				this.targetImpulse.x = ((this.selectStart.x - gameTouch.x) * zoom) * this.powa;
+				this.targetImpulse.y = ((this.selectStart.y - gameTouch.y) * zoom) * this.powa;
+				this.target.x = this.selectStart.x + this.targetImpulse.x;
+				this.target.y = this.selectStart.y + this.targetImpulse.y;
+			}
 			
 			this.worldSelect = gameTouch;
 			
@@ -111,7 +125,22 @@ public class SlimyJump extends Slimy implements ISelectable {
 	@Override
 	public void draw(GL10 gl) {				
 		super.draw(gl);
+		
+		if (this.currentJoint != null) {
+			gl.glDisable(GL10.GL_LINE_SMOOTH);
+			gl.glColor4f(0.0f, 170f / 255f, 54f / 255f, 1.0f);
+			gl.glLineWidth(5f);										
+			CCDrawingPrimitives.ccDrawLine(gl, this.jointStart, this.getPosition());
+		}				
+		
 		if (Level.DebugMode) {
+			if (this.selectStart != null && this.target != null) {
+				gl.glDisable(GL10.GL_LINE_SMOOTH);
+				gl.glColor4f(0.0f, 170f / 255f, 54f / 255f, 1.0f);
+				gl.glLineWidth(2f);										
+				CCDrawingPrimitives.ccDrawLine(gl, this.selectStart, this.target);
+			}
+			
 			if (this.selected && this.target != null) {
 				/*gl.glDisable(GL10.GL_LINE_SMOOTH);
 				gl.glLineWidth(2.0f);*/
@@ -169,8 +198,13 @@ public class SlimyJump extends Slimy implements ISelectable {
 	
 	public boolean canSelect(CGPoint gameReference) {
 		boolean can = false;
-		if (this.isActive() && this.isLanded) {				
-			if (this.isInSlimy(gameReference)) {			
+		if (this.isActive()) {				
+			if (!this.hasJumped) {			
+				if (this.isInSlimy(gameReference)) {
+					can = true;
+				}
+			}
+			else {
 				can = true;
 			}
 		}
@@ -189,7 +223,8 @@ public class SlimyJump extends Slimy implements ISelectable {
 	}
 	
 	public void select(CGPoint gameReference) {
-		this.select();		
+		this.selectStart = gameReference;
+		this.select();
 		this.computeTarget(gameReference);
 	}
 	
@@ -209,13 +244,14 @@ public class SlimyJump extends Slimy implements ISelectable {
 	}
 	
 	@Override
-	public void selectionStop(CGPoint gameReference) {
-		if (this.selected && this.isLanded) {
+	public void selectionStop(CGPoint gameReference) {		
+		if (this.selected) {
 			this.computeTarget(gameReference);			
 			if (this.getBody() != null) {
 				// this.getBody().setAwake(true);
 				Vector2 pos = this.getBody().getPosition();						
 				this.getBody().applyLinearImpulse(this.worldImpulse, pos);
+				this.hasJumped = true;
 				Sounds.playEffect(R.raw.slimyjump);
 				this.isLanded = false;
 				this.stickHandled = false;
@@ -318,7 +354,6 @@ public class SlimyJump extends Slimy implements ISelectable {
 		this.land();
 		if (this.isLanded 
 				&& !this.stickHandled 
-				&& !contact.getContactWith().isNoStick()
 				&& !contact.getContactWith().isIsAllSensor()
 				&& !this.isDead
 				&& !this.isDying
@@ -352,39 +387,47 @@ public class SlimyJump extends Slimy implements ISelectable {
 				float radians = (float)Math.atan2(normal.x, normal.y);
 				float degrees = ccMacros.CC_RADIANS_TO_DEGREES(radians);				
 				this.setAngle(degrees);
-//					float radAngle = -1.0f * ccMacros.CC_DEGREES_TO_RADIANS(this.angle);				
-
-//				
-//				Vector2 jointB = new Vector2();
-//				jointB.x = this.getBody().getPosition().x - (normal.x * ((this.bodyWidth / 2) / this.worldRatio));
-//				jointB.y = this.getBody().getPosition().y - (normal.y * ((this.bodyHeight / 2) / this.worldRatio));
-//				jointB.x = anchor.x + normal.x * ((this.bodyWidth / 2) / this.worldRatio);
-//				jointB.y = anchor.y + normal.y * ((this.bodyHeight / 2) / this.worldRatio);
-//				this.body.setTransform(jointB, radians);
-				
-				if (this.currentJointDef == null) {
-					this.currentJointDef = new WeldJointDef();									
+				if (!contact.getContactWith().isNoStick()) {
+					
+	//					float radAngle = -1.0f * ccMacros.CC_DEGREES_TO_RADIANS(this.angle);				
+	
+	//				
+					Vector2 jointB = this.getBody().getPosition();
+					//				Vector2 jointB = new Vector2();
+	//				jointB.x = this.getBody().getPosition().x - (normal.x * ((this.bodyWidth / 2) / this.worldRatio));
+	// 				jointB.y = this.getBody().getPosition().y - (normal.y * ((this.bodyHeight / 2) / this.worldRatio));
+	//				jointB.x = anchor.x + normal.x * ((this.bodyWidth / 2) / this.worldRatio);
+	//				jointB.y = anchor.y + normal.y * ((this.bodyHeight / 2) / this.worldRatio);
+	//				this.body.setTransform(jointB, radians);
+					
+					if (this.currentJointDef == null) {
+						this.currentJointDef = new DistanceJointDef();									
+					}
+					
+					// contact.getContactWith().getBody(), this.getBody(), contactPoint, normal);
+					// this.currentJointDef.bodyA = contact.getContactWith().getBody();
+					// this.currentJointDef.bodyB = this.getBody();
+					this.currentJointDef.initialize(contact.getContactWith().getBody(), this.getBody(), contactPoint, jointB);
+					this.jointStart.x = contactPoint.x * this.worldRatio;
+					this.jointStart.y = contactPoint.y * this.worldRatio;
+					
+	//				this.currentJointDef.target.set(contactPoint);
+	//				this.currentJointDef.maxForce = 3000.0f * this.getBody().getMass();
+					this.currentJointDef.collideConnected = true;
+					// this.currentJointDef.collideConnected = true;
+	//				this.currentJointDef.dampingRatio = 1.0f;
+		//			this.currentJointDef.enableMotor = false;
+		//			this.currentJointDef.enableLimit = true;
+		//			this.currentJointDef.lowerAngle = 0;
+		//			this.currentJointDef.upperAngle = 0;
+					this.currentJointDef.frequencyHz = 0.9f;
+					this.currentJointDef.dampingRatio = 1.5f;
+								
+					this.currentJoint = this.world.createJoint(this.currentJointDef);
+					
+					this.stickHandled = true;
+					//this.getBody().setAwake(false);
 				}
-				
-				// contact.getContactWith().getBody(), this.getBody(), contactPoint, normal);
-				// this.currentJointDef.bodyA = contact.getContactWith().getBody();
-				// this.currentJointDef.bodyB = this.getBody();
-				this.currentJointDef.initialize(contact.getContactWith().getBody(), this.getBody(), contactPoint);
-				
-//				this.currentJointDef.target.set(contactPoint);
-//				this.currentJointDef.maxForce = 3000.0f * this.getBody().getMass();
-				this.currentJointDef.collideConnected = true;
-				// this.currentJointDef.collideConnected = true;
-//				this.currentJointDef.dampingRatio = 1.0f;
-	//			this.currentJointDef.enableMotor = false;
-	//			this.currentJointDef.enableLimit = true;
-	//			this.currentJointDef.lowerAngle = 0;
-	//			this.currentJointDef.upperAngle = 0;
-							
-				this.currentJoint = this.world.createJoint(this.currentJointDef);
-				
-				this.stickHandled = true;
-				//this.getBody().setAwake(false);
 			}
 		}				
 	}

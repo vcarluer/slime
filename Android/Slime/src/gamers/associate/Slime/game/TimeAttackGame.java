@@ -106,7 +106,16 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 					if (this.leftTime <= this.criticTime) {						
 						this.isCritic = true;
 					}
-				}				
+				}
+				else {
+					if (this.leftTime > this.criticTime) {						
+						this.isCritic = false;
+						CCLabel label = this.level.getHudLabel();
+						label.setColor(ccColor3B.ccc3( 255,255,255));
+						label.stopAllActions();
+						label.setOpacity(255);
+					}
+				}
 				
 				if (this.isCritic) {
 					if (this.localRender >= stepCritic) {
@@ -161,9 +170,11 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 
 	@Override
 	public void selectBegin(CGPoint gameReference) {		
-		this.level.getCameraManager().moveInterpolateTo(this.level.getSelectedGameItem(), 0.5f);
-		this.level.getCameraManager().zoomInterpolateTo(this.level.getSelectedGameItem(), 1.0f, 0.5f);			
-		//this.level.getCameraManager().follow(this.level.getSelectedGameItem());		
+		if (!this.isStarted) {
+			this.level.getCameraManager().moveInterpolateTo(this.level.getSelectedGameItem(), 0.5f);
+			this.level.getCameraManager().zoomInterpolateTo(this.level.getSelectedGameItem(), 1.0f, 0.5f);			
+			//this.level.getCameraManager().follow(this.level.getSelectedGameItem());
+		}
 	}
 
 	@Override

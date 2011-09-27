@@ -24,6 +24,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 public class Button extends GameItemPhysic {
 	public static String Anim_Wait = "button-wait";
 	public static String Anim_Bump = "button";	
+	private static float Only_Once = -1f;
 	private static float Default_Width = 40f;
 	private static float Default_Height = 27f;
 	private static float Reference_Width = 40f;
@@ -112,7 +113,12 @@ public class Button extends GameItemPhysic {
 			this.isEnabled = false;
 			Sounds.playEffect(R.raw.bump);
 			CCAnimate animate = CCAnimate.action(this.animationList.get(Button.Anim_Bump), false);
-			CCDelayTime delay = CCDelayTime.action(this.resetTime);
+			float reset = this.resetTime;
+			if (this.resetTime != Only_Once) {
+				reset = 0;
+			}
+			
+			CCDelayTime delay = CCDelayTime.action(reset);
 			CCCallFunc activate = CCCallFunc.action(this, "activate");
 			CCSequence sequence = CCSequence.actions(animate, delay, activate);
 			this.sprite.runAction(sequence);
@@ -127,6 +133,8 @@ public class Button extends GameItemPhysic {
 	}
 	
 	public void activate() {
-		this.isEnabled = true;
+		if (this.resetTime != Only_Once) {
+			this.isEnabled = true;
+		}		
 	}
 }
