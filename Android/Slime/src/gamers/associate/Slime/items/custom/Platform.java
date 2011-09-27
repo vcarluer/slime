@@ -38,7 +38,7 @@ public class Platform extends GameItemPhysic {
 		this.zOrder = Level.zBack;
 		this.type = platformType;
 		this.move = platformMove;
-		if (this.type != Sticky && this.type != Wall) {
+		if (this.type != Sticky && this.type != Wall && this.type != Corner) {
 			this.noStick = true;
 		}
 	}
@@ -77,7 +77,7 @@ public class Platform extends GameItemPhysic {
     		
     		fixtureDef.restitution = 0f;
     		if (this.type == Bump) {
-    			fixtureDef.restitution = 0.75f;
+    			fixtureDef.restitution = 1.50f;
     		}
     		fixtureDef.filter.categoryBits = GameItemPhysic.Category_Level;
     		this.body.createFixture(fixtureDef);
