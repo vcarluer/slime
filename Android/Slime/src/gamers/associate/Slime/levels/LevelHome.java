@@ -8,8 +8,10 @@ import gamers.associate.Slime.layers.HomeLayer;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.types.CGSize;
 
+import android.content.Context;
+
 public class LevelHome extends LevelDefinitionHardCoded {
-	public static String Id = "Home";
+	public static String Id = "Home";		
 	
 	@Override
 	public void buildLevel(Level level) {
@@ -49,5 +51,13 @@ public class LevelHome extends LevelDefinitionHardCoded {
 	protected void initLevel() {
 		this.setId(Id);
 		this.setSpecial(true);
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.levels.LevelDefinition#getNoScoreStore()
+	 */
+	@Override
+	protected boolean getNoScoreStore() {
+		return true;
 	}
 }

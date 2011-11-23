@@ -1,16 +1,36 @@
 package gamers.associate.Slime.levels;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+import android.content.Context;
+import android.util.Log;
+
+import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.SlimeFactory;
 
 public abstract class LevelDefinition {
-	protected String id;
+	private String id;
+	private boolean noScoreStore;
 	protected boolean isSpecial;
 	protected GamePlay gamePlay;
 	protected int lastScore;
 	protected int maxScore;
+	protected Context context;	
 	
 	protected LevelDefinition() {
-		this.gamePlay = GamePlay.None;	
+		this.gamePlay = GamePlay.None;
+		this.noScoreStore = this.getNoScoreStore();		
+	}
+	
+	protected boolean getNoScoreStore() {
+		return false;
 	}
 	
 	/**
@@ -25,6 +45,11 @@ public abstract class LevelDefinition {
 	 */
 	public void setId(String id) {
 		this.id = id;
+		if (this.id != null && this.id.length() > 0) {
+			if (!this.noScoreStore) {
+				this.loadUserInfo();
+			}
+		}
 	}
 
 	/**
@@ -57,9 +82,7 @@ public abstract class LevelDefinition {
 
 	public void setLastScore(int lastScore) {
 		this.lastScore = lastScore;
-		if (this.lastScore > this.maxScore) {
-			this.maxScore = this.lastScore;
-		}
+		this.setMaxScore(this.lastScore);
 	}
 
 	public int getLastScore() {
@@ -68,6 +91,76 @@ public abstract class LevelDefinition {
 	
 	public int getMaxScore() {
 		return this.maxScore;
+	}
+	
+	private void setMaxScore(int score) {
+		if (score > this.maxScore) {
+			this.maxScore = score;
+			if (!this.noScoreStore) {
+				this.storeUserInfo();
+			}
+		}
+	}
+	
+	private void storeUserInfo() {
+		BufferedWriter buffWriter = null;
+		try {
+			FileOutputStream fos = SlimeFactory.ContextActivity.openFileOutput(this.id, Context.MODE_PRIVATE);
+			OutputStreamWriter streamWriter = new OutputStreamWriter(fos);
+			buffWriter = new BufferedWriter(streamWriter);
+			buffWriter.write(String.valueOf(this.maxScore));
+			// buffWriter.newLine();		
+		} catch (FileNotFoundException ex) {
+			Log.e(Slime.TAG, "ERROR, file not found " + this.id);
+			ex.printStackTrace();
+        } catch (IOException e1) {
+			Log.e(Slime.TAG, "ERROR during opening or write of " + this.id);
+			e1.printStackTrace();
+        } finally {
+        	 //Close the BufferedWriter
+            try {
+                if (buffWriter != null) {
+                	buffWriter.flush();
+                	buffWriter.close();
+                }
+            } catch (IOException ex) {
+            	Log.e(Slime.TAG, "ERROR during close of " + this.id);
+                ex.printStackTrace();
+            }
+        }
+	}
+	
+	private void loadUserInfo() {
+		java.io.InputStream inputStream;
+		String fileName = this.id;
+		try {			
+			inputStream = SlimeFactory.ContextActivity.openFileInput(fileName);
+			InputStreamReader inputreader = new InputStreamReader(inputStream);
+			BufferedReader buffreader = new BufferedReader(inputreader);
+			String line;		
+			
+			int i = 0;
+			try {
+				while (( line = buffreader.readLine()) != null) {
+					try {
+						this.maxScore = Integer.valueOf(line).intValue(); 
+					} catch (Exception e) {
+						Log.e(Slime.TAG, "ERROR during read of " + fileName + " line " + String.valueOf(i));
+						e.printStackTrace();
+					}					
+				}
+			} catch (IOException e) {
+				Log.e(Slime.TAG, "ERROR during read of " + fileName + " line " + String.valueOf(i));
+				e.printStackTrace();
+			} finally {
+				if (buffreader != null) {
+					buffreader.close();
+				}
+			}
+		} catch (IOException e1) {
+			Log.e(Slime.TAG, "ERROR during opening of " + fileName);
+			e1.printStackTrace();
+		}	
 	}
 	
 	public abstract void buildLevel(Level level);

@@ -13,11 +13,14 @@ import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
 
 public class PauseLayer extends CCLayer {
-
+	private static String scoreTxt = "MAX: ";
 	private CCMenu menu;
+	private CCMenuItemLabel scoreMaxLabel;
 	
 	public PauseLayer() {
 		CCMenuItem label = CCMenuItemLabel.item(getMenuLabel("Pause"), this, "");		
+		
+		this.scoreMaxLabel = CCMenuItemLabel.item(getMenuLabel(scoreTxt), null, "");
 		
 		CCSprite resumeSprite = CCSprite.sprite("control-play.png", true);
 		CCMenuItemSprite resumeMenu = CCMenuItemSprite.item(resumeSprite, resumeSprite, this, "goResume");
@@ -28,10 +31,19 @@ public class PauseLayer extends CCLayer {
 		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);
 		CCMenuItemSprite homeMenu = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goHome");
 		
-		this.menu = CCMenu.menu(label, resumeMenu, restartMenu, homeMenu);
+		this.menu = CCMenu.menu(label, this.scoreMaxLabel, resumeMenu, restartMenu, homeMenu);
 		this.menu.alignItemsVertically();
 		
 		this.addChild(this.menu);
+	}
+	
+	public void setMaxScore(String text) {
+		this.scoreMaxLabel.setString(text.toUpperCase());
+	}
+	
+	public void setMaxScore(int scoreMax) {
+		String text = scoreTxt + String.valueOf(scoreMax);
+		this.setMaxScore(text);
 	}
 	
 	public void goResume(Object sender) {

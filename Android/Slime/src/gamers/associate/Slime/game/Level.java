@@ -257,6 +257,7 @@ public class Level {
 			this.hudLayer.getMenu().setVisible(false);
 		}
 		
+		this.pauseLayer.setMaxScore(this.levelDefinition.getMaxScore());
 		this.pauseLayer.enable();		
 	}
 	

@@ -2,6 +2,8 @@ package gamers.associate.Slime.levels;
 
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.items.custom.SlimyFactory;
 import gamers.associate.Slime.levels.itemdef.BecBunsenDef;
 import gamers.associate.Slime.levels.itemdef.BumperAngleDef;
 import gamers.associate.Slime.levels.itemdef.ButtonDef;
@@ -25,21 +27,18 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import android.content.Context;
 import android.util.Log;
 
 public class LevelDefinitionParser extends LevelDefinition
 {
 	private static String SpecialLevel = "Special";
-	private String resourceName;
-	private Context context;
+	private String resourceName;	
 	private ArrayList<ItemDefinition> itemDefinitions;
 	private HashMap<String, ItemDefinition> typeHandler;
 	
-	public LevelDefinitionParser(String resourceName, Context context) {
+	public LevelDefinitionParser(String resourceName) {
 		this.gamePlay = GamePlay.ManuallyDefined;
-		this.resourceName = resourceName;
-		this.context = context;
+		this.resourceName = resourceName;		
 		this.itemDefinitions = new ArrayList<ItemDefinition>();
 		this.typeHandler = new HashMap<String, ItemDefinition>();
 		this.createItemDefinitions();
@@ -51,10 +50,10 @@ public class LevelDefinitionParser extends LevelDefinition
 		
 		int lastPeriodPos = this.resourceName.lastIndexOf('.');
 		if (lastPeriodPos != -1) {
-			this.id = this.resourceName.substring(0, lastPeriodPos);
+			this.setId(this.resourceName.substring(0, lastPeriodPos));
 		}
 		else {
-			this.id = this.resourceName;
+			this.setId(this.resourceName);
 		}
 	}
 	
@@ -89,7 +88,7 @@ public class LevelDefinitionParser extends LevelDefinition
 	public void buildLevel(Level level) {
 		java.io.InputStream inputStream;
 		try {
-			inputStream = this.context.getAssets().open(this.resourceName);
+			inputStream = SlimeFactory.ContextActivity.getAssets().open(this.resourceName);
 			InputStreamReader inputreader = new InputStreamReader(inputStream);
 			BufferedReader buffreader = new BufferedReader(inputreader);
 			String line;		
@@ -108,6 +107,10 @@ public class LevelDefinitionParser extends LevelDefinition
 			} catch (IOException e) {
 				Log.e(Slime.TAG, "ERROR during read of " + this.resourceName + " line " + String.valueOf(i));
 				e.printStackTrace();
+			} finally {
+				if (buffreader != null) {
+					buffreader.close();
+				}
 			}
 		} catch (IOException e1) {
 			Log.e(Slime.TAG, "ERROR during opening of " + this.resourceName);

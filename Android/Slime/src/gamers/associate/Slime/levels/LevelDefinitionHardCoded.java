@@ -1,8 +1,9 @@
 package gamers.associate.Slime.levels;
 
 
-public abstract class LevelDefinitionHardCoded extends LevelDefinition {
 
+public abstract class LevelDefinitionHardCoded extends LevelDefinition {
+	
 	protected LevelDefinitionHardCoded() {
 		this.gamePlay = GamePlay.None;
 		this.init();

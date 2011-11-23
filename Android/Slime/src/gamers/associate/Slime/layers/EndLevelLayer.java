@@ -88,7 +88,7 @@ public class EndLevelLayer extends CCLayer {
 	
 	public void setScore(int score) {
 		String text = scoreTxt + String.valueOf(score);
-		this.scoreLabel.setString(text.toUpperCase());
+		this.setScore(text);
 	}
 		
 	public void enable() {

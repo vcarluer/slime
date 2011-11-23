@@ -23,20 +23,18 @@ public class LevelBuilder implements ILevelBuilder {
 	public void init() {
 		levels = new HashMap<String, LevelDefinition>();
 		levelsChain = new HashMap<String, String>();
-		
 		add(new LevelHome());
 		// Levels are queued in order of add calls
 		add(new LevelBeta());		
-		
-		Context context = SlimeFactory.ContextActivity;	
+				
 		// Bad menu is more level
 		// add(new LevelDefinitionParser("test.slime", context));
 		// add(new LevelDefinitionParser("Level0.slime", context));
 		// add(new LevelDefinitionParser("LevelPoly.slime", context));
 		// add(new LevelDefinitionParser("LevelSaw.slime", context));
 		// add(new LevelDefinitionParser("LevelMenu.slime", context));
-		add(new LevelDefinitionParser("LevelTest.slime", context));
-		add(new LevelDefinitionParser("Level1.slime", context));
+		add(new LevelDefinitionParser("LevelTest.slime"));
+		add(new LevelDefinitionParser("Level1.slime"));
 	}
 	
 	private void add(LevelDefinition levelDef) {
