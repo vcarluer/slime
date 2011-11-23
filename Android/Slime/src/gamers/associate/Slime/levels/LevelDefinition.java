@@ -45,6 +45,7 @@ public abstract class LevelDefinition {
 	 */
 	public void setId(String id) {
 		this.id = id;
+		// todo: lazy load info on demand
 		if (this.id != null && this.id.length() > 0) {
 			if (!this.noScoreStore) {
 				this.loadUserInfo();

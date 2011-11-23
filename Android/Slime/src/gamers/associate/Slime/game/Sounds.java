@@ -66,8 +66,9 @@ public class Sounds {
 		isMusicPlaying = true;
 	}
 	
-	public static void stopLastMusic() {
-		SoundEngine.sharedEngine().stopSound();
+	public static void destroy() {
+		SoundEngine.sharedEngine().realesAllSounds();
+		SoundEngine.sharedEngine().realesAllEffects();
 		isMusicPlaying = false;
 	}
 	

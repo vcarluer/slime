@@ -37,7 +37,7 @@ import com.badlogic.gdx.physics.box2d.World;
  * @uml.dependency   supplier="gamers.associate.Slime.GameItem"
  */
 public class Level {	
-	public static boolean DebugMode = false;
+	public static boolean DebugMode = true;
 	public static boolean isInit;	
 	public static float Gravity = -10;
 	

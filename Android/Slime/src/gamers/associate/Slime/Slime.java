@@ -118,7 +118,7 @@ public class Slime extends Activity {
         
         Level.isInit = false;
         
-        Sounds.stopLastMusic();
+        Sounds.destroy();
         // Destroy here, world and game items?
         
         // No more needed if rotation works:

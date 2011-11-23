@@ -49,9 +49,7 @@ public class CCSpritePolygon extends CCSpriteRepeat {
             newBlend = true;
             gl.glBlendFunc( blendFunc_.src, blendFunc_.dst );
         }
-        
-        // bug fix in case texture name = 0
-        this.getTexture().checkName();
+
         // #define kQuadSize sizeof(quad_.bl)
         gl.glBindTexture(GL10.GL_TEXTURE_2D, this.getTexture().name());
 
