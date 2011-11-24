@@ -1,6 +1,7 @@
 package gamers.associate.Slime.items.custom;
 
 import gamers.associate.Slime.game.ContactInfo;
+import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.SpriteType;
 
@@ -137,7 +138,7 @@ public class LaserBeam extends GameItemPhysic {
 		if (this.isOn) {
 			gl.glDisable(GL10.GL_LINE_SMOOTH);
 			gl.glColor4f(1.0f, 0.043f, 0.149f, 0.63f);
-			gl.glLineWidth(this.height);								
+			gl.glLineWidth(this.height * Level.currentLevel.getCameraManager().getCurrentZoom());								
 			CCDrawingPrimitives.ccDrawLine(gl, this.source, this.target);
 		}
 		
