@@ -140,7 +140,7 @@ class Smile( inkex.Effect ):
 				
 			# MenuNode
 			if str(child.get("type")) == 'MenuNode':
-				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("id"))+";"+str(child.get("att_targetLevel"))+";"+str(child.get("att_targetR"))+";"+str(child.get("att_targetB"))+";"+str(child.get("att_targetL"))+";"+str(child.get("att_targetT"))
+				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("id"))+";"+str(child.get("att_targetLevel"))+";"+str(child.get("att_targetN1"))+";"+str(child.get("att_targetN2"))+";"+str(child.get("att_targetN3"))+";"+str(child.get("att_targetN4"))
 				return True;
 			
 			# Polygon
