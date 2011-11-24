@@ -357,7 +357,8 @@ public class SlimyJump extends Slimy implements ISelectable {
 				&& !contact.getContactWith().isIsAllSensor()
 				&& !this.isDead
 				&& !this.isDying
-				&& this.currentJoint == null) {
+				&& this.currentJoint == null
+				&& this.getBody() != null) {
 			
 			int contactCount = contact.getManifold().getNumberOfContactPoints();
 			if (contactCount > 0) {
