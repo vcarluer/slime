@@ -1,11 +1,20 @@
 package gamers.associate.Slime.items.custom;
 
+import java.util.HashMap;
+
 import gamers.associate.Slime.items.base.GameItemCocosFactory;
 
 
 public class MenuNodeFactory extends GameItemCocosFactory<MenuNode> {			
+	
 	private String name;
 	private String target;
+	private String conn1;
+	private String conn2;
+	private String conn3;
+	private String conn4;
+	
+	private MenuNode currentNode;
 	
 	@Override
 	protected void createAnimList() {
@@ -20,7 +29,7 @@ public class MenuNodeFactory extends GameItemCocosFactory<MenuNode> {
 	@Override
 	protected MenuNode instantiate(float x, float y, float width,
 			float height) {
-		return new MenuNode(x, y, width, height);
+		return new MenuNode(x, y, width, height);		
 	}
 
 	@Override
@@ -28,15 +37,23 @@ public class MenuNodeFactory extends GameItemCocosFactory<MenuNode> {
 		item.createPortal();
 	}
 	
-	public MenuNode create(float x, float y, float width, float height, String name, String target) {
+	public MenuNode create(float x, float y, float width, float height, 
+			String name, String target, 
+			String connection1, String connection2, String connection3, String connection4) {
 		this.name = name;
 		this.target = target;
-		MenuNode node = super.create(x, y, width, height);			
+		this.conn1 = connection1;
+		this.conn2 = connection2;
+		this.conn3 = connection3;
+		this.conn4 = connection4;
+		MenuNode node = super.create(x, y, width, height);
 		return node;
 	}
 	
-	public MenuNode createBL(float x, float y, float width, float height, String name, String target) {
-		return this.create(x + width / 2, y + height / 2, width, height, name, target);
+	public MenuNode createBL(float x, float y, float width, float height, 
+			String name, String target,
+			String connection1, String connection2, String connection3, String connection4) {
+		return this.create(x + width / 2, y + height / 2, width, height, name, target, connection1, connection2, connection3, connection4);
 	}
 	
 	/* (non-Javadoc)
@@ -46,6 +63,24 @@ public class MenuNodeFactory extends GameItemCocosFactory<MenuNode> {
 	protected void initItem(MenuNode item) {
 		item.setNodeId(this.name);	
 		item.setTargetLevel(this.target);
+		this.addConnection(item, this.conn1);
+		this.addConnection(item, this.conn2);
+		this.addConnection(item, this.conn3);
+		this.addConnection(item, this.conn4);		
 		super.initItem(item);
+	}
+	
+	private void addConnection(MenuNode item, String connection) {
+		if (connection != null && connection.length() > 0) {
+			item.addConnection(connection);
+		}
+	}
+
+	public void setCurrentNode(MenuNode currentNode) {
+		this.currentNode = currentNode;
+	}
+
+	public MenuNode getCurrentNode() {
+		return currentNode;
 	}
 }

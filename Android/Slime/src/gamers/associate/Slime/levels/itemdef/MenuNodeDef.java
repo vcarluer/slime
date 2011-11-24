@@ -7,6 +7,7 @@ import gamers.associate.Slime.items.custom.Slimy;
 
 public class MenuNodeDef extends ItemDefinition {
 	private static String Handled_Def = "MenuNode";
+	private static String rootNode = "n00";
 	
 	private String id;
 	private String targetLevel;
@@ -17,13 +18,16 @@ public class MenuNodeDef extends ItemDefinition {
 	
 	@Override
 	public void createItem(Level level) {
-		SlimeFactory.MenuNode.createBL(this.x, this.y, this.width, this.height, id, targetLevel);
-		if (this.id.equals("n00")) {
+		MenuNode node = SlimeFactory.MenuNode.createBL(this.x, this.y, this.width, this.height, 
+										id, targetLevel,
+										this.targetN1, this.targetN2, this.targetN3, this.targetN4);
+		if (this.id.equals(rootNode)) {
 			float ratio = 1.0f;
 			// start item centered in node
 			Slimy slimy = SlimeFactory.Slimy.create(this.x + this.width / 2, this.y + (ratio * Slimy.Default_Height) / 2, ratio);
 			slimy.disablePhysic();
 			level.setStartItem(slimy);
+			SlimeFactory.MenuNode.setCurrentNode(node);
 		}
 	}
 
@@ -41,5 +45,4 @@ public class MenuNodeDef extends ItemDefinition {
 		this.targetN3 = infos[start + 4];
 		this.targetN4 = infos[start + 5];		
 	}
-
 }
