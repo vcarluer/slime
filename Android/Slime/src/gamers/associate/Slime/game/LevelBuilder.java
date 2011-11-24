@@ -16,6 +16,8 @@ import android.content.Context;
 
 
 public class LevelBuilder implements ILevelBuilder {
+	public static String LevelSelection = "LevelMenu";
+	public static String LevelExtension =".slime";
 	private static HashMap<String, LevelDefinition> levels;
 	private static HashMap<String, String> levelsChain;
 	private static LevelDefinition previousDef;
@@ -25,16 +27,16 @@ public class LevelBuilder implements ILevelBuilder {
 		levelsChain = new HashMap<String, String>();
 		add(new LevelHome());
 		// Levels are queued in order of add calls
-		add(new LevelBeta());		
+		// add(new LevelBeta());		
 				
 		// Bad menu is more level
 		// add(new LevelDefinitionParser("test.slime", context));
 		// add(new LevelDefinitionParser("Level0.slime", context));
 		// add(new LevelDefinitionParser("LevelPoly.slime", context));
 		// add(new LevelDefinitionParser("LevelSaw.slime", context));
-		add(new LevelDefinitionParser("LevelMenu.slime"));
-		add(new LevelDefinitionParser("LevelTest.slime"));
-		add(new LevelDefinitionParser("Level1.slime"));
+		add(new LevelDefinitionParser(LevelSelection + LevelExtension));
+		// add(new LevelDefinitionParser("LevelTest.slime"));
+		// add(new LevelDefinitionParser("Level1.slime"));
 	}
 	
 	private void add(LevelDefinition levelDef) {
@@ -61,6 +63,10 @@ public class LevelBuilder implements ILevelBuilder {
 	
 	public void build(Level level, String levelName) {
 		LevelDefinition levelDef = levels.get(levelName);
+		build(level, levelDef);
+	}
+	
+	public static void build(Level level, LevelDefinition levelDef) {
 		if (levelDef != null) {
 			levelDef.buildLevel(level);
 			level.setLevelDefinition(levelDef);

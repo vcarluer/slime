@@ -20,6 +20,7 @@ public class EndLevelLayer extends CCLayer {
 	private CCMenu menu;
 	private CCMenu menuEndPack;
 	private CCMenuItemSprite nextMenu;
+	private CCMenuItemSprite homeMenu;
 	
 	public EndLevelLayer() {		
 		this.textLabel = CCMenuItemLabel.item(getMenuLabel("EMPTY"), null, "");
@@ -33,12 +34,12 @@ public class EndLevelLayer extends CCLayer {
 		CCMenuItemSprite restartMenu = CCMenuItemSprite.item(restartSprite, restartSprite, this, "goRestart");
 		
 		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);
-		CCMenuItemSprite homeMenu = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goHome");
+		this.homeMenu = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goHome");
 		
-		this.menu = CCMenu.menu(this.textLabel, this.scoreLabel, this.nextMenu, restartMenu, homeMenu);
+		this.menu = CCMenu.menu(this.textLabel, this.scoreLabel, this.nextMenu, restartMenu, this.homeMenu);		
 		this.menu.alignItemsVertically();
 		
-		this.menuEndPack = CCMenu.menu(this.textLabel, this.scoreLabel, this.endPackLabel, restartMenu, homeMenu);
+		this.menuEndPack = CCMenu.menu(this.textLabel, this.scoreLabel, this.endPackLabel, restartMenu, this.homeMenu);		
 		this.menuEndPack.alignItemsVertically();
 		
 		this.addChild(this.menu);		
@@ -127,4 +128,9 @@ public class EndLevelLayer extends CCLayer {
 		this.nextMenu.setIsEnabled(value);
 		this.nextMenu.setVisible(value);
 	}	
+	
+	public void setHomeEnabled(boolean value) {
+		this.homeMenu.setIsEnabled(value);
+		this.homeMenu.setVisible(value);
+	}
 }

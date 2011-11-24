@@ -17,19 +17,29 @@ import gamers.associate.Slime.game.SlimeFactory;
 
 public abstract class LevelDefinition {
 	private String id;
-	private boolean noScoreStore;
+	private boolean noStore;
 	protected boolean isSpecial;
 	protected GamePlay gamePlay;
 	protected int lastScore;
 	protected int maxScore;
-	protected Context context;	
+	protected Context context;
+	protected boolean isUnlock;
 	
 	protected LevelDefinition() {
 		this.gamePlay = GamePlay.None;
-		this.noScoreStore = this.getNoScoreStore();		
+		this.noStore = this.getNoStore();
 	}
 	
-	protected boolean getNoScoreStore() {
+	public boolean isUnlock() {
+		return isUnlock;
+	}
+
+	public void setUnlock(boolean isUnlock) {
+		this.isUnlock = isUnlock;
+		this.handlePersistancy();
+	}
+	
+	protected boolean getNoStore() {
 		return false;
 	}
 	
@@ -47,7 +57,7 @@ public abstract class LevelDefinition {
 		this.id = id;
 		// todo: lazy load info on demand
 		if (this.id != null && this.id.length() > 0) {
-			if (!this.noScoreStore) {
+			if (!this.noStore) {
 				this.loadUserInfo();
 			}
 		}
@@ -97,9 +107,13 @@ public abstract class LevelDefinition {
 	private void setMaxScore(int score) {
 		if (score > this.maxScore) {
 			this.maxScore = score;
-			if (!this.noScoreStore) {
-				this.storeUserInfo();
-			}
+			this.handlePersistancy();
+		}
+	}
+	
+	private void handlePersistancy() {
+		if (!this.noStore) {
+			this.storeUserInfo();
 		}
 	}
 	
@@ -110,6 +124,7 @@ public abstract class LevelDefinition {
 			OutputStreamWriter streamWriter = new OutputStreamWriter(fos);
 			buffWriter = new BufferedWriter(streamWriter);
 			buffWriter.write(String.valueOf(this.maxScore));
+			buffWriter.write(String.valueOf(this.isUnlock));
 			// buffWriter.newLine();		
 		} catch (FileNotFoundException ex) {
 			Log.e(Slime.TAG, "ERROR, file not found " + this.id);
@@ -144,11 +159,21 @@ public abstract class LevelDefinition {
 			try {
 				while (( line = buffreader.readLine()) != null) {
 					try {
-						this.maxScore = Integer.valueOf(line).intValue(); 
+						i++;
+						switch(i) {
+						case 1:
+							this.maxScore = Integer.valueOf(line).intValue();
+							break;
+						case 2:
+							this.isUnlock = Boolean.valueOf(line).booleanValue();
+							break;
+						default:
+							break;
+						}												
 					} catch (Exception e) {
 						Log.e(Slime.TAG, "ERROR during read of " + fileName + " line " + String.valueOf(i));
 						e.printStackTrace();
-					}					
+					}									
 				}
 			} catch (IOException e) {
 				Log.e(Slime.TAG, "ERROR during read of " + fileName + " line " + String.valueOf(i));

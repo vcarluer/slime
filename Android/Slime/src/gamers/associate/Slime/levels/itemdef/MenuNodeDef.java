@@ -20,11 +20,27 @@ public class MenuNodeDef extends ItemDefinition {
 	public void createItem(Level level) {
 		MenuNode node = SlimeFactory.MenuNode.createBL(this.x, this.y, this.width, this.height, 
 										id, targetLevel,
-										this.targetN1, this.targetN2, this.targetN3, this.targetN4);
+										this.targetN1, this.targetN2, this.targetN3, this.targetN4);		
+		
 		if (this.id.equals(rootNode)) {
+			node.setUnlock(true);
+		}
+		
+		MenuNode startNode = null;
+		if (SlimeFactory.MenuNode.getCurrentNode() == null && this.id.equals(rootNode)) {
+			startNode = node;
+		}
+		else {
+			if (SlimeFactory.MenuNode.getCurrentNode() != null && SlimeFactory.MenuNode.getCurrentNode().getNodeId().equals(this.id)) {
+				startNode = node;
+			}
+		}
+		
+		if (startNode != null) {
 			float ratio = 1.0f;
 			// start item centered in node
 			Slimy slimy = SlimeFactory.Slimy.create(this.x + this.width / 2, this.y + (ratio * Slimy.Default_Height) / 2, ratio);
+			slimy.land();
 			slimy.disablePhysic();
 			level.setStartItem(slimy);
 			SlimeFactory.MenuNode.setCurrentNode(node);

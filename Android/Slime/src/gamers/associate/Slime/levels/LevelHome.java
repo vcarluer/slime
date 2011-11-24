@@ -57,7 +57,7 @@ public class LevelHome extends LevelDefinitionHardCoded {
 	 * @see gamers.associate.Slime.levels.LevelDefinition#getNoScoreStore()
 	 */
 	@Override
-	protected boolean getNoScoreStore() {
+	protected boolean getNoStore() {
 		return true;
 	}
 }

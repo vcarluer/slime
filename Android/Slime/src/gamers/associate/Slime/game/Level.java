@@ -5,6 +5,7 @@ import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.ISelectable;
 import gamers.associate.Slime.items.base.ITrigerable;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
+import gamers.associate.Slime.items.custom.MenuNode;
 import gamers.associate.Slime.items.custom.Slimy;
 import gamers.associate.Slime.items.custom.Thumbnail;
 import gamers.associate.Slime.layers.BackgoundLayer;
@@ -168,15 +169,34 @@ public class Level {
 	}
 	
 	public static Level get(String levelName, boolean forceReload) {
-		// Level singleton  (for box2d and texture performances
-		if (currentLevel == null || isInit == false) {
-			currentLevel = new Level();
-		}					
+		createSingleton();					
 		
 		// Resume existing level if exists, either reload one
 		if (forceReload || currentLevel.getCurrentLevelName() != levelName) {
 			currentLevel.loadLevel(levelName);
 		}				
+		
+		return currentLevel;
+	}
+	
+	private static void createSingleton() {
+		// Level singleton  (for box2d and texture performances
+		if (currentLevel == null || isInit == false) {
+			currentLevel = new Level();
+		}
+	}
+	
+	public static Level get(LevelDefinition levelDef) {
+		return get(levelDef, false);
+	}
+	
+	public static Level get(LevelDefinition levelDef, boolean forceReload) {
+		createSingleton();
+		
+		// Resume existing level if exists, either reload one
+		if (forceReload || currentLevel.getCurrentLevelName() != levelDef.getId()) {
+			currentLevel.loadLevel(levelDef);
+		}
 		
 		return currentLevel;
 	}
@@ -204,14 +224,29 @@ public class Level {
 	
 	// Must be call before running scene with CCDirector
 	public void loadLevel(String levelName) {
-		this.resetLevel();		
+		this.preBuild();		
 		SlimeFactory.LevelBuilder.build(this, levelName);						
+		this.postBuild(levelName);				
+	}
+	
+	// Must be call before running scene with CCDirector
+	public void loadLevel(LevelDefinition levelDef) {
+		this.preBuild();		
+		LevelBuilder.build(this, levelDef);						
+		this.postBuild(levelDef.getId());				
+	}
+	
+	private void preBuild() {
+		this.resetLevel();
+	}
+	
+	private void postBuild(String levelName) {
 		this.currentLevelName = levelName;
 		// Set camera right based on screen size
 		this.attachLevelToCamera();
 
-		this.startLevel();				
-	}
+		this.startLevel();
+	}	
 			
 	public void resetLevel() {				
 		this.isPhysicDisabled = false;
@@ -684,15 +719,18 @@ public class Level {
 	}		
 	
 	public void goHome() {
-		CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
-		Sounds.resumeMusic();
+		// CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
+		this.loadLevel(LevelBuilder.LevelSelection);
+		// Sounds.resumeMusic();
 	}
 	
 	public void goNext() {
-		String next = SlimeFactory.LevelBuilder.getNext(this.currentLevelName);
-		if (next != null) {
-			this.loadLevel(next);
-		}
+		// String next = SlimeFactory.LevelBuilder.getNext(this.currentLevelName);		
+//		if (next != null) {
+//			this.loadLevel(next);
+//		}
+		
+		this.loadLevel(LevelBuilder.LevelSelection);
 	}
 	
 	public void startLevel() {
@@ -720,9 +758,17 @@ public class Level {
 			this.lastScore = this.gamePlay.getScore();
 			this.isVictory = true;
 			this.endLevel();
+			if (this.levelDefinition != null) {
+				this.levelDefinition.setLastScore(this.lastScore);
+				MenuNode node = SlimeFactory.MenuNode.getForLevel(this.currentLevelName);
+				if (node != null) {
+					
+				}
+			}
+
 			if (showEndLevel) {
 				this.showEndLevel();
-			}
+			}						
 						
 			return true;
 		}
@@ -781,8 +827,8 @@ public class Level {
 			}
 			
 			if (this.levelDefinition != null) {
-				this.levelDefinition.setLastScore(this.lastScore);
 				this.endLevelLayer.setNextEnabled(this.levelDefinition.getMaxScore() > 0);
+				this.endLevelLayer.setHomeEnabled(this.levelDefinition.getMaxScore() == 0);
 			}
 			
 			this.setIsHudEnabled(false);

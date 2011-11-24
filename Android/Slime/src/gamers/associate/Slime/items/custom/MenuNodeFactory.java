@@ -6,7 +6,8 @@ import gamers.associate.Slime.items.base.GameItemCocosFactory;
 
 
 public class MenuNodeFactory extends GameItemCocosFactory<MenuNode> {			
-	
+	private HashMap<String, MenuNode> levelNodes;
+	private HashMap<String, MenuNode> nodes;
 	private String name;
 	private String target;
 	private String conn1;
@@ -15,6 +16,11 @@ public class MenuNodeFactory extends GameItemCocosFactory<MenuNode> {
 	private String conn4;
 	
 	private MenuNode currentNode;
+	
+	public MenuNodeFactory() {
+		this.levelNodes = new HashMap<String, MenuNode>();
+		this.nodes = new HashMap<String, MenuNode>();
+	}
 	
 	@Override
 	protected void createAnimList() {
@@ -67,6 +73,8 @@ public class MenuNodeFactory extends GameItemCocosFactory<MenuNode> {
 		this.addConnection(item, this.conn2);
 		this.addConnection(item, this.conn3);
 		this.addConnection(item, this.conn4);		
+		this.levelNodes.put(item.getTargetLevel(), item);
+		this.nodes.put(item.getNodeId(), item);
 		super.initItem(item);
 	}
 	
@@ -82,5 +90,23 @@ public class MenuNodeFactory extends GameItemCocosFactory<MenuNode> {
 
 	public MenuNode getCurrentNode() {
 		return currentNode;
+	}
+	
+	public MenuNode getForLevel(String levelName) {
+		if (this.levelNodes.containsKey(levelName)) {
+			return this.levelNodes.get(levelName); 
+		} 
+		else {
+			return null;
+		}
+	}
+	
+	public MenuNode get(String nodeId) {
+		if (this.nodes.containsKey(nodeId)) {
+			return this.nodes.get(nodeId); 
+		} 
+		else {
+			return null;
+		}
 	}
 }

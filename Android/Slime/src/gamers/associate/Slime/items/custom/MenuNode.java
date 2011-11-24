@@ -1,11 +1,14 @@
 package gamers.associate.Slime.items.custom;
 
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.LevelBuilder;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.ISelectable;
 import gamers.associate.Slime.items.base.SpriteType;
+import gamers.associate.Slime.levels.LevelDefinition;
+import gamers.associate.Slime.levels.LevelDefinitionParser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,6 +37,7 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 	private boolean isSelected;
 	private CGRect scaledRect;
 	private HashMap<String, String> connections;
+	private LevelDefinition levelDef;
 	
 	public MenuNode(float x, float y, float width, float height) {
 		super(x, y, width, height);		
@@ -135,7 +139,7 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 		return false;
 	}
 	
-	private void moveSelectionToNode() {
+	private void moveSelectionToNode() {		
 		if (Level.currentLevel.getStartItem() instanceof GameItemCocos)
 		{
 			GameItemCocos selection = (GameItemCocos)Level.currentLevel.getStartItem();
@@ -151,6 +155,7 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 	
 	public void endMoveAnimDone() {
 		SlimeFactory.MenuNode.setCurrentNode(this);
+		this.getLevelDefinition();
 	}
 	
 	private void enterLevel() {
@@ -167,8 +172,20 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 		}
 	}
 	
+	@Override
+	public void initItem() {	
+		super.initItem();		
+		this.handleLockState();
+	}
+	
+	private void handleLockState() {		
+		// hide road
+		// hide sprite
+		this.getSprite().setVisible(this.getLevelDefinition().isUnlock());		
+	}
+
 	public void endEnterAnimDone() {
-		Level.get(this.targetLevel);
+		Level.get(this.getLevelDefinition());
 	}
 
 	@Override
@@ -191,5 +208,27 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 	
 	public boolean isConnectionSourceOf(String targetName) {
 		return this.connections.containsKey(targetName);
+	}
+	
+	private LevelDefinition getLevelDefinition() {
+		if (this.levelDef != null) {
+			this.levelDef = new LevelDefinitionParser(this.targetLevel + LevelBuilder.LevelExtension);
+		}
+		
+		return this.levelDef;
+	}
+
+	public void setUnlock(boolean isUnlock) {
+		this.getLevelDefinition().setUnlock(isUnlock);
+		this.handleLockState();
+	}
+	
+	public void unlockChildConnections() {
+		for(String connectionName : this.connections.values()) {
+			MenuNode child = SlimeFactory.MenuNode.get(connectionName);
+			if (child != null) {
+				child.setUnlock(true);
+			}
+		}
 	}
 }
