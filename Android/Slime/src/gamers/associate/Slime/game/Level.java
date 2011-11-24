@@ -587,6 +587,7 @@ public class Level {
 		if (this.selectedItem != null) {
 			// this.cameraManager.centerCameraOn(this.selectedItem.getPosition());
 			if (this.selectedItem instanceof GameItem) {				
+				// Return true if auto or gameplay simpleSelect camera needed
 				if (this.selectedItem.simpleSelect()) {
 					if (this.gamePlay == null) {
 						GameItem center = (GameItem)this.selectedItem;

@@ -2,7 +2,10 @@ package gamers.associate.Slime.items.custom;
 
 import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.base.CCRepeatForever;
+import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCAnimate;
+import org.cocos2d.actions.interval.CCMoveTo;
+import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
@@ -14,6 +17,7 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.items.base.GameItemCocos;
+import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.ISelectable;
 import gamers.associate.Slime.items.base.SpriteType;
 
@@ -113,9 +117,24 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 	}
 	
 	@Override
-	public boolean simpleSelect() {
-		Level.get(this.targetLevel);
+	public boolean simpleSelect() {		
+		if (Level.currentLevel.getStartItem() instanceof GameItemCocos)
+		{
+			GameItemCocos selection = (GameItemCocos)Level.currentLevel.getStartItem();
+			CCMoveTo moveTo = CCMoveTo.action(1.0f, CGPoint.make(this.getPosition().x, this.getPosition().y + selection.getHeight() / 2 ));
+			CCCallFunc callback = CCCallFunc.action(this, "endAnimDone");
+			CCSequence sequence = CCSequence.actions(moveTo, callback);
+			selection.getSprite().runAction(sequence);
+		}
+		else {
+			this.endAnimDone();
+		}
+				
 		return false;
+	}
+	
+	public void endAnimDone() {
+		Level.get(this.targetLevel);
 	}
 
 	@Override

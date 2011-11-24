@@ -21,6 +21,7 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 	protected ArrayList<ContactInfo> contacts;
 	protected boolean noStick;
 	protected boolean IsAllSensor;
+	protected boolean isPhysicDisabled;
 	
 	public GameItemPhysic(float x, float y, float width, float height, World world, float worldRatio) {		
 		super(x, y, width, height, world, worldRatio);		
@@ -38,6 +39,10 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 		this.world = null;
 		this.body = null;
 		super.destroy();
+	}
+	
+	public void disablePhysic() {
+		this.isPhysicDisabled = true;
 	}
 	
 	public void destroyBodyOnly() {
@@ -62,19 +67,21 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 	
 	@Override
 	public void render(float delta) {
-		this.handleContacts();
-		
-		if (this.sprite != null && this.body != null) {
-			float x = this.body.getPosition().x * this.worldRatio;
-			float y = this.body.getPosition().y * this.worldRatio;
-			float rotation = -1.0f * ccMacros.CC_RADIANS_TO_DEGREES(this.body.getAngle());
-			this.sprite.setPosition(x, y);			
-			this.sprite.setRotation(rotation);
-			this.position.set(x, y);
-			this.angle = rotation;
+		if (!this.isPhysicDisabled) {
+			this.handleContacts();
+			
+			if (this.sprite != null && this.body != null) {
+				float x = this.body.getPosition().x * this.worldRatio;
+				float y = this.body.getPosition().y * this.worldRatio;
+				float rotation = -1.0f * ccMacros.CC_RADIANS_TO_DEGREES(this.body.getAngle());
+				this.sprite.setPosition(x, y);			
+				this.sprite.setRotation(rotation);
+				this.position.set(x, y);
+				this.angle = rotation;
+			}
+			
+			// super.render(delta);
 		}
-		
-		// super.render(delta);
 	}
 	
 	public void addContact(Object with, WorldManifold manifold) {

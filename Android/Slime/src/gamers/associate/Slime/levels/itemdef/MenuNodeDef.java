@@ -20,8 +20,10 @@ public class MenuNodeDef extends ItemDefinition {
 		SlimeFactory.MenuNode.createBL(this.x, this.y, this.width, this.height, id, targetLevel);
 		if (this.id.equals("n00")) {
 			float ratio = 1.0f;
-			// node width must be higher than slimy width
-			level.setStartItem(SlimeFactory.Slimy.create(this.x + this.width / 2, this.y + (ratio * Slimy.Default_Height) / 2, ratio));
+			// start item centered in node
+			Slimy slimy = SlimeFactory.Slimy.create(this.x + this.width / 2, this.y + (ratio * Slimy.Default_Height) / 2, ratio);
+			slimy.disablePhysic();
+			level.setStartItem(slimy);
 		}
 	}
 

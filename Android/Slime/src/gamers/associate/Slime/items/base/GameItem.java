@@ -84,4 +84,8 @@ public class GameItem {
 	public boolean isActive() {
 		return true;
 	}
+	
+	public float getHeight() {
+		return this.height;
+	}
 }
