@@ -42,6 +42,7 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 	private CGRect scaledRect;
 	private HashMap<String, String> connections;
 	private LevelDefinition levelDef;
+	private boolean postBuildParsed;
 	
 	public MenuNode(float x, float y, float width, float height) {
 		super(x, y, width, height);		
@@ -240,8 +241,13 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 		}
 	}
 	
-	public void unlockChildConnectionsGraph() {
-		if (this.getLevelDefinition().isFinished()) {
+	public boolean isUnlock() {
+		return this.getLevelDefinition().isUnlock();
+	}
+	
+	public void unlockChildConnectionsGraph() {		
+		if (this.getLevelDefinition().isFinished() && !this.postBuildParsed) {
+			this.postBuildParsed = true;		
 			for(String connectionName : this.connections.values()) {
 				MenuNode child = SlimeFactory.MenuNode.get(connectionName);
 				if (child != null) {
