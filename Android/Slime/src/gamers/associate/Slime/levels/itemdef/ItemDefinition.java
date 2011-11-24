@@ -159,4 +159,8 @@ public abstract class ItemDefinition {
 	public void setAngle(float angle) {
 		this.angle = angle;
 	}
+	
+	public void postBuild() {
+		// Override to handle postBuild
+	}
 }

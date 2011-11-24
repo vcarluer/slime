@@ -1,14 +1,17 @@
 package gamers.associate.Slime.items.custom;
 
+import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelBuilder;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.ISelectable;
 import gamers.associate.Slime.items.base.SpriteType;
 import gamers.associate.Slime.levels.LevelDefinition;
 import gamers.associate.Slime.levels.LevelDefinitionParser;
+import gamers.associate.Slime.levels.LevelDefinitionParserCache;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +20,7 @@ import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCAnimate;
+import org.cocos2d.actions.interval.CCFadeIn;
 import org.cocos2d.actions.interval.CCMoveTo;
 import org.cocos2d.actions.interval.CCRotateBy;
 import org.cocos2d.actions.interval.CCSequence;
@@ -83,7 +87,7 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 
 	@Override
 	public boolean canSelect(CGPoint gameReference) {
-		return true;
+		return this.getLevelDefinition().isUnlock();
 	}
 
 	@Override
@@ -166,6 +170,7 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 			CCCallFunc callback = CCCallFunc.action(this, "endEnterAnimDone");
 			CCSequence sequence = CCSequence.actions(rotate, callback);
 			selection.getSprite().runAction(sequence);
+			Sounds.playEffect(R.raw.getrupee);
 		}
 		else {
 			this.endEnterAnimDone();
@@ -211,24 +216,48 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 	}
 	
 	private LevelDefinition getLevelDefinition() {
-		if (this.levelDef != null) {
-			this.levelDef = new LevelDefinitionParser(this.targetLevel + LevelBuilder.LevelExtension);
+		if (this.levelDef == null) {
+			this.levelDef = LevelDefinitionParserCache.get(this.targetLevel + LevelBuilder.LevelExtension);
 		}
 		
 		return this.levelDef;
 	}
 
 	public void setUnlock(boolean isUnlock) {
+		boolean hasChanged = false;
+		if (isUnlock != this.getLevelDefinition().isUnlock()) {
+			hasChanged = true;
+		}
+		
 		this.getLevelDefinition().setUnlock(isUnlock);
 		this.handleLockState();
-	}
-	
-	public void unlockChildConnections() {
-		for(String connectionName : this.connections.values()) {
-			MenuNode child = SlimeFactory.MenuNode.get(connectionName);
-			if (child != null) {
-				child.setUnlock(true);
+		if (hasChanged) {
+			if (isUnlock = true) {
+				CCFadeIn fadeIn = CCFadeIn.action(2.0f);
+				this.getSprite().runAction(fadeIn);
+				Sounds.playEffect(R.raw.key);
 			}
 		}
+	}
+	
+	public void unlockChildConnectionsGraph() {
+		if (this.getLevelDefinition().isFinished()) {
+			for(String connectionName : this.connections.values()) {
+				MenuNode child = SlimeFactory.MenuNode.get(connectionName);
+				if (child != null) {
+					child.setUnlock(true);
+					child.unlockChildConnectionsGraph();
+				}
+			}
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.base.GameItemCocos#destroy()
+	 */
+	@Override
+	public void destroy() {
+		super.destroy();
+		SlimeFactory.MenuNode.remove(this.getNodeId());
 	}
 }

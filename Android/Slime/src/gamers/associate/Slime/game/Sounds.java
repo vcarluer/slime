@@ -25,6 +25,8 @@ public class Sounds {
 		preloadEffect(R.raw.slimyland);
 		preloadEffect(R.raw.bump);
 		preloadEffect(R.raw.slimydeath);
+		preloadEffect(R.raw.key);
+		preloadEffect(R.raw.getrupee);
 	}
 	
 	private static void preloadEffect(int soundId) {

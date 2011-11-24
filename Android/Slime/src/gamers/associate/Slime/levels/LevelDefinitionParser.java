@@ -35,6 +35,7 @@ public class LevelDefinitionParser extends LevelDefinition
 	private String resourceName;	
 	private ArrayList<ItemDefinition> itemDefinitions;
 	private HashMap<String, ItemDefinition> typeHandler;
+	private ItemDefinition postBuildItem;
 	
 	public LevelDefinitionParser(String resourceName) {
 		this.gamePlay = GamePlay.ManuallyDefined;
@@ -66,9 +67,11 @@ public class LevelDefinitionParser extends LevelDefinition
 		this.itemDefinitions.add(new BecBunsenDef());
 		this.itemDefinitions.add(new BumperAngleDef());
 		this.itemDefinitions.add(new ButtonDef());
-		this.itemDefinitions.add(new CircularSawDef());
-		this.itemDefinitions.add(new MetaMenuDef());
-		this.itemDefinitions.add(new MenuNodeDef());
+		this.itemDefinitions.add(new CircularSawDef());				
+		this.itemDefinitions.add(new MetaMenuDef());				
+		MenuNodeDef menuNode = new MenuNodeDef();
+		this.itemDefinitions.add(menuNode);
+		this.postBuildItem = menuNode;
 		this.itemDefinitions.add(new PolygonDef());
 		this.itemDefinitions.add(new LaserGunDef());
 		this.itemDefinitions.add(new TargetDef());
@@ -115,7 +118,9 @@ public class LevelDefinitionParser extends LevelDefinition
 		} catch (IOException e1) {
 			Log.e(Slime.TAG, "ERROR during opening of " + this.resourceName);
 			e1.printStackTrace();
-		}				
+		}
+		
+		this.postBuildItem.postBuild();
 	}
 	
 	private void HandleLine(Level level, String line) throws Exception {

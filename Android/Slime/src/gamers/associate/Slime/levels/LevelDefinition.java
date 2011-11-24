@@ -24,6 +24,7 @@ public abstract class LevelDefinition {
 	protected int maxScore;
 	protected Context context;
 	protected boolean isUnlock;
+	protected boolean isFinished;
 	
 	protected LevelDefinition() {
 		this.gamePlay = GamePlay.None;
@@ -107,6 +108,7 @@ public abstract class LevelDefinition {
 	private void setMaxScore(int score) {
 		if (score > this.maxScore) {
 			this.maxScore = score;
+			this.isFinished = true;
 			this.handlePersistancy();
 		}
 	}
@@ -124,8 +126,10 @@ public abstract class LevelDefinition {
 			OutputStreamWriter streamWriter = new OutputStreamWriter(fos);
 			buffWriter = new BufferedWriter(streamWriter);
 			buffWriter.write(String.valueOf(this.maxScore));
+			buffWriter.newLine();
 			buffWriter.write(String.valueOf(this.isUnlock));
-			// buffWriter.newLine();		
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.isFinished));	
 		} catch (FileNotFoundException ex) {
 			Log.e(Slime.TAG, "ERROR, file not found " + this.id);
 			ex.printStackTrace();
@@ -167,6 +171,9 @@ public abstract class LevelDefinition {
 						case 2:
 							this.isUnlock = Boolean.valueOf(line).booleanValue();
 							break;
+						case 3:
+							this.isFinished = Boolean.valueOf(line).booleanValue();
+							break;
 						default:
 							break;
 						}												
@@ -190,4 +197,19 @@ public abstract class LevelDefinition {
 	}
 	
 	public abstract void buildLevel(Level level);
+
+	/**
+	 * @return the isFinished
+	 */
+	public boolean isFinished() {
+		return isFinished;
+	}
+
+	/**
+	 * @param isFinished the isFinished to set
+	 */
+	public void setFinished(boolean isFinished) {
+		this.isFinished = isFinished;
+		this.handlePersistancy();
+	}
 }

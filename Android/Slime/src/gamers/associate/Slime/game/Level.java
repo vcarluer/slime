@@ -4,8 +4,6 @@ import gamers.associate.Slime.R;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.ISelectable;
 import gamers.associate.Slime.items.base.ITrigerable;
-import gamers.associate.Slime.items.base.SpriteSheetFactory;
-import gamers.associate.Slime.items.custom.MenuNode;
 import gamers.associate.Slime.items.custom.Slimy;
 import gamers.associate.Slime.items.custom.Thumbnail;
 import gamers.associate.Slime.layers.BackgoundLayer;
@@ -23,11 +21,8 @@ import javax.microedition.khronos.opengles.GL10;
 
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
-import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.nodes.CCSpriteFrameCache;
-import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.math.Vector2;
@@ -206,7 +201,8 @@ public class Level {
 	}
 	
 	public void reload() {
-		currentLevel.loadLevel(this.currentLevelName);
+		// currentLevel.loadLevel(this.currentLevelName);
+		currentLevel.loadLevel(this.levelDefinition);
 		// Set camera right based on screen size
 		currentLevel.getCameraManager().setCameraView();
 		//this.setStartCamera();
@@ -759,11 +755,7 @@ public class Level {
 			this.isVictory = true;
 			this.endLevel();
 			if (this.levelDefinition != null) {
-				this.levelDefinition.setLastScore(this.lastScore);
-				MenuNode node = SlimeFactory.MenuNode.getForLevel(this.currentLevelName);
-				if (node != null) {
-					
-				}
+				this.levelDefinition.setLastScore(this.lastScore);				
 			}
 
 			if (showEndLevel) {
@@ -843,7 +835,8 @@ public class Level {
 	}
 	
 	public Boolean hasNext() {
-		return SlimeFactory.LevelBuilder.getNext(this.currentLevelName) != null;
+		// return SlimeFactory.LevelBuilder.getNext(this.currentLevelName) != null;
+		return true;
 	}
 	
 	public void activate()

@@ -3,7 +3,7 @@ package gamers.associate.Slime.levels.itemdef;
 import gamers.associate.Slime.game.Level;
 
 public class MetaMenuDef extends ItemDefinition {
-	private static String Handled_Def = "MetaMenu";
+	private static String Handled_Def = "MetaMenu";	
 	
 	@Override
 	public void createItem(Level level) {
@@ -18,6 +18,5 @@ public class MetaMenuDef extends ItemDefinition {
 	@Override
 	protected void parseNext(String[] infos, int start) {
 		// NONE
-	}
-
+	}	
 }

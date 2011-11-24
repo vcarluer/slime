@@ -16,6 +16,8 @@ public class MenuNodeDef extends ItemDefinition {
 	private String targetN3;
 	private String targetN4;
 	
+	private MenuNode rootItem;
+	
 	@Override
 	public void createItem(Level level) {
 		MenuNode node = SlimeFactory.MenuNode.createBL(this.x, this.y, this.width, this.height, 
@@ -24,6 +26,7 @@ public class MenuNodeDef extends ItemDefinition {
 		
 		if (this.id.equals(rootNode)) {
 			node.setUnlock(true);
+			this.rootItem = node;
 		}
 		
 		MenuNode startNode = null;
@@ -60,5 +63,13 @@ public class MenuNodeDef extends ItemDefinition {
 		this.targetN2 = infos[start + 3];
 		this.targetN3 = infos[start + 4];
 		this.targetN4 = infos[start + 5];		
+	}
+	
+	@Override
+	public void postBuild() {
+		// Browse node graph to enable or disable new nodes
+		if (this.rootItem != null) {
+			this.rootItem.unlockChildConnectionsGraph();
+		}
 	}
 }
