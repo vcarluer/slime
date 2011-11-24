@@ -69,7 +69,7 @@ public class MenuNodeDef extends ItemDefinition {
 	public void postBuild() {
 		// Browse node graph to enable or disable new nodes
 		if (this.rootItem != null) {
-			this.rootItem.unlockChildConnectionsGraph();
+			this.rootItem.unlockChildConnectionsGraph(null);
 		}
 	}
 }

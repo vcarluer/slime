@@ -16,6 +16,8 @@ import gamers.associate.Slime.levels.LevelDefinitionParserCache;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.microedition.khronos.opengles.GL10;
+
 import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.instant.CCCallFunc;
@@ -26,6 +28,7 @@ import org.cocos2d.actions.interval.CCRotateBy;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 import org.cocos2d.types.CGSize;
@@ -43,6 +46,7 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 	private HashMap<String, String> connections;
 	private LevelDefinition levelDef;
 	private boolean postBuildParsed;
+	private ArrayList<MenuNode> parents;
 	
 	public MenuNode(float x, float y, float width, float height) {
 		super(x, y, width, height);		
@@ -58,6 +62,7 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 		Util.getScaledRect(CGRect.make(this.getPosition(), CGSize.make(this.width, this.height)), MenuNode.Default_Width, MenuNode.Default_Height, Level.currentLevel.getCameraManager().getCurrentZoom(), this.scaledRect);
 		
 		this.connections = new HashMap<String, String>();
+		this.parents = new ArrayList<MenuNode>();
 	}
 	
 	@Override
@@ -245,14 +250,21 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 		return this.getLevelDefinition().isUnlock();
 	}
 	
-	public void unlockChildConnectionsGraph() {		
-		if (this.getLevelDefinition().isFinished() && !this.postBuildParsed) {
-			this.postBuildParsed = true;		
-			for(String connectionName : this.connections.values()) {
-				MenuNode child = SlimeFactory.MenuNode.get(connectionName);
-				if (child != null) {
-					child.setUnlock(true);
-					child.unlockChildConnectionsGraph();
+	public void unlockChildConnectionsGraph(MenuNode parent) {		
+		if (!this.postBuildParsed) {
+			if (parent != null) {
+				this.parents.add(parent);
+			}
+			
+			this.postBuildParsed = true;					
+
+			if (this.getLevelDefinition().isFinished()) {
+				for(String connectionName : this.connections.values()) {
+					MenuNode child = SlimeFactory.MenuNode.get(connectionName);
+					if (child != null) {
+						child.setUnlock(true);
+						child.unlockChildConnectionsGraph(this);
+					}
 				}
 			}
 		}
@@ -265,5 +277,19 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 	public void destroy() {
 		super.destroy();
 		SlimeFactory.MenuNode.remove(this.getNodeId());
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.base.GameItem#draw(javax.microedition.khronos.opengles.GL10)
+	 */
+	@Override
+	public void draw(GL10 gl) {
+		super.draw(gl);
+		for(MenuNode parent : this.parents) {
+			gl.glDisable(GL10.GL_LINE_SMOOTH);
+			gl.glColor4f(0.0f, 170f / 255f, 54f / 255f, 1.0f);
+			gl.glLineWidth(2f);										
+			CCDrawingPrimitives.ccDrawLine(gl, this.getPosition(), parent.getPosition());
+		}
 	}
 }
