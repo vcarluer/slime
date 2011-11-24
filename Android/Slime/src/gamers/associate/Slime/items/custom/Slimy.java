@@ -60,7 +60,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 		super(x, y, width, height, world, worldRatio);
 		this.spriteType = SpriteType.ANIM_SCALE;
 		
-		if (width == 0 && this.height == 0) {
+		if (width == 0 && height == 0) {
 			this.width = Default_Width;
 			this.height = Default_Height;			
 		}	

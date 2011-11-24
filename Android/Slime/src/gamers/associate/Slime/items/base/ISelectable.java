@@ -31,4 +31,6 @@ public interface ISelectable {
 	CCNode getRootNode();
 	
 	boolean isActive();
+	
+	boolean simpleSelect();
 }

@@ -505,4 +505,9 @@ public class SlimyJump extends Slimy implements ISelectable {
 		this.currentJoint = null;
 		this.currentJointDef = null;
 	}
+
+	@Override
+	public boolean simpleSelect() {
+		return true;
+	}
 }

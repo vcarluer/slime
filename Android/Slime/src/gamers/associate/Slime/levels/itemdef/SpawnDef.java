@@ -8,7 +8,8 @@ public class SpawnDef extends ItemDefinition {
 	
 	@Override
 	public void createItem(Level level) {
-		level.setStartItem(SlimeFactory.Slimy.createJump(this.x, this.y, 1.0f));
+		// todo: Create and use createBL
+		level.setStartItem(SlimeFactory.Slimy.createJump(this.x + this.width / 2, this.y + this.height / 2, 1.0f));
 	}
 
 	@Override

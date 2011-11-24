@@ -176,10 +176,7 @@ public class Level {
 		// Resume existing level if exists, either reload one
 		if (forceReload || currentLevel.getCurrentLevelName() != levelName) {
 			currentLevel.loadLevel(levelName);
-		}
-		
-		// Set camera right based on screen size
-		currentLevel.attachLevelToCamera();	
+		}				
 		
 		return currentLevel;
 	}
@@ -208,19 +205,23 @@ public class Level {
 	// Must be call before running scene with CCDirector
 	public void loadLevel(String levelName) {
 		this.resetLevel();		
-		SlimeFactory.LevelBuilder.build(this, levelName);			
-				
+		SlimeFactory.LevelBuilder.build(this, levelName);						
 		this.currentLevelName = levelName;
+		// Set camera right based on screen size
+		this.attachLevelToCamera();
+
 		this.startLevel();				
 	}
 			
-	public void resetLevel() {		
+	public void resetLevel() {				
 		this.isPhysicDisabled = false;
 		this.currentLevelName = "";
 		
 		for (GameItem item : this.items.values()) {
 			item.destroy();
 		}
+		
+		this.gamePlay = null;
 		
 		this.trigerables.clear();
 		this.aliveSlimyList.clear();
@@ -585,11 +586,8 @@ public class Level {
 	public void simpleSelect() {
 		if (this.selectedItem != null) {
 			// this.cameraManager.centerCameraOn(this.selectedItem.getPosition());
-			if (this.selectedItem instanceof GameItem) {
-				if (this.selectedItem instanceof Thumbnail) {
-					((Thumbnail)this.selectedItem).selectionStop(null);
-				}
-				else {
+			if (this.selectedItem instanceof GameItem) {				
+				if (this.selectedItem.simpleSelect()) {
 					if (this.gamePlay == null) {
 						GameItem center = (GameItem)this.selectedItem;
 						this.cameraManager.moveInterpolateTo(center, 0.3f);
@@ -598,7 +596,7 @@ public class Level {
 					else {
 						this.gamePlay.simpleSelect();
 					}
-				}				
+				}							
 			}
 			
 			this.unselectCurrent();

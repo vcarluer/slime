@@ -32,7 +32,7 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 		// this.spriteType = SpriteType.UNKNOWN;
 		this.spriteType = SpriteType.SINGLE_SCALE_DIRECT;
 		this.zOrder = Level.zFront;
-		this.selectionRect = CGRect.make(0, 0, Default_Selection_Width, Default_Selection_Height);
+		this.selectionRect = CGRect.make(0, 0, Default_Selection_Width, Default_Selection_Height);		
 		this.scaledRect = CGRect.zero();
 	}
 	
@@ -58,8 +58,7 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 		this.selectionRect.origin.x = this.position.x - Default_Selection_Width / 2;
 		this.selectionRect.origin.y = this.position.y - Default_Selection_Height / 2;		
 		
-		Util.getScaledRect(this.selectionRect, this.width, this.height, Level.currentLevel.getCameraManager().getCurrentZoom(), this.scaledRect);
-		
+		Util.getScaledRect(this.selectionRect, this.width, this.height, Level.currentLevel.getCameraManager().getCurrentZoom(), this.scaledRect);		
 		return this.scaledRect;
 	}
 
@@ -183,5 +182,11 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 				Util.draw(gl, this.scaledRect, 1.0f, 0, 0, 1, 1);
 			}
 		}
+	}
+
+	@Override
+	public boolean simpleSelect() {
+		this.selectionStop(null);
+		return false;
 	}	
 }

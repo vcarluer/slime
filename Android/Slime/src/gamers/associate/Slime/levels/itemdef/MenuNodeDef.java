@@ -2,6 +2,8 @@ package gamers.associate.Slime.levels.itemdef;
 
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.items.custom.MenuNode;
+import gamers.associate.Slime.items.custom.Slimy;
 
 public class MenuNodeDef extends ItemDefinition {
 	private static String Handled_Def = "MenuNode";
@@ -15,9 +17,11 @@ public class MenuNodeDef extends ItemDefinition {
 	
 	@Override
 	public void createItem(Level level) {
-		SlimeFactory.MenuNode.createBL(this.x, this.y, 0, 0);
+		SlimeFactory.MenuNode.createBL(this.x, this.y, this.width, this.height, id, targetLevel);
 		if (this.id.equals("n00")) {
-			SlimeFactory.Slimy.createBL(this.x, this.y, this.width, this.height);
+			float ratio = 1.0f;
+			// node width must be higher than slimy width
+			level.setStartItem(SlimeFactory.Slimy.create(this.x + this.width / 2, this.y + (ratio * Slimy.Default_Height) / 2, ratio));
 		}
 	}
 
