@@ -10,6 +10,7 @@ import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.types.CGPoint;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -63,7 +64,29 @@ public class CircularSaw extends GameItemPhysic implements ITrigerable {
 		
 		// Define another box shape for our dynamic body.
 		PolygonShape dynamicBox = new PolygonShape();
-		dynamicBox.setAsBox(this.bodyWidth / this.worldRatio / 2, this.bodyHeight / this.worldRatio / 2);
+		// dynamicBox.setAsBox(this.bodyWidth / this.worldRatio / 2, this.bodyHeight / this.worldRatio / 2);
+		float bW = this.bodyWidth / this.worldRatio;
+		float bW2 = bW / 2;
+		float bH = this.bodyHeight / this.worldRatio;
+		float bH2 = bH / 2;
+		Vector2 p1 = new Vector2(bW / 5 - bW2, bH / 5 - bH2);
+		Vector2 p2 = new Vector2(4 * bW / 5 - bW2, bH / 5 - bH2);
+		Vector2 p3 = new Vector2(bW - bW2, 2 * bH / 5 - bH2);
+		Vector2 p4 = new Vector2(bW - bW2, 4 * bH / 5 - bH2);
+		Vector2 p5 = new Vector2(4 * bW / 5 - bW2, bH - bH2);
+		Vector2 p6 = new Vector2(bW / 5 - bW2, bH - bH2);
+		Vector2 p7 = new Vector2(0 - bW2, 4 *  bH / 5 - bH2);
+		Vector2 p8 = new Vector2(0 - bW2,2 *  bH / 5 - bH2);
+		Vector2[] vertices = new Vector2[8];
+		vertices[0] = p1;
+		vertices[1] = p2;
+		vertices[2] = p3;
+		vertices[3] = p4;
+		vertices[4] = p5;
+		vertices[5] = p6;
+		vertices[6] = p7;
+		vertices[7] = p8;
+		dynamicBox.set(vertices);
 		
 		synchronized (world) {
     		// Define the dynamic body fixture and set mass so it's dynamic.

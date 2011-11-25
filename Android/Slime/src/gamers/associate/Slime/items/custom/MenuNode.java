@@ -164,8 +164,13 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 	}
 	
 	public void endMoveAnimDone() {
-		SlimeFactory.MenuNode.setCurrentNode(this);
-		this.getLevelDefinition();
+		MenuNode current = SlimeFactory.MenuNode.getCurrentNode();
+		if (current != null) {
+			current.getLevelDefinition().setCurrentSelection(false);
+		}
+
+		SlimeFactory.MenuNode.setCurrentNode(this);		
+		this.getLevelDefinition().setCurrentSelection(true);
 	}
 	
 	private void enterLevel() {
@@ -291,5 +296,9 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 			gl.glLineWidth(2f);										
 			CCDrawingPrimitives.ccDrawLine(gl, this.getPosition(), parent.getPosition());
 		}
+	}
+	
+	public boolean isCurrentSelection() {
+		return this.getLevelDefinition().isCurrentSelection();
 	}
 }

@@ -41,7 +41,7 @@ public class LevelSelectionLayer extends CCLayer {
 		menu = CCMenu.menu();
 		menuCommand = CCMenu.menu();
 		
-		menuCommand.setPosition((MenuSprite.Width + 5) / 2, (MenuSprite.Height + 5) / 2);
+		menuCommand.setPosition((MenuSprite.Width + 5) / 2, CCDirector.sharedDirector().winSize().height - (MenuSprite.Height + 5) / 2);
 		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);
 		CCMenuItemSprite goBackMenu = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goBackEvent");
 		
@@ -62,8 +62,8 @@ public class LevelSelectionLayer extends CCLayer {
 			
 			menu.addChild(menuItemSprite);
 		}
-				
-		menu.alignItemsInColumns(new int[] { 7, 7 });
+		
+		menu.alignItemsHorizontally(2f);
 		
 		this.addChild(menuCommand, 1);
 		this.addChild(menu, 1);

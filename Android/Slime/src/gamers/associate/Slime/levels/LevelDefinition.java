@@ -25,6 +25,7 @@ public abstract class LevelDefinition {
 	protected Context context;
 	protected boolean isUnlock;
 	protected boolean isFinished;
+	protected boolean isCurrentSelection;
 	
 	protected LevelDefinition() {
 		this.gamePlay = GamePlay.None;
@@ -129,7 +130,9 @@ public abstract class LevelDefinition {
 			buffWriter.newLine();
 			buffWriter.write(String.valueOf(this.isUnlock));
 			buffWriter.newLine();
-			buffWriter.write(String.valueOf(this.isFinished));	
+			buffWriter.write(String.valueOf(this.isFinished));
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.isCurrentSelection));
 		} catch (FileNotFoundException ex) {
 			Log.e(Slime.TAG, "ERROR, file not found " + this.id);
 			ex.printStackTrace();
@@ -174,6 +177,9 @@ public abstract class LevelDefinition {
 						case 3:
 							this.isFinished = Boolean.valueOf(line).booleanValue();
 							break;
+						case 4:
+							this.isCurrentSelection = Boolean.valueOf(line).booleanValue();
+							break;
 						default:
 							break;
 						}												
@@ -210,6 +216,21 @@ public abstract class LevelDefinition {
 	 */
 	public void setFinished(boolean isFinished) {
 		this.isFinished = isFinished;
+		this.handlePersistancy();
+	}
+
+	/**
+	 * @return the isCurrentSelection
+	 */
+	public boolean isCurrentSelection() {
+		return isCurrentSelection;
+	}
+
+	/**
+	 * @param isCurrentSelection the isCurrentSelection to set
+	 */
+	public void setCurrentSelection(boolean isCurrentSelection) {
+		this.isCurrentSelection = isCurrentSelection;
 		this.handlePersistancy();
 	}
 }

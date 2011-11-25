@@ -28,25 +28,21 @@ public class MenuNodeDef extends ItemDefinition {
 			node.setUnlock(true);
 			this.rootItem = node;
 		}
-		
-		MenuNode startNode = null;
-		if (SlimeFactory.MenuNode.getCurrentNode() == null && this.id.equals(rootNode)) {
-			startNode = node;
-		}
-		else {
-			if (SlimeFactory.MenuNode.getCurrentNode() != null && SlimeFactory.MenuNode.getCurrentNode().getNodeId().equals(this.id)) {
-				startNode = node;
-			}
-		}
-		
+					
+		if (node.isCurrentSelection()) {
+			this.createStartNode(node);
+		}						
+	}
+	
+	private void createStartNode(MenuNode startNode) {
 		if (startNode != null) {
 			float ratio = 1.0f;
 			// start item centered in node
 			Slimy slimy = SlimeFactory.Slimy.create(this.x + this.width / 2, this.y + (ratio * Slimy.Default_Height) / 2, ratio);
 			slimy.land();
 			slimy.disablePhysic();
-			level.setStartItem(slimy);
-			SlimeFactory.MenuNode.setCurrentNode(node);
+			Level.currentLevel.setStartItem(slimy);
+			SlimeFactory.MenuNode.setCurrentNode(startNode);
 		}
 	}
 
@@ -70,6 +66,10 @@ public class MenuNodeDef extends ItemDefinition {
 		// Browse node graph to enable or disable new nodes
 		if (this.rootItem != null) {
 			this.rootItem.unlockChildConnectionsGraph(null);
+		}
+		
+		if (SlimeFactory.MenuNode.getCurrentNode() == null) {
+			this.createStartNode(this.rootItem);
 		}
 	}
 }
