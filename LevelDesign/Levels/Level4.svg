@@ -16,7 +16,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 "
-   sodipodi:docname="Slime_level.svg">
+   sodipodi:docname="Level4.svg">
   <defs
      id="defs4">
     <linearGradient
@@ -110,11 +110,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="78.020154"
-     inkscape:cy="344.84933"
+     inkscape:zoom="7.9195959"
+     inkscape:cx="144.88358"
+     inkscape:cy="274.79962"
      inkscape:document-units="px"
-     inkscape:current-layer="Template"
+     inkscape:current-layer="MAP"
      showgrid="true"
      inkscape:snap-grids="true"
      inkscape:snap-page="false"
@@ -146,7 +146,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -683,5 +683,26 @@
        x="0"
        y="368"
        type="Platform" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
+       d="m 112,368 40,0 -8,-16 -24,0 z"
+       id="path3094-4"
+       inkscape:connector-curvature="0"
+       type="Polygon"
+       att_isDynamic="false"
+       att_isStickable="false"
+       att_isEmpty="true"
+       sodipodi:nodetypes="ccccc" />
+    <image
+       width="40"
+       height="16"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAPCAYAAACWV43jAAAABHNCSVQICAgIfAhkiAAAAmRJREFU SIm1ls1K41AUx3/npmBTCiK4cFcK6iOIX7ti22kewBfxGbQiiAtB8KNoXcwgs5o3kL6FLjTFTTcF NaStcbyzaFNv09jRFgOXnHPu5Zzf/efcJOgRl+u6GvjWUavVRiHoBCMu3/cBWF1dZWFhYdRSAEQp xLIQpVBK9X0l0o+Hc+7dHX+urv6fU2uto8Fms0kmkwGg1Wp1i4nEJ/hMPLJGRNBvbwSvr6RsG9/3 ub29JZvNDuWJVfDg4ADP8ygWi6TT6Q/2FgNlKijy7oe2qahSAPjPz/y6uGB7e5uTk5PhnFEFHx8f yWQyLC8vs7m5+Wk4AJVIoCyre4/aPd8yfER48Tx+V6v8rFa5ubkZUlFFixweHtJutykWi1+CA8Dc a9Tu+RrQWqO17raBCAXHIZ1Os7OzM7xp0/E8j/39fdbX15menv46X6/4h6AxvoiQtG1+OA7n5+fc 399/DHh0dMTT0xOlUunLcGZxU6WBudA3bFEKlCJfKpFKpSiXy/GArVaLvb091tbWmJmZGQ8wAjoA GzNH7zGLCFPJJPlCgUqlguu6w4DHx8c0m00cx5kMbIRqIag2QPunWylyGxvYtj2gogLodDrs7u6y srLC7Ozs+HxhcQMg1g5BDQVFBNu2yefznJ2dUa/X3wErlQqNRmP83hugNJSK68OobSgoSpHL5Ugm k30VVRAElMtllpaWmJubmxguztYGdLQNwldNvxenpigUCpyenvLw8EDi8vKSer3O4uIi19fXkwEy 2FPK+P7GxVTvBL92Ot3RbvP35QXLsgiCgK2tLZifn//2P5ZJxj879ZSvD8vC5wAAAABJRU5ErkJg gg== "
+       id="Sprite-4"
+       x="112"
+       y="352"
+       type="Sprite"
+       att_plist="tank"
+       att_frameName="spawn-zone"
+       att_frameCount="1" />
   </g>
 </svg>

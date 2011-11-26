@@ -28,13 +28,13 @@ public class MenuNodeDef extends ItemDefinition {
 			node.setUnlock(true);
 			this.rootItem = node;
 		}
-					
+		
 		if (node.isCurrentSelection()) {
 			this.createStartNode(node);
 		}						
 	}
 	
-	private void createStartNode(MenuNode startNode) {
+	private void createStartNode(MenuNode startNode) {				
 		if (startNode != null) {
 			float ratio = 1.0f;
 			// start item centered in node
@@ -43,7 +43,7 @@ public class MenuNodeDef extends ItemDefinition {
 			slimy.disablePhysic();
 			Level.currentLevel.setStartItem(slimy);
 			SlimeFactory.MenuNode.setCurrentNode(startNode);
-		}
+		}		
 	}
 
 	@Override

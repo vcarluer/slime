@@ -4,6 +4,7 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Triangulate;
 import gamers.associate.Slime.game.Util;
+import gamers.associate.Slime.items.custom.PhysicPolygon;
 import gamers.associate.Slime.items.custom.SlimyFactory;
 
 import java.util.ArrayList;
@@ -17,7 +18,9 @@ public class PolygonDef extends ItemDefinition {
 	private float yReference;
 	private float heightReference;
 	private String path;
-	private boolean isdynamic;
+	private boolean isdynamic;	
+	private boolean isStickable;
+	private boolean isEmpty;
 	
 	@Override
 	public void createItem(Level level) {		
@@ -78,7 +81,12 @@ public class PolygonDef extends ItemDefinition {
 			j++;
 		}
 		
-		SlimeFactory.Polygon.create(this.x, this.y, this.width, this.height, this.isdynamic, realPoints);
+		int polyType = PhysicPolygon.Fill;
+		if (this.isEmpty) {
+			polyType = PhysicPolygon.Empty;
+		}
+		
+		SlimeFactory.Polygon.create(this.x, this.y, this.width, this.height, this.isdynamic, realPoints, polyType, this.isStickable);
 	}
 
 	@Override
@@ -92,6 +100,13 @@ public class PolygonDef extends ItemDefinition {
 		this.heightReference = Float.parseFloat(infos[start+1]);
 		this.path = infos[start + 2];
 		this.isdynamic = Boolean.parseBoolean(infos[start+3]);
+		try {
+			this.isStickable = Boolean.parseBoolean(infos[start+4]);
+			this.isEmpty = Boolean.parseBoolean(infos[start+5]);
+		} catch (Exception ex) {
+			this.isStickable = false;
+			this.isEmpty = false;
+		}
 	}
 
 }

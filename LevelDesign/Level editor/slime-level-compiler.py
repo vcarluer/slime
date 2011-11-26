@@ -186,7 +186,7 @@ class Smile( inkex.Effect ):
 				# if "A " in path:
 				# 	path = path.replace("A ", "")
 					
-				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(self.__yReference)+";"+str(self.__heightReference)+";"+path+";"+str(child.get("att_isDynamic"))
+				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(self.__yReference)+";"+str(self.__heightReference)+";"+path+";"+str(child.get("att_isDynamic"))+";"+str(child.get("att_isStickable"))+";"+str(child.get("att_isEmpty"))
 				
 				return True;
 			
@@ -214,6 +214,11 @@ class Smile( inkex.Effect ):
 				
 			if str(child.get("type")) == 'Box_Bottle':
 				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_isStatic"))+";"+str(child.get("att_isStickable"))
+				return True;
+				
+			# Sprites
+			if str(child.get("type")) == 'Sprite':
+				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_plist"))+";"+str(child.get("att_frameName"))+";"+str(child.get("att_frameCount"))
 				return True;
 			
 			# Standard Item

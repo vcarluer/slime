@@ -6,6 +6,7 @@ import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.layers.GALogoLayer;
+import gamers.associate.Slime.levels.LevelDefinitionParserCache;
 import gamers.associate.Slime.levels.LevelHome;
 
 import org.cocos2d.layers.CCScene;

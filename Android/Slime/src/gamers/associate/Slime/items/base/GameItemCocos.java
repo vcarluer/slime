@@ -16,7 +16,7 @@ import org.cocos2d.types.CGSize;
 /**
  * @author  vince
  */
-public abstract class GameItemCocos extends GameItem {	
+public class GameItemCocos extends GameItem {	
 	protected Hashtable<String, CCAnimation> animationList;
 	protected CCAction currentAction;
 	protected CCSprite sprite;
@@ -25,6 +25,7 @@ public abstract class GameItemCocos extends GameItem {
 	protected boolean attachedToRoot;
 	protected int zOrder;
 	protected CGSize referenceSize;
+	private String referenceAnimationName;
 		
 	public GameItemCocos(float x, float y, float width, float height) {
 		super(x, y, width, height);		
@@ -126,7 +127,12 @@ public abstract class GameItemCocos extends GameItem {
 	}
 	
 	protected String getReferenceAnimationName() {
-		return null;
+		return this.referenceAnimationName;
+	}
+	
+	// Used by CcosFactory
+	public void setReferenceAnimationName(String referenceAnimationName) {
+		this.referenceAnimationName = referenceAnimationName;
 	}
 	
 	protected void transformTexture() {
@@ -324,5 +330,9 @@ public abstract class GameItemCocos extends GameItem {
 		if (this.sprite != null) {
 			this.sprite.setRotation(angle);
 		}
+	}
+	
+	public void setSpriteType(SpriteType type) {
+		this.spriteType = type;
 	}
 }

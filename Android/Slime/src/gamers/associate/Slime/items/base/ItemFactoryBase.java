@@ -37,12 +37,16 @@ public abstract class ItemFactoryBase<T extends GameItemCocos> {
 	
 	protected abstract void createAnimList();
 	
-	protected void createAnim(String animName, int frameCount) {		
-		this.sharedAnimations.put(animName, GameItemCocos.createAnim(animName, frameCount));
+	protected CCAnimation createAnim(String animName, int frameCount) {		
+		CCAnimation animation = GameItemCocos.createAnim(animName, frameCount);
+		this.sharedAnimations.put(animName, animation);
+		return animation;
 	}
 	
-	protected void createAnim(String animName, int frameCount, float interval) {
-		this.sharedAnimations.put(animName, GameItemCocos.createAnim(animName, frameCount, interval));
+	protected CCAnimation createAnim(String animName, int frameCount, float interval) {
+		CCAnimation animation = GameItemCocos.createAnim(animName, frameCount, interval);
+		this.sharedAnimations.put(animName, animation);
+		return animation;
 	}
 	
 	protected abstract String getPlistPng();

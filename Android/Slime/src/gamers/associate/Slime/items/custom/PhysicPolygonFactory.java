@@ -1,9 +1,5 @@
 package gamers.associate.Slime.items.custom;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import gamers.associate.Slime.game.Triangulate;
 import gamers.associate.Slime.items.base.GameItemPhysicFactory;
 import gamers.associate.Slime.items.base.TextureAnimation;
 
@@ -13,10 +9,14 @@ public class PhysicPolygonFactory extends GameItemPhysicFactory<PhysicPolygon> {
 	// Class Not thread safe due to this fields
 	private boolean isDynamic;
 	private CGPoint[] bodyPoints;
+	private int currentType;
+	private boolean isStickable;
 	
-	public PhysicPolygon create(float x, float y, float width, float height, boolean isDynamic, CGPoint[] bodyPoints) {		
-		this.isDynamic = isDynamic;
-		this.bodyPoints = bodyPoints;				
+	public PhysicPolygon create(float x, float y, float width, float height, boolean isDynamic, CGPoint[] bodyPoints, int type, boolean isStickable) {		
+		this.isDynamic = isDynamic;		
+		this.bodyPoints = bodyPoints;
+		this.currentType = type;
+		this.isStickable = isStickable;
 		
 		PhysicPolygon polygon = super.create(x, y, width, height);
 		
@@ -33,8 +33,9 @@ public class PhysicPolygonFactory extends GameItemPhysicFactory<PhysicPolygon> {
 	
 	@Override
 	protected void createAnimList() {
-		TextureAnimation.createFramesFromFiles(PhysicPolygon.Anim_Base, 1);
-		this.createAnim(PhysicPolygon.Anim_Base, 1);
+		TextureAnimation.createFramesFromFiles(PhysicPolygon.Anim_Base_Fill, 1);
+		this.createAnim(PhysicPolygon.Anim_Base_Fill, 1);
+		TextureAnimation.createFramesFromFiles(PhysicPolygon.Anim_Base_Empty, 1);
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class PhysicPolygonFactory extends GameItemPhysicFactory<PhysicPolygon> {
 	@Override
 	protected PhysicPolygon instantiate(float x, float y, float width,
 			float height) {
-		return new PhysicPolygon(x, y, width, height, this.world, this.worldRatio);
+		return new PhysicPolygon(x, y, width, height, this.world, this.worldRatio, this.currentType, this.isStickable);
 	}
 
 	@Override

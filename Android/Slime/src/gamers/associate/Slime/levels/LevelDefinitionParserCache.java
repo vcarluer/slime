@@ -15,4 +15,8 @@ public class LevelDefinitionParserCache {
 			return levelDef;
 		}
 	}
+	
+	public static void reset() {
+		cache.clear();
+	}
 }

@@ -6,6 +6,7 @@ import gamers.associate.Slime.items.custom.BoxFactory;
 import gamers.associate.Slime.items.custom.BumperAngleFactory;
 import gamers.associate.Slime.items.custom.ButtonFactory;
 import gamers.associate.Slime.items.custom.CircularSawFactory;
+import gamers.associate.Slime.items.custom.CocosFactory;
 import gamers.associate.Slime.items.custom.GoalPortalFactory;
 import gamers.associate.Slime.items.custom.HomeLevelHandlerFactory;
 import gamers.associate.Slime.items.custom.LaserBeamFactory;
@@ -53,6 +54,7 @@ public abstract class SlimeFactory {
 	public static LaserGunFactory LaserGun = new LaserGunFactory();
 	public static TargetFactory Target = new TargetFactory();
 	public static LaserBeamFactory LaserBeam = new LaserBeamFactory();
+	public static CocosFactory Sprite = new CocosFactory();
 		
 	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {		
 		LevelBuilder = new LevelBuilder();
@@ -77,6 +79,7 @@ public abstract class SlimeFactory {
 		LaserGun.attach(level, attachNode, attachWorld, attachWorldRatio);
 		Target.attach(level);
 		LaserBeam.attach(level, attachNode, attachWorld, attachWorldRatio);
+		Sprite.attach(level, attachNode);
 		
 		SpriteSheetFactory.attachAll(attachNode);
 		isAttached = true;
@@ -103,6 +106,7 @@ public abstract class SlimeFactory {
 		LaserGun.detach();
 		Target.detach();
 		LaserBeam.detach();
+		Sprite.detach();
 		
 		SpriteSheetFactory.detachAll();
 		isAttached = false;
@@ -128,6 +132,7 @@ public abstract class SlimeFactory {
 		LaserGun.destroy();
 		// No destroy for target
 		LaserBeam.destroy();
+		Sprite.destroy();
 		
 		SpriteSheetFactory.destroy();
 		isAttached = false;

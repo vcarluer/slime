@@ -22,19 +22,26 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class PhysicPolygon extends GameItemPhysic {
-	public static String Anim_Base = "wall"; //metal2
+	public static final int Fill = 0;
+	public static final int Empty = 1;
+	public static String Anim_Base_Fill = "wall";
+	public static String Anim_Base_Empty = "empty";
 	protected CGPoint[] vertices;
 	protected CGPoint[] bodyPoints;
-	protected boolean isDynamic;	
+	protected boolean isDynamic;
+	protected boolean isStickable;
+	
+	protected int type;
 	
 	// Vertices counter clockwise base on 0, 0
 	public PhysicPolygon(float x, float y, float width,
-			float height, World world, float worldRatio) {
+			float height, World world, float worldRatio, int type, boolean isStickable) {
 		super(x, y, width, height, world, worldRatio);
 		
 		this.spriteType = SpriteType.POLYGON_REPEAT;		
 		this.zOrder = Level.zBack;
-		this.setNoStick(false);
+		this.setNoStick(!isStickable);
+		this.type = type;
 	}
 	
 	public void initPoly(boolean isDynamic, CGPoint[] bodyPoints) {
@@ -70,6 +77,8 @@ public class PhysicPolygon extends GameItemPhysic {
 			BodyDef bodyDef = new BodyDef();		
 			if (this.isDynamic) {
 				bodyDef.type = BodyType.DynamicBody;
+			} else {
+				bodyDef.type = BodyType.StaticBody;
 			}
 			
 			CGPoint spawnPoint = new CGPoint();
@@ -132,13 +141,21 @@ public class PhysicPolygon extends GameItemPhysic {
 	 */
 	@Override
 	protected String getReferenceAnimationName() {
-		return PhysicPolygon.Anim_Base;
+		switch (this.type) {
+			case Empty:
+				return Anim_Base_Empty;
+			case Fill:
+			default:
+				return Anim_Base_Fill;
+		}
 	}
 	
 	public void initAnimation() {
-		CCAnimate animation = CCAnimate.action(this.animationList.get(Anim_Base), false);
-		this.currentAction = CCRepeatForever.action(animation);
-		this.sprite.runAction(this.currentAction);
+		if (this.type == Fill) {
+			CCAnimate animation = CCAnimate.action(this.animationList.get(Anim_Base_Fill), false);
+			this.currentAction = CCRepeatForever.action(animation);
+			this.sprite.runAction(this.currentAction);
+		}
 	}
 	
 	/* (non-Javadoc)

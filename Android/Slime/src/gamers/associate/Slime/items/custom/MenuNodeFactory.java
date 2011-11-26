@@ -86,7 +86,14 @@ public class MenuNodeFactory extends GameItemCocosFactory<MenuNode> {
 	}
 
 	public void setCurrentNode(MenuNode currentNode) {
+		if (this.currentNode != null) {
+			this.currentNode.setCurrentSelection(false);
+		}
+		
 		this.currentNode = currentNode;
+		if (this.currentNode != null) {
+			this.currentNode.setCurrentSelection(true);
+		}
 	}
 
 	public MenuNode getCurrentNode() {
