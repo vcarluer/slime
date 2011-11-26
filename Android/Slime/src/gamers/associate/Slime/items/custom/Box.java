@@ -13,27 +13,45 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class Box extends GameItemPhysic{
-	public static String Anim_Base = "wood2";
+	public static final int glassbox = 0;
+	public static final int multitubes = 1;
+	public static final int tube = 2;
+	public static final int bottle = 3;
+		
+	public static String Anim_Base_tube = "gw_smalltube";
+	public static String Anim_Base_bottle = "gw_bottle";
+	public static String Anim_Base_glassbox = "gw_box";
+	public static String Anim_Base_multitubes = "gw_multitube";
 	public static boolean chainMode;
+	
+	private int type;
+	private boolean isStatic;	
 	
 	public static void setChainMode(boolean value) {
 		chainMode = value;
 	}
 	
 	public Box(float x, float y, float width, float height,
-			World world, float worldRatio) {
+			World world, float worldRatio, int boxType, boolean isStatic, boolean isStickable) {
 		super(x, y, width, height, world, worldRatio);
 		
 		this.spriteType = SpriteType.SINGLE_SCALE;
 		this.zOrder = Level.zMid;
-		this.noStick = true;
+		this.noStick = !isStickable;
+		this.isStatic = isStatic;
+		this.type = boxType;
 	}
 
 	@Override
 	protected void initBody() {
 		// Physic body
 		BodyDef bodyDef = new BodyDef();		
-		bodyDef.type = BodyType.DynamicBody;
+		if (this.isStatic) {
+			bodyDef.type = BodyType.StaticBody;
+		} else {
+			bodyDef.type = BodyType.DynamicBody;
+		}
+				
 		CGPoint spawnPoint = new CGPoint();
 		spawnPoint.x = this.position.x;
 		spawnPoint.y = this.position.y;
@@ -71,6 +89,16 @@ public class Box extends GameItemPhysic{
 	 */
 	@Override
 	protected String getReferenceAnimationName() {
-		return Box.Anim_Base;
+		switch (this.type) {		
+		case tube:
+			return Anim_Base_tube;
+		case bottle:
+			return Anim_Base_bottle;		
+		case multitubes:		
+			return Anim_Base_multitubes;
+		case glassbox:
+		default:
+			return Anim_Base_glassbox;
+		}
 	}
 }

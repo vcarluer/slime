@@ -37,7 +37,7 @@ public class GALogoLayer extends CCLayer {
 //		CCSpriteFrame spriteFrame = CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("JulenGarciaGA.png");
 //		this.sprite = CCSprite.sprite(spriteFrame);
 //		this.spriteSheet.addChild(this.sprite);
-		this.sprite = CCSprite.sprite("JulenGarciaGA.png");
+		this.sprite = CCSprite.sprite("cosmo3.png");
 		this.addChild(this.sprite);
 		this.sprite.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,

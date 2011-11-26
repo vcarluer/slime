@@ -68,6 +68,14 @@ public class PlatformFactory extends GameItemPhysicFactory<Platform>{
 		return this.create(x + width / 2, y + height / 2, width, height, Platform.Corner);
 	}
 	
+	public Platform createTBL(float x, float y, float width, float height) {
+		return this.create(x + width / 2, y + height / 2, width, height, Platform.T);
+	}
+	
+	public Platform createCrossBL(float x, float y, float width, float height) {
+		return this.create(x + width / 2, y + height / 2, width, height, Platform.Cross);
+	}
+	
 	public void setCurrentType(int platformType) {
 		this.currentType = platformType;
 	}

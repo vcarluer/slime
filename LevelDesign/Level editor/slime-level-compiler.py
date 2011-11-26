@@ -200,6 +200,22 @@ class Smile( inkex.Effect ):
 				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_name"))
 				return True;
 			
+			# Boxes
+			if str(child.get("type")) == 'Box_Tube':
+				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_isStatic"))+";"+str(child.get("att_isStickable"))
+				return True;
+			if str(child.get("type")) == 'Box_Multitubes':
+				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_isStatic"))+";"+str(child.get("att_isStickable"))
+				return True;
+				
+			if str(child.get("type")) == 'Box_GlassBox':
+				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_isStatic"))+";"+str(child.get("att_isStickable"))
+				return True;
+				
+			if str(child.get("type")) == 'Box_Bottle':
+				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_isStatic"))+";"+str(child.get("att_isStickable"))
+				return True;
+			
 			# Standard Item
 			print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)
 			return True;
