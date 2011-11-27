@@ -104,7 +104,7 @@ public class PolygonDef extends ItemDefinition {
 			this.isStickable = Boolean.parseBoolean(infos[start+4]);
 			this.isEmpty = Boolean.parseBoolean(infos[start+5]);
 		} catch (Exception ex) {
-			this.isStickable = false;
+			this.isStickable = true;
 			this.isEmpty = false;
 		}
 	}

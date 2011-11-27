@@ -359,6 +359,10 @@ public class Level {
 	
 	public void tick(float delta) {
 		if (!isPaused) {
+			if (this.isGameOver && !this.isVictory) {
+				this.reload();
+			}
+
 			delta = delta * this.getTimeRatio();
 			if (this.itemsToAdd.size() > 0) {
 				for(GameItem item : this.itemsToAdd) {
@@ -779,9 +783,9 @@ public class Level {
 				slimy.lose();
 			}
 			
-			if (showEndLevel) {
-				this.showEndLevel();
-			}
+//			if (showEndLevel) {
+//				this.showEndLevel();
+//			}						
 			
 			return true;
 		}

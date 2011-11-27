@@ -261,6 +261,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	}
 	
 	public void kill() {
+		Sounds.playEffect(R.raw.slimydeath);
 		if (this.body != null) {
 			Filter filter = new Filter();
 			
