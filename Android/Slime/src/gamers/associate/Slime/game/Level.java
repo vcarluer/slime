@@ -47,6 +47,7 @@ public class Level {
 	private static String winTxt = "VICTORY";
 	private static String gameOverTxt = "GAME OVER";
 	
+	private float timeRatio = 2.0f;
 	protected World world;
 	protected Vector2 gravity;
 	protected float worldRatio = 32f;
@@ -354,8 +355,12 @@ public class Level {
 	}
 	
 	public float getTimeRatio() {
-		return 2.0f;
+		return this.timeRatio;
 	}
+	
+	public void setTimeRatio(float timeRatio) {
+		this.timeRatio = timeRatio;
+	}	
 	
 	public void tick(float delta) {
 		if (!isPaused) {
