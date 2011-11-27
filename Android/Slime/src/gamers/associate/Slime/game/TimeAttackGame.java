@@ -159,7 +159,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		this.isStarted = true;
 		this.setNormalTime();
 		this.level.getCameraManager().follow(this.level.getSelectedGameItem());		
-		this.level.desactivateCameraMoveAndZoomByUser();
+		// this.level.desactivateCameraMoveAndZoomByUser();
 	}
 
 	@Override
@@ -184,15 +184,27 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 
 	@Override
 	public void startLevel() {
+		this.reset();
+		this.enterGameMode();		
+	}
+	
+	private void enterGameMode() {
 		if(this.level.getStartItem() != null) {						
 			this.level.getCameraManager().centerCameraOn(this.level.getStartItem().getPosition());
 			this.level.getCameraManager().zoomInterpolateTo(this.level.getStartItem(), 1.0f, 1.0f);			
 			this.level.getCameraManager().follow(this.level.getStartItem());			
 		}
-		
-		this.reset();
-		
-		this.level.activateCameraMoveAndZoomByUser();
+
+		this.level.desactivateCameraMoveAndZoomByUser();
+//		this.level.activateCameraMoveAndZoomByUser();
+	}
+	
+	public void setPause(boolean pause) {
+		if (pause) {
+			this.level.activateCameraMoveAndZoomByUser();
+		} else {
+			this.enterGameMode();
+		}
 	}
 	
 	public void setStartTime(int startTime) {

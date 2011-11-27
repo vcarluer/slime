@@ -199,14 +199,16 @@ public class SlimyJump extends Slimy implements ISelectable {
 	public boolean canSelect(CGPoint gameReference) {
 		boolean can = false;
 		if (this.isActive()) {				
-			if (!this.hasJumped) {			
-				if (this.isInSlimy(gameReference)) {
-					can = true;
-				}
-			}
-			else {
-				can = true;
-			}
+			return true;
+//			
+//			if (!this.hasJumped) {			
+//				if (this.isInSlimy(gameReference)) {
+//					can = true;
+//				}
+//			}
+//			else {
+//				can = true;
+//			}
 		}
 		
 		if (!can && this.isDying) {			

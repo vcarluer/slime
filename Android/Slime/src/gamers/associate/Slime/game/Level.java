@@ -389,12 +389,11 @@ public class Level {
 				}
 				
 				this.itemsToRemove.clear();
-			}
-			
-			this.cameraManager.tick(delta);
-			
-			this.thumbnailManager.handle(this.selectables);
+			}									
 		}
+		
+		this.cameraManager.tick(delta);
+		this.thumbnailManager.handle(this.selectables);
 	}
 			
 	public void addItemToRemove(GameItem item) {
@@ -428,7 +427,11 @@ public class Level {
 		}
 		
 		this.isPaused = value;
-		this.setIsTouchEnabled(!this.isPaused);
+		
+		if (this.gamePlay != null) {
+			this.gamePlay.setPause(this.isPaused);
+		}
+//		this.setIsTouchEnabled(!this.isPaused);
 	}
 	
 	public void togglePause() {
@@ -593,14 +596,14 @@ public class Level {
 	}
 	
 	public void unselectCurrent() {
-		if(this.selectedItem != null) {
+		if(this.selectedItem != null && !this.isPaused) {
 			this.selectedItem.unselect();
 			this.selectedItem = null;
 		}
 	}
 	
 	public void activateSelection(CGPoint gameReference) {
-		if (this.selectedItem != null) {
+		if (this.selectedItem != null && !this.isPaused) {
 			// CGPoint gameTarget = this.cameraManager.getGamePoint(screenTarget);
 			this.selectedItem.selectionStop(gameReference);
 			
@@ -619,7 +622,7 @@ public class Level {
 	}
 	
 	public void simpleSelect() {
-		if (this.selectedItem != null) {
+		if (this.selectedItem != null && !this.isPaused) {
 			// this.cameraManager.centerCameraOn(this.selectedItem.getPosition());
 			if (this.selectedItem instanceof GameItem) {				
 				// Return true if auto or gameplay simpleSelect camera needed
@@ -640,7 +643,7 @@ public class Level {
 	}
 	
 	public boolean moveSelection(CGPoint gameReference) {
-		if (this.selectedItem != null) {			
+		if (this.selectedItem != null && !this.isPaused) {			
 			this.selectedItem.selectionMove(gameReference);
 			return true;
 		}
@@ -650,7 +653,7 @@ public class Level {
 	}
 
 	public void trySelect(CGPoint gameReference) {
-		if (this.selectedItem == null) {
+		if (this.selectedItem == null && !this.isPaused) {
 			for(ISelectable selectable : this.selectables) {
 				if (selectable.canSelect(gameReference)) {
 					if (this.selectedItem != null) {
