@@ -67,7 +67,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	private CGPoint selectStart;
 	private CGPoint selectScreenStart;
 	private CGPoint selectScreenEnd;
-	
+	private CGPoint absoluteScreenStart;
 	
 	private boolean hasJumped;		
 	
@@ -89,6 +89,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 		this.jointStart = CGPoint.zero();
 		this.selectScreenStart = CGPoint.zero();
 		this.selectScreenEnd = CGPoint.zero();
+		this.absoluteScreenStart = CGPoint.zero();
 	}
 	
 	public void selectionMove(CGPoint gameReference) {
@@ -144,7 +145,17 @@ public class SlimyJump extends Slimy implements ISelectable {
 			gl.glColor4f(0.0f, 170f / 255f, 54f / 255f, 1.0f);
 			gl.glLineWidth(5f);										
 			CCDrawingPrimitives.ccDrawLine(gl, this.jointStart, this.getPosition());
-		}				
+		}
+		
+		if (this.selected && this.selectScreenStart != null) {
+			gl.glEnable(GL10.GL_LINE_SMOOTH);
+			gl.glLineWidth(1.0f);
+            gl.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
+			CGPoint tmp = Level.currentLevel.getCameraManager().getGamePoint(this.selectScreenStart);
+			this.absoluteScreenStart.x = tmp.x;
+			this.absoluteScreenStart.y = tmp.y;
+            CCDrawingPrimitives.ccDrawCircle(gl, this.absoluteScreenStart, 50, ccMacros.CC_DEGREES_TO_RADIANS(90), 50, false);
+		}
 		
 		if (Level.DebugMode) {
 			if (this.selectStart != null && this.target != null) {
