@@ -153,7 +153,7 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 		if (Level.currentLevel.getStartItem() instanceof GameItemCocos)
 		{
 			GameItemCocos selection = (GameItemCocos)Level.currentLevel.getStartItem();
-			CCMoveTo moveTo = CCMoveTo.action(1.0f, CGPoint.make(this.getPosition().x, this.getPosition().y + selection.getHeight() / 2 ));			
+			CCMoveTo moveTo = CCMoveTo.action(0.5f, CGPoint.make(this.getPosition().x, this.getPosition().y + selection.getHeight() / 2 ));			
 			CCCallFunc callback = CCCallFunc.action(this, "endMoveAnimDone");
 			CCSequence sequence = CCSequence.actions(moveTo, callback);
 			selection.getSprite().runAction(sequence);

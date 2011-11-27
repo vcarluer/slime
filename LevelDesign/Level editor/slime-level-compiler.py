@@ -48,7 +48,7 @@ class Smile( inkex.Effect ):
 		self.printNode(root)
 		if isRootMap == True:
 			for child in root:
-				self.generateNodeAndChilds(child, False)
+				self.generateNodeAndChilds(child, True)
 	
 	def printNode(self, child):
 		if child.get("type") is not None:
