@@ -65,6 +65,9 @@ public class SlimyJump extends Slimy implements ISelectable {
 	private Joint currentJoint;
 	private CGPoint jointStart;
 	private CGPoint selectStart;
+	private CGPoint selectScreenStart;
+	private CGPoint selectScreenEnd;
+	
 	
 	private boolean hasJumped;		
 	
@@ -84,6 +87,8 @@ public class SlimyJump extends Slimy implements ISelectable {
 		this.auraScale = endAuraScale - startAuraScale;
 		
 		this.jointStart = CGPoint.zero();
+		this.selectScreenStart = CGPoint.zero();
+		this.selectScreenEnd = CGPoint.zero();
 	}
 	
 	public void selectionMove(CGPoint gameReference) {
@@ -97,17 +102,18 @@ public class SlimyJump extends Slimy implements ISelectable {
 			float zoom = Level.currentLevel.getCameraManager().getCurrentZoom();
 			
 			if (this.selectStart == null) {
-				this.targetImpulse.x = ((this.getPosition().x - gameTouch.x) * zoom) * this.powa;
-				this.targetImpulse.y = ((this.getPosition().y - gameTouch.y) * zoom) * this.powa;
-				this.target.x = this.getPosition().x + this.targetImpulse.x;
-				this.target.y = this.getPosition().y + this.targetImpulse.y;
+				this.selectStart = CGPoint.zero();
+				this.computeScreenStart(this.getPosition());
 			}
-			else {
-				this.targetImpulse.x = ((this.selectStart.x - gameTouch.x) * zoom) * this.powa;
-				this.targetImpulse.y = ((this.selectStart.y - gameTouch.y) * zoom) * this.powa;
-				this.target.x = this.selectStart.x + this.targetImpulse.x;
-				this.target.y = this.selectStart.y + this.targetImpulse.y;
-			}
+			
+			
+			CGPoint tmp = Level.currentLevel.getCameraManager().getScreenPoint(gameTouch);
+			this.selectScreenEnd.x = tmp.x;
+			this.selectScreenEnd.y = tmp.y;
+			this.targetImpulse.x = ((this.selectScreenStart.x - this.selectScreenEnd.x) * zoom) * this.powa;
+			this.targetImpulse.y = ((this.selectScreenStart.y - this.selectScreenEnd.y) * zoom) * this.powa;
+			this.target.x = this.selectStart.x + this.targetImpulse.x;
+			this.target.y = this.selectStart.y + this.targetImpulse.y;			
 			
 			this.worldSelect = gameTouch;
 			
@@ -117,6 +123,13 @@ public class SlimyJump extends Slimy implements ISelectable {
 				this.worldImpulse.nor().mul(Max_Impulse);
 			}
 		}
+	}
+	
+	private void computeScreenStart(CGPoint gamePoint) {
+		this.selectStart = gamePoint;
+		CGPoint tmp = Level.currentLevel.getCameraManager().getScreenPoint(this.selectStart);
+		this.selectScreenStart.x = tmp.x;
+		this.selectScreenStart.y = tmp.y;
 	}
 	
 	/* (non-Javadoc)
@@ -230,7 +243,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	}
 	
 	public void select(CGPoint gameReference) {
-		this.selectStart = gameReference;
+		this.computeScreenStart(gameReference);
 		this.select();
 		this.computeTarget(gameReference);
 	}

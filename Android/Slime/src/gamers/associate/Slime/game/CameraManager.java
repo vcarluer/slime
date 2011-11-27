@@ -288,7 +288,7 @@ public class CameraManager {
 		this.zoomAnchor = zoomGamePoint;
 	}
 	
-	private CGPoint getScreenPoint(CGPoint gamePoint) {						
+	public CGPoint getScreenPoint(CGPoint gamePoint) {						
 		this.screenPoint.x = (gamePoint.x - this.virtualCamera.origin.x) * this.getCurrentZoom();
 		this.screenPoint.y = (gamePoint.y - this.virtualCamera.origin.y) * this.getCurrentZoom();	
 		
