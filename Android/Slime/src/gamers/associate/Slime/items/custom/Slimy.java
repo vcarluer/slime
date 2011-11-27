@@ -49,6 +49,8 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	private static float Reference_Width = 32f;
 	private static float Reference_Height = 35f;
 	
+	private static float deathDelayTime = 2f;
+	
 	protected Boolean isLanded;	
 	protected CCAction waitAction;
 	protected Boolean isDead;
@@ -215,11 +217,12 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 			
 			CCAnimate animBurn = CCAnimate.action(this.animationList.get(Anim_Burning), false);
 			CCCallFunc kill = CCCallFunc.action(this, "kill");
-			CCSequence sequence = CCSequence.actions(animBurn, kill);
+			CCDelayTime deathDelay = CCDelayTime.action(deathDelayTime);
+			CCSequence sequence = CCSequence.actions(animBurn, deathDelay, kill);
 			this.currentAction = sequence;
-			this.sprite.runAction(this.currentAction);
-			this.isDying = true;
-			Sounds.playEffect(R.raw.slimyfire);		
+			this.sprite.runAction(this.currentAction);			
+			Sounds.playEffect(R.raw.slimyfire);	
+			this.prekill();
 		}
 	}
 	
@@ -234,11 +237,12 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 			}
 			
 			CCAnimate animSplash = CCAnimate.action(this.animationList.get(Anim_Splash), false);			
+			CCDelayTime deathDelay = CCDelayTime.action(deathDelayTime);
 			CCCallFunc kill = CCCallFunc.action(this, "kill");
-			CCSequence sequence = CCSequence.actions(animSplash, kill);
+			CCSequence sequence = CCSequence.actions(animSplash, deathDelay, kill);
 			this.currentAction = sequence;		
-			this.sprite.runAction(this.currentAction);
-			this.isDying = true;
+			this.sprite.runAction(this.currentAction);			
+			this.prekill();
 		}
 	}
 	
@@ -260,8 +264,13 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 		}
 	}
 	
-	public void kill() {
+	private void prekill() {
 		Sounds.playEffect(R.raw.slimydeath);
+		this.isDying = true;
+		Level.currentLevel.stopGamePlay();
+	}
+	
+	public void kill() {		
 		if (this.body != null) {
 			Filter filter = new Filter();
 			
@@ -323,7 +332,10 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	 */
 	@Override
 	public void handleSpecialRemove() {
-		Sounds.playEffect(R.raw.slimydeath);
+		if (!this.isDying) {
+			Sounds.playEffect(R.raw.slimydeath);
+		}
+
 		super.handleSpecialRemove();
 	}
 
@@ -334,4 +346,8 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	protected String getReferenceTexture() {		
 		return super.getReferenceTexture();
 	}*/
+	
+	public boolean isAlive() {
+		return !this.isDead() && !this.isDying;
+	}
 }

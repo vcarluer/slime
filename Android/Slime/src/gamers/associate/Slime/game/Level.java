@@ -794,11 +794,14 @@ public class Level {
 	}
 	
 	private void endLevel() {
+		this.stopGamePlay();		
+		this.isGameOver = true;
+	}
+	
+	public void stopGamePlay() {
 		if (this.gamePlay != null) {
 			this.gamePlay.stop();
 		}
-		
-		this.isGameOver = true;
 	}
 	
 	public void showEndLevel() {

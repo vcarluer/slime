@@ -191,7 +191,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 		if (this.canSelect(gameReference)) {			
 			this.select();
 			this.computeTarget(gameReference);			
-		}
+		} 
 		
 		return this.selected;
 	}
@@ -209,17 +209,22 @@ public class SlimyJump extends Slimy implements ISelectable {
 			}
 		}
 		
+		if (!can && this.isDying) {			
+			this.getSprite().stopAllActions();
+			this.kill();			
+		}
+		
 		return can;
 	}
 	
-	public void select() {
+	public void select() {		
 		this.selected = true;
 		this.auraSprite.setVisible(true);
 		this.arrowSprite.setVisible(true);
 		CCAnimate animation = CCAnimate.action(this.animationList.get(Anim_Dbz_Aura), false);
 		CCRepeatForever repeat = CCRepeatForever.action(animation);
 		this.auraSprite.runAction(repeat);
-		Sounds.playEffect(R.raw.slimyselect);
+		Sounds.playEffect(R.raw.slimyselect);			
 	}
 	
 	public void select(CGPoint gameReference) {

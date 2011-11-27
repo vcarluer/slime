@@ -91,20 +91,22 @@ public class GoalPortal extends GameItemPhysic {
 		
 		if (item.getContactWith() instanceof Slimy) {
 			Slimy slimy = (Slimy) item.getContactWith();
-			slimy.win();
-			slimy.destroyBodyOnly();			
-			
-			if (Level.currentLevel.win(false)) {
-				CCCallFunc callback = CCCallFunc.action(this, "endAnimDone");
-				CCSequence sequence = CCSequence.actions(this.getAnimatePortalEnterReference(), callback);
-				slimy.getSprite().runAction(sequence);
-				Sounds.playEffect(R.raw.portalgoal);
+			if (slimy.isAlive()) {
+				slimy.win();
+				slimy.destroyBodyOnly();			
+				
+				if (Level.currentLevel.win(false)) {
+					CCCallFunc callback = CCCallFunc.action(this, "endAnimDone");
+					CCSequence sequence = CCSequence.actions(this.getAnimatePortalEnterReference(), callback);
+					slimy.getSprite().runAction(sequence);
+					Sounds.playEffect(R.raw.portalgoal);
+				}
+				else {
+					slimy.getSprite().runAction(this.getAnimatePortalEnterReference());
+				}
+				
+				this.applyOtherPortalEnterAction(slimy);
 			}
-			else {
-				slimy.getSprite().runAction(this.getAnimatePortalEnterReference());
-			}
-			
-			this.applyOtherPortalEnterAction(slimy);				
 		}				
 	}
 	
