@@ -57,6 +57,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	protected Boolean isDying;
 	
 	protected boolean hasLanded;
+	private boolean bodyCategorySwitched;
 	
 	public Slimy(float x, float y, float width, float height, World world, float worldRatio) {		
 		super(x, y, width, height, world, worldRatio);
@@ -265,13 +266,22 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	}
 	
 	private void prekill() {
+		this.swithBodyCategory();
 		Sounds.playEffect(R.raw.slimydeath);
 		this.isDying = true;
 		Level.currentLevel.stopGamePlay();
 	}
 	
-	public void kill() {		
-		if (this.body != null) {
+	public void kill() {
+		this.swithBodyCategory();
+		this.isDead = true;
+		this.isDying = false;
+		Level.currentLevel.slimyKilled(this);
+	}
+	
+	private void swithBodyCategory() {
+		if (this.body != null && !this.bodyCategorySwitched) {
+			this.bodyCategorySwitched = true;
 			Filter filter = new Filter();
 			
 			filter.categoryBits = GameItemPhysic.Category_OutGame;
@@ -286,10 +296,6 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 				this.body.resetMassData();
 			}
 		}
-		
-		this.isDead = true;
-		this.isDying = false;
-		Level.currentLevel.slimyKilled(this);
 	}
 	
 	public boolean isDead() {

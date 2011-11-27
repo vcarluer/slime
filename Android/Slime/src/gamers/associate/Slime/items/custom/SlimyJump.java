@@ -66,7 +66,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	private CGPoint jointStart;
 	private CGPoint selectStart;
 	
-	private boolean hasJumped;
+	private boolean hasJumped;		
 	
 	public SlimyJump(float x, float y, float width, float height, World world,
 			float worldRatio) {
