@@ -534,7 +534,8 @@ public class SlimyJump extends Slimy implements ISelectable {
 	@Override
 	public void kill() {
 		super.kill();
-		this.unselect();		
+		this.unselect();				
+		
 		this.currentJoint = null;
 		this.currentJointDef = null;
 	}
@@ -542,5 +543,31 @@ public class SlimyJump extends Slimy implements ISelectable {
 	@Override
 	public boolean simpleSelect() {
 		return true;
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.base.GameItemPhysic#destroyBodyOnly()
+	 */
+	@Override
+	public void destroyBodyOnly() {
+		if (this.currentJoint != null) {
+			this.world.destroyJoint(this.currentJoint);			
+		}
+		
+		this.currentJoint = null;
+		super.destroyBodyOnly();						
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.custom.Slimy#prekill()
+	 */
+	@Override
+	protected void prekill() {
+		super.prekill();
+		if (this.currentJoint != null) {
+			this.world.destroyJoint(this.currentJoint);			
+		}
+		
+		this.currentJoint = null;
 	}
 }

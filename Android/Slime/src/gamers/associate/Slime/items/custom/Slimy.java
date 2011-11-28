@@ -265,7 +265,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 		}
 	}
 	
-	private void prekill() {
+	protected void prekill() {
 		this.swithBodyCategory();
 		Sounds.playEffect(R.raw.slimydeath);
 		this.isDying = true;

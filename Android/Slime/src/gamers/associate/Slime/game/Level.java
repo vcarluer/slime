@@ -54,6 +54,9 @@ public class Level {
 	protected Hashtable<UUID, GameItem> items;
 	protected ArrayList<ISelectable> selectables;
 	
+	private static final float bgWidth = 1467f;
+	private static final float bgHeight = 800f;
+	
 	/**
 	 * @uml.property  name="slimyFactory"
 	 * @uml.associationEnd  
@@ -547,6 +550,13 @@ public class Level {
 	public void setLevelSize(float width, float height) {
 		this.levelWidth = width;
 		this.levelHeight = height;
+		
+		if (width > bgWidth) {
+			this.backgroundLayer.setScale(width / bgWidth);
+		} else {
+			this.backgroundLayer.setScale(1f);
+		}
+		
 	}
 	
 	public void setIsTouchEnabled(boolean value) {
