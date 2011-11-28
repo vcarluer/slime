@@ -95,7 +95,7 @@ public class GoalPortal extends GameItemPhysic {
 				slimy.win();
 				slimy.destroyBodyOnly();			
 				
-				if (Level.currentLevel.win(false)) {
+				if (Level.currentLevel.win(false)) {					
 					CCCallFunc callback = CCCallFunc.action(this, "endAnimDone");
 					CCSequence sequence = CCSequence.actions(this.getAnimatePortalEnterReference(), callback);
 					slimy.getSprite().runAction(sequence);
@@ -115,18 +115,17 @@ public class GoalPortal extends GameItemPhysic {
 	}
 	
 	private CCFiniteTimeAction getAnimatePortalEnterReference() {		
-		return CCRotateBy.action(2.5f, 2160);		
+		return CCRotateBy.action(2.5f, 45f);				
 	}
 	
-	private void applyOtherPortalEnterAction(GameItemCocos item) {
-		CCScaleTo scaleUp = CCScaleTo.action(1.0f, 3.0f);
-		CCDelayTime delay = CCDelayTime.action(1.0f);
+	private void applyOtherPortalEnterAction(GameItemCocos item) {		
+		// CCScaleTo scaleUp = CCScaleTo.action(1.0f, 2.0f);
+		CCDelayTime delay = CCDelayTime.action(2.0f);
 		CCScaleTo scaleDown = CCScaleTo.action(0.5f, 0.0f);
-		CCSequence action1 = CCSequence.actions(scaleUp, delay, scaleDown);
+		CCSequence action1 = CCSequence.actions(delay, scaleDown);
 		CCDelayTime delay2 = CCDelayTime.action(2.0f);				
 		CCFadeOut fade = CCFadeOut.action(0.5f);
 		CCSequence action2 = CCSequence.actions(delay2, fade);
-		
 		
 		item.getSprite().runAction(action1);
 		item.getSprite().runAction(action2);

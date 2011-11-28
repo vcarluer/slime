@@ -14,6 +14,7 @@ public class GameItem {
 	protected float width;
 	protected float height;
 	protected boolean isPaused;
+	protected boolean isActive = true;
 	
 	public GameItem(float x, float y, float width, float height) {		
 		this.id = UUID.randomUUID();		
@@ -82,7 +83,11 @@ public class GameItem {
 	}
 	
 	public boolean isActive() {
-		return true;
+		return this.isActive;
+	}
+	
+	public void setActive(boolean active) {
+		this.isActive = active;
 	}
 	
 	public float getHeight() {

@@ -40,6 +40,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	public static String Anim_Success = "success";
 	public static String Anim_Spawn = "spawn";
 	public static String Anim_Spawn_Falling = "spawn-falling";
+	public static String Anim_Teleport = "teleport";
 	
 	public static float Default_Width = 24f;
 	public static float Default_Height = 26f;
@@ -168,7 +169,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	}
 	
 	public void land() {
-		if (!this.isLanded && !this.isDead && this.sprite != null && !this.isDying) {
+		if (!this.isLanded && !this.isDead && this.sprite != null && !this.isDying && this.isActive()) {
 			if (!this.hasLanded) {
 				this.hasLanded = true;
 				this.waitAnim();
@@ -193,10 +194,11 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	}
 	
 	public void win() {
+		this.setActive(false);
 		this.success();
 	}
 	
-	public void lose() {
+	public void lose() {		
 		this.splash();
 	}
 	
@@ -249,7 +251,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	
 	public void success() {
 		if (!this.isDead && !this.isDying) {
-			if (this.currentAction != null) {				
+			if (this.currentAction != null) {			
 				this.sprite.stopAction(this.currentAction);				
 			}
 			
@@ -257,9 +259,8 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 				this.sprite.stopAction(this.waitAction);
 			}
 					
-			CCAnimate animSuccess = CCAnimate.action(this.animationList.get(Anim_Success), false);			
-			CCDelayTime delay = CCDelayTime.action(2f);			
-			CCSequence succSeq = CCSequence.actions(animSuccess, animSuccess.reverse(), delay);
+			CCAnimate animSuccess = CCAnimate.action(this.animationList.get(Anim_Teleport), false);							
+			CCSequence succSeq = CCSequence.actions(animSuccess, animSuccess.reverse());
 			this.currentAction = CCRepeatForever.action(succSeq);				
 			this.sprite.runAction(this.currentAction);
 		}
@@ -269,13 +270,14 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 		this.swithBodyCategory();
 		Sounds.playEffect(R.raw.slimydeath);
 		this.isDying = true;
+		this.isActive = false;
 		Level.currentLevel.stopGamePlay();
 	}
 	
 	public void kill() {
 		this.swithBodyCategory();
 		this.isDead = true;
-		this.isDying = false;
+		this.isDying = false;		
 		Level.currentLevel.slimyKilled(this);
 	}
 	

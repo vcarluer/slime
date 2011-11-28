@@ -37,7 +37,7 @@ public class GALogoLayer extends CCLayer {
 //		CCSpriteFrame spriteFrame = CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("JulenGarciaGA.png");
 //		this.sprite = CCSprite.sprite(spriteFrame);
 //		this.spriteSheet.addChild(this.sprite);
-		this.sprite = CCSprite.sprite("cosmo3.png");
+		this.sprite = CCSprite.sprite("gamers associate.png");
 		this.addChild(this.sprite);
 		this.sprite.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,
@@ -45,7 +45,7 @@ public class GALogoLayer extends CCLayer {
 				));
 		
 		// Scaling to screen height
-		float originalImageHeight = 566f;
+		float originalImageHeight = 640f;
 		float targetHeight = CCDirector.sharedDirector().winSize().getHeight();			
 		float scale = targetHeight / originalImageHeight;
 		this.sprite.setScale(scale);

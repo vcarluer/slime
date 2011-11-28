@@ -250,11 +250,11 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 	}
 	
 	public void unlockChildConnectionsGraph(MenuNode parent) {		
-		if (!this.postBuildParsed) {
-			if (parent != null) {
-				this.parents.add(parent);
-			}
-			
+		if (parent != null) {
+			this.parents.add(parent);
+		}
+
+		if (!this.postBuildParsed) {						
 			this.postBuildParsed = true;					
 
 			if (this.getLevelDefinition().isFinished()) {
