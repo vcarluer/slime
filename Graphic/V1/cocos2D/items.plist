@@ -30,19 +30,6 @@
                 <key>sourceSize</key>
                 <string>{40,40}</string>
             </dict>
-			<key>bumper-2-wait-01.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{80,0},{47,47}}</string>
-                <key>offset</key>
-                <string>{-3,-3}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,6},{47,47}}</string>
-                <key>sourceSize</key>
-                <string>{53,53}</string>
-            </dict>
             <key>bumper-2-01.png</key>
             <dict>
                 <key>frame</key>
@@ -59,7 +46,7 @@
             <key>bumper-2-02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{127,0},{41,41}}</string>
+                <string>{{0,47},{41,41}}</string>
                 <key>offset</key>
                 <string>{-6,-6}</string>
                 <key>rotated</key>
@@ -72,7 +59,7 @@
             <key>bunsen-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{168,0},{20,65}}</string>
+                <string>{{41,47},{20,65}}</string>
                 <key>offset</key>
                 <string>{0,-1}</string>
                 <key>rotated</key>
@@ -85,7 +72,7 @@
             <key>bunsen-02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{188,0},{20,67}}</string>
+                <string>{{61,47},{20,67}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -98,7 +85,7 @@
             <key>bunsen-03.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{208,0},{20,67}}</string>
+                <string>{{81,47},{20,67}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -111,7 +98,7 @@
             <key>bunsen-04.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{228,0},{20,65}}</string>
+                <string>{{101,47},{20,65}}</string>
                 <key>offset</key>
                 <string>{0,-1}</string>
                 <key>rotated</key>
@@ -124,7 +111,7 @@
             <key>bunsen-05.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,67},{20,65}}</string>
+                <string>{{0,114},{20,65}}</string>
                 <key>offset</key>
                 <string>{0,-1}</string>
                 <key>rotated</key>
@@ -137,7 +124,7 @@
             <key>bunsen-starting-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{20,67},{20,41}}</string>
+                <string>{{20,114},{20,41}}</string>
                 <key>offset</key>
                 <string>{0,-13}</string>
                 <key>rotated</key>
@@ -150,7 +137,7 @@
             <key>bunsen-starting-02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{40,67},{20,45}}</string>
+                <string>{{40,114},{20,45}}</string>
                 <key>offset</key>
                 <string>{0,-11}</string>
                 <key>rotated</key>
@@ -163,7 +150,7 @@
             <key>bunsen-starting-03.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{60,67},{20,55}}</string>
+                <string>{{60,114},{20,55}}</string>
                 <key>offset</key>
                 <string>{0,-6}</string>
                 <key>rotated</key>
@@ -176,7 +163,7 @@
             <key>bunsen-wait-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{80,67},{20,29}}</string>
+                <string>{{80,114},{20,29}}</string>
                 <key>offset</key>
                 <string>{0,-19}</string>
                 <key>rotated</key>
@@ -189,7 +176,7 @@
             <key>button-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{100,67},{40,27}}</string>
+                <string>{{0,179},{40,27}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -202,7 +189,7 @@
             <key>button-02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{140,67},{40,23}}</string>
+                <string>{{40,179},{40,23}}</string>
                 <key>offset</key>
                 <string>{0,-2}</string>
                 <key>rotated</key>
@@ -212,10 +199,36 @@
                 <key>sourceSize</key>
                 <string>{40,27}</string>
             </dict>
+            <key>button-state-01.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{80,179},{40,21}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{40,21}}</string>
+                <key>sourceSize</key>
+                <string>{40,21}</string>
+            </dict>
+            <key>button-state-02.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,206},{40,21}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{40,21}}</string>
+                <key>sourceSize</key>
+                <string>{40,21}</string>
+            </dict>
             <key>laser-firing-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{180,67},{57,15}}</string>
+                <string>{{40,206},{57,15}}</string>
                 <key>offset</key>
                 <string>{4,0}</string>
                 <key>rotated</key>
@@ -228,7 +241,7 @@
             <key>laser-firing-02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,132},{57,15}}</string>
+                <string>{{0,227},{57,15}}</string>
                 <key>offset</key>
                 <string>{4,0}</string>
                 <key>rotated</key>
@@ -241,7 +254,7 @@
             <key>laser-firing-03.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{57,132},{61,15}}</string>
+                <string>{{57,227},{61,15}}</string>
                 <key>offset</key>
                 <string>{2,0}</string>
                 <key>rotated</key>
@@ -254,7 +267,7 @@
             <key>laser-firing-04.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{118,132},{65,15}}</string>
+                <string>{{0,242},{65,15}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -267,7 +280,7 @@
             <key>laser-wait-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{183,132},{57,15}}</string>
+                <string>{{65,242},{57,15}}</string>
                 <key>offset</key>
                 <string>{4,0}</string>
                 <key>rotated</key>
@@ -280,7 +293,7 @@
             <key>saw-running-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,147},{40,40}}</string>
+                <string>{{0,257},{40,40}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -293,7 +306,7 @@
             <key>saw-running-02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{40,147},{40,40}}</string>
+                <string>{{40,257},{40,40}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -303,10 +316,10 @@
                 <key>sourceSize</key>
                 <string>{40,40}</string>
             </dict>
-            <key>saw-wait-01.png</key>
+            <key>saw-wait.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{80,147},{40,40}}</string>
+                <string>{{80,257},{40,40}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -319,7 +332,7 @@
             <key>star-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{120,147},{40,38}}</string>
+                <string>{{0,297},{40,38}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -332,7 +345,7 @@
             <key>star-02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{160,147},{40,38}}</string>
+                <string>{{40,297},{40,38}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -345,7 +358,7 @@
             <key>star-03.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{200,147},{38,38}}</string>
+                <string>{{80,297},{38,38}}</string>
                 <key>offset</key>
                 <string>{0,1}</string>
                 <key>rotated</key>
@@ -358,7 +371,7 @@
             <key>star-fading-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,187},{34,36}}</string>
+                <string>{{0,335},{34,36}}</string>
                 <key>offset</key>
                 <string>{0,-1}</string>
                 <key>rotated</key>
@@ -371,7 +384,7 @@
             <key>star-fading-02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{34,187},{32,30}}</string>
+                <string>{{34,335},{32,30}}</string>
                 <key>offset</key>
                 <string>{-1,-1}</string>
                 <key>rotated</key>
@@ -384,7 +397,7 @@
             <key>star-fading-03.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{66,187},{26,26}}</string>
+                <string>{{66,335},{26,26}}</string>
                 <key>offset</key>
                 <string>{0,-2}</string>
                 <key>rotated</key>
@@ -397,7 +410,7 @@
             <key>star-fading-04.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{92,187},{20,20}}</string>
+                <string>{{92,335},{20,20}}</string>
                 <key>offset</key>
                 <string>{0,-1}</string>
                 <key>rotated</key>
@@ -407,13 +420,26 @@
                 <key>sourceSize</key>
                 <string>{40,40}</string>
             </dict>
+            <key>teleporter.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,371},{107,128}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{107,128}}</string>
+                <key>sourceSize</key>
+                <string>{107,128}</string>
+            </dict>
         </dict>
         <key>metadata</key>
         <dict>
             <key>format</key>
             <integer>2</integer>
             <key>size</key>
-            <string>{248,223}</string>
+            <string>{127,499}</string>
             <key>textureFileName</key>
             <string>items.png</string>
         </dict>
