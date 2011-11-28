@@ -5,6 +5,10 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.custom.MenuSprite;
 
+import org.cocos2d.actions.base.CCRepeatForever;
+import org.cocos2d.actions.interval.CCFadeIn;
+import org.cocos2d.actions.interval.CCFadeOut;
+import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItem;
@@ -21,6 +25,12 @@ public class PauseLayer extends CCLayer {
 	private CCMenuItemLabel scoreMaxLabel;
 	private float scale = 0.5f;
 	private float padding = 5f;
+	private CCSprite arrowSpriteT;
+	private CCSprite arrowSpriteR;
+	private CCSprite arrowSpriteB;
+	private CCSprite arrowSpriteL;
+	private static final float arrowWidth = 75f;
+	private static final float arrowHeight = 69f;
 	
 	public PauseLayer() {
 //		CCMenuItem label = CCMenuItemLabel.item(getMenuLabel("Pause"), this, "");		
@@ -43,6 +53,29 @@ public class PauseLayer extends CCLayer {
 		// this.menu.alignItemsHorizontally();				
 		
 		this.addChild(this.menu);
+		
+		float middleX = CCDirector.sharedDirector().winSize().getWidth() / 2;
+		float middleY = CCDirector.sharedDirector().winSize().getHeight() / 2;
+		float top = CCDirector.sharedDirector().winSize().getHeight() - arrowHeight / 2;
+		float right = CCDirector.sharedDirector().winSize().getWidth() - arrowWidth / 2; 
+		float bottom = arrowHeight / 2;
+		float left = arrowWidth / 2;;
+		this.arrowSpriteT = CCSprite.sprite("arrow.png");
+		this.arrowSpriteT.setPosition(middleX, top);
+		this.arrowSpriteT.setRotation(-90);
+		this.arrowSpriteR = CCSprite.sprite("arrow.png");
+		this.arrowSpriteR.setPosition(right, middleY);		
+		this.arrowSpriteB = CCSprite.sprite("arrow.png");
+		this.arrowSpriteB.setPosition(middleX, bottom);
+		this.arrowSpriteB.setRotation(90);
+		this.arrowSpriteL = CCSprite.sprite("arrow.png");
+		this.arrowSpriteL.setPosition(left, middleY);
+		this.arrowSpriteL.setRotation(180);
+		
+		this.addChild(this.arrowSpriteT);
+		this.addChild(this.arrowSpriteR);
+		this.addChild(this.arrowSpriteB);
+		this.addChild(this.arrowSpriteL);
 	}
 	
 	private void setMenuPos(CCMenuItem menuItem, int count) {
@@ -103,9 +136,27 @@ public class PauseLayer extends CCLayer {
 		this.setIsTouchEnabled(true);
 		this.setVisible(true);
 		this.menu.setIsTouchEnabled(true);
+		
+		this.setArrowAction(this.arrowSpriteT);
+		this.setArrowAction(this.arrowSpriteR);
+		this.setArrowAction(this.arrowSpriteB);
+		this.setArrowAction(this.arrowSpriteL);
 	}
 	
-	public void disable() {
+	private void setArrowAction(CCSprite arrow) {
+		CCFadeOut fo = CCFadeOut.action(1f);
+		CCFadeIn fi = CCFadeIn.action(1f);
+		CCSequence sequence = CCSequence.actions(fo, fi);
+		CCRepeatForever repeat = CCRepeatForever.action(sequence);
+		arrow.runAction(repeat);
+	}
+	
+	public void disable() {		
+		this.arrowSpriteT.stopAllActions();
+		this.arrowSpriteR.stopAllActions();
+		this.arrowSpriteB.stopAllActions();
+		this.arrowSpriteL.stopAllActions();
+		
 		this.setIsTouchEnabled(false);
 		this.setVisible(false);
 		this.menu.setIsTouchEnabled(false);

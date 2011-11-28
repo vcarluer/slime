@@ -167,7 +167,7 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 
 	@Override
 	public boolean isActive() {
-		return this.target.isActive();
+		return this.target.isActive() || this.isPaused;
 	}
 
 	/* (non-Javadoc)
@@ -188,5 +188,21 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 	public boolean simpleSelect() {
 		this.selectionStop(null);
 		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.base.GameItemCocos#pause()
+	 */
+	@Override
+	protected void pause() {
+		// no pause
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.base.GameItemCocos#resume()
+	 */
+	@Override
+	protected void resume() {
+		// no resume
 	}	
 }

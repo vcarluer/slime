@@ -47,7 +47,8 @@ public class ThumbnailManager {
 	}
 	
 	private void manage(ISelectable selectable) {		
-		if (!CGRect.containsPoint(this.cameraManager.getVirtualCamera(), Util.mid(selectable.getSelectionRect())) && selectable.isActive()) {
+		if (!CGRect.containsPoint(this.cameraManager.getVirtualCamera(), Util.mid(selectable.getSelectionRect())) 
+				&& (selectable.isActive() || this.level.isPaused())) {
 			float x = selectable.getPosition().x;
 			float y = selectable.getPosition().y;						
 			

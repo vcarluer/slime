@@ -156,11 +156,13 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 
 	@Override
 	public void activateSelection(CGPoint gameReference) {
-		this.isStarted = true;
-		this.setNormalTime();
-		this.level.getCameraManager().follow(this.level.getSelectedGameItem());	
-		this.level.setTimeRatio(2.0f);
-		// this.level.desactivateCameraMoveAndZoomByUser();
+		if (!this.isPaused) {
+			this.isStarted = true;
+			this.setNormalTime();
+			this.level.getCameraManager().follow(this.level.getSelectedGameItem());	
+			this.level.setTimeRatio(2.0f);
+			// this.level.desactivateCameraMoveAndZoomByUser();
+		}
 	}
 
 	@Override
@@ -171,7 +173,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 
 	@Override
 	public void selectBegin(CGPoint gameReference) {		
-		if (!this.isStarted) {
+		if (!this.isStarted && !this.isPaused) {
 			this.level.getCameraManager().moveInterpolateTo(this.level.getSelectedGameItem(), 0.5f);
 			this.level.getCameraManager().zoomInterpolateTo(this.level.getSelectedGameItem(), 1.0f, 0.5f);			
 			//this.level.getCameraManager().follow(this.level.getSelectedGameItem());			
@@ -182,8 +184,10 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 
 	@Override
 	public void simpleSelect() {
-		this.level.getCameraManager().moveInterpolateTo(this.level.getSelectedGameItem(), 0.5f);
-		this.level.setTimeRatio(2.0f);
+		if (!this.isPaused) {
+			this.level.getCameraManager().moveInterpolateTo(this.level.getSelectedGameItem(), 0.5f);
+			this.level.setTimeRatio(2.0f);
+		}
 	}
 
 	@Override
@@ -200,15 +204,8 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		}
 
 		this.level.desactivateCameraMoveAndZoomByUser();
+		this.level.setTimeRatio(2.0f);
 //		this.level.activateCameraMoveAndZoomByUser();
-	}
-	
-	public void setPause(boolean pause) {
-		if (pause) {
-			this.level.activateCameraMoveAndZoomByUser();
-		} else {
-			this.enterGameMode();
-		}
 	}
 	
 	public void setStartTime(int startTime) {
@@ -253,5 +250,23 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		if (!this.isGameOver) {
 			this.leftTime += 10;
 		}
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.base.GameItem#pause()
+	 */
+	@Override
+	protected void pause() {
+		super.pause();		
+		this.level.activateCameraMoveAndZoomByUser();
+	}
+
+	/* (non-Javadoc)
+	 * @see gamers.associate.Slime.items.base.GameItem#resume()
+	 */
+	@Override
+	protected void resume() {
+		super.resume();
+		this.enterGameMode();
 	}
 }

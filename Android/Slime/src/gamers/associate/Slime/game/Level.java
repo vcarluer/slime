@@ -363,19 +363,21 @@ public class Level {
 	}	
 	
 	public void tick(float delta) {
-		if (!isPaused) {
-			if (this.isGameOver && !this.isVictory) {
-				this.reload();
-			}
+		if (this.isGameOver && !this.isVictory) {
+			this.reload();
+		}
 
-			delta = delta * this.getTimeRatio();
-			if (this.itemsToAdd.size() > 0) {
-				for(GameItem item : this.itemsToAdd) {
-					this.addGameItem(item);
-				}
-				
-				this.itemsToAdd.clear();
+		delta = delta * this.getTimeRatio();
+		if (this.itemsToAdd.size() > 0) {
+			for(GameItem item : this.itemsToAdd) {
+				this.addGameItem(item);
 			}
+			
+			this.itemsToAdd.clear();
+		}
+		
+		if (!isPaused) {
+			
 									
 			if (!this.isPhysicDisabled) {
 				// TODO: physic step must be fix!
@@ -387,14 +389,14 @@ public class Level {
 			for(GameItem item : this.items.values()) {
 				item.render(delta);
 			}
-									
-			if (this.itemsToRemove.size() > 0) {
-				for(GameItem item : this.itemsToRemove) {
-					this.removeGameItem(item);
-				}
-				
-				this.itemsToRemove.clear();
-			}									
+		}				
+		
+		if (this.itemsToRemove.size() > 0) {
+			for(GameItem item : this.itemsToRemove) {
+				this.removeGameItem(item);
+			}
+			
+			this.itemsToRemove.clear();
 		}
 		
 		this.cameraManager.tick(delta);
@@ -415,17 +417,17 @@ public class Level {
 	}		
 		
 	public void setPause(boolean value) {		
-		if (value) {			
-			if (!this.isPaused) {
-				this.levelLayer.pauseSchedulerAndActions();
-			}
-		}
-		else
-		{
-			if (this.isPaused) {
-				this.levelLayer.resumeSchedulerAndActions();
-			}
-		}
+//		if (value) {			
+//			if (!this.isPaused) {
+//				this.levelLayer.pauseSchedulerAndActions();				
+//			}
+//		}
+//		else
+//		{
+//			if (this.isPaused) {
+//				this.levelLayer.resumeSchedulerAndActions();
+//			}
+//		}
 				
 		for(GameItem item : this.items.values()) {
 			item.setPause(value);
@@ -601,14 +603,14 @@ public class Level {
 	}
 	
 	public void unselectCurrent() {
-		if(this.selectedItem != null && !this.isPaused) {
+		if(this.selectedItem != null) {
 			this.selectedItem.unselect();
 			this.selectedItem = null;
 		}
 	}
 	
 	public void activateSelection(CGPoint gameReference) {
-		if (this.selectedItem != null && !this.isPaused) {
+		if (this.selectedItem != null) {
 			// CGPoint gameTarget = this.cameraManager.getGamePoint(screenTarget);
 			this.selectedItem.selectionStop(gameReference);
 			
@@ -627,7 +629,7 @@ public class Level {
 	}
 	
 	public void simpleSelect() {
-		if (this.selectedItem != null && !this.isPaused) {
+		if (this.selectedItem != null) {
 			// this.cameraManager.centerCameraOn(this.selectedItem.getPosition());
 			if (this.selectedItem instanceof GameItem) {				
 				// Return true if auto or gameplay simpleSelect camera needed
@@ -648,7 +650,7 @@ public class Level {
 	}
 	
 	public boolean moveSelection(CGPoint gameReference) {
-		if (this.selectedItem != null && !this.isPaused) {			
+		if (this.selectedItem != null) {			
 			this.selectedItem.selectionMove(gameReference);
 			return true;
 		}
@@ -658,7 +660,7 @@ public class Level {
 	}
 
 	public void trySelect(CGPoint gameReference) {
-		if (this.selectedItem == null && !this.isPaused) {
+		if (this.selectedItem == null) {
 			for(ISelectable selectable : this.selectables) {
 				if (selectable.canSelect(gameReference)) {
 					if (this.selectedItem != null) {
@@ -908,5 +910,19 @@ public class Level {
 	 */
 	public void setPhysicDisabled(boolean isPhysicDisabled) {
 		this.isPhysicDisabled = isPhysicDisabled;
+	}
+
+	/**
+	 * @return the isPaused
+	 */
+	public boolean isPaused() {
+		return isPaused;
+	}
+
+	/**
+	 * @param isPaused the isPaused to set
+	 */
+	public void setPaused(boolean isPaused) {
+		this.isPaused = isPaused;
 	}
 }
