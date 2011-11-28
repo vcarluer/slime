@@ -17,17 +17,19 @@ public class MoveInterpolateAction extends CameraAction {
 
 	@Override
 	protected void actionInternal(float delta) {
-		// Work directly with float for performance		
-		CGRect camera = this.getManager().getVirtualCamera();
-		float cameraX = camera.origin.x + camera.size.width / 2;
-		float cameraY = camera.origin.y + camera.size.height / 2;
-		float targetX = this.getTargetAction().getPosition().x;
-		float targetY = this.getTargetAction().getPosition().y;
-				
-		this.pointAction.x = cameraX + ((targetX - cameraX) * this.getInterpolation());
-		this.pointAction.y = cameraY + ((targetY - cameraY) * this.getInterpolation());
-		
-		this.getManager().centerCameraOn(this.pointAction);		
+		if (this.getTargetAction().isActive()) {
+			// Work directly with float for performance		
+			CGRect camera = this.getManager().getVirtualCamera();
+			float cameraX = camera.origin.x + camera.size.width / 2;
+			float cameraY = camera.origin.y + camera.size.height / 2;
+			float targetX = this.getTargetAction().getPosition().x;
+			float targetY = this.getTargetAction().getPosition().y;
+					
+			this.pointAction.x = cameraX + ((targetX - cameraX) * this.getInterpolation());
+			this.pointAction.y = cameraY + ((targetY - cameraY) * this.getInterpolation());
+			
+			this.getManager().centerCameraOn(this.pointAction);
+		}
 	}
 
 }
