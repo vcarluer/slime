@@ -24,7 +24,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 public class PhysicPolygon extends GameItemPhysic {
 	public static final int Fill = 0;
 	public static final int Empty = 1;
-	public static String Anim_Base_Fill = "wall";
+	public static String Anim_Base_Fill = "glass";
 	public static String Anim_Base_Empty = "empty";
 	protected CGPoint[] vertices;
 	protected CGPoint[] bodyPoints;

@@ -28,7 +28,7 @@ public class Platform extends GameItemPhysic {
 	public static String Anim_Base_Bump = "pf-bump";
 	public static String Anim_Base_NoSticky = "pf-nosticky";
 	public static String Anim_Base_Icy = "ice";
-	public static String Anim_Base_Wall = "wall";
+	public static String Anim_Base_Wall = "glass";
 	public static String Anim_Base_Corner = "pf-corner";
 	public static String Anim_Base_T = "pf-T";
 	public static String Anim_Base_Cross = "pf-cross";

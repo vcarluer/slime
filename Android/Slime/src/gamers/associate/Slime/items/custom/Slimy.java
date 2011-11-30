@@ -112,7 +112,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 		
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = dynamicBox;	
-		fixtureDef.density = 0.7f;
+		fixtureDef.density = 1.0f;//0.7f
 		fixtureDef.friction = 0.3f;
 		fixtureDef.restitution = 0.1f;
 		fixtureDef.filter.categoryBits = GameItemPhysic.Category_InGame;
