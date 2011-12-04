@@ -146,7 +146,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -568,8 +568,8 @@
        y="110"
        type="MenuNode"
        att_targetLevel="Tuto1"
-       att_targetN1="n02"
-       att_targetN2="n03"
+       att_targetN1="n00"
+       att_targetN2="n02"
        att_targetN3=""
        att_targetN4="" />
     <image
