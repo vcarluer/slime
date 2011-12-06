@@ -11,13 +11,13 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   sodipodi:docname="tank-main-01.svg"
-   inkscape:version="0.48.0 r9654"
+   sodipodi:docname="tank-right-01.svg"
+   inkscape:version="0.48.2 r9819"
    version="1.1"
    id="svg2"
    height="30"
    width="30"
-   inkscape:export-filename="/home/guillaume/Documents/gamers associate/labo break/tank3.png"
+   inkscape:export-filename="/home/guillaume/Documents/gamers associate/labo break/base/tank/tank-right-01.png"
    inkscape:export-xdpi="120"
    inkscape:export-ydpi="120">
   <defs
@@ -399,16 +399,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="11.313709"
-     inkscape:cx="10.264516"
-     inkscape:cy="16.280557"
+     inkscape:zoom="2.8284273"
+     inkscape:cx="-42.325667"
+     inkscape:cy="87.837776"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1280"
-     inkscape:window-height="727"
+     inkscape:window-height="776"
      inkscape:window-x="0"
-     inkscape:window-y="25"
+     inkscape:window-y="24"
      inkscape:window-maximized="1"
      showguides="true"
      inkscape:guide-bbox="true"
@@ -484,6 +484,11 @@
        x="64.219193"
        y="812.9024"
        ry="2.7001381" />
+    <path
+       inkscape:connector-curvature="0"
+       style="opacity:0.98000004;color:#000000;fill:#00aa36;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m -29.417354,784.96339 0,25.5 c 0,5.21191 4.194344,9.40625 9.40625,9.40625 l 15.2812495,0 0,8.1875 18.3750005,0 0,-8.1875 15.28125,0 c 5.20144,0 9.38946,-4.17765 9.40625,-9.375 l 8.71875,0 c 2.0889,0 1.63031,-0.0368 1.6875,1.8125 l 0,3.46875 12.15625,0 c -0.004,-1.51529 0,-4.37245 0,-4.9375 -0.13246,-12.69774 1.10676,-11.6875 -11.6875,-11.6875 l -10.875,0 0,-14.1875 -67.75,0 z"
+       id="rect3837-4" />
     <rect
        style="color:#000000;fill:#7393ac;fill-opacity:1;fill-rule:nonzero;stroke:#375f7e;stroke-width:1.65253437;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect4137"
@@ -493,13 +498,13 @@
        y="816.51031"
        ry="0.67373282" />
     <path
-       style="opacity:0.65;color:#000000;fill:#dae9e9;fill-opacity:1;fill-rule:nonzero;stroke:#849090;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="opacity:0.97999999999999998;color:#000000;fill:#c7e8e8;fill-opacity:0.54901962999999998;fill-rule:nonzero;stroke:#84a8a8;stroke-width:2;stroke-miterlimit:4;stroke-opacity:0.82745099;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        d="m 4.575085,681.15628 c -0.159052,0 -0.31173,0.0233 -0.46875,0.0312 l -61.625002,0 c -5.089674,0 -9.187501,4.09783 -9.187501,9.1875 0,5.08967 4.097827,9.1875 9.187501,9.1875 l 52.906251,0 0,12.5625 -15.28125,0 c -5.211906,0 -9.406251,4.19434 -9.406251,9.40625 l 0,88.9375 c 0,5.21191 4.194345,9.40625 9.406251,9.40625 l 15.28125,0 0,263.40622 c 0,5.0897 4.097827,9.1875 9.187501,9.1875 5.089672,0 9.187499,-4.0978 9.187499,-9.1875 l 0,-263.40622 15.281246,0 c 5.20144,0 9.38947,-4.17765 9.40626,-9.375 l 8.71875,0 c 2.0889,0 1.63031,-0.0368 1.6875,1.8125 l 0,4.625 3.09366,10.13767 5.875,0.0312 3.18759,-10.16892 c -0.0146,-0.53216 0,-5.39638 0,-6.09375 -0.13246,-12.69774 1.10676,-11.6875 -11.6875,-11.6875 l -10.875,0 0,-77.625 c 0,-5.21191 -4.19435,-9.40625 -9.40626,-9.40625 l -15.281246,0 0,-21.78125 c 0,-3.49915 -1.948172,-6.51035 -4.812499,-8.0625 -0.0082,-0.004 -0.02304,0.004 -0.03125,0 -1.035287,-0.55692 -2.177619,-0.93847 -3.40625,-1.0625 -0.01027,-10e-4 -0.02097,0.001 -0.03125,0 -0.299617,-0.0292 -0.598702,-0.0625 -0.90625,-0.0625 z"
        id="rect3837"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccsssccsssscssscscsccccccscsscscccccc" />
     <rect
-       style="opacity:0.7;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="opacity:0.4;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3905"
        width="2.875"
        height="17.96233"
@@ -521,7 +526,7 @@
        y="820.18103"
        ry="2.5" />
     <rect
-       style="opacity:0.7;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="opacity:0.4;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3905-8-7-6-4"
        width="2.875"
        height="18.688087"
