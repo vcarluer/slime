@@ -31,16 +31,20 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	
 	public static String Anim_Burned_Wait = "burned-wait";
 	public static String Anim_Burning = "burning";
+	public static String Anim_Buzz = "buzz";
+	public static String Anim_Dissolve = "dissolve";
+	public static String Anim_Electrified = "electrified";	
 	public static String Anim_Falling = "falling";
 	public static String Anim_Landing_H = "landing-h";
 	public static String Anim_Landing_V = "landing-v";
-	public static String Anim_Wait_H = "wait-h";
-	public static String Anim_Wait_V = "wait-v";
-	public static String Anim_Splash = "splashed";
-	public static String Anim_Success = "success";
+	public static String Anim_Sliced = "sliced";
 	public static String Anim_Spawn = "spawn";
 	public static String Anim_Spawn_Falling = "spawn-falling";
+	public static String Anim_Splash = "splashed";
+	public static String Anim_Success = "success";
 	public static String Anim_Teleport = "teleport";
+	public static String Anim_Wait_H = "wait-h";
+	public static String Anim_Wait_V = "wait-v";	
 	
 	public static float Default_Width = 24f;
 	public static float Default_Height = 26f;
@@ -230,6 +234,22 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	}
 	
 	public void splash() {
+		this.killInAction(Anim_Splash);			
+	}
+	
+	public void slice() {
+		this.killInAction(Anim_Sliced);
+	}
+	
+	public void electrify() {
+		this.killInAction(Anim_Electrified);
+	}
+	
+	public void dissolve() {
+		this.killInAction(Anim_Dissolve);
+	}
+	
+	private void killInAction(String animation) {
 		if (!this.isDead && !this.isDying) {
 			if (this.currentAction != null) {				
 				this.sprite.stopAction(this.currentAction);				
@@ -239,7 +259,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 				this.sprite.stopAction(this.waitAction);
 			}
 			
-			CCAnimate animSplash = CCAnimate.action(this.animationList.get(Anim_Splash), false);			
+			CCAnimate animSplash = CCAnimate.action(this.animationList.get(animation), false);			
 			CCDelayTime deathDelay = CCDelayTime.action(deathDelayTime);
 			CCCallFunc kill = CCCallFunc.action(this, "kill");
 			CCSequence sequence = CCSequence.actions(animSplash, deathDelay, kill);

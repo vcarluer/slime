@@ -21,7 +21,7 @@ public class SpawnPortalFactory extends GameItemCocosFactory<SpawnPortal> {
 
 	@Override
 	protected String getPlistPng() {
-		return "labo";
+		return "items";
 	}
 
 	@Override

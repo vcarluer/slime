@@ -34,7 +34,7 @@ import org.cocos2d.types.CGRect;
 import org.cocos2d.types.CGSize;
 
 public class MenuNode extends GameItemCocos implements ISelectable {
-	public static String Anim_Node = "blueportal";
+	public static String Anim_Node = "teleporter-blue-portal";
 	
 	public static float Default_Width = 32f;
 	public static float Default_Height = 10f;

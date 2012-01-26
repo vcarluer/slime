@@ -27,7 +27,7 @@ public class MenuNodeFactory extends GameItemCocosFactory<MenuNode> {
 
 	@Override
 	protected String getPlistPng() {
-		return "labo";
+		return "items";
 	}
 
 	@Override

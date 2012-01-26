@@ -4,122 +4,96 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>spawn-zone-01.png</key>
+            <key>gate-closed-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,0},{53,20}}</string>
+                <string>{{0,0},{31,31}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{53,20}}</string>
+                <string>{{0,0},{31,31}}</string>
                 <key>sourceSize</key>
-                <string>{53,20}</string>
+                <string>{31,31}</string>
             </dict>
-            <key>tank-L-tube-01.png</key>
+            <key>gate-opened-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{53,0},{27,27}}</string>
+                <string>{{31,0},{31,31}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{27,27}}</string>
+                <string>{{0,0},{31,31}}</string>
                 <key>sourceSize</key>
-                <string>{27,27}</string>
+                <string>{31,31}</string>
             </dict>
-            <key>tank-bottom-01.png</key>
+            <key>gate-opening-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{80,0},{40,320}}</string>
+                <string>{{0,31},{31,31}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{40,320}}</string>
+                <string>{{0,0},{31,31}}</string>
                 <key>sourceSize</key>
-                <string>{40,320}</string>
+                <string>{31,31}</string>
             </dict>
-            <key>tank-evacuation-01.png</key>
+            <key>gate-opening-02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,320},{101,107}}</string>
-                <key>offset</key>
-                <string>{-3,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{101,107}}</string>
-                <key>sourceSize</key>
-                <string>{107,107}</string>
-            </dict>
-            <key>tank-main-01.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{0,427},{107,198}}</string>
-                <key>offset</key>
-                <string>{0,-1}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,2},{107,198}}</string>
-                <key>sourceSize</key>
-                <string>{107,200}</string>
-            </dict>
-            <key>tank-main-empty-01.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{0,625},{107,198}}</string>
-                <key>offset</key>
-                <string>{0,-1}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,2},{107,198}}</string>
-                <key>sourceSize</key>
-                <string>{107,200}</string>
-            </dict>
-            <key>tank-right-01.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{0,823},{40,40}}</string>
+                <string>{{31,31},{31,31}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{40,40}}</string>
+                <string>{{0,0},{31,31}}</string>
                 <key>sourceSize</key>
-                <string>{40,40}</string>
+                <string>{31,31}</string>
             </dict>
-            <key>tank-right-empty-01.png</key>
+            <key>gate-opening-03.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{40,823},{40,40}}</string>
+                <string>{{0,62},{31,31}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{40,40}}</string>
+                <string>{{0,0},{31,31}}</string>
                 <key>sourceSize</key>
-                <string>{40,40}</string>
+                <string>{31,31}</string>
             </dict>
-            <key>tank-tube-01.png</key>
+            <key>star-complete-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{80,823},{27,27}}</string>
+                <string>{{31,62},{17,16}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{27,27}}</string>
+                <string>{{0,0},{17,16}}</string>
                 <key>sourceSize</key>
-                <string>{27,27}</string>
+                <string>{17,16}</string>
+            </dict>
+            <key>star-inactive-01.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,93},{17,16}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{17,16}}</string>
+                <key>sourceSize</key>
+                <string>{17,16}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -127,9 +101,9 @@
             <key>format</key>
             <integer>2</integer>
             <key>size</key>
-            <string>{120,863}</string>
+            <string>{64,128}</string>
             <key>textureFileName</key>
-            <string>tank.png</string>
+            <string>worlds-items.png</string>
         </dict>
     </dict>
 </plist>

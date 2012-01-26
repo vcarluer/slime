@@ -14,7 +14,7 @@ import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.types.CGPoint;
 
 public class SpawnPortal extends GameItemCocos {
-	public static String Anim_Spawn_Portal = "blueportal";		
+	public static String Anim_Spawn_Portal = "teleporter-blue-portal";		
 	
 	public SpawnPortal(float x, float y, float width, float height) {
 		super(x, y, width, height);	

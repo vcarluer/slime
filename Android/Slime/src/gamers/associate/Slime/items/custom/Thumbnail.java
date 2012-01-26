@@ -16,7 +16,7 @@ import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 
 public class Thumbnail extends GameItemCocos implements ISelectable {	
-	public static String Thumbnail_back = "thumbnail_back";
+	public static String Thumbnail_back = "thumbnail";
 	
 	private ISelectable target;	
 	private boolean isSelected;

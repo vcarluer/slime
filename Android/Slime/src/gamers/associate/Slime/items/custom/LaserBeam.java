@@ -109,7 +109,7 @@ public class LaserBeam extends GameItemPhysic {
 	protected void handleContact(ContactInfo contact) {	
 		if (this.isOn) {				
 			if (contact.getContactWith() instanceof Slimy) {
-				((Slimy)contact.getContactWith()).burn();
+				((Slimy)contact.getContactWith()).slice();
 			}						
 		}
 		

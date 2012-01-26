@@ -17,17 +17,22 @@ public class SlimyFactory extends GameItemPhysicFactory<Slimy> {
 	protected void createAnimList() {
 		this.createAnim(Slimy.Anim_Burned_Wait, 2);
 		this.createAnim(Slimy.Anim_Burning, 5);
+		this.createAnim(Slimy.Anim_Buzz, 3);
+		this.createAnim(Slimy.Anim_Dissolve, 5);
+		this.createAnim(Slimy.Anim_Electrified, 5);
 		this.createAnim(Slimy.Anim_Falling, 3);
 		this.createAnim(Slimy.Anim_Landing_H, 3);
 		this.createAnim(Slimy.Anim_Landing_V, 3);		
-		this.createAnim(Slimy.Anim_Wait_H, 5);
-		this.createAnim(Slimy.Anim_Wait_V, 5);
-		this.createAnim(Slimy.Anim_Splash, 5);
-		this.createAnim(Slimy.Anim_Success, 7);
+		this.createAnim(Slimy.Anim_Sliced, 5);
 		this.createAnim(Slimy.Anim_Spawn, 8);
 		this.createAnim(Slimy.Anim_Spawn_Falling, 3);
-		this.createAnim(SlimyJump.Anim_Dbz_Aura, 3, 0.1f);
+		this.createAnim(Slimy.Anim_Splash, 5);
+		this.createAnim(Slimy.Anim_Success, 7);
 		this.createAnim(Slimy.Anim_Teleport, 7);
+		this.createAnim(Slimy.Anim_Wait_H, 5);
+		this.createAnim(Slimy.Anim_Wait_V, 5);
+		this.createAnim(SlimyJump.Anim_Dbz_Aura, 3, 0.1f);
+		
 	}
 	
 	@Override

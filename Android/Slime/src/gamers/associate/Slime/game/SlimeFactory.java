@@ -39,7 +39,6 @@ public abstract class SlimeFactory {
 	public static PlatformFactory Platform = new PlatformFactory();
 	public static GoalPortalFactory GoalPortal = new GoalPortalFactory();
 	public static BumperAngleFactory BumperAngle = new BumperAngleFactory();
-	public static SpawnCannonFactory Cannon = new SpawnCannonFactory();
 	public static LevelEndFactory LevelEnd = new LevelEndFactory();
 	public static HomeLevelHandlerFactory HomeLevelHandler = new HomeLevelHandlerFactory();
 	public static LavaFactory Lava = new LavaFactory();
@@ -64,7 +63,6 @@ public abstract class SlimeFactory {
 		Platform.attach(level, attachNode, attachWorld, attachWorldRatio);
 		GoalPortal.attach(level, attachNode, attachWorld, attachWorldRatio);
 		BumperAngle.attach(level, attachNode, attachWorld, attachWorldRatio);
-		Cannon.attach(level, attachNode, attachWorld, attachWorldRatio);
 		LevelEnd.attach(level, attachNode, attachWorld, attachWorldRatio);
 		HomeLevelHandler.attach(level);
 		Lava.attach(level, attachNode, attachWorld, attachWorldRatio);
@@ -91,7 +89,6 @@ public abstract class SlimeFactory {
 		Platform.detach();
 		GoalPortal.detach();
 		BumperAngle.detach();
-		Cannon.detach();
 		LevelEnd.detach();
 		HomeLevelHandler.detach();
 		Lava.detach();
@@ -118,7 +115,6 @@ public abstract class SlimeFactory {
 		Platform.destroy();
 		GoalPortal.destroy();
 		BumperAngle.destroy();
-		Cannon.destroy();
 		LevelEnd.destroy();		
 		Lava.destroy();
 		Box.destroy();
@@ -130,7 +126,6 @@ public abstract class SlimeFactory {
 		Star.destroy();
 		MenuNode.destroy();
 		LaserGun.destroy();
-		// No destroy for target
 		LaserBeam.destroy();
 		Sprite.destroy();
 		

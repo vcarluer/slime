@@ -7,7 +7,7 @@ public class StarFactory extends GameItemPhysicFactory<Star> {
 
 	@Override
 	protected void createAnimList() {
-		this.createAnim(Star.Anim_Wait, 3);
+		this.createAnim(Star.Anim_Wait, 4);
 		this.createAnim(Star.Anim_Fade, 4);
 	}
 

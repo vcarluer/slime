@@ -80,8 +80,7 @@ public class SlimeLoadingLayer extends CCLayer {
 				// SpriteSheetFactory.add("logo", true, SpriteSheetFactory.zDefault);
 				SpriteSheetFactory.add("decor", true, SpriteSheetFactory.zDefault);
 				
-				SpriteSheetFactory.add("items", SpriteSheetFactory.zDefault);				
-				SpriteSheetFactory.add("labo", Level.zMid);
+				SpriteSheetFactory.add("items", SpriteSheetFactory.zDefault);								
 				SpriteSheetFactory.add("slime", Level.zFront);
 				SpriteSheetFactory.add("slimydbz", Level.zFront);
 				SpriteSheetFactory.add("glasswork", Level.zMid);

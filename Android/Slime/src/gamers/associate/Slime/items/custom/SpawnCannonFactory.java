@@ -12,7 +12,7 @@ public class SpawnCannonFactory extends GameItemPhysicFactory<SpawnCannon>{
 
 	@Override
 	protected String getPlistPng() {
-		return "labo";
+		return "items";
 	}
 
 	@Override

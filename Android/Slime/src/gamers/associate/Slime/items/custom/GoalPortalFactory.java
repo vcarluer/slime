@@ -11,7 +11,7 @@ public class GoalPortalFactory extends GameItemPhysicFactory<GoalPortal> {
 
 	@Override
 	protected String getPlistPng() {
-		return "labo";
+		return "items";
 	}
 
 	@Override

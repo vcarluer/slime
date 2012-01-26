@@ -27,7 +27,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class GoalPortal extends GameItemPhysic {
-	public static String Anim_Goal_Portal = "redportal";
+	public static String Anim_Goal_Portal = "teleporter-red-portal";
 	
 	private static float Default_Width = 32f;
 	private static float Default_Height = 10f;

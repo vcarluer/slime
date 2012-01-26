@@ -8,6 +8,7 @@ import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.ITrigerable;
 import gamers.associate.Slime.items.base.SpriteType;
 
+import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCAnimate;
@@ -22,8 +23,9 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class Button extends GameItemPhysic {
-	public static String Anim_Wait = "button-wait";
-	public static String Anim_Bump = "button";	
+	public static String Anim_Wait_On = "button-stateOn";
+	public static String Anim_Wait_Off = "button-stateOff";
+	public static String Anim_Countdown = "button-state-countdown2";	
 	private static float Only_Once = -1f;
 	private static float Default_Width = 40f;
 	private static float Default_Height = 27f;
@@ -33,6 +35,9 @@ public class Button extends GameItemPhysic {
 	private String target;
 	private float resetTime;
 	private boolean isEnabled;
+	private boolean isOn;
+	
+	private CCAction waitAnim;
 		
 	public Button(float x, float y, float width, float height,
 			World world, float worldRatio) {
@@ -49,6 +54,7 @@ public class Button extends GameItemPhysic {
 		this.referenceSize.height = Reference_Height;
 		target = "";
 		this.isEnabled = true;
+		this.isOn = true;
 	}	
 	
 	public void setTarget(String target) {
@@ -89,10 +95,21 @@ public class Button extends GameItemPhysic {
 		}
 	}
 	
-	public void waitAnim() {
-		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Wait), false);
-		CCRepeatForever repeat = CCRepeatForever.action(animate);
-		this.sprite.runAction(repeat);
+	public void waitAnim() {		
+		if (this.waitAnim != null && this.sprite != null) {
+			this.sprite.stopAction(this.waitAnim);
+		}
+		
+		String animName = null;
+		if (this.isOn) {
+			animName = Anim_Wait_On;			
+		} else {
+			animName = Anim_Wait_Off;
+		}
+		
+		CCAnimate animate = CCAnimate.action(this.animationList.get(animName), false);
+		this.waitAnim = CCRepeatForever.action(animate);
+		this.sprite.runAction(this.waitAnim);
 	}
 
 	/* (non-Javadoc)
@@ -100,7 +117,7 @@ public class Button extends GameItemPhysic {
 	 */
 	@Override
 	protected String getReferenceAnimationName() {
-		return Button.Anim_Wait;
+		return Button.Anim_Wait_On;
 	}
 
 	/* (non-Javadoc)
@@ -110,9 +127,15 @@ public class Button extends GameItemPhysic {
 	protected void handleContact(ContactInfo item) {
 		if (this.isEnabled) 
 		{
+			this.isOn = !this.isOn;
+			this.waitAnim();
 			this.isEnabled = false;
-			Sounds.playEffect(R.raw.bump);
-			CCAnimate animate = CCAnimate.action(this.animationList.get(Button.Anim_Bump), false);
+			Sounds.playEffect(R.raw.bump);					
+			CCAnimate animate = CCAnimate.action(this.animationList.get(Button.Anim_Countdown), false);
+			if (!this.isOn) {
+				animate = animate.reverse();
+			}
+
 			float reset = this.resetTime;
 			if (this.resetTime == Only_Once) {
 				reset = 0;
