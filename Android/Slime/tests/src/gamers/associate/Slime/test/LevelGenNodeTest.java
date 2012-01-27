@@ -54,6 +54,10 @@ public class LevelGenNodeTest extends TestCase {
 		assertFalse(node.isConnected(Connector.LeftMid, Connector.RightTop));		
 	}
 	
+	public void testTLIsNotConnected() {
+		assertFalse(node.isConnected(Connector.BottomLeft, Connector.LeftTop));		
+	}
+	
 	public void testHasCorrespondingConnector() {
 		node.addConnector(Connector.TopLeft);
 		assertTrue(node.isConnectedTo(Connector.BottomLeft));
@@ -235,12 +239,25 @@ public class LevelGenNodeTest extends TestCase {
 	public void testNodeLevelEndAndGoTo() {
 		node.addConnector(Connector.LeftMid);
 		node.setIsLevelEnd(true);
-		assertTrue(node.isEndLevelAndGoTo(BlocDirection.Left));
+		assertTrue(node.isLevelEndAndGoTo(BlocDirection.Left));
 	}
 	
 	public void testNodeNotLevelEndAndGoTo() {
 		node.addConnector(Connector.LeftMid);
 		node.setIsLevelEnd(false);
-		assertFalse(node.isEndLevelAndGoTo(BlocDirection.Left));
+		assertFalse(node.isLevelEndAndGoTo(BlocDirection.Left));
+	}
+	
+	public void testGetComplexity() {
+		node.setComplexity(10);
+		assertEquals(10, node.getComplexity());
+	}
+	
+	public void testNodeLevelEndComeFrom() {
+		node.addConnector(Connector.LeftMid);
+		node.setIsLevelEnd(true);
+		LevelGenNode sourceNode = new LevelGenNode();
+		sourceNode.addConnector(Connector.RightMid);
+		assertTrue(node.isLevelEndAndConnect(sourceNode));
 	}
 }

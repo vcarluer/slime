@@ -10,6 +10,7 @@ public class LevelGenNode {
 	private Set<Integer> connectors;
 	private boolean isLevelStart;
 	private boolean isLevelEnd;
+	private int complexity;
 	
 	public LevelGenNode() {
 		this.connectors = new HashSet<Integer>();
@@ -111,17 +112,22 @@ public class LevelGenNode {
 		return list;
 	}
 	
-	public BlocDirection getMirror(BlocDirection direction) {
-		switch (direction) {
-		case Top: 
-			return BlocDirection.Bottom;
-		case Right: 			
-			return BlocDirection.Left;
-		case Bottom:
-			return BlocDirection.Top;
-		case Left: 
-			return BlocDirection.Right;
-		default:
+	public static BlocDirection getMirror(BlocDirection direction) {
+		if (direction != null) {
+			switch (direction) {
+			case Top: 
+				return BlocDirection.Bottom;
+			case Right: 			
+				return BlocDirection.Left;
+			case Bottom:
+				return BlocDirection.Top;
+			case Left: 
+				return BlocDirection.Right;
+			default:
+				return null;
+			}
+		}
+		else {
 			return null;
 		}
 	}
@@ -158,7 +164,19 @@ public class LevelGenNode {
 		this.isLevelEnd = value;
 	}
 
-	public boolean isEndLevelAndGoTo(BlocDirection goToDirection) {
+	public boolean isLevelEndAndGoTo(BlocDirection goToDirection) {
 		return this.isLevelEnd && this.goTo(goToDirection);
+	}
+
+	public void setComplexity(int value) {
+		this.complexity = value;		
+	}
+
+	public int getComplexity() {
+		return this.complexity;
+	}
+
+	public boolean isLevelEndAndConnect(LevelGenNode sourceNode) {
+		return this.isLevelEnd && this.isConnectedTo(sourceNode);
 	}
 }

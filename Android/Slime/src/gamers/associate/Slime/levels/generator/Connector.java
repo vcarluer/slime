@@ -7,10 +7,10 @@ public class Connector {
 	public static final int BottomLeft = 3;	
 	public static final int BottomMid = 4;
 	public static final int BottomRight = 5;
-	public static final int LeftTop = 6;
-	public static final int LeftMid = 7;
-	public static final int LeftBottom = 8;
-	public static final int RightTop = 9;
-	public static final int RightMid = 10;
-	public static final int RightBottom = 11;	
+	public static final int LeftTop = 16;
+	public static final int LeftMid = 17;
+	public static final int LeftBottom = 18;
+	public static final int RightTop = 19;
+	public static final int RightMid = 20;
+	public static final int RightBottom = 21;	
 }
