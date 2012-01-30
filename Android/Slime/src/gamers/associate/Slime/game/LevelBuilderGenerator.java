@@ -28,16 +28,17 @@ public class LevelBuilderGenerator implements ILevelBuilder
 		{
 			this.levelDef.setId(id);
 			if (this.firstBuild) {
-				this.complexity = this.levelDef.getComplexity();
-				if (this.complexity > 40) {
-					this.complexity = 0;
-				}
-			}
+				this.complexity = this.levelDef.getComplexity();				
+			}						
 			
 			if (this.firstBuild && this.levelparser.isStored() && !this.levelDef.isFinished()) {				
 				this.levelparser.buildLevel(level);					
 				level.setLevelDefinition(this.levelDef);
 			} else {
+				if (this.complexity > 40) {
+					this.complexity = 0;
+				}
+
 				this.complexity += 5;
 				this.levelDef.setComplexity(this.complexity);
 				this.levelDef.buildLevel(level);
