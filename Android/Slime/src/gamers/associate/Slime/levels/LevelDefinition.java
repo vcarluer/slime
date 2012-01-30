@@ -17,7 +17,7 @@ import gamers.associate.Slime.game.SlimeFactory;
 
 public abstract class LevelDefinition {
 	private String id;
-	private boolean noStore;
+	protected boolean noStore;
 	protected boolean isSpecial;
 	protected GamePlay gamePlay;
 	protected int lastScore;
@@ -114,7 +114,7 @@ public abstract class LevelDefinition {
 		}
 	}
 	
-	private void handlePersistancy() {
+	public void handlePersistancy() {
 		if (!this.noStore) {
 			this.storeUserInfo();
 		}
@@ -123,6 +123,7 @@ public abstract class LevelDefinition {
 	private void storeUserInfo() {
 		BufferedWriter buffWriter = null;
 		try {
+			Log.d(Slime.TAG, "Storing User Info in " + this.id);
 			FileOutputStream fos = SlimeFactory.ContextActivity.openFileOutput(this.id, Context.MODE_PRIVATE);
 			OutputStreamWriter streamWriter = new OutputStreamWriter(fos);
 			buffWriter = new BufferedWriter(streamWriter);
@@ -133,6 +134,8 @@ public abstract class LevelDefinition {
 			buffWriter.write(String.valueOf(this.isFinished));
 			buffWriter.newLine();
 			buffWriter.write(String.valueOf(this.isCurrentSelection));
+			buffWriter.newLine();
+			this.storeUserInfoNext(buffWriter);
 		} catch (FileNotFoundException ex) {
 			Log.e(Slime.TAG, "ERROR, file not found " + this.id);
 			ex.printStackTrace();
@@ -153,10 +156,14 @@ public abstract class LevelDefinition {
         }
 	}
 	
+	protected void storeUserInfoNext(BufferedWriter buffWriter)  throws IOException {		
+	}
+
 	private void loadUserInfo() {
 		java.io.InputStream inputStream;
 		String fileName = this.id;
 		try {			
+			Log.d(Slime.TAG, "Loading User Info from " + fileName);
 			inputStream = SlimeFactory.ContextActivity.openFileInput(fileName);
 			InputStreamReader inputreader = new InputStreamReader(inputStream);
 			BufferedReader buffreader = new BufferedReader(inputreader);
@@ -181,6 +188,7 @@ public abstract class LevelDefinition {
 							this.isCurrentSelection = Boolean.valueOf(line).booleanValue();
 							break;
 						default:
+							this.loadUserInfoNext(line, i);
 							break;
 						}												
 					} catch (Exception e) {
@@ -202,6 +210,9 @@ public abstract class LevelDefinition {
 		}	
 	}
 	
+	protected void loadUserInfoNext(String line, int idx) {		
+	}
+
 	public abstract void buildLevel(Level level);
 
 	/**
@@ -231,6 +242,22 @@ public abstract class LevelDefinition {
 	 */
 	public void setCurrentSelection(boolean isCurrentSelection) {
 		this.isCurrentSelection = isCurrentSelection;
+		this.handlePersistancy();
+	}
+	
+	public void resetUserInfo() {
+		this.maxScore = 0;
+		this.isFinished = false;
+		this.isUnlock = false;
+		this.isCurrentSelection = false;
+		this.resetUserInfoNext();
+	}
+	
+	protected void resetUserInfoNext() {		
+	}
+
+	public void resetAndSave() {
+		this.resetUserInfo();
 		this.handlePersistancy();
 	}
 }

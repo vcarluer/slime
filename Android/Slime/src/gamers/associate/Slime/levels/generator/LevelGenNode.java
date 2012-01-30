@@ -13,6 +13,7 @@ public class LevelGenNode {
 	private boolean isLevelEnd;
 	private int complexity;
 	private BlocDefinition blocDefinition;
+	private String id;
 	
 	public LevelGenNode() {
 		this.connectorsEntry = new HashSet<Integer>();
@@ -207,7 +208,7 @@ public class LevelGenNode {
 	}
 
 	public boolean ConnectAndGoTo(List<Integer> list, BlocDirection goToDirection) {
-		List<Integer> directionConnectors = this.getConnectorsFor(this.getMirror(goToDirection));		
+		List<Integer> directionConnectors = this.getConnectorsFor(LevelGenNode.getMirror(goToDirection));		
 		return this.isEntryConnectedAtLeastOne(list) && this.isExitConnectedAtLeastOne(directionConnectors);
 	}
 	
@@ -219,7 +220,7 @@ public class LevelGenNode {
 	}
 
 	public boolean goTo(BlocDirection goToDirection) {
-		return this.isExitConnectedAtLeastOne(this.getConnectorsFor(this.getMirror(goToDirection)));
+		return this.isExitConnectedAtLeastOne(this.getConnectorsFor(LevelGenNode.getMirror(goToDirection)));
 	}
 
 	public boolean ConnectAndGoTo(LevelGenNode sourceNode, BlocDirection goToDirection) {
@@ -256,5 +257,13 @@ public class LevelGenNode {
 	
 	public BlocDefinition getBlocDefinition() {
 		return this.blocDefinition;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 }

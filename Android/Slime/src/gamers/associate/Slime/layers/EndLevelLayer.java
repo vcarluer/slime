@@ -13,9 +13,11 @@ import org.cocos2d.nodes.CCSprite;
 
 public class EndLevelLayer extends CCLayer {
 	private static String scoreTxt = "SCORE: "; 
+	private static String maxTxt = "MAX: ";
 	private static String endPackTxt = "END OF PACK!";
 	private CCMenuItemLabel textLabel;
 	private CCMenuItemLabel scoreLabel;
+	private CCMenuItemLabel maxLabel;
 	private CCMenuItemLabel endPackLabel;
 	private CCMenu menu;
 	private CCMenu menuEndPack;
@@ -25,6 +27,7 @@ public class EndLevelLayer extends CCLayer {
 	public EndLevelLayer() {		
 		this.textLabel = CCMenuItemLabel.item(getMenuLabel("EMPTY"), null, "");
 		this.scoreLabel = CCMenuItemLabel.item(getMenuLabel(scoreTxt), null, "");
+		this.maxLabel = CCMenuItemLabel.item(getMenuLabel(maxTxt), null, "");
 		this.endPackLabel = CCMenuItemLabel.item(getMenuLabel(endPackTxt), null, "");
 		
 		CCSprite nextSprite = CCSprite.sprite("control-fastforward.png", true);
@@ -36,10 +39,10 @@ public class EndLevelLayer extends CCLayer {
 		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);
 		this.homeMenu = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goHome");
 		
-		this.menu = CCMenu.menu(this.textLabel, this.scoreLabel, this.nextMenu, restartMenu, this.homeMenu);		
+		this.menu = CCMenu.menu(this.textLabel, this.maxLabel, this.scoreLabel, this.nextMenu, restartMenu, this.homeMenu);		
 		this.menu.alignItemsVertically();
 		
-		this.menuEndPack = CCMenu.menu(this.textLabel, this.scoreLabel, this.endPackLabel, restartMenu, this.homeMenu);		
+		this.menuEndPack = CCMenu.menu(this.textLabel, this.maxLabel, this.scoreLabel, this.endPackLabel, restartMenu, this.homeMenu);		
 		this.menuEndPack.alignItemsVertically();
 		
 		this.addChild(this.menu);		
@@ -90,6 +93,15 @@ public class EndLevelLayer extends CCLayer {
 	public void setScore(int score) {
 		String text = scoreTxt + String.valueOf(score);
 		this.setScore(text);
+	}
+	
+	public void setMax(int max) {
+		String text = maxTxt + String.valueOf(max);
+		this.setMax(text);
+	}
+	
+	public void setMax(String text) {
+		this.maxLabel.setString(text.toUpperCase());
 	}
 		
 	public void enable() {

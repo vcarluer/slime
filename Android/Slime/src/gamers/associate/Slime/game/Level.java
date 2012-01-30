@@ -60,7 +60,8 @@ public class Level {
 	private static final float bgWidth = 1467f;
 	private static final float bgHeight = 800f;
 	
-	private String maxDimension;
+	public static String ManualDimension = "Manual";
+	private String maxDimension = ManualDimension;
 	
 	/**
 	 * @uml.property  name="slimyFactory"
@@ -871,6 +872,7 @@ public class Level {
 			}
 			
 			if (this.levelDefinition != null) {
+				this.endLevelLayer.setMax(this.levelDefinition.getMaxScore());
 				this.endLevelLayer.setNextEnabled(this.levelDefinition.getMaxScore() > 0);
 				this.endLevelLayer.setHomeEnabled(this.levelDefinition.getMaxScore() == 0);
 			}

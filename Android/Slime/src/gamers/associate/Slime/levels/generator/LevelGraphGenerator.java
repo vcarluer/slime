@@ -1,5 +1,6 @@
 package gamers.associate.Slime.levels.generator;
 
+import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.levels.LevelUtil;
 
@@ -8,6 +9,8 @@ import java.util.List;
 import java.util.Random;
 
 import org.cocos2d.types.CGPoint;
+
+import android.util.Log;
 
 public class LevelGraphGenerator {
 	private List<LevelGenNode> nodes;
@@ -133,15 +136,22 @@ public class LevelGraphGenerator {
 
 	public void generate(int maxComplexity, BlocDirection constrained) {
 		this.initCount();
+		this.currentComplexity = 0;
+		Log.d(Slime.TAG, "Picking start node with constraint " + String.valueOf(constrained));
 		LevelGenNode pick = this.pickStartConstrained(constrained);			
+		Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
 		this.handlePick(pick, true);		
 		while (currentComplexity < maxComplexity) {
 			LevelGenNode prev = pick;
+			Log.d(Slime.TAG, "Picking next node with constraint " + String.valueOf(constrained));
 			pick = this.pickNextConstrained(pick, constrained);
+			Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
 			this.handlePick(pick, true);	
 		}
-				
+		
+		Log.d(Slime.TAG, "Picking end node");
 		pick = this.pickEnd(pick);
+		Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
 		this.handlePick(pick, false);
 		
 		if (this.currentLevel != null) {

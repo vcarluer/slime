@@ -51,7 +51,8 @@ public class LevelDefinitionParser extends LevelDefinition
 	private boolean isLocalStorage;
 	private Set<Class> ignoredClasses;
 	
-	public LevelDefinitionParser(String resourceName) {
+	public LevelDefinitionParser(String resourceName, boolean noUserInfoStore) {		
+		this.noStore = noUserInfoStore;
 		this.gamePlay = GamePlay.ManuallyDefined;
 		this.resourceName = resourceName;		
 		this.itemDefinitions = new ArrayList<ItemDefinition>();
@@ -73,6 +74,10 @@ public class LevelDefinitionParser extends LevelDefinition
 		else {
 			this.setId(this.resourceName);
 		}
+	}
+	
+	public LevelDefinitionParser(String resourceName) {
+		this(resourceName, false);
 	}
 	
 	private void defineIgnoreClasses() {
@@ -119,6 +124,7 @@ public class LevelDefinitionParser extends LevelDefinition
 	public void buildLevel(Level level) {
 		java.io.InputStream inputStream;
 		try {
+			Log.d(Slime.TAG, "Loading level from " + this.resourceName);
 			if (this.isLocalStorage) {
 				inputStream = SlimeFactory.ContextActivity.openFileInput(this.resourceName);
 			} else {
@@ -166,6 +172,7 @@ public class LevelDefinitionParser extends LevelDefinition
 	public void storeLevel(Level level) {
 		BufferedWriter buffWriter = null;
 		try {
+			Log.d(Slime.TAG, "Storing level in " + this.resourceName);
 			FileOutputStream fos = SlimeFactory.ContextActivity.openFileOutput(this.resourceName, Context.MODE_PRIVATE);
 			OutputStreamWriter streamWriter = new OutputStreamWriter(fos);
 			buffWriter = new BufferedWriter(streamWriter);

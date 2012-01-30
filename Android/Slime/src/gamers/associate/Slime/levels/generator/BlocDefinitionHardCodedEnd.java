@@ -9,9 +9,9 @@ public class BlocDefinitionHardCodedEnd extends BlocDefinition
 {
   public static BlocDirection EndDirection;
 
-  public void buildLevel(Level paramLevel, int paramInt1, int paramInt2)
+  public void buildLevel(Level level, int xOffset, int yOffset)
   {
-    setOffset(paramInt1, paramInt2);
+    setOffset(xOffset, yOffset);
     SlimeFactory.Platform.createBL(getX(0.0F), getY(0.0F), BlocWidth / 2, 32.0F);
     SlimeFactory.GoalPortal.createBL(getX(100.0F), getY(100.0F), 32.0F, 35.0F);
   }
@@ -21,14 +21,10 @@ public class BlocDefinitionHardCodedEnd extends BlocDefinition
     return 5;
   }
 
-  protected void initGenNodeInternal(LevelGenNode paramLevelGenNode)
+  protected void initGenNodeInternal(LevelGenNode genNode)
   {
-    paramLevelGenNode.setIsLevelEnd(true);
-    paramLevelGenNode.addConnectorsEntry(paramLevelGenNode.getConnectorsFor(EndDirection));
+    genNode.setIsLevelEnd(true);
+    genNode.addConnectorsEntry(genNode.getConnectorsFor(EndDirection));
+    genNode.setId("End" + String.valueOf(EndDirection));
   }
 }
-
-/* Location:           C:\projects\slimedecomp\slime-dex2jar.jar
- * Qualified Name:     gamers.associate.Slime.levels.generator.BlocDefinitionHardCodedEnd
- * JD-Core Version:    0.6.0
- */

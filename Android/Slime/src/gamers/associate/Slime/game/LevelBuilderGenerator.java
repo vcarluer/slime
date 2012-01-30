@@ -9,37 +9,57 @@ import java.util.ArrayList;
 
 public class LevelBuilderGenerator implements ILevelBuilder
 {
-	private static String fileName = "Random.slime"; 
+	private static String defaultId = "Random";
+	private static String fileName = defaultId + ".slime"; 
 	private int complexity;
 	private LevelHome home = new LevelHome();
 	private LevelDefinitionGenerator levelDef = new LevelDefinitionGenerator();
-	private LevelDefinitionParser levelparser = new LevelDefinitionParser(fileName);
+	private LevelDefinitionParser levelparser = new LevelDefinitionParser(fileName, true);
+	private boolean firstBuild;
 	
 	public LevelBuilderGenerator() {
-		this.levelparser.setLocalStorage(true);
+		this.levelparser.setLocalStorage(true);		
+		this.firstBuild = true;
 	}
 	
-	public void build(Level paramLevel, String id)
+	public void build(Level level, String id)
 	{
 		if (id != LevelHome.Id)
 		{
-		  this.levelDef.setId(id);
-		  this.levelDef.setComplexity(this.complexity);
-		  this.levelDef.buildLevel(paramLevel);
-		  paramLevel.setLevelDefinition(this.levelDef);
-		  this.levelparser.storeLevel(paramLevel);
+			this.levelDef.setId(id);
+			if (this.firstBuild) {
+				this.complexity = this.levelDef.getComplexity();
+				if (this.complexity > 40) {
+					this.complexity = 0;
+				}
+			}
+			
+			if (this.firstBuild && this.levelparser.isStored() && !this.levelDef.isFinished()) {				
+				this.levelparser.buildLevel(level);					
+				level.setLevelDefinition(this.levelDef);
+			} else {
+				this.complexity += 5;
+				this.levelDef.setComplexity(this.complexity);
+				this.levelDef.buildLevel(level);
+				level.setLevelDefinition(this.levelDef);				
+				this.levelparser.storeLevel(level);
+				
+				this.levelDef.resetAndSave();
+			}
+			
+			this.firstBuild = false;
 		}
 		else
 		{
-		  this.home.buildLevel(paramLevel);
-		  paramLevel.setLevelDefinition(this.home);
-		  paramLevel.addGamePlay(null);
-		  }
+			this.home.buildLevel(level);
+			level.setLevelDefinition(this.home);
+			level.addGamePlay(null);
+		}
 	}
 	
 	public String getNext(String paramString)
 	{
-		return "Random";
+		return defaultId;
 	}
 	  
 	public ArrayList<LevelDefinition> getNormalLevels()
@@ -60,9 +80,9 @@ public class LevelBuilderGenerator implements ILevelBuilder
 	@Override
 	public void rebuild(Level level, LevelDefinition levelDef) {
 		if (this.levelparser.isStored()) {
-			this.levelparser.buildLevel(level);
+			this.levelparser.buildLevel(level);			
 		} else {
-			this.build(level, levelDef.getId());
+			this.build(level, levelDef.getId());			
 		}
 	}
 }

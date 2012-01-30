@@ -11,11 +11,14 @@ public class LevelInfoDef extends ItemDefinition {
 	private static String Dimension_Auto = "Auto";
 	private static String Dimension_Width = "Width";
 	private static String Dimension_Height = "Height";	
+	private static String Dimension_Manual = Level.ManualDimension;
 	
 	private String maxDimension;
 
 	@Override
 	public void createItem(Level level) {
+		level.setLevelSize(this.width, this.height);
+		
 		if (maxDimension.toUpperCase().equals(Dimension_Auto.toUpperCase())) {		
 			float heightRatio = this.height / this.width;
 			if (LevelUtil.getHeightRatio() >= heightRatio) {

@@ -20,6 +20,7 @@ public class BlocHardInit
     new BlocDefinitionHardCodedEnd();
     BlocDefinitionHardCodedEnd.EndDirection = BlocDirection.Left;
     new BlocDefinitionHardCodedEnd();
+    new BlocDefinitionHardCodedAll();
   }
 }
 

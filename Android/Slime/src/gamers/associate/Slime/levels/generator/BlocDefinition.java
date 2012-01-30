@@ -25,11 +25,11 @@ public abstract class BlocDefinition
     initGenNode();
   }
 
-  public BlocDefinition(int paramInt1, int paramInt2)
+  public BlocDefinition(int width, int height)
   {
     this();
-    BlocWidth = paramInt1;
-    BlocHeight = paramInt2;
+    BlocWidth = width;
+    BlocHeight = height;
   }
 
   private final void initGenNode()
@@ -41,46 +41,41 @@ public abstract class BlocDefinition
     SlimeFactory.LevelGenerator.addNode(localLevelGenNode);
   }
 
-  public abstract void buildLevel(Level paramLevel, int paramInt1, int paramInt2);
+  public abstract void buildLevel(Level level, int xOffset, int yOffset);
 
   protected abstract int getComplexity();
 
-  protected float getX(float paramFloat)
+  protected float getX(float x)
   {
-    return getX(paramFloat, this.currentXOffset);
+    return getX(x, this.currentXOffset);
   }
 
-  protected float getX(float paramFloat1, float paramFloat2)
+  protected float getX(float x, float xOffset)
   {
-    return paramFloat1 + paramFloat2 * BlocWidth;
+    return x + xOffset * BlocWidth;
   }
 
-  protected float getY(float paramFloat)
+  protected float getY(float y)
   {
-    return getY(paramFloat, this.currentYOffset);
+    return getY(y, this.currentYOffset);
   }
 
-  protected float getY(float paramFloat1, float paramFloat2)
+  protected float getY(float y, float yOffset)
   {
-    return paramFloat1 + paramFloat2 * BlocHeight;
+    return y + yOffset * BlocHeight;
   }
 
-  protected abstract void initGenNodeInternal(LevelGenNode paramLevelGenNode);
+  protected abstract void initGenNodeInternal(LevelGenNode genNode);
 
-  public void setGenNode(LevelGenNode paramLevelGenNode)
+  public void setGenNode(LevelGenNode genNode)
   {
-    this.genNode = paramLevelGenNode;
+    this.genNode = genNode;
     this.genNode.setBlocDefinition(this);
   }
 
-  protected void setOffset(int paramInt1, int paramInt2)
+  protected void setOffset(int xOffset, int yOffset)
   {
-    this.currentXOffset = paramInt1;
-    this.currentYOffset = paramInt2;
+    this.currentXOffset = xOffset;
+    this.currentYOffset = yOffset;
   }
 }
-
-/* Location:           C:\projects\slimedecomp\slime-dex2jar.jar
- * Qualified Name:     gamers.associate.Slime.levels.generator.BlocDefinition
- * JD-Core Version:    0.6.0
- */
