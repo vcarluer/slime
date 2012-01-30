@@ -25,7 +25,7 @@ public class LevelGraphGeneratorTest extends TestCase {
 	
 	public void testPickStartNode() {
 		LevelGenNode node = new LevelGenNode();
-		node.addConnector(Connector.TopLeft);
+		node.addConnectorExit(Connector.TopLeft);
 		node.setIsLevelStart(true);
 		generator.addNode(node);
 		LevelGenNode pick = generator.pickStart(BlocDirection.Top);
@@ -34,7 +34,7 @@ public class LevelGraphGeneratorTest extends TestCase {
 	
 	public void testNoPickStartNode1() {
 		LevelGenNode node = new LevelGenNode();
-		node.addConnector(Connector.BottomLeft);
+		node.addConnectorExit(Connector.BottomLeft);
 		node.setIsLevelStart(true);
 		generator.addNode(node);
 		LevelGenNode pick = generator.pickStart(BlocDirection.Top);
@@ -43,7 +43,7 @@ public class LevelGraphGeneratorTest extends TestCase {
 	
 	public void testNoPickStartNode2() {
 		LevelGenNode node = new LevelGenNode();
-		node.addConnector(Connector.TopLeft);
+		node.addConnectorExit(Connector.TopLeft);
 		node.setIsLevelStart(false);
 		generator.addNode(node);
 		LevelGenNode pick = generator.pickStart(BlocDirection.Top);
@@ -53,8 +53,8 @@ public class LevelGraphGeneratorTest extends TestCase {
 	public void testPickNode() {
 		this.createGraphStart();
 		LevelGenNode node = new LevelGenNode();
-		node.addConnector(Connector.BottomLeft);
-		node.addConnector(Connector.RightMid);
+		node.addConnectorEntry(Connector.BottomLeft);
+		node.addConnectorExit(Connector.RightMid);
 		generator.addNode(node);
 		LevelGenNode start = generator.pickStart(BlocDirection.Top);
 		LevelGenNode next = generator.pickNext(start, BlocDirection.Right);
@@ -64,8 +64,8 @@ public class LevelGraphGeneratorTest extends TestCase {
 	public void testNoPickNode() {
 		this.createGraphStart();
 		LevelGenNode node = new LevelGenNode();
-		node.addConnector(Connector.BottomLeft);
-		node.addConnector(Connector.LeftMid);
+		node.addConnectorEntry(Connector.BottomLeft);
+		node.addConnectorExit(Connector.LeftMid);
 		generator.addNode(node);
 		LevelGenNode start = generator.pickStart(BlocDirection.Top);
 		LevelGenNode next = generator.pickNext(start, BlocDirection.Right);
@@ -75,7 +75,7 @@ public class LevelGraphGeneratorTest extends TestCase {
 	public void testPickEndNode() {
 		this.createGraph1();
 		LevelGenNode node = new LevelGenNode();
-		node.addConnector(Connector.LeftMid);
+		node.addConnectorEntry(Connector.LeftMid);
 		node.setIsLevelEnd(true);
 		generator.addNode(node);		
 		LevelGenNode start = generator.pickStart(BlocDirection.Top);
@@ -87,7 +87,7 @@ public class LevelGraphGeneratorTest extends TestCase {
 	public void testNoPickEndNode() {
 		this.createGraph1();
 		LevelGenNode node = new LevelGenNode();
-		node.addConnector(Connector.LeftBottom);
+		node.addConnectorEntry(Connector.LeftBottom);
 		node.setIsLevelEnd(true);
 		generator.addNode(node);		
 		LevelGenNode start = generator.pickStart(BlocDirection.Top);
@@ -153,7 +153,7 @@ public class LevelGraphGeneratorTest extends TestCase {
 		
 	private void createGraphStart() {
 		LevelGenNode node = new LevelGenNode();
-		node.addConnector(Connector.TopLeft);
+		node.addConnectorExit(Connector.TopLeft);
 		node.setIsLevelStart(true);
 		generator.addNode(node);		
 	}
@@ -161,15 +161,15 @@ public class LevelGraphGeneratorTest extends TestCase {
 	private void createGraph1() {
 		this.createGraphStart();
 		LevelGenNode node = new LevelGenNode();
-		node.addConnector(Connector.BottomLeft);
-		node.addConnector(Connector.RightMid);
+		node.addConnectorEntry(Connector.BottomLeft);
+		node.addConnectorExit(Connector.RightMid);
 		generator.addNode(node);
 	}
 	
 	private void createMinGraph() {
 		this.createGraph1();
 		LevelGenNode node = new LevelGenNode();
-		node.addConnector(Connector.LeftBottom);
+		node.addConnectorEntry(Connector.LeftBottom);
 		node.setIsLevelEnd(true);
 		generator.addNode(node);
 	}
@@ -183,121 +183,159 @@ public class LevelGraphGeneratorTest extends TestCase {
 		generator.addNode(this.createEndNodeRight());
 		generator.addNode(this.createEndNodeBottom());
 		generator.addNode(this.createEndNodeLeft());
-		generator.addNode(this.addTop(this.createNodeLeft()));		
-		generator.addNode(this.addBottom(this.createNodeLeft()));
-		generator.addNode(this.addRight(this.createNodeLeft()));
-		generator.addNode(this.addRight(this.createNodeTop()));
-		generator.addNode(this.addBottom(this.createNodeTop()));
-		generator.addNode(this.addLeft(this.createNodeTop()));
-		generator.addNode(this.addBottom(this.createNodeRight()));
-		generator.addNode(this.addLeft(this.createNodeRight()));
-		generator.addNode(this.addTop(this.createNodeRight()));
-		generator.addNode(this.addTop(this.createNodeBottom()));
-		generator.addNode(this.addRight(this.createNodeBottom()));
-		generator.addNode(this.addLeft(this.createNodeBottom()));		
+		generator.addNode(this.addTopEx(this.createNodeLeft()));		
+		generator.addNode(this.addBottomEx(this.createNodeLeft()));
+		generator.addNode(this.addRightEx(this.createNodeLeft()));
+		generator.addNode(this.addRightEx(this.createNodeTop()));
+		generator.addNode(this.addBottomEx(this.createNodeTop()));
+		generator.addNode(this.addLeftEx(this.createNodeTop()));
+		generator.addNode(this.addBottomEx(this.createNodeRight()));
+		generator.addNode(this.addLeftEx(this.createNodeRight()));
+		generator.addNode(this.addTopEx(this.createNodeRight()));
+		generator.addNode(this.addTopEx(this.createNodeBottom()));
+		generator.addNode(this.addRightEx(this.createNodeBottom()));
+		generator.addNode(this.addLeftEx(this.createNodeBottom()));		
 	}		
 	
-	private LevelGenNode addTop(LevelGenNode node) {
-		node.addConnector(Connector.TopLeft);
-		node.addConnector(Connector.TopMid);
-		node.addConnector(Connector.TopRight);
+	private LevelGenNode addTopEn(LevelGenNode node) {
+		node.addConnectorEntry(Connector.TopLeft);
+		node.addConnectorEntry(Connector.TopMid);
+		node.addConnectorEntry(Connector.TopRight);
 		return node;
 	}
 	
-	private LevelGenNode addRight(LevelGenNode node) {
-		node.addConnector(Connector.RightTop);
-		node.addConnector(Connector.RightMid);
-		node.addConnector(Connector.RightBottom);
+	private LevelGenNode addRightEn(LevelGenNode node) {
+		node.addConnectorEntry(Connector.RightTop);
+		node.addConnectorEntry(Connector.RightMid);
+		node.addConnectorEntry(Connector.RightBottom);
 		return node;
 	}
 	
-	private LevelGenNode addBottom(LevelGenNode node) {
-		node.addConnector(Connector.BottomLeft);
-		node.addConnector(Connector.BottomMid);
-		node.addConnector(Connector.BottomRight);
+	private LevelGenNode addBottomEn(LevelGenNode node) {
+		node.addConnectorEntry(Connector.BottomLeft);
+		node.addConnectorEntry(Connector.BottomMid);
+		node.addConnectorEntry(Connector.BottomRight);
 		return node;
 	}
 	
-	private LevelGenNode addLeft(LevelGenNode node) {
-		node.addConnector(Connector.LeftTop);
-		node.addConnector(Connector.LeftMid);
-		node.addConnector(Connector.LeftBottom);
+	private LevelGenNode addLeftEn(LevelGenNode node) {
+		node.addConnectorEntry(Connector.LeftTop);
+		node.addConnectorEntry(Connector.LeftMid);
+		node.addConnectorEntry(Connector.LeftBottom);
 		return node;
 	}
 	
-	private LevelGenNode createNodeTop() {
+	private LevelGenNode addTopEx(LevelGenNode node) {
+		node.addConnectorExit(Connector.TopLeft);
+		node.addConnectorExit(Connector.TopMid);
+		node.addConnectorExit(Connector.TopRight);
+		return node;
+	}
+	
+	private LevelGenNode addRightEx(LevelGenNode node) {
+		node.addConnectorExit(Connector.RightTop);
+		node.addConnectorExit(Connector.RightMid);
+		node.addConnectorExit(Connector.RightBottom);
+		return node;
+	}
+	
+	private LevelGenNode addBottomEx(LevelGenNode node) {
+		node.addConnectorExit(Connector.BottomLeft);
+		node.addConnectorExit(Connector.BottomMid);
+		node.addConnectorExit(Connector.BottomRight);
+		return node;
+	}
+	
+	private LevelGenNode addLeftEx(LevelGenNode node) {
+		node.addConnectorExit(Connector.LeftTop);
+		node.addConnectorExit(Connector.LeftMid);
+		node.addConnectorExit(Connector.LeftBottom);
+		return node;
+	}
+	
+	private LevelGenNode createNode() {
 		LevelGenNode node = new LevelGenNode();
-		node.setComplexity(5);
-		this.addTop(node);
-		return node;
-	}
-	
-	private LevelGenNode createNodeRight() {
-		LevelGenNode node = new LevelGenNode();
-		node.setComplexity(5);
-		this.addRight(node);
-		return node;
-	}
-	
-	private LevelGenNode createNodeBottom() {
-		LevelGenNode node = new LevelGenNode();
-		node.setComplexity(5);
-		this.addBottom(node);
-		return node;
-	}
-	
-	private LevelGenNode createNodeLeft() {
-		LevelGenNode node = new LevelGenNode();
-		node.setComplexity(5);
-		this.addLeft(node);
+		node.setComplexity(5);		
 		return node;
 	}
 	
 	private LevelGenNode createStartNodeTop() {
-		LevelGenNode node = this.createNodeTop();
+		LevelGenNode node = this.createNode();
+		addTopEx(node);
 		node.setIsLevelStart(true);
 		return node;
 	}
 	
 	private LevelGenNode createStartNodeRight() {
-		LevelGenNode node = this.createNodeRight();
+		LevelGenNode node = this.createNode();
+		addRightEx(node);
 		node.setIsLevelStart(true);
 		return node;
 	}
 	
 	private LevelGenNode createStartNodeBottom() {
-		LevelGenNode node = this.createNodeBottom();
+		LevelGenNode node = this.createNode();
+		addBottomEx(node);
 		node.setIsLevelStart(true);
 		return node;
 	}
 	
 	private LevelGenNode createStartNodeLeft() {
-		LevelGenNode node = this.createNodeLeft();
+		LevelGenNode node = this.createNode();
+		addLeftEx(node);
 		node.setIsLevelStart(true);
 		return node;
 	}
 	
 	private LevelGenNode createEndNodeTop() {
-		LevelGenNode node = this.createNodeTop();
+		LevelGenNode node = this.createNode();
+		addTopEn(node);
 		node.setIsLevelEnd(true);
 		return node;
 	}
 	
 	private LevelGenNode createEndNodeRight() {
-		LevelGenNode node = this.createNodeRight();
+		LevelGenNode node = this.createNode();
+		addRightEn(node);
 		node.setIsLevelEnd(true);
 		return node;
 	}
 	
 	private LevelGenNode createEndNodeBottom() {
-		LevelGenNode node = this.createNodeBottom();
+		LevelGenNode node = this.createNode();
+		addBottomEn(node);
 		node.setIsLevelEnd(true);
 		return node;
 	}
 	
 	private LevelGenNode createEndNodeLeft() {
-		LevelGenNode node = this.createNodeLeft();
+		LevelGenNode node = this.createNode();
+		addLeftEn(node);
 		node.setIsLevelEnd(true);
+		return node;
+	}
+	
+	private LevelGenNode createNodeTop() {
+		LevelGenNode node = this.createNode();
+		addTopEn(node);		
+		return node;
+	}
+	
+	private LevelGenNode createNodeRight() {
+		LevelGenNode node = this.createNode();
+		addRightEn(node);		
+		return node;
+	}
+	
+	private LevelGenNode createNodeBottom() {
+		LevelGenNode node = this.createNode();
+		addBottomEn(node);		
+		return node;
+	}
+	
+	private LevelGenNode createNodeLeft() {
+		LevelGenNode node = this.createNode();
+		addLeftEn(node);		
 		return node;
 	}
 }

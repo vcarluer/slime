@@ -20,40 +20,40 @@ public class LevelGenNode {
 	}
 	
 	public void addConnectorEntry(int connector) {
-		this.addConnector(this.connectorsEntry, connector);
+		addConnector(this.connectorsEntry, connector);
 	}
 	
 	public void addConnectorExit(int connector) {
-		this.addConnector(this.connectorsExit, connector);
+		addConnector(this.connectorsExit, connector);
 	}
 	
-	public void addConnector(Set<Integer> connectors, int connector) {
+	public static void addConnector(Set<Integer> connectors, int connector) {
 		connectors.add(connector);
 	}
 	
 	public void addConnectorsEntry(List<Integer> connectorsToAdd) {
-		this.addConnectors(this.connectorsEntry, connectorsToAdd);
+		addConnectors(this.connectorsEntry, connectorsToAdd);
 	}
 	
 	public void addConnectorsExit(List<Integer> connectorsToAdd) {
-		this.addConnectors(this.connectorsExit, connectorsToAdd);
+		addConnectors(this.connectorsExit, connectorsToAdd);
 	}
 	
-	public void addConnectors(Set<Integer> connectors, List<Integer> connectorsToAdd) {
+	public static void addConnectors(Set<Integer> connectors, List<Integer> connectorsToAdd) {
 		for(Integer connector : connectorsToAdd) {
 			connectors.add(connector);
 		}
 	}
 
 	public int getConnectorEntryCount() {
-		return this.getConnectorCount(this.connectorsEntry);
+		return getConnectorCount(this.connectorsEntry);
 	}
 	
 	public int getConnectorExitCount() {
-		return this.getConnectorCount(this.connectorsExit);
+		return getConnectorCount(this.connectorsExit);
 	}
 	
-	public int getConnectorCount(Set<Integer> connectors) {
+	public static int getConnectorCount(Set<Integer> connectors) {
 		return connectors.size();
 	}
 	
@@ -66,25 +66,25 @@ public class LevelGenNode {
 	}
 
 	public boolean isEntryConnectedTo(int connector) {
-		return this.isConnectedTo(this.connectorsEntry, connector);
+		return isConnectedTo(this.connectorsEntry, connector);
 	}
 	
 	public boolean isExitConnectedTo(int connector) {
-		return this.isConnectedTo(this.connectorsExit, connector);
+		return isConnectedTo(this.connectorsExit, connector);
 	}
 	
-	public boolean isConnectedTo(Set<Integer> connectors, int connector) {
+	public static boolean isConnectedTo(Set<Integer> connectors, int connector) {
 		boolean connected = false;
 		for(Integer connection : connectors) {
 			// Source here is connector
-			connected = this.isConnected(connector, connection);
+			connected = isConnected(connector, connection);
 			if (connected) break;
 		}
 		
 		return connected;
 	}
 
-	public boolean isConnected(int connectorSource, int connectorTarget) {
+	public static boolean isConnected(int connectorSource, int connectorTarget) {
 		return Math.abs(connectorSource - connectorTarget) == 3;
 	}
 
@@ -236,10 +236,6 @@ public class LevelGenNode {
 
 	public void setIsLevelEnd(boolean value) {
 		this.isLevelEnd = value;
-	}
-
-	public boolean isLevelEndAndGoTo(BlocDirection goToDirection) {
-		return this.isLevelEnd && this.goTo(goToDirection);
 	}
 
 	public void setComplexity(int value) {

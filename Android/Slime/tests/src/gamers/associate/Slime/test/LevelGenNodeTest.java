@@ -1,7 +1,9 @@
 package gamers.associate.Slime.test;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import gamers.associate.Slime.levels.generator.BlocDirection;
 import gamers.associate.Slime.levels.generator.Connector;
@@ -10,10 +12,12 @@ import junit.framework.TestCase;
 
 public class LevelGenNodeTest extends TestCase {
 	private LevelGenNode node;
+	private Set<Integer> list;
 	
 	@Override
 	protected void setUp() throws Exception {
 		node = new LevelGenNode();
+		list = new HashSet<Integer>();
 		super.setUp();
 	}
 
@@ -22,71 +26,71 @@ public class LevelGenNodeTest extends TestCase {
 	}
 	
 	public void testSetAvailableConnector1() {		
-		node.addConnector(Connector.TopLeft);
-		assertEquals(1, node.getConnectorCount());
+		LevelGenNode.addConnector(list, Connector.TopLeft);
+		assertEquals(1, list.size());
 	}
 	
 	public void testSet2Connectors() {
-		node.addConnector(Connector.TopLeft);
-		node.addConnector(Connector.TopMid);
-		assertEquals(2, node.getConnectorCount());
+		LevelGenNode.addConnector(list, Connector.TopLeft);
+		LevelGenNode.addConnector(list, Connector.TopMid);
+		assertEquals(2, list.size());
 	}
 	
 	public void testOnlyOneType() {
-		node.addConnector(Connector.TopLeft);
-		node.addConnector(Connector.TopLeft);
-		assertEquals(1, node.getConnectorCount());
+		LevelGenNode.addConnector(list, Connector.TopLeft);
+		LevelGenNode.addConnector(list, Connector.TopLeft);
+		assertEquals(1, list.size());
 	}	
 	
 	public void testBTIsConnected() {
-		assertTrue(node.isConnected(Connector.BottomLeft, Connector.TopLeft));
+		assertTrue(LevelGenNode.isConnected(Connector.BottomLeft, Connector.TopLeft));
 	}
 	
 	public void testRLIsConnected() {
-		assertTrue(node.isConnected(Connector.RightMid, Connector.LeftMid));
+		assertTrue(LevelGenNode.isConnected(Connector.RightMid, Connector.LeftMid));
 	}
 	
 	public void testTBIsNotConnected() {
-		assertFalse(node.isConnected(Connector.TopLeft, Connector.BottomMid));		
+		assertFalse(LevelGenNode.isConnected(Connector.TopLeft, Connector.BottomMid));		
 	}
 	
 	public void testLRIsNotConnected() {
-		assertFalse(node.isConnected(Connector.LeftMid, Connector.RightTop));		
+		assertFalse(LevelGenNode.isConnected(Connector.LeftMid, Connector.RightTop));		
 	}
 	
 	public void testTLIsNotConnected() {
-		assertFalse(node.isConnected(Connector.BottomLeft, Connector.LeftTop));		
+		assertFalse(LevelGenNode.isConnected(Connector.BottomLeft, Connector.LeftTop));		
 	}
 	
 	public void testHasCorrespondingConnector() {
-		node.addConnector(Connector.TopLeft);
-		assertTrue(node.isConnectedTo(Connector.BottomLeft));
+		LevelGenNode.addConnector(list, Connector.TopLeft);
+		assertTrue(LevelGenNode.isConnectedTo(list, Connector.BottomLeft));
 	}
 	
 	public void testHasNoCorrespondingConnector() {
-		node.addConnector(Connector.TopLeft);
-		assertFalse(node.isConnectedTo(Connector.TopMid));
+		LevelGenNode.addConnector(list, Connector.TopLeft);
+		assertFalse(LevelGenNode.isConnectedTo(list, Connector.TopMid));
 	}
 	
 	public void testMultiSourceHasCorresponding() {
-		node.addConnector(Connector.TopLeft);
+		node.addConnectorEntry(Connector.TopLeft);
 		LevelGenNode nodeSource = new LevelGenNode();
-		nodeSource.addConnector(Connector.BottomLeft);
-		nodeSource.addConnector(Connector.BottomMid);
-		assertTrue(node.isConnectedTo(nodeSource));
+		nodeSource.addConnectorExit(Connector.BottomLeft);
+		nodeSource.addConnectorExit(Connector.BottomMid);
+		assertTrue(node.isEntryConnectedTo(nodeSource));
 	}
 	
 	public void testMultiSourceHasCorresponding2() {
-		node.addConnector(Connector.BottomLeft);
+		node.addConnectorEntry(Connector.BottomLeft);
 		LevelGenNode nodeSource = new LevelGenNode();
-		nodeSource.addConnector(Connector.TopLeft);
-		nodeSource.addConnector(Connector.TopMid);
-		assertTrue(node.isConnectedTo(nodeSource));
+		nodeSource.addConnectorExit(Connector.TopLeft);
+		nodeSource.addConnectorExit(Connector.TopMid);
+		assertTrue(node.isEntryConnectedTo(nodeSource));
 	}
 	
 	public void testConnectAtLeastOneConnectorPerList() {
-		node.addConnector(Connector.TopLeft);
-		node.addConnector(Connector.RightMid);
+		node.addConnectorEntry(Connector.TopLeft);
+		node.addConnectorEntry(Connector.RightMid);
 		List<Integer> list1 = new ArrayList<Integer>();
 		list1.add(Connector.BottomLeft);
 		List<Integer> list2 = new ArrayList<Integer>();
@@ -94,12 +98,12 @@ public class LevelGenNodeTest extends TestCase {
 		List<List<Integer>> list = new ArrayList<List<Integer>>();
 		list.add(list1);
 		list.add(list2);
-		assertTrue(node.isConnectedMultiple(list));		
+		assertTrue(node.isEntryConnectedMultiple(list));		
 	}
 	
 	public void testDisConnectOneConnector() {
-		node.addConnector(Connector.TopLeft);
-		node.addConnector(Connector.RightMid);
+		node.addConnectorEntry(Connector.TopLeft);
+		node.addConnectorEntry(Connector.RightMid);
 		List<Integer> list1 = new ArrayList<Integer>();
 		list1.add(Connector.BottomRight);		
 		List<Integer> list2 = new ArrayList<Integer>();
@@ -107,12 +111,12 @@ public class LevelGenNodeTest extends TestCase {
 		List<List<Integer>> list = new ArrayList<List<Integer>>();
 		list.add(list1);
 		list.add(list2);
-		assertFalse(node.isConnectedMultiple(list));		
+		assertFalse(node.isEntryConnectedMultiple(list));		
 	}
 	
 	public void testDisConnectOneConnector2() {
-		node.addConnector(Connector.TopLeft);
-		node.addConnector(Connector.RightMid);
+		node.addConnectorEntry(Connector.TopLeft);
+		node.addConnectorEntry(Connector.RightMid);
 		List<Integer> list1 = new ArrayList<Integer>();
 		list1.add(Connector.BottomLeft);		
 		List<Integer> list2 = new ArrayList<Integer>();
@@ -120,12 +124,12 @@ public class LevelGenNodeTest extends TestCase {
 		List<List<Integer>> list = new ArrayList<List<Integer>>();
 		list.add(list1);
 		list.add(list2);
-		assertFalse(node.isConnectedMultiple(list));		
+		assertFalse(node.isEntryConnectedMultiple(list));		
 	}
 	
 	public void testConnectAtLeastOneConnectorPerList2() {
-		node.addConnector(Connector.TopLeft);
-		node.addConnector(Connector.RightMid);
+		node.addConnectorEntry(Connector.TopLeft);
+		node.addConnectorEntry(Connector.RightMid);
 		List<Integer> list1 = new ArrayList<Integer>();
 		list1.add(Connector.BottomRight);
 		list1.add(Connector.BottomLeft);
@@ -135,15 +139,15 @@ public class LevelGenNodeTest extends TestCase {
 		List<List<Integer>> list = new ArrayList<List<Integer>>();
 		list.add(list1);
 		list.add(list2);
-		assertTrue(node.isConnectedMultiple(list));		
+		assertTrue(node.isEntryConnectedMultiple(list));		
 	}
 	
 	public void testConnectAtLeastOne() {
-		node.addConnector(Connector.TopLeft);
-		node.addConnector(Connector.RightMid);
+		node.addConnectorEntry(Connector.TopLeft);
+		node.addConnectorEntry(Connector.RightMid);
 		List<Integer> list1 = new ArrayList<Integer>();		
 		list1.add(Connector.BottomLeft);		
-		assertTrue(node.isConnectedAtLeastOne(list1));		
+		assertTrue(node.isEntryConnectedAtLeastOne(list1));		
 	}
 	
 	public void testGetConnectorListForDirectionT() {
@@ -175,77 +179,65 @@ public class LevelGenNodeTest extends TestCase {
 	}
 	
 	public void testGoTo() {		
-		node.addConnector(Connector.RightMid);		
+		node.addConnectorExit(Connector.RightMid);		
 		assertTrue(node.goTo(BlocDirection.Right));
 	}
 	
 	public void testDontGoTo() {		
-		node.addConnector(Connector.LeftMid);		
+		node.addConnectorExit(Connector.LeftMid);		
 		assertFalse(node.goTo(BlocDirection.Right));
 	}
 	
 	public void testIsConnectedAndGoTo() {
-		node.addConnector(Connector.TopLeft);
-		node.addConnector(Connector.RightMid);
+		node.addConnectorEntry(Connector.TopLeft);
+		node.addConnectorExit(Connector.RightMid);
 		List<Integer> list = new ArrayList<Integer>();
 		list.add(Connector.BottomLeft);
 		assertTrue(node.ConnectAndGoTo(list, BlocDirection.Right));
 	}
 	
 	public void testIsDisConnectedAndGoTo() {
-		node.addConnector(Connector.TopLeft);
-		node.addConnector(Connector.RightMid);
+		node.addConnectorEntry(Connector.TopLeft);
+		node.addConnectorExit(Connector.RightMid);
 		List<Integer> list = new ArrayList<Integer>();
 		list.add(Connector.BottomMid);
 		assertFalse(node.ConnectAndGoTo(list, BlocDirection.Right));
 	}
 	
 	public void testIsConnectedAndDontGoTo() {
-		node.addConnector(Connector.TopLeft);
-		node.addConnector(Connector.RightMid);
+		node.addConnectorEntry(Connector.TopLeft);
+		node.addConnectorExit(Connector.RightMid);
 		List<Integer> list = new ArrayList<Integer>();
 		list.add(Connector.BottomLeft);
 		assertFalse(node.ConnectAndGoTo(list, BlocDirection.Left));
 	}
 	
 	public void testNodeConnectAndGoTo() {
-		node.addConnector(Connector.TopLeft);
-		node.addConnector(Connector.RightMid);
+		node.addConnectorEntry(Connector.TopLeft);
+		node.addConnectorExit(Connector.RightMid);
 		LevelGenNode sourceNode = new LevelGenNode();
-		sourceNode.addConnector(Connector.BottomLeft);
+		sourceNode.addConnectorExit(Connector.BottomLeft);
 		assertTrue(node.ConnectAndGoTo(sourceNode, BlocDirection.Right));
 	}
 	
 	public void testNodeDisConnectAndGoTo() {
-		node.addConnector(Connector.TopLeft);
-		node.addConnector(Connector.RightMid);
+		node.addConnectorEntry(Connector.TopLeft);
+		node.addConnectorExit(Connector.RightMid);
 		LevelGenNode sourceNode = new LevelGenNode();
-		sourceNode.addConnector(Connector.BottomRight);
+		sourceNode.addConnectorExit(Connector.BottomRight);
 		assertFalse(node.ConnectAndGoTo(sourceNode, BlocDirection.Right));
 	}
 	
 	public void testNodeLevelStartAndGoTo() {
-		node.addConnector(Connector.RightMid);
+		node.addConnectorExit(Connector.RightMid);
 		node.setIsLevelStart(true);
 		assertTrue(node.isStartAndGoTo(BlocDirection.Right));
 	}
 	
 	public void testNodeNotLevelStartAndGoTo() {
-		node.addConnector(Connector.RightMid);
+		node.addConnectorExit(Connector.RightMid);
 		node.setIsLevelStart(false);
 		assertFalse(node.isStartAndGoTo(BlocDirection.Right));
-	}
-	
-	public void testNodeLevelEndAndGoTo() {
-		node.addConnector(Connector.LeftMid);
-		node.setIsLevelEnd(true);
-		assertTrue(node.isLevelEndAndGoTo(BlocDirection.Left));
-	}
-	
-	public void testNodeNotLevelEndAndGoTo() {
-		node.addConnector(Connector.LeftMid);
-		node.setIsLevelEnd(false);
-		assertFalse(node.isLevelEndAndGoTo(BlocDirection.Left));
 	}
 	
 	public void testGetComplexity() {
@@ -254,10 +246,10 @@ public class LevelGenNodeTest extends TestCase {
 	}
 	
 	public void testNodeLevelEndComeFrom() {
-		node.addConnector(Connector.LeftMid);
+		node.addConnectorEntry(Connector.LeftMid);
 		node.setIsLevelEnd(true);
 		LevelGenNode sourceNode = new LevelGenNode();
-		sourceNode.addConnector(Connector.RightMid);
+		sourceNode.addConnectorExit(Connector.RightMid);
 		assertTrue(node.isLevelEndAndConnect(sourceNode));
 	}
 }

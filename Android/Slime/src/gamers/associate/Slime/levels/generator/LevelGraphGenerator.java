@@ -84,7 +84,11 @@ public class LevelGraphGenerator {
 	}	
 	
 	public BlocDirection getRandomDirection() {
-		 Random randomGenerator = new Random();
+		 return this.getRandomDirection(null);
+	}
+	
+	public BlocDirection getRandomDirection(BlocDirection constrained) {
+		Random randomGenerator = new Random();
 		 int dir = randomGenerator.nextInt(4);		 
 		 BlocDirection direction = BlocDirection.Top;
 		 switch(dir) {
@@ -101,25 +105,20 @@ public class LevelGraphGenerator {
 		 		direction = BlocDirection.Left;
 		 		break;
 		 	default:
-		 		direction = this.getRandomDirection();
+		 		direction = this.getRandomDirection(constrained);
 		 		break;
 		 }
 		 
 		 // Interdit de tirer l'inverse de la direction précédente
 		 if (direction == LevelGenNode.getMirror(this.lastDirection)) {
-			 direction = this.getRandomDirection();
+			 direction = this.getRandomDirection(constrained);
 		 }
-		 
-		 this.lastDirection = direction;
-		 
-		 return direction;
-	}
-	
-	public BlocDirection getRandomDirection(BlocDirection constrained) {
-		BlocDirection direction = this.getRandomDirection();
+				
 		if (direction == constrained) {
 			direction = this.getRandomDirection(constrained);
 		}
+		
+		this.lastDirection = direction;
 		
 		return direction;
 	}
@@ -137,6 +136,7 @@ public class LevelGraphGenerator {
 		LevelGenNode pick = this.pickStartConstrained(constrained);			
 		this.handlePick(pick, true);		
 		while (currentComplexity < maxComplexity) {
+			LevelGenNode prev = pick;
 			pick = this.pickNextConstrained(pick, constrained);
 			this.handlePick(pick, true);	
 		}
