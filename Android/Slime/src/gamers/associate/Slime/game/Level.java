@@ -16,6 +16,7 @@ import gamers.associate.Slime.levels.LevelHome;
 import gamers.associate.Slime.levels.generator.BlocDirection;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Hashtable;
 import java.util.UUID;
 
@@ -233,7 +234,8 @@ public class Level {
 	
 	// Must be call before running scene with CCDirector
 	public void loadLevel(LevelDefinition levelDef) {
-		this.preBuild();		
+		this.preBuild();
+		// To put in interface? => YES !!!!
 		LevelBuilder.build(this, levelDef);						
 		this.postBuild(levelDef.getId());				
 	}

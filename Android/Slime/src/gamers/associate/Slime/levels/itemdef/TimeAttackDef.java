@@ -2,6 +2,7 @@ package gamers.associate.Slime.levels.itemdef;
 
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.TimeAttackGame;
+import gamers.associate.Slime.items.base.GameItem;
 
 public class TimeAttackDef extends ItemDefinition {
 	private static String Handled_TimeAttack = "TimeAttack";
@@ -31,6 +32,37 @@ public class TimeAttackDef extends ItemDefinition {
 		else {
 			this.criticTime = 0;
 		}
+	}
+
+	@Override
+	protected void initClassHandled() {
+		this.classHandled.add(TimeAttackGame.class);
+		
+	}
+
+	@Override
+	protected String writeNext(String line) {
+		line = this.addValue(line, String.valueOf(this.levelTime));
+		line = this.addValue(line, String.valueOf(this.criticTime));
+		
+		return line;
+	}
+
+	@Override
+	protected boolean getIsBL() {
+		return true;
+	}
+
+	@Override
+	protected String getItemType(GameItem item) {
+		return Handled_TimeAttack;
+	}
+
+	@Override
+	protected void setValuesNext(GameItem item) {
+		TimeAttackGame game = (TimeAttackGame)item;
+		this.levelTime = (int) game.getStartTime();
+		this.criticTime = (int) game.getCriticTime();
 	}
 
 }

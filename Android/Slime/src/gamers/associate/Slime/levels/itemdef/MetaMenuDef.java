@@ -1,6 +1,7 @@
 package gamers.associate.Slime.levels.itemdef;
 
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.items.base.GameItem;
 
 public class MetaMenuDef extends ItemDefinition {
 	private static String Handled_Def = "MetaMenu";	
@@ -18,5 +19,31 @@ public class MetaMenuDef extends ItemDefinition {
 	@Override
 	protected void parseNext(String[] infos, int start) {
 		// NONE
+	}
+
+	@Override
+	protected void initClassHandled() {
+		// NONE for now
+		
+	}
+
+	@Override
+	protected String writeNext(String line) {
+		return null;
+	}
+
+	@Override
+	protected boolean getIsBL() {
+		return false;
+	}
+
+	@Override
+	protected String getItemType(GameItem item) {
+		return null;
+	}
+
+	@Override
+	protected void setValuesNext(GameItem item) {
+		
 	}	
 }

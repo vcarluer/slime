@@ -1,6 +1,7 @@
 package gamers.associate.Slime.levels.itemdef;
 
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.levels.LevelUtil;
 
 public class LevelInfoDef extends ItemDefinition {
@@ -61,5 +62,30 @@ public class LevelInfoDef extends ItemDefinition {
 	@Override
 	protected void parseNext(String[] infos, int start) {
 		this.maxDimension = infos[start];
+	}
+
+	@Override
+	protected void initClassHandled() {
+		// NONE		
+	}
+
+	@Override
+	protected String writeNext(String line) {
+		// Not stored. Must be recreated dynamcially
+		return null;
+	}
+
+	@Override
+	protected boolean getIsBL() {
+		return false;
+	}
+
+	@Override
+	protected String getItemType(GameItem item) {
+		return null;
+	}
+
+	@Override
+	protected void setValuesNext(GameItem item) {		
 	}
 }

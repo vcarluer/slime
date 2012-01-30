@@ -174,6 +174,10 @@ public class CircularSaw extends GameItemPhysic implements ITrigerable {
 		this.startOn = startOn;
 	}
 	
+	public boolean getStartOn() {
+		return this.startOn;
+	}
+	
 	public void initAnimation() {
 		if (this.startOn) {
 			this.animateOn();

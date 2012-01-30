@@ -10,7 +10,7 @@ import gamers.associate.Slime.items.custom.SlimyFactory;
 
 public class BlocDefinitionHardCodedStart extends BlocDefinition
 {
-  public static BlocDirection StartDirection;
+  public static BlocDirection StartDirection;  
 
   public void buildLevel(Level paramLevel, int paramInt1, int paramInt2)
   {

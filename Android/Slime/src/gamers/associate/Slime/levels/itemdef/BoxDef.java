@@ -2,6 +2,8 @@ package gamers.associate.Slime.levels.itemdef;
 
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.items.base.GameItem;
+import gamers.associate.Slime.items.custom.Box;
 
 public class BoxDef extends ItemDefinition {
 	private static String Handled_Tube = "Box_Tube";
@@ -44,6 +46,47 @@ public class BoxDef extends ItemDefinition {
 	protected void parseNext(String[] infos, int start) {
 		this.isStatic = Boolean.parseBoolean(infos[start]);
 		this.isStickable = Boolean.parseBoolean(infos[start + 1]);
+	}
+
+	@Override
+	protected void initClassHandled() {
+		this.classHandled.add(Box.class);		
+	}
+
+	@Override
+	protected String writeNext(String line) {
+		line = this.addValue(line, String.valueOf(this.isStatic));
+		line = this.addValue(line, String.valueOf(this.isStickable));
+		
+		return line;
+	}
+
+	@Override
+	protected String getItemType(GameItem item) {
+		switch (((Box)item).getType()) {
+		case Box.bottle:
+			return Handled_Bottle;
+		case Box.glassbox:
+			return Handled_Glassbox;
+		case Box.multitubes:
+			return Handled_Multitubes;
+		case Box.tube:
+			return Handled_Tube;
+		default:
+			return null;
+		}
+	}
+
+	@Override
+	protected void setValuesNext(GameItem item) {
+		Box box = (Box)item;
+		this.isStatic = box.isStatic();
+		this.isStickable = !box.isNoStick();
+	}
+
+	@Override
+	protected boolean getIsBL() {
+		return true;
 	}
 
 }

@@ -159,6 +159,10 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 		this.startOn = startOn;
 	}
 	
+	public boolean getStartOn() {
+		return this.startOn;
+	}
+	
 	public void initanimation() {
 		this.turnedOff();
 		if (this.startOn) {

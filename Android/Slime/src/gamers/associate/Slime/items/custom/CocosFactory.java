@@ -16,6 +16,14 @@ public class CocosFactory extends GameItemCocosFactory<GameItemCocos> {
 	private CCAnimation animation;
 	
 	@Override
+	protected void initItem(GameItemCocos item) {
+		item.setpList(this.currentPlistName);
+		item.setFrameName(this.currentFrameName);
+		item.setFrameCount(this.currentFrameCount);
+		super.initItem(item);
+	}
+
+	@Override
 	protected void createAnimList() {		
 	}
 

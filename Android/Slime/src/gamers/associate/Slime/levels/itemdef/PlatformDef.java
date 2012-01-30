@@ -2,6 +2,8 @@ package gamers.associate.Slime.levels.itemdef;
 
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.items.base.GameItem;
+import gamers.associate.Slime.items.custom.Platform;
 
 public class PlatformDef extends ItemDefinition {
 	private static String Handled_Platform = "Platform";
@@ -14,7 +16,7 @@ public class PlatformDef extends ItemDefinition {
 	private static String Handled_Cross = "Platform_Cross";
 	
 	@Override
-	public void createItem(Level level) {
+	public void createItem(Level level) {		
 		if (this.itemType.toUpperCase().equals(Handled_Platform.toUpperCase())) {
 			SlimeFactory.Platform.createBL(this.x, this.y, this.width, this.height).setAngle(this.angle);
 		}
@@ -63,5 +65,41 @@ public class PlatformDef extends ItemDefinition {
 	@Override
 	protected void parseNext(String[] infos, int start) {
 		// None
+	}
+
+	@Override
+	protected void initClassHandled() {
+		this.classHandled.add(Platform.class);
+	}
+
+	@Override
+	protected String writeNext(String line) {
+		return line;
+	}
+
+	@Override
+	protected boolean getIsBL() {
+		return true;
+	}
+
+	@Override
+	protected String getItemType(GameItem item) {
+		Platform platform = (Platform)item;
+		switch(platform.getType()) {
+		case Platform.Bump: return Handled_Bumper;
+		case Platform.Corner: return Handled_Corner;
+		case Platform.Cross: return Handled_Cross;
+		case Platform.Icy: return Handled_Ice;
+		case Platform.NoSticky: return Handled_NoSticky;
+		case Platform.Sticky: return Handled_Platform;
+		case Platform.T: return Handled_T;
+		case Platform.Wall: return Handled_Wall;
+		default: return null;
+		}
+	}
+
+	@Override
+	protected void setValuesNext(GameItem item) {
+		
 	}
 }

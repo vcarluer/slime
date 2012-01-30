@@ -61,8 +61,16 @@ public class Button extends GameItemPhysic {
 		this.target = target;
 	}
 	
+	public String getTarget() {
+		return this.target;
+	}
+	
 	public void setResetTime(float resetTime) {
 		this.resetTime = resetTime;
+	}
+	
+	public float getResetTime() {
+		return this.resetTime;
 	}
 
 	@Override

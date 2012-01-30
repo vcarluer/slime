@@ -93,4 +93,8 @@ public class GameItem {
 	public float getHeight() {
 		return this.height;
 	}
+	
+	public float getWidth() {
+		return this.width;
+	}
 }

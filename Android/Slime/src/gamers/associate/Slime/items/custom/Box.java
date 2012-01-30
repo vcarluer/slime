@@ -38,15 +38,15 @@ public class Box extends GameItemPhysic{
 		this.spriteType = SpriteType.SINGLE_SCALE;
 		this.zOrder = Level.zMid;
 		this.noStick = !isStickable;
-		this.isStatic = isStatic;
-		this.type = boxType;
+		this.setStatic(isStatic);
+		this.setType(boxType);
 	}
 
 	@Override
 	protected void initBody() {
 		// Physic body
 		BodyDef bodyDef = new BodyDef();		
-		if (this.isStatic) {
+		if (this.isStatic()) {
 			bodyDef.type = BodyType.StaticBody;
 		} else {
 			bodyDef.type = BodyType.DynamicBody;
@@ -89,7 +89,7 @@ public class Box extends GameItemPhysic{
 	 */
 	@Override
 	protected String getReferenceAnimationName() {
-		switch (this.type) {		
+		switch (this.getType()) {		
 		case tube:
 			return Anim_Base_tube;
 		case bottle:
@@ -100,5 +100,21 @@ public class Box extends GameItemPhysic{
 		default:
 			return Anim_Base_glassbox;
 		}
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public boolean isStatic() {
+		return isStatic;
+	}
+
+	public void setStatic(boolean isStatic) {
+		this.isStatic = isStatic;
 	}
 }

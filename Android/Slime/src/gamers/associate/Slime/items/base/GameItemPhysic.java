@@ -132,6 +132,10 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 	public void setNoStick(boolean noStick) {
 		this.noStick = noStick;
 	}
+	
+	public boolean getNoStick() {
+		return this.noStick;
+	}
 
 	/**
 	 * @return the isAllSensor

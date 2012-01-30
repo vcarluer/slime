@@ -4,6 +4,7 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Triangulate;
 import gamers.associate.Slime.game.Util;
+import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.custom.PhysicPolygon;
 import gamers.associate.Slime.items.custom.SlimyFactory;
 
@@ -13,65 +14,86 @@ import java.util.Arrays;
 import org.cocos2d.types.CGPoint;
 
 public class PolygonDef extends ItemDefinition {
+	private static String RealPath = "REAL";
+	private static String PointSep = " ";
+	private static String CoordSep = ",";
 	private static String Handled_Def = "Polygon";
 	private static String Relative = "m"; // M = Absolute
 	private float yReference;
 	private float heightReference;
+	// 2 modes: 
+	// - path from SVG (needs more parsing)
+	// - path from real points (noparsing needed)
 	private String path;
 	private boolean isdynamic;	
 	private boolean isStickable;
 	private boolean isEmpty;
 	
 	@Override
-	public void createItem(Level level) {		
-		String[] pathBase = this.path.split(" ");
+	public void createItem(Level level) {				
 		ArrayList<CGPoint> polygon = new ArrayList<CGPoint>();
-		float cumulX = 0;
-		float cumulY = 0;
-		int i = 0;
-		boolean isRelative = false;
-		for (String coordSvgBase : pathBase) {			
-			if (coordSvgBase.length() == 1) {
-				char ch = coordSvgBase.charAt(0);
-				if (Character.isLowerCase(ch)) {				
-					isRelative = true;
-				}
-				else {
-					isRelative = false;
-				}
-			}
-			else {
-				String[] coordSvg = coordSvgBase.split(",");			
-				float x = Float.parseFloat(coordSvg[0]);
-				float y = Float.parseFloat(coordSvg[1]);
-								
-				if (i == 0) {
-					y = this.yReference + this.heightReference - y;
-					this.x = x;
-					this.y = y;
-					x = 0;
-					y = 0;
-				}
-				else {
-					if (isRelative) {
-						x = cumulX + x;
-						
-						y = - y;
-						y = cumulY + y;
-					}
-					else {
-						x = x - this.x;
-						y = this.yReference + this.heightReference - y;
-						y = y - this.y;
-					}
-				}			
+		if (this.path.substring(0, RealPath.length()).toUpperCase() == RealPath) {
+			// Read path directly
+			String pathMid = this.path.substring(RealPath.length());
+			String[] pathBase = pathMid.split(PointSep);
+			for(String coordBase : pathBase) {
+				String[] coord = coordBase.split(CoordSep);
+				float x = Float.parseFloat(coord[0]);
+				float y = Float.parseFloat(coord[1]);
 				
 				CGPoint point = CGPoint.make(x, y);
-				cumulX = x;
-				cumulY = y;
 				polygon.add(point);
-				i++;
-			}						
+			}
+		} else {
+			// Compute path based on SVG
+			String[] pathBase = this.path.split(PointSep);
+			float cumulX = 0;
+			float cumulY = 0;
+			int i = 0;
+			boolean isRelative = false;
+			for (String coordSvgBase : pathBase) {			
+				if (coordSvgBase.length() == 1) {
+					char ch = coordSvgBase.charAt(0);
+					if (Character.isLowerCase(ch)) {				
+						isRelative = true;
+					}
+					else {
+						isRelative = false;
+					}
+				}
+				else {
+					String[] coordSvg = coordSvgBase.split(CoordSep);			
+					float x = Float.parseFloat(coordSvg[0]);
+					float y = Float.parseFloat(coordSvg[1]);
+									
+					if (i == 0) {
+						y = this.yReference + this.heightReference - y;
+						this.x = x;
+						this.y = y;
+						x = 0;
+						y = 0;
+					}
+					else {
+						if (isRelative) {
+							x = cumulX + x;
+							
+							y = - y;
+							y = cumulY + y;
+						}
+						else {
+							x = x - this.x;
+							y = this.yReference + this.heightReference - y;
+							y = y - this.y;
+						}
+					}			
+					
+					CGPoint point = CGPoint.make(x, y);
+					cumulX = x;
+					cumulY = y;
+					polygon.add(point);
+					i++;
+				}						
+			}
 		}
 
 		CGPoint[] realPoints = new CGPoint[polygon.size()];
@@ -107,6 +129,36 @@ public class PolygonDef extends ItemDefinition {
 			this.isStickable = true;
 			this.isEmpty = false;
 		}
+	}
+
+	@Override
+	protected void initClassHandled() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected String writeNext(String line) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected boolean getIsBL() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected String getItemType(GameItem item) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected void setValuesNext(GameItem item) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

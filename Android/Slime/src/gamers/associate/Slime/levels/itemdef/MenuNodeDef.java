@@ -2,6 +2,7 @@ package gamers.associate.Slime.levels.itemdef;
 
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.custom.MenuNode;
 import gamers.associate.Slime.items.custom.Slimy;
 
@@ -71,5 +72,30 @@ public class MenuNodeDef extends ItemDefinition {
 		if (SlimeFactory.MenuNode.getCurrentNode() == null) {
 			this.createStartNode(this.rootItem);
 		}
+	}
+
+	@Override
+	protected void initClassHandled() {
+		// NONE for now		
+	}
+
+	@Override
+	protected String writeNext(String line) {
+		return null;
+	}
+
+	@Override
+	protected boolean getIsBL() {
+		return false;
+	}
+
+	@Override
+	protected String getItemType(GameItem item) {
+		return null;
+	}
+
+	@Override
+	protected void setValuesNext(GameItem item) {
+		
 	}
 }

@@ -61,6 +61,10 @@ public class BecBunsen extends GameItemPhysic implements ITrigerable {
 	public void setAnimDelay(float delay) {
 		this.animDelay = delay;
 	}
+	
+	public float getAnimDelay() {
+		return this.animDelay;
+	}
 
 	@Override
 	protected void initBody() {
@@ -175,5 +179,9 @@ public class BecBunsen extends GameItemPhysic implements ITrigerable {
 		if (this.startOn) {
 			this.turnOn();
 		}
+	}
+	
+	public boolean getStartOn() {
+		return this.startOn;
 	}
 }

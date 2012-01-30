@@ -3,6 +3,7 @@ package gamers.associate.Slime.levels;
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.levels.itemdef.BecBunsenDef;
 import gamers.associate.Slime.levels.itemdef.BoxDef;
 import gamers.associate.Slime.levels.itemdef.BumperAngleDef;
@@ -23,11 +24,16 @@ import gamers.associate.Slime.levels.itemdef.TargetDef;
 import gamers.associate.Slime.levels.itemdef.TimeAttackDef;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import android.content.Context;
 import android.util.Log;
 
 public class LevelDefinitionParser extends LevelDefinition
@@ -36,6 +42,7 @@ public class LevelDefinitionParser extends LevelDefinition
 	private String resourceName;	
 	private ArrayList<ItemDefinition> itemDefinitions;
 	private HashMap<String, ItemDefinition> typeHandler;
+	private HashMap<Class, ItemDefinition> classHandler;
 	private ItemDefinition postBuildItem;
 	
 	public LevelDefinitionParser(String resourceName) {
@@ -87,6 +94,11 @@ public class LevelDefinitionParser extends LevelDefinition
 			for(String typeHandled : types) {
 				this.typeHandler.put(typeHandled, itemDef);
 			}
+			
+			ArrayList<Class> classes = itemDef.getClassesHandled();
+			for(Class claz : classes) {
+				this.classHandler.put(claz, itemDef);
+			}
 		}
 	}
 	
@@ -131,5 +143,42 @@ public class LevelDefinitionParser extends LevelDefinition
 		String itemType = items[0];
 		ItemDefinition itemDef = this.typeHandler.get(itemType);
 		itemDef.parseAndCreate(line, level);		
+	}
+	
+	public void storeLevel(Level level) {
+		BufferedWriter buffWriter = null;
+		try {
+			FileOutputStream fos = SlimeFactory.ContextActivity.openFileOutput(this.resourceName, Context.MODE_PRIVATE);
+			OutputStreamWriter streamWriter = new OutputStreamWriter(fos);
+			buffWriter = new BufferedWriter(streamWriter);
+			for(GameItem item : level.getItemsToAdd()) {
+				ItemDefinition itemDef = this.classHandler.get(item.getClass());
+				if (itemDef != null) {			
+					itemDef.setValues(item);
+					itemDef.writeLine(buffWriter);
+				}
+				else {
+					Log.e(Slime.TAG, "ERROR, ItemDefinition not found for " + item.getClass().toString() + ". Can not store item in " + this.resourceName);
+				}
+			}
+			
+		} catch (FileNotFoundException ex) {
+			Log.e(Slime.TAG, "ERROR, file not found " + this.resourceName);
+			ex.printStackTrace();
+        } catch (IOException e1) {
+			Log.e(Slime.TAG, "ERROR during opening or write of " + this.resourceName);
+			e1.printStackTrace();
+        } finally {
+        	 //Close the BufferedWriter
+            try {
+                if (buffWriter != null) {
+                	buffWriter.flush();
+                	buffWriter.close();
+                }
+            } catch (IOException ex) {
+            	Log.e(Slime.TAG, "ERROR during close of " + this.resourceName);
+                ex.printStackTrace();
+            }
+        }
 	}
 }

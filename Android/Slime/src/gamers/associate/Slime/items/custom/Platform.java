@@ -120,5 +120,13 @@ public class Platform extends GameItemPhysic {
 	@Override
 	protected void handleContact(ContactInfo item) {		
 		super.handleContact(item);
-	}	
+	}
+	
+	public int getType() {
+		return this.type;
+	}
+	
+	public boolean getMove() {
+		return this.move;
+	}
 }

@@ -26,6 +26,9 @@ public class GameItemCocos extends GameItem {
 	protected int zOrder;
 	protected CGSize referenceSize;
 	private String referenceAnimationName;
+	private String pList;
+	private String frameName;
+	private int frameCount;
 		
 	public GameItemCocos(float x, float y, float width, float height) {
 		super(x, y, width, height);		
@@ -334,5 +337,30 @@ public class GameItemCocos extends GameItem {
 	
 	public void setSpriteType(SpriteType type) {
 		this.spriteType = type;
+	}
+
+	
+	public String getpList() {
+		return pList;
+	}
+
+	public void setpList(String pList) {
+		this.pList = pList;
+	}
+
+	public void setFrameName(String currentFrameName) {
+		this.frameName = currentFrameName;
+	}
+	
+	public String getFrameName() {
+		return this.frameName;
+	}
+
+	public void setFrameCount(int currentFrameCount) {
+		this.frameCount = currentFrameCount;
+	}
+	
+	public int getFrameCount() {
+		return this.frameCount;
 	}
 }

@@ -2,13 +2,17 @@ package gamers.associate.Slime.levels.itemdef;
 
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.items.base.GameItem;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.util.Log;
 
 public abstract class ItemDefinition {		
 	protected static String None = "None";
+	protected static String infoSep = ";";
 	
 	protected String itemType;
 
@@ -18,13 +22,18 @@ public abstract class ItemDefinition {
 	protected float height;
 	protected float angle;
 	protected ArrayList<String> typesHandled;
+	protected ArrayList<Class> classHandled;		
 	
 	public ItemDefinition() {
 		this.typesHandled = new ArrayList<String>();
+		this.classHandled = new ArrayList<Class>();
 		this.initTypeHandled();
+		this.initClassHandled();
 	}
 	
 	protected abstract void initTypeHandled();
+	
+	protected abstract void initClassHandled();
 	
 	/**
 	 * @return the type
@@ -90,7 +99,7 @@ public abstract class ItemDefinition {
 	public void parse(String line) throws Exception {
 		try
 		{
-			String[] infos = line.split(";", -1);
+			String[] infos = line.split(infoSep, -1);
 			this.itemType = infos[0];
 			this.x = ZeroIfNone(infos[1]);
 			this.y = ZeroIfNone(infos[2]);
@@ -162,5 +171,62 @@ public abstract class ItemDefinition {
 	
 	public void postBuild() {
 		// Override to handle postBuild
+	}
+	
+	public ArrayList<Class> getClassesHandled() {
+		return this.classHandled;
+	}
+	
+	public void writeLine(BufferedWriter writer) throws IOException {
+		try {
+			String line = "";		
+			line = this.addValue(line, this.itemType);
+			line = this.addValue(line, String.valueOf(this.x));
+			line = this.addValue(line, String.valueOf(this.y));
+			line = this.addValue(line, String.valueOf(this.width));
+			line = this.addValue(line, String.valueOf(this.height));
+			line = this.addValue(line, String.valueOf(this.angle));
+			
+			line = this.writeNext(line);
+
+			writer.newLine();
+		} catch (IOException e) {
+			Log.e(Slime.TAG, "ERROR during write of line");
+			throw e;
+		}
+			
+	}
+	
+	protected abstract String writeNext(String line);
+	
+	protected String addValue(String line, String value) {
+		return line + infoSep +  value;
+	}
+
+	public final void setValues(GameItem item) {		
+		this.itemType = this.getItemType(item);
+		this.x = item.getPosition().x;
+		this.y = item.getPosition().y;
+		this.width = item.getWidth();
+		this.height = item.getHeight();
+		this.angle = item.getAngle();
+		
+		// x and y may need to be be shift on BL referential depending on item definition
+		if (this.getIsBL()) {
+			this.transformBL();
+		}
+		
+		this.setValuesNext(item);
+	}
+
+	protected abstract boolean getIsBL();
+
+	protected abstract String getItemType(GameItem item);
+
+	protected abstract void setValuesNext(GameItem item);
+	
+	protected void transformBL() {
+		this.x = this.x - this.width / 2;
+		this.y = this.y - this.height / 2;
 	}
 }
