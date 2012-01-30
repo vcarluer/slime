@@ -27,11 +27,11 @@ public class PhysicPolygon extends GameItemPhysic {
 	public static String Anim_Base_Fill = "glass";
 	public static String Anim_Base_Empty = "empty";
 	protected CGPoint[] vertices;
-	protected CGPoint[] bodyPoints;
-	protected boolean isDynamic;
-	protected boolean isStickable;
+	private CGPoint[] bodyPoints;
+	private boolean isDynamic;
+	private boolean isStickable;
 	
-	protected int type;
+	private int type;
 	
 	// Vertices counter clockwise base on 0, 0
 	public PhysicPolygon(float x, float y, float width,
@@ -41,12 +41,12 @@ public class PhysicPolygon extends GameItemPhysic {
 		this.spriteType = SpriteType.POLYGON_REPEAT;		
 		this.zOrder = Level.zBack;
 		this.setNoStick(!isStickable);
-		this.type = type;
+		this.setType(type);
 	}
 	
 	public void initPoly(boolean isDynamic, CGPoint[] bodyPoints) {
-		this.bodyPoints = bodyPoints;					
-		this.isDynamic = isDynamic;
+		this.setBodyPoints(bodyPoints);					
+		this.setDynamic(isDynamic);
 		
 		ArrayList<CGPoint> contour = new ArrayList<CGPoint>(Arrays.asList(bodyPoints));
 		ArrayList<CGPoint> body = new ArrayList<CGPoint>();
@@ -75,7 +75,7 @@ public class PhysicPolygon extends GameItemPhysic {
 		if (vertices != null) {
 			// Physic body
 			BodyDef bodyDef = new BodyDef();		
-			if (this.isDynamic) {
+			if (this.isDynamic()) {
 				bodyDef.type = BodyType.DynamicBody;
 			} else {
 				bodyDef.type = BodyType.StaticBody;
@@ -109,7 +109,7 @@ public class PhysicPolygon extends GameItemPhysic {
 		    		fixtureDef.density = 1.0f;
 		    		fixtureDef.friction = 5.0f;	    
 		    		fixtureDef.restitution = 0f;
-		    		if (this.isDynamic) {
+		    		if (this.isDynamic()) {
 		    			fixtureDef.filter.categoryBits = GameItemPhysic.Category_InGame;
 		    		}
 		    		else {
@@ -123,7 +123,7 @@ public class PhysicPolygon extends GameItemPhysic {
 	}
 	
 	private Vector2[] getWorldPolygonVectors() {		
-		return this.getWorldPolygonVectors(this.bodyPoints);
+		return this.getWorldPolygonVectors(this.getBodyPoints());
 	}
 	
 	private Vector2[] getWorldPolygonVectors(CGPoint[] points) {		
@@ -141,7 +141,7 @@ public class PhysicPolygon extends GameItemPhysic {
 	 */
 	@Override
 	protected String getReferenceAnimationName() {
-		switch (this.type) {
+		switch (this.getType()) {
 			case Empty:
 				return Anim_Base_Empty;
 			case Fill:
@@ -151,7 +151,7 @@ public class PhysicPolygon extends GameItemPhysic {
 	}
 	
 	public void initAnimation() {
-		if (this.type == Fill) {
+		if (this.getType() == Fill) {
 			CCAnimate animation = CCAnimate.action(this.animationList.get(Anim_Base_Fill), false);
 			this.currentAction = CCRepeatForever.action(animation);
 			this.sprite.runAction(this.currentAction);
@@ -164,5 +164,37 @@ public class PhysicPolygon extends GameItemPhysic {
 	@Override
 	protected void runReferenceAction() {
 		this.initAnimation();
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	protected void setType(int type) {
+		this.type = type;
+	}
+
+	public boolean isStickable() {
+		return isStickable;
+	}
+
+	protected void setStickable(boolean isStickable) {
+		this.isStickable = isStickable;
+	}
+
+	public boolean isDynamic() {
+		return isDynamic;
+	}
+
+	protected void setDynamic(boolean isDynamic) {
+		this.isDynamic = isDynamic;
+	}
+
+	public CGPoint[] getBodyPoints() {
+		return bodyPoints;
+	}
+
+	protected void setBodyPoints(CGPoint[] bodyPoints) {
+		this.bodyPoints = bodyPoints;
 	}
 }

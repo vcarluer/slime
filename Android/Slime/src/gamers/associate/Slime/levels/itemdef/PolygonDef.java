@@ -38,8 +38,10 @@ public class PolygonDef extends ItemDefinition {
 			String[] pathBase = pathMid.split(PointSep);
 			for(String coordBase : pathBase) {
 				String[] coord = coordBase.split(CoordSep);
-				float x = Float.parseFloat(coord[0]);
-				float y = Float.parseFloat(coord[1]);
+				if (coord.length > 1) {
+					float x = Float.parseFloat(coord[0]);
+					float y = Float.parseFloat(coord[1]);
+				}
 				
 				CGPoint point = CGPoint.make(x, y);
 				polygon.add(point);
@@ -133,32 +135,57 @@ public class PolygonDef extends ItemDefinition {
 
 	@Override
 	protected void initClassHandled() {
-		// TODO Auto-generated method stub
+		this.classHandled.add(PhysicPolygon.class);
 		
 	}
 
 	@Override
 	protected String writeNext(String line) {
-		// TODO Auto-generated method stub
-		return null;
+		line = this.addValue(line, String.valueOf(yReference));
+		line = this.addValue(line, String.valueOf(heightReference));
+		line = this.addValue(line, this.path);
+		line = this.addValue(line, String.valueOf(this.isdynamic));
+		line = this.addValue(line, String.valueOf(this.isStickable));
+		line = this.addValue(line, String.valueOf(this.isEmpty));
+		
+		return line;		
+	}
+	
+	private String createPathString(CGPoint[] points) {
+		String p = RealPath;
+		int i = 0;
+		for(CGPoint point : points) {
+			if (i > 0) {
+				p += PointSep ;
+			}
+			
+			String coord = point.x + CoordSep + point.y;
+			p += coord;
+			i++;
+		}
+		
+		return p;
 	}
 
 	@Override
 	protected boolean getIsBL() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	protected String getItemType(GameItem item) {
-		// TODO Auto-generated method stub
-		return null;
+		return Handled_Def;
 	}
 
 	@Override
 	protected void setValuesNext(GameItem item) {
-		// TODO Auto-generated method stub
-		
+		PhysicPolygon poly = (PhysicPolygon)item;
+		this.yReference = 0;
+		this.heightReference = 0;
+		this.path = this.createPathString(poly.getBodyPoints());
+		this.isdynamic = poly.isDynamic();
+		this.isStickable = !poly.isNoStick();
+		this.isEmpty = poly.getType() == PhysicPolygon.Empty;
 	}
 
 }
