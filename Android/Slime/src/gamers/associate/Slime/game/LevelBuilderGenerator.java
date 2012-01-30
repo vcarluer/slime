@@ -37,7 +37,7 @@ public class LevelBuilderGenerator implements ILevelBuilder
 				this.levelparser.buildLevel(level);					
 				level.setLevelDefinition(this.levelDef);
 			} else {
-				if (this.complexity > this.levelDef.getBossComplexity()) {
+				if (this.complexity >= this.levelDef.getBossComplexity()) {
 					this.complexity = 0;
 				}
 
