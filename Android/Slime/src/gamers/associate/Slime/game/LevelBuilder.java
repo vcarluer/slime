@@ -111,4 +111,19 @@ public class LevelBuilder implements ILevelBuilder {
 	public void rebuild(Level level, LevelDefinition levelDef) {
 		this.build(level, levelDef);
 	}
+
+	@Override
+	public void resetAll() {
+		// None for now
+	}
+
+	@Override
+	public boolean hasBegun() {		
+		return true;
+	}
+
+	@Override
+	public void start() {
+		// TODO Auto-generated method stub		
+	}
 }

@@ -23,8 +23,9 @@ public class PauseLayer extends CCLayer {
 	private static String scoreTxt = "MAX: ";
 	private CCMenu menu;
 	private CCMenuItemLabel scoreMaxLabel;
-	private float scale = 0.5f;
-	private float padding = 5f;
+	public static float Scale = 0.7f;
+	public static float PaddingX = 25f;
+	public static float PaddingY = 5f;
 	private CCSprite arrowSpriteT;
 	private CCSprite arrowSpriteR;
 	private CCSprite arrowSpriteB;
@@ -79,10 +80,10 @@ public class PauseLayer extends CCLayer {
 	}
 	
 	private void setMenuPos(CCMenuItem menuItem, int count) {
-		menuItem.setScale(this.scale);
+		menuItem.setScale(Scale);
 		
-		float left = - CCDirector.sharedDirector().winSize().getWidth() / 2 + ((MenuSprite.Width * this.scale) + this.padding) / 2 + (MenuSprite.Width * this.scale + this.padding) * (count - 1);
-		float top = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((MenuSprite.Height * this.scale) + 5) / 2;
+		float left = - CCDirector.sharedDirector().winSize().getWidth() / 2 + ((MenuSprite.Width * Scale) + PaddingX) / 2 + (MenuSprite.Width * Scale + PaddingX) * (count - 1);
+		float top = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((MenuSprite.Height * Scale) + PaddingY) / 2;
 		menuItem.setPosition(CGPoint.make(left, top));
 	}
 	

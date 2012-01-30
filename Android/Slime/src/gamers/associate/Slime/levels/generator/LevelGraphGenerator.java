@@ -22,6 +22,7 @@ public class LevelGraphGenerator {
 	private int bottomCount;
 	private int leftCount;
 	private Level currentLevel;
+	private int bossComplexity;
 	
 	public LevelGraphGenerator() {
 		this.nodes = new ArrayList<LevelGenNode>();
@@ -85,6 +86,18 @@ public class LevelGraphGenerator {
 				
 		return pick;
 	}	
+	
+	public LevelGenNode pickBoss(LevelGenNode source) {		
+		LevelGenNode pick = null;
+		for(LevelGenNode node : this.nodes) {
+			if (node.isLevelBossAndConnect(source)) {
+				pick = node;
+				break;
+			}
+		}
+				
+		return pick;
+	}
 	
 	public BlocDirection getRandomDirection() {
 		 return this.getRandomDirection(null);
@@ -150,7 +163,11 @@ public class LevelGraphGenerator {
 		}
 		
 		Log.d(Slime.TAG, "Picking end node");
-		pick = this.pickEnd(pick);
+		if (maxComplexity >= this.getBossComplexity()) {
+			pick = this.pickBoss(pick);
+		} else {
+			pick = this.pickEnd(pick);
+		}
 		Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
 		this.handlePick(pick, false);
 		
@@ -263,5 +280,13 @@ public class LevelGraphGenerator {
 	
 	public int getLeftCount() {
 		return this.leftCount;
+	}
+
+	public int getBossComplexity() {
+		return bossComplexity;
+	}
+
+	public void setBossComplexity(int bossComplexity) {
+		this.bossComplexity = bossComplexity;
 	}
 }

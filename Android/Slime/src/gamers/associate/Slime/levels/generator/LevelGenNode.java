@@ -11,6 +11,7 @@ public class LevelGenNode {
 	private Set<Integer> connectorsExit;
 	private boolean isLevelStart;
 	private boolean isLevelEnd;
+	private boolean isBoss;
 	private int complexity;
 	private BlocDefinition blocDefinition;
 	private String id;
@@ -250,6 +251,10 @@ public class LevelGenNode {
 	public boolean isLevelEndAndConnect(LevelGenNode sourceNode) {
 		return this.isLevelEnd && this.isEntryConnectedTo(sourceNode);
 	}
+	
+	public boolean isLevelBossAndConnect(LevelGenNode sourceNode) {
+		return this.isBoss && this.isEntryConnectedTo(sourceNode);
+	}
 
 	public void setBlocDefinition(BlocDefinition blocDefinition) {
 		this.blocDefinition = blocDefinition;		
@@ -265,5 +270,13 @@ public class LevelGenNode {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public boolean isBoss() {
+		return isBoss;
+	}
+
+	public void setBoss(boolean isBoss) {
+		this.isBoss = isBoss;
 	}
 }

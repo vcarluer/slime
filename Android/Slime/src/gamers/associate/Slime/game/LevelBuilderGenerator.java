@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class LevelBuilderGenerator implements ILevelBuilder
 {
-	private static String defaultId = "Random";
+	public static String defaultId = "Random";
 	private static String fileName = defaultId + ".slime"; 
 	private int complexity;
 	private LevelHome home = new LevelHome();
@@ -20,22 +20,24 @@ public class LevelBuilderGenerator implements ILevelBuilder
 	public LevelBuilderGenerator() {
 		this.levelparser.setLocalStorage(true);		
 		this.firstBuild = true;
+		this.levelDef.setBossComplexity(25);
+		// always default id... Used for reset all
+		this.levelDef.setId(defaultId);
 	}
 	
 	public void build(Level level, String id)
 	{
 		if (id != LevelHome.Id)
-		{
-			this.levelDef.setId(id);
+		{			
 			if (this.firstBuild) {
 				this.complexity = this.levelDef.getComplexity();				
-			}						
+			}												
 			
 			if (this.firstBuild && this.levelparser.isStored() && !this.levelDef.isFinished()) {				
 				this.levelparser.buildLevel(level);					
 				level.setLevelDefinition(this.levelDef);
 			} else {
-				if (this.complexity > 40) {
+				if (this.complexity > this.levelDef.getBossComplexity()) {
 					this.complexity = 0;
 				}
 
@@ -45,7 +47,7 @@ public class LevelBuilderGenerator implements ILevelBuilder
 				level.setLevelDefinition(this.levelDef);				
 				this.levelparser.storeLevel(level);
 				
-				this.levelDef.resetAndSave();
+				this.levelDef.resetAndSave();								
 			}
 			
 			this.firstBuild = false;
@@ -85,5 +87,25 @@ public class LevelBuilderGenerator implements ILevelBuilder
 		} else {
 			this.build(level, levelDef.getId());			
 		}
+	}
+	
+	public void resetAll() {
+		this.levelDef.resetAllAndSave();
+		this.levelparser.resetStorage();
+		this.complexity = this.levelDef.getComplexity();
+		Level.get(LevelBuilderGenerator.defaultId, true);
+	}
+	
+	public LevelDefinitionParser getParser() {
+		return this.levelparser;
+	}
+	
+	public boolean hasBegun() {
+		return this.levelparser.isStored();
+	}
+	
+	public void start() {
+		this.firstBuild = true;
+		Level.get(LevelBuilderGenerator.defaultId, true);
 	}
 }

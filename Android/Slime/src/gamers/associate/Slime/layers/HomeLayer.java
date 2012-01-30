@@ -2,6 +2,7 @@ package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.LevelBuilderGenerator;
 import gamers.associate.Slime.game.LevelSelection;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
@@ -29,6 +30,10 @@ public class HomeLayer extends CCLayer {
 	
 	protected HomeLayer() {
 		super();
+		
+		// temp
+		// ((LevelBuilderGenerator)SlimeFactory.LevelBuilder).getParser().resetStorage();
+		
 		this.setIsTouchEnabled(true);
 //		this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
 //		this.addChild(this.spriteSheet);
@@ -44,14 +49,20 @@ public class HomeLayer extends CCLayer {
 		
 		float shiftMenu = - 150f; // Slime height = 160 / 2 + 20
 		CCSprite playSprite = CCSprite.sprite("control-play.png", true);
-		CCMenuItemSprite playMenu = CCMenuItemSprite.item(playSprite, playSprite, this, "selectPlay");			
+		CCMenuItemSprite playMenu = CCMenuItemSprite.item(playSprite, playSprite, this, "selectPlay");
+		CCSprite restartSprite = CCSprite.sprite("control-restart.png", true);
+		CCMenuItemSprite restartMenu = CCMenuItemSprite.item(restartSprite, restartSprite, this, "goRestart");
+		restartMenu.setScale(0.5f);
+				
+		restartMenu.setVisible(SlimeFactory.LevelBuilder.hasBegun());
+		restartMenu.setIsEnabled(SlimeFactory.LevelBuilder.hasBegun());				
 		
-		playMenu.setPosition(CGPoint.make(
-				0,
-				shiftMenu
-				));
-		
-		this.menu = CCMenu.menu(playMenu);
+		this.menu = CCMenu.menu(playMenu, restartMenu);		
+		this.menu.alignItemsHorizontally(50);
+		this.menu.setPosition(CGPoint.make(
+				CCDirector.sharedDirector().winSize().getWidth() / 2,
+				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftMenu
+				));			
 		
 		this.addChild(this.menu);
 	}
@@ -60,7 +71,7 @@ public class HomeLayer extends CCLayer {
 	public boolean ccTouchesEnded(MotionEvent event) {
 		// TODO: Go to level selection		
 		// return super.ccTouchesEnded(event);
-		this.selectPlay(this);
+		// this.selectPlay(this);
 		return true;
 		//CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
 		//return CCTouchDispatcher.kEventHandled;
@@ -89,6 +100,12 @@ public class HomeLayer extends CCLayer {
 		
 		Sounds.playEffect(R.raw.menuselect);
 		Sounds.pauseMusic();
-		Level.get("Random", true);
+		SlimeFactory.LevelBuilder.start();
+	}
+	
+	public void goRestart(Object sender) {
+		Sounds.playEffect(R.raw.menuselect);
+		Sounds.pauseMusic();
+		SlimeFactory.LevelBuilder.resetAll();
 	}
 }

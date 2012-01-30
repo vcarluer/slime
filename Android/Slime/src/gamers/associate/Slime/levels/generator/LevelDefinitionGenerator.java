@@ -12,7 +12,9 @@ import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelDefinition;
 
 public class LevelDefinitionGenerator extends LevelDefinition {
+	private static int DefaultBoss = 20;
 	private int complexity;
+	private int bossComplexity = DefaultBoss;
 	
 	public LevelDefinitionGenerator() {
 		this.gamePlay = GamePlay.ManuallyDefined;
@@ -61,6 +63,19 @@ public class LevelDefinitionGenerator extends LevelDefinition {
 	protected void resetUserInfoNext() {
 		// No reset of complexity! except reset of game.
 	}
-	
-	
+
+	public int getBossComplexity() {
+		return bossComplexity;
+	}
+
+	public void setBossComplexity(int bossComplexity) {
+		this.bossComplexity = bossComplexity;
+		SlimeFactory.LevelGenerator.setBossComplexity(this.bossComplexity);
+	}
+
+	@Override
+	protected void resetAllNext() {		
+		super.resetAllNext();
+		this.complexity = 0;
+	}
 }

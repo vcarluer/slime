@@ -260,4 +260,17 @@ public abstract class LevelDefinition {
 		this.resetUserInfo();
 		this.handlePersistancy();
 	}
+	
+	public void resetAll() {
+		this.resetUserInfo();
+		this.resetAllNext();
+	}
+
+	protected void resetAllNext() {		
+	}
+	
+	public void resetAllAndSave() {
+		this.resetAll();
+		this.handlePersistancy();
+	}
 }

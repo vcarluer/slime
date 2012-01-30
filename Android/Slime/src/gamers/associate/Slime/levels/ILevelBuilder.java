@@ -11,4 +11,7 @@ public interface ILevelBuilder {
 	ArrayList<LevelDefinition> getNormalLevels();
 	void build(Level level, LevelDefinition levelDef);
 	void rebuild(Level level, LevelDefinition levelDef);
+	void resetAll();
+	boolean hasBegun();
+	void start();
 }
