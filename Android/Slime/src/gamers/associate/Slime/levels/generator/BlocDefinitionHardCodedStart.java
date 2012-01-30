@@ -32,7 +32,7 @@ public class BlocDefinitionHardCodedStart extends BlocDefinition
   protected void initGenNodeInternal(LevelGenNode paramLevelGenNode)
   {
     paramLevelGenNode.setIsLevelStart(true);
-    paramLevelGenNode.addConnectors(paramLevelGenNode.getConnectorsFor(StartDirection));
+    paramLevelGenNode.addConnectorsExit(paramLevelGenNode.getConnectorsFor(StartDirection));
   }
 }
 
