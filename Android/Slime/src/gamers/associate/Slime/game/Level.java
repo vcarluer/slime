@@ -12,6 +12,8 @@ import gamers.associate.Slime.layers.HudLayer;
 import gamers.associate.Slime.layers.LevelLayer;
 import gamers.associate.Slime.layers.PauseLayer;
 import gamers.associate.Slime.levels.LevelDefinition;
+import gamers.associate.Slime.levels.LevelHome;
+import gamers.associate.Slime.levels.generator.BlocDirection;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -33,7 +35,7 @@ import com.badlogic.gdx.physics.box2d.World;
  * @uml.dependency   supplier="gamers.associate.Slime.GameItem"
  */
 public class Level {	
-	public static boolean DebugMode = false;
+	public static boolean DebugMode = true;
 	public static boolean isInit;	
 	public static float Gravity = -10;
 	
@@ -123,7 +125,7 @@ public class Level {
 	
 	protected boolean isPhysicDisabled;
 	
-	protected Level() {
+	public Level() {
 		this.scene = CCScene.node();
 		this.levelLayer = new LevelLayer(this);
 		this.hudLayer = new HudLayer();
@@ -208,7 +210,7 @@ public class Level {
 		// currentLevel.loadLevel(this.currentLevelName);
 		currentLevel.loadLevel(this.levelDefinition);
 		// Set camera right based on screen size
-		currentLevel.getCameraManager().setCameraView();
+		// currentLevel.getCameraManager().setCameraView();
 		//this.setStartCamera();
 	}
 	
@@ -234,6 +236,12 @@ public class Level {
 		this.preBuild();		
 		LevelBuilder.build(this, levelDef);						
 		this.postBuild(levelDef.getId());				
+	}
+	
+	public void loadLevelRandom(int complexity) {
+		this.preBuild();		
+		SlimeFactory.LevelGenerator.generate(complexity, BlocDirection.Left);						
+		this.postBuild("Random");				
 	}
 	
 	private void preBuild() {
@@ -277,6 +285,8 @@ public class Level {
 		this.endLevelLayer.setVisible(false);
 		this.levelLayer.reset();		
 		// this.disablePauseLayer();
+		
+		this.setLevelOrigin(CGPoint.zero());
 		
 		this.resume();
 	}
@@ -418,6 +428,10 @@ public class Level {
 	public void addItemToAdd(GameItem item) {
 		this.itemsToAdd.add(item);
 	}		
+	
+	public ArrayList<GameItem> getItemsToAdd() {
+		return this.itemsToAdd;
+	}
 		
 	public void setPause(boolean value) {		
 //		if (value) {			
@@ -740,7 +754,8 @@ public class Level {
 	
 	public void goHome() {
 		// CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
-		this.loadLevel(LevelBuilder.LevelSelection);
+		// this.loadLevel(LevelBuilder.LevelSelection);
+		this.loadLevel(LevelHome.Id);
 		// Sounds.resumeMusic();
 	}
 	
@@ -934,5 +949,18 @@ public class Level {
 	 */
 	public void setPaused(boolean isPaused) {
 		this.isPaused = isPaused;
+	}
+
+	public void shiftAll(int xShift, int yShift) {
+		/*for(GameItem item : this.items.values()) {
+			// item.shift(xShift, yShift)
+		}*/
+	}
+	
+	public void setLevelOrigin(CGPoint origin) {
+		this.levelOrigin = origin;
+		// this.gameLayer.setAnchorPoint(this.levelOrigin);
+		// this.gameLayer.setPosition(origin.x, origin.y);
+		this.backgroundLayer.setPosition(origin.x, origin.y);
 	}
 }

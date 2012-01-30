@@ -149,12 +149,10 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		this.localRender = 0;
 	}
 
-	@Override
 	public void setLevel(Level level) {
 		this.level = level;
 	}
 
-	@Override
 	public void activateSelection(CGPoint gameReference) {
 		if (!this.isPaused) {
 			this.isStarted = true;
@@ -165,13 +163,11 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		}
 	}
 
-	@Override
 	public int getScore() {		
 		// return (int) Math.round(this.leftTime);
 		return (int) Math.ceil((double)this.leftTime);
 	}
 
-	@Override
 	public void selectBegin(CGPoint gameReference) {		
 		if (!this.isStarted && !this.isPaused) {
 			this.level.getCameraManager().moveInterpolateTo(this.level.getSelectedGameItem(), 0.5f);
@@ -182,7 +178,6 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		this.level.setTimeRatio(0.2f);
 	}
 
-	@Override
 	public void simpleSelect() {
 		if (!this.isPaused) {
 			this.level.getCameraManager().moveInterpolateTo(this.level.getSelectedGameItem(), 0.5f);
@@ -190,7 +185,6 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		}
 	}
 
-	@Override
 	public void startLevel() {
 		this.reset();
 		this.enterGameMode();		
@@ -216,7 +210,6 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		this.criticTime = (float) criticTime;
 	}
 
-	@Override
 	public void stop() {
 		CCLabel label = this.level.getHudLabel();
 		label.setColor(ccColor3B.ccc3( 255,255,255));
@@ -226,12 +219,10 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		this.isStarted = false;
 	}
 
-	@Override
 	public boolean isGameOver() {
 		return this.isGameOver;
 	}
 
-	@Override
 	public void setNewAliveSlimyCount(int count) {
 		if (count == 0) {
 			this.lose();
@@ -245,7 +236,6 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		}			
 	}
 
-	@Override
 	public void setNewBonus() {
 		if (!this.isGameOver) {
 			this.leftTime += 10;

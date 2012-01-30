@@ -48,12 +48,10 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 		this.targetThumbnail.setPosition(this.position);		
 	}
 
-	@Override
 	public boolean canSelect(CGPoint gameReference) {
 		return CGRect.containsPoint(this.getSelectionRect(), gameReference);
 	}
 
-	@Override
 	public CGRect getSelectionRect() {
 		this.selectionRect.origin.x = this.position.x - Default_Selection_Width / 2;
 		this.selectionRect.origin.y = this.position.y - Default_Selection_Height / 2;		
@@ -62,28 +60,23 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 		return this.scaledRect;
 	}
 
-	@Override
 	public boolean isSelected() {
 		return isSelected;
 	}
 
-	@Override
 	public void select() {
 		this.isSelected = true;
 		
 	}
 
-	@Override
 	public void select(CGPoint gameReference) {
 		this.isSelected = true;
 	}
 
-	@Override
 	public void selectionMove(CGPoint gameReference) {
 		// Do nothing
 	}
 
-	@Override
 	public void selectionStop(CGPoint gameReference) {
 		if (this.isSelected) {
 			if (this.target instanceof GameItem) {
@@ -92,7 +85,6 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 		}
 	}
 
-	@Override
 	public boolean trySelect(CGPoint gameReference) {		
 		if (this.canSelect(gameReference))
 		{
@@ -102,17 +94,14 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 		return this.isSelected();
 	}
 
-	@Override
 	public void unselect() {
 		this.isSelected = false;
 	}
 
-	@Override
 	public CCSprite getThumbail() {
 		return target.getThumbail();
 	}
 
-	@Override
 	public CCNode getRootNode() {
 		return target.getRootNode();
 	}
@@ -120,7 +109,6 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 	/* (non-Javadoc)
 	 * @see gamers.associate.Slime.items.base.GameItemCocos#setPosition(org.cocos2d.types.CGPoint)
 	 */
-	@Override
 	public void setPosition(CGPoint position) {		
 		super.setPosition(position);
 		if (this.targetThumbnail != null) {
@@ -184,7 +172,6 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 		}
 	}
 
-	@Override
 	public boolean simpleSelect() {
 		this.selectionStop(null);
 		return false;

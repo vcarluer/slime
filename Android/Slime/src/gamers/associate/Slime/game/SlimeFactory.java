@@ -23,6 +23,7 @@ import gamers.associate.Slime.items.custom.StarFactory;
 import gamers.associate.Slime.items.custom.TargetFactory;
 import gamers.associate.Slime.items.custom.ThumbnailFactory;
 import gamers.associate.Slime.levels.ILevelBuilder;
+import gamers.associate.Slime.levels.generator.LevelGraphGenerator;
 
 import org.cocos2d.nodes.CCNode;
 
@@ -54,9 +55,12 @@ public abstract class SlimeFactory {
 	public static TargetFactory Target = new TargetFactory();
 	public static LaserBeamFactory LaserBeam = new LaserBeamFactory();
 	public static CocosFactory Sprite = new CocosFactory();
+	public static LevelGraphGenerator LevelGenerator = new LevelGraphGenerator(); 
 		
 	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {		
-		LevelBuilder = new LevelBuilder();
+		// LevelBuilder = new LevelBuilder();
+		LevelBuilder = new LevelBuilderGenerator();
+		LevelGenerator.attach(level);		
 		
 		Slimy.attach(level, attachNode, attachWorld, attachWorldRatio);
 		SpawnPortal.attach(level, attachNode);
@@ -105,6 +109,8 @@ public abstract class SlimeFactory {
 		LaserBeam.detach();
 		Sprite.detach();
 		
+		LevelGenerator.detach();
+		
 		SpriteSheetFactory.detachAll();
 		isAttached = false;
 	}
@@ -128,6 +134,8 @@ public abstract class SlimeFactory {
 		LaserGun.destroy();
 		LaserBeam.destroy();
 		Sprite.destroy();
+		
+		LevelGenerator.destroy();
 		
 		SpriteSheetFactory.destroy();
 		isAttached = false;

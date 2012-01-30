@@ -91,51 +91,41 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 		return nodeId;
 	}
 
-	@Override
 	public boolean canSelect(CGPoint gameReference) {
 		return this.getLevelDefinition().isUnlock();
 	}
 
-	@Override
 	public CCNode getRootNode() {
 		return this.rootNode;
 	}
 
-	@Override
 	public CGRect getSelectionRect() {
 		return this.scaledRect;
 	}
 
-	@Override
 	public CCSprite getThumbail() {
 		return null;
 	}
 
-	@Override
 	public boolean isSelected() {
 		return this.isSelected;
 	}
 
-	@Override
 	public void select() {
 		this.isSelected = true;		
 	}
 
-	@Override
 	public void select(CGPoint gameReference) {
 		this.select();
 	}
 
-	@Override
 	public void selectionMove(CGPoint gameReference) {		
 	}
 
-	@Override
 	public void selectionStop(CGPoint gameReference) {
 		this.unselect();		
 	}
 	
-	@Override
 	public boolean simpleSelect() {		
 		MenuNode current = SlimeFactory.MenuNode.getCurrentNode();
 		if (current.getNodeId().equals(this.getNodeId())) {
@@ -198,7 +188,6 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 		Level.get(this.getLevelDefinition());
 	}
 
-	@Override
 	public boolean trySelect(CGPoint gameReference) {
 		if (this.canSelect(gameReference)) {
 			this.select();
@@ -207,7 +196,7 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 		return this.isSelected;
 	}
 
-	@Override
+
 	public void unselect() {
 		this.isSelected = false;		
 	}

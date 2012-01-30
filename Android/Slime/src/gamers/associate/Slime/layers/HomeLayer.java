@@ -1,11 +1,13 @@
 package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.R;
+import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelSelection;
 import gamers.associate.Slime.game.Sounds;
 
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
+import org.cocos2d.menus.CCMenuItem;
 import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
@@ -79,9 +81,13 @@ public class HomeLayer extends CCLayer {
 	}
 
 	public void selectPlay(Object sender) {
-		Sounds.playEffect(R.raw.menuselect);		
-		CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
+		// Sounds.playEffect(R.raw.menuselect);		
+		// CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
 //		CCTransitionScene transition = CCMoveInRTransition.transition(0.5f, LevelSelection.get().getScene());
 //		CCDirector.sharedDirector().replaceScene(transition);
+		
+		Sounds.playEffect(R.raw.menuselect);
+		Sounds.pauseMusic();
+		Level.currentLevel.get("Random", true);
 	}
 }

@@ -8,7 +8,6 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 
 public class ContactManager implements ContactListener {
 	
-	@Override
 	public void beginContact(Contact contact) {
 		if (contact.getFixtureA() != null && contact.getFixtureB() != null) {
 			Object oA = contact.getFixtureA().getBody().getUserData();
@@ -27,7 +26,6 @@ public class ContactManager implements ContactListener {
 		}	
 	}
 
-	@Override
 	public void endContact(Contact contact) {
 		// TODO Auto-generated method stub
 		

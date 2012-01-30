@@ -71,7 +71,6 @@ public class TextureAnimation {
     	final CCTexture2D tex = new CCTexture2D();
         tex.setLoader(new GLResourceHelper.GLResourceLoader() {
 			
-			@Override
 			public void load(Resource res) {
 	            try {
 		        	InputStream is = CCDirector.sharedDirector().getActivity().getAssets().open(path);

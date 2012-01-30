@@ -153,7 +153,6 @@ public class CircularSaw extends GameItemPhysic implements ITrigerable {
 		}
 	}
 
-	@Override
 	public String getName() {
 		return this.name;
 	}
@@ -162,7 +161,6 @@ public class CircularSaw extends GameItemPhysic implements ITrigerable {
 		this.name = name;
 	}
 
-	@Override
 	public void trigger(Object source, String data) {
 		if (this.isOn) {
 			this.turnOff();

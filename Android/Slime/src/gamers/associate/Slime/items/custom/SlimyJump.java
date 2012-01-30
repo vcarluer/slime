@@ -274,7 +274,6 @@ public class SlimyJump extends Slimy implements ISelectable {
 		return this.selected;
 	}
 	
-	@Override
 	public void selectionStop(CGPoint gameReference) {		
 		if (this.selected && !this.isPaused) {
 			this.computeTarget(gameReference);			
@@ -465,7 +464,6 @@ public class SlimyJump extends Slimy implements ISelectable {
 		}				
 	}
 
-	@Override
 	public CCSprite getThumbail() {
 		if (this.thumbnailSprite == null) {
 			this.thumbnailSprite = CCSprite.sprite(thumbSprite, true);			
@@ -474,7 +472,6 @@ public class SlimyJump extends Slimy implements ISelectable {
 		return this.thumbnailSprite; 
 	}
 
-	@Override
 	public CCNode getRootNode() {
 		return this.rootNode;		
 	}
@@ -540,7 +537,6 @@ public class SlimyJump extends Slimy implements ISelectable {
 		this.currentJointDef = null;
 	}
 
-	@Override
 	public boolean simpleSelect() {
 		return true;
 	}

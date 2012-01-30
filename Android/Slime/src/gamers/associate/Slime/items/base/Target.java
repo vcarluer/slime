@@ -11,12 +11,10 @@ public class Target extends GameItem implements ITrigerable {
 		this.name = name;
 	}
 
-	@Override
 	public String getName() {
 		return this.name;
 	}
 
-	@Override
 	public void trigger(Object source, String data) {		
 	}
 }

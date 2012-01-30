@@ -181,10 +181,10 @@ public class Slime extends Activity {
 				return true;
 			}			
 			
-			if (LevelSelection.get() != null && LevelSelection.get().getActivated()) {
+			/*if (LevelSelection.get() != null && LevelSelection.get().getActivated()) {
 				Sounds.playEffect(R.raw.menuselect);
 				LevelSelection.get().goBack();
-			}
+			}*/
 	    }				
 		
 		return super.onKeyUp(keyCode, event);

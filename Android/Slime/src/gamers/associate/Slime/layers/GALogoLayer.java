@@ -57,7 +57,6 @@ public class GALogoLayer extends CCLayer {
 	
 	private UpdateCallback nextCallback = new UpdateCallback() {
 			
-			@Override
 			public void update(float d) {		
 				long elapsed = (System.currentTimeMillis() - onEnterTime) / 1000;
 				if (elapsed > waitLogoSec) {

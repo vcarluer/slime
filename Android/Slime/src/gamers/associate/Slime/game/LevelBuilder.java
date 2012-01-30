@@ -34,7 +34,9 @@ public class LevelBuilder implements ILevelBuilder {
 		// add(new LevelDefinitionParser("Level0.slime", context));
 		// add(new LevelDefinitionParser("LevelPoly.slime", context));
 		// add(new LevelDefinitionParser("LevelSaw.slime", context));
-		add(new LevelDefinitionParser(LevelSelection + LevelExtension));
+		
+		// add(new LevelDefinitionParser(LevelSelection + LevelExtension));
+		
 		// add(new LevelDefinitionParser("LevelTest.slime"));
 		// add(new LevelDefinitionParser("Level1.slime"));
 	}

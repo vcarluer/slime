@@ -11,6 +11,7 @@ public class LevelGenNode {
 	private boolean isLevelStart;
 	private boolean isLevelEnd;
 	private int complexity;
+	private BlocDefinition blocDefinition;
 	
 	public LevelGenNode() {
 		this.connectors = new HashSet<Integer>();
@@ -18,6 +19,12 @@ public class LevelGenNode {
 	
 	public void addConnector(int connector) {
 		this.connectors.add(connector);
+	}
+	
+	public void addConnectors(List<Integer> connectors) {
+		for(Integer connector : connectors) {
+			this.connectors.add(connector);
+		}
 	}
 
 	public int getConnectorCount() {
@@ -178,5 +185,13 @@ public class LevelGenNode {
 
 	public boolean isLevelEndAndConnect(LevelGenNode sourceNode) {
 		return this.isLevelEnd && this.isConnectedTo(sourceNode);
+	}
+
+	public void setBlocDefinition(BlocDefinition blocDefinition) {
+		this.blocDefinition = blocDefinition;		
+	}
+	
+	public BlocDefinition getBlocDefinition() {
+		return this.blocDefinition;
 	}
 }

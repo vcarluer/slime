@@ -191,12 +191,10 @@ public class LevelBeta extends LevelTimeAttack {
 		this.setId("Beta");		
 	}
 
-	@Override
 	public int getLevelCriticTime() {
 		return 10;
 	}
 
-	@Override
 	public int getLevelTime() {
 		return 20;
 	}

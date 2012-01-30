@@ -173,29 +173,29 @@ public class CameraManager {
 		boolean isNormalized = false;
 		CGPoint position = this.gameLayer.getPosition();
 		
-		float maxLeft = CGRect.minX(this.screenView);
+		float maxLeft = CGRect.minX(this.screenView) - (this.levelOrigin.x * scale);;
 		float left = position.x;
 		if (left > maxLeft) {
 			position.x += maxLeft - left;
 			isNormalized = true;
 		}
 		
-		float minRight = CGRect.maxX(this.screenView);
+		float minRight = CGRect.maxX(this.screenView) - (this.levelOrigin.x * scale);;
 		float right = position.x + this.levelWidth * scale;
 		if (right < minRight) {
 			position.x += minRight - right;
 			isNormalized = true;
 		}
 		
-		float maxBottom = CGRect.minY(this.screenView);
+		float maxBottom = CGRect.minY(this.screenView) - (this.levelOrigin.y * scale);
 		float bottom = position.y;
 		if (bottom > maxBottom) {
 			position.y += maxBottom - bottom;
 			isNormalized = true;
 		}
 		
-		float minTop = CGRect.maxY(this.screenView);
-		float top = position.y + this.levelHeight * scale;
+		float minTop = CGRect.maxY(this.screenView) - (this.levelOrigin.y * scale);
+		float top = position.y - this.levelOrigin.y + this.levelHeight * scale;
 		if (top < minTop) {
 			position.y += minTop - top;
 			isNormalized = true;
@@ -427,7 +427,8 @@ public class CameraManager {
 	public void setCameraView() {		
 		CGPoint origin = this.levelOrigin;		
 		// Default view is windows size
-		this.screenView = CGRect.make(origin, CCDirector.sharedDirector().winSize());					
+		// this.screenView = CGRect.make(origin, CCDirector.sharedDirector().winSize());					
+		this.screenView = CGRect.make(CGPoint.zero(), CCDirector.sharedDirector().winSize());
 		
 		// By default camera can not be unzoom more than the most little size		
 		float minScaleW = 1 / (this.levelWidth / CGRect.width(this.screenView));

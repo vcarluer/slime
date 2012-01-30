@@ -74,7 +74,6 @@ public class SlimeLoadingLayer extends CCLayer {
 	
 	private UpdateCallback nextCallback = new UpdateCallback() {
 			
-			@Override
 			public void update(float d) {
 				SpriteSheetFactory.add("controls", true, SpriteSheetFactory.zDefault);
 				// SpriteSheetFactory.add("logo", true, SpriteSheetFactory.zDefault);

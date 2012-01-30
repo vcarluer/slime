@@ -1,8 +1,13 @@
 package gamers.associate.Slime.levels.generator;
 
+import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.levels.LevelUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import org.cocos2d.types.CGPoint;
 
 public class LevelGraphGenerator {
 	private List<LevelGenNode> nodes;
@@ -13,9 +18,25 @@ public class LevelGraphGenerator {
 	private int rightCount;
 	private int bottomCount;
 	private int leftCount;
+	private Level currentLevel;
 	
 	public LevelGraphGenerator() {
 		this.nodes = new ArrayList<LevelGenNode>();
+	}
+	
+	public void attach(Level level) {
+		this.currentLevel = level;
+		
+		BlocHardInit.InitHardCoded();
+	}
+	
+	public void detach() {
+		this.currentLevel = null;
+	}
+	
+	public void destroy() {
+		this.currentLevel = null;
+		this.nodes.clear();
 	}
 	
 	public void addNode(LevelGenNode levelGenNode) {
@@ -122,9 +143,37 @@ public class LevelGraphGenerator {
 				
 		pick = this.pickEnd(pick);
 		this.handlePick(pick, false);
+		
+		if (this.currentLevel != null) {
+			int xSize = this.rightCount + this.leftCount + 1;
+			int ySize = this.topCount + this.bottomCount + 1;
+			
+			this.currentLevel.setLevelSize(
+					BlocDefinition.BlocWidth * xSize,
+					BlocDefinition.BlocHeight * ySize);
+			
+			this.changeReferenceToZero();
+			
+			//LevelUtil.createGroundBox(this.currentLevel);
+		}
+		
 		this.lastGeneratedComplexity = currentComplexity;
 	}
 	
+	private void changeReferenceToZero() {
+		int xShift = 0;
+		int yShift = 0;
+		if (this.getXOffset() < 0 ) {
+			xShift = this.getXOffset() * BlocDefinition.BlocWidth; 
+		}
+		
+		if (this.getYOffset() < 0 ) {
+			yShift = this.getYOffset() * BlocDefinition.BlocHeight; 
+		}
+		
+		this.currentLevel.setLevelOrigin(CGPoint.make(xShift, yShift));		
+	}
+
 	private LevelGenNode pickNextConstrained(LevelGenNode source,
 			BlocDirection constrained) {
 		return this.pickNext(source, this.getRandomDirection(constrained));
@@ -139,13 +188,25 @@ public class LevelGraphGenerator {
 	}
 	
 	private void handlePick(LevelGenNode pick, boolean countDirection) {
-		// Handle level creation here
-		// Offset is directionCount
+		BlocDefinition bloc = pick.getBlocDefinition();
+		if (bloc != null) {
+			int xOffSet = this.getXOffset();
+			int yOffSet = this.getYOffset();
+			bloc.buildLevel(this.currentLevel, xOffSet, yOffSet);
+		}
 		
 		currentComplexity += pick.getComplexity();
 		if (countDirection) {
 			this.count(this.lastDirection);
 		}
+	}
+	
+	private int getXOffset() {
+		return this.rightCount - this.leftCount;		
+	}
+	
+	private int getYOffset() {
+		return this.topCount - this.bottomCount;
 	}
 
 	public int getLastGeneratedComplexity() {

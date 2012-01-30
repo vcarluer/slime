@@ -138,7 +138,6 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 		this.isOn = false;
 	}
 
-	@Override
 	public String getName() {
 		return this.name;
 	}
@@ -147,7 +146,6 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 		this.name = name;
 	}
 
-	@Override
 	public void trigger(Object source, String data) {
 		if (this.isOn) {
 			this.turnOff();
