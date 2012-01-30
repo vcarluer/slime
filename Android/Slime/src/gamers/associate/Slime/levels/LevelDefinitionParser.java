@@ -3,7 +3,9 @@ package gamers.associate.Slime.levels;
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.game.TimeAttackGame;
 import gamers.associate.Slime.items.base.GameItem;
+import gamers.associate.Slime.items.custom.LevelEnd;
 import gamers.associate.Slime.levels.itemdef.BecBunsenDef;
 import gamers.associate.Slime.levels.itemdef.BoxDef;
 import gamers.associate.Slime.levels.itemdef.BumperAngleDef;
@@ -32,6 +34,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import android.content.Context;
 import android.util.Log;
@@ -44,14 +48,19 @@ public class LevelDefinitionParser extends LevelDefinition
 	private HashMap<String, ItemDefinition> typeHandler;
 	private HashMap<Class, ItemDefinition> classHandler;
 	private ItemDefinition postBuildItem;
+	private boolean isLocalStorage;
+	private Set<Class> ignoredClasses;
 	
 	public LevelDefinitionParser(String resourceName) {
 		this.gamePlay = GamePlay.ManuallyDefined;
 		this.resourceName = resourceName;		
 		this.itemDefinitions = new ArrayList<ItemDefinition>();
 		this.typeHandler = new HashMap<String, ItemDefinition>();
-		this.createItemDefinitions();
+		this.classHandler = new HashMap<Class, ItemDefinition>();
+		this.ignoredClasses = new HashSet<Class>();
+		this.createItemDefinitions();		
 		this.buildItemTypeMap();
+		this.defineIgnoreClasses();
 				
 		if (this.resourceName.toUpperCase().contains(SpecialLevel.toUpperCase())) {
 			this.isSpecial = true;
@@ -66,6 +75,10 @@ public class LevelDefinitionParser extends LevelDefinition
 		}
 	}
 	
+	private void defineIgnoreClasses() {
+		this.ignoredClasses.add(LevelEnd.class);
+	}
+
 	private void createItemDefinitions() {
 		this.itemDefinitions.add(new PlatformDef());
 		this.itemDefinitions.add(new LevelInfoDef());
@@ -106,7 +119,11 @@ public class LevelDefinitionParser extends LevelDefinition
 	public void buildLevel(Level level) {
 		java.io.InputStream inputStream;
 		try {
-			inputStream = SlimeFactory.ContextActivity.getAssets().open(this.resourceName);
+			if (this.isLocalStorage) {
+				inputStream = SlimeFactory.ContextActivity.openFileInput(this.resourceName);
+			} else {
+				inputStream = SlimeFactory.ContextActivity.getAssets().open(this.resourceName);
+			}			
 			InputStreamReader inputreader = new InputStreamReader(inputStream);
 			BufferedReader buffreader = new BufferedReader(inputreader);
 			String line;		
@@ -116,6 +133,7 @@ public class LevelDefinitionParser extends LevelDefinition
 				while (( line = buffreader.readLine()) != null) {
 					try {
 						i++;
+						Log.d(Slime.TAG, line);
 						this.HandleLine(level, line);
 					} catch (Exception e) {
 						Log.e(Slime.TAG, "ERROR during read of " + this.resourceName + " line " + String.valueOf(i));
@@ -151,17 +169,31 @@ public class LevelDefinitionParser extends LevelDefinition
 			FileOutputStream fos = SlimeFactory.ContextActivity.openFileOutput(this.resourceName, Context.MODE_PRIVATE);
 			OutputStreamWriter streamWriter = new OutputStreamWriter(fos);
 			buffWriter = new BufferedWriter(streamWriter);
+			// First line: LevelInfo
+			LevelInfoDef infoDef = (LevelInfoDef) this.typeHandler.get(LevelInfoDef.Handled_Size);
+			infoDef.setValuesSpe(level);
+			infoDef.writeLine(buffWriter);
+			// Second line: TimeAttackGame
+			if (level.getGamePlay() != null) {
+				TimeAttackDef gamePlayDef = (TimeAttackDef) this.typeHandler.get(TimeAttackDef.Handled_TimeAttack);
+				TimeAttackGame gamePlay = (TimeAttackGame) level.getGamePlay();
+				gamePlayDef.setValues(gamePlay);
+				gamePlayDef.writeLine(buffWriter);
+			}
+						
+			// Next lines
 			for(GameItem item : level.getItemsToAdd()) {
-				ItemDefinition itemDef = this.classHandler.get(item.getClass());
-				if (itemDef != null) {			
-					itemDef.setValues(item);
-					itemDef.writeLine(buffWriter);
-				}
-				else {
-					Log.e(Slime.TAG, "ERROR, ItemDefinition not found for " + item.getClass().toString() + ". Can not store item in " + this.resourceName);
+				if (!this.ignoredClasses.contains(item.getClass())) {
+					ItemDefinition itemDef = this.classHandler.get(item.getClass());
+					if (itemDef != null) {			
+						itemDef.setValues(item);
+						itemDef.writeLine(buffWriter);
+					}
+					else {
+						Log.e(Slime.TAG, "ERROR, ItemDefinition not found for " + item.getClass().toString() + ". Can not store item in " + this.resourceName);
+					}
 				}
 			}
-			
 		} catch (FileNotFoundException ex) {
 			Log.e(Slime.TAG, "ERROR, file not found " + this.resourceName);
 			ex.printStackTrace();
@@ -180,5 +212,21 @@ public class LevelDefinitionParser extends LevelDefinition
                 ex.printStackTrace();
             }
         }
+	}
+
+	public boolean isStored() {
+		return SlimeFactory.ContextActivity.getFileStreamPath(this.resourceName).exists();
+	}
+
+	public boolean isLocalStorage() {
+		return isLocalStorage;
+	}
+
+	public void setLocalStorage(boolean isLocalStorage) {
+		this.isLocalStorage = isLocalStorage;
+	}
+	
+	public void resetStorage() {
+		SlimeFactory.ContextActivity.deleteFile(this.resourceName);
 	}
 }

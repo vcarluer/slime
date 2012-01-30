@@ -1,11 +1,13 @@
 package gamers.associate.Slime.levels.itemdef;
 
+import org.cocos2d.types.CGPoint;
+
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.levels.LevelUtil;
 
 public class LevelInfoDef extends ItemDefinition {
-	private static String Handled_Size = "LevelInfo";
+	public static String Handled_Size = "LevelInfo";
 	private static String Dimension_Auto = "Auto";
 	private static String Dimension_Width = "Width";
 	private static String Dimension_Height = "Height";	
@@ -51,6 +53,8 @@ public class LevelInfoDef extends ItemDefinition {
 					this.height);
 		}
 		
+		level.setLevelOrigin(CGPoint.make(this.x, this.y));
+		level.setMaxDimension(this.maxDimension);
 		LevelUtil.createGroundBox(level);
 	}
 
@@ -71,8 +75,8 @@ public class LevelInfoDef extends ItemDefinition {
 
 	@Override
 	protected String writeNext(String line) {
-		// Not stored. Must be recreated dynamcially
-		return null;
+		line = this.addValue(line, this.maxDimension);
+		return line;
 	}
 
 	@Override
@@ -82,10 +86,21 @@ public class LevelInfoDef extends ItemDefinition {
 
 	@Override
 	protected String getItemType(GameItem item) {
-		return null;
+		return Handled_Size;
 	}
 
 	@Override
 	protected void setValuesNext(GameItem item) {		
 	}
+	
+	public void setValuesSpe(Level level) {		
+		this.itemType = this.getItemType(null);
+		this.x = level.getLevelOrigin().x;
+		this.y = level.getLevelOrigin().y;
+		this.width = level.getLevelWidth();
+		this.height = level.getLevelHeight();
+		this.angle = 0;
+		this.maxDimension = level.getMaxDimension();
+	}
+
 }

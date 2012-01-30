@@ -68,7 +68,7 @@ public class LevelBuilder implements ILevelBuilder {
 		build(level, levelDef);
 	}
 	
-	public static void build(Level level, LevelDefinition levelDef) {
+	public void build(Level level, LevelDefinition levelDef) {
 		if (levelDef != null) {
 			levelDef.buildLevel(level);
 			level.setLevelDefinition(levelDef);
@@ -105,5 +105,10 @@ public class LevelBuilder implements ILevelBuilder {
 		}
 		
 		return gameLevels;
+	}
+
+	@Override
+	public void rebuild(Level level, LevelDefinition levelDef) {
+		this.build(level, levelDef);
 	}
 }

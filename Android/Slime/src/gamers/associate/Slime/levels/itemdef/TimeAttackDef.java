@@ -5,7 +5,7 @@ import gamers.associate.Slime.game.TimeAttackGame;
 import gamers.associate.Slime.items.base.GameItem;
 
 public class TimeAttackDef extends ItemDefinition {
-	private static String Handled_TimeAttack = "TimeAttack";
+	public static String Handled_TimeAttack = "TimeAttack";
 	
 	private int levelTime;
 	private int criticTime;

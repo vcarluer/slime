@@ -154,7 +154,7 @@ public class LevelGraphGenerator {
 			
 			this.changeReferenceToZero();
 			
-			//LevelUtil.createGroundBox(this.currentLevel);
+			LevelUtil.createGroundBox(this.currentLevel);
 		}
 		
 		this.lastGeneratedComplexity = currentComplexity;

@@ -189,6 +189,8 @@ public abstract class ItemDefinition {
 			
 			line = this.writeNext(line);
 
+			writer.write(line);
+			Log.d(Slime.TAG, line);
 			writer.newLine();
 		} catch (IOException e) {
 			Log.e(Slime.TAG, "ERROR during write of line");
@@ -200,7 +202,11 @@ public abstract class ItemDefinition {
 	protected abstract String writeNext(String line);
 	
 	protected String addValue(String line, String value) {
-		return line + infoSep +  value;
+		if (line != "") {
+			return line + infoSep +  value;
+		} else {
+			return value;
+		}
 	}
 
 	public final void setValues(GameItem item) {		

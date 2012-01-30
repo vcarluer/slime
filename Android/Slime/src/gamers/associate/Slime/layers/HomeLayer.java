@@ -3,6 +3,7 @@ package gamers.associate.Slime.layers;
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelSelection;
+import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 
 import org.cocos2d.layers.CCLayer;
@@ -88,6 +89,6 @@ public class HomeLayer extends CCLayer {
 		
 		Sounds.playEffect(R.raw.menuselect);
 		Sounds.pauseMusic();
-		Level.currentLevel.get("Random", true);
+		Level.get("Random", true);
 	}
 }

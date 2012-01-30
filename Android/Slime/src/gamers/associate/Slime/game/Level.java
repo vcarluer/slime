@@ -60,6 +60,8 @@ public class Level {
 	private static final float bgWidth = 1467f;
 	private static final float bgHeight = 800f;
 	
+	private String maxDimension;
+	
 	/**
 	 * @uml.property  name="slimyFactory"
 	 * @uml.associationEnd  
@@ -209,10 +211,16 @@ public class Level {
 	
 	public void reload() {
 		// currentLevel.loadLevel(this.currentLevelName);
-		currentLevel.loadLevel(this.levelDefinition);
+		
+		// currentLevel.loadLevel(this.levelDefinition);
+		
 		// Set camera right based on screen size
 		// currentLevel.getCameraManager().setCameraView();
 		//this.setStartCamera();
+		
+		this.preBuild();
+		SlimeFactory.LevelBuilder.rebuild(this, this.levelDefinition);
+		this.postBuild(this.currentLevelName);
 	}
 	
 	public void attachLevelToCamera() {
@@ -235,8 +243,7 @@ public class Level {
 	// Must be call before running scene with CCDirector
 	public void loadLevel(LevelDefinition levelDef) {
 		this.preBuild();
-		// To put in interface? => YES !!!!
-		LevelBuilder.build(this, levelDef);						
+		SlimeFactory.LevelBuilder.build(this, levelDef);						
 		this.postBuild(levelDef.getId());				
 	}
 	
@@ -573,7 +580,7 @@ public class Level {
 			this.backgroundLayer.setScale(1f);
 		}
 		
-	}
+	} 
 	
 	public void setIsTouchEnabled(boolean value) {
 		this.levelLayer.setIsTouchEnabled(value);
@@ -767,7 +774,8 @@ public class Level {
 //			this.loadLevel(next);
 //		}
 		
-		this.loadLevel(LevelBuilder.LevelSelection);
+		// this.loadLevel(LevelBuilder.LevelSelection);
+		get(SlimeFactory.LevelBuilder.getNext(this.currentLevelName), true);
 	}
 	
 	public void startLevel() {
@@ -964,5 +972,17 @@ public class Level {
 		// this.gameLayer.setAnchorPoint(this.levelOrigin);
 		// this.gameLayer.setPosition(origin.x, origin.y);
 		this.backgroundLayer.setPosition(origin.x, origin.y);
+	}
+
+	public String getMaxDimension() {
+		return maxDimension;
+	}
+
+	public void setMaxDimension(String maxDimension) {
+		this.maxDimension = maxDimension;
+	}
+	
+	public CGPoint getLevelOrigin() {
+		return this.levelOrigin;
 	}
 }

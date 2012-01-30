@@ -18,21 +18,24 @@ public class LevelUtil {
 		float w = s.width;
 		float w2 = s.width / 2;
 		float h = s.height;
-		float h2 = s.height / 2;					
+		float h2 = s.height / 2;			
+		float x = level.getLevelOrigin().x;
+		float y = level.getLevelOrigin().y;
+		
 		// up
-		SlimeFactory.LevelEnd.create(w2, h + m, w, si);
+		SlimeFactory.LevelEnd.create(w2 + x, h + m + y, w, si);
 		//right
-		SlimeFactory.LevelEnd.create(w + m, h2, si, h);
+		SlimeFactory.LevelEnd.create(w + m + x, h2 + y, si, h);
 		// bottom
-		SlimeFactory.LevelEnd.create(w2, -m, w, si);
+		SlimeFactory.LevelEnd.create(w2 + x, -m + y, w, si);
 		// left
-		SlimeFactory.LevelEnd.create(-m, h2, si, h);			
+		SlimeFactory.LevelEnd.create(-m + x, h2 + y, si, h);			
 	}
 	
 	public static void createLand(Level level) {
 		CGSize s = CGSize.make(level.getLevelWidth(), level.getLevelHeight());		
 		
-		SlimeFactory.Platform.create(s.width / 2, LAND_HEIGHT / 2, s.width, LAND_HEIGHT);
+		SlimeFactory.Platform.create(s.width / 2 + level.getLevelOrigin().x, LAND_HEIGHT / 2 + level.getLevelOrigin().y, s.width, LAND_HEIGHT);
 	}
 	
 	public static float getHeightRatio() {
