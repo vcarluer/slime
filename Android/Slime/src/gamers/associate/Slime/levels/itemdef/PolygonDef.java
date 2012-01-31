@@ -110,7 +110,7 @@ public class PolygonDef extends ItemDefinition {
 			polyType = PhysicPolygon.Empty;
 		}
 		
-		SlimeFactory.Polygon.create(this.x, this.y, this.width, this.height, this.isdynamic, realPoints, polyType, this.isStickable);
+		SlimeFactory.Polygon.create(this.getX(), this.getY(), this.width, this.height, this.isdynamic, realPoints, polyType, this.isStickable);
 	}
 
 	@Override
@@ -187,5 +187,4 @@ public class PolygonDef extends ItemDefinition {
 		this.isStickable = !poly.isNoStick();
 		this.isEmpty = poly.getType() == PhysicPolygon.Empty;
 	}
-
 }

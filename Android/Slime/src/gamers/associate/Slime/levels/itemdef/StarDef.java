@@ -10,7 +10,7 @@ public class StarDef extends ItemDefinition {
 	
 	@Override
 	public void createItem(Level level) {
-		SlimeFactory.Star.createBL(this.x, this.y, this.width, this.height);
+		SlimeFactory.Star.createBL(this.getX(), this.getY(), this.width, this.height);
 	}
 
 	@Override

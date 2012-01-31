@@ -22,7 +22,10 @@ public abstract class ItemDefinition {
 	protected float height;
 	protected float angle;
 	protected ArrayList<String> typesHandled;
-	protected ArrayList<Class> classHandled;		
+	protected ArrayList<Class> classHandled;	
+	
+	protected float xOffset;
+	protected float yOffset;
 	
 	public ItemDefinition() {
 		this.typesHandled = new ArrayList<String>();
@@ -51,26 +54,24 @@ public abstract class ItemDefinition {
 	 * @return the x
 	 */
 	public float getX() {
-		return x;
+		return this.getOffX(this.x);
 	}
-	/**
-	 * @param x the x to set
-	 */
-	public void setX(float x) {
-		this.x = x;
-	}
+
 	/**
 	 * @return the y
 	 */
 	public float getY() {
-		return y;
+		return this.getOffY(this.y);
 	}
-	/**
-	 * @param y the y to set
-	 */
-	public void setY(float y) {
-		this.y = y;
+	
+	protected float getOffX(float xVal) {
+		return xVal + this.xOffset * this.width;
 	}
+	
+	protected float getOffY(float yVal) {
+		return yVal + this.yOffset * this.height;
+	}
+	
 	/**
 	 * @return the width
 	 */
@@ -128,8 +129,18 @@ public abstract class ItemDefinition {
 	public abstract void createItem(Level level);
 	
 	public void parseAndCreate(String line, Level level) throws Exception {
+		this.parseAndCreate(line, level, 0, 0);
+	}
+	
+	public void parseAndCreate(String line, Level level, float xOffset, float yOffset) throws Exception {				
 		this.parse(line);
+		this.setOffset(xOffset, yOffset);
 		this.createItem(level);
+	}
+	
+	public void setOffset(float xOffset, float yOffset) {
+		this.xOffset = xOffset;
+		this.yOffset = yOffset;
 	}
 	
 	protected void registerHandledType(String typeName) {

@@ -13,7 +13,7 @@ public class SpriteDef extends ItemDefinition {
 	
 	@Override
 	public void createItem(Level level) {
-		SlimeFactory.Sprite.createBL(this.x, this.y, this.width, this.height, this.plist, this.frame, this.count).setAngle(this.angle);
+		SlimeFactory.Sprite.createBL(this.getX(), this.getY(), this.width, this.height, this.plist, this.frame, this.count).setAngle(this.angle);
 	}
 
 	@Override

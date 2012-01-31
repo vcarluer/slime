@@ -165,11 +165,15 @@ public class LevelDefinitionParser extends LevelDefinition
 		this.postBuildItem.postBuild();
 	}
 	
-	private void HandleLine(Level level, String line) throws Exception {
+	protected void HandleLine(Level level, String line) throws Exception {
+		ItemDefinition itemDef = this.getItemDef(line);
+		itemDef.parseAndCreate(line, level);		
+	}
+	
+	protected ItemDefinition getItemDef(String line) {
 		String[] items = line.split(";", -1);		
 		String itemType = items[0];
-		ItemDefinition itemDef = this.typeHandler.get(itemType);
-		itemDef.parseAndCreate(line, level);		
+		return this.typeHandler.get(itemType);
 	}
 	
 	public void storeLevel(Level level) {

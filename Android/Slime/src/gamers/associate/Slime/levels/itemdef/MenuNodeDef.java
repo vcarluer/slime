@@ -21,7 +21,7 @@ public class MenuNodeDef extends ItemDefinition {
 	
 	@Override
 	public void createItem(Level level) {
-		MenuNode node = SlimeFactory.MenuNode.createBL(this.x, this.y, this.width, this.height, 
+		MenuNode node = SlimeFactory.MenuNode.createBL(this.getX(), this.getY(), this.width, this.height, 
 										id, targetLevel,
 										this.targetN1, this.targetN2, this.targetN3, this.targetN4);		
 		
@@ -39,7 +39,7 @@ public class MenuNodeDef extends ItemDefinition {
 		if (startNode != null) {
 			float ratio = 1.0f;
 			// start item centered in node
-			Slimy slimy = SlimeFactory.Slimy.create(this.x + this.width / 2, this.y + (ratio * Slimy.Default_Height) / 2, ratio);
+			Slimy slimy = SlimeFactory.Slimy.create(this.getX() + this.width / 2, this.getY() + (ratio * Slimy.Default_Height) / 2, ratio);
 			slimy.land();
 			slimy.disablePhysic();
 			Level.currentLevel.setStartItem(slimy);

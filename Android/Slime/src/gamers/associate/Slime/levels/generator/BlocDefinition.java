@@ -33,26 +33,6 @@ public abstract class BlocDefinition extends LevelDefinitionParser
 
   public abstract void buildLevel(Level level, int xOffset, int yOffset);
 
-  protected float getX(float x)
-  {
-    return getX(x, this.currentXOffset);
-  }
-
-  protected float getX(float x, float xOffset)
-  {
-    return x + xOffset * BlocWidth;
-  }
-
-  protected float getY(float y)
-  {
-    return getY(y, this.currentYOffset);
-  }
-
-  protected float getY(float y, float yOffset)
-  {
-    return y + yOffset * BlocHeight;
-  }
-
   public void setGenNode(LevelGenNode genNode)
   {
     this.genNode = genNode;

@@ -17,19 +17,19 @@ public class BoxDef extends ItemDefinition {
 	@Override
 	public void createItem(Level level) {
 		if (this.itemType.toUpperCase().equals(Handled_Tube.toUpperCase())) {
-			SlimeFactory.Box.createTubeBL(this.x, this.y, this.width, this.height, this.isStatic, this.isStickable).setAngle(this.angle);
+			SlimeFactory.Box.createTubeBL(this.getX(), this.getY(), this.width, this.height, this.isStatic, this.isStickable).setAngle(this.angle);
 		}
 
 		if (this.itemType.toUpperCase().equals(Handled_Multitubes.toUpperCase())) {
-			SlimeFactory.Box.createMultitubesBL(this.x, this.y, this.width, this.height, this.isStatic, this.isStickable).setAngle(this.angle);
+			SlimeFactory.Box.createMultitubesBL(this.getX(), this.getY(), this.width, this.height, this.isStatic, this.isStickable).setAngle(this.angle);
 		}
 
 		if (this.itemType.toUpperCase().equals(Handled_Glassbox.toUpperCase())) {
-			SlimeFactory.Box.createGlassboxBL(this.x, this.y, this.width, this.height, this.isStatic, this.isStickable).setAngle(this.angle);
+			SlimeFactory.Box.createGlassboxBL(this.getX(), this.getY(), this.width, this.height, this.isStatic, this.isStickable).setAngle(this.angle);
 		}
 
 		if (this.itemType.toUpperCase().equals(Handled_Bottle.toUpperCase())) {
-			SlimeFactory.Box.createBottleBL(this.x, this.y, this.width, this.height, this.isStatic, this.isStickable).setAngle(this.angle);
+			SlimeFactory.Box.createBottleBL(this.getX(), this.getY(), this.width, this.height, this.isStatic, this.isStickable).setAngle(this.angle);
 		}
 
 	}

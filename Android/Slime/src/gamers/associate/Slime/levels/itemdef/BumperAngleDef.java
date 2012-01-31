@@ -10,7 +10,7 @@ public class BumperAngleDef extends ItemDefinition {
 		
 	@Override
 	public void createItem(Level level) {
-		SlimeFactory.BumperAngle.createBL(this.x, this.y, this.width, this.height).setAngle(this.angle);
+		SlimeFactory.BumperAngle.createBL(this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
 	}
 
 	@Override

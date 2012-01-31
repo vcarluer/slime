@@ -10,7 +10,7 @@ public class GoalPortalDef extends ItemDefinition {
 	
 	@Override
 	public void createItem(Level level) {
-		SlimeFactory.GoalPortal.createBL(this.x, this.y, this.width, this.height);
+		SlimeFactory.GoalPortal.createBL(this.getX(), this.getY(), this.width, this.height);
 	}
 
 	@Override

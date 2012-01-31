@@ -13,7 +13,7 @@ public class LaserGunDef extends ItemDefinition {
 	
 	@Override
 	public void createItem(Level level) {
-		SlimeFactory.LaserGun.createBL(this.x, this.y, this.width, this.height, this.name, this.target, this.isOn).setAngle(this.angle);
+		SlimeFactory.LaserGun.createBL(this.getX(), this.getY(), this.width, this.height, this.name, this.target, this.isOn).setAngle(this.angle);
 	}
 
 	@Override
