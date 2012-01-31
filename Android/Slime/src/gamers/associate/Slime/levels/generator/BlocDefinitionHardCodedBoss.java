@@ -14,8 +14,8 @@ public class BlocDefinitionHardCodedBoss extends BlocDefinition
 	public void buildLevel(Level paramLevel, int xOffset, int yOffset)
 	  {
 	    setOffset(xOffset, yOffset);
-	    SlimeFactory.Platform.createBL(getX(200.0F), getY(200.0F), 200 , 32.0F);
-	    SlimeFactory.Platform.createBL(getX(200.0F), getY(300.0F), 200 , 32.0F);
+	    SlimeFactory.Platform.createBL(getX(200.0F), getY(200.0F), 100 , 32.0F);
+	    SlimeFactory.Platform.createBL(getX(200.0F), getY(275.0F), 100 , 32.0F);
 	    SlimeFactory.Platform.createBL(getX(200.0F), getY(232.0F), 68 , 32.0F).setAngle(-90f);
 	    SlimeFactory.GoalPortal.createBL(getX(100.0F), getY(100.0F), 32.0F, 35.0F);
 	  }

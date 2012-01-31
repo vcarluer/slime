@@ -13,7 +13,7 @@ public class BlocDefinitionHardCodedAll extends BlocDefinition
 	public void buildLevel(Level paramLevel, int xOffset, int yOffset)
 	  {
 	    setOffset(xOffset, yOffset);
-	    SlimeFactory.Platform.createBL(getX(200.0F), getY(200.0F), 200 , 32.0F);    
+	    SlimeFactory.Platform.createBL(getX(150.0F), getY(150.0F), 100 , 32.0F);    
 	  }
 
 	  protected int getComplexity()

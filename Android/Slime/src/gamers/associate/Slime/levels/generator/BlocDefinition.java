@@ -7,21 +7,16 @@ public abstract class BlocDefinition
 {
   public static int BlocHeight;
   public static int BlocWidth;
-  public static int Default_Bloc_Height;
-  public static int Default_Bloc_Width = 600;
+  public static int Default_Bloc_Height = 400;
+  public static int Default_Bloc_Width = 400;
   protected int currentXOffset;
   protected int currentYOffset;
   protected LevelGenNode genNode;
 
-  static
-  {
-    Default_Bloc_Height = 600;
-    BlocWidth = Default_Bloc_Width;
-    BlocHeight = Default_Bloc_Height;
-  }
-
   public BlocDefinition()
   {
+	BlocWidth = Default_Bloc_Width;
+	BlocHeight = Default_Bloc_Height;
     initGenNode();
   }
 
