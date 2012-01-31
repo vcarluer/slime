@@ -7,6 +7,7 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.GameItemPhysic;
+import gamers.associate.Slime.items.base.ISelectable;
 import gamers.associate.Slime.items.base.SpriteType;
 
 import org.cocos2d.actions.base.CCAction;
@@ -19,18 +20,23 @@ import org.cocos2d.actions.interval.CCFadeOut;
 import org.cocos2d.actions.interval.CCRotateBy;
 import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.actions.interval.CCSequence;
+import org.cocos2d.nodes.CCNode;
+import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.CGPoint;
+import org.cocos2d.types.CGRect;
 
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class GoalPortal extends GameItemPhysic {
+public class GoalPortal extends GameItemPhysic implements ISelectable {
 	public static String Anim_Goal_Portal = "teleporter-red-portal";
+	private static String thumbnail = "teleporter-red-portal-04.png";
 	
-	private static float Default_Width = 32f;
-	private static float Default_Height = 10f;
+	public static float Default_Width = 32f;
+	public static float Default_Height = 75f;
+	private CCSprite thumbnailSprite;
 	
 	public GoalPortal(float x, float y, float width, float height, World world,
 			float worldRatio) {
@@ -129,5 +135,76 @@ public class GoalPortal extends GameItemPhysic {
 		
 		item.getSprite().runAction(action1);
 		item.getSprite().runAction(action2);
+	}
+
+	@Override
+	public boolean trySelect(CGPoint gameReference) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean canSelect(CGPoint gameReference) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void selectionMove(CGPoint gameReference) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void selectionStop(CGPoint gameReference) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void select() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void select(CGPoint gameReference) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void unselect() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isSelected() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public CGRect getSelectionRect() {
+		return CGRect.make(this.position.x, this.position.y, Default_Height, Default_Height);
+	}
+
+	public CCSprite getThumbail() {
+		if (this.thumbnailSprite == null) {
+			this.thumbnailSprite = CCSprite.sprite(thumbnail, true);			
+		}
+		
+		return this.thumbnailSprite; 
+	}
+		
+	public CCNode getRootNode() {
+		return this.rootNode;		
+	}
+
+	@Override
+	public boolean simpleSelect() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

@@ -2,6 +2,7 @@ package gamers.associate.Slime.levels.generator;
 
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.items.custom.GoalPortal;
 import gamers.associate.Slime.items.custom.GoalPortalFactory;
 import gamers.associate.Slime.items.custom.PlatformFactory;
 
@@ -13,7 +14,7 @@ public class BlocDefinitionHardCodedEnd extends BlocDefinition
   {
     setOffset(xOffset, yOffset);
     SlimeFactory.Platform.createBL(getX(0.0F), getY(0.0F), BlocWidth / 2, 32.0F);
-    SlimeFactory.GoalPortal.createBL(getX(100.0F), getY(100.0F), 32.0F, 35.0F);
+    SlimeFactory.GoalPortal.createBL(getX(100.0F), getY(100.0F), GoalPortal.Default_Width, GoalPortal.Default_Height);
   }
 
   protected int getComplexity()

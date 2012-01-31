@@ -24,6 +24,8 @@ public class Platform extends GameItemPhysic {
 	public static final int T = 6;
 	public static final int Cross = 7;
 	
+	public static float Default_Height= 32f;
+	
 	public static String Anim_Base_Sticky = "pf";
 	public static String Anim_Base_Bump = "pf-bump";
 	public static String Anim_Base_NoSticky = "pf-nosticky";
