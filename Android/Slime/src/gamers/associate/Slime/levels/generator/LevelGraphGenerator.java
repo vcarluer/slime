@@ -23,9 +23,11 @@ public class LevelGraphGenerator {
 	private int leftCount;
 	private Level currentLevel;
 	private int bossComplexity;
+	private Random randomGenerator;
 	
 	public LevelGraphGenerator() {
 		this.nodes = new ArrayList<LevelGenNode>();
+		this.randomGenerator = new Random();
 	}
 	
 	public void attach(Level level) {
@@ -103,8 +105,7 @@ public class LevelGraphGenerator {
 		 return this.getRandomDirection(null);
 	}
 	
-	public BlocDirection getRandomDirection(BlocDirection constrained) {
-		Random randomGenerator = new Random();
+	public BlocDirection getRandomDirection(BlocDirection constrained) {		
 		 int dir = randomGenerator.nextInt(4);		 
 		 BlocDirection direction = BlocDirection.Top;
 		 switch(dir) {
