@@ -12,10 +12,16 @@ public class TimeAttackDef extends ItemDefinition {
 	
 	@Override
 	public void createItem(Level level) {
-		TimeAttackGame taGame = TimeAttackGame.NewGame();
-		level.addGamePlay(taGame);
-		taGame.setStartTime(this.levelTime);
-		taGame.setCriticTime(this.criticTime);
+		if (level.getGamePlay() != null) {
+			TimeAttackGame taGame = (TimeAttackGame)level.getGamePlay();
+			taGame.setStartTime(taGame.getStartTime() + this.levelTime);
+			taGame.setCriticTime(taGame.getCriticTime() + this.criticTime);
+		} else {
+			TimeAttackGame taGame = TimeAttackGame.NewGame();
+			level.addGamePlay(taGame);
+			taGame.setStartTime(this.levelTime);
+			taGame.setCriticTime(this.criticTime);
+		}				
 	}
 
 	@Override

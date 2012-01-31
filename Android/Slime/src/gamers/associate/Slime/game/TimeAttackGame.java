@@ -206,12 +206,20 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		this.startTime = (float) startTime;
 	}
 	
+	public void setStartTime(float startTime) {
+		this.startTime = startTime;
+	}
+	
 	public float getStartTime() {
 		return this.startTime;
 	}
 	
 	public void setCriticTime(int criticTime) {
 		this.criticTime = (float) criticTime;
+	}
+	
+	public void setCriticTime(float criticTime) {
+		this.criticTime = criticTime;
 	}
 	
 	public float getCriticTime() {

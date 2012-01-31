@@ -1,16 +1,11 @@
 package gamers.associate.Slime.levels.generator;
 
-import gamers.associate.Slime.game.IGamePlay;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
-import gamers.associate.Slime.game.TimeAttackGame;
-import gamers.associate.Slime.items.base.GameItem;
-import gamers.associate.Slime.items.custom.PlatformFactory;
-import gamers.associate.Slime.items.custom.Slimy;
-import gamers.associate.Slime.items.custom.SlimyFactory;
 
-public class BlocDefinitionHardCodedBoss extends BlocDefinition
+public class BlocDefinitionHardCodedBoss extends BlocDefinitionHardCoded
 {
+	@Override
 	public void buildLevel(Level paramLevel, int xOffset, int yOffset)
 	  {
 	    setOffset(xOffset, yOffset);
@@ -19,12 +14,13 @@ public class BlocDefinitionHardCodedBoss extends BlocDefinition
 	    SlimeFactory.Platform.createBL(getX(200.0F), getY(232.0F), 68 , 32.0F).setAngle(-90f);
 	    SlimeFactory.GoalPortal.createBL(getX(100.0F), getY(100.0F), 32.0F, 35.0F);
 	  }
-
-	  protected int getComplexity()
+	@Override
+	  protected int getInitComplexity()
 	  {
 	    return 5;
 	  }
 
+	@Override
 	  protected void initGenNodeInternal(LevelGenNode genNode)
 	  {
 	    genNode.setBoss(true);

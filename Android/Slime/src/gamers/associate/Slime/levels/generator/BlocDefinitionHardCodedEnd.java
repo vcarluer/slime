@@ -3,13 +3,12 @@ package gamers.associate.Slime.levels.generator;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.custom.GoalPortal;
-import gamers.associate.Slime.items.custom.GoalPortalFactory;
-import gamers.associate.Slime.items.custom.PlatformFactory;
 
-public class BlocDefinitionHardCodedEnd extends BlocDefinition
+public class BlocDefinitionHardCodedEnd extends BlocDefinitionHardCoded
 {
   public static BlocDirection EndDirection;
 
+  @Override
   public void buildLevel(Level level, int xOffset, int yOffset)
   {
     setOffset(xOffset, yOffset);
@@ -17,11 +16,13 @@ public class BlocDefinitionHardCodedEnd extends BlocDefinition
     SlimeFactory.GoalPortal.createBL(getX(100.0F), getY(100.0F), GoalPortal.Default_Width, GoalPortal.Default_Height);
   }
 
-  protected int getComplexity()
+  @Override
+  protected int getInitComplexity()
   {
     return 5;
   }
 
+  @Override
   protected void initGenNodeInternal(LevelGenNode genNode)
   {
     genNode.setIsLevelEnd(true);

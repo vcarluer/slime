@@ -1,9 +1,9 @@
 package gamers.associate.Slime.levels.generator;
 
 import gamers.associate.Slime.game.Level;
-import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.levels.LevelDefinitionParser;
 
-public abstract class BlocDefinition
+public abstract class BlocDefinition extends LevelDefinitionParser
 {
   public static int BlocHeight;
   public static int BlocWidth;
@@ -14,10 +14,14 @@ public abstract class BlocDefinition
   protected LevelGenNode genNode;
 
   public BlocDefinition()
-  {
-	BlocWidth = Default_Bloc_Width;
-	BlocHeight = Default_Bloc_Height;
-    initGenNode();
+  {	  
+	  this.genNode = new LevelGenNode();
+	  BlocWidth = Default_Bloc_Width;
+	  BlocHeight = Default_Bloc_Height;    
+  }
+  
+  public BlocDefinition(String resourceName, boolean noUserInfoStore) {
+	  super(resourceName, noUserInfoStore);
   }
 
   public BlocDefinition(int width, int height)
@@ -27,18 +31,7 @@ public abstract class BlocDefinition
     BlocHeight = height;
   }
 
-  private final void initGenNode()
-  {
-    LevelGenNode localLevelGenNode = new LevelGenNode();
-    localLevelGenNode.setComplexity(getComplexity());
-    initGenNodeInternal(localLevelGenNode);
-    setGenNode(localLevelGenNode);
-    SlimeFactory.LevelGenerator.addNode(localLevelGenNode);
-  }
-
   public abstract void buildLevel(Level level, int xOffset, int yOffset);
-
-  protected abstract int getComplexity();
 
   protected float getX(float x)
   {
@@ -60,12 +53,14 @@ public abstract class BlocDefinition
     return y + yOffset * BlocHeight;
   }
 
-  protected abstract void initGenNodeInternal(LevelGenNode genNode);
-
   public void setGenNode(LevelGenNode genNode)
   {
     this.genNode = genNode;
     this.genNode.setBlocDefinition(this);
+  }
+  
+  public LevelGenNode getGenNode() {
+	  return this.genNode;
   }
 
   protected void setOffset(int xOffset, int yOffset)

@@ -51,6 +51,9 @@ public class LevelDefinitionParser extends LevelDefinition
 	private boolean isLocalStorage;
 	private Set<Class> ignoredClasses;
 	
+	public LevelDefinitionParser() {		
+	}
+	
 	public LevelDefinitionParser(String resourceName, boolean noUserInfoStore) {		
 		this.noStore = noUserInfoStore;
 		this.gamePlay = GamePlay.ManuallyDefined;

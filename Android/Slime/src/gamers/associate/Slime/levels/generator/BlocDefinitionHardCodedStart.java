@@ -5,13 +5,12 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.TimeAttackGame;
 import gamers.associate.Slime.items.base.GameItem;
-import gamers.associate.Slime.items.custom.PlatformFactory;
-import gamers.associate.Slime.items.custom.SlimyFactory;
 
-public class BlocDefinitionHardCodedStart extends BlocDefinition
+public class BlocDefinitionHardCodedStart extends BlocDefinitionHardCoded
 {
 	public static BlocDirection StartDirection;  
 
+	@Override
 	  public void buildLevel(Level level, int xOffset, int yOffset)
 	  {
 	    setOffset(xOffset, yOffset);
@@ -25,11 +24,13 @@ public class BlocDefinitionHardCodedStart extends BlocDefinition
 	    level.setMaxDimension(Level.ManualDimension);
 	  }
 
-	  protected int getComplexity()
+	@Override
+	  protected int getInitComplexity()
 	  {
 	    return 5;
 	  }
 
+	@Override
 	  protected void initGenNodeInternal(LevelGenNode genNode)
 	  {
 	    genNode.setIsLevelStart(true);
