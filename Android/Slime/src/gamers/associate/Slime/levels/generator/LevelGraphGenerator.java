@@ -17,6 +17,7 @@ public class LevelGraphGenerator {
 	private int lastGeneratedComplexity;
 	private int currentComplexity;
 	private int currentMaxComplexity;
+	private int previousPickComplexity;
 	private BlocDirection lastDirection;
 	private int topCount;
 	private int rightCount;
@@ -156,6 +157,7 @@ public class LevelGraphGenerator {
 	public void generate(int maxComplexity, BlocDirection constrained) {
 		this.initCount();
 		this.currentComplexity = 0;
+		this.previousPickComplexity = 0;		
 		this.currentMaxComplexity = maxComplexity;
 		Log.d(Slime.TAG, "Picking start node with constraint " + String.valueOf(constrained));
 		LevelGenNode pick = this.pickStartConstrained(constrained);			
@@ -229,7 +231,8 @@ public class LevelGraphGenerator {
 			bloc.buildLevel(this.currentLevel, xOffSet, yOffSet);
 		}
 		
-		currentComplexity += pick.getComplexity();
+		this.currentComplexity += pick.getComplexity();
+		this.previousPickComplexity = pick.getComplexity();
 		if (countDirection) {
 			this.count(this.lastDirection);
 		}
@@ -298,11 +301,47 @@ public class LevelGraphGenerator {
 	}
 	
 	public LevelGenNode pickFromCompatible(List<LevelGenNode> list) {
-		LevelGenNode selected = null;
+		LevelGenNode selected = null;		
 		
 		if (list != null && list.size() > 0) {
-			int idx = this.randomGenerator.nextInt(list.size());
-			selected = list.get(idx);
+			int idx = 0;
+			int min = this.previousPickComplexity;
+			int max = this.currentMaxComplexity - this.currentComplexity;
+			List<LevelGenNode> listGen = new ArrayList<LevelGenNode>();
+			
+			List<LevelGenNode> listGenOpt = null;
+			List<LevelGenNode> listGenOpt1 = new ArrayList<LevelGenNode>();
+			List<LevelGenNode> listGenOpt2 = new ArrayList<LevelGenNode>();
+			
+			// Option 1: complexity grows and complexity does not exceed left complexity
+			// But complexity must always grow if possible
+			if (max > min) {
+				listGenOpt = listGenOpt1;
+				for(LevelGenNode node : list) {
+					if (node.getComplexity() > min && node.getComplexity() <= max) {
+						listGenOpt1.add(node);
+					}										
+				}
+			}else {
+				// Option 2: Complexity grows
+				listGenOpt = listGenOpt2;
+				for(LevelGenNode node : list) {
+					if (node.getComplexity() > min) {
+						listGenOpt2.add(node);
+					}
+				}								
+			}
+				
+			if (listGenOpt.size() > 0) {
+				listGen = listGenOpt;
+			} else {
+				// No draw with rules possible, use full list
+				// todo: pick item in inverse order if complexity to limit complexity drop?
+				listGen = list;
+			}
+			
+			idx = this.randomGenerator.nextInt(listGen.size());						
+			selected = listGen.get(idx);
 		}
 		
 		return selected;
