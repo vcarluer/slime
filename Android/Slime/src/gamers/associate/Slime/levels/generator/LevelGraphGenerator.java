@@ -16,6 +16,7 @@ public class LevelGraphGenerator {
 	private List<LevelGenNode> nodes;
 	private int lastGeneratedComplexity;
 	private int currentComplexity;
+	private int currentMaxComplexity;
 	private BlocDirection lastDirection;
 	private int topCount;
 	private int rightCount;
@@ -55,49 +56,53 @@ public class LevelGraphGenerator {
 	
 	public LevelGenNode pickStart(BlocDirection goToDirection) {
 		LevelGenNode pick = null;
+		List<LevelGenNode> selection = new ArrayList<LevelGenNode>();
 		for(LevelGenNode node : this.nodes) {
 			if (node.isStartAndGoTo(goToDirection)) {
-				pick = node;
-				break;
+				selection.add(node);				
 			}
 		}
 				
+		pick = this.pickFromCompatible(selection);
 		return pick;
 	}
 
 	public LevelGenNode pickNext(LevelGenNode source, BlocDirection goToDirection) {
 		LevelGenNode pick = null;
+		List<LevelGenNode> selection = new ArrayList<LevelGenNode>();
 		for(LevelGenNode node : this.nodes) {
 			if (node.ConnectAndGoTo(source, goToDirection)) {
-				pick = node;
-				break;
+				selection.add(node);
 			}
 		}
 				
+		pick = this.pickFromCompatible(selection);
 		return pick;
 	}
 
 	public LevelGenNode pickEnd(LevelGenNode source) {		
 		LevelGenNode pick = null;
+		List<LevelGenNode> selection = new ArrayList<LevelGenNode>();
 		for(LevelGenNode node : this.nodes) {
 			if (node.isLevelEndAndConnect(source)) {
-				pick = node;
-				break;
+				selection.add(node);
 			}
 		}
 				
+		pick = this.pickFromCompatible(selection);
 		return pick;
 	}	
 	
 	public LevelGenNode pickBoss(LevelGenNode source) {		
 		LevelGenNode pick = null;
+		List<LevelGenNode> selection = new ArrayList<LevelGenNode>();
 		for(LevelGenNode node : this.nodes) {
 			if (node.isLevelBossAndConnect(source)) {
-				pick = node;
-				break;
+				selection.add(node);
 			}
 		}
 				
+		pick = this.pickFromCompatible(selection);
 		return pick;
 	}
 	
@@ -151,11 +156,12 @@ public class LevelGraphGenerator {
 	public void generate(int maxComplexity, BlocDirection constrained) {
 		this.initCount();
 		this.currentComplexity = 0;
+		this.currentMaxComplexity = maxComplexity;
 		Log.d(Slime.TAG, "Picking start node with constraint " + String.valueOf(constrained));
 		LevelGenNode pick = this.pickStartConstrained(constrained);			
 		Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
 		this.handlePick(pick, true);		
-		while (currentComplexity < maxComplexity) {
+		while (this.currentComplexity < this.currentMaxComplexity) {
 			LevelGenNode prev = pick;
 			Log.d(Slime.TAG, "Picking next node with constraint " + String.valueOf(constrained));
 			pick = this.pickNextConstrained(pick, constrained);
@@ -164,7 +170,7 @@ public class LevelGraphGenerator {
 		}
 		
 		Log.d(Slime.TAG, "Picking end node");
-		if (maxComplexity >= this.getBossComplexity()) {
+		if (this.currentMaxComplexity >= this.getBossComplexity()) {
 			pick = this.pickBoss(pick);
 		} else {
 			pick = this.pickEnd(pick);
@@ -289,5 +295,16 @@ public class LevelGraphGenerator {
 
 	public void setBossComplexity(int bossComplexity) {
 		this.bossComplexity = bossComplexity;
+	}
+	
+	public LevelGenNode pickFromCompatible(List<LevelGenNode> list) {
+		LevelGenNode selected = null;
+		
+		if (list != null && list.size() > 0) {
+			int idx = this.randomGenerator.nextInt(list.size());
+			selected = list.get(idx);
+		}
+		
+		return selected;
 	}
 }
