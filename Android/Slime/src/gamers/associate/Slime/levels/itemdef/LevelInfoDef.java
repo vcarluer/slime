@@ -7,7 +7,7 @@ import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.levels.LevelUtil;
 
 public class LevelInfoDef extends ItemDefinition {
-	public static String Handled_Size = "LevelInfo";
+	public static String Handled_Info = "LevelInfo";
 	private static String Dimension_Auto = "Auto";
 	private static String Dimension_Width = "Width";
 	private static String Dimension_Height = "Height";	
@@ -63,7 +63,7 @@ public class LevelInfoDef extends ItemDefinition {
 
 	@Override
 	protected void initTypeHandled() {
-		this.typesHandled.add(Handled_Size);
+		this.typesHandled.add(Handled_Info);
 	}
 
 	@Override
@@ -89,7 +89,7 @@ public class LevelInfoDef extends ItemDefinition {
 
 	@Override
 	protected String getItemType(GameItem item) {
-		return Handled_Size;
+		return Handled_Info;
 	}
 
 	@Override

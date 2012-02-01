@@ -1,10 +1,12 @@
 package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.R;
+import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.levels.LevelHome;
+import gamers.associate.Slime.levels.generator.BlocInfoParser;
 
 import org.cocos2d.actions.UpdateCallback;
 import org.cocos2d.layers.CCLayer;
@@ -86,6 +88,8 @@ public class SlimeLoadingLayer extends CCLayer {
 				SpriteSheetFactory.add("tank", Level.zMid);
 				
 				Sounds.preload();
+				
+				BlocInfoParser.buildAll();
 				
 				currentLevel = Level.get(LevelHome.Id);					
 				unschedule(nextCallback);

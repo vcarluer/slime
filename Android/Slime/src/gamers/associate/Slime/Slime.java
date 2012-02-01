@@ -27,7 +27,7 @@ import android.view.WindowManager;
  * @uml.dependency   supplier="gamers.associate.Slime.LevelLayer"
  */
 public class Slime extends Activity {
-	public static final String TAG = "Slime";
+	public static final String TAG = "Slime";	
 	
 	static {
         System.loadLibrary("gdx");

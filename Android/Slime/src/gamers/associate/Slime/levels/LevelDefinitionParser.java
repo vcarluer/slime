@@ -30,6 +30,7 @@ import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
@@ -49,7 +50,8 @@ public class LevelDefinitionParser extends LevelDefinition
 	private HashMap<Class, ItemDefinition> classHandler;
 	private ItemDefinition postBuildItem;
 	private boolean isLocalStorage;
-	private Set<Class> ignoredClasses;
+	protected Set<Class> ignoredClasses;
+	protected Set<String> ignoredItems;
 	
 	public LevelDefinitionParser() {		
 	}
@@ -62,8 +64,10 @@ public class LevelDefinitionParser extends LevelDefinition
 		this.typeHandler = new HashMap<String, ItemDefinition>();
 		this.classHandler = new HashMap<Class, ItemDefinition>();
 		this.ignoredClasses = new HashSet<Class>();
+		this.ignoredItems = new HashSet<String>();
 		this.createItemDefinitions();		
 		this.buildItemTypeMap();
+		this.defineIgnoredItems();
 		this.defineIgnoreClasses();
 				
 		if (this.resourceName.toUpperCase().contains(SpecialLevel.toUpperCase())) {
@@ -79,6 +83,11 @@ public class LevelDefinitionParser extends LevelDefinition
 		}
 	}
 	
+	protected void defineIgnoredItems() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public LevelDefinitionParser(String resourceName) {
 		this(resourceName, false);
 	}
@@ -125,7 +134,7 @@ public class LevelDefinitionParser extends LevelDefinition
 	
 	@Override
 	public void buildLevel(Level level) {
-		java.io.InputStream inputStream;
+		InputStream inputStream;
 		try {
 			Log.d(Slime.TAG, "Loading level from " + this.resourceName);
 			if (this.isLocalStorage) {
@@ -167,13 +176,20 @@ public class LevelDefinitionParser extends LevelDefinition
 	
 	protected void HandleLine(Level level, String line) throws Exception {
 		ItemDefinition itemDef = this.getItemDef(line);
-		itemDef.parseAndCreate(line, level);		
+		if (itemDef != null) {
+			itemDef.parseAndCreate(line, level);
+		}
 	}
 	
 	protected ItemDefinition getItemDef(String line) {
 		String[] items = line.split(";", -1);		
 		String itemType = items[0];
-		return this.typeHandler.get(itemType);
+		if (!this.ignoredItems.contains(itemType)) {
+			return this.typeHandler.get(itemType);
+		} else {
+			Log.d(Slime.TAG, "Item " + itemType + " ignored");
+			return null;
+		}		
 	}
 	
 	public void storeLevel(Level level) {
@@ -184,7 +200,7 @@ public class LevelDefinitionParser extends LevelDefinition
 			OutputStreamWriter streamWriter = new OutputStreamWriter(fos);
 			buffWriter = new BufferedWriter(streamWriter);
 			// First line: LevelInfo
-			LevelInfoDef infoDef = (LevelInfoDef) this.typeHandler.get(LevelInfoDef.Handled_Size);
+			LevelInfoDef infoDef = (LevelInfoDef) this.typeHandler.get(LevelInfoDef.Handled_Info);
 			infoDef.setValuesSpe(level);
 			infoDef.writeLine(buffWriter);
 			// Second line: TimeAttackGame

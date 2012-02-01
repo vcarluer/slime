@@ -1,7 +1,9 @@
 package gamers.associate.Slime.levels.generator;
 
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.levels.itemdef.BlocInfoDef;
 import gamers.associate.Slime.levels.itemdef.ItemDefinition;
+import gamers.associate.Slime.levels.itemdef.LevelInfoDef;
 
 public class BlocDefinitionParser extends BlocDefinition {
 	
@@ -14,6 +16,15 @@ public class BlocDefinitionParser extends BlocDefinition {
 	@Override
 	protected void HandleLine(Level level, String line) throws Exception {
 		ItemDefinition itemDef = this.getItemDef(line);
-		itemDef.parseAndCreate(line, level, this.currentXOffset, this.currentYOffset);		
+		if (itemDef != null) {
+			itemDef.parseAndCreate(line, level, this.currentXOffset, this.currentYOffset);
+		}
+	}
+
+	@Override
+	protected void defineIgnoredItems() {
+		super.defineIgnoredItems();
+		this.ignoredItems.add(BlocInfoDef.Handled_Info);
+		this.ignoredItems.add(LevelInfoDef.Handled_Info);
 	}
 }
