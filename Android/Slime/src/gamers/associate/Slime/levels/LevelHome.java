@@ -8,8 +8,6 @@ import gamers.associate.Slime.layers.HomeLayer;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.types.CGSize;
 
-import android.content.Context;
-
 public class LevelHome extends LevelDefinitionHardCoded {
 	public static String Id = "Home";		
 	

@@ -1,10 +1,10 @@
 package gamers.associate.Slime.levels.itemdef;
 
-import org.cocos2d.types.CGPoint;
-
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.levels.LevelUtil;
+
+import org.cocos2d.types.CGPoint;
 
 public class LevelInfoDef extends ItemDefinition {
 	public static String Handled_Info = "LevelInfo";

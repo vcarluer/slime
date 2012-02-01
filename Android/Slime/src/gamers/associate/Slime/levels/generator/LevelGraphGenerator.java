@@ -164,7 +164,6 @@ public class LevelGraphGenerator {
 		Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
 		this.handlePick(pick, true);		
 		while (this.currentComplexity < this.currentMaxComplexity) {
-			LevelGenNode prev = pick;
 			Log.d(Slime.TAG, "Picking next node with constraint " + String.valueOf(constrained));
 			pick = this.pickNextConstrained(pick, constrained);
 			Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));

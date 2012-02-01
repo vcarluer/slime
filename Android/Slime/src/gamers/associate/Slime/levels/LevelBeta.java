@@ -5,8 +5,6 @@ import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.custom.BecBunsen;
 import gamers.associate.Slime.items.custom.Platform;
 
-import org.cocos2d.types.CGPoint;
-
 public class LevelBeta extends LevelTimeAttack {
 	@Override
 	public void buildLevel(Level level) {

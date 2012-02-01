@@ -16,6 +16,7 @@ public class BlocDefinitionParser extends BlocDefinition {
 	@Override
 	protected void HandleLine(Level level, String line) throws Exception {
 		ItemDefinition itemDef = this.getItemDef(line);
+		// Todo: plug here probability check?
 		if (itemDef != null) {
 			itemDef.parseAndCreate(line, level, this.currentXOffset, this.currentYOffset);
 		}

@@ -1,13 +1,13 @@
 package gamers.associate.Slime.items.custom;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Triangulate;
 import gamers.associate.Slime.items.base.CCSpritePolygon;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.SpriteType;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
@@ -16,10 +16,10 @@ import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class PhysicPolygon extends GameItemPhysic {
 	public static final int Fill = 0;

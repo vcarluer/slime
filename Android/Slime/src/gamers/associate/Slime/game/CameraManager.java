@@ -425,7 +425,7 @@ public class CameraManager {
 	}
 	
 	public void setCameraView() {		
-		CGPoint origin = this.levelOrigin;		
+		// CGPoint origin = this.levelOrigin;		
 		// Default view is windows size
 		// this.screenView = CGRect.make(origin, CCDirector.sharedDirector().winSize());					
 		this.screenView = CGRect.make(CGPoint.zero(), CCDirector.sharedDirector().winSize());

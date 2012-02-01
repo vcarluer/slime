@@ -3,16 +3,11 @@ package gamers.associate.Slime.game;
 import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.ILevelBuilder;
 import gamers.associate.Slime.levels.ITimeAttackLevel;
-import gamers.associate.Slime.levels.Level11;
-import gamers.associate.Slime.levels.LevelBeta;
 import gamers.associate.Slime.levels.LevelDefinition;
-import gamers.associate.Slime.levels.LevelDefinitionParser;
 import gamers.associate.Slime.levels.LevelHome;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import android.content.Context;
 
 
 public class LevelBuilder implements ILevelBuilder {

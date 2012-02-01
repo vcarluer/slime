@@ -10,7 +10,6 @@ import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.ISelectable;
 import gamers.associate.Slime.items.base.SpriteType;
 import gamers.associate.Slime.levels.LevelDefinition;
-import gamers.associate.Slime.levels.LevelDefinitionParser;
 import gamers.associate.Slime.levels.LevelDefinitionParserCache;
 
 import java.util.ArrayList;

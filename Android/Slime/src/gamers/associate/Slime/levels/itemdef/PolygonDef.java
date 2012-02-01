@@ -2,14 +2,10 @@ package gamers.associate.Slime.levels.itemdef;
 
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
-import gamers.associate.Slime.game.Triangulate;
-import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.custom.PhysicPolygon;
-import gamers.associate.Slime.items.custom.SlimyFactory;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.cocos2d.types.CGPoint;
 
@@ -18,7 +14,6 @@ public class PolygonDef extends ItemDefinition {
 	private static String PointSep = " ";
 	private static String CoordSep = ",";
 	private static String Handled_Def = "Polygon";
-	private static String Relative = "m"; // M = Absolute
 	private float yReference;
 	private float heightReference;
 	// 2 modes: 
@@ -41,10 +36,9 @@ public class PolygonDef extends ItemDefinition {
 				if (coord.length > 1) {
 					float x = Float.parseFloat(coord[0]);
 					float y = Float.parseFloat(coord[1]);
-				}
-				
-				CGPoint point = CGPoint.make(x, y);
-				polygon.add(point);
+					CGPoint point = CGPoint.make(x, y);
+					polygon.add(point);
+				}								
 			}
 		} else {
 			// Compute path based on SVG
