@@ -113,9 +113,9 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1.0703276"
      inkscape:cx="-287.3902"
-     inkscape:cy="-243.774"
+     inkscape:cy="653.14765"
      inkscape:document-units="px"
-     inkscape:current-layer="Template"
+     inkscape:current-layer="MAP"
      showgrid="true"
      inkscape:snap-grids="true"
      inkscape:snap-page="false"
@@ -223,8 +223,8 @@
        id="TimeAttack"
        sodipodi:linespacing="125%"
        type="TimeAttack"
-       att_criticTime="20"
-       att_levelTime="50"><tspan
+       att_criticTime="5"
+       att_levelTime="15"><tspan
          sodipodi:role="line"
          id="tspan4745-6"
          x="-440"
@@ -979,8 +979,8 @@
        id="TimeAttack-7"
        sodipodi:linespacing="125%"
        type="TimeAttack"
-       att_criticTime="20"
-       att_levelTime="50"><tspan
+       att_criticTime="5"
+       att_levelTime="15"><tspan
          sodipodi:role="line"
          id="tspan4745-6-6"
          x="-2"

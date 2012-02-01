@@ -59,6 +59,13 @@ class Smile( inkex.Effect ):
 				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(child.get("y"))+";"+str(child.get("width"))+";"+str(child.get("height"))+";0;"+str(child.get("att_maxDimension"))
 				return True;
 			
+			# BlocInfo
+			if str(child.get("type")) == 'BlocInfo':
+				self.__yReference = round(float(child.get("y")))
+				self.__heightReference = round(float(child.get("height")))
+				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(child.get("y"))+";"+str(child.get("width"))+";"+str(child.get("height"))+";0;"+str(child.get("id"))+";"+str(child.get("att_complexity"))+";"+str(child.get("att_entries"))+";"+str(child.get("att_exits"))+";"+str(child.get("att_isStart"))+";"+str(child.get("att_isEnd"))+";"+str(child.get("att_isBoss"))
+				return True;
+			
 			
 			if child.get("x") is not None:
 				x = float(str(child.get("x")))
@@ -220,7 +227,7 @@ class Smile( inkex.Effect ):
 			if str(child.get("type")) == 'Sprite':
 				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_plist"))+";"+str(child.get("att_frameName"))+";"+str(child.get("att_frameCount"))
 				return True;
-			
+						
 			# Standard Item
 			print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)
 			return True;
