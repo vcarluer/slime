@@ -5,43 +5,41 @@ import gamers.associate.Slime.levels.LevelDefinition;
 import gamers.associate.Slime.levels.LevelDefinitionParser;
 import gamers.associate.Slime.levels.LevelHome;
 import gamers.associate.Slime.levels.generator.LevelDefinitionGenerator;
+
 import java.util.ArrayList;
 
 public class LevelBuilderGenerator implements ILevelBuilder
 {
+	private static int MinimumComplexity = 15;
+	private static int AverageComplexityPerLevel = 3;
 	public static String defaultId = "Random";
 	private static String fileName = defaultId + ".slime"; 
 	private int complexity;
 	private LevelHome home = new LevelHome();
 	private LevelDefinitionGenerator levelDef = new LevelDefinitionGenerator();
 	private LevelDefinitionParser levelparser = new LevelDefinitionParser(fileName, true);
-	private boolean firstBuild;
+	private boolean firstBuild;	
+	private GameInformation gameInfo;
 	
-	public LevelBuilderGenerator() {
+	public LevelBuilderGenerator() {		
+		this.gameInfo = new GameInformation();
 		this.levelparser.setLocalStorage(true);		
 		this.firstBuild = true;
 		this.levelDef.setBossComplexity(25);
 		// always default id... Used for reset all
 		this.levelDef.setId(defaultId);
-	}
+	}	
 	
 	public void build(Level level, String id)
 	{
 		if (id != LevelHome.Id)
-		{			
-			if (this.firstBuild) {
-				this.complexity = this.levelDef.getComplexity();				
-			}												
-			
+		{																				
 			if (this.firstBuild && this.levelparser.isStored() && !this.levelDef.isFinished()) {				
 				this.levelparser.buildLevel(level);					
 				level.setLevelDefinition(this.levelDef);
 			} else {
-				if (this.complexity >= this.levelDef.getBossComplexity()) {
-					this.complexity = 0;
-				}
-
-				this.complexity += 5;
+				this.gameInfo.levelUp();
+				this.complexity = this.computeComplexity();
 				this.levelDef.setComplexity(this.complexity);
 				this.levelDef.buildLevel(level);
 				level.setLevelDefinition(this.levelDef);				
@@ -59,7 +57,7 @@ public class LevelBuilderGenerator implements ILevelBuilder
 			level.addGamePlay(null);
 		}
 	}
-	
+
 	public String getNext(String paramString)
 	{
 		return defaultId;
@@ -72,9 +70,13 @@ public class LevelBuilderGenerator implements ILevelBuilder
 	
 	public void init()
 	{
-		this.complexity = 5;
+		this.complexity = this.computeComplexity();
 	}
 	
+	private int computeComplexity() {
+		return MinimumComplexity + AverageComplexityPerLevel * this.gameInfo.getLevelNum();
+	}
+
 	@Override
 	public void build(Level level, LevelDefinition levelDef) {
 		levelDef.buildLevel(level);
