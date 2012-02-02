@@ -13,27 +13,29 @@ import android.util.Log;
 
 public class BlocInfoParser {
 	// TODO: change extension for blocs?
-	public static String blocFileExtension = ".slime";
-	public static final String BlocsAssetsBase = "blocs";
+	public static String blocFileExtension = ".slime";	
+	public static LevelGraphGeneratorBase Generator;
 	
-	public static void buildAll() {
+	public static void buildAll(LevelGraphGeneratorBase generator) {
+		Generator = generator;
 		int i = 0;
 		try {			
-			for (String resourceName : SlimeFactory.ContextActivity.getAssets().list(BlocsAssetsBase)) {				
+			for (String resourceName : SlimeFactory.ContextActivity.getAssets().list(Generator.getAssetsBase())) {				
 				i++;
 				
 				if (resourceName.contains(".slime")) {
-					String resourcePath = BlocsAssetsBase + "/" + resourceName;
-					buildBlocDef(resourcePath);
+					String resourcePath = Generator.getAssetsBase() + "/" + resourceName;
+					buildBlocDef(resourcePath, generator);
 				}
 			}
 		} catch (IOException e) {
-			Log.e(Slime.TAG, "Error during read of Blocs definition in " + BlocsAssetsBase + ", number: " + String.valueOf(i));
+			Log.e(Slime.TAG, "Error during read of Blocs definition in " + Generator.getAssetsBase() + ", number: " + String.valueOf(i));
 			e.printStackTrace();
 		}
 	}
 	
-	public static void buildBlocDef(String resourcePath) {
+	public static void buildBlocDef(String resourcePath, LevelGraphGeneratorBase generator) {
+		Generator = generator;
 		InputStream inputStream;
 		try {
 			Log.d(Slime.TAG, "Loading blocInfo from " + resourcePath);			

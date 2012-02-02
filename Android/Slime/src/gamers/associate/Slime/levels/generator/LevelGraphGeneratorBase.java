@@ -258,4 +258,6 @@ public abstract class LevelGraphGeneratorBase {
 		
 		return selected;
 	}
+
+	public abstract String getAssetsBase();
 }

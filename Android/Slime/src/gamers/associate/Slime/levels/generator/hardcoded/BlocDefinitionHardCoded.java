@@ -22,7 +22,7 @@ public abstract class BlocDefinitionHardCoded extends BlocDefinition {
 	    localLevelGenNode.setComplexity(getInitComplexity());
 	    initGenNodeInternal(localLevelGenNode);
 	    setGenNode(localLevelGenNode);
-	    SlimeFactory.LevelGenerator.addNode(localLevelGenNode);
+	    SlimeFactory.LevelGeneratorCorridor.addNode(localLevelGenNode);
 	  }	  
 
 	  protected abstract int getInitComplexity();

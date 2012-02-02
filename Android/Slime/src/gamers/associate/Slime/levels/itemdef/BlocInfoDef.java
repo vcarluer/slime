@@ -9,6 +9,7 @@ import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.levels.generator.BlocDefinition;
 import gamers.associate.Slime.levels.generator.BlocDefinitionParser;
 import gamers.associate.Slime.levels.generator.BlocDirection;
+import gamers.associate.Slime.levels.generator.BlocInfoParser;
 import gamers.associate.Slime.levels.generator.Connector;
 import gamers.associate.Slime.levels.generator.LevelGenNode;
 
@@ -66,7 +67,7 @@ public class BlocInfoDef extends ItemDefinition {
 		node.setBoss(this.isBoss);
 		
 		bloc.setGenNode(node);
-		SlimeFactory.LevelGenerator.addNode(node);
+		BlocInfoParser.Generator.addNode(node);
 	}
 
 	private List<Integer> getConnectorsFaces(String openFacesParam) {

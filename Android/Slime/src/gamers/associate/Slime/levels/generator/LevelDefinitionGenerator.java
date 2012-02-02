@@ -15,6 +15,7 @@ public class LevelDefinitionGenerator extends LevelDefinition {
 	private static int DefaultBoss = 20;
 	private int complexity;
 	private int bossComplexity = DefaultBoss;
+	private LevelGraphGeneratorBase currentGenerator;
 	
 	public LevelDefinitionGenerator() {
 		this.gamePlay = GamePlay.ManuallyDefined;
@@ -24,14 +25,22 @@ public class LevelDefinitionGenerator extends LevelDefinition {
 	protected boolean getNoStore() {
 		return false;
 	}
+	
+	public void setLevelGenerator(LevelGraphGeneratorBase generator) {
+		this.currentGenerator = generator;
+	}
 
 	@Override
 	public void buildLevel(Level level) {
-		SlimeFactory.LevelGenerator.generate(this.getComplexity(), BlocDirection.Left);
+		if (this.currentGenerator != null) {
+			this.currentGenerator.generate(this.getComplexity(), BlocDirection.Left);
+		}
 	}
 	
 	public void buildBossLevel(Level level) {
-		SlimeFactory.LevelGenerator.generate(this.getComplexity(), BlocDirection.Left, true);
+		if (this.currentGenerator != null) {
+			this.currentGenerator.generate(this.getComplexity(), BlocDirection.Left, true);
+		}
 	}
 
 	public int getComplexity() {

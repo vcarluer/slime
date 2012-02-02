@@ -247,12 +247,6 @@ public class Level {
 		this.postBuild(levelDef.getId());				
 	}
 	
-	public void loadLevelRandom(int complexity) {
-		this.preBuild();		
-		SlimeFactory.LevelGenerator.generate(complexity, BlocDirection.Left);						
-		this.postBuild("Random");				
-	}
-	
 	private void preBuild() {
 		this.resetLevel();
 	}

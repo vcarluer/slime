@@ -13,6 +13,7 @@ import org.cocos2d.types.CGPoint;
 import android.util.Log;
 
 public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {		
+	private static final String BlocsAssetsBase = "blocsCorridor";
 	
 	public LevelGenNode pickStart(BlocDirection goToDirection) {
 		LevelGenNode pick = null;
@@ -109,5 +110,10 @@ public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {
 
 	public void generate(int maxComplexity) {			
 		this.generate(maxComplexity, null);
+	}
+
+	@Override
+	public String getAssetsBase() {
+		return BlocsAssetsBase; 
 	}		
 }
