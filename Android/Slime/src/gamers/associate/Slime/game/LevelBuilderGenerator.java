@@ -25,7 +25,6 @@ public class LevelBuilderGenerator implements ILevelBuilder
 		this.gameInfo = new GameInformation();
 		this.levelparser.setLocalStorage(true);		
 		this.firstBuild = true;
-		this.levelDef.setBossComplexity(25);
 		// always default id... Used for reset all
 		this.levelDef.setId(defaultId);
 	}	
@@ -41,7 +40,12 @@ public class LevelBuilderGenerator implements ILevelBuilder
 				this.gameInfo.levelUp();
 				this.complexity = this.computeComplexity();
 				this.levelDef.setComplexity(this.complexity);
-				this.levelDef.buildLevel(level);
+				if (this.gameInfo.getLevelNum() == this.gameInfo.getLevelMax()) {
+					this.levelDef.buildBossLevel(level);
+				} else {
+					this.levelDef.buildLevel(level);
+				}
+
 				level.setLevelDefinition(this.levelDef);				
 				this.levelparser.storeLevel(level);
 				

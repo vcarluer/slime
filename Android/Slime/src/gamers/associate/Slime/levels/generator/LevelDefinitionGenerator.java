@@ -29,6 +29,10 @@ public class LevelDefinitionGenerator extends LevelDefinition {
 	public void buildLevel(Level level) {
 		SlimeFactory.LevelGenerator.generate(this.getComplexity(), BlocDirection.Left);
 	}
+	
+	public void buildBossLevel(Level level) {
+		SlimeFactory.LevelGenerator.generate(this.getComplexity(), BlocDirection.Left, true);
+	}
 
 	public int getComplexity() {
 		return complexity;
@@ -62,15 +66,6 @@ public class LevelDefinitionGenerator extends LevelDefinition {
 	@Override
 	protected void resetUserInfoNext() {
 		// No reset of complexity! except reset of game.
-	}
-
-	public int getBossComplexity() {
-		return bossComplexity;
-	}
-
-	public void setBossComplexity(int bossComplexity) {
-		this.bossComplexity = bossComplexity;
-		SlimeFactory.LevelGenerator.setBossComplexity(this.bossComplexity);
 	}
 
 	@Override
