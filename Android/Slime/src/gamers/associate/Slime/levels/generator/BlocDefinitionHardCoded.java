@@ -6,8 +6,13 @@ import gamers.associate.Slime.game.SlimeFactory;
 public abstract class BlocDefinitionHardCoded extends BlocDefinition {
 	
 	public BlocDefinitionHardCoded() {
-		initGenNode();
+		this(null, true);
 	}
+	
+	public BlocDefinitionHardCoded(String resourceName, boolean noUserInfoStore) {
+		super(resourceName, noUserInfoStore);
+		initGenNode();
+	}	
 	
 	private final void initGenNode()
 	  {

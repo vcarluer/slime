@@ -44,9 +44,13 @@ public class BlocInfoDef extends ItemDefinition {
 		this.isBoss = Boolean.valueOf(infos[start + 6]).booleanValue();
 	}
 
-	@Override
-	public void createItem(Level level) {	
-		BlocDefinition bloc = new BlocDefinitionParser();
+	
+	public void createItem(Level level) {		
+	}
+	
+	public void createItem(String resource) {	
+		BlocDefinition bloc = new BlocDefinitionParser(resource);
+		//Todo: bloc width here
 		LevelGenNode node = new LevelGenNode();
 		node.setId(id);
 		node.setComplexity(this.complexity);
@@ -62,9 +66,9 @@ public class BlocInfoDef extends ItemDefinition {
 
 	private List<Integer> getConnectors(String connParam) {
 		List<Integer> list = new ArrayList<Integer>();
-		String[] connectors = connParam.split(connectorsSep);
+		String[] connectors = connParam.split(connectorsSep, -1);
 		for(String connectorStr : connectors) {
-			String tc = connectorStr.trim().toUpperCase();
+			String tc = connectorStr.trim().toLowerCase();
 			if (tc.equals("tl")) {
 				list.add(Connector.TopLeft);
 			}

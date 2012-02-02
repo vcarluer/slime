@@ -7,6 +7,10 @@ import gamers.associate.Slime.levels.itemdef.LevelInfoDef;
 
 public class BlocDefinitionParser extends BlocDefinition {
 	
+	public BlocDefinitionParser(String resourceName) {
+		super(resourceName, true);
+	}
+	
 	@Override
 	public void buildLevel(Level level, int xOffset, int yOffset) {
 		this.setOffset(xOffset, yOffset);

@@ -7,28 +7,17 @@ public abstract class BlocDefinition extends LevelDefinitionParser
 {
   public static int BlocHeight;
   public static int BlocWidth;
-  public static int Default_Bloc_Height = 400;
-  public static int Default_Bloc_Width = 400;
+  public static int Default_Bloc_Height = 480;
+  public static int Default_Bloc_Width = 480;
   protected int currentXOffset;
   protected int currentYOffset;
   protected LevelGenNode genNode;
-
-  public BlocDefinition()
-  {	  
+  
+  public BlocDefinition(String resourceName, boolean noUserInfoStore) {	  
+	  super(resourceName, noUserInfoStore);
 	  this.genNode = new LevelGenNode();
 	  BlocWidth = Default_Bloc_Width;
-	  BlocHeight = Default_Bloc_Height;    
-  }
-  
-  public BlocDefinition(String resourceName, boolean noUserInfoStore) {
-	  super(resourceName, noUserInfoStore);
-  }
-
-  public BlocDefinition(int width, int height)
-  {
-    this();
-    BlocWidth = width;
-    BlocHeight = height;
+	  BlocHeight = Default_Bloc_Height;
   }
 
   public abstract void buildLevel(Level level, int xOffset, int yOffset);

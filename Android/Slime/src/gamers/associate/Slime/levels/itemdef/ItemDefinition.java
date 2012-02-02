@@ -3,6 +3,7 @@ package gamers.associate.Slime.levels.itemdef;
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.items.base.GameItem;
+import gamers.associate.Slime.levels.generator.BlocDefinition;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -65,11 +66,11 @@ public abstract class ItemDefinition {
 	}
 	
 	protected float getOffX(float xVal) {
-		return xVal + this.xOffset * this.width;
+		return xVal + this.xOffset * BlocDefinition.BlocWidth;
 	}
 	
 	protected float getOffY(float yVal) {
-		return yVal + this.yOffset * this.height;
+		return yVal + this.yOffset * BlocDefinition.BlocHeight;
 	}
 	
 	/**

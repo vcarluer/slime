@@ -229,15 +229,15 @@ public class LevelGenNode {
 	}
 
 	public void setIsLevelStart(boolean value) {
-		this.isLevelStart = value;
+		this.setLevelStart(value);
 	}
 
 	public boolean isStartAndGoTo(BlocDirection goToDirection) {		
-		return this.isLevelStart && this.goTo(goToDirection);
+		return this.isLevelStart() && this.goTo(goToDirection);
 	}
 
 	public void setIsLevelEnd(boolean value) {
-		this.isLevelEnd = value;
+		this.setLevelEnd(value);
 	}
 
 	public void setComplexity(int value) {
@@ -249,7 +249,7 @@ public class LevelGenNode {
 	}
 
 	public boolean isLevelEndAndConnect(LevelGenNode sourceNode) {
-		return this.isLevelEnd && this.isEntryConnectedTo(sourceNode);
+		return this.isLevelEnd() && this.isEntryConnectedTo(sourceNode);
 	}
 	
 	public boolean isLevelBossAndConnect(LevelGenNode sourceNode) {
@@ -279,4 +279,20 @@ public class LevelGenNode {
 	public void setBoss(boolean isBoss) {
 		this.isBoss = isBoss;
 	}
+
+	public boolean isLevelStart() {
+		return isLevelStart;
+	}
+
+	public void setLevelStart(boolean isLevelStart) {
+		this.isLevelStart = isLevelStart;
+	}
+
+	public boolean isLevelEnd() {
+		return isLevelEnd;
+	}
+
+	public void setLevelEnd(boolean isLevelEnd) {
+		this.isLevelEnd = isLevelEnd;
+	}		
 }

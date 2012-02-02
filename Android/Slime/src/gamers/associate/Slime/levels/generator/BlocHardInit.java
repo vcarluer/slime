@@ -4,6 +4,7 @@ public class BlocHardInit
 {
   public static void InitHardCoded()
   {
+	  /*
     BlocDefinitionHardCodedStart.StartDirection = BlocDirection.Top;
     new BlocDefinitionHardCodedStart();
     BlocDefinitionHardCodedStart.StartDirection = BlocDirection.Right;
@@ -21,7 +22,7 @@ public class BlocHardInit
     BlocDefinitionHardCodedEnd.EndDirection = BlocDirection.Left;
     new BlocDefinitionHardCodedEnd();
     new BlocDefinitionHardCodedAll();
-    new BlocDefinitionHardCodedBoss();
+    new BlocDefinitionHardCodedBoss();*/
   }
 }
 

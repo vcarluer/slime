@@ -23,7 +23,7 @@ public class BlocInfoParser {
 				i++;
 				
 				if (resourceName.contains(".slime")) {
-					String resourcePath = BlocsAssetsBase + resourceName;
+					String resourcePath = BlocsAssetsBase + "/" + resourceName;
 					buildBlocDef(resourcePath);
 				}
 			}
@@ -47,13 +47,14 @@ public class BlocInfoParser {
 				// Only read first line (convention) for performance?
 				while (( line = buffreader.readLine()) != null) {
 					try {
-						i++;
-						Log.d(Slime.TAG, line);
+						i++;						
 						String[] items = line.split(";", -1);		
 						String itemType = items[0];
-						if (itemType == BlocInfoDef.Handled_Info) {
+						if (itemType.equals(BlocInfoDef.Handled_Info)) {
+							Log.d(Slime.TAG, line);
 							BlocInfoDef blocDef = new BlocInfoDef();
-							blocDef.parseAndCreate(line, null);
+							blocDef.parse(line);							
+							blocDef.createItem(resourcePath);
 						}
 					} catch (Exception e) {
 						Log.e(Slime.TAG, "ERROR during read of " + resourcePath + " line " + String.valueOf(i));

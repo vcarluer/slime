@@ -73,7 +73,10 @@ public class LevelGraphGenerator {
 		List<LevelGenNode> selection = new ArrayList<LevelGenNode>();
 		for(LevelGenNode node : this.nodes) {
 			if (node.ConnectAndGoTo(source, goToDirection)) {
-				selection.add(node);
+				// hack for multi entry / exit test blocks
+				if (!node.isLevelStart() && !node.isLevelEnd() && !node.isBoss()) {
+					selection.add(node);
+				}
 			}
 		}
 				
