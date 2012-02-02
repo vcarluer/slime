@@ -22,7 +22,7 @@ import gamers.associate.Slime.items.custom.StarFactory;
 import gamers.associate.Slime.items.custom.TargetFactory;
 import gamers.associate.Slime.items.custom.ThumbnailFactory;
 import gamers.associate.Slime.levels.ILevelBuilder;
-import gamers.associate.Slime.levels.generator.LevelGraphGenerator;
+import gamers.associate.Slime.levels.generator.LevelGraphGeneratorCorridor;
 
 import org.cocos2d.nodes.CCNode;
 
@@ -54,7 +54,7 @@ public abstract class SlimeFactory {
 	public static TargetFactory Target = new TargetFactory();
 	public static LaserBeamFactory LaserBeam = new LaserBeamFactory();
 	public static CocosFactory Sprite = new CocosFactory();
-	public static LevelGraphGenerator LevelGenerator = new LevelGraphGenerator(); 
+	public static LevelGraphGeneratorCorridor LevelGenerator = new LevelGraphGeneratorCorridor(); 
 		
 	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {		
 		// LevelBuilder = new LevelBuilder();

@@ -3,19 +3,19 @@ package gamers.associate.Slime.test;
 import gamers.associate.Slime.levels.generator.BlocDirection;
 import gamers.associate.Slime.levels.generator.Connector;
 import gamers.associate.Slime.levels.generator.LevelGenNode;
-import gamers.associate.Slime.levels.generator.LevelGraphGenerator;
+import gamers.associate.Slime.levels.generator.LevelGraphGeneratorCorridor;
 import junit.framework.TestCase;
 
 public class LevelGraphGeneratorTest extends TestCase {
-	private LevelGraphGenerator generator;
+	private LevelGraphGeneratorCorridor generator;
 	
 	protected void setUp() throws Exception {
-		generator = new LevelGraphGenerator();
+		generator = new LevelGraphGeneratorCorridor();
 		super.setUp();
 	}
 	
 	public void testCreate() {
-		generator = new LevelGraphGenerator();
+		generator = new LevelGraphGeneratorCorridor();
 	}
 	
 	public void testAddNodes() {
