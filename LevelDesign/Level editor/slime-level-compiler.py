@@ -63,7 +63,7 @@ class Smile( inkex.Effect ):
 			if str(child.get("type")) == 'BlocInfo':
 				self.__yReference = round(float(child.get("y")))
 				self.__heightReference = round(float(child.get("height")))
-				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(child.get("y"))+";"+str(child.get("width"))+";"+str(child.get("height"))+";0;"+str(child.get("id"))+";"+str(child.get("att_complexity"))+";"+str(child.get("att_entries"))+";"+str(child.get("att_exits"))+";"+str(child.get("att_isStart"))+";"+str(child.get("att_isEnd"))+";"+str(child.get("att_isBoss"))
+				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(child.get("y"))+";"+str(child.get("width"))+";"+str(child.get("height"))+";0;"+str(child.get("id"))+";"+str(child.get("att_complexity"))+";"+str(child.get("att_entries"))+";"+str(child.get("att_exits"))+";"+str(child.get("att_isStart"))+";"+str(child.get("att_isEnd"))+";"+str(child.get("att_isBoss"))+";"+str(child.get("att_openFaces"))
 				return True;
 			
 			
