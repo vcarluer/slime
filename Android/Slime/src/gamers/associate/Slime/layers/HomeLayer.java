@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 
 public class HomeLayer extends CCLayer {
 	private static HomeLayer layer;	
+	private CCMenuItemSprite restartMenu;
 	
 	public static HomeLayer get() {
 		if (layer == null) {
@@ -47,13 +48,10 @@ public class HomeLayer extends CCLayer {
 		CCSprite playSprite = CCSprite.sprite("control-play.png", true);
 		CCMenuItemSprite playMenu = CCMenuItemSprite.item(playSprite, playSprite, this, "selectPlay");
 		CCSprite restartSprite = CCSprite.sprite("control-restart.png", true);
-		CCMenuItemSprite restartMenu = CCMenuItemSprite.item(restartSprite, restartSprite, this, "goRestart");
-		restartMenu.setScale(0.5f);
-				
-		restartMenu.setVisible(SlimeFactory.LevelBuilder.hasBegun());
-		restartMenu.setIsEnabled(SlimeFactory.LevelBuilder.hasBegun());				
+		this.restartMenu = CCMenuItemSprite.item(restartSprite, restartSprite, this, "goRestart");
+		restartMenu.setScale(0.5f);									
 		
-		this.menu = CCMenu.menu(playMenu, restartMenu);		
+		this.menu = CCMenu.menu(playMenu, this.restartMenu);		
 		this.menu.alignItemsHorizontally(50);
 		this.menu.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().getWidth() / 2,
@@ -80,7 +78,9 @@ public class HomeLayer extends CCLayer {
 	 */
 	@Override
 	public void onEnter() {		
-		super.onEnter();										
+		super.onEnter();
+		this.restartMenu.setVisible(SlimeFactory.LevelBuilder.hasBegun());
+		this.restartMenu.setIsEnabled(SlimeFactory.LevelBuilder.hasBegun());
 	}
 	
 	@Override
