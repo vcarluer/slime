@@ -320,5 +320,37 @@ public class LevelGenNode {
 
 	public void setLevelEnd(boolean isLevelEnd) {
 		this.isLevelEnd = isLevelEnd;
-	}		
+	}
+	
+	public boolean isExactlyConnectedTo(List<Integer> list) {
+		boolean connected = false;
+		if (list != null) {
+			// Exactly the same amount of connections
+			int connectionCount = list.size();
+			if (connectionCount == this.connectors.size()) {		
+				for(Integer connector : list) {
+					connected = this.isEntryConnectedTo(connector);
+					if (!connected) break;
+				}
+			}
+		}
+		
+		return connected;
+	}
+	
+	public boolean isLevelStartAndExactlyConnectedTo(List<Integer> list) {
+		return this.isLevelStart && this.isExactlyConnectedTo(list);
+	}
+	
+	public boolean isLevelEndAndExactlyConnectedTo(List<Integer> list) {
+		return this.isLevelEnd && this.isExactlyConnectedTo(list);
+	}
+	
+	public boolean isLevelBossAndExactlyConnectedTo(List<Integer> list) {
+		return this.isBoss && this.isExactlyConnectedTo(list);
+	}
+	
+	public boolean isNoSpecialAndExactlyConnectedTo(List<Integer> list) {
+		return this.isNoSpecial() && this.isExactlyConnectedTo(list);
+	}
 }
