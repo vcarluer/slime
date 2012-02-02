@@ -7,7 +7,8 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 	@Override
 	protected void generateInternal(int maxComplexity,
 			BlocDirection constrained, boolean isBoss) {
-		// TODO Auto-generated method stub
+		// For now only to right
+		// pull by line
 		
 	}
 
@@ -15,5 +16,4 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 	public String getAssetsBase() {
 		return BlocsAssetsBase;
 	}
-
 }

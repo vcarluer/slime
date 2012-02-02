@@ -12,8 +12,8 @@ import java.io.InputStreamReader;
 import android.util.Log;
 
 public class BlocInfoParser {
-	// TODO: change extension for blocs?
 	public static String blocFileExtension = ".slime";	
+	// Used in BlocInfoDef
 	public static LevelGraphGeneratorBase Generator;
 	
 	public static void buildAll(LevelGraphGeneratorBase generator) {
