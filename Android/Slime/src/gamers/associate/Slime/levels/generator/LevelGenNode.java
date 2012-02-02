@@ -9,6 +9,7 @@ import java.util.HashSet;
 public class LevelGenNode {
 	private Set<Integer> connectorsEntry;
 	private Set<Integer> connectorsExit;
+	private Set<Integer> connectors;
 	private boolean isLevelStart;
 	private boolean isLevelEnd;
 	private boolean isBoss;
@@ -19,14 +20,21 @@ public class LevelGenNode {
 	public LevelGenNode() {
 		this.connectorsEntry = new HashSet<Integer>();
 		this.connectorsExit = new HashSet<Integer>();
+		this.connectors = new HashSet<Integer>();
 	}
 	
 	public void addConnectorEntry(int connector) {
 		addConnector(this.connectorsEntry, connector);
+		addConnector(this.connectors, connector);
 	}
 	
 	public void addConnectorExit(int connector) {
 		addConnector(this.connectorsExit, connector);
+		addConnector(this.connectors, connector);
+	}
+	
+	public void addConnector(int connector) {
+		addConnector(this.connectors, connector);
 	}
 	
 	public static void addConnector(Set<Integer> connectors, int connector) {
@@ -35,10 +43,16 @@ public class LevelGenNode {
 	
 	public void addConnectorsEntry(List<Integer> connectorsToAdd) {
 		addConnectors(this.connectorsEntry, connectorsToAdd);
+		addConnectors(this.connectors, connectorsToAdd);
 	}
 	
 	public void addConnectorsExit(List<Integer> connectorsToAdd) {
 		addConnectors(this.connectorsExit, connectorsToAdd);
+		addConnectors(this.connectors, connectorsToAdd);
+	}
+	
+	public void addConnectors(List<Integer> connectorsToAdd) {
+		addConnectors(this.connectors, connectorsToAdd);
 	}
 	
 	public static void addConnectors(Set<Integer> connectors, List<Integer> connectorsToAdd) {
@@ -55,6 +69,10 @@ public class LevelGenNode {
 		return getConnectorCount(this.connectorsExit);
 	}
 	
+	public int getConnectorCount() {
+		return getConnectorCount(this.connectors);
+	}
+	
 	public static int getConnectorCount(Set<Integer> connectors) {
 		return connectors.size();
 	}
@@ -65,6 +83,10 @@ public class LevelGenNode {
 	
 	public Set<Integer> getConnectorExitList() {
 		return this.connectorsExit;
+	}
+	
+	public Set<Integer> getConnectorList() {
+		return this.connectors;
 	}
 
 	public boolean isEntryConnectedTo(int connector) {
@@ -158,7 +180,7 @@ public class LevelGenNode {
 		return isConnected;
 	}
 
-	public List<Integer> getConnectorsFor(BlocDirection direction) {
+	public static List<Integer> getConnectorsFor(BlocDirection direction) {
 		List<Integer> list = new ArrayList<Integer>();
 		switch (direction) {
 		case Top: 
@@ -209,7 +231,7 @@ public class LevelGenNode {
 	}
 
 	public boolean connectNoSpecialAndGoTo(List<Integer> list, BlocDirection goToDirection) {
-		List<Integer> directionConnectors = this.getConnectorsFor(LevelGenNode.getMirror(goToDirection));		
+		List<Integer> directionConnectors = getConnectorsFor(LevelGenNode.getMirror(goToDirection));		
 		return this.isEntryConnectedAtLeastOne(list) && this.isExitConnectedAtLeastOne(directionConnectors) && this.isNoSpecial();
 	}
 	
@@ -221,7 +243,7 @@ public class LevelGenNode {
 	}
 
 	public boolean goTo(BlocDirection goToDirection) {
-		return this.isExitConnectedAtLeastOne(this.getConnectorsFor(LevelGenNode.getMirror(goToDirection)));
+		return this.isExitConnectedAtLeastOne(getConnectorsFor(LevelGenNode.getMirror(goToDirection)));
 	}
 
 	public boolean connectNoSpecialAndGoTo(LevelGenNode sourceNode, BlocDirection goToDirection) {

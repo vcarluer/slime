@@ -8,20 +8,23 @@ import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.levels.generator.BlocDefinition;
 import gamers.associate.Slime.levels.generator.BlocDefinitionParser;
+import gamers.associate.Slime.levels.generator.BlocDirection;
 import gamers.associate.Slime.levels.generator.Connector;
 import gamers.associate.Slime.levels.generator.LevelGenNode;
 
 public class BlocInfoDef extends ItemDefinition {
 	public static String Handled_Info = "BlocInfo";
 	private static String connectorsSep = ",";
+	private static String facesSep = ",";
 	
 	private String id;
 	private int complexity;
 	private String entries;
-	private String exits;
+	private String exits;	
 	private boolean isStart;
 	private boolean isEnd;
-	private boolean isBoss;	
+	private boolean isBoss;
+	private String openFaces;
 	
 	@Override
 	protected void initTypeHandled() {
@@ -38,10 +41,11 @@ public class BlocInfoDef extends ItemDefinition {
 		this.id = infos[start];
 		this.complexity = Integer.valueOf(infos[start + 1]).intValue();
 		this.entries = infos[start + 2];
-		this.exits = infos[start + 3];
+		this.exits = infos[start + 3];		
 		this.isStart = Boolean.valueOf(infos[start + 4]).booleanValue();
 		this.isEnd = Boolean.valueOf(infos[start + 5]).booleanValue();
 		this.isBoss = Boolean.valueOf(infos[start + 6]).booleanValue();
+		this.openFaces = infos[start + 7];
 	}
 
 	
@@ -56,12 +60,35 @@ public class BlocInfoDef extends ItemDefinition {
 		node.setComplexity(this.complexity);
 		node.addConnectorsEntry(this.getConnectors(this.entries));
 		node.addConnectorsExit(this.getConnectors(this.exits));
+		node.addConnectors(this.getConnectorsFaces(this.openFaces));
 		node.setIsLevelStart(this.isStart);
 		node.setIsLevelEnd(this.isEnd);
 		node.setBoss(this.isBoss);
 		
 		bloc.setGenNode(node);
 		SlimeFactory.LevelGenerator.addNode(node);
+	}
+
+	private List<Integer> getConnectorsFaces(String openFacesParam) {
+		List<Integer> list = new ArrayList<Integer>();
+		String[] faces = openFacesParam.split(facesSep, -1);
+		for(String faceStr : faces) {
+			String face = faceStr.trim().toLowerCase();
+			if (face.equals("t")) {
+				list.addAll(LevelGenNode.getConnectorsFor(BlocDirection.Top));
+			}
+			if (face.equals("r")) {
+				list.addAll(LevelGenNode.getConnectorsFor(BlocDirection.Right));
+			}
+			if (face.equals("b")) {
+				list.addAll(LevelGenNode.getConnectorsFor(BlocDirection.Bottom));
+			}
+			if (face.equals("l")) {
+				list.addAll(LevelGenNode.getConnectorsFor(BlocDirection.Left));
+			}
+		}
+		
+		return list;
 	}
 
 	private List<Integer> getConnectors(String connParam) {

@@ -2,6 +2,7 @@ package gamers.associate.Slime.levels.generator;
 
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.levels.LevelUtil;
+import gamers.associate.Slime.levels.generator.hardcoded.BlocHardInit;
 
 import java.util.ArrayList;
 import java.util.List;

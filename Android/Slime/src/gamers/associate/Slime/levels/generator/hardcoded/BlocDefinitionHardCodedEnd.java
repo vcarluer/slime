@@ -1,8 +1,10 @@
-package gamers.associate.Slime.levels.generator;
+package gamers.associate.Slime.levels.generator.hardcoded;
 
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.custom.GoalPortal;
+import gamers.associate.Slime.levels.generator.BlocDirection;
+import gamers.associate.Slime.levels.generator.LevelGenNode;
 
 public class BlocDefinitionHardCodedEnd extends BlocDefinitionHardCoded
 {

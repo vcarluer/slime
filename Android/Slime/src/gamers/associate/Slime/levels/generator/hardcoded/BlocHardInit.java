@@ -1,4 +1,4 @@
-package gamers.associate.Slime.levels.generator;
+package gamers.associate.Slime.levels.generator.hardcoded;
 
 public class BlocHardInit
 {
