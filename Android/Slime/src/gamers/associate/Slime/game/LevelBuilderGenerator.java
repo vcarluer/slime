@@ -34,6 +34,10 @@ public class LevelBuilderGenerator implements ILevelBuilder
 	{
 		if (id != LevelHome.Id)
 		{																				
+			if (!this.levelparser.isStored()) {
+				this.gameInfo.resetDifficulty(this.gameInfo.getDifficulty());
+			}
+			
 			if (this.firstBuild && this.levelparser.isStored() && !this.levelDef.isFinished()) {				
 				this.levelparser.buildLevel(level);					
 				level.setLevelDefinition(this.levelDef);

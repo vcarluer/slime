@@ -27,7 +27,7 @@ public class PolygonDef extends ItemDefinition {
 	@Override
 	public void createItem(Level level) {				
 		ArrayList<CGPoint> polygon = new ArrayList<CGPoint>();
-		if (this.path.substring(0, RealPath.length()).toUpperCase() == RealPath) {
+		if (this.path.substring(0, RealPath.length()).toUpperCase().equals(RealPath)) {
 			// Read path directly
 			String pathMid = this.path.substring(RealPath.length());
 			String[] pathBase = pathMid.split(PointSep);
