@@ -16,7 +16,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 "
-   sodipodi:docname="r1.svg">
+   sodipodi:docname="er1.svg">
   <defs
      id="defs4">
     <linearGradient
@@ -971,7 +971,7 @@
        att_entries=""
        att_exits=""
        att_isStart="false"
-       att_isEnd="false"
+       att_isEnd="true"
        att_isBoss="false"
        att_openFaces="t,b,l" />
     <text
