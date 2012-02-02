@@ -70,22 +70,24 @@ public class BlocInfoDef extends ItemDefinition {
 		BlocInfoParser.Generator.addNode(node);
 	}
 
-	private List<Integer> getConnectorsFaces(String openFacesParam) {
+	private List<Integer> getConnectorsFaces(String openFacesParam) {		
 		List<Integer> list = new ArrayList<Integer>();
-		String[] faces = openFacesParam.split(facesSep, -1);
-		for(String faceStr : faces) {
-			String face = faceStr.trim().toLowerCase();
-			if (face.equals("t")) {
-				list.addAll(LevelGenNode.getConnectorsFor(BlocDirection.Top));
-			}
-			if (face.equals("r")) {
-				list.addAll(LevelGenNode.getConnectorsFor(BlocDirection.Right));
-			}
-			if (face.equals("b")) {
-				list.addAll(LevelGenNode.getConnectorsFor(BlocDirection.Bottom));
-			}
-			if (face.equals("l")) {
-				list.addAll(LevelGenNode.getConnectorsFor(BlocDirection.Left));
+		if (!openFacesParam.equals(ItemDefinition.None)) {
+			String[] faces = openFacesParam.split(facesSep, -1);
+			for(String faceStr : faces) {
+				String face = faceStr.trim().toLowerCase();
+				if (face.equals("t")) {
+					list.addAll(LevelGenNode.getConnectorsFor(BlocDirection.Top));
+				}
+				if (face.equals("r")) {
+					list.addAll(LevelGenNode.getConnectorsFor(BlocDirection.Right));
+				}
+				if (face.equals("b")) {
+					list.addAll(LevelGenNode.getConnectorsFor(BlocDirection.Bottom));
+				}
+				if (face.equals("l")) {
+					list.addAll(LevelGenNode.getConnectorsFor(BlocDirection.Left));
+				}
 			}
 		}
 		

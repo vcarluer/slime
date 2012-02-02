@@ -37,7 +37,8 @@ public class LevelBuilderGenerator implements ILevelBuilder
 				this.levelparser.buildLevel(level);					
 				level.setLevelDefinition(this.levelDef);
 			} else {
-				this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor);
+				// this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor);
+				this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorRectangle);
 				this.gameInfo.levelUp();
 				this.complexity = this.computeComplexity();
 				this.levelDef.setComplexity(this.complexity);

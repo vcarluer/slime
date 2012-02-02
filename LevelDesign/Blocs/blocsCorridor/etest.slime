@@ -1,4 +1,4 @@
-BlocInfo;0;120;480;480;0;etest;5;tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb;tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb;false;true;false
+BlocInfo;0;120;480;480;0;etest;5;tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb;tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb;false;true;false;
 TimeAttack;-2.0;0.0;0.0;0.0;0.0;3;1
 Platform_Corner;448.0;0.0;32.0;32.0;0.0
 Platform_Corner;448.0;448.0;32.0;32.0;-90.0

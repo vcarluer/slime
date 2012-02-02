@@ -89,6 +89,10 @@ public class LevelGenNode {
 		return this.connectors;
 	}
 
+	public boolean isConnectedTo(int connector) {
+		return isConnectedTo(this.connectors, connector);
+	}
+	
 	public boolean isEntryConnectedTo(int connector) {
 		return isConnectedTo(this.connectorsEntry, connector);
 	}
@@ -329,7 +333,7 @@ public class LevelGenNode {
 			int connectionCount = list.size();
 			if (connectionCount == this.connectors.size()) {		
 				for(Integer connector : list) {
-					connected = this.isEntryConnectedTo(connector);
+					connected = this.isConnectedTo(connector);
 					if (!connected) break;
 				}
 			}
