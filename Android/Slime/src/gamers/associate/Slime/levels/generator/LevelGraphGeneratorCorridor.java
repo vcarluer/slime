@@ -31,11 +31,9 @@ public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {
 		LevelGenNode pick = null;
 		List<LevelGenNode> selection = new ArrayList<LevelGenNode>();
 		for(LevelGenNode node : this.nodes) {
-			if (node.ConnectAndGoTo(source, goToDirection)) {
-				// hack for multi entry / exit test blocks
-				if (!node.isLevelStart() && !node.isLevelEnd() && !node.isBoss()) {
-					selection.add(node);
-				}
+			if (node.connectNoSpecialAndGoTo(source, goToDirection)) {
+				// hack for multi entry / exit test blocks				
+				selection.add(node);				
 			}
 		}
 				
@@ -77,7 +75,8 @@ public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {
 		return this.pickNext(source, this.getRandomDirection());
 	}
 	
-	public void generateInternal(int maxComplexity, BlocDirection constrained, boolean isBoss) {		
+	@Override
+	protected void generateInternal(int maxComplexity, BlocDirection constrained, boolean isBoss) {		
 		Log.d(Slime.TAG, "Picking start node with constraint " + String.valueOf(constrained));
 		LevelGenNode pick = this.pickStartConstrained(constrained);			
 		Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));

@@ -208,9 +208,9 @@ public class LevelGenNode {
 		}
 	}
 
-	public boolean ConnectAndGoTo(List<Integer> list, BlocDirection goToDirection) {
+	public boolean connectNoSpecialAndGoTo(List<Integer> list, BlocDirection goToDirection) {
 		List<Integer> directionConnectors = this.getConnectorsFor(LevelGenNode.getMirror(goToDirection));		
-		return this.isEntryConnectedAtLeastOne(list) && this.isExitConnectedAtLeastOne(directionConnectors);
+		return this.isEntryConnectedAtLeastOne(list) && this.isExitConnectedAtLeastOne(directionConnectors) && this.isNoSpecial();
 	}
 	
 	public List<List<Integer>> getMatchList(List<Integer> list1, List<Integer> list2) {
@@ -224,8 +224,12 @@ public class LevelGenNode {
 		return this.isExitConnectedAtLeastOne(this.getConnectorsFor(LevelGenNode.getMirror(goToDirection)));
 	}
 
-	public boolean ConnectAndGoTo(LevelGenNode sourceNode, BlocDirection goToDirection) {
-		return this.ConnectAndGoTo(new ArrayList<Integer>(sourceNode.getConnectorExitList()), goToDirection);
+	public boolean connectNoSpecialAndGoTo(LevelGenNode sourceNode, BlocDirection goToDirection) {
+		return this.connectNoSpecialAndGoTo(new ArrayList<Integer>(sourceNode.getConnectorExitList()), goToDirection);
+	}
+	
+	public boolean isNoSpecial() {
+		return !this.isLevelStart() && !this.isLevelEnd() && !this.isBoss();
 	}
 
 	public void setIsLevelStart(boolean value) {

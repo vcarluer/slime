@@ -193,7 +193,7 @@ public class LevelGenNodeTest extends TestCase {
 		node.addConnectorExit(Connector.RightMid);
 		List<Integer> list = new ArrayList<Integer>();
 		list.add(Connector.BottomLeft);
-		assertTrue(node.ConnectAndGoTo(list, BlocDirection.Right));
+		assertTrue(node.connectNoSpecialAndGoTo(list, BlocDirection.Right));
 	}
 	
 	public void testIsDisConnectedAndGoTo() {
@@ -201,7 +201,7 @@ public class LevelGenNodeTest extends TestCase {
 		node.addConnectorExit(Connector.RightMid);
 		List<Integer> list = new ArrayList<Integer>();
 		list.add(Connector.BottomMid);
-		assertFalse(node.ConnectAndGoTo(list, BlocDirection.Right));
+		assertFalse(node.connectNoSpecialAndGoTo(list, BlocDirection.Right));
 	}
 	
 	public void testIsConnectedAndDontGoTo() {
@@ -209,7 +209,7 @@ public class LevelGenNodeTest extends TestCase {
 		node.addConnectorExit(Connector.RightMid);
 		List<Integer> list = new ArrayList<Integer>();
 		list.add(Connector.BottomLeft);
-		assertFalse(node.ConnectAndGoTo(list, BlocDirection.Left));
+		assertFalse(node.connectNoSpecialAndGoTo(list, BlocDirection.Left));
 	}
 	
 	public void testNodeConnectAndGoTo() {
@@ -217,7 +217,7 @@ public class LevelGenNodeTest extends TestCase {
 		node.addConnectorExit(Connector.RightMid);
 		LevelGenNode sourceNode = new LevelGenNode();
 		sourceNode.addConnectorExit(Connector.BottomLeft);
-		assertTrue(node.ConnectAndGoTo(sourceNode, BlocDirection.Right));
+		assertTrue(node.connectNoSpecialAndGoTo(sourceNode, BlocDirection.Right));
 	}
 	
 	public void testNodeDisConnectAndGoTo() {
@@ -225,7 +225,7 @@ public class LevelGenNodeTest extends TestCase {
 		node.addConnectorExit(Connector.RightMid);
 		LevelGenNode sourceNode = new LevelGenNode();
 		sourceNode.addConnectorExit(Connector.BottomRight);
-		assertFalse(node.ConnectAndGoTo(sourceNode, BlocDirection.Right));
+		assertFalse(node.connectNoSpecialAndGoTo(sourceNode, BlocDirection.Right));
 	}
 	
 	public void testNodeLevelStartAndGoTo() {
