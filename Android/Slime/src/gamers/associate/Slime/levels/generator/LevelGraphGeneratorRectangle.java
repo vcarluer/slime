@@ -59,7 +59,7 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 			Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
 			this.handlePick(pick, true);
 			
-			while (colNum < colCount) {
+			while (colNum <= colCount) {
 				Log.d(Slime.TAG, "Picking middle block");
 				pick = this.pickMiddle();
 				Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
@@ -86,7 +86,7 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 		Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
 		this.handlePick(pick, true);
 		
-		while (colNum < colCount) {
+		while (colNum <= colCount) {
 			Log.d(Slime.TAG, "Picking middle block");
 			pick = this.pickTopMiddle();
 			Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
