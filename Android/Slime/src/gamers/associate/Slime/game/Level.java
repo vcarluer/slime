@@ -13,7 +13,6 @@ import gamers.associate.Slime.layers.LevelLayer;
 import gamers.associate.Slime.layers.PauseLayer;
 import gamers.associate.Slime.levels.LevelDefinition;
 import gamers.associate.Slime.levels.LevelHome;
-import gamers.associate.Slime.levels.generator.BlocDirection;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -140,7 +139,7 @@ public class Level {
 		this.backgroundLayer = new BackgoundLayer();
 		this.gameLayer = CCLayer.node();
 		this.pauseLayer = new PauseLayer();
-		this.endLevelLayer = new EndLevelLayer();
+		this.endLevelLayer = new EndLevelLayer();				
 		
 		this.gameLayer.addChild(this.backgroundLayer, 0);
 		this.gameLayer.addChild(this.levelLayer, 1);			
