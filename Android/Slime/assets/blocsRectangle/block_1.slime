@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 BlocInfo;0;120;480;480;0;Block_1;5;tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb;tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb;false;false;false;t,r,b,l
+=======
+BlocInfo;0;120;480;480;0;BlocInfo-0;5;tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb;tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb;false;false;false;t,r,b,l
+>>>>>>> f86b9d80fa81405161383747f7817ceb81487bfd
 TimeAttack;-2.0;0.0;0.0;0.0;0.0;15;5
 Platform_Corner;448.0;448.0;32.0;32.0;-90.0
 Platform;300.0;268.0;328.0;32.0;90.0
