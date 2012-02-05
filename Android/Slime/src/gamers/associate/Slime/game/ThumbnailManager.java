@@ -2,6 +2,7 @@ package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.items.base.ISelectable;
 import gamers.associate.Slime.items.custom.Thumbnail;
+import gamers.associate.Slime.layers.PauseLayer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +26,9 @@ public class ThumbnailManager {
 	private CGPoint vector;
 	private CGPoint st;
 	
+	private float topPadding = 75; // why 75? good question watson
+	private CGRect thumbRect;
+	
 	public ThumbnailManager(Level level) {
 		this.level = level;
 		this.cameraManager = this.level.getCameraManager();
@@ -36,6 +40,7 @@ public class ThumbnailManager {
 		this.result = CGPoint.zero();
 		this.vector = CGPoint.zero();
 		this.st = CGPoint.zero();
+		this.thumbRect = CGRect.zero();
 	}
 	
 	public void handle(ArrayList<ISelectable> selectables) {
@@ -46,14 +51,22 @@ public class ThumbnailManager {
 		}
 	}
 	
-	private void manage(ISelectable selectable) {		
-		if (!CGRect.containsPoint(this.cameraManager.getVirtualCamera(), Util.mid(selectable.getSelectionRect())) 
+	private void computeRect() {
+		CGRect camera = this.cameraManager.getVirtualCamera();
+		float zoom = this.cameraManager.getCurrentZoom();
+		float ratio = 1 / zoom;
+		this.thumbRect.set(camera.origin.x, camera.origin.y, camera.size.width, camera.size.height - (topPadding * ratio));
+	}
+	
+	private void manage(ISelectable selectable) {
+		this.computeRect();
+		if (!CGRect.containsPoint(this.thumbRect, Util.mid(selectable.getSelectionRect())) 
 				// && (selectable.isActive() || this.level.isPaused())) {
 				&& this.level.isPaused()) {			
 			float x = selectable.getPosition().x;
 			float y = selectable.getPosition().y;						
 			
-			CGRect camera = this.cameraManager.getVirtualCamera();
+			CGRect camera = this.thumbRect;
 			
 			float reverseScale = 1;
 			if (this.level.getCameraManager().getCurrentZoom() != 0) {
