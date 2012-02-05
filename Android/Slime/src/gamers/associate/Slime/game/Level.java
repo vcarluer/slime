@@ -254,8 +254,7 @@ public class Level {
 	}
 	
 	private void preBuild() {
-		this.resetLevel();
-		this.setBackground();		
+		this.resetLevel();			
 	}
 	
 	private void setBackground() {
@@ -263,7 +262,7 @@ public class Level {
 			this.backgroundLayer.removeChild(this.backgroundSprite, true);
 		}				
 				
-		int choice = this.randomGen.nextInt(3);
+		int choice = this.randomGen.nextInt(4);
 		String fileName = "";
 		switch (choice) {
 		default:
@@ -275,15 +274,25 @@ public class Level {
 			break;
 		case 2:
 			fileName = "world00-01.png";
-			break;		
+			break;
+		case 3:
+			fileName = "splash-level-01.png";
+			break;
 		}
 		
 		this.backgroundSprite = CCSprite.sprite(backgroundPath + fileName);
 		this.backgroundSprite.setAnchorPoint(0, 0);
+		float wRatio = this.levelWidth / this.backgroundSprite.getTextureRect().size.width;
+		float hRatio = this.levelHeight / this.backgroundSprite.getTextureRect().size.height;
+		float ratio = Math.max(wRatio, hRatio);
+		if (ratio > 1) {
+			this.backgroundSprite.setScale(ratio);
+		}
 		this.backgroundLayer.addChild(this.backgroundSprite);
 	}
 	
 	private void postBuild(String levelName) {
+		this.setBackground();
 		this.currentLevelName = levelName;
 		// Set camera right based on screen size
 		this.attachLevelToCamera();
