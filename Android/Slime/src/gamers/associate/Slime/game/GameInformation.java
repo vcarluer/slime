@@ -154,4 +154,10 @@ public class GameInformation {
 		this.lastScore = 0;
 		this.store();
 	}
+
+	public void resetTotalScore() {
+		this.totalScore = 0;
+		this.lastScore = 0;
+		this.store();		
+	}
 }
