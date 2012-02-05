@@ -17,6 +17,7 @@ import gamers.associate.Slime.levels.generator.BlocDirection;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Random;
 import java.util.UUID;
 
 import javax.microedition.khronos.opengles.GL10;
@@ -38,6 +39,7 @@ public class Level {
 	public static boolean DebugMode = false;
 	public static boolean isInit;	
 	public static float Gravity = -10;
+	private static String backgroundPath = "bkg/";
 	
 	public static Level currentLevel; 
 	
@@ -128,7 +130,10 @@ public class Level {
 	
 	protected boolean isPhysicDisabled;
 	
+	private Random randomGen;
+	
 	public Level() {
+		this.randomGen = new Random();
 		this.scene = CCScene.node();
 		this.levelLayer = new LevelLayer(this);
 		this.hudLayer = new HudLayer();
@@ -250,6 +255,32 @@ public class Level {
 	
 	private void preBuild() {
 		this.resetLevel();
+		this.setBackground();		
+	}
+	
+	private void setBackground() {
+		if (this.backgroundSprite != null) {
+			this.backgroundLayer.removeChild(this.backgroundSprite, true);
+		}				
+				
+		int choice = this.randomGen.nextInt(3);
+		String fileName = "";
+		switch (choice) {
+		default:
+		case 0:
+			fileName = "background-level-01.png";
+			break;
+		case 1:
+			fileName = "background-world00-01.png";
+			break;
+		case 2:
+			fileName = "world00-01.png";
+			break;		
+		}
+		
+		this.backgroundSprite = CCSprite.sprite(backgroundPath + fileName);
+		this.backgroundSprite.setAnchorPoint(0, 0);
+		this.backgroundLayer.addChild(this.backgroundSprite);
 	}
 	
 	private void postBuild(String levelName) {
@@ -352,9 +383,11 @@ public class Level {
 		//this.backgroundLayer.setRotation(-90f);				
 		//this.backgroundLayer.setScale(2.0f);
 		// this.backgroundSprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("decor.png"));		
-		this.backgroundSprite = CCSprite.sprite("background-level-01.png");
+		
+		/*this.backgroundSprite = CCSprite.sprite("background-level-01.png");
 		this.backgroundSprite.setAnchorPoint(0, 0);
-		this.backgroundLayer.addChild(this.backgroundSprite);
+		this.backgroundLayer.addChild(this.backgroundSprite);*/
+		
 		// spriteSheet.addChild(this.backgroundSprite);				
 		
 		// hud
