@@ -7,7 +7,7 @@ import org.cocos2d.nodes.CCSprite;
 import gamers.associate.Slime.items.base.GameItemPhysicFactory;
 
 
-public class StarFactory extends GameItemPhysicFactory<Star> {
+public class StarFactory extends GameItemPhysicFactory<Star> {	
 
 	@Override
 	protected void createAnimList() {
@@ -21,7 +21,7 @@ public class StarFactory extends GameItemPhysicFactory<Star> {
 	}
 
 	@Override
-	protected Star instantiate(float x, float y, float width, float height) {		
+	protected Star instantiate(float x, float y, float width, float height) {
 		return new Star(x, y, width, height, this.world, this.worldRatio);
 	}
 

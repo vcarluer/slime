@@ -32,7 +32,7 @@ public class LevelBuilderGenerator implements ILevelBuilder
 	public void build(Level level, String id)
 	{
 		if (id != LevelHome.Id)
-		{			
+		{
 			if (this.firstBuild && this.levelparser.isStored() && !this.levelDef.isFinished()) {				
 				this.levelparser.buildLevel(level);					
 				level.setLevelDefinition(this.levelDef);
