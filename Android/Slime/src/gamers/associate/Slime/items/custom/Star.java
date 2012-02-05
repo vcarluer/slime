@@ -22,7 +22,7 @@ public class Star extends GameItemPhysic {
 	public static String Anim_Fade = "star-fading";	
 	private static float Default_Width = 40f;
 	private static float Default_Height = 40f;
-	private static float Reference_Width = 40f;
+	public static float Reference_Width = 40f;
 	private static float Reference_Height = 40f;	
 	
 	private boolean fading;

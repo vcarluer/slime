@@ -1,5 +1,9 @@
 package gamers.associate.Slime.items.custom;
 
+import org.cocos2d.actions.base.CCRepeatForever;
+import org.cocos2d.actions.interval.CCAnimate;
+import org.cocos2d.nodes.CCSprite;
+
 import gamers.associate.Slime.items.base.GameItemPhysicFactory;
 
 
@@ -28,5 +32,17 @@ public class StarFactory extends GameItemPhysicFactory<Star> {
 	
 	public Star createBL(float x, float y, float width, float height) {
 		return this.create(x + width / 2, y + height / 2, width, height);
+	}
+	
+	public CCSprite getAnimatedStar() {
+		CCSprite star = new CCSprite();
+		CCAnimate animate = CCAnimate.action(this.sharedAnimations.get(Star.Anim_Wait), false);
+		CCRepeatForever repeat = CCRepeatForever.action(animate);
+		star.runAction(repeat);
+		return star;
+	}
+	
+	public float getStarReferenceWidth() {
+		return Star.Reference_Width;
 	}
 }

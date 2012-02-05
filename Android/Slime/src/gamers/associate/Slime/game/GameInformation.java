@@ -17,6 +17,8 @@ public class GameInformation {
 	private int levelNum;
 	private int levelDifficulty;
 	private String fileName = "gameInfo.sli";
+	private int totalScore;
+	private int lastScore;
 	
 	public GameInformation() {
 		this.levelDifficulty = LevelDifficulty.Easy;
@@ -41,6 +43,7 @@ public class GameInformation {
 	
 	public void levelUp() {		
 		this.levelNum++;
+		this.lastScore = 0;
 		if (this.levelNum > this.getLevelMax()) {
 			this.difficultyUp();
 		}
@@ -57,6 +60,8 @@ public class GameInformation {
 			buffWriter.write(String.valueOf(this.levelDifficulty));
 			buffWriter.newLine();
 			buffWriter.write(String.valueOf(this.levelNum));			
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.totalScore));
 		} catch (FileNotFoundException ex) {
 			Log.e(Slime.TAG, "ERROR, file not found " + fileName);
 			ex.printStackTrace();
@@ -100,6 +105,9 @@ public class GameInformation {
 							case 2:
 								this.levelNum = Integer.valueOf(line).intValue();
 								break;
+							case 3:
+								this.totalScore = Integer.valueOf(line).intValue();
+								break;
 							default:
 								break;
 							}												
@@ -129,5 +137,21 @@ public class GameInformation {
 	
 	public int getDifficulty() {
 		return this.levelDifficulty;
+	}
+	
+	public int getTotalScore() {
+		return this.totalScore;
+	}
+	
+	public void addLevelScore(int score) {
+		this.lastScore = score;
+		this.totalScore += score;
+		this.store();
+	}
+	
+	public void removeLastScore() {
+		this.totalScore -= this.lastScore;
+		this.lastScore = 0;
+		this.store();
 	}
 }

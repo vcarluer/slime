@@ -5,6 +5,8 @@ import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 
+import org.cocos2d.actions.base.CCRepeatForever;
+import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItemSprite;
@@ -12,6 +14,7 @@ import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.CGPoint;
+import org.cocos2d.types.CGRect;
 
 import android.view.MotionEvent;
 
@@ -19,6 +22,10 @@ public class HomeLayer extends CCLayer {
 	private static HomeLayer layer;	
 	private CCMenuItemSprite restartMenu;
 	private CCLabel lblLevel;
+	private CCLabel lblScore;
+	private CCSprite starSprite;
+	
+	private static float baseShift = 150f;
 	
 	public static HomeLayer get() {
 		if (layer == null) {
@@ -31,6 +38,11 @@ public class HomeLayer extends CCLayer {
 	protected HomeLayer() {
 		super();
 		
+		float shiftTitle = baseShift;
+		float shiftMenu  = shiftTitle - 150f; // Slime height = 160 / 2 + 20
+		float shiftInfo  = shiftMenu - 100f;
+		float shiftScore = shiftInfo - 70f;
+		
 		// temp
 		// ((LevelBuilderGenerator)SlimeFactory.LevelBuilder).getParser().resetStorage();
 		
@@ -42,13 +54,13 @@ public class HomeLayer extends CCLayer {
 		CCSprite sprite = CCSprite.sprite("slime-attack.png");
 //		this.spriteSheet.addChild(sprite);
 		this.addChild(sprite);
-		float shiftTitle = 100f;
+		
 		sprite.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,
 				CCDirector.sharedDirector().winSize().height / 2 + shiftTitle
 				));
 		
-		float shiftMenu = - 50f; // Slime height = 160 / 2 + 20
+		
 		CCSprite playSprite = CCSprite.sprite("control-play.png", true);
 		CCMenuItemSprite playMenu = CCMenuItemSprite.item(playSprite, playSprite, this, "selectPlay");
 		CCSprite restartSprite = CCSprite.sprite("control-restart.png", true);
@@ -64,7 +76,7 @@ public class HomeLayer extends CCLayer {
 		
 		this.addChild(this.menu);
 		
-		float shiftInfo = -150f;
+		
 		String diff =LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty());		
 		String lvl = String.valueOf(SlimeFactory.GameInfo.getLevelNum());
 		String lvlMax = String.valueOf(SlimeFactory.GameInfo.getLevelMax());
@@ -75,6 +87,20 @@ public class HomeLayer extends CCLayer {
 				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftInfo
 				));
 		this.addChild(this.lblLevel);
+				
+		this.lblScore = CCLabel.makeLabel("0", "fonts/Slime.ttf", 60.0f);
+		this.lblScore.setPosition(CGPoint.make(
+				CCDirector.sharedDirector().winSize().getWidth() / 2,
+				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftScore
+				));
+		this.addChild(this.lblScore);
+		
+		this.starSprite = SlimeFactory.Star.getAnimatedStar();		
+		this.starSprite.setPosition(CGPoint.make(
+				CCDirector.sharedDirector().winSize().getWidth() / 2,
+				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftScore
+				));
+		this.addChild(this.starSprite);
 	}
 
 	@Override
@@ -103,6 +129,15 @@ public class HomeLayer extends CCLayer {
 		String lvlMax = String.valueOf(SlimeFactory.GameInfo.getLevelMax());
 		String info = diff + " " + lvl + " / " + lvlMax;
 		this.lblLevel.setString(info);
+		
+		String score = String.valueOf(SlimeFactory.GameInfo.getTotalScore());
+		this.lblScore.setString(score);
+		float starPadding = -10f;
+		float starX = this.lblScore.getPosition().x - this.lblScore.getContentSize().width / 2 - SlimeFactory.Star.getStarReferenceWidth() / 2 + starPadding;
+		this.starSprite.setPosition(CGPoint.make(
+				starX,
+				this.starSprite.getPosition().y
+				));
 	}
 	
 	@Override

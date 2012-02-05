@@ -219,6 +219,7 @@ public class Level {
 		//this.setStartCamera();
 		
 		this.preBuild();
+		SlimeFactory.GameInfo.removeLastScore();
 		SlimeFactory.LevelBuilder.rebuild(this, this.levelDefinition);
 		this.postBuild(this.currentLevelName);
 	}
@@ -800,6 +801,8 @@ public class Level {
 			if (this.levelDefinition != null) {
 				this.levelDefinition.setLastScore(this.lastScore);				
 			}
+			
+			SlimeFactory.GameInfo.addLevelScore(this.lastScore);
 
 			if (showEndLevel) {
 				this.showEndLevel();

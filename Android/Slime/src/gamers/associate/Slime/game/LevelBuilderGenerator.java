@@ -89,7 +89,7 @@ public class LevelBuilderGenerator implements ILevelBuilder
 	}
 	
 	@Override
-	public void rebuild(Level level, LevelDefinition levelDef) {
+	public void rebuild(Level level, LevelDefinition levelDef) {		
 		if (this.levelparser.isStored()) {
 			this.levelparser.buildLevel(level);			
 		} else {
