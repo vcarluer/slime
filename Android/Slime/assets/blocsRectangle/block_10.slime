@@ -1,0 +1,9 @@
+BlocInfo;0;120;480;480;0;BlocInfo-0;5;tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb;tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb;false;false;false;t,r,b,l
+TimeAttack;-2.0;0.0;0.0;0.0;0.0;15;5
+CircularSaw;80.0;336.0;40.0;40.0;-179.0;circularsaw;true
+Platform_Bumper;0.0;192.0;480.0;32.0;0.0
+Platform_NoSticky;0.0;376.0;480.0;32.0;0.0
+Star;234.0;281.0;30.0;31.0;0.0
+CircularSaw;152.0;336.0;40.0;40.0;-179.0;circularsaw;true
+CircularSaw;296.0;336.0;40.0;40.0;-179.0;circularsaw;true
+CircularSaw;392.0;336.0;40.0;40.0;-179.0;circularsaw;true

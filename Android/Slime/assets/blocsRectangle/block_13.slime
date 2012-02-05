@@ -1,0 +1,11 @@
+BlocInfo;0;120;480;480;0;BlocInfo-0;5;tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb;tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb;false;false;false;t,r,b,l
+TimeAttack;-2.0;0.0;0.0;0.0;0.0;15;5
+Platform;256.0;224.0;384.0;32.0;90.0
+Star;360.0;233.0;30.0;31.0;0.0
+Platform;0.0;432.0;432.0;32.0;0.0
+Platform_Corner;432.0;16.0;32.0;32.0;0.0
+Platform_Corner;432.0;432.0;32.0;32.0;-90.0
+Platform;0.0;16.0;432.0;32.0;0.0
+LaserGun;224.0;73.0;65.0;15.0;90.0;lasergun;target-7;true
+Target;248.0;416.0;16.0;16.0;0.0;target
+Button;48.0;48.0;40.0;27.0;0.0;laser-4;3

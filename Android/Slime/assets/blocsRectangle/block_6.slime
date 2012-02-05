@@ -1,0 +1,10 @@
+BlocInfo;0;120;480;480;0;Block_6;5;tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb;tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb;false;false;false;t,r,b,l
+TimeAttack;-2.0;0.0;0.0;0.0;0.0;15;5
+Platform;24.0;24.0;384.0;32.0;0.0
+Platform;144.0;160.0;96.0;32.0;0.0
+Platform;240.0;288.0;192.0;32.0;0.0
+BecBunsen;88.0;56.0;20.0;67.0;0.0;true;0;becbunsen
+CircularSaw;152.0;192.0;40.0;40.0;0.0;circularsaw;true
+CircularSaw;254.0;318.0;40.0;40.0;0.0;circularsaw;true
+CircularSaw;312.0;248.0;40.0;40.0;-179.0;circularsaw;true
+Star;250.0;248.0;30.0;31.0;0.0
