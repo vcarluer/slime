@@ -148,7 +148,7 @@ public class CircularSaw extends GameItemPhysic implements ITrigerable {
 		super.handleContact(contact);
 		if (this.isOn) {
 			if (contact.getContactWith() instanceof Slimy) {
-				((Slimy)contact.getContactWith()).splash();
+				((Slimy)contact.getContactWith()).slice();
 			}
 		}
 	}

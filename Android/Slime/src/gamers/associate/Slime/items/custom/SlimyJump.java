@@ -11,6 +11,7 @@ import gamers.associate.Slime.items.base.SpriteSheetFactory;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.config.ccMacros;
@@ -57,6 +58,8 @@ public class SlimyJump extends Slimy implements ISelectable {
 	private static float arrowScale = 1.5f;
 	private static float arrowAngleShift = -90;
 	private boolean isDisabled;
+	
+	private CCAction actionSelect;
 	
 	private boolean stickHandled;
 	
@@ -244,11 +247,13 @@ public class SlimyJump extends Slimy implements ISelectable {
 	
 	public void select() {		
 		this.selected = true;
-		this.auraSprite.setVisible(true);
+		// this.auraSprite.setVisible(true);
 		this.arrowSprite.setVisible(true);
-		CCAnimate animation = CCAnimate.action(this.animationList.get(Anim_Dbz_Aura), false);
-		CCRepeatForever repeat = CCRepeatForever.action(animation);
-		this.auraSprite.runAction(repeat);
+		// CCAnimate animation = CCAnimate.action(this.animationList.get(Anim_Dbz_Aura), false);
+		CCAnimate animation = CCAnimate.action(this.animationList.get(Anim_Buzz), false);
+		this.actionSelect = CCRepeatForever.action(animation);
+		this.sprite.runAction(this.actionSelect);
+		// this.auraSprite.runAction(repeat);
 		Sounds.playEffect(R.raw.slimyselect);			
 	}
 	
@@ -300,7 +305,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	public void render(float delta) {
 		super.render(delta);
 		if (this.isSelected()) {			
-			this.auraPosition.x = this.getPosition().x;
+			/*this.auraPosition.x = this.getPosition().x;
 			this.auraPosition.y = this.getPosition().y - this.height / 2;
 			this.auraSprite.setPosition(this.auraPosition);			
 			// this.auraSprite.setRotation(this.getAngle());
@@ -308,7 +313,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 			// scale go from 0 to 10, reajust to aura scale			
 			scale = scale * this.auraScale + startAuraScale;
 						
-			this.auraSprite.setScale(scale);
+			 this.auraSprite.setScale(scale);*/
 			this.arrowSprite.setPosition(this.getPosition());
 			float radians = (float)Math.atan2(this.worldImpulse.x, this.worldImpulse.y);
 			float degrees = ccMacros.CC_RADIANS_TO_DEGREES(radians) + arrowAngleShift;
@@ -487,10 +492,10 @@ public class SlimyJump extends Slimy implements ISelectable {
 	protected void postSpriteInit() {		
 		super.postSpriteInit();
 		this.auraSheet = SpriteSheetFactory.getSpriteSheet("slimydbz");		
-		this.auraSprite = CCSprite.sprite(GameItemCocos.getAnimFirstFrame(Anim_Dbz_Aura));
+		/*this.auraSprite = CCSprite.sprite(GameItemCocos.getAnimFirstFrame(Anim_Dbz_Aura));
 		this.auraSprite.setVisible(false);
 		this.auraSprite.setAnchorPoint(0.5f, 0f);
-		this.auraSheet.addChild(this.auraSprite);
+		this.auraSheet.addChild(this.auraSprite);*/
 		
 		this.arrowSprite = CCSprite.sprite(GameItemCocos.getAnimFirstFrame(Anim_Arrow));
 		this.arrowSprite.setVisible(false);		
@@ -507,14 +512,16 @@ public class SlimyJump extends Slimy implements ISelectable {
 //			this.currentJoint = null;
 //			this.currentJointDef = null;
 //		}
-		this.auraSheet.removeChild(this.auraSprite, true);
-		this.auraSheet.removeChild(this.arrowSprite, true);
+		/*this.auraSheet.removeChild(this.auraSprite, true);
+		this.auraSheet.removeChild(this.arrowSprite, true);*/
 		super.destroy();
 	}
 	
 	private void stopAura() {
-		this.auraSprite.setVisible(false);
+		this.sprite.stopAction(this.actionSelect);
+		/*this.auraSprite.setVisible(false);
 		this.auraSprite.stopAllActions();
+		*/
 		this.arrowSprite.setVisible(false);
 	}
 
