@@ -57,12 +57,14 @@ public abstract class SlimeFactory {
 	public static CocosFactory Sprite = new CocosFactory();
 	public static LevelGraphGeneratorCorridor LevelGeneratorCorridor = new LevelGraphGeneratorCorridor(); 
 	public static LevelGraphGeneratorRectangle LevelGeneratorRectangle = new LevelGraphGeneratorRectangle();
+	public static GameInformation GameInfo;
 		
 	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {		
 		// LevelBuilder = new LevelBuilder();
+		GameInfo = new GameInformation();
 		LevelBuilder = new LevelBuilderGenerator();
 		LevelGeneratorCorridor.attach(level);		
-		LevelGeneratorRectangle.attach(level);
+		LevelGeneratorRectangle.attach(level);		
 		
 		Slimy.attach(level, attachNode, attachWorld, attachWorldRatio);
 		SpawnPortal.attach(level, attachNode);

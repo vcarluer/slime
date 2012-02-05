@@ -22,7 +22,7 @@ public class LevelBuilderGenerator implements ILevelBuilder
 	private GameInformation gameInfo;
 	
 	public LevelBuilderGenerator() {		
-		this.gameInfo = new GameInformation();
+		this.gameInfo = SlimeFactory.GameInfo;
 		this.levelparser.setLocalStorage(true);		
 		this.firstBuild = true;
 		// always default id... Used for reset all
@@ -100,7 +100,7 @@ public class LevelBuilderGenerator implements ILevelBuilder
 	public void resetAll() {
 		this.levelDef.resetAllAndSave();
 		this.levelparser.resetStorage();
-		this.gameInfo.resetDifficulty(this.gameInfo.getDifficulty());
+		this.gameInfo.resetDifficulty(this.gameInfo.getDifficulty());		
 		Level.get(LevelBuilderGenerator.defaultId, true);
 	}
 	
