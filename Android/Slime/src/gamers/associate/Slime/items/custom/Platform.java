@@ -41,7 +41,7 @@ public class Platform extends GameItemPhysic {
 	public Platform(float x, float y, float width, float height, World world, float worldRatio, int platformType, boolean platformMove) {
 		super(x, y, width, height, world, worldRatio);
 		this.spriteType = SpriteType.SINGLE_REPEAT;		
-		this.zOrder = Level.zBack;
+		this.zOrder = Level.zTop;
 		this.type = platformType;
 		this.move = platformMove;
 		if (this.type != Sticky && this.type != Wall && this.type != Corner && this.type != T && this.type != Cross) {

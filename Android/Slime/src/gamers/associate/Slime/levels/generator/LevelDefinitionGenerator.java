@@ -3,6 +3,8 @@ package gamers.associate.Slime.levels.generator;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
+import org.cocos2d.nodes.CCDirector;
+
 import android.util.Log;
 
 import gamers.associate.Slime.Slime;
@@ -34,12 +36,22 @@ public class LevelDefinitionGenerator extends LevelDefinition {
 	public void buildLevel(Level level) {
 		if (this.currentGenerator != null) {
 			this.currentGenerator.generate(this.getComplexity(), BlocDirection.Left);
+			this.postBuild(level);
 		}
 	}
 	
+	private void postBuild(Level level) {
+		float w = CCDirector.sharedDirector().winSize().width / 2;
+		float h = CCDirector.sharedDirector().winSize().height / 2;
+		
+		
+		
+	}
+
 	public void buildBossLevel(Level level) {
 		if (this.currentGenerator != null) {
 			this.currentGenerator.generate(this.getComplexity(), BlocDirection.Left, true);
+			this.postBuild(level);
 		}
 	}
 

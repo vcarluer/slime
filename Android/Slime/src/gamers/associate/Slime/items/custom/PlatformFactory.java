@@ -16,6 +16,8 @@ public class PlatformFactory extends GameItemPhysicFactory<Platform>{
 		TextureAnimation.createFramesFromFiles(Platform.Anim_Base_Icy, 1);
 		TextureAnimation.createFramesFromFiles(Platform.Anim_Base_Wall, 1);
 		TextureAnimation.createFramesFromFiles(Platform.Anim_Base_Corner, 1);
+		TextureAnimation.createFramesFromFiles(Platform.Anim_Base_T, 1);
+		TextureAnimation.createFramesFromFiles(Platform.Anim_Base_Cross, 1);
 	}
 
 	@Override
