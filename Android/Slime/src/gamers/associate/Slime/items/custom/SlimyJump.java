@@ -145,7 +145,9 @@ public class SlimyJump extends Slimy implements ISelectable {
 		if (this.currentJoint != null) {
 			gl.glDisable(GL10.GL_LINE_SMOOTH);
 			gl.glColor4f(0.0f, 170f / 255f, 54f / 255f, 1.0f);
-			gl.glLineWidth(5f);										
+			gl.glLineWidth(5f);
+			this.jointStart.x = this.currentJoint.getAnchorA().x * this.worldRatio;
+			this.jointStart.y = this.currentJoint.getAnchorA().y * this.worldRatio;
 			CCDrawingPrimitives.ccDrawLine(gl, this.jointStart, this.getPosition());
 		}
 		
