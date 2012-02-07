@@ -112,10 +112,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.0703276"
-     inkscape:cx="91.356586"
-     inkscape:cy="223.0261"
+     inkscape:cx="-454.93243"
+     inkscape:cy="100.68314"
      inkscape:document-units="px"
-     inkscape:current-layer="Template"
+     inkscape:current-layer="MAP"
      showgrid="true"
      inkscape:snap-grids="true"
      inkscape:snap-page="false"
@@ -147,7 +147,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -223,8 +223,8 @@
        id="TimeAttack"
        sodipodi:linespacing="125%"
        type="TimeAttack"
-       att_criticTime="5"
-       att_levelTime="15"><tspan
+       att_criticTime="0"
+       att_levelTime="0"><tspan
          sodipodi:role="line"
          id="tspan4745-6"
          x="-440"
@@ -843,7 +843,7 @@
        x="-1104"
        y="648"
        type="BlocInfo"
-       att_complexity="5"
+       att_complexity="1"
        att_entries="tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb"
        att_exits="tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb"
        att_isStart="false"
@@ -986,9 +986,9 @@
        x="0"
        y="120"
        type="BlocInfo"
-       att_complexity="5"
-       att_entries="tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb"
-       att_exits="tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb"
+       att_complexity="1"
+       att_entries=""
+       att_exits=""
        att_isStart="false"
        att_isEnd="false"
        att_isBoss="false"
@@ -1001,8 +1001,8 @@
        id="TimeAttack-7"
        sodipodi:linespacing="125%"
        type="TimeAttack"
-       att_criticTime="5"
-       att_levelTime="15"><tspan
+       att_criticTime="0"
+       att_levelTime="0"><tspan
          sodipodi:role="line"
          id="tspan4745-6-6"
          x="-2"
@@ -1079,5 +1079,29 @@
        x="32"
        y="120"
        type="Platform" />
-  </g>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-600"
+       y="600"
+       id="text3142"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3144"
+         x="-600"
+         y="600"
+         style="font-size:20px">att_entries / att_exits: tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3146"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       transform="translate(-11.40625,109.53853)"><flowRegion
+         id="flowRegion3148"><rect
+           id="rect3150"
+           width="420.60486"
+           height="54.248413"
+           x="-588.60486"
+           y="497.75159" /></flowRegion><flowPara
+         id="flowPara3152"
+         style="font-size:20px">att_openFaces: t,r,b,l</flowPara></flowRoot>  </g>
 </svg>
