@@ -25,13 +25,7 @@ public class EndLevelLayer extends CCLayer {
 	private CCMenuItemSprite restartMenu;
 	private CCMenuItemSprite homeMenu;
 	
-	public EndLevelLayer() {		
-		this.star = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);
-		this.star.setPosition(CGPoint.make(
-				CCDirector.sharedDirector().winSize().width / 2,
-				CCDirector.sharedDirector().winSize().height / 2
-				));
-		
+	public EndLevelLayer() {						
 		this.scoreLabel = getMenuLabel("0");
 		this.scoreLabel.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,
@@ -43,19 +37,19 @@ public class EndLevelLayer extends CCLayer {
 		
 		CCSprite restartSprite = CCSprite.sprite("control-restart.png", true);
 		this.restartMenu = CCMenuItemSprite.item(restartSprite, restartSprite, this, "goRestart");
+		this.restartMenu.setScale(0.5f);
 		
 		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);
 		this.homeMenu = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goHome");
+		this.homeMenu.setScale(0.5f);
 		
-		this.menu = CCMenu.menu(this.nextMenu, this.restartMenu, this.homeMenu);
-		this.menu.alignItemsVertically();
+		this.menu = CCMenu.menu(this.homeMenu, this.nextMenu, this.restartMenu);
+		this.menu.alignItemsHorizontally(50);
 		this.menu.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,
-				CCDirector.sharedDirector().winSize().height / 2 - 50
+				CCDirector.sharedDirector().winSize().height / 2 - 100
 				));				
-				
-		// todo: set positions		
-		this.addChild(this.star);
+
 		this.addChild(this.scoreLabel);
 		this.addChild(this.menu);		
 	}
@@ -79,9 +73,17 @@ public class EndLevelLayer extends CCLayer {
 	 * @see org.cocos2d.layers.CCLayer#onEnter()
 	 */
 	@Override
-	public void onEnter() {
-		// TODO Auto-generated method stub
+	public void onEnter() {		
 		super.onEnter();
+		if (this.star == null) {
+			this.star = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);
+			this.star.setPosition(CGPoint.make(
+					CCDirector.sharedDirector().winSize().width / 2,
+					CCDirector.sharedDirector().winSize().height / 2
+					));
+			
+			this.addChild(this.star);
+		}
 	}
 
 	/* (non-Javadoc)
@@ -123,8 +125,14 @@ public class EndLevelLayer extends CCLayer {
 		this.setIsTouchEnabled(true);
 		currentMenu.setIsTouchEnabled(true);
 		currentMenu.setVisible(true);
-		this.slime.setVisible(true);
-		this.star.setVisible(true);
+		if (this.slime != null) {
+			this.slime.setVisible(true);
+		}
+		
+		if (this.star != null) {
+			this.star.setVisible(true);
+		}
+		
 		this.scoreLabel.setVisible(true);
 		this.setVisible(true);
 
@@ -134,8 +142,14 @@ public class EndLevelLayer extends CCLayer {
 	
 	public void disable() {
 		this.setIsTouchEnabled(false);
-		this.slime.setVisible(false);
-		this.star.setVisible(false);
+		if (this.slime != null) {
+			this.slime.setVisible(false);
+		}
+		
+		if (this.star != null) {
+			this.star.setVisible(false);
+		}
+		
 		this.scoreLabel.setVisible(false);
 		this.menu.setIsTouchEnabled(false);
 		this.menu.setVisible(false);
@@ -158,25 +172,26 @@ public class EndLevelLayer extends CCLayer {
 	
 	public void setVictory(int score) {
 		this.setScore(score);
-		this.initSlime(Slimy.Anim_Success);
+		this.initSlime(Slimy.Anim_Success, 0f);
 	}
 	
 	public void setLose() {
 		this.setScore(0);
-		this.initSlime(Slimy.Anim_LastDeath);
+		this.initSlime(Slimy.Anim_LastDeath, 2f);
 	}
 	
-	private void initSlime(String animation) {
+	private void initSlime(String animation, float waitTime) {
 		if (this.slime != null) {
 			this.removeChild(this.slime, true);
 		}
 		
-		this.slime = SlimeFactory.Slimy.getAnimatedSprite(animation, 2f);
+		this.slime = SlimeFactory.Slimy.getAnimatedSprite(animation, waitTime);
+		this.slime.setScale(2f);
 		this.addChild(this.slime);
 		
 		this.slime.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,
-				CCDirector.sharedDirector().winSize().height / 2 + 50
+				CCDirector.sharedDirector().winSize().height / 2 + 100
 				));
 	}
 }
