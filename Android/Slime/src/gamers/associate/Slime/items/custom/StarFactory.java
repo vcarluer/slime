@@ -34,14 +34,6 @@ public class StarFactory extends GameItemPhysicFactory<Star> {
 		return this.create(x + width / 2, y + height / 2, width, height);
 	}
 	
-	public CCSprite getAnimatedStar() {
-		CCSprite star = new CCSprite();
-		CCAnimate animate = CCAnimate.action(this.sharedAnimations.get(Star.Anim_Wait), false);
-		CCRepeatForever repeat = CCRepeatForever.action(animate);
-		star.runAction(repeat);
-		return star;
-	}
-	
 	public float getStarReferenceWidth() {
 		return Star.Reference_Width;
 	}

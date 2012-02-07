@@ -4,6 +4,7 @@ import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
+import gamers.associate.Slime.items.custom.Star;
 
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
@@ -95,7 +96,7 @@ public class HomeLayer extends CCLayer {
 				));
 		this.addChild(this.lblScore);
 		
-		this.starSprite = SlimeFactory.Star.getAnimatedStar();		
+		this.starSprite = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);		
 		this.starSprite.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().getWidth() / 2,
 				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftScore

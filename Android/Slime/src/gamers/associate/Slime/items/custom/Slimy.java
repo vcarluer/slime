@@ -64,6 +64,8 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 	protected boolean hasLanded;
 	private boolean bodyCategorySwitched;
 	
+	public static String Anim_LastDeath = Anim_Splash;
+	
 	public Slimy(float x, float y, float width, float height, World world, float worldRatio) {		
 		super(x, y, width, height, world, worldRatio);
 		this.spriteType = SpriteType.ANIM_SCALE;
@@ -216,13 +218,14 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 				this.sprite.stopAction(this.waitAction);
 			}
 					
-			CCAnimate animateBlink = CCAnimate.action(this.animationList.get(Anim_Burned_Wait), false);
+			CCAnimate animateBlink = CCAnimate.action(this.animationList.get(Anim_Burned_Wait), false);			
 			CCDelayTime delay = CCDelayTime.action(3f);
 			CCSequence blinkSeq = CCSequence.actions(animateBlink, animateBlink.reverse(), delay);
 			this.waitAction = CCRepeatForever.action(blinkSeq);		
 			this.sprite.runAction(this.waitAction);		
 			
 			CCAnimate animBurn = CCAnimate.action(this.animationList.get(Anim_Burning), false);
+			this.Anim_LastDeath = Anim_Burning;
 			CCCallFunc kill = CCCallFunc.action(this, "kill");
 			CCDelayTime deathDelay = CCDelayTime.action(deathDelayTime);
 			CCSequence sequence = CCSequence.actions(animBurn, deathDelay, kill);
@@ -258,6 +261,8 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 			if (this.waitAction != null) {				
 				this.sprite.stopAction(this.waitAction);
 			}
+			
+			this.Anim_LastDeath = animation;
 			
 			CCAnimate animSplash = CCAnimate.action(this.animationList.get(animation), false);			
 			CCDelayTime deathDelay = CCDelayTime.action(deathDelayTime);

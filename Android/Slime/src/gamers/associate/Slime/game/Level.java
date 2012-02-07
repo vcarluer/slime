@@ -903,15 +903,21 @@ public class Level {
 	private void showEndLevel(String text) {
 		if (!this.endLevelShown) {
 			this.enableEndLevelLayer();
-			this.endLevelLayer.setText(text);		
+			int score = 0;		
+			// No more care of text...
 			if (this.gamePlay != null) {			
-				this.endLevelLayer.setScore(this.lastScore);			
+				score = this.lastScore;			
 			}
 			
-			if (this.levelDefinition != null) {
-				this.endLevelLayer.setMax(this.levelDefinition.getMaxScore());
+			if (this.isVictory) {
+				this.endLevelLayer.setVictory(score);
+			} else {
+				this.endLevelLayer.setLose();
+			}
+			
+			if (this.levelDefinition != null) {				
 				this.endLevelLayer.setNextEnabled(this.levelDefinition.getMaxScore() > 0);
-				this.endLevelLayer.setHomeEnabled(this.levelDefinition.getMaxScore() == 0);
+				this.endLevelLayer.setHomeEnabled(true);
 			}
 			
 			this.setIsHudEnabled(false);

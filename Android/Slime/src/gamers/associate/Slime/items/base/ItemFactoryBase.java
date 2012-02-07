@@ -1,11 +1,17 @@
 package gamers.associate.Slime.items.base;
 
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.items.custom.Star;
 
 import java.util.Hashtable;
 
+import org.cocos2d.actions.base.CCRepeatForever;
+import org.cocos2d.actions.interval.CCAnimate;
+import org.cocos2d.actions.interval.CCDelayTime;
+import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.nodes.CCAnimation;
 import org.cocos2d.nodes.CCNode;
+import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteSheet;
 
 public abstract class ItemFactoryBase<T extends GameItemCocos> {	
@@ -114,5 +120,19 @@ public abstract class ItemFactoryBase<T extends GameItemCocos> {
 		}
 		
 		return node;
+	}
+	
+	public CCSprite getAnimatedSprite(String animationName) {
+		return this.getAnimatedSprite(animationName, 0f);
+	}
+	
+	public CCSprite getAnimatedSprite(String animationName, float waitTime) {
+		CCSprite spr = new CCSprite();
+		CCAnimate animate = CCAnimate.action(this.sharedAnimations.get(animationName), false);
+		CCDelayTime delay = CCDelayTime.action(waitTime);
+		CCSequence seq = CCSequence.actions(animate, delay);
+		CCRepeatForever repeat = CCRepeatForever.action(seq);
+		spr.runAction(repeat);
+		return spr;
 	}
 }
