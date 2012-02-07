@@ -33,4 +33,6 @@ public interface ISelectable {
 	boolean isActive();
 	
 	boolean simpleSelect();
+	
+	boolean isThumbnailAwaysOn();
 }

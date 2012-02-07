@@ -574,4 +574,10 @@ public class SlimyJump extends Slimy implements ISelectable {
 		
 		this.currentJoint = null;
 	}
+
+	@Override
+	public boolean isThumbnailAwaysOn() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

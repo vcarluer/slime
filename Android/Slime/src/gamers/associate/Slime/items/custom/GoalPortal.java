@@ -207,4 +207,9 @@ public class GoalPortal extends GameItemPhysic implements ISelectable {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public boolean isThumbnailAwaysOn() {
+		return true;
+	}
 }

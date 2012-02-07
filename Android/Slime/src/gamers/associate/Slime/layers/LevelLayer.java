@@ -140,14 +140,13 @@ public class LevelLayer extends CCLayer {
 						deltaMove.x = event.getX(touch.getPointerId()) - touch.getFirstMoveReference().x;
 						deltaMove.y = this.getGameY(event.getY(touch.getPointerId())) - touch.getFirstMoveReference().y;					
 											
+						CGPoint touchPoint = CGPoint.make(
+								event.getX(touch.getPointerId()), 
+								this.getGameY(event.getY(touch.getPointerId())));
 						if (CGPoint.ccpLength(deltaMove) < 5) {
-							this.level.simpleSelect();
+							this.level.simpleSelect(this.getGamePoint(touchPoint));
 						}
-						else {
-							CGPoint touchPoint = CGPoint.make(
-									event.getX(touch.getPointerId()), 
-									this.getGameY(event.getY(touch.getPointerId())));					
-												
+						else {																						
 							this.level.activateSelection(this.getGamePoint(touchPoint));					
 						}
 					}

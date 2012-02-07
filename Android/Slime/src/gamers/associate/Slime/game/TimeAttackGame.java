@@ -179,10 +179,10 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	}
 
 	public void simpleSelect() {
-		if (!this.isPaused) {
+		/*if (!this.isPaused) {
 			this.level.getCameraManager().moveInterpolateTo(this.level.getSelectedGameItem(), 0.5f);
 			this.level.setTimeRatio(2.0f);
-		}
+		}*/
 	}
 
 	public void startLevel() {

@@ -287,4 +287,9 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 	public void setCurrentSelection(boolean value) {
 		this.getLevelDefinition().setCurrentSelection(value);
 	}
+
+	@Override
+	public boolean isThumbnailAwaysOn() {
+		return false;
+	}
 }

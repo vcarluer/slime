@@ -697,24 +697,28 @@ public class Level {
 		}
 	}
 	
-	public void simpleSelect() {
+	public void simpleSelect(CGPoint gameReference) {
 		if (this.selectedItem != null) {
-			// this.cameraManager.centerCameraOn(this.selectedItem.getPosition());
-			if (this.selectedItem instanceof GameItem) {				
-				// Return true if auto or gameplay simpleSelect camera needed
-				if (this.selectedItem.simpleSelect()) {
-					if (this.gamePlay == null) {
-						GameItem center = (GameItem)this.selectedItem;
-						this.cameraManager.moveInterpolateTo(center, 0.3f);
-						// this.cameraManager.zoomInterpolateTo(center, 1.0f, 0.3f);
-					}
-					else {
-						this.gamePlay.simpleSelect();
-					}
-				}							
-			}
-			
-			this.unselectCurrent();
+			if (this.isPaused) {
+				// this.cameraManager.centerCameraOn(this.selectedItem.getPosition());
+				if (this.selectedItem instanceof GameItem) {				
+					// Return true if auto or gameplay simpleSelect camera needed
+					if (this.selectedItem.simpleSelect()) {
+						if (this.gamePlay == null) {
+							GameItem center = (GameItem)this.selectedItem;
+							this.cameraManager.moveInterpolateTo(center, 0.3f);
+							// this.cameraManager.zoomInterpolateTo(center, 1.0f, 0.3f);
+						}
+						else {
+							this.gamePlay.simpleSelect();
+						}
+					}							
+				}						
+				
+				this.unselectCurrent();
+			} else {
+				this.activateSelection(gameReference);
+			}			
 		}
 	}
 	
@@ -739,7 +743,11 @@ public class Level {
 					}
 					else {
 						this.selectedItem = selectable;
-					}									
+					}
+					
+					if (this.selectedItem != null) {
+						break;
+					}
 				}
 			}
 			

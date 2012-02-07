@@ -22,7 +22,7 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 	private boolean isSelected;
 	private CCSprite targetThumbnail;
 	private CGRect selectionRect;
-	private CGRect scaledRect;
+	private CGRect scaledRect;	
 	
 	private static float Default_Selection_Width = 50f;
 	private static float Default_Selection_Height = 50f;
@@ -31,7 +31,7 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 		super(x, y, width, height);
 		// this.spriteType = SpriteType.UNKNOWN;
 		this.spriteType = SpriteType.SINGLE_SCALE_DIRECT;
-		this.zOrder = Level.zFront;
+		this.zOrder = Level.zTop;
 		this.selectionRect = CGRect.make(0, 0, Default_Selection_Width, Default_Selection_Height);		
 		this.scaledRect = CGRect.zero();
 	}
@@ -44,12 +44,13 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 	public void setTarget(ISelectable target) {
 		this.target = target;
 		this.targetThumbnail = this.target.getThumbail();
-		target.getRootNode().addChild(this.targetThumbnail, Level.zFront);
+		this.isActive = !this.target.isThumbnailAwaysOn();
+		target.getRootNode().addChild(this.targetThumbnail, Level.zTop);
 		this.targetThumbnail.setPosition(this.position);		
 	}
 
 	public boolean canSelect(CGPoint gameReference) {
-		return CGRect.containsPoint(this.getSelectionRect(), gameReference);
+		return this.isActive() && CGRect.containsPoint(this.getSelectionRect(), gameReference);
 	}
 
 	public CGRect getSelectionRect() {
@@ -155,7 +156,7 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 
 	@Override
 	public boolean isActive() {
-		return this.target.isActive() || this.isPaused;
+		return this.isActive || Level.currentLevel.isPaused();
 	}
 
 	/* (non-Javadoc)
@@ -191,5 +192,10 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 	@Override
 	protected void resume() {
 		// no resume
+	}
+
+	@Override
+	public boolean isThumbnailAwaysOn() {
+		return false;
 	}	
 }
