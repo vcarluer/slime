@@ -44,7 +44,7 @@ public class LevelDefinitionGenerator extends LevelDefinition {
 		float w = CCDirector.sharedDirector().winSize().width / 2;
 		float h = CCDirector.sharedDirector().winSize().height / 2;
 		
-		
+		// Complete level here
 		
 	}
 

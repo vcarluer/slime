@@ -32,8 +32,13 @@ public class ZoomInterpolateAction extends CameraAction {
 		else {
 			// Set zoom point center of screen?
 		}					
-		
+				
 		float zoomBy = (this.getTargetValue() - this.getManager().getCurrentZoom()) * this.getInterpolation();
+		// Only for zoom...
+		if (this.getManager().getCurrentZoom() + zoomBy >= this.getTargetValue()) {
+			zoomBy = this.getTargetValue() - this.getManager().getCurrentZoom();
+		}
+		
 		// this.getManager().zoomCameraCenterBy(zoomBy);
 		this.getManager().zoomCameraBy(zoomBy);
 	}

@@ -24,6 +24,7 @@ public class MoveInterpolateAction extends CameraAction {
 		float targetX = this.getTargetAction().getPosition().x;
 		float targetY = this.getTargetAction().getPosition().y;
 				
+		// A borner...
 		this.pointAction.x = cameraX + ((targetX - cameraX) * this.getInterpolation());
 		this.pointAction.y = cameraY + ((targetY - cameraY) * this.getInterpolation());
 		

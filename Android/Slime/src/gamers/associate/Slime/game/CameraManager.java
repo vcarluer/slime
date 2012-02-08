@@ -438,7 +438,7 @@ public class CameraManager {
 		this.minFollowScale = 0.5f;
 		this.zoomSpeed = 3.0f;
 		// To take into account new limits
-		this.zoomCameraTo(1.0f);
+		this.zoomCameraTo(0f);
 		// this.defineVirtualCameraRect();
 		// this.zoomCameraBy(0);
 		// this.normalizePosition();
