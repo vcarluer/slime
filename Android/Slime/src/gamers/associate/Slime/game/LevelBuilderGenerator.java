@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 public class LevelBuilderGenerator implements ILevelBuilder
 {
-	private static int MinimumComplexity = 15;
-	private static int AverageComplexityPerLevel = 3;
+	private static int MinimumComplexity = 1;
+	private static int AverageComplexityPerLevel = 1;
 	public static String defaultId = "Random";
 	private static String fileName = defaultId + ".slime"; 
 	private int complexity;
@@ -80,7 +80,7 @@ public class LevelBuilderGenerator implements ILevelBuilder
 	}
 	
 	private int computeComplexity() {
-		return MinimumComplexity + AverageComplexityPerLevel * this.gameInfo.getLevelNum();
+		return MinimumComplexity + this.gameInfo.getDifficulty() + AverageComplexityPerLevel * this.gameInfo.getDifficulty() * this.gameInfo.getLevelNum();
 	}
 
 	@Override

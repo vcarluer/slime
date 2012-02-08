@@ -49,6 +49,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 			label.setColor(ccColor3B.ccc3( 255,255,255));
 			label.stopAllActions();
 			label.setOpacity(255);
+			this.setStartTime();
 		}
 		
 		this.leftTime = this.startTime;
@@ -146,6 +147,11 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	
 	private void setNormalTime() {
 		this.level.setHudText(getFormatTime(this.leftTime));
+		this.localRender = 0;
+	}
+	
+	private void setStartTime() {
+		this.level.setStartText(getFormatTime(this.leftTime));
 		this.localRender = 0;
 	}
 

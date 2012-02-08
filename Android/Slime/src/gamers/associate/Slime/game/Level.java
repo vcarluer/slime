@@ -793,6 +793,10 @@ public class Level {
 		this.hudLayer.setHudText(text);
 	}
 	
+	public void setStartText(String text) {
+		this.hudLayer.setHudStartText(text);
+	}
+	
 	public void hideHudText() {
 		this.hudLayer.hideHudText();
 	}

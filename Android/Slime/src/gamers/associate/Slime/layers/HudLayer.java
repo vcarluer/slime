@@ -79,6 +79,13 @@ public class HudLayer extends CCLayer {
 		this.countLabel.setString(text);		
 	}
 	
+	public void setHudStartText(String text) {
+		this.countLabel.setPosition(
+				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - 65 - this.countLabel.getContentSize().width, 
+				CCDirector.sharedDirector().winSize().getHeight() - 65));		
+		this.countLabel.setString(text);		
+	}
+	
 	public void hideHudText() {
 		if (this.countLabel != null) {
 			this.countLabel.setVisible(false);

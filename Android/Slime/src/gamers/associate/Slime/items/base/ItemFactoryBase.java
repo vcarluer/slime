@@ -5,6 +5,7 @@ import gamers.associate.Slime.items.custom.Star;
 
 import java.util.Hashtable;
 
+import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCDelayTime;
@@ -127,12 +128,16 @@ public abstract class ItemFactoryBase<T extends GameItemCocos> {
 	}
 	
 	public CCSprite getAnimatedSprite(String animationName, float waitTime) {
-		CCSprite spr = new CCSprite();
+		CCSprite spr = new CCSprite();		
+		spr.runAction(this.getAnimation(animationName, waitTime));
+		return spr;
+	}
+	
+	public CCAction getAnimation(String animationName, float waitTime) {		
 		CCAnimate animate = CCAnimate.action(this.sharedAnimations.get(animationName), false);
 		CCDelayTime delay = CCDelayTime.action(waitTime);
 		CCSequence seq = CCSequence.actions(animate, delay);
 		CCRepeatForever repeat = CCRepeatForever.action(seq);
-		spr.runAction(repeat);
-		return spr;
+		return repeat;
 	}
 }

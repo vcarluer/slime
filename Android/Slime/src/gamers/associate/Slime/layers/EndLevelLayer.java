@@ -74,16 +74,7 @@ public class EndLevelLayer extends CCLayer {
 	 */
 	@Override
 	public void onEnter() {		
-		super.onEnter();
-		if (this.star == null) {
-			this.star = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);
-			this.star.setPosition(CGPoint.make(
-					CCDirector.sharedDirector().winSize().width / 2,
-					CCDirector.sharedDirector().winSize().height / 2
-					));
-			
-			this.addChild(this.star);
-		}
+		super.onEnter();		
 	}
 
 	/* (non-Javadoc)
@@ -171,23 +162,38 @@ public class EndLevelLayer extends CCLayer {
 	}
 	
 	public void setVictory(int score) {
+		this.initStar();
 		this.setScore(score);
 		this.initSlime(Slimy.Anim_Success, 0f);
 	}
 	
 	public void setLose() {
+		this.initStar();
 		this.setScore(0);
 		this.initSlime(Slimy.Anim_LastDeath, 2f);
 	}
 	
-	private void initSlime(String animation, float waitTime) {
-		if (this.slime != null) {
-			this.removeChild(this.slime, true);
+	private void initStar() {
+		if (this.star == null) {
+			this.star = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);
+			this.addChild(this.star);
 		}
-		
-		this.slime = SlimeFactory.Slimy.getAnimatedSprite(animation, waitTime);
-		this.slime.setScale(2f);
-		this.addChild(this.slime);
+				
+		this.star.setPosition(CGPoint.make(
+				CCDirector.sharedDirector().winSize().width / 2,
+				CCDirector.sharedDirector().winSize().height / 2
+				));					
+	}
+	
+	private void initSlime(String animation, float waitTime) {
+		if (this.slime == null) {
+			this.slime = SlimeFactory.Slimy.getAnimatedSprite(animation, waitTime);
+			this.slime.setScale(2f);
+			this.addChild(this.slime);
+		} else {
+			this.slime.stopAllActions();
+			this.slime.runAction(SlimeFactory.Slimy.getAnimation(animation, waitTime));
+		}				
 		
 		this.slime.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,
