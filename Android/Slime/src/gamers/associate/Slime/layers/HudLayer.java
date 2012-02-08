@@ -40,7 +40,7 @@ public class HudLayer extends CCLayer {
 		this.countLabel.setAnchorPoint(0, 0);
 		this.addChild(this.countLabel);
 		this.countLabel.setPosition(
-				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - 65, 
+				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - 15, 
 				CCDirector.sharedDirector().winSize().getHeight() - 65));
 		this.hideSlimyCount();
 	}
@@ -81,7 +81,7 @@ public class HudLayer extends CCLayer {
 	
 	public void setHudStartText(String text) {
 		this.countLabel.setPosition(
-				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - 65 - this.countLabel.getContentSize().width, 
+				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - 15 - this.countLabel.getContentSize().width, 
 				CCDirector.sharedDirector().winSize().getHeight() - 65));		
 		this.countLabel.setString(text);		
 	}
