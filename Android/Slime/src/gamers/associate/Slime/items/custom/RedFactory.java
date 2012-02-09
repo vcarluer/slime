@@ -24,7 +24,7 @@ public class RedFactory extends GameItemPhysicFactory<Red> {
 
 	@Override
 	protected void runFirstAnimations(Red item) {
-		item.waitAnim();
+		item.waitAnimReal();
 	}
 	
 	public Red createBL(float x, float y) {

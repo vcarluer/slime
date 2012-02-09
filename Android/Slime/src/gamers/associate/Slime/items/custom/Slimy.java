@@ -304,26 +304,7 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 		this.isDead = true;
 		this.isDying = false;		
 		Level.currentLevel.slimyKilled(this);
-	}
-	
-	private void swithBodyCategory() {
-		if (this.body != null && !this.bodyCategorySwitched) {
-			this.bodyCategorySwitched = true;
-			Filter filter = new Filter();
-			
-			filter.categoryBits = GameItemPhysic.Category_OutGame;
-			filter.maskBits = GameItemPhysic.Category_Level;					
-			filter.groupIndex = -1;
-			for(Fixture fix : this.body.getFixtureList()) {
-				// Change fixture shape here?
-				fix.setFilterData(filter);
-				fix.setRestitution(0f);
-				fix.setFriction(1.0f);
-				fix.setDensity(10f);
-				this.body.resetMassData();
-			}
-		}
-	}
+	}	
 	
 	public boolean isDead() {
 		return this.isDead;

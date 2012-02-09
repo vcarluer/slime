@@ -1,14 +1,20 @@
 package gamers.associate.Slime.items.custom;
 
+import java.util.Random;
+
+import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCDelayTime;
+import org.cocos2d.actions.interval.CCReverseTime;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
@@ -29,6 +35,21 @@ public class Red extends GameItemPhysic {
 	public static String Anim_Contracting = "contracting";
 	public static String Anim_Wait = "wait";
 	
+	// private static float SlimeMaxDistance = 480f;
+	// Used for wait too
+	private static int maxWaitJump = 3;
+	private static float minTimeBeforeHit = 1;
+	private long lastHitTime;
+	private long nextTrigger;
+	private boolean waitTrigger;
+	
+	private int life = 3;	
+	private RedState state;
+	
+	private CCAction action;	
+	
+	private static Random rand = new Random();
+	
 	public Red(float x, float y, float width, float height, World world,
 			float worldRatio) {
 		super(x, y, width, height, world, worldRatio);
@@ -43,6 +64,8 @@ public class Red extends GameItemPhysic {
 		
 		this.bodyWidth = Default_Body_Width * this.width / Default_Width;
 		this.bodyHeight = Default_Body_Height * this.height / Default_Height;
+		
+		this.state = RedState.Wait;
 	}
 
 	@Override
@@ -108,13 +131,136 @@ public class Red extends GameItemPhysic {
 	@Override
 	protected void handleContact(ContactInfo item) {					
 		super.handleContact(item);
+		
+		if (item.getContactWith() instanceof Slimy) {
+			Slimy slimy = (Slimy) item.getContactWith();
+			switch (this.state) {
+			case Attack:
+				slimy.splash();
+				break;
+			case Defense:
+			case Dead:
+				break;
+			case PrepareAttack:
+			case Wait:
+				this.hit();
+				break;
+			}
+			
+			// Bounce
+		} else {
+			this.land();
+		}
+	}		
+
+	private void land() {
+		if (this.state == RedState.Attack) {
+			this.goToWaitState();
+		}
 	}
+
+	private void hit() {
+		long hitTime = System.currentTimeMillis();
+		if ((hitTime - this.lastHitTime) / 1000 > minTimeBeforeHit) {
+			this.lastHitTime = hitTime;
+			this.life--;
+			if (this.life == 0) {
+				this.goToDeadState();
+			} else {
+				// this.goToDefenseState();
+			}
+		}		
+	}
+
+	private void goToDefenseState() {
+		this.state = RedState.Defense;
+		this.defenseAnim();
+		this.prepareNextJump();
+	}
+
+	private void prepareNextJump() {
+		this.nextTrigger = System.currentTimeMillis() + ((rand.nextInt(maxWaitJump) + 2) * 1000);
+		this.waitTrigger = true;
+	}
+
+	private void defenseAnim() {
+		this.sprite.stopAllActions();
+		CCAnimate shrink = CCAnimate.action(this.animationList.get(Anim_Contracting), false);
+		this.action = shrink;
+		this.sprite.runAction(this.action);
+	}
+
+	private void goToDeadState() {
+		this.state = RedState.Dead;
+		this.deadAnim();
+		this.swithBodyCategory();
+	}	
 	
+	private void deadAnim() {
+		this.sprite.stopAllActions();
+		CCAnimate shrink = CCAnimate.action(this.animationList.get(Anim_Contracting), false);
+		CCAnimate breaking = CCAnimate.action(this.animationList.get(Anim_Breaking), false);
+		CCSequence seq = CCSequence.actions(shrink, breaking);
+		this.action = seq;
+		this.sprite.runAction(this.action);
+	}
+
 	public void waitAnim() {
+		this.sprite.stopAllActions();		 
+		CCCallFunc call = CCCallFunc.action(this, "waitAnimReal");
+		if (this.state == RedState.Defense) {		
+			CCAnimate shrink = CCAnimate.action(this.animationList.get(Anim_Contracting), false);			
+			CCSequence seq = CCSequence.actions(shrink, call);
+			this.action = seq;
+		} else {
+			this.action = call;
+		}
+							
+		this.sprite.runAction(this.action);
+	}	
+	
+	public void waitAnimReal() {
 		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Wait), false);
 		CCDelayTime delay = CCDelayTime.action(2f);
 		CCSequence seq = CCSequence.actions(animate, delay);
-		CCRepeatForever repeat = CCRepeatForever.action(seq);
-		this.sprite.runAction(repeat);	
+		CCRepeatForever repeat = CCRepeatForever.action(seq);		
+		this.action = repeat;
+		this.sprite.runAction(this.action);
+		this.state = RedState.Wait;		
+		this.prepareNextJump();
+	}
+
+	public void goToWaitState() {		
+		this.state = RedState.Wait;
+		this.waitAnim();
+	}
+	
+	@Override
+	public void render(float delta) {		
+		super.render(delta);
+		
+		if (this.waitTrigger) {
+			long time = System.currentTimeMillis();
+			if (time > this.nextTrigger) {
+				switch (this.state) {			
+				case Attack:
+				case Dead:			
+				case PrepareAttack:
+					break;
+				case Defense:
+					this.goToWaitState();
+					break;
+				case Wait:
+					this.jump();
+				}
+			}
+			
+			this.waitTrigger = false;
+		}
+	}
+
+	private void jump() {
+		// TODO Auto-generated method stub
+		
 	}
 }

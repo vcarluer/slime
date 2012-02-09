@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import org.cocos2d.config.ccMacros;
 
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.WorldManifold;
 
@@ -22,6 +24,7 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 	protected boolean noStick;
 	protected boolean IsAllSensor;
 	protected boolean isPhysicDisabled;
+	private boolean bodyCategorySwitched;
 	
 	public GameItemPhysic(float x, float y, float width, float height, World world, float worldRatio) {		
 		super(x, y, width, height, world, worldRatio);		
@@ -149,5 +152,24 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 	 */
 	public void setIsAllSensor(boolean isAllSensor) {
 		IsAllSensor = isAllSensor;
+	}
+	
+	protected void swithBodyCategory() {
+		if (this.body != null && !this.bodyCategorySwitched) {
+			this.bodyCategorySwitched = true;
+			Filter filter = new Filter();
+			
+			filter.categoryBits = GameItemPhysic.Category_OutGame;
+			filter.maskBits = GameItemPhysic.Category_Level;					
+			filter.groupIndex = -1;
+			for(Fixture fix : this.body.getFixtureList()) {
+				// Change fixture shape here?
+				fix.setFilterData(filter);
+				fix.setRestitution(0f);
+				fix.setFriction(1.0f);
+				fix.setDensity(10f);
+				this.body.resetMassData();
+			}
+		}
 	}
 }
