@@ -19,6 +19,7 @@ import gamers.associate.Slime.levels.itemdef.MenuNodeDef;
 import gamers.associate.Slime.levels.itemdef.MetaMenuDef;
 import gamers.associate.Slime.levels.itemdef.PlatformDef;
 import gamers.associate.Slime.levels.itemdef.PolygonDef;
+import gamers.associate.Slime.levels.itemdef.RedDef;
 import gamers.associate.Slime.levels.itemdef.SpawnDef;
 import gamers.associate.Slime.levels.itemdef.SpriteDef;
 import gamers.associate.Slime.levels.itemdef.StarDef;
@@ -116,6 +117,7 @@ public class LevelDefinitionParser extends LevelDefinition
 		this.itemDefinitions.add(new StarDef());
 		this.itemDefinitions.add(new BoxDef());
 		this.itemDefinitions.add(new SpriteDef());
+		this.itemDefinitions.add(new RedDef());
 	}
 	
 	private void buildItemTypeMap() {
