@@ -20,8 +20,10 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
+import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 
@@ -201,6 +203,8 @@ public class Red extends GameItemPhysic {
 			this.sprite.stopAction(this.currentAction);
 			this.goToWaitState();
 		}
+		
+		Sounds.playEffect(R.raw.slimyland);
 	}
 
 	private void hit() {
@@ -209,6 +213,7 @@ public class Red extends GameItemPhysic {
 			this.sprite.stopAction(this.currentAction);
 			this.lastHitTime = hitTime;
 			this.setLife(this.getLife() - 1);
+			Sounds.playEffect(R.raw.slimydeath);
 			if (this.getLife() == 0) {
 				this.goToDeadState();
 			} else {
@@ -238,6 +243,7 @@ public class Red extends GameItemPhysic {
 
 	private void goToDeadState() {
 		this.state = RedState.Dead;
+		Sounds.playEffect(R.raw.slimyfire);
 		this.deadAnim();
 		this.swithBodyCategory();
 	}	
@@ -398,6 +404,7 @@ public class Red extends GameItemPhysic {
 	}
 	
 	public void prepareJumpReal() {
+		Sounds.playEffect(R.raw.slimyselect);
 		this.state = RedState.PrepareAttack;
 		this.prepareJumpAnim();
 	}
@@ -421,6 +428,7 @@ public class Red extends GameItemPhysic {
 	public void jumpReal() {
 		if (this.state == RedState.PrepareAttack) {
 			GameItem item = Level.currentLevel.getStartItem();
+			Sounds.playEffect(R.raw.slimyjump);
 			int dir = this.impulse(item, this, false, 4, 10);
 			if (dir > 0) {
 				this.sprite.setFlipX(true);
