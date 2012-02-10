@@ -116,7 +116,7 @@ public class Red extends GameItemPhysic {
 		    		FixtureDef fixtureDef = new FixtureDef();
 		    		fixtureDef.shape = dynamicBox;	    		
 					fixtureDef.density = 0.1f;
-					fixtureDef.friction = 0.1f;
+					fixtureDef.friction = 0.9f;
 		    		fixtureDef.restitution = 0.1f;    		
 		    		
 		    		fixtureDef.filter.categoryBits = GameItemPhysic.Category_InGame;
@@ -147,11 +147,17 @@ public class Red extends GameItemPhysic {
 				break;
 			case PrepareAttack:
 			case Wait:
-				this.hit();
+				float ySlimy = slimy.getPosition().y - slimy.getHeight() / 2;
+				float yMe = this.getPosition().y - this.getHeight() / 2;
+				if (yMe > ySlimy) {
+					slimy.splash();
+				} else {
+					this.hit();
+				}			
 				break;
 			}
-			
-			this.bouceSlimy(slimy);
+						
+			this.impulse(this, slimy, true, 2, 4);
 		} else {
 			this.land();
 		}
@@ -190,6 +196,7 @@ public class Red extends GameItemPhysic {
 
 	private void goToDefenseState() {
 		this.state = RedState.Defense;
+		this.impulse(Level.currentLevel.getStartItem(), this, true, 2, 5);		
 		this.defenseAnim();
 		this.prepareNextJump();
 	}
@@ -252,7 +259,11 @@ public class Red extends GameItemPhysic {
 	}
 	
 	@Override
-	public void render(float delta) {		
+	public void render(float delta) {
+		if (this.body != null) {
+			this.body.setTransform(this.body.getPosition(), 0f);
+		}
+		
 		super.render(delta);
 		
 		if (this.waitTrigger) {
@@ -302,23 +313,27 @@ public class Red extends GameItemPhysic {
 	public void jumpReal() {
 		if (this.state == RedState.PrepareAttack) {
 			GameItem item = Level.currentLevel.getStartItem();
-			int dir = 1;
-			if (item.getPosition().x < this.getPosition().x) {
-				dir = -1;
-			}
-			
-			int powa = rand.nextInt(6) + 5;
-			this.impulse.x = powa * dir;
-			this.impulse.y = powa;
-			this.getBody().applyLinearImpulse(this.impulse, this.body.getPosition());
+			this.impulse(item, this, false, 1, 8);
 			this.state = RedState.Attack;
 			
 			this.jumpRealAnim();			
 		}
 	}
 	
-	private void impulse(GameItem item, GameItemPhysic toImpulse) {
+	private void impulse(GameItem item, GameItemPhysic toImpulse, boolean goAway, int minPowa, int maxPowa) {
+		int dir = 1;
+		if (goAway) {
+			dir = -1;
+		}
 		
+		if (item.getPosition().x < toImpulse.getPosition().x) {
+			dir = -dir;
+		}
+		
+		int powa = rand.nextInt(maxPowa + 1 - minPowa) + minPowa;
+		this.impulse.x = powa * dir;
+		this.impulse.y = powa;
+		toImpulse.getBody().applyLinearImpulse(this.impulse, toImpulse.getBody().getPosition());		
 	}
 
 	private void jumpRealAnim() {
