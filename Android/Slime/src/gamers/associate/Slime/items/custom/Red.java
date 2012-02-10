@@ -49,8 +49,7 @@ public class Red extends GameItemPhysic {
 	
 	private int life = 1;	
 	private RedState state;
-	
-	private CCAction action;
+		
 	private CCAction waitAction;
 	private CCAction waitActionDefense;
 	private CCAction waitActionDead;
@@ -60,13 +59,16 @@ public class Red extends GameItemPhysic {
 	private static Random rand = new Random();
 	
 	private boolean isBoss;
+	private float densityBoss = 0.1f;	
+	private float densityNorm = 2.0f;
 	
 	public Red(float x, float y, float width, float height, World world,
-			float worldRatio) {
+			float worldRatio, boolean isBoss) {
 		super(x, y, width, height, world, worldRatio);
 		
 		this.spriteType = spriteType.ANIM_SCALE;
 		this.setNoStick(true);
+		this.isBoss = isBoss;
 		
 		if (width == 0 && height == 0) {
 			this.width = Default_Width;
@@ -125,7 +127,12 @@ public class Red extends GameItemPhysic {
 		    		
 		    		FixtureDef fixtureDef = new FixtureDef();
 		    		fixtureDef.shape = dynamicBox;	    		
-					fixtureDef.density = 0.1f;
+					float density = this.densityNorm;
+					if (this.isBoss()) {
+						density = this.densityBoss;
+					}
+
+		    		fixtureDef.density = density;
 					fixtureDef.friction = 0.9f;
 		    		fixtureDef.restitution = 0.1f;    		
 		    		
@@ -145,37 +152,53 @@ public class Red extends GameItemPhysic {
 	@Override
 	protected void handleContact(ContactInfo item) {					
 		super.handleContact(item);
-		
+				
 		if (item.getContactWith() instanceof Slimy) {
 			Slimy slimy = (Slimy) item.getContactWith();
 			switch (this.state) {			
 			case Attack:
-				slimy.splash();
-				break;
-			case Defense:
-			case Dead:
-			case PrepareAttack:
-				break;			
-			case Wait:
-				float ySlimy = slimy.getPosition().y - slimy.getHeight() / 2;
-				float yMe = this.getPosition().y - this.getHeight() / 2;
-				if (yMe > ySlimy) {
+				if (this.isBoss()) {
 					slimy.splash();
 				} else {
-					this.hit();
-				}			
+					this.contact(slimy);
+				}
+				
+				break;
+			case Defense:
+			case Dead:			
+				break;
+			case PrepareAttack:
+				if (!this.isBoss()) {
+					this.contact(slimy);
+				}
+
+				break;
+			case Wait:
+				this.contact(slimy);			
 				break;
 			}
 						
 			this.impulse(this, slimy, true, 2, 4);
 		} else {
-			this.land();
+			if (!(item.getContactWith() instanceof Red)) {
+				this.land();
+			}			
 		}
+	}
+
+	private void contact(Slimy slimy) {
+		float ySlimy = slimy.getPosition().y - slimy.getHeight() / 2;
+		float yMe = this.getPosition().y - this.getHeight() / 2;
+		if (yMe > ySlimy) {
+			slimy.splash();
+		} else {
+			this.hit();
+		}		
 	}
 
 	private void land() {
 		if (this.state == RedState.Attack) {			
-			this.sprite.stopAction(this.action);
+			this.sprite.stopAction(this.currentAction);
 			this.goToWaitState();
 		}
 	}
@@ -183,6 +206,7 @@ public class Red extends GameItemPhysic {
 	private void hit() {
 		long hitTime = System.currentTimeMillis();
 		if ((hitTime - this.lastHitTime) / 1000 > minTimeBeforeHit) {
+			this.sprite.stopAction(this.currentAction);
 			this.lastHitTime = hitTime;
 			this.setLife(this.getLife() - 1);
 			if (this.getLife() == 0) {
@@ -208,8 +232,8 @@ public class Red extends GameItemPhysic {
 
 	private void defenseAnim() {		
 		CCAnimate shrink = CCAnimate.action(this.animationList.get(Anim_Contracting), false);
-		this.action = shrink;
-		this.sprite.runAction(this.action);
+		this.currentAction = shrink;
+		this.sprite.runAction(this.currentAction);
 	}
 
 	private void goToDeadState() {
@@ -235,8 +259,8 @@ public class Red extends GameItemPhysic {
 			CCAnimate breaking = CCAnimate.action(this.animationList.get(Anim_Breaking), false);
 			CCCallFunc call = CCCallFunc.action(this, "win");
 			CCSequence seq = CCSequence.actions(shrink, breaking, call);
-			this.action = seq;
-			this.sprite.runAction(this.action);
+			this.currentAction = seq;
+			this.sprite.runAction(this.currentAction);
 		}
 															
 	}
@@ -253,12 +277,12 @@ public class Red extends GameItemPhysic {
 		if (this.state == RedState.Defense) {		
 			CCAnimate shrink = CCAnimate.action(this.animationList.get(Anim_Contracting), false);			
 			CCSequence seq = CCSequence.actions(shrink.reverse(), call);
-			this.action = seq;
+			this.currentAction = seq;
 		} else {
-			this.action = call;
+			this.currentAction = call;
 		}
 							
-		this.sprite.runAction(this.action);
+		this.sprite.runAction(this.currentAction);
 	}	
 	
 	public void waitAnimReal() {								
@@ -365,12 +389,12 @@ public class Red extends GameItemPhysic {
 		if (this.state == RedState.Defense) {		
 			CCAnimate shrink = CCAnimate.action(this.animationList.get(Anim_Contracting), false);			
 			CCSequence seq = CCSequence.actions(shrink.reverse(), call);
-			this.action = seq;
+			this.currentAction = seq;
 		} else {
-			this.action = call;
+			this.currentAction = call;
 		}
 							
-		this.sprite.runAction(this.action);					
+		this.sprite.runAction(this.currentAction);					
 	}
 	
 	public void prepareJumpReal() {
@@ -382,8 +406,8 @@ public class Red extends GameItemPhysic {
 		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Bite));
 		CCCallFunc call = CCCallFunc.action(this, "jumpReal");
 		CCSequence seq = CCSequence.actions(animate, animate, call);
-		this.action = seq;
-		this.sprite.runAction(this.action);
+		this.currentAction = seq;
+		this.sprite.runAction(this.currentAction);
 		
 		GameItem item = Level.currentLevel.getStartItem();
 		int dir = this.getDir(item, this, false);
@@ -438,8 +462,8 @@ public class Red extends GameItemPhysic {
 	private void jumpRealAnim() {
 		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Bite));
 		CCRepeatForever repeat = CCRepeatForever.action(animate);
-		this.action = repeat;		
-		this.sprite.runAction(this.action);		
+		this.currentAction = repeat;		
+		this.sprite.runAction(this.currentAction);		
 	}
 
 	public boolean isBoss() {

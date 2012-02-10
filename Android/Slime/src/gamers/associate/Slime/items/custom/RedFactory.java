@@ -4,6 +4,8 @@ import gamers.associate.Slime.items.base.GameItemPhysicFactory;
 
 public class RedFactory extends GameItemPhysicFactory<Red> {
 
+	private boolean isBoss;
+
 	@Override
 	protected void createAnimList() {
 		this.createAnim(Red.Anim_Bite, 5);
@@ -21,7 +23,7 @@ public class RedFactory extends GameItemPhysicFactory<Red> {
 
 	@Override
 	protected Red instantiate(float x, float y, float width, float height) {
-		return new Red(x, y, width, height, this.world, this.worldRatio);
+		return new Red(x, y, width, height, this.world, this.worldRatio, this.isBoss);
 	}
 
 	@Override
@@ -32,6 +34,11 @@ public class RedFactory extends GameItemPhysicFactory<Red> {
 	public Red createBL(float x, float y) {
 		float width = Red.Default_Width;
 		float height = Red.Default_Height;
+		return this.create(x + width / 2, y + height / 2, width, height);
+	}
+	
+	public Red createBL(float x, float y, float width, float height, boolean isBoss) {
+		this.isBoss = isBoss;
 		return this.create(x + width / 2, y + height / 2, width, height);
 	}
 }
