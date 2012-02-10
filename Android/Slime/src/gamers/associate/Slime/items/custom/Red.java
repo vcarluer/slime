@@ -161,19 +161,7 @@ public class Red extends GameItemPhysic {
 		} else {
 			this.land();
 		}
-	}		
-
-	private void bouceSlimy(Slimy slimy) {
-		int dir = 1;
-		if (slimy.getPosition().x < this.getPosition().x) {
-			dir = -1;
-		}
-		
-		int powa = rand.nextInt(7) + 1;
-		this.impulse.x = powa * dir;
-		this.impulse.y = powa;
-		slimy.getBody().applyLinearImpulse(this.impulse, slimy.getBody().getPosition());		
-	}		
+	}
 
 	private void land() {
 		if (this.state == RedState.Attack) {
@@ -283,9 +271,7 @@ public class Red extends GameItemPhysic {
 				case Dead:			
 				case PrepareAttack:
 					break;
-				case Defense:
-					this.goToWaitState();
-					break;
+				case Defense:					
 				case Wait:
 					this.jump();
 				}
@@ -306,8 +292,22 @@ public class Red extends GameItemPhysic {
 	}
 	
 	private void prepareJump() {
+		this.sprite.stopAllActions();		 
+		CCCallFunc call = CCCallFunc.action(this, "prepareJumpReal");
+		if (this.state == RedState.Defense) {		
+			CCAnimate shrink = CCAnimate.action(this.animationList.get(Anim_Contracting), false);			
+			CCSequence seq = CCSequence.actions(shrink.reverse(), call);
+			this.action = seq;
+		} else {
+			this.action = call;
+		}
+							
+		this.sprite.runAction(this.action);					
+	}
+	
+	public void prepareJumpReal() {
 		this.state = RedState.PrepareAttack;
-		this.prepareJumpAnim();		
+		this.prepareJumpAnim();
 	}
 	
 	private void prepareJumpAnim() {
