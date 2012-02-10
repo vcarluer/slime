@@ -60,7 +60,7 @@ public class LevelDefinitionParser extends LevelDefinition
 	public LevelDefinitionParser(String resourceName, boolean noUserInfoStore) {		
 		this.noStore = noUserInfoStore;
 		this.gamePlay = GamePlay.ManuallyDefined;
-		this.resourceName = resourceName;		
+		this.setResourceName(resourceName);		
 		this.itemDefinitions = new ArrayList<ItemDefinition>();
 		this.typeHandler = new HashMap<String, ItemDefinition>();
 		this.classHandler = new HashMap<Class, ItemDefinition>();
@@ -71,16 +71,16 @@ public class LevelDefinitionParser extends LevelDefinition
 		this.defineIgnoredItems();
 		this.defineIgnoreClasses();
 				
-		if (this.resourceName.toUpperCase().contains(SpecialLevel.toUpperCase())) {
+		if (this.getResourceName().toUpperCase().contains(SpecialLevel.toUpperCase())) {
 			this.isSpecial = true;
 		}
 		
-		int lastPeriodPos = this.resourceName.lastIndexOf('.');
+		int lastPeriodPos = this.getResourceName().lastIndexOf('.');
 		if (lastPeriodPos != -1) {
-			this.setId(this.resourceName.substring(0, lastPeriodPos));
+			this.setId(this.getResourceName().substring(0, lastPeriodPos));
 		}
 		else {
-			this.setId(this.resourceName);
+			this.setId(this.getResourceName());
 		}
 	}
 	
@@ -138,11 +138,11 @@ public class LevelDefinitionParser extends LevelDefinition
 	public void buildLevel(Level level) {
 		InputStream inputStream;
 		try {
-			Log.d(Slime.TAG, "Loading level from " + this.resourceName);
+			Log.d(Slime.TAG, "Loading level from " + this.getResourceName());
 			if (this.isLocalStorage) {
-				inputStream = SlimeFactory.ContextActivity.openFileInput(this.resourceName);
+				inputStream = SlimeFactory.ContextActivity.openFileInput(this.getResourceName());
 			} else {
-				inputStream = SlimeFactory.ContextActivity.getAssets().open(this.resourceName);
+				inputStream = SlimeFactory.ContextActivity.getAssets().open(this.getResourceName());
 			}			
 			InputStreamReader inputreader = new InputStreamReader(inputStream);
 			BufferedReader buffreader = new BufferedReader(inputreader);
@@ -156,12 +156,12 @@ public class LevelDefinitionParser extends LevelDefinition
 						Log.d(Slime.TAG, line);
 						this.HandleLine(level, line);
 					} catch (Exception e) {
-						Log.e(Slime.TAG, "ERROR during read of " + this.resourceName + " line " + String.valueOf(i));
+						Log.e(Slime.TAG, "ERROR during read of " + this.getResourceName() + " line " + String.valueOf(i));
 						e.printStackTrace();
 					}					
 				}
 			} catch (IOException e) {
-				Log.e(Slime.TAG, "ERROR during read of " + this.resourceName + " line " + String.valueOf(i));
+				Log.e(Slime.TAG, "ERROR during read of " + this.getResourceName() + " line " + String.valueOf(i));
 				e.printStackTrace();
 			} finally {
 				if (buffreader != null) {
@@ -169,7 +169,7 @@ public class LevelDefinitionParser extends LevelDefinition
 				}
 			}
 		} catch (IOException e1) {
-			Log.e(Slime.TAG, "ERROR during opening of " + this.resourceName);
+			Log.e(Slime.TAG, "ERROR during opening of " + this.getResourceName());
 			e1.printStackTrace();
 		}
 		
@@ -197,8 +197,8 @@ public class LevelDefinitionParser extends LevelDefinition
 	public void storeLevel(Level level) {
 		BufferedWriter buffWriter = null;
 		try {
-			Log.d(Slime.TAG, "Storing level in " + this.resourceName);
-			FileOutputStream fos = SlimeFactory.ContextActivity.openFileOutput(this.resourceName, Context.MODE_PRIVATE);
+			Log.d(Slime.TAG, "Storing level in " + this.getResourceName());
+			FileOutputStream fos = SlimeFactory.ContextActivity.openFileOutput(this.getResourceName(), Context.MODE_PRIVATE);
 			OutputStreamWriter streamWriter = new OutputStreamWriter(fos);
 			buffWriter = new BufferedWriter(streamWriter);
 			// First line: LevelInfo
@@ -222,15 +222,15 @@ public class LevelDefinitionParser extends LevelDefinition
 						itemDef.writeLine(buffWriter);
 					}
 					else {
-						Log.e(Slime.TAG, "ERROR, ItemDefinition not found for " + item.getClass().toString() + ". Can not store item in " + this.resourceName);
+						Log.e(Slime.TAG, "ERROR, ItemDefinition not found for " + item.getClass().toString() + ". Can not store item in " + this.getResourceName());
 					}
 				}
 			}
 		} catch (FileNotFoundException ex) {
-			Log.e(Slime.TAG, "ERROR, file not found " + this.resourceName);
+			Log.e(Slime.TAG, "ERROR, file not found " + this.getResourceName());
 			ex.printStackTrace();
         } catch (IOException e1) {
-			Log.e(Slime.TAG, "ERROR during opening or write of " + this.resourceName);
+			Log.e(Slime.TAG, "ERROR during opening or write of " + this.getResourceName());
 			e1.printStackTrace();
         } finally {
         	 //Close the BufferedWriter
@@ -240,14 +240,14 @@ public class LevelDefinitionParser extends LevelDefinition
                 	buffWriter.close();
                 }
             } catch (IOException ex) {
-            	Log.e(Slime.TAG, "ERROR during close of " + this.resourceName);
+            	Log.e(Slime.TAG, "ERROR during close of " + this.getResourceName());
                 ex.printStackTrace();
             }
         }
 	}
 
 	public boolean isStored() {
-		return SlimeFactory.ContextActivity.getFileStreamPath(this.resourceName).exists();
+		return SlimeFactory.ContextActivity.getFileStreamPath(this.getResourceName()).exists();
 	}
 
 	public boolean isLocalStorage() {
@@ -259,6 +259,14 @@ public class LevelDefinitionParser extends LevelDefinition
 	}
 	
 	public void resetStorage() {
-		SlimeFactory.ContextActivity.deleteFile(this.resourceName);
+		SlimeFactory.ContextActivity.deleteFile(this.getResourceName());
+	}
+
+	public String getResourceName() {
+		return resourceName;
+	}
+
+	public void setResourceName(String resourceName) {
+		this.resourceName = resourceName;
 	}
 }

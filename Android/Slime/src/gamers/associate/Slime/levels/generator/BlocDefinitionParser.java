@@ -8,7 +8,7 @@ import gamers.associate.Slime.levels.itemdef.LevelInfoDef;
 public class BlocDefinitionParser extends BlocDefinition {
 	
 	public BlocDefinitionParser(String resourceName) {
-		super(resourceName, true);
+		super(resourceName, true);		
 	}
 	
 	@Override

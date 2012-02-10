@@ -11,6 +11,9 @@ import java.util.Random;
 import org.cocos2d.types.CGPoint;
 
 public abstract class LevelGraphGeneratorBase {
+	protected static boolean debugBlocOn = true;
+	protected static String forceBlock = "";
+	
 	protected List<LevelGenNode> nodes;
 	protected int lastGeneratedComplexity;
 	protected int currentComplexity;
@@ -217,6 +220,15 @@ public abstract class LevelGraphGeneratorBase {
 		LevelGenNode selected = null;		
 		
 		if (list != null && list.size() > 0) {
+			
+			if (debugBlocOn) {
+				for(LevelGenNode node : list) {
+					if (node.getBlocDefinition().getResourceName().toUpperCase().equals(forceBlock.toUpperCase())) {
+						return node;
+					}
+				}
+			}
+			
 			int idx = 0;
 			int min = this.previousPickComplexity;
 			int max = this.currentMaxComplexity - this.currentComplexity;
