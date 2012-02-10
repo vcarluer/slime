@@ -137,6 +137,7 @@ public class Level {
 		this.levelLayer = new LevelLayer(this);
 		this.hudLayer = new HudLayer();
 		this.backgroundLayer = new BackgoundLayer();
+		this.backgroundLayer.setAnchorPoint(0, 0);
 		this.gameLayer = CCLayer.node();
 		this.pauseLayer = new PauseLayer();
 		this.endLevelLayer = new EndLevelLayer();				
@@ -1041,5 +1042,12 @@ public class Level {
 	
 	public CGPoint getLevelOrigin() {
 		return this.levelOrigin;
+	}
+	
+	public void setLevelOrigin(float x, float y) {
+		this.levelOrigin.x = x;
+		this.levelOrigin.y = y;
+		
+		this.backgroundLayer.setPosition(this.getLevelOrigin());
 	}
 }

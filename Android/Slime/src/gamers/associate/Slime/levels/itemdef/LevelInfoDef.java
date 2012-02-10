@@ -56,7 +56,7 @@ public class LevelInfoDef extends ItemDefinition {
 					this.height);
 		}
 		
-		level.setLevelOrigin(CGPoint.make(this.x, this.y));
+		level.setLevelOrigin(this.x, this.y);
 		level.setMaxDimension(this.maxDimension);
 		LevelUtil.createGroundBox(level);
 	}

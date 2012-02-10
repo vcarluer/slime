@@ -123,7 +123,8 @@ public abstract class LevelGraphGeneratorBase {
 			
 			this.changeReferenceToZero();
 			
-			LevelUtil.createGroundBox(this.currentLevel);
+			// LevelUtil.createGroundBox(this.currentLevel);
+			LevelUtil.createGroundBoxGlass(this.currentLevel);
 		}
 		
 		this.lastGeneratedComplexity = currentComplexity;
@@ -140,7 +141,7 @@ public abstract class LevelGraphGeneratorBase {
 			yShift = this.getYOffset() * BlocDefinition.BlocHeight; 
 		}
 		
-		this.currentLevel.setLevelOrigin(CGPoint.make(xShift, yShift));		
+		this.currentLevel.setLevelOrigin(xShift, yShift);		
 	}
 	
 	protected void handlePick(LevelGenNode pick, boolean countDirection) {

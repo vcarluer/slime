@@ -173,14 +173,14 @@ public class CameraManager {
 		boolean isNormalized = false;
 		CGPoint position = this.gameLayer.getPosition();
 		
-		float maxLeft = CGRect.minX(this.screenView) - (this.levelOrigin.x * scale);;
+		float maxLeft = CGRect.minX(this.screenView) - (this.levelOrigin.x * scale);
 		float left = position.x;
 		if (left > maxLeft) {
 			position.x += maxLeft - left;
 			isNormalized = true;
 		}
 		
-		float minRight = CGRect.maxX(this.screenView) - (this.levelOrigin.x * scale);;
+		float minRight = CGRect.maxX(this.screenView) - (this.levelOrigin.x * scale);
 		float right = position.x + this.levelWidth * scale;
 		if (right < minRight) {
 			position.x += minRight - right;
@@ -195,7 +195,7 @@ public class CameraManager {
 		}
 		
 		float minTop = CGRect.maxY(this.screenView) - (this.levelOrigin.y * scale);
-		float top = position.y - this.levelOrigin.y + this.levelHeight * scale;
+		float top = position.y + this.levelHeight * scale;
 		if (top < minTop) {
 			position.y += minTop - top;
 			isNormalized = true;
