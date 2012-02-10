@@ -21,6 +21,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 import gamers.associate.Slime.game.ContactInfo;
+import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 
 public class Red extends GameItemPhysic {
@@ -35,7 +37,7 @@ public class Red extends GameItemPhysic {
 	public static String Anim_Contracting = "contracting";
 	public static String Anim_Wait = "wait";
 	
-	// private static float SlimeMaxDistance = 480f;
+	private static float SlimeMaxDistance = 480f;
 	// Used for wait too
 	private static int maxWaitJump = 3;
 	private static float minTimeBeforeHit = 1;
@@ -46,7 +48,8 @@ public class Red extends GameItemPhysic {
 	private int life = 3;	
 	private RedState state;
 	
-	private CCAction action;	
+	private CCAction action;
+	private Vector2 impulse;
 	
 	private static Random rand = new Random();
 	
@@ -66,6 +69,7 @@ public class Red extends GameItemPhysic {
 		this.bodyHeight = Default_Body_Height * this.height / Default_Height;
 		
 		this.state = RedState.Wait;
+		this.impulse = new Vector2();
 	}
 
 	@Override
@@ -111,8 +115,8 @@ public class Red extends GameItemPhysic {
 		    		
 		    		FixtureDef fixtureDef = new FixtureDef();
 		    		fixtureDef.shape = dynamicBox;	    		
-					fixtureDef.density = 8.0f;
-					fixtureDef.friction = 8.0f;
+					fixtureDef.density = 0.1f;
+					fixtureDef.friction = 0.1f;
 		    		fixtureDef.restitution = 0.1f;    		
 		    		
 		    		fixtureDef.filter.categoryBits = GameItemPhysic.Category_InGame;
@@ -147,10 +151,22 @@ public class Red extends GameItemPhysic {
 				break;
 			}
 			
-			// Bounce
+			this.bouceSlimy(slimy);
 		} else {
 			this.land();
 		}
+	}		
+
+	private void bouceSlimy(Slimy slimy) {
+		int dir = 1;
+		if (slimy.getPosition().x < this.getPosition().x) {
+			dir = -1;
+		}
+		
+		int powa = rand.nextInt(7) + 1;
+		this.impulse.x = powa * dir;
+		this.impulse.y = powa;
+		slimy.getBody().applyLinearImpulse(this.impulse, slimy.getBody().getPosition());		
 	}		
 
 	private void land() {
@@ -167,7 +183,7 @@ public class Red extends GameItemPhysic {
 			if (this.life == 0) {
 				this.goToDeadState();
 			} else {
-				// this.goToDefenseState();
+				this.goToDefenseState();
 			}
 		}		
 	}
@@ -210,7 +226,7 @@ public class Red extends GameItemPhysic {
 		CCCallFunc call = CCCallFunc.action(this, "waitAnimReal");
 		if (this.state == RedState.Defense) {		
 			CCAnimate shrink = CCAnimate.action(this.animationList.get(Anim_Contracting), false);			
-			CCSequence seq = CCSequence.actions(shrink, call);
+			CCSequence seq = CCSequence.actions(shrink.reverse(), call);
 			this.action = seq;
 		} else {
 			this.action = call;
@@ -220,6 +236,7 @@ public class Red extends GameItemPhysic {
 	}	
 	
 	public void waitAnimReal() {
+		this.sprite.stopAllActions();
 		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Wait), false);
 		CCDelayTime delay = CCDelayTime.action(2f);
 		CCSequence seq = CCSequence.actions(animate, delay);
@@ -230,8 +247,7 @@ public class Red extends GameItemPhysic {
 		this.prepareNextJump();
 	}
 
-	public void goToWaitState() {		
-		this.state = RedState.Wait;
+	public void goToWaitState() {				
 		this.waitAnim();
 	}
 	
@@ -253,14 +269,63 @@ public class Red extends GameItemPhysic {
 				case Wait:
 					this.jump();
 				}
-			}
-			
-			this.waitTrigger = false;
+				
+				this.waitTrigger = false;
+			}						
 		}
 	}
 
 	private void jump() {
-		// TODO Auto-generated method stub
+		GameItem item = Level.currentLevel.getStartItem();
+		if (CGPoint.ccpDistance(this.getPosition(), item.getPosition()) <= SlimeMaxDistance) {
+			this.prepareJump();
+			
+		} else {
+			this.prepareNextJump();
+		}		
+	}
+	
+	private void prepareJump() {
+		this.state = RedState.PrepareAttack;
+		this.prepareJumpAnim();		
+	}
+	
+	private void prepareJumpAnim() {
+		this.sprite.stopAllActions();
+		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Bite));
+		CCCallFunc call = CCCallFunc.action(this, "jumpReal");
+		CCSequence seq = CCSequence.actions(animate, call);
+		this.action = seq;
+		this.sprite.runAction(this.action);
+	}
+	
+	public void jumpReal() {
+		if (this.state == RedState.PrepareAttack) {
+			GameItem item = Level.currentLevel.getStartItem();
+			int dir = 1;
+			if (item.getPosition().x < this.getPosition().x) {
+				dir = -1;
+			}
+			
+			int powa = rand.nextInt(6) + 5;
+			this.impulse.x = powa * dir;
+			this.impulse.y = powa;
+			this.getBody().applyLinearImpulse(this.impulse, this.body.getPosition());
+			this.state = RedState.Attack;
+			
+			this.jumpRealAnim();			
+		}
+	}
+	
+	private void impulse(GameItem item, GameItemPhysic toImpulse) {
 		
+	}
+
+	private void jumpRealAnim() {
+		this.sprite.stopAllActions();
+		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Bite));
+		CCRepeatForever repeat = CCRepeatForever.action(animate);
+		this.action = repeat;
+		this.sprite.runAction(this.action);		
 	}
 }
