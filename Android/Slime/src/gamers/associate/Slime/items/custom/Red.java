@@ -313,14 +313,19 @@ public class Red extends GameItemPhysic {
 	public void jumpReal() {
 		if (this.state == RedState.PrepareAttack) {
 			GameItem item = Level.currentLevel.getStartItem();
-			this.impulse(item, this, false, 4, 10);
+			int dir = this.impulse(item, this, false, 4, 10);
+			if (dir > 0) {
+				this.sprite.setFlipX(true);
+			} else {
+				this.sprite.setFlipX(false);
+			}
 			this.state = RedState.Attack;
 			
 			this.jumpRealAnim();			
 		}
 	}
 	
-	private void impulse(GameItem item, GameItemPhysic toImpulse, boolean goAway, int minPowa, int maxPowa) {
+	private int impulse(GameItem item, GameItemPhysic toImpulse, boolean goAway, int minPowa, int maxPowa) {
 		int dir = 1;
 		if (goAway) {
 			dir = -1;
@@ -333,14 +338,16 @@ public class Red extends GameItemPhysic {
 		int powa = rand.nextInt(maxPowa + 1 - minPowa) + minPowa;
 		this.impulse.x = powa * dir;
 		this.impulse.y = powa;
-		toImpulse.getBody().applyLinearImpulse(this.impulse, toImpulse.getBody().getPosition());		
+		toImpulse.getBody().applyLinearImpulse(this.impulse, toImpulse.getBody().getPosition());
+		
+		return dir;
 	}
 
 	private void jumpRealAnim() {
 		this.sprite.stopAllActions();
 		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Bite));
 		CCRepeatForever repeat = CCRepeatForever.action(animate);
-		this.action = repeat;
+		this.action = repeat;		
 		this.sprite.runAction(this.action);		
 	}
 }
