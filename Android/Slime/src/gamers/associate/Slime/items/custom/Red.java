@@ -148,14 +148,14 @@ public class Red extends GameItemPhysic {
 		
 		if (item.getContactWith() instanceof Slimy) {
 			Slimy slimy = (Slimy) item.getContactWith();
-			switch (this.state) {
+			switch (this.state) {			
 			case Attack:
 				slimy.splash();
 				break;
 			case Defense:
 			case Dead:
-				break;
 			case PrepareAttack:
+				break;			
 			case Wait:
 				float ySlimy = slimy.getPosition().y - slimy.getHeight() / 2;
 				float yMe = this.getPosition().y - this.getHeight() / 2;
@@ -381,9 +381,17 @@ public class Red extends GameItemPhysic {
 	private void prepareJumpAnim() {
 		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Bite));
 		CCCallFunc call = CCCallFunc.action(this, "jumpReal");
-		CCSequence seq = CCSequence.actions(animate, call);
+		CCSequence seq = CCSequence.actions(animate, animate, call);
 		this.action = seq;
 		this.sprite.runAction(this.action);
+		
+		GameItem item = Level.currentLevel.getStartItem();
+		int dir = this.getDir(item, this, false);
+		if (dir > 0) {
+			this.sprite.setFlipX(true);
+		} else {
+			this.sprite.setFlipX(false);
+		}
 	}
 	
 	public void jumpReal() {
@@ -401,15 +409,21 @@ public class Red extends GameItemPhysic {
 		}
 	}
 	
-	private int impulse(GameItem item, GameItemPhysic toImpulse, boolean goAway, int minPowa, int maxPowa) {
+	private int getDir(GameItem target, GameItem source, boolean goAway) {
 		int dir = 1;
 		if (goAway) {
 			dir = -1;
 		}
 		
-		if (item.getPosition().x < toImpulse.getPosition().x) {
+		if (target.getPosition().x < source.getPosition().x) {
 			dir = -dir;
 		}
+		
+		return dir;
+	}
+	
+	private int impulse(GameItem item, GameItemPhysic toImpulse, boolean goAway, int minPowa, int maxPowa) {
+		int dir = this.getDir(item, toImpulse, goAway);
 		
 		int powa = rand.nextInt(maxPowa + 1 - minPowa) + minPowa;
 		this.impulse.x = powa * dir;
