@@ -223,9 +223,18 @@ public class Red extends GameItemPhysic {
 		this.sprite.stopAllActions();
 		CCAnimate shrink = CCAnimate.action(this.animationList.get(Anim_Contracting), false);
 		CCAnimate breaking = CCAnimate.action(this.animationList.get(Anim_Breaking), false);
+		// CCCallFunc call = CCCallFunc.action(this, "win");
+		// CCSequence seq = CCSequence.actions(shrink, breaking, call);
 		CCSequence seq = CCSequence.actions(shrink, breaking);
 		this.action = seq;
 		this.sprite.runAction(this.action);
+	}
+	
+	public void win() {
+		Slimy slimy = (Slimy) Level.currentLevel.getStartItem();
+		slimy.win();
+		slimy.destroyBodyOnly();
+		Level.currentLevel.win();
 	}
 
 	public void waitAnim() {
