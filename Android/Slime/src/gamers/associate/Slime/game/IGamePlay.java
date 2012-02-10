@@ -15,4 +15,5 @@ public interface IGamePlay {
 	void setNewAliveSlimyCount(int count);
 	void setNewBonus();
 	void setPause(boolean value);
+	boolean isStarted();
 }

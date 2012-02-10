@@ -10,6 +10,8 @@ public class RedFactory extends GameItemPhysicFactory<Red> {
 		this.createAnim(Red.Anim_Breaking, 7);
 		this.createAnim(Red.Anim_Contracting, 3);
 		this.createAnim(Red.Anim_Wait, 2, 1f);
+		this.createAnim(Red.Anim_WaitDefense, 1);
+		this.createAnim(Red.Anim_WaitDead, 1);
 	}
 
 	@Override

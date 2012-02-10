@@ -160,6 +160,19 @@
                 <key>sourceSize</key>
                 <string>{167,113}</string>
             </dict>
+			<key>waitDead-01.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{141,299},{159,45}}</string>
+                <key>offset</key>
+                <string>{4,-34}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{8,68},{159,45}}</string>
+                <key>sourceSize</key>
+                <string>{167,113}</string>
+            </dict>
             <key>contracting-01.png</key>
             <dict>
                 <key>frame</key>
@@ -187,6 +200,19 @@
                 <string>{167,113}</string>
             </dict>
             <key>contracting-03.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{135,396},{119,79}}</string>
+                <key>offset</key>
+                <string>{0,-17}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{24,34},{119,79}}</string>
+                <key>sourceSize</key>
+                <string>{167,113}</string>
+            </dict>
+			<key>waitDefense-01.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{135,396},{119,79}}</string>

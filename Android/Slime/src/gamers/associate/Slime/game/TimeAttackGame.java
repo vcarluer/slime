@@ -284,4 +284,9 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		super.resume();
 		this.enterGameMode(0.5f);
 	}
+
+	@Override
+	public boolean isStarted() {
+		return this.isStarted;
+	}
 }

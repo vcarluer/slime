@@ -36,22 +36,30 @@ public class Red extends GameItemPhysic {
 	public static String Anim_Breaking = "breaking";
 	public static String Anim_Contracting = "contracting";
 	public static String Anim_Wait = "wait";
+	public static String Anim_WaitDefense = "waitDefense";
+	public static String Anim_WaitDead = "waitDead";
 	
 	private static float SlimeMaxDistance = 480f;
 	// Used for wait too
-	private static int maxWaitJump = 3;
+	private static int maxWaitJump = 5;
 	private static float minTimeBeforeHit = 1;
 	private long lastHitTime;
 	private long nextTrigger;
 	private boolean waitTrigger;
 	
-	private int life = 3;	
+	private int life = 1;	
 	private RedState state;
 	
 	private CCAction action;
+	private CCAction waitAction;
+	private CCAction waitActionDefense;
+	private CCAction waitActionDead;
+	private CCAction currentWait;
 	private Vector2 impulse;
 	
 	private static Random rand = new Random();
+	
+	private boolean isBoss;
 	
 	public Red(float x, float y, float width, float height, World world,
 			float worldRatio) {
@@ -70,6 +78,8 @@ public class Red extends GameItemPhysic {
 		
 		this.state = RedState.Wait;
 		this.impulse = new Vector2();
+		
+		this.waitTrigger = true;
 	}
 
 	@Override
@@ -164,7 +174,8 @@ public class Red extends GameItemPhysic {
 	}
 
 	private void land() {
-		if (this.state == RedState.Attack) {
+		if (this.state == RedState.Attack) {			
+			this.sprite.stopAction(this.action);
 			this.goToWaitState();
 		}
 	}
@@ -173,8 +184,8 @@ public class Red extends GameItemPhysic {
 		long hitTime = System.currentTimeMillis();
 		if ((hitTime - this.lastHitTime) / 1000 > minTimeBeforeHit) {
 			this.lastHitTime = hitTime;
-			this.life--;
-			if (this.life == 0) {
+			this.setLife(this.getLife() - 1);
+			if (this.getLife() == 0) {
 				this.goToDeadState();
 			} else {
 				this.goToDefenseState();
@@ -185,17 +196,17 @@ public class Red extends GameItemPhysic {
 	private void goToDefenseState() {
 		this.state = RedState.Defense;
 		this.impulse(Level.currentLevel.getStartItem(), this, true, 3, 7);		
+		this.switchWait(this.state);
 		this.defenseAnim();
-		this.prepareNextJump();
+		this.prepareNextJump(1);
 	}
 
-	private void prepareNextJump() {
-		this.nextTrigger = System.currentTimeMillis() + ((rand.nextInt(maxWaitJump) + 2) * 1000);
+	private void prepareNextJump(int minSec) {
+		this.nextTrigger = System.currentTimeMillis() + ((rand.nextInt(maxWaitJump) + minSec) * 1000);
 		this.waitTrigger = true;
 	}
 
-	private void defenseAnim() {
-		this.sprite.stopAllActions();
+	private void defenseAnim() {		
 		CCAnimate shrink = CCAnimate.action(this.animationList.get(Anim_Contracting), false);
 		this.action = shrink;
 		this.sprite.runAction(this.action);
@@ -209,39 +220,35 @@ public class Red extends GameItemPhysic {
 	
 	private void deadAnim() {		
 		Slimy slimy = (Slimy) Level.currentLevel.getStartItem();
-		if (slimy.isAlive()) {
+		if (slimy.isAlive() && this.isBoss()) {
 			slimy.win();
-			slimy.destroyBodyOnly();
-			
-			if (Level.currentLevel.win(false)) {
-				this.sprite.stopAllActions();
-				CCAnimate shrink = CCAnimate.action(this.animationList.get(Anim_Contracting), false);
-				CCAnimate breaking = CCAnimate.action(this.animationList.get(Anim_Breaking), false);
-				CCCallFunc call = CCCallFunc.action(this, "win");
-				CCSequence seq = CCSequence.actions(shrink, breaking, call);
-				this.action = seq;
-				this.sprite.runAction(this.action);												
-			}
-		}					
+			slimy.destroyBodyOnly();					
+		}	
+		
+		boolean go = true;
+		if (this.isBoss()) {
+			go = Level.currentLevel.win(false);
+		}
+		
+		if (go) {
+			CCAnimate shrink = CCAnimate.action(this.animationList.get(Anim_Contracting), false);
+			CCAnimate breaking = CCAnimate.action(this.animationList.get(Anim_Breaking), false);
+			CCCallFunc call = CCCallFunc.action(this, "win");
+			CCSequence seq = CCSequence.actions(shrink, breaking, call);
+			this.action = seq;
+			this.sprite.runAction(this.action);
+		}
+															
 	}
 	
-	public void win() {		
-		this.deadWaitAnim();
-		Level.currentLevel.showEndLevel();
+	public void win() {
+		this.switchWait(this.state);
+		if (this.isBoss()) {
+			Level.currentLevel.showEndLevel();
+		}
 	}
 
-	private void deadWaitAnim() {
-		this.sprite.stopAllActions();
-		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Wait), false);
-		CCDelayTime delay = CCDelayTime.action(2f);
-		CCSequence seq = CCSequence.actions(animate, delay);
-		// CCRepeatForever repeat = CCRepeatForever.action(seq);		
-		this.action = seq;
-		this.sprite.runAction(this.action);
-	}
-
-	public void waitAnim() {
-		this.sprite.stopAllActions();		 
+	public void waitAnim() {	 
 		CCCallFunc call = CCCallFunc.action(this, "waitAnimReal");
 		if (this.state == RedState.Defense) {		
 			CCAnimate shrink = CCAnimate.action(this.animationList.get(Anim_Contracting), false);			
@@ -254,16 +261,61 @@ public class Red extends GameItemPhysic {
 		this.sprite.runAction(this.action);
 	}	
 	
-	public void waitAnimReal() {
-		this.sprite.stopAllActions();
-		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Wait), false);
-		CCDelayTime delay = CCDelayTime.action(2f);
-		CCSequence seq = CCSequence.actions(animate, delay);
-		CCRepeatForever repeat = CCRepeatForever.action(seq);		
-		this.action = repeat;
-		this.sprite.runAction(this.action);
+	public void waitAnimReal() {								
 		this.state = RedState.Wait;		
-		this.prepareNextJump();
+		this.switchWait(this.state);
+		this.prepareNextJump(0);
+	}
+	
+	private void switchWait(RedState state) {												
+		CCAction nextWait = null;
+		
+		if (state == RedState.Wait) {
+			if (this.waitAction == null) {
+				CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Wait), false);
+				CCDelayTime delay = CCDelayTime.action(2f);
+				CCSequence seq = CCSequence.actions(animate, delay);
+				CCRepeatForever repeat = CCRepeatForever.action(seq);		
+				this.waitAction = repeat;				
+			}
+			
+			nextWait = this.waitAction;
+		}
+		
+		if (state == RedState.Defense) {
+			if (this.waitActionDefense == null) {
+				CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_WaitDefense), false);
+				CCDelayTime delay = CCDelayTime.action(2f);
+				CCSequence seq = CCSequence.actions(animate, delay);
+				CCRepeatForever repeat = CCRepeatForever.action(seq);		
+				this.waitActionDefense = repeat;				
+			}
+			
+			nextWait = this.waitActionDefense;
+		}
+		
+		if (state == RedState.Dead) {
+			if (this.waitActionDead == null) {
+				CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_WaitDead), false);
+				CCDelayTime delay = CCDelayTime.action(2f);
+				CCSequence seq = CCSequence.actions(animate, delay);
+				CCRepeatForever repeat = CCRepeatForever.action(seq);		
+				this.waitActionDead = repeat;				
+			}
+			
+			nextWait = this.waitActionDead;
+		}
+
+		if (this.currentWait != nextWait) {
+			if (this.currentWait != null) {
+				this.sprite.stopAction(this.currentWait);
+			}
+			
+			if (nextWait != null) {
+				this.currentWait = nextWait;
+				this.sprite.runAction(this.currentWait);
+			}
+		}
 	}
 
 	public void goToWaitState() {				
@@ -278,22 +330,24 @@ public class Red extends GameItemPhysic {
 		
 		super.render(delta);
 		
-		if (this.waitTrigger) {
-			long time = System.currentTimeMillis();
-			if (time > this.nextTrigger) {
-				switch (this.state) {			
-				case Attack:
-				case Dead:			
-				case PrepareAttack:
-					break;
-				case Defense:					
-				case Wait:
-					this.jump();
-				}
-				
-				this.waitTrigger = false;
-			}						
-		}
+		if (Level.currentLevel.getGamePlay().isStarted()) {
+			if (this.waitTrigger) {
+				long time = System.currentTimeMillis();
+				if (time > this.nextTrigger) {
+					switch (this.state) {			
+					case Attack:
+					case Dead:			
+					case PrepareAttack:
+						break;
+					case Defense:					
+					case Wait:
+						this.jump();
+					}
+					
+					this.waitTrigger = false;
+				}						
+			}
+		}			
 	}
 
 	private void jump() {
@@ -302,12 +356,11 @@ public class Red extends GameItemPhysic {
 			this.prepareJump();
 			
 		} else {
-			this.prepareNextJump();
+			this.prepareNextJump(0);
 		}		
 	}
 	
-	private void prepareJump() {
-		this.sprite.stopAllActions();		 
+	private void prepareJump() {	 
 		CCCallFunc call = CCCallFunc.action(this, "prepareJumpReal");
 		if (this.state == RedState.Defense) {		
 			CCAnimate shrink = CCAnimate.action(this.animationList.get(Anim_Contracting), false);			
@@ -326,7 +379,6 @@ public class Red extends GameItemPhysic {
 	}
 	
 	private void prepareJumpAnim() {
-		this.sprite.stopAllActions();
 		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Bite));
 		CCCallFunc call = CCCallFunc.action(this, "jumpReal");
 		CCSequence seq = CCSequence.actions(animate, call);
@@ -370,10 +422,25 @@ public class Red extends GameItemPhysic {
 	}
 
 	private void jumpRealAnim() {
-		this.sprite.stopAllActions();
 		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Bite));
 		CCRepeatForever repeat = CCRepeatForever.action(animate);
 		this.action = repeat;		
 		this.sprite.runAction(this.action);		
+	}
+
+	public boolean isBoss() {
+		return isBoss;
+	}
+
+	public void setBoss(boolean isBoss) {
+		this.isBoss = isBoss;
+	}
+
+	public int getLife() {
+		return life;
+	}
+
+	public void setLife(int life) {
+		this.life = life;
 	}
 }
