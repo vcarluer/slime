@@ -8,6 +8,9 @@ import gamers.associate.Slime.items.custom.Red;
 public class RedDef extends ItemDefinition {
 	private static String Handled_Def = "Red"; 
 	
+	private int life;
+	private boolean isBoss;
+	
 	@Override
 	protected void initTypeHandled() {
 		this.typesHandled.add(Handled_Def);
@@ -19,7 +22,9 @@ public class RedDef extends ItemDefinition {
 	}
 
 	@Override
-	protected void parseNext(String[] infos, int start) {		
+	protected void parseNext(String[] infos, int start) {
+		this.isBoss = Boolean.parseBoolean(infos[start]);
+		this.life = Integer.parseInt(infos[start + 1]);		
 	}
 
 	@Override
@@ -31,6 +36,9 @@ public class RedDef extends ItemDefinition {
 
 	@Override
 	protected String writeNext(String line) {
+		line = this.addValue(line, String.valueOf(this.isBoss));
+		line = this.addValue(line, String.valueOf(this.life));
+		
 		return line;
 	}
 
@@ -45,7 +53,10 @@ public class RedDef extends ItemDefinition {
 	}
 
 	@Override
-	protected void setValuesNext(GameItem item) {		
+	protected void setValuesNext(GameItem item) {
+		Red red = (Red)item;
+		this.isBoss = red.isBoss();
+		this.life = red.getLife();
 	}
 
 }

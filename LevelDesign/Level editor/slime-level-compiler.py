@@ -227,7 +227,12 @@ class Smile( inkex.Effect ):
 			if str(child.get("type")) == 'Sprite':
 				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_plist"))+";"+str(child.get("att_frameName"))+";"+str(child.get("att_frameCount"))
 				return True;
-						
+			
+			# Red
+			if str(child.get("type")) == 'Red':
+				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_isBoss"))+";"+str(child.get("att_life"))
+				return True;
+			
 			# Standard Item
 			print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)
 			return True;

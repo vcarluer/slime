@@ -1023,7 +1023,9 @@
        id="red"
        x="-600"
        y="383"
-       type="Red" />
+       type="Red"
+       att_isBoss="true"
+       att_life="3" />
   </g>
   <g
      inkscape:groupmode="layer"
