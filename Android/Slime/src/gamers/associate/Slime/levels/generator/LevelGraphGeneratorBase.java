@@ -122,9 +122,9 @@ public abstract class LevelGraphGeneratorBase {
 					BlocDefinition.BlocHeight * ySize);
 			
 			this.changeReferenceToZero();
-			
-			// LevelUtil.createGroundBox(this.currentLevel);
+						
 			LevelUtil.createGroundBoxGlass(this.currentLevel);
+			LevelUtil.createGroundBox(this.currentLevel);
 		}
 		
 		this.lastGeneratedComplexity = currentComplexity;
