@@ -196,7 +196,7 @@ public class Red extends GameItemPhysic {
 
 	private void goToDefenseState() {
 		this.state = RedState.Defense;
-		this.impulse(Level.currentLevel.getStartItem(), this, true, 2, 5);		
+		this.impulse(Level.currentLevel.getStartItem(), this, true, 3, 7);		
 		this.defenseAnim();
 		this.prepareNextJump();
 	}
@@ -313,7 +313,7 @@ public class Red extends GameItemPhysic {
 	public void jumpReal() {
 		if (this.state == RedState.PrepareAttack) {
 			GameItem item = Level.currentLevel.getStartItem();
-			this.impulse(item, this, false, 1, 8);
+			this.impulse(item, this, false, 4, 10);
 			this.state = RedState.Attack;
 			
 			this.jumpRealAnim();			
