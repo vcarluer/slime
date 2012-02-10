@@ -27,6 +27,7 @@ public abstract class ItemDefinition {
 	
 	protected float xOffset;
 	protected float yOffset;
+	private String idPre;
 	
 	public ItemDefinition() {
 		this.typesHandled = new ArrayList<String>();
@@ -130,15 +131,24 @@ public abstract class ItemDefinition {
 	public abstract void createItem(Level level);
 	
 	public void parseAndCreate(String line, Level level) throws Exception {
-		this.parseAndCreate(line, level, 0, 0);
+		this.parseAndCreate(line, level, 0, 0, "");
 	}
 	
-	public void parseAndCreate(String line, Level level, float xOffset, float yOffset) throws Exception {				
+	public void parseAndCreate(String line, Level level, float xOffset, float yOffset, String idPre) throws Exception {				
 		this.parse(line);
 		this.setOffset(xOffset, yOffset);
+		this.setIdPre(idPre);
 		this.createItem(level);
 	}
 	
+	private void setIdPre(String idPre) {
+		this.idPre = idPre;
+	}
+	
+	protected String getIdPre() {
+		return this.idPre;
+	}
+
 	public void setOffset(float xOffset, float yOffset) {
 		this.xOffset = xOffset;
 		this.yOffset = yOffset;

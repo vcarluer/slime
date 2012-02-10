@@ -22,7 +22,7 @@ public class BlocDefinitionParser extends BlocDefinition {
 		ItemDefinition itemDef = this.getItemDef(line);
 		// Todo: plug here probability check?
 		if (itemDef != null) {
-			itemDef.parseAndCreate(line, level, this.currentXOffset, this.currentYOffset);
+			itemDef.parseAndCreate(line, level, this.currentXOffset, this.currentYOffset, this.getBlocId().toString());
 		}
 	}
 

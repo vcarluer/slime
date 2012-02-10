@@ -10,7 +10,7 @@ public class TargetDef extends ItemDefinition {
 	private String name;
 	@Override
 	public void createItem(Level level) {
-		SlimeFactory.Target.createBL(this.getX(), this.getY(), this.width, this.height, this.name);
+		SlimeFactory.Target.createBL(this.getX(), this.getY(), this.width, this.height, this.getIdPre() + this.name);
 	}
 
 	@Override

@@ -14,7 +14,7 @@ public class BecBunsenDef extends ItemDefinition {
 	
 	@Override
 	public void createItem(Level level) {
-		SlimeFactory.BecBunsen.createBL(this.getX(), this.getY(), this.width, this.height, this.name, this.delay, this.isOn).setAngle(this.angle);		
+		SlimeFactory.BecBunsen.createBL(this.getX(), this.getY(), this.width, this.height, this.getIdPre() + this.name, this.delay, this.isOn).setAngle(this.angle);		
 	}
 
 	@Override
