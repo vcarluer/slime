@@ -207,22 +207,37 @@ public class Red extends GameItemPhysic {
 		this.swithBodyCategory();
 	}	
 	
-	private void deadAnim() {
-		this.sprite.stopAllActions();
-		CCAnimate shrink = CCAnimate.action(this.animationList.get(Anim_Contracting), false);
-		CCAnimate breaking = CCAnimate.action(this.animationList.get(Anim_Breaking), false);
-		// CCCallFunc call = CCCallFunc.action(this, "win");
-		// CCSequence seq = CCSequence.actions(shrink, breaking, call);
-		CCSequence seq = CCSequence.actions(shrink, breaking);
-		this.action = seq;
-		this.sprite.runAction(this.action);
+	private void deadAnim() {		
+		Slimy slimy = (Slimy) Level.currentLevel.getStartItem();
+		if (slimy.isAlive()) {
+			slimy.win();
+			slimy.destroyBodyOnly();
+			
+			if (Level.currentLevel.win(false)) {
+				this.sprite.stopAllActions();
+				CCAnimate shrink = CCAnimate.action(this.animationList.get(Anim_Contracting), false);
+				CCAnimate breaking = CCAnimate.action(this.animationList.get(Anim_Breaking), false);
+				CCCallFunc call = CCCallFunc.action(this, "win");
+				CCSequence seq = CCSequence.actions(shrink, breaking, call);
+				this.action = seq;
+				this.sprite.runAction(this.action);												
+			}
+		}					
 	}
 	
-	public void win() {
-		Slimy slimy = (Slimy) Level.currentLevel.getStartItem();
-		slimy.win();
-		slimy.destroyBodyOnly();
-		Level.currentLevel.win();
+	public void win() {		
+		this.deadWaitAnim();
+		Level.currentLevel.showEndLevel();
+	}
+
+	private void deadWaitAnim() {
+		this.sprite.stopAllActions();
+		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Wait), false);
+		CCDelayTime delay = CCDelayTime.action(2f);
+		CCSequence seq = CCSequence.actions(animate, delay);
+		// CCRepeatForever repeat = CCRepeatForever.action(seq);		
+		this.action = seq;
+		this.sprite.runAction(this.action);
 	}
 
 	public void waitAnim() {
@@ -347,7 +362,9 @@ public class Red extends GameItemPhysic {
 		int powa = rand.nextInt(maxPowa + 1 - minPowa) + minPowa;
 		this.impulse.x = powa * dir;
 		this.impulse.y = powa;
-		toImpulse.getBody().applyLinearImpulse(this.impulse, toImpulse.getBody().getPosition());
+		if (toImpulse.getBody() != null) {
+			toImpulse.getBody().applyLinearImpulse(this.impulse, toImpulse.getBody().getPosition());
+		}
 		
 		return dir;
 	}
