@@ -695,6 +695,7 @@ public class Level {
 			}
 			
 			this.unselectCurrent();			
+			this.hudLayer.gameBegin();
 		}
 	}
 	

@@ -11,6 +11,7 @@ import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCFadeIn;
 import org.cocos2d.actions.interval.CCFadeOut;
+import org.cocos2d.actions.interval.CCMoveBy;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
@@ -28,6 +29,8 @@ public class HudLayer extends CCLayer {
 	private CCMenu menu;
 	
 	private CCLabel title;
+	
+	private CGPoint tmp = CGPoint.zero();
 	
 	public HudLayer() {
 		
@@ -71,18 +74,36 @@ public class HudLayer extends CCLayer {
 	@Override
 	public void onEnter() {		
 		super.onEnter();
+		this.title.stopAllActions();
 		this.title.setVisible(true);
 		this.title.setString(TitleGenerator.generateNewTitle());
-		CCFadeIn in = CCFadeIn.action(0f);
-		CCDelayTime delay = CCDelayTime.action(3f);
+		// double padding
+		float dPadding = 250f;
+		float scaleRatio = CCDirector.sharedDirector().winSize().width / (this.title.getContentSize().width + dPadding);
+		this.title.setScale(scaleRatio);
+		this.title.setPosition(
+				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
+				CCDirector.sharedDirector().winSize().getHeight() / 2));
+		this.title.setOpacity(255);
+		float moveDistance = 75f;
+		float time = 3f;
+		CCDelayTime delay = CCDelayTime.action(time);
 		CCCallFunc call = CCCallFunc.action(this, "fadeTitle");
-		CCSequence seq = CCSequence.actions(in, delay, call);
+		CCSequence seq = CCSequence.actions(delay, call);
 		this.title.runAction(seq);
+		tmp.set(-moveDistance, 0);
+		CCMoveBy move = CCMoveBy.action(time, tmp);
+		this.title.runAction(move);
 	}
 	
 	public void fadeTitle() {
 		CCFadeOut fade = CCFadeOut.action(1f);
 		this.title.runAction(fade);
+	}
+	
+	public void gameBegin() {
+		this.title.stopAllActions();
+		this.title.setVisible(false);
 	}
 
 	@Override
