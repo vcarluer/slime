@@ -4,8 +4,14 @@ import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelSelection;
 import gamers.associate.Slime.game.Sounds;
+import gamers.associate.Slime.game.TitleGenerator;
 import gamers.associate.Slime.items.custom.MenuSprite;
 
+import org.cocos2d.actions.instant.CCCallFunc;
+import org.cocos2d.actions.interval.CCDelayTime;
+import org.cocos2d.actions.interval.CCFadeIn;
+import org.cocos2d.actions.interval.CCFadeOut;
+import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItemSprite;
@@ -20,6 +26,8 @@ public class HudLayer extends CCLayer {
 	private CCLabel countLabel;
 	
 	private CCMenu menu;
+	
+	private CCLabel title;
 	
 	public HudLayer() {
 		
@@ -42,16 +50,39 @@ public class HudLayer extends CCLayer {
 		this.countLabel.setPosition(
 				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - 15, 
 				CCDirector.sharedDirector().winSize().getHeight() - 65));
+				
 		this.hideSlimyCount();
+		
+		this.title = getMenuLabel(TitleGenerator.generateNewTitle(), 45f);
+		this.title.setPosition(
+				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
+				CCDirector.sharedDirector().winSize().getHeight() / 2));
+		this.addChild(this.title);
 	}
 	
 	private static CCLabel getMenuLabel(String text) {
-		return CCLabel.makeLabel(text.toUpperCase(), "fonts/Slime.ttf", 60.0f);
+		return getMenuLabel(text, 60f);
+	}
+	
+	private static CCLabel getMenuLabel(String text, float size) {
+		return CCLabel.makeLabel(text.toUpperCase(), "fonts/Slime.ttf", size);
 	}
 	
 	@Override
 	public void onEnter() {		
-		super.onEnter();				
+		super.onEnter();
+		this.title.setVisible(true);
+		this.title.setString(TitleGenerator.generateNewTitle());
+		CCFadeIn in = CCFadeIn.action(0f);
+		CCDelayTime delay = CCDelayTime.action(3f);
+		CCCallFunc call = CCCallFunc.action(this, "fadeTitle");
+		CCSequence seq = CCSequence.actions(in, delay, call);
+		this.title.runAction(seq);
+	}
+	
+	public void fadeTitle() {
+		CCFadeOut fade = CCFadeOut.action(1f);
+		this.title.runAction(fade);
 	}
 
 	@Override
@@ -102,5 +133,5 @@ public class HudLayer extends CCLayer {
 	
 	public CCMenu getMenu() {
 		return this.menu;
-	}
+	}	
 }
