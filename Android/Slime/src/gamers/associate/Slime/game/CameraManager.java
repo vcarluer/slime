@@ -525,6 +525,12 @@ public class CameraManager {
 		this.zoomScreenPin = null;
 	}
 	
+	public void cancelAll() {
+		this.cancelZoomAnchor();
+		this.cancelActions();
+		this.cancelFollow();
+	}
+	
 	private void findOppositePointOnCamera(CGPoint itemPoint, CGPoint result) {
 		tl.set(CGRect.minX(this.virtualCamera), CGRect.maxY(this.virtualCamera));
 		tr.set(CGRect.maxX(this.virtualCamera), CGRect.maxY(this.virtualCamera));

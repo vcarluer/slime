@@ -331,6 +331,7 @@ public class Level {
 		// this.disablePauseLayer();
 		
 		this.setLevelOrigin(CGPoint.zero());
+		this.cameraManager.cancelAll();
 		
 		this.resume();
 	}

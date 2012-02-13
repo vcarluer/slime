@@ -6,6 +6,7 @@ import gamers.associate.Slime.game.LevelSelection;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.TitleGenerator;
 import gamers.associate.Slime.items.custom.MenuSprite;
+import gamers.associate.Slime.levels.LevelHome;
 
 import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCDelayTime;
@@ -19,6 +20,8 @@ import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.transitions.CCFadeTransition;
+import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 
 public class HudLayer extends CCLayer {
@@ -113,7 +116,10 @@ public class HudLayer extends CCLayer {
 	}
 
 	public void goBack(Object sender) {
-		CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
+		Level currentLevel = Level.get(LevelHome.Id, true);							
+		CCTransitionScene transition = CCFadeTransition.transition(0.5f, currentLevel.getScene());
+		CCDirector.sharedDirector().replaceScene(transition);
+		Sounds.playMusic(R.raw.menumusic, true);
 	}
 	
 	public void goPause(Object sender) {
