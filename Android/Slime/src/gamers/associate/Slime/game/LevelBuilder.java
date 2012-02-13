@@ -121,4 +121,10 @@ public class LevelBuilder implements ILevelBuilder {
 	public void start() {
 		// TODO Auto-generated method stub		
 	}
+
+	@Override
+	public void resetAllAndRun() {
+		// TODO Auto-generated method stub
+		
+	}
 }

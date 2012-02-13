@@ -101,7 +101,11 @@ public class LevelBuilderGenerator implements ILevelBuilder
 		this.levelDef.resetAllAndSave();
 		this.levelparser.resetStorage();
 		this.gameInfo.resetDifficulty(this.gameInfo.getDifficulty());
-		this.gameInfo.resetTotalScore();
+		this.gameInfo.resetTotalScore();		
+	}
+	
+	public void resetAllAndRun() {
+		this.resetAll();
 		Level.get(LevelBuilderGenerator.defaultId, true);
 	}
 	

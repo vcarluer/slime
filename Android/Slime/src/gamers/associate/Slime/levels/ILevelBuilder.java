@@ -12,6 +12,7 @@ public interface ILevelBuilder {
 	void build(Level level, LevelDefinition levelDef);
 	void rebuild(Level level, LevelDefinition levelDef);
 	void resetAll();
+	void resetAllAndRun();
 	boolean hasBegun();
 	void start();
 }

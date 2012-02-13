@@ -10,10 +10,13 @@ import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
+import org.cocos2d.menus.CCMenuItemLabel;
 import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.transitions.CCFadeTransition;
+import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 
@@ -21,7 +24,7 @@ import android.view.MotionEvent;
 
 public class HomeLayer extends CCLayer {
 	private static HomeLayer layer;	
-	private CCMenuItemSprite restartMenu;
+	// private CCMenuItemSprite restartMenu;
 	private CCLabel lblLevel;
 	private CCLabel lblScore;
 	private CCSprite starSprite;
@@ -64,11 +67,12 @@ public class HomeLayer extends CCLayer {
 		
 		CCSprite playSprite = CCSprite.sprite("control-play.png", true);
 		CCMenuItemSprite playMenu = CCMenuItemSprite.item(playSprite, playSprite, this, "selectPlay");
-		CCSprite restartSprite = CCSprite.sprite("control-restart.png", true);
+		/*CCSprite restartSprite = CCSprite.sprite("control-restart.png", true);
 		this.restartMenu = CCMenuItemSprite.item(restartSprite, restartSprite, this, "goRestart");
-		restartMenu.setScale(0.5f);			
+		restartMenu.setScale(0.5f);*/			
 		
-		this.menu = CCMenu.menu(playMenu, this.restartMenu);		
+		// this.menu = CCMenu.menu(playMenu, this.restartMenu);		
+		this.menu = CCMenu.menu(playMenu);
 		this.menu.alignItemsHorizontally(50);
 		this.menu.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().getWidth() / 2,
@@ -82,12 +86,20 @@ public class HomeLayer extends CCLayer {
 		String lvl = String.valueOf(SlimeFactory.GameInfo.getLevelNum());
 		String lvlMax = String.valueOf(SlimeFactory.GameInfo.getLevelMax());
 		String info = diff + " " + lvl + " / " + lvlMax;
-		this.lblLevel = CCLabel.makeLabel("Yop yop", "fonts/Slime.ttf", 60.0f);
-		this.lblLevel.setPosition(CGPoint.make(
+		this.lblLevel = CCLabel.makeLabel("Yop yop", "fonts/Slime.ttf", 60.0f);		
+		CCMenuItemLabel menuLevelInfo = CCMenuItemLabel.item(this.lblLevel, this, "changeDifficulty");
+		CCMenu menuInfo = CCMenu.menu(menuLevelInfo);
+		menuInfo.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().getWidth() / 2,
 				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftInfo
 				));
-		this.addChild(this.lblLevel);
+		this.addChild(menuInfo);
+		
+		/*this.lblLevel.setPosition(CGPoint.make(
+				CCDirector.sharedDirector().winSize().getWidth() / 2,
+				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftInfo
+				));
+		this.addChild(this.lblLevel);*/
 				
 		this.lblScore = CCLabel.makeLabel("0", "fonts/Slime.ttf", 60.0f);
 		this.lblScore.setPosition(CGPoint.make(
@@ -102,6 +114,11 @@ public class HomeLayer extends CCLayer {
 				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftScore
 				));
 		this.addChild(this.starSprite);
+	}
+	
+	public void changeDifficulty(Object sender) {
+		CCTransitionScene transition = CCFadeTransition.transition(0.5f, ChangeDifficultyLayer.getScene());
+		CCDirector.sharedDirector().replaceScene(transition);
 	}
 
 	@Override
@@ -122,8 +139,8 @@ public class HomeLayer extends CCLayer {
 	@Override
 	public void onEnter() {		
 		super.onEnter();
-		this.restartMenu.setVisible(SlimeFactory.LevelBuilder.hasBegun());
-		this.restartMenu.setIsEnabled(SlimeFactory.LevelBuilder.hasBegun());
+		// this.restartMenu.setVisible(SlimeFactory.LevelBuilder.hasBegun());
+		// this.restartMenu.setIsEnabled(SlimeFactory.LevelBuilder.hasBegun());
 		
 		String diff =LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty());		
 		String lvl = String.valueOf(SlimeFactory.GameInfo.getLevelNum());
@@ -160,6 +177,6 @@ public class HomeLayer extends CCLayer {
 	public void goRestart(Object sender) {
 		Sounds.playEffect(R.raw.menuselect);
 		Sounds.pauseMusic();
-		SlimeFactory.LevelBuilder.resetAll();
+		SlimeFactory.LevelBuilder.resetAllAndRun();
 	}
 }
