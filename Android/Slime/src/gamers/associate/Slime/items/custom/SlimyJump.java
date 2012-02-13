@@ -1,6 +1,7 @@
 package gamers.associate.Slime.items.custom;
 
 import gamers.associate.Slime.R;
+import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Sounds;
@@ -21,6 +22,8 @@ import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
+
+import android.util.Log;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Joint;
@@ -71,7 +74,9 @@ public class SlimyJump extends Slimy implements ISelectable {
 	private CGPoint selectScreenEnd;
 	private CGPoint absoluteScreenStart;
 	
-	private boolean hasJumped;		
+	private boolean hasJumped;
+	
+	private float maxContactManifold;
 	
 	public SlimyJump(float x, float y, float width, float height, World world,
 			float worldRatio) {
@@ -92,6 +97,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 		this.selectScreenStart = CGPoint.zero();
 		this.selectScreenEnd = CGPoint.zero();
 		this.absoluteScreenStart = CGPoint.zero();
+		this.maxContactManifold = this.height / this.worldRatio;
 	}
 	
 	public void selectionMove(CGPoint gameReference) {
@@ -399,72 +405,88 @@ public class SlimyJump extends Slimy implements ISelectable {
 			
 			int contactCount = contact.getManifold().getNumberOfContactPoints();
 			if (contactCount > 0) {
-				Vector2 contactPoint = null;
-				for (int i = 0; i < contactCount; i++) {
-					contactPoint = contact.getManifold().getPoints()[i];
-					break;
-				}
-				
-				Vector2 normal = contact.getManifold().getNormal();
-				float diffX = this.getBody().getPosition().x - contact.getContactWith().getBody().getPosition().x;
-				if (diffX > 0 && normal.x < 0) {					
-					normal.x = - normal.x;					
-				}
-				if (diffX < 0 && normal.x > 0) {
-					normal.x = - normal.x;
-				}
-				
-				float diffY = this.getBody().getPosition().y - contact.getContactWith().getBody().getPosition().y;
-				if (diffY > 0 && normal.y < 0) {					
-					normal.y = - normal.y;					
-				}
-				if (diffY < 0 && normal.y > 0) {					
-					normal.y = - normal.y;					
-				}					
-				
-				float radians = (float)Math.atan2(normal.x, normal.y);
-				float degrees = ccMacros.CC_RADIANS_TO_DEGREES(radians);				
-				this.setAngle(degrees);
 				if (!contact.getContactWith().isNoStick()) {
-					
-	//					float radAngle = -1.0f * ccMacros.CC_DEGREES_TO_RADIANS(this.angle);				
-	
-	//				
-					Vector2 jointB = this.getBody().getPosition();
-					//				Vector2 jointB = new Vector2();
-	//				jointB.x = this.getBody().getPosition().x - (normal.x * ((this.bodyWidth / 2) / this.worldRatio));
-	// 				jointB.y = this.getBody().getPosition().y - (normal.y * ((this.bodyHeight / 2) / this.worldRatio));
-	//				jointB.x = anchor.x + normal.x * ((this.bodyWidth / 2) / this.worldRatio);
-	//				jointB.y = anchor.y + normal.y * ((this.bodyHeight / 2) / this.worldRatio);
-	//				this.body.setTransform(jointB, radians);
-					
-					if (this.currentJointDef == null) {
-						this.currentJointDef = new DistanceJointDef();									
+					Vector2 contactPoint = null;
+					Vector2 tmpPoint = null;
+					// Bug here => Always take the first one or destroyed object at 0 0 ?
+					for (int i = 0; i < contactCount; i++) {
+						try
+						{
+							tmpPoint = contact.getManifold().getPoints()[i];
+							if (tmpPoint.x != 0 && tmpPoint.y != 0) {
+								// Try to debug long attach bug
+								if (this.getBody().getPosition().dst(tmpPoint) < this.maxContactManifold) {
+									contactPoint = tmpPoint;
+									break;
+								}								
+							}
+						} catch (Exception ex) {
+							Log.e(Slime.TAG, "Error during read of contact manifold in SlimyJump");
+						}
 					}
 					
-					// contact.getContactWith().getBody(), this.getBody(), contactPoint, normal);
-					// this.currentJointDef.bodyA = contact.getContactWith().getBody();
-					// this.currentJointDef.bodyB = this.getBody();
-					this.currentJointDef.initialize(contact.getContactWith().getBody(), this.getBody(), contactPoint, jointB);
-					this.jointStart.x = contactPoint.x * this.worldRatio;
-					this.jointStart.y = contactPoint.y * this.worldRatio;
+					if (contactPoint != null) {
 					
-	//				this.currentJointDef.target.set(contactPoint);
-	//				this.currentJointDef.maxForce = 3000.0f * this.getBody().getMass();
-					this.currentJointDef.collideConnected = true;
-					// this.currentJointDef.collideConnected = true;
-	//				this.currentJointDef.dampingRatio = 1.0f;
-		//			this.currentJointDef.enableMotor = false;
-		//			this.currentJointDef.enableLimit = true;
-		//			this.currentJointDef.lowerAngle = 0;
-		//			this.currentJointDef.upperAngle = 0;
-					this.currentJointDef.frequencyHz = 0.9f;
-					this.currentJointDef.dampingRatio = 1.5f;
-								
-					this.currentJoint = this.world.createJoint(this.currentJointDef);
-					
-					this.stickHandled = true;
-					//this.getBody().setAwake(false);
+						Vector2 normal = contact.getManifold().getNormal();
+						float diffX = this.getBody().getPosition().x - contact.getContactWith().getBody().getPosition().x;
+						if (diffX > 0 && normal.x < 0) {					
+							normal.x = - normal.x;					
+						}
+						if (diffX < 0 && normal.x > 0) {
+							normal.x = - normal.x;
+						}
+						
+						float diffY = this.getBody().getPosition().y - contact.getContactWith().getBody().getPosition().y;
+						if (diffY > 0 && normal.y < 0) {					
+							normal.y = - normal.y;					
+						}
+						if (diffY < 0 && normal.y > 0) {					
+							normal.y = - normal.y;					
+						}					
+						
+						float radians = (float)Math.atan2(normal.x, normal.y);
+						float degrees = ccMacros.CC_RADIANS_TO_DEGREES(radians);				
+						this.setAngle(degrees);				
+						
+		//					float radAngle = -1.0f * ccMacros.CC_DEGREES_TO_RADIANS(this.angle);				
+		
+		//				
+						Vector2 jointB = this.getBody().getPosition();
+						//				Vector2 jointB = new Vector2();
+		//				jointB.x = this.getBody().getPosition().x - (normal.x * ((this.bodyWidth / 2) / this.worldRatio));
+		// 				jointB.y = this.getBody().getPosition().y - (normal.y * ((this.bodyHeight / 2) / this.worldRatio));
+		//				jointB.x = anchor.x + normal.x * ((this.bodyWidth / 2) / this.worldRatio);
+		//				jointB.y = anchor.y + normal.y * ((this.bodyHeight / 2) / this.worldRatio);
+		//				this.body.setTransform(jointB, radians);
+						
+						if (this.currentJointDef == null) {
+							this.currentJointDef = new DistanceJointDef();									
+						}
+						
+						// contact.getContactWith().getBody(), this.getBody(), contactPoint, normal);
+						// this.currentJointDef.bodyA = contact.getContactWith().getBody();
+						// this.currentJointDef.bodyB = this.getBody();
+						this.currentJointDef.initialize(contact.getContactWith().getBody(), this.getBody(), contactPoint, jointB);
+						this.jointStart.x = contactPoint.x * this.worldRatio;
+						this.jointStart.y = contactPoint.y * this.worldRatio;
+						
+		//				this.currentJointDef.target.set(contactPoint);
+		//				this.currentJointDef.maxForce = 3000.0f * this.getBody().getMass();
+						this.currentJointDef.collideConnected = true;
+						// this.currentJointDef.collideConnected = true;
+		//				this.currentJointDef.dampingRatio = 1.0f;
+			//			this.currentJointDef.enableMotor = false;
+			//			this.currentJointDef.enableLimit = true;
+			//			this.currentJointDef.lowerAngle = 0;
+			//			this.currentJointDef.upperAngle = 0;
+						this.currentJointDef.frequencyHz = 0.9f;
+						this.currentJointDef.dampingRatio = 1.5f;
+									
+						this.currentJoint = this.world.createJoint(this.currentJointDef);
+						
+						this.stickHandled = true;
+						//this.getBody().setAwake(false);
+					}
 				}
 			}
 		}				
