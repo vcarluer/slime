@@ -5,6 +5,7 @@ import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.levels.LevelHome;
 
+import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.menus.CCMenu;
@@ -57,6 +58,10 @@ public class EndDifficultyGameLayer extends CCLayer {
 					CCDirector.sharedDirector().winSize().getWidth() / 2,
 					CCDirector.sharedDirector().winSize().getHeight() / 2
 					));			
+			unlock.setScale(10.0f);
+			CCScaleTo scale = CCScaleTo.action(0.5f, 1.0f);
+			unlock.runAction(scale);
+			
 			this.addChild(unlock);
 		}
 		
