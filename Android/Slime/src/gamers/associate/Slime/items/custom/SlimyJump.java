@@ -95,7 +95,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	}
 	
 	public void selectionMove(CGPoint gameReference) {
-		if (this.selected && !this.isPaused) {			
+		if (this.selected && this.isActive()) {			
 			this.computeTarget(gameReference);
 		}
 	}
@@ -281,7 +281,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	}
 	
 	public void selectionStop(CGPoint gameReference) {		
-		if (this.selected && !this.isPaused) {
+		if (this.selected && this.isActive()) {
 			this.computeTarget(gameReference);			
 			if (this.getBody() != null) {
 				// this.getBody().setAwake(true);				

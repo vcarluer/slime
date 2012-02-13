@@ -726,7 +726,7 @@ public class Level {
 	}
 	
 	public boolean moveSelection(CGPoint gameReference) {
-		if (this.selectedItem != null) {			
+		if (this.selectedItem != null && !this.isGameOver) {			
 			this.selectedItem.selectionMove(gameReference);
 			return true;
 		}
@@ -736,7 +736,7 @@ public class Level {
 	}
 
 	public void trySelect(CGPoint gameReference) {
-		if (this.selectedItem == null) {
+		if (this.selectedItem == null && !this.isGameOver) {
 			for(ISelectable selectable : this.selectables) {
 				if (selectable.canSelect(gameReference)) {
 					if (this.selectedItem != null) {
@@ -892,13 +892,18 @@ public class Level {
 	}
 	
 	private void endLevel() {
-		this.stopGamePlay();		
+		this.stopGamePlay();			
 		this.isGameOver = true;
 	}
 	
 	public void stopGamePlay() {
 		if (this.gamePlay != null) {
 			this.gamePlay.stop();
+		}
+		
+		if (this.selectedItem != null) {
+			this.selectedItem.unselect();
+			this.selectedItem = null;
 		}
 	}
 	

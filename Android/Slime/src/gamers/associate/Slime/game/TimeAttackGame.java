@@ -160,7 +160,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	}
 
 	public void activateSelection(CGPoint gameReference) {
-		if (!this.isPaused) {
+		if (!this.isPaused && !this.isGameOver) {
 			this.isStarted = true;
 			this.setNormalTime();
 			this.level.getCameraManager().follow(this.level.getSelectedGameItem());	
@@ -175,7 +175,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	}
 
 	public void selectBegin(CGPoint gameReference) {		
-		if (!this.isStarted && !this.isPaused) {
+		if (!this.isStarted && !this.isPaused && !this.isGameOver) {
 			this.level.getCameraManager().cancelActions();
 			this.level.getCameraManager().moveInterpolateTo(this.level.getSelectedGameItem(), 0.5f);
 			this.level.getCameraManager().zoomInterpolateTo(this.level.getSelectedGameItem(), 1.0f, 0.5f);			
@@ -240,6 +240,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		label.setColor(ccColor3B.ccc3( 255,255,255));
 		label.stopAllActions();
 		label.setOpacity(255);
+		this.level.setTimeRatio(2.0f);
 		this.setNormalTime();
 		this.isStarted = false;
 	}
