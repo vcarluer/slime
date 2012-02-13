@@ -16,7 +16,7 @@ import org.cocos2d.transitions.CCTransitionScene;
 
 public class LevelBuilderGenerator implements ILevelBuilder
 {
-	private static boolean isDebug = false;
+	private static boolean isDebug = true;
 	private static int forceDiff = 1;
 	private static int forceLevel = 10;
 	

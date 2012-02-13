@@ -1,6 +1,8 @@
 package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.LevelDifficulty;
+import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.levels.LevelHome;
 
 import org.cocos2d.layers.CCLayer;
@@ -43,9 +45,20 @@ public class EndDifficultyGameLayer extends CCLayer {
 		CCLabel label = CCLabel.makeLabel("Game Over", "fonts/Slime.ttf", 60f);
 		label.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().getWidth() / 2,
-				CCDirector.sharedDirector().winSize().getHeight() / 2
+				CCDirector.sharedDirector().winSize().getHeight() / 2 + 150f
 				));	
 		this.addChild(label);
+		
+		if (SlimeFactory.GameInfo.getDifficulty() != LevelDifficulty.Extrem) {
+			String unlockLvl = LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty());
+			String unlockTxt = "You have unlock: " + unlockLvl + " mode";
+			CCLabel unlock = CCLabel.makeLabel(unlockTxt, "fonts/Slime.ttf", 45f);
+			unlock.setPosition(CGPoint.make(
+					CCDirector.sharedDirector().winSize().getWidth() / 2,
+					CCDirector.sharedDirector().winSize().getHeight() / 2
+					));			
+			this.addChild(unlock);
+		}
 		
 		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);
 		CCMenuItemSprite goHome = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goHome");
