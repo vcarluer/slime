@@ -35,6 +35,11 @@ public class GameInformation {
 		this.levelNum = 0;		
 	}
 	
+	public void endDifficulty() {
+		this.difficultyUp();
+		this.store();
+	}
+	
 	public void resetDifficulty(int diff) {
 		this.levelDifficulty = diff;
 		this.levelNum = 0;
@@ -47,6 +52,12 @@ public class GameInformation {
 		if (this.levelNum > this.getLevelMax()) {
 			this.difficultyUp();
 		}
+		this.store();
+	}
+	
+	public void forceLevel(int diff, int level) {
+		this.levelDifficulty = diff;
+		this.levelNum = level;
 		this.store();
 	}
 	

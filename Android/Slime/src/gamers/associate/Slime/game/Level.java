@@ -826,7 +826,10 @@ public class Level {
 //		}
 		
 		// this.loadLevel(LevelBuilder.LevelSelection);
-		get(SlimeFactory.LevelBuilder.getNext(this.currentLevelName), true);
+		String next = SlimeFactory.LevelBuilder.getNext(this.currentLevelName);
+		if (next != null) {
+			get(next, true);
+		}
 	}
 	
 	public void startLevel() {
