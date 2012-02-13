@@ -364,6 +364,7 @@ public class Red extends GameItemPhysic {
 			if (this.waitTrigger) {
 				long time = System.currentTimeMillis();
 				if (time > this.nextTrigger) {
+					this.waitTrigger = false;
 					switch (this.state) {			
 					case Attack:
 					case Dead:			
@@ -372,9 +373,7 @@ public class Red extends GameItemPhysic {
 					case Defense:					
 					case Wait:
 						this.jump();
-					}
-					
-					this.waitTrigger = false;
+					}										
 				}						
 			}
 		}			
