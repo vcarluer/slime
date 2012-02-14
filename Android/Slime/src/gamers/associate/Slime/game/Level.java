@@ -23,9 +23,12 @@ import javax.microedition.khronos.opengles.GL10;
 
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
+import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
+import org.cocos2d.nodes.CCMotionStreak;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.CGPoint;
+import org.cocos2d.types.ccColor4B;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -167,7 +170,7 @@ public class Level {
 		
 		this.aliveSlimyList = new ArrayList<Slimy>();
 		this.trigerables = new ArrayList<ITrigerable>();
-		
+
 		this.init();
 		
 		isInit = true;
@@ -460,7 +463,7 @@ public class Level {
 		}
 		
 		this.cameraManager.tick(delta);
-		this.thumbnailManager.handle(this.selectables);
+		this.thumbnailManager.handle(this.selectables);	
 	}
 			
 	public void addItemToRemove(GameItem item) {

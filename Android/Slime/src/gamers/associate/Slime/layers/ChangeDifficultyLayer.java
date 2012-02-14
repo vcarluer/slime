@@ -20,6 +20,10 @@ import org.cocos2d.types.ccColor3B;
 public class ChangeDifficultyLayer extends CCLayer {
 	private static float padding = 25f;
 	private static CCScene scene;
+	private CCMenuItemLabel easyMenuLabel;
+	CCMenuItemLabel normalMenuLabel;
+	CCMenuItemLabel hardMenuLabel;
+	CCMenuItemLabel extremMenuLabel;
 	
 	public static CCScene getScene() {
 		if (scene == null) {
@@ -44,18 +48,39 @@ public class ChangeDifficultyLayer extends CCLayer {
 		spriteBg.setScale(Math.max(scaleW, scaleH));
 		this.addChild(spriteBg, 0);
 		
-		CCMenuItemLabel EasyMenuLabel = this.createMenuLabel(LevelDifficulty.Easy, "selectEasy");
-		CCMenuItemLabel normalMenuLabel = this.createMenuLabel(LevelDifficulty.Normal, "selectNormal");
-		CCMenuItemLabel hardMenuLabel = this.createMenuLabel(LevelDifficulty.Hard, "selectHard");
-		CCMenuItemLabel extremMenuLabel = this.createMenuLabel(LevelDifficulty.Extrem, "selectExtrem");
+		this.easyMenuLabel = this.createMenuLabel(LevelDifficulty.Easy, "selectEasy");
+		this.normalMenuLabel = this.createMenuLabel(LevelDifficulty.Normal, "selectNormal");
+		this.hardMenuLabel = this.createMenuLabel(LevelDifficulty.Hard, "selectHard");
+		this.extremMenuLabel = this.createMenuLabel(LevelDifficulty.Extrem, "selectExtrem");
 		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);
 		CCMenuItemSprite goHome = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goHome");
 		
-		CCMenu menu = CCMenu.menu(EasyMenuLabel, normalMenuLabel, hardMenuLabel, extremMenuLabel, goHome);
+		CCMenu menu = CCMenu.menu(this.easyMenuLabel, this.normalMenuLabel, this.hardMenuLabel, this.extremMenuLabel, goHome);
 		menu.alignItemsVertically(padding);
 		this.addChild(menu);
 	}
 	
+	@Override
+	public void onEnter() {		
+		this.enableMenu(this.easyMenuLabel, LevelDifficulty.Easy);
+		this.enableMenu(this.normalMenuLabel, LevelDifficulty.Normal);
+		this.enableMenu(this.hardMenuLabel, LevelDifficulty.Hard);
+		this.enableMenu(this.extremMenuLabel, LevelDifficulty.Extrem);
+		
+		super.onEnter();
+	}
+	
+	private void enableMenu(CCMenuItemLabel label, int diffRef) {
+		int diff = SlimeFactory.GameInfo.getMaxLevelDifficulty();
+		boolean isEnable = diffRef <= diff;
+		label.setIsEnabled(isEnable);
+		if (isEnable) {
+			label.setColor(ccColor3B.ccc3(255, 255, 255));
+		} else {
+			label.setColor(ccColor3B.ccc3(125, 125, 125));
+		}
+	}
+
 	private CCMenuItemLabel createMenuLabel(int diff, String selector) {
 		return CCMenuItemLabel.item(this.createLabel(LevelDifficulty.getText(diff)), this, selector);
 	}

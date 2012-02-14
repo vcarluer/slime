@@ -1,6 +1,5 @@
 package gamers.associate.Slime.game;
 
-import gamers.associate.Slime.layers.ChangeDifficultyLayer;
 import gamers.associate.Slime.layers.EndDifficultyGameLayer;
 import gamers.associate.Slime.levels.ILevelBuilder;
 import gamers.associate.Slime.levels.LevelDefinition;
@@ -16,7 +15,7 @@ import org.cocos2d.transitions.CCTransitionScene;
 
 public class LevelBuilderGenerator implements ILevelBuilder
 {
-	private static boolean isDebug = false;
+	private static boolean isDebug =  true;
 	private static int forceDiff = 1;
 	private static int forceLevel = 10;
 	
@@ -124,8 +123,7 @@ public class LevelBuilderGenerator implements ILevelBuilder
 	public void resetAll() {
 		this.levelDef.resetAllAndSave();
 		this.levelparser.resetStorage();
-		this.gameInfo.resetDifficulty(this.gameInfo.getDifficulty());
-		this.gameInfo.resetTotalScore();		
+		this.gameInfo.resetDifficulty(this.gameInfo.getDifficulty());			
 	}
 	
 	public void resetAllAndRun() {

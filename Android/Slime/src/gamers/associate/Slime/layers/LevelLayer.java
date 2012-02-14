@@ -41,7 +41,7 @@ public class LevelLayer extends CCLayer {
 	
 	private UpdateCallback tickCallback = new UpdateCallback() {
 		
-		public void update(float d) {
+		public void update(float d) {			
 			tick(d);
 		}
 	};
@@ -78,7 +78,7 @@ public class LevelLayer extends CCLayer {
 	 */
 	@Override
 	public boolean ccTouchesMoved(MotionEvent event) {
-		try { 
+		try { 						
 			for (int i = 0; i < event.getPointerCount(); i++) {			 
 			TouchInfo touch = this.getTouch(event, i);
 			if (touch != null) { 

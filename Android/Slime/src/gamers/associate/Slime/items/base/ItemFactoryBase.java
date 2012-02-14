@@ -1,7 +1,6 @@
 package gamers.associate.Slime.items.base;
 
 import gamers.associate.Slime.game.Level;
-import gamers.associate.Slime.items.custom.Star;
 
 import java.util.Hashtable;
 
@@ -77,7 +76,10 @@ public abstract class ItemFactoryBase<T extends GameItemCocos> {
 			this.preInit(item);
 			this.initItem(item);
 			this.runFirstAnimations(item);
-			this.level.addItemToAdd(item);			
+			if (this.level != null) {
+				this.level.addItemToAdd(item);
+			}
+
 			return item;
 		}
 		else

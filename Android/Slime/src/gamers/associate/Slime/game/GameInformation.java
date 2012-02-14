@@ -19,11 +19,22 @@ public class GameInformation {
 	private String fileName = "gameInfo.sli";
 	private int totalScore;
 	private int lastScore;
+	private int maxLevelDifficulty;
+	private int previousTotalScore;
 	
 	public GameInformation() {
-		this.levelDifficulty = LevelDifficulty.Easy;
+		this.maxLevelDifficulty = this.levelDifficulty = LevelDifficulty.Easy;
 		this.levelNum = 0;
 		this.load();
+	}
+	
+	private void setLevelDifficulty(int leveldifficulty) {
+		this.totalScore = 0;
+		this.lastScore = 0;
+		this.levelDifficulty = leveldifficulty;
+		if (this.levelDifficulty > this.maxLevelDifficulty) {
+			this.maxLevelDifficulty = this.levelDifficulty;
+		}
 	}
 	
 	public int getLevelMax() {
@@ -31,17 +42,18 @@ public class GameInformation {
 	}
 	
 	private void difficultyUp() {
-		this.levelDifficulty = LevelDifficulty.getNextDifficulty(this.levelDifficulty);
+		this.setLevelDifficulty(LevelDifficulty.getNextDifficulty(this.levelDifficulty));
 		this.levelNum = 0;		
 	}
 	
 	public void endDifficulty() {
+		this.previousTotalScore = this.totalScore;
 		this.difficultyUp();
 		this.store();
 	}
 	
 	public void resetDifficulty(int diff) {
-		this.levelDifficulty = diff;
+		this.setLevelDifficulty(diff);
 		this.levelNum = 0;
 		this.store();
 	}
@@ -56,7 +68,7 @@ public class GameInformation {
 	}
 	
 	public void forceLevel(int diff, int level) {
-		this.levelDifficulty = diff;
+		this.setLevelDifficulty(diff);
 		this.levelNum = level;
 		this.store();
 	}
@@ -73,6 +85,8 @@ public class GameInformation {
 			buffWriter.write(String.valueOf(this.levelNum));			
 			buffWriter.newLine();
 			buffWriter.write(String.valueOf(this.totalScore));
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.maxLevelDifficulty));
 		} catch (FileNotFoundException ex) {
 			Log.e(Slime.TAG, "ERROR, file not found " + fileName);
 			ex.printStackTrace();
@@ -118,6 +132,9 @@ public class GameInformation {
 								break;
 							case 3:
 								this.totalScore = Integer.valueOf(line).intValue();
+								break;
+							case 4:
+								this.maxLevelDifficulty = Integer.valueOf(line).intValue();
 								break;
 							default:
 								break;
@@ -170,5 +187,18 @@ public class GameInformation {
 		this.totalScore = 0;
 		this.lastScore = 0;
 		this.store();		
+	}
+
+	public int getMaxLevelDifficulty() {
+		return maxLevelDifficulty;
+	}
+	
+	// for debug
+	public void resetMaxLevelDifficulty() {
+		this.maxLevelDifficulty = LevelDifficulty.Easy;
+	}
+
+	public int getPreviousTotalScore() {
+		return previousTotalScore;
 	}
 }

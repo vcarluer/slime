@@ -7,6 +7,7 @@ import gamers.associate.Slime.items.custom.BumperAngleFactory;
 import gamers.associate.Slime.items.custom.ButtonFactory;
 import gamers.associate.Slime.items.custom.CircularSawFactory;
 import gamers.associate.Slime.items.custom.CocosFactory;
+import gamers.associate.Slime.items.custom.GateFactory;
 import gamers.associate.Slime.items.custom.GoalPortalFactory;
 import gamers.associate.Slime.items.custom.HomeLevelHandlerFactory;
 import gamers.associate.Slime.items.custom.LaserBeamFactory;
@@ -60,6 +61,7 @@ public abstract class SlimeFactory {
 	public static LevelGraphGeneratorRectangle LevelGeneratorRectangle = new LevelGraphGeneratorRectangle();
 	public static GameInformation GameInfo;
 	public static RedFactory Red = new RedFactory();
+	public static GateFactory Gate = new GateFactory();
 		
 	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {		
 		// LevelBuilder = new LevelBuilder();
@@ -89,6 +91,7 @@ public abstract class SlimeFactory {
 		LaserBeam.attach(level, attachNode, attachWorld, attachWorldRatio);
 		Sprite.attach(level, attachNode);
 		Red.attach(level, attachNode, attachWorld, attachWorldRatio);
+		Gate.attach(level, attachNode);
 		
 		SpriteSheetFactory.attachAll(attachNode);
 		isAttached = true;
@@ -116,6 +119,7 @@ public abstract class SlimeFactory {
 		LaserBeam.detach();
 		Sprite.detach();
 		Red.detach();
+		Gate.detach();
 		
 		LevelGeneratorCorridor.detach();
 		LevelGeneratorRectangle.detach();
@@ -144,6 +148,7 @@ public abstract class SlimeFactory {
 		LaserBeam.destroy();
 		Sprite.destroy();
 		Red.destroy();
+		Gate.destroy();
 		
 		LevelGeneratorCorridor.destroy();
 		LevelGeneratorRectangle.destroy();

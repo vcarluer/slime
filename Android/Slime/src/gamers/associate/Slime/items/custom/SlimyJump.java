@@ -16,12 +16,15 @@ import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.config.ccMacros;
+import org.cocos2d.nodes.CCDirector;
+import org.cocos2d.nodes.CCMotionStreak;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
+import org.cocos2d.types.ccColor4B;
 
 import android.util.Log;
 
@@ -165,7 +168,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 			this.absoluteScreenStart.x = tmp.x;
 			this.absoluteScreenStart.y = tmp.y;
             CCDrawingPrimitives.ccDrawCircle(gl, this.absoluteScreenStart, 50, ccMacros.CC_DEGREES_TO_RADIANS(90), 50, false);
-		}
+		}					
 		
 		if (Level.DebugMode) {
 			if (this.selectStart != null && this.target != null) {
@@ -293,7 +296,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 				// this.getBody().setAwake(true);				
 				this.getBody().setLinearVelocity(new Vector2(0, 0));
 				Vector2 pos = this.getBody().getPosition();		
-				this.getBody().applyLinearImpulse(this.worldImpulse, pos);
+				this.getBody().applyLinearImpulse(this.worldImpulse, pos);				
 				this.hasJumped = true;
 				Sounds.playEffect(R.raw.slimyjump);
 				this.isLanded = false;
@@ -332,7 +335,15 @@ public class SlimyJump extends Slimy implements ISelectable {
 			}
 			this.arrowSprite.setScale(arrowScale * cameraScale);
 			this.arrowSprite.setRotation(degrees);
-		}		
+		}
+		
+		// CCMotionStreak streak = Level.currentLevel.getMotionStreak();
+		//if (!this.isLanded) {			
+			//streak.setVisible(true);
+		//	streak.setPosition(CCDirector.sharedDirector().convertToGL(this.getPosition()));
+		//} else {
+			//streak.setVisible(false);
+		//}
 		
 //		if (this.selected) {
 //			Vector2 antigravity = new Vector2();

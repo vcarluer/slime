@@ -68,6 +68,24 @@ public class SpriteSheetFactory {
 		}		
 	}
 	
+	public static void attach(String plistPngName, CCNode attachNode) {					
+		if (attachNode != null) {
+			SpriteSheetCacheInfo sci = SpriteSheetList.get(plistPngName);
+			if (sci != null) {
+				attachNode.addChild(sci.getSpriteSheet(), sci.getZOrder());
+			}			
+		}				
+	}
+	
+	public static void detach(String plistPngName, CCNode attachNode) {					
+		if (attachNode != null) {
+			SpriteSheetCacheInfo sci = SpriteSheetList.get(plistPngName);
+			if (sci != null) {
+				attachNode.removeChild(sci.getSpriteSheet(), true);
+			}			
+		}				
+	}
+	
 	public static void detachAll() {
 		if (isAttached && rootNode != null) {
 			for(SpriteSheetCacheInfo sci : SpriteSheetList.values()) {

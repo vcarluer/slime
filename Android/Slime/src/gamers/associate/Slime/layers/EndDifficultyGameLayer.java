@@ -3,6 +3,10 @@ package gamers.associate.Slime.layers;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.items.base.SpriteSheetFactory;
+import gamers.associate.Slime.items.custom.Gate;
+import gamers.associate.Slime.items.custom.GateFactory;
+import gamers.associate.Slime.items.custom.Star;
 import gamers.associate.Slime.levels.LevelHome;
 
 import org.cocos2d.actions.interval.CCScaleTo;
@@ -19,6 +23,8 @@ import org.cocos2d.types.CGPoint;
 
 public class EndDifficultyGameLayer extends CCLayer {
 	private static CCScene scene;
+	private CCLabel lblScore;
+	private CCSprite starSprite;
 	
 	public static CCScene getScene() {
 		if (scene == null) {
@@ -50,7 +56,22 @@ public class EndDifficultyGameLayer extends CCLayer {
 				));	
 		this.addChild(label);
 		
-		if (SlimeFactory.GameInfo.getDifficulty() != LevelDifficulty.Extrem) {
+		this.lblScore = CCLabel.makeLabel("0", "fonts/Slime.ttf", 60.0f);
+		this.lblScore.setPosition(CGPoint.make(
+				CCDirector.sharedDirector().winSize().getWidth() / 2,
+				CCDirector.sharedDirector().winSize().getHeight() / 2 + 75f
+				));
+		this.addChild(this.lblScore);
+		
+		this.starSprite = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);		
+		this.starSprite.setPosition(CGPoint.make(
+				CCDirector.sharedDirector().winSize().getWidth() / 2,
+				CCDirector.sharedDirector().winSize().getHeight() / 2 + 75f
+				));
+		this.addChild(this.starSprite);
+		
+		
+		if (SlimeFactory.GameInfo.getDifficulty() != LevelDifficulty.Extrem) {			
 			String unlockLvl = LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty());
 			String unlockTxt = "You have unlock: " + unlockLvl + " mode";
 			CCLabel unlock = CCLabel.makeLabel(unlockTxt, "fonts/Slime.ttf", 45f);
@@ -60,11 +81,11 @@ public class EndDifficultyGameLayer extends CCLayer {
 					));			
 			unlock.setScale(10.0f);
 			CCScaleTo scale = CCScaleTo.action(0.5f, 1.0f);
-			unlock.runAction(scale);
+			unlock.runAction(scale);						
 			
 			this.addChild(unlock);
 		}
-		
+				
 		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);
 		CCMenuItemSprite goHome = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goHome");
 		CCMenu menu = CCMenu.menu(goHome);
@@ -74,7 +95,20 @@ public class EndDifficultyGameLayer extends CCLayer {
 				));	
 		this.addChild(menu);
 	}
-	
+
+	@Override
+	public void onEnter() {
+		String score = String.valueOf(SlimeFactory.GameInfo.getPreviousTotalScore());
+		this.lblScore.setString(score);
+		float starPadding = -10f;
+		float starX = this.lblScore.getPosition().x - this.lblScore.getContentSize().width / 2 - SlimeFactory.Star.getStarReferenceWidth() / 2 + starPadding;
+		this.starSprite.setPosition(CGPoint.make(
+				starX,
+				this.starSprite.getPosition().y
+				));
+		super.onEnter();
+	}
+
 	public void goHome(Object sender) {
 		Level currentLevel = Level.get(LevelHome.Id, true);								
 		CCTransitionScene transition = CCFadeTransition.transition(0.5f, currentLevel.getScene());
