@@ -12,6 +12,7 @@ import org.cocos2d.actions.UpdateCallback;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
+import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
@@ -54,13 +55,24 @@ public class SlimeLoadingLayer extends CCLayer {
 		
 		// this.sprite = CCSprite.sprite("slime-attack.png", true);
 		this.sprite = CCSprite.sprite("slime-attack.png");
-		this.sprite.setScale(1.0f);
+		float padding = 100f;
+		float saW = 333 + padding;
+		float w = CCDirector.sharedDirector().winSize().getWidth();
+		this.sprite.setScale(w / saW);
 		// this.spriteSheet.addChild(this.sprite);
 		this.addChild(this.sprite, 1);
 		this.sprite.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,
 				CCDirector.sharedDirector().winSize().height / 2
 				));
+		
+		CCLabel lbl = CCLabel.makeLabel("Loading...", "fonts/Slime.ttf", 30f);
+		this.addChild(lbl);
+		lbl.setPosition(CGPoint.make(
+				CCDirector.sharedDirector().winSize().width / 2,
+				30f
+				));
+		
 	}
 
 	/* (non-Javadoc)
