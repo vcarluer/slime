@@ -8,8 +8,12 @@ import gamers.associate.Slime.items.custom.Star;
 
 import org.apache.http.conn.ClientConnectionRequest;
 import org.cocos2d.actions.base.CCRepeatForever;
+import org.cocos2d.actions.camera.CCOrbitCamera;
 import org.cocos2d.actions.interval.CCAnimate;
+import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCMoveBy;
+import org.cocos2d.actions.interval.CCRotateBy;
+import org.cocos2d.actions.interval.CCRotateTo;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
@@ -32,10 +36,17 @@ public class HomeLayer extends CCLayer {
 	private CCLabel lblScore;
 	private CCSprite starSprite;
 	private CCSprite arrow;
+	private CCMenu menuInfo;
 	
 	private static float baseShift = 150f;
+	private static float shiftTitle = baseShift;
+	private static float shiftMenu  = shiftTitle - 150f; // Slime height = 160 / 2 + 20
+	private static float shiftInfo  = shiftMenu - 100f;
+	private static float shiftScore = shiftInfo - 70f;
 	
 	private float shiftArrow = -60f;
+	
+	private CCSprite titleSprite;
 	
 	public static HomeLayer get() {
 		if (layer == null) {
@@ -48,28 +59,9 @@ public class HomeLayer extends CCLayer {
 	protected HomeLayer() {
 		super();
 		
-		float shiftTitle = baseShift;
-		float shiftMenu  = shiftTitle - 150f; // Slime height = 160 / 2 + 20
-		float shiftInfo  = shiftMenu - 100f;
-		float shiftScore = shiftInfo - 70f;
 		
-		// temp
-		// ((LevelBuilderGenerator)SlimeFactory.LevelBuilder).getParser().resetStorage();
 		
 		this.setIsTouchEnabled(true);
-//		this.spriteSheet = SpriteSheetFactory.getSpriteSheet("logo", true);
-//		this.addChild(this.spriteSheet);
-		
-//		CCSprite sprite = CCSprite.sprite("slime-attack.png", true);		
-		CCSprite sprite = CCSprite.sprite("slime-attack.png");
-//		this.spriteSheet.addChild(sprite);
-		this.addChild(sprite);
-		
-		sprite.setPosition(CGPoint.make(
-				CCDirector.sharedDirector().winSize().width / 2,
-				CCDirector.sharedDirector().winSize().height / 2 + shiftTitle
-				));
-		
 		
 		CCSprite playSprite = CCSprite.sprite("control-play.png", true);
 		CCMenuItemSprite playMenu = CCMenuItemSprite.item(playSprite, playSprite, this, "selectPlay");
@@ -86,26 +78,7 @@ public class HomeLayer extends CCLayer {
 				));			
 		
 		this.addChild(this.menu);
-		
-		
-		String diff =LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty());		
-		String lvl = String.valueOf(SlimeFactory.GameInfo.getLevelNum());
-		String lvlMax = String.valueOf(SlimeFactory.GameInfo.getLevelMax());
-		String info = diff + " " + lvl + " / " + lvlMax;
-		this.lblLevel = CCLabel.makeLabel("Yop yop", "fonts/Slime.ttf", 60.0f);		
-		CCMenuItemLabel menuLevelInfo = CCMenuItemLabel.item(this.lblLevel, this, "changeDifficulty");
-		CCMenu menuInfo = CCMenu.menu(menuLevelInfo);
-		menuInfo.setPosition(CGPoint.make(
-				CCDirector.sharedDirector().winSize().getWidth() / 2,
-				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftInfo
-				));
-		this.addChild(menuInfo);
-		
-		/*this.lblLevel.setPosition(CGPoint.make(
-				CCDirector.sharedDirector().winSize().getWidth() / 2,
-				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftInfo
-				));
-		this.addChild(this.lblLevel);*/
+					
 				
 		this.lblScore = CCLabel.makeLabel("0", "fonts/Slime.ttf", 60.0f);
 		this.lblScore.setPosition(CGPoint.make(
@@ -119,17 +92,13 @@ public class HomeLayer extends CCLayer {
 				CCDirector.sharedDirector().winSize().getWidth() / 2,
 				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftScore
 				));
-		this.addChild(this.starSprite);
+		this.addChild(this.starSprite);				
 		
 		this.arrow = CCSprite.sprite("arrow.png");
 		float arrowSize = 50f;
 		float as = arrowSize / 69;
 		this.arrow.setScale(as);
 		this.addChild(this.arrow);
-		this.arrow.setPosition(CGPoint.make(
-				CCDirector.sharedDirector().winSize().getWidth() / 2 - (this.lblLevel.getContentSize().width / 2) + this.shiftArrow,
-				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftInfo
-				));				
 	}
 	
 	public void changeDifficulty(Object sender) {
@@ -155,17 +124,22 @@ public class HomeLayer extends CCLayer {
 	@Override
 	public void onEnter() {		
 		super.onEnter();
-		// this.restartMenu.setVisible(SlimeFactory.LevelBuilder.hasBegun());
-		// this.restartMenu.setIsEnabled(SlimeFactory.LevelBuilder.hasBegun());
-		
 		String diff =LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty());		
 		String lvl = String.valueOf(SlimeFactory.GameInfo.getLevelNum());
 		String lvlMax = String.valueOf(SlimeFactory.GameInfo.getLevelMax());
 		String info = diff + " " + lvl + " / " + lvlMax;
-		this.lblLevel.setString(info);				
+		this.lblLevel = CCLabel.makeLabel(info, "fonts/Slime.ttf", 60.0f);		
+		CCMenuItemLabel menuLevelInfo = CCMenuItemLabel.item(this.lblLevel, this, "changeDifficulty");
+		menuInfo = CCMenu.menu(menuLevelInfo);
+		menuInfo.setPosition(CGPoint.make(
+				CCDirector.sharedDirector().winSize().getWidth() / 2,
+				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftInfo
+				));
+		this.addChild(menuInfo);						
 		
 		String score = String.valueOf(SlimeFactory.GameInfo.getTotalScore());
 		this.lblScore.setString(score);
+		
 		float starPadding = -10f;
 		float starX = this.lblScore.getPosition().x - this.lblScore.getContentSize().width / 2 - SlimeFactory.Star.getStarReferenceWidth() / 2 + starPadding;
 		this.starSprite.setPosition(CGPoint.make(
@@ -173,16 +147,40 @@ public class HomeLayer extends CCLayer {
 				this.starSprite.getPosition().y
 				));
 		
+		this.arrow.setPosition(CGPoint.make(
+				CCDirector.sharedDirector().winSize().getWidth() / 2 - (this.lblLevel.getContentSize().width / 2) + this.shiftArrow,
+				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftInfo
+				));				
 		CCMoveBy mb = CCMoveBy.action(0.2f, CGPoint.make(10, 0));
 		CCSequence seq = CCSequence.actions(mb, mb.reverse());
 		CCRepeatForever rep = CCRepeatForever.action(seq);
 		this.arrow.runAction(rep);
 		
 		this.starSprite.runAction(SlimeFactory.Star.getAnimation(Star.Anim_Wait));
+		
+		
+		this.titleSprite = CCSprite.sprite("slime-attack.png");
+		this.addChild(this.titleSprite);
+		
+		this.titleSprite.setPosition(CGPoint.make(
+				CCDirector.sharedDirector().winSize().width / 2,
+				CCDirector.sharedDirector().winSize().height / 2 + shiftTitle
+				));
+		// this.titleSprite.setAnchorPoint(0, 0);		
+		CCRotateTo r0 = CCRotateTo.action(0, 0);		
+		CCDelayTime d = CCDelayTime.action(0.5f);
+		CCRotateBy r1 = CCRotateBy.action(0.3f, 25f);
+		CCRotateBy r2 = CCRotateBy.action(0.3f, -5f);
+		CCDelayTime d1 = CCDelayTime.action(0.1f);
+		CCRotateBy r3 = CCRotateBy.action(0.3f, 5f);
+		CCSequence seqTitle = CCSequence.actions(r0, d, r1, r2, d1, r3);
+		this.titleSprite.runAction(seqTitle);
 	}
 	
 	@Override
-	public void onExit() {		
+	public void onExit() {
+		this.removeChild(this.menuInfo, true);
+		this.removeChild(this.titleSprite, true);		
 		super.onExit();
 	}
 

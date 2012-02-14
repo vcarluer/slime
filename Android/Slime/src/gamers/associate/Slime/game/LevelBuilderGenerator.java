@@ -141,6 +141,6 @@ public class LevelBuilderGenerator implements ILevelBuilder
 	
 	public void start() {
 		this.firstBuild = true;
-		Level.get(LevelBuilderGenerator.defaultId, true);
+		Level.get(LevelBuilderGenerator.defaultId, true);		
 	}
 }
