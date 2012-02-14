@@ -25,9 +25,13 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 			case LevelDifficulty.Hard: lgMax = maxWidth * 3 / 4; break;
 			case LevelDifficulty.Extrem: lgMax = maxWidth; break;
 		}
-		
-		int lvlWidth = (int) Math.ceil(SlimeFactory.GameInfo.getLevelNum() * lgMax / SlimeFactory.GameInfo.getLevelMax());
-		int lvlHeight = (int) Math.ceil(lvlWidth * maxAddHeight / maxWidth);
+					
+		float tmp = SlimeFactory.GameInfo.getLevelNum() * lgMax;
+		tmp = tmp / SlimeFactory.GameInfo.getLevelMax();
+		int lvlWidth = (int) Math.ceil(tmp);
+		tmp = lvlWidth * maxAddHeight;
+		tmp = tmp / maxWidth;
+		int lvlHeight = (int) Math.ceil(tmp);
 		// Always at least 2
 		lvlWidth++;
 		lvlHeight++;
@@ -48,8 +52,10 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 		}
 		
 		LevelGenNode pick = null;
-		for (int col = 0; col < lvlHeight; col++) {
-			for (int row = 0; row < lvlWidth; row++) {
+		this.rightCount = 0;
+		for (int col = 0; col < lvlWidth; col++) {
+			this.topCount = 0;
+			for (int row = 0; row < lvlHeight; row++) {
 				// Left col
 				if (col == 0) {
 					if (row == 0) {
@@ -60,7 +66,7 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 							pick = this.pickBottomLeft();
 						}											
 					}
-					if (row > 0 && row < lvlWidth - 1) {
+					if (row > 0 && row < lvlHeight - 1) {
 						if (row == startPos) {
 							pick = this.pickStartMidLeft();
 						} else {
@@ -68,7 +74,7 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 						}
 						
 					}
-					if (row == lvlWidth - 1) {
+					if (row == lvlHeight - 1) {
 						if (row == startPos) {
 							pick = this.pickStartTopLeft();
 						} else {
@@ -79,7 +85,7 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 				}
 				
 				// Mid col
-				if (col > 0 && col < lvlHeight - 1) {
+				if (col > 0 && col < lvlWidth - 1) {
 					if (row == 0) {
 						// can be boss
 						if (col == bossPos) {
@@ -89,17 +95,17 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 						}
 					}
 					
-					if (row > 0 && row < lvlWidth - 1) {
+					if (row > 0 && row < lvlHeight - 1) {
 						pick = this.pickMiddle();
 					}
 					
-					if (row == lvlWidth - 1) {
+					if (row == lvlHeight - 1) {
 						pick = this.pickTopMiddle();
 					}
 				}
 				
 				// Right col
-				if (col == lvlHeight - 1) {
+				if (col == lvlWidth - 1) {
 					if (row == 0) {
 						// can be boss
 						if (col == bossPos) {
@@ -114,7 +120,7 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 						}
 					}
 					
-					if (row > 0 && row < lvlWidth - 1) {
+					if (row > 0 && row < lvlHeight - 1) {
 						if (row == endPos) {
 							pick = this.pickExitMiddleRight();
 						} else {
@@ -122,7 +128,7 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 						}						
 					}
 					
-					if (row == lvlWidth - 1) {
+					if (row == lvlHeight - 1) {
 						if (row == endPos) {
 							pick = this.pickExitTopRight();
 						} else {
@@ -134,11 +140,15 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 				if (pick != null) {
 					this.handlePick(pick, false);
 				}
-			}				
+				
+				this.topCount++;
+			}
+			
+			this.rightCount++;
 		}
 		
-		this.topCount = lvlHeight - 1;
-		this.rightCount = lvlWidth - 1;
+		this.topCount--;
+		this.rightCount--;
 		// Compute total time et critic time here
 	}	
 

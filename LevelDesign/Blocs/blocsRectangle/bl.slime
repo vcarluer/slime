@@ -1,0 +1,9 @@
+BlocInfo;0;120;480;480;0;BlocInfo-0;5;;;false;false;false;t,r
+TimeAttack;-2.0;0.0;0.0;0.0;0.0;5;1
+Platform;32.0;0.0;448.0;32.0;0.0
+Platform_Corner;0.0;0.0;32.0;32.0;90.0
+Platform;-208.0;240.0;448.0;32.0;90.0
+Box_GlassBox;232.0;32.0;232.0;40.0;0.0;true;true
+Red;56.0;32.0;153.0;105.0;0.0;true;3
+Red;232.0;72.0;32.0;22.0;0.0;false;1
+Red;432.0;72.0;32.0;22.0;0.0;false;1
