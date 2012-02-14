@@ -6,8 +6,11 @@ import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.custom.Star;
 
+import org.apache.http.conn.ClientConnectionRequest;
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
+import org.cocos2d.actions.interval.CCMoveBy;
+import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItemLabel;
@@ -28,8 +31,11 @@ public class HomeLayer extends CCLayer {
 	private CCLabel lblLevel;
 	private CCLabel lblScore;
 	private CCSprite starSprite;
+	private CCSprite arrow;
 	
 	private static float baseShift = 150f;
+	
+	private float shiftArrow = -60f;
 	
 	public static HomeLayer get() {
 		if (layer == null) {
@@ -108,12 +114,22 @@ public class HomeLayer extends CCLayer {
 				));
 		this.addChild(this.lblScore);
 		
-		this.starSprite = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);		
+		this.starSprite = new CCSprite(); // SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);		
 		this.starSprite.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().getWidth() / 2,
 				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftScore
 				));
 		this.addChild(this.starSprite);
+		
+		this.arrow = CCSprite.sprite("arrow.png");
+		float arrowSize = 50f;
+		float as = arrowSize / 69;
+		this.arrow.setScale(as);
+		this.addChild(this.arrow);
+		this.arrow.setPosition(CGPoint.make(
+				CCDirector.sharedDirector().winSize().getWidth() / 2 - (this.lblLevel.getContentSize().width / 2) + this.shiftArrow,
+				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftInfo
+				));				
 	}
 	
 	public void changeDifficulty(Object sender) {
@@ -146,7 +162,7 @@ public class HomeLayer extends CCLayer {
 		String lvl = String.valueOf(SlimeFactory.GameInfo.getLevelNum());
 		String lvlMax = String.valueOf(SlimeFactory.GameInfo.getLevelMax());
 		String info = diff + " " + lvl + " / " + lvlMax;
-		this.lblLevel.setString(info);
+		this.lblLevel.setString(info);				
 		
 		String score = String.valueOf(SlimeFactory.GameInfo.getTotalScore());
 		this.lblScore.setString(score);
@@ -156,6 +172,13 @@ public class HomeLayer extends CCLayer {
 				starX,
 				this.starSprite.getPosition().y
 				));
+		
+		CCMoveBy mb = CCMoveBy.action(0.2f, CGPoint.make(10, 0));
+		CCSequence seq = CCSequence.actions(mb, mb.reverse());
+		CCRepeatForever rep = CCRepeatForever.action(seq);
+		this.arrow.runAction(rep);
+		
+		this.starSprite.runAction(SlimeFactory.Star.getAnimation(Star.Anim_Wait));
 	}
 	
 	@Override

@@ -125,6 +125,10 @@ public abstract class ItemFactoryBase<T extends GameItemCocos> {
 		return node;
 	}
 	
+	public CCAction getAnimation(String animationName) {
+		return this.getAnimation(animationName, 0f);
+	}
+	
 	public CCSprite getAnimatedSprite(String animationName) {
 		return this.getAnimatedSprite(animationName, 0f);
 	}
