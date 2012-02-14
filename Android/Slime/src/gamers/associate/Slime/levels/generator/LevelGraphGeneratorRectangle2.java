@@ -8,7 +8,8 @@ import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
 
 public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle {
-	private final static int maxWidth = 24;
+	// tuned with SGS
+	private final static int maxWidth = 10;
 	private final static int maxAddHeight = 3;
 	private final static int minBossPos = 1;
 	private final static Random rand = new Random();
