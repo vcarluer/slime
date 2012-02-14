@@ -1,5 +1,7 @@
 package gamers.associate.Slime.levels.generator;
 
+import java.util.UUID;
+
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.levels.itemdef.BlocInfoDef;
 import gamers.associate.Slime.levels.itemdef.ItemDefinition;
@@ -14,6 +16,7 @@ public class BlocDefinitionParser extends BlocDefinition {
 	@Override
 	public void buildLevel(Level level, int xOffset, int yOffset) {
 		this.setOffset(xOffset, yOffset);
+		this.setBlocId(UUID.randomUUID());
 		this.buildLevel(level);
 	}
 	
