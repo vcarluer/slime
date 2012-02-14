@@ -28,10 +28,17 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 					
 		float tmp = SlimeFactory.GameInfo.getLevelNum() * lgMax;
 		tmp = tmp / SlimeFactory.GameInfo.getLevelMax();
-		int lvlWidth = (int) Math.ceil(tmp);
+		int lvlWidth = Math.round(tmp);
+		if (lvlWidth == 0) {
+			lvlWidth = 1;
+		}
 		tmp = lvlWidth * maxAddHeight;
 		tmp = tmp / maxWidth;
-		int lvlHeight = (int) Math.ceil(tmp);
+		int lvlHeight = Math.round(tmp);
+		if (lvlHeight == 0) {
+			lvlHeight = 1;
+		}
+
 		// Always at least 2
 		lvlWidth++;
 		lvlHeight++;
