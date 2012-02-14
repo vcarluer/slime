@@ -4,15 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import gamers.associate.Slime.game.IGamePlay;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.game.TimeAttackGame;
 
 public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle {
+	private static final int timeCritic = 5;
+	private static final float timeCalcPerBlock = 8f;
+	private static final int timeCalcBase = 20;
 	// tuned with SGS
-	private final static int maxWidth = 10;
-	private final static int maxAddHeight = 3;
-	private final static int minBossPos = 1;
-	private final static Random rand = new Random();
+	private static final int maxWidth = 10;
+	private static final int maxAddHeight = 3;
+	private static final int minBossPos = 1;
+	private static final Random rand = new Random();
 	
 	@Override
 	protected void generateInternal(int maxComplexity,
@@ -158,7 +163,19 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 		
 		this.topCount--;
 		this.rightCount--;
-		// Compute total time et critic time here
+		// Compute total time et critic time here		
+		this.currentLevel.removeCurrentGamePlay();
+		
+		TimeAttackGame taGame = TimeAttackGame.NewGame();
+		this.currentLevel.addGamePlay(taGame);
+				
+		int baseTime = timeCalcBase - SlimeFactory.GameInfo.getDifficulty();
+		int secPerBloc = Math.round(timeCalcPerBlock / SlimeFactory.GameInfo.getDifficulty());
+		int totalTime = baseTime + (lvlWidth * lvlHeight) * secPerBloc; 
+		taGame.setStartTime(totalTime);
+		// 10% or other or fix?
+		int critic = timeCritic;
+		taGame.setCriticTime(critic);					
 	}	
 
 	protected LevelGenNode pickStartBottomLeft() {

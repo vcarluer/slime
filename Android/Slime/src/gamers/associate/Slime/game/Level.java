@@ -795,6 +795,17 @@ public class Level {
 		}		
 	}	
 	
+	public void removeCurrentGamePlay() {
+		if (this.gamePlay != null) {
+			if (this.gamePlay instanceof GameItem) {
+				GameItem item = (GameItem) gamePlay;
+				this.removeGameItem(item);
+			}			
+		}
+		
+		this.gamePlay = null;		
+	}
+	
 	public void setHudText(String text) {
 		this.hudLayer.setHudText(text);
 	}
