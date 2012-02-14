@@ -46,7 +46,7 @@ public class SlimeLoadingLayer extends CCLayer {
 		spriteBg.setPosition(0, 0);
 		float sW = CCDirector.sharedDirector().winSize().width;
 		// Scale for full width, no deformation
-		float scale = sW / originalW;
+		float scale = sW / originalW;		
 		spriteBg.setScale(scale);
 		this.addChild(spriteBg, 0);
 		
@@ -58,7 +58,11 @@ public class SlimeLoadingLayer extends CCLayer {
 		float padding = 100f;
 		float saW = 333 + padding;
 		float w = CCDirector.sharedDirector().winSize().getWidth();
-		this.sprite.setScale(w / saW);
+		scale = w / saW;
+		if (scale > 1.5) {
+			scale = 1.5f;
+		}
+		this.sprite.setScale(scale);
 		// this.spriteSheet.addChild(this.sprite);
 		this.addChild(this.sprite, 1);
 		this.sprite.setPosition(CGPoint.make(
