@@ -9,8 +9,8 @@ import android.util.Log;
 
 
 public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
-	private static final String BlocsAssetsBase = "blocsRectangle";	
-	private static final float GoldenRatio = 1.61803f;		
+	protected static final String BlocsAssetsBase = "blocsRectangle";	
+	protected static final float GoldenRatio = 1.61803f;		
 	
 	@Override
 	// For now only to right
@@ -119,7 +119,7 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 		this.handlePick(pick, false);
 	}
 
-	private LevelGenNode pickTopRight() {
+	protected LevelGenNode pickTopRight() {
 		LevelGenNode pick = null;
 		List<LevelGenNode> selection = new ArrayList<LevelGenNode>();
 		List<Integer> list = new ArrayList<Integer>();		
@@ -135,7 +135,7 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 		return pick;
 	}
 
-	private LevelGenNode pickExitTopRight() {
+	protected LevelGenNode pickExitTopRight() {
 		LevelGenNode pick = null;
 		List<LevelGenNode> selection = new ArrayList<LevelGenNode>();
 		List<Integer> list = new ArrayList<Integer>();
@@ -151,7 +151,7 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 		return pick;
 	}
 
-	private LevelGenNode pickTopMiddle() {
+	protected LevelGenNode pickTopMiddle() {
 		LevelGenNode pick = null;
 		List<LevelGenNode> selection = new ArrayList<LevelGenNode>();
 		List<Integer> list = new ArrayList<Integer>();		
@@ -168,7 +168,7 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 		return pick;
 	}
 
-	private LevelGenNode pickTopLeft() {
+	protected LevelGenNode pickTopLeft() {
 		LevelGenNode pick = null;
 		List<LevelGenNode> selection = new ArrayList<LevelGenNode>();
 		List<Integer> list = new ArrayList<Integer>();		
@@ -184,7 +184,7 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 		return pick;
 	}
 
-	private LevelGenNode pickMiddleRight() {
+	protected LevelGenNode pickMiddleRight() {
 		LevelGenNode pick = null;
 		List<LevelGenNode> selection = new ArrayList<LevelGenNode>();
 		List<Integer> list = new ArrayList<Integer>();
@@ -201,7 +201,7 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 		return pick;
 	}
 
-	private LevelGenNode pickExitMiddleRight() {
+	protected LevelGenNode pickExitMiddleRight() {
 		LevelGenNode pick = null;
 		List<LevelGenNode> selection = new ArrayList<LevelGenNode>();
 		List<Integer> list = new ArrayList<Integer>();
@@ -218,7 +218,7 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 		return pick;
 	}
 
-	private LevelGenNode pickMiddle() {
+	protected LevelGenNode pickMiddle() {
 		LevelGenNode pick = null;
 		List<LevelGenNode> selection = new ArrayList<LevelGenNode>();
 		List<Integer> list = new ArrayList<Integer>();
@@ -236,7 +236,7 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 		return pick;
 	}
 
-	private LevelGenNode pickMiddleLeft() {
+	protected LevelGenNode pickMiddleLeft() {
 		LevelGenNode pick = null;
 		List<LevelGenNode> selection = new ArrayList<LevelGenNode>();
 		List<Integer> list = new ArrayList<Integer>();
@@ -253,7 +253,7 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 		return pick;
 	}
 
-	private LevelGenNode pickExitGroundRightCorner() {
+	protected LevelGenNode pickExitGroundRightCorner() {
 		LevelGenNode pick = null;
 		List<LevelGenNode> selection = new ArrayList<LevelGenNode>();
 		List<Integer> list = new ArrayList<Integer>();
@@ -269,7 +269,7 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 		return pick;
 	}
 
-	private LevelGenNode pickGroundRightCorner() {
+	protected LevelGenNode pickGroundRightCorner() {
 		LevelGenNode pick = null;
 		List<LevelGenNode> selection = new ArrayList<LevelGenNode>();
 		List<Integer> list = new ArrayList<Integer>();
@@ -285,7 +285,7 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 		return pick;
 	}
 
-	private LevelGenNode pickNextGround() {
+	protected LevelGenNode pickNextGround() {
 		LevelGenNode pick = null;
 		List<LevelGenNode> selection = new ArrayList<LevelGenNode>();
 		List<Integer> list = new ArrayList<Integer>();
@@ -307,7 +307,7 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 		return BlocsAssetsBase;
 	}
 	
-	private LevelGenNode pickStart() {
+	protected LevelGenNode pickStart() {
 		LevelGenNode pick = null;
 		List<LevelGenNode> selection = new ArrayList<LevelGenNode>();
 		List<Integer> list = new ArrayList<Integer>();
