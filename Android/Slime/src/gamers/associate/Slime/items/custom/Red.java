@@ -246,6 +246,7 @@ public class Red extends GameItemPhysic {
 		Sounds.playEffect(R.raw.slimyfire);
 		this.deadAnim();
 		this.swithBodyCategory();
+		Level.currentLevel.getGamePlay().setNewBonus();
 	}	
 	
 	private void deadAnim() {		
