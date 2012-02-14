@@ -45,11 +45,12 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 		lvlHeight++;
 		
 		int startPos = rand.nextInt(lvlHeight);
-		int endPos = rand.nextInt(lvlHeight);
+		/*int endPos = rand.nextInt(lvlHeight);
 		// try to repick if equal
 		if (startPos == endPos) {
 			endPos = rand.nextInt(lvlHeight);
-		}
+		}*/
+		int endPos = lvlHeight - 1 - startPos;
 		
 		// Pick start / end and all other blocks ! Based on complexity? And difficulty?
 		// Boss always at right or at bottom?
