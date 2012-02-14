@@ -29,7 +29,7 @@ public class Sounds {
 		preloadEffect(R.raw.getrupee);
 	}
 	
-	private static void preloadEffect(int soundId) {
+	public static void preloadEffect(int soundId) {
 		SoundEngine.sharedEngine().preloadEffect(CCDirector.sharedDirector().getActivity(), soundId);
 	}
 	
