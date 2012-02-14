@@ -21,6 +21,7 @@ public class GameInformation {
 	private int lastScore;
 	private int maxLevelDifficulty;
 	private int previousTotalScore;
+	private int previousDifficulty;
 	
 	public GameInformation() {
 		this.maxLevelDifficulty = this.levelDifficulty = LevelDifficulty.Easy;
@@ -31,6 +32,7 @@ public class GameInformation {
 	private void setLevelDifficulty(int leveldifficulty) {
 		this.totalScore = 0;
 		this.lastScore = 0;
+		this.previousDifficulty = this.levelDifficulty;
 		this.levelDifficulty = leveldifficulty;
 		if (this.levelDifficulty > this.maxLevelDifficulty) {
 			this.maxLevelDifficulty = this.levelDifficulty;
@@ -200,5 +202,9 @@ public class GameInformation {
 
 	public int getPreviousTotalScore() {
 		return previousTotalScore;
+	}
+	
+	public int getPreviousDifficulty() {
+		return this.previousDifficulty;
 	}
 }

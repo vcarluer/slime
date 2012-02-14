@@ -71,18 +71,16 @@ public class EndDifficultyGameLayer extends CCLayer {
 				));
 		this.addChild(this.starSprite);
 		
+						
+		String unlockLvl = LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty());
+		String unlockTxt = "You have unlock: " + unlockLvl + " mode";
+		this.unlock = CCLabel.makeLabel(unlockTxt, "fonts/Slime.ttf", 45f);
+		this.unlock.setPosition(CGPoint.make(
+				CCDirector.sharedDirector().winSize().getWidth() / 2,
+				CCDirector.sharedDirector().winSize().getHeight() / 2
+				));									
 		
-		if (SlimeFactory.GameInfo.getDifficulty() != LevelDifficulty.Extrem) {			
-			String unlockLvl = LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty());
-			String unlockTxt = "You have unlock: " + unlockLvl + " mode";
-			this.unlock = CCLabel.makeLabel(unlockTxt, "fonts/Slime.ttf", 45f);
-			this.unlock.setPosition(CGPoint.make(
-					CCDirector.sharedDirector().winSize().getWidth() / 2,
-					CCDirector.sharedDirector().winSize().getHeight() / 2
-					));									
-			
-			this.addChild(this.unlock);
-		}
+		this.addChild(this.unlock);		
 				
 		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);
 		CCMenuItemSprite goHome = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goHome");
@@ -96,10 +94,15 @@ public class EndDifficultyGameLayer extends CCLayer {
 
 	@Override
 	public void onEnter() {		
-		this.unlock.setScale(10.0f);
-		CCScaleTo scale = CCScaleTo.action(0.5f, 1.0f);
-		this.unlock.runAction(scale);
-
+		if (SlimeFactory.GameInfo.getPreviousDifficulty() != LevelDifficulty.Extrem) {
+			this.unlock.setVisible(true);
+			this.unlock.setScale(10.0f);
+			CCScaleTo scale = CCScaleTo.action(0.5f, 1.0f);
+			this.unlock.runAction(scale);
+		} else {
+			this.unlock.setVisible(false);
+		}
+		
 		String score = String.valueOf(SlimeFactory.GameInfo.getPreviousTotalScore());
 		this.lblScore.setString(score);
 		float starPadding = -10f;
