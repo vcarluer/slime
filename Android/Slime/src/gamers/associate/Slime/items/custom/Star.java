@@ -96,7 +96,7 @@ public class Star extends GameItemPhysic {
 	 */
 	@Override
 	protected void handleContact(ContactInfo item) {	
-		if (!this.fading) {	
+		if (!this.fading && item.getContactWith() instanceof Slimy) {	
 			this.fading = true;
 			CCAnimate animate = CCAnimate.action(this.animationList.get(Star.Anim_Fade), false);			
 			CCCallFunc activate = CCCallFunc.action(this, "starTaken");
