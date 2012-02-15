@@ -301,10 +301,11 @@ public class Red extends GameItemPhysic {
 	private void switchWait(RedState state) {												
 		CCAction nextWait = null;
 		
+		int del = rand.nextInt(3) + 1;
 		if (state == RedState.Wait) {
 			if (this.waitAction == null) {
 				CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Wait), false);
-				CCDelayTime delay = CCDelayTime.action(2f);
+				CCDelayTime delay = CCDelayTime.action(del);
 				CCSequence seq = CCSequence.actions(animate, delay);
 				CCRepeatForever repeat = CCRepeatForever.action(seq);		
 				this.waitAction = repeat;				
@@ -316,7 +317,7 @@ public class Red extends GameItemPhysic {
 		if (state == RedState.Defense) {
 			if (this.waitActionDefense == null) {
 				CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_WaitDefense), false);
-				CCDelayTime delay = CCDelayTime.action(2f);
+				CCDelayTime delay = CCDelayTime.action(del);
 				CCSequence seq = CCSequence.actions(animate, delay);
 				CCRepeatForever repeat = CCRepeatForever.action(seq);		
 				this.waitActionDefense = repeat;				
@@ -328,7 +329,7 @@ public class Red extends GameItemPhysic {
 		if (state == RedState.Dead) {
 			if (this.waitActionDead == null) {
 				CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_WaitDead), false);
-				CCDelayTime delay = CCDelayTime.action(2f);
+				CCDelayTime delay = CCDelayTime.action(del);
 				CCSequence seq = CCSequence.actions(animate, delay);
 				CCRepeatForever repeat = CCRepeatForever.action(seq);		
 				this.waitActionDead = repeat;				
