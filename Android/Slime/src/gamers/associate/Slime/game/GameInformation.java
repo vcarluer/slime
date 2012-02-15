@@ -22,10 +22,11 @@ public class GameInformation {
 	private int maxLevelDifficulty;
 	private int previousTotalScore;
 	private int previousDifficulty;
+	private String lastBgk;
 	
-	public GameInformation() {
+	public GameInformation() {		
 		this.maxLevelDifficulty = this.levelDifficulty = LevelDifficulty.Easy;
-		this.levelNum = 0;
+		this.setLevelNum(0);
 		this.load();
 	}
 	
@@ -45,7 +46,7 @@ public class GameInformation {
 	
 	private void difficultyUp() {
 		this.setLevelDifficulty(LevelDifficulty.getNextDifficulty(this.levelDifficulty));
-		this.levelNum = 0;		
+		this.setLevelNum(0);		
 	}
 	
 	public void endDifficulty() {
@@ -61,7 +62,7 @@ public class GameInformation {
 	}
 	
 	public void levelUp() {		
-		this.levelNum++;
+		this.setLevelNum(levelNum + 1);
 		this.lastScore = 0;
 		if (this.levelNum > this.getLevelMax()) {
 			this.difficultyUp();
@@ -71,7 +72,7 @@ public class GameInformation {
 	
 	public void forceLevel(int diff, int level) {
 		this.setLevelDifficulty(diff);
-		this.levelNum = level;
+		this.setLevelNum(level);
 		this.store();
 	}
 	
@@ -89,6 +90,8 @@ public class GameInformation {
 			buffWriter.write(String.valueOf(this.totalScore));
 			buffWriter.newLine();
 			buffWriter.write(String.valueOf(this.maxLevelDifficulty));
+			buffWriter.newLine();
+			buffWriter.write(this.lastBgk);
 		} catch (FileNotFoundException ex) {
 			Log.e(Slime.TAG, "ERROR, file not found " + fileName);
 			ex.printStackTrace();
@@ -137,6 +140,9 @@ public class GameInformation {
 								break;
 							case 4:
 								this.maxLevelDifficulty = Integer.valueOf(line).intValue();
+								break;
+							case 5:
+								this.lastBgk = line;
 								break;
 							default:
 								break;
@@ -203,8 +209,26 @@ public class GameInformation {
 	public int getPreviousTotalScore() {
 		return previousTotalScore;
 	}
-	
+		
 	public int getPreviousDifficulty() {
 		return this.previousDifficulty;
+	}
+
+	public String getLastBkg() {
+		return this.lastBgk;
+	}
+	
+	private void setLastBkg(String lastBkg) {
+		this.lastBgk = lastBkg;
+	}
+	
+	public void setLastBkgandSave(String lastBkg) {
+		this.setLastBkg(lastBkg);
+		this.store();
+	}
+	
+	private void setLevelNum(int levelNum) {
+		this.levelNum = levelNum;
+		this.setLastBkg("");
 	}
 }
