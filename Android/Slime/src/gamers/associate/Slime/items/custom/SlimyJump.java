@@ -15,16 +15,25 @@ import javax.microedition.khronos.opengles.GL10;
 import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
+import org.cocos2d.actions.interval.CCIntervalAction;
+import org.cocos2d.actions.interval.CCMoveBy;
+import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.config.ccMacros;
+import org.cocos2d.layers.CCLayer;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCMotionStreak;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteSheet;
+import org.cocos2d.nodes.CCTextureCache;
 import org.cocos2d.opengl.CCDrawingPrimitives;
+import org.cocos2d.particlesystem.CCParticleFire;
+import org.cocos2d.particlesystem.CCParticleMeteor;
+import org.cocos2d.particlesystem.CCParticleSystem;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 import org.cocos2d.types.ccColor4B;
+import org.cocos2d.types.ccColor4F;
 
 import android.util.Log;
 
@@ -35,6 +44,7 @@ import com.badlogic.gdx.physics.box2d.joints.DistanceJointDef;
 
 public class SlimyJump extends Slimy implements ISelectable {
 
+	private static final int AuraScaleDown = 5;
 	public static String thumbSprite = "wait-v-01.png";
 	public static String Anim_Dbz_Aura = "aura";
 	public static String Anim_Arrow = "greenarrow";
@@ -43,6 +53,8 @@ public class SlimyJump extends Slimy implements ISelectable {
 	public static float Max_Impulse = 7f;
 	private static float Default_Selection_Width = 72f; // 48f
 	private static float Default_Selection_Height = 78f; // 52f
+	private static float MaxAuraSize = 150f;
+	private static float MinAuraSize = 36f;
 	
 	private CGPoint target;
 	private Vector2 targetImpulse;
@@ -81,6 +93,11 @@ public class SlimyJump extends Slimy implements ISelectable {
 	
 	private float maxContactManifold;
 	
+	private CCParticleSystem emitter;
+	private CCSprite effectLayer = CCSprite.sprite("pf-01.png");
+	
+	private float emitterStartSize;
+	
 	public SlimyJump(float x, float y, float width, float height, World world,
 			float worldRatio) {
 		super(x, y, width, height, world, worldRatio);
@@ -100,7 +117,19 @@ public class SlimyJump extends Slimy implements ISelectable {
 		this.selectScreenStart = CGPoint.zero();
 		this.selectScreenEnd = CGPoint.zero();
 		this.absoluteScreenStart = CGPoint.zero();
-		this.maxContactManifold = this.height / this.worldRatio;
+		this.maxContactManifold = this.height / this.worldRatio * 2;
+		
+		this.MinAuraSize = this.height + 10;
+		this.MaxAuraSize = this.height + 124;
+		this.emitter = CCParticleFire.node();
+		this.emitter.setEmitterMode(CCParticleSystem.kCCPositionTypeRelative);						
+		this.emitter.setTexture(CCTextureCache.sharedTextureCache().addImage("fire.png"));
+		Level.currentLevel.getLevelLayer().addChild(this.emitter);
+		this.emitter.setEmitterMode(CCParticleSystem.kCCParticleModeRadius);
+		this.emitter.setPositionType(CCParticleSystem.kCCPositionTypeRelative);
+		this.emitter.setLife(0.1f);
+		this.emitter.setStartColor(new ccColor4F(0, 1f, 0, 1f));		
+		this.emitter.stopSystem();
 	}
 	
 	public void selectionMove(CGPoint gameReference) {
@@ -335,7 +364,27 @@ public class SlimyJump extends Slimy implements ISelectable {
 			}
 			this.arrowSprite.setScale(arrowScale * cameraScale);
 			this.arrowSprite.setRotation(degrees);
+			
+			if (!this.emitter.getActive()) {
+				this.emitter.resetSystem();
+			}
+						
+			float ech = MaxAuraSize - MinAuraSize;
+			float size = this.worldImpulse.len() *  ech / Max_Impulse;
+			this.emitterStartSize = MinAuraSize + size;
+			this.emitter.setStartSize(this.emitterStartSize);
+		} else {
+			this.emitterStartSize -= AuraScaleDown;
+			if (this.emitterStartSize < MinAuraSize) {
+				this.emitterStartSize = MinAuraSize;
+			}
+			
+			this.emitter.setStartSize(this.emitterStartSize);
 		}
+		
+		this.emitter.setPosition(this.getPosition());
+				
+		// this.effectLayer.setPosition(Level.currentLevel.getCameraManager().getScreenPoint(this.getPosition()));		
 		
 		// CCMotionStreak streak = Level.currentLevel.getMotionStreak();
 		//if (!this.isLanded) {			
@@ -414,6 +463,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 				&& this.currentJoint == null
 				&& this.getBody() != null) {
 			
+			this.emitter.stopSystem();
 			int contactCount = contact.getManifold().getNumberOfContactPoints();
 			if (contactCount > 0) {
 				if (!contact.getContactWith().isNoStick()) {
@@ -549,6 +599,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 //		}
 		/*this.auraSheet.removeChild(this.auraSprite, true);
 		this.auraSheet.removeChild(this.arrowSprite, true);*/
+		Level.currentLevel.getLevelLayer().removeChild(this.emitter, true);
 		super.destroy();
 	}
 	

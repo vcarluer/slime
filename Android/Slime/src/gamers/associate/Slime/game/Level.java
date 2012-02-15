@@ -1081,4 +1081,13 @@ public class Level {
 		
 		this.backgroundLayer.setPosition(this.getLevelOrigin());
 	}
+	
+	// for tests
+	public CCLayer getLevelLayer() {
+		return this.levelLayer;
+	}
+	
+	public CCLayer getGameLayer() {
+		return this.gameLayer;
+	}
 }
