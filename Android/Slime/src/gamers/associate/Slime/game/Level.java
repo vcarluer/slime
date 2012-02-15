@@ -47,6 +47,7 @@ public class Level {
 	public static boolean isInit;	
 	public static float Gravity = -10;
 	private static String backgroundPath = "bkg/";
+	private static final String HomeBkg = "world00-01.png";
 	
 	public static Level currentLevel; 
 	
@@ -251,7 +252,7 @@ public class Level {
 	public void loadLevel(String levelName) {
 		this.preBuild();		
 		SlimeFactory.LevelBuilder.build(this, levelName);						
-		this.postBuild(levelName);				
+		this.postBuild(levelName);		
 	}
 	
 	// Must be call before running scene with CCDirector
@@ -265,47 +266,63 @@ public class Level {
 		this.resetLevel();			
 	}
 	
-	private void setBackground() {
+	private void setBackground() {						
+		String fileName = "";
+		if (SlimeFactory.GameInfo.getLastBkg() != null && SlimeFactory.GameInfo.getLastBkg() != "") {
+			fileName = SlimeFactory.GameInfo.getLastBkg();
+		} else {
+			// todo list assets in bkg folder instead
+			int choice = this.randomGen.nextInt(7);
+			
+			switch (choice) {
+			default:
+			case 0:
+				fileName = "background-level-01.png";
+				break;
+			case 1:
+				fileName = "background-world00-01.png";
+				break;
+			case 2:
+				fileName = "world00-01.png";
+				break;
+			case 3:
+				fileName = "splash-level-01.png";
+				break;
+			case 4:
+				fileName = "background-world01-01.png";
+				break;
+			case 5:
+				fileName = "background-level-02-01.png";
+				break;
+			case 6:
+				fileName = "background-level-03-01.png";
+				break;
+			}
+			
+			SlimeFactory.GameInfo.setLastBkgandSave(fileName);
+		}		
+		
+		this.setBackgroundFrom(fileName);
+	}
+	
+	public void setBackgroundFrom(String fileName) {
 		if (this.backgroundSprite != null) {
 			this.backgroundLayer.removeChild(this.backgroundSprite, true);
-		}				
-		
-		// todo list assets in bkg folder instead
-		int choice = this.randomGen.nextInt(7);
-		String fileName = "";
-		switch (choice) {
-		default:
-		case 0:
-			fileName = "background-level-01.png";
-			break;
-		case 1:
-			fileName = "background-world00-01.png";
-			break;
-		case 2:
-			fileName = "world00-01.png";
-			break;
-		case 3:
-			fileName = "splash-level-01.png";
-			break;
-		case 4:
-			fileName = "background-world01-01.png";
-			break;
-		case 5:
-			fileName = "background-level-02-01.png";
-			break;
-		case 6:
-			fileName = "background-level-03-01.png";
-			break;
-		}
-		
+		}	
+
 		this.backgroundSprite = CCSprite.sprite(backgroundPath + fileName);
 		this.backgroundSprite.setAnchorPoint(0, 0);
 		this.fixBgSize();
 		this.backgroundLayer.addChild(this.backgroundSprite);
 	}
-	
+
 	private void postBuild(String levelName) {
-		this.setBackground();
+		if (levelName == LevelHome.Id) {
+			this.setBackgroundFrom(HomeBkg);
+		} else {
+			this.setBackground();
+		}
+		
 		this.currentLevelName = levelName;
 		// Set camera right based on screen size
 		this.attachLevelToCamera();
@@ -847,8 +864,8 @@ public class Level {
 		// CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
 		// this.loadLevel(LevelBuilder.LevelSelection);
 		this.loadLevel(LevelHome.Id);
-		CCTransitionScene transition = CCFadeTransition.transition(0.5f, currentLevel.getScene());
-		CCDirector.sharedDirector().replaceScene(transition);
+//		CCTransitionScene transition = CCFadeTransition.transition(0.5f, currentLevel.getScene());
+//		CCDirector.sharedDirector().replaceScene(transition);
 		// Sounds.resumeMusic();
 	}
 	
