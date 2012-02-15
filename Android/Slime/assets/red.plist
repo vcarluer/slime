@@ -160,7 +160,72 @@
                 <key>sourceSize</key>
                 <string>{167,113}</string>
             </dict>
-			<key>waitDead-01.png</key>
+            <key>broken-01.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{300,299},{159,45}}</string>
+                <key>offset</key>
+                <string>{4,-34}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{8,68},{159,45}}</string>
+                <key>sourceSize</key>
+                <string>{167,113}</string>
+            </dict>
+            <key>broken-02.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,366},{159,45}}</string>
+                <key>offset</key>
+                <string>{4,-34}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{8,68},{159,45}}</string>
+                <key>sourceSize</key>
+                <string>{167,113}</string>
+            </dict>
+            <key>broken-03.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{159,366},{159,45}}</string>
+                <key>offset</key>
+                <string>{4,-34}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{8,68},{159,45}}</string>
+                <key>sourceSize</key>
+                <string>{167,113}</string>
+            </dict>
+            <key>broken-04.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{318,366},{159,45}}</string>
+                <key>offset</key>
+                <string>{4,-34}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{8,68},{159,45}}</string>
+                <key>sourceSize</key>
+                <string>{167,113}</string>
+            </dict>
+            <key>broken-05.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,411},{159,45}}</string>
+                <key>offset</key>
+                <string>{4,-34}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{8,68},{159,45}}</string>
+                <key>sourceSize</key>
+                <string>{167,113}</string>
+            </dict>
+            <key>broken-06.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{141,299},{159,45}}</string>
@@ -173,10 +238,88 @@
                 <key>sourceSize</key>
                 <string>{167,113}</string>
             </dict>
+            <key>contracted-01.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{159,411},{119,79}}</string>
+                <key>offset</key>
+                <string>{0,-17}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{24,34},{119,79}}</string>
+                <key>sourceSize</key>
+                <string>{167,113}</string>
+            </dict>
+            <key>contracted-02.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{278,411},{119,79}}</string>
+                <key>offset</key>
+                <string>{0,-17}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{24,34},{119,79}}</string>
+                <key>sourceSize</key>
+                <string>{167,113}</string>
+            </dict>
+            <key>contracted-03.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,490},{119,79}}</string>
+                <key>offset</key>
+                <string>{0,-17}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{24,34},{119,79}}</string>
+                <key>sourceSize</key>
+                <string>{167,113}</string>
+            </dict>
+            <key>contracted-04.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{119,490},{119,79}}</string>
+                <key>offset</key>
+                <string>{0,-17}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{24,34},{119,79}}</string>
+                <key>sourceSize</key>
+                <string>{167,113}</string>
+            </dict>
+            <key>contracted-05.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{238,490},{119,79}}</string>
+                <key>offset</key>
+                <string>{0,-17}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{24,34},{119,79}}</string>
+                <key>sourceSize</key>
+                <string>{167,113}</string>
+            </dict>
+            <key>contracted-06.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{357,490},{119,79}}</string>
+                <key>offset</key>
+                <string>{0,-17}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{24,34},{119,79}}</string>
+                <key>sourceSize</key>
+                <string>{167,113}</string>
+            </dict>
             <key>contracting-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{300,299},{139,97}}</string>
+                <string>{{0,569},{139,97}}</string>
                 <key>offset</key>
                 <string>{0,-8}</string>
                 <key>rotated</key>
@@ -189,7 +332,7 @@
             <key>contracting-02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,396},{135,89}}</string>
+                <string>{{139,569},{135,89}}</string>
                 <key>offset</key>
                 <string>{0,-12}</string>
                 <key>rotated</key>
@@ -202,7 +345,7 @@
             <key>contracting-03.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{135,396},{119,79}}</string>
+                <string>{{274,569},{119,79}}</string>
                 <key>offset</key>
                 <string>{0,-17}</string>
                 <key>rotated</key>
@@ -212,23 +355,62 @@
                 <key>sourceSize</key>
                 <string>{167,113}</string>
             </dict>
-			<key>waitDefense-01.png</key>
+            <key>turning-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{135,396},{119,79}}</string>
+                <string>{{0,666},{157,103}}</string>
                 <key>offset</key>
-                <string>{0,-17}</string>
+                <string>{-2,-5}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{24,34},{119,79}}</string>
+                <string>{{3,10},{157,103}}</string>
+                <key>sourceSize</key>
+                <string>{167,113}</string>
+            </dict>
+            <key>turning-02.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{157,666},{149,101}}</string>
+                <key>offset</key>
+                <string>{2,-6}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{11,12},{149,101}}</string>
+                <key>sourceSize</key>
+                <string>{167,113}</string>
+            </dict>
+            <key>turning-03.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{306,666},{151,101}}</string>
+                <key>offset</key>
+                <string>{7,-6}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{15,12},{151,101}}</string>
+                <key>sourceSize</key>
+                <string>{167,113}</string>
+            </dict>
+            <key>turning-04.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,769},{155,103}}</string>
+                <key>offset</key>
+                <string>{6,-5}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{12,10},{155,103}}</string>
                 <key>sourceSize</key>
                 <string>{167,113}</string>
             </dict>
             <key>wait-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{254,396},{153,105}}</string>
+                <string>{{155,769},{153,105}}</string>
                 <key>offset</key>
                 <string>{0,-4}</string>
                 <key>rotated</key>
@@ -241,7 +423,7 @@
             <key>wait-02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,501},{153,105}}</string>
+                <string>{{308,769},{153,105}}</string>
                 <key>offset</key>
                 <string>{0,-4}</string>
                 <key>rotated</key>
@@ -257,7 +439,7 @@
             <key>format</key>
             <integer>2</integer>
             <key>size</key>
-            <string>{488,606}</string>
+            <string>{488,874}</string>
             <key>textureFileName</key>
             <string>red.png</string>
         </dict>

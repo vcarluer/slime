@@ -38,8 +38,9 @@ public class Red extends GameItemPhysic {
 	public static String Anim_Breaking = "breaking";
 	public static String Anim_Contracting = "contracting";
 	public static String Anim_Wait = "wait";
-	public static String Anim_WaitDefense = "waitDefense";
-	public static String Anim_WaitDead = "waitDead";
+	public static String Anim_WaitDefense = "contracted";
+	public static String Anim_WaitDead = "broken";
+	public static String Anim_Turning = "turning";
 	
 	private static float SlimeMaxDistance = 480f;
 	// Used for wait too
