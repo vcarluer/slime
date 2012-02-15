@@ -1,5 +1,6 @@
-BlocInfo;0;120;480;480;0;BlocInfo-0;5;;false;false;false;t,r,l
+BlocInfo;0;120;480;480;0;BlocInfo-0;5;;;false;false;false;t,r,l
 TimeAttack;-2.0;0.0;0.0;0.0;0.0;15;5
+Platform;0.0;0.0;480.0;32.0;0.0
 Platform;216.0;264.0;48.0;32.0;0.0
 Platform_Corner;264.0;184.0;32.0;32.0;0.0
 Platform_Corner;264.0;264.0;32.0;32.0;-90.0
@@ -12,9 +13,7 @@ CircularSaw;192.0;296.0;40.0;40.0;0.0;circularsaw;true
 CircularSaw;248.0;296.0;40.0;40.0;0.0;circularsaw;true
 BecBunsen;320.0;244.0;20.0;67.0;90.0;true;0;becbunsen
 BecBunsen;320.0;168.0;20.0;67.0;90.0;true;0;becbunsen
-Star;306.0;224.0;30.0;31.0;0.0
 BecBunsen;192.0;117.0;20.0;67.0;180.0;true;0;becbunsen
 BecBunsen;268.0;117.0;20.0;67.0;180.0;true;0;becbunsen
-Star;224.0;145.0;30.0;31.0;0.0
 CircularSaw;144.0;248.0;40.0;40.0;-90.0;circularsaw;true
 CircularSaw;144.0;192.0;40.0;40.0;-90.0;circularsaw;true

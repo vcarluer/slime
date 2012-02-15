@@ -89,21 +89,29 @@ public class ChangeDifficultyLayer extends CCLayer {
 	private void enableMenu(CCMenuItemLabel label, int diffRef) {
 		int diff = SlimeFactory.GameInfo.getMaxLevelDifficulty();
 		boolean isEnable = diffRef <= diff;
-		label.setIsEnabled(isEnable);
-		String suf = "";
-		String diffTxt = LevelDifficulty.getText(diffRef).toLowerCase();
+		label.setIsEnabled(isEnable);		
 		if (isEnable) {															
 			label.setColor(ccColor3B.ccc3(255, 255, 255));
-		} else {
-			suf = "-grey";
+		} else {			
 			label.setColor(ccColor3B.ccc3(125, 125, 125));
 		}
 		
 		tmp = CGPoint.ccpAdd(this.menu.getPosition(), label.getPosition());
+		CCSprite spr = this.getLevelSprite(diffRef, isEnable);
+		spr.setPosition(tmp.x - iconPadding - (iconSize / 2), tmp.y + (iconSize - 60f));
+		this.addChild(spr);
+	}
+	
+	public static CCSprite getLevelSprite(int diff, boolean isEnable) {
+		String suf = "";
+		if (!isEnable) {
+			suf = "-grey";
+		}
+		String diffTxt = LevelDifficulty.getText(diff).toLowerCase();
 		CCSprite spr = CCSprite.sprite("mode-" + diffTxt + suf + "-01.png");
 		spr.setScale(iconSize / iconSizeReference);
-		spr.setPosition(tmp.x - iconPadding - (iconSize / 2), tmp.y);
-		this.addChild(spr);
+		
+		return spr;
 	}
 
 	private CCMenuItemLabel createMenuLabel(int diff, String selector) {

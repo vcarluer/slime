@@ -37,12 +37,14 @@ public class HomeLayer extends CCLayer {
 	private CCSprite starSprite;
 	private CCSprite arrow;
 	private CCMenu menuInfo;
+	private CCSprite diffSpr;
 	
 	private static float baseShift = 150f;
 	private static float shiftTitle = baseShift;
 	private static float shiftMenu  = shiftTitle - 150f; // Slime height = 160 / 2 + 20
 	private static float shiftInfo  = shiftMenu - 100f;
 	private static float shiftScore = shiftInfo - 70f;
+	private static float paddingDiff = 50f;
 	
 	private float shiftArrow = -60f;
 	
@@ -154,11 +156,17 @@ public class HomeLayer extends CCLayer {
 		CCMoveBy mb = CCMoveBy.action(0.2f, CGPoint.make(10, 0));
 		CCSequence seq = CCSequence.actions(mb, mb.reverse());
 		CCRepeatForever rep = CCRepeatForever.action(seq);
-		this.arrow.runAction(rep);
+		this.arrow.runAction(rep);				
+		
+		this.diffSpr = ChangeDifficultyLayer.getLevelSprite(SlimeFactory.GameInfo.getDifficulty(), true);
+		this.diffSpr.setPosition(CGPoint.make(
+				CCDirector.sharedDirector().winSize().getWidth() / 2 + (133 / 2) + paddingDiff,
+				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftMenu
+				));
+		this.addChild(this.diffSpr);
 		
 		this.starSprite.runAction(SlimeFactory.Star.getAnimation(Star.Anim_Wait));
-		
-		
+				
 		this.titleSprite = CCSprite.sprite("slime-attack.png");
 		this.addChild(this.titleSprite);
 		
@@ -180,7 +188,8 @@ public class HomeLayer extends CCLayer {
 	@Override
 	public void onExit() {
 		this.removeChild(this.menuInfo, true);
-		this.removeChild(this.titleSprite, true);		
+		this.removeChild(this.titleSprite, true);
+		this.removeChild(this.diffSpr, true);
 		super.onExit();
 	}
 
