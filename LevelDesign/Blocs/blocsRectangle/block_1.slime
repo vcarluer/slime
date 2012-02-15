@@ -1,8 +1,8 @@
 BlocInfo;0;120;480;480;0;BlocInfo-0;5;tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb;tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb;false;false;false;t,r,b,l
 TimeAttack;-2.0;0.0;0.0;0.0;0.0;15;5
-Platform_Corner;448.0;448.0;32.0;32.0;-90.0
-Platform;300.0;268.0;328.0;32.0;90.0
-Platform;168.0;448.0;280.0;32.0;0.0
+Platform_Corner;408.0;400.0;32.0;32.0;-90.0
+Platform;308.0;268.0;232.0;32.0;90.0
+Platform;128.0;400.0;280.0;32.0;0.0
 BecBunsen;120.0;199.0;20.0;67.0;0.0;true;0;becbunsen
 BecBunsen;144.0;199.0;20.0;67.0;0.0;true;0;becbunsen
 Platform;120.0;168.0;240.0;32.0;0.0
@@ -11,3 +11,4 @@ BecBunsen;292.0;200.0;20.0;67.0;0.0;true;0;becbunsen
 BecBunsen;316.0;200.0;20.0;67.0;0.0;true;0;becbunsen
 BecBunsen;340.0;200.0;20.0;67.0;0.0;true;0;becbunsen
 Star;226.0;208.0;30.0;31.0;0.0
+Bumper_Angle;360.0;352.0;48.0;48.0;180.0

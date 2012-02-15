@@ -1,14 +1,10 @@
-<<<<<<< HEAD
-BlocInfo;0;120;480;480;0;Block_7;5;tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb;tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb;false;false;false;t,r,b,l
-=======
 BlocInfo;0;120;480;480;0;BlocInfo-0;5;tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb;tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb;false;false;false;t,r,b,l
->>>>>>> f86b9d80fa81405161383747f7817ceb81487bfd
 TimeAttack;-2.0;0.0;0.0;0.0;0.0;15;5
-Platform;24.0;24.0;384.0;32.0;0.0
-Platform;240.0;288.0;192.0;32.0;0.0
-BecBunsen;88.0;56.0;20.0;67.0;0.0;true;0;becbunsen
+Platform;48.0;44.0;360.0;32.0;0.0
+Platform;240.0;288.0;168.0;32.0;0.0
+BecBunsen;88.0;76.0;20.0;67.0;0.0;true;0;becbunsen
 CircularSaw;254.0;318.0;40.0;40.0;0.0;circularsaw;true
 CircularSaw;312.0;248.0;40.0;40.0;-179.0;circularsaw;true
 Star;250.0;248.0;30.0;31.0;0.0
-Box_GlassBox;216.0;56.0;128.0;64.0;0.0;true;true
-Bumper_Angle;216.0;120.0;48.0;48.0;0.0
+Box_GlassBox;216.0;76.0;128.0;64.0;0.0;true;true
+Bumper_Angle;216.0;140.0;48.0;48.0;0.0

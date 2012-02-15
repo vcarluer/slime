@@ -8,18 +8,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import android.util.Log;
 
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.levels.itemdef.BlocInfoDef;
 import gamers.associate.Slime.levels.itemdef.ItemDefinition;
 import gamers.associate.Slime.levels.itemdef.LevelInfoDef;
 
 public class BlocDefinitionParser extends BlocDefinition {
+	private static Random rand = new Random();
 	private HashSet<String> hazardItemsDef;
 	private List<String> hazardLines;
 	
@@ -62,7 +65,7 @@ public class BlocDefinitionParser extends BlocDefinition {
 			
 			int i = 0;
 			try {
-				
+				this.hazardLines.clear();
 				while (( line = buffreader.readLine()) != null) {
 					try {
 						i++;
@@ -77,10 +80,10 @@ public class BlocDefinitionParser extends BlocDefinition {
 					} catch (Exception e) {
 						Log.e(Slime.TAG, "ERROR during read of " + this.getResourceName() + " line " + String.valueOf(i));
 						e.printStackTrace();
-					}
-					
-					this.pickHazardLines();
+					}										
 				}
+				
+				this.pickHazardLines(level);
 			} catch (IOException e) {
 				Log.e(Slime.TAG, "ERROR during read of " + this.getResourceName() + " line " + String.valueOf(i));
 				e.printStackTrace();
@@ -97,9 +100,47 @@ public class BlocDefinitionParser extends BlocDefinition {
 		this.postBuildItem.postBuild();
 	}
 	
-	private void pickHazardLines() {
-		// TODO Auto-generated method stub
+	private void pickHazardLines(Level level) {
+		if (SlimeFactory.GameInfo.getDifficulty() == LevelDifficulty.Extrem) {
+			for(String line : this.hazardLines) {
+				try {
+					this.HandleLine(level, line);					
+				} catch (Exception e) {
+					Log.e(Slime.TAG, "Error during hazard pick");
+					e.printStackTrace();
+				}
+			}
+			
+			return;
+		}
+		float nbHazard = this.hazardLines.size();
+		int nbPick = 0;
+		switch (SlimeFactory.GameInfo.getDifficulty()) {
+			default:
+			case LevelDifficulty.Easy: nbPick = (int) Math.ceil(nbHazard / 4f); break;
+			case LevelDifficulty.Normal: nbPick = (int) Math.ceil(nbHazard / 2f); break;
+			case LevelDifficulty.Hard: nbPick = (int) Math.ceil(nbHazard * 3f / 4f); break;
+			case LevelDifficulty.Extrem: nbPick = (int) Math.ceil(nbHazard); break;
+		}				
 		
+		if (nbPick > 0) {
+			this.pickAndHandle(nbPick, this.hazardLines, level);
+		}
+	}
+
+	private void pickAndHandle(int nbPick, List<String> lines, Level level) {
+		int pickPos = rand.nextInt(lines.size());
+		try {
+			this.HandleLine(level, lines.get(pickPos));			
+			lines.remove(pickPos);
+			nbPick--;
+			if (nbPick > 0) {
+				this.pickAndHandle(nbPick, lines, level);
+			}
+		} catch (Exception e) {
+			Log.e(Slime.TAG, "Error during hazard pick");
+			e.printStackTrace();
+		}		
 	}
 
 	private void storeHazardLine(String line) {

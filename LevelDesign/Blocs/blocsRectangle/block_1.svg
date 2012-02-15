@@ -147,7 +147,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -992,18 +992,18 @@
        height="32"
        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAN5JREFU OI2d000OgjAQBeBHqWzUjh1JOIDu9A49jRtP4dHkDrLTA5hoEfYUF2qEBJDaTX8m/fLapsFufziy JsNagVmBNYFZ4Xq9Y7tZIwwFTtkFcbyAtSVsXrz711iwJhMESPFnE6wV9EIZ1P8hkll9xgZA+u49 AE3NuTfSTNBA6tGIvN0eXetGzacFAOoqtoDtZtVXIyFE4ZwbRGRVud5iVTmKoslgEnnKzr9SEqlZ LyKTZPkLwGtz98VKa8sxANDzxNLmxVigE/FJ8EXqLyJt7g0AwOcDGt8jtJMA6RMHCEtDGfOV4gAA AABJRU5ErkJggg== "
        id="platform_corner-4"
-       x="-152"
-       y="448"
+       x="-200"
+       y="408"
        type="Platform_Corner"
        transform="matrix(0,-1,1,0,0,0)" />
     <image
        style="display:inline"
-       width="328"
+       width="232"
        height="32"
        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAFRJREFU OI1jTM1q+M9AAWAREuSnRD8Di5AgH4UGCFFqAMVeoNQFb958oMgAxus3blMWjX///qPIBSxXrt6h zABxcWHKDHj37hOFBrz/OOAuGGAvAACJyB2YZglWcgAAAABJRU5ErkJggg== "
        id="platform-7-83"
-       x="152"
-       y="-480"
+       x="200"
+       y="-440"
        type="Platform"
        transform="matrix(0,1,-1,0,0,0)" />
     <image
@@ -1012,8 +1012,8 @@
        height="32"
        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAFRJREFU OI1jTM1q+M9AAWAREuSnRD8Di5AgH4UGCFFqAMVeoNQFb958oMgAxus3blMWjX///qPIBSxXrt6h zABxcWHKDHj37hOFBrz/OOAuGGAvAACJyB2YZglWcgAAAABJRU5ErkJggg== "
        id="platform-7-7"
-       x="168"
-       y="120"
+       x="128"
+       y="168"
        type="Platform" />
     <image
        width="20"
@@ -1097,5 +1097,14 @@
        x="226"
        y="361"
        type="Star" />
+    <image
+       width="48"
+       height="48"
+       xlink:href="data:image/png;base64,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 "
+       id="bumper_angle-1"
+       x="-408"
+       y="-248"
+       type="Bumper_Angle"
+       transform="scale(-1,-1)" />
   </g>
 </svg>
