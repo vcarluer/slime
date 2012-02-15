@@ -15,15 +15,22 @@ import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
+import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
 
 public class ChangeDifficultyLayer extends CCLayer {
+	private static final float menuPadding = 75f;
+	private static final float iconSizeReference = 87f;
 	private static float padding = 25f;
+	private static float iconSize = 70f;
+	private static float iconPadding = 50f;
 	private static CCScene scene;
 	private CCMenuItemLabel easyMenuLabel;
 	CCMenuItemLabel normalMenuLabel;
 	CCMenuItemLabel hardMenuLabel;
 	CCMenuItemLabel extremMenuLabel;
+	private CCMenu menu;
+	CGPoint tmp;
 	
 	public static CCScene getScene() {
 		if (scene == null) {
@@ -35,6 +42,7 @@ public class ChangeDifficultyLayer extends CCLayer {
 	}
 	
 	public ChangeDifficultyLayer() {
+		tmp = CGPoint.zero();
 		int originalW = 1467;		
 		int originalH = 800;
 		CCSprite spriteBg = CCSprite.sprite("change-difficulty.png");
@@ -55,9 +63,17 @@ public class ChangeDifficultyLayer extends CCLayer {
 		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);
 		CCMenuItemSprite goHome = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goHome");
 		
-		CCMenu menu = CCMenu.menu(this.easyMenuLabel, this.normalMenuLabel, this.hardMenuLabel, this.extremMenuLabel, goHome);
-		menu.alignItemsVertically(padding);
-		this.addChild(menu);
+		this.menu = CCMenu.menu(this.easyMenuLabel, this.normalMenuLabel, this.hardMenuLabel, this.extremMenuLabel);
+		this.menu.alignItemsVertically(padding);
+		this.menu.setPosition(CGPoint.make(
+				CCDirector.sharedDirector().winSize().getWidth() / 2 - menuPadding,
+				CCDirector.sharedDirector().winSize().getHeight() / 2
+				));
+		this.addChild(this.menu);
+		
+		CCMenu menuHome = CCMenu.menu(goHome);		
+		this.addChild(menuHome);
+		menuHome.setPosition(100f, 70f);
 	}
 	
 	@Override
@@ -74,15 +90,26 @@ public class ChangeDifficultyLayer extends CCLayer {
 		int diff = SlimeFactory.GameInfo.getMaxLevelDifficulty();
 		boolean isEnable = diffRef <= diff;
 		label.setIsEnabled(isEnable);
-		if (isEnable) {
+		String suf = "";
+		String diffTxt = LevelDifficulty.getText(diffRef).toLowerCase();
+		if (isEnable) {															
 			label.setColor(ccColor3B.ccc3(255, 255, 255));
 		} else {
+			suf = "-grey";
 			label.setColor(ccColor3B.ccc3(125, 125, 125));
 		}
+		
+		tmp = CGPoint.ccpAdd(this.menu.getPosition(), label.getPosition());
+		CCSprite spr = CCSprite.sprite("mode-" + diffTxt + suf + "-01.png");
+		spr.setScale(iconSize / iconSizeReference);
+		spr.setPosition(tmp.x - iconPadding - (iconSize / 2), tmp.y);
+		this.addChild(spr);
 	}
 
 	private CCMenuItemLabel createMenuLabel(int diff, String selector) {
-		return CCMenuItemLabel.item(this.createLabel(LevelDifficulty.getText(diff)), this, selector);
+		CCMenuItemLabel label = CCMenuItemLabel.item(this.createLabel(LevelDifficulty.getText(diff)), this, selector);
+		label.setAnchorPoint(0, 0.5f);
+		return label;
 	}
 	
 	private CCLabel createLabel(String text) {
