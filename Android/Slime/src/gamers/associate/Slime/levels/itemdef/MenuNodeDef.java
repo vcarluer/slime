@@ -67,11 +67,11 @@ public class MenuNodeDef extends ItemDefinition {
 		// Browse node graph to enable or disable new nodes
 		if (this.rootItem != null) {
 			this.rootItem.unlockChildConnectionsGraph(null);
-		}
-		
-		if (SlimeFactory.MenuNode.getCurrentNode() == null) {
-			this.createStartNode(this.rootItem);
-		}
+			
+			if (SlimeFactory.MenuNode.getCurrentNode() == null) {
+				this.createStartNode(this.rootItem);
+			}
+		}				
 	}
 
 	@Override

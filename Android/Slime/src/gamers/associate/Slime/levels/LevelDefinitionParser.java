@@ -49,8 +49,8 @@ public class LevelDefinitionParser extends LevelDefinition
 	private ArrayList<ItemDefinition> itemDefinitions;
 	private HashMap<String, ItemDefinition> typeHandler;
 	private HashMap<Class, ItemDefinition> classHandler;
-	private ItemDefinition postBuildItem;
-	private boolean isLocalStorage;
+	protected ItemDefinition postBuildItem;
+	protected boolean isLocalStorage;
 	protected Set<Class> ignoredClasses;
 	protected Set<String> ignoredItems;
 	
@@ -183,15 +183,20 @@ public class LevelDefinitionParser extends LevelDefinition
 		}
 	}
 	
-	protected ItemDefinition getItemDef(String line) {
-		String[] items = line.split(";", -1);		
-		String itemType = items[0];
+	protected ItemDefinition getItemDef(String line) {			
+		String itemType = this.getItemType(line);
 		if (!this.ignoredItems.contains(itemType)) {
 			return this.typeHandler.get(itemType);
 		} else {
 			Log.d(Slime.TAG, "Item " + itemType + " ignored");
 			return null;
 		}		
+	}
+	
+	protected String getItemType(String line) {
+		String[] items = line.split(";", -1);		
+		String itemType = items[0];
+		return itemType;
 	}
 	
 	public void storeLevel(Level level) {
