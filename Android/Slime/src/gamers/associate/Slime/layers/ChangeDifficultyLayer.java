@@ -3,6 +3,7 @@ package gamers.associate.Slime.layers;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.levels.LevelHome;
 
 import org.cocos2d.layers.CCLayer;
@@ -62,6 +63,13 @@ public class ChangeDifficultyLayer extends CCLayer {
 		this.extremMenuLabel = this.createMenuLabel(LevelDifficulty.Extrem, "selectExtrem");
 		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);
 		CCMenuItemSprite goHome = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goHome");
+		goHome.setScale(PauseLayer.Scale);
+		
+		float left = - CCDirector.sharedDirector().winSize().getWidth() / 2 + ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) / 2 ;
+		float top = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY) / 2;
+		goHome.setPosition(left, top);
+		CCMenu menuHome = CCMenu.menu(goHome);		
+		this.addChild(menuHome);
 		
 		this.menu = CCMenu.menu(this.easyMenuLabel, this.normalMenuLabel, this.hardMenuLabel, this.extremMenuLabel);
 		this.menu.alignItemsVertically(padding);
@@ -69,11 +77,7 @@ public class ChangeDifficultyLayer extends CCLayer {
 				CCDirector.sharedDirector().winSize().getWidth() / 2 - menuPadding,
 				CCDirector.sharedDirector().winSize().getHeight() / 2
 				));
-		this.addChild(this.menu);
-		
-		CCMenu menuHome = CCMenu.menu(goHome);		
-		this.addChild(menuHome);
-		menuHome.setPosition(100f, 70f);
+		this.addChild(this.menu);				
 	}
 	
 	@Override
