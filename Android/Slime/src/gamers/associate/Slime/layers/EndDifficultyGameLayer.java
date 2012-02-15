@@ -37,8 +37,8 @@ public class EndDifficultyGameLayer extends CCLayer {
 	}
 	
 	public EndDifficultyGameLayer() {
-		int originalW = 1467;		
-		int originalH = 800;
+		int originalW = 800;		
+		int originalH = 480;
 		CCSprite spriteBg = CCSprite.sprite("game-over.png");
 		spriteBg.setAnchorPoint(0, 0);
 		spriteBg.setPosition(0, 0);

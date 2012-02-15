@@ -65,8 +65,8 @@ public class Level {
 	protected Hashtable<UUID, GameItem> items;
 	protected ArrayList<ISelectable> selectables;
 	
-	private static final float bgWidth = 1467f;
-	private static final float bgHeight = 800f;
+	// private static final float bgWidth = 1467f;
+	// private static final float bgHeight = 800f;
 	
 	public static String ManualDimension = "Manual";
 	private String maxDimension = ManualDimension;
@@ -269,8 +269,9 @@ public class Level {
 		if (this.backgroundSprite != null) {
 			this.backgroundLayer.removeChild(this.backgroundSprite, true);
 		}				
-				
-		int choice = this.randomGen.nextInt(4);
+		
+		// todo list assets in bkg folder instead
+		int choice = this.randomGen.nextInt(7);
 		String fileName = "";
 		switch (choice) {
 		default:
@@ -286,16 +287,20 @@ public class Level {
 		case 3:
 			fileName = "splash-level-01.png";
 			break;
+		case 4:
+			fileName = "background-world01-01.png";
+			break;
+		case 5:
+			fileName = "background-level-02-01.png";
+			break;
+		case 6:
+			fileName = "background-level-03-01.png";
+			break;
 		}
 		
 		this.backgroundSprite = CCSprite.sprite(backgroundPath + fileName);
 		this.backgroundSprite.setAnchorPoint(0, 0);
-		float wRatio = this.levelWidth / this.backgroundSprite.getTextureRect().size.width;
-		float hRatio = this.levelHeight / this.backgroundSprite.getTextureRect().size.height;
-		float ratio = Math.max(wRatio, hRatio);
-		if (ratio > 1) {
-			this.backgroundSprite.setScale(ratio);
-		}
+		this.fixBgSize();
 		this.backgroundLayer.addChild(this.backgroundSprite);
 	}
 	
@@ -618,15 +623,22 @@ public class Level {
 	
 	public void setLevelSize(float width, float height) {
 		this.levelWidth = width;
-		this.levelHeight = height;
-		
-		if (width > bgWidth) {
-			this.backgroundLayer.setScale(width / bgWidth);
-		} else {
-			this.backgroundLayer.setScale(1f);
-		}
-		
+		this.levelHeight = height;	
+		this.fixBgSize();
 	} 
+	
+	private void fixBgSize() {
+		if (this.backgroundSprite != null) {
+			float wRatio = this.levelWidth / this.backgroundSprite.getTextureRect().size.width;
+			float hRatio = this.levelHeight / this.backgroundSprite.getTextureRect().size.height;
+			float ratio = Math.max(wRatio, hRatio);
+			if (ratio > 1) {
+				this.backgroundSprite.setScale(ratio);
+			} else {
+				this.backgroundSprite.setScale(1f);
+			}
+		}
+	}
 	
 	public void setIsTouchEnabled(boolean value) {
 		this.levelLayer.setIsTouchEnabled(value);
