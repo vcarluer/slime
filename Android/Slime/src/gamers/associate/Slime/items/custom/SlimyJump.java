@@ -124,7 +124,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 		this.emitter = CCParticleFire.node();
 		this.emitter.setEmitterMode(CCParticleSystem.kCCPositionTypeRelative);						
 		this.emitter.setTexture(CCTextureCache.sharedTextureCache().addImage("fire.png"));
-		Level.currentLevel.getLevelLayer().addChild(this.emitter);
+		Level.currentLevel.getLevelLayer().addChild(this.emitter, Level.zBack);
 		this.emitter.setEmitterMode(CCParticleSystem.kCCParticleModeRadius);
 		this.emitter.setPositionType(CCParticleSystem.kCCPositionTypeRelative);
 		this.emitter.setLife(0.1f);
