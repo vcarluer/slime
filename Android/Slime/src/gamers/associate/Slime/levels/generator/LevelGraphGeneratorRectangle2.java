@@ -10,6 +10,7 @@ import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.TimeAttackGame;
 
 public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle {
+	private static final int noBossPos = -1;
 	private static final int timeCritic = 5;
 	private static final float timeCalcPerBlock = 8f;
 	private static final int timeCalcBase = 20;
@@ -55,14 +56,14 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 		if (startPos == endPos) {
 			endPos = rand.nextInt(lvlHeight);
 		}*/
-		int endPos = lvlHeight - 1 - startPos;
 		
-		// Pick start / end and all other blocks ! Based on complexity? And difficulty?
-		// Boss always at right or at bottom?
-		// At bottom:
-		int bossPos = -1;
+		int endPos = noBossPos;
+		int bossPos = noBossPos;
 		if (isBoss) {
-			bossPos = rand.nextInt(lvlWidth - minBossPos) + minBossPos; 
+			bossPos = rand.nextInt(lvlWidth - minBossPos) + minBossPos;
+			
+		} else {
+			endPos = lvlHeight - 1 - startPos;
 		}
 		
 		LevelGenNode pick = null;

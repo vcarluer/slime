@@ -35,9 +35,9 @@ public class HomeLayer extends CCLayer {
 	private CCLabel lblLevel;
 	private CCLabel lblScore;
 	private CCSprite starSprite;
-	private CCSprite arrow;
+	//private CCSprite arrow;
 	private CCMenu menuInfo;
-	private CCSprite diffSpr;
+	//private CCSprite diffSpr;
 	
 	private static float baseShift = 150f;
 	private static float shiftTitle = baseShift;
@@ -96,11 +96,11 @@ public class HomeLayer extends CCLayer {
 				));
 		this.addChild(this.starSprite);				
 		
-		this.arrow = CCSprite.sprite("arrow.png");
+		/*this.arrow = CCSprite.sprite("arrow.png");
 		float arrowSize = 50f;
 		float as = arrowSize / 69;
 		this.arrow.setScale(as);
-		this.addChild(this.arrow);
+		this.addChild(this.arrow);*/
 	}
 	
 	public void changeDifficulty(Object sender) {
@@ -149,7 +149,7 @@ public class HomeLayer extends CCLayer {
 				this.starSprite.getPosition().y
 				));
 		
-		this.arrow.setPosition(CGPoint.make(
+		/*this.arrow.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().getWidth() / 2 - (this.lblLevel.getContentSize().width / 2) + this.shiftArrow,
 				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftInfo
 				));				
@@ -163,7 +163,7 @@ public class HomeLayer extends CCLayer {
 				CCDirector.sharedDirector().winSize().getWidth() / 2 + (133 / 2) + paddingDiff,
 				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftMenu
 				));
-		this.addChild(this.diffSpr);
+		this.addChild(this.diffSpr);*/
 		
 		this.starSprite.runAction(SlimeFactory.Star.getAnimation(Star.Anim_Wait));
 				
@@ -189,7 +189,7 @@ public class HomeLayer extends CCLayer {
 	public void onExit() {
 		this.removeChild(this.menuInfo, true);
 		this.removeChild(this.titleSprite, true);
-		this.removeChild(this.diffSpr, true);
+		// this.removeChild(this.diffSpr, true);
 		super.onExit();
 	}
 
