@@ -5,6 +5,7 @@ import java.util.Random;
 import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.instant.CCCallFunc;
+import org.cocos2d.actions.instant.CCFlipX;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCReverseTime;
@@ -64,6 +65,9 @@ public class Red extends GameItemPhysic {
 	private boolean isBoss;
 	private float densityBoss = 0.1f;	
 	private float densityNorm = 2.0f;
+	
+	private float currentDir = -1; // Turn left
+	private float nextDir = -1; // Turn left
 	
 	public Red(float x, float y, float width, float height, World world,
 			float worldRatio, boolean isBoss) {
@@ -420,23 +424,34 @@ public class Red extends GameItemPhysic {
 		
 		GameItem item = Level.currentLevel.getStartItem();
 		int dir = this.getDir(item, this, false);
-		if (dir > 0) {
-			this.sprite.setFlipX(true);
-		} else {
-			this.sprite.setFlipX(false);
-		}
+		this.animTurn(dir);
 	}
+	
+	private void animTurn(int newDir) {		
+		
+		if ((newDir < 0) != (this.currentDir < 0)) {
+			this.currentDir = newDir;
+			this.sprite.setFlipX(this.currentDir > 0);
+			/*CCAnimate anim = CCAnimate.action(this.animationList.get(Anim_Turning), false);
+									
+			CCFlipX flip = CCFlipX.action(this.currentDir > 0);			
+			CCCallFunc call = CCCallFunc.action(this, "endTurn");
+			CCSequence seq = CCSequence.actions(anim, flip, call);			
+			
+			this.sprite.runAction(seq);*/
+		}				
+	}
+	
+	/*public void endTurn() {
+		this.switchWait(this.state);		
+	}*/
 	
 	public void jumpReal() {
 		if (this.state == RedState.PrepareAttack) {
 			GameItem item = Level.currentLevel.getStartItem();
 			Sounds.playEffect(R.raw.slimyjump);
 			int dir = this.impulse(item, this, false, 4, 10);
-			if (dir > 0) {
-				this.sprite.setFlipX(true);
-			} else {
-				this.sprite.setFlipX(false);
-			}
+			this.animTurn(dir);
 			this.state = RedState.Attack;
 			
 			this.jumpRealAnim();			
