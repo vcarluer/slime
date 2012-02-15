@@ -70,7 +70,7 @@ public class SlimeLoadingLayer extends CCLayer {
 				CCDirector.sharedDirector().winSize().height / 2
 				));
 		
-		CCLabel lbl = CCLabel.makeLabel("Loading...", "fonts/Slime.ttf", 30f);
+		CCLabel lbl = CCLabel.makeLabel("Loading...".toUpperCase(), "fonts/Slime.ttf", 30f);
 		this.addChild(lbl);
 		lbl.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,

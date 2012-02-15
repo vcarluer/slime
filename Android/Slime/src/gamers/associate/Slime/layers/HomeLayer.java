@@ -82,7 +82,7 @@ public class HomeLayer extends CCLayer {
 		this.addChild(this.menu);
 					
 				
-		this.lblScore = CCLabel.makeLabel("0", "fonts/Slime.ttf", 60.0f);
+		this.lblScore = CCLabel.makeLabel("0".toUpperCase(), "fonts/Slime.ttf", 60.0f);
 		this.lblScore.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().getWidth() / 2,
 				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftScore
@@ -130,7 +130,7 @@ public class HomeLayer extends CCLayer {
 		String lvl = String.valueOf(SlimeFactory.GameInfo.getLevelNum());
 		String lvlMax = String.valueOf(SlimeFactory.GameInfo.getLevelMax());
 		String info = diff + " " + lvl + " / " + lvlMax;
-		this.lblLevel = CCLabel.makeLabel(info, "fonts/Slime.ttf", 60.0f);		
+		this.lblLevel = CCLabel.makeLabel(info.toUpperCase().toUpperCase(), "fonts/Slime.ttf", 60.0f);		
 		CCMenuItemLabel menuLevelInfo = CCMenuItemLabel.item(this.lblLevel, this, "changeDifficulty");
 		menuInfo = CCMenu.menu(menuLevelInfo);
 		menuInfo.setPosition(CGPoint.make(
@@ -140,7 +140,7 @@ public class HomeLayer extends CCLayer {
 		this.addChild(menuInfo);						
 		
 		String score = String.valueOf(SlimeFactory.GameInfo.getTotalScore());
-		this.lblScore.setString(score);
+		this.lblScore.setString(score.toUpperCase());
 		
 		float starPadding = -10f;
 		float starX = this.lblScore.getPosition().x - this.lblScore.getContentSize().width / 2 - SlimeFactory.Star.getStarReferenceWidth() / 2 + starPadding;

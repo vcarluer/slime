@@ -79,7 +79,7 @@ public class HudLayer extends CCLayer {
 		super.onEnter();
 		this.title.stopAllActions();
 		this.title.setVisible(true);
-		this.title.setString(TitleGenerator.generateNewTitle());
+		this.title.setString(TitleGenerator.generateNewTitle().toUpperCase());
 		// double padding
 		float dPadding = 250f;
 		float scaleRatio = CCDirector.sharedDirector().winSize().width / (this.title.getContentSize().width + dPadding);
@@ -129,19 +129,19 @@ public class HudLayer extends CCLayer {
 	
 	public void setSlimyCount(int count) {
 		this.countLabel.setVisible(true);
-		this.countLabel.setString(Count_Text + String.valueOf(count));
+		this.countLabel.setString((Count_Text + String.valueOf(count)).toUpperCase());
 	}
 	
 	public void setHudText(String text) {
 		this.countLabel.setVisible(true);
-		this.countLabel.setString(text);		
+		this.countLabel.setString(text.toUpperCase());		
 	}
 	
 	public void setHudStartText(String text) {
 		this.countLabel.setPosition(
 				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - 15 - this.countLabel.getContentSize().width, 
 				CCDirector.sharedDirector().winSize().getHeight() - 65));		
-		this.countLabel.setString(text);		
+		this.countLabel.setString(text.toUpperCase());		
 	}
 	
 	public void hideHudText() {

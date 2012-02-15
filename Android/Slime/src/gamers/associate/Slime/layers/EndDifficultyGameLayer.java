@@ -50,14 +50,14 @@ public class EndDifficultyGameLayer extends CCLayer {
 		spriteBg.setScale(Math.max(scaleW, scaleH));
 		this.addChild(spriteBg, 0);		
 		
-		CCLabel label = CCLabel.makeLabel("Game Over", "fonts/Slime.ttf", 60f);
+		CCLabel label = CCLabel.makeLabel("Game Over".toUpperCase(), "fonts/Slime.ttf", 60f);
 		label.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().getWidth() / 2,
 				CCDirector.sharedDirector().winSize().getHeight() / 2 + 150f
 				));	
 		this.addChild(label);
 		
-		this.lblScore = CCLabel.makeLabel("0", "fonts/Slime.ttf", 60.0f);
+		this.lblScore = CCLabel.makeLabel("0".toUpperCase(), "fonts/Slime.ttf", 60.0f);
 		this.lblScore.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().getWidth() / 2,
 				CCDirector.sharedDirector().winSize().getHeight() / 2 + 75f
@@ -74,7 +74,7 @@ public class EndDifficultyGameLayer extends CCLayer {
 						
 		String unlockLvl = LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty());
 		String unlockTxt = "You have unlock: " + unlockLvl + " mode";
-		this.unlock = CCLabel.makeLabel(unlockTxt, "fonts/Slime.ttf", 45f);
+		this.unlock = CCLabel.makeLabel(unlockTxt.toUpperCase(), "fonts/Slime.ttf", 45f);
 		this.unlock.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().getWidth() / 2,
 				CCDirector.sharedDirector().winSize().getHeight() / 2
@@ -102,13 +102,13 @@ public class EndDifficultyGameLayer extends CCLayer {
 			unlockTxt = "Congratulations!!!!";
 		}
 		
-		this.unlock.setString(unlockTxt);
+		this.unlock.setString(unlockTxt.toUpperCase());
 		this.unlock.setScale(10.0f);
 		CCScaleTo scale = CCScaleTo.action(0.5f, 1.0f);
 		this.unlock.runAction(scale);
 		
 		String score = String.valueOf(SlimeFactory.GameInfo.getPreviousTotalScore());
-		this.lblScore.setString(score);
+		this.lblScore.setString(score.toUpperCase());
 		float starPadding = -10f;
 		float starX = this.lblScore.getPosition().x - this.lblScore.getContentSize().width / 2 - SlimeFactory.Star.getStarReferenceWidth() / 2 + starPadding;
 		this.starSprite.setPosition(CGPoint.make(

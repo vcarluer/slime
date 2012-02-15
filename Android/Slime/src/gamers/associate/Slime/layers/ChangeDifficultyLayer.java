@@ -125,7 +125,7 @@ public class ChangeDifficultyLayer extends CCLayer {
 	}
 	
 	private CCLabel createLabel(String text) {
-		CCLabel label = CCLabel.makeLabel(text, "fonts/Slime.ttf", 60.0f);
+		CCLabel label = CCLabel.makeLabel(text.toUpperCase(), "fonts/Slime.ttf", 60.0f);
 		// label.setColor(ccColor3B.ccc3(32,181,79));
 		label.setColor(ccColor3B.ccc3(255,255,255));
 		return label;
