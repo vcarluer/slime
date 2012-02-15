@@ -238,10 +238,88 @@
                 <key>sourceSize</key>
                 <string>{167,113}</string>
             </dict>
+            <key>contracted-01.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{159,411},{119,79}}</string>
+                <key>offset</key>
+                <string>{0,-17}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{24,34},{119,79}}</string>
+                <key>sourceSize</key>
+                <string>{167,113}</string>
+            </dict>
+            <key>contracted-02.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{278,411},{119,79}}</string>
+                <key>offset</key>
+                <string>{0,-17}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{24,34},{119,79}}</string>
+                <key>sourceSize</key>
+                <string>{167,113}</string>
+            </dict>
+            <key>contracted-03.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,490},{119,79}}</string>
+                <key>offset</key>
+                <string>{0,-17}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{24,34},{119,79}}</string>
+                <key>sourceSize</key>
+                <string>{167,113}</string>
+            </dict>
+            <key>contracted-04.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{119,490},{119,79}}</string>
+                <key>offset</key>
+                <string>{0,-17}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{24,34},{119,79}}</string>
+                <key>sourceSize</key>
+                <string>{167,113}</string>
+            </dict>
+            <key>contracted-05.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{238,490},{119,79}}</string>
+                <key>offset</key>
+                <string>{0,-17}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{24,34},{119,79}}</string>
+                <key>sourceSize</key>
+                <string>{167,113}</string>
+            </dict>
+            <key>contracted-06.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{357,490},{119,79}}</string>
+                <key>offset</key>
+                <string>{0,-17}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{24,34},{119,79}}</string>
+                <key>sourceSize</key>
+                <string>{167,113}</string>
+            </dict>
             <key>contracting-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{159,411},{139,97}}</string>
+                <string>{{0,569},{139,97}}</string>
                 <key>offset</key>
                 <string>{0,-8}</string>
                 <key>rotated</key>
@@ -254,7 +332,7 @@
             <key>contracting-02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{298,411},{135,89}}</string>
+                <string>{{139,569},{135,89}}</string>
                 <key>offset</key>
                 <string>{0,-12}</string>
                 <key>rotated</key>
@@ -267,7 +345,7 @@
             <key>contracting-03.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,508},{119,79}}</string>
+                <string>{{274,569},{119,79}}</string>
                 <key>offset</key>
                 <string>{0,-17}</string>
                 <key>rotated</key>
@@ -280,7 +358,7 @@
             <key>turning-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{119,508},{157,103}}</string>
+                <string>{{0,666},{157,103}}</string>
                 <key>offset</key>
                 <string>{-2,-5}</string>
                 <key>rotated</key>
@@ -293,7 +371,7 @@
             <key>turning-02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{276,508},{149,101}}</string>
+                <string>{{157,666},{149,101}}</string>
                 <key>offset</key>
                 <string>{2,-6}</string>
                 <key>rotated</key>
@@ -306,7 +384,7 @@
             <key>turning-03.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,611},{151,101}}</string>
+                <string>{{306,666},{151,101}}</string>
                 <key>offset</key>
                 <string>{7,-6}</string>
                 <key>rotated</key>
@@ -319,7 +397,7 @@
             <key>turning-04.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{151,611},{155,103}}</string>
+                <string>{{0,769},{155,103}}</string>
                 <key>offset</key>
                 <string>{6,-5}</string>
                 <key>rotated</key>
@@ -332,7 +410,7 @@
             <key>wait-01.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{306,611},{153,105}}</string>
+                <string>{{155,769},{153,105}}</string>
                 <key>offset</key>
                 <string>{0,-4}</string>
                 <key>rotated</key>
@@ -345,7 +423,7 @@
             <key>wait-02.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,716},{153,105}}</string>
+                <string>{{308,769},{153,105}}</string>
                 <key>offset</key>
                 <string>{0,-4}</string>
                 <key>rotated</key>
@@ -361,7 +439,7 @@
             <key>format</key>
             <integer>2</integer>
             <key>size</key>
-            <string>{488,821}</string>
+            <string>{488,874}</string>
             <key>textureFileName</key>
             <string>red.png</string>
         </dict>
