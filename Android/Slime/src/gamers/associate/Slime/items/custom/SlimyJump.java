@@ -117,7 +117,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 		this.selectScreenStart = CGPoint.zero();
 		this.selectScreenEnd = CGPoint.zero();
 		this.absoluteScreenStart = CGPoint.zero();
-		this.maxContactManifold = this.height / this.worldRatio * 2;
+		this.maxContactManifold = (this.height / this.worldRatio) * 3;
 		
 		this.MinAuraSize = this.height + 10;
 		this.MaxAuraSize = this.height + 124;

@@ -1,4 +1,4 @@
-BlocInfo;0;120;480;480;0;BlocInfo-0;5;;false;false;false;t,r,l
+BlocInfo;0;120;480;480;0;BlocInfo-0;5;;;false;false;false;t,r,l
 TimeAttack;-2.0;0.0;0.0;0.0;0.0;15;5
 Platform;0.0;0.0;480.0;32.0;0.0
 Platform;216.0;264.0;48.0;32.0;0.0
