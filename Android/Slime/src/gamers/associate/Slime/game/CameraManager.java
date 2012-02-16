@@ -9,6 +9,7 @@ import javax.microedition.khronos.opengles.GL10;
 import org.cocos2d.config.ccMacros;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.nodes.CCDirector;
+import org.cocos2d.nodes.CCParallaxNode;
 import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
@@ -26,7 +27,7 @@ public class CameraManager {
 	private float screenW2 = CCDirector.sharedDirector().winSize().width * CCDirector.sharedDirector().winSize().width;
 	private float screenH2 = CCDirector.sharedDirector().winSize().height * CCDirector.sharedDirector().winSize().height;
 	
-	private CCLayer gameLayer;
+	private CCParallaxNode gameLayer;
 	private float levelWidth;
 	private float levelHeight;	
 	private boolean isCameraOnContinuousMove;
@@ -58,8 +59,8 @@ public class CameraManager {
 	
 	private float zoomStart;
 	
-	public CameraManager(CCLayer gameLayer) {
-		this.gameLayer = gameLayer;
+	public CameraManager(CCParallaxNode gameLayer2) {
+		this.gameLayer = gameLayer2;
 				
 		this.moveCameraBy = new CGPoint();
 		this.virtualCamera = CGRect.getZero();

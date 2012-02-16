@@ -29,6 +29,7 @@ import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCMotionStreak;
+import org.cocos2d.nodes.CCParallaxNode;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
@@ -43,6 +44,8 @@ import com.badlogic.gdx.physics.box2d.World;
  * @uml.dependency   supplier="gamers.associate.Slime.GameItem"
  */
 public class Level {	
+	private static final float bgRatioY = 0.7f;
+	private static final float bgRatioX = 0.6f;
 	public static boolean DebugMode = false;
 	public static boolean isInit;	
 	public static float Gravity = -10;
@@ -87,7 +90,7 @@ public class Level {
 	protected LevelLayer levelLayer;
 	protected HudLayer hudLayer;
 	protected BackgoundLayer backgroundLayer;
-	protected CCLayer gameLayer;
+	protected CCParallaxNode gameLayer;
 	protected CCLayer customOverLayer;
 	protected PauseLayer pauseLayer;
 	protected EndLevelLayer endLevelLayer;
@@ -146,17 +149,32 @@ public class Level {
 		this.levelLayer = new LevelLayer(this);
 		this.hudLayer = new HudLayer();
 		this.backgroundLayer = new BackgoundLayer();
-		this.backgroundLayer.setAnchorPoint(0, 0);
-		this.gameLayer = CCLayer.node();
+		this.backgroundLayer.setAnchorPoint(0, 0);				
+        
+		// this.gameLayer = CCLayer.node();
+		this.gameLayer = CCParallaxNode.node();
 		this.pauseLayer = new PauseLayer();
 		this.endLevelLayer = new EndLevelLayer();				
 		
-		this.gameLayer.addChild(this.backgroundLayer, 0);
-		this.gameLayer.addChild(this.levelLayer, 1);			
+		/*this.gameLayer.addChild(this.backgroundLayer, 0);
+		this.gameLayer.addChild(this.levelLayer, 1);*/			
 		this.levelOrigin = CGPoint.make(0, 0);
-		this.gameLayer.setAnchorPoint(this.levelOrigin);
+		this.gameLayer.setAnchorPoint(0, 0);
+		
+		// create a void node, a parent node
+        // CCParallaxNode voidNode = CCParallaxNode.node();
+        
+		// background image is moved at a ratio of 0.4x, 0.5y
+		this.gameLayer.addChild(this.backgroundLayer, -1, bgRatioX, bgRatioY, 
+				- CCDirector.sharedDirector().winSize().width / 2, 
+				- CCDirector.sharedDirector().winSize().height / 2); // Magic offset = level origin offset after build
+
+        // tiles are moved at a ratio of 2.2x, 1.0y
+        // voidNode.addChild(this.gameLayer, 1, 2.2f, 1.0f, 0, -200);
+		this.gameLayer.addChild(this.levelLayer, 0, 1, 1, 0, 0);
 		
 		this.scene.addChild(this.gameLayer, 0);
+        // this.scene.addChild(voidNode, 0);
 		this.isHudEnabled = true;
 		this.scene.addChild(this.hudLayer, this.hudZ);
 		this.scene.addChild(this.pauseLayer, this.hudZ);
@@ -165,7 +183,7 @@ public class Level {
 		this.items = new Hashtable<UUID, GameItem>();				
 		this.selectables = new ArrayList<ISelectable>();
 		
-		this.cameraManager = new CameraManager(this.gameLayer);							
+		this.cameraManager = new CameraManager(this.gameLayer);			
 		
 		this.itemsToRemove = new ArrayList<GameItem>();
 		this.itemsToAdd = new ArrayList<GameItem>();
@@ -646,8 +664,8 @@ public class Level {
 	
 	private void fixBgSize() {
 		if (this.backgroundSprite != null) {
-			float wRatio = this.levelWidth / this.backgroundSprite.getTextureRect().size.width;
-			float hRatio = this.levelHeight / this.backgroundSprite.getTextureRect().size.height;
+			float wRatio = (this.levelWidth / this.backgroundSprite.getTextureRect().size.width);
+			float hRatio = (this.levelHeight / this.backgroundSprite.getTextureRect().size.height);
 			float ratio = Math.max(wRatio, hRatio);
 			if (ratio > 1) {
 				this.backgroundSprite.setScale(ratio);
@@ -1089,7 +1107,14 @@ public class Level {
 		this.levelOrigin = origin;
 		// this.gameLayer.setAnchorPoint(this.levelOrigin);
 		// this.gameLayer.setPosition(origin.x, origin.y);
-		this.backgroundLayer.setPosition(origin.x, origin.y);
+		/*if (this.backgroundSprite != null) {
+			this.backgroundSprite.setPosition(origin.x, origin.y);
+		}*/
+		
+		// this.backgroundLayer.setPosition(origin.x, origin.y);
+		this.gameLayer.addChild(this.backgroundLayer, -1, bgRatioX, bgRatioY, 
+				origin.x, 
+				origin.y);
 	}
 
 	public String getMaxDimension() {
@@ -1108,7 +1133,12 @@ public class Level {
 		this.levelOrigin.x = x;
 		this.levelOrigin.y = y;
 		
-		this.backgroundLayer.setPosition(this.getLevelOrigin());
+		// this.backgroundSprite.setPosition(this.getLevelOrigin());
+		// this.backgroundLayer.setPosition(this.getLevelOrigin());
+		this.gameLayer.removeChild(this.backgroundLayer, false);
+		this.gameLayer.addChild(this.backgroundLayer, -1, bgRatioX, bgRatioY, 
+				x, 
+				y);
 	}
 	
 	// for tests
@@ -1116,7 +1146,7 @@ public class Level {
 		return this.levelLayer;
 	}
 	
-	public CCLayer getGameLayer() {
+	public CCParallaxNode getGameLayer() {
 		return this.gameLayer;
 	}
 }
