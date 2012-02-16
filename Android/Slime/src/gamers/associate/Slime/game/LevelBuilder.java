@@ -127,4 +127,22 @@ public class LevelBuilder implements ILevelBuilder {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public int getTotalStar() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void addStar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void resetTotalStar() {
+		// TODO Auto-generated method stub
+		
+	}
 }

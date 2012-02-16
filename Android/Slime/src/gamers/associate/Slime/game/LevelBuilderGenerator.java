@@ -29,6 +29,7 @@ public class LevelBuilderGenerator implements ILevelBuilder
 	private LevelDefinitionParser levelparser = new LevelDefinitionParser(fileName, true);
 	private boolean firstBuild;	
 	private GameInformation gameInfo;
+	private int totalStar;
 	
 	public LevelBuilderGenerator() {		
 		this.gameInfo = SlimeFactory.GameInfo;
@@ -42,6 +43,7 @@ public class LevelBuilderGenerator implements ILevelBuilder
 	{
 		if (id != LevelHome.Id)
 		{
+			this.resetTotalStar();
 			if (this.firstBuild && this.levelparser.isStored() && !this.levelDef.isFinished()) {				
 				this.levelparser.buildLevel(level);					
 				level.setLevelDefinition(this.levelDef);
@@ -113,6 +115,7 @@ public class LevelBuilderGenerator implements ILevelBuilder
 	
 	@Override
 	public void rebuild(Level level, LevelDefinition levelDef) {		
+		this.resetTotalStar();
 		if (this.levelparser.isStored()) {
 			this.levelparser.buildLevel(level);			
 		} else {
@@ -142,5 +145,17 @@ public class LevelBuilderGenerator implements ILevelBuilder
 	public void start() {
 		this.firstBuild = true;
 		Level.get(LevelBuilderGenerator.defaultId, true);		
+	}
+
+	public int getTotalStar() {
+		return this.totalStar;
+	}
+
+	public void addStar() {
+		this.totalStar++;
+	}
+
+	public void resetTotalStar() {
+		this.totalStar = 0;
 	}
 }

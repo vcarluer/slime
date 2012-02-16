@@ -1,11 +1,14 @@
 package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.R;
+import gamers.associate.Slime.game.IGamePlay;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelSelection;
+import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.TitleGenerator;
 import gamers.associate.Slime.items.custom.MenuSprite;
+import gamers.associate.Slime.items.custom.Star;
 import gamers.associate.Slime.levels.LevelHome;
 
 import org.cocos2d.actions.instant.CCCallFunc;
@@ -23,6 +26,7 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
+import org.cocos2d.types.ccColor3B;
 
 public class HudLayer extends CCLayer {
 	private static String Count_Text = "Hud";
@@ -34,6 +38,9 @@ public class HudLayer extends CCLayer {
 	private CCLabel title;
 	
 	private CGPoint tmp = CGPoint.zero();
+	
+	private CCLabel starLabel;
+	private CCSprite starSprite;
 	
 	public HudLayer() {
 		
@@ -59,11 +66,18 @@ public class HudLayer extends CCLayer {
 				
 		this.hideSlimyCount();
 		
-		this.title = getMenuLabel(TitleGenerator.generateNewTitle(), 45f);
+		this.title = getMenuLabel(TitleGenerator.generateNewTitle(), 45f, ccColor3B.ccBLACK);
 		this.title.setPosition(
 				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
 				CCDirector.sharedDirector().winSize().getHeight() / 2));
 		this.addChild(this.title);
+		
+		this.starLabel = getMenuLabel("0 / 0");
+		this.starLabel.setPosition(
+				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
+				CCDirector.sharedDirector().winSize().getHeight() - 65));
+		this.starLabel.setAnchorPoint(0, 0f);
+		this.addChild(starLabel);				
 	}
 	
 	private static CCLabel getMenuLabel(String text) {
@@ -71,7 +85,13 @@ public class HudLayer extends CCLayer {
 	}
 	
 	private static CCLabel getMenuLabel(String text, float size) {
-		return CCLabel.makeLabel(text.toUpperCase(), "fonts/Slime.ttf", size);
+		return getMenuLabel(text, size, ccColor3B.ccWHITE);
+	}
+	
+	private static CCLabel getMenuLabel(String text, float size, ccColor3B color) {
+		CCLabel label =  CCLabel.makeLabel(text.toUpperCase(), "fonts/Slime.ttf", size);
+		label.setColor(color);
+		return label;
 	}
 	
 	@Override
@@ -97,6 +117,49 @@ public class HudLayer extends CCLayer {
 		tmp.set(-moveDistance, 0);
 		CCMoveBy move = CCMoveBy.action(time, tmp);
 		this.title.runAction(move);
+		this.setStarsCount();
+		
+		this.starSprite = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);		
+		this.starSprite.setPosition(
+				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2 - Star.Reference_Width - 25f, 
+				CCDirector.sharedDirector().winSize().getHeight() - 65));
+		this.starSprite.setAnchorPoint(0, 0f);
+		this.addChild(this.starSprite);
+	}
+	
+	private void setStarsCount() {
+		if (SlimeFactory.LevelBuilder.getTotalStar() > 0) {
+			IGamePlay gp = Level.currentLevel.getGamePlay();
+			if (gp != null) {
+				String txt = String.valueOf(gp.bonusCount()) + " / " + String.valueOf(SlimeFactory.LevelBuilder.getTotalStar());
+				this.starLabel.setString(txt);
+				this.starLabel.setPosition(
+						CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
+						CCDirector.sharedDirector().winSize().getHeight() - 65));
+				
+				this.starLabel.setVisible(true);
+			}			
+		}	
+		else {
+			this.starLabel.setVisible(false);						
+		}
+		
+		this.setStarSprite();
+	}
+	
+	private void setStarSprite() {
+		if (this.starSprite != null) {
+			if (SlimeFactory.LevelBuilder.getTotalStar() > 0) {
+				this.starSprite.setVisible(true);
+			}
+			else {
+				this.starSprite.setVisible(false);
+			}
+		}
+	}
+	
+	public void upudateStarsCount() {
+		this.setStarsCount();
 	}
 	
 	public void fadeTitle() {

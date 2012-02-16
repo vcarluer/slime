@@ -108,7 +108,7 @@ public class Star extends GameItemPhysic {
 	}
 	
 	public void starTaken() {
-		Level.currentLevel.getGamePlay().setNewBonus();
+		Level.currentLevel.setNewBonus();
 		Level.currentLevel.addItemToRemove(this);
 	}
 }

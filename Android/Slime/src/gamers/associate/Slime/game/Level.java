@@ -345,7 +345,8 @@ public class Level {
 		this.currentLevelName = levelName;
 		// Set camera right based on screen size
 		this.attachLevelToCamera();
-
+		
+		this.hudLayer.upudateStarsCount();
 		this.startLevel();
 	}	
 			
@@ -1153,5 +1154,13 @@ public class Level {
 	
 	public CCLayer getBackroundLayer() {
 		return this.backgroundLayer;
+	}
+
+	public void setNewBonus() {
+		if (this.gamePlay != null) {
+			this.gamePlay.setNewBonus();
+			this.hudLayer.upudateStarsCount();
+		}
+		
 	}
 }

@@ -4,6 +4,7 @@ import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.nodes.CCSprite;
 
+import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.base.GameItemPhysicFactory;
 
 
@@ -22,6 +23,7 @@ public class StarFactory extends GameItemPhysicFactory<Star> {
 
 	@Override
 	protected Star instantiate(float x, float y, float width, float height) {
+		SlimeFactory.LevelBuilder.addStar();
 		return new Star(x, y, width, height, this.world, this.worldRatio);
 	}
 

@@ -15,4 +15,7 @@ public interface ILevelBuilder {
 	void resetAllAndRun();
 	boolean hasBegun();
 	void start();
+	int getTotalStar();
+	void addStar();
+	void resetTotalStar();
 }

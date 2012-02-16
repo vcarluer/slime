@@ -29,6 +29,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	private float localRender;
 	private boolean isCritic;
 	private CCAction criticAction;
+	private int bonusTaken;
 	
 	public static TimeAttackGame NewGame() {
 		return new TimeAttackGame(0, 0, 0, 0);				
@@ -52,6 +53,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 			this.setStartTime();
 		}
 		
+		this.bonusTaken = 0;
 		this.leftTime = this.startTime;
 		this.isGameOver = false;
 		this.localRender = 0;
@@ -265,6 +267,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	public void setNewBonus() {
 		if (!this.isGameOver) {
 			this.leftTime += 10;
+			this.bonusTaken++;
 		}
 	}
 
@@ -289,5 +292,10 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	@Override
 	public boolean isStarted() {
 		return this.isStarted;
+	}
+
+	@Override
+	public int bonusCount() {
+		return this.bonusTaken;
 	}
 }
