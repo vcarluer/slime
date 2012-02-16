@@ -27,7 +27,7 @@ public class CameraManager {
 	private float screenW2 = CCDirector.sharedDirector().winSize().width * CCDirector.sharedDirector().winSize().width;
 	private float screenH2 = CCDirector.sharedDirector().winSize().height * CCDirector.sharedDirector().winSize().height;
 	
-	private CCParallaxNode gameLayer;
+	private CCLayer gameLayer;
 	private float levelWidth;
 	private float levelHeight;	
 	private boolean isCameraOnContinuousMove;
@@ -59,7 +59,7 @@ public class CameraManager {
 	
 	private float zoomStart;
 	
-	public CameraManager(CCParallaxNode gameLayer2) {
+	public CameraManager(CCLayer gameLayer2) {
 		this.gameLayer = gameLayer2;
 				
 		this.moveCameraBy = new CGPoint();
