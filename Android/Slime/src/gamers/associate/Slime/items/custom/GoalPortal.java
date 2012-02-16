@@ -48,7 +48,7 @@ public class GoalPortal extends GameItemPhysic implements ISelectable {
 		}
 		
 		this.bodyWidth = this.width;
-		this.bodyHeight = this.height;
+		this.bodyHeight = this.height;				
 	}
 
 	@Override
@@ -75,7 +75,8 @@ public class GoalPortal extends GameItemPhysic implements ISelectable {
 	
 	public void createPortal() {
 		CCAction animate = CCRepeatForever.action(CCAnimate.action(this.animationList.get(Anim_Goal_Portal), false));				
-		this.sprite.runAction(animate);		
+		this.sprite.runAction(animate);
+		this.sprite.setVisible(false);
 	}
 
 	@Override

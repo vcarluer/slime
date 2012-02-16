@@ -102,7 +102,7 @@ public class SlimeLoadingLayer extends CCLayer {
 				SpriteSheetFactory.add("red", Level.zTop);
 				SpriteSheetFactory.add("slimydbz", Level.zFront);
 				SpriteSheetFactory.add("glasswork", Level.zMid);
-				SpriteSheetFactory.add("tank", Level.zMid);
+				SpriteSheetFactory.add("tank", Level.zFront);
 				SpriteSheetFactory.add("worlds-items", Level.zMid);
 				
 				Sounds.preload();
