@@ -23,47 +23,50 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 	@Override
 	protected void generateInternal(int maxComplexity,
 			BlocDirection constrained, boolean isBoss) {
-		
-		int lgMax = 1;
-		switch (SlimeFactory.GameInfo.getDifficulty()) {
-			default:
-			case LevelDifficulty.Easy: lgMax = maxWidth / 4; break;
-			case LevelDifficulty.Normal: lgMax = maxWidth / 2; break;
-			case LevelDifficulty.Hard: lgMax = maxWidth * 3 / 4; break;
-			case LevelDifficulty.Extrem: lgMax = maxWidth; break;
-		}
-					
-		float tmp = SlimeFactory.GameInfo.getLevelNum() * lgMax;
-		tmp = tmp / SlimeFactory.GameInfo.getLevelMax();
-		int lvlWidth = Math.round(tmp);
-		if (lvlWidth == 0) {
-			lvlWidth = 1;
-		}
-		tmp = lvlWidth * maxAddHeight;
-		tmp = tmp / maxWidth;
-		int lvlHeight = Math.round(tmp);
-		if (lvlHeight == 0) {
-			lvlHeight = 1;
-		}
-
-		// Always at least 2
-		lvlWidth++;
-		lvlHeight++;
-		
-		int startPos = rand.nextInt(lvlHeight);
-		/*int endPos = rand.nextInt(lvlHeight);
-		// try to repick if equal
-		if (startPos == endPos) {
-			endPos = rand.nextInt(lvlHeight);
-		}*/
-		
+				
+		int lvlWidth = 0;
+		int lvlHeight = 0;
 		int endPos = noBossPos;
 		int bossPos = noBossPos;
-		if (isBoss) {
-			bossPos = rand.nextInt(lvlWidth - minBossPos) + minBossPos;
+				
+		if (!isBoss) {
+			int lgMax = 1;
+			switch (SlimeFactory.GameInfo.getDifficulty()) {
+				default:
+				case LevelDifficulty.Easy: lgMax = maxWidth / 4; break;
+				case LevelDifficulty.Normal: lgMax = maxWidth / 2; break;
+				case LevelDifficulty.Hard: lgMax = maxWidth * 3 / 4; break;
+				case LevelDifficulty.Extrem: lgMax = maxWidth; break;
+			}
+						
+			float tmp = SlimeFactory.GameInfo.getLevelNum() * lgMax;
+			tmp = tmp / SlimeFactory.GameInfo.getLevelMax();
+			lvlWidth = Math.round(tmp);
+			if (lvlWidth == 0) {
+				lvlWidth = 1;
+			}
+			tmp = lvlWidth * maxAddHeight;
+			tmp = tmp / maxWidth;
+			lvlHeight = Math.round(tmp);
+			if (lvlHeight == 0) {
+				lvlHeight = 1;
+			}
 			
+			// Always at least 2
+			lvlWidth++;
+			lvlHeight++;						
 		} else {
+			lvlWidth = 3;
+			lvlHeight = 2;			
+		}
+		
+		int startPos = rand.nextInt(lvlHeight);
+		if (!isBoss) {
+			// Inverse from start
 			endPos = lvlHeight - 1 - startPos;
+
+		} else {
+			bossPos = rand.nextInt(lvlWidth - minBossPos) + minBossPos;
 		}
 		
 		LevelGenNode pick = null;
