@@ -56,6 +56,7 @@ public class CameraManager {
 	private CGPoint centerScreen;
 	private CGPoint currentOpposite;
 	private CGPoint screenPoint;
+	private CGPoint bgPos;
 	
 	private float zoomStart;
 	
@@ -79,6 +80,7 @@ public class CameraManager {
 		this.centerScreen = CGPoint.zero();
 		this.currentOpposite = CGPoint.zero();
 		this.screenPoint = CGPoint.zero();
+		this.bgPos = CGPoint.zero();
 	}
 	
 	protected void tick(float delta) {
@@ -207,6 +209,11 @@ public class CameraManager {
 		if (isNormalized) {
 			this.isCameraOnContinuousMove = false;
 		}
+		
+		
+		this.bgPos.x = position.x * -0.1f + Level.currentLevel.getLevelOrigin().x;
+		this.bgPos.y = position.y * -0.1f + Level.currentLevel.getLevelOrigin().y;
+		Level.currentLevel.getBackroundLayer().setPosition(this.bgPos);
 	}
 	
 	public void centerCameraOn(CGPoint center) {		

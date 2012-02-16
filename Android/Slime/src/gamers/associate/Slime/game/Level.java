@@ -173,6 +173,7 @@ public class Level {
         // voidNode.addChild(this.gameLayer, 1, 2.2f, 1.0f, 0, -200);
 		// this.gameLayer.addChild(this.levelLayer, 1, 1, 1, 0, 0);
 		
+		// this.scene.addChild(this.backgroundLayer, -1);
 		this.scene.addChild(this.gameLayer, 0);
         // this.scene.addChild(voidNode, 0);
 		this.isHudEnabled = true;
@@ -1111,7 +1112,7 @@ public class Level {
 			this.backgroundSprite.setPosition(origin.x, origin.y);
 		}*/
 		
-		// this.backgroundLayer.setPosition(origin.x, origin.y);
+		this.backgroundLayer.setPosition(origin.x, origin.y);
 //		this.gameLayer.addChild(this.backgroundLayer, -1, bgRatioX, bgRatioY, 
 //				origin.x, 
 //				origin.y);
@@ -1134,7 +1135,7 @@ public class Level {
 		this.levelOrigin.y = y;
 		
 		// this.backgroundSprite.setPosition(this.getLevelOrigin());
-//		// this.backgroundLayer.setPosition(this.getLevelOrigin());
+		this.backgroundLayer.setPosition(this.getLevelOrigin());
 //		this.gameLayer.removeChild(this.backgroundLayer, false);
 //		this.gameLayer.addChild(this.backgroundLayer, -1, bgRatioX, bgRatioY, 
 //				x, 
@@ -1148,5 +1149,9 @@ public class Level {
 	
 	public CCLayer getGameLayer() {
 		return this.gameLayer;
+	}
+	
+	public CCLayer getBackroundLayer() {
+		return this.backgroundLayer;
 	}
 }
