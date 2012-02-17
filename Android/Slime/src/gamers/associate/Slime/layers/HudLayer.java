@@ -9,9 +9,12 @@ import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.TitleGenerator;
 import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.items.custom.Star;
+import gamers.associate.Slime.items.custom.StarFactory;
 import gamers.associate.Slime.levels.LevelHome;
 
+import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.instant.CCCallFunc;
+import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCFadeIn;
 import org.cocos2d.actions.interval.CCFadeOut;
@@ -124,7 +127,7 @@ public class HudLayer extends CCLayer {
 				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2 - Star.Reference_Width - 25f, 
 				CCDirector.sharedDirector().winSize().getHeight() - 65));
 		this.starSprite.setAnchorPoint(0, 0f);
-		this.addChild(this.starSprite);
+		this.addChild(this.starSprite);				
 	}
 	
 	private void setStarsCount() {
@@ -138,7 +141,7 @@ public class HudLayer extends CCLayer {
 						CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
 						CCDirector.sharedDirector().winSize().getHeight() - 65));
 				
-				activate = true;				
+				activate = true;
 			}			
 		}
 		
@@ -168,7 +171,6 @@ public class HudLayer extends CCLayer {
 
 	@Override
 	public void onExit() {
-		// TODO Auto-generated method stub
 		super.onExit();
 	}
 

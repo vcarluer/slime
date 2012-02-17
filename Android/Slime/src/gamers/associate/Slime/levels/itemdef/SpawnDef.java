@@ -36,7 +36,7 @@ public class SpawnDef extends ItemDefinition {
 
 	@Override
 	protected boolean getIsBL() {
-		return false;
+		return true;
 	}
 
 	@Override

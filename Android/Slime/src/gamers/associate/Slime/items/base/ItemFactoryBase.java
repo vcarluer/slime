@@ -125,10 +125,6 @@ public abstract class ItemFactoryBase<T extends GameItemCocos> {
 		return node;
 	}
 	
-	public CCAction getAnimation(String animationName) {
-		return this.getAnimation(animationName, 0f);
-	}
-	
 	public CCSprite getAnimatedSprite(String animationName) {
 		return this.getAnimatedSprite(animationName, 0f);
 	}
@@ -139,11 +135,29 @@ public abstract class ItemFactoryBase<T extends GameItemCocos> {
 		return spr;
 	}
 	
-	public CCAction getAnimation(String animationName, float waitTime) {		
+	public CCAction getAnimation(String animationName, float waitTime) {
+		return this.getAnimation(animationName, waitTime, true);
+	}
+	
+	public CCAction getAnimation(String animationName) {
+		return this.getAnimation(animationName, 0f, true);
+	}
+	
+	public CCAction getAnimation(String animationName, boolean repeat) {
+		return this.getAnimation(animationName, 0f, repeat);
+	}		
+	
+	public CCAction getAnimation(String animationName, float waitTime, boolean repeat) {		
+		CCAction action = null;
 		CCAnimate animate = CCAnimate.action(this.sharedAnimations.get(animationName), false);
 		CCDelayTime delay = CCDelayTime.action(waitTime);
 		CCSequence seq = CCSequence.actions(animate, delay);
-		CCRepeatForever repeat = CCRepeatForever.action(seq);
-		return repeat;
+		action = seq;
+		if (repeat) {
+			CCRepeatForever repeatAction = CCRepeatForever.action(seq);
+			action = repeatAction;
+		}
+		
+		return action;
 	}
 }
