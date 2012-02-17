@@ -9,6 +9,7 @@ import gamers.associate.Slime.levels.LevelHome;
 import gamers.associate.Slime.levels.generator.BlocInfoParser;
 
 import org.cocos2d.actions.UpdateCallback;
+import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCScaleBy;
@@ -32,6 +33,7 @@ public class GALogoLayer extends CCLayer {
 	private CCSprite sprite;
 	private float scaleTarget;
 	private Level currentLevel;
+	private static GALogoLayer logoLayer;
 	
 	public static CCScene scene() {
 		if (scene == null) {
@@ -41,7 +43,8 @@ public class GALogoLayer extends CCLayer {
 					CCDirector.sharedDirector().winSize().height);
 					
 			scene.addChild(colorLayer, 0);
-			scene.addChild(new GALogoLayer(), 1);
+			logoLayer = new GALogoLayer();
+			scene.addChild(logoLayer, 1);
 		}
 		
 		return scene;
@@ -78,8 +81,9 @@ public class GALogoLayer extends CCLayer {
 		scaleTarget = targetHeight / originalImageHeight;
 		this.sprite.setScale(10.0f);
 		CCScaleTo scaleTo = CCScaleTo.action(0.3f, scaleTarget);
+		CCDelayTime delay = CCDelayTime.action(0.2f);
 		CCCallFunc call = CCCallFunc.action(this, "endScale");
-		CCSequence seq = CCSequence.actions(scaleTo, call);
+		CCSequence seq = CCSequence.actions(scaleTo, delay,  call);
 		this.sprite.runAction(seq);
 		
 		// schedule(nextCallback, waitLogoSec); doesn't work?
@@ -88,23 +92,25 @@ public class GALogoLayer extends CCLayer {
 	}		
 	
 	public void endScale() {
-		float soundTime = 1.0f;
-		float waitTime = 2.0f;
+		/*float soundTime = 1.0f;
+		float waitTime = 2.0f;*/
 		Sounds.playEffect(R.raw.ga);
-		CCDelayTime delay = CCDelayTime.action(waitTime);
-		CCScaleBy sb = CCScaleBy.action(0.1f, 1.10f);
-		CCScaleTo st = CCScaleTo.action(0.1f, this.scaleTarget);		
-		CCCallFunc call = CCCallFunc.action(this, "load");
-		CCSequence seq = CCSequence.actions(delay, sb, st, call);
-		this.sprite.runAction(seq);
+		// CCDelayTime delay = CCDelayTime.action(waitTime);
+		/*CCScaleBy sb = CCScaleBy.action(0.1f, 1.10f);
+		CCScaleTo st = CCScaleTo.action(0.1f, this.scaleTarget);
+		CCDelayTime delay2 = CCDelayTime.action(1f);
+		// CCCallFunc call = CCCallFunc.action(this, "load");
+		CCSequence seq = CCSequence.actions(sb, st, delay2);
+		CCRepeatForever rep = CCRepeatForever.action(seq);
+		this.sprite.runAction(rep);*/
 		this.schedule(nextCallback);
 	}
 	
 	public void load() {
 		removeChild(sprite, true);
-		
-		//CCScene nextScene = SlimeLoadingLayer.scene();
-		//CCDirector.sharedDirector().replaceScene(nextScene);
+		Sounds.playMusic(R.raw.menumusic, true);
+		CCScene nextScene = SlimeLoadingLayer.scene();
+		CCDirector.sharedDirector().replaceScene(nextScene);
 	}
 	
 //	private UpdateCallback nextCallback = new UpdateCallback() {
@@ -148,9 +154,16 @@ public class GALogoLayer extends CCLayer {
 //			spriteSheet.removeChild(sprite, true);						
 			// removeChild(sprite, true);
 			// CCTransitionScene transition = CCTurnOffTilesTransition.transition(1.0f, currentLevel.getScene());
+			
+			CCScaleBy sb = CCScaleBy.action(0.1f, 1.10f);
+			CCScaleTo st = CCScaleTo.action(0.1f, scaleTarget);
+			CCCallFunc call = CCCallFunc.action(logoLayer, "load");
+			CCSequence seq = CCSequence.actions(sb, st, call);
+			sprite.runAction(seq);
+			
+			/*removeChild(sprite, true);
 			CCTransitionScene transition = CCFadeTransition.transition(1.0f, currentLevel.getScene());
-			CCDirector.sharedDirector().replaceScene(transition);
-			Sounds.playMusic(R.raw.menumusic, true);
+			CCDirector.sharedDirector().replaceScene(transition);*/			
 		}
 	};
 	
