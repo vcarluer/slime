@@ -69,7 +69,7 @@ public class HudLayer extends CCLayer {
 				
 		this.hideSlimyCount();
 		
-		this.title = getMenuLabel(TitleGenerator.generateNewTitle(), 45f, ccColor3B.ccBLACK);
+		this.title = getMenuLabel(TitleGenerator.generateNewTitle(), 45f, SlimeFactory.ColorSlimeBorder);
 		this.title.setPosition(
 				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
 				CCDirector.sharedDirector().winSize().getHeight() / 2));
@@ -79,6 +79,7 @@ public class HudLayer extends CCLayer {
 		this.starLabel.setPosition(
 				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
 				CCDirector.sharedDirector().winSize().getHeight() - 65));
+		this.starLabel.setColor(SlimeFactory.ColorSlime);
 		this.starLabel.setAnchorPoint(0, 0f);
 		this.addChild(starLabel);				
 	}
@@ -125,7 +126,7 @@ public class HudLayer extends CCLayer {
 		this.starSprite = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);		
 		this.starSprite.setPosition(
 				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2 - Star.Reference_Width - 25f, 
-				CCDirector.sharedDirector().winSize().getHeight() - 65));
+				CCDirector.sharedDirector().winSize().getHeight() - 35));
 		this.starSprite.setAnchorPoint(0, 0f);
 		this.addChild(this.starSprite);				
 	}

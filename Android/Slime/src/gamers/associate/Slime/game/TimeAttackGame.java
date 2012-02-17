@@ -47,7 +47,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		if (this.level != null) {
 			this.level.hideHudText();
 			CCLabel label = this.level.getHudLabel();
-			label.setColor(ccColor3B.ccc3( 255,255,255));
+			label.setColor(SlimeFactory.ColorSlime);
 			label.stopAllActions();
 			label.setOpacity(255);
 			this.setStartTime();
@@ -114,7 +114,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 					if (this.leftTime > this.criticTime) {						
 						this.isCritic = false;
 						CCLabel label = this.level.getHudLabel();
-						label.setColor(ccColor3B.ccc3( 255,255,255));
+						label.setColor(SlimeFactory.ColorSlime);
 						label.stopAllActions();
 						label.setOpacity(255);
 					}
@@ -239,7 +239,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 
 	public void stop() {
 		CCLabel label = this.level.getHudLabel();
-		label.setColor(ccColor3B.ccc3( 255,255,255));
+		label.setColor(SlimeFactory.ColorSlime);
 		label.stopAllActions();
 		label.setOpacity(255);
 		this.level.setTimeRatio(2.0f);

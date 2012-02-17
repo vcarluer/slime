@@ -198,10 +198,10 @@ public class GoalPortal extends GameItemPhysic implements ISelectable {
 
 	public CCSprite getThumbail() {
 		if (this.thumbnailSprite == null) {
-			this.thumbnailSprite = CCSprite.sprite(thumbnail, true);	
-			this.thumbnailSprite.setRotation(this.sprite.getRotation());
+			this.thumbnailSprite = CCSprite.sprite(thumbnail, true);				
 		}
 		
+		this.thumbnailSprite.setRotation(this.sprite.getRotation());
 		this.thumbnailSprite.setScale(Thumbnail.Reference_Width / (107f + Thumbnail.Reference_Inside_Margin));
 		return this.thumbnailSprite; 
 	}

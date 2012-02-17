@@ -148,7 +148,9 @@ public class EndLevelLayer extends CCLayer {
 	}
 	
 	private static CCLabel getMenuLabel(String text) {
-		return CCLabel.makeLabel(text.toUpperCase(), "fonts/Slime.ttf", 60.0f);
+		CCLabel label = CCLabel.makeLabel(text.toUpperCase(), "fonts/Slime.ttf", 60.0f);
+		label.setColor(SlimeFactory.ColorSlime);
+		return label;
 	}
 	
 	public void setNextEnabled(boolean value) {

@@ -4,6 +4,7 @@ import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
+import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.items.custom.Star;
 
 import org.apache.http.conn.ClientConnectionRequest;
@@ -26,6 +27,7 @@ import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
+import org.cocos2d.types.ccColor3B;
 
 import android.view.MotionEvent;
 
@@ -41,14 +43,15 @@ public class HomeLayer extends CCLayer {
 	
 	private static float baseShift = 150f;
 	private static float shiftTitle = baseShift;
-	private static float shiftMenu  = shiftTitle - 150f; // Slime height = 160 / 2 + 20
+	private static float shiftMenu  = 0f; // shiftTitle - 150f; // Slime height = 160 / 2 + 20
 	private static float shiftInfo  = shiftMenu - 100f;
-	private static float shiftScore = shiftInfo - 70f;
+	private static float shiftScore = shiftMenu - 100f; // shiftInfo - 70f;
 	private static float paddingDiff = 50f;
 	
 	private float shiftArrow = -60f;
 	
 	private CCSprite titleSprite;
+	private CCMenu restartMenu;
 	
 	public static HomeLayer get() {
 		if (layer == null) {
@@ -126,21 +129,39 @@ public class HomeLayer extends CCLayer {
 	@Override
 	public void onEnter() {		
 		super.onEnter();
+				
+		CCSprite restartSprite = CCSprite.sprite("control-restart.png", true);
+		CCMenuItemSprite restartItem = CCMenuItemSprite.item(restartSprite, restartSprite, this, "changeDifficulty");
+		restartItem.setScale(PauseLayer.Scale);		
+		
+		float left = - CCDirector.sharedDirector().winSize().getWidth() / 2 + ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) / 2 ;
+		float top = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY) / 2;
+		restartItem.setPosition(left, top);
+		this.restartMenu = CCMenu.menu(restartItem);		
+		this.addChild(this.restartMenu);
+		
 		String diff =LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty());		
 		String lvl = String.valueOf(SlimeFactory.GameInfo.getLevelNum());
 		String lvlMax = String.valueOf(SlimeFactory.GameInfo.getLevelMax());
 		String info = diff + " " + lvl + " / " + lvlMax;
-		this.lblLevel = CCLabel.makeLabel(info.toUpperCase().toUpperCase(), "fonts/Slime.ttf", 60.0f);		
-		CCMenuItemLabel menuLevelInfo = CCMenuItemLabel.item(this.lblLevel, this, "changeDifficulty");
-		menuInfo = CCMenu.menu(menuLevelInfo);
-		menuInfo.setPosition(CGPoint.make(
-				CCDirector.sharedDirector().winSize().getWidth() / 2,
-				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftInfo
-				));
-		this.addChild(menuInfo);						
+		this.lblLevel = CCLabel.makeLabel(info.toUpperCase().toUpperCase(), "fonts/Slime.ttf", 45f);		
+		/*CCMenuItemLabel menuLevelInfo = CCMenuItemLabel.item(this.lblLevel, this, "changeDifficulty");		
+		menuLevelInfo.setPosition(
+				restartItem.getPosition().x + restartSprite.getContentSize().width / 2 + this.lblLevel.getContentSize().width / 2 + PauseLayer.PaddingX, 
+				CCDirector.sharedDirector().winSize().getHeight() / 2 - this.lblLevel.getContentSize().height + PauseLayer.PaddingY
+				);
+		this.menuInfo = CCMenu.menu(menuLevelInfo);
+		this.addChild(menuInfo);					*/	
+		this.lblLevel.setPosition(
+				CCDirector.sharedDirector().winSize().width / 2 + restartItem.getPosition().x + restartSprite.getContentSize().width / 2 + this.lblLevel.getContentSize().width / 2 + PauseLayer.PaddingX, 
+				CCDirector.sharedDirector().winSize().height / 2 + CCDirector.sharedDirector().winSize().getHeight() / 2 - this.lblLevel.getContentSize().height + PauseLayer.PaddingY
+				);
+		this.lblLevel.setColor(SlimeFactory.ColorSlime);
+		this.addChild(this.lblLevel);
 		
 		String score = String.valueOf(SlimeFactory.GameInfo.getTotalScore());
 		this.lblScore.setString(score.toUpperCase());
+		this.lblScore.setColor(SlimeFactory.ColorSlime);		
 		
 		float starPadding = -10f;
 		float starX = this.lblScore.getPosition().x - this.lblScore.getContentSize().width / 2 - SlimeFactory.Star.getStarReferenceWidth() / 2 + starPadding;
@@ -170,10 +191,12 @@ public class HomeLayer extends CCLayer {
 		this.titleSprite = CCSprite.sprite("slime-attack.png");
 		this.addChild(this.titleSprite);
 		
+		float scale = 0.5f;
+		this.titleSprite.setScale(scale);
 		this.titleSprite.setPosition(CGPoint.make(
-				CCDirector.sharedDirector().winSize().width / 2,
-				CCDirector.sharedDirector().winSize().height / 2 + shiftTitle
-				));
+				CCDirector.sharedDirector().winSize().width - (this.titleSprite.getContentSize().width / 2) * scale - PauseLayer.PaddingX,
+				CCDirector.sharedDirector().winSize().height - (this.titleSprite.getContentSize().height / 2) * scale - PauseLayer.PaddingY
+				)); // + shiftTitle
 		// this.titleSprite.setAnchorPoint(0, 0);		
 		CCRotateTo r0 = CCRotateTo.action(0, 0);		
 		CCDelayTime d = CCDelayTime.action(0.5f);
@@ -187,8 +210,10 @@ public class HomeLayer extends CCLayer {
 	
 	@Override
 	public void onExit() {
-		this.removeChild(this.menuInfo, true);
+		// this.removeChild(this.menuInfo, true);
+		this.removeChild(this.lblLevel, true);
 		this.removeChild(this.titleSprite, true);
+		this.removeChild(this.restartMenu, true);
 		// this.removeChild(this.diffSpr, true);
 		super.onExit();
 	}

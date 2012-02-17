@@ -95,9 +95,9 @@ public class ChangeDifficultyLayer extends CCLayer {
 		boolean isEnable = diffRef <= diff;
 		label.setIsEnabled(isEnable);		
 		if (isEnable) {															
-			label.setColor(ccColor3B.ccc3(255, 255, 255));
+			label.setColor(ccColor3B.ccWHITE);
 		} else {			
-			label.setColor(ccColor3B.ccc3(125, 125, 125));
+			label.setColor(SlimeFactory.ColorSlimeBorder);
 		}
 		
 		tmp = CGPoint.ccpAdd(this.menu.getPosition(), label.getPosition());
@@ -127,7 +127,7 @@ public class ChangeDifficultyLayer extends CCLayer {
 	private CCLabel createLabel(String text) {
 		CCLabel label = CCLabel.makeLabel(text.toUpperCase(), "fonts/Slime.ttf", 60.0f);
 		// label.setColor(ccColor3B.ccc3(32,181,79));
-		label.setColor(ccColor3B.ccc3(255,255,255));
+		label.setColor(ccColor3B.ccWHITE);
 		return label;
 	}
 	

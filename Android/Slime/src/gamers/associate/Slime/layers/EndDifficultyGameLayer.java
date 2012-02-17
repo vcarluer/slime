@@ -58,6 +58,7 @@ public class EndDifficultyGameLayer extends CCLayer {
 		this.addChild(label);
 		
 		this.lblScore = CCLabel.makeLabel("0".toUpperCase(), "fonts/Slime.ttf", 60.0f);
+		// this.lblScore.setColor(SlimeFactory.ColorSlime);
 		this.lblScore.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().getWidth() / 2,
 				CCDirector.sharedDirector().winSize().getHeight() / 2 + 75f
@@ -75,6 +76,7 @@ public class EndDifficultyGameLayer extends CCLayer {
 		String unlockLvl = LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty());
 		String unlockTxt = "You have unlock: " + unlockLvl + " mode";
 		this.unlock = CCLabel.makeLabel(unlockTxt.toUpperCase(), "fonts/Slime.ttf", 45f);
+		// this.unlock.setColor(SlimeFactory.ColorSlime);
 		this.unlock.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().getWidth() / 2,
 				CCDirector.sharedDirector().winSize().getHeight() / 2

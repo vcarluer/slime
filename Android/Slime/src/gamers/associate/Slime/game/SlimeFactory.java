@@ -29,6 +29,7 @@ import gamers.associate.Slime.levels.generator.LevelGraphGeneratorRectangle;
 import gamers.associate.Slime.levels.generator.LevelGraphGeneratorRectangle2;
 
 import org.cocos2d.nodes.CCNode;
+import org.cocos2d.types.ccColor3B;
 
 import android.app.Activity;
 
@@ -64,6 +65,9 @@ public abstract class SlimeFactory {
 	public static GameInformation GameInfo;
 	public static RedFactory Red = new RedFactory();
 	public static GateFactory Gate = new GateFactory();
+	public static ccColor3B ColorSlime = ccColor3B.ccc3(0, 170, 54);
+	public static ccColor3B ColorSlimeBorder = ccColor3B.ccc3(0, 62, 8);
+	public static ccColor3B ColorSlimeLight = ccColor3B.ccc3(255, 255, 255); // 178, 229, 194
 		
 	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {		
 		// LevelBuilder = new LevelBuilder();
