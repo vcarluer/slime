@@ -60,6 +60,8 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 			lvlHeight = 2;			
 		}
 		
+		int starBlocCount = (int) Math.ceil(lvlWidth * lvlHeight / 2f);		
+		
 		int startPos = rand.nextInt(lvlHeight);
 		if (!isBoss) {
 			// Inverse from start
