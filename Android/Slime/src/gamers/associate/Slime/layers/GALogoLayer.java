@@ -1,7 +1,12 @@
 package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.R;
+import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
+import gamers.associate.Slime.items.base.SpriteSheetFactory;
+import gamers.associate.Slime.levels.LevelHome;
+import gamers.associate.Slime.levels.generator.BlocInfoParser;
 
 import org.cocos2d.actions.UpdateCallback;
 import org.cocos2d.actions.instant.CCCallFunc;
@@ -15,6 +20,8 @@ import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.sound.SoundEngine;
+import org.cocos2d.transitions.CCFadeTransition;
+import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor4B;
 
@@ -24,6 +31,7 @@ public class GALogoLayer extends CCLayer {
 	// private long onEnterTime;
 	private CCSprite sprite;
 	private float scaleTarget;
+	private Level currentLevel;
 	
 	public static CCScene scene() {
 		if (scene == null) {
@@ -73,7 +81,7 @@ public class GALogoLayer extends CCLayer {
 		CCCallFunc call = CCCallFunc.action(this, "endScale");
 		CCSequence seq = CCSequence.actions(scaleTo, call);
 		this.sprite.runAction(seq);
-
+		
 		// schedule(nextCallback, waitLogoSec); doesn't work?
 //		schedule(nextCallback);
 //		this.onEnterTime = System.currentTimeMillis();
@@ -89,13 +97,14 @@ public class GALogoLayer extends CCLayer {
 		CCCallFunc call = CCCallFunc.action(this, "load");
 		CCSequence seq = CCSequence.actions(delay, sb, st, call);
 		this.sprite.runAction(seq);
+		this.schedule(nextCallback);
 	}
 	
 	public void load() {
 		removeChild(sprite, true);
 		
-		CCScene nextScene = SlimeLoadingLayer.scene();
-		CCDirector.sharedDirector().replaceScene(nextScene);
+		//CCScene nextScene = SlimeLoadingLayer.scene();
+		//CCDirector.sharedDirector().replaceScene(nextScene);
 	}
 	
 //	private UpdateCallback nextCallback = new UpdateCallback() {
@@ -112,4 +121,37 @@ public class GALogoLayer extends CCLayer {
 //				}
 //			}
 //		};
+	private UpdateCallback nextCallback = new UpdateCallback() {
+		
+		public void update(float d) {
+			SpriteSheetFactory.add("controls", true, SpriteSheetFactory.zDefault);
+			// SpriteSheetFactory.add("logo", true, SpriteSheetFactory.zDefault);
+			SpriteSheetFactory.add("decor", true, SpriteSheetFactory.zDefault);
+			
+			SpriteSheetFactory.add("items", Level.zFront);								
+			SpriteSheetFactory.add("slime", Level.zTop);
+			SpriteSheetFactory.add("red", Level.zTop);
+			SpriteSheetFactory.add("slimydbz", Level.zFront);
+			SpriteSheetFactory.add("glasswork", Level.zMid);
+			SpriteSheetFactory.add("tank", Level.zFront);
+			SpriteSheetFactory.add("worlds-items", Level.zMid);
+			
+			Sounds.preload();
+			
+			BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorCorridor);
+			BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle);
+			BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle2);
+			
+			currentLevel = Level.get(LevelHome.Id);					
+			unschedule(nextCallback);
+			
+//			spriteSheet.removeChild(sprite, true);						
+			// removeChild(sprite, true);
+			// CCTransitionScene transition = CCTurnOffTilesTransition.transition(1.0f, currentLevel.getScene());
+			CCTransitionScene transition = CCFadeTransition.transition(1.0f, currentLevel.getScene());
+			CCDirector.sharedDirector().replaceScene(transition);
+			Sounds.playMusic(R.raw.menumusic, true);
+		}
+	};
+	
 }
