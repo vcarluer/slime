@@ -18,6 +18,7 @@ import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCFadeOut;
+import org.cocos2d.actions.interval.CCMoveTo;
 import org.cocos2d.actions.interval.CCRotateBy;
 import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.actions.interval.CCSequence;
@@ -132,11 +133,14 @@ public class GoalPortal extends GameItemPhysic implements ISelectable {
 		CCScaleTo scaleDown = CCScaleTo.action(0.5f, 0.0f);
 		CCSequence action1 = CCSequence.actions(scaleUp, scaleDown);
 		CCDelayTime delay2 = CCDelayTime.action(1.0f);				
-		CCFadeOut fade = CCFadeOut.action(0.5f);
-		CCSequence action2 = CCSequence.actions(delay2, fade);
+		CCFadeOut fade = CCFadeOut.action(0.5f);		
+		CCSequence action2 = CCSequence.actions(delay2, fade);		
+		CCMoveTo moveIn = CCMoveTo.action(0.5f, CGPoint.ccp(this.getPosition().x + this.width / 2, this.getPosition().y));
+		CCSequence action3 = CCSequence.actions(delay2, moveIn);
 		
 		item.getSprite().runAction(action1);
 		item.getSprite().runAction(action2);
+		item.getSprite().runAction(action3);
 	}
 
 	@Override
