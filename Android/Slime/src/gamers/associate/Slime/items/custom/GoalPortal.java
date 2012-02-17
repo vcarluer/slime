@@ -123,15 +123,15 @@ public class GoalPortal extends GameItemPhysic implements ISelectable {
 	}
 	
 	private CCFiniteTimeAction getAnimatePortalEnterReference() {		
-		return CCRotateBy.action(2.5f, 45f);				
+		return CCRotateBy.action(1.5f, 180f);				
 	}
 	
 	private void applyOtherPortalEnterAction(GameItemCocos item) {		
-		// CCScaleTo scaleUp = CCScaleTo.action(1.0f, 2.0f);
-		CCDelayTime delay = CCDelayTime.action(2.0f);
+		CCScaleTo scaleUp = CCScaleTo.action(1.0f, 1.5f);
+		// CCDelayTime delay = CCDelayTime.action(2.0f);
 		CCScaleTo scaleDown = CCScaleTo.action(0.5f, 0.0f);
-		CCSequence action1 = CCSequence.actions(delay, scaleDown);
-		CCDelayTime delay2 = CCDelayTime.action(2.0f);				
+		CCSequence action1 = CCSequence.actions(scaleUp, scaleDown);
+		CCDelayTime delay2 = CCDelayTime.action(1.0f);				
 		CCFadeOut fade = CCFadeOut.action(0.5f);
 		CCSequence action2 = CCSequence.actions(delay2, fade);
 		

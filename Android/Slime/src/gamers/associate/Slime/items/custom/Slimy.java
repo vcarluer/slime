@@ -284,7 +284,8 @@ public class Slimy extends GameItemPhysic implements IBurnable {
 				this.sprite.stopAction(this.waitAction);
 			}
 					
-			CCAnimate animSuccess = CCAnimate.action(this.animationList.get(Anim_Teleport), false);							
+			// CCAnimate animSuccess = CCAnimate.action(this.animationList.get(Anim_Teleport), false);							
+			CCAnimate animSuccess = CCAnimate.action(this.animationList.get(Anim_Success), false);
 			CCSequence succSeq = CCSequence.actions(animSuccess, animSuccess.reverse());
 			this.currentAction = CCRepeatForever.action(succSeq);				
 			this.sprite.runAction(this.currentAction);
