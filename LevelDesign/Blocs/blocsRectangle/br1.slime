@@ -1,5 +1,11 @@
-BlocInfo;0;120;480;480;0;BlocInfo-0;5;;;false;false;false;t,l
+BlocInfo;0;120;480;480;0;BlocInfo-0;2;;;false;false;false;t,l
 TimeAttack;-2.0;0.0;0.0;0.0;0.0;2;1
 Platform;0.0;0.0;448.0;32.0;0.0
 Platform_Corner;448.0;0.0;32.0;32.0;0.0
 Platform;240.0;240.0;448.0;32.0;90.0
+Box_Multitubes;0.0;32.0;144.0;64.0;0.0;true;true
+Box_GlassBox;144.0;32.0;304.0;64.0;0.0;true;true
+Star;226.0;249.0;30.0;31.0;0.0
+Platform_Cross;64.0;384.0;32.0;32.0;0.0
+LaserGun;96.0;393.0;65.0;15.0;180.0;lasergun;target1;true
+Target;440.0;392.0;16.0;16.0;0.0;target1

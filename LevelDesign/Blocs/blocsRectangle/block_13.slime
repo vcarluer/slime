@@ -6,6 +6,6 @@ Platform;0.0;432.0;432.0;32.0;0.0
 Platform_Corner;432.0;16.0;32.0;32.0;0.0
 Platform_Corner;432.0;432.0;32.0;32.0;-90.0
 Platform;0.0;16.0;432.0;32.0;0.0
-LaserGun;224.0;73.0;65.0;15.0;90.0;lasergun;target-7;true
-Target;248.0;416.0;16.0;16.0;0.0;target
-Button;48.0;48.0;40.0;27.0;0.0;laser-4;3
+LaserGun;224.0;73.0;65.0;15.0;90.0;lasergun;target;true
+Target;248.0;424.0;16.0;16.0;0.0;target
+Button;48.0;48.0;40.0;27.0;0.0;lasergun;3
