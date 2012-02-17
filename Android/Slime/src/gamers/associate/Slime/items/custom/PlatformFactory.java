@@ -18,6 +18,7 @@ public class PlatformFactory extends GameItemPhysicFactory<Platform>{
 		TextureAnimation.createFramesFromFiles(Platform.Anim_Base_Corner, 1);
 		TextureAnimation.createFramesFromFiles(Platform.Anim_Base_T, 1);
 		TextureAnimation.createFramesFromFiles(Platform.Anim_Base_Cross, 1);
+		TextureAnimation.createFramesFromFiles(Platform.Anim_Base_End, 1);
 	}
 
 	@Override
@@ -76,6 +77,10 @@ public class PlatformFactory extends GameItemPhysicFactory<Platform>{
 	
 	public Platform createCrossBL(float x, float y, float width, float height) {
 		return this.create(x + width / 2, y + height / 2, width, height, Platform.Cross);
+	}
+	
+	public Platform createEndBL(float x, float y, float width, float height) {
+		return this.create(x + width / 2, y + height / 2, width, height, Platform.End);
 	}
 	
 	public void setCurrentType(int platformType) {

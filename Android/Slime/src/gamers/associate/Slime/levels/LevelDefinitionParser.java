@@ -15,6 +15,8 @@ import gamers.associate.Slime.levels.itemdef.GoalPortalDef;
 import gamers.associate.Slime.levels.itemdef.ItemDefinition;
 import gamers.associate.Slime.levels.itemdef.LaserGunDef;
 import gamers.associate.Slime.levels.itemdef.LevelInfoDef;
+import gamers.associate.Slime.levels.itemdef.LiquidDef;
+import gamers.associate.Slime.levels.itemdef.LiquidSurfaceDef;
 import gamers.associate.Slime.levels.itemdef.MenuNodeDef;
 import gamers.associate.Slime.levels.itemdef.MetaMenuDef;
 import gamers.associate.Slime.levels.itemdef.PlatformDef;
@@ -118,6 +120,8 @@ public class LevelDefinitionParser extends LevelDefinition
 		this.itemDefinitions.add(new BoxDef());
 		this.itemDefinitions.add(new SpriteDef());
 		this.itemDefinitions.add(new RedDef());
+		this.itemDefinitions.add(new LiquidDef());
+		this.itemDefinitions.add(new LiquidSurfaceDef());
 	}
 	
 	private void buildItemTypeMap() {

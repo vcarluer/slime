@@ -23,6 +23,7 @@ public class Platform extends GameItemPhysic {
 	public static final int Corner = 5;
 	public static final int T = 6;
 	public static final int Cross = 7;
+	public static final int End = 8;
 	
 	public static float Default_Height= 32f;
 	
@@ -34,6 +35,7 @@ public class Platform extends GameItemPhysic {
 	public static String Anim_Base_Corner = "pf-corner";
 	public static String Anim_Base_T = "pf-T";
 	public static String Anim_Base_Cross = "pf-cross";
+	public static String Anim_Base_End = "pf-end";
 	
 	private int type;
 	private boolean move;
@@ -44,7 +46,7 @@ public class Platform extends GameItemPhysic {
 		this.zOrder = Level.zMid;
 		this.type = platformType;
 		this.move = platformMove;
-		if (this.type != Sticky && this.type != Wall && this.type != Corner && this.type != T && this.type != Cross) {
+		if (this.type != Sticky && this.type != Wall && this.type != Corner && this.type != T && this.type != Cross && this.type != End) {
 			this.noStick = true;
 		}
 	}
@@ -110,8 +112,10 @@ public class Platform extends GameItemPhysic {
 			return Anim_Base_T;
 		case Cross:
 			return Anim_Base_Cross;
+		case End:
+			return Anim_Base_End;
 		case Sticky:
-			default:
+			default:			
 			return Anim_Base_Sticky;
 		}
 	}

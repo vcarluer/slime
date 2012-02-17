@@ -14,6 +14,8 @@ import gamers.associate.Slime.items.custom.LaserBeamFactory;
 import gamers.associate.Slime.items.custom.LaserGunFactory;
 import gamers.associate.Slime.items.custom.LavaFactory;
 import gamers.associate.Slime.items.custom.LevelEndFactory;
+import gamers.associate.Slime.items.custom.LiquidFactory;
+import gamers.associate.Slime.items.custom.LiquidSurfaceFactory;
 import gamers.associate.Slime.items.custom.MenuNodeFactory;
 import gamers.associate.Slime.items.custom.PhysicPolygonFactory;
 import gamers.associate.Slime.items.custom.PlatformFactory;
@@ -36,6 +38,10 @@ import android.app.Activity;
 import com.badlogic.gdx.physics.box2d.World;
 
 public abstract class SlimeFactory {
+	public static ccColor3B ColorSlime = ccColor3B.ccc3(0, 170, 54);
+	public static ccColor3B ColorSlimeBorder = ccColor3B.ccc3(0, 62, 8);
+	public static ccColor3B ColorSlimeLight = ccColor3B.ccc3(255, 255, 255); // 178, 229, 194
+	
 	public static Activity ContextActivity;
 	public static ILevelBuilder LevelBuilder;
 	public static boolean isAttached;
@@ -65,9 +71,8 @@ public abstract class SlimeFactory {
 	public static GameInformation GameInfo;
 	public static RedFactory Red = new RedFactory();
 	public static GateFactory Gate = new GateFactory();
-	public static ccColor3B ColorSlime = ccColor3B.ccc3(0, 170, 54);
-	public static ccColor3B ColorSlimeBorder = ccColor3B.ccc3(0, 62, 8);
-	public static ccColor3B ColorSlimeLight = ccColor3B.ccc3(255, 255, 255); // 178, 229, 194
+	public static LiquidFactory Liquid = new LiquidFactory();
+	public static LiquidSurfaceFactory LiquidSurface = new LiquidSurfaceFactory();
 		
 	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {		
 		// LevelBuilder = new LevelBuilder();
@@ -99,6 +104,8 @@ public abstract class SlimeFactory {
 		Sprite.attach(level, attachNode);
 		Red.attach(level, attachNode, attachWorld, attachWorldRatio);
 		Gate.attach(level, attachNode);
+		Liquid.attach(level, attachNode, attachWorld, attachWorldRatio);
+		LiquidSurface.attach(level, attachNode, attachWorld, attachWorldRatio);
 		
 		SpriteSheetFactory.attachAll(attachNode);
 		isAttached = true;
@@ -127,6 +134,8 @@ public abstract class SlimeFactory {
 		Sprite.detach();
 		Red.detach();
 		Gate.detach();
+		Liquid.detach();
+		LiquidSurface.detach();
 		
 		LevelGeneratorCorridor.detach();
 		LevelGeneratorRectangle.detach();
@@ -157,6 +166,8 @@ public abstract class SlimeFactory {
 		Sprite.destroy();
 		Red.destroy();
 		Gate.destroy();
+		Liquid.destroy();
+		LiquidSurface.destroy();
 		
 		LevelGeneratorCorridor.destroy();
 		LevelGeneratorRectangle.destroy();

@@ -7,6 +7,7 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.IBurnable;
+import gamers.associate.Slime.items.base.IDissolvable;
 import gamers.associate.Slime.items.base.SpriteType;
 
 import org.cocos2d.actions.base.CCAction;
@@ -27,7 +28,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
-public class Slimy extends GameItemPhysic implements IBurnable {
+public class Slimy extends GameItemPhysic implements IBurnable, IDissolvable {
 	
 	public static String Anim_Burned_Wait = "burned-wait";
 	public static String Anim_Burning = "burning";
