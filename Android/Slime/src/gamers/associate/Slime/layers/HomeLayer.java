@@ -41,9 +41,9 @@ public class HomeLayer extends CCLayer {
 	private CCMenu menuInfo;
 	//private CCSprite diffSpr;
 	
-	private static float baseShift = 150f;
+	private static float baseShift = 100f;
 	private static float shiftTitle = baseShift;
-	private static float shiftMenu  = 0f; // shiftTitle - 150f; // Slime height = 160 / 2 + 20
+	private static float shiftMenu  = shiftTitle - 150f; // Slime height = 160 / 2 + 20
 	private static float shiftInfo  = shiftMenu - 100f;
 	private static float shiftScore = shiftMenu - 100f; // shiftInfo - 70f;
 	private static float paddingDiff = 50f;
@@ -191,13 +191,17 @@ public class HomeLayer extends CCLayer {
 		this.titleSprite = CCSprite.sprite("slime-attack.png");
 		this.addChild(this.titleSprite);
 		
-		float scale = 0.5f;
+		/*float scale = 0.5f;
 		this.titleSprite.setScale(scale);
 		this.titleSprite.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width - (this.titleSprite.getContentSize().width / 2) * scale - PauseLayer.PaddingX,
 				CCDirector.sharedDirector().winSize().height - (this.titleSprite.getContentSize().height / 2) * scale - PauseLayer.PaddingY
-				)); // + shiftTitle
-		// this.titleSprite.setAnchorPoint(0, 0);		
+				)); // + shiftTitle*/
+		// this.titleSprite.setAnchorPoint(0, 0);
+		this.titleSprite.setPosition(
+				CCDirector.sharedDirector().winSize().width / 2,
+				CCDirector.sharedDirector().winSize().height / 2 + shiftTitle
+				);
 		CCRotateTo r0 = CCRotateTo.action(0, 0);		
 		CCDelayTime d = CCDelayTime.action(0.5f);
 		CCRotateBy r1 = CCRotateBy.action(0.3f, 25f);
