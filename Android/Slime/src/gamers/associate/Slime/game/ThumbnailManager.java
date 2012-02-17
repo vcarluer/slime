@@ -62,7 +62,7 @@ public class ThumbnailManager {
 		this.computeRect();
 		if (!CGRect.containsPoint(this.thumbRect, Util.mid(selectable.getSelectionRect())) 
 				// && (selectable.isActive() || this.level.isPaused())) {
-				&& (this.level.isPaused() || selectable.isThumbnailAwaysOn())) {			
+				&& (this.level.isPaused() || (selectable.isThumbnailAwaysOn() && selectable.isActive()))) {			
 			float x = selectable.getPosition().x;
 			float y = selectable.getPosition().y;						
 			

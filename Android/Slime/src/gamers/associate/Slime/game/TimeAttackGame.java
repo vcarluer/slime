@@ -56,7 +56,10 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		this.bonusTaken = 0;
 		this.leftTime = this.startTime;
 		this.isGameOver = false;
-		this.localRender = 0;
+		this.localRender = 0;	
+		if (Level.currentLevel != null && Level.currentLevel.getGoal() != null) {
+			Level.currentLevel.getGoal().setActive(this.neededBonus() == 0);
+		}
 	}
 		
 	public boolean getGameOver() {
@@ -268,7 +271,25 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		if (!this.isGameOver) {
 			this.leftTime += 10;
 			this.bonusTaken++;
+			
+			if (this.bonusTaken >= this.neededBonus()) {
+				if (Level.currentLevel != null && Level.currentLevel.getGoal() != null) {
+					Level.currentLevel.getGoal().setActive(true);
+				}
+			}
 		}
+	}
+	
+	public int neededBonus() {
+		int needed = 0;
+		switch (SlimeFactory.GameInfo.getDifficulty()) {
+		default:
+		case LevelDifficulty.Easy: needed = (int) Math.ceil(SlimeFactory.LevelBuilder.getTotalStar() / 4f); break;
+		case LevelDifficulty.Normal: needed = (int) Math.ceil(SlimeFactory.LevelBuilder.getTotalStar() / 2f); break;
+		case LevelDifficulty.Hard: needed = (int) Math.ceil(SlimeFactory.LevelBuilder.getTotalStar() * 3f / 4f); break;
+		case LevelDifficulty.Extrem: needed = SlimeFactory.LevelBuilder.getTotalStar(); break;
+	}
+		return needed;
 	}
 
 	/* (non-Javadoc)

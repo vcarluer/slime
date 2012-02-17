@@ -78,7 +78,7 @@ public class GoalPortal extends GameItemPhysic implements ISelectable {
 	public void createPortal() {
 		CCAction animate = CCRepeatForever.action(CCAnimate.action(this.animationList.get(Anim_Goal_Portal), false));				
 		this.sprite.runAction(animate);
-		this.sprite.setVisible(false);
+		//this.sprite.setVisible(false);
 	}
 
 	@Override
@@ -98,7 +98,7 @@ public class GoalPortal extends GameItemPhysic implements ISelectable {
 	protected void handleContact(ContactInfo item) {		
 		super.handleContact(item);
 		
-		if (item.getContactWith() instanceof Slimy) {
+		if (this.isActive && item.getContactWith() instanceof Slimy) {
 			Slimy slimy = (Slimy) item.getContactWith();
 			if (slimy.isAlive()) {
 				slimy.win();
@@ -119,6 +119,12 @@ public class GoalPortal extends GameItemPhysic implements ISelectable {
 		}				
 	}
 	
+	@Override
+	public void setActive(boolean active) {
+		this.sprite.setVisible(active);
+		super.setActive(active);
+	}
+
 	public void endAnimDone() {
 		Level.currentLevel.showEndLevel();
 	}
@@ -196,14 +202,14 @@ public class GoalPortal extends GameItemPhysic implements ISelectable {
 		return CGRect.make(this.position.x, this.position.y, Default_Height, Default_Height);
 	}
 
-	public CCSprite getThumbail() {
+	public CCSprite getThumbail() {		
 		if (this.thumbnailSprite == null) {
 			this.thumbnailSprite = CCSprite.sprite(thumbnail, true);				
 		}
 		
 		this.thumbnailSprite.setRotation(this.sprite.getRotation());
 		this.thumbnailSprite.setScale(Thumbnail.Reference_Width / (107f + Thumbnail.Reference_Inside_Margin));
-		return this.thumbnailSprite; 
+		return this.thumbnailSprite;			
 	}
 		
 	public CCNode getRootNode() {

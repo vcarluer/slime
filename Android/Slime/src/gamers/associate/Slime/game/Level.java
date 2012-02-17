@@ -4,6 +4,7 @@ import gamers.associate.Slime.R;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.ISelectable;
 import gamers.associate.Slime.items.base.ITrigerable;
+import gamers.associate.Slime.items.custom.GoalPortal;
 import gamers.associate.Slime.items.custom.Slimy;
 import gamers.associate.Slime.items.custom.Thumbnail;
 import gamers.associate.Slime.layers.BackgoundLayer;
@@ -128,6 +129,8 @@ public class Level {
 	protected boolean isActivated;
 	
 	protected ArrayList<Slimy> aliveSlimyList;
+	
+	protected GoalPortal goal;
 	
 	protected boolean isGameOver;
 	
@@ -359,6 +362,7 @@ public class Level {
 		}
 		
 		this.gamePlay = null;
+		this.goal = null;
 		
 		this.trigerables.clear();
 		this.aliveSlimyList.clear();
@@ -1160,7 +1164,14 @@ public class Level {
 		if (this.gamePlay != null) {
 			this.gamePlay.setNewBonus();
 			this.hudLayer.upudateStarsCount();
-		}
-		
+		}		
+	}
+	
+	public GoalPortal getGoal() {
+		return this.goal;
+	}
+	
+	public void setGoal(GoalPortal goal) {
+		this.goal = goal;
 	}
 }

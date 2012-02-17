@@ -136,7 +136,7 @@ public class HudLayer extends CCLayer {
 		if (SlimeFactory.LevelBuilder.getTotalStar() > 0) {
 			IGamePlay gp = Level.currentLevel.getGamePlay();
 			if (gp != null) {
-				String txt = String.valueOf(gp.bonusCount()) + " / " + String.valueOf(SlimeFactory.LevelBuilder.getTotalStar());
+				String txt = String.valueOf(gp.bonusCount()) + " / " + String.valueOf(gp.neededBonus());
 				this.starLabel.setString(txt);
 				this.starLabel.setPosition(
 						CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 

@@ -17,4 +17,5 @@ public interface IGamePlay {
 	void setPause(boolean value);
 	boolean isStarted();
 	int bonusCount();
+	int neededBonus();
 }

@@ -33,9 +33,9 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 			int lgMax = 1;
 			switch (SlimeFactory.GameInfo.getDifficulty()) {
 				default:
-				case LevelDifficulty.Easy: lgMax = maxWidth / 4; break;
-				case LevelDifficulty.Normal: lgMax = maxWidth / 2; break;
-				case LevelDifficulty.Hard: lgMax = maxWidth * 3 / 4; break;
+				case LevelDifficulty.Easy: lgMax = Math.round(maxWidth / 4f); break;
+				case LevelDifficulty.Normal: lgMax = Math.round(maxWidth / 2f); break;
+				case LevelDifficulty.Hard: lgMax = Math.round(maxWidth * 3f / 4f); break;
 				case LevelDifficulty.Extrem: lgMax = maxWidth; break;
 			}
 						
