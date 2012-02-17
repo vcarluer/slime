@@ -6,7 +6,7 @@ import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.custom.CircularSaw;
 
 public class CircularSawDef extends ItemDefinition {
-	private static String Handled_Def = "CircularSaw";
+	public static String Handled_Def = "CircularSaw";
 	
 	private boolean isOn;
 	private String name;

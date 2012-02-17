@@ -6,7 +6,7 @@ import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.custom.LaserGun;
 
 public class LaserGunDef extends ItemDefinition {
-	private static String Handled_Def = "LaserGun";
+	public static String Handled_Def = "LaserGun";
 	private String name;
 	private String target;
 	private boolean isOn;

@@ -6,7 +6,8 @@ import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.custom.Red;
 
 public class RedDef extends ItemDefinition {
-	private static String Handled_Def = "Red"; 
+	private static String Handled_Def = "Red";
+	public static String Handled_DefMini = "MiniRed";	
 	
 	private int life;
 	private boolean isBoss;
@@ -14,6 +15,7 @@ public class RedDef extends ItemDefinition {
 	@Override
 	protected void initTypeHandled() {
 		this.typesHandled.add(Handled_Def);
+		this.typesHandled.add(Handled_DefMini);
 	}
 
 	@Override
@@ -48,7 +50,12 @@ public class RedDef extends ItemDefinition {
 
 	@Override
 	protected String getItemType(GameItem item) {
-		return Handled_Def;
+		Red red = (Red) item;
+		if (red.isBoss()) {
+			return Handled_Def;
+		} else {
+			return Handled_DefMini;
+		}		
 	}
 
 	@Override

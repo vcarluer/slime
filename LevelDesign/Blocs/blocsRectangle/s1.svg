@@ -15,7 +15,7 @@
    height="480"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.1 "
+   inkscape:version="0.48.2 r9819"
    sodipodi:docname="s1.svg">
   <defs
      id="defs4">
@@ -111,18 +111,18 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="11.313709"
-     inkscape:cx="88.418162"
-     inkscape:cy="91.762101"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="119.99049"
+     inkscape:cy="270.26281"
      inkscape:document-units="px"
      inkscape:current-layer="MAP"
      showgrid="true"
      inkscape:snap-grids="true"
      inkscape:snap-page="false"
      width="800px"
-     inkscape:window-width="1680"
-     inkscape:window-height="988"
-     inkscape:window-x="-8"
+     inkscape:window-width="1606"
+     inkscape:window-height="1028"
+     inkscape:window-x="66"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      showguides="false"
@@ -147,7 +147,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1049,7 +1049,7 @@
        id="red-3"
        x="344"
        y="274.03922"
-       type="Red"
+       type="MiniRed"
        att_isBoss="false"
        att_life="1" />
     <image
@@ -1060,7 +1060,7 @@
        id="red-3-2"
        x="248"
        y="504"
-       type="Red"
+       type="MiniRed"
        att_isBoss="false"
        att_life="1" />
     <image

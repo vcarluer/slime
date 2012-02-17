@@ -6,7 +6,7 @@ import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.custom.BecBunsen;
 
 public class BecBunsenDef extends ItemDefinition {
-	private static String Handled_BecBunsen = "BecBunsen";	
+	public static String Handled_BecBunsen = "BecBunsen";	
 	
 	private boolean isOn;
 	private float delay;

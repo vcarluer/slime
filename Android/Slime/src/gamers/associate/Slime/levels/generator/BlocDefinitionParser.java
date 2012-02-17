@@ -17,9 +17,13 @@ import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.levels.itemdef.BecBunsenDef;
 import gamers.associate.Slime.levels.itemdef.BlocInfoDef;
+import gamers.associate.Slime.levels.itemdef.CircularSawDef;
 import gamers.associate.Slime.levels.itemdef.ItemDefinition;
+import gamers.associate.Slime.levels.itemdef.LaserGunDef;
 import gamers.associate.Slime.levels.itemdef.LevelInfoDef;
+import gamers.associate.Slime.levels.itemdef.RedDef;
 
 public class BlocDefinitionParser extends BlocDefinition {
 	private static Random rand = new Random();
@@ -37,9 +41,10 @@ public class BlocDefinitionParser extends BlocDefinition {
 	
 	private void registerHazardItems() {
 		// Todo: loop on itemdef and call a new isDeadly property?
-		this.hazardItemsDef.add("BecBunsen");	
-		this.hazardItemsDef.add("CircularSaw");
-		this.hazardItemsDef.add("LaserGun");		
+		this.hazardItemsDef.add(BecBunsenDef.Handled_BecBunsen);	
+		this.hazardItemsDef.add(CircularSawDef.Handled_Def);
+		this.hazardItemsDef.add(LaserGunDef.Handled_Def);		
+		this.hazardItemsDef.add(RedDef.Handled_DefMini);
 	}
 
 	@Override
