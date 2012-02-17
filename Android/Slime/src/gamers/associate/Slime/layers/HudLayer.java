@@ -128,6 +128,7 @@ public class HudLayer extends CCLayer {
 	}
 	
 	private void setStarsCount() {
+		boolean activate = false;
 		if (SlimeFactory.LevelBuilder.getTotalStar() > 0) {
 			IGamePlay gp = Level.currentLevel.getGamePlay();
 			if (gp != null) {
@@ -137,24 +138,17 @@ public class HudLayer extends CCLayer {
 						CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
 						CCDirector.sharedDirector().winSize().getHeight() - 65));
 				
-				this.starLabel.setVisible(true);
+				activate = true;				
 			}			
-		}	
-		else {
-			this.starLabel.setVisible(false);						
 		}
 		
-		this.setStarSprite();
+		this.starLabel.setVisible(activate);
+		this.setStarSprite(activate);
 	}
 	
-	private void setStarSprite() {
-		if (this.starSprite != null) {
-			if (SlimeFactory.LevelBuilder.getTotalStar() > 0) {
-				this.starSprite.setVisible(true);
-			}
-			else {
-				this.starSprite.setVisible(false);
-			}
+	private void setStarSprite(boolean activate) {
+		if (this.starSprite != null) {			
+			this.starSprite.setVisible(activate);			
 		}
 	}
 	

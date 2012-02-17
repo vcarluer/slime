@@ -155,9 +155,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.0273436"
-     inkscape:cx="-174.97322"
-     inkscape:cy="411.83844"
+     inkscape:zoom="4.2813104"
+     inkscape:cx="-200.3709"
+     inkscape:cy="360.96735"
      inkscape:document-units="px"
      inkscape:current-layer="Template"
      showgrid="true"
@@ -639,7 +639,7 @@
        att_isStickable="true" />
     <g
        id="g3123"
-       transform="translate(203.83929,-32.410715)">
+       transform="translate(220.7261,88.732821)">
       <image
          att_frameCount="1"
          att_frameName="spawn-zone"
@@ -664,7 +664,7 @@
     </g>
     <g
        id="g3169"
-       transform="translate(127.11319,-89.143536)">
+       transform="translate(144,32)">
       <image
          y="312"
          x="-216"
@@ -689,7 +689,7 @@
     </g>
     <g
        id="g3191"
-       transform="translate(-24,-122.39873)">
+       transform="translate(-7.11319,-1.255194)">
       <image
          y="224"
          x="-144"
@@ -714,7 +714,7 @@
     </g>
     <g
        id="g3213"
-       transform="translate(-88.986852,124.56486)">
+       transform="translate(-72.100042,245.7084)">
       <image
          y="128"
          x="-48"
@@ -1038,7 +1038,8 @@
        att_isBoss="false"
        att_life="1" />
     <g
-       id="g3183">
+       id="g3220"
+       transform="matrix(0,-1,1,0,-438.8823,2.8527096)">
       <image
          type="Sprite"
          att_plist="tank"
@@ -1061,6 +1062,14 @@
          id="path3094-2"
          d="m -241.42765,288.06658 17.98895,-0.37489 5.98264,-6.38858 -0.0429,-8.16637 0.82001,-5.90563 0.0447,-5.48523 1.90889,-5.38359 16.11575,-38.52023 1.71834,-1.77638 -0.0977,-7.31781 -74.0819,-0.14597 0.29325,8.10386 6.36155,5.82275 15.07824,33.81779 1.53799,5.24464 0.0639,5.84817 1.45921,5.84861 0.0598,7.93219 z"
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
+      <image
+         type="GoalPortal"
+         y="192"
+         x="-272"
+         id="slimy_goal-2"
+         xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAKCAYAAADVTVykAAAABHNCSVQICAgIfAhkiAAAAgVJREFU OI3NlD9rFUEUxe/cmdmdefsv0TxEogZMICDRRrETsUgrVn6IWGiZj5BSi/ghrMROUoiWio1GQVAh agqNqG//vNndmb3XwkaL1yb++sM9cM49gplhFgf3b6VdLM+hNmsY2UWMbQbK5ChVjlLnIEQGAADM FQ2+pCGUENqSOldR7/bJt7txN7wdb2zXs26Ivw183FwvRGpuok2uo0nXpM2W0CQC4wQwHoGIR4Da gNAxCKkAUP4R0gA8BGDfAfkWuJsCdVOgrgFqGx5ctUdtvUuuecR1++Ds1s7kHwPv7py/gHG2KUfZ DbS5lTYDtBlIm3nIii+U5PshMT8gNp40BqHRs+TeC+oBADRjJAYRsSeNnhR0rVZNewybchGqyanB VZpcBYOrgFzphmn1kLpqa/Xu61fizcbyio6z58Lm8zLJmYvxy35x6Wlz+sSnZsE2WrSp8m2G3KWK XCLZW+TeIIUImSQAAAkcCFVPImoHoV1A25CI66BN5dnUyXeXJJ+/non2966KycHFoSkFu/Kn76rL CllsM8p5HqVPvl1ZvzddWW4VV3MquCKi6rjyTRGRm1M0LXSoCxVcLtnlEbUpkjcAAIS67dHUg7Bl ULb0Kp0EHE0EWytUErtx8qs6ufoiiEs7o/cfzMKzx7eha64hi22c2cBD4sgjOPoS/hdvOIvDGKLf DCLSl4fcbhcAAAAASUVORK5CYII= "
+         height="16.000006"
+         width="74.94194" />
     </g>
   </g>
   <g

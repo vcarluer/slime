@@ -558,6 +558,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 			this.thumbnailSprite = CCSprite.sprite(thumbSprite, true);			
 		}
 		
+		this.thumbnailSprite.setScale(Thumbnail.Reference_Height / (this.height + Thumbnail.Reference_Inside_Margin));
 		return this.thumbnailSprite; 
 	}
 

@@ -8,6 +8,7 @@ import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.ISelectable;
+import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.items.base.SpriteType;
 
 import org.cocos2d.actions.base.CCAction;
@@ -32,7 +33,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class GoalPortal extends GameItemPhysic implements ISelectable {
 	public static String Anim_Goal_Portal = "teleporter-red-portal";
-	private static String thumbnail = "teleporter-red-portal-04.png";
+	private static String thumbnail = "tank-evacuation-01.png"; // "teleporter-red-portal-04.png";
 	
 	public static float Default_Width = 32f;
 	public static float Default_Height = 75f;
@@ -196,11 +197,13 @@ public class GoalPortal extends GameItemPhysic implements ISelectable {
 			this.thumbnailSprite = CCSprite.sprite(thumbnail, true);			
 		}
 		
+		this.thumbnailSprite.setScale(Thumbnail.Reference_Width / (107f + Thumbnail.Reference_Inside_Margin));
 		return this.thumbnailSprite; 
 	}
 		
 	public CCNode getRootNode() {
-		return this.rootNode;		
+		// return this.rootNode;
+		return SpriteSheetFactory.getSpriteSheet("tank");
 	}
 
 	@Override

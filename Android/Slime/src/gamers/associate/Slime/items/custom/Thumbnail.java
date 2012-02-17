@@ -22,10 +22,16 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 	private boolean isSelected;
 	private CCSprite targetThumbnail;
 	private CGRect selectionRect;
-	private CGRect scaledRect;	
+	private CGRect scaledRect;
+
+	private float targetOriginalScale;	
 	
 	private static float Default_Selection_Width = 50f;
 	private static float Default_Selection_Height = 50f;
+	
+	public static float Reference_Width = 50f;
+	public static float Reference_Height = 50f;
+	public static float Reference_Inside_Margin = 25f;
 	
 	public Thumbnail(float x, float y, float width, float height) {
 		super(x, y, width, height);
@@ -45,8 +51,9 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 		this.target = target;
 		this.targetThumbnail = this.target.getThumbail();
 		this.isActive = !this.target.isThumbnailAwaysOn();
-		target.getRootNode().addChild(this.targetThumbnail, Level.zTop);
-		this.targetThumbnail.setPosition(this.position);		
+		this.target.getRootNode().addChild(this.targetThumbnail, Level.zTop);
+		this.targetThumbnail.setPosition(this.position);
+		this.targetOriginalScale = this.targetThumbnail.getScale();
 	}
 
 	public boolean canSelect(CGPoint gameReference) {
@@ -142,7 +149,7 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 	public void setScale(float scale) {
 		super.setScale(scale);
 		if (this.targetThumbnail != null) {
-			this.targetThumbnail.setScale(scale);
+			this.targetThumbnail.setScale(this.targetOriginalScale * scale);
 		}
 	}
 	
