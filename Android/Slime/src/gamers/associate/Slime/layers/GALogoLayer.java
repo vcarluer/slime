@@ -4,6 +4,7 @@ import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
+import gamers.associate.Slime.game.LoadingQuoteGenerator;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.levels.LevelHome;
 import gamers.associate.Slime.levels.generator.BlocInfoParser;
@@ -93,7 +94,7 @@ public class GALogoLayer extends CCLayer {
 		CCSequence seq = CCSequence.actions(scaleTo, delay,  call);
 		this.sprite.runAction(seq);
 		
-		this.loadLabel = CCLabel.makeLabel("defibrillating...".toUpperCase(), "fonts/Slime.ttf", 15f);		
+		this.loadLabel = CCLabel.makeLabel(LoadingQuoteGenerator.NewQuote().toUpperCase(), "fonts/Slime.ttf", 15f);		
 		this.loadLabel.setPosition(CCDirector.sharedDirector().winSize().width - this.loadLabel.getContentSize().width - PauseLayer.PaddingX, PauseLayer.PaddingY);
 		this.loadLabel.setAnchorPoint(0, 0);
 		this.loadLabel.setColor(ccColor3B.ccBLACK);
@@ -126,7 +127,7 @@ public class GALogoLayer extends CCLayer {
 	
 	public void heartbeat() {
 		this.loadLabel.setVisible(true);
-		this.loadLabel.setString("defibrillating...");
+		this.loadLabel.setString(LoadingQuoteGenerator.NewQuote().toUpperCase());
 		this.loadLabel.setPosition(CCDirector.sharedDirector().winSize().width - this.loadLabel.getContentSize().width - PauseLayer.PaddingX, PauseLayer.PaddingY);
 		Sounds.playEffect(R.raw.heartbeat);
 	}
