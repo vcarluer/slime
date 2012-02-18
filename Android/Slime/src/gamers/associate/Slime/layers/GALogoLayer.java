@@ -70,6 +70,7 @@ public class GALogoLayer extends CCLayer {
 		
 		loaded = false;
 		Sounds.preloadEffect(R.raw.ga);
+		Sounds.preloadEffect(R.raw.heartbeat);
 		
 		this.sprite = CCSprite.sprite("gamers associate.png");
 		this.addChild(this.sprite);
@@ -102,14 +103,18 @@ public class GALogoLayer extends CCLayer {
 		CCDelayTime delay2 = CCDelayTime.action(1f);
 		CCScaleBy sb = CCScaleBy.action(0.1f, 1.10f);
 		CCScaleTo st = CCScaleTo.action(0.1f, this.scaleTarget);
-		
+		CCCallFunc ps = CCCallFunc.action(this, "heartbeat");
 		// CCCallFunc call = CCCallFunc.action(this, "load");
-		CCSequence seq = CCSequence.actions(delay2, sb, st);
+		CCSequence seq = CCSequence.actions(delay2, sb, st, ps);
 		CCRepeatForever rep = CCRepeatForever.action(seq);
 		this.sprite.runAction(rep);
 		this.schedule(nextCallback);
 		LoadThread th = new LoadThread();
 		th.start();
+	}
+	
+	public void heartbeat() {
+		Sounds.playEffect(R.raw.heartbeat);
 	}
 	
 	public void load() {
