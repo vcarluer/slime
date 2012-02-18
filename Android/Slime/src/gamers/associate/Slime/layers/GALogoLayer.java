@@ -19,11 +19,13 @@ import org.cocos2d.layers.CCColorLayer;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
+import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.sound.SoundEngine;
 import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
+import org.cocos2d.types.ccColor3B;
 import org.cocos2d.types.ccColor4B;
 
 public class GALogoLayer extends CCLayer {	
@@ -36,6 +38,7 @@ public class GALogoLayer extends CCLayer {
 	private static GALogoLayer logoLayer;
 	private static boolean loaded;
 	private final Object lock = new Object();
+	private CCLabel loadLabel;
 	
 	public static CCScene scene() {
 		if (scene == null) {
@@ -90,6 +93,13 @@ public class GALogoLayer extends CCLayer {
 		CCSequence seq = CCSequence.actions(scaleTo, delay,  call);
 		this.sprite.runAction(seq);
 		
+		this.loadLabel = CCLabel.makeLabel("defibrillating...".toUpperCase(), "fonts/Slime.ttf", 15f);		
+		this.loadLabel.setPosition(CCDirector.sharedDirector().winSize().width - this.loadLabel.getContentSize().width - PauseLayer.PaddingX, PauseLayer.PaddingY);
+		this.loadLabel.setAnchorPoint(0, 0);
+		this.loadLabel.setColor(ccColor3B.ccBLACK);
+		this.loadLabel.setVisible(false);
+		this.addChild(this.loadLabel);
+		
 		// schedule(nextCallback, waitLogoSec); doesn't work?
 //		schedule(nextCallback);
 //		this.onEnterTime = System.currentTimeMillis();
@@ -98,7 +108,8 @@ public class GALogoLayer extends CCLayer {
 	public void endScale() {
 		/*float soundTime = 1.0f;
 		float waitTime = 2.0f;*/
-		Sounds.playEffect(R.raw.ga);
+		Sounds.playEffect(R.raw.ga);		
+		
 		// CCDelayTime delay = CCDelayTime.action(waitTime);
 		CCDelayTime delay2 = CCDelayTime.action(1f);
 		CCScaleBy sb = CCScaleBy.action(0.1f, 1.10f);
@@ -114,11 +125,15 @@ public class GALogoLayer extends CCLayer {
 	}
 	
 	public void heartbeat() {
+		this.loadLabel.setVisible(true);
+		this.loadLabel.setString("defibrillating..."); // Ajoute l'appel ici
+		this.loadLabel.setPosition(CCDirector.sharedDirector().winSize().width - this.loadLabel.getContentSize().width - PauseLayer.PaddingX, PauseLayer.PaddingY);
 		Sounds.playEffect(R.raw.heartbeat);
 	}
 	
 	public void load() {
 		removeChild(sprite, true);
+		removeChild(loadLabel, true);
 		Sounds.playMusic(R.raw.menumusic, true);
 		/* CCScene nextScene = SlimeLoadingLayer.scene();
 		CCDirector.sharedDirector().replaceScene(nextScene);*/ 
