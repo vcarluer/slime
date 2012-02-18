@@ -16,8 +16,8 @@ import org.cocos2d.transitions.CCTransitionScene;
 public class LevelBuilderGenerator implements ILevelBuilder
 {	
 	private static boolean isDebug =  false;
-	private static int forceDiff = 8;
-	private static int forceLevel = 79;
+	private static int forceDiff = 1;
+	private static int forceLevel = 9;
 	
 	private static int MinimumComplexity = 1;
 	private static int AverageComplexityPerLevel = 1;
@@ -30,6 +30,7 @@ public class LevelBuilderGenerator implements ILevelBuilder
 	private boolean firstBuild;	
 	private GameInformation gameInfo;
 	private int totalStar;
+	private boolean isBoss;
 	
 	public LevelBuilderGenerator() {		
 		this.gameInfo = SlimeFactory.GameInfo;
@@ -42,23 +43,25 @@ public class LevelBuilderGenerator implements ILevelBuilder
 	public void build(Level level, String id)
 	{
 		if (id != LevelHome.Id)
-		{
+		{			
+			if (!isDebug) {
+				this.gameInfo.levelUp();
+			} else {
+				this.gameInfo.forceLevel(forceDiff, forceLevel);
+			}
+
+			this.isBoss = (this.gameInfo.getLevelNum() == this.gameInfo.getLevelMax());
 			this.resetTotalStar();
 			if (this.firstBuild && this.levelparser.isStored() && !this.levelDef.isFinished()) {				
 				this.levelparser.buildLevel(level);					
 				level.setLevelDefinition(this.levelDef);
 			} else {
 				// this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor);
-				this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorRectangle2);
-				if (!isDebug) {
-					this.gameInfo.levelUp();
-				} else {
-					this.gameInfo.forceLevel(forceDiff, forceLevel);
-				}
+				this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorRectangle2);				
 				
 				this.complexity = this.computeComplexity();
 				this.levelDef.setComplexity(this.complexity);
-				if (this.gameInfo.getLevelNum() == this.gameInfo.getLevelMax()) {
+				if (this.isBoss) {
 					this.levelDef.buildBossLevel(level);
 				} else {
 					this.levelDef.buildLevel(level);
@@ -157,5 +160,9 @@ public class LevelBuilderGenerator implements ILevelBuilder
 
 	public void resetTotalStar() {
 		this.totalStar = 0;
+	}
+
+	public boolean isBoss() {
+		return isBoss;
 	}
 }

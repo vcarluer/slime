@@ -145,4 +145,10 @@ public class LevelBuilder implements ILevelBuilder {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public boolean isBoss() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

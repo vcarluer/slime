@@ -24,6 +24,13 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 	private static final int maxAddHeight = 3;
 	private static final int minBossPos = 1;
 	private static final Random rand = new Random();
+	private HashSet<Integer> starList;
+	private List<Integer> allStars;
+	
+	public LevelGraphGeneratorRectangle2() {
+		  this.starList = new HashSet<Integer>();
+		  this.allStars = new ArrayList<Integer>();
+	}
 	
 	@Override
 	protected void generateInternal(int maxComplexity,
@@ -89,22 +96,22 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 		
 		Log.d(Slime.TAG, "Picking stars: " + String.valueOf(starBlocCount) + " in " + String.valueOf(totalBlocs) + "blocks");
 
-		HashSet<Integer> starList = new HashSet<Integer>();
-		List<Integer> allStars = new ArrayList<Integer>();
+		this.starList.clear();
+		this.allStars.clear();
 		for(int i = 0; i < totalBlocs; i++) {
 			if (i != startStar && i != endStar) {
-				allStars.add(i);
+				this.allStars.add(i);
 			}			
 		}		
 		
 		if (starBlocCount > 0) {
-			this.pickStar(starBlocCount, allStars, starList);
+			this.pickStar(starBlocCount, this.allStars, this.starList);
 		}
 		
-		starList.add(startStar);
+		this.starList.add(startStar);
 		Log.d(Slime.TAG, "star inverse of star in " + String.valueOf(startStar));
 		if (!isBoss) {
-			starList.add(endStar);
+			this.starList.add(endStar);
 			Log.d(Slime.TAG, "star inverse of end in " + String.valueOf(endStar));
 		}
 		
@@ -199,7 +206,7 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 					// reset always (previous may have change it)
 					starIdx = row * lvlWidth + col;
 					Log.d(Slime.TAG, "Block star idx: " + String.valueOf(starIdx));
-					pick.setStarBlock(starList.contains(starIdx));
+					pick.setStarBlock(this.starList.contains(starIdx));
 					if (pick.isStarBlock()) {
 						Log.d(Slime.TAG, "Stars in block " + pick.getBlocDefinition().getResourceName());
 					}

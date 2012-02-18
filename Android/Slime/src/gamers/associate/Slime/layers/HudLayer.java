@@ -133,7 +133,7 @@ public class HudLayer extends CCLayer {
 	
 	private void setStarsCount() {
 		boolean activate = false;
-		if (SlimeFactory.LevelBuilder.getTotalStar() > 0) {
+		if (SlimeFactory.LevelBuilder.getTotalStar() > 0 && !SlimeFactory.LevelBuilder.isBoss()) {
 			IGamePlay gp = Level.currentLevel.getGamePlay();
 			if (gp != null) {
 				String txt = String.valueOf(gp.bonusCount()) + " / " + String.valueOf(gp.neededBonus());
