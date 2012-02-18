@@ -1,6 +1,7 @@
 package gamers.associate.Slime.levels.generator;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
@@ -58,9 +59,7 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 		} else {
 			lvlWidth = 3;
 			lvlHeight = 2;			
-		}
-		
-		int starBlocCount = (int) Math.ceil(lvlWidth * lvlHeight / 2f);		
+		}				
 		
 		int startPos = rand.nextInt(lvlHeight);
 		if (!isBoss) {
@@ -70,6 +69,21 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 		} else {
 			bossPos = rand.nextInt(lvlWidth - minBossPos) + minBossPos;
 		}
+		
+		/*int startStar = startPos * lvlWidth;
+		int endStar = lvlWidth * endPos + endPos;
+		float totalBlocs = lvlWidth * lvlHeight;		
+		int starBlocCountBase = (int) Math.ceil(totalBlocs / 2f);
+		int starBlocCount = starBlocCountBase - 2; // 2 opposite corner are always picked
+		int starTotal = (int) (totalBlocs - 2);
+		HashSet<Integer> starList = new HashSet<Integer>();
+		for(int i = 0; i < totalBlocs; i++) {
+			starList.add(i);
+		}
+		
+		if (starBlocCount > 0) {
+			
+		}*/
 		
 		LevelGenNode pick = null;
 		this.rightCount = 0;

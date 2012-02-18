@@ -126,7 +126,7 @@ public class GALogoLayer extends CCLayer {
 	
 	public void heartbeat() {
 		this.loadLabel.setVisible(true);
-		this.loadLabel.setString("defibrillating..."); // Ajoute l'appel ici
+		this.loadLabel.setString("defibrillating...");
 		this.loadLabel.setPosition(CCDirector.sharedDirector().winSize().width - this.loadLabel.getContentSize().width - PauseLayer.PaddingX, PauseLayer.PaddingY);
 		Sounds.playEffect(R.raw.heartbeat);
 	}
