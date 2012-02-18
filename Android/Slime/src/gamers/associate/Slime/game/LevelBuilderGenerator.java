@@ -17,7 +17,7 @@ public class LevelBuilderGenerator implements ILevelBuilder
 {	
 	private static boolean isDebug =  false;
 	private static int forceDiff = 1;
-	private static int forceLevel = 9;
+	private static int forceLevel = 10;
 	
 	private static int MinimumComplexity = 1;
 	private static int AverageComplexityPerLevel = 1;
@@ -44,12 +44,6 @@ public class LevelBuilderGenerator implements ILevelBuilder
 	{
 		if (id != LevelHome.Id)
 		{			
-			if (!isDebug) {
-				this.gameInfo.levelUp();
-			} else {
-				this.gameInfo.forceLevel(forceDiff, forceLevel);
-			}
-
 			this.isBoss = (this.gameInfo.getLevelNum() == this.gameInfo.getLevelMax());
 			this.resetTotalStar();
 			if (this.firstBuild && this.levelparser.isStored() && !this.levelDef.isFinished()) {				
@@ -57,7 +51,13 @@ public class LevelBuilderGenerator implements ILevelBuilder
 				level.setLevelDefinition(this.levelDef);
 			} else {
 				// this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor);
-				this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorRectangle2);				
+				this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorRectangle2);
+				if (!isDebug) {
+					this.gameInfo.levelUp();
+				} else {
+					this.gameInfo.forceLevel(forceDiff, forceLevel);
+					this.isBoss = (this.gameInfo.getLevelNum() == this.gameInfo.getLevelMax());
+				}
 				
 				this.complexity = this.computeComplexity();
 				this.levelDef.setComplexity(this.complexity);
