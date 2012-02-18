@@ -5,6 +5,7 @@ import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Sounds;
+import gamers.associate.Slime.game.Vibe;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.IBurnable;
 import gamers.associate.Slime.items.base.IDissolvable;
@@ -294,6 +295,7 @@ public class Slimy extends GameItemPhysic implements IBurnable, IDissolvable {
 	}
 	
 	protected void prekill() {
+		// Vibe.vibrate();
 		this.swithBodyCategory();
 		Sounds.playEffect(R.raw.slimydeath);
 		this.isDying = true;
