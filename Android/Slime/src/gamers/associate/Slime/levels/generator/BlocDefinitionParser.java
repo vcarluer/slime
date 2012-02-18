@@ -24,6 +24,7 @@ import gamers.associate.Slime.levels.itemdef.ItemDefinition;
 import gamers.associate.Slime.levels.itemdef.LaserGunDef;
 import gamers.associate.Slime.levels.itemdef.LevelInfoDef;
 import gamers.associate.Slime.levels.itemdef.RedDef;
+import gamers.associate.Slime.levels.itemdef.StarDef;
 
 public class BlocDefinitionParser extends BlocDefinition {
 	private static Random rand = new Random();
@@ -76,12 +77,19 @@ public class BlocDefinitionParser extends BlocDefinition {
 						i++;
 						Log.d(Slime.TAG, line);
 						String itemType = this.getItemType(line);
-						if (this.hazardItemsDef.contains(itemType)) {
-							this.storeHazardLine(line);
+						if (itemType == StarDef.Handled_Def) {
+							if (this.isStarBlock()) {
+								this.HandleLine(level, line);
+							} else {
+								Log.d(Slime.TAG, "Skipping star line " + String.valueOf(i));
+							}
 						} else {
-							this.HandleLine(level, line);
-						}
-						
+							if (this.hazardItemsDef.contains(itemType)) {
+								this.storeHazardLine(line);
+							} else {
+								this.HandleLine(level, line);
+							}
+						}						
 					} catch (Exception e) {
 						Log.e(Slime.TAG, "ERROR during read of " + this.getResourceName() + " line " + String.valueOf(i));
 						e.printStackTrace();

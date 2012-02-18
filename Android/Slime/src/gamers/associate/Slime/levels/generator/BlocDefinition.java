@@ -15,6 +15,7 @@ public abstract class BlocDefinition extends LevelDefinitionParser
   protected int currentYOffset;
   protected LevelGenNode genNode;
   private UUID blocId;
+  private boolean isStarBlock;
   
   public BlocDefinition(String resourceName, boolean noUserInfoStore) {	  
 	  super(resourceName, noUserInfoStore);
@@ -48,5 +49,13 @@ public UUID getBlocId() {
 
 public void setBlocId(UUID blocId) {
 	this.blocId = blocId;
+}
+
+public boolean isStarBlock() {
+	return isStarBlock;
+}
+
+public void setStarBlock(boolean isStarBlock) {
+	this.isStarBlock = isStarBlock;
 }
 }

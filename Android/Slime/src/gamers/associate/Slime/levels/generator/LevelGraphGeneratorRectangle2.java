@@ -5,10 +5,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
+import android.util.Log;
+
+import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.IGamePlay;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.TimeAttackGame;
+import gamers.associate.Slime.levels.LevelHome;
 
 public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle {
 	private static final int noBossPos = -1;
@@ -61,32 +65,52 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 			lvlHeight = 2;			
 		}				
 		
-		int startPos = rand.nextInt(lvlHeight);
+		int startPos = rand.nextInt(lvlHeight);		
+		
 		if (!isBoss) {
 			// Inverse from start
-			endPos = lvlHeight - 1 - startPos;
-
+			endPos = lvlHeight - 1 - startPos;			
 		} else {
 			bossPos = rand.nextInt(lvlWidth - minBossPos) + minBossPos;
+		}					
+		
+		int startStar = startPos * lvlWidth + lvlWidth - 1;
+		int endStar = noBossPos;
+		if (!isBoss) {
+			endStar = lvlWidth * endPos;			
+		}
+		 
+		float totalBlocs = lvlWidth * lvlHeight;
+		int starBlocCountBase = (int) Math.ceil(totalBlocs / 2f);
+		int starBlocCount = starBlocCountBase - 1; // 2 opposite corner are always picked
+		if (!isBoss) {
+			starBlocCount--;
 		}
 		
-		/*int startStar = startPos * lvlWidth;
-		int endStar = lvlWidth * endPos + endPos;
-		float totalBlocs = lvlWidth * lvlHeight;		
-		int starBlocCountBase = (int) Math.ceil(totalBlocs / 2f);
-		int starBlocCount = starBlocCountBase - 2; // 2 opposite corner are always picked
-		int starTotal = (int) (totalBlocs - 2);
+		Log.d(Slime.TAG, "Picking stars: " + String.valueOf(starBlocCount) + " in " + String.valueOf(totalBlocs) + "blocks");
+
 		HashSet<Integer> starList = new HashSet<Integer>();
+		List<Integer> allStars = new ArrayList<Integer>();
 		for(int i = 0; i < totalBlocs; i++) {
-			starList.add(i);
-		}
+			if (i != startStar && i != endStar) {
+				allStars.add(i);
+			}			
+		}		
 		
 		if (starBlocCount > 0) {
-			
-		}*/
+			this.pickStar(starBlocCount, allStars, starList);
+		}
+		
+		starList.add(startStar);
+		Log.d(Slime.TAG, "star inverse of star in " + String.valueOf(startStar));
+		if (!isBoss) {
+			starList.add(endStar);
+			Log.d(Slime.TAG, "star inverse of end in " + String.valueOf(endStar));
+		}
 		
 		LevelGenNode pick = null;
 		this.rightCount = 0;
+		int starIdx = 0;
 		for (int col = 0; col < lvlWidth; col++) {
 			this.topCount = 0;
 			for (int row = 0; row < lvlHeight; row++) {
@@ -171,10 +195,17 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 					}
 				}
 				
-				if (pick != null) {
+				if (pick != null) {					
+					// reset always (previous may have change it)
+					starIdx = row * lvlWidth + col;
+					Log.d(Slime.TAG, "Block star idx: " + String.valueOf(starIdx));
+					pick.setStarBlock(starList.contains(starIdx));
+					if (pick.isStarBlock()) {
+						Log.d(Slime.TAG, "Stars in block " + pick.getBlocDefinition().getResourceName());
+					}
 					this.handlePick(pick, false);
 				}
-				
+								
 				this.topCount++;
 			}
 			
@@ -197,6 +228,18 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 		int critic = timeCritic;
 		taGame.setCriticTime(critic);					
 	}	
+
+	private void pickStar(int starBlocCount, List<Integer> allStars,
+			HashSet<Integer> starList) {
+		int idx = rand.nextInt(allStars.size());
+		Log.d(Slime.TAG, "star in " + String.valueOf(allStars.get(idx)));
+		starList.add(allStars.get(idx));
+		allStars.remove(idx);
+		starBlocCount--;
+		if (starBlocCount > 0) {
+			this.pickStar(starBlocCount, allStars, starList);
+		}
+	}
 
 	protected LevelGenNode pickStartBottomLeft() {
 		LevelGenNode pick = null;

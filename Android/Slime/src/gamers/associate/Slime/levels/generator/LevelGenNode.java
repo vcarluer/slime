@@ -16,6 +16,7 @@ public class LevelGenNode {
 	private int complexity;
 	private BlocDefinition blocDefinition;
 	private String id;
+	private boolean isStarBlock;
 	
 	public LevelGenNode() {
 		this.connectorsEntry = new HashSet<Integer>();
@@ -356,5 +357,14 @@ public class LevelGenNode {
 	
 	public boolean isNoSpecialAndExactlyConnectedTo(List<Integer> list) {
 		return this.isNoSpecial() && this.isExactlyConnectedTo(list);
+	}
+
+	public boolean isStarBlock() {
+		return isStarBlock;
+	}
+
+	public void setStarBlock(boolean isStarBlock) {
+		this.isStarBlock = isStarBlock;		
+		this.blocDefinition.setStarBlock(isStarBlock);
 	}
 }

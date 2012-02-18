@@ -6,7 +6,7 @@ import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.custom.Star;
 
 public class StarDef extends ItemDefinition {
-	private static String Handled_Def = "Star";
+	public static String Handled_Def = "Star";
 	
 	@Override
 	public void createItem(Level level) {
