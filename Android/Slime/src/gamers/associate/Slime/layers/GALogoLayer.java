@@ -34,6 +34,8 @@ public class GALogoLayer extends CCLayer {
 	private float scaleTarget;
 	private Level currentLevel;
 	private static GALogoLayer logoLayer;
+	private static boolean loaded;
+	private final Object lock = new Object();
 	
 	public static CCScene scene() {
 		if (scene == null) {
@@ -66,6 +68,7 @@ public class GALogoLayer extends CCLayer {
 //		this.sprite = CCSprite.sprite(spriteFrame);
 //		this.spriteSheet.addChild(this.sprite);
 		
+		loaded = false;
 		Sounds.preloadEffect(R.raw.ga);
 		
 		this.sprite = CCSprite.sprite("gamers associate.png");
@@ -96,14 +99,17 @@ public class GALogoLayer extends CCLayer {
 		float waitTime = 2.0f;*/
 		Sounds.playEffect(R.raw.ga);
 		// CCDelayTime delay = CCDelayTime.action(waitTime);
-		/*CCScaleBy sb = CCScaleBy.action(0.1f, 1.10f);
-		CCScaleTo st = CCScaleTo.action(0.1f, this.scaleTarget);
 		CCDelayTime delay2 = CCDelayTime.action(1f);
+		CCScaleBy sb = CCScaleBy.action(0.1f, 1.10f);
+		CCScaleTo st = CCScaleTo.action(0.1f, this.scaleTarget);
+		
 		// CCCallFunc call = CCCallFunc.action(this, "load");
-		CCSequence seq = CCSequence.actions(sb, st, delay2);
+		CCSequence seq = CCSequence.actions(delay2, sb, st);
 		CCRepeatForever rep = CCRepeatForever.action(seq);
-		this.sprite.runAction(rep);*/
+		this.sprite.runAction(rep);
 		this.schedule(nextCallback);
+		LoadThread th = new LoadThread();
+		th.start();
 	}
 	
 	public void load() {
@@ -132,36 +138,24 @@ public class GALogoLayer extends CCLayer {
 	private UpdateCallback nextCallback = new UpdateCallback() {
 		
 		public void update(float d) {
-			SpriteSheetFactory.add("controls", true, SpriteSheetFactory.zDefault);
-			// SpriteSheetFactory.add("logo", true, SpriteSheetFactory.zDefault);
-			SpriteSheetFactory.add("decor", true, SpriteSheetFactory.zDefault);
 			
-			SpriteSheetFactory.add("items", Level.zFront);								
-			SpriteSheetFactory.add("slime", Level.zTop);
-			SpriteSheetFactory.add("red", Level.zTop);
-			SpriteSheetFactory.add("slimydbz", Level.zFront);
-			SpriteSheetFactory.add("glasswork", Level.zMid);
-			SpriteSheetFactory.add("tank", Level.zFront);
-			SpriteSheetFactory.add("worlds-items", Level.zMid);
-			
-			Sounds.preload();
-			
-			BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorCorridor);
-			BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle);
-			BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle2);
-			
-			currentLevel = Level.get(LevelHome.Id);					
-			unschedule(nextCallback);
+			synchronized(lock) {
+				if (loaded == true) {
+					currentLevel = Level.get(LevelHome.Id);					
+					unschedule(nextCallback);
+					load();				
+				}
+			}
 			
 //			spriteSheet.removeChild(sprite, true);						
 			// removeChild(sprite, true);
 			// CCTransitionScene transition = CCTurnOffTilesTransition.transition(1.0f, currentLevel.getScene());
 			
-			CCScaleBy sb = CCScaleBy.action(0.1f, 1.10f);
+			/*CCScaleBy sb = CCScaleBy.action(0.1f, 1.10f);
 			CCScaleTo st = CCScaleTo.action(0.1f, scaleTarget);
 			CCCallFunc call = CCCallFunc.action(logoLayer, "load");
 			CCSequence seq = CCSequence.actions(sb, st, call);
-			sprite.runAction(seq);
+			sprite.runAction(seq);*/
 			
 			/*removeChild(sprite, true);
 			CCTransitionScene transition = CCFadeTransition.transition(1.0f, currentLevel.getScene());
@@ -169,4 +163,32 @@ public class GALogoLayer extends CCLayer {
 		}
 	};
 	
+	public class LoadThread extends Thread {		  		  
+		  public LoadThread() {		    
+		  }
+		  
+		  public void run() {
+			  	SpriteSheetFactory.add("controls", true, SpriteSheetFactory.zDefault);
+				// SpriteSheetFactory.add("logo", true, SpriteSheetFactory.zDefault);
+				SpriteSheetFactory.add("decor", true, SpriteSheetFactory.zDefault);
+				
+				SpriteSheetFactory.add("items", Level.zFront);								
+				SpriteSheetFactory.add("slime", Level.zTop);
+				SpriteSheetFactory.add("red", Level.zTop);
+				SpriteSheetFactory.add("slimydbz", Level.zFront);
+				SpriteSheetFactory.add("glasswork", Level.zMid);
+				SpriteSheetFactory.add("tank", Level.zFront);
+				SpriteSheetFactory.add("worlds-items", Level.zMid);
+				
+				Sounds.preload();
+				
+				BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorCorridor);
+				BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle);
+				BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle2);
+				
+				synchronized(lock) {
+					loaded = true;
+				}
+		  }
+		}
 }
