@@ -14,6 +14,7 @@ import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.types.CGPoint;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -30,6 +31,16 @@ public class BecBunsen extends GameItemPhysic implements ITrigerable {
 	
 	private static float Reference_Width = 20f;
 	private static float Reference_Height = 67f;
+	
+	private static float Reference_Fire_Width = 17.6f;
+	private static float Reference_Fire_Height = 38.6f;
+	private static float Reference_Base_Width = 7f;
+	private static float Reference_Base_Height = Reference_Height - Reference_Fire_Height;
+	
+	private float base_width;
+	private float base_height;
+	private float fire_width;
+	private float fire_height;
 	
 	private boolean isOn;
 	
@@ -55,6 +66,11 @@ public class BecBunsen extends GameItemPhysic implements ITrigerable {
 		this.referenceSize.width = Reference_Width;
 		this.referenceSize.height = Reference_Height;
 		
+		this.base_width = Reference_Base_Width / Reference_Width * this.width;
+		this.base_height = Reference_Base_Height / Reference_Height * this.height;
+		this.fire_width = Reference_Fire_Width / Reference_Width * this.width;
+		this.fire_height = Reference_Fire_Height / Reference_Height * this.height;		
+		
 		this.name = "";
 	}
 	
@@ -71,29 +87,47 @@ public class BecBunsen extends GameItemPhysic implements ITrigerable {
 		// Physic body
 		BodyDef bodyDef = new BodyDef();		
 		bodyDef.type = BodyType.StaticBody;
+		
 		CGPoint spawnPoint = new CGPoint();
 		spawnPoint.x = this.position.x;
 		spawnPoint.y = this.position.y;
+				
 		bodyDef.position.set(spawnPoint.x/worldRatio, spawnPoint.y/worldRatio);
 		
 		// Define another box shape for our dynamic body.
-		PolygonShape dynamicBox = new PolygonShape();
-		dynamicBox.setAsBox(this.bodyWidth / this.worldRatio / 2, this.bodyHeight / this.worldRatio / 2);
+		PolygonShape dynamicBoxBase = new PolygonShape();
+		Vector2 center = new Vector2();
+		center.x = 0;
+		center.y = ( - this.height / 2f + this.base_height / 2f) / this.worldRatio;
+		dynamicBoxBase.setAsBox(this.base_width / this.worldRatio / 2, this.base_height / this.worldRatio / 2, center, 0f);						
+		
+		// Define another box shape for our dynamic body.
+		PolygonShape dynamicBoxFire = new PolygonShape();
+		Vector2 center2 = new Vector2();
+		center2.x = 0;
+		center2.y = ( - this.height / 2f + this.base_height + this.fire_height / 2f) / this.worldRatio;
+		dynamicBoxFire.setAsBox(this.fire_width / this.worldRatio / 2f, this.fire_height / this.worldRatio / 2f, center2, 0f);
 		
 		synchronized (world) {
     		// Define the dynamic body fixture and set mass so it's dynamic.
     		this.body = world.createBody(bodyDef);
     		this.body.setUserData(this);
     		
-    		FixtureDef fixtureDef = new FixtureDef();
-    		fixtureDef.shape = dynamicBox;	    		
-			fixtureDef.density = 1.0f;
-			fixtureDef.friction = 3.0f;
-    		fixtureDef.restitution = 0f;    		
+    		FixtureDef fixtureDefBase = new FixtureDef();
+    		fixtureDefBase.shape = dynamicBoxBase;	    		
+    		fixtureDefBase.density = 1.0f;
+    		fixtureDefBase.friction = 3.0f;
+    		fixtureDefBase.restitution = 0f;       		    	
+    		fixtureDefBase.filter.categoryBits = GameItemPhysic.Category_InGame;
     		
-    		fixtureDef.filter.categoryBits = GameItemPhysic.Category_InGame;
-    		this.body.createFixture(fixtureDef);
-    	} 		
+    		FixtureDef fixtureDefFire = new FixtureDef();
+    		fixtureDefFire.shape = dynamicBoxFire;    		  
+    		fixtureDefFire.isSensor = true;
+    		fixtureDefFire.filter.categoryBits = GameItemPhysic.Category_InGame;
+    		    		
+    		this.body.createFixture(fixtureDefFire);
+    		this.body.createFixture(fixtureDefBase);    		
+    	}
 	}
 
 	/* (non-Javadoc)
