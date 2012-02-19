@@ -126,7 +126,7 @@ public class HudLayer extends CCLayer {
 		this.starSprite = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);		
 		this.starSprite.setPosition(
 				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2 - Star.Reference_Width - 25f, 
-				CCDirector.sharedDirector().winSize().getHeight() - 35));
+				CCDirector.sharedDirector().winSize().getHeight() - 55));
 		this.starSprite.setAnchorPoint(0, 0f);
 		this.addChild(this.starSprite);				
 	}
@@ -199,7 +199,7 @@ public class HudLayer extends CCLayer {
 	
 	public void setHudStartText(String text) {
 		this.countLabel.setPosition(
-				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - 15 - this.countLabel.getContentSize().width, 
+				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - PauseLayer.PaddingX - this.countLabel.getContentSize().width, 
 				CCDirector.sharedDirector().winSize().getHeight() - 65));		
 		this.countLabel.setString(text.toUpperCase());		
 	}

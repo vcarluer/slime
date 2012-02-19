@@ -4,6 +4,7 @@ import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
+import gamers.associate.Slime.game.Vibe;
 import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.items.custom.Star;
 
@@ -52,6 +53,8 @@ public class HomeLayer extends CCLayer {
 	
 	private CCSprite titleSprite;
 	private CCMenu restartMenu;
+	
+	private boolean nextDoNotStopMusic;
 	
 	public static HomeLayer get() {
 		if (layer == null) {
@@ -210,6 +213,8 @@ public class HomeLayer extends CCLayer {
 		CCRotateBy r3 = CCRotateBy.action(0.3f, 5f);
 		CCSequence seqTitle = CCSequence.actions(r0, d, r1, r2, d1, r3);
 		this.titleSprite.runAction(seqTitle);
+		
+		Sounds.playMusic(R.raw.menumusic, true);
 	}
 	
 	@Override
@@ -219,6 +224,13 @@ public class HomeLayer extends CCLayer {
 		this.removeChild(this.titleSprite, true);
 		this.removeChild(this.restartMenu, true);
 		// this.removeChild(this.diffSpr, true);
+		
+		if (!this.nextDoNotStopMusic) {
+			Sounds.pauseMusic();
+		} else {
+			this.nextDoNotStopMusic = false;
+		}
+		
 		super.onExit();
 	}
 
@@ -228,6 +240,7 @@ public class HomeLayer extends CCLayer {
 //		CCTransitionScene transition = CCMoveInRTransition.transition(0.5f, LevelSelection.get().getScene());
 //		CCDirector.sharedDirector().replaceScene(transition);
 		
+		Vibe.vibrate();
 		Sounds.playEffect(R.raw.menuselect);
 		Sounds.pauseMusic();
 		SlimeFactory.LevelBuilder.start();
@@ -235,7 +248,8 @@ public class HomeLayer extends CCLayer {
 	
 	public void goRestart(Object sender) {
 		Sounds.playEffect(R.raw.menuselect);
-		Sounds.pauseMusic();
+		this.nextDoNotStopMusic = true;
+		// Sounds.pauseMusic();
 		SlimeFactory.LevelBuilder.resetAllAndRun();
 	}
 }

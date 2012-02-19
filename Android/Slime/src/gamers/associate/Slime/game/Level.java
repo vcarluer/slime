@@ -361,6 +361,14 @@ public class Level {
 			item.destroy();
 		}
 		
+		for (GameItem item : this.itemsToAdd) {
+			item.destroy();
+		}
+		
+		for (GameItem item : this.itemsToRemove) {
+			item.destroy();
+		}
+		
 		this.gamePlay = null;
 		this.goal = null;
 		

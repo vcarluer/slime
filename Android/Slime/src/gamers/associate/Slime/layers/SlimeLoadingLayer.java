@@ -118,8 +118,7 @@ public class SlimeLoadingLayer extends CCLayer {
 				// removeChild(sprite, true);
 				// CCTransitionScene transition = CCTurnOffTilesTransition.transition(1.0f, currentLevel.getScene());
 				CCTransitionScene transition = CCFadeTransition.transition(1.0f, currentLevel.getScene());
-				CCDirector.sharedDirector().replaceScene(transition);
-				Sounds.playMusic(R.raw.menumusic, true);
+				CCDirector.sharedDirector().replaceScene(transition);				
 			}
 		};
 

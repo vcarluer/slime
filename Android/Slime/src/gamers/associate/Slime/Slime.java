@@ -83,9 +83,12 @@ public class Slime extends Activity {
 
         if (Level.currentLevel != null) {
         	Level.currentLevel.setPause(true);
-        }
+        	
+        	if (Level.currentLevel.getCurrentLevelName() == LevelHome.Id) {
+            	Sounds.pauseMusic();
+        	}
+        }                
         
-        Sounds.pauseMusic();
         CCDirector.sharedDirector().onPause();
     }
 
@@ -95,10 +98,15 @@ public class Slime extends Activity {
 
         CCDirector.sharedDirector().onResume();
         if (Level.currentLevel != null) {
-        	Level.currentLevel.setPause(false);
-        }
-        
-        Sounds.resumeMusic();
+        	// No automatic unpause
+        	if (Level.currentLevel.getCurrentLevelName() == LevelHome.Id) {
+        		Level.currentLevel.setPause(false);
+        		Sounds.resumeMusic();
+        	} else {
+        		// to put the hud back in pause
+        		Level.currentLevel.enablePauseLayer();
+        	}
+        }                
     }
 
     @Override

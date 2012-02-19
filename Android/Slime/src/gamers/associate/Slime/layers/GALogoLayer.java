@@ -135,7 +135,7 @@ public class GALogoLayer extends CCLayer {
 	public void load() {
 		removeChild(sprite, true);
 		removeChild(loadLabel, true);
-		Sounds.playMusic(R.raw.menumusic, true);
+		// Sounds.playMusic(R.raw.menumusic, true);
 		/* CCScene nextScene = SlimeLoadingLayer.scene();
 		CCDirector.sharedDirector().replaceScene(nextScene);*/ 
 		CCTransitionScene transition = CCFadeTransition.transition(1.0f, currentLevel.getScene());

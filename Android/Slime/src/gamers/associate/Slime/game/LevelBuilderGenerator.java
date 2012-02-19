@@ -55,10 +55,11 @@ public class LevelBuilderGenerator implements ILevelBuilder
 				if (!isDebug) {
 					this.gameInfo.levelUp();
 				} else {
-					this.gameInfo.forceLevel(forceDiff, forceLevel);
-					this.isBoss = (this.gameInfo.getLevelNum() == this.gameInfo.getLevelMax());
+					this.gameInfo.forceLevel(forceDiff, forceLevel);					
 				}
 				
+				this.isBoss = (this.gameInfo.getLevelNum() == this.gameInfo.getLevelMax());
+								
 				this.complexity = this.computeComplexity();
 				this.levelDef.setComplexity(this.complexity);
 				if (this.isBoss) {
