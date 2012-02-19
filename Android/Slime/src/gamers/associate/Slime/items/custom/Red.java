@@ -13,6 +13,7 @@ import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
@@ -68,6 +69,8 @@ public class Red extends GameItemPhysic {
 	
 	private float currentDir = -1; // Turn left
 	private float nextDir = -1; // Turn left
+//	private Body compressedBody;
+	private Body normalBody;
 	
 	public Red(float x, float y, float width, float height, World world,
 			float worldRatio, boolean isBoss) {
@@ -94,59 +97,119 @@ public class Red extends GameItemPhysic {
 	@Override
 	protected void initBody() {
 		// Physic body
-				BodyDef bodyDef = new BodyDef();		
-				bodyDef.type = BodyType.DynamicBody;
-				CGPoint spawnPoint = new CGPoint();
-				spawnPoint.x = this.position.x;
-				spawnPoint.y = this.position.y;
-				bodyDef.position.set(spawnPoint.x/worldRatio, spawnPoint.y/worldRatio);
-				
-				// Define another box shape for our dynamic body.
-				PolygonShape dynamicBox = new PolygonShape();
-				// dynamicBox.setAsBox(this.bodyWidth / this.worldRatio / 2, this.bodyHeight / this.worldRatio / 2);
-				float bW = this.bodyWidth / this.worldRatio;
-				float bW2 = bW / 2;
-				float bH = this.bodyHeight / this.worldRatio;
-				float bH2 = bH / 2;
-				Vector2 p1 = new Vector2(3 * bW / 14 - bW2, - bH2);
-				Vector2 p2 = new Vector2(11 * bW / 14 - bW2, - bH2);
-				Vector2 p3 = new Vector2(bW - bW2, 5 * bH / 10 - bH2);
-				Vector2 p4 = new Vector2(12 * bW / 14 - bW2, 8 * bH / 10 - bH2);
-				Vector2 p5 = new Vector2(8 * bW / 14 - bW2, 10 * bH / 10 - bH2);
-				Vector2 p6 = new Vector2(3 * bW / 14 - bW2, 9 * bH / 10 - bH2);
-				Vector2 p7 = new Vector2(bW / 14 - bW2, 6 *  bH / 10 - bH2);
-				Vector2 p8 = new Vector2(bW / 14 - bW2, 3 *  bH / 10 - bH2);
-				Vector2[] vertices = new Vector2[8];
-				vertices[0] = p1;
-				vertices[1] = p2;
-				vertices[2] = p3;
-				vertices[3] = p4;
-				vertices[4] = p5;
-				vertices[5] = p6;
-				vertices[6] = p7;
-				vertices[7] = p8;
-				dynamicBox.set(vertices);
-				
-				synchronized (world) {
-		    		// Define the dynamic body fixture and set mass so it's dynamic.
-		    		this.body = world.createBody(bodyDef);
-		    		this.body.setUserData(this);
-		    		
-		    		FixtureDef fixtureDef = new FixtureDef();
-		    		fixtureDef.shape = dynamicBox;	    		
-					float density = this.densityNorm;
-					if (this.isBoss()) {
-						density = this.densityBoss;
-					}
+		BodyDef bodyDef = new BodyDef();		
+		bodyDef.type = BodyType.DynamicBody;
+		CGPoint spawnPoint = new CGPoint();
+		spawnPoint.x = this.position.x;
+		spawnPoint.y = this.position.y;
+		bodyDef.position.set(spawnPoint.x/worldRatio, spawnPoint.y/worldRatio);
+		
+		// Define another box shape for our dynamic body.
+		PolygonShape dynamicBox = new PolygonShape();
+		// dynamicBox.setAsBox(this.bodyWidth / this.worldRatio / 2, this.bodyHeight / this.worldRatio / 2);
+		float bW = this.bodyWidth / this.worldRatio;
+		float bW2 = bW / 2;
+		float bH = this.bodyHeight / this.worldRatio;
+		float bH2 = bH / 2;
+		Vector2 p1 = new Vector2(3 * bW / 14 - bW2, - bH2);
+		Vector2 p2 = new Vector2(11 * bW / 14 - bW2, - bH2);
+		Vector2 p3 = new Vector2(bW - bW2, 5 * bH / 10 - bH2);
+		Vector2 p4 = new Vector2(12 * bW / 14 - bW2, 8 * bH / 10 - bH2);
+		Vector2 p5 = new Vector2(8 * bW / 14 - bW2, 10 * bH / 10 - bH2);
+		Vector2 p6 = new Vector2(3 * bW / 14 - bW2, 9 * bH / 10 - bH2);
+		Vector2 p7 = new Vector2(bW / 14 - bW2, 6 *  bH / 10 - bH2);
+		Vector2 p8 = new Vector2(bW / 14 - bW2, 3 *  bH / 10 - bH2);
+		Vector2[] vertices = new Vector2[8];
+		vertices[0] = p1;
+		vertices[1] = p2;
+		vertices[2] = p3;
+		vertices[3] = p4;
+		vertices[4] = p5;
+		vertices[5] = p6;
+		vertices[6] = p7;
+		vertices[7] = p8;
+		dynamicBox.set(vertices);
+						
+		synchronized (world) {
+    		// Define the dynamic body fixture and set mass so it's dynamic.
+    		this.normalBody = world.createBody(bodyDef);
+    		this.normalBody.setUserData(this);
+    		
+    		FixtureDef fixtureDef = new FixtureDef();
+    		fixtureDef.shape = dynamicBox;	    		
+			float density = this.densityNorm;
+			if (this.isBoss()) {
+				density = this.densityBoss;
+			}
 
-		    		fixtureDef.density = density;
-					fixtureDef.friction = 0.9f;
-		    		fixtureDef.restitution = 0.1f;    		
-		    		
-		    		fixtureDef.filter.categoryBits = GameItemPhysic.Category_InGame;
-		    		this.body.createFixture(fixtureDef);
-		    	}
+    		fixtureDef.density = density;
+			fixtureDef.friction = 0.9f;
+    		fixtureDef.restitution = 0.1f;    		
+    		
+    		fixtureDef.filter.categoryBits = GameItemPhysic.Category_InGame;		    		
+    		this.normalBody.createFixture(fixtureDef);
+    		
+    		this.body = this.normalBody;
+    	}
+		
+		// this.initCompressedBody();
 	}
+	
+//	private void initCompressedBody() {
+//		BodyDef bodyDef = new BodyDef();		
+//		bodyDef.type = BodyType.DynamicBody;
+//		CGPoint spawnPoint = new CGPoint();
+//		spawnPoint.x = this.position.x;
+//		spawnPoint.y = this.position.y;
+//		bodyDef.position.set(spawnPoint.x/worldRatio, spawnPoint.y/worldRatio);
+//		
+//		// Define another box shape for our dynamic body.
+//		PolygonShape dynamicBox = new PolygonShape();
+//		// dynamicBox.setAsBox(this.bodyWidth / this.worldRatio / 2, this.bodyHeight / this.worldRatio / 2);
+//		float bW = this.bodyWidth / this.worldRatio;
+//		float bW2 = bW / 2;
+//		float bH = this.bodyHeight / this.worldRatio;
+//		float bH2 = bH / 2;
+//		Vector2 p1 = new Vector2((3 * bW / 14 - bW2) * (11 / 14), (- bH2) * ( 7 / 10));
+//		Vector2 p2 = new Vector2((11 * bW / 14 - bW2) * (11 / 14), (- bH2) * ( 7 / 10));
+//		Vector2 p3 = new Vector2((bW - bW2) * (11 / 14),( 5 * bH / 10 - bH2) * ( 7 / 10));
+//		Vector2 p4 = new Vector2((12 * bW / 14 - bW2) * (11 / 14), (8 * bH / 10 - bH2) * ( 7 / 10));
+//		Vector2 p5 = new Vector2((8 * bW / 14 - bW2) * (11 / 14), (10 * bH / 10 - bH2) * ( 7 / 10));
+//		Vector2 p6 = new Vector2((3 * bW / 14 - bW2) * (11 / 14), (9 * bH / 10 - bH2) * ( 7 / 10));
+//		Vector2 p7 = new Vector2((bW / 14 - bW2) * (11 / 14), (6 *  bH / 10 - bH2) * ( 7 / 10));
+//		Vector2 p8 = new Vector2((bW / 14 - bW2) * (11 / 14), (3 *  bH / 10 - bH2) * ( 7 / 10));
+//		Vector2[] vertices = new Vector2[8];
+//		vertices[0] = p1;
+//		vertices[1] = p2;
+//		vertices[2] = p3;
+//		vertices[3] = p4;
+//		vertices[4] = p5;
+//		vertices[5] = p6;
+//		vertices[6] = p7;
+//		vertices[7] = p8;
+//		dynamicBox.set(vertices);
+//						
+//		synchronized (world) {
+//    		// Define the dynamic body fixture and set mass so it's dynamic.
+//    		this.compressedBody = world.createBody(bodyDef);
+//    		this.compressedBody.setUserData(this);
+//    		
+//    		FixtureDef fixtureDef = new FixtureDef();
+//    		fixtureDef.shape = dynamicBox;	    		
+//			float density = this.densityNorm;
+//			if (this.isBoss()) {
+//				density = this.densityBoss;
+//			}
+//
+//    		fixtureDef.density = density;
+//			fixtureDef.friction = 0.9f;
+//    		fixtureDef.restitution = 0.1f;    		
+//    		
+//    		fixtureDef.filter.categoryBits = GameItemPhysic.Category_InGame;		    		
+//    		this.compressedBody.createFixture(fixtureDef);
+//    		this.compressedBody.setActive(false);
+//    	}
+//	}
 	
 	@Override
 	protected String getReferenceAnimationName() {
@@ -353,6 +416,17 @@ public class Red extends GameItemPhysic {
 				this.sprite.runAction(this.currentWait);
 			}
 		}
+					
+//		Body previousBody = this.body;
+//		previousBody.setActive(false);
+//		if (state == RedState.Defense) {			
+//			this.body = this.compressedBody;
+//			this.body.setTransform(previousBody.getPosition(), previousBody.getAngle());			
+//		} else {
+//			this.body = this.normalBody;
+//			this.body.setTransform(previousBody.getPosition(), previousBody.getAngle());
+//		}
+//		this.body.setActive(true);
 	}
 
 	public void goToWaitState() {				

@@ -40,6 +40,9 @@ public class GALogoLayer extends CCLayer {
 	private static boolean loaded;
 	private final Object lock = new Object();
 	private CCLabel loadLabel;
+	private long nextBeat;
+	private int step;
+	private boolean heartBeating;
 	
 	public static CCScene scene() {
 		if (scene == null) {
@@ -112,24 +115,38 @@ public class GALogoLayer extends CCLayer {
 		Sounds.playEffect(R.raw.ga);		
 		
 		// CCDelayTime delay = CCDelayTime.action(waitTime);
-		CCDelayTime delay2 = CCDelayTime.action(1f);
-		CCScaleBy sb = CCScaleBy.action(0.1f, 1.10f);
-		CCScaleTo st = CCScaleTo.action(0.1f, this.scaleTarget);
-		CCCallFunc ps = CCCallFunc.action(this, "heartbeat");
-		// CCCallFunc call = CCCallFunc.action(this, "load");
-		CCSequence seq = CCSequence.actions(delay2, sb, st, ps);
-		CCRepeatForever rep = CCRepeatForever.action(seq);
-		this.sprite.runAction(rep);
-		this.schedule(nextCallback);
-		LoadThread th = new LoadThread();
-		th.start();
+//		CCDelayTime delay2 = CCDelayTime.action(1f);
+//		CCScaleBy sb = CCScaleBy.action(0.1f, 1.10f);
+//		CCScaleTo st = CCScaleTo.action(0.1f, this.scaleTarget);
+//		CCCallFunc ps = CCCallFunc.action(this, "heartbeat");
+//		// CCCallFunc call = CCCallFunc.action(this, "load");
+//		CCSequence seq = CCSequence.actions(delay2, sb, st, ps);
+//		CCRepeatForever rep = CCRepeatForever.action(seq);
+//		this.sprite.runAction(rep);
+		this.step = 0;
+		this.nextBeat = System.currentTimeMillis() + 1000;
+		this.schedule(nextCallback);		
+//		LoadThread th = new LoadThread();
+//		th.start();
 	}
 	
-	public void heartbeat() {
+	public void heartbeat() {		
 		this.loadLabel.setVisible(true);
 		this.loadLabel.setString(LoadingQuoteGenerator.NewQuote().toUpperCase());
 		this.loadLabel.setPosition(CCDirector.sharedDirector().winSize().width - this.loadLabel.getContentSize().width - PauseLayer.PaddingX, PauseLayer.PaddingY);
 		Sounds.playEffect(R.raw.heartbeat);
+		
+		this.heartBeating = true;
+		CCScaleBy sb = CCScaleBy.action(0.1f, 1.10f);
+		CCScaleTo st = CCScaleTo.action(0.1f, this.scaleTarget);
+		CCCallFunc ps = CCCallFunc.action(this, "heartbeatEnd");
+		CCSequence seq = CCSequence.actions(sb, st, ps);
+		this.sprite.runAction(seq);		
+	}
+	
+	public void heartbeatEnd() {
+		this.heartBeating = false;
+		this.nextBeat = System.currentTimeMillis() + 1000;
 	}
 	
 	public void load() {
@@ -160,14 +177,60 @@ public class GALogoLayer extends CCLayer {
 		
 		public void update(float d) {
 			
-			synchronized(lock) {
-				if (loaded == true) {
-					currentLevel = Level.get(LevelHome.Id);					
-					unschedule(nextCallback);
-					load();				
+			if (System.currentTimeMillis() > nextBeat && !heartBeating) {
+				heartbeat();
+			} else {
+				if (!heartBeating) {
+					switch (step) {
+					case 0:
+						SpriteSheetFactory.add("controls", true, SpriteSheetFactory.zDefault);
+						break;
+					case 1:
+						SpriteSheetFactory.add("decor", true, SpriteSheetFactory.zDefault);
+						break;
+					case 2:					
+						SpriteSheetFactory.add("items", Level.zFront);
+						break;
+					case 3:
+						SpriteSheetFactory.add("slime", Level.zTop);
+						break;
+					case 4:
+						SpriteSheetFactory.add("red", Level.zTop);
+						break;
+					case 5:
+						SpriteSheetFactory.add("slimydbz", Level.zFront);
+						break;
+					case 6:
+						SpriteSheetFactory.add("glasswork", Level.zMid);
+						break;
+					case 7:
+						SpriteSheetFactory.add("tank", Level.zFront);
+						break;
+					case 8:
+						SpriteSheetFactory.add("worlds-items", Level.zMid);
+						break;
+					case 9:	
+						Sounds.preload();
+						break;
+					case 10:
+						BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorCorridor);
+						break;
+					case 11:
+						BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle);
+						break;
+					case 12:
+						BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle2);
+						break;
+					case 13:					
+						currentLevel = Level.get(LevelHome.Id);					
+						unschedule(nextCallback);
+						load();
+						break;
+					}
+		
+					step++;
 				}
 			}
-			
 //			spriteSheet.removeChild(sprite, true);						
 			// removeChild(sprite, true);
 			// CCTransitionScene transition = CCTurnOffTilesTransition.transition(1.0f, currentLevel.getScene());
@@ -184,32 +247,32 @@ public class GALogoLayer extends CCLayer {
 		}
 	};
 	
-	public class LoadThread extends Thread {		  		  
-		  public LoadThread() {		    
-		  }
-		  
-		  public void run() {
-			  	SpriteSheetFactory.add("controls", true, SpriteSheetFactory.zDefault);
-				// SpriteSheetFactory.add("logo", true, SpriteSheetFactory.zDefault);
-				SpriteSheetFactory.add("decor", true, SpriteSheetFactory.zDefault);
-				
-				SpriteSheetFactory.add("items", Level.zFront);								
-				SpriteSheetFactory.add("slime", Level.zTop);
-				SpriteSheetFactory.add("red", Level.zTop);
-				SpriteSheetFactory.add("slimydbz", Level.zFront);
-				SpriteSheetFactory.add("glasswork", Level.zMid);
-				SpriteSheetFactory.add("tank", Level.zFront);
-				SpriteSheetFactory.add("worlds-items", Level.zMid);
-				
-				Sounds.preload();
-				
-				BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorCorridor);
-				BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle);
-				BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle2);
-				
-				synchronized(lock) {
-					loaded = true;
-				}
-		  }
-		}
+//	public class LoadThread extends Thread {		  		  
+//		  public LoadThread() {		    
+//		  }
+//		  
+//		  public void run() {
+//			  	SpriteSheetFactory.add("controls", true, SpriteSheetFactory.zDefault);
+//				// SpriteSheetFactory.add("logo", true, SpriteSheetFactory.zDefault);
+//				SpriteSheetFactory.add("decor", true, SpriteSheetFactory.zDefault);
+//				
+//				SpriteSheetFactory.add("items", Level.zFront);								
+//				SpriteSheetFactory.add("slime", Level.zTop);
+//				SpriteSheetFactory.add("red", Level.zTop);
+//				SpriteSheetFactory.add("slimydbz", Level.zFront);
+//				SpriteSheetFactory.add("glasswork", Level.zMid);
+//				SpriteSheetFactory.add("tank", Level.zFront);
+//				SpriteSheetFactory.add("worlds-items", Level.zMid);
+//				
+//				Sounds.preload();
+//				
+//				BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorCorridor);
+//				BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle);
+//				BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle2);
+//				
+//				synchronized(lock) {
+//					loaded = true;
+//				}
+//		  }
+//		}
 }
