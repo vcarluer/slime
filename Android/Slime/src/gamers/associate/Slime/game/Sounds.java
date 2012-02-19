@@ -10,6 +10,7 @@ import android.media.MediaPlayer;
 
 public class Sounds {
 	private static IntMap<MediaPlayer> soundsMap = new IntMap<MediaPlayer>();
+	private static int lastSndId = -1;
 	
 	public static boolean isMusicPlaying;
 	public static void preload() {		
@@ -64,6 +65,7 @@ public class Sounds {
 	
 	// > 5 sec
 	public static void playMusic(int soundId, boolean loop) {
+		lastSndId = soundId;
 		SoundEngine.sharedEngine().playSound(CCDirector.sharedDirector().getActivity(), soundId, loop);
 		isMusicPlaying = true;
 	}
@@ -74,7 +76,7 @@ public class Sounds {
 		isMusicPlaying = false;
 	}
 	
-	public static void pauseMusic() {
+	public static void pauseMusic() {		
 		SoundEngine.sharedEngine().pauseSound();
 		isMusicPlaying = false;
 	}
@@ -82,5 +84,18 @@ public class Sounds {
 	public static void resumeMusic() {
 		SoundEngine.sharedEngine().resumeSound();
 		isMusicPlaying = true;
+	}
+	
+	public static void stopMusic() {
+		if (lastSndId == -1)
+			return;
+		
+		MediaPlayer mp = null;
+		synchronized(soundsMap) {
+			mp = soundsMap.get(lastSndId);
+			if (mp == null)
+				return;
+		}
+		mp.stop();		
 	}
 }

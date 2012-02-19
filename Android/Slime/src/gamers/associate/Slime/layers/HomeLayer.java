@@ -110,6 +110,7 @@ public class HomeLayer extends CCLayer {
 	}
 	
 	public void changeDifficulty(Object sender) {
+		this.nextDoNotStopMusic = true;
 		CCTransitionScene transition = CCFadeTransition.transition(0.5f, ChangeDifficultyLayer.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
 	}
@@ -242,13 +243,12 @@ public class HomeLayer extends CCLayer {
 		
 		Vibe.vibrate();
 		Sounds.playEffect(R.raw.menuselect);
-		Sounds.pauseMusic();
+		Sounds.stopMusic();
 		SlimeFactory.LevelBuilder.start();
 	}
 	
 	public void goRestart(Object sender) {
-		Sounds.playEffect(R.raw.menuselect);
-		this.nextDoNotStopMusic = true;
+		Sounds.playEffect(R.raw.menuselect);		
 		// Sounds.pauseMusic();
 		SlimeFactory.LevelBuilder.resetAllAndRun();
 	}
