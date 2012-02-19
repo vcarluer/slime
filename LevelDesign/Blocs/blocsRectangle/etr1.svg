@@ -164,8 +164,8 @@
      inkscape:snap-grids="true"
      inkscape:snap-page="false"
      width="800px"
-     inkscape:window-width="1680"
-     inkscape:window-height="988"
+     inkscape:window-width="1920"
+     inkscape:window-height="1138"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -191,7 +191,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1107,34 +1107,6 @@
          id="tspan4745-6-6"
          x="-2"
          y="0">TimeAttack</tspan></text>
-    <image
-       width="32"
-       height="32"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAN5JREFU OI2d000OgjAQBeBHqWzUjh1JOIDu9A49jRtP4dHkDrLTA5hoEfYUF2qEBJDaTX8m/fLapsFufziy JsNagVmBNYFZ4Xq9Y7tZIwwFTtkFcbyAtSVsXrz711iwJhMESPFnE6wV9EIZ1P8hkll9xgZA+u49 AE3NuTfSTNBA6tGIvN0eXetGzacFAOoqtoDtZtVXIyFE4ZwbRGRVud5iVTmKoslgEnnKzr9SEqlZ LyKTZPkLwGtz98VKa8sxANDzxNLmxVigE/FJ8EXqLyJt7g0AwOcDGt8jtJMA6RMHCEtDGfOV4gAA AABJRU5ErkJggg== "
-       id="platform_corner-4"
-       x="-152"
-       y="448"
-       type="Platform_Corner"
-       transform="matrix(0,-1,1,0,0,0)" />
-    <image
-       style="display:inline"
-       width="448"
-       height="32"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAFRJREFU OI1jTM1q+M9AAWAREuSnRD8Di5AgH4UGCFFqAMVeoNQFb958oMgAxus3blMWjX///qPIBSxXrt6h zABxcWHKDHj37hOFBrz/OOAuGGAvAACJyB2YZglWcgAAAABJRU5ErkJggg== "
-       id="platform-7-83"
-       x="152"
-       y="-480"
-       type="Platform"
-       transform="matrix(0,1,-1,0,0,0)" />
-    <image
-       style="display:inline"
-       width="448"
-       height="32"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAFRJREFU OI1jTM1q+M9AAWAREuSnRD8Di5AgH4UGCFFqAMVeoNQFb958oMgAxus3blMWjX///qPIBSxXrt6h zABxcWHKDHj37hOFBrz/OOAuGGAvAACJyB2YZglWcgAAAABJRU5ErkJggg== "
-       id="platform-7-7"
-       x="7.1054274e-015"
-       y="120"
-       type="Platform" />
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -1244,8 +1216,8 @@
        id="target-3"
        width="16"
        height="16"
-       x="440"
-       y="352"
+       x="464"
+       y="328"
        type="Target"
        att_name="targetle" />
   </g>

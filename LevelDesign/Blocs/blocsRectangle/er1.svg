@@ -120,8 +120,8 @@
      inkscape:snap-grids="true"
      inkscape:snap-page="false"
      width="800px"
-     inkscape:window-width="1680"
-     inkscape:window-height="988"
+     inkscape:window-width="1920"
+     inkscape:window-height="1138"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -148,7 +148,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -988,16 +988,6 @@
          id="tspan4745-6-6"
          x="-2"
          y="0">TimeAttack</tspan></text>
-    <image
-       style="display:inline"
-       width="480"
-       height="32"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAFRJREFU OI1jTM1q+M9AAWAREuSnRD8Di5AgH4UGCFFqAMVeoNQFb958oMgAxus3blMWjX///qPIBSxXrt6h zABxcWHKDHj37hOFBrz/OOAuGGAvAACJyB2YZglWcgAAAABJRU5ErkJggg== "
-       id="platform-7-83"
-       x="120"
-       y="-480"
-       type="Platform"
-       transform="matrix(0,1,-1,0,0,0)" />
     <image
        width="160"
        height="32"
