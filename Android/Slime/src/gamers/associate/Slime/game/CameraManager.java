@@ -211,9 +211,9 @@ public class CameraManager {
 		}
 		
 		
-		this.bgPos.x = position.x * -0.1f + Level.currentLevel.getLevelOrigin().x;
-		this.bgPos.y = position.y * -0.1f + Level.currentLevel.getLevelOrigin().y;
-		Level.currentLevel.getBackroundLayer().setPosition(this.bgPos);
+//		this.bgPos.x = position.x * -0.1f + Level.currentLevel.getLevelOrigin().x;
+//		this.bgPos.y = position.y * -0.1f + Level.currentLevel.getLevelOrigin().y;
+//		Level.currentLevel.getBackroundLayer().setPosition(this.bgPos);
 	}
 	
 	public void centerCameraOn(CGPoint center) {		
