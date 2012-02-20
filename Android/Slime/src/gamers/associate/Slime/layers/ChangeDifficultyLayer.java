@@ -15,6 +15,7 @@ import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.transitions.CCFadeTransition;
+import org.cocos2d.transitions.CCSlideInBTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
@@ -149,7 +150,7 @@ public class ChangeDifficultyLayer extends CCLayer {
 	
 	public void goHome(Object sender) {
 		Level currentLevel = Level.get(LevelHome.Id, true);								
-		CCTransitionScene transition = CCFadeTransition.transition(0.5f, currentLevel.getScene());
+		CCTransitionScene transition = CCSlideInBTransition.transition(0.5f, currentLevel.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
 	}
 	

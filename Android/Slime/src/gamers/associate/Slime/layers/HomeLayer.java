@@ -32,6 +32,7 @@ import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.transitions.CCFadeTransition;
+import org.cocos2d.transitions.CCSlideInTTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
@@ -65,6 +66,7 @@ public class HomeLayer extends CCLayer {
 	private boolean nextDoNotStopMusic;
 	
 	private CCLayer top;
+	private static boolean firstLoadDone;
 	
 	public static HomeLayer get() {
 		if (layer == null) {
@@ -121,7 +123,7 @@ public class HomeLayer extends CCLayer {
 	
 	public void changeDifficulty(Object sender) {
 		this.nextDoNotStopMusic = true;
-		CCTransitionScene transition = CCFadeTransition.transition(0.5f, ChangeDifficultyLayer.getScene());
+		CCTransitionScene transition = CCSlideInTTransition.transition(0.5f, ChangeDifficultyLayer.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
 	}
 
@@ -232,19 +234,30 @@ public class HomeLayer extends CCLayer {
 	}
 	
 	public void temp() {
-		this.top = CCLayer.node();
 		this.titleSprite = CCSprite.sprite("slime-attack.png");
-		this.titleSprite.setPosition(CCDirector.sharedDirector().winSize().width / 2, CCDirector.sharedDirector().winSize().height / 2 + 115f);
-		this.top.addChild(this.titleSprite);
+		this.top = CCLayer.node();
 		this.addChild(this.top, 1);
-		this.titleSprite.setScale(10f);
-		// CCDelayTime delay = CCDelayTime.action(0.5f);
-		CCScaleTo sc = CCScaleTo.action(0.5f, 1f , 1f);
-		CCDelayTime d2 = CCDelayTime.action(2f);
-		CCCallFunc call = CCCallFunc.action(this, "endTitle");
-		
-		CCSequence act = CCSequence.actions(sc, d2, call);
-		this.titleSprite.runAction(act);
+		this.top.addChild(this.titleSprite);
+		if (!firstLoadDone) {					
+			this.titleSprite.setPosition(CCDirector.sharedDirector().winSize().width / 2, CCDirector.sharedDirector().winSize().height / 2 + 115f);						
+			this.titleSprite.setScale(10f);
+			// CCDelayTime delay = CCDelayTime.action(0.5f);
+			CCScaleTo sc = CCScaleTo.action(0.5f, 1f , 1f);
+			CCDelayTime d2 = CCDelayTime.action(2f);
+			CCCallFunc call = CCCallFunc.action(this, "endTitle");
+			
+			CCSequence act = CCSequence.actions(sc, d2, call);
+			this.titleSprite.runAction(act);
+			firstLoadDone = true;
+		} else {
+			float scale = 0.5f;
+			this.titleSprite.setScale(scale);
+			this.titleSprite.setPosition(
+					CCDirector.sharedDirector().winSize().width - (this.titleSprite.getContentSize().width / 2) * scale - PauseLayer.PaddingX,
+					CCDirector.sharedDirector().winSize().height - (this.titleSprite.getContentSize().height / 2) * scale - PauseLayer.PaddingY
+					);
+			this.actionTitle();
+		}
 	}
 	
 	public void endTitle() {

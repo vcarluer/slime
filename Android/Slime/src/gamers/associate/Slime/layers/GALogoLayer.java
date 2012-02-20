@@ -2,15 +2,14 @@ package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.LoadingQuoteGenerator;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
-import gamers.associate.Slime.game.LoadingQuoteGenerator;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.levels.LevelHome;
 import gamers.associate.Slime.levels.generator.BlocInfoParser;
 
 import org.cocos2d.actions.UpdateCallback;
-import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCScaleBy;
@@ -22,9 +21,9 @@ import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.sound.SoundEngine;
+import org.cocos2d.transitions.CCFadeDownTransition;
 import org.cocos2d.transitions.CCFadeTransition;
-import org.cocos2d.transitions.CCJumpZoomTransition;
+import org.cocos2d.transitions.CCShrinkGrowTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
@@ -167,7 +166,11 @@ public class GALogoLayer extends CCLayer {
 //		 CCTransitionScene transition = CCFadeTransition.transition(1.0f, currentLevel.getScene());		
 //		 CCDirector.sharedDirector().replaceScene(transition); 
 		loaded = true;
-		CCDirector.sharedDirector().replaceScene(currentLevel.getScene());
+		// CCDirector.sharedDirector().replaceScene(currentLevel.getScene());
+		
+		// CCJumpZoomTransition transition = CCJumpZoomTransition.transition(1.0f, currentLevel.getScene());		
+		CCTransitionScene transition = CCFadeTransition.transition(0.5f, currentLevel.getScene());
+		CCDirector.sharedDirector().replaceScene(transition);
 	}
 	
 //	private UpdateCallback nextCallback = new UpdateCallback() {
