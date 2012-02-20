@@ -24,6 +24,7 @@ import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.sound.SoundEngine;
 import org.cocos2d.transitions.CCFadeTransition;
+import org.cocos2d.transitions.CCJumpZoomTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
@@ -35,14 +36,14 @@ public class GALogoLayer extends CCLayer {
 	// private long onEnterTime;
 	private CCSprite sprite;
 	private float scaleTarget;
-	private Level currentLevel;
+	private static Level currentLevel;
 	private static GALogoLayer logoLayer;
 	private static boolean loaded;
 	private final Object lock = new Object();
 	private CCLabel loadLabel;
 	private long nextBeat;
 	private int step;
-	private boolean heartBeating;
+	private static boolean heartBeating;
 	
 	public static CCScene scene() {
 		if (scene == null) {
@@ -76,6 +77,7 @@ public class GALogoLayer extends CCLayer {
 //		this.spriteSheet.addChild(this.sprite);
 		
 		loaded = false;
+		heartBeating = false;
 		Sounds.preloadEffect(R.raw.ga);
 		Sounds.preloadEffect(R.raw.heartbeat);
 		
@@ -109,6 +111,13 @@ public class GALogoLayer extends CCLayer {
 //		this.onEnterTime = System.currentTimeMillis();
 	}		
 	
+	@Override
+	public void onExit() {
+		this.removeChild(this.sprite, true);
+		this.removeChild(this.loadLabel, true);
+		super.onExit();
+	}
+
 	public void endScale() {
 		/*float soundTime = 1.0f;
 		float waitTime = 2.0f;*/
@@ -131,32 +140,34 @@ public class GALogoLayer extends CCLayer {
 	}
 	
 	public void heartbeat() {		
-		this.loadLabel.setVisible(true);
-		this.loadLabel.setString(LoadingQuoteGenerator.NewQuote().toUpperCase());
-		this.loadLabel.setPosition(CCDirector.sharedDirector().winSize().width - this.loadLabel.getContentSize().width - PauseLayer.PaddingX, PauseLayer.PaddingY);
-		Sounds.playEffect(R.raw.heartbeat);
-		
-		this.heartBeating = true;
-		CCScaleBy sb = CCScaleBy.action(0.1f, 1.10f);
-		CCScaleTo st = CCScaleTo.action(0.1f, this.scaleTarget);
-		CCCallFunc ps = CCCallFunc.action(this, "heartbeatEnd");
-		CCSequence seq = CCSequence.actions(sb, st, ps);
-		this.sprite.runAction(seq);		
+		if (!loaded) {
+			this.loadLabel.setVisible(true);
+			this.loadLabel.setString(LoadingQuoteGenerator.NewQuote().toUpperCase());
+			this.loadLabel.setPosition(CCDirector.sharedDirector().winSize().width - this.loadLabel.getContentSize().width - PauseLayer.PaddingX, PauseLayer.PaddingY);
+			Sounds.playEffect(R.raw.heartbeat);
+			
+			heartBeating = true;
+			CCScaleBy sb = CCScaleBy.action(0.1f, 1.10f);
+			CCScaleTo st = CCScaleTo.action(0.1f, this.scaleTarget);
+			CCCallFunc ps = CCCallFunc.action(this, "heartbeatEnd");
+			CCSequence seq = CCSequence.actions(sb, st, ps);
+			this.sprite.runAction(seq);
+		}
 	}
 	
 	public void heartbeatEnd() {
-		this.heartBeating = false;
+		heartBeating = false;
 		this.nextBeat = System.currentTimeMillis() + 1000;
 	}
 	
-	public void load() {
-		removeChild(sprite, true);
-		removeChild(loadLabel, true);
+	public void load() {		
 		// Sounds.playMusic(R.raw.menumusic, true);
 		/* CCScene nextScene = SlimeLoadingLayer.scene();
 		CCDirector.sharedDirector().replaceScene(nextScene);*/ 
-		CCTransitionScene transition = CCFadeTransition.transition(1.0f, currentLevel.getScene());
-		CCDirector.sharedDirector().replaceScene(transition);
+//		 CCTransitionScene transition = CCFadeTransition.transition(1.0f, currentLevel.getScene());		
+//		 CCDirector.sharedDirector().replaceScene(transition); 
+		loaded = true;
+		CCDirector.sharedDirector().replaceScene(currentLevel.getScene());
 	}
 	
 //	private UpdateCallback nextCallback = new UpdateCallback() {
@@ -177,7 +188,7 @@ public class GALogoLayer extends CCLayer {
 		
 		public void update(float d) {
 			
-			if (System.currentTimeMillis() > nextBeat && !heartBeating) {
+			if (!loaded && System.currentTimeMillis() > nextBeat && !heartBeating) {
 				heartbeat();
 			} else {
 				if (!heartBeating) {
@@ -221,10 +232,10 @@ public class GALogoLayer extends CCLayer {
 					case 12:
 						BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle2);
 						break;
-					case 13:					
-						currentLevel = Level.get(LevelHome.Id);					
+					case 13:						
+						currentLevel = Level.get(LevelHome.Id);
 						unschedule(nextCallback);
-						load();
+						load();											
 						break;
 					}
 		
@@ -275,4 +286,27 @@ public class GALogoLayer extends CCLayer {
 //				}
 //		  }
 //		}
+	
+//	public class LoadThread extends Thread {		  		  
+//	  public LoadThread() {		    
+//	  }
+//	  
+//	  public void run() {
+//		while (loaded != true || heartBeating == true) {
+//			try {
+//				Thread.sleep(1000);
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		
+//		try {
+//			Thread.sleep(1000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		CCDirector.sharedDirector().replaceScene(currentLevel.getScene());
+//	  }
+//	}
 }

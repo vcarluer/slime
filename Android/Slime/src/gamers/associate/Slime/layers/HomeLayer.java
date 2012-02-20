@@ -11,12 +11,18 @@ import gamers.associate.Slime.items.custom.Star;
 import org.apache.http.conn.ClientConnectionRequest;
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.camera.CCOrbitCamera;
+import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCDelayTime;
+import org.cocos2d.actions.interval.CCFadeIn;
 import org.cocos2d.actions.interval.CCMoveBy;
+import org.cocos2d.actions.interval.CCMoveTo;
 import org.cocos2d.actions.interval.CCRotateBy;
 import org.cocos2d.actions.interval.CCRotateTo;
+import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.actions.interval.CCSequence;
+import org.cocos2d.actions.tile.CCFadeOutDownTiles;
+import org.cocos2d.actions.tile.CCFadeOutUpTiles;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItemLabel;
@@ -24,11 +30,13 @@ import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 import org.cocos2d.types.ccColor3B;
+import org.cocos2d.types.ccGridSize;
 
 import android.view.MotionEvent;
 
@@ -42,7 +50,7 @@ public class HomeLayer extends CCLayer {
 	private CCMenu menuInfo;
 	//private CCSprite diffSpr;
 	
-	private static float baseShift = 100f;
+	private static float baseShift = 150f; //100f;
 	private static float shiftTitle = baseShift;
 	private static float shiftMenu  = shiftTitle - 150f; // Slime height = 160 / 2 + 20
 	private static float shiftInfo  = shiftMenu - 100f;
@@ -55,6 +63,8 @@ public class HomeLayer extends CCLayer {
 	private CCMenu restartMenu;
 	
 	private boolean nextDoNotStopMusic;
+	
+	private CCLayer top;
 	
 	public static HomeLayer get() {
 		if (layer == null) {
@@ -94,8 +104,8 @@ public class HomeLayer extends CCLayer {
 				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftScore
 				));
 		this.addChild(this.lblScore);
-		
-		this.starSprite = new CCSprite(); // SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);		
+				
+		this.starSprite = CCSprite.sprite("star-01.png", true); // SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);		
 		this.starSprite.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().getWidth() / 2,
 				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftScore
@@ -192,38 +202,82 @@ public class HomeLayer extends CCLayer {
 		
 		this.starSprite.runAction(SlimeFactory.Star.getAnimation(Star.Anim_Wait));
 				
-		this.titleSprite = CCSprite.sprite("slime-attack.png");
-		this.addChild(this.titleSprite);
+//		this.titleSprite = CCSprite.sprite("slime-attack.png");
+//		this.addChild(this.titleSprite);
 		
-		/*float scale = 0.5f;
-		this.titleSprite.setScale(scale);
-		this.titleSprite.setPosition(CGPoint.make(
+//		float scale = 0.5f;
+//		this.titleSprite.setScale(scale);
+//		this.titleSprite.setPosition(CGPoint.make(
+//				CCDirector.sharedDirector().winSize().width - (this.titleSprite.getContentSize().width / 2) * scale - PauseLayer.PaddingX,
+//				CCDirector.sharedDirector().winSize().height - (this.titleSprite.getContentSize().height / 2) * scale - PauseLayer.PaddingY
+//				)); // + shiftTitle
+		// this.titleSprite.setAnchorPoint(0, 0);
+//		this.titleSprite.setPosition(
+//				CCDirector.sharedDirector().winSize().width / 2,
+//				CCDirector.sharedDirector().winSize().height / 2 + shiftTitle
+//				);
+//		CCRotateTo r0 = CCRotateTo.action(0, 0);		
+//		CCDelayTime d = CCDelayTime.action(0.5f);
+//		CCRotateBy r1 = CCRotateBy.action(0.3f, 25f);
+//		CCRotateBy r2 = CCRotateBy.action(0.3f, -5f);
+//		CCDelayTime d1 = CCDelayTime.action(0.1f);
+//		CCRotateBy r3 = CCRotateBy.action(0.3f, 5f);		
+//		CCSequence seqTitle = CCSequence.actions(r0, d, r1, r2, d1, r3);
+//		this.titleSprite.runAction(seqTitle);
+		
+		Sounds.playMusic(R.raw.menumusic, true);
+		
+		
+		this.temp();
+	}
+	
+	public void temp() {
+		this.top = CCLayer.node();
+		this.titleSprite = CCSprite.sprite("slime-attack.png");
+		this.titleSprite.setPosition(CCDirector.sharedDirector().winSize().width / 2, CCDirector.sharedDirector().winSize().height / 2 + 115f);
+		this.top.addChild(this.titleSprite);
+		this.addChild(this.top, 1);
+		this.titleSprite.setScale(10f);
+		// CCDelayTime delay = CCDelayTime.action(0.5f);
+		CCScaleTo sc = CCScaleTo.action(0.5f, 1f , 1f);
+		CCDelayTime d2 = CCDelayTime.action(2f);
+		CCCallFunc call = CCCallFunc.action(this, "endTitle");
+		
+		CCSequence act = CCSequence.actions(sc, d2, call);
+		this.titleSprite.runAction(act);
+	}
+	
+	public void endTitle() {
+		float scale = 0.5f;
+		CCMoveTo mt = CCMoveTo.action(0.2f, CGPoint.ccp(
 				CCDirector.sharedDirector().winSize().width - (this.titleSprite.getContentSize().width / 2) * scale - PauseLayer.PaddingX,
 				CCDirector.sharedDirector().winSize().height - (this.titleSprite.getContentSize().height / 2) * scale - PauseLayer.PaddingY
-				)); // + shiftTitle*/
-		// this.titleSprite.setAnchorPoint(0, 0);
-		this.titleSprite.setPosition(
-				CCDirector.sharedDirector().winSize().width / 2,
-				CCDirector.sharedDirector().winSize().height / 2 + shiftTitle
-				);
+				));
+		CCScaleTo sc2 = CCScaleTo.action(0.2f, scale);
+		CCCallFunc call = CCCallFunc.action(this, "actionTitle");
+		CCSequence seq = CCSequence.actions(sc2, call);
+		this.titleSprite.runAction(mt);
+		this.titleSprite.runAction(seq);
+	}
+	
+	public void actionTitle() {
 		CCRotateTo r0 = CCRotateTo.action(0, 0);		
 		CCDelayTime d = CCDelayTime.action(0.5f);
 		CCRotateBy r1 = CCRotateBy.action(0.3f, 25f);
 		CCRotateBy r2 = CCRotateBy.action(0.3f, -5f);
 		CCDelayTime d1 = CCDelayTime.action(0.1f);
-		CCRotateBy r3 = CCRotateBy.action(0.3f, 5f);
+		CCRotateBy r3 = CCRotateBy.action(0.3f, 5f);		
 		CCSequence seqTitle = CCSequence.actions(r0, d, r1, r2, d1, r3);
 		this.titleSprite.runAction(seqTitle);
-		
-		Sounds.playMusic(R.raw.menumusic, true);
 	}
 	
 	@Override
 	public void onExit() {
 		// this.removeChild(this.menuInfo, true);
 		this.removeChild(this.lblLevel, true);
-		this.removeChild(this.titleSprite, true);
-		this.removeChild(this.restartMenu, true);
+		// this.removeChild(this.titleSprite, true);
+		this.removeChild(this.restartMenu, true);		
+		this.removeChild(this.top, true);
 		// this.removeChild(this.diffSpr, true);
 		
 		if (!this.nextDoNotStopMusic) {
