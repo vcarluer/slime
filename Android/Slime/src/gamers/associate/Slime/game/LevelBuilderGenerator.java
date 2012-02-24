@@ -17,7 +17,7 @@ public class LevelBuilderGenerator implements ILevelBuilder
 {	
 	private static boolean isDebug =  true;
 	private static int forceDiff = 8;
-	private static int forceLevel = 70;
+	private static int forceLevel = 79;
 	
 	private static int MinimumComplexity = 1;
 	private static int AverageComplexityPerLevel = 1;

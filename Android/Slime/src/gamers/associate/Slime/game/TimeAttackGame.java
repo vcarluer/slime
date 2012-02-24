@@ -16,6 +16,7 @@ import org.cocos2d.types.ccColor3B;
 
 
 public class TimeAttackGame extends GameItem implements IGamePlay {
+	private static final int bonusTime = 3;
 	private static float defaultTime = 60;
 	private static float defaultCritic = 10;
 	private static float stepNormal = 1.0f;
@@ -269,7 +270,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 
 	public void setNewBonus() {
 		if (!this.isGameOver) {
-			this.leftTime += 10;
+			this.leftTime += bonusTime;
 			this.bonusTaken++;
 			
 			if (this.bonusTaken >= this.neededBonus()) {

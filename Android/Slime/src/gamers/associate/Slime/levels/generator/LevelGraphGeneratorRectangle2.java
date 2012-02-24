@@ -20,8 +20,8 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 	private static final float timeCalcPerBlock = 8f;
 	private static final int timeCalcBase = 20;
 	// tuned with SGS
-	private static final int maxWidth = 10;
-	private static final int maxAddHeight = 3;
+	private static final int maxWidth = 6;
+	private static final int maxAddHeight = 2;
 	private static final int minBossPos = 1;
 	private static final Random rand = new Random();
 	private HashSet<Integer> starList;
