@@ -155,9 +155,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="12.109375"
-     inkscape:cx="-673.91052"
-     inkscape:cy="542.93542"
+     inkscape:zoom="3.0273438"
+     inkscape:cx="-479.19989"
+     inkscape:cy="316.4359"
      inkscape:document-units="px"
      inkscape:current-layer="Template"
      showgrid="true"
@@ -170,7 +170,7 @@
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      showguides="false"
-     inkscape:snap-global="false">
+     inkscape:snap-global="true">
     <inkscape:grid
        type="xygrid"
        id="grid3053"
@@ -318,16 +318,6 @@
        type="CircularSaw"
        att_isOn="true"
        att_name="circularsaw" />
-    <image
-       width="40"
-       height="27"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAUCAYAAACaq43EAAAABHNCSVQICAgIfAhkiAAAAqxJREFU SInFlM9OE1EUxn/3tpSWgYSYFDFgQqkaNtBVH4CdyEbXxidon4AF4R3cuDNxwZaViCvSN7DEBaIQ UasGOiLNDIXWucfFTOcPxcQYqye5Od89c+d+9zvn3IuIyPHxsVQqFSnMzAgwkFGYmZFKpSLNZlNE RFSz2ZRSqUSj0eB6Os2NoQwqlUKlUuiE19Fc+16lIyzGIJ6H8byEF8/DGI+PrRafXZfpqSnqOzuk V1dXaTQaPLTGeGCNkbEsMpbFkDXCkGWRsUYZskaCmBXg0Rj246bTpeM6dF2XztkZXcel47p0z87o Og4XrsvT1zs82XvD2toa+uXWFhOpNPdzFoiACBIMH5twLiJg/BhiAuyvQyuU0qA0SimUVr5XCrRG K82j4m0mszlebG6i9w8OuKY1CpKk8U1N/CCCmP51PkFESEBOSO77/PAw7/b30VwyMQaMiTY1xldo TICDA5heNvx4SKBUoDqmPhwRXR9xXHUy5ZexCTFGYip1QnGoWmt/3iMuzs7yzRgk5I1q6KuJp9Uk 62uiPvAJ9aWUB6qDw4hSHHUuuFUsou8uLXHk/WCj7frkYYolajYjCXUSr3kPX2qoUHXgRSmevd3j a7vNveVllG3bUlpY4FOjwUQqzWTf/Y18MqaT33QKMR7imSvv8vvT73xxHG5OT/OqXgcREdu2pVqt ymyhMLCXa7ZQkGq1KrZt+y+XiPTKG9rp6Snj4+Ns1OvcmZ/v67/fsefr6zxeWeHD4eGV3/u7+h/Z fyNO90C73eb8/ByAVqsFgNNq0To5+aON266LMYaT2P/ZbJZcLgdAWGOl1NU7/GXrtVQ6Hpybm2Nx cXEghNvb2+zu7obzBHG5XKZcLg+E2HGcXxPXajW0Hky/1Wq1ZEACy+fzA3s8eiOfz/fo5Cdi+Tgm ulHhKwAAAABJRU5ErkJggg== "
-       id="button"
-       x="-448"
-       y="301"
-       type="Button"
-       att_target=""
-       att_resetTime="3" />
     <image
        width="65"
        height="15"
@@ -1312,6 +1302,17 @@
          att_targetId=""
          sodipodi:nodetypes="ccccc" />
     </g>
+    <image
+       style="display:inline"
+       width="30"
+       height="16"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAQCAYAAAABOs/SAAAABHNCSVQICAgIfAhkiAAAA79JREFU OI21lDtvVEcYhp+ZOcZ7DWaNA1lsZOPEEAVjy2ApKVMh5Q+EhCbpXfpPuCMtTSRiS24oIqVyEYuU QQFZIJMgO94YGd9Y73rvu2fOfBRnL2cDKTPSaJ75vpl5v3fOBRGR5eVlmZ6+IcYYAf6XboyRmZlZ WV1dFRERtbKyInfv3sUz5/AGpvA8D89TeEZjPNVm1WYd4f41QSAEVrCBYK2LcBj3fZ83+Wc0m0Ue PnyImpu7KRsbW2SGfsDz0iSTXrsbEkmP1H9wMmlIpTwSiZB9X6jVLNVqQLViqdYs1UoQjtWQTwrH PPrtO+bnp9EbGxt4ZhKt0zgHzkm7g8h7WEIWRzcuAlqDUgqtQGnQWrVjoFXI8ViGdPoqm5ub6CCw gKLTwoOJCIKTkF2kkD520hPSCq0VSkW4XYjSoJUJ1w8OxhCCrrC0HffEO+7CsY8jBSrVc6nbglr1 uJN30sLzDHp+/hbW/kUQ7IeOI9fdJ95heTcuIr3DlYoUoSJXrahUcpRKL5ibm0Otra3J7du3AYMx oyhlMJ3Kjeq6MFr1zbVWkVjbTeTqXSAEkXlgLcXTHOBYX19HiYgsLi5y//59EvEETgS6Tz2suDtX oDqZdkD1FofuEegbOzeiKZVLLCwssLS0hAcwOTnJh7MXSX0/Qmowxo3gM/IU2HI5zsXinDYbzAxc 4078Kxo/PkDKZbxUEiWCq9UZGBtl6JuvuVdcZsfukR4YoNBscNNcx4nwQr2k3Gpg7r1ifHwcIBQG cJ6QvTTAhVSC4naZI07IZj3Gh9Lkij7HRwUAgoMDPvhomPSlEUQcld19modHAOwFh2QveWSTSV4W GuSPTxERrl5JsFvyOfKk+xJ3hQGuDGWYGh7h922fhPH4OHOeL8cn+TW3xeu8AWDwbJpk9gLDs9cQ G+Csw55UABgajPFJJsUX2TGsCMW8QotmPjuK0Zrn7LxfuNxqclSt4DhDyzlKzQZbJ28oNZtY0aFj 32LrdepHeSQQbK2O830AWkEQ7inkwz0uiULYL5cpNZtRqX7hJwd7/HNaIMtVrDj+2N/ndaXMQaXE ZTcJgK3VKf65Q+ukBOKoHebRmfMA1KzP49fH7BROeFUq8ikZnAiPdnMcVsvvF959nOPO82/RSnE2 SDFkYjTMRYxSjAFpUjyxG8RvzWGcQ9P+RY5NQDzG9tOnfK6vU6WOc47LIiT8OE6E5N9nGBXhp2cP +oUnJiYIKpZf7v3cTdRqtb4KFf9q6p1I2Nqfo4igjSEWi/VyLWFqagqAt53NZ/GexDBQAAAAAElF TkSuQmCC "
+       id="button"
+       x="-448"
+       y="320"
+       att_resetTime="3"
+       att_target=""
+       type="Button" />
   </g>
   <g
      inkscape:groupmode="layer"
