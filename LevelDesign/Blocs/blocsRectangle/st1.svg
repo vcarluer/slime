@@ -164,10 +164,10 @@
      inkscape:snap-grids="true"
      inkscape:snap-page="false"
      width="800px"
-     inkscape:window-width="1680"
-     inkscape:window-height="988"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
+     inkscape:window-width="944"
+     inkscape:window-height="1122"
+     inkscape:window-x="960"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      showguides="false"
      inkscape:snap-global="true">
@@ -191,7 +191,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1116,25 +1116,6 @@
        y="-152"
        type="Platform_Corner"
        transform="scale(-1,-1)" />
-    <image
-       style="display:inline"
-       width="232"
-       height="32"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAFRJREFU OI1jTM1q+M9AAWAREuSnRD8Di5AgH4UGCFFqAMVeoNQFb958oMgAxus3blMWjX///qPIBSxXrt6h zABxcWHKDHj37hOFBrz/OOAuGGAvAACJyB2YZglWcgAAAABJRU5ErkJggg== "
-       id="platform-7-8"
-       x="152"
-       y="-32"
-       type="Platform"
-       transform="matrix(0,1,-1,0,0,0)" />
-    <image
-       style="display:inline"
-       width="448"
-       height="32"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAFRJREFU OI1jTM1q+M9AAWAREuSnRD8Di5AgH4UGCFFqAMVeoNQFb958oMgAxus3blMWjX///qPIBSxXrt6h zABxcWHKDHj37hOFBrz/OOAuGGAvAACJyB2YZglWcgAAAABJRU5ErkJggg== "
-       id="platform-7-7"
-       x="32"
-       y="120"
-       type="Platform" />
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -1238,25 +1219,6 @@
        x="32"
        y="384"
        type="Platform" />
-    <image
-       style="display:inline"
-       width="184"
-       height="32"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAFRJREFU OI1jTM1q+M9AAWAREuSnRD8Di5AgH4UGCFFqAMVeoNQFb958oMgAxus3blMWjX///qPIBSxXrt6h zABxcWHKDHj37hOFBrz/OOAuGGAvAACJyB2YZglWcgAAAABJRU5ErkJggg== "
-       id="platform-7-8-1"
-       x="416"
-       y="-32"
-       type="Platform"
-       transform="matrix(0,1,-1,0,0,0)" />
-    <image
-       width="32"
-       height="32"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAONJREFU OI3Fj0FOwzAQRZ9dq6qEsOtppV6AHb2DT8OGU3A0fIdWIAEHqBQcnH3ibqAKImmLuuhsRpr/580f 9fD49CzeBfEWEYt4h4hlt/tkfX/HZKLZbD9YLuek1JDq/N0bUp2jFu+CUkT+WUoRxbtgxFuAQCEC 4aztQvRzGwCMiP0ZBzgLEmVhDx4j3vXFU5Ao3v3S+gl6kDIAKVHE/gGbqvoauhTs7U0GHMBsNs1V lQdTqZfXtzISF611Bui6zo15TNt2YxptO754AGy276c8xwGr1eIyQErNhYA6Xz3BlV/YA0aLT8Z5 2HuiAAAAAElFTkSuQmCC "
-       id="Platform_T-7"
-       x="384"
-       y="-32"
-       type="Platform_T"
-       transform="matrix(0,1,-1,0,0,0)" />
     <image
        width="48"
        height="32"
