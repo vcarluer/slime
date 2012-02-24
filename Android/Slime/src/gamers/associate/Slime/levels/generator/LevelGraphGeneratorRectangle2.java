@@ -174,7 +174,7 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 					if (row == 0) {
 						// can be boss
 						if (col == bossPos) {
-							pick = this.pickBossBottomMiddle();
+							pick = this.pickBossBottomRightCorner();
 						} else {
 							// can be exit
 							if (row == endPos) {
