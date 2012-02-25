@@ -16,7 +16,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 "
-   sodipodi:docname="Slime_level.svg">
+   sodipodi:docname="block_c_5_2.svg">
   <defs
      id="defs4">
     <linearGradient
@@ -1007,14 +1007,6 @@
          id="tspan4745-6-6"
          x="-2"
          y="0">TimeAttack</tspan></text>
-    <image
-       width="480"
-       height="32"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAFRJREFU OI1jTM1q+M9AAWAREuSnRD8Di5AgH4UGCFFqAMVeoNQFb958oMgAxus3blMWjX///qPIBSxXrt6h zABxcWHKDHj37hOFBrz/OOAuGGAvAACJyB2YZglWcgAAAABJRU5ErkJggg== "
-       id="platform-7"
-       x="7.1054274e-015"
-       y="568"
-       type="Platform" />
     <image
        width="96"
        height="32"
