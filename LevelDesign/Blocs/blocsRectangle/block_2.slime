@@ -1,6 +1,0 @@
-BlocInfo;0;120;480;480;0;BlocInfo-0;5;tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb;tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb;false;false;false;t,r,b,l
-TimeAttack;-2.0;0.0;0.0;0.0;0.0;15;5
-Platform;0.0;160.0;216.0;32.0;0.0
-Platform_Corner;216.0;160.0;32.0;32.0;0.0
-Platform;137.0;272.0;191.0;32.0;90.0
-Bumper_Angle;168.0;192.0;48.0;48.0;-90.0
