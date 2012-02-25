@@ -11,8 +11,8 @@ import java.util.Random;
 import org.cocos2d.types.CGPoint;
 
 public abstract class LevelGraphGeneratorBase {
-	protected static boolean debugBlocOn = false;
-	protected static String forceBlock = "blocsRectangle/bl_1.slime";
+	protected static boolean debugBlocOn = true;
+	protected static String forceBlock = "blocsRectangle/block_seta.slime";
 	
 	protected List<LevelGenNode> nodes;
 	protected int lastGeneratedComplexity;

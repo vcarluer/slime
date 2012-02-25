@@ -113,6 +113,13 @@ public class BlocDefinitionParser extends BlocDefinition {
 		this.postBuildItem.postBuild();
 	}
 	
+	@Override
+	protected void createItemDefinitions() {
+		super.createItemDefinitions();
+		BlocInfoDef infoDef = new BlocInfoDef();
+		this.postBuildItem = infoDef;
+	}
+
 	private void pickHazardLines(Level level) {
 		if (SlimeFactory.GameInfo.getDifficulty() == LevelDifficulty.Extrem) {
 			for(String line : this.hazardLines) {

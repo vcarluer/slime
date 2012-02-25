@@ -142,6 +142,8 @@ public class Level {
 	
 	protected ArrayList<ITrigerable> trigerables;
 	
+	protected ArrayList<ITrigerable> trigerablesToAdd;
+	
 	protected boolean isPhysicDisabled;
 	
 	private Random randomGen;
@@ -198,6 +200,7 @@ public class Level {
 		
 		this.aliveSlimyList = new ArrayList<Slimy>();
 		this.trigerables = new ArrayList<ITrigerable>();
+		this.trigerablesToAdd = new ArrayList<ITrigerable>();
 
 		this.init();
 		
@@ -373,6 +376,7 @@ public class Level {
 		this.goal = null;
 		
 		this.trigerables.clear();
+		this.trigerablesToAdd.clear();
 		this.aliveSlimyList.clear();
 		this.isGameOver = false;
 		this.lastScore = 0;		
@@ -526,15 +530,32 @@ public class Level {
 	}
 			
 	public void addItemToRemove(GameItem item) {
-		this.itemsToRemove.add(item);
-		if (item instanceof ISelectable)
-		{
-			ISelectable selectable = (ISelectable)item;			
-			this.thumbnailManager.removeThumbnail(selectable);
-		}
+		if (item != null) {
+			if (this.itemsToAdd.contains(item)) {
+				if (item instanceof ITrigerable) {
+					ITrigerable triger = (ITrigerable)item;
+					this.trigerablesToAdd.remove(triger);
+				}						
+
+				item.destroy();
+				this.itemsToAdd.remove(item);
+			} else {
+				this.itemsToRemove.add(item);
+				if (item instanceof ISelectable)
+				{
+					ISelectable selectable = (ISelectable)item;			
+					this.thumbnailManager.removeThumbnail(selectable);
+				}
+			}						
+		}				
 	}
 	
 	public void addItemToAdd(GameItem item) {
+		if (item instanceof ITrigerable) {
+			ITrigerable triger = (ITrigerable)item;
+			this.trigerablesToAdd.add(triger);
+		}
+		
 		this.itemsToAdd.add(item);
 	}		
 	
@@ -632,6 +653,7 @@ public class Level {
 		{
 			ITrigerable trigerable = (ITrigerable)item;
 			this.trigerables.add(trigerable);
+			this.trigerablesToAdd.remove(trigerable);
 		}
 		
 		if (item instanceof Slimy) {
@@ -651,6 +673,11 @@ public class Level {
 			{
 				ISelectable selectable = (ISelectable)item;
 				this.selectables.remove(selectable);				
+			}
+			
+			if (item instanceof ITrigerable) {
+				ITrigerable triger = (ITrigerable)item;
+				this.trigerables.remove(triger);
 			}
 			
 			if (this.items.containsKey(item.getId())) {
@@ -1075,6 +1102,17 @@ public class Level {
 	public ArrayList<ITrigerable> getTrigerables(String name) {
 		ArrayList<ITrigerable> list = new ArrayList<ITrigerable>();
 		for (ITrigerable trigerable : this.trigerables) {
+			if (trigerable.getName().equals(name)) {
+				list.add(trigerable);
+			}
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<ITrigerable> getTrigerablesInItemToAdd(String name) {
+		ArrayList<ITrigerable> list = new ArrayList<ITrigerable>();
+		for (ITrigerable trigerable : this.trigerablesToAdd) {
 			if (trigerable.getName().equals(name)) {
 				list.add(trigerable);
 			}

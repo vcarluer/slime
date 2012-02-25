@@ -6,6 +6,8 @@ import java.util.List;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.base.GameItem;
+import gamers.associate.Slime.items.base.ITrigerable;
+import gamers.associate.Slime.items.custom.Button;
 import gamers.associate.Slime.levels.generator.BlocDefinition;
 import gamers.associate.Slime.levels.generator.BlocDefinitionParser;
 import gamers.associate.Slime.levels.generator.BlocDirection;
@@ -20,6 +22,22 @@ public class BlocInfoDef extends ItemDefinition {
 	
 	private String id;
 	private int complexity;
+	@Override
+	public void postBuild() {		
+		super.postBuild();
+		
+		ArrayList<GameItem> items = new ArrayList<GameItem>(Level.currentLevel.getItemsToAdd());
+		for(GameItem item : items) {
+			if (item instanceof Button) {
+				Button button = (Button) item;
+				ArrayList<ITrigerable> targets = Level.currentLevel.getTrigerablesInItemToAdd(button.getTarget());
+				if (targets.size() == 0) {
+					Level.currentLevel.addItemToRemove(item);
+				}
+			}
+		}			
+	}
+
 	private String entries;
 	private String exits;	
 	private boolean isStart;

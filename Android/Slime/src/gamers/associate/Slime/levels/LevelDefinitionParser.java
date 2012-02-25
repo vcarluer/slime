@@ -99,7 +99,7 @@ public class LevelDefinitionParser extends LevelDefinition
 		this.ignoredClasses.add(LevelEnd.class);
 	}
 
-	private void createItemDefinitions() {
+	protected void createItemDefinitions() {
 		this.itemDefinitions.add(new PlatformDef());
 		this.itemDefinitions.add(new LevelInfoDef());
 		this.itemDefinitions.add(new TimeAttackDef());
