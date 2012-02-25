@@ -6,3 +6,9 @@ BecBunsen;320.0;413.0;20.0;67.0;180.0;true;0;becbunsen
 CircularSaw;440.0;280.0;40.0;40.0;-90.0;circularsaw;true
 CircularSaw;440.0;120.0;40.0;40.0;-90.0;circularsaw;true
 Star;106.0;136.0;30.0;31.0;0.0
+Platform;120.0;240.0;208.0;32.0;0.0
+Platform_End;328.0;240.0;32.0;32.0;0.0
+Platform_End;88.0;240.0;32.0;32.0;180.0
+Box_Tube;110.0;272.0;18.0;72.0;0.0;false;true
+Box_Tube;302.0;272.0;18.0;72.0;0.0;false;true
+Box_Tube;214.0;272.0;18.0;72.0;0.0;false;true

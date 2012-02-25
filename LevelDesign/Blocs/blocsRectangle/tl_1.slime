@@ -3,6 +3,10 @@ TimeAttack;-2.0;0.0;0.0;0.0;0.0;2;1
 BecBunsen;320.0;413.0;20.0;67.0;180.0;true;0;becbunsen
 CircularSaw;0.0;120.0;40.0;40.0;90.0;circularsaw;true
 CircularSaw;0.0;280.0;40.0;40.0;90.0;circularsaw;true
-BecBunsen;160.0;413.0;20.0;67.0;180.0;true;0;becbunsen
-Star;234.0;216.0;30.0;31.0;0.0
+Star;24.0;208.0;30.0;31.0;0.0
 Star;234.0;416.0;30.0;31.0;0.0
+Platform_Ice;168.0;144.0;216.0;32.0;0.0
+Box_Bottle;320.0;176.0;48.0;72.0;0.0;false;true
+Platform_Cross;280.0;176.0;32.0;32.0;0.0
+LaserGun;230.0;221.0;65.0;15.0;45.0;lasergun;target;true
+Target;-8.0;472.0;16.0;16.0;0.0;target

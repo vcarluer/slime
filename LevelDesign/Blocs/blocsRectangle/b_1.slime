@@ -1,0 +1,14 @@
+BlocInfo;0;120;480;480;0;BlocInfo-0;5;;;false;false;false;t,r,l
+TimeAttack;-2.0;0.0;0.0;0.0;0.0;2;1
+Platform;0.0;0.0;480.0;32.0;0.0
+CircularSaw;200.0;96.0;40.0;40.0;0.0;circularsaw;true
+Box_GlassBox;0.0;32.0;480.0;64.0;0.0;true;true
+Star;202.0;184.0;30.0;31.0;0.0
+Box_Bottle;120.0;96.0;48.0;72.0;0.0;false;true
+Box_Bottle;272.0;96.0;48.0;72.0;0.0;false;true
+Box_GlassBox;40.0;96.0;80.0;144.0;0.0;true;true
+Box_GlassBox;320.0;96.0;80.0;144.0;0.0;true;true
+Platform_Cross;192.0;360.0;32.0;32.0;0.0
+BecBunsen;248.0;344.0;20.0;67.0;90.0;true;0;becbunsen
+BecBunsen;149.0;340.0;20.0;67.0;-90.0;true;0;becbunsen
+MiniRed;336.0;240.0;32.0;22.0;0.0;false;1
