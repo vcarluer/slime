@@ -9,3 +9,5 @@ Star;226.0;249.0;30.0;31.0;0.0
 Platform_Cross;64.0;384.0;32.0;32.0;0.0
 LaserGun;96.0;393.0;65.0;15.0;180.0;lasergun;target1;true
 Target;440.0;392.0;16.0;16.0;0.0;target1
+BecBunsen;48.0;96.0;20.0;67.0;0.0;true;0;becbunsen
+BecBunsen;396.0;96.0;20.0;67.0;0.0;true;0;becbunsen

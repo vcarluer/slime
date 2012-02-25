@@ -1,9 +1,0 @@
-BlocInfo;0;120;480;480;0;BlocInfo-0;5;;;false;false;false;t,r,b
-TimeAttack;-2.0;0.0;0.0;0.0;0.0;2;1
-BecBunsen;24.0;296.0;20.0;67.0;90.0;true;0;becbunsen
-BecBunsen;24.0;-24.0;20.0;67.0;90.0;true;0;becbunsen
-CircularSaw;0.0;160.0;40.0;40.0;90.0;circularsaw;true
-CircularSaw;0.0;440.0;40.0;40.0;90.0;circularsaw;true
-Star;34.0;72.0;30.0;31.0;0.0
-Star;120.0;232.0;30.0;31.0;0.0
-Star;66.0;385.0;30.0;31.0;0.0
