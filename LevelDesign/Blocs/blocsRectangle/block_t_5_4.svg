@@ -16,7 +16,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 "
-   sodipodi:docname="Nouveau document 2">
+   sodipodi:docname="block_t_5_4.svg">
   <defs
      id="defs4">
     <linearGradient
@@ -155,17 +155,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.0703276"
-     inkscape:cx="113.02033"
-     inkscape:cy="170.62063"
+     inkscape:zoom="2.1406552"
+     inkscape:cx="217.69441"
+     inkscape:cy="222.69425"
      inkscape:document-units="px"
      inkscape:current-layer="MAP"
      showgrid="true"
      inkscape:snap-grids="true"
      inkscape:snap-page="false"
      width="800px"
-     inkscape:window-width="1920"
-     inkscape:window-height="1138"
+     inkscape:window-width="1680"
+     inkscape:window-height="988"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -191,7 +191,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1074,11 +1074,11 @@
          x="-2"
          y="0">TimeAttack</tspan></text>
     <image
-       width="192"
+       width="128"
        height="32"
        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAFRJREFU OI1jTM1q+M9AAWAREuSnRD8Di5AgH4UGCFFqAMVeoNQFb958oMgAxus3blMWjX///qPIBSxXrt6h zABxcWHKDHj37hOFBrz/OOAuGGAvAACJyB2YZglWcgAAAABJRU5ErkJggg== "
        id="platform-7"
-       x="144"
+       x="176"
        y="336"
        type="Platform" />
     <text
@@ -1169,12 +1169,21 @@
        y="416"
        type="Star" />
     <image
-       width="480"
+       width="32"
        height="32"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAFRJREFU OI1jTM1q+M9AAWAREuSnRD8Di5AgH4UGCFFqAMVeoNQFb958oMgAxus3blMWjX///qPIBSxXrt6h zABxcWHKDHj37hOFBrz/OOAuGGAvAACJyB2YZglWcgAAAABJRU5ErkJggg== "
-       id="platform-6"
-       x="0"
-       y="120"
-       type="Platform" />
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAp9JREFU WIWtl8tu2zAQRS+HdG1l1wL1Oquiv9VFP6N/2q66qhsY7cpONI8uhhTpR2rKERGBCqDknrkz4ozC l6/fDJ3L4I+aGczK3v3nV1cahnX3w+bqMFRxU4OaQVWh6vscqHkATnASvZrBGnFR9V38ugWThs1M B9CIa9nPAMR3EXEQFojqKwCdDlhz00av6g60kasqWAqAQGIEi4BZoGcgaRg2nQCG/ANM1tfoK4BH nUQgEsEs4CiITIhE/rswSmb6HbiW/2vWi0zRMwtiJEQmMBGICEQBgQOYGarWXwPX818st5pvEcSc 9xgFzJyFszgFhOAXjzyzBi7yf1pwzBmABRwJxC5KRJMoQkAAgBDuSQGm6NVa8SwcBcKEGAk0EigE UBEGpr3UkpkhDZuZRViibyOXLEye68Al4kZ0CsROrpkpqNaXg2aynDzXNcdnorALcTVD+v7jZxfA aytGwmq1wjCszyy+FFN155QIQu5Y2m4/vAmgXSJSxYqgKkRcTIhAkUBS34q0/fh+MYDj8wuenv5U MQoIoYoR5aLM9yGEZR1gFuz3fxGa6qemGAPya9i8FUnkepO4Z93zv9Jut18M4PllrB2ybddW3wQ0 Q4yZIe1+LwcA4GQmKMd17RltE8vnwK83OhBjxPrdCg8PA8wUzOL9v7Ti3J4nKClADpU+f3rsEvrf QcTsTYdZMOb9/JqA2tlBFelweO4EuHUUV7ExA43jdZgWKh2Oxz6AjmZU7GcRjOOpKxcw+fkZDqC7 HbcCE8TYpqjCzANA30DCeSBxiDZy9vSMdU+HYyfAnSNZLdIziDKSzS7CTHNrKC17SYec5L8ZSg+H ziJsbmaP5ayvj+W9DrQQi36Y9NaACzvGop9msx1Y+uN0HsDyn+f/APyp7GGxADO2AAAAAElFTkSu QmCC "
+       id="end"
+       x="304"
+       y="336"
+       type="Platform_End" />
+    <image
+       width="32"
+       height="32"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAp9JREFU WIWtl8tu2zAQRS+HdG1l1wL1Oquiv9VFP6N/2q66qhsY7cpONI8uhhTpR2rKERGBCqDknrkz4ozC l6/fDJ3L4I+aGczK3v3nV1cahnX3w+bqMFRxU4OaQVWh6vscqHkATnASvZrBGnFR9V38ugWThs1M B9CIa9nPAMR3EXEQFojqKwCdDlhz00av6g60kasqWAqAQGIEi4BZoGcgaRg2nQCG/ANM1tfoK4BH nUQgEsEs4CiITIhE/rswSmb6HbiW/2vWi0zRMwtiJEQmMBGICEQBgQOYGarWXwPX818st5pvEcSc 9xgFzJyFszgFhOAXjzyzBi7yf1pwzBmABRwJxC5KRJMoQkAAgBDuSQGm6NVa8SwcBcKEGAk0EigE UBEGpr3UkpkhDZuZRViibyOXLEye68Al4kZ0CsROrpkpqNaXg2aynDzXNcdnorALcTVD+v7jZxfA aytGwmq1wjCszyy+FFN155QIQu5Y2m4/vAmgXSJSxYqgKkRcTIhAkUBS34q0/fh+MYDj8wuenv5U MQoIoYoR5aLM9yGEZR1gFuz3fxGa6qemGAPya9i8FUnkepO4Z93zv9Jut18M4PllrB2ybddW3wQ0 Q4yZIe1+LwcA4GQmKMd17RltE8vnwK83OhBjxPrdCg8PA8wUzOL9v7Ti3J4nKClADpU+f3rsEvrf QcTsTYdZMOb9/JqA2tlBFelweO4EuHUUV7ExA43jdZgWKh2Oxz6AjmZU7GcRjOOpKxcw+fkZDqC7 HbcCE8TYpqjCzANA30DCeSBxiDZy9vSMdU+HYyfAnSNZLdIziDKSzS7CTHNrKC17SYec5L8ZSg+H ziJsbmaP5ayvj+W9DrQQi36Y9NaACzvGop9msx1Y+uN0HsDyn+f/APyp7GGxADO2AAAAAElFTkSu QmCC "
+       id="end-1"
+       x="-176"
+       y="-368"
+       type="Platform_End"
+       transform="scale(-1,-1)" />
   </g>
 </svg>

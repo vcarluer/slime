@@ -16,7 +16,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 "
-   sodipodi:docname="Slime_level.svg">
+   sodipodi:docname="block_c_5_1.svg">
   <defs
      id="defs4">
     <linearGradient
@@ -120,8 +120,8 @@
      inkscape:snap-grids="true"
      inkscape:snap-page="false"
      width="800px"
-     inkscape:window-width="1920"
-     inkscape:window-height="1138"
+     inkscape:window-width="1680"
+     inkscape:window-height="988"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -147,7 +147,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -987,8 +987,8 @@
        y="120"
        type="BlocInfo"
        att_complexity="5"
-       att_entries="tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb"
-       att_exits="tl,tm,tr,rt,rm,rb,bl,bm,br,lt,lm,lb"
+       att_entries=""
+       att_exits=""
        att_isStart="false"
        att_isEnd="false"
        att_isBoss="false"
@@ -1007,14 +1007,6 @@
          id="tspan4745-6-6"
          x="-2"
          y="0">TimeAttack</tspan></text>
-    <image
-       width="480"
-       height="32"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAFRJREFU OI1jTM1q+M9AAWAREuSnRD8Di5AgH4UGCFFqAMVeoNQFb958oMgAxus3blMWjX///qPIBSxXrt6h zABxcWHKDHj37hOFBrz/OOAuGGAvAACJyB2YZglWcgAAAABJRU5ErkJggg== "
-       id="platform-7"
-       x="7.1054274e-015"
-       y="568"
-       type="Platform" />
     <image
        width="48"
        height="32"

@@ -1,11 +1,12 @@
 BlocInfo;0;120;480;480;0;BlocInfo-0;1;;;false;false;false;t,r,l
 TimeAttack;-2.0;0.0;0.0;0.0;0.0;0;0
-Platform;144.0;232.0;192.0;32.0;0.0
+Platform;176.0;232.0;128.0;32.0;0.0
 BecBunsen;168.0;264.0;20.0;67.0;0.0;true;0;becbunsen
 BecBunsen;292.0;264.0;20.0;67.0;0.0;true;0;becbunsen
 BecBunsen;168.0;165.0;20.0;67.0;180.0;true;0;becbunsen
 BecBunsen;292.0;165.0;20.0;67.0;180.0;true;0;becbunsen
 Star;226.0;313.0;30.0;31.0;0.0
 Star;224.0;153.0;30.0;31.0;0.0
-Platform;0.0;0.0;480.0;32.0;0.0
-Box_GlassBox;0.0;32.0;480.0;64.0;0.0;true;true
+Box_GlassBox;0.0;0.0;480.0;64.0;0.0;true;true
+Platform_End;304.0;232.0;32.0;32.0;0.0
+Platform_End;144.0;232.0;32.0;32.0;180.0

@@ -155,9 +155,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.0703276"
-     inkscape:cx="147.1951"
-     inkscape:cy="360.97277"
+     inkscape:zoom="2.1406552"
+     inkscape:cx="106.2988"
+     inkscape:cy="333.1567"
      inkscape:document-units="px"
      inkscape:current-layer="MAP"
      showgrid="true"
@@ -1394,7 +1394,7 @@
        y="241"
        type="Star" />
     <image
-       width="144"
+       width="112"
        height="32"
        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAVRJREFU OI2lks8rw3EYx1+fbcK+trY02giRKfkDlNUUR+5+JQeU4uC+1Bz2J4gixWFy23DDEoXbDjNmyZQf ZTLM5vc+DvOjnT/P8f0871fPu+cRE5M+iUIZrFazih+D1aIMMCkCVCPUBAPIThdSMxZ2Mhl0oX3S /X1/kmlpGRCkBwf+AXflNhwz84gud4E/Fwxx7e7g8fYeAC0Wo/LgEKTgpr6BjLMJAHF8EpfC48Ws l5TUVQPwcnZBWl+M9Hp+tsmiGxrF1tIMQpCMRMktzoFmRESOYpJMlqLhsfyAlCQjUT4WZuEnlt7r w5x7o7ShFoDXxCWPn/A1PYVYWd2QAGXxUxr9fgDiPb08O50AWMJhqnZD6LrbCyLK9R2uWl0YHHZb XrHbyCbOAYnZ3cbvbUzbSd7HR0DTCgCi1knF5h4isLal9sqp1JOKH0PqIa0KUN1AMcI3RUN0LjpO aDwAAAAASUVORK5CYII= "
        id="platform_bumper-5"
@@ -1411,7 +1411,7 @@
        type="Platform_Corner"
        transform="scale(-1,-1)" />
     <image
-       width="104"
+       width="88"
        height="32"
        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAL5JREFU OI3Fkr0OAVEQhb9NLlaDvVHgEfw9jVfQeAqPI6JVi07tP9Gj2Fy7GovYq5ANm1BNYcozc07mS47T 7fUtglHaK0r8KO0VhAFaGiBGkH7g+wEA5uqyMFUAWvqAzkWpQz/KszpVAGh4R8ruBQBns91ZgNG8 RCabA+B+u9JpB6mAX3v1eMQAxNaSFCK2lkTnQ/u2dwbDsU0QlkENgGZp/xVhHb4Q68XDG2Eyncma aMxZ4keZUygMkH/wZ4QnJ95Y9+rbe4kAAAAASUVORK5CYII= "
        id="platform_NoSticky-6"
@@ -1419,5 +1419,22 @@
        y="-72"
        type="Platform_NoSticky"
        transform="matrix(0,1,-1,0,0,0)" />
+    <image
+       width="32"
+       height="32"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAp9JREFU WIWtl8tu2zAQRS+HdG1l1wL1Oquiv9VFP6N/2q66qhsY7cpONI8uhhTpR2rKERGBCqDknrkz4ozC l6/fDJ3L4I+aGczK3v3nV1cahnX3w+bqMFRxU4OaQVWh6vscqHkATnASvZrBGnFR9V38ugWThs1M B9CIa9nPAMR3EXEQFojqKwCdDlhz00av6g60kasqWAqAQGIEi4BZoGcgaRg2nQCG/ANM1tfoK4BH nUQgEsEs4CiITIhE/rswSmb6HbiW/2vWi0zRMwtiJEQmMBGICEQBgQOYGarWXwPX818st5pvEcSc 9xgFzJyFszgFhOAXjzyzBi7yf1pwzBmABRwJxC5KRJMoQkAAgBDuSQGm6NVa8SwcBcKEGAk0EigE UBEGpr3UkpkhDZuZRViibyOXLEye68Al4kZ0CsROrpkpqNaXg2aynDzXNcdnorALcTVD+v7jZxfA aytGwmq1wjCszyy+FFN155QIQu5Y2m4/vAmgXSJSxYqgKkRcTIhAkUBS34q0/fh+MYDj8wuenv5U MQoIoYoR5aLM9yGEZR1gFuz3fxGa6qemGAPya9i8FUnkepO4Z93zv9Jut18M4PllrB2ybddW3wQ0 Q4yZIe1+LwcA4GQmKMd17RltE8vnwK83OhBjxPrdCg8PA8wUzOL9v7Ti3J4nKClADpU+f3rsEvrf QcTsTYdZMOb9/JqA2tlBFelweO4EuHUUV7ExA43jdZgWKh2Oxz6AjmZU7GcRjOOpKxcw+fkZDqC7 HbcCE8TYpqjCzANA30DCeSBxiDZy9vSMdU+HYyfAnSNZLdIziDKSzS7CTHNrKC17SYec5L8ZSg+H ziJsbmaP5ayvj+W9DrQQi36Y9NaACzvGop9msx1Y+uN0HsDyn+f/APyp7GGxADO2AAAAAElFTkSu QmCC "
+       id="end-1"
+       x="304"
+       y="-72"
+       type="Platform_End"
+       transform="matrix(0,1,-1,0,0,0)" />
+    <image
+       width="32"
+       height="32"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAp9JREFU WIWtl8tu2zAQRS+HdG1l1wL1Oquiv9VFP6N/2q66qhsY7cpONI8uhhTpR2rKERGBCqDknrkz4ozC l6/fDJ3L4I+aGczK3v3nV1cahnX3w+bqMFRxU4OaQVWh6vscqHkATnASvZrBGnFR9V38ugWThs1M B9CIa9nPAMR3EXEQFojqKwCdDlhz00av6g60kasqWAqAQGIEi4BZoGcgaRg2nQCG/ANM1tfoK4BH nUQgEsEs4CiITIhE/rswSmb6HbiW/2vWi0zRMwtiJEQmMBGICEQBgQOYGarWXwPX818st5pvEcSc 9xgFzJyFszgFhOAXjzyzBi7yf1pwzBmABRwJxC5KRJMoQkAAgBDuSQGm6NVa8SwcBcKEGAk0EigE UBEGpr3UkpkhDZuZRViibyOXLEye68Al4kZ0CsROrpkpqNaXg2aynDzXNcdnorALcTVD+v7jZxfA aytGwmq1wjCszyy+FFN155QIQu5Y2m4/vAmgXSJSxYqgKkRcTIhAkUBS34q0/fh+MYDj8wuenv5U MQoIoYoR5aLM9yGEZR1gFuz3fxGa6qemGAPya9i8FUnkepO4Z93zv9Jut18M4PllrB2ybddW3wQ0 Q4yZIe1+LwcA4GQmKMd17RltE8vnwK83OhBjxPrdCg8PA8wUzOL9v7Ti3J4nKClADpU+f3rsEvrf QcTsTYdZMOb9/JqA2tlBFelweO4EuHUUV7ExA43jdZgWKh2Oxz6AjmZU7GcRjOOpKxcw+fkZDqC7 HbcCE8TYpqjCzANA30DCeSBxiDZy9vSMdU+HYyfAnSNZLdIziDKSzS7CTHNrKC17SYec5L8ZSg+H ziJsbmaP5ayvj+W9DrQQi36Y9NaACzvGop9msx1Y+uN0HsDyn+f/APyp7GGxADO2AAAAAElFTkSu QmCC "
+       id="end-8"
+       x="184"
+       y="184"
+       type="Platform_End" />
   </g>
 </svg>

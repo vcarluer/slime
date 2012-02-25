@@ -1,6 +1,5 @@
 BlocInfo;0;120;480;480;0;BlocInfo-0;5;;;false;false;false;t,r,l
 TimeAttack;-2.0;0.0;0.0;0.0;0.0;15;5
-Platform;0.0;0.0;480.0;32.0;0.0
 Platform;216.0;336.0;48.0;32.0;0.0
 Platform_Corner;264.0;256.0;32.0;32.0;0.0
 Platform_Corner;264.0;336.0;32.0;32.0;-90.0
@@ -19,6 +18,6 @@ BecBunsen;268.0;189.0;20.0;67.0;180.0;true;0;becbunsen
 Star;224.0;217.0;30.0;31.0;0.0
 CircularSaw;144.0;320.0;40.0;40.0;-90.0;circularsaw;true
 CircularSaw;144.0;264.0;40.0;40.0;-90.0;circularsaw;true
-Box_Multitubes;128.0;32.0;224.0;72.0;0.0;true;true
-Box_GlassBox;352.0;32.0;128.0;64.0;0.0;true;true
-Box_GlassBox;0.0;32.0;128.0;64.0;0.0;true;true
+Box_Multitubes;128.0;0.0;224.0;72.0;0.0;true;true
+Box_GlassBox;352.0;0.0;128.0;64.0;0.0;true;true
+Box_GlassBox;0.0;0.0;128.0;64.0;0.0;true;true

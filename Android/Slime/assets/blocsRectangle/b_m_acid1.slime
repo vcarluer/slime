@@ -12,6 +12,8 @@ Star;322.0;208.0;30.0;31.0;0.0
 CircularSaw;200.0;240.0;40.0;40.0;180.0;circularsaw;true
 Bumper_Angle;24.0;64.0;48.0;48.0;0.0
 Star;130.0;328.0;30.0;31.0;0.0
-Platform_Bumper;72.0;384.0;144.0;32.0;0.0
+Platform_Bumper;72.0;384.0;112.0;32.0;0.0
 Platform_Corner;40.0;384.0;32.0;32.0;180.0
-Platform_NoSticky;4.0;316.0;104.0;32.0;90.0
+Platform_NoSticky;12.0;324.0;88.0;32.0;90.0
+Platform_End;40.0;264.0;32.0;32.0;90.0
+Platform_End;184.0;384.0;32.0;32.0;0.0
