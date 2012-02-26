@@ -2,6 +2,7 @@ package gamers.associate.Slime.items.custom;
 
 import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.SpriteType;
 
@@ -10,6 +11,7 @@ import javax.microedition.khronos.opengles.GL10;
 import org.cocos2d.config.ccMacros;
 import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.types.CGPoint;
+import org.cocos2d.types.CGRect;
 
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -56,7 +58,7 @@ public class LaserBeam extends GameItemPhysic {
 			this.setPosition(CGPoint.ccpMidpoint(this.source, this.target));
 			CGPoint base = CGPoint.make(1, 0);
 			CGPoint diff = CGPoint.make(this.target.x - this.source.x, this.target.y - this.source.y);
-			float newAngle = - ccMacros.CC_RADIANS_TO_DEGREES(CGPoint.ccpAngle(base, diff));
+			float newAngle = ccMacros.CC_RADIANS_TO_DEGREES(CGPoint.ccpAngle(base, diff));
 			this.setAngle(newAngle);			
 		}
 	}

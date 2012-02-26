@@ -189,7 +189,7 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 				xFire = (float) (Math.cos(radAngle)*((this.position.x - this.width / 2 + this.beamOffset) - this.position.x)) + this.position.x;
 				yFire = (float) (Math.sin(radAngle)*((this.position.x - this.width / 2 + this.beamOffset) - this.position.x)) + this.position.y;
 				CGPoint startFire = CGPoint.make(xFire, yFire);
-				for (ITrigerable targetBeam : Level.currentLevel.getTrigerables(this.target)) {
+				for (ITrigerable targetBeam : Level.currentLevel.getTrigerables(this.target)) {					
 					LaserBeam b = SlimeFactory.LaserBeam.create(startFire, targetBeam.getPosition(), false);
 					this.beam.add(b);
 				}
