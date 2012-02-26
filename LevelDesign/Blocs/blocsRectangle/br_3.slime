@@ -1,0 +1,12 @@
+BlocInfo;0;120;480;480;0;BlocInfo-0;1;;;false;false;false;t,l
+TimeAttack;-2.0;0.0;0.0;0.0;0.0;0;0
+Box_GlassBox;0.0;0.0;240.0;64.0;0.0;true;true
+Box_Multitubes;240.0;0.0;240.0;120.0;0.0;true;true
+MiniRed;240.0;120.0;32.0;22.0;0.0;false;1
+MiniRed;128.0;64.0;32.0;22.0;0.0;false;1
+Star;418.0;160.0;30.0;31.0;0.0
+BecBunsen;437.0;208.0;20.0;67.0;-90.0;true;0;becbunsen
+Platform;312.0;312.0;168.0;32.0;0.0
+Platform_End;280.0;312.0;32.0;32.0;180.0
+MiniRed;288.0;344.0;32.0;22.0;0.0;false;1
+Star;394.0;368.0;30.0;31.0;0.0

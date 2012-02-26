@@ -47,7 +47,7 @@ import com.badlogic.gdx.physics.box2d.World;
 public class Level {	
 	private static final float bgRatioY = 0.7f;
 	private static final float bgRatioX = 0.6f;
-	public static boolean DebugMode = true;
+	public static boolean DebugMode = false;
 	public static boolean isInit;	
 	public static float Gravity = -10;
 	private static String backgroundPath = "bkg/";
