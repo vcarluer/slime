@@ -12,7 +12,7 @@ import org.cocos2d.types.CGPoint;
 
 public abstract class LevelGraphGeneratorBase {
 	protected static boolean debugBlocOn = true;
-	protected static String forceBlock = "blocsRectangle/tr_3.slime";
+	protected static String forceBlock = "blocsRectangle/br_1.slime";
 	
 	protected List<LevelGenNode> nodes;
 	protected int lastGeneratedComplexity;
