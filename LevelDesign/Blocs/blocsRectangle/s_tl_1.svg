@@ -15,7 +15,7 @@
    height="480"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.1 "
+   inkscape:version="0.48.2 r9819"
    sodipodi:docname="s_tl_1.svg">
   <defs
      id="defs4">
@@ -164,10 +164,10 @@
      inkscape:snap-grids="true"
      inkscape:snap-page="false"
      width="800px"
-     inkscape:window-width="1680"
-     inkscape:window-height="988"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
+     inkscape:window-width="1606"
+     inkscape:window-height="1028"
+     inkscape:window-x="66"
+     inkscape:window-y="22"
      inkscape:window-maximized="1"
      showguides="false"
      inkscape:snap-global="true">
@@ -191,7 +191,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1266,8 +1266,8 @@
     <path
        sodipodi:nodetypes="ccccc"
        att_targetId=""
-       att_isEmpty="false"
-       att_isStickable="false"
+       att_isEmpty="true"
+       att_isStickable="true"
        att_isDynamic="false"
        type="Polygon"
        inkscape:connector-curvature="0"
@@ -1281,8 +1281,8 @@
        inkscape:connector-curvature="0"
        type="Polygon"
        att_isDynamic="false"
-       att_isStickable="false"
-       att_isEmpty="false"
+       att_isStickable="true"
+       att_isEmpty="true"
        att_targetId=""
        sodipodi:nodetypes="ccccccccc" />
     <image
@@ -1301,8 +1301,8 @@
     <path
        sodipodi:nodetypes="cccccc"
        att_targetId=""
-       att_isEmpty="false"
-       att_isStickable="false"
+       att_isEmpty="true"
+       att_isStickable="true"
        att_isDynamic="false"
        type="Polygon"
        inkscape:connector-curvature="0"
@@ -1325,8 +1325,8 @@
     <path
        sodipodi:nodetypes="ccccc"
        att_targetId=""
-       att_isEmpty="false"
-       att_isStickable="false"
+       att_isEmpty="true"
+       att_isStickable="true"
        att_isDynamic="false"
        type="Polygon"
        inkscape:connector-curvature="0"
