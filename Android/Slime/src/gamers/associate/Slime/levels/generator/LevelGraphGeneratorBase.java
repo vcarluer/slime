@@ -222,11 +222,10 @@ public abstract class LevelGraphGeneratorBase {
 		if (list != null && list.size() > 0) {
 			
 			if (debugBlocOn) {
-				for(LevelGenNode node : list) {
-					if (node.getBlocDefinition().getResourceName().toUpperCase().equals(forceBlock.toUpperCase())) {
-						return node;
-					}
-				}
+				selected = pickBlockByName(forceBlock);
+				if (selected != null) {
+					return selected;
+				}				
 			}
 			
 			int idx = 0;
@@ -270,6 +269,16 @@ public abstract class LevelGraphGeneratorBase {
 		}
 		
 		return selected;
+	}
+
+	protected LevelGenNode pickBlockByName(String resourceName) {
+		for(LevelGenNode node : this.nodes) {
+			if (node.getBlocDefinition().getResourceName().toUpperCase().equals(resourceName.toUpperCase())) {
+				return node;
+			}
+		}
+		
+		return null;
 	}
 
 	public abstract String getAssetsBase();
