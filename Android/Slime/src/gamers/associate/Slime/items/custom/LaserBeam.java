@@ -1,5 +1,6 @@
 package gamers.associate.Slime.items.custom;
 
+import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Util;
@@ -13,6 +14,8 @@ import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 
+import android.util.Log;
+
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -24,7 +27,9 @@ public class LaserBeam extends GameItemPhysic {
 	private CGPoint source;
 	private CGPoint target;
 	private boolean isOn;
-
+	private CGPoint ref;
+	private CGPoint diff;
+	
 	public LaserBeam(float x, float y, float width, float height,
 			World world, float worldRatio) {
 		super(x, y, width, height, world, worldRatio);		
@@ -33,6 +38,9 @@ public class LaserBeam extends GameItemPhysic {
 		if (this.height == 0) {
 			this.bodyHeight = this.height = Default_Height;			
 		}		
+		
+		this.ref = CGPoint.make(1, 0);
+		this.diff = CGPoint.zero();
 	}
 	
 	public void setSource(CGPoint source) {
@@ -56,9 +64,11 @@ public class LaserBeam extends GameItemPhysic {
 		if (this.source != null && this.target != null) {
 			this.bodyWidth = this.width = CGPoint.ccpDistance(this.source, this.target);
 			this.setPosition(CGPoint.ccpMidpoint(this.source, this.target));
-			CGPoint base = CGPoint.make(1, 0);
-			CGPoint diff = CGPoint.make(this.target.x - this.source.x, this.target.y - this.source.y);
-			float newAngle = ccMacros.CC_RADIANS_TO_DEGREES(CGPoint.ccpAngle(base, diff));
+			this.diff.x = this.target.x - this.source.x;
+			this.diff.y = this.target.y - this.source.y;
+			float angle = CGPoint.ccpAngleSigned(this.ref, this.diff);
+			float newAngle = - ccMacros.CC_RADIANS_TO_DEGREES(angle);			
+			
 			this.setAngle(newAngle);			
 		}
 	}
@@ -142,6 +152,17 @@ public class LaserBeam extends GameItemPhysic {
 			gl.glColor4f(1.0f, 0.043f, 0.149f, 0.63f);
 			gl.glLineWidth(this.height * Level.currentLevel.getCameraManager().getCurrentZoom());								
 			CCDrawingPrimitives.ccDrawLine(gl, this.source, this.target);
+		}
+		
+		if (Level.DebugMode) {
+			CGPoint spawnPoint =  this.getPosition();
+			gl.glDisable(GL10.GL_LINE_SMOOTH);
+			gl.glColor4f(0.0f, 0.0f, 1.0f, 1.0f);			
+			gl.glPointSize(5.0f);						
+			CCDrawingPrimitives.ccDrawPoint(gl, spawnPoint);
+			gl.glColor4f(0.0f, 1.0f, 0.0f, 1.0f);
+			CCDrawingPrimitives.ccDrawPoint(gl, this.target);
+			CCDrawingPrimitives.ccDrawPoint(gl, this.source);			
 		}
 		
 		super.draw(gl);
