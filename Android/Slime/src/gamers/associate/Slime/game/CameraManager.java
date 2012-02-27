@@ -15,6 +15,7 @@ import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 
 public class CameraManager {
+	private static final float Max_Scale = 2.0f;
 	private static float margeFollowUnzoom = 50f;
 	private static float margeSelectUnzoom = 100f;
 	
@@ -322,7 +323,9 @@ public class CameraManager {
 		this.zoomCameraCenterTo(scale);
 	}
 	
-	public void zoomCameraTo(float zoomValue) {
+	public void zoomCameraTo(float zoomValueTo) {
+		float zoomValue = this.scaleScreen(zoomValueTo);
+		
 		if (zoomValue <= minScale) {
 			zoomValue = minScale;
 		}
@@ -432,6 +435,10 @@ public class CameraManager {
 				hMarge);
 	}
 	
+	private float scaleScreen(float fromScale) {
+		return CCDirector.sharedDirector().winSize().width * fromScale / 800f;
+	}
+	
 	public void setCameraView() {		
 		// CGPoint origin = this.levelOrigin;		
 		// Default view is windows size
@@ -442,7 +449,8 @@ public class CameraManager {
 		float minScaleW = 1 / (this.levelWidth / CGRect.width(this.screenView));
 		float minScaleH = 1 / (this.levelHeight / CGRect.height(this.screenView));
 		this.minScale = Math.max(minScaleW, minScaleH);
-		this.maxScale = 2.0f;
+		// max scale 2 for sgs 800*480
+		this.maxScale = this.scaleScreen(Max_Scale);
 		this.minFollowScale = 0.5f;
 		this.zoomSpeed = 3.0f;
 		// To take into account new limits
