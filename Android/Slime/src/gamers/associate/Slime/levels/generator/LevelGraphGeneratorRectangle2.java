@@ -15,6 +15,7 @@ import gamers.associate.Slime.game.TimeAttackGame;
 import gamers.associate.Slime.levels.LevelHome;
 
 public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle {
+	private static final String BLOCS_TUTORIAL = "blocsTutorial";
 	private static final String TUT7_2 = "tut7-2";
 	private static final String TUT7_1 = "tut7-1";
 	private static final String TUT6_2 = "tut6-2";
@@ -51,8 +52,8 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 			BlocDirection constrained, boolean isBoss) {
 		
 		if (SlimeFactory.GameInfo.getDifficulty() == LevelDifficulty.Easy && SlimeFactory.GameInfo.getLevelNum() <= tutorialCount) {
-//			this.generateTutorialLevel(SlimeFactory.GameInfo.getLevelNum());
-//			return;
+			this.generateTutorialLevel(SlimeFactory.GameInfo.getLevelNum());
+			return;
 		}
 		
 		int lvlWidth = 0;
@@ -324,7 +325,7 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 	}
 	
 	private String resource(String shortName) {
-		return "blocsRectangle/" + shortName + ".slime";
+		return BLOCS_TUTORIAL + "/" + shortName + ".slime";
 	}	
 
 	private void pickStar(int starBlocCount, List<Integer> allStars,

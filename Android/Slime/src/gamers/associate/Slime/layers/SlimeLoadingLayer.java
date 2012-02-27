@@ -110,6 +110,7 @@ public class SlimeLoadingLayer extends CCLayer {
 				BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorCorridor);
 				BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle);
 				BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle2);
+				BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorTutorial);
 				
 				currentLevel = Level.get(LevelHome.Id);					
 				unschedule(nextCallback);

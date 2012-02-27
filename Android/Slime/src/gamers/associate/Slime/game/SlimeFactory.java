@@ -29,6 +29,7 @@ import gamers.associate.Slime.levels.ILevelBuilder;
 import gamers.associate.Slime.levels.generator.LevelGraphGeneratorCorridor;
 import gamers.associate.Slime.levels.generator.LevelGraphGeneratorRectangle;
 import gamers.associate.Slime.levels.generator.LevelGraphGeneratorRectangle2;
+import gamers.associate.Slime.levels.generator.LevelGraphGeneratorTutorial;
 
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.ccColor3B;
@@ -68,6 +69,7 @@ public abstract class SlimeFactory {
 	public static LevelGraphGeneratorCorridor LevelGeneratorCorridor = new LevelGraphGeneratorCorridor(); 
 	public static LevelGraphGeneratorRectangle LevelGeneratorRectangle = new LevelGraphGeneratorRectangle();
 	public static LevelGraphGeneratorRectangle2 LevelGeneratorRectangle2 = new LevelGraphGeneratorRectangle2();
+	public static LevelGraphGeneratorTutorial LevelGeneratorTutorial = new LevelGraphGeneratorTutorial();
 	public static GameInformation GameInfo;
 	public static RedFactory Red = new RedFactory();
 	public static GateFactory Gate = new GateFactory();
@@ -81,6 +83,8 @@ public abstract class SlimeFactory {
 		LevelGeneratorCorridor.attach(level);		
 		LevelGeneratorRectangle.attach(level);		
 		LevelGeneratorRectangle2.attach(level);
+		LevelGeneratorTutorial.attach(level);
+		
 		
 		Slimy.attach(level, attachNode, attachWorld, attachWorldRatio);
 		SpawnPortal.attach(level, attachNode);
@@ -140,6 +144,7 @@ public abstract class SlimeFactory {
 		LevelGeneratorCorridor.detach();
 		LevelGeneratorRectangle.detach();
 		LevelGeneratorRectangle2.detach();
+		LevelGeneratorTutorial.detach();
 		
 		SpriteSheetFactory.detachAll();
 		isAttached = false;
@@ -172,6 +177,7 @@ public abstract class SlimeFactory {
 		LevelGeneratorCorridor.destroy();
 		LevelGeneratorRectangle.destroy();
 		LevelGeneratorRectangle2.destroy();
+		LevelGeneratorTutorial.destroy();
 		
 		SpriteSheetFactory.destroy();
 		isAttached = false;

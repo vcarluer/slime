@@ -235,7 +235,10 @@ public class GALogoLayer extends CCLayer {
 					case 12:
 						BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle2);
 						break;
-					case 13:						
+					case 13:
+						BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorTutorial);
+						break;
+					case 14:						
 						currentLevel = Level.get(LevelHome.Id);
 						unschedule(nextCallback);
 						load();											

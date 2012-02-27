@@ -6,6 +6,8 @@ import gamers.associate.Slime.levels.LevelDefinition;
 import gamers.associate.Slime.levels.LevelDefinitionParser;
 import gamers.associate.Slime.levels.LevelHome;
 import gamers.associate.Slime.levels.generator.LevelDefinitionGenerator;
+import gamers.associate.Slime.levels.generator.LevelGenNode;
+import gamers.associate.Slime.levels.generator.LevelGraphGeneratorTutorial;
 
 import java.util.ArrayList;
 
@@ -15,8 +17,8 @@ import org.cocos2d.transitions.CCTransitionScene;
 
 public class LevelBuilderGenerator implements ILevelBuilder
 {	
-	private static boolean isDebug =  false;
-	private static int forceDiff = 8;
+	private static boolean isDebug =  true;
+	private static int forceDiff = 1;
 	private static int forceLevel = 1;
 	
 	private static int MinimumComplexity = 1;
@@ -49,13 +51,19 @@ public class LevelBuilderGenerator implements ILevelBuilder
 			if (this.firstBuild && this.levelparser.isStored() && !this.levelDef.isFinished()) {				
 				this.levelparser.buildLevel(level);					
 				level.setLevelDefinition(this.levelDef);
-			} else {
-				// this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor);
-				this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorRectangle2);
+			} else {							
 				if (!isDebug) {
 					this.gameInfo.levelUp();
 				} else {
 					this.gameInfo.forceLevel(forceDiff, forceLevel);					
+				}
+				
+				// this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor);
+				if (this.gameInfo.getDifficulty() == LevelDifficulty.Easy 
+						&& this.gameInfo.getLevelNum() <= LevelGraphGeneratorTutorial.tutorialCount) {
+					this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorTutorial);
+				} else {
+					this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorRectangle2);
 				}
 				
 				this.isBoss = (this.gameInfo.getLevelNum() == this.gameInfo.getLevelMax());
