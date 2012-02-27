@@ -12,7 +12,7 @@ import org.cocos2d.types.CGPoint;
 
 public abstract class LevelGraphGeneratorBase {
 	protected static boolean debugBlocOn = false;
-	protected static String forceBlock = "blocsRectangle/br_2.slime";
+	protected static String forceBlock = "blocsRectangle/s_tl_3.slime";
 	
 	protected List<LevelGenNode> nodes;
 	protected int lastGeneratedComplexity;
@@ -222,7 +222,7 @@ public abstract class LevelGraphGeneratorBase {
 		if (list != null && list.size() > 0) {
 			
 			if (debugBlocOn) {
-				selected = pickBlockByName(forceBlock);
+				selected = pickBlockByName(forceBlock, list);
 				if (selected != null) {
 					return selected;
 				}				
@@ -271,8 +271,11 @@ public abstract class LevelGraphGeneratorBase {
 		return selected;
 	}
 
-	protected LevelGenNode pickBlockByName(String resourceName) {
-		for(LevelGenNode node : this.nodes) {
+	protected LevelGenNode pickBlockByName(String resourceName) {	
+		return this.pickBlockByName(resourceName, this.nodes);
+	}
+	protected LevelGenNode pickBlockByName(String resourceName, List<LevelGenNode> list) {
+		for(LevelGenNode node : list) {
 			if (node.getBlocDefinition().getResourceName().toUpperCase().equals(resourceName.toUpperCase())) {
 				return node;
 			}
