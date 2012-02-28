@@ -4,6 +4,7 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.custom.BumperAngle;
 import gamers.associate.Slime.items.custom.LaserGun;
+import gamers.associate.Slime.items.custom.LiquidSurface;
 import gamers.associate.Slime.items.custom.Platform;
 import gamers.associate.Slime.items.custom.SpawnPortal;
 import gamers.associate.Slime.layers.HomeLayer;
@@ -32,7 +33,26 @@ public class LevelHome extends LevelDefinitionHardCoded {
 				
 		// Ground
 		float groundHeight = 128f;
-		SlimeFactory.Platform.createWallBL(0, 0, level.getLevelWidth(), groundHeight);
+		float groundWidth = level.getLevelWidth() / 4f;
+		float acidWidth = level.getLevelWidth() / 12f;
+		float groundMiddle = level.getLevelWidth() - 2 * groundWidth - 2* acidWidth;
+		float acidBaseHeight = 32f;
+		SlimeFactory.Platform.createWallBL(0, 0, groundWidth, groundHeight);
+		
+		SlimeFactory.Platform.createWallBL(groundWidth, 0, acidWidth, acidBaseHeight);		
+		SlimeFactory.Liquid.createBL(groundWidth, acidBaseHeight, acidWidth, groundHeight - LiquidSurface.Default_Height - acidBaseHeight);
+		SlimeFactory.LiquidSurface.createBL(groundWidth, acidBaseHeight + groundHeight - acidBaseHeight - LiquidSurface.Default_Height, acidWidth, LiquidSurface.Default_Height);
+				
+		SlimeFactory.Platform.createWallBL(groundWidth + acidWidth, 0, groundMiddle, groundHeight);
+//		float tubeW = 32f;
+//		SlimeFactory.Sprite.createBL(level.getLevelWidth() / 2f - tubeW / 2f, groundHeight / 2f - groundMiddle / 2f, tubeW, groundMiddle, "tank", "tank-tube-filled", 1).setAngle(90f);
+		
+		SlimeFactory.Platform.createWallBL(groundWidth + acidWidth + groundMiddle, 0, acidWidth, acidBaseHeight);
+		SlimeFactory.Liquid.createBL(groundWidth + acidWidth + groundMiddle, acidBaseHeight, acidWidth, groundHeight - LiquidSurface.Default_Height - acidBaseHeight);
+		SlimeFactory.LiquidSurface.createBL(groundWidth + acidWidth + groundMiddle, acidBaseHeight + groundHeight - acidBaseHeight - LiquidSurface.Default_Height, acidWidth, LiquidSurface.Default_Height);
+		
+		SlimeFactory.Platform.createWallBL(groundWidth + acidWidth + groundMiddle + acidWidth, 0, groundWidth, groundHeight);
+		
 		float middleBlockS = 64f;
 		SlimeFactory.Platform.createWallBL(level.getLevelWidth() / 2f - middleBlockS / 2f, groundHeight, middleBlockS, middleBlockS);
 		

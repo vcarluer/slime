@@ -18,6 +18,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class LiquidSurface extends GameItemPhysic {
 	public static String Anim_Init = "liquid-surface";
+	public static float Default_Height = 16f;
 	
 	public LiquidSurface(float x, float y, float width, float height,
 			World world, float worldRatio) {
