@@ -26,8 +26,8 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 	public static String Anim_Wait = "laser-wait";
 	public static String Anim_Firing = "laser-firing";
 	
-	private static float Default_Width = 65f;
-	private static float Default_Height = 15f;
+	public static float Default_Width = 65f;
+	public static float Default_Height = 15f;
 	
 	private static float Reference_Width = 65f;
 	private static float Reference_Height = 15f;

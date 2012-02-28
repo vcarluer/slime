@@ -40,7 +40,7 @@ public class PlatformFactory extends GameItemPhysicFactory<Platform>{
 		return this.create(x + width / 2, y + height / 2, width, height, Platform.Sticky);
 	}
 	
-	private Platform create(float x, float y, float width, float height, int platformType) {		
+	public Platform create(float x, float y, float width, float height, int platformType) {		
 		this.currentType = platformType;
 		this.currentMove = false;
 		Platform platform = this.create(x, y, width, height);		
