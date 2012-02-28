@@ -388,6 +388,7 @@ public class Level {
 		this.itemsToAdd.clear();
 		this.itemsToRemove.clear();
 		this.startItem = null;
+		this.thumbnailManager.reset();
 		
 		this.removeCustomOverLayer();
 		this.setIsTouchEnabled(true);
@@ -397,7 +398,7 @@ public class Level {
 		// this.disablePauseLayer();
 		
 		this.setLevelOrigin(CGPoint.zero());
-		this.cameraManager.cancelAll();
+		this.cameraManager.cancelAll();		
 		
 		this.resume();
 	}

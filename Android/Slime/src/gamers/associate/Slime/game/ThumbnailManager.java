@@ -160,4 +160,8 @@ public class ThumbnailManager {
 			}
 		}
 	}
+	
+	public void reset() {
+		this.thumbnails.clear();
+	}
 }
