@@ -343,7 +343,8 @@ public class CameraManager {
 		this.normalizePosition();
 	}
 	
-	public void zoomCameraCenterTo(float zoomValue) {
+	public void zoomCameraCenterTo(float zoomValueTo) {
+		float zoomValue = this.scaleScreen(zoomValueTo);
 		if (zoomValue <= minScale) {
 			zoomValue = minScale;
 		}

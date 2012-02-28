@@ -227,4 +227,9 @@ public class GoalPortal extends GameItemPhysic implements ISelectable {
 	public boolean isThumbnailAwaysOn() {
 		return true;
 	}
+
+	@Override
+	public boolean isThumbnailActive() {
+		return true;
+	}
 }

@@ -50,10 +50,12 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 	public void setTarget(ISelectable target) {
 		this.target = target;
 		this.targetThumbnail = this.target.getThumbail();
-		this.isActive = !this.target.isThumbnailAwaysOn();
-		this.target.getRootNode().addChild(this.targetThumbnail, Level.zTop);
-		this.targetThumbnail.setPosition(this.position);
-		this.targetOriginalScale = this.targetThumbnail.getScale();
+		if (this.targetThumbnail != null) {
+			this.isActive = !this.target.isThumbnailAwaysOn();
+			this.target.getRootNode().addChild(this.targetThumbnail, Level.zTop);
+			this.targetThumbnail.setPosition(this.position);
+			this.targetOriginalScale = this.targetThumbnail.getScale();
+		}
 	}
 
 	public boolean canSelect(CGPoint gameReference) {
@@ -139,7 +141,9 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 	@Override
 	public void destroy() {		
 		super.destroy();
-		this.target.getRootNode().removeChild(this.targetThumbnail, true);
+		if (this.targetThumbnail != null) {
+			this.target.getRootNode().removeChild(this.targetThumbnail, true);
+		}
 	}
 
 	/* (non-Javadoc)
@@ -203,6 +207,11 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 
 	@Override
 	public boolean isThumbnailAwaysOn() {
+		return false;
+	}
+
+	@Override
+	public boolean isThumbnailActive() {
 		return false;
 	}	
 }

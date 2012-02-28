@@ -292,4 +292,9 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 	public boolean isThumbnailAwaysOn() {
 		return false;
 	}
+
+	@Override
+	public boolean isThumbnailActive() {
+		return true;
+	}
 }

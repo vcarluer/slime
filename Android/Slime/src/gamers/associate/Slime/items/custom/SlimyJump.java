@@ -665,4 +665,9 @@ public class SlimyJump extends Slimy implements ISelectable {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public boolean isThumbnailActive() {
+		return true;
+	}
 }

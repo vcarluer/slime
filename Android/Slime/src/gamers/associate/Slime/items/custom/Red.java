@@ -10,7 +10,10 @@ import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCReverseTime;
 import org.cocos2d.actions.interval.CCSequence;
+import org.cocos2d.nodes.CCNode;
+import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.CGPoint;
+import org.cocos2d.types.CGRect;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -28,13 +31,17 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.GameItemPhysic;
+import gamers.associate.Slime.items.base.ISelectable;
+import gamers.associate.Slime.items.base.SpriteSheetFactory;
 
-public class Red extends GameItemPhysic {
+public class Red extends GameItemPhysic implements ISelectable {
 	public static final float Default_Width = 153;
 	public static final float Default_Height = 105f;
 	
 	protected static float Default_Body_Width = 153f;
 	protected static float Default_Body_Height = 105f;
+	
+	private static String thumbnail = "wait-01.png"; // "teleporter-red-portal-04.png";
 
 	public static String Anim_Bite = "bite";
 	public static String Anim_Breaking = "breaking";
@@ -71,6 +78,8 @@ public class Red extends GameItemPhysic {
 	private float nextDir = -1; // Turn left
 //	private Body compressedBody;
 	private Body normalBody;
+	
+	private CCSprite thumbnailSprite;
 	
 	public Red(float x, float y, float width, float height, World world,
 			float worldRatio, boolean isBoss) {
@@ -579,5 +588,90 @@ public class Red extends GameItemPhysic {
 
 	public void setLife(int life) {
 		this.life = life;
+	}
+
+	@Override
+	public boolean trySelect(CGPoint gameReference) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean canSelect(CGPoint gameReference) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void selectionMove(CGPoint gameReference) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void selectionStop(CGPoint gameReference) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void select() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void select(CGPoint gameReference) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void unselect() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isSelected() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public CGRect getSelectionRect() {
+		return CGRect.make(this.position.x, this.position.y, Default_Height, Default_Height);
+	}
+
+	@Override
+	public CCSprite getThumbail() {
+		if (this.thumbnailSprite == null) {
+			this.thumbnailSprite = CCSprite.sprite(thumbnail, true);				
+		}
+		
+		this.thumbnailSprite.setRotation(this.sprite.getRotation());
+		this.thumbnailSprite.setScale(Thumbnail.Reference_Width / (Default_Width + Thumbnail.Reference_Inside_Margin));
+		return this.thumbnailSprite;	
+	}
+
+	@Override
+	public CCNode getRootNode() {
+		return SpriteSheetFactory.getSpriteSheet("red");
+	}
+
+	@Override
+	public boolean simpleSelect() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isThumbnailAwaysOn() {
+		return this.isBoss;
+	}
+
+	@Override
+	public boolean isThumbnailActive() {
+		return this.isBoss;
 	}
 }
