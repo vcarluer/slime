@@ -17,6 +17,7 @@ import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCFadeIn;
+import org.cocos2d.actions.interval.CCFadeTo;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.config.ccMacros;
 import org.cocos2d.types.CGPoint;
@@ -367,5 +368,16 @@ public class Slimy extends GameItemPhysic implements IBurnable, IDissolvable {
 	
 	public boolean isAlive() {
 		return !this.isDead() && !this.isDying;
+	}
+	
+	public void fadeDestroy() {
+		CCFadeTo fi = CCFadeTo.action(0.5f, 0);
+		CCCallFunc call = CCCallFunc.action(this, "removeSlimy");
+		CCSequence seq = CCSequence.actions(fi, call);
+		this.getSprite().runAction(seq);
+	}
+	
+	public void removeSlimy() {		
+		Level.currentLevel.addItemToRemove(this);
 	}
 }
