@@ -323,6 +323,10 @@ public class SlimyJump extends Slimy implements ISelectable {
 			this.computeTarget(gameReference);			
 			if (this.getBody() != null) {
 				// this.getBody().setAwake(true);				
+				if (!this.hasLanded) {
+					this.hasLanded = true;
+					this.waitAnim();
+				}
 				this.getBody().setLinearVelocity(new Vector2(0, 0));
 				Vector2 pos = this.getBody().getPosition();		
 				this.getBody().applyLinearImpulse(this.worldImpulse, pos);				
