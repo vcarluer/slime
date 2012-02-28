@@ -489,12 +489,13 @@ public class Level {
 		this.timeRatio = timeRatio;
 	}	
 	
-	public void tick(float delta) {
+	private float delta = 0f;
+	public void tick(float deltaBase) {
 		if (this.isGameOver && !this.isVictory) {
 			this.reload();
 		}
 
-		delta = delta * this.getTimeRatio();
+		delta = deltaBase * this.getTimeRatio();
 		if (this.itemsToAdd.size() > 0) {
 			for(GameItem item : this.itemsToAdd) {
 				this.addGameItem(item);
@@ -526,7 +527,8 @@ public class Level {
 			this.itemsToRemove.clear();
 		}
 		
-		this.cameraManager.tick(delta);
+		// Handle camera with real time
+		this.cameraManager.tick(deltaBase);
 		this.thumbnailManager.handle(this.selectables);	
 	}
 			
