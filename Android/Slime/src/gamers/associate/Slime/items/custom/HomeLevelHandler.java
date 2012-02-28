@@ -23,19 +23,19 @@ public class HomeLevelHandler extends GameItem {
 	}
 	
 	public void setPortal(SpawnPortal portal) {
-		this.spawnPortal = portal;
+		this.setSpawnPortal(portal);
 	}
 				
 	@Override
 	public void render(float delta) {
-		if (this.spawnPortal != null) {
+		if (this.getSpawnPortal() != null) {
 			if (Level.currentLevel.slimies().size() < maxSlime && !this.isPaused) {
 				Level level = Level.currentLevel;
 				if (level != null) {
 					long elapsed = (System.currentTimeMillis() - startHome) / 1000;
 					nextRand = MathLib.random(minSpawn, maxSpawn);
 					if (elapsed > nextRand && !this.isPaused) {
-						this.spawnPortal.spawn();												
+						this.getSpawnPortal().spawn();												
 						this.startHome = System.currentTimeMillis();
 					}
 				}
@@ -57,5 +57,13 @@ public class HomeLevelHandler extends GameItem {
 	public void removeSlimy() {
 		Slimy slimy = Level.currentLevel.slimies().get(0);
 		Level.currentLevel.addItemToRemove(slimy);
+	}
+
+	public SpawnPortal getSpawnPortal() {
+		return spawnPortal;
+	}
+
+	public void setSpawnPortal(SpawnPortal spawnPortal) {
+		this.spawnPortal = spawnPortal;
 	}
 }

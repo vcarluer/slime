@@ -82,7 +82,9 @@ public class LevelHome extends LevelDefinitionHardCoded {
 		
 		SlimeFactory.HomeLevelHandler.create().setPortal(spawnPortal);
 		
-		level.addCustomOverLayer(HomeLayer.get());
+		HomeLayer layer = HomeLayer.get();
+		layer.setSpawner(spawnPortal);
+		level.addCustomOverLayer(layer);
 		level.setIsHudEnabled(false);
 		level.setIsTouchEnabled(false);		
 	}

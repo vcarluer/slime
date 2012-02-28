@@ -1235,4 +1235,5 @@ public class Level {
 	public ArrayList<Slimy> slimies() {
 		return this.slimyList;
 	}
+	
 }

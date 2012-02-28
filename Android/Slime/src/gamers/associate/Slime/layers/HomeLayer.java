@@ -6,6 +6,7 @@ import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.Vibe;
 import gamers.associate.Slime.items.custom.MenuSprite;
+import gamers.associate.Slime.items.custom.SpawnPortal;
 import gamers.associate.Slime.items.custom.Star;
 
 import org.apache.http.conn.ClientConnectionRequest;
@@ -50,6 +51,7 @@ public class HomeLayer extends CCLayer {
 	//private CCSprite arrow;
 	private CCMenu menuInfo;
 	//private CCSprite diffSpr;
+	private SpawnPortal spawner;
 	
 	private static float baseShift = 150f; //100f;
 	private static float shiftTitle = baseShift;
@@ -129,6 +131,9 @@ public class HomeLayer extends CCLayer {
 
 	@Override
 	public boolean ccTouchesEnded(MotionEvent event) {
+		if (this.spawner != null) {
+			this.spawner.spawn();
+		}
 		// TODO: Go to level selection		
 		// return super.ccTouchesEnded(event);
 		// this.selectPlay(this);
@@ -318,5 +323,13 @@ public class HomeLayer extends CCLayer {
 		Sounds.playEffect(R.raw.menuselect);		
 		// Sounds.pauseMusic();
 		SlimeFactory.LevelBuilder.resetAllAndRun();
+	}
+
+	public SpawnPortal getSpawner() {
+		return spawner;
+	}
+
+	public void setSpawner(SpawnPortal spawner) {
+		this.spawner = spawner;
 	}
 }
