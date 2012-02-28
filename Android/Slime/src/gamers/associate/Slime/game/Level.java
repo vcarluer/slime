@@ -129,6 +129,7 @@ public class Level {
 	protected boolean isActivated;
 	
 	protected ArrayList<Slimy> aliveSlimyList;
+	protected ArrayList<Slimy> slimyList;
 	
 	protected GoalPortal goal;
 	
@@ -199,6 +200,7 @@ public class Level {
 		this.gameLayer.addChild(this.nodeDraw, zTop);
 		
 		this.aliveSlimyList = new ArrayList<Slimy>();
+		this.slimyList = new ArrayList<Slimy>();
 		this.trigerables = new ArrayList<ITrigerable>();
 		this.trigerablesToAdd = new ArrayList<ITrigerable>();
 
@@ -378,6 +380,7 @@ public class Level {
 		this.trigerables.clear();
 		this.trigerablesToAdd.clear();
 		this.aliveSlimyList.clear();
+		this.slimyList.clear();
 		this.isGameOver = false;
 		this.lastScore = 0;		
 		this.isVictory = false;
@@ -662,6 +665,7 @@ public class Level {
 		if (item instanceof Slimy) {
 			Slimy slimy = (Slimy) item;
 			if (!slimy.isDead()) {
+				this.slimyList.add(slimy);
 				this.aliveSlimyList.add(slimy);
 				if (this.gamePlay != null) {
 					this.gamePlay.setNewAliveSlimyCount(this.aliveSlimyList.size());
@@ -690,7 +694,11 @@ public class Level {
 			
 			if (item instanceof Slimy) {
 				Slimy slimy = (Slimy) item;
-				if (this.aliveSlimyList.contains(slimy)) {
+				if (this.slimyList.contains(slimy)) {
+					this.slimyList.remove(slimy);
+				}
+				
+				if (this.aliveSlimyList.contains(slimy)) {				
 					this.aliveSlimyList.remove(slimy);
 					if (this.gamePlay != null) {
 						this.gamePlay.setNewAliveSlimyCount(this.aliveSlimyList.size());
@@ -1222,5 +1230,9 @@ public class Level {
 	
 	public void setGoal(GoalPortal goal) {
 		this.goal = goal;
+	}
+	
+	public ArrayList<Slimy> slimies() {
+		return this.slimyList;
 	}
 }
