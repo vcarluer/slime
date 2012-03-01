@@ -1,0 +1,7 @@
+# Android export (H.264, 30 fps, 500k bitrate)
+
+ffmpeg.exe -f image2 -i [sourceimage%03d.jpg] -b:v 500k -vcodec libx264 -r 30 -sameq -acodec aac movie.mp4
+
+# Test export (mpg)
+
+ffmpeg.exe -f image2 -i [sourceimage%03d.jpg] -r 30 -sameq movie.mpg
