@@ -4,9 +4,13 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/hello"
-    />
+    <gamers.associate.Slime.game.GLView        	
+        	android:id="@+id/glsurface"
+        	android:layout_width="fill_parent" 
+    		android:layout_height="fill_parent"/>
+    
+    <SurfaceView android:id="@+id/videosurface"
+        android:layout_width="fill_parent" 
+    	android:layout_height="fill_parent" 
+        />
 </LinearLayout>

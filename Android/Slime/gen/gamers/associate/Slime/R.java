@@ -13,6 +13,10 @@ public final class R {
     public static final class drawable {
         public static final int icon=0x7f020000;
     }
+    public static final class id {
+        public static final int glsurface=0x7f060000;
+        public static final int videosurface=0x7f060001;
+    }
     public static final class layout {
         public static final int main=0x7f030000;
     }
@@ -21,18 +25,19 @@ public final class R {
         public static final int ga=0x7f040001;
         public static final int getrupee=0x7f040002;
         public static final int heartbeat=0x7f040003;
-        public static final int key=0x7f040004;
-        public static final int lose=0x7f040005;
-        public static final int menumusic=0x7f040006;
-        public static final int menuselect=0x7f040007;
-        public static final int portalgoal=0x7f040008;
-        public static final int slimydeath=0x7f040009;
-        public static final int slimyfire=0x7f04000a;
-        public static final int slimyjump=0x7f04000b;
-        public static final int slimyland=0x7f04000c;
-        public static final int slimyselect=0x7f04000d;
-        public static final int tick=0x7f04000e;
-        public static final int victory=0x7f04000f;
+        public static final int intro=0x7f040004;
+        public static final int key=0x7f040005;
+        public static final int lose=0x7f040006;
+        public static final int menumusic=0x7f040007;
+        public static final int menuselect=0x7f040008;
+        public static final int portalgoal=0x7f040009;
+        public static final int slimydeath=0x7f04000a;
+        public static final int slimyfire=0x7f04000b;
+        public static final int slimyjump=0x7f04000c;
+        public static final int slimyland=0x7f04000d;
+        public static final int slimyselect=0x7f04000e;
+        public static final int tick=0x7f04000f;
+        public static final int victory=0x7f040010;
     }
     public static final class string {
         public static final int app_name=0x7f050001;

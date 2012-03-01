@@ -1,5 +1,6 @@
 package gamers.associate.Slime.game;
 
+import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.items.custom.BecBunsenFactory;
 import gamers.associate.Slime.items.custom.BoxFactory;
@@ -43,7 +44,7 @@ public abstract class SlimeFactory {
 	public static ccColor3B ColorSlimeBorder = ccColor3B.ccc3(0, 62, 8);
 	public static ccColor3B ColorSlimeLight = ccColor3B.ccc3(255, 255, 255); // 178, 229, 194
 	
-	public static Activity ContextActivity;
+	public static Slime ContextActivity;
 	public static ILevelBuilder LevelBuilder;
 	public static boolean isAttached;
 	public static SlimyFactory Slimy = new SlimyFactory();

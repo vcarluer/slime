@@ -492,6 +492,7 @@ public class Level {
 		this.timeRatio = timeRatio;
 	}	
 	
+	private Object syncObject = new Object();
 	private float delta = 0f;
 	public void tick(float deltaBase) {
 		if (this.isGameOver && !this.isVictory) {
@@ -499,13 +500,15 @@ public class Level {
 		}
 
 		delta = deltaBase * this.getTimeRatio();
-		if (this.itemsToAdd.size() > 0) {
-			for(GameItem item : this.itemsToAdd) {
-				this.addGameItem(item);
+		synchronized (this.syncObject) {
+			if (this.itemsToAdd.size() > 0) {
+				for(GameItem item : this.itemsToAdd) {
+					this.addGameItem(item);
+				}
+				
+				this.itemsToAdd.clear();
 			}
-			
-			this.itemsToAdd.clear();
-		}
+		}		
 		
 		if (!isPaused) {
 			
@@ -522,12 +525,14 @@ public class Level {
 			}
 		}				
 		
-		if (this.itemsToRemove.size() > 0) {
-			for(GameItem item : this.itemsToRemove) {
-				this.removeGameItem(item);
+		synchronized (this.syncObject) {
+			if (this.itemsToRemove.size() > 0) {
+				for(GameItem item : this.itemsToRemove) {
+					this.removeGameItem(item);
+				}
+				
+				this.itemsToRemove.clear();
 			}
-			
-			this.itemsToRemove.clear();
 		}
 		
 		// Handle camera with real time
@@ -536,33 +541,37 @@ public class Level {
 	}
 			
 	public void addItemToRemove(GameItem item) {
-		if (item != null) {
-			if (this.itemsToAdd.contains(item)) {
-				if (item instanceof ITrigerable) {
-					ITrigerable triger = (ITrigerable)item;
-					this.trigerablesToAdd.remove(triger);
+		synchronized (this.syncObject) {					
+			if (item != null) {
+				if (this.itemsToAdd.contains(item)) {
+					if (item instanceof ITrigerable) {
+						ITrigerable triger = (ITrigerable)item;
+						this.trigerablesToAdd.remove(triger);
+					}						
+	
+					item.destroy();
+					this.itemsToAdd.remove(item);
+				} else {
+					this.itemsToRemove.add(item);
+					if (item instanceof ISelectable)
+					{
+						ISelectable selectable = (ISelectable)item;			
+						this.thumbnailManager.removeThumbnail(selectable);
+					}
 				}						
-
-				item.destroy();
-				this.itemsToAdd.remove(item);
-			} else {
-				this.itemsToRemove.add(item);
-				if (item instanceof ISelectable)
-				{
-					ISelectable selectable = (ISelectable)item;			
-					this.thumbnailManager.removeThumbnail(selectable);
-				}
-			}						
-		}				
+			}
+		}
 	}
 	
 	public void addItemToAdd(GameItem item) {
-		if (item instanceof ITrigerable) {
-			ITrigerable triger = (ITrigerable)item;
-			this.trigerablesToAdd.add(triger);
+		synchronized (this.syncObject) {					
+			if (item instanceof ITrigerable) {
+				ITrigerable triger = (ITrigerable)item;
+				this.trigerablesToAdd.add(triger);
+			}
+			
+			this.itemsToAdd.add(item);
 		}
-		
-		this.itemsToAdd.add(item);
 	}		
 	
 	public ArrayList<GameItem> getItemsToAdd() {

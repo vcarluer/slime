@@ -40,9 +40,12 @@ import org.cocos2d.types.CGRect;
 import org.cocos2d.types.ccColor3B;
 import org.cocos2d.types.ccGridSize;
 
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.view.MotionEvent;
+import android.view.SurfaceHolder;
 
-public class HomeLayer extends CCLayer {
+public class HomeLayer extends CCLayer implements MediaPlayer.OnCompletionListener {
 	private static HomeLayer layer;	
 	// private CCMenuItemSprite restartMenu;
 	private CCLabel lblLevel;
@@ -315,7 +318,11 @@ public class HomeLayer extends CCLayer {
 		
 		Vibe.vibrate();
 		Sounds.playEffect(R.raw.menuselect);
-		Sounds.stopMusic();
+		Sounds.stopMusic();				
+//		MediaPlayer mediaPlayer = MediaPlayer.create(SlimeFactory.ContextActivity, R.raw.intro);		
+//		// mediaPlayer.setDisplay(SlimeFactory.ContextActivity.getGlSurface().getHolder());
+//		mediaPlayer.setOnCompletionListener(this);			
+//		mediaPlayer.start(); // no need to call prepare(); create() does that for you
 		SlimeFactory.LevelBuilder.start();
 	}
 	
@@ -331,5 +338,11 @@ public class HomeLayer extends CCLayer {
 
 	public void setSpawner(SpawnPortal spawner) {
 		this.spawner = spawner;
+	}
+
+	@Override
+	public void onCompletion(MediaPlayer mp) {
+		mp.release();
+		SlimeFactory.LevelBuilder.start();
 	}
 }

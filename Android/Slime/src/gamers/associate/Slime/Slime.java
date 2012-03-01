@@ -17,8 +17,13 @@ import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.SurfaceView;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AbsoluteLayout;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 /**
  * @uml.dependency   supplier="gamers.associate.Slime.LevelLayer"
@@ -42,14 +47,14 @@ public class Slime extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        
-        mGLSurfaceView = new CCGLSurfaceView(this);
-        
+               
+        mGLSurfaceView = new CCGLSurfaceView(this);             
         setContentView(mGLSurfaceView);
         
         SlimeFactory.ContextActivity = this;
         
      // attach the OpenGL to a window
+        // View glView = findViewById(R.id.glsurface);
 		CCDirector.sharedDirector().attachInView(mGLSurfaceView);
 		
 		// no effect here because devise orientation is controlled by manifest
@@ -70,7 +75,7 @@ public class Slime extends Activity {
 		
 		// Make the Scene active		
 		CCDirector.sharedDirector().runWithScene(this.scene);
-    }
+    }    
     
     @Override
     public void onStart() {
@@ -193,5 +198,9 @@ public class Slime extends Activity {
 	    }				
 		
 		return super.onKeyUp(keyCode, event);
-	}       
+	}
+	
+	public SurfaceView getGlSurface() {
+		return this.mGLSurfaceView;
+	}
 }
