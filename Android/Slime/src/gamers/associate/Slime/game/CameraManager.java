@@ -437,7 +437,8 @@ public class CameraManager {
 	}
 	
 	private float scaleScreen(float fromScale) {
-		return CCDirector.sharedDirector().winSize().width * fromScale / 800f;
+		// return CCDirector.sharedDirector().winSize().width * fromScale / 800f;
+		return fromScale;
 	}
 	
 	public void setCameraView() {		
