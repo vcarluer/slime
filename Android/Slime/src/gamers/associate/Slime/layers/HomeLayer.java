@@ -323,7 +323,9 @@ public class HomeLayer extends CCLayer implements MediaPlayer.OnCompletionListen
 //		// mediaPlayer.setDisplay(SlimeFactory.ContextActivity.getGlSurface().getHolder());
 //		mediaPlayer.setOnCompletionListener(this);			
 //		mediaPlayer.start(); // no need to call prepare(); create() does that for you
-		SlimeFactory.LevelBuilder.start();
+		// SlimeFactory.LevelBuilder.start();
+		
+		SlimeFactory.ContextActivity.runIntro();
 	}
 	
 	public void goRestart(Object sender) {

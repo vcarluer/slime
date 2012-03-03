@@ -2,4 +2,5 @@
 <resources>
     <string name="hello">Hello World, Slime!</string>
     <string name="app_name">Slime</string>
+    <string name="intro_name">Slime intro</string>
 </resources>

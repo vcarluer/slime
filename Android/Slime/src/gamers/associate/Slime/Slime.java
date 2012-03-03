@@ -13,6 +13,7 @@ import org.cocos2d.opengl.CCGLSurfaceView;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.os.Bundle;
@@ -29,6 +30,8 @@ import android.widget.RelativeLayout;
  * @uml.dependency   supplier="gamers.associate.Slime.LevelLayer"
  */
 public class Slime extends Activity {
+	public static final int ACTIVITY_INTRO = 0;
+	
 	public static final String TAG = "Slime";	
 	
 	static {
@@ -200,7 +203,14 @@ public class Slime extends Activity {
 		return super.onKeyUp(keyCode, event);
 	}
 	
-	public SurfaceView getGlSurface() {
-		return this.mGLSurfaceView;
+	public void runIntro() {
+		Intent i = new Intent(this, SlimeIntro.class);
+		this.startActivityForResult(i, ACTIVITY_INTRO);
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		SlimeFactory.LevelBuilder.start();
 	}
 }
