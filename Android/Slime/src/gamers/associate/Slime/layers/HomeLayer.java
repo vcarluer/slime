@@ -45,7 +45,7 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
-public class HomeLayer extends CCLayer implements MediaPlayer.OnCompletionListener {
+public class HomeLayer extends CCLayer {
 	private static HomeLayer layer;	
 	// private CCMenuItemSprite restartMenu;
 	private CCLabel lblLevel;
@@ -310,22 +310,16 @@ public class HomeLayer extends CCLayer implements MediaPlayer.OnCompletionListen
 		super.onExit();
 	}
 
-	public void selectPlay(Object sender) {
-		// Sounds.playEffect(R.raw.menuselect);		
-		// CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
-//		CCTransitionScene transition = CCMoveInRTransition.transition(0.5f, LevelSelection.get().getScene());
-//		CCDirector.sharedDirector().replaceScene(transition);
-		
+	public void selectPlay(Object sender) {		
 		Vibe.vibrate();
 		Sounds.playEffect(R.raw.menuselect);
-		Sounds.stopMusic();				
-//		MediaPlayer mediaPlayer = MediaPlayer.create(SlimeFactory.ContextActivity, R.raw.intro);		
-//		// mediaPlayer.setDisplay(SlimeFactory.ContextActivity.getGlSurface().getHolder());
-//		mediaPlayer.setOnCompletionListener(this);			
-//		mediaPlayer.start(); // no need to call prepare(); create() does that for you
-		// SlimeFactory.LevelBuilder.start();
+		Sounds.stopMusic();
 		
-		SlimeFactory.ContextActivity.runIntro();
+		if (SlimeFactory.GameInfo.getLevelNum() == 0) {
+			SlimeFactory.ContextActivity.runIntro();
+		} else {
+			SlimeFactory.LevelBuilder.start();
+		}
 	}
 	
 	public void goRestart(Object sender) {
@@ -340,11 +334,5 @@ public class HomeLayer extends CCLayer implements MediaPlayer.OnCompletionListen
 
 	public void setSpawner(SpawnPortal spawner) {
 		this.spawner = spawner;
-	}
-
-	@Override
-	public void onCompletion(MediaPlayer mp) {
-		mp.release();
-		SlimeFactory.LevelBuilder.start();
 	}
 }

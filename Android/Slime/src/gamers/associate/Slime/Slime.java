@@ -41,6 +41,7 @@ public class Slime extends Activity {
 	private CCGLSurfaceView mGLSurfaceView;
 	private CCScene scene;
 	private AudioManager audio;
+	private boolean startLevel;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -104,17 +105,23 @@ public class Slime extends Activity {
     public void onResume() {
         super.onResume();
 
-        CCDirector.sharedDirector().onResume();
-        if (Level.currentLevel != null) {
-        	// No automatic unpause
-        	if (Level.currentLevel.getCurrentLevelName() == LevelHome.Id) {
-        		Level.currentLevel.setPause(false);
-        		Sounds.resumeMusic();
-        	} else {
-        		// to put the hud back in pause
-        		Level.currentLevel.enablePauseLayer();
-        	}
-        }                
+        CCDirector.sharedDirector().onResume();        
+        
+        if (this.startLevel) {
+        	this.startLevel = false;
+        	SlimeFactory.LevelBuilder.start();
+        } else {
+        	if (Level.currentLevel != null) {
+            	// No automatic unpause
+            	if (Level.currentLevel.getCurrentLevelName() == LevelHome.Id) {
+            		Level.currentLevel.setPause(false);
+            		Sounds.resumeMusic();
+            	} else {
+            		// to put the hud back in pause
+            		Level.currentLevel.enablePauseLayer();
+            	}
+            }
+        }
     }
 
     @Override
@@ -211,6 +218,6 @@ public class Slime extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		SlimeFactory.LevelBuilder.start();
+		this.startLevel = true;					
 	}
 }
