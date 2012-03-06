@@ -50,50 +50,45 @@ public class LevelGraphGeneratorTutorial extends LevelGraphGeneratorRectangle {
 		switch (SlimeFactory.GameInfo.getLevelNum()) {
 		// 1 - Shoot / Go to end
 		case 1:
-			Level.currentLevel.setTitle(TUT1_TITLE);
 			this.handleTut(TUT1_1);
 			break;
 		// 2 - Take star
 		case 2:
-			Level.currentLevel.setTitle(TUT2_TITLE);
 			this.handleTut(TUT2_1);			
 			break;
 		// 3 - bumper platform + star
 		case 3: // vertical level
-			Level.currentLevel.setTitle(TUT3_TITLE);
 			this.handleTut(TUT3_1);
 			this.topCount++;
 			this.handleTut(TUT3_2);
 			break;
 		// 4 - no sticky platform + death threat + star
 		case 4: // horizontal level
-			Level.currentLevel.setTitle(TUT4_TITLE);
 			this.handleTut(TUT4_1);
 			this.rightCount++;
 			this.handleTut(TUT4_2);
 			break;
 		// 5 - icy platform + death threat + star
 		case 5: // vertical level down
-			Level.currentLevel.setTitle(TUT5_TITLE);
 			this.handleTut(TUT5_1);
 			this.bottomCount++;
 			this.handleTut(TUT5_2);
 			break;
 		// 6 - button + laser + star
 		case 6: // horizontal level
-			Level.currentLevel.setTitle(TUT6_TITLE);
 			this.handleTut(TUT6_1);
 			this.rightCount++;
 			this.handleTut(TUT6_2);
 			break;
 		// 7 - Bullet time + death threat + 2 stars
 		case 7: // vertical level
-			Level.currentLevel.setTitle(TUT7_TITLE);
 			this.handleTut(TUT7_1);
 			this.topCount++;
 			this.handleTut(TUT7_2);
 			break;	
 		}			
+		
+		this.setTitle();
 		
 		TimeAttackGame taGame = TimeAttackGame.NewGame();
 		this.currentLevel.addGamePlay(taGame);
@@ -117,5 +112,38 @@ public class LevelGraphGeneratorTutorial extends LevelGraphGeneratorRectangle {
 	
 	private String resource(String shortName) {
 		return BLOCS_TUTORIAL + "/" + shortName + ".slime";
+	}
+	
+	public void setTitle() {
+		switch (SlimeFactory.GameInfo.getLevelNum()) {
+		// 1 - Shoot / Go to end
+		case 1:
+			Level.currentLevel.setTitle(TUT1_TITLE);
+			break;
+		// 2 - Take star
+		case 2:
+			Level.currentLevel.setTitle(TUT2_TITLE);		
+			break;
+		// 3 - bumper platform + star
+		case 3: // vertical level
+			Level.currentLevel.setTitle(TUT3_TITLE);
+			break;
+		// 4 - no sticky platform + death threat + star
+		case 4: // horizontal level
+			Level.currentLevel.setTitle(TUT4_TITLE);
+			break;
+		// 5 - icy platform + death threat + star
+		case 5: // vertical level down
+			Level.currentLevel.setTitle(TUT5_TITLE);
+			break;
+		// 6 - button + laser + star
+		case 6: // horizontal level
+			Level.currentLevel.setTitle(TUT6_TITLE);
+			break;
+		// 7 - Bullet time + death threat + 2 stars
+		case 7: // vertical level
+			Level.currentLevel.setTitle(TUT7_TITLE);
+			break;	
+		}		
 	}
 }

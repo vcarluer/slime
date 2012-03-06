@@ -49,7 +49,11 @@ public class LevelBuilderGenerator implements ILevelBuilder
 			this.isBoss = (this.gameInfo.getLevelNum() == this.gameInfo.getLevelMax());
 			this.resetTotalStar();
 			if (this.firstBuild && this.levelparser.isStored() && !this.levelDef.isFinished()) {				
-				this.levelparser.buildLevel(level);					
+				this.levelparser.buildLevel(level);
+				if (this.isTut()) {
+					SlimeFactory.LevelGeneratorTutorial.setTitle();
+				}
+
 				level.setLevelDefinition(this.levelDef);
 			} else {							
 				if (!isDebug) {
@@ -59,8 +63,7 @@ public class LevelBuilderGenerator implements ILevelBuilder
 				}
 				
 				// this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor);
-				if (this.gameInfo.getDifficulty() == LevelDifficulty.Easy 
-						&& this.gameInfo.getLevelNum() <= LevelGraphGeneratorTutorial.tutorialCount) {
+				if (this.isTut()) {
 					this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorTutorial);
 				} else {
 					this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorRectangle2);
@@ -173,5 +176,10 @@ public class LevelBuilderGenerator implements ILevelBuilder
 
 	public boolean isBoss() {
 		return isBoss;
+	}
+	
+	private boolean isTut() {
+		return this.gameInfo.getDifficulty() == LevelDifficulty.Easy
+				&& this.gameInfo.getLevelNum() <= LevelGraphGeneratorTutorial.tutorialCount;
 	}
 }
