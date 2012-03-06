@@ -40,10 +40,12 @@ import android.app.Activity;
 import com.badlogic.gdx.physics.box2d.World;
 
 public abstract class SlimeFactory {
+	private static final float SGSDensityBase = 1.5f; // Samsung Galaxy S density
 	public static ccColor3B ColorSlime = ccColor3B.ccc3(0, 170, 54);
 	public static ccColor3B ColorSlimeBorder = ccColor3B.ccc3(0, 62, 8);
 	public static ccColor3B ColorSlimeLight = ccColor3B.ccc3(255, 255, 255); // 178, 229, 194
-	public static float Density;
+	public static float Density; // surface density
+	public static float SGSDensity; // Samsung Galaxy S reference density ratio (SGS used as a reference for layout...) 
 	
 	public static Slime ContextActivity;
 	public static ILevelBuilder LevelBuilder;
@@ -183,5 +185,16 @@ public abstract class SlimeFactory {
 		
 		SpriteSheetFactory.destroy();
 		isAttached = false;
+	}
+	
+	public static void setDensity(float density) {
+		// Should never happen...
+		if (density <= 0) {
+			Density = 1.0f;
+		} else {
+			Density = density;
+		}
+				
+		SGSDensity = Density / SGSDensityBase;
 	}
 }

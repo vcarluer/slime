@@ -45,13 +45,13 @@ import com.badlogic.gdx.physics.box2d.joints.DistanceJointDef;
 
 public class SlimyJump extends Slimy implements ISelectable {
 
-	private static final int Shoot_Circle = 50;
+	private static final int Shoot_Circle = 50; // in dps
 	private static final int AuraScaleDown = 5;
 	public static String thumbSprite = "wait-v-01.png";
 	public static String Anim_Dbz_Aura = "aura";
 	public static String Anim_Arrow = "greenarrow";
 	
-	public static float Default_Powa = 1.5f;
+	public static float Default_Powa = 4.5f; // in dps
 	public static float Max_Impulse = 7f;
 	private static float Default_Selection_Width = 72f; // 48f
 	private static float Default_Selection_Height = 78f; // 52f
@@ -78,6 +78,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	private static float arrowScale = 1.5f;
 	private static float arrowAngleShift = -90;
 	private boolean isDisabled;
+	private float scaledShoot;
 	
 	private CCAction actionSelect;
 	
@@ -132,6 +133,8 @@ public class SlimyJump extends Slimy implements ISelectable {
 		this.emitter.setLife(0.1f);
 		this.emitter.setStartColor(new ccColor4F(0, 1f, 0, 1f));		
 		this.emitter.stopSystem();
+		
+		this.scaledShoot = Shoot_Circle * SlimeFactory.Density;
 	}
 	
 	public void selectionMove(CGPoint gameReference) {
@@ -153,8 +156,14 @@ public class SlimyJump extends Slimy implements ISelectable {
 			CGPoint tmp = Level.currentLevel.getCameraManager().getScreenPoint(gameTouch);
 			this.selectScreenEnd.x = tmp.x;
 			this.selectScreenEnd.y = tmp.y;
-			this.targetImpulse.x = (this.selectScreenStart.x - this.selectScreenEnd.x) * this.powa * SlimeFactory.Density;
-			this.targetImpulse.y = (this.selectScreenStart.y - this.selectScreenEnd.y) * this.powa * SlimeFactory.Density;
+			this.targetImpulse.x = (this.selectScreenStart.x - this.selectScreenEnd.x);
+			this.targetImpulse.y = (this.selectScreenStart.y - this.selectScreenEnd.y);
+			if (this.targetImpulse.len() > this.scaledShoot) {
+				this.targetImpulse.nor().mul(this.scaledShoot);
+			}
+			
+			this.targetImpulse.mul(1 / SlimeFactory.Density).mul(this.powa);
+			
 			this.target.x = this.selectStart.x + this.targetImpulse.x;
 			this.target.y = this.selectStart.y + this.targetImpulse.y;			
 			
@@ -162,9 +171,6 @@ public class SlimyJump extends Slimy implements ISelectable {
 			
 			this.worldImpulse.x = (this.targetImpulse.x  / this.worldRatio);
 			this.worldImpulse.y = (this.targetImpulse.y / this.worldRatio);
-			if (this.worldImpulse.len() > (Max_Impulse)) {
-				this.worldImpulse.nor().mul(Max_Impulse);
-			}
 		}
 	}
 	
@@ -198,7 +204,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 			CGPoint tmp = Level.currentLevel.getCameraManager().getGamePoint(this.selectScreenStart);
 			this.absoluteScreenStart.x = tmp.x;
 			this.absoluteScreenStart.y = tmp.y;
-            CCDrawingPrimitives.ccDrawCircle(gl, this.absoluteScreenStart, Shoot_Circle * SlimeFactory.Density / Level.currentLevel.getCameraManager().getCurrentZoom(), ccMacros.CC_DEGREES_TO_RADIANS(90), 50, false);
+            CCDrawingPrimitives.ccDrawCircle(gl, this.absoluteScreenStart, this.scaledShoot / Level.currentLevel.getCameraManager().getCurrentZoom(), ccMacros.CC_DEGREES_TO_RADIANS(90), 50, false);
 		}					
 		
 		if (Level.DebugMode) {

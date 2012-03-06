@@ -90,6 +90,7 @@ public class HomeLayer extends CCLayer {
 		
 		CCSprite playSprite = CCSprite.sprite("control-play.png", true);
 		CCMenuItemSprite playMenu = CCMenuItemSprite.item(playSprite, playSprite, this, "selectPlay");
+		// playMenu.setScale(SlimeFactory.SGSDensity);
 		/*CCSprite restartSprite = CCSprite.sprite("control-restart.png", true);
 		this.restartMenu = CCMenuItemSprite.item(restartSprite, restartSprite, this, "goRestart");
 		restartMenu.setScale(0.5f);*/			
@@ -101,7 +102,7 @@ public class HomeLayer extends CCLayer {
 				CCDirector.sharedDirector().winSize().getWidth() / 2,
 				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftMenu
 				));			
-		
+				
 		this.addChild(this.menu);
 					
 				

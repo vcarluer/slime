@@ -57,7 +57,7 @@ public class Slime extends Activity {
         setContentView(mGLSurfaceView);
         
         SlimeFactory.ContextActivity = this;
-        SlimeFactory.Density = this.getResources().getDisplayMetrics().density;
+        SlimeFactory.setDensity(this.getResources().getDisplayMetrics().density);
         Log.d(Slime.TAG, "Density: " + String.valueOf(SlimeFactory.Density));
         
      // attach the OpenGL to a window
