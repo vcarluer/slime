@@ -193,7 +193,7 @@ public class Slimy extends GameItemPhysic implements IBurnable, IDissolvable {
 			this.sprite.runAction(this.currentAction);
 			this.isLanded = true;
 						
-			Sounds.playEffect(R.raw.slimyland);			
+			// Sounds.playEffect(R.raw.slimyland);			
 		}		
 	}		
 	
