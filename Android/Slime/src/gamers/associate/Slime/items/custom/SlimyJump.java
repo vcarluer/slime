@@ -4,6 +4,7 @@ import gamers.associate.Slime.R;
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.items.base.GameItemCocos;
@@ -44,6 +45,7 @@ import com.badlogic.gdx.physics.box2d.joints.DistanceJointDef;
 
 public class SlimyJump extends Slimy implements ISelectable {
 
+	private static final int Shoot_Circle = 50;
 	private static final int AuraScaleDown = 5;
 	public static String thumbSprite = "wait-v-01.png";
 	public static String Anim_Dbz_Aura = "aura";
@@ -151,8 +153,8 @@ public class SlimyJump extends Slimy implements ISelectable {
 			CGPoint tmp = Level.currentLevel.getCameraManager().getScreenPoint(gameTouch);
 			this.selectScreenEnd.x = tmp.x;
 			this.selectScreenEnd.y = tmp.y;
-			this.targetImpulse.x = ((this.selectScreenStart.x - this.selectScreenEnd.x) * zoom) * this.powa;
-			this.targetImpulse.y = ((this.selectScreenStart.y - this.selectScreenEnd.y) * zoom) * this.powa;
+			this.targetImpulse.x = (this.selectScreenStart.x - this.selectScreenEnd.x) * this.powa * SlimeFactory.Density;
+			this.targetImpulse.y = (this.selectScreenStart.y - this.selectScreenEnd.y) * this.powa * SlimeFactory.Density;
 			this.target.x = this.selectStart.x + this.targetImpulse.x;
 			this.target.y = this.selectStart.y + this.targetImpulse.y;			
 			
@@ -196,7 +198,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 			CGPoint tmp = Level.currentLevel.getCameraManager().getGamePoint(this.selectScreenStart);
 			this.absoluteScreenStart.x = tmp.x;
 			this.absoluteScreenStart.y = tmp.y;
-            CCDrawingPrimitives.ccDrawCircle(gl, this.absoluteScreenStart, 50, ccMacros.CC_DEGREES_TO_RADIANS(90), 50, false);
+            CCDrawingPrimitives.ccDrawCircle(gl, this.absoluteScreenStart, Shoot_Circle * SlimeFactory.Density / Level.currentLevel.getCameraManager().getCurrentZoom(), ccMacros.CC_DEGREES_TO_RADIANS(90), 50, false);
 		}					
 		
 		if (Level.DebugMode) {

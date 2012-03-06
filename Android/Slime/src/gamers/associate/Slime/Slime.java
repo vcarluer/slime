@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.SurfaceView;
 import android.view.View;
@@ -56,6 +57,8 @@ public class Slime extends Activity {
         setContentView(mGLSurfaceView);
         
         SlimeFactory.ContextActivity = this;
+        SlimeFactory.Density = this.getResources().getDisplayMetrics().density;
+        Log.d(Slime.TAG, "Density: " + String.valueOf(SlimeFactory.Density));
         
      // attach the OpenGL to a window
         // View glView = findViewById(R.id.glsurface);

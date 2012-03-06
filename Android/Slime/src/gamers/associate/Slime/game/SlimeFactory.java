@@ -43,6 +43,7 @@ public abstract class SlimeFactory {
 	public static ccColor3B ColorSlime = ccColor3B.ccc3(0, 170, 54);
 	public static ccColor3B ColorSlimeBorder = ccColor3B.ccc3(0, 62, 8);
 	public static ccColor3B ColorSlimeLight = ccColor3B.ccc3(255, 255, 255); // 178, 229, 194
+	public static float Density;
 	
 	public static Slime ContextActivity;
 	public static ILevelBuilder LevelBuilder;
