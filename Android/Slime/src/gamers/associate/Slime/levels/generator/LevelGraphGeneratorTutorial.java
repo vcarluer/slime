@@ -11,7 +11,7 @@ public class LevelGraphGeneratorTutorial extends LevelGraphGeneratorRectangle {
 	private static final String TUT5_TITLE = "The explorer of the frozen labyrinth";
 	private static final String TUT4_TITLE = "The suspicious world which do not stick";
 	private static final String TUT3_TITLE = "The amazing bounce of the vigilant creature";
-	private static final String TUT2_TITLE = "The golden star of the Forbidden doorway";
+	private static final String TUT2_TITLE = "The golden star of the forbidden doorway";
 	private static final String TUT1_TITLE = "The incredible exit tube";
 	private static final String BLOCS_TUTORIAL = "blocsTutorial";
 	private static final String TUT7_2 = "tut7-2";
