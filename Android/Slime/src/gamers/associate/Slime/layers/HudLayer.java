@@ -69,7 +69,7 @@ public class HudLayer extends CCLayer {
 				
 		this.hideSlimyCount();
 		
-		this.title = getMenuLabel(TitleGenerator.generateNewTitle(), 45f, SlimeFactory.ColorSlimeBorder);
+		this.title = getMenuLabel(" ", 45f, SlimeFactory.ColorSlimeBorder);
 		this.title.setPosition(
 				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
 				CCDirector.sharedDirector().winSize().getHeight() / 2));
