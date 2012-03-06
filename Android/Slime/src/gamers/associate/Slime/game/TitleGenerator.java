@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class TitleGenerator {
-	private static Random rand = new Random();
+	private static Random rand = new Random();	
 	
-	public static String generateNewTitle() {
+	public static String generateNewTitle() {		
+		
 		String newtitle = "";
 		
 		String[] preposition1=new String[6];

@@ -1,9 +1,18 @@
 package gamers.associate.Slime.levels.generator;
 
+import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.TimeAttackGame;
+import gamers.associate.Slime.game.TitleGenerator;
 
 public class LevelGraphGeneratorTutorial extends LevelGraphGeneratorRectangle {
+	private static final String TUT7_TITLE = "The reveleation of the flying monster";
+	private static final String TUT6_TITLE = "The prismatic equation of the mechanician";
+	private static final String TUT5_TITLE = "The explorer of the frozen labyrinth";
+	private static final String TUT4_TITLE = "The suspicious world which do not stick";
+	private static final String TUT3_TITLE = "The amazing bounce of the vigilant creature";
+	private static final String TUT2_TITLE = "The golden star of the Forbidden doorway";
+	private static final String TUT1_TITLE = "The incredible exit tube";
 	private static final String BLOCS_TUTORIAL = "blocsTutorial";
 	private static final String TUT7_2 = "tut7-2";
 	private static final String TUT7_1 = "tut7-1";
@@ -41,38 +50,45 @@ public class LevelGraphGeneratorTutorial extends LevelGraphGeneratorRectangle {
 		switch (SlimeFactory.GameInfo.getLevelNum()) {
 		// 1 - Shoot / Go to end
 		case 1:
+			Level.currentLevel.setTitle(TUT1_TITLE);
 			this.handleTut(TUT1_1);
 			break;
 		// 2 - Take star
 		case 2:
+			Level.currentLevel.setTitle(TUT2_TITLE);
 			this.handleTut(TUT2_1);			
 			break;
 		// 3 - bumper platform + star
 		case 3: // vertical level
+			Level.currentLevel.setTitle(TUT3_TITLE);
 			this.handleTut(TUT3_1);
 			this.topCount++;
 			this.handleTut(TUT3_2);
 			break;
 		// 4 - no sticky platform + death threat + star
 		case 4: // horizontal level
+			Level.currentLevel.setTitle(TUT4_TITLE);
 			this.handleTut(TUT4_1);
 			this.rightCount++;
 			this.handleTut(TUT4_2);
 			break;
 		// 5 - icy platform + death threat + star
 		case 5: // vertical level down
+			Level.currentLevel.setTitle(TUT5_TITLE);
 			this.handleTut(TUT5_1);
 			this.bottomCount++;
 			this.handleTut(TUT5_2);
 			break;
 		// 6 - button + laser + star
 		case 6: // horizontal level
+			Level.currentLevel.setTitle(TUT6_TITLE);
 			this.handleTut(TUT6_1);
 			this.rightCount++;
 			this.handleTut(TUT6_2);
 			break;
 		// 7 - Bullet time + death threat + 2 stars
 		case 7: // vertical level
+			Level.currentLevel.setTitle(TUT7_TITLE);
 			this.handleTut(TUT7_1);
 			this.topCount++;
 			this.handleTut(TUT7_2);

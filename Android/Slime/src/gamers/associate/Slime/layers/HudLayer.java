@@ -101,26 +101,7 @@ public class HudLayer extends CCLayer {
 	@Override
 	public void onEnter() {		
 		super.onEnter();
-		this.title.stopAllActions();
-		this.title.setVisible(true);
-		this.title.setString(TitleGenerator.generateNewTitle().toUpperCase());
-		// double padding
-		float dPadding = 250f;
-		float scaleRatio = CCDirector.sharedDirector().winSize().width / (this.title.getContentSize().width + dPadding);
-		this.title.setScale(scaleRatio);
-		this.title.setPosition(
-				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
-				CCDirector.sharedDirector().winSize().getHeight() / 2));
-		this.title.setOpacity(255);
-		float moveDistance = 75f;
-		float time = 3f;
-		CCDelayTime delay = CCDelayTime.action(time);
-		CCCallFunc call = CCCallFunc.action(this, "fadeTitle");
-		CCSequence seq = CCSequence.actions(delay, call);
-		this.title.runAction(seq);
-		tmp.set(-moveDistance, 0);
-		CCMoveBy move = CCMoveBy.action(time, tmp);
-		this.title.runAction(move);
+		this.setTitle(TitleGenerator.generateNewTitle());
 		this.setStarsCount();
 		
 		this.starSprite = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);		
@@ -220,5 +201,28 @@ public class HudLayer extends CCLayer {
 	
 	public CCMenu getMenu() {
 		return this.menu;
-	}	
+	}
+	
+	public void setTitle(String title) {
+		this.title.stopAllActions();
+		this.title.setVisible(true);
+		this.title.setString(title.toUpperCase());
+		// double padding
+		float dPadding = 250f;
+		float scaleRatio = CCDirector.sharedDirector().winSize().width / (this.title.getContentSize().width + dPadding);
+		this.title.setScale(scaleRatio);
+		this.title.setPosition(
+				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
+				CCDirector.sharedDirector().winSize().getHeight() / 2));
+		this.title.setOpacity(255);
+		float moveDistance = 75f;
+		float time = 3f;
+		CCDelayTime delay = CCDelayTime.action(time);
+		CCCallFunc call = CCCallFunc.action(this, "fadeTitle");
+		CCSequence seq = CCSequence.actions(delay, call);
+		this.title.runAction(seq);
+		tmp.set(-moveDistance, 0);
+		CCMoveBy move = CCMoveBy.action(time, tmp);
+		this.title.runAction(move);
+	}
 }

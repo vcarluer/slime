@@ -1245,4 +1245,7 @@ public class Level {
 		return this.slimyList;
 	}
 	
+	public void setTitle(String title) {
+		this.hudLayer.setTitle(title);
+	}
 }
