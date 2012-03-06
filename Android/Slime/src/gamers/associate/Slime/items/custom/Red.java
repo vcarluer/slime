@@ -281,7 +281,7 @@ public class Red extends GameItemPhysic implements ISelectable {
 			this.goToWaitState();
 		}
 		
-		Sounds.playEffect(R.raw.slimyland);
+		// Sounds.playEffect(R.raw.slimyland);
 	}
 
 	private void hit() {
@@ -493,7 +493,7 @@ public class Red extends GameItemPhysic implements ISelectable {
 	}
 	
 	public void prepareJumpReal() {
-		Sounds.playEffect(R.raw.slimyselect);
+		// Sounds.playEffect(R.raw.slimyselect);
 		this.state = RedState.PrepareAttack;
 		this.prepareJumpAnim();
 	}
