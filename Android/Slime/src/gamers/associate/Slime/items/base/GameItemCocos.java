@@ -40,6 +40,11 @@ public class GameItemCocos extends GameItem {
 		this.referenceSize = CGSize.zero();
 	}
 	
+	public GameItemCocos(float x, float y, float width, float height, int zOrder) {
+		this(x, y, width, height);
+		this.zOrder = zOrder;
+	}
+	
 	@Override
 	public void destroy() {		
 		if (this.sprite != null) {

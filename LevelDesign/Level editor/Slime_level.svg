@@ -157,7 +157,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1.5136719"
      inkscape:cx="-1037.5001"
-     inkscape:cy="146.62848"
+     inkscape:cy="252.33171"
      inkscape:document-units="px"
      inkscape:current-layer="Template"
      showgrid="true"
@@ -1389,7 +1389,8 @@
        att_actionCode="1"
        att_inverse="false"
        att_repeat="true"
-       att_originalDelay="1" />
+       att_originalDelay="1"
+       att_resetPosition="true" />
   </g>
   <g
      inkscape:groupmode="layer"

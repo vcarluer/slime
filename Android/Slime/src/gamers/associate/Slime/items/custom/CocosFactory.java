@@ -1,5 +1,6 @@
 package gamers.associate.Slime.items.custom;
 
+import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.GameItemCocosFactory;
@@ -22,6 +23,7 @@ public class CocosFactory extends GameItemCocosFactory<GameItemCocos> {
 		item.setpList(this.currentPlistName);
 		item.setFrameName(this.currentFrameName);
 		item.setFrameCount(this.currentFrameCount);
+		item.setSpriteAction(this.spriteAction);
 		super.initItem(item);
 	}
 
@@ -37,7 +39,7 @@ public class CocosFactory extends GameItemCocosFactory<GameItemCocos> {
 	@Override
 	protected GameItemCocos instantiate(float x, float y, float width,
 			float height) {
-		return new GameItemCocos(x, y, width, height);
+		return new GameItemCocos(x, y, width, height, Level.zTop);
 	}
 
 	@Override

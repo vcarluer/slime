@@ -21,7 +21,7 @@ public class SpriteDef extends ItemDefinition {
 	
 	@Override
 	public void createItem(Level level) {
-		if (actionCode != 0) {
+		if (actionCode != SpriteAction.noActionReserved) {
 			SpriteAction action = new SpriteAction(this.actionCode, this.actionValue, this.actionTime, this.inverse, this.repeat, this.originalDelay, this.resetPosition);
 			SlimeFactory.Sprite.createBL(this.getX(), this.getY(), this.width, this.height, this.plist, this.frame, this.count, action).setAngle(this.angle);
 		} else {
@@ -97,14 +97,23 @@ public class SpriteDef extends ItemDefinition {
 		this.plist = cocos.getpList();
 		this.frame = cocos.getFrameName();
 		this.count = cocos.getFrameCount();
+		this.actionCode = SpriteAction.noActionReserved;
+		this.actionValue = 0;
+		this.actionTime = 0;
+		this.inverse = false;
+		this.repeat = false;
+		this.originalDelay = 0;
+		this.resetPosition = false;
 		if (cocos.getSpriteAction() != null) {
-			this.actionCode = cocos.getSpriteAction().getActionCode();
-			this.actionValue = cocos.getSpriteAction().getActionValue();
-			this.actionTime = cocos.getSpriteAction().getActionTime();
-			this.inverse = cocos.getSpriteAction().getInverse();
-			this.repeat = cocos.getSpriteAction().getRepeat();
-			this.originalDelay = cocos.getSpriteAction().getOriginalDelay();
-			this.resetPosition = cocos.getSpriteAction().getResetPosition();
+			if (cocos.getSpriteAction().getActionCode() != SpriteAction.noActionReserved) {
+				this.actionCode = cocos.getSpriteAction().getActionCode();
+				this.actionValue = cocos.getSpriteAction().getActionValue();
+				this.actionTime = cocos.getSpriteAction().getActionTime();
+				this.inverse = cocos.getSpriteAction().getInverse();
+				this.repeat = cocos.getSpriteAction().getRepeat();
+				this.originalDelay = cocos.getSpriteAction().getOriginalDelay();
+				this.resetPosition = cocos.getSpriteAction().getResetPosition();
+			}			
 		}
 	}
 }
