@@ -60,9 +60,10 @@ public class ThumbnailManager {
 	
 	private void manage(ISelectable selectable) {
 		this.computeRect();
-		if (selectable.isThumbnailActive() && !CGRect.containsPoint(this.thumbRect, Util.mid(selectable.getSelectionRect())) 
-				// && (selectable.isActive() || this.level.isPaused())) {
-				&& (this.level.isPaused() || (selectable.isThumbnailAwaysOn() && selectable.isActive()))) {			
+		if ((this.level.isPaused() || (selectable.isThumbnailAwaysOn() && selectable.isActive()))
+				&& selectable.isThumbnailActive() 
+				&& !CGRect.containsPoint(this.thumbRect, Util.mid(selectable.getSelectionRect())) 
+				) {			
 			float x = selectable.getPosition().x;
 			float y = selectable.getPosition().y;						
 			
@@ -79,7 +80,7 @@ public class ThumbnailManager {
 			float minMargeY = CGRect.minY(camera) + (Thumbnail_Margin_Height * reverseScale) / 2;
 			
 			CGPoint centerScreen = this.cameraManager.getCenterScreen();
-			CGPoint target = selectable.getPosition();
+			CGPoint target = Util.mid(selectable.getSelectionRect());
 			tl.set(CGRect.minX(camera), CGRect.maxY(camera));
 			tr.set(CGRect.maxX(camera), CGRect.maxY(camera));
 			br.set(CGRect.maxX(camera), CGRect.minY(camera));
