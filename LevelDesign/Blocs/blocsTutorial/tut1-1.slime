@@ -26,3 +26,4 @@ Platform_Wall;216.0;408.0;104.0;24.0;0.0
 Liquid;240.0;432.0;104.0;24.0;0.0
 Platform_Wall;216.0;432.0;24.0;48.0;0.0
 Box_Bottle;384.0;64.0;48.0;72.0;0.0;false;true
+Sprite;130.0;145.0;160.0;80.0;-42.0;arrows;arrow-green;1
