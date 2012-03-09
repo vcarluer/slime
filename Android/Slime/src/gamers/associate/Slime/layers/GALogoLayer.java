@@ -223,22 +223,25 @@ public class GALogoLayer extends CCLayer {
 					case 8:
 						SpriteSheetFactory.add("worlds-items", Level.zMid);
 						break;
-					case 9:	
+					case 9:
+						SpriteSheetFactory.add("arrows", Level.zMid);
+						break;
+					case 10:	
 						Sounds.preload();
 						break;
-					case 10:
+					case 11:
 						BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorCorridor);
 						break;
-					case 11:
+					case 12:
 						BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle);
 						break;
-					case 12:
+					case 13:
 						BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle2);
 						break;
-					case 13:
+					case 14:
 						BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorTutorial);
 						break;
-					case 14:						
+					case 15:						
 						currentLevel = Level.get(LevelHome.Id);
 						unschedule(nextCallback);
 						load();											
