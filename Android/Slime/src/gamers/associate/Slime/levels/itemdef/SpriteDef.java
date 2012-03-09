@@ -4,16 +4,29 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.GameItemCocos;
+import gamers.associate.Slime.items.custom.SpriteAction;
 
 public class SpriteDef extends ItemDefinition {
 	private static String Handled_Def = "Sprite";
 	private String plist;
 	private String frame;
 	private int count;
+	private int actionCode;
+	private float actionValue;
+	private float actionTime;
+	private boolean inverse;
+	private boolean repeat;	
+	private float originalDelay;
+	private boolean resetPosition;
 	
 	@Override
 	public void createItem(Level level) {
-		SlimeFactory.Sprite.createBL(this.getX(), this.getY(), this.width, this.height, this.plist, this.frame, this.count).setAngle(this.angle);
+		if (actionCode != 0) {
+			SpriteAction action = new SpriteAction(this.actionCode, this.actionValue, this.actionTime, this.inverse, this.repeat, this.originalDelay, this.resetPosition);
+			SlimeFactory.Sprite.createBL(this.getX(), this.getY(), this.width, this.height, this.plist, this.frame, this.count, action).setAngle(this.angle);
+		} else {
+			SlimeFactory.Sprite.createBL(this.getX(), this.getY(), this.width, this.height, this.plist, this.frame, this.count).setAngle(this.angle);
+		}		
 	}
 
 	@Override
@@ -25,7 +38,24 @@ public class SpriteDef extends ItemDefinition {
 	protected void parseNext(String[] infos, int start) {
 		this.plist = infos[start];
 		this.frame = infos[start+1];
-		this.count = Integer.parseInt(infos[start+2]);		
+		this.count = Integer.parseInt(infos[start+2]);
+		if ((infos.length - 1) > (start + 2)) {
+			this.actionCode = Integer.valueOf(infos[start+3]);
+			this.actionValue = Float.valueOf(infos[start+4]);
+			this.actionTime = Float.valueOf(infos[start+5]);
+			this.inverse = Boolean.valueOf(infos[start+6]);
+			this.repeat = Boolean.valueOf(infos[start+7]);
+			this.originalDelay = Float.valueOf(infos[start+8]);
+			this.resetPosition = Boolean.valueOf(infos[start+9]);
+		} else {
+			this.actionCode = SpriteAction.noActionReserved;
+			this.actionValue = 0;
+			this.actionTime = 0;
+			this.inverse = false;
+			this.repeat = false;
+			this.originalDelay = 0;
+			this.resetPosition = false;
+		}
 	}
 
 	@Override
@@ -38,6 +68,16 @@ public class SpriteDef extends ItemDefinition {
 		line = this.addValue(line, this.plist);
 		line = this.addValue(line, this.frame);
 		line = this.addValue(line, String.valueOf(this.count));
+		if (this.actionCode != SpriteAction.noActionReserved) {
+			line = this.addValue(line, String.valueOf(this.actionCode));
+			line = this.addValue(line, String.valueOf(this.actionValue));
+			line = this.addValue(line, String.valueOf(this.actionTime));
+			line = this.addValue(line, String.valueOf(this.inverse));
+			line = this.addValue(line, String.valueOf(this.repeat));
+			line = this.addValue(line, String.valueOf(this.originalDelay));
+			line = this.addValue(line, String.valueOf(this.resetPosition));
+		}
+
 		return line;
 	}
 
@@ -57,5 +97,14 @@ public class SpriteDef extends ItemDefinition {
 		this.plist = cocos.getpList();
 		this.frame = cocos.getFrameName();
 		this.count = cocos.getFrameCount();
+		if (cocos.getSpriteAction() != null) {
+			this.actionCode = cocos.getSpriteAction().getActionCode();
+			this.actionValue = cocos.getSpriteAction().getActionValue();
+			this.actionTime = cocos.getSpriteAction().getActionTime();
+			this.inverse = cocos.getSpriteAction().getInverse();
+			this.repeat = cocos.getSpriteAction().getRepeat();
+			this.originalDelay = cocos.getSpriteAction().getOriginalDelay();
+			this.resetPosition = cocos.getSpriteAction().getResetPosition();
+		}
 	}
 }

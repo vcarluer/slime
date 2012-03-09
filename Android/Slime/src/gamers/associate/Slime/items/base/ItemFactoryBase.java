@@ -112,7 +112,11 @@ public abstract class ItemFactoryBase<T extends GameItemCocos> {
 		case ANIM_SCALE:
 		case SINGLE_SCALE:
 		default:
-			node = this.spriteSheet;
+			if (this.spriteSheet != null) {
+				node = this.spriteSheet;
+			} else {
+				node = this.rootNode;
+			}			
 			break;
 		case ANIM_REPEAT:
 		case SINGLE_REPEAT:

@@ -1,5 +1,6 @@
 package gamers.associate.Slime.items.custom;
 
+import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.GameItemCocosFactory;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
@@ -13,6 +14,7 @@ public class CocosFactory extends GameItemCocosFactory<GameItemCocos> {
 	private String currentPlistName;
 	private String currentFrameName;
 	private int currentFrameCount;
+	private SpriteAction spriteAction;
 	private CCAnimation animation;
 	
 	@Override
@@ -43,6 +45,10 @@ public class CocosFactory extends GameItemCocosFactory<GameItemCocos> {
 		if (this.animation != null) {
 			item.getSprite().runAction(CCAnimate.action(this.animation));
 		}
+		
+		if (this.spriteAction != null) {
+			this.spriteAction.apply(item.getSprite());
+		}
 	}
 	
 	public GameItemCocos createBL(float x, float y, float width, float height, String plist, String frameName, int frameCount) {		
@@ -54,13 +60,16 @@ public class CocosFactory extends GameItemCocosFactory<GameItemCocos> {
 	}
 	
 	private void createDynamicAnimList() {
-		this.animation = null; 
-		this.spriteSheet = SpriteSheetFactory.getSpriteSheet(this.currentPlistName);
-		if (this.currentPlistName == "") {
+		this.spriteAction = null;
+		this.animation = null; 		
+		if (this.currentPlistName.length() == 0) {
+			this.spriteSheet = null;
 			TextureAnimation.createFramesFromFiles(this.currentFrameName, this.currentFrameCount);
+		} else {
+			this.spriteSheet = SpriteSheetFactory.getSpriteSheet(this.currentPlistName);
 		}
 		
-		if (currentFrameCount > 1) {
+		if (currentFrameCount > 1) {			
 			this.animation = this.createAnim(this.currentFrameName, this.currentFrameCount);
 		}
 	}
@@ -73,5 +82,16 @@ public class CocosFactory extends GameItemCocosFactory<GameItemCocos> {
 		super.preInit(item);
 		item.setReferenceAnimationName(this.currentFrameName);
 		item.setSpriteType(SpriteType.SINGLE_SCALE);
+	}
+
+	public GameItem createBL(float x, float y, float width, float height,
+			String plist, String frame, int count, SpriteAction action) {
+		this.currentFrameName = frame;
+		this.currentPlistName = plist;
+		this.currentFrameCount = count;
+		this.createDynamicAnimList();
+		
+		this.spriteAction = action;		
+		return this.create(x + width / 2, y + height / 2, width, height);
 	}
 }

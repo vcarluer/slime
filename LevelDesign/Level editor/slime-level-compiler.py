@@ -227,6 +227,11 @@ class Smile( inkex.Effect ):
 			if str(child.get("type")) == 'Sprite':
 				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_plist"))+";"+str(child.get("att_frameName"))+";"+str(child.get("att_frameCount"))
 				return True;
+				
+			# Sprites action
+			if str(child.get("type")) == 'SpriteAction':
+				print  "Sprite;"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_plist"))+";"+str(child.get("att_frameName"))+";"+str(child.get("att_frameCount"))+";"+str(child.get("att_actionCode"))+";"+str(child.get("att_actionValue"))+";"+str(child.get("att_actionTime"))+";"+str(child.get("att_inverse"))+";"+str(child.get("att_repeat"))+";"+str(child.get("att_originalDelay"))+";"+str(child.get("att_resetPosition"))
+				return True;
 			
 			# Red
 			if str(child.get("type")) == 'Red' or str(child.get("type")) == 'MiniRed':

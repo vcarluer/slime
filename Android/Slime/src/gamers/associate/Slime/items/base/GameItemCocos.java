@@ -1,6 +1,8 @@
 package gamers.associate.Slime.items.base;
 
 
+import gamers.associate.Slime.items.custom.SpriteAction;
+
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -29,6 +31,7 @@ public class GameItemCocos extends GameItem {
 	private String pList;
 	private String frameName;
 	private int frameCount;
+	private SpriteAction spriteAction;
 		
 	public GameItemCocos(float x, float y, float width, float height) {
 		super(x, y, width, height);		
@@ -362,5 +365,13 @@ public class GameItemCocos extends GameItem {
 	
 	public int getFrameCount() {
 		return this.frameCount;
+	}
+
+	public SpriteAction getSpriteAction() {
+		return spriteAction;
+	}
+
+	public void setSpriteAction(SpriteAction spriteAction) {
+		this.spriteAction = spriteAction;
 	}
 }
