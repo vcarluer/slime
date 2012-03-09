@@ -149,6 +149,8 @@ public class Level {
 	
 	private Random randomGen;
 	
+	private GameItem helpItem;
+	
 	public Level() {
 		this.randomGen = new Random();
 		this.scene = CCScene.node();
@@ -1247,5 +1249,13 @@ public class Level {
 	
 	public void setTitle(String title) {
 		this.hudLayer.setTitle(title);
+	}
+
+	public GameItem getHelpItem() {
+		return helpItem;
+	}
+
+	public void setHelpItem(GameItem helpItem) {
+		this.helpItem = helpItem;
 	}
 }

@@ -18,12 +18,17 @@ public class SpriteDef extends ItemDefinition {
 	private boolean repeat;	
 	private float originalDelay;
 	private boolean resetPosition;
+	private float delayBefore;
 	
 	@Override
 	public void createItem(Level level) {
 		if (actionCode != SpriteAction.noActionReserved) {
-			SpriteAction action = new SpriteAction(this.actionCode, this.actionValue, this.actionTime, this.inverse, this.repeat, this.originalDelay, this.resetPosition);
-			SlimeFactory.Sprite.createBL(this.getX(), this.getY(), this.width, this.height, this.plist, this.frame, this.count, action).setAngle(this.angle);
+			SpriteAction action = new SpriteAction(this.actionCode, this.actionValue, this.actionTime, this.inverse, this.repeat, this.originalDelay, this.resetPosition, this.delayBefore);
+			GameItem item = SlimeFactory.Sprite.createBL(this.getX(), this.getY(), this.width, this.height, this.plist, this.frame, this.count, action);
+			item.setAngle(this.angle);
+			if (this.frame.equals("gestures_tap")) {
+				level.setHelpItem(item);
+			}			
 		} else {
 			SlimeFactory.Sprite.createBL(this.getX(), this.getY(), this.width, this.height, this.plist, this.frame, this.count).setAngle(this.angle);
 		}		
@@ -47,6 +52,7 @@ public class SpriteDef extends ItemDefinition {
 			this.repeat = Boolean.valueOf(infos[start+7]);
 			this.originalDelay = Float.valueOf(infos[start+8]);
 			this.resetPosition = Boolean.valueOf(infos[start+9]);
+			this.delayBefore = Float.valueOf(infos[start+10]);
 		} else {
 			this.actionCode = SpriteAction.noActionReserved;
 			this.actionValue = 0;
@@ -55,6 +61,7 @@ public class SpriteDef extends ItemDefinition {
 			this.repeat = false;
 			this.originalDelay = 0;
 			this.resetPosition = false;
+			this.delayBefore = 0;
 		}
 	}
 
@@ -76,6 +83,7 @@ public class SpriteDef extends ItemDefinition {
 			line = this.addValue(line, String.valueOf(this.repeat));
 			line = this.addValue(line, String.valueOf(this.originalDelay));
 			line = this.addValue(line, String.valueOf(this.resetPosition));
+			line = this.addValue(line, String.valueOf(this.delayBefore));
 		}
 
 		return line;
@@ -104,6 +112,7 @@ public class SpriteDef extends ItemDefinition {
 		this.repeat = false;
 		this.originalDelay = 0;
 		this.resetPosition = false;
+		this.delayBefore = 0;
 		if (cocos.getSpriteAction() != null) {
 			if (cocos.getSpriteAction().getActionCode() != SpriteAction.noActionReserved) {
 				this.actionCode = cocos.getSpriteAction().getActionCode();
@@ -113,6 +122,7 @@ public class SpriteDef extends ItemDefinition {
 				this.repeat = cocos.getSpriteAction().getRepeat();
 				this.originalDelay = cocos.getSpriteAction().getOriginalDelay();
 				this.resetPosition = cocos.getSpriteAction().getResetPosition();
+				this.delayBefore = cocos.getSpriteAction().getDelayBefore();
 			}			
 		}
 	}

@@ -5,6 +5,8 @@ import org.cocos2d.actions.base.CCFiniteTimeAction;
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCDelayTime;
+import org.cocos2d.actions.interval.CCFadeIn;
+import org.cocos2d.actions.interval.CCFadeOut;
 import org.cocos2d.actions.interval.CCIntervalAction;
 import org.cocos2d.actions.interval.CCMoveBy;
 import org.cocos2d.actions.interval.CCMoveTo;
@@ -15,6 +17,7 @@ import org.cocos2d.types.CGPoint;
 public class SpriteAction {
 	public static int noActionReserved = 0;
 	public static int MoveBL = 1;
+	public static int FadeIn = 2;
 	
 	private int actionCode;
 	private float actionValue;
@@ -23,12 +26,13 @@ public class SpriteAction {
 	private boolean repeat;	
 	private float originalDelay;
 	private boolean resetPosition;
+	private float delayBefore;
 	private CCSprite sprite;
 	
 	private float originalX;
 	private float originalY;
 	
-	public SpriteAction(int action, float value, float time, boolean inverse, boolean repeat, float originalDelay, boolean resetPosition) {
+	public SpriteAction(int action, float value, float time, boolean inverse, boolean repeat, float originalDelay, boolean resetPosition, float delayBefore) {
 		this.actionCode = action;
 		this.actionValue = value;
 		this.actionTime = time;
@@ -36,6 +40,7 @@ public class SpriteAction {
 		this.repeat = repeat;
 		this.originalDelay = originalDelay;
 		this.resetPosition = resetPosition;
+		this.delayBefore = delayBefore;
 	}
 	
 	public void apply(CCSprite sprite) {
@@ -45,7 +50,11 @@ public class SpriteAction {
 			this.originalY = sprite.getPosition().y;
 		}
 		
-		if (this.sprite != null && this.actionCode != noActionReserved && this.originalDelay > 0) {						
+		if (this.sprite != null && this.actionCode != noActionReserved && this.originalDelay > 0) {		
+			if (actionCode == FadeIn) {
+				this.sprite.setOpacity(0);
+			}
+
 			CCDelayTime delay = CCDelayTime.action(this.originalDelay);
 			CCCallFunc call = CCCallFunc.action(this, "continueAction");
 			CCSequence seq = CCSequence.actions(delay, call);
@@ -61,8 +70,12 @@ public class SpriteAction {
 			if (actionCode == MoveBL) {
 				action = CCMoveBy.action(this.actionTime, CGPoint.ccp(- this.actionValue, -this.actionValue));			
 			}
+			
+			if (actionCode == FadeIn) {
+				action = CCFadeIn.action(this.actionTime);			
+			}
 					
-			if (action != null) {
+			if (action != null) {								
 				CCIntervalAction actionT1 = action;
 				if (this.inverse) {
 					actionT1 = CCSequence.actions(action, action.reverse());
@@ -74,12 +87,18 @@ public class SpriteAction {
 					actionT2 = CCSequence.actions(actionT1, mt);
 				}
 				
-				CCAction actionT3 = actionT2;
-				if (this.repeat) {
-					actionT3 = CCRepeatForever.action(actionT2);
+				CCIntervalAction actionT3 = actionT2;
+				if (this.delayBefore > 0) {
+					CCDelayTime delay = CCDelayTime.action(this.delayBefore);
+					actionT3 = CCSequence.actions(delay, actionT2);
 				}
 				
-				sprite.runAction(actionT3);
+				CCAction actionT4 = actionT3;
+				if (this.repeat) {
+					actionT4 = CCRepeatForever.action(actionT3);
+				}
+				
+				sprite.runAction(actionT4);
 			}
 		}		
 	}
@@ -110,5 +129,9 @@ public class SpriteAction {
 	
 	public boolean getResetPosition() {
 		return this.resetPosition;
+	}
+	
+	public float getDelayBefore() {
+		return this.delayBefore;
 	}
 }
