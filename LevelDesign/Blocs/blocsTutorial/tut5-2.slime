@@ -14,8 +14,11 @@ Box_Multitubes;0.0;0.0;216.0;176.0;0.0;true;true
 Box_Bottle;8.0;176.0;48.0;72.0;0.0;false;true
 Box_GlassBox;216.0;0.0;264.0;80.0;0.0;true;true
 Platform_Ice;300.0;219.0;179.0;32.0;-30.0
-Platform;380.0;348.0;168.0;32.0;90.0
-Platform_End;448.0;448.0;32.0;32.0;-90.0
 Platform_End;448.0;248.0;32.0;32.0;90.0
-Platform_End;0.0;296.0;32.0;32.0;90.0
-Platform_NoSticky;-60.0;388.0;152.0;32.0;90.0
+Platform_End;0.0;280.0;32.0;32.0;90.0
+Platform_NoSticky;-68.0;380.0;168.0;32.0;90.0
+Platform_NoSticky;364.0;364.0;200.0;32.0;90.0
+Sprite;223.0;406.0;32.0;16.0;-135.0;arrows;arrow-green;1;2;0;1;true;true;0;false;0
+Sprite;166.0;447.0;32.0;16.0;-150.0;arrows;arrow-green;1;2;0;1;true;true;0.25;false;0
+Sprite;94.0;455.0;32.0;16.0;150.0;arrows;arrow-green;1;2;0;1;true;true;0.5;false;0
+Sprite;47.0;410.0;32.0;16.0;120.0;arrows;arrow-green;1;2;0;1;true;true;0.75;false;0

@@ -16,11 +16,8 @@ Polygon;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 35.224852,335.28835 0.12444,19.4935 12
 Sprite;8.0;238.0;20.0;35.0;-90.0;tank;tank-tube-filled;1
 Polygon;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 35.368553,355.2543 -10e-4,-20.03027 -35.41154926,0.10734 -0.121165,19.80671;false;true;true
 Platform_Ice;157.0;56.0;168.0;32.0;30.0
-Platform;32.0;96.0;112.0;32.0;0.0
-Platform_End;144.0;96.0;32.0;32.0;0.0
 Star;394.0;88.0;30.0;31.0;0.0
 Platform_Ice;373.0;36.0;112.0;32.0;-45.0
-Platform;376.0;184.0;176.0;32.0;90.0
 Platform_Corner;448.0;384.0;32.0;32.0;-90.0
 CircularSaw;408.0;216.0;40.0;40.0;-90.0;circularsaw;true
 Platform_T;448.0;288.0;32.0;32.0;-90.0
@@ -36,5 +33,10 @@ BecBunsen;192.0;416.0;20.0;67.0;0.0;true;0;becbunsen
 Box_Bottle;415.0;412.0;48.0;72.0;75.0;false;true
 Platform_NoSticky;-32.0;32.0;96.0;32.0;90.0
 Platform_Corner;0.0;96.0;32.0;32.0;180.0
-Platform_End;448.0;80.0;32.0;32.0;90.0
 Box_Tube;0.0;128.0;18.0;72.0;0.0;false;true
+Platform_NoSticky;320.0;128.0;288.0;32.0;90.0
+Platform_Ice;32.0;96.0;144.0;32.0;0.0
+Sprite;162.0;145.0;32.0;16.0;10.0;arrows;arrow-green;1;2;0;1;true;true;0;false;0
+Sprite;217.0;135.0;32.0;16.0;10.0;arrows;arrow-green;1;2;0;1;true;true;0.25;false;0
+Sprite;272.0;125.0;32.0;16.0;10.0;arrows;arrow-green;1;2;0;1;true;true;0.5;false;0
+Sprite;327.0;115.0;32.0;16.0;10.0;arrows;arrow-green;1;2;0;1;true;true;0.75;false;0

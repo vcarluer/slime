@@ -20,3 +20,7 @@ Box_Bottle;256.0;64.0;48.0;72.0;0.0;false;true
 Box_GlassBox;304.0;64.0;176.0;88.0;0.0;true;true
 Star;298.0;392.0;30.0;31.0;0.0
 Button;338.0;152.0;30.0;16.0;0.0;lasergun;3
+Sprite;157.0;129.0;32.0;16.0;-30.0;arrows;arrow-green;1;2;0;1;true;true;0;false;0
+Sprite;222.0;169.0;32.0;16.0;-30.0;arrows;arrow-green;1;2;0;1;true;true;0.25;false;0
+Sprite;283.0;196.0;32.0;16.0;-15.0;arrows;arrow-green;1;2;0;1;true;true;0.5;false;0
+Sprite;360.0;200.0;32.0;16.0;0.0;arrows;arrow-green;1;2;0;1;true;true;0.75;false;0

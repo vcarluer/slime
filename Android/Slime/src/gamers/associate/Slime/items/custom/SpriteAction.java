@@ -18,6 +18,7 @@ public class SpriteAction {
 	public static int noActionReserved = 0;
 	public static int MoveBL = 1;
 	public static int FadeIn = 2;
+	public static int MoveL = 3;
 	
 	private int actionCode;
 	private float actionValue;
@@ -49,19 +50,21 @@ public class SpriteAction {
 			this.originalX = sprite.getPosition().x;
 			this.originalY = sprite.getPosition().y;
 		}
-		
-		if (this.sprite != null && this.actionCode != noActionReserved && this.originalDelay > 0) {		
+				
+		if (this.sprite != null && this.actionCode != noActionReserved) {
 			if (actionCode == FadeIn) {
 				this.sprite.setOpacity(0);
 			}
-
-			CCDelayTime delay = CCDelayTime.action(this.originalDelay);
-			CCCallFunc call = CCCallFunc.action(this, "continueAction");
-			CCSequence seq = CCSequence.actions(delay, call);
-			this.sprite.runAction(seq);
-		} else {
-			this.continueAction();
-		}			
+			
+			if (this.originalDelay > 0) {
+				CCDelayTime delay = CCDelayTime.action(this.originalDelay);
+				CCCallFunc call = CCCallFunc.action(this, "continueAction");
+				CCSequence seq = CCSequence.actions(delay, call);
+				this.sprite.runAction(seq);
+			} else {
+				this.continueAction();
+			}
+		}
 	}
 	
 	public void continueAction() {
@@ -69,6 +72,10 @@ public class SpriteAction {
 			CCIntervalAction action = null;
 			if (actionCode == MoveBL) {
 				action = CCMoveBy.action(this.actionTime, CGPoint.ccp(- this.actionValue, -this.actionValue));			
+			}
+			
+			if (actionCode == MoveL) {
+				action = CCMoveBy.action(this.actionTime, CGPoint.ccp(- this.actionValue, 0));			
 			}
 			
 			if (actionCode == FadeIn) {

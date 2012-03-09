@@ -23,7 +23,9 @@ public class SpriteDef extends ItemDefinition {
 	@Override
 	public void createItem(Level level) {
 		if (actionCode != SpriteAction.noActionReserved) {
-			SpriteAction action = new SpriteAction(this.actionCode, this.actionValue, this.actionTime, this.inverse, this.repeat, this.originalDelay, this.resetPosition, this.delayBefore);
+			SpriteAction action = new SpriteAction(
+					this.actionCode, this.actionValue, this.actionTime, this.inverse, this.repeat, 
+					this.originalDelay, this.resetPosition, this.delayBefore);
 			GameItem item = SlimeFactory.Sprite.createBL(this.getX(), this.getY(), this.width, this.height, this.plist, this.frame, this.count, action);
 			item.setAngle(this.angle);
 			if (this.frame.equals("gestures_tap")) {

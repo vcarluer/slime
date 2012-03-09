@@ -24,3 +24,7 @@ Platform_Corner;448.0;232.0;32.0;32.0;-90.0
 Liquid;392.0;0.0;56.0;168.0;0.0
 LiquidSurface;392.0;168.0;56.0;16.0;0.0
 Platform_NoSticky;348.0;100.0;232.0;32.0;90.0
+Sprite;112.0;129.0;32.0;16.0;-51.0;arrows;arrow-green;1;2;0;1;true;true;0;false;0
+Sprite;160.0;185.0;32.0;16.0;-51.0;arrows;arrow-green;1;2;0;1;true;true;0.25;false;0
+Sprite;214.0;237.0;32.0;16.0;-37.0;arrows;arrow-green;1;2;0;1;true;true;0.5;false;0
+Sprite;277.0;274.0;32.0;16.0;-26.0;arrows;arrow-green;1;2;0;1;true;true;0.75;false;0
