@@ -17,7 +17,10 @@ public class GameInformation {
 	private int levelNum;
 	private int levelDifficulty;
 	private String fileName = "gameInfo.sli";
-	private int totalScore;
+	private int totalScoreEasy;
+	private int totalScoreNormal;
+	private int totalScoreHard;
+	private int totalScoreExtrem;
 	private int lastScore;
 	private int maxLevelDifficulty;
 	private int previousTotalScore;
@@ -30,13 +33,57 @@ public class GameInformation {
 		this.load();
 	}
 	
-	private void setLevelDifficulty(int leveldifficulty) {
-		this.totalScore = 0;
+	private void setLevelDifficulty(int leveldifficulty) {		
 		this.lastScore = 0;
 		this.previousDifficulty = this.levelDifficulty;
 		this.levelDifficulty = leveldifficulty;
+		this.setTotalScore(0);
 		if (this.levelDifficulty > this.maxLevelDifficulty) {
 			this.maxLevelDifficulty = this.levelDifficulty;
+		}
+	}
+	
+	private void setTotalScore(int score) {
+		this.setTotalScore(score, this.levelDifficulty);
+	}
+	
+	private void setTotalScore(int score, int levelDifficulty) {
+		switch (levelDifficulty) {		
+		case LevelDifficulty.Normal:
+			this.totalScoreNormal = score;
+			break;
+		case LevelDifficulty.Hard:
+			this.totalScoreHard = score;
+			break;
+		case LevelDifficulty.Extrem:
+			this.totalScoreExtrem = score;
+			break;
+		case LevelDifficulty.Easy:
+		default:
+			this.totalScoreEasy = score;
+			break;
+		}
+	}
+	
+	private int getScore() {
+		return this.totalScoreEasy + this.totalScoreNormal + this.totalScoreHard + this.totalScoreExtrem;
+	}
+	
+	private int getDifficultyScore() {
+		return this.getDifficultyScore(this.levelDifficulty);
+	}
+	
+	private int getDifficultyScore(int levelDifficulty) {
+		switch (levelDifficulty) {		
+		case LevelDifficulty.Normal:
+			return this.totalScoreNormal;
+		case LevelDifficulty.Hard:
+			return this.totalScoreHard;
+		case LevelDifficulty.Extrem:
+			return this.totalScoreExtrem;
+		case LevelDifficulty.Easy:
+		default:
+			return this.totalScoreEasy;
 		}
 	}
 	
@@ -50,7 +97,7 @@ public class GameInformation {
 	}
 	
 	public void endDifficulty() {
-		this.previousTotalScore = this.totalScore;
+		this.previousTotalScore = this.getDifficultyScore();
 		this.difficultyUp();
 		this.store();
 	}
@@ -87,7 +134,13 @@ public class GameInformation {
 			buffWriter.newLine();
 			buffWriter.write(String.valueOf(this.levelNum));			
 			buffWriter.newLine();
-			buffWriter.write(String.valueOf(this.totalScore));
+			buffWriter.write(String.valueOf(this.totalScoreEasy));
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.totalScoreNormal));
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.totalScoreHard));
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.totalScoreExtrem));
 			buffWriter.newLine();
 			buffWriter.write(String.valueOf(this.maxLevelDifficulty));
 			buffWriter.newLine();
@@ -136,12 +189,21 @@ public class GameInformation {
 								this.levelNum = Integer.valueOf(line).intValue();
 								break;
 							case 3:
-								this.totalScore = Integer.valueOf(line).intValue();
+								this.setTotalScore(Integer.valueOf(line).intValue(), LevelDifficulty.Easy);
 								break;
 							case 4:
-								this.maxLevelDifficulty = Integer.valueOf(line).intValue();
+								this.setTotalScore(Integer.valueOf(line).intValue(), LevelDifficulty.Normal);
 								break;
 							case 5:
+								this.setTotalScore(Integer.valueOf(line).intValue(), LevelDifficulty.Hard);
+								break;
+							case 6:
+								this.setTotalScore(Integer.valueOf(line).intValue(), LevelDifficulty.Extrem);
+								break;
+							case 7:
+								this.maxLevelDifficulty = Integer.valueOf(line).intValue();
+								break;
+							case 8:
 								this.lastBgk = line;
 								break;
 							default:
@@ -176,25 +238,19 @@ public class GameInformation {
 	}
 	
 	public int getTotalScore() {
-		return this.totalScore;
+		return this.getScore();
 	}
 	
 	public void addLevelScore(int score) {
 		this.lastScore = score;
-		this.totalScore += score;
+		this.setTotalScore(this.getDifficultyScore() + score);
 		this.store();
 	}
 	
 	public void removeLastScore() {
-		this.totalScore -= this.lastScore;
+		this.setTotalScore(this.getDifficultyScore() - this.lastScore);
 		this.lastScore = 0;
 		this.store();
-	}
-
-	public void resetTotalScore() {
-		this.totalScore = 0;
-		this.lastScore = 0;
-		this.store();		
 	}
 
 	public int getMaxLevelDifficulty() {
