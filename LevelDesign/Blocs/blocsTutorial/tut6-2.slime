@@ -9,21 +9,20 @@ Sprite;401.0;129.0;80.0;152.0;0.0;tank;tank-main;1
 Polygon;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 411.42409,360.60558 0.18298,94.97583 6.6518,7.41333 17.91309,0.24565 0.17031,7.31853 19.95666,0.0876 -0.18953,-6.75251 17.00321,-0.17723 7.41617,-7.75072 0.18532,-95.91428 -5.76794,-7.20067 L 456,352 l -0.31893,-25.01746 -5.78529,-5.72258 -48.91585,-0.005 0.0543,20.46094 35.12259,0.0986 -0.17044,10.69312 -17.87711,0.0919;false;true;true
 LaserGun;167.0;440.0;65.0;15.0;-90.0;lasergun;target;true
 Target;192.0;56.0;16.0;16.0;0.0;target
-Button;66.0;64.0;30.0;16.0;0.0;lasergun;3
+Button;114.0;152.0;30.0;16.0;0.0;lasergun;3
 Star;274.0;104.0;30.0;31.0;0.0
 Platform;336.0;312.0;144.0;32.0;0.0
 Platform_End;304.0;312.0;32.0;32.0;180.0
 Box_Multitubes;336.0;344.0;144.0;72.0;0.0;true;true
 Box_Tube;360.0;64.0;18.0;72.0;0.0;false;true
 Polygon;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 72,200 88,-24 24,-56 -168,0;false;true;false
-Platform_Bumper;-28.0;92.0;88.0;32.0;90.0
-Box_Tube;142.0;64.0;18.0;72.0;0.0;false;true
 Box_GlassBox;48.0;0.0;432.0;64.0;0.0;true;true
 Platform_Wall;0.0;0.0;48.0;64.0;0.0
-Sprite;104.0;136.0;32.0;16.0;-53.0;arrows;arrow-green;1;2;0;1;true;true;0;false;0
-Sprite;164.0;158.0;32.0;16.0;22.0;arrows;arrow-green;1;2;0;1;true;true;0.25;false;0
+Sprite;144.0;184.0;32.0;16.0;-53.0;arrows;arrow-green;1;2;0;1;true;true;0;false;0
+Sprite;188.0;190.0;32.0;16.0;22.0;arrows;arrow-green;1;2;0;1;true;true;0.25;false;0
 Sprite;277.0;146.0;32.0;16.0;-79.0;arrows;arrow-green;1;2;0;1;true;true;0.75;false;0
 Sprite;288.0;201.0;32.0;16.0;-79.0;arrows;arrow-green;1;2;0;1;true;true;1;false;0
-Sprite;60.0;105.0;32.0;16.0;76.0;arrows;arrow-green;1;2;0;1;true;true;1.25;false;0
-Sprite;229.0;130.0;32.0;16.0;26.0;arrows;arrow-green;1;2;0;1;true;true;0.5;false;0
-Sprite;22.0;167.0;32.0;16.0;31.0;arrows;arrow-green;1;2;0;1;true;true;1;false;0
+Sprite;103.0;178.0;32.0;16.0;61.0;arrows;arrow-green;1;2;0;1;true;true;1.25;false;0
+Sprite;232.0;153.0;32.0;16.0;56.0;arrows;arrow-green;1;2;0;1;true;true;0.5;false;0
+Sprite;58.0;195.0;32.0;16.0;16.0;arrows;arrow-green;1;2;0;1;true;true;1;false;0
+Box_GlassBox;0.0;64.0;192.0;88.0;0.0;true;true
