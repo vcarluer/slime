@@ -159,7 +159,7 @@
      inkscape:cx="294.32121"
      inkscape:cy="217.59098"
      inkscape:document-units="px"
-     inkscape:current-layer="Template"
+     inkscape:current-layer="MAP"
      showgrid="true"
      inkscape:snap-grids="true"
      inkscape:snap-page="false"
@@ -191,7 +191,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1592,11 +1592,12 @@
        height="16"
        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAQCAYAAAABOs/SAAAABHNCSVQICAgIfAhkiAAAA79JREFU OI21lDtvVEcYhp+ZOcZ7DWaNA1lsZOPEEAVjy2ApKVMh5Q+EhCbpXfpPuCMtTSRiS24oIqVyEYuU QQFZIJMgO94YGd9Y73rvu2fOfBRnL2cDKTPSaJ75vpl5v3fOBRGR5eVlmZ6+IcYYAf6XboyRmZlZ WV1dFRERtbKyInfv3sUz5/AGpvA8D89TeEZjPNVm1WYd4f41QSAEVrCBYK2LcBj3fZ83+Wc0m0Ue PnyImpu7KRsbW2SGfsDz0iSTXrsbEkmP1H9wMmlIpTwSiZB9X6jVLNVqQLViqdYs1UoQjtWQTwrH PPrtO+bnp9EbGxt4ZhKt0zgHzkm7g8h7WEIWRzcuAlqDUgqtQGnQWrVjoFXI8ViGdPoqm5ub6CCw gKLTwoOJCIKTkF2kkD520hPSCq0VSkW4XYjSoJUJ1w8OxhCCrrC0HffEO+7CsY8jBSrVc6nbglr1 uJN30sLzDHp+/hbW/kUQ7IeOI9fdJ95heTcuIr3DlYoUoSJXrahUcpRKL5ibm0Otra3J7du3AYMx oyhlMJ3Kjeq6MFr1zbVWkVjbTeTqXSAEkXlgLcXTHOBYX19HiYgsLi5y//59EvEETgS6Tz2suDtX oDqZdkD1FofuEegbOzeiKZVLLCwssLS0hAcwOTnJh7MXSX0/Qmowxo3gM/IU2HI5zsXinDYbzAxc 4078Kxo/PkDKZbxUEiWCq9UZGBtl6JuvuVdcZsfukR4YoNBscNNcx4nwQr2k3Gpg7r1ifHwcIBQG cJ6QvTTAhVSC4naZI07IZj3Gh9Lkij7HRwUAgoMDPvhomPSlEUQcld19modHAOwFh2QveWSTSV4W GuSPTxERrl5JsFvyOfKk+xJ3hQGuDGWYGh7h922fhPH4OHOeL8cn+TW3xeu8AWDwbJpk9gLDs9cQ G+Csw55UABgajPFJJsUX2TGsCMW8QotmPjuK0Zrn7LxfuNxqclSt4DhDyzlKzQZbJ28oNZtY0aFj 32LrdepHeSQQbK2O830AWkEQ7inkwz0uiULYL5cpNZtRqX7hJwd7/HNaIMtVrDj+2N/ndaXMQaXE ZTcJgK3VKf65Q+ukBOKoHebRmfMA1KzP49fH7BROeFUq8ikZnAiPdnMcVsvvF959nOPO82/RSnE2 SDFkYjTMRYxSjAFpUjyxG8RvzWGcQ9P+RY5NQDzG9tOnfK6vU6WOc47LIiT8OE6E5N9nGBXhp2cP +oUnJiYIKpZf7v3cTdRqtb4KFf9q6p1I2Nqfo4igjSEWi/VyLWFqagqAt53NZ/GexDBQAAAAAElF TkSuQmCC "
        id="button-5"
-       x="338"
-       y="432"
+       x="-366"
+       y="-280"
        att_resetTime="3"
        att_target="lasergun"
-       type="Button" />
+       type="Button"
+       transform="scale(-1,-1)" />
     <image
        style="display:inline"
        width="32"
