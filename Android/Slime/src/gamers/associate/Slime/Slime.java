@@ -22,12 +22,16 @@ import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AbsoluteLayout;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -35,6 +39,8 @@ import android.widget.RelativeLayout;
  * @uml.dependency   supplier="gamers.associate.Slime.LevelLayer"
  */
 public class Slime extends Activity {
+	private static final String AdMobPublisherId = "a14f5f7a390a6a4";
+
 	public static final int ACTIVITY_INTRO = 0;
 	
 	public static final String TAG = "Slime";	
@@ -61,11 +67,15 @@ public class Slime extends Activity {
                 
         mGLSurfaceView = new CCGLSurfaceView(this);             
         setContentView(R.layout.main);
-        LinearLayout layout = (LinearLayout) this.findViewById(R.id.mainLayout);
+        RelativeLayout layout = (RelativeLayout) this.findViewById(R.id.mainLayout);
         layout.addView(this.mGLSurfaceView);
         
         // Create an ad.
-        adView = new AdView(this, AdSize.IAB_BANNER, "a14f5f7a390a6a4");
+        adView = new AdView(this, AdSize.IAB_BANNER, AdMobPublisherId);
+        FrameLayout.LayoutParams adsParams =new FrameLayout.LayoutParams(
+        		FrameLayout.LayoutParams.FILL_PARENT, FrameLayout.LayoutParams.FILL_PARENT);        
+        adView.setLayoutParams(adsParams);
+        adView.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL);
         // Create an ad request.
         AdRequest adRequest = new AdRequest();
         // Fill out ad request.
