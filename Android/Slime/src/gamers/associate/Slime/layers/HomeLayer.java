@@ -240,6 +240,8 @@ public class HomeLayer extends CCLayer {
 		
 		
 		this.temp();
+		
+		SlimeFactory.ContextActivity.showAndNextAd();
 	}
 	
 	public void temp() {
@@ -308,6 +310,7 @@ public class HomeLayer extends CCLayer {
 			this.nextDoNotStopMusic = false;
 		}
 		
+		SlimeFactory.ContextActivity.hideAd();		
 		super.onExit();
 	}
 

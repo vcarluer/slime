@@ -21,6 +21,10 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -39,11 +43,18 @@ import android.widget.RelativeLayout;
  * @uml.dependency   supplier="gamers.associate.Slime.LevelLayer"
  */
 public class Slime extends Activity {
+	private static final String SGS_VCR = "32336C42695A00EC";
 	private static final String AdMobPublisherId = "a14f5f7a390a6a4";
+	private static final boolean AdTest = true;
 
 	public static final int ACTIVITY_INTRO = 0;
 	
 	public static final String TAG = "Slime";	
+	
+	public static final int SHOW_AD = 0;
+    public static final int HIDE_AD = 1;
+    public static final int NEXT_AD = 2;
+    public static final int SHOW_NEXT_AD = 3;
 	
 	static {
         System.loadLibrary("gdx");
@@ -54,7 +65,9 @@ public class Slime extends Activity {
 	private AudioManager audio;
 	private boolean startLevel;
 	
-	private AdView adView;
+	private AdView adView;	
+	
+	private Handler mHandler;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -67,7 +80,7 @@ public class Slime extends Activity {
                 
         mGLSurfaceView = new CCGLSurfaceView(this);             
         setContentView(R.layout.main);
-        RelativeLayout layout = (RelativeLayout) this.findViewById(R.id.mainLayout);
+        RelativeLayout layout = (RelativeLayout) this.findViewById(R.id.mainLayout);        
         layout.addView(this.mGLSurfaceView);
         
         // Create an ad.
@@ -75,17 +88,31 @@ public class Slime extends Activity {
         FrameLayout.LayoutParams adsParams =new FrameLayout.LayoutParams(
         		FrameLayout.LayoutParams.FILL_PARENT, FrameLayout.LayoutParams.FILL_PARENT);        
         adView.setLayoutParams(adsParams);
-        adView.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL);
-        // Create an ad request.
-        AdRequest adRequest = new AdRequest();
-        // Fill out ad request.
-
+        adView.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL);        
         // Add the AdView to the view hierarchy. The view will have no size
         // until the ad is loaded.
-
-        // Start loading the ad in the background.
-        adView.loadAd(adRequest);
         layout.addView(adView);
+
+        this.mHandler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+	            	switch(msg.what)
+	    	        {
+	    	        case SHOW_AD:	        
+	    	            showAdInternal();	        
+	    	        case HIDE_AD:
+	    	            hideAdInternal();
+	    	        case NEXT_AD:
+	    	        	nextAdInternal();
+	    	        case SHOW_NEXT_AD:
+	    	        	showAndNextAdInternal();
+	    	        default:
+	    	            break;
+	    	        }
+			    }
+        };
+
+        this.hideAdInternal();
         
         SlimeFactory.ContextActivity = this;
         SlimeFactory.setDensity(this.getResources().getDisplayMetrics().density);
@@ -114,6 +141,54 @@ public class Slime extends Activity {
 		// Make the Scene active		
 		CCDirector.sharedDirector().runWithScene(this.scene);
     }    
+    
+    private void showAdInternal() {
+    	this.adView.setVisibility(View.VISIBLE);
+    }
+    
+    private void hideAdInternal() {
+    	this.adView.setVisibility(View.GONE);
+    }
+    
+    private void nextAdInternal() {
+    	// Create an ad request.
+        AdRequest adRequest = new AdRequest();
+        if (AdTest) {
+        	adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
+        	adRequest.addTestDevice(SGS_VCR);
+        }
+        // Fill out ad request.       
+
+        // Start loading the ad in the background.
+        this.adView.loadAd(adRequest);
+    }
+    
+    private void showAndNextAdInternal() {
+    	this.nextAdInternal();
+    	this.showAdInternal();
+    }
+    
+    public void showAd() {
+    	this.ad(SHOW_AD);
+    }
+    
+    public void hideAd() {
+    	this.ad(HIDE_AD);
+    }
+    
+    public void nextAd() {
+    	this.ad(NEXT_AD);
+    }
+    
+    public void showAndNextAd() {
+    	this.ad(SHOW_NEXT_AD);
+    }
+    
+    private void ad(int actionCode) {
+    	Message msg = new Message();
+    	msg.what = actionCode;        
+        mHandler.sendMessage(msg);
+    }
     
     @Override
     public void onStart() {
@@ -177,8 +252,7 @@ public class Slime extends Activity {
         // Destroy here, world and game items?
         
      // Destroy the AdView.
-        adView.destroy();
-        
+        adView.destroy();        
         // No more needed if rotation works:
         /*SpriteSheetFactory.destroy();
         SlimeFactory.destroyAll();*/
