@@ -11,6 +11,10 @@ import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.opengl.CCGLSurfaceView;
 
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -44,6 +48,8 @@ public class Slime extends Activity {
 	private AudioManager audio;
 	private boolean startLevel;
 	
+	private AdView adView;
+	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,9 +58,24 @@ public class Slime extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-               
+                
         mGLSurfaceView = new CCGLSurfaceView(this);             
-        setContentView(mGLSurfaceView);
+        setContentView(R.layout.main);
+        LinearLayout layout = (LinearLayout) this.findViewById(R.id.mainLayout);
+        layout.addView(this.mGLSurfaceView);
+        
+        // Create an ad.
+        adView = new AdView(this, AdSize.IAB_BANNER, "a14f5f7a390a6a4");
+        // Create an ad request.
+        AdRequest adRequest = new AdRequest();
+        // Fill out ad request.
+
+        // Add the AdView to the view hierarchy. The view will have no size
+        // until the ad is loaded.
+
+        // Start loading the ad in the background.
+        adView.loadAd(adRequest);
+        layout.addView(adView);
         
         SlimeFactory.ContextActivity = this;
         SlimeFactory.setDensity(this.getResources().getDisplayMetrics().density);
@@ -144,6 +165,9 @@ public class Slime extends Activity {
         
         Sounds.destroy();
         // Destroy here, world and game items?
+        
+     // Destroy the AdView.
+        adView.destroy();
         
         // No more needed if rotation works:
         /*SpriteSheetFactory.destroy();
