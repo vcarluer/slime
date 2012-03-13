@@ -1266,4 +1266,12 @@ public class Level {
 		CGPoint screenPos = this.cameraManager.getScreenPoint(gamePosition);
 		this.hudLayer.starTaken(screenPos);
 	}
+	
+	public float getNormalTimeRatio() {
+		if (this.gamePlay != null) {
+			return this.gamePlay.getNormalTimeRatio();
+		} else {
+			return 1.0f;
+		}
+	}
 }

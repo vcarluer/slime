@@ -26,6 +26,7 @@ import gamers.associate.Slime.items.custom.SpawnPortalFactory;
 import gamers.associate.Slime.items.custom.StarFactory;
 import gamers.associate.Slime.items.custom.TargetFactory;
 import gamers.associate.Slime.items.custom.ThumbnailFactory;
+import gamers.associate.Slime.items.custom.TriggerTimeFactory;
 import gamers.associate.Slime.levels.ILevelBuilder;
 import gamers.associate.Slime.levels.generator.LevelGraphGeneratorCorridor;
 import gamers.associate.Slime.levels.generator.LevelGraphGeneratorRectangle;
@@ -79,6 +80,7 @@ public abstract class SlimeFactory {
 	public static GateFactory Gate = new GateFactory();
 	public static LiquidFactory Liquid = new LiquidFactory();
 	public static LiquidSurfaceFactory LiquidSurface = new LiquidSurfaceFactory();
+	public static TriggerTimeFactory TriggerTime = new TriggerTimeFactory();
 		
 	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {		
 		// LevelBuilder = new LevelBuilder();
@@ -114,6 +116,7 @@ public abstract class SlimeFactory {
 		Gate.attach(level, attachNode);
 		Liquid.attach(level, attachNode, attachWorld, attachWorldRatio);
 		LiquidSurface.attach(level, attachNode, attachWorld, attachWorldRatio);
+		TriggerTime.attach(level);
 		
 		SpriteSheetFactory.attachAll(attachNode);
 		isAttached = true;
@@ -144,6 +147,7 @@ public abstract class SlimeFactory {
 		Gate.detach();
 		Liquid.detach();
 		LiquidSurface.detach();
+		TriggerTime.detach();
 		
 		LevelGeneratorCorridor.detach();
 		LevelGeneratorRectangle.detach();

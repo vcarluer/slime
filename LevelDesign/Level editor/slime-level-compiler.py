@@ -238,6 +238,11 @@ class Smile( inkex.Effect ):
 				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_isBoss"))+";"+str(child.get("att_life"))
 				return True;
 			
+			# Trigger time
+			if str(child.get("type")) == 'Trigger_Time':
+				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_target"))+";"+str(child.get("att_interval"))
+				return True;
+				
 			# Standard Item
 			print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)
 			return True;

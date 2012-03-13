@@ -27,6 +27,7 @@ import gamers.associate.Slime.levels.itemdef.SpriteDef;
 import gamers.associate.Slime.levels.itemdef.StarDef;
 import gamers.associate.Slime.levels.itemdef.TargetDef;
 import gamers.associate.Slime.levels.itemdef.TimeAttackDef;
+import gamers.associate.Slime.levels.itemdef.TriggerTimeDef;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -122,6 +123,7 @@ public class LevelDefinitionParser extends LevelDefinition
 		this.itemDefinitions.add(new RedDef());
 		this.itemDefinitions.add(new LiquidDef());
 		this.itemDefinitions.add(new LiquidSurfaceDef());
+		this.itemDefinitions.add(new TriggerTimeDef());
 	}
 	
 	private void buildItemTypeMap() {

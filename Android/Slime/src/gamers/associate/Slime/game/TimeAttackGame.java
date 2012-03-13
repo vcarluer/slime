@@ -16,6 +16,8 @@ import org.cocos2d.types.ccColor3B;
 
 
 public class TimeAttackGame extends GameItem implements IGamePlay {
+	private static final float TimeRatioNormal = 2.0f;
+	private static final float TimeRatioLow = 0.2f;
 	private static final int bonusTime = 3;
 	private static float defaultTime = 60;
 	private static float defaultCritic = 10;
@@ -171,7 +173,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 			this.level.addItemToRemove(this.level.getHelpItem());
 			this.setNormalTime();
 			this.level.getCameraManager().follow(this.level.getSelectedGameItem());	
-			this.level.setTimeRatio(2.0f);
+			this.level.setTimeRatio(TimeRatioNormal);
 			// this.level.desactivateCameraMoveAndZoomByUser();
 		}
 	}
@@ -189,13 +191,13 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 			//this.level.getCameraManager().follow(this.level.getSelectedGameItem());			
 		}
 		
-		this.level.setTimeRatio(0.2f);
+		this.level.setTimeRatio(TimeRatioLow);
 	}
 
 	public void simpleSelect() {
 		/*if (!this.isPaused) {
 			this.level.getCameraManager().moveInterpolateTo(this.level.getSelectedGameItem(), 0.5f);
-			this.level.setTimeRatio(2.0f);
+			this.level.setTimeRatio(TimeRatioNormal);
 		}*/
 	}
 
@@ -214,7 +216,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		}
 
 		this.level.desactivateCameraMoveAndZoomByUser();
-		this.level.setTimeRatio(2.0f);
+		this.level.setTimeRatio(TimeRatioNormal);
 //		this.level.activateCameraMoveAndZoomByUser();
 	}
 	
@@ -247,7 +249,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		label.setColor(SlimeFactory.ColorSlime);
 		label.stopAllActions();
 		label.setOpacity(255);
-		this.level.setTimeRatio(2.0f);
+		this.level.setTimeRatio(TimeRatioNormal);
 		this.setNormalTime();
 		this.isStarted = false;
 	}
@@ -320,5 +322,9 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	@Override
 	public int bonusCount() {
 		return this.bonusTaken;
+	}
+	
+	public float getNormalTimeRatio() {
+		return TimeRatioNormal;
 	}
 }

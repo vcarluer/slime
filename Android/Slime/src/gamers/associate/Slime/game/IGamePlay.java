@@ -18,4 +18,5 @@ public interface IGamePlay {
 	boolean isStarted();
 	int bonusCount();
 	int neededBonus();
+	float getNormalTimeRatio();
 }
