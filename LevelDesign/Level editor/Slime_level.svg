@@ -155,9 +155,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.75683595"
-     inkscape:cx="-929.74987"
-     inkscape:cy="266.19483"
+     inkscape:zoom="3.0273438"
+     inkscape:cx="-291.5578"
+     inkscape:cy="487.14285"
      inkscape:document-units="px"
      inkscape:current-layer="Template"
      showgrid="true"
@@ -251,12 +251,12 @@
        sodipodi:linespacing="125%"
        id="text4532"
        y="96"
-       x="-472"
+       x="-512"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
        xml:space="preserve"><tspan
          style="font-size:20px"
          y="96"
-         x="-472"
+         x="-512"
          id="tspan4534"
          sodipodi:role="line">Nosticky</tspan></text>
     <text
@@ -544,7 +544,7 @@
        height="32"
        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAL5JREFU OI3Fkr0OAVEQhb9NLlaDvVHgEfw9jVfQeAqPI6JVi07tP9Gj2Fy7GovYq5ANm1BNYcozc07mS47T 7fUtglHaK0r8KO0VhAFaGiBGkH7g+wEA5uqyMFUAWvqAzkWpQz/KszpVAGh4R8ruBQBns91ZgNG8 RCabA+B+u9JpB6mAX3v1eMQAxNaSFCK2lkTnQ/u2dwbDsU0QlkENgGZp/xVhHb4Q68XDG2Eyncma aMxZ4keZUygMkH/wZ4QnJ95Y9+rbe4kAAAAASUVORK5CYII= "
        id="platform_NoSticky"
-       x="-360"
+       x="-424"
        y="64"
        type="Platform_NoSticky" />
     <text
@@ -1476,6 +1476,22 @@
          width="32"
          style="display:inline" />
     </g>
+    <image
+       width="32"
+       height="32"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAvFJREFU WIXFl11LFGEYhq8dB2deXB3d1dEWLM2PWsxIMIgIhugPRBAdddBBp0LHkUTQsdBB9BciEH9AUYJ4 FHQgYpmmJvgxq7t+rDu7kjsdjLvurrOrs+7qczLzPrwf19zc8/C8vmfPX30TQjGEUBCqghAKQqjk jxWE6uR+zi7SqgfQWwLoeoCaGgnTjGJGYphmlO6udiwrhZVMOk8rhZU8fFrJgnEKSQjFAHucCwpZ CAXA8PkYB4zTLNpMKnz4epk/237AR1djHU96EmUBSEJ1pFYVxcCBKBlb+4LhyUFWE/WENAhpNit7 fl5ODBDbF54BMgpkwsAurcTYUj/NfokePU1bQxqAtR0JkBhd6ON2eN0rgFqYM6A4xMp+kE7Npq0h TbjtIJvfiPtYjAQAzwCKWz5jzFN54iwhC9UVAMCwXZQI1W4SS1w6lN2JtR2JWMJHSImWAeCuQBaC AoiHV6Z4N9sKSGzEfQDEEj424mmehqeB5ooCOBA5xmystXhz9zuf5sI5v2GcF7d+cbBreTrcAVCP mfBEiKCaYvj+34JKmMLc9Xz+qRTIQthVMKY8N7+cHcT2BaMLfaykAgCElCiPOqdpqs1KazRq9duA VjEAXXcO27QURiYGaPZLdDTYDlCijZEZnbf3fhAUqcwaTVWVikHIeksTAO+/tBetcB9/X+P1g+Xc dZosyxWByCowv+UnVKTCzW/5yczLhcDmzBDywUH68NUuMc3maF4+hFxzNiVk03Sq11XNz2qi3rXC XdV2ycxzgziLJ2Qz4mz8uHuP4clB3Crc0M0ZzEiqxDZo9f66siDk9ZwvG+r9zNhSPwuRIODU/aHe Kf7tWKzvlN5o3YxqgcYGzxDy9d6OvMSdGyZg5mRaveyneS1WsmWVlLacOLGpyQdIJisN4AmiGgoc QZTorM4DAIo0NfkAyaoCwAntXbUVyIFwV0K2rKqY0B3CxZjnpcARRMEN7Dw8cAwi9xp43gpkITLG vCiAQwjG/wM1/jzPIlS5ZQAAAABJRU5ErkJggg== "
+       id="platform_NoSticky_Corner"
+       x="-384"
+       y="64"
+       type="Platform_NoSticky_Corner" />
+    <image
+       width="32"
+       height="32"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAA5tJREFU WIWtV89rJEUU/upVk8zI7IaYNYQoLEZEwpqL4M2bf4AieBIPHrzqX7Ao+D94EryLPy/iRUHYZRHE y6oXjbtBWZdksll2ZjPZrvfqeajq7urpialeUkzzqmfe9Pe9772qem3eefeqInMogquqQrWy2X9f OIrhcDnbWQM6FA24eoVXhfce3gfbh1Q/AoFBK3qvCk3AxftgJVxnkSmGg54KIAH3lZ0jIMGKSCDC AvH+FAKZCmgySaP3PiiQRu69B0tFQCDWgkXALPBzRIrhcJBJQBE/QC19E31DIERdiEDEglnAVmCZ YInCvTCqzOQrsCj/i6QXqaNnFlhLsExgIhARiAwMGzAzvNf8Glic/0pybfItAhvzbq2AmSNwBCcD Y8LFjnvWQCf/7YJjjgRYwJZAHECJqAaFMTAAYMzjpAB19F5T8AhsBcIEawnkCGQMqAIGalvVkqqi GA56FmEVfRq5RGAKuTZcRZyA1oFo6+qZgkb6aqOpJaeQ6ybHc6DQDrhXRfHn7t8dsKNygC9vXcGd R2sAgM3lQ7zx7G9YXTrp+FpLmPgRvvhrB3vTFQDA04N7eP3yTYyKaWfP8OLhiSAUFDPffvdja68c z5Zw9dpLWBsRVp8IPx0dGxxOPT565RdcGpbI8R9PBO9v/4CRmaAsGc4xSsdwzsGVzbxYf2q19cCP v38GayPC8+seGxfDrnX3AQEgfPbHC/jw1X8y/S2+vv0i3t76qV6CRLEo49wYg2J9/cnWA3fvj7C5 oti46LG9IU2kU4Pd+yP08b99sBZXQShGg7gMk1VRiCw+JE4bff3PGsX+/r3WF1srI/x7fCHKGMbd B4SjY4OtlQn6+G8uH4YzQ5uVgKSJUVUU+wftB7753BQf3HgZAGE8DVJVRfjezu/YPyiz/McTwVvb v0LVJ2dGeogFIuaTTz/vdAxH5QDf7O3gTnkJALC5NMZrl2+esgwtHuoFfHXrCvYezi1DmsK5dAUw XOla9+ba9Z+z+qf/24iYw6HDLHDMYBdsBe4cd+8jiWI2e5SDn7EVV0QELhJyjuvvFl0igmJ20pV1 IYGMw4g5EhGBc21VOmSifw8FkH0cpwA1CZekiBsy/QggryHh2JAEEmnkHNLjGlvMTjIJPGZL1hTp HImqJetdhJHNWU1pZat0SCv/SVM6m2UWYTLp3ZazP70tz1UgJXGuLya5NRCAA41zfTXrrcB5v5z2 I3D+r+f/AQZWQTwvGIxnAAAAAElFTkSuQmCC "
+       id="platform_NoSticky_End"
+       x="-344"
+       y="64"
+       type="Platform_NoSticky_End" />
   </g>
   <g
      inkscape:groupmode="layer"

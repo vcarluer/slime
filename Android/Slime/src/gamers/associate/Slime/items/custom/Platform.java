@@ -24,6 +24,8 @@ public class Platform extends GameItemPhysic {
 	public static final int T = 6;
 	public static final int Cross = 7;
 	public static final int End = 8;
+	public static final int NoStickyCorner = 9;
+	public static final int NoStickyEnd = 10;
 	
 	public static float Default_Height= 32f;
 	
@@ -36,6 +38,8 @@ public class Platform extends GameItemPhysic {
 	public static String Anim_Base_T = "pf-T";
 	public static String Anim_Base_Cross = "pf-cross";
 	public static String Anim_Base_End = "pf-end";
+	public static String Anim_Base_NoSticky_Corner = "pf-nosticky-corner";
+	public static String Anim_Base_NoSticky_End = "pf-nosticky-end";
 	
 	private int type;
 	private boolean move;
@@ -104,6 +108,10 @@ public class Platform extends GameItemPhysic {
 			return Anim_Base_Bump;
 		case NoSticky:
 			return Anim_Base_NoSticky;
+		case NoStickyCorner:
+			return Anim_Base_NoSticky_Corner;
+		case NoStickyEnd:
+			return Anim_Base_NoSticky_End;
 		case Wall:
 			return Anim_Base_Wall;
 		case Corner:
@@ -116,7 +124,7 @@ public class Platform extends GameItemPhysic {
 			return Anim_Base_End;
 		case Sticky:
 			default:			
-			return Anim_Base_Sticky;
+			return Anim_Base_Sticky;			
 		}
 	}
 

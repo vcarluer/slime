@@ -15,6 +15,8 @@ public class PlatformDef extends ItemDefinition {
 	private static String Handled_T = "Platform_T";
 	private static String Handled_Cross = "Platform_Cross";
 	private static String Handled_End = "Platform_End";
+	private static String Handled_NoSticky_Corner = "Platform_NoSticky_Corner";
+	private static String Handled_NoSticky_End = "Platform_NoSticky_End";
 	
 	@Override
 	public void createItem(Level level) {		
@@ -53,6 +55,14 @@ public class PlatformDef extends ItemDefinition {
 		if (this.itemType.toUpperCase().equals(Handled_End.toUpperCase())) {
 			SlimeFactory.Platform.createEndBL(this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
 		}
+		
+		if (this.itemType.toUpperCase().equals(Handled_NoSticky_Corner.toUpperCase())) {
+			SlimeFactory.Platform.createNoStickyCornerBL(this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
+		}
+		
+		if (this.itemType.toUpperCase().equals(Handled_NoSticky_End.toUpperCase())) {
+			SlimeFactory.Platform.createNoStickyEndBL(this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
+		}
 	}
 
 	@Override
@@ -66,6 +76,8 @@ public class PlatformDef extends ItemDefinition {
 		this.typesHandled.add(Handled_T);
 		this.typesHandled.add(Handled_Cross);
 		this.typesHandled.add(Handled_End);
+		this.typesHandled.add(Handled_NoSticky_Corner);
+		this.typesHandled.add(Handled_NoSticky_End);
 	}
 
 	@Override
@@ -101,6 +113,8 @@ public class PlatformDef extends ItemDefinition {
 		case Platform.T: return Handled_T;
 		case Platform.Wall: return Handled_Wall;
 		case Platform.End: return Handled_End;
+		case Platform.NoStickyCorner: return Handled_NoSticky_Corner;
+		case Platform.NoStickyEnd: return Handled_NoSticky_End;
 		default: return null;
 		}
 	}

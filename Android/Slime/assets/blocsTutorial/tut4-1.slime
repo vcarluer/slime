@@ -12,15 +12,11 @@ Spawn;83.0;215.0;24.0;26.0;0.0
 Box_Multitubes;0.0;0.0;264.0;64.0;0.0;true;true
 Box_GlassBox;264.0;0.0;96.0;64.0;0.0;true;true
 Platform_NoSticky;260.0;100.0;232.0;32.0;90.0
-Platform_Corner;360.0;232.0;32.0;32.0;180.0
 Platform_NoSticky;392.0;232.0;56.0;32.0;0.0
 Star;290.0;296.0;30.0;31.0;0.0
 Platform_NoSticky;0.0;384.0;216.0;32.0;0.0
-Platform_Corner;216.0;384.0;32.0;32.0;0.0
-Platform;200.0;432.0;64.0;32.0;90.0
 Liquid;0.0;416.0;216.0;40.0;0.0
 LiquidSurface;0.0;456.0;216.0;16.0;0.0
-Platform_Corner;448.0;232.0;32.0;32.0;-90.0
 Liquid;392.0;0.0;56.0;168.0;0.0
 LiquidSurface;392.0;168.0;56.0;16.0;0.0
 Platform_NoSticky;348.0;100.0;232.0;32.0;90.0
@@ -28,3 +24,7 @@ Sprite;112.0;129.0;32.0;16.0;-51.0;arrows;arrow-green;1;2;0;1;true;true;0;false;
 Sprite;160.0;185.0;32.0;16.0;-51.0;arrows;arrow-green;1;2;0;1;true;true;0.25;false;0
 Sprite;214.0;237.0;32.0;16.0;-37.0;arrows;arrow-green;1;2;0;1;true;true;0.5;false;0
 Sprite;277.0;274.0;32.0;16.0;-26.0;arrows;arrow-green;1;2;0;1;true;true;0.75;false;0
+Platform_NoSticky_Corner;360.0;232.0;32.0;32.0;180.0
+Platform_NoSticky_Corner;448.0;232.0;32.0;32.0;-90.0
+Platform_NoSticky_Corner;216.0;384.0;32.0;32.0;0.0
+Platform_NoSticky;200.0;432.0;64.0;32.0;90.0
