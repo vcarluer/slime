@@ -1,5 +1,8 @@
 package gamers.associate.Slime.layers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.IGamePlay;
 import gamers.associate.Slime.game.Level;
@@ -12,6 +15,7 @@ import gamers.associate.Slime.items.custom.Star;
 import gamers.associate.Slime.items.custom.StarFactory;
 import gamers.associate.Slime.levels.LevelHome;
 
+import org.cocos2d.actions.UpdateCallback;
 import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCAnimate;
@@ -19,6 +23,8 @@ import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCFadeIn;
 import org.cocos2d.actions.interval.CCFadeOut;
 import org.cocos2d.actions.interval.CCMoveBy;
+import org.cocos2d.actions.interval.CCMoveTo;
+import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
@@ -44,6 +50,14 @@ public class HudLayer extends CCLayer {
 	
 	private CCLabel starLabel;
 	private CCSprite starSprite;
+	
+	private List<CCSprite> starsToAdd;
+	private List<CCSprite> starsToDelete;
+	private List<CCSprite> starsTaken;
+	private float starX;
+	private float starY;
+	
+	private Object sync = new Object();
 	
 	public HudLayer() {
 		
@@ -82,7 +96,13 @@ public class HudLayer extends CCLayer {
 		this.starLabel.setColor(SlimeFactory.ColorSlime);
 		this.starLabel.setAnchorPoint(0, 0f);
 		this.addChild(starLabel);				
-	}
+		
+		this.starsTaken = new ArrayList<CCSprite>();
+		this.starsToAdd = new ArrayList<CCSprite>();
+		this.starsToDelete = new ArrayList<CCSprite>();
+		this.starX = CCDirector.sharedDirector().winSize().getWidth() / 2 - Star.Reference_Width - 25f;
+		this.starY = CCDirector.sharedDirector().winSize().getHeight() - 55;		
+	}	
 	
 	private static CCLabel getMenuLabel(String text) {
 		return getMenuLabel(text, 60f);
@@ -104,10 +124,8 @@ public class HudLayer extends CCLayer {
 		this.setTitle(TitleGenerator.generateNewTitle());
 		this.setStarsCount();
 		
-		this.starSprite = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);		
-		this.starSprite.setPosition(
-				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2 - Star.Reference_Width - 25f, 
-				CCDirector.sharedDirector().winSize().getHeight() - 55));
+		this.starSprite = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);			
+		this.starSprite.setPosition(this.starX, this.starY);
 		this.starSprite.setAnchorPoint(0, 0f);
 		this.addChild(this.starSprite);				
 	}
@@ -129,7 +147,7 @@ public class HudLayer extends CCLayer {
 		
 		this.starLabel.setVisible(activate);
 		this.setStarSprite(activate);
-	}
+	}	
 	
 	private void setStarSprite(boolean activate) {
 		if (this.starSprite != null) {			
@@ -224,5 +242,50 @@ public class HudLayer extends CCLayer {
 		tmp.set(-moveDistance, 0);
 		CCMoveBy move = CCMoveBy.action(time, tmp);
 		this.title.runAction(move);
+	}
+	
+	public void starTaken(float x, float y) {
+		CCSprite star = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait, Star.BaseFrameName); // Anim_Fade
+		star.setPosition(x, y);
+		star.setScale(1 / Level.currentLevel.getCameraManager().getCurrentZoom());
+		synchronized(this.sync) {
+			this.starsToAdd.add(star);
+		}		
+	}		
+	
+	public void endMoveStar() {
+		synchronized(this.sync) {
+			if (this.starsTaken.size() > 0) {
+				this.starsToDelete.add(this.starsTaken.get(0));
+				this.starsTaken.remove(0);
+			}
+		}		
+	}
+
+	public void starTaken(CGPoint screenPos) {
+		this.starTaken(screenPos.x, screenPos.y);
+	}
+	
+	public void render(float delta) {
+		
+		synchronized(this.sync) {
+			for(CCSprite star : this.starsToAdd) {
+				this.addChild(star);
+				CCMoveTo moveTo = CCMoveTo.action(Star.AnimDelay, CGPoint.make(this.starX + Star.Reference_Width / 2f, this.starY + Star.Reference_Height / 2f));
+				CCCallFunc endMove = CCCallFunc.action(this, "endMoveStar");		
+				CCSequence seq = CCSequence.actions(moveTo, endMove);
+				CCScaleTo scale = CCScaleTo.action(Star.AnimDelay - 0.1f, 1.0f);		
+				star.runAction(seq);
+				star.runAction(scale);
+			}
+			
+			this.starsToAdd.clear();
+			
+			for(CCSprite star : this.starsToDelete) {
+				this.removeChild(star, true);
+			}
+			
+			this.starsToDelete.clear();
+		}		
 	}
 }

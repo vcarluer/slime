@@ -129,12 +129,22 @@ public abstract class ItemFactoryBase<T extends GameItemCocos> {
 		return node;
 	}
 	
+	public CCSprite getAnimatedSprite(String animationName, String baseFrameName) {
+		return this.getAnimatedSprite(animationName, 0f, baseFrameName);
+	}
+	
 	public CCSprite getAnimatedSprite(String animationName) {
 		return this.getAnimatedSprite(animationName, 0f);
 	}
 	
 	public CCSprite getAnimatedSprite(String animationName, float waitTime) {
 		CCSprite spr = new CCSprite();		
+		spr.runAction(this.getAnimation(animationName, waitTime));
+		return spr;
+	}
+	
+	public CCSprite getAnimatedSprite(String animationName, float waitTime, String baseFrameName) {
+		CCSprite spr = CCSprite.sprite(baseFrameName, true);		
 		spr.runAction(this.getAnimation(animationName, waitTime));
 		return spr;
 	}

@@ -8,6 +8,7 @@ import gamers.associate.Slime.items.base.SpriteType;
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCAnimate;
+import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.types.CGPoint;
 
@@ -18,12 +19,14 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class Star extends GameItemPhysic {
+	public static final float AnimDelay = 0.3f;
 	public static String Anim_Wait = "star";
 	public static String Anim_Fade = "star-fading";	
 	private static float Default_Width = 40f;
 	private static float Default_Height = 40f;
 	public static float Reference_Width = 40f;
-	private static float Reference_Height = 40f;	
+	public static float Reference_Height = 40f;	
+	public static String BaseFrameName = "star-01.png";
 	
 	private boolean fading;
 		
@@ -98,9 +101,12 @@ public class Star extends GameItemPhysic {
 	protected void handleContact(ContactInfo item) {	
 		if (!this.fading && item.getContactWith() instanceof Slimy) {	
 			this.fading = true;
-			CCAnimate animate = CCAnimate.action(this.animationList.get(Star.Anim_Fade), false);			
+			// CCAnimate animate = CCAnimate.action(this.animationList.get(Star.Anim_Fade), false);			
+			Level.currentLevel.AnimNewBonus(this.getPosition());
+			this.getSprite().setVisible(false);
+			CCDelayTime delay = CCDelayTime.action(AnimDelay);
 			CCCallFunc activate = CCCallFunc.action(this, "starTaken");
-			CCSequence sequence = CCSequence.actions(animate, activate);
+			CCSequence sequence = CCSequence.actions(delay, activate);
 			this.sprite.runAction(sequence);						
 		}
 		

@@ -539,7 +539,10 @@ public class Level {
 		
 		// Handle camera with real time
 		this.cameraManager.tick(deltaBase);
-		this.thumbnailManager.handle(this.selectables);	
+		this.thumbnailManager.handle(this.selectables);
+		if (this.hudLayer != null) {
+			this.hudLayer.render(deltaBase);
+		}
 	}
 			
 	public void addItemToRemove(GameItem item) {
@@ -1232,7 +1235,7 @@ public class Level {
 		if (this.gamePlay != null) {
 			this.gamePlay.setNewBonus();
 			this.hudLayer.upudateStarsCount();
-		}		
+		}
 	}
 	
 	public GoalPortal getGoal() {
@@ -1257,5 +1260,10 @@ public class Level {
 
 	public void setHelpItem(GameItem helpItem) {
 		this.helpItem = helpItem;
+	}
+
+	public void AnimNewBonus(CGPoint gamePosition) {
+		CGPoint screenPos = this.cameraManager.getScreenPoint(gamePosition);
+		this.hudLayer.starTaken(screenPos);
 	}
 }
