@@ -43,6 +43,7 @@ import android.widget.RelativeLayout;
  * @uml.dependency   supplier="gamers.associate.Slime.LevelLayer"
  */
 public class Slime extends Activity {
+	private static final String SGN_AMZ = "800F2BBA8B5811D40BB140402CAF9D63";
 	private static final String SGS_VCR = "703A6FB6180B55E158105A7D9481857A";
 	private static final String AdMobPublisherId = "a14f5f7a390a6a4";
 	private static final boolean AdTest = true;
@@ -84,7 +85,7 @@ public class Slime extends Activity {
         layout.addView(this.mGLSurfaceView);
         
         // Create an ad.
-        adView = new AdView(this, AdSize.IAB_BANNER, AdMobPublisherId);
+        adView = new AdView(this, AdSize.BANNER, AdMobPublisherId);
         FrameLayout.LayoutParams adsParams =new FrameLayout.LayoutParams(
         		FrameLayout.LayoutParams.FILL_PARENT, FrameLayout.LayoutParams.FILL_PARENT);        
         adView.setLayoutParams(adsParams);
@@ -99,13 +100,17 @@ public class Slime extends Activity {
 	            	switch(msg.what)
 	    	        {
 	    	        case SHOW_AD:	        
-	    	            showAdInternal();	        
+	    	            showAdInternal();
+	    	            break;
 	    	        case HIDE_AD:
 	    	            hideAdInternal();
+	    	            break;
 	    	        case NEXT_AD:
 	    	        	nextAdInternal();
+	    	        	break;
 	    	        case SHOW_NEXT_AD:
 	    	        	showAndNextAdInternal();
+	    	        	break;
 	    	        default:
 	    	            break;
 	    	        }
@@ -142,12 +147,12 @@ public class Slime extends Activity {
 		CCDirector.sharedDirector().runWithScene(this.scene);
     }    
     
-    private void showAdInternal() {
-    	this.adView.setVisibility(View.VISIBLE);
+    private void showAdInternal() {    	
+    	this.adView.setVisibility(View.VISIBLE);    	
     }
     
-    private void hideAdInternal() {
-    	this.adView.setVisibility(View.GONE);
+    private void hideAdInternal() {    	
+    	this.adView.setVisibility(View.GONE);    	
     }
     
     private void nextAdInternal() {
@@ -155,17 +160,18 @@ public class Slime extends Activity {
         AdRequest adRequest = new AdRequest();
         if (AdTest) {
         	adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
-        	adRequest.addTestDevice(SGS_VCR);        	
+        	adRequest.addTestDevice(SGS_VCR);
+        	adRequest.addTestDevice(SGN_AMZ);
         }
         // Fill out ad request.       
 
-        // Start loading the ad in the background.
+        // Start loading the ad in the background.        
         this.adView.loadAd(adRequest);
     }
     
     private void showAndNextAdInternal() {
-    	this.nextAdInternal();
     	this.showAdInternal();
+    	this.nextAdInternal();    	
     }
     
     public void showAd() {

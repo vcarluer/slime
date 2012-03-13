@@ -89,7 +89,7 @@ public class EndDifficultyGameLayer extends CCLayer {
 		CCMenu menu = CCMenu.menu(goHome);
 		menu.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().getWidth() / 2,
-				CCDirector.sharedDirector().winSize().getHeight() / 2 - 150f
+				CCDirector.sharedDirector().winSize().getHeight() / 2 - 100f
 				));	
 		this.addChild(menu);
 	}
@@ -117,7 +117,15 @@ public class EndDifficultyGameLayer extends CCLayer {
 				starX,
 				this.starSprite.getPosition().y
 				));
+		
+		SlimeFactory.ContextActivity.showAndNextAd();
 		super.onEnter();
+	}
+
+	@Override
+	public void onExit() {
+		SlimeFactory.ContextActivity.hideAd();
+		super.onExit();
 	}
 
 	public void goHome(Object sender) {
