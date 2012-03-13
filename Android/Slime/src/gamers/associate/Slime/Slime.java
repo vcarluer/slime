@@ -43,14 +43,14 @@ import android.widget.RelativeLayout;
  * @uml.dependency   supplier="gamers.associate.Slime.LevelLayer"
  */
 public class Slime extends Activity {
-	private static final String SGS_VCR = "32336C42695A00EC";
+	private static final String SGS_VCR = "703A6FB6180B55E158105A7D9481857A";
 	private static final String AdMobPublisherId = "a14f5f7a390a6a4";
 	private static final boolean AdTest = true;
 
 	public static final int ACTIVITY_INTRO = 0;
 	
 	public static final String TAG = "Slime";	
-	
+
 	public static final int SHOW_AD = 0;
     public static final int HIDE_AD = 1;
     public static final int NEXT_AD = 2;
@@ -155,7 +155,7 @@ public class Slime extends Activity {
         AdRequest adRequest = new AdRequest();
         if (AdTest) {
         	adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
-        	adRequest.addTestDevice(SGS_VCR);
+        	adRequest.addTestDevice(SGS_VCR);        	
         }
         // Fill out ad request.       
 
