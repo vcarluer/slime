@@ -5,8 +5,6 @@ Platform;80.0;48.0;80.0;32.0;0.0
 Platform_Corner;48.0;48.0;32.0;32.0;90.0
 Platform_End;160.0;48.0;32.0;32.0;0.0
 Platform_NoSticky;16.0;264.0;240.0;32.0;90.0
-Platform_Corner;120.0;400.0;32.0;32.0;180.0
-Platform_Corner;120.0;128.0;32.0;32.0;90.0
 Platform_Bumper;152.0;128.0;328.0;32.0;0.0
 Platform_Ice;248.0;320.0;232.0;32.0;0.0
 Platform_Ice;152.0;208.0;256.0;32.0;0.0
@@ -24,3 +22,5 @@ Platform_Ice;80.0;472.0;400.0;8.0;0.0
 Platform_Ice;416.0;408.0;120.0;8.0;90.0
 Platform_Ice;76.0;316.0;160.0;8.0;90.0
 Platform_Ice;396.0;236.0;160.0;8.0;90.0
+Platform_NoSticky_Corner;120.0;400.0;32.0;32.0;180.0
+Platform_NoSticky_Corner;120.0;128.0;32.0;32.0;90.0

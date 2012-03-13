@@ -7,12 +7,12 @@ Platform_NoSticky;144.0;96.0;192.0;32.0;0.0
 CircularSaw;168.0;128.0;40.0;40.0;0.0;circularsaw;true
 Star;232.0;202.0;30.0;31.0;0.0
 CircularSaw;288.0;128.0;40.0;40.0;0.0;circularsaw;true
-Platform_End;336.0;96.0;32.0;32.0;0.0
-Platform_End;112.0;96.0;32.0;32.0;180.0
 Platform_NoSticky;123.0;321.0;96.0;32.0;135.0
-Platform_End;200.0;367.0;32.0;32.0;-45.0
-Platform_End;109.0;276.0;32.0;32.0;135.0
 BecBunsen;316.0;413.0;20.0;67.0;180.0;true;0;becbunsen
 BecBunsen;123.0;336.0;20.0;67.0;-45.0;true;0;becbunsen
 BecBunsen;209.0;283.0;20.0;67.0;135.0;true;0;becbunsen
 Star;243.0;404.0;30.0;31.0;0.0
+Platform_NoSticky_End;336.0;96.0;32.0;32.0;0.0
+Platform_NoSticky_End;112.0;96.0;32.0;32.0;180.0
+Platform_NoSticky_End;200.0;367.0;32.0;32.0;-45.0
+Platform_NoSticky_End;109.0;276.0;32.0;32.0;135.0
