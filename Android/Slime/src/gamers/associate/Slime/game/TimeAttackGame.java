@@ -21,6 +21,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	private static final int bonusTime = 3;
 	private static float defaultTime = 60;
 	private static float defaultCritic = 10;
+	private static float adTime = 5.0f; 
 	private static float stepNormal = 1.0f;
 	private static float stepCritic = 1.0f;
 	private float startTime;
@@ -30,9 +31,11 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	private boolean isGameOver;
 	private Level level;
 	private float localRender;
+	private float adRender;
 	private boolean isCritic;
 	private CCAction criticAction;
 	private int bonusTaken;
+	private boolean adHiddenTimer;
 	
 	public static TimeAttackGame NewGame() {
 		return new TimeAttackGame(0, 0, 0, 0);				
@@ -59,7 +62,9 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		this.bonusTaken = 0;
 		this.leftTime = this.startTime;
 		this.isGameOver = false;
+		this.adHiddenTimer = false;
 		this.localRender = 0;	
+		this.adRender = 0;
 		if (Level.currentLevel != null && Level.currentLevel.getGoal() != null) {
 			Level.currentLevel.getGoal().setActive(this.neededBonus() == 0);
 		}
@@ -101,9 +106,19 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		super.render(delta);
 		
 		float deltaReal = delta  / this.level.getTimeRatio();
+		
+		if (!this.adHiddenTimer) {
+			if (this.adRender > adTime) {
+				SlimeFactory.ContextActivity.hideAd();
+				this.adHiddenTimer = true;
+			} else {
+				this.adRender += deltaReal;
+			}
+		}		
+
 		if (this.isStarted && !this.isGameOver) {			
 			this.leftTime -= deltaReal;
-			this.localRender += deltaReal;			
+			this.localRender += deltaReal;											
 			
 			if (this.leftTime <= 0) {
 				this.leftTime = 0;
@@ -111,6 +126,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 			}			
 			
 			if (!this.isGameOver) {				
+				
 				if (!this.isCritic) {
 					if (this.leftTime <= this.criticTime) {						
 						this.isCritic = true;
@@ -169,13 +185,18 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 
 	public void activateSelection(CGPoint gameReference) {
 		if (!this.isPaused && !this.isGameOver) {
-			this.isStarted = true;
+			this.isStarted = true;			
 			this.level.addItemToRemove(this.level.getHelpItem());
 			this.setNormalTime();
 			this.level.getCameraManager().follow(this.level.getSelectedGameItem());	
 			this.level.setTimeRatio(TimeRatioNormal);
-			// this.level.desactivateCameraMoveAndZoomByUser();
+			// this.level.desactivateCameraMoveAndZoomByUser();						
 		}
+	}
+
+	@Override
+	public void setPause(boolean value) {		
+		super.setPause(value);
 	}
 
 	public int getScore() {		
@@ -188,7 +209,12 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 			this.level.getCameraManager().cancelActions();
 			this.level.getCameraManager().moveInterpolateTo(this.level.getSelectedGameItem(), 0.5f);
 			this.level.getCameraManager().zoomInterpolateTo(this.level.getSelectedGameItem(), 1.0f, 0.5f);			
-			//this.level.getCameraManager().follow(this.level.getSelectedGameItem());			
+			//this.level.getCameraManager().follow(this.level.getSelectedGameItem());									
+		}
+		
+		if (!this.adHiddenTimer) {
+			SlimeFactory.ContextActivity.hideAd();
+			this.adHiddenTimer = true;
 		}
 		
 		this.level.setTimeRatio(TimeRatioLow);
@@ -252,6 +278,8 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		this.level.setTimeRatio(TimeRatioNormal);
 		this.setNormalTime();
 		this.isStarted = false;
+		
+		SlimeFactory.ContextActivity.showAndNextAd();
 	}
 
 	public boolean isGameOver() {
@@ -264,7 +292,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		}
 	}
 	
-	private void lose() {
+	private void lose() {		
 		this.isGameOver = true;
 		if (this.level.lose()) {						
 			this.level.getHudLabel().stopAction(this.criticAction);

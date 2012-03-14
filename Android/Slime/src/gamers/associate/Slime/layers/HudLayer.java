@@ -183,7 +183,8 @@ public class HudLayer extends CCLayer {
 	
 	public void goPause(Object sender) {
 		Sounds.playEffect(R.raw.menuselect);		
-		Level.currentLevel.pause();
+		Level.currentLevel.pause();		
+		SlimeFactory.ContextActivity.showAndNextAd();
 	}
 	
 	public void setSlimyCount(int count) {

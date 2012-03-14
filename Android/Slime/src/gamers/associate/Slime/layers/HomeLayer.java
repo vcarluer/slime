@@ -240,6 +240,8 @@ public class HomeLayer extends CCLayer {
 		
 		
 		this.temp();
+		
+		SlimeFactory.ContextActivity.hideAd();
 	}
 	
 	public void temp() {

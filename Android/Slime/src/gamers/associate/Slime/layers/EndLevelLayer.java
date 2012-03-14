@@ -103,7 +103,6 @@ public class EndLevelLayer extends CCLayer {
 	}		
 		
 	public void enable() {
-		SlimeFactory.ContextActivity.showAd();
 		CCMenu currentMenu = null;
 		Boolean hasNext = Level.currentLevel.hasNext();
 		/*if (hasNext) {
@@ -146,8 +145,6 @@ public class EndLevelLayer extends CCLayer {
 		this.menu.setIsTouchEnabled(false);
 		this.menu.setVisible(false);
 		this.setVisible(false);
-		SlimeFactory.ContextActivity.nextAd();
-		SlimeFactory.ContextActivity.hideAd();
 	}
 	
 	private static CCLabel getMenuLabel(String text) {

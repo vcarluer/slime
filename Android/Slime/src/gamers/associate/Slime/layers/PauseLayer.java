@@ -2,6 +2,7 @@ package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.custom.MenuSprite;
 
@@ -103,6 +104,7 @@ public class PauseLayer extends CCLayer {
 	public void goResume(Object sender) {
 		Sounds.playEffect(R.raw.menuselect);
 		Level.currentLevel.resume();
+		SlimeFactory.ContextActivity.hideAd();
 	}
 	
 	public void goRestart(Object sender) {

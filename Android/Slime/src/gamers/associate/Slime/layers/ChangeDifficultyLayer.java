@@ -88,9 +88,16 @@ public class ChangeDifficultyLayer extends CCLayer {
 		this.enableMenu(this.hardMenuLabel, LevelDifficulty.Hard);
 		this.enableMenu(this.extremMenuLabel, LevelDifficulty.Extrem);
 		
+		SlimeFactory.ContextActivity.showAndNextAd();
 		super.onEnter();
 	}
 	
+	@Override
+	public void onExit() {
+		SlimeFactory.ContextActivity.hideAd();
+		super.onExit();
+	}
+
 	private void enableMenu(CCMenuItemLabel label, int diffRef) {
 		int diff = SlimeFactory.GameInfo.getMaxLevelDifficulty();
 		boolean isEnable = diffRef <= diff;
