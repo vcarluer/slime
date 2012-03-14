@@ -11,10 +11,6 @@ import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.opengl.CCGLSurfaceView;
 
-import com.google.ads.AdRequest;
-import com.google.ads.AdSize;
-import com.google.ads.AdView;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -22,22 +18,19 @@ import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.SurfaceView;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AbsoluteLayout;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
 
 /**
  * @uml.dependency   supplier="gamers.associate.Slime.LevelLayer"
@@ -47,6 +40,7 @@ public class Slime extends Activity {
 	private static final String SGS_VCR = "703A6FB6180B55E158105A7D9481857A";
 	private static final String AdMobPublisherId = "a14f5f7a390a6a4";
 	private static final boolean AdTest = true;
+	private static final boolean AdOn = true;
 
 	public static final int ACTIVITY_INTRO = 0;
 	
@@ -191,9 +185,11 @@ public class Slime extends Activity {
     }
     
     private void ad(int actionCode) {
-    	Message msg = new Message();
-    	msg.what = actionCode;        
-        mHandler.sendMessage(msg);
+    	if (this.AdOn) {
+    		Message msg = new Message();
+        	msg.what = actionCode;        
+            mHandler.sendMessage(msg);
+    	}    	
     }
     
     @Override
