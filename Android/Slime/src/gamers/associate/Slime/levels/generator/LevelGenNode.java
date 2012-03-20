@@ -58,7 +58,7 @@ public class LevelGenNode {
 		addConnectors(this.connectorsExit, connectorsToAdd);
 	}
 	
-	public static void addConnectors(Set<Integer> connectors, List<Integer> connectorsToAdd) {
+	private static void addConnectors(Set<Integer> connectors, List<Integer> connectorsToAdd) {
 		for(Integer connector : connectorsToAdd) {
 			connectors.add(connector);
 		}
