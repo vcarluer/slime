@@ -97,7 +97,7 @@ public abstract class LevelGraphGeneratorBase {
 		 		direction = this.getRandomDirection(constrained);
 		 		break;
 		 }
-		 
+
 		 // Interdit de tirer l'inverse de la direction pr�c�dente
 		 if (direction == LevelGenNode.getMirror(this.lastDirection)) {
 			 direction = this.getRandomDirection(constrained);
