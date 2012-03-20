@@ -15,10 +15,8 @@ import gamers.associate.Slime.game.TimeAttackGame;
 import gamers.associate.Slime.levels.LevelHome;
 
 public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle {
-	private static final int noBossPos = -1;
-	private static final int timeCritic = 5;
-	private static final float timeCalcPerBlock = 8f;
-	private static final int timeCalcBase = 20;
+	private static final int noBossPos = -1;	
+	
 	// tuned with SGS
 	private static final int maxWidth = 6;
 	private static final int maxAddHeight = 2;
@@ -230,19 +228,7 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 		
 		this.topCount--;
 		this.rightCount--;
-		// Compute total time et critic time here		
-		this.currentLevel.removeCurrentGamePlay();
-		
-		TimeAttackGame taGame = TimeAttackGame.NewGame();
-		this.currentLevel.addGamePlay(taGame);
-				
-		int baseTime = timeCalcBase - SlimeFactory.GameInfo.getDifficulty();
-		int secPerBloc = Math.round(timeCalcPerBlock / SlimeFactory.GameInfo.getDifficulty());
-		int totalTime = baseTime + (lvlWidth * lvlHeight) * secPerBloc; 
-		taGame.setStartTime(totalTime);
-		// 10% or other or fix?
-		int critic = timeCritic;
-		taGame.setCriticTime(critic);					
+		this.addGamePlay(lvlWidth * lvlHeight);					
 	}	
 	
 	private void pickStar(int starBlocCount, List<Integer> allStars,

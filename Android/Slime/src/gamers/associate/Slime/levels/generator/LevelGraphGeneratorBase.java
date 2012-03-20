@@ -1,6 +1,8 @@
 package gamers.associate.Slime.levels.generator;
 
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.game.TimeAttackGame;
 import gamers.associate.Slime.levels.LevelUtil;
 import gamers.associate.Slime.levels.generator.hardcoded.BlocHardInit;
 
@@ -14,6 +16,10 @@ public abstract class LevelGraphGeneratorBase {
 	protected static boolean debugBlocOn = false;
 	protected static String forceBlock = "blocsRectangle/s_tl_3.slime";
 	
+	protected static final int timeCalcBase = 20;
+	protected static final float timeCalcPerBlock = 8f;
+	protected static final int timeCritic = 5;
+	
 	protected List<LevelGenNode> nodes;
 	protected int lastGeneratedComplexity;
 	protected int currentComplexity;
@@ -24,6 +30,7 @@ public abstract class LevelGraphGeneratorBase {
 	protected int rightCount;
 	protected int bottomCount;
 	protected int leftCount;
+	protected int totalCount;
 	protected Level currentLevel;
 	protected Random randomGenerator;
 	
@@ -194,6 +201,8 @@ public abstract class LevelGraphGeneratorBase {
 		default:
 			break;
 		}
+		
+		this.totalCount++;
 	}
 	
 	protected void initCount() {
@@ -296,4 +305,20 @@ public abstract class LevelGraphGeneratorBase {
 	}
 	
 	protected abstract void initAssets(List<String> assetsList);
+	
+	protected void addGamePlay(int blocCount) {
+		// Compute total time et critic time here
+		this.currentLevel.removeCurrentGamePlay();
+		
+		TimeAttackGame taGame = TimeAttackGame.NewGame();
+		this.currentLevel.addGamePlay(taGame);
+				
+		int baseTime = timeCalcBase - SlimeFactory.GameInfo.getDifficulty();
+		int secPerBloc = Math.round(timeCalcPerBlock / SlimeFactory.GameInfo.getDifficulty());
+		int totalTime = baseTime + (blocCount) * secPerBloc; 
+		taGame.setStartTime(totalTime);
+		// 10% or other or fix?
+		int critic = timeCritic;
+		taGame.setCriticTime(critic);
+	}
 }
