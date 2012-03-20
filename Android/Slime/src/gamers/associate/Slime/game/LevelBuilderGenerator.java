@@ -62,11 +62,15 @@ public class LevelBuilderGenerator implements ILevelBuilder
 					this.gameInfo.forceLevel(forceDiff, forceLevel);					
 				}
 				
-				// this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor);
 				if (this.isTut()) {
 					this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorTutorial);
 				} else {
-					if (this.gameInfo.getLevelNum() % 4 == 0) {
+					int lvl = SlimeFactory.GameInfo.getLevelNum();
+					if (SlimeFactory.GameInfo.getDifficulty() == LevelDifficulty.Easy) {
+						lvl -=  LevelGraphGeneratorTutorial.tutorialCount;
+					}
+					
+					if (lvl % 4 == 0) {
 						this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorRectangle2);
 					} else {
 						this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor2);
