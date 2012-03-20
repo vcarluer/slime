@@ -34,12 +34,20 @@ public abstract class LevelGraphGeneratorBase {
 	protected Level currentLevel;
 	protected Random randomGenerator;
 	
+	protected int minX;
+	protected int maxX;
+	protected int minY;
+	protected int maxY;
+	
 	private List<String> assets;
+	
+	protected ArrayList<CGPoint> blockMap;
 	
 	public LevelGraphGeneratorBase() {
 		this.nodes = new ArrayList<LevelGenNode>();
 		this.randomGenerator = new Random();
 		this.assets = new ArrayList<String>();
+		this.blockMap = new ArrayList<CGPoint>();
 	}
 	
 	public void attach(Level level) {
@@ -117,6 +125,7 @@ public abstract class LevelGraphGeneratorBase {
 		this.currentComplexity = 0;
 		this.previousPickComplexity = 0;		
 		this.currentMaxComplexity = maxComplexity;
+		this.blockMap.clear();
 			
 		this.generateInternal(maxComplexity, constrained, isBoss);
 		
@@ -144,25 +153,25 @@ public abstract class LevelGraphGeneratorBase {
 	}
 	
 	protected void changeReferenceToZero() {
-		int xShift = 0;
-		int yShift = 0;
-		if (this.getXOffset() < 0 ) {
-			xShift = this.getXOffset() * BlocDefinition.BlocWidth; 
-		}
-		
-		if (this.getYOffset() < 0 ) {
-			yShift = this.getYOffset() * BlocDefinition.BlocHeight; 
-		}
+		int xShift = this.minX * BlocDefinition.BlocWidth;
+		int yShift = this.minY * BlocDefinition.BlocHeight;
 		
 		this.currentLevel.setLevelOrigin(xShift, yShift);		
 	}
 	
 	protected void handlePick(LevelGenNode pick, boolean countDirection) {
+		int x = this.getXOffset();
+		int y = this.getYOffset();
+		if (x < this.minX) this.minX = x;
+		if (x > this.maxX) this.maxX = x;
+		if (y < this.minY) this.minY = y;
+		if (y > this.maxY) this.maxY = y;
+
+		this.blockMap.add(CGPoint.make(x, y));
+		
 		BlocDefinition bloc = pick.getBlocDefinition();
 		if (bloc != null) {
-			int xOffSet = this.getXOffset();
-			int yOffSet = this.getYOffset();
-			bloc.buildLevel(this.currentLevel, xOffSet, yOffSet);
+			bloc.buildLevel(this.currentLevel, x, y);
 		}
 		
 		this.currentComplexity += pick.getComplexity();
@@ -210,6 +219,11 @@ public abstract class LevelGraphGeneratorBase {
 		this.rightCount = 0;
 		this.bottomCount = 0;
 		this.leftCount = 0;
+		
+		this.minX = 0;
+		this.maxX = 0;
+		this.minY = 0;
+		this.maxY = 0;
 	}
 	
 	public int getTopCount() {

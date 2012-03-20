@@ -70,16 +70,8 @@ public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {
 		return pick;
 	}
 	
-	private ArrayList<CGPoint> blockMap;
-	
 	@Override
-	protected void generateInternal(int maxComplexity, BlocDirection constrained, boolean isBoss) {
-		this.blockMap = new ArrayList<CGPoint>();
-		this.minX = 0;
-		this.maxX = 0;
-		this.minY = 0;
-		this.maxY = 0;
-		
+	protected void generateInternal(int maxComplexity, BlocDirection constrained, boolean isBoss) {		
 		Log.d(Slime.TAG, "Picking start node with constraint " + String.valueOf(constrained));
 		LevelGenNode pick = this.pickStartConstrained(constrained);
 		Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
@@ -104,25 +96,6 @@ public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {
 		this.addGamePlay(this.totalCount);
 		
 		this.fillEmptyBlocks();
-	}	
-
-	private int minX;
-	private int maxX;
-	private int minY;
-	private int maxY;
-	
-	@Override
-	protected void handlePick(LevelGenNode pick, boolean countDirection) {		
-		int x = this.rightCount - this.leftCount;
-		int y = this.topCount - this.bottomCount;
-		if (x < minX) this.minX = x;
-		if (x > maxX) this.maxX = x;
-		if (y < this.minY) this.minY = y;
-		if (y > this.maxY) this.maxY = y;
-
-		this.blockMap.add(CGPoint.make(x, y));
-
-		super.handlePick(pick, countDirection);				
 	}
 	
 	private void fillEmptyBlocks() {
