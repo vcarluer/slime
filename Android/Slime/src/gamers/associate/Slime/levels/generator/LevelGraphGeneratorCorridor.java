@@ -2,6 +2,8 @@ package gamers.associate.Slime.levels.generator;
 
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.LevelDifficulty;
+import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.levels.LevelUtil;
 import gamers.associate.Slime.levels.generator.hardcoded.BlocHardInit;
 
@@ -16,6 +18,7 @@ import android.util.Log;
 public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {		
 	protected static final String BlocsAssetsBase = "blocsCorridor";
 	protected static final String BlocsAssetsBaseRect = "blocsRectangle";
+	private static final int minWidth = 1;
 	
 	protected LevelGenNode pickStart(BlocDirection goToDirection) {
 		LevelGenNode pick = null;
@@ -76,7 +79,7 @@ public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {
 		LevelGenNode pick = this.pickStartConstrained(constrained);
 		Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
 		this.handlePick(pick, true);		
-		while (this.currentComplexity < this.currentMaxComplexity) {
+		while (this.totalCount < this.getLvlBlockCount()) {
 			Log.d(Slime.TAG, "Picking next node with constraint " + String.valueOf(constrained));
 			pick = this.pickNextConstrained(pick, constrained);
 			Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
@@ -98,6 +101,25 @@ public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {
 		this.fillEmptyBlocks();
 	}
 	
+	@Override
+	protected void computeLevelSize(boolean isBoss) {
+		this.lvlHeight = 1;
+		if (!isBoss) {
+			int lgMax = this.getRatioDiff((maxWidth + 1) * (maxAddHeight + 1)) - 1;
+			this.computeLevelWidth(lgMax);
+		} else {
+			if (SlimeFactory.GameInfo.getDifficulty() == LevelDifficulty.Easy) {
+				this.lvlWidth = 3;
+			} else {
+				this.lvlWidth = 5;
+			}				
+		}
+		
+		if (this.lvlWidth < minWidth) {
+			this.lvlWidth = minWidth;
+		}
+	}
+
 	private void fillEmptyBlocks() {
 		for(int x = this.minX; x <= this.maxX; x++) {
 			for(int y = this.minY; y <= this.maxY; y++) {

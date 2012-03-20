@@ -66,9 +66,8 @@ public class LevelBuilderGenerator implements ILevelBuilder
 				if (this.isTut()) {
 					this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorTutorial);
 				} else {
-					if (this.gameInfo.getLevelNum() % 2 == 0) {
-						this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor2);
-						// this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorRectangle2);
+					if (this.gameInfo.getLevelNum() % 3 == 2) {
+						this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorRectangle2);
 					} else {
 						this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor2);
 					}					

@@ -1,6 +1,8 @@
 package gamers.associate.Slime.levels.generator;
 
 import gamers.associate.Slime.Slime;
+import gamers.associate.Slime.game.LevelDifficulty;
+import gamers.associate.Slime.game.SlimeFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -321,5 +323,36 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 				
 		pick = this.pickFromCompatible(selection);
 		return pick;
+	}
+
+	@Override
+	protected void computeLevelSize(boolean isBoss) {
+		if (!isBoss) {
+			int lgMax = this.getRatioDiff(maxWidth);						
+			this.computeLevelWidth(lgMax);
+			
+			if (lvlWidth == 0) {
+				lvlWidth = 1;
+			}
+
+			float tmp = lvlWidth * maxAddHeight;
+			tmp = tmp / maxWidth;
+			this.lvlHeight = Math.round(tmp);
+			if (lvlHeight == 0) {
+				lvlHeight = 1;
+			}
+			
+			// Always at least 2
+			lvlWidth++;
+			lvlHeight++;						
+		} else {
+			if (SlimeFactory.GameInfo.getDifficulty() == LevelDifficulty.Easy) {
+				lvlWidth = 2;
+				lvlHeight = 2;
+			} else {
+				lvlWidth = 3;
+				lvlHeight = 2;
+			}						
+		}		
 	}
 }

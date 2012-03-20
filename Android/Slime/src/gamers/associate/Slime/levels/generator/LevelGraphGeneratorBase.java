@@ -1,6 +1,7 @@
 package gamers.associate.Slime.levels.generator;
 
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.TimeAttackGame;
 import gamers.associate.Slime.levels.LevelUtil;
@@ -20,6 +21,10 @@ public abstract class LevelGraphGeneratorBase {
 	protected static final float timeCalcPerBlock = 8f;
 	protected static final int timeCritic = 5;
 	
+	// tuned with SGS
+	protected static final int maxWidth = 6; // -1
+	protected static final int maxAddHeight = 2; // -1
+	
 	protected List<LevelGenNode> nodes;
 	protected int lastGeneratedComplexity;
 	protected int currentComplexity;
@@ -38,6 +43,9 @@ public abstract class LevelGraphGeneratorBase {
 	protected int maxX;
 	protected int minY;
 	protected int maxY;
+	
+	protected int lvlWidth;
+	protected int lvlHeight;
 	
 	private List<String> assets;
 	
@@ -126,7 +134,10 @@ public abstract class LevelGraphGeneratorBase {
 		this.previousPickComplexity = 0;		
 		this.currentMaxComplexity = maxComplexity;
 		this.blockMap.clear();
+		this.lvlWidth = 0;
+		this.lvlHeight = 0;
 			
+		this.computeLevelSize(isBoss);
 		this.generateInternal(maxComplexity, constrained, isBoss);
 		
 		this.postGenerate();		
@@ -219,6 +230,7 @@ public abstract class LevelGraphGeneratorBase {
 		this.rightCount = 0;
 		this.bottomCount = 0;
 		this.leftCount = 0;
+		this.totalCount = 0;
 		
 		this.minX = 0;
 		this.maxX = 0;
@@ -334,5 +346,34 @@ public abstract class LevelGraphGeneratorBase {
 		// 10% or other or fix?
 		int critic = timeCritic;
 		taGame.setCriticTime(critic);
+	}
+	
+	protected abstract void computeLevelSize(boolean isBoss);
+	
+	protected int getLvlBlockCount() {
+		return this.lvlWidth * this.lvlHeight;
+	}
+	
+	protected int getRatioDiff(int val) {
+		int ratioVal = 1;
+		switch (SlimeFactory.GameInfo.getDifficulty()) {
+			default:
+			case LevelDifficulty.Easy: ratioVal = Math.round(val / 4f); break;
+			case LevelDifficulty.Normal: ratioVal = Math.round(val / 2f); break;
+			case LevelDifficulty.Hard: ratioVal = Math.round(val * 3f / 4f); break;
+			case LevelDifficulty.Extrem: ratioVal = val; break;
+		}
+		
+		return ratioVal;
+	}
+	
+	protected void computeLevelWidth(int lgMax) {
+		float tmp = SlimeFactory.GameInfo.getLevelNum() * lgMax;
+		if (SlimeFactory.GameInfo.getDifficulty() == LevelDifficulty.Easy) {
+			tmp -=  LevelGraphGeneratorTutorial.tutorialCount;
+		}
+		
+		tmp = tmp / SlimeFactory.GameInfo.getLevelMax();
+		lvlWidth = Math.round(tmp);
 	}
 }

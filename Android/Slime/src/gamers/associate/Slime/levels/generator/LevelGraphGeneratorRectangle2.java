@@ -17,9 +17,6 @@ import gamers.associate.Slime.levels.LevelHome;
 public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle {
 	private static final int noBossPos = -1;	
 	
-	// tuned with SGS
-	private static final int maxWidth = 6;
-	private static final int maxAddHeight = 2;
 	private static final int minBossPos = 1;
 	private static final Random rand = new Random();
 	private HashSet<Integer> starList;
@@ -34,50 +31,8 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 	protected void generateInternal(int maxComplexity,
 			BlocDirection constrained, boolean isBoss) {
 		
-		int lvlWidth = 0;
-		int lvlHeight = 0;
 		int endPos = noBossPos;
 		int bossPos = noBossPos;
-				
-		if (!isBoss) {
-			int lgMax = 1;
-			switch (SlimeFactory.GameInfo.getDifficulty()) {
-				default:
-				case LevelDifficulty.Easy: lgMax = Math.round(maxWidth / 4f); break;
-				case LevelDifficulty.Normal: lgMax = Math.round(maxWidth / 2f); break;
-				case LevelDifficulty.Hard: lgMax = Math.round(maxWidth * 3f / 4f); break;
-				case LevelDifficulty.Extrem: lgMax = maxWidth; break;
-			}
-						
-			float tmp = SlimeFactory.GameInfo.getLevelNum() * lgMax;
-			if (SlimeFactory.GameInfo.getDifficulty() == LevelDifficulty.Easy) {
-				tmp -=  LevelGraphGeneratorTutorial.tutorialCount;
-			}
-			
-			tmp = tmp / SlimeFactory.GameInfo.getLevelMax();
-			lvlWidth = Math.round(tmp);
-			if (lvlWidth == 0) {
-				lvlWidth = 1;
-			}
-			tmp = lvlWidth * maxAddHeight;
-			tmp = tmp / maxWidth;
-			lvlHeight = Math.round(tmp);
-			if (lvlHeight == 0) {
-				lvlHeight = 1;
-			}
-			
-			// Always at least 2
-			lvlWidth++;
-			lvlHeight++;						
-		} else {
-			if (SlimeFactory.GameInfo.getDifficulty() == LevelDifficulty.Easy) {
-				lvlWidth = 2;
-				lvlHeight = 2;
-			} else {
-				lvlWidth = 3;
-				lvlHeight = 2;
-			}						
-		}				
 		
 		int startPos = rand.nextInt(lvlHeight);		
 		
