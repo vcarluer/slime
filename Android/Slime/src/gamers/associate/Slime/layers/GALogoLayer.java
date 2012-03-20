@@ -231,21 +231,18 @@ public class GALogoLayer extends CCLayer {
 						Sounds.preload();
 						break;
 					case 11:
-						BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorCorridor);
+						BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorCorridor2);
 						break;
 					case 12:
-						BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle);
-						break;
-					case 13:
 						BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle2);
 						break;
-					case 14:
+					case 13:
 						BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorTutorial);
 						break;
-					case 15:
+					case 14:
 						BlocHardInit.InitHardCoded();
 						break;
-					case 16:						
+					case 15:						
 						currentLevel = Level.get(LevelHome.Id);
 						unschedule(nextCallback);
 						load();											

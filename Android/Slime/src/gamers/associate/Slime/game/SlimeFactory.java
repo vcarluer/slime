@@ -29,6 +29,7 @@ import gamers.associate.Slime.items.custom.ThumbnailFactory;
 import gamers.associate.Slime.items.custom.TriggerTimeFactory;
 import gamers.associate.Slime.levels.ILevelBuilder;
 import gamers.associate.Slime.levels.generator.LevelGraphGeneratorCorridor;
+import gamers.associate.Slime.levels.generator.LevelGraphGeneratorCorridor2;
 import gamers.associate.Slime.levels.generator.LevelGraphGeneratorRectangle;
 import gamers.associate.Slime.levels.generator.LevelGraphGeneratorRectangle2;
 import gamers.associate.Slime.levels.generator.LevelGraphGeneratorTutorial;
@@ -72,8 +73,7 @@ public abstract class SlimeFactory {
 	public static TargetFactory Target = new TargetFactory();
 	public static LaserBeamFactory LaserBeam = new LaserBeamFactory();
 	public static CocosFactory Sprite = new CocosFactory();
-	public static LevelGraphGeneratorCorridor LevelGeneratorCorridor = new LevelGraphGeneratorCorridor(); 
-	public static LevelGraphGeneratorRectangle LevelGeneratorRectangle = new LevelGraphGeneratorRectangle();
+	public static LevelGraphGeneratorCorridor2 LevelGeneratorCorridor2 = new LevelGraphGeneratorCorridor2(); 
 	public static LevelGraphGeneratorRectangle2 LevelGeneratorRectangle2 = new LevelGraphGeneratorRectangle2();
 	public static LevelGraphGeneratorTutorial LevelGeneratorTutorial = new LevelGraphGeneratorTutorial();
 	public static GameInformation GameInfo;
@@ -87,8 +87,7 @@ public abstract class SlimeFactory {
 		// LevelBuilder = new LevelBuilder();
 		GameInfo = new GameInformation();
 		LevelBuilder = new LevelBuilderGenerator();
-		LevelGeneratorCorridor.attach(level);		
-		LevelGeneratorRectangle.attach(level);		
+		LevelGeneratorCorridor2.attach(level);				
 		LevelGeneratorRectangle2.attach(level);
 		LevelGeneratorTutorial.attach(level);
 		
@@ -150,8 +149,7 @@ public abstract class SlimeFactory {
 		LiquidSurface.detach();
 		TriggerTime.detach();
 		
-		LevelGeneratorCorridor.detach();
-		LevelGeneratorRectangle.detach();
+		LevelGeneratorCorridor2.detach();
 		LevelGeneratorRectangle2.detach();
 		LevelGeneratorTutorial.detach();
 		
@@ -183,8 +181,7 @@ public abstract class SlimeFactory {
 		Liquid.destroy();
 		LiquidSurface.destroy();
 		
-		LevelGeneratorCorridor.destroy();
-		LevelGeneratorRectangle.destroy();
+		LevelGeneratorCorridor2.destroy();
 		LevelGeneratorRectangle2.destroy();
 		LevelGeneratorTutorial.destroy();
 		

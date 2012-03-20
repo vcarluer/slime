@@ -128,6 +128,16 @@ public class LevelGenNode {
 		
 		return isConnected;
 	}
+	
+	public boolean isEntryConnectedTo(List<Integer>	list) {
+		boolean isConnected = false;
+		for(Integer connector : list) {
+			isConnected = this.isEntryConnectedTo(connector);
+			if (isConnected) break;
+		}
+		
+		return isConnected;
+	}
 
 	public boolean isEntryConnectedMultiple(List<List<Integer>> list) {
 		boolean isConnected = false;
@@ -368,5 +378,23 @@ public class LevelGenNode {
 	public void setStarBlock(boolean isStarBlock) {
 		this.isStarBlock = isStarBlock;		
 		this.blocDefinition.setStarBlock(isStarBlock);
+	}
+
+	public boolean NoSpecialComeFromAndGoTo(BlocDirection fromDirection,
+			BlocDirection toDirection) {
+		List<Integer> fromConnectors = getConnectorsFor(LevelGenNode.getMirror(fromDirection));
+		List<Integer> toConnectors = getConnectorsFor(LevelGenNode.getMirror(toDirection));
+		
+		return this.isEntryConnectedAtLeastOne(fromConnectors) && this.isExitConnectedAtLeastOne(toConnectors) && this.isNoSpecial();
+	}
+
+	public boolean isLevelEndAndComeFrom(BlocDirection fromDirection) {
+		List<Integer> fromConnectors = getConnectorsFor(LevelGenNode.getMirror(fromDirection));
+		return this.isLevelEnd() && this.isEntryConnectedTo(fromConnectors);
+	}
+
+	public boolean isLevelBossAndComeFrom(BlocDirection fromDirection) {
+		List<Integer> fromConnectors = getConnectorsFor(LevelGenNode.getMirror(fromDirection));
+		return this.isBoss && this.isEntryConnectedTo(fromConnectors);
 	}
 }

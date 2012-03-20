@@ -14,10 +14,10 @@ import org.cocos2d.types.CGPoint;
 import android.util.Log;
 
 public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {		
-	private static final String BlocsAssetsBase = "blocsCorridor";
-	private static final String BlocsAssetsBaseRect = "blocsRectangle";
+	protected static final String BlocsAssetsBase = "blocsCorridor";
+	protected static final String BlocsAssetsBaseRect = "blocsRectangle";
 	
-	public LevelGenNode pickStart(BlocDirection goToDirection) {
+	protected LevelGenNode pickStart(BlocDirection goToDirection) {
 		LevelGenNode pick = null;
 		List<LevelGenNode> selection = new ArrayList<LevelGenNode>();
 		for(LevelGenNode node : this.nodes) {
@@ -30,7 +30,7 @@ public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {
 		return pick;
 	}
 
-	public LevelGenNode pickNext(LevelGenNode source, BlocDirection goToDirection) {
+	protected LevelGenNode pickNext(LevelGenNode source, BlocDirection goToDirection) {
 		LevelGenNode pick = null;
 		List<LevelGenNode> selection = new ArrayList<LevelGenNode>();
 		for(LevelGenNode node : this.nodes) {
@@ -44,7 +44,7 @@ public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {
 		return pick;
 	}
 
-	public LevelGenNode pickEnd(LevelGenNode source) {		
+	protected LevelGenNode pickEnd(LevelGenNode source) {		
 		LevelGenNode pick = null;
 		List<LevelGenNode> selection = new ArrayList<LevelGenNode>();
 		for(LevelGenNode node : this.nodes) {
@@ -57,7 +57,7 @@ public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {
 		return pick;
 	}	
 	
-	public LevelGenNode pickBoss(LevelGenNode source) {		
+	protected LevelGenNode pickBoss(LevelGenNode source) {		
 		LevelGenNode pick = null;
 		List<LevelGenNode> selection = new ArrayList<LevelGenNode>();
 		for(LevelGenNode node : this.nodes) {
@@ -68,14 +68,6 @@ public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {
 				
 		pick = this.pickFromCompatible(selection);
 		return pick;
-	}
-	
-	public LevelGenNode pickStart() {
-		return this.pickStart(this.getRandomDirection());
-	}
-
-	public LevelGenNode pickNext(LevelGenNode source) {
-		return this.pickNext(source, this.getRandomDirection());
 	}
 	
 	private ArrayList<CGPoint> blockMap;
@@ -155,12 +147,12 @@ public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {
 		return exists;
 	}
 
-	private LevelGenNode pickNextConstrained(LevelGenNode source,
+	protected LevelGenNode pickNextConstrained(LevelGenNode source,
 			BlocDirection constrained) {
 		return this.pickNext(source, this.getRandomDirection(constrained));
 	}
 
-	private LevelGenNode pickStartConstrained(BlocDirection constrained) {
+	protected LevelGenNode pickStartConstrained(BlocDirection constrained) {
 		return this.pickStart(this.getRandomDirection(constrained));
 	}
 
@@ -171,6 +163,5 @@ public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {
 	@Override
 	protected void initAssets(List<String> assetsList) {
 		 assetsList.add(BlocsAssetsBase);
-		 assetsList.add(BlocsAssetsBaseRect);
 	}		
 }
