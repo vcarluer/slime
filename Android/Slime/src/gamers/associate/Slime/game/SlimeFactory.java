@@ -32,6 +32,7 @@ import gamers.associate.Slime.levels.generator.LevelGraphGeneratorCorridor;
 import gamers.associate.Slime.levels.generator.LevelGraphGeneratorRectangle;
 import gamers.associate.Slime.levels.generator.LevelGraphGeneratorRectangle2;
 import gamers.associate.Slime.levels.generator.LevelGraphGeneratorTutorial;
+import gamers.associate.Slime.levels.generator.hardcoded.BlocHardInit;
 
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.ccColor3B;

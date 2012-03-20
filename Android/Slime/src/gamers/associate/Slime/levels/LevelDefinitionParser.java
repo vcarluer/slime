@@ -74,17 +74,19 @@ public class LevelDefinitionParser extends LevelDefinition
 		this.defineIgnoredItems();
 		this.defineIgnoreClasses();
 				
-		if (this.getResourceName().toUpperCase().contains(SpecialLevel.toUpperCase())) {
-			this.isSpecial = true;
-		}
-		
-		int lastPeriodPos = this.getResourceName().lastIndexOf('.');
-		if (lastPeriodPos != -1) {
-			this.setId(this.getResourceName().substring(0, lastPeriodPos));
-		}
-		else {
-			this.setId(this.getResourceName());
-		}
+		if (this.getResourceName() != null) {
+			if (this.getResourceName().toUpperCase().contains(SpecialLevel.toUpperCase())) {
+				this.isSpecial = true;
+			}
+			
+			int lastPeriodPos = this.getResourceName().lastIndexOf('.');
+			if (lastPeriodPos != -1) {
+				this.setId(this.getResourceName().substring(0, lastPeriodPos));
+			}
+			else {
+				this.setId(this.getResourceName());
+			}
+		}		
 	}
 	
 	protected void defineIgnoredItems() {

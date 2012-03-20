@@ -2,8 +2,11 @@ package gamers.associate.Slime.levels.generator.hardcoded;
 
 public class BlocHardInit
 {
+	public static BlocDefinitionFill BlockFill;
+	
   public static void InitHardCoded()
   {
+	  BlockFill = new BlocDefinitionFill();
 	  /*
     BlocDefinitionHardCodedStart.StartDirection = BlocDirection.Top;
     new BlocDefinitionHardCodedStart();

@@ -8,6 +8,7 @@ import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.levels.LevelHome;
 import gamers.associate.Slime.levels.generator.BlocInfoParser;
+import gamers.associate.Slime.levels.generator.hardcoded.BlocHardInit;
 
 import org.cocos2d.actions.UpdateCallback;
 import org.cocos2d.actions.instant.CCCallFunc;
@@ -241,7 +242,10 @@ public class GALogoLayer extends CCLayer {
 					case 14:
 						BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorTutorial);
 						break;
-					case 15:						
+					case 15:
+						BlocHardInit.InitHardCoded();
+						break;
+					case 16:						
 						currentLevel = Level.get(LevelHome.Id);
 						unschedule(nextCallback);
 						load();											
