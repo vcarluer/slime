@@ -368,10 +368,12 @@ public abstract class LevelGraphGeneratorBase {
 	}
 	
 	protected void computeLevelWidth(int lgMax) {
-		float tmp = SlimeFactory.GameInfo.getLevelNum() * lgMax;
+		float tmp = SlimeFactory.GameInfo.getLevelNum();
 		if (SlimeFactory.GameInfo.getDifficulty() == LevelDifficulty.Easy) {
 			tmp -=  LevelGraphGeneratorTutorial.tutorialCount;
 		}
+		
+		tmp = tmp * lgMax;
 		
 		tmp = tmp / SlimeFactory.GameInfo.getLevelMax();
 		lvlWidth = Math.round(tmp);

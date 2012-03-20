@@ -108,11 +108,7 @@ public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {
 			int lgMax = this.getRatioDiff((maxWidth + 1) * (maxAddHeight + 1)) - 1;
 			this.computeLevelWidth(lgMax);
 		} else {
-			if (SlimeFactory.GameInfo.getDifficulty() == LevelDifficulty.Easy) {
-				this.lvlWidth = 3;
-			} else {
-				this.lvlWidth = 5;
-			}				
+			this.lvlWidth = SlimeFactory.GameInfo.getDifficulty() + 1;
 		}
 		
 		if (this.lvlWidth < minWidth) {

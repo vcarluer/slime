@@ -349,10 +349,17 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 			if (SlimeFactory.GameInfo.getDifficulty() == LevelDifficulty.Easy) {
 				lvlWidth = 2;
 				lvlHeight = 2;
-			} else {
+			}
+			
+			if (SlimeFactory.GameInfo.getDifficulty() == LevelDifficulty.Normal) {
 				lvlWidth = 3;
 				lvlHeight = 2;
-			}						
+			}
+			
+			if (SlimeFactory.GameInfo.getDifficulty() >= LevelDifficulty.Hard) {
+				lvlWidth = 4;
+				lvlHeight = 2;
+			}
 		}		
 	}
 }
