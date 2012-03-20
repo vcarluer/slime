@@ -14,6 +14,7 @@ import android.util.Log;
 
 public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {		
 	private static final String BlocsAssetsBase = "blocsCorridor";
+	private static final String BlocsAssetsBaseRect = "blocsRectangle";
 	
 	public LevelGenNode pickStart(BlocDirection goToDirection) {
 		LevelGenNode pick = null;
@@ -113,7 +114,8 @@ public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {
 	}
 
 	@Override
-	public String getAssetsBase() {
-		return BlocsAssetsBase; 
+	protected void initAssets(List<String> assetsList) {
+		 assetsList.add(BlocsAssetsBase);
+		 assetsList.add(BlocsAssetsBaseRect);
 	}		
 }

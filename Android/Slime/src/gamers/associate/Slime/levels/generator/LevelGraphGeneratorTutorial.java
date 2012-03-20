@@ -1,5 +1,7 @@
 package gamers.associate.Slime.levels.generator;
 
+import java.util.List;
+
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.TimeAttackGame;
@@ -29,9 +31,10 @@ public class LevelGraphGeneratorTutorial extends LevelGraphGeneratorRectangle {
 	private static final int tutorialTimeMult = 2;
 	public static final int tutorialCount = 7;
 	private static final int timeCritic = 5;
+	
 	@Override
-	public String getAssetsBase() {
-		return BLOCS_TUTORIAL;
+	protected void initAssets(List<String> assetsList) {
+		assetsList.add(BLOCS_TUTORIAL);
 	}
 
 	private static final int timeCalcBase = 20;

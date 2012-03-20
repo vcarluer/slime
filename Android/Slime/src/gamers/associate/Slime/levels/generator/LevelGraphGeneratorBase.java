@@ -27,9 +27,12 @@ public abstract class LevelGraphGeneratorBase {
 	protected Level currentLevel;
 	protected Random randomGenerator;
 	
+	private List<String> assets;
+	
 	public LevelGraphGeneratorBase() {
 		this.nodes = new ArrayList<LevelGenNode>();
 		this.randomGenerator = new Random();
+		this.assets = new ArrayList<String>();
 	}
 	
 	public void attach(Level level) {
@@ -80,7 +83,7 @@ public abstract class LevelGraphGeneratorBase {
 		 		break;
 		 }
 		 
-		 // Interdit de tirer l'inverse de la direction précédente
+		 // Interdit de tirer l'inverse de la direction prï¿½cï¿½dente
 		 if (direction == LevelGenNode.getMirror(this.lastDirection)) {
 			 direction = this.getRandomDirection(constrained);
 		 }
@@ -284,5 +287,13 @@ public abstract class LevelGraphGeneratorBase {
 		return null;
 	}
 
-	public abstract String getAssetsBase();
+	public List<String> getAssetsBase() {
+		if (this.assets.size() == 0) {
+			this.initAssets(this.assets);
+		}
+
+		return this.assets;
+	}
+	
+	protected abstract void initAssets(List<String> assetsList);
 }

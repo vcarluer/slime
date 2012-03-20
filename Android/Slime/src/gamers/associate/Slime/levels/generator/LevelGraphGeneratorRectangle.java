@@ -10,7 +10,7 @@ import android.util.Log;
 
 public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 	protected static final String BlocsAssetsBase = "blocsRectangle";	
-	protected static final float GoldenRatio = 1.61803f;		
+	protected static final float GoldenRatio = 1.61803f;
 	
 	@Override
 	// For now only to right
@@ -303,8 +303,8 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 	}
 
 	@Override
-	public String getAssetsBase() {
-		return BlocsAssetsBase;
+	protected void initAssets(List<String> assetsList) {		
+		assetsList.add(BlocsAssetsBase);
 	}
 	
 	protected LevelGenNode pickStart() {

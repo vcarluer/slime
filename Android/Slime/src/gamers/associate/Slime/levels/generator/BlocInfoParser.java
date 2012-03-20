@@ -20,14 +20,16 @@ public class BlocInfoParser {
 		Generator = generator;
 		int i = 0;
 		try {			
-			for (String resourceName : SlimeFactory.ContextActivity.getAssets().list(Generator.getAssetsBase())) {				
-				i++;
-				
-				if (resourceName.contains(".slime")) {
-					String resourcePath = Generator.getAssetsBase() + "/" + resourceName;
-					buildBlocDef(resourcePath, generator);
+			for (String assetBase : Generator.getAssetsBase()) {
+				for (String resourceName : SlimeFactory.ContextActivity.getAssets().list(assetBase)) {				
+					i++;
+					
+					if (resourceName.contains(".slime")) {
+						String resourcePath = assetBase + "/" + resourceName;
+						buildBlocDef(resourcePath, generator);
+					}
 				}
-			}
+			}			
 		} catch (IOException e) {
 			Log.e(Slime.TAG, "Error during read of Blocs definition in " + Generator.getAssetsBase() + ", number: " + String.valueOf(i));
 			e.printStackTrace();
