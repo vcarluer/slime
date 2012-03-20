@@ -23,3 +23,4 @@ Platform_Cross;80.0;392.0;32.0;32.0;0.0
 LaserGun;415.0;401.0;65.0;15.0;0.0;lasergun;target;true
 Target;104.0;400.0;16.0;16.0;0.0;target
 CircularSaw;80.0;232.0;40.0;40.0;0.0;circularsaw;true
+Star;160.0;336.0;30.0;31.0;0.0
