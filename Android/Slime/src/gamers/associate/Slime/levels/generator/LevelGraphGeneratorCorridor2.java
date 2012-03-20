@@ -16,7 +16,7 @@ public class LevelGraphGeneratorCorridor2 extends LevelGraphGeneratorCorridor {
 
 	@Override
 	protected LevelGenNode pickEnd(LevelGenNode source) {
-		return this.pickEnd(LevelGenNode.getMirror(this.previousDirection));
+		return this.pickEnd(LevelGenNode.getMirror(this.lastDirection));
 	}
 
 	private LevelGenNode pickEnd(BlocDirection fromDirection) {
@@ -34,7 +34,7 @@ public class LevelGraphGeneratorCorridor2 extends LevelGraphGeneratorCorridor {
 
 	@Override
 	protected LevelGenNode pickBoss(LevelGenNode source) {
-		return this.pickBoss(LevelGenNode.getMirror(this.previousDirection));
+		return this.pickBoss(LevelGenNode.getMirror(this.lastDirection));
 	}
 
 	private LevelGenNode pickBoss(BlocDirection fromDirection) {
@@ -53,7 +53,10 @@ public class LevelGraphGeneratorCorridor2 extends LevelGraphGeneratorCorridor {
 	@Override
 	protected LevelGenNode pickNextConstrained(LevelGenNode source,
 			BlocDirection constrained) {
-		return this.pickNextConstrained(LevelGenNode.getMirror(this.previousDirection), this.getRandomDirection(constrained));
+		BlocDirection fromDirection = LevelGenNode.getMirror(this.lastDirection);
+		BlocDirection toDirection = this.getRandomDirection(constrained);
+		
+		return this.pickNextConstrained(fromDirection, toDirection);
 	}
 
 	private LevelGenNode pickNextConstrained(BlocDirection fromDirection,

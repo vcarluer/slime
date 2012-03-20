@@ -26,7 +26,6 @@ public abstract class LevelGraphGeneratorBase {
 	protected int currentMaxComplexity;
 	protected int previousPickComplexity;
 	protected BlocDirection lastDirection;
-	protected BlocDirection previousDirection;
 	protected int topCount;
 	protected int rightCount;
 	protected int bottomCount;
@@ -100,7 +99,6 @@ public abstract class LevelGraphGeneratorBase {
 			direction = this.getRandomDirection(constrained);
 		}
 		
-		this.previousDirection = this.lastDirection;
 		this.lastDirection = direction;
 		
 		return direction;
