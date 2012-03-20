@@ -7,6 +7,7 @@ import java.util.HashSet;
 
 // For future, multiple connector should exclude unwanted direction by grouping connectors in direction)
 public class LevelGenNode {
+	private static String defaultId = "Default";
 	private Set<Integer> connectorsEntry;
 	private Set<Integer> connectorsExit;
 	private Set<Integer> connectors;
@@ -19,6 +20,7 @@ public class LevelGenNode {
 	private boolean isStarBlock;
 	
 	public LevelGenNode() {
+		this.id = defaultId;
 		this.connectorsEntry = new HashSet<Integer>();
 		this.connectorsExit = new HashSet<Integer>();
 		this.connectors = new HashSet<Integer>();
