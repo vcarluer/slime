@@ -1,17 +1,22 @@
 package gamers.associate.Slime.items.custom;
 
+import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.items.base.GameItemPhysic;
+import gamers.associate.Slime.items.base.SpriteType;
+
+import org.cocos2d.actions.instant.CCCallFunc;
+import org.cocos2d.actions.interval.CCFadeOut;
+import org.cocos2d.actions.interval.CCMoveBy;
+import org.cocos2d.actions.interval.CCRotateBy;
+import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-
-import gamers.associate.Slime.game.Level;
-import gamers.associate.Slime.items.base.GameItemPhysic;
-import gamers.associate.Slime.items.base.SpriteType;
 
 public class EvacuationPlug extends GameItemPhysic {
 	public static String Anim_Base = "tank-evacuation-plug";
@@ -98,6 +103,19 @@ public class EvacuationPlug extends GameItemPhysic {
 	}
 	
 	public void remove() {
+		this.destroyBodyOnly();
+		CCFadeOut fade = CCFadeOut.action(1.0f);
+		CCRotateBy rotate = CCRotateBy.action(0.1f, 30f);
+		CCMoveBy move = CCMoveBy.action(1.0f, CGPoint.make(0, -75f));
+		CCCallFunc call = CCCallFunc.action(this, "removeEnd");
+		CCSequence seq = CCSequence.actions(move, call);
+		
+		this.sprite.runAction(fade);
+		this.sprite.runAction(rotate);
+		this.sprite.runAction(seq);		
+	}
+	
+	public void removeEnd() {
 		Level.currentLevel.addItemToRemove(this);
 	}
 }
