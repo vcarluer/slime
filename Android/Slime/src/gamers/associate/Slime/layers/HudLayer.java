@@ -283,11 +283,11 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 			if (this.starsTaken.size() > 0) {
 				this.starsToDelete.add(this.starsTaken.get(0));
 				this.starsTaken.remove(0);
-			}
-			
-			if (this.starCounters.size() > this.counterIdx) {
-				this.starCounters.get(this.counterIdx).takeStar();
-				this.counterIdx++;
+				
+				if (this.starCounters.size() > this.counterIdx) {
+					this.starCounters.get(this.counterIdx).takeStar();
+					this.counterIdx++;
+				}
 			}
 		}		
 	}
@@ -301,6 +301,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 		// Star animation management
 		synchronized(this.sync) {
 			for(CCSprite star : this.starsToAdd) {
+				this.starsTaken.add(star);
 				this.addChild(star);
 				CCMoveTo moveTo = CCMoveTo.action(Star.AnimDelay, CGPoint.make(this.starX + Star.Reference_Width / 2f, this.starY + Star.Reference_Height / 2f));
 				CCCallFunc endMove = CCCallFunc.action(this, "endMoveStar");		
@@ -379,6 +380,24 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 		this.gameItems.clear();
 		this.gameItemsToAdd.clear();
 		this.gameItemstoRemove.clear();
+		
+		for(CCSprite sprite : this.starsToAdd) {
+			sprite.cleanup();
+		}
+		
+		for(CCSprite sprite : this.starsToDelete) {
+			sprite.cleanup();
+			this.removeChild(sprite, true);
+		}
+		
+		for(CCSprite sprite : this.starsTaken) {
+			sprite.cleanup();
+			this.removeChild(sprite, true);
+		}
+		
+		this.starsToAdd.clear();
+		this.starsToDelete.clear();
+		this.starsTaken.clear();
 		
 		this.starCounters.clear();
 		this.counterIdx = 0;
