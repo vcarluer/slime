@@ -12,14 +12,14 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    sodipodi:docname="tank-right-01.svg"
-   inkscape:version="0.48.2 r9819"
+   inkscape:version="0.48.1 "
    version="1.1"
    id="svg2"
    height="30"
    width="30"
-   inkscape:export-filename="/home/guillaume/Documents/gamers associate/labo break/base/tank/tank-right-01.png"
-   inkscape:export-xdpi="120"
-   inkscape:export-ydpi="120">
+   inkscape:export-filename="C:\Documents and Settings\clerc.RRC-RA\gamersAssociate\Slime\Graphic\V1\png\tank\tank-right-empty-01.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs4">
     <linearGradient
@@ -399,16 +399,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8284273"
-     inkscape:cx="-42.325667"
-     inkscape:cy="87.837776"
+     inkscape:zoom="5.6568546"
+     inkscape:cx="-17.835529"
+     inkscape:cy="33.770656"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      showgrid="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="776"
-     inkscape:window-x="0"
-     inkscape:window-y="24"
+     inkscape:window-width="1440"
+     inkscape:window-height="844"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
      inkscape:window-maximized="1"
      showguides="true"
      inkscape:guide-bbox="true"
@@ -469,7 +469,14 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Liquide"
-     transform="translate(-39.4375,-145.60657)" />
+     transform="translate(-39.4375,-145.60657)"
+     style="display:none">
+    <path
+       inkscape:connector-curvature="0"
+       style="opacity:0.98000004;color:#000000;fill:#00aa36;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m -29.4175,132.60082 0,25.5 c 0,5.21191 4.19434,9.40625 9.40625,9.40625 l 15.28125,0 0,8.1875 18.375,0 0,-8.1875 15.28125,0 c 5.20144,0 9.38946,-4.17765 9.40625,-9.375 l 8.71875,0 c 2.0889,0 1.63031,-0.0368 1.6875,1.8125 l 0,3.46875 12.15625,0 c -0.004,-1.51529 0,-4.37245 0,-4.9375 -0.13246,-12.69774 1.10676,-11.6875 -11.6875,-11.6875 l -10.875,0 0,-14.1875 -67.75,0 z"
+       id="rect3837-4" />
+  </g>
   <g
      inkscape:label="Calque 1"
      inkscape:groupmode="layer"
@@ -484,11 +491,6 @@
        x="64.219193"
        y="812.9024"
        ry="2.7001381" />
-    <path
-       inkscape:connector-curvature="0"
-       style="opacity:0.98000004;color:#000000;fill:#00aa36;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="m -29.417354,784.96339 0,25.5 c 0,5.21191 4.194344,9.40625 9.40625,9.40625 l 15.2812495,0 0,8.1875 18.3750005,0 0,-8.1875 15.28125,0 c 5.20144,0 9.38946,-4.17765 9.40625,-9.375 l 8.71875,0 c 2.0889,0 1.63031,-0.0368 1.6875,1.8125 l 0,3.46875 12.15625,0 c -0.004,-1.51529 0,-4.37245 0,-4.9375 -0.13246,-12.69774 1.10676,-11.6875 -11.6875,-11.6875 l -10.875,0 0,-14.1875 -67.75,0 z"
-       id="rect3837-4" />
     <rect
        style="color:#000000;fill:#7393ac;fill-opacity:1;fill-rule:nonzero;stroke:#375f7e;stroke-width:1.65253437;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect4137"
