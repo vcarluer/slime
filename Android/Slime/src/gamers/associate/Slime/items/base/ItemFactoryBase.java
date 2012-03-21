@@ -1,5 +1,6 @@
 package gamers.associate.Slime.items.base;
 
+import gamers.associate.Slime.game.IGameItemHandler;
 import gamers.associate.Slime.game.Level;
 
 import java.util.Hashtable;
@@ -22,7 +23,7 @@ public abstract class ItemFactoryBase<T extends GameItemCocos> {
 	protected boolean isAttached;
 	protected CCNode rootNode;
 	protected float ratio;
-	protected Level level;
+	protected IGameItemHandler itemHandler;
 	
 	protected ItemFactoryBase() {
 		this.isInit = false;
@@ -76,8 +77,8 @@ public abstract class ItemFactoryBase<T extends GameItemCocos> {
 			this.preInit(item);
 			this.initItem(item);
 			this.runFirstAnimations(item);
-			if (this.level != null) {
-				this.level.addItemToAdd(item);
+			if (this.itemHandler != null) {
+				this.itemHandler.addItemToAdd(item);
 			}
 
 			return item;

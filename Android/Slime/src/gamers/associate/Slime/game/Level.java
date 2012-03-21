@@ -22,20 +22,11 @@ import java.util.UUID;
 
 import javax.microedition.khronos.opengles.GL10;
 
-import org.cocos2d.actions.interval.CCFadeIn;
-import org.cocos2d.actions.interval.CCFadeOut;
-import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
-import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
-import org.cocos2d.nodes.CCMotionStreak;
-import org.cocos2d.nodes.CCParallaxNode;
 import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.transitions.CCFadeTransition;
-import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
-import org.cocos2d.types.ccColor4B;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -44,7 +35,7 @@ import com.badlogic.gdx.physics.box2d.World;
  * @author    vince
  * @uml.dependency   supplier="gamers.associate.Slime.GameItem"
  */
-public class Level {	
+public class Level implements IGameItemHandler {	
 	private static final float bgRatioY = 0.7f;
 	private static final float bgRatioX = 0.6f;
 	public static boolean DebugMode = false;
@@ -248,9 +239,9 @@ public class Level {
 		return currentLevel;
 	}
 	
-	protected void attachToFactory() {		
+	public void attachToFactory() {		
 		SlimeFactory.attachAll(this, this.levelLayer, this.world, this.worldRatio);
-		SlimeFactory.StarCounter.attach(null, this.hudLayer);
+		this.hudLayer.attachToFactory();
 	}
 	
 	public void reload() {
@@ -404,7 +395,9 @@ public class Level {
 		// this.disablePauseLayer();
 		
 		this.setLevelOrigin(CGPoint.zero());
-		this.cameraManager.cancelAll();		
+		this.cameraManager.cancelAll();
+		
+		this.hudLayer.resetLevel();
 		
 		this.resume();
 	}

@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gamers.associate.Slime.R;
+import gamers.associate.Slime.game.IGameItemHandler;
 import gamers.associate.Slime.game.IGamePlay;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelSelection;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.TitleGenerator;
+import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.items.custom.Star;
+import gamers.associate.Slime.items.custom.StarCounter;
 import gamers.associate.Slime.items.custom.StarFactory;
 import gamers.associate.Slime.levels.LevelHome;
 
@@ -37,7 +40,7 @@ import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
 
-public class HudLayer extends CCLayer {
+public class HudLayer extends CCLayer implements IGameItemHandler {
 	private static String Count_Text = "Hud";
 	
 	private CCLabel countLabel;
@@ -59,8 +62,19 @@ public class HudLayer extends CCLayer {
 	
 	private Object sync = new Object();
 	
+	private List<GameItem> gameItems;
+	private List<GameItem> gameItemsToAdd;
+	private List<GameItem> gameItemstoRemove;
+	
+	private List<StarCounter> starCounters;
+	private int counterIdx;
+	
 	public HudLayer() {
 		
+		this.gameItems = new ArrayList<GameItem>();
+		this.gameItemsToAdd = new ArrayList<GameItem>();
+		this.gameItemstoRemove = new ArrayList<GameItem>();
+		this.starCounters = new ArrayList<StarCounter>();
 		float pauseScale = PauseLayer.Scale;
 		CCSprite pauseSprite = CCSprite.sprite("control-pause.png", true);
 		CCMenuItemSprite pauseMenu = CCMenuItemSprite.item(pauseSprite, pauseSprite, this, "goPause");
@@ -132,7 +146,7 @@ public class HudLayer extends CCLayer {
 	
 	private void setStarsCount() {
 		boolean activate = false;
-		if (SlimeFactory.LevelBuilder.getTotalStar() > 0 && !SlimeFactory.LevelBuilder.isBoss()) {
+		if (SlimeFactory.LevelBuilder.getTotalStar() > 0) {
 			IGamePlay gp = Level.currentLevel.getGamePlay();
 			if (gp != null) {
 				String txt = String.valueOf(gp.bonusCount()) + " / " + String.valueOf(gp.neededBonus());
@@ -260,6 +274,11 @@ public class HudLayer extends CCLayer {
 				this.starsToDelete.add(this.starsTaken.get(0));
 				this.starsTaken.remove(0);
 			}
+			
+			if (this.starCounters.size() > this.counterIdx) {
+				this.starCounters.get(this.counterIdx).takeStar();
+				this.counterIdx++;
+			}
 		}		
 	}
 
@@ -269,6 +288,7 @@ public class HudLayer extends CCLayer {
 	
 	public void render(float delta) {
 		
+		// Star animation management
 		synchronized(this.sync) {
 			for(CCSprite star : this.starsToAdd) {
 				this.addChild(star);
@@ -288,5 +308,68 @@ public class HudLayer extends CCLayer {
 			
 			this.starsToDelete.clear();
 		}		
+		
+		synchronized(this.sync) {
+			for(GameItem item : this.gameItemsToAdd) {
+				this.gameItems.add(item);
+				if (item instanceof StarCounter) {
+					StarCounter counter = (StarCounter) item;
+					this.starCounters.add(counter);
+				}
+			}
+			
+			this.gameItemsToAdd.clear();
+			
+			for(GameItem item : this.gameItemstoRemove) {
+				this.gameItems.remove(item);
+				if (item instanceof StarCounter) {
+					StarCounter counter = (StarCounter) item;
+					this.starCounters.remove(counter);
+				}				
+			}
+			
+			this.gameItemstoRemove.clear();
+		}
+	}
+
+	@Override
+	public void addItemToAdd(GameItem item) {
+		synchronized(this.sync) {
+			this.gameItemsToAdd.add(item);
+		}
+	}
+
+	@Override
+	public void addItemToRemove(GameItem item) {
+		synchronized(this.sync) {
+			this.gameItemstoRemove.add(item);
+		}		
+	}
+
+	@Override
+	public void attachToFactory() {
+		SlimeFactory.StarCounter.attach(this, this);
+	}
+
+	@Override
+	public void resetLevel() {
+		for(GameItem item : this.gameItems) {
+			item.destroy();
+		}
+		
+		for(GameItem item : this.gameItemsToAdd) {
+			item.destroy();
+		}
+		
+		for(GameItem item : this.gameItemstoRemove) {
+			item.destroy();
+		}
+		
+		this.gameItems.clear();
+		this.gameItemsToAdd.clear();
+		this.gameItemstoRemove.clear();
+		
+		this.starCounters.clear();
+		this.counterIdx = 0;
 	}
 }

@@ -242,9 +242,7 @@ public class Slime extends Activity {
         CCDirector.sharedDirector().end();
         SpriteSheetFactory.destroy();
         SlimeFactory.detachAll();
-        SlimeFactory.destroyAll();
-        SlimeFactory.StarCounter.detach();
-        SlimeFactory.StarCounter.destroy();
+        SlimeFactory.destroyAll();        
         
         if (Level.currentLevel != null) {
         	Level.currentLevel.resetLevel();

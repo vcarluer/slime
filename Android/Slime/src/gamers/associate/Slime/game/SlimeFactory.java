@@ -150,6 +150,7 @@ public abstract class SlimeFactory {
 		Liquid.detach();
 		LiquidSurface.detach();
 		TriggerTime.detach();
+		StarCounter.detach();
 		
 		LevelGeneratorCorridor2.detach();
 		LevelGeneratorRectangle2.detach();
@@ -182,6 +183,7 @@ public abstract class SlimeFactory {
 		Gate.destroy();
 		Liquid.destroy();
 		LiquidSurface.destroy();
+		StarCounter.destroy();
 		
 		LevelGeneratorCorridor2.destroy();
 		LevelGeneratorRectangle2.destroy();

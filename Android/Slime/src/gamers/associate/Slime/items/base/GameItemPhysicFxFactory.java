@@ -1,5 +1,6 @@
 package gamers.associate.Slime.items.base;
 
+import gamers.associate.Slime.game.IGameItemHandler;
 import gamers.associate.Slime.game.Level;
 
 import org.cocos2d.nodes.CCNode;
@@ -10,8 +11,8 @@ public abstract class GameItemPhysicFxFactory<T extends GameItemPhysicFx> extend
 	protected World world;
 	protected float worldRatio;		
 		
-	public void attach(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {
-		this.level = level;
+	public void attach(IGameItemHandler itemHandler, CCNode attachNode, World attachWorld, float attachWorldRatio) {
+		this.itemHandler = itemHandler;
 		this.rootNode = attachNode;
 		this.world = attachWorld;
 		this.worldRatio = attachWorldRatio;
@@ -21,7 +22,7 @@ public abstract class GameItemPhysicFxFactory<T extends GameItemPhysicFx> extend
 	
 	public void detach() {
 		if (this.isAttached && this.spriteSheet != null && this.rootNode != null) {
-			this.level = null;			
+			this.itemHandler = null;			
 			this.rootNode = null;
 			this.world = null;
 			this.worldRatio = 0f;
