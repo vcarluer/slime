@@ -6,12 +6,12 @@ import gamers.associate.Slime.items.base.GameItemPhysicFactory;
 public class GoalPortalFactory extends GameItemPhysicFactory<GoalPortal> {
 	@Override
 	protected void createAnimList() {
-		this.createAnim(GoalPortal.Anim_Goal_Portal, 4);		
+		this.createAnim(GoalPortal.Anim_Goal_Portal, 8);		
 	}
 
 	@Override
 	protected String getPlistPng() {
-		return "items";
+		return "tank";
 	}
 
 	@Override
