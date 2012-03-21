@@ -12,9 +12,12 @@ import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.TitleGenerator;
 import gamers.associate.Slime.items.base.GameItem;
+import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.items.custom.Star;
 import gamers.associate.Slime.items.custom.StarCounter;
+import gamers.associate.Slime.items.custom.StarCounterFactory;
+import gamers.associate.Slime.items.custom.StarCounterType;
 import gamers.associate.Slime.items.custom.StarFactory;
 import gamers.associate.Slime.levels.LevelHome;
 
@@ -41,6 +44,10 @@ import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
 
 public class HudLayer extends CCLayer implements IGameItemHandler {
+	private static final float PaddingLeftStar = 25f;
+
+	private static final int starCountHShift = 35;
+
 	private static String Count_Text = "Hud";
 	
 	private CCLabel countLabel;
@@ -51,7 +58,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 	
 	private CGPoint tmp = CGPoint.zero();
 	
-	private CCLabel starLabel;
+	// private CCLabel starLabel;
 	private CCSprite starSprite;
 	
 	private List<CCSprite> starsToAdd;
@@ -103,19 +110,19 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 				CCDirector.sharedDirector().winSize().getHeight() / 2));
 		this.addChild(this.title);
 		
-		this.starLabel = getMenuLabel("0 / 0");
-		this.starLabel.setPosition(
-				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
-				CCDirector.sharedDirector().winSize().getHeight() - 65));
-		this.starLabel.setColor(SlimeFactory.ColorSlime);
-		this.starLabel.setAnchorPoint(0, 0f);
-		this.addChild(starLabel);				
+//		this.starLabel = getMenuLabel("0 / 0");
+//		this.starLabel.setPosition(
+//				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
+//				CCDirector.sharedDirector().winSize().getHeight() - 65));
+//		this.starLabel.setColor(SlimeFactory.ColorSlime);
+//		this.starLabel.setAnchorPoint(0, 0f);
+//		this.addChild(starLabel);				
 		
 		this.starsTaken = new ArrayList<CCSprite>();
 		this.starsToAdd = new ArrayList<CCSprite>();
 		this.starsToDelete = new ArrayList<CCSprite>();
-		this.starX = CCDirector.sharedDirector().winSize().getWidth() / 2 - Star.Reference_Width - 25f;
-		this.starY = CCDirector.sharedDirector().winSize().getHeight() - 55;		
+		this.starX = CCDirector.sharedDirector().winSize().getWidth() / 2 - Star.Reference_Width - PaddingLeftStar;
+		this.starY = CCDirector.sharedDirector().winSize().getHeight() - (starCountHShift + Star.Reference_Height / 2);		
 	}	
 	
 	private static CCLabel getMenuLabel(String text) {
@@ -149,17 +156,24 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 		if (SlimeFactory.LevelBuilder.getTotalStar() > 0) {
 			IGamePlay gp = Level.currentLevel.getGamePlay();
 			if (gp != null) {
-				String txt = String.valueOf(gp.bonusCount()) + " / " + String.valueOf(gp.neededBonus());
-				this.starLabel.setString(txt);
-				this.starLabel.setPosition(
-						CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
-						CCDirector.sharedDirector().winSize().getHeight() - 65));
+//				String txt = String.valueOf(gp.bonusCount()) + " / " + String.valueOf(gp.neededBonus());
+//				this.starLabel.setString(txt);
+//				this.starLabel.setPosition(
+//						CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
+//						CCDirector.sharedDirector().winSize().getHeight() - 65));
+				
+				float xPosBase = CCDirector.sharedDirector().winSize().getWidth() / 2;
+				float yPos = CCDirector.sharedDirector().winSize().getHeight() - starCountHShift;
+				for(int i = 0; i < SlimeFactory.LevelBuilder.getTotalStar(); i++) {
+					float xPos = xPosBase + (i * StarCounter.Default_Width);
+					SlimeFactory.StarCounter.create(xPos, yPos, StarCounterType.Cell_Green);
+				}
 				
 				activate = true;
 			}			
 		}
 		
-		this.starLabel.setVisible(activate);
+//		this.starLabel.setVisible(activate);
 		this.setStarSprite(activate);
 	}	
 	
@@ -348,6 +362,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 
 	@Override
 	public void attachToFactory() {
+		SpriteSheetFactory.attach(StarCounterFactory.CONTROL_STARS, this);
 		SlimeFactory.StarCounter.attach(this, this);
 	}
 

@@ -242,7 +242,10 @@ public class GALogoLayer extends CCLayer {
 					case 14:
 						BlocHardInit.InitHardCoded();
 						break;
-					case 15:						
+					case 15:
+						SpriteSheetFactory.add("control-stars", true, Level.zFront);
+						break;
+					case 16:						
 						currentLevel = Level.get(LevelHome.Id);
 						unschedule(nextCallback);
 						load();											

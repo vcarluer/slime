@@ -32,7 +32,7 @@ public class StarCounter extends GameItemCocos {
 	public StarCounter(float x, float y, float width, float height, StarCounterType counterType) {
 		super(x, y, width, height);
 		
-		this.spriteType = SpriteType.ANIM_SCALE;		
+		this.spriteType = SpriteType.SINGLE_SCALE;		
 		
 		if (width == 0 && height == 0) {
 			this.width = Default_Width;

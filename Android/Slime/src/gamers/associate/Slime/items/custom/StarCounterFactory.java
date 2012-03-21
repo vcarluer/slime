@@ -4,7 +4,7 @@ import gamers.associate.Slime.items.base.GameItemCocosFactory;
 
 public class StarCounterFactory extends GameItemCocosFactory<StarCounter> {
 
-	private static final String CONTROL_STARS = "control-stars";
+	public static final String CONTROL_STARS = "control-stars";
 	private StarCounterType currentType;
 
 	@Override
