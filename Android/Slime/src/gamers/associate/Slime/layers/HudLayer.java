@@ -58,7 +58,6 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 	
 	private CGPoint tmp = CGPoint.zero();
 	
-	// private CCLabel starLabel;
 	private CCSprite starSprite;
 	
 	private List<CCSprite> starsToAdd;
@@ -108,15 +107,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 		this.title.setPosition(
 				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
 				CCDirector.sharedDirector().winSize().getHeight() / 2));
-		this.addChild(this.title);
-		
-//		this.starLabel = getMenuLabel("0 / 0");
-//		this.starLabel.setPosition(
-//				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
-//				CCDirector.sharedDirector().winSize().getHeight() - 65));
-//		this.starLabel.setColor(SlimeFactory.ColorSlime);
-//		this.starLabel.setAnchorPoint(0, 0f);
-//		this.addChild(starLabel);				
+		this.addChild(this.title);		
 		
 		this.starsTaken = new ArrayList<CCSprite>();
 		this.starsToAdd = new ArrayList<CCSprite>();
@@ -155,25 +146,18 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 		boolean activate = false;
 		if (SlimeFactory.LevelBuilder.getTotalStar() > 0) {
 			IGamePlay gp = Level.currentLevel.getGamePlay();
-			if (gp != null) {
-//				String txt = String.valueOf(gp.bonusCount()) + " / " + String.valueOf(gp.neededBonus());
-//				this.starLabel.setString(txt);
-//				this.starLabel.setPosition(
-//						CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
-//						CCDirector.sharedDirector().winSize().getHeight() - 65));
-				
+			if (gp != null) {				
 				float xPosBase = CCDirector.sharedDirector().winSize().getWidth() / 2;
 				float yPos = CCDirector.sharedDirector().winSize().getHeight() - starCountHShift;
-				for(int i = 0; i < SlimeFactory.LevelBuilder.getTotalStar(); i++) {
+				for(int i = 0; i < SlimeFactory.LevelBuilder.getTotalStar(); i++) {					
 					float xPos = xPosBase + (i * StarCounter.Default_Width);
-					SlimeFactory.StarCounter.create(xPos, yPos, StarCounterType.Cell_Green);
+					SlimeFactory.StarCounter.create(xPos, yPos, i + 1, gp.neededBonus(), SlimeFactory.LevelBuilder.getTotalStar());
 				}
 				
 				activate = true;
 			}			
 		}
 		
-//		this.starLabel.setVisible(activate);
 		this.setStarSprite(activate);
 	}	
 	

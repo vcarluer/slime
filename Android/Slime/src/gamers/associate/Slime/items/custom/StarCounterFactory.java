@@ -43,4 +43,49 @@ public class StarCounterFactory extends GameItemCocosFactory<StarCounter> {
 		this.currentType = counterType;
 		return this.create(x, y);
 	}
+	
+	public StarCounterType getFromIndicators(int current, int min, int max) {	
+		// green
+		if (current < min) {
+			if (current == max) {
+				// Should never happen
+				return StarCounterType.End_Green;
+			}
+			
+			if (current == 1) {
+				return StarCounterType.Start_Green;
+			}
+			
+			return StarCounterType.Cell_Green;
+		}
+		
+		// Target
+		if (current == min) {
+			if (current == max) {
+				return StarCounterType.End_Target;
+			}
+			
+			return StarCounterType.Cell_Target;
+		}
+		
+		// Gold
+		if (current > min) {
+			if (current == max) {
+				return StarCounterType.End_Gold;
+			}
+			
+			if (current == 1) {
+				return StarCounterType.Start_Gold;
+			}
+			
+			return StarCounterType.Cell_Gold;
+		}
+		
+		return StarCounterType.Cell_Green;
+	}
+	
+	public StarCounter create(float x, float y, int current, int min, int max) {
+		this.currentType = this.getFromIndicators(current, min, max);
+		return this.create(x, y);
+	}
 }

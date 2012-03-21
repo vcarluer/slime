@@ -1228,7 +1228,6 @@ public class Level implements IGameItemHandler {
 	public void setNewBonus() {
 		if (this.gamePlay != null) {
 			this.gamePlay.setNewBonus();
-			this.hudLayer.upudateStarsCount();
 		}
 	}
 	

@@ -20,9 +20,8 @@ public class StarCounter extends GameItemCocos {
 	public static String Anim_End_Empty = "control-stars-end-empty";
 	public static String Anim_End_Green = "control-stars-end-green";
 	public static String Anim_End_Gold = "control-stars-end-yellow";
-	// todo: To change with real anim with created
-	public static String Anim_End_Target_Empty = "control-stars-cell-target-empty";
-	public static String Anim_End_Target_Green = "control-stars-cell-target-green";
+	public static String Anim_End_Target_Empty = "control-stars-end-target-empty";
+	public static String Anim_End_Target_Green = "control-stars-end-target-green";
 	
 	public static float Default_Width = 17f;
 	public static float Default_Height = 21f;
@@ -106,6 +105,7 @@ public class StarCounter extends GameItemCocos {
 	}
 	
 	private void animate(String anim) {
+		this.sprite.stopAllActions();
 		CCAnimate animate = CCAnimate.action(this.animationList.get(anim), false);
 		CCRepeatForever repeat = CCRepeatForever.action(animate);
 		this.sprite.runAction(repeat);
