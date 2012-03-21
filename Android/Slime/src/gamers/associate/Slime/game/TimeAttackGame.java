@@ -82,7 +82,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		// float base = Math.round(millis);
 		double base = Math.ceil((double)millis);
 		DecimalFormat df = new DecimalFormat ( ) ; 
-		df.setMaximumFractionDigits ( 0 ) ; //arrondi à 2 chiffres apres la virgules 
+		df.setMaximumFractionDigits ( 0 ) ; //arrondi ï¿½ 2 chiffres apres la virgules 
 		df.setMinimumFractionDigits ( 0 ) ; 
 		df.setDecimalSeparatorAlwaysShown ( false ) ; 
 		return df.format(base);		
@@ -92,7 +92,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		// float base = Math.round(millis);
 		double base = Math.ceil((double)millis);
 		DecimalFormat df = new DecimalFormat ( ) ; 
-		df.setMaximumFractionDigits ( 0 ) ; //arrondi à 2 chiffres apres la virgules 
+		df.setMaximumFractionDigits ( 0 ) ; //arrondi ï¿½ 2 chiffres apres la virgules 
 		df.setMinimumFractionDigits ( 0 ) ; 
 		df.setDecimalSeparatorAlwaysShown ( false ) ; 
 		return df.format(base);		
@@ -314,13 +314,16 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	
 	public int neededBonus() {
 		int needed = 0;
-		switch (SlimeFactory.GameInfo.getDifficulty()) {
-		default:
-		case LevelDifficulty.Easy: needed = (int) Math.ceil(SlimeFactory.LevelBuilder.getTotalStar() / 4f); break;
-		case LevelDifficulty.Normal: needed = (int) Math.ceil(SlimeFactory.LevelBuilder.getTotalStar() / 2f); break;
-		case LevelDifficulty.Hard: needed = (int) Math.ceil(SlimeFactory.LevelBuilder.getTotalStar() * 3f / 4f); break;
-		case LevelDifficulty.Extrem: needed = SlimeFactory.LevelBuilder.getTotalStar(); break;
-	}
+		if (!SlimeFactory.LevelBuilder.isBoss()) {
+			switch (SlimeFactory.GameInfo.getDifficulty()) {
+				default:
+				case LevelDifficulty.Easy: needed = (int) Math.ceil(SlimeFactory.LevelBuilder.getTotalStar() / 4f); break;
+				case LevelDifficulty.Normal: needed = (int) Math.ceil(SlimeFactory.LevelBuilder.getTotalStar() / 2f); break;
+				case LevelDifficulty.Hard: needed = (int) Math.ceil(SlimeFactory.LevelBuilder.getTotalStar() * 3f / 4f); break;
+				case LevelDifficulty.Extrem: needed = SlimeFactory.LevelBuilder.getTotalStar(); break;
+			}
+		}		
+		
 		return needed;
 	}
 
