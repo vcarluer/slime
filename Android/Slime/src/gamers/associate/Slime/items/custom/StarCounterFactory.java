@@ -39,6 +39,11 @@ public class StarCounterFactory extends GameItemCocosFactory<StarCounter> {
 	protected void runFirstAnimations(StarCounter item) {		
 	}
 	
+	public StarCounter create(float x, float y, float width, float height, StarCounterType counterType) {
+		this.currentType = counterType;
+		return this.create(x, y, width, height);
+	}
+	
 	public StarCounter create(float x, float y, StarCounterType counterType) {
 		this.currentType = counterType;
 		return this.create(x, y);
@@ -84,8 +89,13 @@ public class StarCounterFactory extends GameItemCocosFactory<StarCounter> {
 		return StarCounterType.Cell_Green;
 	}
 	
+	public StarCounter create(float x, float y, float width, float height, int current, int min, int max) {
+		StarCounterType cType = this.getFromIndicators(current, min, max);
+		return this.create(x, y, width, height, cType);
+	}
+	
 	public StarCounter create(float x, float y, int current, int min, int max) {
-		this.currentType = this.getFromIndicators(current, min, max);
-		return this.create(x, y);
+		StarCounterType cType = this.getFromIndicators(current, min, max);
+		return this.create(x, y, cType);
 	}
 }

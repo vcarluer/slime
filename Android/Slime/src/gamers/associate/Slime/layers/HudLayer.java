@@ -44,13 +44,17 @@ import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
 
 public class HudLayer extends CCLayer implements IGameItemHandler {
+	private static final float TextHeight = 60f;
+	private static final float PaddingHCount = TextHeight/2f;
 	private static final float PaddingLeftStar = 25f;
-
 	private static final int starCountHShift = 35;
+	private static final float starCountBarHeight = 40f;
+	private static final float starCountBarWidth = 200f;
 
 	private static String Count_Text = "Hud";
 	
 	private CCLabel countLabel;
+	private float countX;
 	
 	private CCMenu menu;
 	
@@ -117,7 +121,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 	}	
 	
 	private static CCLabel getMenuLabel(String text) {
-		return getMenuLabel(text, 60f);
+		return getMenuLabel(text, TextHeight);
 	}
 	
 	private static CCLabel getMenuLabel(String text, float size) {
@@ -149,9 +153,10 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 			if (gp != null) {				
 				float xPosBase = CCDirector.sharedDirector().winSize().getWidth() / 2;
 				float yPos = CCDirector.sharedDirector().winSize().getHeight() - starCountHShift;
+				float w = starCountBarWidth / SlimeFactory.LevelBuilder.getTotalStar();
 				for(int i = 0; i < SlimeFactory.LevelBuilder.getTotalStar(); i++) {					
-					float xPos = xPosBase + (i * StarCounter.Default_Width);
-					SlimeFactory.StarCounter.create(xPos, yPos, i + 1, gp.neededBonus(), SlimeFactory.LevelBuilder.getTotalStar());
+					float xPos = xPosBase + (i * w);
+					SlimeFactory.StarCounter.create(xPos, yPos, w, starCountBarHeight, i + 1, gp.neededBonus(), SlimeFactory.LevelBuilder.getTotalStar());
 				}
 				
 				activate = true;
@@ -210,9 +215,10 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 	}
 	
 	public void setHudStartText(String text) {
+		this.countX = CCDirector.sharedDirector().winSize().getWidth() - PauseLayer.PaddingX - this.countLabel.getContentSize().width;
 		this.countLabel.setPosition(
-				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - PauseLayer.PaddingX - this.countLabel.getContentSize().width, 
-				CCDirector.sharedDirector().winSize().getHeight() - 65));		
+				CGPoint.ccp(this.countX, 
+				CCDirector.sharedDirector().winSize().getHeight() - (starCountHShift + PaddingHCount)));		
 		this.countLabel.setString(text.toUpperCase());		
 	}
 	
