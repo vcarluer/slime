@@ -48,8 +48,8 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 	private static final float PaddingHCount = TextHeight/2f;
 	private static final float PaddingLeftStar = 25f;
 	private static final int starCountHShift = 35;
-	private static final float starCountBarHeight = 40f;
-	private static final float starCountBarWidth = 200f;
+	private static final float starCountBarHeight = 30f;
+	private static final float starCountBarWidthMax = 200f;
 
 	private static String Count_Text = "Hud";
 	
@@ -153,7 +153,12 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 			if (gp != null) {				
 				float xPosBase = CCDirector.sharedDirector().winSize().getWidth() / 2;
 				float yPos = CCDirector.sharedDirector().winSize().getHeight() - starCountHShift;
-				float w = starCountBarWidth / SlimeFactory.LevelBuilder.getTotalStar();
+				float w = starCountBarHeight * StarCounter.Default_Width / StarCounter.Default_Height;
+				float totalW = w * SlimeFactory.LevelBuilder.getTotalStar();
+				if (totalW > starCountBarWidthMax) {
+					w = starCountBarWidthMax / SlimeFactory.LevelBuilder.getTotalStar();
+				}
+				
 				for(int i = 0; i < SlimeFactory.LevelBuilder.getTotalStar(); i++) {					
 					float xPos = xPosBase + (i * w);
 					SlimeFactory.StarCounter.create(xPos, yPos, w, starCountBarHeight, i + 1, gp.neededBonus(), SlimeFactory.LevelBuilder.getTotalStar());

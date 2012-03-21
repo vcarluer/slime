@@ -2,6 +2,9 @@ package gamers.associate.Slime.items.custom;
 
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
+import org.cocos2d.actions.interval.CCScaleBy;
+import org.cocos2d.actions.interval.CCScaleTo;
+import org.cocos2d.actions.interval.CCSequence;
 
 import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.SpriteType;
@@ -96,9 +99,16 @@ public class StarCounter extends GameItemCocos {
 			}			
 						
 			this.animate(anim);
+			this.animSup();
 		}				
 	}
 	
+	private void animSup() {
+		CCScaleBy sb = CCScaleBy.action(0.2f, 1.3f);		
+		CCSequence seq = CCSequence.actions(sb, sb.reverse());
+		this.sprite.runAction(seq);
+	}
+
 	public void resetStar() {
 		String anim = this.getReferenceAnimationName();
 		this.animate(anim);
