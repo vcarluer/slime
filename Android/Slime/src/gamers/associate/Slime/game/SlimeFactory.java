@@ -8,6 +8,7 @@ import gamers.associate.Slime.items.custom.BumperAngleFactory;
 import gamers.associate.Slime.items.custom.ButtonFactory;
 import gamers.associate.Slime.items.custom.CircularSawFactory;
 import gamers.associate.Slime.items.custom.CocosFactory;
+import gamers.associate.Slime.items.custom.EvacuationPlugfactory;
 import gamers.associate.Slime.items.custom.GateFactory;
 import gamers.associate.Slime.items.custom.GoalPortalFactory;
 import gamers.associate.Slime.items.custom.HomeLevelHandlerFactory;
@@ -83,7 +84,9 @@ public abstract class SlimeFactory {
 	public static LiquidFactory Liquid = new LiquidFactory();
 	public static LiquidSurfaceFactory LiquidSurface = new LiquidSurfaceFactory();
 	public static TriggerTimeFactory TriggerTime = new TriggerTimeFactory();
-	public static StarCounterFactory StarCounter = new StarCounterFactory(); // Not attached in attach All
+	public static EvacuationPlugfactory EvacuationPlug = new EvacuationPlugfactory();
+	
+	public static StarCounterFactory StarCounter = new StarCounterFactory(); // Not attached in attach All but in HudLayer	
 		
 	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {		
 		// LevelBuilder = new LevelBuilder();
@@ -119,6 +122,7 @@ public abstract class SlimeFactory {
 		Liquid.attach(level, attachNode, attachWorld, attachWorldRatio);
 		LiquidSurface.attach(level, attachNode, attachWorld, attachWorldRatio);
 		TriggerTime.attach(level);
+		EvacuationPlug.attach(level, attachNode, attachWorld, attachWorldRatio);
 		
 		SpriteSheetFactory.attachAll(attachNode);
 		isAttached = true;
@@ -151,6 +155,7 @@ public abstract class SlimeFactory {
 		LiquidSurface.detach();
 		TriggerTime.detach();
 		StarCounter.detach();
+		EvacuationPlug.detach();
 		
 		LevelGeneratorCorridor2.detach();
 		LevelGeneratorRectangle2.detach();
@@ -184,6 +189,7 @@ public abstract class SlimeFactory {
 		Liquid.destroy();
 		LiquidSurface.destroy();
 		StarCounter.destroy();
+		EvacuationPlug.destroy();
 		
 		LevelGeneratorCorridor2.destroy();
 		LevelGeneratorRectangle2.destroy();
