@@ -58,14 +58,14 @@ public class EvacuationPlug extends GameItemPhysic {
 		float bH = this.bodyHeight / this.worldRatio;
 		float bH2 = bH / 2;
 		//todo: correct vectors for plug (here based on circular saw)
-		Vector2 p1 = new Vector2(bW / 5 - bW2, bH / 5 - bH2);
-		Vector2 p2 = new Vector2(4 * bW / 5 - bW2, bH / 5 - bH2);
+		Vector2 p1 = new Vector2(bW / 11 - bW2, - bH2);
+		Vector2 p2 = new Vector2(10 * bW / 11 - bW2, - bH2);
 		Vector2 p3 = new Vector2(bW - bW2, 2 * bH / 5 - bH2);
 		Vector2 p4 = new Vector2(bW - bW2, 4 * bH / 5 - bH2);
-		Vector2 p5 = new Vector2(4 * bW / 5 - bW2, bH - bH2);
-		Vector2 p6 = new Vector2(bW / 5 - bW2, bH - bH2);
-		Vector2 p7 = new Vector2(0 - bW2, 4 *  bH / 5 - bH2);
-		Vector2 p8 = new Vector2(0 - bW2,2 *  bH / 5 - bH2);
+		Vector2 p5 = new Vector2(10 * bW / 11 - bW2, bH - bH2);
+		Vector2 p6 = new Vector2(bW / 11 - bW2, bH - bH2);
+		Vector2 p7 = new Vector2(- bW2, 4 *  bH / 5 - bH2);
+		Vector2 p8 = new Vector2(- bW2, 2 *  bH / 5 - bH2);
 		Vector2[] vertices = new Vector2[8];
 		vertices[0] = p1;
 		vertices[1] = p2;
