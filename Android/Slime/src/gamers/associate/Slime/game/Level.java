@@ -372,6 +372,7 @@ public class Level implements IGameItemHandler {
 		
 		this.gamePlay = null;
 		this.goal = null;
+		this.plug = null;
 		
 		this.trigerables.clear();
 		this.trigerablesToAdd.clear();

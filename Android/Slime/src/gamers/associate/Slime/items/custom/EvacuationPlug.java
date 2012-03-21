@@ -30,6 +30,10 @@ public class EvacuationPlug extends GameItemPhysic {
 			this.height = this.bodyHeight = Default_Height; 
 		}
 	}
+	
+	public static float getHeightFromWidth(float width) {
+		return width * Default_Height / Default_Width;
+	}
 
 	@Override
 	protected void initBody() {
