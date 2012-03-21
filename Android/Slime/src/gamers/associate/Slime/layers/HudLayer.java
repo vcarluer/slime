@@ -137,13 +137,14 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 	@Override
 	public void onEnter() {		
 		super.onEnter();
-		this.setTitle(TitleGenerator.generateNewTitle());
-		this.setStarsCount();
+		this.setTitle(TitleGenerator.generateNewTitle());		
 		
 		this.starSprite = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);			
 		this.starSprite.setPosition(this.starX, this.starY);
 		this.starSprite.setAnchorPoint(0, 0f);
 		this.addChild(this.starSprite);				
+				
+		this.setStarsCount();
 	}
 	
 	private void setStarsCount() {
