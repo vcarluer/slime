@@ -22,6 +22,10 @@ public class StarCounterFactory extends GameItemCocosFactory<StarCounter> {
 		this.createAnim(StarCounter.Anim_Start_Empty, 1);
 		this.createAnim(StarCounter.Anim_Start_Gold, 1);
 		this.createAnim(StarCounter.Anim_Start_Green, 1);
+		this.createAnim(StarCounter.Anim_Start_Target_Empty, 1);
+		this.createAnim(StarCounter.Anim_Start_Target_Green, 1);
+		this.createAnim(StarCounter.Anim_OneCell_Target_Empty, 1);
+		this.createAnim(StarCounter.Anim_OneCell_Target_Green, 1);
 	}
 
 	@Override
@@ -49,7 +53,11 @@ public class StarCounterFactory extends GameItemCocosFactory<StarCounter> {
 		return this.create(x, y);
 	}
 	
-	public StarCounterType getFromIndicators(int current, int min, int max) {	
+	public StarCounterType getFromIndicators(int current, int min, int max) {
+		if (max == 1) {
+			return StarCounterType.OneCell_Target;
+		}
+		
 		// green
 		if (current < min) {
 			if (current == max) {
@@ -66,6 +74,10 @@ public class StarCounterFactory extends GameItemCocosFactory<StarCounter> {
 		
 		// Target
 		if (current == min) {
+			if (current == 1) {
+				return StarCounterType.Start_Target;
+			}
+			
 			if (current == max) {
 				return StarCounterType.End_Target;
 			}
@@ -91,6 +103,11 @@ public class StarCounterFactory extends GameItemCocosFactory<StarCounter> {
 	
 	public StarCounter create(float x, float y, float width, float height, int current, int min, int max) {
 		StarCounterType cType = this.getFromIndicators(current, min, max);
+		if (cType == StarCounterType.OneCell_Target) {
+			width = width * StarCounter.getOneCellWidthRatio();
+			height = height * StarCounter.getOneCellHeightRation();
+		}
+		
 		return this.create(x, y, width, height, cType);
 	}
 	

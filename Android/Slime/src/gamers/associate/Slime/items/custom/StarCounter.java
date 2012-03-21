@@ -10,9 +10,14 @@ import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.SpriteType;
 
 public class StarCounter extends GameItemCocos {
+	public static String Anim_OneCell_Target_Empty = "control-stars-onecell-empty";
+	public static String Anim_OneCell_Target_Green = "control-stars-onecell-green";
+	
 	public static String Anim_Start_Empty = "control-stars-start-empty";
 	public static String Anim_Start_Green = "control-stars-start-green";
 	public static String Anim_Start_Gold = "control-stars-start-yellow";
+	public static String Anim_Start_Target_Empty = "control-stars-start-target-empty";
+	public static String Anim_Start_Target_Green = "control-stars-start-target-green";
 	
 	public static String Anim_Cell_Empty = "control-stars-cell-empty";
 	public static String Anim_Cell_Green = "control-stars-cell-green";
@@ -29,19 +34,33 @@ public class StarCounter extends GameItemCocos {
 	public static float Default_Width = 17f;
 	public static float Default_Height = 21f;
 	
+	public static float Default_Width_OneCell = 27f;
+	public static float Default_Height_OneCell = 21f;
+	
 	private StarCounterType counterType;
 	
 	public StarCounter(float x, float y, float width, float height, StarCounterType counterType) {
 		super(x, y, width, height);
 		
+		this.counterType = counterType;
 		this.spriteType = SpriteType.SINGLE_SCALE;		
 		
 		if (width == 0 && height == 0) {
-			this.width = Default_Width;
-			this.height = Default_Height; 
-		}		
-		
-		this.counterType = counterType;
+			if (this.counterType == StarCounterType.OneCell_Target) {
+				
+			} else {
+				this.width = Default_Width_OneCell;
+				this.height = Default_Height_OneCell;
+			}			
+		}						
+	}
+	
+	public static float getOneCellWidthRatio() {
+		return Default_Width_OneCell / Default_Width;
+	}
+	
+	public static float getOneCellHeightRation() {
+		return Default_Height_OneCell / Default_Height;
 	}
 
 	@Override
@@ -60,6 +79,10 @@ public class StarCounter extends GameItemCocos {
 		case Start_Gold:
 		case Start_Green:
 			return Anim_Start_Empty;
+		case Start_Target:
+			return Anim_Start_Target_Empty;
+		case OneCell_Target:
+			return Anim_OneCell_Target_Empty;
 		default:
 			return Anim_Cell_Empty;
 		}
@@ -92,6 +115,12 @@ public class StarCounter extends GameItemCocos {
 				break;
 			case Start_Green:
 				anim = Anim_Start_Green;
+				break;
+			case Start_Target:
+				anim = Anim_Start_Target_Green;
+				break;
+			case OneCell_Target:
+				anim = Anim_OneCell_Target_Green;
 				break;
 			default:
 				anim = Anim_Cell_Green;
