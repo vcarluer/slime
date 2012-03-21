@@ -2,6 +2,7 @@ package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.items.base.GameItem;
+import gamers.associate.Slime.items.custom.EvacuationPlug;
 
 import java.text.DecimalFormat;
 
@@ -307,6 +308,10 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 			if (this.bonusTaken >= this.neededBonus()) {
 				if (Level.currentLevel != null && Level.currentLevel.getGoal() != null) {
 					Level.currentLevel.getGoal().setActive(true);
+					EvacuationPlug plug = Level.currentLevel.getPlug();
+					if (plug != null) {
+						plug.remove();
+					}
 				}
 			}
 		}

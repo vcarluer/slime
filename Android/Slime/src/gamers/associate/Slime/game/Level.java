@@ -4,6 +4,7 @@ import gamers.associate.Slime.R;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.ISelectable;
 import gamers.associate.Slime.items.base.ITrigerable;
+import gamers.associate.Slime.items.custom.EvacuationPlug;
 import gamers.associate.Slime.items.custom.GoalPortal;
 import gamers.associate.Slime.items.custom.Slimy;
 import gamers.associate.Slime.items.custom.Thumbnail;
@@ -123,6 +124,7 @@ public class Level implements IGameItemHandler {
 	protected ArrayList<Slimy> slimyList;
 	
 	protected GoalPortal goal;
+	protected EvacuationPlug plug;
 	
 	protected boolean isGameOver;
 	
@@ -1237,6 +1239,14 @@ public class Level implements IGameItemHandler {
 	
 	public void setGoal(GoalPortal goal) {
 		this.goal = goal;
+	}
+	
+	public EvacuationPlug getPlug() {
+		return this.plug;		
+	}
+	
+	public void setPlug(EvacuationPlug plug) {
+		this.plug = plug;
 	}
 	
 	public ArrayList<Slimy> slimies() {
