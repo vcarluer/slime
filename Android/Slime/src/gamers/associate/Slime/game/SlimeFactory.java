@@ -23,6 +23,7 @@ import gamers.associate.Slime.items.custom.PlatformFactory;
 import gamers.associate.Slime.items.custom.RedFactory;
 import gamers.associate.Slime.items.custom.SlimyFactory;
 import gamers.associate.Slime.items.custom.SpawnPortalFactory;
+import gamers.associate.Slime.items.custom.StarCounterFactory;
 import gamers.associate.Slime.items.custom.StarFactory;
 import gamers.associate.Slime.items.custom.TargetFactory;
 import gamers.associate.Slime.items.custom.ThumbnailFactory;
@@ -82,6 +83,7 @@ public abstract class SlimeFactory {
 	public static LiquidFactory Liquid = new LiquidFactory();
 	public static LiquidSurfaceFactory LiquidSurface = new LiquidSurfaceFactory();
 	public static TriggerTimeFactory TriggerTime = new TriggerTimeFactory();
+	public static StarCounterFactory StarCounter = new StarCounterFactory(); // Not attached in attach All
 		
 	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {		
 		// LevelBuilder = new LevelBuilder();

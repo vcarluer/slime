@@ -243,6 +243,8 @@ public class Slime extends Activity {
         SpriteSheetFactory.destroy();
         SlimeFactory.detachAll();
         SlimeFactory.destroyAll();
+        SlimeFactory.StarCounter.detach();
+        SlimeFactory.StarCounter.destroy();
         
         if (Level.currentLevel != null) {
         	Level.currentLevel.resetLevel();
