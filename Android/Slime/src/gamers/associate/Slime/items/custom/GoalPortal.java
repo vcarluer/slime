@@ -33,7 +33,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class GoalPortal extends GameItemPhysic implements ISelectable {
-	public static String Anim_Goal_Portal = "teleporter-red-portal";
+	public static String Anim_Goal_Portal = "tank-evacuation-whirlwind";
 	private static String thumbnail = "tank-evacuation-01.png"; // "teleporter-red-portal-04.png";
 	
 	public static float Default_Width = 32f;
