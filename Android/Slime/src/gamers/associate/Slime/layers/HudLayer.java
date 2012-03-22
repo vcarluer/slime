@@ -12,6 +12,7 @@ import gamers.associate.Slime.game.LevelSelection;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.TitleGenerator;
+import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.items.custom.MenuSprite;
@@ -45,6 +46,7 @@ import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
 
 public class HudLayer extends CCLayer implements IGameItemHandler {
+	private static final float scoreTakenPadding = 10f;
 	private static final float TextHeight = 60f;
 	private static final float PaddingHCount = TextHeight/2f;
 	private static final float PaddingLeftStar = 25f;
@@ -60,6 +62,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 	private CCMenu menu;
 	
 	private CCLabel title;
+	private CCLabel scoreTaken;
 	
 	private CGPoint tmp = CGPoint.zero();
 	
@@ -105,6 +108,10 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 		this.countLabel.setPosition(
 				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - 15, 
 				CCDirector.sharedDirector().winSize().getHeight() - 65));
+		
+		this.scoreTaken = getMenuLabel("   ", TextHeight, SlimeFactory.ColorSlime);
+		this.scoreTaken.setAnchorPoint(0, 0);
+		this.addChild(this.scoreTaken);
 				
 		this.hideSlimyCount();
 		
@@ -166,6 +173,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 					SlimeFactory.StarCounter.create(xPos, yPos, w, starCountBarHeight, i + 1, gp.neededBonus(), SlimeFactory.LevelBuilder.getTotalStar());
 				}
 				
+				this.scoreTaken.setPosition(xPosBase - (w / 2f) + totalW  + scoreTakenPadding, CCDirector.sharedDirector().winSize().getHeight() - (starCountHShift + PaddingHCount));				
 				activate = true;
 			}			
 		}
@@ -212,8 +220,8 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 	}
 	
 	public void setSlimyCount(int count) {
-		this.countLabel.setVisible(true);
-		this.countLabel.setString((Count_Text + String.valueOf(count)).toUpperCase());
+		this.countLabel.setVisible(true);		
+		this.countLabel.setString((Count_Text + String.valueOf(count)).toUpperCase());		
 	}
 	
 	public void setHudText(String text) {
@@ -233,6 +241,10 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 		if (this.countLabel != null) {
 			this.countLabel.setVisible(false);
 		}
+		
+		if (this.scoreTaken != null) {
+			this.scoreTaken.setVisible(false);
+		}
 	}
 	
 	public CCLabel getLabel() {
@@ -241,6 +253,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 	
 	public void hideSlimyCount() {
 		this.countLabel.setVisible(false);
+		this.scoreTaken.setVisible(false);
 	}
 	
 	public CCMenu getMenu() {
@@ -289,13 +302,32 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 					StarCounter currentCounter = this.starCounters.get(this.counterIdx);
 					currentCounter.takeStar();
 					this.counterIdx++;
+					
+					IGamePlay gp = Level.currentLevel.getGamePlay();
+					// Extra bonus anim
 					if (this.counterIdx == this.starCounters.size()) {							
 						for(StarCounter counter: this.starCounters) {
 							if (counter != currentCounter) {
 								counter.animSup();
 							}							
 						}
-					}					
+						
+						if (gp != null) {
+							this.scoreTaken.setString("+" + Util.getFormatTime(gp.getExtraBonusPoints()));
+						}
+					} else {
+						if (gp != null) {
+							this.scoreTaken.setString("+" + Util.getFormatTime(gp.getNormalBonusPoints()));
+						}						
+					}
+					
+					this.scoreTaken.setVisible(true);
+					this.scoreTaken.stopAllActions();
+					CCFadeIn fi = CCFadeIn.action(0.1f);
+					CCDelayTime delay = CCDelayTime.action(1.0f);
+					CCFadeOut fade = CCFadeOut.action(0.5f);
+					CCSequence seq = CCSequence.actions(fi, delay, fade);
+					this.scoreTaken.runAction(seq);
 				}
 			}
 		}		
@@ -410,5 +442,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 		
 		this.starCounters.clear();
 		this.counterIdx = 0;
+		
+		this.scoreTaken.cleanup();
 	}
 }

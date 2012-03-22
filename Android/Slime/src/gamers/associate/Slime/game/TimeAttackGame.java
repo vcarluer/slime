@@ -77,28 +77,8 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	}
 	
 	public String getLeftTime() {
-		return getFormatTime(this.leftTime);
-	}
-	
-	private static String getFormatTime(float millis) {
-		// float base = Math.round(millis);
-		double base = Math.ceil((double)millis);
-		DecimalFormat df = new DecimalFormat ( ) ; 
-		df.setMaximumFractionDigits ( 0 ) ; //arrondi � 2 chiffres apres la virgules 
-		df.setMinimumFractionDigits ( 0 ) ; 
-		df.setDecimalSeparatorAlwaysShown ( false ) ; 
-		return df.format(base);		
-	}
-	
-	private static String getFormatTimeCritic(float millis) {
-		// float base = Math.round(millis);
-		double base = Math.ceil((double)millis);
-		DecimalFormat df = new DecimalFormat ( ) ; 
-		df.setMaximumFractionDigits ( 0 ) ; //arrondi � 2 chiffres apres la virgules 
-		df.setMinimumFractionDigits ( 0 ) ; 
-		df.setDecimalSeparatorAlwaysShown ( false ) ; 
-		return df.format(base);		
-	}
+		return Util.getFormatTime(this.leftTime);
+	}				
 
 	/* (non-Javadoc)
 	 * @see gamers.associate.Slime.items.base.GameItem#render(float)
@@ -156,7 +136,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 						label.runAction(this.criticAction);
 						label.setColor(ccColor3B.ccc3( 255,0,0));
 						
-						this.level.setHudText(getFormatTimeCritic(this.leftTime));
+						this.level.setHudText(Util.getFormatTimeCritic(this.leftTime));
 						this.localRender = 0;
 						
 						Sounds.playEffect(R.raw.tick);
@@ -172,12 +152,12 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	}
 	
 	private void setNormalTime() {
-		this.level.setHudText(getFormatTime(this.leftTime));
+		this.level.setHudText(Util.getFormatTime(this.leftTime));
 		this.localRender = 0;
 	}
 	
 	private void setStartTime() {
-		this.level.setStartText(getFormatTime(this.leftTime));
+		this.level.setStartText(Util.getFormatTime(this.leftTime));
 		this.localRender = 0;
 	}
 
@@ -367,5 +347,15 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	
 	public float getNormalTimeRatio() {
 		return TimeRatioNormal;
+	}
+
+	@Override
+	public float getNormalBonusPoints() {
+		return bonusTime;
+	}
+
+	@Override
+	public float getExtraBonusPoints() {
+		return extraBonusTime;
 	}
 }

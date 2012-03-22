@@ -19,4 +19,6 @@ public interface IGamePlay {
 	int bonusCount();
 	int neededBonus();
 	float getNormalTimeRatio();
+	float getNormalBonusPoints();
+	float getExtraBonusPoints();
 }

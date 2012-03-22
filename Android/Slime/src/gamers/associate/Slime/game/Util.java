@@ -1,5 +1,7 @@
 package gamers.associate.Slime.game;
 
+import java.text.DecimalFormat;
+
 import javax.microedition.khronos.opengles.GL10;
 
 import org.cocos2d.opengl.CCDrawingPrimitives;
@@ -62,5 +64,25 @@ public class Util {
 		}
 
 		return true;
+	}
+	
+	public static String getFormatTime(float millis) {
+		// float base = Math.round(millis);
+		double base = Math.ceil((double)millis);
+		DecimalFormat df = new DecimalFormat ( ) ; 
+		df.setMaximumFractionDigits ( 0 ) ; //arrondi � 2 chiffres apres la virgules 
+		df.setMinimumFractionDigits ( 0 ) ; 
+		df.setDecimalSeparatorAlwaysShown ( false ) ; 
+		return df.format(base);		
+	}
+	
+	public static String getFormatTimeCritic(float millis) {
+		// float base = Math.round(millis);
+		double base = Math.ceil((double)millis);
+		DecimalFormat df = new DecimalFormat ( ) ; 
+		df.setMaximumFractionDigits ( 0 ) ; //arrondi � 2 chiffres apres la virgules 
+		df.setMinimumFractionDigits ( 0 ) ; 
+		df.setDecimalSeparatorAlwaysShown ( false ) ; 
+		return df.format(base);		
 	}
 }

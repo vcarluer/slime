@@ -22,7 +22,7 @@ public abstract class LevelGraphGeneratorBase {
 	protected static final int timeCritic = 5;
 	
 	// tuned with SGS
-	protected static final int maxWidth = 6; // -1
+	protected static final int maxWidth = 3; // -1
 	protected static final int maxAddHeight = 2; // -1
 	
 	protected List<LevelGenNode> nodes;
