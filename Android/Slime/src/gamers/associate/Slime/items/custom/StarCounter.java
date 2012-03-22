@@ -132,7 +132,7 @@ public class StarCounter extends GameItemCocos {
 		}				
 	}
 	
-	private void animSup() {
+	public void animSup() {
 		CCScaleBy sb = CCScaleBy.action(0.2f, 1.3f);		
 		CCSequence seq = CCSequence.actions(sb, sb.reverse());
 		this.sprite.runAction(seq);

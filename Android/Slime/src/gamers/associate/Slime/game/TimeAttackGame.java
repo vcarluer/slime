@@ -17,6 +17,7 @@ import org.cocos2d.types.ccColor3B;
 
 
 public class TimeAttackGame extends GameItem implements IGamePlay {
+	private static final float extraBonusTime = 10f;
 	private static final float TimeRatioNormal = 2.0f;
 	private static final float TimeRatioLow = 0.2f;
 	private static final int bonusTime = 3;
@@ -313,6 +314,10 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 						plug.remove();
 					}
 				}
+			}
+			
+			if (this.bonusTaken == SlimeFactory.LevelBuilder.getTotalStar()) {
+				this.leftTime += extraBonusTime;
 			}
 		}
 	}

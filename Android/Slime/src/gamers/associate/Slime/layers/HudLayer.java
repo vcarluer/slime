@@ -7,6 +7,7 @@ import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.IGameItemHandler;
 import gamers.associate.Slime.game.IGamePlay;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.LevelSelection;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
@@ -285,8 +286,16 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 				this.starsTaken.remove(0);
 				
 				if (this.starCounters.size() > this.counterIdx) {
-					this.starCounters.get(this.counterIdx).takeStar();
+					StarCounter currentCounter = this.starCounters.get(this.counterIdx);
+					currentCounter.takeStar();
 					this.counterIdx++;
+					if (this.counterIdx == this.starCounters.size()) {							
+						for(StarCounter counter: this.starCounters) {
+							if (counter != currentCounter) {
+								counter.animSup();
+							}							
+						}
+					}					
 				}
 			}
 		}		
