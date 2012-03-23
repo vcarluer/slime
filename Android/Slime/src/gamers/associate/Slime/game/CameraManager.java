@@ -326,8 +326,13 @@ public class CameraManager {
 	public void zoomCameraTo(float zoomValueTo) {
 		float zoomValue = this.scaleScreen(zoomValueTo);
 		
-		if (zoomValue <= minScale) {
-			zoomValue = minScale;
+		if (zoomValue <= minScale){
+			if (Level.currentLevel.isPaused || Level.currentLevel.currentLevelName =="Home"){
+				zoomValue = minScale;				
+			}
+			else{
+				zoomValue = SlimeFactory.SGSDensity;				
+			}
 		}
 		
 		if (zoomValue >= maxScale) {
@@ -345,8 +350,13 @@ public class CameraManager {
 	
 	public void zoomCameraCenterTo(float zoomValueTo) {
 		float zoomValue = this.scaleScreen(zoomValueTo);
-		if (zoomValue <= minScale) {
-			zoomValue = minScale;
+		if (zoomValue <= minScale){
+			if (Level.currentLevel.isPaused || Level.currentLevel.currentLevelName =="Home"){
+				zoomValue = minScale;				
+			}
+			else{
+				zoomValue = SlimeFactory.SGSDensity;				
+			}
 		}
 		
 		if (zoomValue >= maxScale) {
