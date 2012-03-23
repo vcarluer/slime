@@ -7,9 +7,10 @@ Platform_NoSticky;96.0;120.0;168.0;32.0;0.0
 Box_Bottle;216.0;152.0;48.0;72.0;0.0;false;true
 Box_Tube;94.0;152.0;18.0;72.0;0.0;false;true
 Star;154.0;176.0;30.0;31.0;0.0
-LaserGun;255.0;138.0;65.0;15.0;150.0;lasergun;targetle;true
-Target;464.0;256.0;16.0;16.0;0.0;targetle
+LaserGun;255.0;138.0;65.0;15.0;150.0;lasergunsaw;targetle;true
+Target;472.0;256.0;16.0;16.0;0.0;targetle
 BecBunsen;80.0;413.0;20.0;67.0;180.0;true;0;becbunsen
-CircularSaw;56.0;112.0;40.0;40.0;-90.0;circularsaw;true
-Star;418.0;400.0;30.0;31.0;0.0
-BecBunsen;372.0;413.0;20.0;67.0;180.0;true;0;becbunsen
+CircularSaw;56.0;112.0;40.0;40.0;-90.0;lasergunsaw;true
+Star;224.0;424.0;30.0;31.0;0.0
+BecBunsen;364.0;413.0;20.0;67.0;180.0;true;0;becbunsen
+Button;170.0;104.0;30.0;16.0;180.0;lasergunsaw;3
