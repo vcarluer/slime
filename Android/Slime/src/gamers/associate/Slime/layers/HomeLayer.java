@@ -251,7 +251,7 @@ public class HomeLayer extends CCLayer {
 		this.top.addChild(this.titleSprite);
 		if (!firstLoadDone) {					
 			this.titleSprite.setPosition(CCDirector.sharedDirector().winSize().width / 2, CCDirector.sharedDirector().winSize().height / 2 + 115f);						
-			this.titleSprite.setScale(10f);
+			this.titleSprite.setScale(10f * SlimeFactory.SGSDensity);
 			// CCDelayTime delay = CCDelayTime.action(0.5f);
 			CCScaleTo sc = CCScaleTo.action(0.5f, 1f , 1f);
 			CCDelayTime d2 = CCDelayTime.action(2f);
@@ -261,7 +261,7 @@ public class HomeLayer extends CCLayer {
 			this.titleSprite.runAction(act);
 			firstLoadDone = true;
 		} else {
-			float scale = 0.5f;
+			float scale = 0.5f * SlimeFactory.SGSDensity;
 			this.titleSprite.setScale(scale);
 			this.titleSprite.setPosition(
 					CCDirector.sharedDirector().winSize().width - (this.titleSprite.getContentSize().width / 2) * scale - PauseLayer.PaddingX,
@@ -272,7 +272,7 @@ public class HomeLayer extends CCLayer {
 	}
 	
 	public void endTitle() {
-		float scale = 0.5f;
+		float scale = 0.5f  * SlimeFactory.SGSDensity;
 		CCMoveTo mt = CCMoveTo.action(0.2f, CGPoint.ccp(
 				CCDirector.sharedDirector().winSize().width - (this.titleSprite.getContentSize().width / 2) * scale - PauseLayer.PaddingX,
 				CCDirector.sharedDirector().winSize().height - (this.titleSprite.getContentSize().height / 2) * scale - PauseLayer.PaddingY

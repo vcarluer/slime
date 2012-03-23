@@ -162,7 +162,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 			if (gp != null) {				
 				float xPosBase = CCDirector.sharedDirector().winSize().getWidth() / 2;
 				float yPos = CCDirector.sharedDirector().winSize().getHeight() - starCountHShift;
-				float w = starCountBarHeight * StarCounter.Default_Width / StarCounter.Default_Height;
+				float w = starCountBarHeight * StarCounter.Default_Width / StarCounter.Default_Height * SlimeFactory.SGSDensity;
 				float totalW = w * SlimeFactory.LevelBuilder.getTotalStar();
 				if (totalW > starCountBarWidthMax) {
 					w = starCountBarWidthMax / SlimeFactory.LevelBuilder.getTotalStar();

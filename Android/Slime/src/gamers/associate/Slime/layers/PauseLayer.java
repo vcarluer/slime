@@ -24,7 +24,7 @@ public class PauseLayer extends CCLayer {
 	private static String scoreTxt = "MAX: ";
 	private CCMenu menu;
 	private CCMenuItemLabel scoreMaxLabel;
-	public static float Scale = 0.7f;
+	public static float Scale = 0.7f * SlimeFactory.SGSDensity;
 	public static float PaddingX = 25f;
 	public static float PaddingY = 5f;
 	private CCSprite arrowSpriteT;
