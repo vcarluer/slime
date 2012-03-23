@@ -38,6 +38,7 @@ import com.google.ads.AdView;
 public class Slime extends Activity {
 	private static final String SGN_AMZ = "800F2BBA8B5811D40BB140402CAF9D63";
 	private static final String SGS_VCR = "703A6FB6180B55E158105A7D9481857A";
+	private static final String SGS_CMZ = "AB84E64BAD5ED6B0B7CBD7AC5F37461C";
 	private static final String AdMobPublisherId = "a14f5f7a390a6a4";
 	private static final boolean AdTest = true;
 	private static final boolean AdOn = true;
@@ -156,6 +157,7 @@ public class Slime extends Activity {
         	adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
         	adRequest.addTestDevice(SGS_VCR);
         	adRequest.addTestDevice(SGN_AMZ);
+        	adRequest.addTestDevice(SGS_CMZ);
         }
         // Fill out ad request.       
 

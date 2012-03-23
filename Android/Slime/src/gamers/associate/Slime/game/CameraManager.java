@@ -326,8 +326,8 @@ public class CameraManager {
 	public void zoomCameraTo(float zoomValueTo) {
 		float zoomValue = this.scaleScreen(zoomValueTo);
 		
-		if (zoomValue <= minScale) {
-			zoomValue = minScale;
+		if (zoomValue <= minScale){
+			zoomValue = minScale;				
 		}
 		
 		if (zoomValue >= maxScale) {
@@ -345,8 +345,8 @@ public class CameraManager {
 	
 	public void zoomCameraCenterTo(float zoomValueTo) {
 		float zoomValue = this.scaleScreen(zoomValueTo);
-		if (zoomValue <= minScale) {
-			zoomValue = minScale;
+		if (zoomValue <= minScale){
+			zoomValue = minScale;				
 		}
 		
 		if (zoomValue >= maxScale) {
