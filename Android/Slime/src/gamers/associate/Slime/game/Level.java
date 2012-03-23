@@ -876,7 +876,8 @@ public class Level implements IGameItemHandler {
 				this.selectedItem.select(gameReference);
 				if (!(this.selectedItem instanceof Thumbnail)) {
 					if (this.gamePlay == null) {
-						this.cameraManager.unzoomForMargin(this.selectedItem.getPosition(), 1.0f);
+						//AMZ density
+						this.cameraManager.unzoomForMargin(this.selectedItem.getPosition(), SlimeFactory.SGSDensity);
 					}
 					else {
 						this.gamePlay.selectBegin(gameReference);
@@ -968,8 +969,9 @@ public class Level implements IGameItemHandler {
 			this.getGamePlay().startLevel();
 		}
 		else {
-			if(this.getStartItem() != null) {						
-				this.getCameraManager().zoomInterpolateTo(this.getStartItem(), 1.0f, 1.0f);
+			if(this.getStartItem() != null) {	
+				//AMZ replacing 1.0f by SGSDensity 
+				this.getCameraManager().zoomInterpolateTo(this.getStartItem(),SlimeFactory.SGSDensity, 1.0f);
 				this.getCameraManager().follow(this.getStartItem());
 			}
 		}

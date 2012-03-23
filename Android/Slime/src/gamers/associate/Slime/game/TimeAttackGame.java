@@ -190,7 +190,8 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		if (!this.isStarted && !this.isPaused && !this.isGameOver) {
 			this.level.getCameraManager().cancelActions();
 			this.level.getCameraManager().moveInterpolateTo(this.level.getSelectedGameItem(), 0.5f);
-			this.level.getCameraManager().zoomInterpolateTo(this.level.getSelectedGameItem(), 1.0f, 0.5f);			
+			//AMZ replacing 1.0f by SGSDensity 
+			this.level.getCameraManager().zoomInterpolateTo(this.level.getSelectedGameItem(), SlimeFactory.SGSDensity, 0.5f);			
 			//this.level.getCameraManager().follow(this.level.getSelectedGameItem());									
 		}
 		
@@ -219,7 +220,8 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	private void enterGameMode(float speed) {
 		if(this.level.getStartItem() != null) {				
 			this.level.getCameraManager().moveInterpolateTo(this.level.getStartItem(), speed);
-			this.level.getCameraManager().zoomInterpolateTo(this.level.getStartItem(), 1.0f, speed);		
+			//AMZ replacing 1.0f by SGSDensity  
+			this.level.getCameraManager().zoomInterpolateTo(this.level.getStartItem(), SlimeFactory.SGSDensity, speed);		
 			this.level.getCameraManager().follow(this.level.getStartItem());			
 		}
 
