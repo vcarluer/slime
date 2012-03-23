@@ -60,9 +60,9 @@ public class LiquidSurface extends GameItemPhysic {
 	@Override
 	protected void handleContact(ContactInfo item) {
 		super.handleContact(item);
-		if (item.getContactWith() instanceof IDissolvable) {
-			((IDissolvable)item.getContactWith()).dissolve();
-		}
+//		if (item.getContactWith() instanceof IDissolvable) {
+//			((IDissolvable)item.getContactWith()).dissolve();
+//		}
 	}
 	
 	public void initAnimation() {
