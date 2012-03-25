@@ -74,7 +74,7 @@ public class Slime extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                 
-        mGLSurfaceView = new CCGLSurfaceView(this);             
+        mGLSurfaceView = new CCGLSurfaceView(this);        
         setContentView(R.layout.main);
         RelativeLayout layout = (RelativeLayout) this.findViewById(R.id.mainLayout);        
         layout.addView(this.mGLSurfaceView);
@@ -84,10 +84,14 @@ public class Slime extends Activity {
         FrameLayout.LayoutParams adsParams =new FrameLayout.LayoutParams(
         		FrameLayout.LayoutParams.FILL_PARENT, FrameLayout.LayoutParams.FILL_PARENT);        
         adView.setLayoutParams(adsParams);
-        adView.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL);        
+        adView.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL); 
         // Add the AdView to the view hierarchy. The view will have no size
         // until the ad is loaded.
         layout.addView(adView);
+        
+        Log.d(Slime.TAG, "mGLSurfaceView isHardwareAccelerated(): " + mGLSurfaceView.isHardwareAccelerated());
+        Log.d(Slime.TAG, "adView isHardwareAccelerated(): " + adView.isHardwareAccelerated());
+        Log.d(Slime.TAG, "layout isHardwareAccelerated(): " + layout.isHardwareAccelerated());
 
         this.mHandler = new Handler(){
             @Override
