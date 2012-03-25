@@ -19,6 +19,7 @@ public class SpriteAction {
 	public static int MoveBL = 1;
 	public static int FadeIn = 2;
 	public static int MoveL = 3;
+	public static int MoveB = 4;
 	
 	private int actionCode;
 	private float actionValue;
@@ -80,6 +81,10 @@ public class SpriteAction {
 			
 			if (actionCode == FadeIn) {
 				action = CCFadeIn.action(this.actionTime);			
+			}
+			
+			if (actionCode == MoveB) {
+				action = CCMoveBy.action(this.actionTime, CGPoint.ccp(0, - this.actionValue));
 			}
 					
 			if (action != null) {								
