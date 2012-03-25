@@ -314,6 +314,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	
 	public void unselect() {
 		if (this.selected) {
+			Sounds.stopEffect(R.raw.slimyselect);
 			this.selected = false;	
 			this.stopAura();
 		}

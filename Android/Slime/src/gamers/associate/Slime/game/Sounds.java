@@ -47,6 +47,15 @@ public class Sounds {
 		}
 	}
 	
+	public static void stopEffect(int soundId) {
+		synchronized(soundsMap) {
+			//MediaPlayer mp = soundsMap.get(soundId);
+			//if (mp != null) {
+				SoundEngine.sharedEngine().stopEffect(CCDirector.sharedDirector().getActivity(), soundId);
+			//}
+		}
+	}
+	
 	private static void preloadEffectAsSound(int soundId) {		
 		synchronized(soundsMap) {			
 			MediaPlayer mp = soundsMap.get(soundId);
