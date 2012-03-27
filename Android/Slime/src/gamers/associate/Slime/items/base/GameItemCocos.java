@@ -32,6 +32,9 @@ public class GameItemCocos extends GameItem {
 	private String frameName;
 	private int frameCount;
 	private SpriteAction spriteAction;
+	
+	protected boolean positionChanged;
+	protected boolean angleChanged;
 		
 	public GameItemCocos(float x, float y, float width, float height) {
 		super(x, y, width, height);		
@@ -179,10 +182,17 @@ public class GameItemCocos extends GameItem {
 	@Override
 	public void render(float delta) {
 		if (this.sprite != null) {
-			this.position = this.sprite.getPosition();			
-			this.angle = this.sprite.getRotation();
+			this.positionChanged = this.position.x != this.sprite.getPosition().x || this.position.y != this.getSprite().getPosition().y;
+			if (this.positionChanged) {
+				this.position = this.sprite.getPosition();
+			}
+			
+			this.angleChanged = this.angle != this.sprite.getRotation();
+			if (this.angleChanged) {
+				this.angle = this.sprite.getRotation();
+			}			
 		}
-	}
+	}	
 	
 	protected void addAnim(String animName, int frameCount) {
 		if (this.animationList != null) {

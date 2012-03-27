@@ -6,6 +6,9 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.SpriteType;
 
+import org.cocos2d.actions.base.CCRepeatForever;
+import org.cocos2d.actions.interval.CCMoveBy;
+import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -142,5 +145,14 @@ public class Platform extends GameItemPhysic {
 	
 	public boolean getMove() {
 		return this.move;
+	}
+	
+	public void animate() {
+		if (this.type == End) {
+			CCMoveBy mb = CCMoveBy.action(1.0f, CGPoint.make(25f, 0));
+			CCSequence seq = CCSequence.actions(mb, mb.reverse());
+			CCRepeatForever repeat = CCRepeatForever.action(seq);
+			this.getSprite().runAction(repeat);
+		}
 	}
 }

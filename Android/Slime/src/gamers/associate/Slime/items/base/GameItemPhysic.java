@@ -6,11 +6,13 @@ import java.util.ArrayList;
 
 import org.cocos2d.config.ccMacros;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.WorldManifold;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public abstract class GameItemPhysic extends GameItemPhysicFx {
 	public static short Category_Level = 0x0001;
@@ -25,12 +27,14 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 	protected boolean IsAllSensor;
 	protected boolean isPhysicDisabled;
 	private boolean bodyCategorySwitched;
+	private Vector2 transformVector;
 	
 	public GameItemPhysic(float x, float y, float width, float height, World world, float worldRatio) {		
 		super(x, y, width, height, world, worldRatio);		
 		this.bodyWidth = this.width;
 		this.bodyHeight = this.height;
 		this.contacts = new ArrayList<ContactInfo>();
+		this.transformVector = new Vector2();
 	}
 	
 	@Override
@@ -74,16 +78,25 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 			this.handleContacts();
 			
 			if (this.sprite != null && this.body != null) {
-				float x = this.body.getPosition().x * this.worldRatio;
-				float y = this.body.getPosition().y * this.worldRatio;
-				float rotation = -1.0f * ccMacros.CC_RADIANS_TO_DEGREES(this.body.getAngle());
-				this.sprite.setPosition(x, y);			
-				this.sprite.setRotation(rotation);
-				this.position.set(x, y);
-				this.angle = rotation;
+				if (this.body.getType() == BodyType.StaticBody) {
+					// Set position based on sprite
+					super.render(delta);
+					if (this.positionChanged || this.angleChanged) {
+						this.transformVector.x = this.getPosition().x / this.worldRatio;
+						this.transformVector.y = this.getPosition().y / this.worldRatio;
+						float rotation = -1.0f * ccMacros.CC_DEGREES_TO_RADIANS(this.getAngle());
+						this.body.setTransform(this.transformVector, rotation);
+					}									
+				} else {
+					float x = this.body.getPosition().x * this.worldRatio;
+					float y = this.body.getPosition().y * this.worldRatio;
+					float rotation = -1.0f * ccMacros.CC_RADIANS_TO_DEGREES(this.body.getAngle());
+					this.sprite.setPosition(x, y);			
+					this.sprite.setRotation(rotation);
+					this.position.set(x, y);
+					this.angle = rotation;
+				}				
 			}
-			
-			// super.render(delta);
 		}
 	}
 	

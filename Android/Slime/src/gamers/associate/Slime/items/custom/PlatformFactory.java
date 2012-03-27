@@ -35,6 +35,7 @@ public class PlatformFactory extends GameItemPhysicFactory<Platform>{
 
 	@Override
 	protected void runFirstAnimations(Platform item) {	
+		item.animate();
 	}
 	
 	@Override
