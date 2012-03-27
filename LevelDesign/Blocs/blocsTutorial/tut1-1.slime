@@ -26,8 +26,8 @@ Platform_Wall;216.0;408.0;104.0;24.0;0.0
 Liquid;240.0;432.0;104.0;24.0;0.0
 Platform_Wall;216.0;432.0;24.0;48.0;0.0
 Box_Bottle;384.0;64.0;48.0;72.0;0.0;false;true
-Sprite;26.0;-129.0;152.0;248.0;0.0;;gestures_tap;1;1;50;1;false;true;1;true;0
-Sprite;123.0;122.0;32.0;16.0;-51.0;arrows;arrow-green;1;2;0;1;true;true;0;false;0
-Sprite;161.0;171.0;32.0;16.0;-51.0;arrows;arrow-green;1;2;0;1;true;true;0.25;false;0
-Sprite;206.0;212.0;32.0;16.0;-36.0;arrows;arrow-green;1;2;0;1;true;true;0.5;false;0
-Sprite;260.0;246.0;32.0;16.0;-21.0;arrows;arrow-green;1;2;0;1;true;true;0.75;false;0
+Sprite;26.0;-129.0;152.0;248.0;0.0;;gestures_tap;1;1;50;0;1;false;true;1;true;0
+Sprite;123.0;122.0;32.0;16.0;-51.0;arrows;arrow-green;1;2;0;None;1;true;true;0;false;0
+Sprite;161.0;171.0;32.0;16.0;-51.0;arrows;arrow-green;1;2;0;None;1;true;true;0.25;false;0
+Sprite;206.0;212.0;32.0;16.0;-36.0;arrows;arrow-green;1;2;0;None;1;true;true;0.5;false;0
+Sprite;260.0;246.0;32.0;16.0;-21.0;arrows;arrow-green;1;2;0;None;1;true;true;0.75;false;0

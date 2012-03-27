@@ -33,10 +33,10 @@ Platform_NoSticky;-32.0;32.0;96.0;32.0;90.0
 Box_Tube;0.0;128.0;18.0;72.0;0.0;false;true
 Platform_NoSticky;320.0;128.0;288.0;32.0;90.0
 Platform_Ice;32.0;96.0;144.0;32.0;0.0
-Sprite;162.0;145.0;32.0;16.0;10.0;arrows;arrow-green;1;2;0;1;true;true;0;false;0
-Sprite;217.0;135.0;32.0;16.0;10.0;arrows;arrow-green;1;2;0;1;true;true;0.25;false;0
-Sprite;272.0;125.0;32.0;16.0;10.0;arrows;arrow-green;1;2;0;1;true;true;0.5;false;0
-Sprite;327.0;115.0;32.0;16.0;10.0;arrows;arrow-green;1;2;0;1;true;true;0.75;false;0
+Sprite;162.0;145.0;32.0;16.0;10.0;arrows;arrow-green;1;2;0;None;1;true;true;0;false;0
+Sprite;217.0;135.0;32.0;16.0;10.0;arrows;arrow-green;1;2;0;None;1;true;true;0.25;false;0
+Sprite;272.0;125.0;32.0;16.0;10.0;arrows;arrow-green;1;2;0;None;1;true;true;0.5;false;0
+Sprite;327.0;115.0;32.0;16.0;10.0;arrows;arrow-green;1;2;0;None;1;true;true;0.75;false;0
 Platform_NoSticky_Corner;0.0;96.0;32.0;32.0;180.0
 Platform_NoSticky_End;320.0;288.0;32.0;32.0;180.0
 Platform_NoSticky_End;80.0;384.0;32.0;32.0;180.0

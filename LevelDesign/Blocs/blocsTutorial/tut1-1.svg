@@ -159,7 +159,7 @@
      inkscape:cx="137.29792"
      inkscape:cy="186.66347"
      inkscape:document-units="px"
-     inkscape:current-layer="Template"
+     inkscape:current-layer="MAP"
      showgrid="true"
      inkscape:snap-grids="true"
      inkscape:snap-page="false"
@@ -191,7 +191,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1761,7 +1761,8 @@
        att_repeat="true"
        att_originalDelay="1"
        att_resetPosition="true"
-       att_delayBefore="0" />
+       att_delayBefore="0"
+       att_actionValue2="0" />
     <image
        width="32"
        height="16"

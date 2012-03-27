@@ -13,6 +13,7 @@ public class SpriteDef extends ItemDefinition {
 	private int count;
 	private int actionCode;
 	private float actionValue;
+	private float actionValue2;
 	private float actionTime;
 	private boolean inverse;
 	private boolean repeat;	
@@ -24,7 +25,7 @@ public class SpriteDef extends ItemDefinition {
 	public void createItem(Level level) {
 		if (actionCode != SpriteAction.noActionReserved) {
 			SpriteAction action = new SpriteAction(
-					this.actionCode, this.actionValue, this.actionTime, this.inverse, this.repeat, 
+					this.actionCode, this.actionValue, this.actionValue2, this.actionTime, this.inverse, this.repeat, 
 					this.originalDelay, this.resetPosition, this.delayBefore);
 			GameItem item = SlimeFactory.Sprite.createBL(this.getX(), this.getY(), this.width, this.height, this.plist, this.frame, this.count, action);
 			item.setAngle(this.angle);
@@ -49,15 +50,17 @@ public class SpriteDef extends ItemDefinition {
 		if ((infos.length - 1) > (start + 2)) {
 			this.actionCode = Integer.valueOf(infos[start+3]);
 			this.actionValue = Float.valueOf(infos[start+4]);
-			this.actionTime = Float.valueOf(infos[start+5]);
-			this.inverse = Boolean.valueOf(infos[start+6]);
-			this.repeat = Boolean.valueOf(infos[start+7]);
-			this.originalDelay = Float.valueOf(infos[start+8]);
-			this.resetPosition = Boolean.valueOf(infos[start+9]);
-			this.delayBefore = Float.valueOf(infos[start+10]);
+			this.actionValue2 = Float.valueOf(ZeroIfNone(infos[start+5]));
+			this.actionTime = Float.valueOf(infos[start+6]);
+			this.inverse = Boolean.valueOf(infos[start+7]);
+			this.repeat = Boolean.valueOf(infos[start+8]);
+			this.originalDelay = Float.valueOf(infos[start+9]);
+			this.resetPosition = Boolean.valueOf(infos[start+10]);
+			this.delayBefore = Float.valueOf(infos[start+11]);
 		} else {
 			this.actionCode = SpriteAction.noActionReserved;
 			this.actionValue = 0;
+			this.actionValue2 = 0;
 			this.actionTime = 0;
 			this.inverse = false;
 			this.repeat = false;
@@ -80,6 +83,7 @@ public class SpriteDef extends ItemDefinition {
 		if (this.actionCode != SpriteAction.noActionReserved) {
 			line = this.addValue(line, String.valueOf(this.actionCode));
 			line = this.addValue(line, String.valueOf(this.actionValue));
+			line = this.addValue(line, String.valueOf(this.actionValue2));
 			line = this.addValue(line, String.valueOf(this.actionTime));
 			line = this.addValue(line, String.valueOf(this.inverse));
 			line = this.addValue(line, String.valueOf(this.repeat));
@@ -109,6 +113,7 @@ public class SpriteDef extends ItemDefinition {
 		this.count = cocos.getFrameCount();
 		this.actionCode = SpriteAction.noActionReserved;
 		this.actionValue = 0;
+		this.actionValue2 = 0;
 		this.actionTime = 0;
 		this.inverse = false;
 		this.repeat = false;
@@ -119,6 +124,7 @@ public class SpriteDef extends ItemDefinition {
 			if (cocos.getSpriteAction().getActionCode() != SpriteAction.noActionReserved) {
 				this.actionCode = cocos.getSpriteAction().getActionCode();
 				this.actionValue = cocos.getSpriteAction().getActionValue();
+				this.actionValue2 = cocos.getSpriteAction().getActionValue2();
 				this.actionTime = cocos.getSpriteAction().getActionTime();
 				this.inverse = cocos.getSpriteAction().getInverse();
 				this.repeat = cocos.getSpriteAction().getRepeat();

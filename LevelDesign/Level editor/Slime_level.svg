@@ -155,9 +155,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="6.0546876"
-     inkscape:cx="-250.91991"
-     inkscape:cy="339.28547"
+     inkscape:zoom="1.0703277"
+     inkscape:cx="-805.0813"
+     inkscape:cy="-130.14343"
      inkscape:document-units="px"
      inkscape:current-layer="Template"
      showgrid="true"
@@ -1391,7 +1391,8 @@
        att_repeat="true"
        att_originalDelay="1"
        att_resetPosition="true"
-       att_delayBefore="0" />
+       att_delayBefore="0"
+       att_actionValue2="0" />
     <g
        transform="translate(-864,216)"
        id="g3304">

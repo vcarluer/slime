@@ -10,6 +10,7 @@ import org.cocos2d.actions.interval.CCFadeOut;
 import org.cocos2d.actions.interval.CCIntervalAction;
 import org.cocos2d.actions.interval.CCMoveBy;
 import org.cocos2d.actions.interval.CCMoveTo;
+import org.cocos2d.actions.interval.CCRotateBy;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.CGPoint;
@@ -20,9 +21,14 @@ public class SpriteAction {
 	public static int FadeIn = 2;
 	public static int MoveL = 3;
 	public static int MoveB = 4;
+	public static int MoveR = 5;
+	public static int MoveT = 6;
+	public static int Move = 7;
+	public static int Rotate = 8;
 	
 	private int actionCode;
 	private float actionValue;
+	private float actionValue2;
 	private float actionTime;
 	private boolean inverse;
 	private boolean repeat;	
@@ -34,9 +40,10 @@ public class SpriteAction {
 	private float originalX;
 	private float originalY;
 	
-	public SpriteAction(int action, float value, float time, boolean inverse, boolean repeat, float originalDelay, boolean resetPosition, float delayBefore) {
+	public SpriteAction(int action, float value, float value2, float time, boolean inverse, boolean repeat, float originalDelay, boolean resetPosition, float delayBefore) {
 		this.actionCode = action;
 		this.actionValue = value;
+		this.actionValue2 = value2;
 		this.actionTime = time;
 		this.inverse = inverse;
 		this.repeat = repeat;
@@ -86,6 +93,22 @@ public class SpriteAction {
 			if (actionCode == MoveB) {
 				action = CCMoveBy.action(this.actionTime, CGPoint.ccp(0, - this.actionValue));
 			}
+			
+			if (actionCode == MoveR) {
+				action = CCMoveBy.action(this.actionTime, CGPoint.ccp(this.actionValue, 0));
+			}
+			
+			if (actionCode == MoveT) {
+				action = CCMoveBy.action(this.actionTime, CGPoint.ccp(0, this.actionValue));
+			}
+			
+			if (actionCode == Move) {
+				action = CCMoveBy.action(this.actionTime, CGPoint.ccp(this.actionValue, this.actionValue2));
+			}
+			
+			if (actionCode == Rotate) {
+				action = CCRotateBy.action(this.actionTime, this.actionValue);
+			}						
 					
 			if (action != null) {								
 				CCIntervalAction actionT1 = action;
@@ -121,6 +144,10 @@ public class SpriteAction {
 	
 	public float getActionValue() {
 		return this.actionValue;
+	}
+	
+	public float getActionValue2() {
+		return this.actionValue2;
 	}
 	
 	public float getActionTime() {

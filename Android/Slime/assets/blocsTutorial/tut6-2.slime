@@ -18,11 +18,11 @@ Box_Tube;360.0;64.0;18.0;72.0;0.0;false;true
 Polygon;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 72,200 88,-24 24,-56 -168,0;false;true;false
 Box_GlassBox;48.0;0.0;432.0;64.0;0.0;true;true
 Platform_Wall;0.0;0.0;48.0;64.0;0.0
-Sprite;144.0;184.0;32.0;16.0;-53.0;arrows;arrow-green;1;2;0;1;true;true;0;false;0
-Sprite;188.0;190.0;32.0;16.0;22.0;arrows;arrow-green;1;2;0;1;true;true;0.25;false;0
-Sprite;277.0;146.0;32.0;16.0;-79.0;arrows;arrow-green;1;2;0;1;true;true;0.75;false;0
-Sprite;288.0;201.0;32.0;16.0;-79.0;arrows;arrow-green;1;2;0;1;true;true;1;false;0
-Sprite;103.0;178.0;32.0;16.0;61.0;arrows;arrow-green;1;2;0;1;true;true;1.25;false;0
-Sprite;232.0;153.0;32.0;16.0;56.0;arrows;arrow-green;1;2;0;1;true;true;0.5;false;0
-Sprite;58.0;195.0;32.0;16.0;16.0;arrows;arrow-green;1;2;0;1;true;true;1;false;0
+Sprite;144.0;184.0;32.0;16.0;-53.0;arrows;arrow-green;1;2;0;None;1;true;true;0;false;0
+Sprite;188.0;190.0;32.0;16.0;22.0;arrows;arrow-green;1;2;0;None;1;true;true;0.25;false;0
+Sprite;277.0;146.0;32.0;16.0;-79.0;arrows;arrow-green;1;2;0;None;1;true;true;0.75;false;0
+Sprite;288.0;201.0;32.0;16.0;-79.0;arrows;arrow-green;1;2;0;None;1;true;true;1;false;0
+Sprite;103.0;178.0;32.0;16.0;61.0;arrows;arrow-green;1;2;0;None;1;true;true;1.25;false;0
+Sprite;232.0;153.0;32.0;16.0;56.0;arrows;arrow-green;1;2;0;None;1;true;true;0.5;false;0
+Sprite;58.0;195.0;32.0;16.0;16.0;arrows;arrow-green;1;2;0;None;1;true;true;1;false;0
 Box_GlassBox;0.0;64.0;192.0;88.0;0.0;true;true

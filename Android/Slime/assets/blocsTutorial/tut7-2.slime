@@ -10,11 +10,11 @@ Star;66.0;248.0;30.0;31.0;0.0
 BecBunsen;56.0;144.0;20.0;67.0;90.0;true;0;becbunsen
 Platform_NoSticky;251.0;448.0;197.0;32.0;180.0
 Platform_Wall;233.0;448.0;18.0;32.0;0.0
-Sprite;327.0;54.0;32.0;16.0;-135.0;arrows;arrow-green;1;2;0;1;true;true;0;false;0
-Sprite;287.0;93.0;32.0;16.0;-135.0;arrows;arrow-green;1;2;0;1;true;true;0.25;false;0
-Sprite;248.0;133.0;32.0;16.0;-135.0;arrows;arrow-green;1;2;0;1;true;true;0.5;false;0
-Sprite;208.0;172.0;32.0;16.0;-135.0;arrows;arrow-green;1;2;0;1;true;true;0.75;false;0
-Sprite;134.0;289.0;32.0;16.0;-30.0;arrows;arrow-green;1;2;0;1;true;true;1;false;0
-Sprite;183.0;317.0;32.0;16.0;-30.0;arrows;arrow-green;1;2;0;1;true;true;1.25;false;0
+Sprite;327.0;54.0;32.0;16.0;-135.0;arrows;arrow-green;1;2;0;None;1;true;true;0;false;0
+Sprite;287.0;93.0;32.0;16.0;-135.0;arrows;arrow-green;1;2;0;None;1;true;true;0.25;false;0
+Sprite;248.0;133.0;32.0;16.0;-135.0;arrows;arrow-green;1;2;0;None;1;true;true;0.5;false;0
+Sprite;208.0;172.0;32.0;16.0;-135.0;arrows;arrow-green;1;2;0;None;1;true;true;0.75;false;0
+Sprite;134.0;289.0;32.0;16.0;-30.0;arrows;arrow-green;1;2;0;None;1;true;true;1;false;0
+Sprite;183.0;317.0;32.0;16.0;-30.0;arrows;arrow-green;1;2;0;None;1;true;true;1.25;false;0
 Platform_NoSticky_Corner;0.0;448.0;32.0;32.0;180.0
 Platform_NoSticky_Corner;448.0;448.0;32.0;32.0;-90.0

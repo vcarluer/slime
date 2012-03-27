@@ -147,12 +147,6 @@ public class Platform extends GameItemPhysic {
 		return this.move;
 	}
 	
-	public void animate() {
-		if (this.type == End) {
-			CCMoveBy mb = CCMoveBy.action(1.0f, CGPoint.make(25f, 0));
-			CCSequence seq = CCSequence.actions(mb, mb.reverse());
-			CCRepeatForever repeat = CCRepeatForever.action(seq);
-			this.getSprite().runAction(repeat);
-		}
+	public void animate() {		
 	}
 }
