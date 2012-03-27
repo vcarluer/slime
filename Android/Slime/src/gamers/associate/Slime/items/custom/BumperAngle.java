@@ -8,6 +8,8 @@ import gamers.associate.Slime.items.base.SpriteType;
 
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
+import org.cocos2d.actions.interval.CCDelayTime;
+import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.math.Vector2;
@@ -105,8 +107,11 @@ public class BumperAngle extends GameItemPhysic {
 	@Override
 	protected void handleContact(ContactInfo item) {
 		Sounds.playEffect(R.raw.bump);
-		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Bump), false);				
-		this.sprite.runAction(animate);
+		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Bump), false);
+		// Delay to see too quick animation
+		CCDelayTime delay = CCDelayTime.action(0.3f);
+		CCSequence seq = CCSequence.actions(animate, delay);
+		this.sprite.runAction(seq);
 		super.handleContact(item);
 	}		
 }
