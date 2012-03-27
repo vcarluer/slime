@@ -533,7 +533,7 @@ public class Red extends GameItemPhysic implements ISelectable {
 		if (this.state == RedState.PrepareAttack) {
 			GameItem item = Level.currentLevel.getStartItem();
 			Sounds.playEffect(R.raw.slimyjump);
-			int dir = this.impulse(item, this, false, 4, 10);
+			int dir = this.impulse(item, this, false, this.getMinImpulse(), this.getMaxImpulse());
 			this.animTurn(dir);
 			this.state = RedState.Attack;
 			
@@ -541,6 +541,22 @@ public class Red extends GameItemPhysic implements ISelectable {
 		}
 	}
 	
+	private int getMaxImpulse() {
+		if (this.isBoss) {
+			return 10;
+		} else {
+			return 6;
+		}
+	}
+
+	private int getMinImpulse() {
+		if (this.isBoss) {
+			return 4;
+		} else {
+			return 2;
+		}
+	}
+
 	private int getDir(GameItem target, GameItem source, boolean goAway) {
 		int dir = 1;
 		if (goAway) {
