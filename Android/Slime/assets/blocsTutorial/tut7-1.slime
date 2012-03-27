@@ -1,30 +1,30 @@
-BlocInfo;0;120;480;480;0;BlocInfo-0;1;;;true;false;false;t
-TimeAttack;-2.0;0.0;0.0;0.0;0.0;0;0
-Sprite;0.0;235.0;80.0;150.0;0.0;tank;tank-main;1
-Polygon;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 10.44416,255.35062 0.18298,94.97582 6.6518,7.41333 17.91309,0.24565 0.17031,7.31853 19.95666,0.0876 -0.18953,-6.75251 17.00321,-0.17723 7.41617,-7.75072 0.18532,-95.91427 -7.981385,-6.73468 -16.965709,-0.0356 L 54.70114,221.72758 48.91585,216.005 0,216 l 0.0543,20.46094 35.12259,0.0986 -0.17044,10.69312 -17.87711,0.0919;false;true;true
-Sprite;80.0;242.0;30.0;30.0;0.0;tank;tank-right;1
-Polygon;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 78.9683,341.80893 6.68272,0.0181 -0.06,7.70085 2.70489,0.1596 2.90897,9.50172 9.01782,-0.0493 0.37952,-5.44022 10.39601,-0.16334 0.0673,-11.38577 -8.41502,-0.1325 0.12133,-14.706 -23.76786,-0.125;false;true;true
-Sprite;31.0;0.0;30.0;236.0;0.0;tank;tank-bottom-filled;1
-Polygon;0.0;0.0;0.0;0.0;0.0;120.0;480.0;M 35.2694,599.7588 54.97481,600 l 0.2247,-214.61624 5.14839,-5.87408 -0.0601,-8.69547 -5.1459,-6.60963 -19.67351,0.15484 -3.92141,5.85219 -0.0184,9.23524 3.90961,6.23102;false;true;true
-Sprite;75.0;64.0;40.0;16.0;0.0;tank;spawn-zone;1
-Polygon;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 75.261915,535.76701 40.000005,0 -8,-16 -24.000005,0;false;false;true
-Spawn;83.0;215.0;24.0;26.0;0.0
-Box_Multitubes;-0.0;0.0;192.0;64.0;0.0;true;true
-Platform_NoSticky;224.0;224.0;480.0;32.0;90.0
-Box_Multitubes;256.0;0.0;192.0;64.0;0.0;true;true
-Platform_Wall;192.0;0.0;64.0;64.0;0.0
-Platform_NoSticky;56.0;328.0;80.0;32.0;90.0
-Platform_NoSticky;32.0;384.0;48.0;32.0;0.0
-Platform_NoSticky;-16.0;432.0;64.0;32.0;90.0
-Star;370.0;432.0;30.0;31.0;0.0
-CircularSaw;56.0;416.0;40.0;40.0;0.0;circularsaw;true
-Sprite;139.0;122.0;32.0;16.0;-48.0;arrows;arrow-green;1;2;0;None;1;true;true;0;false;0
-Sprite;176.0;164.0;32.0;16.0;-48.0;arrows;arrow-green;1;2;0;None;1;true;true;0.25;false;0
-Sprite;214.0;205.0;32.0;16.0;-48.0;arrows;arrow-green;1;2;0;None;1;true;true;0.5;false;0
-Sprite;251.0;247.0;32.0;16.0;-48.0;arrows;arrow-green;1;2;0;None;1;true;true;0.75;false;0
-Sprite;368.0;352.0;32.0;16.0;-90.0;arrows;arrow-green;1;2;0;None;1;true;true;1;false;0
-Sprite;368.0;408.0;32.0;16.0;-90.0;arrows;arrow-green;1;2;0;None;1;true;true;1.25;false;0
-Platform_NoSticky_Corner;0.0;384.0;32.0;32.0;90.0
-Platform_NoSticky_Corner;80.0;384.0;32.0;32.0;-90.0
-Platform_NoSticky_End;80.0;272.0;32.0;32.0;90.0
-Sprite;312.0;96.0;152.0;248.0;0.0;;gestures_tap;1;4;50;None;1;false;true;1;true;0
+BlocInfo;None;0;120;480;480;0;BlocInfo-0;1;;;true;false;false;t
+TimeAttack;None;-2.0;0.0;0.0;0.0;0.0;0;0
+Sprite;None;0.0;235.0;80.0;150.0;0.0;tank;tank-main;1
+Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 10.44416,255.35062 0.18298,94.97582 6.6518,7.41333 17.91309,0.24565 0.17031,7.31853 19.95666,0.0876 -0.18953,-6.75251 17.00321,-0.17723 7.41617,-7.75072 0.18532,-95.91427 -7.981385,-6.73468 -16.965709,-0.0356 L 54.70114,221.72758 48.91585,216.005 0,216 l 0.0543,20.46094 35.12259,0.0986 -0.17044,10.69312 -17.87711,0.0919;false;true;true
+Sprite;None;80.0;242.0;30.0;30.0;0.0;tank;tank-right;1
+Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 78.9683,341.80893 6.68272,0.0181 -0.06,7.70085 2.70489,0.1596 2.90897,9.50172 9.01782,-0.0493 0.37952,-5.44022 10.39601,-0.16334 0.0673,-11.38577 -8.41502,-0.1325 0.12133,-14.706 -23.76786,-0.125;false;true;true
+Sprite;None;31.0;0.0;30.0;236.0;0.0;tank;tank-bottom-filled;1
+Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;M 35.2694,599.7588 54.97481,600 l 0.2247,-214.61624 5.14839,-5.87408 -0.0601,-8.69547 -5.1459,-6.60963 -19.67351,0.15484 -3.92141,5.85219 -0.0184,9.23524 3.90961,6.23102;false;true;true
+Sprite;None;75.0;64.0;40.0;16.0;0.0;tank;spawn-zone;1
+Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 75.261915,535.76701 40.000005,0 -8,-16 -24.000005,0;false;false;true
+Spawn;None;83.0;215.0;24.0;26.0;0.0
+Box_Multitubes;None;-0.0;0.0;192.0;64.0;0.0;true;true
+Platform_NoSticky;None;224.0;224.0;480.0;32.0;90.0
+Box_Multitubes;None;256.0;0.0;192.0;64.0;0.0;true;true
+Platform_Wall;None;192.0;0.0;64.0;64.0;0.0
+Platform_NoSticky;None;56.0;328.0;80.0;32.0;90.0
+Platform_NoSticky;None;32.0;384.0;48.0;32.0;0.0
+Platform_NoSticky;None;-16.0;432.0;64.0;32.0;90.0
+Star;None;370.0;432.0;30.0;31.0;0.0
+CircularSaw;circularsaw;56.0;416.0;40.0;40.0;0.0;true
+Sprite;None;139.0;122.0;32.0;16.0;-48.0;arrows;arrow-green;1;2;0;None;1;true;true;0;false;0
+Sprite;None;176.0;164.0;32.0;16.0;-48.0;arrows;arrow-green;1;2;0;None;1;true;true;0.25;false;0
+Sprite;None;214.0;205.0;32.0;16.0;-48.0;arrows;arrow-green;1;2;0;None;1;true;true;0.5;false;0
+Sprite;None;251.0;247.0;32.0;16.0;-48.0;arrows;arrow-green;1;2;0;None;1;true;true;0.75;false;0
+Sprite;None;368.0;352.0;32.0;16.0;-90.0;arrows;arrow-green;1;2;0;None;1;true;true;1;false;0
+Sprite;None;368.0;408.0;32.0;16.0;-90.0;arrows;arrow-green;1;2;0;None;1;true;true;1.25;false;0
+Platform_NoSticky_Corner;None;0.0;384.0;32.0;32.0;90.0
+Platform_NoSticky_Corner;None;80.0;384.0;32.0;32.0;-90.0
+Platform_NoSticky_End;None;80.0;272.0;32.0;32.0;90.0
+Sprite;None;312.0;96.0;152.0;248.0;0.0;;gestures_tap;1;4;50;None;1;false;true;1;true;0

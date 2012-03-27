@@ -108,15 +108,8 @@ public abstract class ItemDefinition {
 			String[] infos = line.split(infoSep, -1);
 			this.itemType = infos[0];
 			int cpt = 1;
-			if (Util.isNumeric(infos[cpt])) {
-				// Old format, name is not in line definition
-				this.name = None;
-			} 
-			else {
-				this.name = infos[cpt];
-				cpt++;
-			}
-			
+			this.name = infos[cpt];
+			cpt++;
 			this.x = ZeroIfNone(infos[cpt]);
 			cpt++;
 			this.y = ZeroIfNone(infos[cpt]);
