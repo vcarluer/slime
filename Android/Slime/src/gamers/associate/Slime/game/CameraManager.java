@@ -452,7 +452,7 @@ public class CameraManager {
 		float minScaleH = 1 / (this.levelHeight / CGRect.height(this.screenView));
 		this.minScale = Math.max(minScaleW, minScaleH);
 		// max scale 2 for sgs 800*480
-		this.maxScale = this.scaleScreen(Max_Scale);
+		this.maxScale = this.scaleScreen(Max_Scale * SlimeFactory.SGSDensity);
 		this.minFollowScale = 0.5f;
 		this.zoomSpeed = 3.0f;
 		// To take into account new limits
