@@ -166,6 +166,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 				float totalW = w * SlimeFactory.LevelBuilder.getTotalStar();
 				if (totalW > starCountBarWidthMax) {
 					w = starCountBarWidthMax / SlimeFactory.LevelBuilder.getTotalStar();
+					totalW = w * SlimeFactory.LevelBuilder.getTotalStar();
 				}
 				
 				for(int i = 0; i < SlimeFactory.LevelBuilder.getTotalStar(); i++) {					
@@ -230,11 +231,11 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 	}
 	
 	public void setHudStartText(String text) {
+		this.countLabel.setString(text.toUpperCase());
 		this.countX = CCDirector.sharedDirector().winSize().getWidth() - PauseLayer.PaddingX - this.countLabel.getContentSize().width;
 		this.countLabel.setPosition(
 				CGPoint.ccp(this.countX, 
-				CCDirector.sharedDirector().winSize().getHeight() - (starCountHShift + PaddingHCount)));		
-		this.countLabel.setString(text.toUpperCase());		
+				CCDirector.sharedDirector().winSize().getHeight() - (starCountHShift + PaddingHCount)));
 	}
 	
 	public void hideHudText() {

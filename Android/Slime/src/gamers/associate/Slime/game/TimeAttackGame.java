@@ -52,6 +52,13 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	}
 	
 	public void reset()	{
+		this.bonusTaken = 0;
+		this.leftTime = this.startTime;
+		this.isGameOver = false;
+		this.adHiddenTimer = false;
+		this.localRender = 0;	
+		this.adRender = 0;
+		
 		if (this.level != null) {
 			this.level.hideHudText();
 			CCLabel label = this.level.getHudLabel();
@@ -61,12 +68,6 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 			this.setStartTime();
 		}
 		
-		this.bonusTaken = 0;
-		this.leftTime = this.startTime;
-		this.isGameOver = false;
-		this.adHiddenTimer = false;
-		this.localRender = 0;	
-		this.adRender = 0;
 		if (Level.currentLevel != null && Level.currentLevel.getGoal() != null) {
 			Level.currentLevel.getGoal().setActive(this.neededBonus() == 0);
 		}
