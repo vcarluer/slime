@@ -42,6 +42,7 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 	private ArrayList<LaserBeam> beam;
 	
 	private float beamOffset;
+	private CGPoint tmp;
 	
 	public LaserGun(float x, float y, float width, float height,
 			World world, float worldRatio) {
@@ -60,6 +61,7 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 		
 		this.referenceSize.width = Reference_Width;
 		this.referenceSize.height = Reference_Height;
+		this.tmp = CGPoint.zero();
 	}
 	
 	@Override
@@ -169,16 +171,12 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 		if (this.beam == null) {
 			if (this.target != null && this.target != "") {
 				this.beam = new ArrayList<LaserBeam>();
-				float xFire = 0;
-				float yFire = 0;
-				float radAngle = - ccMacros.CC_DEGREES_TO_RADIANS(this.angle);
-				// (x'-xc) = Kc*(x-xc) - Ks*(y-yc)
-				// (y'-yc) = Ks*(x-xc) + Kc*(y-yc)
-				xFire = (float) (Math.cos(radAngle)*((this.position.x - this.width / 2 + this.beamOffset) - this.position.x)) + this.position.x;
-				yFire = (float) (Math.sin(radAngle)*((this.position.x - this.width / 2 + this.beamOffset) - this.position.x)) + this.position.y;
-				CGPoint startFire = CGPoint.make(xFire, yFire);
+				
+				CGPoint startFire = this.getSourcePoint();
 				for (ITrigerable targetBeam : Level.currentLevel.getTrigerables(this.target)) {					
 					LaserBeam b = SlimeFactory.LaserBeam.create(startFire, targetBeam.getPosition(), false);
+					b.setSourceItem(this);
+					b.setTargetItem(targetBeam);
 					this.beam.add(b);
 				}
 			}
@@ -187,12 +185,24 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 		return this.beam;
 	}
 	
+	public CGPoint getSourcePoint() {
+		// (x'-xc) = Kc*(x-xc) - Ks*(y-yc)
+		// (y'-yc) = Ks*(x-xc) + Kc*(y-yc)
+		float radAngle = - ccMacros.CC_DEGREES_TO_RADIANS(this.angle);
+		float xFire = (float) (Math.cos(radAngle)*((this.position.x - this.width / 2 + this.beamOffset) - this.position.x)) + this.position.x;
+		float yFire = (float) (Math.sin(radAngle)*((this.position.x - this.width / 2 + this.beamOffset) - this.position.x)) + this.position.y;
+		this.tmp.x = xFire;
+		this.tmp.y = yFire;
+		return this.tmp;
+	}
+	
 	@Override
 	public void render(float delta) {
 		if (this.getBeam() != null) {			
 			for (LaserBeam b : this.getBeam()) {
 				if (this.isOn) {
 					b.switchOn();
+					b.refreshBeam();
 				}
 				else {
 					b.switchOff();

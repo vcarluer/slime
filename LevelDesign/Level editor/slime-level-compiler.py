@@ -243,6 +243,11 @@ class Smile( inkex.Effect ):
 				print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_target"))+";"+str(child.get("att_interval"))
 				return True;
 				
+			# Director
+			if str(child.get("type")) == 'Director':
+				print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_target"))+";"+str(child.get("att_actionCode"))+";"+str(child.get("att_actionValue"))+";"+str(child.get("att_actionValue2"))+";"+str(child.get("att_actionTime"))+";"+str(child.get("att_inverse"))+";"+str(child.get("att_repeat"))+";"+str(child.get("att_originalDelay"))+";"+str(child.get("att_resetPosition"))+";"+str(child.get("att_delayBefore"))
+				return True;
+				
 			# Standard Item
 			print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)
 			return True;

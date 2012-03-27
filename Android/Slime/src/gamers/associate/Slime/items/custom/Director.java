@@ -9,8 +9,8 @@ public class Director extends GameItem {
 	private SpriteAction action;
 	private boolean isInit;
 	
-	public Director(String name, float x, float y, float width, float height, String target, SpriteAction action) {
-		super(name, x, y, width, height);
+	public Director(float x, float y, float width, float height, String target, SpriteAction action) {
+		super(x, y, width, height);
 		this.setTarget(target);
 		this.setAction(action);
 		this.isInit = false;
@@ -26,11 +26,11 @@ public class Director extends GameItem {
 					if (item instanceof GameItemCocos) {
 						GameItemCocos cocos = (GameItemCocos) item;
 						this.getAction().apply(cocos.getSprite());
+						// At least one is apply for init
+						this.isInit = true;
 					}
 				}
 			}
-			
-			this.isInit = true;
 		}
 	}
 

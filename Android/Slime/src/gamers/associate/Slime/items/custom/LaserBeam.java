@@ -4,7 +4,9 @@ import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Util;
+import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.GameItemPhysic;
+import gamers.associate.Slime.items.base.ITrigerable;
 import gamers.associate.Slime.items.base.SpriteType;
 
 import javax.microedition.khronos.opengles.GL10;
@@ -29,6 +31,8 @@ public class LaserBeam extends GameItemPhysic {
 	private boolean isOn;
 	private CGPoint ref;
 	private CGPoint diff;
+	private ITrigerable targetItem;
+	private LaserGun sourceItem;
 	
 	public LaserBeam(float x, float y, float width, float height,
 			World world, float worldRatio) {
@@ -58,6 +62,18 @@ public class LaserBeam extends GameItemPhysic {
 		if (this.body != null) {
 			this.body.setActive(this.isOn);
 		}
+	}
+	
+	public void refreshBeam() {
+		if (this.sourceItem != null) {
+			this.source = this.sourceItem.getSourcePoint();
+		}
+		
+		if (this.targetItem != null) {
+			this.target = this.targetItem.getPosition();
+		}
+		
+		this.refresh();
 	}
 	
 	private void refresh() {
@@ -166,5 +182,21 @@ public class LaserBeam extends GameItemPhysic {
 		}
 		
 		super.draw(gl);
+	}
+
+	public ITrigerable getTargetItem() {
+		return targetItem;
+	}
+
+	public void setTargetItem(ITrigerable targetItem) {
+		this.targetItem = targetItem;
+	}
+
+	public LaserGun getSourceItem() {
+		return sourceItem;
+	}
+
+	public void setSourceItem(LaserGun sourceItem) {
+		this.sourceItem = sourceItem;
 	}
 }

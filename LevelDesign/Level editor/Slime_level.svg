@@ -155,9 +155,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.75683597"
-     inkscape:cx="-397.50199"
-     inkscape:cy="462.71387"
+     inkscape:zoom="3.0273439"
+     inkscape:cx="-296.79141"
+     inkscape:cy="324.42363"
      inkscape:document-units="px"
      inkscape:current-layer="Template"
      showgrid="true"
@@ -1600,6 +1600,25 @@
          id="tspan3300-4-9"
          x="-288"
          y="248">Time</tspan></text>
+    <rect
+       style="fill:#03ff00;fill-opacity:1;stroke:none;display:inline"
+       id="director"
+       width="16"
+       height="16"
+       x="-232"
+       y="264"
+       type="Director"
+       att_target="target"
+       att_name="None"
+       att_actionCode="0"
+       att_actionValue="0"
+       att_actionValue2="0"
+       att_actionTime="0"
+       att_inverse="false"
+       att_repeat="false"
+       att_originalDelay="0"
+       att_resetPosition="false"
+       att_delayBefore="0" />
   </g>
   <g
      inkscape:groupmode="layer"

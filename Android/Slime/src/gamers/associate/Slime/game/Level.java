@@ -1288,9 +1288,12 @@ public class Level implements IGameItemHandler {
 		
 	public List<GameItem> getItemsByName(String name) {
 		this.tempList.clear();
-		for(GameItem item : this.items.values()) {
-			if (item.getName().toUpperCase().equals(name.toUpperCase())) {
-				this.tempList.add(item);
+		if (name != null) {
+			for(GameItem item : this.items.values()) {
+				String itemName = item.getName();
+				if (itemName != null && itemName.toUpperCase().equals(name.toUpperCase())) {
+					this.tempList.add(item);
+				}
 			}
 		}
 		

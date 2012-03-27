@@ -147,7 +147,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1145,5 +1145,24 @@
        att_delay="0"
        att_isOn="true"
        att_name="becbunsen" />
+    <rect
+       style="fill:#03ff00;fill-opacity:1;stroke:none;display:inline"
+       id="director"
+       width="16"
+       height="16"
+       x="112"
+       y="176"
+       type="Director"
+       att_target="target"
+       att_name="None"
+       att_actionCode="7"
+       att_actionValue="100"
+       att_actionValue2="0"
+       att_actionTime="2"
+       att_inverse="true"
+       att_repeat="true"
+       att_originalDelay="0"
+       att_resetPosition="false"
+       att_delayBefore="0" />
   </g>
 </svg>

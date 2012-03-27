@@ -8,6 +8,7 @@ import gamers.associate.Slime.items.custom.BumperAngleFactory;
 import gamers.associate.Slime.items.custom.ButtonFactory;
 import gamers.associate.Slime.items.custom.CircularSawFactory;
 import gamers.associate.Slime.items.custom.CocosFactory;
+import gamers.associate.Slime.items.custom.DirectorFactory;
 import gamers.associate.Slime.items.custom.EvacuationPlugfactory;
 import gamers.associate.Slime.items.custom.GateFactory;
 import gamers.associate.Slime.items.custom.GoalPortalFactory;
@@ -85,6 +86,7 @@ public abstract class SlimeFactory {
 	public static LiquidSurfaceFactory LiquidSurface = new LiquidSurfaceFactory();
 	public static TriggerTimeFactory TriggerTime = new TriggerTimeFactory();
 	public static EvacuationPlugfactory EvacuationPlug = new EvacuationPlugfactory();
+	public static DirectorFactory Director = new DirectorFactory();
 	
 	public static StarCounterFactory StarCounter = new StarCounterFactory(); // Not attached in attach All but in HudLayer	
 		
@@ -123,6 +125,7 @@ public abstract class SlimeFactory {
 		LiquidSurface.attach(level, attachNode, attachWorld, attachWorldRatio);
 		TriggerTime.attach(level);
 		EvacuationPlug.attach(level, attachNode, attachWorld, attachWorldRatio);
+		Director.attach(level);
 		
 		SpriteSheetFactory.attachAll(attachNode);
 		isAttached = true;
@@ -156,6 +159,7 @@ public abstract class SlimeFactory {
 		TriggerTime.detach();
 		StarCounter.detach();
 		EvacuationPlug.detach();
+		Director.detach();
 		
 		LevelGeneratorCorridor2.detach();
 		LevelGeneratorRectangle2.detach();
