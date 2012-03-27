@@ -9,11 +9,10 @@ public class CircularSawDef extends ItemDefinition {
 	public static String Handled_Def = "CircularSaw";
 	
 	private boolean isOn;
-	private String name;
 	
 	@Override
 	public void createItem(Level level) {
-		SlimeFactory.CircularSaw.createBL(this.getX(), this.getY(), this.width, this.height, this.getIdPre() + this.name, this.isOn).setAngle(this.angle);
+		SlimeFactory.CircularSaw.createBL(this.getX(), this.getY(), this.width, this.height, this.getUName(), this.isOn).setAngle(this.angle);
 	}
 
 	@Override
@@ -23,8 +22,7 @@ public class CircularSawDef extends ItemDefinition {
 
 	@Override
 	protected void parseNext(String[] infos, int start) {
-		this.name = infos[start];
-		this.isOn = Boolean.valueOf(infos[start + 1]).booleanValue();		
+		this.isOn = Boolean.valueOf(infos[start]).booleanValue();		
 	}
 
 	@Override
@@ -35,7 +33,6 @@ public class CircularSawDef extends ItemDefinition {
 
 	@Override
 	protected String writeNext(String line) {
-		line = this.addValue(line, this.name);
 		line = this.addValue(line, String.valueOf(this.isOn));
 		return line;
 	}
@@ -53,7 +50,6 @@ public class CircularSawDef extends ItemDefinition {
 	@Override
 	protected void setValuesNext(GameItem item) {
 		CircularSaw saw = (CircularSaw)item;
-		this.name = saw.getName();
 		this.isOn = saw.getStartOn();		
 	}
 }

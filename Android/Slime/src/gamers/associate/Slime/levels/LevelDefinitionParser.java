@@ -5,6 +5,7 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.TimeAttackGame;
 import gamers.associate.Slime.items.base.GameItem;
+import gamers.associate.Slime.items.custom.EvacuationPlug;
 import gamers.associate.Slime.items.custom.LevelEnd;
 import gamers.associate.Slime.levels.itemdef.BecBunsenDef;
 import gamers.associate.Slime.levels.itemdef.BoxDef;
@@ -100,6 +101,7 @@ public class LevelDefinitionParser extends LevelDefinition
 	
 	private void defineIgnoreClasses() {
 		this.ignoredClasses.add(LevelEnd.class);
+		this.ignoredClasses.add(EvacuationPlug.class);
 	}
 
 	protected void createItemDefinitions() {

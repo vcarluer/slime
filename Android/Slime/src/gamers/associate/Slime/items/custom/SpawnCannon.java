@@ -101,7 +101,7 @@ public class SpawnCannon extends GameItemPhysic {
 			CGPoint spawn = this.getSpawnPoint();
 			/*slimy = SlimeFactory.Slimy.createGrow(spawn.x, spawn.y, 1);
 			slimy.setTargetGrowDif(this.slimyCounter - 1);*/
-			slimy = SlimeFactory.Slimy.createJump(spawn.x, spawn.y, 1);
+			slimy = SlimeFactory.Slimy.createJump("Cannon", spawn.x, spawn.y, 1);
 			Vector2 pos = slimy.getBody().getPosition();			
 			this.worldImpulse.x = (this.targetImpulse.x  / this.worldRatio);
 			this.worldImpulse.y = (this.targetImpulse.y / this.worldRatio);

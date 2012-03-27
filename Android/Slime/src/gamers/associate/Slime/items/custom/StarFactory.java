@@ -32,10 +32,6 @@ public class StarFactory extends GameItemPhysicFactory<Star> {
 		item.waitAnim();		
 	}
 	
-	public Star createBL(float x, float y, float width, float height) {
-		return this.create(x + width / 2, y + height / 2, width, height);
-	}
-	
 	public float getStarReferenceWidth() {
 		return Star.Reference_Width;
 	}

@@ -22,6 +22,6 @@ public class BlocDefinitionFill extends BlocDefinitionHardCoded {
 	@Override
 	public void buildLevel(Level level, int xOffset, int yOffset) {
 		setOffset(xOffset, yOffset);
-		SlimeFactory.Platform.createWallBL(this.getX(0), this.getY(0), BlocDefinition.BlocWidth, BlocDefinition.BlocHeight);
+		SlimeFactory.Platform.createWallBL("Fill", this.getX(0), this.getY(0), BlocDefinition.BlocWidth, BlocDefinition.BlocHeight);
 	}
 }

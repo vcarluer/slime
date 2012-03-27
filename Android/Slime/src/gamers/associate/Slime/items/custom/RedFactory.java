@@ -32,14 +32,14 @@ public class RedFactory extends GameItemPhysicFactory<Red> {
 		item.waitAnimReal();
 	}
 	
-	public Red createBL(float x, float y) {
+	public Red createBL(String name, float x, float y) {
 		float width = Red.Default_Width;
 		float height = Red.Default_Height;
-		return this.create(x + width / 2, y + height / 2, width, height);
+		return this.create(name, x + width / 2, y + height / 2, width, height);
 	}
 	
-	public Red createBL(float x, float y, float width, float height, boolean isBoss) {
+	public Red createBL(String name, float x, float y, float width, float height, boolean isBoss) {
 		this.isBoss = isBoss;
-		return this.create(x + width / 2, y + height / 2, width, height);
+		return this.create(name, x + width / 2, y + height / 2, width, height);
 	}
 }

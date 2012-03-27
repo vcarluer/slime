@@ -39,59 +39,63 @@ public class PlatformFactory extends GameItemPhysicFactory<Platform>{
 	}
 	
 	@Override
-	public Platform createBL(float x, float y, float width, float height) {		
-		return this.create(x + width / 2, y + height / 2, width, height, Platform.Sticky);
+	public Platform createBL(String name, float x, float y, float width, float height) {		
+		return this.create(name, x + width / 2, y + height / 2, width, height, Platform.Sticky);
 	}
 	
-	public Platform create(float x, float y, float width, float height, int platformType) {		
+	public Platform create(String name, float x, float y, float width, float height, int platformType) {		
 		this.currentType = platformType;
 		this.currentMove = false;
-		Platform platform = this.create(x, y, width, height);		
+		Platform platform = this.create(name, x, y, width, height);		
 		return platform;
 	}
+	
+	public Platform create(float x, float y, float width, float height, int platformType) {
+		return this.create(null, x, y, width, height, platformType);		
+	}
 		
-	public Platform createStickyBL(float x, float y, float width, float height) {
-		return this.create(x + width / 2, y + height / 2, width, height, Platform.Sticky);
+	public Platform createStickyBL(String name, float x, float y, float width, float height) {
+		return this.create(name, x + width / 2, y + height / 2, width, height, Platform.Sticky);
 	}
 	
-	public Platform createBumpBL(float x, float y, float width, float height) {
-		return this.create(x + width / 2, y + height / 2, width, height, Platform.Bump);
+	public Platform createBumpBL(String name, float x, float y, float width, float height) {
+		return this.create(name, x + width / 2, y + height / 2, width, height, Platform.Bump);
 	}
 	
-	public Platform createNoStickyBL(float x, float y, float width, float height) {
-		return this.create(x + width / 2, y + height / 2, width, height, Platform.NoSticky);
+	public Platform createNoStickyBL(String name, float x, float y, float width, float height) {
+		return this.create(name, x + width / 2, y + height / 2, width, height, Platform.NoSticky);
 	}
 	
-	public Platform createIcyBL(float x, float y, float width, float height) {
-		return this.create(x + width / 2, y + height / 2, width, height, Platform.Icy);
+	public Platform createIcyBL(String name, float x, float y, float width, float height) {
+		return this.create(name, x + width / 2, y + height / 2, width, height, Platform.Icy);
 	}
 	
-	public Platform createWallBL(float x, float y, float width, float height) {
-		return this.create(x + width / 2, y + height / 2, width, height, Platform.Wall);
+	public Platform createWallBL(String name, float x, float y, float width, float height) {
+		return this.create(name, x + width / 2, y + height / 2, width, height, Platform.Wall);
 	}
 	
-	public Platform createCornerBL(float x, float y, float width, float height) {
-		return this.create(x + width / 2, y + height / 2, width, height, Platform.Corner);
+	public Platform createCornerBL(String name, float x, float y, float width, float height) {
+		return this.create(name, x + width / 2, y + height / 2, width, height, Platform.Corner);
 	}
 	
-	public Platform createTBL(float x, float y, float width, float height) {
-		return this.create(x + width / 2, y + height / 2, width, height, Platform.T);
+	public Platform createTBL(String name, float x, float y, float width, float height) {
+		return this.create(name, x + width / 2, y + height / 2, width, height, Platform.T);
 	}
 	
-	public Platform createCrossBL(float x, float y, float width, float height) {
-		return this.create(x + width / 2, y + height / 2, width, height, Platform.Cross);
+	public Platform createCrossBL(String name, float x, float y, float width, float height) {
+		return this.create(name, x + width / 2, y + height / 2, width, height, Platform.Cross);
 	}
 	
-	public Platform createEndBL(float x, float y, float width, float height) {
-		return this.create(x + width / 2, y + height / 2, width, height, Platform.End);
+	public Platform createEndBL(String name, float x, float y, float width, float height) {
+		return this.create(name, x + width / 2, y + height / 2, width, height, Platform.End);
 	}
 	
-	public Platform createNoStickyCornerBL(float x, float y, float width, float height) {
-		return this.create(x + width / 2, y + height / 2, width, height, Platform.NoStickyCorner);
+	public Platform createNoStickyCornerBL(String name, float x, float y, float width, float height) {
+		return this.create(name, x + width / 2, y + height / 2, width, height, Platform.NoStickyCorner);
 	}
 	
-	public Platform createNoStickyEndBL(float x, float y, float width, float height) {
-		return this.create(x + width / 2, y + height / 2, width, height, Platform.NoStickyEnd);
+	public Platform createNoStickyEndBL(String name, float x, float y, float width, float height) {
+		return this.create(name, x + width / 2, y + height / 2, width, height, Platform.NoStickyEnd);
 	}
 	
 	public void setCurrentType(int platformType) {

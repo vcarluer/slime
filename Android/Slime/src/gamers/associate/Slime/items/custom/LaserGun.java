@@ -37,8 +37,6 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 	private boolean isOn;
 	
 	private boolean startOn;
-	
-	private String name;
 	private String target;
 	
 	private ArrayList<LaserBeam> beam;
@@ -62,8 +60,6 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 		
 		this.referenceSize.width = Reference_Width;
 		this.referenceSize.height = Reference_Height;
-		
-		this.name = "";
 	}
 	
 	@Override
@@ -135,14 +131,6 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 		CCRepeatForever repeat = CCRepeatForever.action(animate);
 		this.sprite.runAction(repeat);
 		this.isOn = false;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public void trigger(Object source, String data) {

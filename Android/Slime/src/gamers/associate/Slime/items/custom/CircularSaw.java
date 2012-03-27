@@ -31,8 +31,6 @@ public class CircularSaw extends GameItemPhysic implements ITrigerable {
 	
 	private boolean startOn;
 	
-	private String name;
-	
 	public CircularSaw(float x, float y, float width, float height,
 			World world, float worldRatio) {
 		super(x, y, width, height, world, worldRatio);
@@ -48,8 +46,6 @@ public class CircularSaw extends GameItemPhysic implements ITrigerable {
 		
 		this.referenceSize.width = Reference_Width;
 		this.referenceSize.height = Reference_Height;
-		
-		this.name = "";
 	}
 	
 	@Override
@@ -151,14 +147,6 @@ public class CircularSaw extends GameItemPhysic implements ITrigerable {
 				((Slimy)contact.getContactWith()).slice();
 			}
 		}
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public void trigger(Object source, String data) {

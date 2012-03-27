@@ -2,6 +2,7 @@ package gamers.associate.Slime.levels.itemdef;
 
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.levels.generator.BlocDefinition;
 
@@ -22,6 +23,8 @@ public abstract class ItemDefinition {
 	protected float width;
 	protected float height;
 	protected float angle;
+	protected String name;
+	
 	protected ArrayList<String> typesHandled;
 	protected ArrayList<Class> classHandled;	
 	
@@ -104,12 +107,27 @@ public abstract class ItemDefinition {
 		{
 			String[] infos = line.split(infoSep, -1);
 			this.itemType = infos[0];
-			this.x = ZeroIfNone(infos[1]);
-			this.y = ZeroIfNone(infos[2]);
-			this.width = ZeroIfNone(infos[3]);
-			this.height = ZeroIfNone(infos[4]);
-			this.angle = ZeroIfNone(infos[5]);
-			this.parseNext(infos, 6);
+			int cpt = 1;
+			if (Util.isNumeric(infos[cpt])) {
+				// Old format, name is not in line definition
+				this.name = None;
+			} 
+			else {
+				this.name = infos[cpt];
+				cpt++;
+			}
+			
+			this.x = ZeroIfNone(infos[cpt]);
+			cpt++;
+			this.y = ZeroIfNone(infos[cpt]);
+			cpt++;
+			this.width = ZeroIfNone(infos[cpt]);
+			cpt++;
+			this.height = ZeroIfNone(infos[cpt]);
+			cpt++;
+			this.angle = ZeroIfNone(infos[cpt]);
+			cpt++;
+			this.parseNext(infos, cpt);
 		}
 		catch (Exception ex) {
 			Log.e(Slime.TAG, "BAD FORMAT for item definition " + this.getType());
@@ -147,6 +165,14 @@ public abstract class ItemDefinition {
 	
 	protected String getIdPre() {
 		return this.idPre;
+	}
+	
+	protected String getUName() {
+		return this.getUString(this.name);
+	}
+	
+	protected String getUString(String original) {
+		return this.idPre + original;
 	}
 
 	public void setOffset(float xOffset, float yOffset) {
@@ -203,6 +229,7 @@ public abstract class ItemDefinition {
 		try {
 			String line = "";		
 			line = this.addValue(line, this.itemType);
+			line = this.addValue(line, this.name);
 			line = this.addValue(line, String.valueOf(this.x));
 			line = this.addValue(line, String.valueOf(this.y));
 			line = this.addValue(line, String.valueOf(this.width));
@@ -233,6 +260,7 @@ public abstract class ItemDefinition {
 
 	public final void setValues(GameItem item) {		
 		this.itemType = this.getItemType(item);
+		this.name = item.getName();
 		this.x = item.getPosition().x;
 		this.y = item.getPosition().y;
 		this.width = item.getWidth();
@@ -256,5 +284,13 @@ public abstract class ItemDefinition {
 	protected void transformBL() {
 		this.x = this.x - this.width / 2;
 		this.y = this.y - this.height / 2;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

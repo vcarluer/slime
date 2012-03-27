@@ -15,13 +15,23 @@ public class GameItem {
 	protected float height;
 	protected boolean isPaused;
 	protected boolean isActive = true;
+	private String name;
 	
-	public GameItem(float x, float y, float width, float height) {		
+	public GameItem(float x, float y, float width, float height) {
+		this(null, x, y, width, height);
+	}
+	
+	public GameItem(String name, float x, float y, float width, float height) {		
 		this.id = UUID.randomUUID();		
 		this.position = CGPoint.make(x, y);		
 		this.angle = 0f;		
 		this.width = width;
-		this.height = height;		
+		this.height = height;
+		if (name != null) {
+			this.name = name;
+		} else {
+			this.name = "";
+		}		
 	}
 	
 	public UUID getId() {
@@ -96,5 +106,13 @@ public class GameItem {
 	
 	public float getWidth() {
 		return this.width;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

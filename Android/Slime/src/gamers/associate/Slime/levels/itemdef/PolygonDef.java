@@ -104,7 +104,7 @@ public class PolygonDef extends ItemDefinition {
 			polyType = PhysicPolygon.Empty;
 		}
 		
-		SlimeFactory.Polygon.create(this.getX(), this.getY(), this.width, this.height, this.isdynamic, realPoints, polyType, this.isStickable);
+		SlimeFactory.Polygon.create(this.getUName(), this.getX(), this.getY(), this.width, this.height, this.isdynamic, realPoints, polyType, this.isStickable);
 	}
 
 	@Override

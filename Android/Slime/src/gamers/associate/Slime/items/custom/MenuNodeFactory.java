@@ -57,7 +57,7 @@ public class MenuNodeFactory extends GameItemCocosFactory<MenuNode> {
 	public MenuNode createBL(float x, float y, float width, float height, 
 			String name, String target,
 			String connection1, String connection2, String connection3, String connection4) {
-		return this.create(x + width / 2, y + height / 2, width, height, name, target, connection1, connection2, connection3, connection4);
+		return this.create(x + width / 2, y + height / 2, width, height, name, target, connection1, connection2, connection3, connection4);				
 	}
 	
 	/* (non-Javadoc)

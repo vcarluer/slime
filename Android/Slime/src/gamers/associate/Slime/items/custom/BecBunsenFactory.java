@@ -36,8 +36,7 @@ public class BecBunsenFactory extends GameItemPhysicFactory<BecBunsen>{
 			this.isOn = isOn;
 			this.delay = i / 2f;
 
-			BecBunsen becBunsen = super.create(x + i * width, y, width, height);
-			becBunsen.setName(name);				
+			BecBunsen becBunsen = super.create(name, x + i * width, y, width, height);
 			created[i] = becBunsen;
 		}
 				

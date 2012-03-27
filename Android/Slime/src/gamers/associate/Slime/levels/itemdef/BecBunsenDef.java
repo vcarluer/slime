@@ -10,11 +10,10 @@ public class BecBunsenDef extends ItemDefinition {
 	
 	private boolean isOn;
 	private float delay;
-	private String name;
 	
 	@Override
 	public void createItem(Level level) {
-		SlimeFactory.BecBunsen.createBL(this.getX(), this.getY(), this.width, this.height, this.getIdPre() + this.name, this.delay, this.isOn).setAngle(this.angle);		
+		SlimeFactory.BecBunsen.createBL(this.getX(), this.getY(), this.width, this.height, this.getUName(), this.delay, this.isOn).setAngle(this.angle);		
 	}
 
 	@Override
@@ -26,7 +25,6 @@ public class BecBunsenDef extends ItemDefinition {
 	protected void parseNext(String[] infos, int start) {
 		this.isOn = Boolean.valueOf(infos[start]).booleanValue();
 		this.delay = Float.valueOf(infos[start + 1]).floatValue();
-		this.name = infos[start + 2];
 	}
 
 	@Override
@@ -38,7 +36,6 @@ public class BecBunsenDef extends ItemDefinition {
 	protected String writeNext(String line) {
 		line = this.addValue(line, String.valueOf(this.isOn));
 		line = this.addValue(line, String.valueOf(this.delay));
-		line = this.addValue(line, String.valueOf(this.name));
 		
 		return line;
 	}
@@ -53,8 +50,7 @@ public class BecBunsenDef extends ItemDefinition {
 		BecBunsen bec = (BecBunsen)item;
 		
 		this.isOn = bec.getStartOn();
-		this.delay = bec.getAnimDelay();
-		this.name = bec.getName();		
+		this.delay = bec.getAnimDelay();	
 	}
 
 	@Override

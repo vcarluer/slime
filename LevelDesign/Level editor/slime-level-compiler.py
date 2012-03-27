@@ -56,14 +56,14 @@ class Smile( inkex.Effect ):
 			if str(child.get("type")) == 'LevelInfo':
 				self.__yReference = round(float(child.get("y")))
 				self.__heightReference = round(float(child.get("height")))
-				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(child.get("y"))+";"+str(child.get("width"))+";"+str(child.get("height"))+";0;"+str(child.get("att_maxDimension"))
+				print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(child.get("x"))+";"+str(child.get("y"))+";"+str(child.get("width"))+";"+str(child.get("height"))+";0;"+str(child.get("att_maxDimension"))
 				return True;
 			
 			# BlocInfo
 			if str(child.get("type")) == 'BlocInfo':
 				self.__yReference = round(float(child.get("y")))
 				self.__heightReference = round(float(child.get("height")))
-				print  str(child.get("type"))+";"+str(child.get("x"))+";"+str(child.get("y"))+";"+str(child.get("width"))+";"+str(child.get("height"))+";0;"+str(child.get("id"))+";"+str(child.get("att_complexity"))+";"+str(child.get("att_entries"))+";"+str(child.get("att_exits"))+";"+str(child.get("att_isStart"))+";"+str(child.get("att_isEnd"))+";"+str(child.get("att_isBoss"))+";"+str(child.get("att_openFaces"))
+				print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(child.get("x"))+";"+str(child.get("y"))+";"+str(child.get("width"))+";"+str(child.get("height"))+";0;"+str(child.get("id"))+";"+str(child.get("att_complexity"))+";"+str(child.get("att_entries"))+";"+str(child.get("att_exits"))+";"+str(child.get("att_isStart"))+";"+str(child.get("att_isEnd"))+";"+str(child.get("att_isBoss"))+";"+str(child.get("att_openFaces"))
 				return True;
 			
 			
@@ -127,27 +127,27 @@ class Smile( inkex.Effect ):
 
 			# TimeAttack
 			if str(child.get("type")) == 'TimeAttack':
-				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_levelTime"))+";"+str(child.get("att_criticTime"))
+				print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_levelTime"))+";"+str(child.get("att_criticTime"))
 				return True;
 			
 			# BecBunsen
 			if str(child.get("type")) == 'BecBunsen':
-				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_isOn"))+";"+str(child.get("att_delay"))+";"+str(child.get("att_name"))
+				print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_isOn"))+";"+str(child.get("att_delay"))
 				return True;
 
 			# Button
 			if str(child.get("type")) == 'Button':
-				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_target"))+";"+str(child.get("att_resetTime"))
+				print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_target"))+";"+str(child.get("att_resetTime"))
 				return True;
 				
-			# Button
+			# CircularSaw
 			if str(child.get("type")) == 'CircularSaw':
-				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_name"))+";"+str(child.get("att_isOn"))
+				print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_isOn"))
 				return True;
 				
 			# MenuNode
 			if str(child.get("type")) == 'MenuNode':
-				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("id"))+";"+str(child.get("att_targetLevel"))+";"+str(child.get("att_targetN1"))+";"+str(child.get("att_targetN2"))+";"+str(child.get("att_targetN3"))+";"+str(child.get("att_targetN4"))
+				print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("id"))+";"+str(child.get("att_targetLevel"))+";"+str(child.get("att_targetN1"))+";"+str(child.get("att_targetN2"))+";"+str(child.get("att_targetN3"))+";"+str(child.get("att_targetN4"))
 				return True;
 			
 			# Polygon
@@ -193,58 +193,58 @@ class Smile( inkex.Effect ):
 				# if "A " in path:
 				# 	path = path.replace("A ", "")
 					
-				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(self.__yReference)+";"+str(self.__heightReference)+";"+path+";"+str(child.get("att_isDynamic"))+";"+str(child.get("att_isStickable"))+";"+str(child.get("att_isEmpty"))
+				print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(self.__yReference)+";"+str(self.__heightReference)+";"+path+";"+str(child.get("att_isDynamic"))+";"+str(child.get("att_isStickable"))+";"+str(child.get("att_isEmpty"))
 				
 				return True;
 			
 			# LaserGun
 			if str(child.get("type")) == 'LaserGun':
-				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_name"))+";"+str(child.get("att_target"))+";"+str(child.get("att_isOn"))
+				print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_target"))+";"+str(child.get("att_isOn"))
 				return True;
 
 			# Target
 			if str(child.get("type")) == 'Target':
-				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_name"))
+				print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)
 				return True;
 			
 			# Boxes
 			if str(child.get("type")) == 'Box_Tube':
-				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_isStatic"))+";"+str(child.get("att_isStickable"))
+				print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_isStatic"))+";"+str(child.get("att_isStickable"))
 				return True;
 			if str(child.get("type")) == 'Box_Multitubes':
-				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_isStatic"))+";"+str(child.get("att_isStickable"))
+				print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_isStatic"))+";"+str(child.get("att_isStickable"))
 				return True;
 				
 			if str(child.get("type")) == 'Box_GlassBox':
-				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_isStatic"))+";"+str(child.get("att_isStickable"))
+				print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_isStatic"))+";"+str(child.get("att_isStickable"))
 				return True;
 				
 			if str(child.get("type")) == 'Box_Bottle':
-				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_isStatic"))+";"+str(child.get("att_isStickable"))
+				print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_isStatic"))+";"+str(child.get("att_isStickable"))
 				return True;
 				
 			# Sprites
 			if str(child.get("type")) == 'Sprite':
-				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_plist"))+";"+str(child.get("att_frameName"))+";"+str(child.get("att_frameCount"))
+				print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_plist"))+";"+str(child.get("att_frameName"))+";"+str(child.get("att_frameCount"))
 				return True;
 				
 			# Sprites action
 			if str(child.get("type")) == 'SpriteAction':
-				print  "Sprite;"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_plist"))+";"+str(child.get("att_frameName"))+";"+str(child.get("att_frameCount"))+";"+str(child.get("att_actionCode"))+";"+str(child.get("att_actionValue"))+";"+str(child.get("att_actionValue2"))+";"+str(child.get("att_actionTime"))+";"+str(child.get("att_inverse"))+";"+str(child.get("att_repeat"))+";"+str(child.get("att_originalDelay"))+";"+str(child.get("att_resetPosition"))+";"+str(child.get("att_delayBefore"))
+				print  "Sprite;"+str(child.get("att_name"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_plist"))+";"+str(child.get("att_frameName"))+";"+str(child.get("att_frameCount"))+";"+str(child.get("att_actionCode"))+";"+str(child.get("att_actionValue"))+";"+str(child.get("att_actionValue2"))+";"+str(child.get("att_actionTime"))+";"+str(child.get("att_inverse"))+";"+str(child.get("att_repeat"))+";"+str(child.get("att_originalDelay"))+";"+str(child.get("att_resetPosition"))+";"+str(child.get("att_delayBefore"))
 				return True;
 			
 			# Red
 			if str(child.get("type")) == 'Red' or str(child.get("type")) == 'MiniRed':
-				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_isBoss"))+";"+str(child.get("att_life"))
+				print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_isBoss"))+";"+str(child.get("att_life"))
 				return True;
 			
 			# Trigger time
 			if str(child.get("type")) == 'Trigger_Time':
-				print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_target"))+";"+str(child.get("att_interval"))
+				print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_target"))+";"+str(child.get("att_interval"))
 				return True;
 				
 			# Standard Item
-			print  str(child.get("type"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)
+			print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)
 			return True;
 	
 	def affect(self, args=sys.argv[1:]):

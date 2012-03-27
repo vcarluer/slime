@@ -21,47 +21,47 @@ public class PlatformDef extends ItemDefinition {
 	@Override
 	public void createItem(Level level) {		
 		if (this.itemType.toUpperCase().equals(Handled_Platform.toUpperCase())) {
-			SlimeFactory.Platform.createBL(this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
+			SlimeFactory.Platform.createBL(this.getUName(), this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
 		}
 		
 		if (this.itemType.toUpperCase().equals(Handled_Bumper.toUpperCase())) {
-			SlimeFactory.Platform.createBumpBL(this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
+			SlimeFactory.Platform.createBumpBL(this.getUName(), this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
 		}
 		
 		if (this.itemType.toUpperCase().equals(Handled_NoSticky.toUpperCase())) {
-			SlimeFactory.Platform.createNoStickyBL(this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
+			SlimeFactory.Platform.createNoStickyBL(this.getUName(), this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
 		}
 		
 		if (this.itemType.toUpperCase().equals(Handled_Ice.toUpperCase())) {
-			SlimeFactory.Platform.createIcyBL(this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
+			SlimeFactory.Platform.createIcyBL(this.getUName(), this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
 		}
 		
 		if (this.itemType.toUpperCase().equals(Handled_Wall.toUpperCase())) {
-			SlimeFactory.Platform.createWallBL(this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
+			SlimeFactory.Platform.createWallBL(this.getUName(), this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
 		}
 		
 		if (this.itemType.toUpperCase().equals(Handled_Corner.toUpperCase())) {
-			SlimeFactory.Platform.createCornerBL(this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
+			SlimeFactory.Platform.createCornerBL(this.getUName(), this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
 		}
 		
 		if (this.itemType.toUpperCase().equals(Handled_T.toUpperCase())) {
-			SlimeFactory.Platform.createTBL(this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
+			SlimeFactory.Platform.createTBL(this.getUName(), this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
 		}
 		
 		if (this.itemType.toUpperCase().equals(Handled_Cross.toUpperCase())) {
-			SlimeFactory.Platform.createCrossBL(this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
+			SlimeFactory.Platform.createCrossBL(this.getUName(), this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
 		}
 		
 		if (this.itemType.toUpperCase().equals(Handled_End.toUpperCase())) {
-			SlimeFactory.Platform.createEndBL(this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
+			SlimeFactory.Platform.createEndBL(this.getUName(), this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
 		}
 		
 		if (this.itemType.toUpperCase().equals(Handled_NoSticky_Corner.toUpperCase())) {
-			SlimeFactory.Platform.createNoStickyCornerBL(this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
+			SlimeFactory.Platform.createNoStickyCornerBL(this.getUName(), this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
 		}
 		
 		if (this.itemType.toUpperCase().equals(Handled_NoSticky_End.toUpperCase())) {
-			SlimeFactory.Platform.createNoStickyEndBL(this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
+			SlimeFactory.Platform.createNoStickyEndBL(this.getUName(), this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
 		}
 	}
 

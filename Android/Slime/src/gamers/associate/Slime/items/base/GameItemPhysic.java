@@ -29,8 +29,12 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 	private boolean bodyCategorySwitched;
 	private Vector2 transformVector;
 	
-	public GameItemPhysic(float x, float y, float width, float height, World world, float worldRatio) {		
-		super(x, y, width, height, world, worldRatio);		
+	public GameItemPhysic(float x, float y, float width, float height, World world, float worldRatio) {
+		this(null, x, y, width, height, world, worldRatio);
+	}
+	
+	public GameItemPhysic(String name, float x, float y, float width, float height, World world, float worldRatio) {		
+		super(name, x, y, width, height, world, worldRatio);		
 		this.bodyWidth = this.width;
 		this.bodyHeight = this.height;
 		this.contacts = new ArrayList<ContactInfo>();

@@ -12,7 +12,7 @@ public class TriggerTimeFactory extends GameItemFactory<TriggerTime> {
 		return new TriggerTime(x, y, width, height, this.target, this.interval);
 	}
 	
-	public TriggerTime create(String target, float interval) {
+	public TriggerTime create(String name, String target, float interval) {
 		this.target = target;
 		this.interval = interval;
 		return this.create();

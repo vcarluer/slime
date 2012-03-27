@@ -11,8 +11,7 @@ public class TargetFactory extends GameItemFactory<Target> {
 	}
 	
 	public Target create(float x, float y, float width, float height, String name) {
-		Target target = super.create(x, y, width, height);
-		target.setName(name);
+		Target target = super.create(name, x, y, width, height);
 		return target;
 	}
 	

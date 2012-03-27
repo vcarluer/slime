@@ -27,14 +27,18 @@ public class ButtonFactory extends GameItemPhysicFactory<Button> {
 		item.waitAnim();		
 	}
 	
-	public Button create(float x, float y, float width, float height, String target, float resetTime) {
-		Button button = super.create(x, y, width, height);
+	public Button create(String name, float x, float y, float width, float height, String target, float resetTime) {
+		Button button = super.create(name, x, y, width, height);
 		button.setTarget(target);
 		button.setResetTime(resetTime);
 		return button;
 	}
 	
+	public Button createBL(String name, float x, float y, float width, float height, String target, float resetTime) {
+		return this.create(name, x + width / 2, y + height / 2, width, height, target, resetTime);
+	}
+	
 	public Button createBL(float x, float y, float width, float height, String target, float resetTime) {
-		return this.create(x + width / 2, y + height / 2, width, height, target, resetTime);
+		return this.createBL(null, x, y, width, height, target, resetTime);
 	}
 }

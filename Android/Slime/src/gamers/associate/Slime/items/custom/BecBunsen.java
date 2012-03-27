@@ -46,8 +46,6 @@ public class BecBunsen extends GameItemPhysic implements ITrigerable {
 	
 	private boolean startOn;
 	
-	private String name;
-	
 	private float animDelay = 0f;
 	
 	public BecBunsen(float x, float y, float width, float height,
@@ -69,9 +67,7 @@ public class BecBunsen extends GameItemPhysic implements ITrigerable {
 		this.base_width = Reference_Base_Width / Reference_Width * this.width;
 		this.base_height = Reference_Base_Height / Reference_Height * this.height;
 		this.fire_width = Reference_Fire_Width / Reference_Width * this.width;
-		this.fire_height = Reference_Fire_Height / Reference_Height * this.height;		
-		
-		this.name = "";
+		this.fire_height = Reference_Fire_Height / Reference_Height * this.height;				
 	}
 	
 	public void setAnimDelay(float delay) {
@@ -185,14 +181,6 @@ public class BecBunsen extends GameItemPhysic implements ITrigerable {
 				((IBurnable)contact.getContactWith()).burn();
 			}
 		}
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public void trigger(Object source, String data) {

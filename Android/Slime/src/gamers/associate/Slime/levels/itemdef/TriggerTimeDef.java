@@ -28,7 +28,7 @@ public class TriggerTimeDef extends ItemDefinition {
 
 	@Override
 	public void createItem(Level level) {
-		SlimeFactory.TriggerTime.create(this.getIdPre() + this.target, this.interval);
+		SlimeFactory.TriggerTime.create(this.getUName(), this.getUString(this.target), this.interval);
 	}
 
 	@Override

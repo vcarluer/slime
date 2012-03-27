@@ -64,21 +64,21 @@ public class SlimyFactory extends GameItemPhysicFactory<Slimy> {
 		return slimy;
 	}
 	
-	public Slimy create(float x, float y, float ratio) {
-		return this.create(x, y, ratio, Type_Simple);
+	public Slimy create(String name, float x, float y, float ratio) {
+		return this.create(name, x, y, ratio, Type_Simple);
 	}
 	
-	public SlimyGrow createGrow(float x, float y, float ratio) {
-		return (SlimyGrow)this.create(x, y, ratio, Type_Grow);
+	public SlimyGrow createGrow(String name, float x, float y, float ratio) {
+		return (SlimyGrow)this.create(name, x, y, ratio, Type_Grow);
 	}
 	
-	public SlimyJump createJump(float x, float y, float ratio) {
-		return (SlimyJump)this.create(x, y, ratio, Type_Jump);
+	public SlimyJump createJump(String name, float x, float y, float ratio) {
+		return (SlimyJump)this.create(name, x, y, ratio, Type_Jump);
 	}
 	
-	public Slimy create(float x, float y, float ratio, int slimyType) {		
+	public Slimy create(String name, float x, float y, float ratio, int slimyType) {		
 		this.currentType = slimyType;
-		Slimy slimy = this.create(x, y, Slimy.Default_Width * ratio, Slimy.Default_Height * ratio);		
+		Slimy slimy = this.create(name, x, y, Slimy.Default_Width * ratio, Slimy.Default_Height * ratio);		
 		return slimy;
 	}
 }

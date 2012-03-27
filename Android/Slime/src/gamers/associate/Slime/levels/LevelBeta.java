@@ -31,7 +31,7 @@ public class LevelBeta extends LevelTimeAttack {
 		float cY = 0;
 		// Line 0
 		SlimeFactory.Platform.createBL(cX, cY, level.getLevelWidth() / 2, 200);
-		SlimeFactory.Platform.createIcyBL(cX + level.getLevelWidth() / 2, cY, level.getLevelWidth() / 2, 200);
+		SlimeFactory.Platform.createIcyBL("None", cX + level.getLevelWidth() / 2, cY, level.getLevelWidth() / 2, 200);
 		cY+=200;
 		
 		cX += 100;
@@ -41,11 +41,11 @@ public class LevelBeta extends LevelTimeAttack {
 		SlimeFactory.Platform.createBL(cX, cY, 200, 150);
 		SlimeFactory.Button.createBL(cX + 20, cY + 150, 40, 27, "ramp1", 2f);
 		// SpawnCannon spawnCannon = SlimeFactory.Cannon.create(200 - SpawnCannon.Default_Width / 2, 150 + SpawnCannon.Default_Height / 2);
-		level.setStartItem(SlimeFactory.Slimy.createJump(cX + 150, cY + 250, 1.0f));
+		level.setStartItem(SlimeFactory.Slimy.createJump("Start", cX + 150, cY + 250, 1.0f));
 		// SlimeFactory.Slimy.createJump(cX + 200, cY + 550, 1.0f);
 		cX += 200;
 		// SlimeFactory.Lava.createBL(cX, cY, 200, 50);
-		SlimeFactory.Platform.createBumpBL(cX, cY, 100, 50);		
+		SlimeFactory.Platform.createBumpBL("None", cX, cY, 100, 50);		
 		cX += 100;
 		SlimeFactory.Platform.createBL(cX, cY, 50, 100);
 		cX += 50;		
@@ -122,7 +122,7 @@ public class LevelBeta extends LevelTimeAttack {
 		
 		cX += 300;
 		SlimeFactory.Box.createBL(cX, cY + 20, 10, 80);
-		SlimeFactory.Platform.createNoStickyBL(cX, cY, 128, 20);
+		SlimeFactory.Platform.createNoStickyBL("None", cX, cY, 128, 20);
 		cX += 28;
 		SlimeFactory.GoalPortal.create(cX + 40, cY + 90);
 		cX += 100;

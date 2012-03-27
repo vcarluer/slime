@@ -13,7 +13,7 @@ public class ButtonDef extends ItemDefinition {
 	
 	@Override
 	public void createItem(Level level) {
-		SlimeFactory.Button.createBL(this.getX(), this.getY(), this.width, this.height, this.getIdPre() + this.target, this.resetTime).setAngle(this.angle);
+		SlimeFactory.Button.createBL(this.getUName(), this.getX(), this.getY(), this.width, this.height, this.getUString(this.target), this.resetTime).setAngle(this.angle);
 	}
 
 	@Override

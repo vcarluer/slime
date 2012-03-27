@@ -32,8 +32,7 @@ public class CircularSawFactory extends GameItemPhysicFactory<CircularSaw>{
 	public CircularSaw create(float x, float y, float width, float height, String name, boolean startOn) {		
 		this.isOn = startOn;
 
-		CircularSaw saw = super.create(x, y, width, height);
-		saw.setName(name);				
+		CircularSaw saw = super.create(name, x, y, width, height);
 		return saw;
 	}
 	

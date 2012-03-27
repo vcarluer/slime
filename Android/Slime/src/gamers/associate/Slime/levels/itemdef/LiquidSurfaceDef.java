@@ -10,7 +10,7 @@ public class LiquidSurfaceDef extends ItemDefinition {
 	
 	@Override
 	public void createItem(Level level) {
-		SlimeFactory.LiquidSurface.createBL(this.getX(), this.getY(), this.width, this.height);
+		SlimeFactory.LiquidSurface.createBL(this.getUName(), this.getX(), this.getY(), this.width, this.height);
 	}
 
 	@Override

@@ -18,6 +18,7 @@ import gamers.associate.Slime.levels.LevelHome;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -144,6 +145,8 @@ public class Level implements IGameItemHandler {
 	
 	private GameItem helpItem;
 	
+	private List<GameItem> tempList;
+	
 	public Level() {
 		this.randomGen = new Random();
 		this.scene = CCScene.node();
@@ -198,10 +201,12 @@ public class Level implements IGameItemHandler {
 		this.slimyList = new ArrayList<Slimy>();
 		this.trigerables = new ArrayList<ITrigerable>();
 		this.trigerablesToAdd = new ArrayList<ITrigerable>();
+		
+		this.tempList = new ArrayList<GameItem>();
 
 		this.init();
 		
-		isInit = true;
+		isInit = true;				
 	}
 	
 	public static Level get(String levelName) {
@@ -1279,5 +1284,16 @@ public class Level implements IGameItemHandler {
 		} else {
 			return 1.0f;
 		}
+	}
+		
+	public List<GameItem> getItemsByName(String name) {
+		this.tempList.clear();
+		for(GameItem item : this.items.values()) {
+			if (item.getName().toUpperCase().equals(name.toUpperCase())) {
+				this.tempList.add(item);
+			}
+		}
+		
+		return this.tempList;
 	}
 }

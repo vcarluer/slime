@@ -7,10 +7,9 @@ import gamers.associate.Slime.items.base.Target;
 
 public class TargetDef extends ItemDefinition {
 	private static String Handled_Def = "Target";
-	private String name;
 	@Override
 	public void createItem(Level level) {
-		SlimeFactory.Target.createBL(this.getX(), this.getY(), this.width, this.height, this.getIdPre() + this.name);
+		SlimeFactory.Target.createBL(this.getX(), this.getY(), this.width, this.height, this.getUName());
 	}
 
 	@Override
@@ -20,7 +19,6 @@ public class TargetDef extends ItemDefinition {
 
 	@Override
 	protected void parseNext(String[] infos, int start) {
-		this.name = infos[start];
 	}
 
 	@Override
@@ -30,7 +28,6 @@ public class TargetDef extends ItemDefinition {
 
 	@Override
 	protected String writeNext(String line) {
-		line = this.addValue(line, this.name);
 		return line;
 	}
 
@@ -47,6 +44,5 @@ public class TargetDef extends ItemDefinition {
 	@Override
 	protected void setValuesNext(GameItem item) {
 		Target target = (Target)item;
-		this.name = target.getName();
 	}
 }

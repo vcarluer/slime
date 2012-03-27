@@ -37,14 +37,22 @@ public class GameItemCocos extends GameItem {
 	protected boolean angleChanged;
 		
 	public GameItemCocos(float x, float y, float width, float height) {
-		super(x, y, width, height);		
+		this(null, x, y, width, height);
+	}
+	
+	public GameItemCocos(String name, float x, float y, float width, float height) {
+		super(name, x, y, width, height);		
 		this.animationList = new Hashtable<String, CCAnimation>();				
 		this.spriteType = SpriteType.UNKNOWN;
 		this.referenceSize = CGSize.zero();
 	}
 	
 	public GameItemCocos(float x, float y, float width, float height, int zOrder) {
-		this(x, y, width, height);
+		this(null, x, y, width, height, zOrder);
+	}
+	
+	public GameItemCocos(String name, float x, float y, float width, float height, int zOrder) {
+		this(name, x, y, width, height);
 		this.zOrder = zOrder;
 	}
 	

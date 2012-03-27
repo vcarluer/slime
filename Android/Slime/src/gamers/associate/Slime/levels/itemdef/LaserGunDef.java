@@ -7,13 +7,12 @@ import gamers.associate.Slime.items.custom.LaserGun;
 
 public class LaserGunDef extends ItemDefinition {
 	public static String Handled_Def = "LaserGun";
-	private String name;
 	private String target;
 	private boolean isOn;
 	
 	@Override
 	public void createItem(Level level) {
-		SlimeFactory.LaserGun.createBL(this.getX(), this.getY(), this.width, this.height, this.getIdPre() + this.name, this.getIdPre() + this.target, this.isOn).setAngle(this.angle);
+		SlimeFactory.LaserGun.createBL(this.getX(), this.getY(), this.width, this.height, this.getUName(), this.getUString(this.target), this.isOn).setAngle(this.angle);
 	}
 
 	@Override
@@ -23,8 +22,7 @@ public class LaserGunDef extends ItemDefinition {
 
 	@Override
 	protected void parseNext(String[] infos, int start) {
-		this.name = infos[start];
-		this.target = infos[start + 1];
+		this.target = infos[start];
 		this.isOn = Boolean.parseBoolean(infos[start + 2]);
 	}
 
@@ -35,7 +33,6 @@ public class LaserGunDef extends ItemDefinition {
 
 	@Override
 	protected String writeNext(String line) {
-		line = this.addValue(line, String.valueOf(this.name));
 		line = this.addValue(line, String.valueOf(this.target));
 		line = this.addValue(line, String.valueOf(this.isOn));
 		
@@ -55,7 +52,6 @@ public class LaserGunDef extends ItemDefinition {
 	@Override
 	protected void setValuesNext(GameItem item) {
 		LaserGun laser = (LaserGun)item;
-		this.name = laser.getName();
 		this.target = laser.getTarget();
 		this.isOn = laser.getStartOn();
 	}

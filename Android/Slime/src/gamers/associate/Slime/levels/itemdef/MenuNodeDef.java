@@ -10,6 +10,7 @@ public class MenuNodeDef extends ItemDefinition {
 	private static String Handled_Def = "MenuNode";
 	private static String rootNode = "n00";
 	
+	// unique name here for id and target?
 	private String id;
 	private String targetLevel;
 	private String targetN1;
@@ -39,7 +40,7 @@ public class MenuNodeDef extends ItemDefinition {
 		if (startNode != null) {
 			float ratio = 1.0f;
 			// start item centered in node
-			Slimy slimy = SlimeFactory.Slimy.create(this.getX() + this.width / 2, this.getY() + (ratio * Slimy.Default_Height) / 2, ratio);
+			Slimy slimy = SlimeFactory.Slimy.create("Menu", this.getX() + this.width / 2, this.getY() + (ratio * Slimy.Default_Height) / 2, ratio);
 			slimy.land();
 			slimy.disablePhysic();
 			Level.currentLevel.setStartItem(slimy);

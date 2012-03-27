@@ -12,13 +12,13 @@ public class GoalPortalDef extends ItemDefinition {
 	
 	@Override
 	public void createItem(Level level) {
-		GoalPortal goal = SlimeFactory.GoalPortal.createBL(this.getX(), this.getY(), this.width, this.height);
+		GoalPortal goal = SlimeFactory.GoalPortal.createBL(this.getUName(), this.getX(), this.getY(), this.width, this.height);
 		goal.setAngle(this.angle);
 		level.setGoal(goal);
 		
 		if (SlimeFactory.GameInfo.getDifficulty() != LevelDifficulty.Easy || SlimeFactory.GameInfo.getLevelNum() != 1) {
 			float evacuationHeight = EvacuationPlug.getHeightFromWidth(this.width);
-			EvacuationPlug plug = SlimeFactory.EvacuationPlug.create(goal.getPosition().x, goal.getPosition().y, this.width, evacuationHeight);
+			EvacuationPlug plug = SlimeFactory.EvacuationPlug.create(this.getUName(), goal.getPosition().x, goal.getPosition().y, this.width, evacuationHeight);
 			plug.setAngle(this.angle);
 			level.setPlug(plug);
 		}

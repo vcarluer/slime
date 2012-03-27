@@ -57,12 +57,12 @@ public class CocosFactory extends GameItemCocosFactory<GameItemCocos> {
 		}
 	}
 	
-	public GameItemCocos createBL(float x, float y, float width, float height, String plist, String frameName, int frameCount) {		
+	public GameItemCocos createBL(String name, float x, float y, float width, float height, String plist, String frameName, int frameCount) {		
 		this.currentFrameName = frameName;
 		this.currentPlistName = plist;
 		this.currentFrameCount = frameCount;
 		this.createDynamicAnimList();
-		return this.create(x + width / 2, y + height / 2, width, height);
+		return this.create(name, x + width / 2, y + height / 2, width, height);
 	}
 	
 	private void createDynamicAnimList() {
@@ -90,7 +90,7 @@ public class CocosFactory extends GameItemCocosFactory<GameItemCocos> {
 		item.setSpriteType(SpriteType.SINGLE_SCALE);
 	}
 
-	public GameItem createBL(float x, float y, float width, float height,
+	public GameItem createBL(String name, float x, float y, float width, float height,
 			String plist, String frame, int count, SpriteAction action) {
 		this.currentFrameName = frame;
 		this.currentPlistName = plist;
@@ -98,6 +98,6 @@ public class CocosFactory extends GameItemCocosFactory<GameItemCocos> {
 		this.createDynamicAnimList();
 		
 		this.spriteAction = action;		
-		return this.create(x + width / 2, y + height / 2, width, height);
+		return this.create(name, x + width / 2, y + height / 2, width, height);
 	}
 }

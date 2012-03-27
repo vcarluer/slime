@@ -12,13 +12,17 @@ public class PhysicPolygonFactory extends GameItemPhysicFactory<PhysicPolygon> {
 	private int currentType;
 	private boolean isStickable;
 	
-	public PhysicPolygon create(float x, float y, float width, float height, boolean isDynamic, CGPoint[] bodyPoints, int type, boolean isStickable) {		
+	public PhysicPolygon create(float x, float y, float width, float height, boolean isDynamic, CGPoint[] bodyPoints, int type, boolean isStickable) {
+		return this.create(null, x, y, width, height, isDynamic, bodyPoints, type, isStickable);
+	}
+	
+	public PhysicPolygon create(String name, float x, float y, float width, float height, boolean isDynamic, CGPoint[] bodyPoints, int type, boolean isStickable) {		
 		this.isDynamic = isDynamic;		
 		this.bodyPoints = bodyPoints;
 		this.currentType = type;
 		this.isStickable = isStickable;
 		
-		PhysicPolygon polygon = super.create(x, y, width, height);
+		PhysicPolygon polygon = super.create(name, x, y, width, height);
 		
 		return polygon;
 	}

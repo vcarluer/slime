@@ -27,13 +27,13 @@ public class SpriteDef extends ItemDefinition {
 			SpriteAction action = new SpriteAction(
 					this.actionCode, this.actionValue, this.actionValue2, this.actionTime, this.inverse, this.repeat, 
 					this.originalDelay, this.resetPosition, this.delayBefore);
-			GameItem item = SlimeFactory.Sprite.createBL(this.getX(), this.getY(), this.width, this.height, this.plist, this.frame, this.count, action);
+			GameItem item = SlimeFactory.Sprite.createBL(this.getUName(), this.getX(), this.getY(), this.width, this.height, this.plist, this.frame, this.count, action);
 			item.setAngle(this.angle);
 			if (this.frame.equals("gestures_tap")) {
 				level.setHelpItem(item);
 			}			
 		} else {
-			SlimeFactory.Sprite.createBL(this.getX(), this.getY(), this.width, this.height, this.plist, this.frame, this.count).setAngle(this.angle);
+			SlimeFactory.Sprite.createBL(this.getUName(), this.getX(), this.getY(), this.width, this.height, this.plist, this.frame, this.count).setAngle(this.angle);
 		}		
 	}
 
