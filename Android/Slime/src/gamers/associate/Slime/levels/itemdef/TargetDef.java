@@ -3,13 +3,13 @@ package gamers.associate.Slime.levels.itemdef;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.base.GameItem;
-import gamers.associate.Slime.items.base.Target;
+import gamers.associate.Slime.items.custom.Target;
 
 public class TargetDef extends ItemDefinition {
 	private static String Handled_Def = "Target";
 	@Override
 	public void createItem(Level level) {
-		SlimeFactory.Target.createBL(this.getX(), this.getY(), this.width, this.height, this.getUName());
+		SlimeFactory.Target.createBL(this.getUName(), this.getX(), this.getY(), this.width, this.height);
 	}
 
 	@Override

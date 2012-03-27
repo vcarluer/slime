@@ -114,7 +114,7 @@ public abstract class SlimeFactory {
 		Star.attach(level, attachNode, attachWorld, attachWorldRatio);
 		MenuNode.attach(level, attachNode);
 		LaserGun.attach(level, attachNode, attachWorld, attachWorldRatio);
-		Target.attach(level);
+		Target.attach(level, attachNode);
 		LaserBeam.attach(level, attachNode, attachWorld, attachWorldRatio);
 		Sprite.attach(level, attachNode);
 		Red.attach(level, attachNode, attachWorld, attachWorldRatio);

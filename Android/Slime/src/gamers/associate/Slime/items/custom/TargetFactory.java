@@ -1,21 +1,28 @@
 package gamers.associate.Slime.items.custom;
 
+import gamers.associate.Slime.items.base.GameItemCocosFactory;
 import gamers.associate.Slime.items.base.GameItemFactory;
-import gamers.associate.Slime.items.base.Target;
+import gamers.associate.Slime.items.base.TextureAnimation;
 
-public class TargetFactory extends GameItemFactory<Target> {
-
+public class TargetFactory extends GameItemCocosFactory<Target> {
+	
+	
 	@Override
 	protected Target instantiate(float x, float y, float width, float height) {
 		return new Target(x, y, width, height);
 	}
-	
-	public Target create(float x, float y, float width, float height, String name) {
-		Target target = super.create(name, x, y, width, height);
-		return target;
+
+	@Override
+	protected void createAnimList() {
+		TextureAnimation.createFramesFromFiles(Target.Anim_Base, 1);		
 	}
-	
-	public Target createBL(float x, float y, float width, float height, String name) {
-		return this.create(x + width / 2, y + height / 2, width, height, name);
+
+	@Override
+	protected String getPlistPng() {
+		return "";
+	}
+
+	@Override
+	protected void runFirstAnimations(Target item) {
 	}
 }

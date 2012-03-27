@@ -77,7 +77,7 @@ public class LevelHome extends LevelDefinitionHardCoded {
 		SlimeFactory.LaserGun.createBL(level.getLevelWidth() / 2f - LaserGun.Default_Width / 2f, groundHeight + middleBlockS, LaserGun.Default_Width, LaserGun.Default_Height, "laser", "target", true).setAngle(90f);
 		float targetCenterX = level.getLevelWidth() / 2f;
 		float targetCenterY = level.getLevelHeight() / 2f;
-		SlimeFactory.Target.create(targetCenterX, targetCenterY, 16, 16, "target");
+		SlimeFactory.Target.create("target", targetCenterX, targetCenterY, 16, 16);
 		SlimeFactory.Platform.create(targetCenterX, targetCenterY, 32f, 32f, Platform.Bump);
 		
 		SlimeFactory.HomeLevelHandler.create().setPortal(spawnPortal);
