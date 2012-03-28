@@ -303,7 +303,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 		this.actionSelect = CCRepeatForever.action(animation);
 		this.sprite.runAction(this.actionSelect);
 		// this.auraSprite.runAction(repeat);
-		Sounds.playEffect(R.raw.slimyselect);			
+		Sounds.playEffect(R.raw.slimycharging);			
 	}
 	
 	public void select(CGPoint gameReference) {
@@ -314,7 +314,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	
 	public void unselect() {
 		if (this.selected) {
-			Sounds.stopEffect(R.raw.slimyselect);
+			Sounds.stopEffect(R.raw.slimycharging);
 			this.selected = false;	
 			this.stopAura();
 		}
