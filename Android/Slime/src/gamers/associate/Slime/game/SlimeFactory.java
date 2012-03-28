@@ -17,6 +17,7 @@ import gamers.associate.Slime.items.custom.LaserBeamFactory;
 import gamers.associate.Slime.items.custom.LaserGunFactory;
 import gamers.associate.Slime.items.custom.LavaFactory;
 import gamers.associate.Slime.items.custom.LevelEndFactory;
+import gamers.associate.Slime.items.custom.LightningFactory;
 import gamers.associate.Slime.items.custom.LiquidFactory;
 import gamers.associate.Slime.items.custom.LiquidSurfaceFactory;
 import gamers.associate.Slime.items.custom.MenuNodeFactory;
@@ -89,6 +90,7 @@ public abstract class SlimeFactory {
 	public static EvacuationPlugfactory EvacuationPlug = new EvacuationPlugfactory();
 	public static DirectorFactory Director = new DirectorFactory();
 	public static TeslaCoilFactory TeslaCoil = new TeslaCoilFactory();
+	public static LightningFactory Lightning = new LightningFactory();
 	
 	public static StarCounterFactory StarCounter = new StarCounterFactory(); // Not attached in attach All but in HudLayer	
 		

@@ -3,6 +3,8 @@ package gamers.associate.Slime.items.custom;
 import javax.microedition.khronos.opengles.GL10;
 
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.IElectrificable;
 import gamers.associate.Slime.items.base.ITrigerable;
@@ -43,11 +45,15 @@ public class TeslaCoil extends GameItemPhysic  implements ITrigerable {
 	private float strikeDistance;	
 	
 	private CGPoint tmpTarget;
+	private CGPoint ref;	
+	
+	private static float LigthningHeightRatio = 32f / 171f;
 
 	public TeslaCoil(float x, float y, float width, float height, World world,
 			float worldRatio, boolean startOn, float strikeDistance) {
 		super(x, y, width, height, world, worldRatio);
 		
+		this.ref = CGPoint.make(1, 0);
 		this.startOn = startOn;
 		this.setStrikeDistance(strikeDistance);
 		
@@ -164,30 +170,32 @@ public class TeslaCoil extends GameItemPhysic  implements ITrigerable {
 		if (this.isOn) {
 			for(IElectrificable elec : Level.currentLevel.getElectrificables()) {
 				if (elec != null) {
-					if (CGPoint.ccpDistance(elec.getPosition(), this.getSourcePoint()) <= this.getStrikeDistance()) {
-						this.strike(elec);
+					CGPoint source = this.getSourcePoint();
+					if (CGPoint.ccpDistance(elec.getPosition(), source) <= this.getStrikeDistance()) {
+						this.strike(source, elec);
 					}
 				}
 			}					
 		}
 	}
 	
-	public void strike(IElectrificable elect) {
+	public void strike(CGPoint source, IElectrificable elect) {
 		elect.electrify();
-		this.tmpTarget.set(elect.getPosition());
+		
+		SlimeFactory.Lightning.create(source, elect, Lightning.DefaultLife);
 	}
 
 	@Override
 	public void draw(GL10 gl) {
 		super.draw(gl);
 		
-		if (this.isOn && this.tmpTarget != null && (this.tmpTarget.x != 0 || this.tmpTarget.y != 0)) {
-			gl.glDisable(GL10.GL_LINE_SMOOTH);
-			gl.glColor4f(0f, 0f, 1.0f, 0.63f);
-			// gl.glLineWidth(this.height * Level.currentLevel.getCameraManager().getCurrentZoom());
-			gl.glLineWidth(3.0f * Level.currentLevel.getCameraManager().getCurrentZoom());
-			CCDrawingPrimitives.ccDrawLine(gl, this.getSourcePoint(), this.tmpTarget);
-		}
+//		if (this.isOn && this.tmpTarget != null && (this.tmpTarget.x != 0 || this.tmpTarget.y != 0)) {
+//			gl.glDisable(GL10.GL_LINE_SMOOTH);
+//			gl.glColor4f(0f, 0f, 1.0f, 0.63f);
+//			// gl.glLineWidth(this.height * Level.currentLevel.getCameraManager().getCurrentZoom());
+//			gl.glLineWidth(3.0f * Level.currentLevel.getCameraManager().getCurrentZoom());
+//			CCDrawingPrimitives.ccDrawLine(gl, this.getSourcePoint(), this.tmpTarget);
+//		}
 	}
 
 	public float getStrikeDistance() {

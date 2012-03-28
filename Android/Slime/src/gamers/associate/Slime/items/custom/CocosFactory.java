@@ -57,6 +57,14 @@ public class CocosFactory extends GameItemCocosFactory<GameItemCocos> {
 		}
 	}
 	
+	public GameItemCocos create(String name, float x, float y, float width, float height, String plist, String frameName, int frameCount) {		
+		this.currentFrameName = frameName;
+		this.currentPlistName = plist;
+		this.currentFrameCount = frameCount;
+		this.createDynamicAnimList();
+		return this.create(name, x, y, width, height);
+	}
+	
 	public GameItemCocos createBL(String name, float x, float y, float width, float height, String plist, String frameName, int frameCount) {		
 		this.currentFrameName = frameName;
 		this.currentPlistName = plist;
