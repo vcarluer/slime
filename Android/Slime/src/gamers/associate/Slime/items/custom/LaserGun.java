@@ -189,8 +189,8 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 		// (x'-xc) = Kc*(x-xc) - Ks*(y-yc)
 		// (y'-yc) = Ks*(x-xc) + Kc*(y-yc)
 		float radAngle = - ccMacros.CC_DEGREES_TO_RADIANS(this.angle);
-		float xFire = (float) (Math.cos(radAngle)*((this.position.x - this.width / 2 + this.beamOffset) - this.position.x)) + this.position.x;
-		float yFire = (float) (Math.sin(radAngle)*((this.position.x - this.width / 2 + this.beamOffset) - this.position.x)) + this.position.y;
+		float xFire = (float) (Math.cos(radAngle)*((this.position.x - this.width / 2f + this.beamOffset) - this.position.x)) + this.position.x;
+		float yFire = (float) (Math.sin(radAngle)*((this.position.x - this.width / 2f + this.beamOffset) - this.position.x)) + this.position.y;
 		this.tmp.x = xFire;
 		this.tmp.y = yFire;
 		return this.tmp;

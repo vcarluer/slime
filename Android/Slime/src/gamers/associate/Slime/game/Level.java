@@ -2,6 +2,7 @@ package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.items.base.GameItem;
+import gamers.associate.Slime.items.base.IElectrificable;
 import gamers.associate.Slime.items.base.ISelectable;
 import gamers.associate.Slime.items.base.ITrigerable;
 import gamers.associate.Slime.items.custom.EvacuationPlug;
@@ -123,6 +124,7 @@ public class Level implements IGameItemHandler {
 	
 	protected ArrayList<Slimy> aliveSlimyList;
 	protected ArrayList<Slimy> slimyList;
+	protected ArrayList<IElectrificable> electrificables;
 	
 	protected GoalPortal goal;
 	protected EvacuationPlug plug;
@@ -201,6 +203,7 @@ public class Level implements IGameItemHandler {
 		this.slimyList = new ArrayList<Slimy>();
 		this.trigerables = new ArrayList<ITrigerable>();
 		this.trigerablesToAdd = new ArrayList<ITrigerable>();
+		this.electrificables = new ArrayList<IElectrificable>();
 		
 		this.tempList = new ArrayList<GameItem>();
 
@@ -379,6 +382,7 @@ public class Level implements IGameItemHandler {
 		this.goal = null;
 		this.plug = null;
 		
+		this.electrificables.clear();
 		this.trigerables.clear();
 		this.trigerablesToAdd.clear();
 		this.aliveSlimyList.clear();
@@ -678,6 +682,11 @@ public class Level implements IGameItemHandler {
 			this.trigerablesToAdd.remove(trigerable);
 		}
 		
+		if (item instanceof IElectrificable) {
+			IElectrificable elec = (IElectrificable)item;
+			this.electrificables.add(elec);
+		}
+		
 		if (item instanceof Slimy) {
 			Slimy slimy = (Slimy) item;
 			if (!slimy.isDead()) {
@@ -701,6 +710,11 @@ public class Level implements IGameItemHandler {
 			if (item instanceof ITrigerable) {
 				ITrigerable triger = (ITrigerable)item;
 				this.trigerables.remove(triger);
+			}
+			
+			if (item instanceof IElectrificable) {
+				IElectrificable elec = (IElectrificable)item;
+				this.electrificables.remove(elec);
 			}
 			
 			if (this.items.containsKey(item.getId())) {
@@ -1298,5 +1312,9 @@ public class Level implements IGameItemHandler {
 		}
 		
 		return this.tempList;
+	}
+	
+	public List<IElectrificable> getElectrificables() {
+		return this.electrificables;
 	}
 }

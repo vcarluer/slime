@@ -28,6 +28,7 @@ import gamers.associate.Slime.items.custom.SpawnPortalFactory;
 import gamers.associate.Slime.items.custom.StarCounterFactory;
 import gamers.associate.Slime.items.custom.StarFactory;
 import gamers.associate.Slime.items.custom.TargetFactory;
+import gamers.associate.Slime.items.custom.TeslaCoilFactory;
 import gamers.associate.Slime.items.custom.ThumbnailFactory;
 import gamers.associate.Slime.items.custom.TriggerTimeFactory;
 import gamers.associate.Slime.levels.ILevelBuilder;
@@ -87,6 +88,7 @@ public abstract class SlimeFactory {
 	public static TriggerTimeFactory TriggerTime = new TriggerTimeFactory();
 	public static EvacuationPlugfactory EvacuationPlug = new EvacuationPlugfactory();
 	public static DirectorFactory Director = new DirectorFactory();
+	public static TeslaCoilFactory TeslaCoil = new TeslaCoilFactory();
 	
 	public static StarCounterFactory StarCounter = new StarCounterFactory(); // Not attached in attach All but in HudLayer	
 		
@@ -126,6 +128,7 @@ public abstract class SlimeFactory {
 		TriggerTime.attach(level);
 		EvacuationPlug.attach(level, attachNode, attachWorld, attachWorldRatio);
 		Director.attach(level);
+		TeslaCoil.attach(level, attachNode, attachWorld, attachWorldRatio);
 		
 		SpriteSheetFactory.attachAll(attachNode);
 		isAttached = true;
@@ -160,6 +163,7 @@ public abstract class SlimeFactory {
 		StarCounter.detach();
 		EvacuationPlug.detach();
 		Director.detach();
+		TeslaCoil.detach();
 		
 		LevelGeneratorCorridor2.detach();
 		LevelGeneratorRectangle2.detach();
@@ -194,6 +198,7 @@ public abstract class SlimeFactory {
 		LiquidSurface.destroy();
 		StarCounter.destroy();
 		EvacuationPlug.destroy();
+		TeslaCoil.destroy();
 		
 		LevelGeneratorCorridor2.destroy();
 		LevelGeneratorRectangle2.destroy();
