@@ -353,6 +353,14 @@ public class GameItemCocos extends GameItem {
 	}
 
 	@Override
+	public void setSize(float width, float height) {		
+		super.setSize(width, height);
+		if (this.sprite != null) {
+			this.transformTexture();
+		}
+	}
+
+	@Override
 	// In degree
 	public void setAngle(float angle) {		
 		super.setAngle(angle);

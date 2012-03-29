@@ -115,4 +115,9 @@ public class GameItem {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public void setSize(float width, float height) {
+		this.width = width;
+		this.height = height;
+	}
 }

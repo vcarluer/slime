@@ -172,17 +172,26 @@ public class TeslaCoil extends GameItemPhysic  implements ITrigerable {
 				if (elec != null) {
 					CGPoint source = this.getSourcePoint();
 					if (CGPoint.ccpDistance(elec.getPosition(), source) <= this.getStrikeDistance()) {
-						this.strike(source, elec);
+						this.strike(this, elec);
 					}
 				}
 			}					
 		}
 	}
 	
-	public void strike(CGPoint source, IElectrificable elect) {
-		elect.electrify();
-		
-		SlimeFactory.Lightning.create(source, elect, Lightning.DefaultLife);
+	private Lightning lightning;
+	
+	public void strike(GameItem source, IElectrificable elect) {				
+		if (this.lightning == null) {
+			if (elect.isActive()) {
+				elect.electrify();
+				this.lightning = SlimeFactory.Lightning.create(source, elect, Lightning.DefaultLife);
+			}			
+		} else {
+			if (this.lightning.isEnded()) {
+				this.lightning = null;
+			}
+		}
 	}
 
 	@Override
