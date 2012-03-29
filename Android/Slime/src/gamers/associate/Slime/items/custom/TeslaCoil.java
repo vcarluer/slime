@@ -1,19 +1,19 @@
 package gamers.associate.Slime.items.custom;
 
-import javax.microedition.khronos.opengles.GL10;
-
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.IElectrificable;
 import gamers.associate.Slime.items.base.ITrigerable;
 import gamers.associate.Slime.items.base.SpriteType;
 
+import javax.microedition.khronos.opengles.GL10;
+
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.config.ccMacros;
-import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -198,13 +198,12 @@ public class TeslaCoil extends GameItemPhysic  implements ITrigerable {
 	public void draw(GL10 gl) {
 		super.draw(gl);
 		
-//		if (this.isOn && this.tmpTarget != null && (this.tmpTarget.x != 0 || this.tmpTarget.y != 0)) {
-//			gl.glDisable(GL10.GL_LINE_SMOOTH);
-//			gl.glColor4f(0f, 0f, 1.0f, 0.63f);
-//			// gl.glLineWidth(this.height * Level.currentLevel.getCameraManager().getCurrentZoom());
-//			gl.glLineWidth(3.0f * Level.currentLevel.getCameraManager().getCurrentZoom());
-//			CCDrawingPrimitives.ccDrawLine(gl, this.getSourcePoint(), this.tmpTarget);
-//		}
+		if (this.isOn) {
+			gl.glEnable(GL10.GL_LINE_SMOOTH);
+			gl.glLineWidth(1.0f);
+            gl.glColor4f(0f, 0f, 1.0f, 0.05f);			
+            Util.ccDrawCirclePlain(gl, this.getPosition(), this.strikeDistance, ccMacros.CC_DEGREES_TO_RADIANS(90), 50);
+		}
 	}
 
 	public float getStrikeDistance() {

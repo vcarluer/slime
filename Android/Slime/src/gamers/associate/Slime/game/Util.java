@@ -1,5 +1,12 @@
 package gamers.associate.Slime.game;
 
+import static javax.microedition.khronos.opengles.GL10.GL_COLOR_ARRAY;
+import static javax.microedition.khronos.opengles.GL10.GL_FLOAT;
+import static javax.microedition.khronos.opengles.GL10.GL_TEXTURE_2D;
+import static javax.microedition.khronos.opengles.GL10.GL_TEXTURE_COORD_ARRAY;
+
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.text.DecimalFormat;
 
 import javax.microedition.khronos.opengles.GL10;
@@ -7,6 +14,7 @@ import javax.microedition.khronos.opengles.GL10;
 import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
+import org.cocos2d.utils.FastFloatBuffer;
 
 public class Util {
 	public static void draw(GL10 gl, CGRect rect, float width, float r,
@@ -85,4 +93,58 @@ public class Util {
 		df.setDecimalSeparatorAlwaysShown ( false ) ; 
 		return df.format(base);		
 	}
+	
+	/** draws a circle given the center, radius and number of segments. */
+    public static void ccDrawCirclePlain(GL10 gl, CGPoint center, float r, float a,
+            int segments) {
+
+//        ByteBuffer vbb = ByteBuffer.allocateDirect(4 * 2 * (segments + 2));
+//        vbb.order(ByteOrder.nativeOrder());
+//        FloatBuffer vertices = vbb.asFloatBuffer();
+        FastFloatBuffer vertices = getVertices(2 * (segments + 2));
+
+        int additionalSegment = 2;
+        
+        vertices.put(center.x);
+        vertices.put(center.y);
+
+        final float coef = 2.0f * (float) Math.PI / segments;
+        for (int i = 0; i <= segments; i++) {
+            float rads = i * coef;
+            float j = (float) (r * Math.cos(rads + a) + center.x);
+            float k = (float) (r * Math.sin(rads + a) + center.y);
+
+            vertices.put(j);
+            vertices.put(k);
+        }        
+        
+        vertices.position(0);
+
+        // Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+        // Needed states: GL_VERTEX_ARRAY, 
+        // Unneeded states: GL_TEXTURE_2D, GL_TEXTURE_COORD_ARRAY, GL_COLOR_ARRAY	
+        gl.glDisable(GL_TEXTURE_2D);
+        gl.glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        gl.glDisableClientState(GL_COLOR_ARRAY);
+
+        gl.glVertexPointer(2, GL_FLOAT, 0, vertices.bytes);
+        gl.glDrawArrays(GL10.GL_TRIANGLE_FAN, 0, segments + additionalSegment);
+
+        // restore default state
+        gl.glEnableClientState(GL_COLOR_ARRAY);
+        gl.glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+        gl.glEnable(GL_TEXTURE_2D);	
+    }
+    
+    private static FastFloatBuffer getVertices(int size) {
+		if(tmpFloatBuf == null || tmpFloatBuf.capacity() < size) {
+	        ByteBuffer vbb = ByteBuffer.allocateDirect(4 * size);
+	        vbb.order(ByteOrder.nativeOrder());
+	        tmpFloatBuf = FastFloatBuffer.createBuffer(vbb);
+		}
+		tmpFloatBuf.rewind();
+		return tmpFloatBuf;
+	}
+    
+    private static FastFloatBuffer tmpFloatBuf;
 }
