@@ -155,20 +155,20 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.0273439"
-     inkscape:cx="-296.79141"
-     inkscape:cy="324.42363"
+     inkscape:zoom="0.53516385"
+     inkscape:cx="-203.6167"
+     inkscape:cy="612.31304"
      inkscape:document-units="px"
      inkscape:current-layer="Template"
      showgrid="true"
      inkscape:snap-grids="true"
      inkscape:snap-page="false"
      width="800px"
-     inkscape:window-width="1846"
-     inkscape:window-height="1058"
-     inkscape:window-x="66"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1"
+     inkscape:window-width="954"
+     inkscape:window-height="674"
+     inkscape:window-x="174"
+     inkscape:window-y="100"
+     inkscape:window-maximized="0"
      showguides="false"
      inkscape:snap-global="true">
     <inkscape:grid
@@ -1619,6 +1619,17 @@
        att_originalDelay="0"
        att_resetPosition="false"
        att_delayBefore="0" />
+    <image
+       width="26"
+       height="45"
+       xlink:href="data:image/png;base64,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 "
+       id="TeslaCoil"
+       x="-192"
+       y="291"
+       att_name="tesla"
+       type="TeslaCoil"
+       att_startOn="true"
+       att_strikeDistance="0" />
   </g>
   <g
      inkscape:groupmode="layer"

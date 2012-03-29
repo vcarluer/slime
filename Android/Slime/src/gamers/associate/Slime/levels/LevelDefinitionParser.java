@@ -28,6 +28,7 @@ import gamers.associate.Slime.levels.itemdef.SpawnDef;
 import gamers.associate.Slime.levels.itemdef.SpriteDef;
 import gamers.associate.Slime.levels.itemdef.StarDef;
 import gamers.associate.Slime.levels.itemdef.TargetDef;
+import gamers.associate.Slime.levels.itemdef.TeslaCoilDef;
 import gamers.associate.Slime.levels.itemdef.TimeAttackDef;
 import gamers.associate.Slime.levels.itemdef.TriggerTimeDef;
 
@@ -130,6 +131,7 @@ public class LevelDefinitionParser extends LevelDefinition
 		this.itemDefinitions.add(new LiquidSurfaceDef());
 		this.itemDefinitions.add(new TriggerTimeDef());
 		this.itemDefinitions.add(new DirectorDef());
+		this.itemDefinitions.add(new TeslaCoilDef());
 	}
 	
 	private void buildItemTypeMap() {
