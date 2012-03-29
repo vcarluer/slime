@@ -43,8 +43,7 @@ public class TeslaCoil extends GameItemPhysic  implements ITrigerable {
 	
 	private boolean startOn;
 	private float strikeDistance;	
-	
-	private CGPoint tmpTarget;
+
 	private CGPoint ref;	
 	
 	private static float LigthningHeightRatio = 32f / 171f;
@@ -72,7 +71,6 @@ public class TeslaCoil extends GameItemPhysic  implements ITrigerable {
 		this.referenceSize.width = Reference_Width;
 		this.referenceSize.height = Reference_Height;
 		this.tmp = CGPoint.zero();
-		this.tmpTarget = CGPoint.zero();
 	}
 
 	@Override
@@ -165,8 +163,7 @@ public class TeslaCoil extends GameItemPhysic  implements ITrigerable {
 	}
 	
 	@Override
-	public void render(float delta) {
-		this.tmpTarget.set(0, 0);
+	public void render(float delta) {		
 		if (this.isOn) {
 			for(IElectrificable elec : Level.currentLevel.getElectrificables()) {
 				if (elec != null) {
