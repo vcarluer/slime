@@ -7,6 +7,8 @@ import gamers.associate.Slime.items.base.SpriteType;
 
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
+import org.cocos2d.nodes.CCAnimation;
+import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -27,7 +29,7 @@ public class EnergyBall extends GameItemPhysic {
 	public EnergyBall(float x, float y, float width, float height, World world,
 			float worldRatio) {
 		super(x, y, width, height, world, worldRatio);
-		this.spriteType = SpriteType.ANIM_SCALE;
+		this.spriteType = SpriteType.ANIM_SCALE_DIRECT;
 		
 		if (width == 0 && height == 0) {
 			this.width = Default_Width;
@@ -79,7 +81,7 @@ public class EnergyBall extends GameItemPhysic {
 	protected String getReferenceAnimationName() {
 		return Anim_Wait;
 	}
-	
+
 	public void waitAnim() {
 		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Wait), false);
 		CCRepeatForever repeat = CCRepeatForever.action(animate);
@@ -90,7 +92,7 @@ public class EnergyBall extends GameItemPhysic {
 	 * @see gamers.associate.Slime.items.base.GameItemPhysic#handleContact(gamers.associate.Slime.items.base.GameItemPhysic)
 	 */
 	@Override
-	protected void handleContact(ContactInfo item) {	
+	protected void handleContact(ContactInfo item) {
 		if (item.getContactWith() instanceof IElectrificable) {	
 			IElectrificable elect = (IElectrificable) item.getContactWith();
 			elect.electrify();

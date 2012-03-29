@@ -3,6 +3,7 @@ package gamers.associate.Slime.items.base;
 public enum SpriteType {
 	UNKNOWN,
 	ANIM_SCALE,
+	ANIM_SCALE_DIRECT,
 	SINGLE_SCALE,
 	ANIM_REPEAT,	
 	SINGLE_REPEAT,

@@ -288,6 +288,7 @@ public class GameItemCocos extends GameItem {
 				// If a texture for CCSprite is needed here create a dummy transparent texture?
 				sprite = new CCSprite();				
 				break;
+			case ANIM_SCALE_DIRECT:
 			case SINGLE_SCALE:
 			case SINGLE_SCALE_DIRECT:
 				sprite = CCSprite.sprite(this.getReferenceFirstFrame());

@@ -42,7 +42,9 @@ public class TeslaCoil extends GameItemPhysic  implements ITrigerable {
 	private boolean isOn;
 	
 	private boolean startOn;
-	private float strikeDistance;	
+	private float strikeDistance;
+	
+	private float tmpDistance;
 
 	private CGPoint ref;	
 	
@@ -196,10 +198,26 @@ public class TeslaCoil extends GameItemPhysic  implements ITrigerable {
 		super.draw(gl);
 		
 		if (this.isOn) {
+			if (this.tmpDistance < this.strikeDistance) {
+				this.tmpDistance += 10f;
+				if (this.tmpDistance > this.strikeDistance) {
+					this.tmpDistance = this.strikeDistance;
+				}
+			}						
+		} else {
+			if (this.tmpDistance > 0) {
+				this.tmpDistance -= 10f;
+				if (this.tmpDistance < 0) {
+					this.tmpDistance = 0;
+				}
+			}			
+		}
+		
+		if (this.tmpDistance > 0) {
 			gl.glEnable(GL10.GL_LINE_SMOOTH);
 			gl.glLineWidth(1.0f);
             gl.glColor4f(0f, 0f, 1.0f, 0.05f);			
-            Util.ccDrawCirclePlain(gl, this.getPosition(), this.strikeDistance, ccMacros.CC_DEGREES_TO_RADIANS(90), 50);
+            Util.ccDrawCirclePlain(gl, this.getPosition(), this.tmpDistance, ccMacros.CC_DEGREES_TO_RADIANS(90), 50);
 		}
 	}
 

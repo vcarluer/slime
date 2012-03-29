@@ -24,5 +24,6 @@ public class EnergyBallFactory extends GameItemPhysicFactory<EnergyBall> {
 
 	@Override
 	protected void runFirstAnimations(EnergyBall item) {
+		item.waitAnim();
 	}
 }
