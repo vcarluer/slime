@@ -80,7 +80,8 @@ public class LevelHome extends LevelDefinitionHardCoded {
 		float targetCenterY = level.getLevelHeight() / 2f;
 		SlimeFactory.Target.create("target", targetCenterX, targetCenterY, 16, 16);
 		SlimeFactory.Platform.create(targetCenterX, targetCenterY, 32f, 32f, Platform.Bump);
-		// SlimeFactory.TeslaCoil.create(targetCenterX, targetCenterY + 16f + TeslaCoil.Default_Height / 2f, TeslaCoil.Default_Width, TeslaCoil.Default_Height, "tesla", true, 400f);
+		SlimeFactory.TeslaCoil.create(targetCenterX, targetCenterY + 16f + TeslaCoil.Default_Height / 2f + 50f, TeslaCoil.Default_Width, TeslaCoil.Default_Height, "tesla", true, 400f);
+		SlimeFactory.EnergyBall.create("ball", 50, targetCenterY, 0, 0); 
 		
 		SlimeFactory.HomeLevelHandler.create().setPortal(spawnPortal);
 		

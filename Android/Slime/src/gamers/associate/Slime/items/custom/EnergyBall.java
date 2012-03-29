@@ -16,7 +16,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class EnergyBall extends GameItemPhysic {	
-	public static String Anim_Wait = "energy-ball-01";
+	public static String Anim_Wait = "energy-ball";
 	private static float Default_Width = 37;
 	private static float Default_Height = 37;
 	public static float Reference_Width = 37;
@@ -92,10 +92,15 @@ public class EnergyBall extends GameItemPhysic {
 	@Override
 	protected void handleContact(ContactInfo item) {	
 		if (item.getContactWith() instanceof IElectrificable) {	
-			IElectrificable elect = (IElectrificable) item;
+			IElectrificable elect = (IElectrificable) item.getContactWith();
 			elect.electrify();
 		}
 		
 		super.handleContact(item);
+	}
+
+	@Override
+	protected void runReferenceAction() {
+		this.waitAnim();
 	}
 }
