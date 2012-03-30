@@ -190,7 +190,7 @@ public class Camera extends GameItemPhysic {
 				if (this.targets != null) {								
 					if (this.spoted) {						
 						for(ITrigerable target : this.targets) {							
-							target.trigger(this, LaserGun.DIRECT_SWITCH);
+							target.trigger(this, "");
 						}
 					}								
 				}
