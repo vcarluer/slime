@@ -1317,4 +1317,8 @@ public class Level implements IGameItemHandler {
 	public List<IElectrificable> getElectrificables() {
 		return this.electrificables;
 	}
+	
+	public List<Slimy> aliveList() {
+		return this.aliveSlimyList;
+	}
 }

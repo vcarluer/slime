@@ -136,6 +136,39 @@ public class Util {
         gl.glEnable(GL_TEXTURE_2D);	
     }
     
+    public static void ccDrawTrianglePlain(GL10 gl, CGPoint v0, CGPoint v1, CGPoint v2) {
+
+//        ByteBuffer vbb = ByteBuffer.allocateDirect(4 * 2 * (segments + 2));
+//        vbb.order(ByteOrder.nativeOrder());
+//        FloatBuffer vertices = vbb.asFloatBuffer();
+        int count = 3;
+    	FastFloatBuffer vertices = getVertices(2 * (count));
+        
+        vertices.put(v0.x);
+        vertices.put(v0.y);
+        vertices.put(v1.x);
+        vertices.put(v1.y);
+        vertices.put(v2.x);
+        vertices.put(v2.y);        
+        
+        vertices.position(0);
+
+        // Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+        // Needed states: GL_VERTEX_ARRAY, 
+        // Unneeded states: GL_TEXTURE_2D, GL_TEXTURE_COORD_ARRAY, GL_COLOR_ARRAY	
+        gl.glDisable(GL_TEXTURE_2D);
+        gl.glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        gl.glDisableClientState(GL_COLOR_ARRAY);
+
+        gl.glVertexPointer(2, GL_FLOAT, 0, vertices.bytes);
+        gl.glDrawArrays(GL10.GL_TRIANGLES, 0, count);
+
+        // restore default state
+        gl.glEnableClientState(GL_COLOR_ARRAY);
+        gl.glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+        gl.glEnable(GL_TEXTURE_2D);	
+    }
+    
     private static FastFloatBuffer getVertices(int size) {
 		if(tmpFloatBuf == null || tmpFloatBuf.capacity() < size) {
 	        ByteBuffer vbb = ByteBuffer.allocateDirect(4 * size);
@@ -147,4 +180,30 @@ public class Util {
 	}
     
     private static FastFloatBuffer tmpFloatBuf;
+    
+    public static float det(CGPoint u, CGPoint v) {
+    	// det(u v) = u.v = uxvy-uyvx
+    	return u.x*v.y - u.y*v.x;
+    }
+    
+    // http://mathworld.wolfram.com/TriangleInterior.html
+    public static float solveA(CGPoint v0, CGPoint v1, CGPoint v2, CGPoint v) {
+    	return (det(v, v2) - det(v0, v2)) / (det(v1, v2));    	
+    }
+    
+    public static float solveB(CGPoint v0, CGPoint v1, CGPoint v2, CGPoint v) {
+    	return -1 * ((det(v, v1) - det(v0, v1)) / det(v1, v2));
+    }
+    
+    /** Is point in triangle 
+     @param v0 start
+     @param v1 vector1
+     @param v2 vector2
+     @param v point to test
+     **/
+    public static boolean inTriangle(CGPoint v0, CGPoint v1, CGPoint v2, CGPoint v) {
+    	float a = solveA(v0, v1, v2, v);
+    	float b = solveB(v0, v1, v2, v);
+    	return a > 0 && b > 0 && a + b < 1;
+    }
 }

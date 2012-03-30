@@ -3,6 +3,8 @@ package gamers.associate.Slime.levels;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.custom.BumperAngle;
+import gamers.associate.Slime.items.custom.Camera;
+import gamers.associate.Slime.items.custom.EnergyBallGun;
 import gamers.associate.Slime.items.custom.LaserGun;
 import gamers.associate.Slime.items.custom.LiquidSurface;
 import gamers.associate.Slime.items.custom.Platform;
@@ -82,7 +84,8 @@ public class LevelHome extends LevelDefinitionHardCoded {
 		SlimeFactory.Platform.create("centerPlat", targetCenterX, targetCenterY, 32f, 32f, Platform.Bump);
 		SlimeFactory.TeslaCoil.create(targetCenterX, targetCenterY + 16f + TeslaCoil.Default_Height / 2f + 50f, TeslaCoil.Default_Width, TeslaCoil.Default_Height, "tesla", true, 400f);
 		// SlimeFactory.EnergyBall.create("ball", 50, targetCenterY, 0, 0);
-		SlimeFactory.EnergyBallGun.createBL(0, targetCenterY, 0, 0, "enGun", "target", true, 0, 0).setAngle(180f);
+		SlimeFactory.EnergyBallGun.createBL(0, targetCenterY, EnergyBallGun.Default_Width, EnergyBallGun.Default_Height, "enGun", "target", true, 0, 0).setAngle(180f);
+		SlimeFactory.Camera.createBL("camera", 0, targetCenterY + 100f, Camera.Default_Width, Camera.Default_Height, "enGun", true, 0, 0);
 		
 		SlimeFactory.HomeLevelHandler.create().setPortal(spawnPortal);
 		
