@@ -11,6 +11,7 @@ import gamers.associate.Slime.levels.itemdef.BecBunsenDef;
 import gamers.associate.Slime.levels.itemdef.BoxDef;
 import gamers.associate.Slime.levels.itemdef.BumperAngleDef;
 import gamers.associate.Slime.levels.itemdef.ButtonDef;
+import gamers.associate.Slime.levels.itemdef.CameraDef;
 import gamers.associate.Slime.levels.itemdef.CircularSawDef;
 import gamers.associate.Slime.levels.itemdef.DirectorDef;
 import gamers.associate.Slime.levels.itemdef.EnergyBallDef;
@@ -136,6 +137,7 @@ public class LevelDefinitionParser extends LevelDefinition
 		this.itemDefinitions.add(new TeslaCoilDef());
 		this.itemDefinitions.add(new EnergyBallDef());
 		this.itemDefinitions.add(new EnergyBallGunDef());
+		this.itemDefinitions.add(new CameraDef());
 	}
 	
 	private void buildItemTypeMap() {
