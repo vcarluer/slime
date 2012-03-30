@@ -22,8 +22,8 @@ public class TeslaCoilDef extends ItemDefinition {
 
 	@Override
 	protected void parseNext(String[] infos, int start) {
-		this.startOn = Boolean.valueOf(infos[start]).booleanValue();
-		this.strikeDistance = Float.valueOf(infos[start+1]).floatValue();
+		this.startOn = Boolean.parseBoolean(infos[start]);
+		this.strikeDistance = Float.parseFloat(infos[start+1]);
 	}
 
 	@Override

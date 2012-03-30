@@ -23,7 +23,7 @@ public class TriggerTimeDef extends ItemDefinition {
 	@Override
 	protected void parseNext(String[] infos, int start) {
 		this.target = infos[start];
-		this.interval = Float.valueOf(infos[start+1]).floatValue();
+		this.interval = Float.parseFloat(infos[start+1]);
 	}
 
 	@Override
