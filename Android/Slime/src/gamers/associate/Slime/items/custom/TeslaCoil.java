@@ -216,7 +216,12 @@ public class TeslaCoil extends GameItemPhysic  implements ITrigerable {
 		if (this.tmpDistance > 0) {
 			gl.glEnable(GL10.GL_LINE_SMOOTH);
 			gl.glLineWidth(1.0f);
-            gl.glColor4f(0f, 0f, 1.0f, 0.05f);			
+			if (this.lightning != null)	 {
+				gl.glColor4f(1.0f, 0f, 0f, 0.05f);
+			} else {
+				gl.glColor4f(0f, 0f, 1.0f, 0.05f);
+			}
+            			
             Util.ccDrawCirclePlain(gl, this.getPosition(), this.tmpDistance, ccMacros.CC_DEGREES_TO_RADIANS(90), 50);
 		}
 	}
