@@ -253,6 +253,11 @@ class Smile( inkex.Effect ):
 				print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_startOn"))+";"+str(child.get("att_strikeDistance"))
 				return True;
 				
+			# EnergyBallGun
+			if str(child.get("type")) == 'EnergyBallGun':
+				print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)+";"+str(child.get("att_target"))+";"+str(child.get("att_isOn"))+";"+str(child.get("att_ballSpeed"))+";"+str(child.get("att_waitTime"))
+				return True;
+				
 			# Standard Item
 			print  str(child.get("type"))+";"+str(child.get("att_name"))+";"+str(x)+";"+str(y)+";"+str(width)+";"+str(height)+";"+str(angle)
 			return True;
