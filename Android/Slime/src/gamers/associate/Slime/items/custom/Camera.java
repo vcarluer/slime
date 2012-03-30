@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import org.cocos2d.actions.base.CCRepeatForever;
+import org.cocos2d.actions.interval.CCRotateBy;
+import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.config.ccMacros;
 import org.cocos2d.types.CGPoint;
 
@@ -223,5 +226,13 @@ public class Camera extends GameItemPhysic {
 
 	public void setViewDistance(float viewDistance) {
 		this.viewDistance = viewDistance;
+	}
+	
+	public void rotateBy(float time, float rotationAngle) {
+		CCRotateBy rot = CCRotateBy.action(time, rotationAngle);
+		CCRotateBy rot2 = CCRotateBy.action(time, -rotationAngle);
+		CCSequence seq = CCSequence.actions(rot, rot.reverse(), rot2, rot2.reverse());
+		CCRepeatForever repeat = CCRepeatForever.action(seq);
+		this.getSprite().runAction(repeat);
 	}
 }
