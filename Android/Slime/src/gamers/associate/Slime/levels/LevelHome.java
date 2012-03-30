@@ -87,8 +87,7 @@ public class LevelHome extends LevelDefinitionHardCoded {
 		SlimeFactory.EnergyBallGun.createBL(0, targetCenterY, EnergyBallGun.Default_Width, EnergyBallGun.Default_Height, "enGun", "target", true, 0, 0).setAngle(180f);
 		SlimeFactory.Target.create("target2", 0, targetCenterY - 100f, 8, 8);
 		SlimeFactory.LaserGun.create(targetCenterX - LaserGun.Default_Width, targetCenterY - 100f, LaserGun.Default_Width, LaserGun.Default_Height, "laser2", "target2", false);
-		Camera camera = SlimeFactory.Camera.createBL("camera", 0, targetCenterY + 100f, Camera.Default_Width, Camera.Default_Height, "laser2", true, 0, 0);
-		camera.rotateBy(2, 30);
+		SlimeFactory.Camera.createBL("camera", 0, targetCenterY + 100f, Camera.Default_Width, Camera.Default_Height, "laser2", true, 0, 0, 2, 30);		
 		
 		SlimeFactory.HomeLevelHandler.create().setPortal(spawnPortal);
 		

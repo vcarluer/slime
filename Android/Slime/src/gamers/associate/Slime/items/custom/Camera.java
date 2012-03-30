@@ -51,8 +51,12 @@ public class Camera extends GameItemPhysic {
 	private boolean spoted;
 	private boolean vComputed;
 	
+	private float rotateTime;
+	private float rotateAngle;
+	
 	public Camera(float x, float y, float width, float height, World world,
-			float worldRatio, String targetName, boolean startOn, float fov, float viewDistance) {
+			float worldRatio, String targetName, boolean startOn, float fov, float viewDistance,
+			float rotateTime, float rotateAngle) {
 		super(x, y, width, height, world, worldRatio);
 		// temp scale direct 
 		this.spriteType = SpriteType.SINGLE_SCALE_DIRECT;
@@ -61,6 +65,8 @@ public class Camera extends GameItemPhysic {
 		this.startOn = startOn;
 		this.setFov(Default_fov);
 		this.setViewDistance(Default_distance);
+		this.setRotateTime(rotateTime);
+		this.setRotateAngle(rotateAngle);
 		
 		if (fov > 0) {
 			this.setFov(fov);
@@ -202,6 +208,9 @@ public class Camera extends GameItemPhysic {
 
 	public void initState() {
 		this.setOn(this.isStartOn());
+		if (this.getRotateTime() > 0 && this.getRotateAngle() > 0) {
+			this.startRotation();
+		}
 	}
 
 	public String getTargetName() {
@@ -228,11 +237,33 @@ public class Camera extends GameItemPhysic {
 		this.viewDistance = viewDistance;
 	}
 	
-	public void rotateBy(float time, float rotationAngle) {
-		CCRotateBy rot = CCRotateBy.action(time, rotationAngle);
-		CCRotateBy rot2 = CCRotateBy.action(time, -rotationAngle);
+	public void rotateBy(float time, float rotationAngle) {		
+		this.setRotateTime(time);
+		this.setRotateAngle(rotationAngle);
+		this.startRotation();		
+	}
+	
+	public void startRotation() {
+		CCRotateBy rot = CCRotateBy.action(this.getRotateTime(), this.getRotateAngle());
+		CCRotateBy rot2 = CCRotateBy.action(this.getRotateTime(), -this.getRotateAngle());
 		CCSequence seq = CCSequence.actions(rot, rot.reverse(), rot2, rot2.reverse());
 		CCRepeatForever repeat = CCRepeatForever.action(seq);
 		this.getSprite().runAction(repeat);
 	}
+
+	public float getRotateTime() {
+		return rotateTime;
+	}
+
+	public void setRotateTime(float rotateTime) {
+		this.rotateTime = rotateTime;
+	}
+
+	public float getRotateAngle() {
+		return rotateAngle;
+	}
+
+	public void setRotateAngle(float rotateAngle) {
+		this.rotateAngle = rotateAngle;
+	}		
 }
