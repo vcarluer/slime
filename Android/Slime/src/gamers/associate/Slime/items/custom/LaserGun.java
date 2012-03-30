@@ -35,6 +35,7 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 	private static float Default_Beam_Offset = 12f;
 	
 	private boolean isOn;
+	protected boolean turningOn;
 	
 	private boolean startOn;
 	private String target;
@@ -103,7 +104,12 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 	}
 	
 	public void turnOn() {
-		if (!this.isOn) {						
+		this.turnOn(false);
+	}
+	
+	public void turnOn(boolean force) {
+		if (!this.isOn() || force) {		
+			this.turningOn = true;
 			CCAnimate animateStart = CCAnimate.action(this.animationList.get(Anim_Firing), false);
 			CCCallFunc callStartEnded = CCCallFunc.action(this, "turnedOn");
 			CCSequence sequence = CCSequence.actions(animateStart, callStartEnded);
@@ -112,18 +118,19 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 	}
 	
 	public void turnedOn() {
+		this.turningOn = false;
 		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_On), false);
 		CCRepeatForever repeat = CCRepeatForever.action(animate);
 		this.sprite.runAction(repeat);
-		this.isOn = true;		
+		this.setOn(true);		
 	}
 	
 	public void turnOff() {
-		if (this.isOn) {			
+		if (this.isOn()) {			
 			CCAnimate animateStart = CCAnimate.action(this.animationList.get(Anim_Firing), false);		
 			CCCallFunc callStartEnded = CCCallFunc.action(this, "turnedOff");
 			CCSequence sequence = CCSequence.actions(animateStart.reverse(), callStartEnded);
-			this.isOn = false;
+			this.setOn(false);
 			this.sprite.runAction(sequence);
 		}
 	}
@@ -132,11 +139,11 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 		CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Wait), false);
 		CCRepeatForever repeat = CCRepeatForever.action(animate);
 		this.sprite.runAction(repeat);
-		this.isOn = false;
+		this.setOn(false);
 	}
 
 	public void trigger(Object source, String data) {
-		if (this.isOn) {
+		if (this.isOn()) {
 			this.turnOff();
 		}
 		else {
@@ -200,7 +207,7 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 	public void render(float delta) {
 		if (this.getBeam() != null) {			
 			for (LaserBeam b : this.getBeam()) {
-				if (this.isOn) {
+				if (this.isOn()) {
 					b.switchOn();
 					b.refreshBeam();
 				}
@@ -209,5 +216,13 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 				}
 			}						
 		}
+	}
+
+	public boolean isOn() {
+		return isOn;
+	}
+
+	public void setOn(boolean isOn) {
+		this.isOn = isOn;
 	}
 }

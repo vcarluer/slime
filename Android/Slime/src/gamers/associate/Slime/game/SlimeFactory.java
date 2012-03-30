@@ -10,6 +10,7 @@ import gamers.associate.Slime.items.custom.CircularSawFactory;
 import gamers.associate.Slime.items.custom.CocosFactory;
 import gamers.associate.Slime.items.custom.DirectorFactory;
 import gamers.associate.Slime.items.custom.EnergyBallFactory;
+import gamers.associate.Slime.items.custom.EnergyBallGunFactory;
 import gamers.associate.Slime.items.custom.EvacuationPlugfactory;
 import gamers.associate.Slime.items.custom.GateFactory;
 import gamers.associate.Slime.items.custom.GoalPortalFactory;
@@ -93,6 +94,7 @@ public abstract class SlimeFactory {
 	public static TeslaCoilFactory TeslaCoil = new TeslaCoilFactory();
 	public static LightningFactory Lightning = new LightningFactory();
 	public static EnergyBallFactory EnergyBall = new EnergyBallFactory();
+	public static EnergyBallGunFactory EnergyBallGun = new EnergyBallGunFactory();
 	
 	public static StarCounterFactory StarCounter = new StarCounterFactory(); // Not attached in attach All but in HudLayer	
 		
@@ -134,6 +136,7 @@ public abstract class SlimeFactory {
 		Director.attach(level);
 		TeslaCoil.attach(level, attachNode, attachWorld, attachWorldRatio);
 		EnergyBall.attach(level, attachNode, attachWorld, attachWorldRatio);
+		EnergyBallGun.attach(level, attachNode, attachWorld, attachWorldRatio);
 		
 		SpriteSheetFactory.attachAll(attachNode);
 		isAttached = true;
@@ -170,6 +173,7 @@ public abstract class SlimeFactory {
 		Director.detach();
 		TeslaCoil.detach();
 		EnergyBall.detach();
+		EnergyBallGun.detach();
 		
 		LevelGeneratorCorridor2.detach();
 		LevelGeneratorRectangle2.detach();
@@ -206,6 +210,7 @@ public abstract class SlimeFactory {
 		EvacuationPlug.destroy();
 		TeslaCoil.destroy();
 		EnergyBall.destroy();
+		EnergyBallGun.destroy();
 		
 		LevelGeneratorCorridor2.destroy();
 		LevelGeneratorRectangle2.destroy();

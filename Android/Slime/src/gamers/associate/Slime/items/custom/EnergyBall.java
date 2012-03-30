@@ -1,14 +1,16 @@
 package gamers.associate.Slime.items.custom;
 
 import gamers.associate.Slime.game.ContactInfo;
+import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.IElectrificable;
 import gamers.associate.Slime.items.base.SpriteType;
 
 import org.cocos2d.actions.base.CCRepeatForever;
+import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCAnimate;
-import org.cocos2d.nodes.CCAnimation;
-import org.cocos2d.nodes.CCSpriteFrame;
+import org.cocos2d.actions.interval.CCMoveTo;
+import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -99,10 +101,44 @@ public class EnergyBall extends GameItemPhysic {
 		}
 		
 		super.handleContact(item);
+		this.removeMe();
 	}
 
 	@Override
 	protected void runReferenceAction() {
 		this.waitAnim();
+	}
+	
+	/*
+	 * speed = px / sec
+	 */
+	public void moveTo(CGPoint target, float speed) {
+		this.move = true;
+		this.direction = CGPoint.ccpNormalize(CGPoint.ccpSub(target, this.getPosition()));
+		this.speed = speed;		
+	}
+	
+	private boolean move;
+	private CGPoint direction;
+	private float speed;
+	
+	@Override
+	public void render(float delta) {		
+		super.render(delta);
+		if (this.move) {
+			if (this.direction != null && this.speed > 0) {
+				float x = this.getPosition().x + this.getMoveCoord(this.direction.x, delta);
+				float y = this.getPosition().y + this.getMoveCoord(this.direction.y, delta);
+				this.getSprite().setPosition(x, y);				
+			}
+		}
+	}
+	
+	private float getMoveCoord(float directionCoord, float delta) {
+		return directionCoord * this.speed * (delta / Level.currentLevel.getNormalTimeRatio());
+	}
+	
+	protected void removeMe() {
+		Level.currentLevel.addItemToRemove(this);
 	}
 }
