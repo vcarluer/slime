@@ -22,6 +22,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class LaserGun extends GameItemPhysic implements ITrigerable {	
+	public static final String DIRECT_SWITCH = "directSwitch";
 	public static String Anim_On = "laser-on";
 	public static String Anim_Wait = "laser-wait";
 	public static String Anim_Firing = "laser-firing";
@@ -143,12 +144,21 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 	}
 
 	public void trigger(Object source, String data) {
-		if (this.isOn()) {
-			this.turnOff();
-		}
-		else {
-			this.turnOn();
-		}
+		if (data.equals(DIRECT_SWITCH)) {
+			if (this.isOn()) {
+				this.turnedOff();
+			}
+			else {
+				this.turnedOn();
+			}
+		} else {
+			if (this.isOn()) {
+				this.turnOff();
+			}
+			else {
+				this.turnOn();
+			}
+		}		
 	}
 	
 	public void setStartOn(boolean startOn) {

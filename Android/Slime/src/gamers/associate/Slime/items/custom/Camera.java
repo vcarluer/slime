@@ -181,7 +181,7 @@ public class Camera extends GameItemPhysic {
 				if (this.targets != null) {								
 					if (this.spoted) {						
 						for(ITrigerable target : this.targets) {							
-							target.trigger(this, "");
+							target.trigger(this, LaserGun.DIRECT_SWITCH);
 						}
 					}								
 				}
@@ -192,7 +192,7 @@ public class Camera extends GameItemPhysic {
 	private void getTargets() {
 		if (this.targets == null) {
 			if (this.getTargetName() != null && this.getTargetName() != "") {
-				this.targets = new ArrayList<ITrigerable>();
+				this.targets = Level.currentLevel.getTrigerables(this.getTargetName());
 			}
 		}				
 	}
