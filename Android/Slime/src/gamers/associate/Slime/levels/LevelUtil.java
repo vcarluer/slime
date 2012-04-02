@@ -48,15 +48,18 @@ public class LevelUtil {
 		float h2 = s.height / 2;			
 		float x = level.getLevelOrigin().x;
 		float y = level.getLevelOrigin().y;
+		float glassWidth = 10f;
 		
 		// up
-		SlimeFactory.Platform.createWallBL("GBG", -siW + x, h + y, w + sw, siH);
+		SlimeFactory.Platform.createWallBL("GBG", -glassWidth + x, h + y, w + 2 * glassWidth, glassWidth);
 		//right
-		SlimeFactory.Platform.createWallBL("GBG", w + x, y, siW, h);
+		SlimeFactory.Platform.createWallBL("GBG", w + x, y, glassWidth, h);
 		// bottom
-		SlimeFactory.Platform.createWallBL("GBG", -siW + x, -siH + y, w + sw, siH);
+		SlimeFactory.Platform.createWallBL("GBG", -glassWidth + x, -glassWidth + y, w + 2 * glassWidth, glassWidth);
 		// left
-		SlimeFactory.Platform.createWallBL("GBG", -siW + x, y, siW, h);
+		SlimeFactory.Platform.createWallBL("GBG", -glassWidth + x, y, glassWidth, h);
+		// Ground
+		SlimeFactory.Platform.createWallBL("GBG", -siW + x, -siH + y, w + sw, siH - glassWidth);
 				
 		level.setLevelOrigin(level.getLevelOrigin().x - siW, level.getLevelOrigin().y - siH);
 		level.setLevelSize(w + sw, h + sh);
