@@ -217,9 +217,9 @@ public class TeslaCoil extends GameItemPhysic  implements ITrigerable {
 			gl.glEnable(GL10.GL_LINE_SMOOTH);
 			gl.glLineWidth(1.0f);
 			if (this.lightning != null)	 {
-				gl.glColor4f(1.0f, 0f, 0f, 0.05f);
+				SlimeFactory.triggerZoneAlertColor(gl);
 			} else {
-				gl.glColor4f(0f, 0f, 1.0f, 0.05f);
+				SlimeFactory.triggerZoneColor(gl);				
 			}
             			
             Util.ccDrawCirclePlain(gl, this.getPosition(), this.tmpDistance, ccMacros.CC_DEGREES_TO_RADIANS(90), 50);

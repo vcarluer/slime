@@ -1,5 +1,7 @@
 package gamers.associate.Slime.game;
 
+import javax.microedition.khronos.opengles.GL10;
+
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.items.custom.BecBunsenFactory;
@@ -234,5 +236,13 @@ public abstract class SlimeFactory {
 		}
 				
 		SGSDensity = Density / SGSDensityBase;
+	}
+	
+	public static void triggerZoneColor(GL10 gl) {
+		gl.glColor4f(0f, 0f, 1.0f, 0.01f);		
+	}
+	
+	public static void triggerZoneAlertColor(GL10 gl) {
+		gl.glColor4f(1.0f, 0f, 0f, 0.01f);
 	}
 }

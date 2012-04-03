@@ -18,6 +18,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.GameItemPhysic;
@@ -54,6 +55,9 @@ public class Camera extends GameItemPhysic {
 	private float rotateTime;
 	private float rotateAngle;
 	
+	private CGPoint tmp1;
+	private CGPoint tmp2;
+	
 	public Camera(float x, float y, float width, float height, World world,
 			float worldRatio, String targetName, boolean startOn, float fov, float viewDistance,
 			float rotateTime, float rotateAngle) {
@@ -88,6 +92,8 @@ public class Camera extends GameItemPhysic {
 		this.zero = CGPoint.zero();
 		this.v1 = CGPoint.zero();
 		this.v2 = CGPoint.zero();
+		this.tmp1 = CGPoint.zero();
+		this.tmp2 = CGPoint .zero();
 	}
 
 	@Override
@@ -152,13 +158,19 @@ public class Camera extends GameItemPhysic {
 			gl.glEnable(GL10.GL_LINE_SMOOTH);
 			gl.glLineWidth(1.0f);
 			if (this.spoted)	 {
-				gl.glColor4f(1.0f, 0f, 0f, 0.05f);
+				SlimeFactory.triggerZoneAlertColor(gl);
+				
 			} else {
-				gl.glColor4f(0f, 0f, 1.0f, 0.05f);
+				SlimeFactory.triggerZoneColor(gl);
 			}
 	        			
 	        CGPoint v0 = this.getPosition();
-			Util.ccDrawTrianglePlain(gl, v0, CGPoint.ccpAdd(v0, this.v1), CGPoint.ccpAdd(v0, this.v2));
+	        
+	        this.tmp1.x = this.v1.x + v0.x;
+	        this.tmp1.y = this.v1.y + v0.y;
+	        this.tmp2.x = this.v2.x + v0.x;
+	        this.tmp2.y = this.v2.y + v0.y;
+			Util.ccDrawTrianglePlain(gl, v0, this.tmp1, this.tmp2);
 		}		
 	}
 
@@ -168,11 +180,24 @@ public class Camera extends GameItemPhysic {
 		boolean previousSpoted = this.spoted;
 		if (this.isOn) {
 			float rad = -1.0f * ccMacros.CC_DEGREES_TO_RADIANS(this.angle);
-			this.targetPoint = CGPoint.ccpMult(CGPoint.ccpForAngle(rad), this.viewDistance);
+			this.tmp1.x = (float) Math.cos(rad);
+			this.tmp1.y = (float) Math.sin(rad);
+			
+			this.targetPoint.x = this.tmp1.x * this.viewDistance;
+			this.targetPoint.y = this.tmp1.y * this.viewDistance;
 			
 			float radAngle = -1.0f * ccMacros.CC_DEGREES_TO_RADIANS(this.fov);
-			this.v1 = CGPoint.ccpRotateByAngle(this.targetPoint, this.zero, radAngle);
-			this.v2 = CGPoint.ccpRotateByAngle(this.targetPoint, this.zero, - radAngle);
+												
+	        float t = this.targetPoint.x;
+	        float cosa1 = (float)Math.cos(radAngle);
+	        float sina1 = (float)Math.sin(radAngle);
+	        this.v1.x = t*cosa1 - this.targetPoint.y*sina1;
+	        this.v1.y = t*sina1 + this.targetPoint.y*cosa1;	        
+	        float cosa2 = (float)Math.cos(-radAngle);
+	        float sina2 = (float)Math.sin(-radAngle);
+	        this.v2.x = t*cosa2 - this.targetPoint.y*sina2;
+	        this.v2.y = t*sina2 + this.targetPoint.y*cosa2;	        
+			
 			this.vComputed = true;
 			
 			this.spoted = false;
