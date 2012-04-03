@@ -187,12 +187,15 @@ public class GameItemCocos extends GameItem {
 		//this.transformTexture();
 	}
 	
+	
+	
 	@Override
 	public void render(float delta) {
 		if (this.sprite != null) {
-			this.positionChanged = this.position.x != this.sprite.getPosition().x || this.position.y != this.getSprite().getPosition().y;
+			// get sprite position reference (not copy)
+			this.positionChanged = this.position.x != this.sprite.getPositionRef().x || this.position.y != this.getSprite().getPositionRef().y;
 			if (this.positionChanged) {
-				this.position = this.sprite.getPosition();
+				this.position = this.sprite.getPositionRef();
 			}
 			
 			this.angleChanged = this.angle != this.sprite.getRotation();

@@ -45,11 +45,11 @@ public class EnergyBallGun extends LaserGun {
 			for(ITrigerable target : this.targets) {
 				CGPoint sourcePoint = this.getSourcePoint();
 				EnergyBall ball = SlimeFactory.EnergyBall.create(sourcePoint.x, sourcePoint.y);
-				ball.moveTo(target.getPosition(), this.ballSpeed);
-				
-				this.turnedOff();
-				this.nextShoot = this.waitTime;
+				ball.moveTo(target.getPosition(), this.ballSpeed);												
 			}
+			
+			this.nextShoot = this.waitTime;
+			this.turnedOff();
 		} else {
 			if (!this.turningOn) {
 				this.nextShoot -= delta;
