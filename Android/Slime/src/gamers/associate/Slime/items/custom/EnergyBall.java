@@ -28,6 +28,8 @@ public class EnergyBall extends GameItemPhysic {
 	private static float Default_Body_Width = 15;
 	private static float Default_Body_Height = 15;
 	
+	private CGPoint tmp;
+	
 	public EnergyBall(float x, float y, float width, float height, World world,
 			float worldRatio) {
 		super(x, y, width, height, world, worldRatio);
@@ -43,6 +45,9 @@ public class EnergyBall extends GameItemPhysic {
 		
 		this.referenceSize.width = Reference_Width;
 		this.referenceSize.height = Reference_Height;
+		
+		this.tmp = CGPoint.zero();
+		this.direction = CGPoint.zero();
 	}
 
 	@Override
@@ -114,7 +119,13 @@ public class EnergyBall extends GameItemPhysic {
 	 */
 	public void moveTo(CGPoint target, float speed) {
 		this.move = true;
-		this.direction = CGPoint.ccpNormalize(CGPoint.ccpSub(target, this.getPosition()));
+		
+		// this.direction = CGPoint.ccpNormalize(CGPoint.ccpSub(target, this.getPosition()));
+		this.tmp.x = target.x - this.position.x;
+		this.tmp.y = target.y - this.position.y;
+		float ln = CGPoint.ccpLength(this.tmp);
+		this.direction.x = this.tmp.x / ln;
+		this.direction.y = this.tmp.y / ln;		
 		this.speed = speed;		
 	}
 	
@@ -126,7 +137,7 @@ public class EnergyBall extends GameItemPhysic {
 	public void render(float delta) {		
 		super.render(delta);
 		if (this.move) {
-			if (this.direction != null && this.speed > 0) {
+			if (this.speed > 0 && (this.direction.x != 0 || this.direction.y != 0)) {
 				float x = this.getPosition().x + this.getMoveCoord(this.direction.x, delta);
 				float y = this.getPosition().y + this.getMoveCoord(this.direction.y, delta);
 				this.getSprite().setPosition(x, y);				
