@@ -13,8 +13,7 @@ public class Lightning extends GameItem {
 	public static final float InfiniteLife = -666f;
 	private static final int COUNT = 4;
 	private static final String FRAME = "lightning";
-	private static final String PLIST = "items";
-	private static final float kCGPointEpsilon = 0.00000012f;
+	private static final String PLIST = "items";	
 	private CGPoint tmp;
 	private CGPoint ref;
 	private CGPoint tmpDist;
@@ -41,11 +40,10 @@ public class Lightning extends GameItem {
 		this.source = source;
 		this.target = target;
 		this.life = life;
-		this.ref = CGPoint.make(1, 0);
-		float ln = CGPoint.ccpLength(this.ref);
-		this.ref.x = this.ref.x /  ln;
-		this.ref.y = this.ref.y /  ln;
 		
+		// Normalized ref
+		this.ref = CGPoint.make(1, 0);
+			
 		this.tmp = CGPoint.zero();
 		this.tmpDist = new CGPoint();
 		
@@ -84,7 +82,7 @@ public class Lightning extends GameItem {
 	        
 	        float dot = this.ref.x * this.tmp.x + this.ref.y * this.tmp.y;	        
 	        float angle = (float)Math.atan2(this.ref.x * this.tmp.y - this.ref.y * this.tmp.x, dot);
-	        if( Math.abs(angle) < kCGPointEpsilon ) angle = 0.f;		
+	        if( Math.abs(angle) < SlimeFactory.kCGPointEpsilon ) angle = 0.f;		
 	        // end calculate angle
 	        
 			float newAngle = - ccMacros.CC_RADIANS_TO_DEGREES(angle);

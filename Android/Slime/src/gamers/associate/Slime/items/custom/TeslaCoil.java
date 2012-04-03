@@ -44,17 +44,12 @@ public class TeslaCoil extends GameItemPhysic  implements ITrigerable {
 	private boolean startOn;
 	private float strikeDistance;
 	
-	private float tmpDistance;
-
-	private CGPoint ref;	
-	
-	private static float LigthningHeightRatio = 32f / 171f;
+	private float tmpDistance;	
 
 	public TeslaCoil(float x, float y, float width, float height, World world,
 			float worldRatio, boolean startOn, float strikeDistance) {
 		super(x, y, width, height, world, worldRatio);
-		
-		this.ref = CGPoint.make(1, 0);
+
 		this.startOn = startOn;
 		this.setStrikeDistance(strikeDistance);
 		

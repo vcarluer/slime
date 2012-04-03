@@ -3,6 +3,7 @@ package gamers.associate.Slime.items.custom;
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.GameItemPhysic;
@@ -33,6 +34,7 @@ public class LaserBeam extends GameItemPhysic {
 	private CGPoint diff;
 	private ITrigerable targetItem;
 	private LaserGun sourceItem;
+	private CGPoint tmp;
 	
 	public LaserBeam(float x, float y, float width, float height,
 			World world, float worldRatio) {
@@ -43,8 +45,11 @@ public class LaserBeam extends GameItemPhysic {
 			this.bodyHeight = this.height = Default_Height;			
 		}		
 		
-		this.ref = CGPoint.make(1, 0);
+		// Normalized ref
+		this.ref = CGPoint.make(1, 0);		
+		
 		this.diff = CGPoint.zero();
+		this.tmp = CGPoint.zero();
 	}
 	
 	public void setSource(CGPoint source) {
@@ -78,11 +83,27 @@ public class LaserBeam extends GameItemPhysic {
 	
 	private void refresh() {
 		if (this.source != null && this.target != null) {
-			this.bodyWidth = this.width = CGPoint.ccpDistance(this.source, this.target);
-			this.setPosition(CGPoint.ccpMidpoint(this.source, this.target));
+			this.tmp.x = this.source.x - this.target.x;
+			this.tmp.y = this.source.y - this.target.y;			
+			this.bodyWidth = this.width = CGPoint.ccpLength(this.tmp);
+			
+			// in mid point. Strange algo but optimized
+			this.position.x = (this.source.x + this.target.x) * 0.5f;
+			this.position.y = (this.source.y + this.target.y) * 0.5f;
+			this.setPosition(this.position);
+
 			this.diff.x = this.target.x - this.source.x;
 			this.diff.y = this.target.y - this.source.y;
-			float angle = CGPoint.ccpAngleSigned(this.ref, this.diff);
+					
+			// Calculate signed angle (optimized)
+			float ln = CGPoint.ccpLength(this.diff);
+			this.tmp.x = this.diff.x / ln;
+			this.tmp.y = this.diff.y / ln;
+	        
+			float dot = this.ref.x * this.tmp.x + this.ref.y * this.tmp.y;
+	        float angle = (float)Math.atan2(this.ref.x * this.tmp.y - this.ref.y * this.tmp.x, dot);
+	        if( Math.abs(angle) < SlimeFactory.kCGPointEpsilon ) angle = 0.f;
+			
 			float newAngle = - ccMacros.CC_RADIANS_TO_DEGREES(angle);			
 			
 			this.setAngle(newAngle);			

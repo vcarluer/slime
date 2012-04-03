@@ -140,6 +140,7 @@ public class EnergyBall extends GameItemPhysic {
 			if (this.speed > 0 && (this.direction.x != 0 || this.direction.y != 0)) {
 				float x = this.getPosition().x + this.getMoveCoord(this.direction.x, delta);
 				float y = this.getPosition().y + this.getMoveCoord(this.direction.y, delta);
+				// set body in physic and cocos render
 				this.getSprite().setPosition(x, y);				
 			}
 		}
