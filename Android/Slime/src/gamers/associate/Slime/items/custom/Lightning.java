@@ -16,6 +16,7 @@ public class Lightning extends GameItem {
 	private static final String PLIST = "items";	
 	private CGPoint tmp;
 	private CGPoint ref;
+	private CGPoint tmpDist;
 	
 	private static float LigthningHeightRatio = 32f / 171f;
 	private GameItem sprite;
@@ -40,7 +41,8 @@ public class Lightning extends GameItem {
 		this.target = target;
 		this.life = life;
 		this.ref = CGPoint.make(1, 0);		
-		this.tmp = new CGPoint();				
+		this.tmp = new CGPoint();			
+		this.tmpDist = new CGPoint();
 		
 		Level.currentLevel.addItemToAdd(this);
 	}
@@ -62,18 +64,21 @@ public class Lightning extends GameItem {
 			Level.currentLevel.addItemToRemove(this);
 		} else {
 			CGPoint sourcePos = this.source.getPosition();
-			CGPoint targetPos = this.target.getPosition();
-			CGPoint pos = CGPoint.ccpMidpoint(sourcePos, this.target.getPosition());
+			CGPoint targetPos = this.target.getPosition();			
+			this.position.x = (sourcePos.x + targetPos.x) * 0.5f;
+			this.position.y = (sourcePos.y + targetPos.y) * 0.5f;
 			this.tmp.x = targetPos.x - sourcePos.x;
 			this.tmp.y = targetPos.y - sourcePos.y;
 			float angle = CGPoint.ccpAngleSigned(this.ref, this.tmp);
-			float newAngle = - ccMacros.CC_RADIANS_TO_DEGREES(angle);			
-			float length = CGPoint.ccpDistance(sourcePos, targetPos);
+			float newAngle = - ccMacros.CC_RADIANS_TO_DEGREES(angle);
+			this.tmpDist.x = sourcePos.x - targetPos.x;
+			this.tmpDist.y = sourcePos.y - targetPos.y;			
+			float length = CGPoint.ccpLength(this.tmpDist);
 			float size = length * LigthningHeightRatio;
 			if (this.sprite == null) {
-				this.sprite = SlimeFactory.Sprite.create("lg", pos.x, pos.y, length, size, PLIST, FRAME, COUNT);
+				this.sprite = SlimeFactory.Sprite.create("lg", this.position.x, this.position.y, length, size, PLIST, FRAME, COUNT);
 			} else {
-				this.sprite.setPosition(pos);
+				this.sprite.setPosition(this.position);
 				this.sprite.setSize(length, size);
 			}
 			
