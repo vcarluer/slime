@@ -154,7 +154,8 @@ public class HomeLayer extends CCLayer {
 	@Override
 	public void onEnter() {		
 		super.onEnter();
-				
+		Sounds.setEffectsDisable(true);
+		
 		CCSprite restartSprite = CCSprite.sprite("control-restart.png", true);
 		CCMenuItemSprite restartItem = CCMenuItemSprite.item(restartSprite, restartSprite, this, "changeDifficulty");
 		restartItem.setScale(PauseLayer.Scale);		
@@ -309,13 +310,14 @@ public class HomeLayer extends CCLayer {
 		} else {
 			this.nextDoNotStopMusic = false;
 		}
-
+		
+		Sounds.setEffectsDisable(false);
 		super.onExit();
 	}
 
 	public void selectPlay(Object sender) {		
 		Vibe.vibrate();
-		Sounds.playEffect(R.raw.menuselect);
+		Sounds.playEffect(R.raw.menuselect, true);
 		Sounds.stopMusic();
 		
 		if (SlimeFactory.GameInfo.getLevelNum() == 0) {
@@ -326,7 +328,7 @@ public class HomeLayer extends CCLayer {
 	}
 	
 	public void goRestart(Object sender) {
-		Sounds.playEffect(R.raw.menuselect);		
+		Sounds.playEffect(R.raw.menuselect, true);		
 		// Sounds.pauseMusic();
 		SlimeFactory.LevelBuilder.resetAllAndRun();
 	}

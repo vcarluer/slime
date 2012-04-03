@@ -11,8 +11,10 @@ import android.media.MediaPlayer;
 public class Sounds {
 	private static IntMap<MediaPlayer> soundsMap = new IntMap<MediaPlayer>();
 	private static int lastSndId = -1;
+	private static boolean disableEffects;
 	
 	public static boolean isMusicPlaying;
+	
 	public static void preload() {		
 		preloadMusic(R.raw.menumusic);
 		preloadEffect(R.raw.menuselect);
@@ -28,23 +30,34 @@ public class Sounds {
 		preloadEffect(R.raw.slimydeath);
 		preloadEffect(R.raw.key);
 		preloadEffect(R.raw.getrupee);
+	}		
+	
+	public static void setEffectsDisable(boolean isDisable) {
+		disableEffects = isDisable;
 	}
+	
 	
 	public static void preloadEffect(int soundId) {
 		SoundEngine.sharedEngine().preloadEffect(CCDirector.sharedDirector().getActivity(), soundId);
 	}
 	
-	// < 5 sec
 	public static void playEffect(int soundId) {
-		synchronized(soundsMap) {
-			MediaPlayer mp = soundsMap.get(soundId);
-			if (mp != null) {
-				mp.start();
+		playEffect(soundId, false);
+	}
+	
+	// < 5 sec
+	public static void playEffect(int soundId, boolean force) {
+		if (!disableEffects || force) {
+			synchronized(soundsMap) {
+				MediaPlayer mp = soundsMap.get(soundId);
+				if (mp != null) {
+					mp.start();
+				}
+				else {
+					SoundEngine.sharedEngine().playEffect(CCDirector.sharedDirector().getActivity(), soundId);
+				}
 			}
-			else {
-				SoundEngine.sharedEngine().playEffect(CCDirector.sharedDirector().getActivity(), soundId);
-			}
-		}
+		}		
 	}
 	
 	public static void stopEffect(int soundId) {
