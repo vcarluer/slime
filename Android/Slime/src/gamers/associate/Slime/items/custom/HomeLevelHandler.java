@@ -8,7 +8,7 @@ import org.cocos2d.utils.javolution.MathLib;
 public class HomeLevelHandler extends GameItem {
 	private long startHome;		
 	private double nextRand;
-	private int maxSlime = 42;
+	private int maxSlime = 21;
 	private double minSpawn = 0.5;
 	private double maxSpawn = 3;
 	private boolean isPaused;

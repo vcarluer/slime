@@ -170,7 +170,11 @@ public class TeslaCoil extends GameItemPhysic  implements ITrigerable {
 			for(IElectrificable elec : Level.currentLevel.getElectrificables()) {
 				if (elec != null) {
 					CGPoint source = this.getSourcePoint();
-					if (CGPoint.ccpDistance(elec.getPosition(), source) <= this.getStrikeDistance()) {
+					CGPoint elecPos = elec.getPosition();
+					this.tmp.x = elecPos.x - source.x;
+					this.tmp.y = elecPos.y - source.y;
+					float dist = CGPoint.ccpLength(this.tmp);
+					if (dist <= this.getStrikeDistance()) {
 						this.strike(this, elec);
 					}
 				}

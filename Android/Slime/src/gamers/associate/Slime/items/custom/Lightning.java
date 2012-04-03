@@ -13,7 +13,8 @@ public class Lightning extends GameItem {
 	public static final float InfiniteLife = -666f;
 	private static final int COUNT = 4;
 	private static final String FRAME = "lightning";
-	private static final String PLIST = "items";	
+	private static final String PLIST = "items";
+	private static final float kCGPointEpsilon = 0.00000012f;
 	private CGPoint tmp;
 	private CGPoint ref;
 	private CGPoint tmpDist;
@@ -40,8 +41,12 @@ public class Lightning extends GameItem {
 		this.source = source;
 		this.target = target;
 		this.life = life;
-		this.ref = CGPoint.make(1, 0);		
-		this.tmp = new CGPoint();			
+		this.ref = CGPoint.make(1, 0);
+		float ln = CGPoint.ccpLength(this.ref);
+		this.ref.x = this.ref.x /  ln;
+		this.ref.y = this.ref.y /  ln;
+		
+		this.tmp = CGPoint.zero();
 		this.tmpDist = new CGPoint();
 		
 		Level.currentLevel.addItemToAdd(this);
@@ -65,16 +70,30 @@ public class Lightning extends GameItem {
 		} else {
 			CGPoint sourcePos = this.source.getPosition();
 			CGPoint targetPos = this.target.getPosition();			
+			// Get mid point (optimized)
 			this.position.x = (sourcePos.x + targetPos.x) * 0.5f;
 			this.position.y = (sourcePos.y + targetPos.y) * 0.5f;
+			// end mid point
+			
+			// calculate angle (optimized)						
 			this.tmp.x = targetPos.x - sourcePos.x;
 			this.tmp.y = targetPos.y - sourcePos.y;
-			float angle = CGPoint.ccpAngleSigned(this.ref, this.tmp);
+			float ln = CGPoint.ccpLength(this.tmp);
+	        this.tmp.x = this.tmp.x / ln;
+	        this.tmp.y = this.tmp.y / ln;
+	        
+	        float dot = this.ref.x * this.tmp.x + this.ref.y * this.tmp.y;	        
+	        float angle = (float)Math.atan2(this.ref.x * this.tmp.y - this.ref.y * this.tmp.x, dot);
+	        if( Math.abs(angle) < kCGPointEpsilon ) angle = 0.f;		
+	        // end calculate angle
+	        
 			float newAngle = - ccMacros.CC_RADIANS_TO_DEGREES(angle);
 			this.tmpDist.x = sourcePos.x - targetPos.x;
 			this.tmpDist.y = sourcePos.y - targetPos.y;			
 			float length = CGPoint.ccpLength(this.tmpDist);
+			
 			float size = length * LigthningHeightRatio;
+			
 			if (this.sprite == null) {
 				this.sprite = SlimeFactory.Sprite.create("lg", this.position.x, this.position.y, length, size, PLIST, FRAME, COUNT);
 			} else {
