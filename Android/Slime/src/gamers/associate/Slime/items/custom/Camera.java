@@ -64,6 +64,7 @@ public class Camera extends GameItemPhysic {
 		super(x, y, width, height, world, worldRatio);
 		// temp scale direct 
 		this.spriteType = SpriteType.SINGLE_SCALE_DIRECT;
+		this.zOrder = Level.zTop;
 		
 		this.setTargetName(targetName);
 		this.startOn = startOn;
