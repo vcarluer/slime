@@ -236,7 +236,7 @@ public class Camera extends GameItemPhysic {
 
 	public void initState() {
 		this.setOn(this.isStartOn());
-		if (this.getRotateTime() > 0 && this.getRotateAngle() > 0) {
+		if (this.getRotateTime() > 0 && this.getRotateAngle() != 0) {
 			this.startRotation();
 		}
 	}
