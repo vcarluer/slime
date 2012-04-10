@@ -37,7 +37,7 @@ public class CameraDef extends ItemDefinition {
 	@Override
 	public void createItem(Level level) {
 		// setAngle after cameraMove error?
-		SlimeFactory.Camera.createBL(this.getUName(), this.getX(), this.getY(), this.width, this.height, this.targetName, this.startOn, this.fov, this.viewDistance, this.rotateTime, this.rotateAngle).setAngle(this.angle);			
+		SlimeFactory.Camera.createBL(this.getUName(), this.getX(), this.getY(), this.width, this.height, this.getUString(this.targetName), this.startOn, this.fov, this.viewDistance, this.rotateTime, this.rotateAngle).setAngle(this.angle);			
 	}
 
 	@Override
