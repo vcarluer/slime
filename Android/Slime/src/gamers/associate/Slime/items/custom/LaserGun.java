@@ -126,7 +126,11 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 	}
 	
 	public void turnOff() {
-		if (this.isOn()) {			
+		this.turnOff(false);
+	}
+	
+	public void turnOff(boolean force) {
+		if (this.isOn() || force) {			
 			CCAnimate animateStart = CCAnimate.action(this.animationList.get(Anim_Firing), false);		
 			CCCallFunc callStartEnded = CCCallFunc.action(this, "turnedOff");
 			CCSequence sequence = CCSequence.actions(animateStart.reverse(), callStartEnded);
@@ -228,11 +232,11 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 
 	@Override
 	public void triggerOn(Object source) {
-		this.turnOn();
+		this.turnOn(true);
 	}
 
 	@Override
 	public void triggerOff(Object source) {
-		this.turnOff();
+		this.turnOff(true);
 	}
 }

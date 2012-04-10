@@ -135,7 +135,11 @@ public class BecBunsen extends GameItemPhysic implements ITrigerable {
 	}
 	
 	public void turnOn() {
-		if (!this.isOn) {			
+		this.turnOn(false);
+	}
+	
+	public void turnOn(boolean force) {
+		if (!this.isOn || force) {			
 			CCDelayTime delay = CCDelayTime.action(this.animDelay);
 			CCAnimate animateStart = CCAnimate.action(this.animationList.get(Anim_Starting), false);
 			CCCallFunc callStartEnded = CCCallFunc.action(this, "turnedOn");
@@ -153,7 +157,11 @@ public class BecBunsen extends GameItemPhysic implements ITrigerable {
 	}
 	
 	public void turnOff() {
-		if (this.isOn) {
+		this.turnOff(false);
+	}
+	
+	public void turnOff(boolean force) {
+		if (this.isOn || force) {
 			CCDelayTime delay = CCDelayTime.action(this.animDelay);
 			CCAnimate animateStart = CCAnimate.action(this.animationList.get(Anim_Starting), false);		
 			CCCallFunc callStartEnded = CCCallFunc.action(this, "turnedOff");
@@ -209,11 +217,11 @@ public class BecBunsen extends GameItemPhysic implements ITrigerable {
 
 	@Override
 	public void triggerOn(Object source) {
-		this.turnOn();
+		this.turnOn(true);
 	}
 
 	@Override
 	public void triggerOff(Object source) {
-		this.turnOff();
+		this.turnOff(true);
 	}
 }
