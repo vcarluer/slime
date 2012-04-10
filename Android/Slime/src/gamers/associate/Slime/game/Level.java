@@ -46,6 +46,7 @@ public class Level implements IGameItemHandler {
 	public static float Gravity = -10;
 	private static String backgroundPath = "bkg/";
 	private static final String HomeBkg = "world00-01.png";
+	private static final boolean forceBgScale = true;
 	
 	public static Level currentLevel; 
 	
@@ -749,7 +750,7 @@ public class Level implements IGameItemHandler {
 			float wRatio = (this.levelWidth / this.backgroundSprite.getTextureRect().size.width);
 			float hRatio = (this.levelHeight / this.backgroundSprite.getTextureRect().size.height);
 			float ratio = Math.max(wRatio, hRatio);
-			if (ratio > 1) {
+			if (ratio > 1 || forceBgScale) {
 				this.backgroundSprite.setScale(ratio);
 			} else {
 				this.backgroundSprite.setScale(1f);
