@@ -1,0 +1,17 @@
+BlocInfo;None;0;120;480;480;0;BlocInfo-0;1;;;false;false;false;t,r,b,l
+TimeAttack;None;-2.0;0.0;0.0;0.0;0.0;0;0
+Platform_Cross;None;448.0;448.0;32.0;32.0;0.0
+EnergyBallGun;energyballgun;411.0;439.0;65.0;15.0;-45.0;target;false;0;0
+Platform_Cross;None;0.0;448.0;32.0;32.0;0.0
+EnergyBallGun;energyballgun;1.0;436.0;65.0;15.0;-135.0;target;false;0;0
+Box_GlassBox;None;176.0;200.0;128.0;64.0;0.0;true;true
+Target;target;232.0;256.0;16.0;16.0;0.0
+Star;None;226.0;304.0;30.0;31.0;0.0
+Platform_NoSticky;None;128.0;168.0;216.0;32.0;0.0
+Sprite;camera-mount;345.0;165.0;34.0;36.0;-90.0;;camera-mount;1
+Camera;Camera;344.0;176.0;56.0;25.0;0.0;energyballgun;true;0;0;3;90
+Sprite;camera-mount;93.0;167.0;34.0;36.0;90.0;;camera-mount;1
+Camera;Camera;72.0;167.0;56.0;25.0;180.0;energyballgun;true;0;0;3;-90
+BecBunsen;energyballgun;148.0;101.0;20.0;67.0;180.0;false;0
+BecBunsen;energyballgun;312.0;101.0;20.0;67.0;180.0;false;0
+Star;None;234.0;120.0;30.0;31.0;0.0

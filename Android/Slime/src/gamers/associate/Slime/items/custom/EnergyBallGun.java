@@ -42,21 +42,18 @@ public class EnergyBallGun extends LaserGun {
 	public void render(float delta) {
 		this.createTargetList();
 		if (this.isOn()) {
-			for(ITrigerable target : this.targets) {
-				CGPoint sourcePoint = this.getSourcePoint();
-				EnergyBall ball = SlimeFactory.EnergyBall.create(sourcePoint.x, sourcePoint.y);
-				ball.moveTo(target.getPosition(), this.ballSpeed);												
-			}
-			
-			this.nextShoot = this.waitTime;
-			this.turnedOff();
-		} else {
-			if (!this.turningOn) {
-				this.nextShoot -= delta;
-				if (this.nextShoot <= 0) {
-					this.turnOn();
+			this.nextShoot -= delta;
+			if (this.nextShoot <= 0) {
+				for(ITrigerable target : this.targets) {
+					CGPoint sourcePoint = this.getSourcePoint();
+					EnergyBall ball = SlimeFactory.EnergyBall.create(sourcePoint.x, sourcePoint.y);
+					ball.moveTo(target.getPosition(), this.ballSpeed);												
 				}
-			}			
+				
+				this.nextShoot = this.waitTime;
+			}
+		} else {
+			this.nextShoot = 0;
 		}
 	}	
 
