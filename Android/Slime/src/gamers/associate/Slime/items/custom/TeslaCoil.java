@@ -31,8 +31,8 @@ public class TeslaCoil extends GameItemPhysic  implements ITrigerable {
 	
 	public static float Default_StrikeDistance = 100f;
 	
-	private static float Reference_Width = 26f;
-	private static float Reference_Height = 45f;
+	private static float Reference_Width = 37f;
+	private static float Reference_Height = 64f;
 	
 	private static float Default_Beam_Offset = 38f;
 	

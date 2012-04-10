@@ -20,11 +20,14 @@ import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.levels.itemdef.BecBunsenDef;
 import gamers.associate.Slime.levels.itemdef.BlocInfoDef;
 import gamers.associate.Slime.levels.itemdef.CircularSawDef;
+import gamers.associate.Slime.levels.itemdef.EnergyBallDef;
+import gamers.associate.Slime.levels.itemdef.EnergyBallGunDef;
 import gamers.associate.Slime.levels.itemdef.ItemDefinition;
 import gamers.associate.Slime.levels.itemdef.LaserGunDef;
 import gamers.associate.Slime.levels.itemdef.LevelInfoDef;
 import gamers.associate.Slime.levels.itemdef.RedDef;
 import gamers.associate.Slime.levels.itemdef.StarDef;
+import gamers.associate.Slime.levels.itemdef.TeslaCoilDef;
 
 public class BlocDefinitionParser extends BlocDefinition {
 	private static Random rand = new Random();
@@ -46,6 +49,9 @@ public class BlocDefinitionParser extends BlocDefinition {
 		this.hazardItemsDef.add(CircularSawDef.Handled_Def);
 		this.hazardItemsDef.add(LaserGunDef.Handled_Def);		
 		this.hazardItemsDef.add(RedDef.Handled_DefMini);
+		this.hazardItemsDef.add(TeslaCoilDef.Handled_Def);
+		this.hazardItemsDef.add(EnergyBallDef.Handled_Def);
+		this.hazardItemsDef.add(EnergyBallGunDef.Handled_Def);
 	}
 
 	@Override

@@ -9,6 +9,6 @@ Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 220.12014,299.03483 0.19221,4.081
 TeslaCoil;tesla;120.0;99.0;26.0;45.0;180.0;true;0
 Star;None;238.0;305.0;30.0;31.0;0.0
 Star;None;242.0;104.0;30.0;31.0;0.0
-TeslaCoil;tesla;358.0;176.0;26.0;45.0;0.0;true;0
 TeslaCoil;tesla;120.0;176.0;26.0;45.0;0.0;true;0
-TeslaCoil;tesla;358.0;99.0;26.0;45.0;180.0;true;0
+CircularSaw;None;344.0;176.0;40.0;40.0;0.0;true
+CircularSaw;None;344.0;104.0;40.0;40.0;180.0;true
