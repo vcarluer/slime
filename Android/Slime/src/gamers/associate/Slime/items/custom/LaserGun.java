@@ -225,4 +225,14 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 	public void setOn(boolean isOn) {
 		this.isOn = isOn;
 	}
+
+	@Override
+	public void triggerOn(Object source) {
+		this.turnOn();
+	}
+
+	@Override
+	public void triggerOff(Object source) {
+		this.turnOff();
+	}
 }

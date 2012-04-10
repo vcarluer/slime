@@ -20,4 +20,12 @@ public class Target extends GameItemCocos implements ITrigerable {
 
 	public void trigger(Object source, String data) {		
 	}
+
+	@Override
+	public void triggerOn(Object source) {
+	}
+
+	@Override
+	public void triggerOff(Object source) {
+	}
 }

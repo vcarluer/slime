@@ -206,4 +206,14 @@ public class BecBunsen extends GameItemPhysic implements ITrigerable {
 	public boolean getStartOn() {
 		return this.startOn;
 	}
+
+	@Override
+	public void triggerOn(Object source) {
+		this.turnOn();
+	}
+
+	@Override
+	public void triggerOff(Object source) {
+		this.turnOff();
+	}
 }

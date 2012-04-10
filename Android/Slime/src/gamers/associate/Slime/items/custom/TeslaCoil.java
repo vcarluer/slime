@@ -232,4 +232,14 @@ public class TeslaCoil extends GameItemPhysic  implements ITrigerable {
 	public void setStrikeDistance(float strikeDistance) {
 		this.strikeDistance = strikeDistance;
 	}
+
+	@Override
+	public void triggerOn(Object source) {
+		this.turnOn();
+	}
+
+	@Override
+	public void triggerOff(Object source) {
+		this.turnOff();
+	}
 }

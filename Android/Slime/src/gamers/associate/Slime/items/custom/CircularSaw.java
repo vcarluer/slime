@@ -176,4 +176,14 @@ public class CircularSaw extends GameItemPhysic implements ITrigerable {
 		
 		this.isOn = this.startOn;
 	}
+
+	@Override
+	public void triggerOn(Object source) {
+		this.turnOn();
+	}
+
+	@Override
+	public void triggerOff(Object source) {
+		this.turnOff();
+	}
 }

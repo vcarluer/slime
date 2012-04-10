@@ -212,12 +212,14 @@ public class Camera extends GameItemPhysic {
 			
 			if (previousSpoted != this.spoted) {
 				this.getTargets();			
-				if (this.targets != null) {								
-					if (this.spoted) {						
-						for(ITrigerable target : this.targets) {							
-							target.trigger(this, "");
+				if (this.targets != null) {					
+					for(ITrigerable target : this.targets) {		
+						if (this.spoted) {
+							target.triggerOn(this);
+						} else {
+							target.triggerOff(this);
 						}
-					}								
+					}							
 				}
 			}
 		}
