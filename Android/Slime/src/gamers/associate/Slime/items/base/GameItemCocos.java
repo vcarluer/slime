@@ -195,7 +195,8 @@ public class GameItemCocos extends GameItem {
 			// get sprite position reference (not copy)
 			this.positionChanged = this.position.x != this.sprite.getPositionRef().x || this.position.y != this.getSprite().getPositionRef().y;
 			if (this.positionChanged) {
-				this.position = this.sprite.getPositionRef();
+				this.position.x = this.sprite.getPositionRef().x;
+				this.position.y = this.sprite.getPositionRef().y;
 			}
 			
 			this.angleChanged = this.angle != this.sprite.getRotation();

@@ -1,7 +1,10 @@
 package gamers.associate.Slime.items.custom;
 
+import javax.microedition.khronos.opengles.GL10;
+
 import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.IElectrificable;
 import gamers.associate.Slime.items.base.SpriteType;
@@ -11,7 +14,9 @@ import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCMoveTo;
 import org.cocos2d.actions.interval.CCSequence;
+import org.cocos2d.config.ccMacros;
 import org.cocos2d.types.CGPoint;
+import org.cocos2d.types.CGRect;
 
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -135,7 +140,6 @@ public class EnergyBall extends GameItemPhysic {
 	
 	@Override
 	public void render(float delta) {		
-		super.render(delta);
 		if (this.move) {
 			if (this.speed > 0 && (this.direction.x != 0 || this.direction.y != 0)) {
 				float x = this.getPosition().x + this.getMoveCoord(this.direction.x, delta);
@@ -144,8 +148,22 @@ public class EnergyBall extends GameItemPhysic {
 				this.getSprite().setPosition(x, y);				
 			}
 		}
+		
+		super.render(delta);
 	}
 	
+	@Override
+	public void draw(GL10 gl) {
+		if (Level.DebugMode) {
+			if (this.getBody() != null) {						
+				CGRect spriteBody = CGRect.make(this.getBody().getPosition().x * this.worldRatio - this.bodyWidth / 2, this.getBody().getPosition().y * this.worldRatio - this.bodyHeight / 2, this.bodyWidth, this.bodyHeight);
+				Util.draw(gl, spriteBody, 2.0f, 1, 0, 0, 1);
+			}
+		}
+		
+		super.draw(gl);
+	}
+
 	private float getMoveCoord(float directionCoord, float delta) {
 		return directionCoord * this.speed * (delta / Level.currentLevel.getNormalTimeRatio());
 	}
