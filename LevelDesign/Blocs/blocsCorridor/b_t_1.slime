@@ -1,0 +1,21 @@
+BlocInfo;None;0;120;480;480;0;BlocInfo-0;1;;;false;false;true;r,b,l
+TimeAttack;None;-2.0;0.0;0.0;0.0;0.0;0;0
+Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 144,160 0,48 96,-40 48,0 72,-16 40,0 80,-32 -480,0 96,40;false;true;false
+Platform_End;None;376.0;192.0;32.0;32.0;0.0
+Platform_End;None;264.0;192.0;32.0;32.0;180.0
+Platform;None;296.0;192.0;80.0;32.0;0.0
+Red;None;263.0;224.0;153.0;105.0;0.0;true;3
+Sprite;camera-mount;248.0;396.0;34.0;36.0;0.0;;camera-mount;1
+Camera;CameraT;241.0;391.0;56.0;25.0;90.0;lasergun;true;0;0;2;30
+Platform_End;None;184.0;72.0;32.0;32.0;0.0
+Platform_End;None;72.0;72.0;32.0;32.0;180.0
+Platform;None;104.0;72.0;80.0;32.0;0.0
+LaserGun;lasergun;96.0;408.0;65.0;15.0;-90.0;target;false
+Target;target;120.0;96.0;16.0;16.0;0.0
+Sprite;camera-mount;367.0;156.0;34.0;36.0;0.0;;camera-mount;1
+Camera;CameraB;359.0;151.0;56.0;25.0;135.0;lasergun;true;0;0;3;45
+Platform_Cross;None;400.0;72.0;32.0;32.0;0.0
+LaserGun;lasergun;200.0;80.0;65.0;15.0;180.0;targetb;false
+Target;targetb;392.0;80.0;16.0;16.0;0.0
+CircularSaw;lasergun;72.0;104.0;40.0;40.0;0.0;false
+BecBunsen;lasergun;368.0;381.0;20.0;67.0;180.0;false;0
