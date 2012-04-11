@@ -58,7 +58,7 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 			this.height = this.bodyHeight = Default_Height;
 		}
 		
-		this.beamOffset = this.width * Default_Beam_Offset / Default_Width;
+		this.setBeamOffset(this.width * Default_Beam_Offset / Default_Width);
 		
 		this.referenceSize.width = Reference_Width;
 		this.referenceSize.height = Reference_Height;
@@ -200,8 +200,8 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 		// (x'-xc) = Kc*(x-xc) - Ks*(y-yc)
 		// (y'-yc) = Ks*(x-xc) + Kc*(y-yc)
 		float radAngle = - ccMacros.CC_DEGREES_TO_RADIANS(this.angle);
-		float xFire = (float) (Math.cos(radAngle)*((this.position.x - this.width / 2f + this.beamOffset) - this.position.x)) + this.position.x;
-		float yFire = (float) (Math.sin(radAngle)*((this.position.x - this.width / 2f + this.beamOffset) - this.position.x)) + this.position.y;
+		float xFire = (float) (Math.cos(radAngle)*((this.position.x - this.width / 2f + this.getBeamOffset()) - this.position.x)) + this.position.x;
+		float yFire = (float) (Math.sin(radAngle)*((this.position.x - this.width / 2f + this.getBeamOffset()) - this.position.x)) + this.position.y;
 		this.tmp.x = xFire;
 		this.tmp.y = yFire;
 		return this.tmp;
@@ -238,5 +238,13 @@ public class LaserGun extends GameItemPhysic implements ITrigerable {
 	@Override
 	public void triggerOff(Object source) {
 		this.turnOff(true);
+	}
+
+	public float getBeamOffset() {
+		return beamOffset;
+	}
+
+	public void setBeamOffset(float beamOffset) {
+		this.beamOffset = beamOffset;
 	}
 }

@@ -28,6 +28,7 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 	protected boolean isPhysicDisabled;
 	private boolean bodyCategorySwitched;
 	private Vector2 transformVector;
+	private boolean forcePosition;
 	
 	public GameItemPhysic(float x, float y, float width, float height, World world, float worldRatio) {
 		this(null, x, y, width, height, world, worldRatio);
@@ -82,7 +83,8 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 			this.handleContacts();
 			
 			if (this.sprite != null && this.body != null) {
-				if (this.body.getType() == BodyType.StaticBody) {
+				if (this.body.getType() == BodyType.StaticBody || this.body.getType() == BodyType.KinematicBody 
+						|| (this.body.getType() == BodyType.DynamicBody && this.isForcePosition())) {
 					// Set position based on sprite
 					super.render(delta);
 					if (this.positionChanged || this.angleChanged) {
@@ -188,5 +190,13 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 				this.body.resetMassData();
 			}
 		}
+	}
+
+	public boolean isForcePosition() {
+		return forcePosition;
+	}
+
+	public void setForcePosition(boolean forcePosition) {
+		this.forcePosition = forcePosition;
 	}
 }

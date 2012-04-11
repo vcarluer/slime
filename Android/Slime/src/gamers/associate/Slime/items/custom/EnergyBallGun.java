@@ -12,6 +12,7 @@ import gamers.associate.Slime.items.base.ITrigerable;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class EnergyBallGun extends LaserGun {
+	private static final float Default_Beam_Offset = -12f; // negative offset needed, why?
 	public static float Default_BallSpeed = 50f;
 	public static float Default_WaitTime = 2f;
 	
@@ -27,6 +28,8 @@ public class EnergyBallGun extends LaserGun {
 		super(x, y, width, height, world, worldRatio);		
 		this.ballSpeed = Default_BallSpeed;
 		this.waitTime = Default_WaitTime;
+		
+		this.setBeamOffset(this.width * Default_Beam_Offset / Default_Width);
 	}
 
 	private void createTargetList()	 {

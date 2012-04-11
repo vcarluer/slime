@@ -59,7 +59,8 @@ public class EnergyBall extends GameItemPhysic {
 	protected void initBody() {
 		// Physic body
 		BodyDef bodyDef = new BodyDef();		
-		bodyDef.type = BodyType.StaticBody;
+		bodyDef.type = BodyType.DynamicBody;
+		this.setForcePosition(true);
 		CGPoint spawnPoint = new CGPoint();
 		spawnPoint.x = this.position.x;
 		spawnPoint.y = this.position.y;
