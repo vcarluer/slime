@@ -111,8 +111,11 @@ public class EnergyBall extends GameItemPhysic {
 			elect.electrify();
 		}
 		
-		super.handleContact(item);
-		this.removeMe();
+		if (!(item.getContactWith() instanceof EnergyBall) && !(item.getContactWith() instanceof EnergyBallGun)) {
+			this.removeMe();
+		}
+		
+		super.handleContact(item);		
 	}
 
 	@Override
