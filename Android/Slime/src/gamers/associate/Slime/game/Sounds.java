@@ -18,7 +18,13 @@ public class Sounds {
 	public static void preload() {		
 		preloadMusic(R.raw.menumusic);
 		preloadEffect(R.raw.menuselect);
+		preloadEffect(R.raw.slimycharging);
 		preloadEffect(R.raw.slimyjump);
+		preloadEffect(R.raw.slimyjumpa);
+		preloadEffect(R.raw.slimyjumpb);
+		preloadEffect(R.raw.slimyjumpd);
+		preloadEffect(R.raw.slimyjumpe);
+		preloadEffect(R.raw.slimyjumpg);
 		preloadEffect(R.raw.victory);
 		preloadEffect(R.raw.slimyfire);
 		preloadEffect(R.raw.lose);
@@ -30,6 +36,7 @@ public class Sounds {
 		preloadEffect(R.raw.slimydeath);
 		preloadEffect(R.raw.key);
 		preloadEffect(R.raw.getrupee);
+		preloadEffect(R.raw.slimyswitch);
 	}		
 	
 	public static void setEffectsDisable(boolean isDisable) {

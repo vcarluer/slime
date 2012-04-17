@@ -138,7 +138,7 @@ public class Button extends GameItemPhysic {
 			this.isOn = !this.isOn;
 			this.waitAnim();
 			this.isEnabled = false;
-			Sounds.playEffect(R.raw.bump);					
+			Sounds.playEffect(R.raw.slimyswitch);					
 			CCAnimate animate = CCAnimate.action(this.animationList.get(Button.Anim_Countdown), false);
 			if (!this.isOn) {
 				animate = animate.reverse();

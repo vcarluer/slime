@@ -100,6 +100,9 @@ public class SlimyJump extends Slimy implements ISelectable {
 	private CCSprite effectLayer = CCSprite.sprite("pf-01.png");
 	
 	private float emitterStartSize;
+	private int numberOfJump = 0;
+	private int jumpSound[] = {R.raw.slimyjumpa, R.raw.slimyjumpb, R.raw.slimyjumpd , R.raw.slimyjumpe, R.raw.slimyjumpg};
+	
 	
 	public SlimyJump(float x, float y, float width, float height, World world,
 			float worldRatio) {
@@ -134,7 +137,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 		this.emitter.setLife(0.1f);
 		this.emitter.setStartColor(new ccColor4F(0, 1f, 0, 1f));		
 		this.emitter.stopSystem();
-		
+						
 		this.scaledShoot = Shoot_Circle * SlimeFactory.Density;
 	}
 	
@@ -341,7 +344,13 @@ public class SlimyJump extends Slimy implements ISelectable {
 				Vector2 pos = this.getBody().getPosition();		
 				this.getBody().applyLinearImpulse(this.worldImpulse, pos);				
 				this.hasJumped = true;
-				Sounds.playEffect(R.raw.slimyjump);
+				Sounds.playEffect(this.jumpSound[numberOfJump]);
+				this.numberOfJump++;
+				if(this.numberOfJump==4){
+					this.numberOfJump = 0;
+				}
+				
+
 				this.isLanded = false;
 				this.stickHandled = false;
 				if (this.currentJoint != null) {
