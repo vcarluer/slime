@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<canvas version="0.9" width="480" height="360" xres="2834.645752" yres="2834.645752" view-box="-3.671512 2.753634 3.671512 -2.753634" antialias="1" fps="50.000" begin-time="0f" end-time="1s 15f" bgcolor="0.500000 0.500000 0.500000 1.000000">
+  <name>Synfig Animation 1</name>
+  <layer type="import" active="true" version="0.1" desc="hawaii-postcard.png">
+    <param name="z_depth">
+      <real value="0.0000000000"/>
+    </param>
+    <param name="amount">
+      <real value="1.0000000000"/>
+    </param>
+    <param name="blend_method">
+      <integer value="0"/>
+    </param>
+    <param name="tl">
+      <vector>
+        <x>-4.0000000000</x>
+        <y>3.0000000000</y>
+      </vector>
+    </param>
+    <param name="br">
+      <vector>
+        <x>4.0000000000</x>
+        <y>-3.0000000000</y>
+      </vector>
+    </param>
+    <param name="c">
+      <integer value="1" static="true"/>
+    </param>
+    <param name="gamma_adjust">
+      <real value="1.0000000000"/>
+    </param>
+    <param name="filename">
+      <string>hawaii-postcard.png</string>
+    </param>
+    <param name="time_offset">
+      <time value="0s"/>
+    </param>
+  </layer>
+  <layer type="PasteCanvas" active="true" version="0.1">
+    <param name="z_depth">
+      <real value="0.0000000000"/>
+    </param>
+    <param name="amount">
+      <real value="1.0000000000"/>
+    </param>
+    <param name="blend_method">
+      <integer value="0"/>
+    </param>
+    <param name="origin">
+      <vector>
+        <x>0.8260902166</x>
+        <y>-0.6119186878</y>
+      </vector>
+    </param>
+    <param name="canvas" use="slime-hawaiian.sif#"/>
+    <param name="zoom">
+      <real value="0.8000000000"/>
+    </param>
+    <param name="time_offset">
+      <time value="0s"/>
+    </param>
+    <param name="children_lock">
+      <bool value="true"/>
+    </param>
+    <param name="focus">
+      <vector>
+        <x>0.0000000000</x>
+        <y>0.0000000000</y>
+      </vector>
+    </param>
+    <param name="outline_grow">
+      <real value="0.0000000000"/>
+    </param>
+  </layer>
+</canvas>
