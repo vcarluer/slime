@@ -199,10 +199,10 @@ public class EndLevelLayer extends CCLayer {
 			this.slime = SlimeFactory.SlimySuccess.getAnimatedSprite(SlimySuccess.getAnimationName(SlimeFactory.GameInfo.getDifficulty()));			
 		} else {
 			this.slime = SlimeFactory.Slimy.getAnimatedSprite(animation, waitTime);
+			this.slime.setScale(2f);
 		}				
 		
 		this.addChild(this.slime);
-		this.slime.setScale(2f);
 		this.slime.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,
 				CCDirector.sharedDirector().winSize().height / 2 + 100
