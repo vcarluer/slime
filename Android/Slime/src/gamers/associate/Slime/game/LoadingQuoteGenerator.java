@@ -1,6 +1,5 @@
 package gamers.associate.Slime.game;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class LoadingQuoteGenerator {
@@ -12,7 +11,7 @@ public class LoadingQuoteGenerator {
 		String[] catchPhrases=new String[22];
 		catchPhrases[0] = "Resistance is futile";
 		catchPhrases[1] = "We want information, information, information.";
-		catchPhrases[2] = "“I’m just a mean green mothah from outer space";
+		catchPhrases[2] = "I'm just a mean green mothah from outer space";
 		catchPhrases[3] = "Eterminate, exterminate.";
 		catchPhrases[4] = "Prepare to die!";
 		catchPhrases[5] = "Welcome Humans! I am ready for you";

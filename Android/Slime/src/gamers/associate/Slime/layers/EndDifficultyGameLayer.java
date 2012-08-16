@@ -12,6 +12,7 @@ import gamers.associate.Slime.items.custom.Star;
 import gamers.associate.Slime.levels.LevelHome;
 
 import org.cocos2d.actions.instant.CCCallFunc;
+import org.cocos2d.actions.interval.CCFadeIn;
 import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCLayer;
@@ -147,13 +148,15 @@ public class EndDifficultyGameLayer extends CCLayer {
 				CCDirector.sharedDirector().winSize().getWidth() / 2 + ((this.bgWidth / 2) * 1 / 3),
 				CCDirector.sharedDirector().winSize().getHeight() / 2 - ((this.bgHeight / 2) * 1 / 2)
 				));	
+		this.successSprite.setOpacity(0);
 		this.addChild(successSprite, zNormal);
 		
 		super.onEnter();
 	}
 	
 	public void endTextScale()	{
-		
+		CCFadeIn fade = CCFadeIn.action(1.0f);
+		this.successSprite.runAction(fade);
 	}
 
 	private void addSpriteBg(CCSprite sprite) {

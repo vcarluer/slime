@@ -5,6 +5,7 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.custom.Slimy;
+import gamers.associate.Slime.items.custom.SlimySuccess;
 import gamers.associate.Slime.items.custom.Star;
 
 import org.cocos2d.layers.CCLayer;
@@ -166,13 +167,14 @@ public class EndLevelLayer extends CCLayer {
 	public void setVictory(int score) {
 		this.initStar();
 		this.setScore(score);
-		this.initSlime(Slimy.Anim_Success, 0f);
+		// Slimy.Anim_Success not used anymore
+		this.initSlime(Slimy.Anim_Success, 0f, true);
 	}
 	
 	public void setLose() {
 		this.initStar();
 		this.setScore(0);
-		this.initSlime(Slimy.Anim_LastDeath, 2f);
+		this.initSlime(Slimy.Anim_LastDeath, 2f, false);
 	}
 	
 	private void initStar() {
@@ -187,16 +189,20 @@ public class EndLevelLayer extends CCLayer {
 				));					
 	}
 	
-	private void initSlime(String animation, float waitTime) {
-		if (this.slime == null) {
-			this.slime = SlimeFactory.Slimy.getAnimatedSprite(animation, waitTime);
-			this.slime.setScale(2f);
-			this.addChild(this.slime);
-		} else {
+	private void initSlime(String animation, float waitTime, boolean win) {
+		if (this.slime != null) {
 			this.slime.stopAllActions();
-			this.slime.runAction(SlimeFactory.Slimy.getAnimation(animation, waitTime));
+			this.removeChild(this.slime, true);
+		}
+		
+		if (win) {
+			this.slime = SlimeFactory.SlimySuccess.getAnimatedSprite(SlimySuccess.getAnimationName(SlimeFactory.GameInfo.getDifficulty()));			
+		} else {
+			this.slime = SlimeFactory.Slimy.getAnimatedSprite(animation, waitTime);
 		}				
 		
+		this.addChild(this.slime);
+		this.slime.setScale(2f);
 		this.slime.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,
 				CCDirector.sharedDirector().winSize().height / 2 + 100
