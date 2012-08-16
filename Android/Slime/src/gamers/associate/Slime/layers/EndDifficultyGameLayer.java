@@ -6,10 +6,14 @@ import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.items.custom.Gate;
 import gamers.associate.Slime.items.custom.GateFactory;
+import gamers.associate.Slime.items.custom.SlimyFactory;
+import gamers.associate.Slime.items.custom.SlimySuccess;
 import gamers.associate.Slime.items.custom.Star;
 import gamers.associate.Slime.levels.LevelHome;
 
+import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCScaleTo;
+import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.menus.CCMenu;
@@ -26,6 +30,12 @@ public class EndDifficultyGameLayer extends CCLayer {
 	private CCLabel lblScore;
 	private CCSprite starSprite;
 	private CCLabel unlock;
+	private CCSprite spriteBg;
+	private static int BgOriginalWidth = 480;
+	private static int BgOriginalHeight = 360;
+	private static int zBg = 0;
+	private static int zNormal = 1;
+	private CCSprite successSprite;
 	
 	public static CCScene getScene() {
 		if (scene == null) {
@@ -36,26 +46,13 @@ public class EndDifficultyGameLayer extends CCLayer {
 		return scene;
 	}
 	
-	public EndDifficultyGameLayer() {
-		int originalW = 800;		
-		int originalH = 480;
-		CCSprite spriteBg = CCSprite.sprite("game-over.png");
-		spriteBg.setAnchorPoint(0, 0);
-		spriteBg.setPosition(0, 0);
-		float sW = CCDirector.sharedDirector().winSize().width;
-		float sH = CCDirector.sharedDirector().winSize().height;
-		// Scale for full width, no deformation
-		float scaleW = sW / originalW;
-		float scaleH = sH / originalH;
-		spriteBg.setScale(Math.max(scaleW, scaleH));
-		this.addChild(spriteBg, 0);		
-		
+	public EndDifficultyGameLayer() {	
 		CCLabel label = CCLabel.makeLabel("Game Over".toUpperCase(), "fonts/Slime.ttf", 60f);
 		label.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().getWidth() / 2,
 				CCDirector.sharedDirector().winSize().getHeight() / 2 + 150f
 				));	
-		this.addChild(label);
+		this.addChild(label, zNormal);
 		
 		this.lblScore = CCLabel.makeLabel("0".toUpperCase(), "fonts/Slime.ttf", 60.0f);
 		// this.lblScore.setColor(SlimeFactory.ColorSlime);
@@ -63,14 +60,14 @@ public class EndDifficultyGameLayer extends CCLayer {
 				CCDirector.sharedDirector().winSize().getWidth() / 2,
 				CCDirector.sharedDirector().winSize().getHeight() / 2 + 75f
 				));
-		this.addChild(this.lblScore);
+		this.addChild(this.lblScore, zNormal);
 		
 		this.starSprite = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);		
 		this.starSprite.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().getWidth() / 2,
 				CCDirector.sharedDirector().winSize().getHeight() / 2 + 75f
 				));
-		this.addChild(this.starSprite);
+		this.addChild(this.starSprite, zNormal);
 		
 						
 		String unlockLvl = LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty());
@@ -82,7 +79,7 @@ public class EndDifficultyGameLayer extends CCLayer {
 				CCDirector.sharedDirector().winSize().getHeight() / 2
 				));									
 		
-		this.addChild(this.unlock);		
+		this.addChild(this.unlock, zNormal);		
 				
 		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);
 		CCMenuItemSprite goHome = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goHome");
@@ -91,11 +88,33 @@ public class EndDifficultyGameLayer extends CCLayer {
 				CCDirector.sharedDirector().winSize().getWidth() / 2,
 				CCDirector.sharedDirector().winSize().getHeight() / 2 - 100f
 				));	
-		this.addChild(menu);
+		this.addChild(menu, zNormal);
 	}
 
 	@Override
-	public void onEnter() {		
+	public void onEnter() {
+		int endedDifficulty = SlimeFactory.GameInfo.getPreviousDifficulty();
+		String fileBase = "";
+		switch (endedDifficulty) {
+		case LevelDifficulty.Normal:
+			fileBase = "moon-postcard";
+			break;
+		case LevelDifficulty.Hard:
+			fileBase = "disco-postcard";
+			break;
+		case LevelDifficulty.Extrem:
+			fileBase = "hawaii-postcard";
+			break;
+		case LevelDifficulty.Easy:
+		default:
+			fileBase = "mexico-postcard";
+			break;
+		}
+		
+		String fileBg = "bkg/" + fileBase + ".png";
+		this.spriteBg = CCSprite.sprite(fileBg);
+		this.addSpriteBg(this.spriteBg);
+		
 		String unlockTxt = "";
 		if (SlimeFactory.GameInfo.getPreviousDifficulty() != LevelDifficulty.Extrem) {
 			String unlockLvl = LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty());
@@ -107,7 +126,9 @@ public class EndDifficultyGameLayer extends CCLayer {
 		this.unlock.setString(unlockTxt.toUpperCase());
 		this.unlock.setScale(10.0f);
 		CCScaleTo scale = CCScaleTo.action(0.5f, 1.0f);
-		this.unlock.runAction(scale);
+		CCCallFunc call = CCCallFunc.action(this, "endTextScale");
+		CCSequence seq = CCSequence.actions(scale, call);
+		this.unlock.runAction(seq);
 		
 		String score = String.valueOf(SlimeFactory.GameInfo.getPreviousTotalScore());
 		this.lblScore.setString(score.toUpperCase());
@@ -119,12 +140,45 @@ public class EndDifficultyGameLayer extends CCLayer {
 				));
 		
 		SlimeFactory.ContextActivity.showAndNextAd();
+		
+		this.successSprite = SlimeFactory.SlimySuccess.getAnimatedSprite(SlimySuccess.getAnimationName(SlimeFactory.GameInfo.getPreviousDifficulty()));
+		this.successSprite.setAnchorPoint(0.5f, 0f);
+		this.successSprite.setPosition(CGPoint.make(
+				CCDirector.sharedDirector().winSize().getWidth() / 2 + ((this.bgWidth / 2) * 1 / 3),
+				CCDirector.sharedDirector().winSize().getHeight() / 2 - ((this.bgHeight / 2) * 1 / 2)
+				));	
+		this.addChild(successSprite, zNormal);
+		
 		super.onEnter();
 	}
+	
+	public void endTextScale()	{
+		
+	}
+
+	private void addSpriteBg(CCSprite sprite) {
+		//sprite.setAnchorPoint(0, 0);
+		sprite.setPosition(CCDirector.sharedDirector().winSize().width / 2f, CCDirector.sharedDirector().winSize().height / 2f);
+		float sW = CCDirector.sharedDirector().winSize().width;
+		float sH = CCDirector.sharedDirector().winSize().height;
+		// Scale for full width or height visibble no deformation, black bands possible
+		float scaleW = sW / BgOriginalWidth;
+		float scaleH = sH / BgOriginalHeight;
+		float scale = Math.min(scaleW, scaleH);
+		this.bgWidth = BgOriginalWidth * scale;
+		this.bgHeight = BgOriginalHeight * scale;
+		sprite.setScale(scale);
+		this.addChild(sprite, zBg);
+	}
+	
+	private float bgWidth;
+	private float bgHeight;
 
 	@Override
 	public void onExit() {
 		SlimeFactory.ContextActivity.hideAd();
+		this.removeChild(this.successSprite, true);
+		this.removeChild(this.spriteBg, true);
 		super.onExit();
 	}
 

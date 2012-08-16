@@ -245,7 +245,10 @@ public class GALogoLayer extends CCLayer {
 					case 15:
 						SpriteSheetFactory.add("control-stars", true, Level.zFront);
 						break;
-					case 16:						
+					case 16:
+						SpriteSheetFactory.add("success", true, Level.zTop);
+						break;
+					case 17:						
 						currentLevel = Level.get(LevelHome.Id);
 						unschedule(nextCallback);
 						load();											

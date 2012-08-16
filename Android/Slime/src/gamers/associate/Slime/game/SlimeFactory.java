@@ -30,6 +30,7 @@ import gamers.associate.Slime.items.custom.PhysicPolygonFactory;
 import gamers.associate.Slime.items.custom.PlatformFactory;
 import gamers.associate.Slime.items.custom.RedFactory;
 import gamers.associate.Slime.items.custom.SlimyFactory;
+import gamers.associate.Slime.items.custom.SlimySuccessFactory;
 import gamers.associate.Slime.items.custom.SpawnPortalFactory;
 import gamers.associate.Slime.items.custom.StarCounterFactory;
 import gamers.associate.Slime.items.custom.StarFactory;
@@ -100,6 +101,7 @@ public abstract class SlimeFactory {
 	public static EnergyBallFactory EnergyBall = new EnergyBallFactory();
 	public static EnergyBallGunFactory EnergyBallGun = new EnergyBallGunFactory();
 	public static CameraFactory Camera = new CameraFactory();
+	public static SlimySuccessFactory SlimySuccess = new SlimySuccessFactory();
 	
 	public static StarCounterFactory StarCounter = new StarCounterFactory(); // Not attached in attach All but in HudLayer	
 		
@@ -143,6 +145,7 @@ public abstract class SlimeFactory {
 		EnergyBall.attach(level, attachNode, attachWorld, attachWorldRatio);
 		EnergyBallGun.attach(level, attachNode, attachWorld, attachWorldRatio);
 		Camera.attach(level, attachNode, attachWorld, attachWorldRatio);
+		SlimySuccess.attach(level, attachNode);
 		
 		SpriteSheetFactory.attachAll(attachNode);
 		isAttached = true;
@@ -181,6 +184,7 @@ public abstract class SlimeFactory {
 		EnergyBall.detach();
 		EnergyBallGun.detach();
 		Camera.detach();
+		SlimySuccess.detach();
 		
 		LevelGeneratorCorridor2.detach();
 		LevelGeneratorRectangle2.detach();
@@ -219,6 +223,7 @@ public abstract class SlimeFactory {
 		EnergyBall.destroy();
 		EnergyBallGun.destroy();
 		Camera.destroy();
+		SlimySuccess.destroy();
 		
 		LevelGeneratorCorridor2.destroy();
 		LevelGeneratorRectangle2.destroy();
