@@ -331,6 +331,8 @@ public class Slime extends Activity {
 	
 	public void runIntro() {
 		Intent i = new Intent(this, SlimeIntro.class);
+		int currentDifficulty = SlimeFactory.GameInfo.getDifficulty();
+		i.putExtra(SlimeIntro.INTRO_CHOICE, currentDifficulty);
 		this.startActivityForResult(i, ACTIVITY_INTRO);
 	}
 

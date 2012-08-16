@@ -1,5 +1,6 @@
 package gamers.associate.Slime;
 
+import gamers.associate.Slime.game.LevelDifficulty;
 import android.app.Activity;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
@@ -13,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.VideoView;
 
 public class SlimeIntro extends Activity {
+	public static final String INTRO_CHOICE = "IntroChoice";
 	private VideoView videos;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +36,27 @@ public class SlimeIntro extends Activity {
         setContentView(R.layout.videointro);
         videos = (VideoView) this.findViewById(R.id.videointroview);
 		
-		int a= R.raw.intro; //
-        String  str= "android.resource://gamers.associate.Slime/"+a;
+        // get bundle parameter here
+        Bundle introInfo = this.getIntent().getExtras();
+        int introChoice = introInfo.getInt(SlimeIntro.INTRO_CHOICE);
+        int resourceNum = 0;
+        switch(introChoice) {
+        	case LevelDifficulty.Normal:
+        		resourceNum = R.raw.bmoon;
+        		break;
+        	case LevelDifficulty.Hard:
+        		resourceNum = R.raw.cdisco;
+        		break;
+        	case LevelDifficulty.Extrem:
+        		resourceNum = R.raw.dhawaii;
+        		break;
+        	case LevelDifficulty.Easy:
+        	default:
+    			resourceNum	= R.raw.asombrero;
+    			break;
+        }
+        
+        String  str= "android.resource://gamers.associate.Slime/"+resourceNum;
 
         Uri uri=Uri.parse(str);
         
