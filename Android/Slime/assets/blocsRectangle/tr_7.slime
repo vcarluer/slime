@@ -1,0 +1,13 @@
+BlocInfo;None;0;120;480;480;0;BlocInfo-0;1;;;false;false;false;b,l
+TimeAttack;None;-2.0;0.0;0.0;0.0;0.0;0;0
+Sprite;camera-mount;222.0;228.0;34.0;36.0;0.0;;camera-mount;1
+Camera;Camera;214.0;216.0;56.0;25.0;135.0;targetcam;true;0;0;3;180
+Platform_Cross;None;224.0;264.0;32.0;32.0;0.0
+Star;None;298.0;344.0;30.0;31.0;0.0
+Star;None;154.0;184.0;30.0;31.0;0.0
+Target;target;232.0;272.0;16.0;16.0;0.0
+LaserGun;targetcam;41.0;452.0;65.0;15.0;-130.0;target;false
+LaserGun;targetcam;422.0;452.0;65.0;15.0;-45.0;target;false
+LaserGun;targetcam;429.0;61.0;65.0;15.0;40.0;target;false
+Platform_Cross;None;56.0;80.0;32.0;32.0;0.0
+LaserGun;targetcam;74.0;124.0;65.0;15.0;131.0;target;false

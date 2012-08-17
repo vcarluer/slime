@@ -1,0 +1,25 @@
+BlocInfo;None;0;120;480;480;0;BlocInfo-0;1;;;false;false;false;b,l
+TimeAttack;None;-2.0;0.0;0.0;0.0;0.0;0;0
+Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 480,384 0,-264 -320,0 120,176;false;true;false
+Platform;None;248.0;88.0;72.0;32.0;0.0
+Platform_End;None;320.0;88.0;32.0;32.0;0.0
+Platform_Corner;None;184.0;88.0;32.0;32.0;90.0
+Platform_Corner;None;152.0;120.0;32.0;32.0;90.0
+Platform_Corner;None;120.0;152.0;32.0;32.0;90.0
+Star;None;202.0;176.0;30.0;31.0;0.0
+MiniRed;None;304.0;120.0;32.0;22.0;0.0;false;1
+MiniRed;None;120.0;216.0;32.0;22.0;0.0;false;1
+BecBunsen;None;77.0;128.0;20.0;67.0;-90.0;true;0
+Platform;None;88.0;184.0;32.0;32.0;0.0
+Platform_End;None;56.0;184.0;32.0;32.0;180.0
+Star;None;386.0;96.0;30.0;31.0;0.0
+BecBunsen;None;352.0;198.0;20.0;67.0;-155.0;true;0
+Platform_Corner;None;120.0;184.0;32.0;32.0;-90.0
+Platform_Corner;None;152.0;152.0;32.0;32.0;-90.0
+Platform_Corner;None;184.0;120.0;32.0;32.0;-90.0
+Platform_End;None;216.0;56.0;32.0;32.0;90.0
+Platform_T;None;216.0;88.0;32.0;32.0;180.0
+Platform_Bumper;None;72.0;288.0;144.0;32.0;0.0
+Platform_End;None;216.0;288.0;32.0;32.0;0.0
+Platform_End;None;40.0;288.0;32.0;32.0;180.0
+Box_Tube;None;38.0;320.0;18.0;72.0;0.0;false;true

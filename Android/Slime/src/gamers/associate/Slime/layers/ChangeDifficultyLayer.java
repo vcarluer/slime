@@ -58,6 +58,8 @@ public class ChangeDifficultyLayer extends CCLayer {
 		spriteBg.setScale(Math.max(scaleW, scaleH));
 		this.addChild(spriteBg, 0);
 		
+		CCMenuItemLabel title = CCMenuItemLabel.item(this.createLabel("RESET TO:"), this, "");
+		title.setAnchorPoint(0, 0.5f);
 		this.easyMenuLabel = this.createMenuLabel(LevelDifficulty.Easy, "selectEasy");
 		this.normalMenuLabel = this.createMenuLabel(LevelDifficulty.Normal, "selectNormal");
 		this.hardMenuLabel = this.createMenuLabel(LevelDifficulty.Hard, "selectHard");
@@ -72,7 +74,7 @@ public class ChangeDifficultyLayer extends CCLayer {
 		CCMenu menuHome = CCMenu.menu(goHome);		
 		this.addChild(menuHome);
 		
-		this.menu = CCMenu.menu(this.easyMenuLabel, this.normalMenuLabel, this.hardMenuLabel, this.extremMenuLabel);
+		this.menu = CCMenu.menu(title, this.easyMenuLabel, this.normalMenuLabel, this.hardMenuLabel, this.extremMenuLabel);
 		this.menu.alignItemsVertically(padding);
 		this.menu.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().getWidth() / 2 - menuPadding,

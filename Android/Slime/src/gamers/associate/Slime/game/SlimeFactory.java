@@ -245,10 +245,10 @@ public abstract class SlimeFactory {
 	}
 	
 	public static void triggerZoneColor(GL10 gl) {
-		gl.glColor4f(0f, 0f, 1.0f, 0.01f);		
+		gl.glColor4f(0f, 0f, 1.0f, 0.07f);		
 	}
 	
 	public static void triggerZoneAlertColor(GL10 gl) {
-		gl.glColor4f(1.0f, 0f, 0f, 0.01f);
+		gl.glColor4f(1.0f, 0f, 0f, 0.07f);
 	}
 }

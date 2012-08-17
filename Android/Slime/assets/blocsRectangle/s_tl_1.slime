@@ -20,7 +20,7 @@ Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 35.224852,335.28835 0.12444,19.49
 Sprite;None;8.0;238.0;20.0;35.0;-90.0;tank;tank-tube-filled;1
 Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 35.368553,355.2543 -10e-4,-20.03027 -35.41154926,0.10734 -0.121165,19.80671;false;true;true
 Box_Bottle;None;360.0;128.0;48.0;72.0;0.0;false;true
-Box_Tube;None;374.0;200.0;18.0;72.0;0.0;false;true
+Box_Tube;None;376.0;200.0;18.0;72.0;0.0;false;true
 Star;None;130.0;32.0;30.0;31.0;0.0
 BecBunsen;becbunsen;68.0;29.0;20.0;67.0;180.0;true;0
 Platform_Bumper;None;192.0;360.0;120.0;32.0;0.0
