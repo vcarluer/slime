@@ -1,0 +1,15 @@
+BlocInfo;None;0;120;480;480;0;BlocInfo-0;1;;;false;false;false;r,b,l
+TimeAttack;None;-2.0;0.0;0.0;0.0;0.0;0;0
+TeslaCoil;tesla;144.0;435.0;26.0;45.0;180.0;true;0
+TeslaCoil;tesla;318.0;435.0;26.0;45.0;180.0;true;0
+Star;None;216.0;312.0;30.0;31.0;0.0
+Star;None;218.0;144.0;30.0;31.0;0.0
+Liquid;None;96.0;72.0;288.0;32.0;0.0
+LiquidSurface;None;96.0;104.0;288.0;16.0;0.0
+Platform_NoSticky;None;96.0;40.0;288.0;32.0;0.0
+Platform_NoSticky_End;None;384.0;40.0;32.0;32.0;0.0
+Platform_NoSticky_End;None;64.0;40.0;32.0;32.0;180.0
+Box_GlassBox;None;64.0;72.0;32.0;168.0;0.0;true;true
+Box_GlassBox;None;384.0;72.0;32.0;168.0;0.0;true;true
+BecBunsen;None;120.0;120.0;20.0;67.0;90.0;true;0
+BecBunsen;None;341.0;120.0;20.0;67.0;-90.0;true;0

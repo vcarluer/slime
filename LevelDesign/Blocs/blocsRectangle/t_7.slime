@@ -1,0 +1,16 @@
+BlocInfo;None;0;120;480;480;0;BlocInfo-0;1;;;false;false;false;r,b,l
+Platform_Cross;None;40.0;72.0;32.0;32.0;0.0
+TimeAttack;None;-2.0;0.0;0.0;0.0;0.0;0;0
+EnergyBallGun;energyballgun;111.0;440.0;65.0;15.0;-90.0;ttl;false;0;0
+EnergyBallGun;energyballgun;304.0;440.0;65.0;15.0;-90.0;ttr;false;0;0
+EnergyBallGun;energyballgun;60.0;114.0;65.0;15.0;135.0;tbl;false;0;0
+Platform_Cross;None;408.0;72.0;32.0;32.0;0.0
+EnergyBallGun;energyballgun;355.0;114.0;65.0;15.0;45.0;tbr;false;0;0
+Star;None;306.0;184.0;30.0;31.0;0.0
+Star;None;130.0;320.0;30.0;31.0;0.0
+Platform_Cross;None;224.0;224.0;32.0;32.0;0.0
+Camera;Camera;211.0;227.0;56.0;25.0;0.0;energyballgun;true;0;0;4;360
+Target;tbl;216.0;240.0;16.0;16.0;0.0
+Target;tbr;248.0;240.0;16.0;16.0;0.0
+Target;ttl;136.0;-8.0;16.0;16.0;0.0
+Target;ttr;328.0;-8.0;16.0;16.0;0.0

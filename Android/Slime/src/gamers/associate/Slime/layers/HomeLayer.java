@@ -129,7 +129,8 @@ public class HomeLayer extends CCLayer {
 	
 	public void changeDifficulty(Object sender) {
 		this.nextDoNotStopMusic = true;
-		CCTransitionScene transition = CCSlideInTTransition.transition(0.5f, ChangeDifficultyLayer.getScene());
+		CCFadeTransition transition = CCFadeTransition.transition(0.5f, ChangeDifficultyLayer.getScene());
+//		CCTransitionScene transition = CCSlideInTTransition.transition(0.5f, ChangeDifficultyLayer.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
 	}
 
