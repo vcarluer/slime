@@ -15,7 +15,7 @@ import org.cocos2d.types.CGPoint;
 
 public abstract class LevelGraphGeneratorBase {
 	protected static boolean debugBlocOn = true;
-	protected static String forceBlock = "blocsRectangle/tl_6.slime";
+	protected static String forceBlock = "blocsRectangle/tl_7.slime";
 	
 	protected static final int timeCalcBase = 20;
 	protected static final float timeCalcPerBlock = 8f;
