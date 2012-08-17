@@ -1,0 +1,21 @@
+BlocInfo;None;0;120;480;480;0;BlocInfo-0;1;;;false;false;false;r,b
+TimeAttack;None;-2.0;0.0;0.0;0.0;0.0;0;0
+Platform;None;96.0;96.0;288.0;32.0;0.0
+Platform_End;None;384.0;96.0;32.0;32.0;0.0
+BecBunsen;becbunsen;188.0;128.0;20.0;67.0;0.0;true;0
+BecBunsen;becbunsen;396.0;128.0;20.0;67.0;0.0;true;0
+CircularSaw;circularsaw;344.0;392.0;40.0;40.0;-90.0;true
+Star;None;384.0;249.0;30.0;31.0;0.0
+Star;None;226.0;40.0;30.0;31.0;0.0
+Platform_End;None;64.0;96.0;32.0;32.0;180.0
+Box_Bottle;None;344.0;128.0;48.0;72.0;0.0;false;true
+Box_Tube;None;264.0;272.0;18.0;72.0;0.0;false;true
+Box_Tube;None;302.0;272.0;18.0;72.0;0.0;false;true
+Platform_Cross;None;384.0;400.0;32.0;32.0;0.0
+CircularSaw;circularsaw;376.0;432.0;40.0;40.0;0.0;true
+Box_Bottle;None;288.0;128.0;48.0;72.0;0.0;false;true
+Box_Bottle;None;232.0;128.0;48.0;72.0;0.0;false;true
+Box_Bottle;None;312.0;200.0;48.0;72.0;0.0;false;true
+Box_Bottle;None;264.0;200.0;48.0;72.0;0.0;false;true
+Box_Tube;None;342.0;272.0;18.0;72.0;0.0;false;true
+Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 0,288 40,-64 88,-8 40,-40 48,-56 -216,0;false;true;false
