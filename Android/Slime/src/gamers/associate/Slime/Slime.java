@@ -41,7 +41,7 @@ public class Slime extends Activity {
 	private static final String SGS_CMZ = "AB84E64BAD5ED6B0B7CBD7AC5F37461C";
 	private static final String AdMobPublisherId = "a14f5f7a390a6a4";
 	private static final boolean AdTest = true;
-	private static final boolean AdOn = true;
+	private static final boolean AdOn = false;
 
 	public static final int ACTIVITY_INTRO = 0;
 	

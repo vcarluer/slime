@@ -1,0 +1,15 @@
+BlocInfo;None;0;120;480;480;0;BlocInfo-0;1;;;false;false;false;r,b,l
+TimeAttack;None;-2.0;0.0;0.0;0.0;0.0;0;0
+Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 88,208 96,-40 248,-48 -384,0;false;true;false
+Platform_Ice;None;40.0;238.0;112.0;32.0;30.0
+Platform_Ice;None;136.0;214.0;216.0;32.0;0.0
+Platform_Ice;None;335.0;240.0;112.0;32.0;-30.0
+Box_Bottle;None;184.0;248.0;48.0;72.0;0.0;false;true
+Platform_Ice;None;96.0;72.0;288.0;32.0;0.0
+Box_Tube;None;206.0;320.0;18.0;72.0;0.0;false;true
+Star;None;216.0;144.0;30.0;31.0;0.0
+Star;None;298.0;368.0;30.0;31.0;0.0
+CircularSaw;None;120.0;372.0;40.0;40.0;155.0;true
+CircularSaw;None;304.0;248.0;40.0;40.0;0.0;true
+CircularSaw;None;96.0;104.0;40.0;40.0;0.0;true
+CircularSaw;None;312.0;176.0;40.0;40.0;180.0;true
