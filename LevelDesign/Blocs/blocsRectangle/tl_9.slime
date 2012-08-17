@@ -1,0 +1,10 @@
+BlocInfo;None;0;120;480;480;0;BlocInfo-0;1;;;false;false;false;r,b
+TimeAttack;None;-2.0;0.0;0.0;0.0;0.0;0;0
+Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;M 0,312 0,504 216,432 312,336 192,336 168,264 120,240 96,120 0,120;false;true;false
+TeslaCoil;tesla;230.0;264.0;26.0;45.0;0.0;true;0
+Star;None;226.0;440.0;30.0;31.0;0.0
+Star;None;130.0;56.0;30.0;31.0;0.0
+TeslaCoil;tesla;266.0;176.0;26.0;45.0;135.0;true;0
+Box_Tube;None;192.0;264.0;18.0;72.0;0.0;false;true
+BecBunsen;None;148.0;345.0;20.0;67.0;27.0;true;0
+CircularSaw;None;0.0;32.0;40.0;40.0;90.0;true
