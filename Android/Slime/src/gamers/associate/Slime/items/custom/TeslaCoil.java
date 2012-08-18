@@ -125,7 +125,11 @@ public class TeslaCoil extends GameItemPhysic  implements ITrigerable {
 	}
 	
 	public void turnOff() {
-		if (this.isOn) {			
+		this.turnOff(false);
+	}
+	
+	private void turnOff(boolean force) {
+		if (this.isOn || force) {			
 			CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Wait), false);
 			CCRepeatForever repeat = CCRepeatForever.action(animate);
 			this.sprite.runAction(repeat);
@@ -142,7 +146,7 @@ public class TeslaCoil extends GameItemPhysic  implements ITrigerable {
 	}
 	
 	public void initState() {
-		this.turnOff();
+		this.turnOff(true);
 		if (this.startOn) {
 			this.turnOn();
 		}
