@@ -9,9 +9,9 @@ Target;target;232.0;256.0;16.0;16.0;0.0
 Star;None;226.0;304.0;30.0;31.0;0.0
 Platform_NoSticky;None;128.0;168.0;216.0;32.0;0.0
 Sprite;camera-mount;345.0;165.0;34.0;36.0;-90.0;;camera-mount;1
-Camera;Camerar;344.0;176.0;56.0;25.0;0.0;energyballgun;true;0;0;3;90
+Camera;Camerar;344.0;176.0;56.0;25.0;0.0;energyballgun;true;0;0;3;120
 Sprite;camera-mount;93.0;167.0;34.0;36.0;90.0;;camera-mount;1
-Camera;Cameral;72.0;167.0;56.0;25.0;180.0;energyballgun;true;0;0;3;-90
+Camera;Cameral;72.0;167.0;56.0;25.0;180.0;energyballgun;true;0;0;3;-120
 BecBunsen;energyballgun;148.0;101.0;20.0;67.0;180.0;false;0
 BecBunsen;energyballgun;312.0;101.0;20.0;67.0;180.0;false;0
 Star;None;234.0;120.0;30.0;31.0;0.0

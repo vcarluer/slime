@@ -1,0 +1,14 @@
+BlocInfo;None;-0.390625;120.39062;480;480;0;BlocInfo-0;1;;;false;false;false;t,r,b,l
+TimeAttack;None;-2.0;0.0;0.0;0.0;0.0;0;0
+Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 312,240 96,0 0,96 -96,0 0,48 96,0 0,96 -96,0 0,48 168,0 0,-336 -168,0;false;true;false
+Platform_Cross;None;104.0;296.0;32.0;32.0;0.0
+Platform_Cross;None;104.0;152.0;32.0;32.0;0.0
+Target;tt;128.0;304.0;16.0;16.0;0.0
+Target;tb;128.0;160.0;16.0;16.0;0.0
+LaserGun;lasergun;343.0;304.0;65.0;15.0;0.0;tt;true
+LaserGun;lasergun;343.0;160.0;65.0;15.0;0.0;tb;true
+Star;None;66.0;224.0;30.0;31.0;0.0
+Star;None;242.0;224.0;30.0;31.0;0.0
+BecBunsen;None;108.0;328.0;20.0;67.0;0.0;true;0
+BecBunsen;None;108.0;85.0;20.0;67.0;180.0;true;0
+Box_GlassBox;None;352.0;408.0;128.0;64.0;0.0;true;true

@@ -164,9 +164,9 @@
      inkscape:snap-grids="true"
      inkscape:snap-page="false"
      width="800px"
-     inkscape:window-width="1846"
-     inkscape:window-height="1058"
-     inkscape:window-x="66"
+     inkscape:window-width="1606"
+     inkscape:window-height="1028"
+     inkscape:window-x="1986"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      showguides="false"
@@ -191,7 +191,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1855,7 +1855,7 @@
        att_fov="0"
        att_viewDistance="0"
        att_rotateTime="3"
-       att_rotateAngle="90" />
+       att_rotateAngle="120" />
     <image
        width="34"
        height="36"
@@ -1885,7 +1885,7 @@
        att_fov="0"
        att_viewDistance="0"
        att_rotateTime="3"
-       att_rotateAngle="-90"
+       att_rotateAngle="-120"
        transform="scale(-1,-1)" />
     <image
        width="20"

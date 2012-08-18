@@ -9,3 +9,5 @@ Platform_Bumper;None;110.0;195.0;140.0;28.0;45.0
 Bumper_Angle;None;216.0;178.0;48.0;48.0;-45.0
 Platform_Bumper;None;229.0;194.0;140.0;28.0;135.0
 CircularSaw;circularsaw;272.0;269.0;40.0;40.0;-132.0;true
+BecBunsen;becbunsen;93.0;277.0;20.0;67.0;-45.0;true;0
+BecBunsen;becbunsen;367.0;277.0;20.0;67.0;45.0;true;0

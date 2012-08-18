@@ -1,0 +1,16 @@
+BlocInfo;None;0;120;480;480;0;BlocInfo-0;1;;;false;false;false;t,b,l
+TimeAttack;None;-2.0;0.0;0.0;0.0;0.0;0;0
+LaserGun;lgl;152.0;145.0;65.0;15.0;90.0;tl;true
+Target;tl;176.0;360.0;16.0;16.0;0.0
+LaserGun;lgr;327.0;328.0;65.0;15.0;-90.0;tr;true
+Target;tr;352.0;112.0;16.0;16.0;0.0
+Button;None;122.0;352.0;30.0;16.0;180.0;lgl;3
+Button;None;306.0;120.0;30.0;16.0;0.0;lgr;3
+Star;None;242.0;232.0;30.0;31.0;0.0
+Star;None;418.0;232.0;30.0;31.0;0.0
+CircularSaw;None;64.0;328.0;40.0;40.0;180.0;true
+CircularSaw;None;240.0;120.0;40.0;40.0;0.0;true
+Platform_Bumper;None;104.0;368.0;376.0;32.0;0.0
+Platform_End;None;72.0;368.0;32.0;32.0;180.0
+Platform_Bumper;None;192.0;88.0;288.0;32.0;0.0
+Platform_End;None;160.0;88.0;32.0;32.0;180.0

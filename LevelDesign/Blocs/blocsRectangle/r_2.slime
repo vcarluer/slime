@@ -1,0 +1,18 @@
+BlocInfo;None;0;120;480;480;0;BlocInfo-0;1;;;false;false;false;t,b,l
+TimeAttack;None;-2.0;0.0;0.0;0.0;0.0;0;0
+Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;M 424,264 449.88105,408.19443 320,448 480,576 480,120 312,240;false;true;false
+Sprite;camera-mount;348.0;313.0;34.0;36.0;11.0;;camera-mount;1
+Camera;Camera;337.0;301.0;56.0;25.0;101.0;tesla;true;0;0;2;120
+Star;None;342.0;217.0;30.0;31.0;0.0
+TeslaCoil;tesla;402.0;238.0;26.0;45.0;-101.0;false;0
+LaserGun;lasergun;285.0;176.0;65.0;15.0;88.0;tl;true
+Target;tl;304.0;352.0;16.0;16.0;0.0
+Button;None;328.0;115.0;30.0;16.0;-140.0;lasergun;3
+Star;None;130.0;312.0;30.0;31.0;0.0
+Box_Bottle;None;120.0;216.0;48.0;72.0;0.0;false;true
+Box_Multitubes;None;72.0;144.0;144.0;72.0;0.0;true;true
+Platform;None;104.0;112.0;80.0;32.0;0.0
+Platform_End;None;184.0;112.0;32.0;32.0;0.0
+Platform_End;None;72.0;112.0;32.0;32.0;180.0
+CircularSaw;None;184.0;216.0;40.0;40.0;0.0;true
+CircularSaw;None;64.0;216.0;40.0;40.0;0.0;true

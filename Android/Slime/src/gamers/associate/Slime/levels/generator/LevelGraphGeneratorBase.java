@@ -14,14 +14,13 @@ import java.util.Random;
 import org.cocos2d.types.CGPoint;
 
 public abstract class LevelGraphGeneratorBase {
-	protected static boolean debugBlocOn = false;
-	protected static String forceBlock = "blocsRectangle/l_10.slime";
+	protected static boolean debugBlocOn = true;
+	protected static String forceBlock = "blocsRectangle/bl_2.slime";
 	
 	protected static final int timeCalcBase = 20;
 	protected static final float timeCalcPerBlock = 8f;
 	protected static final int timeCritic = 5;
 	
-	// tuned with SGS
 	protected static final int maxWidth = 3; // -1
 	protected static final int maxAddHeight = 2; // -1
 	
