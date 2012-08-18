@@ -1,0 +1,12 @@
+BlocInfo;None;0;120;480;480;0;BlocInfo-0;1;;;false;false;false;t,r
+TimeAttack;None;-2.0;0.0;0.0;0.0;0.0;0;0
+Liquid;None;0.0;0.0;416.0;128.0;0.0
+LiquidSurface;None;0.0;128.0;416.0;16.0;0.0
+Platform_Wall;None;416.0;0.0;64.0;144.0;0.0
+Star;None;186.0;361.0;30.0;31.0;0.0
+Star;None;184.0;208.0;30.0;31.0;0.0
+Platform_Wall;None;0.0;264.0;336.0;96.0;0.0
+BecBunsen;None;44.0;360.0;20.0;67.0;0.0;true;0
+BecBunsen;None;44.0;197.0;20.0;67.0;180.0;true;0
+BecBunsen;None;452.0;144.0;20.0;67.0;0.0;true;0
+CircularSaw;None;304.0;360.0;40.0;40.0;0.0;true

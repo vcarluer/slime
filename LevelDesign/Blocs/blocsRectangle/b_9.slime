@@ -1,0 +1,14 @@
+BlocInfo;None;0;120;480;480;0;BlocInfo-0;1;;;false;false;false;t,r,l
+TimeAttack;None;-2.0;0.0;0.0;0.0;0.0;0;0
+Box_Multitubes;None;0.0;0.0;480.0;216.0;0.0;true;true
+LaserGun;lasergun;40.0;241.0;65.0;15.0;90.0;target;true
+Target;target;64.0;440.0;16.0;16.0;0.0
+Trigger_Time;None;232.0;384.0;16.0;16.0;0.0;lasergun;2
+LaserGun;lasergun;376.0;241.0;65.0;15.0;90.0;target;true
+Target;target;400.0;440.0;16.0;16.0;0.0
+Star;None;130.0;344.0;30.0;31.0;0.0
+Star;None;314.0;344.0;30.0;31.0;0.0
+Platform_Cross;None;392.0;448.0;32.0;32.0;0.0
+Platform_Cross;None;56.0;448.0;32.0;32.0;0.0
+CircularSaw;None;304.0;216.0;40.0;40.0;0.0;true
+CircularSaw;None;136.0;216.0;40.0;40.0;0.0;true

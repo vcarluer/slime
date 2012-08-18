@@ -211,7 +211,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 		Level currentLevel = Level.get(LevelHome.Id, true);							
 		CCTransitionScene transition = CCFadeTransition.transition(0.5f, currentLevel.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
-		Sounds.playMusic(R.raw.menumusic, true);
+//		Sounds.playMusic(R.raw.menumusic, true);
 	}
 	
 	public void goPause(Object sender) {

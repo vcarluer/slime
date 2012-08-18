@@ -1,0 +1,10 @@
+BlocInfo;None;0;120;480;480;0;BlocInfo-0;1;;;false;false;false;t,r
+TimeAttack;None;-2.0;0.0;0.0;0.0;0.0;0;0
+Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 0,600 480,0 0,-72 -50.31251,0 L 344,232 l -56,56 -32,112 88,56 40,96 -240,0 -40,-72 32,-80 56,-16 8,-120 L 96,176 57.812499,528 0,528;false;true;false
+MiniRed;None;328.0;48.0;32.0;22.0;0.0;false;1
+MiniRed;None;144.0;48.0;32.0;22.0;0.0;false;1
+CircularSaw;None;148.0;168.0;40.0;40.0;165.0;true
+CircularSaw;None;253.0;146.0;40.0;40.0;-145.0;true
+Star;None;201.0;97.0;30.0;31.0;0.0
+Star;None;224.0;274.0;30.0;31.0;0.0
+Box_Bottle;None;8.0;72.0;48.0;72.0;0.0;false;true
