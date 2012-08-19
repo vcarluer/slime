@@ -26,6 +26,7 @@ import gamers.associate.Slime.items.base.ITrigerable;
 import gamers.associate.Slime.items.base.SpriteType;
 
 public class Camera extends GameItemPhysic {
+	
 	public static String Anim_Wait = "camera";
 	public static float Default_Width = 56f;
 	public static float Default_Height = 25f;
@@ -54,6 +55,8 @@ public class Camera extends GameItemPhysic {
 	
 	private float rotateTime;
 	private float rotateAngle;
+	private float baseAngle;
+	private boolean baseAngleDefined;
 	
 	private CGPoint tmp1;
 	private CGPoint tmp2;
@@ -223,6 +226,8 @@ public class Camera extends GameItemPhysic {
 					}							
 				}
 			}
+			
+			this.handleRotation(delta);
 		}
 	}		
 	
@@ -236,9 +241,6 @@ public class Camera extends GameItemPhysic {
 
 	public void initState() {
 		this.setOn(this.isStartOn());
-		if (this.getRotateTime() > 0 && this.getRotateAngle() != 0) {
-			this.startRotation();
-		}
 	}
 
 	public String getTargetName() {
@@ -267,17 +269,38 @@ public class Camera extends GameItemPhysic {
 	
 	public void rotateBy(float time, float rotationAngle) {		
 		this.setRotateTime(time);
-		this.setRotateAngle(rotationAngle);
-		this.startRotation();		
+		this.setRotateAngle(rotationAngle);	
 	}
 	
-	public void startRotation() {
-		CCRotateBy rot = CCRotateBy.action(this.getRotateTime(), this.getRotateAngle());
-		CCRotateBy rot2 = CCRotateBy.action(this.getRotateTime(), -this.getRotateAngle());
-		CCSequence seq = CCSequence.actions(rot, rot.reverse(), rot2, rot2.reverse());
-		CCRepeatForever repeat = CCRepeatForever.action(seq);
-		this.getSprite().runAction(repeat);
+	private void handleRotation(float delta) {
+		if (this.getRotateTime() > 0 && this.getRotateAngle() != 0) {
+			float realAngle = this.rotateAngle * 2;
+			if (!this.baseAngleDefined) {
+				this.rotateAngleCurrent = this.rotateAngle;
+				this.baseAngle = this.angle - this.rotateAngle;
+				this.baseAngleDefined = true;
+			}
+			
+			float deltaAngle = this.getRotateAngle() / this.getRotateTime() * delta;
+			this.rotateAngleCurrent += deltaAngle;
+			boolean turn = false;
+			if (Math.abs(this.rotateAngleCurrent) >= Math.abs(realAngle)) {
+				rotateAngleCurrent = realAngle;
+				turn = true;
+			}
+			
+			float newAngle = this.baseAngle + this.rotateAngleCurrent;
+			this.setAngle(newAngle);
+			
+			if (turn) {
+				this.rotateAngle *= -1;
+				this.baseAngle = this.angle;
+				this.rotateAngleCurrent = 0;
+			}
+		}
 	}
+	
+	private float rotateAngleCurrent;
 
 	public float getRotateTime() {
 		return rotateTime;
@@ -293,5 +316,5 @@ public class Camera extends GameItemPhysic {
 
 	public void setRotateAngle(float rotateAngle) {
 		this.rotateAngle = rotateAngle;
-	}		
+	}
 }
