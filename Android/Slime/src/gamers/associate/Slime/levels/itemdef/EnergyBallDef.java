@@ -24,7 +24,7 @@ public class EnergyBallDef extends ItemDefinition {
 
 	@Override
 	public void createItem(Level level) {
-		SlimeFactory.EnergyBall.createBL("ball", x, y, width, height).setAngle(angle);
+		SlimeFactory.EnergyBall.createBL(this.getUName(), x, y, width, height).setAngle(angle);
 	}
 
 	@Override

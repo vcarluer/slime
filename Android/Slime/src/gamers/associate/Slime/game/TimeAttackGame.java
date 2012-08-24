@@ -201,6 +201,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 			this.adHiddenTimer = true;
 		}
 		
+		// todo: Slow down animation? http://cocos2d-central.com/topic/1049-changing-speed-of-an-action-after-its-started/
 		this.level.setTimeRatio(TimeRatioLow);
 	}
 
