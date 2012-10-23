@@ -156,18 +156,18 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.0703276"
-     inkscape:cx="-215.63416"
-     inkscape:cy="328.60324"
+     inkscape:cx="-178.07071"
+     inkscape:cy="362.56093"
      inkscape:document-units="px"
-     inkscape:current-layer="Template"
+     inkscape:current-layer="MAP"
      showgrid="true"
      inkscape:snap-grids="true"
      inkscape:snap-page="false"
      width="800px"
-     inkscape:window-width="1606"
-     inkscape:window-height="1028"
-     inkscape:window-x="66"
-     inkscape:window-y="22"
+     inkscape:window-width="1858"
+     inkscape:window-height="1058"
+     inkscape:window-x="54"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1"
      showguides="false"
      inkscape:snap-global="true">
@@ -1590,5 +1590,16 @@
        type="CircularSaw"
        att_isOn="true"
        att_name="circularsaw" />
+    <image
+       width="20"
+       height="67"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAyCAYAAACDMoE5AAAABHNCSVQICAgIfAhkiAAABHFJREFU SInllU1oXFUUgL/7/ubnTWaSadKYGpnWxFjSNlq0KM5KEEXEldSCdiW0hSAW3bWrCpUuWkRFF203 LlRocVMFUUQXClIJAzElptamESdpM00yzfy9N29m3rsuZjo/mZm0uvXA5d137v3OPefcc+8VUkpJ B3GLeYSiohiBTsMAKN0GXDvH4sV3u4KbwqovyMqPn2Inf783LD2XSm6taeU8AMvffnhv+MYnb/Db 0V3QlAKhqmRmfkB67uawEvADYC9dBaBSSGP096KGDOzFuc1h669pfIMmhflEFc6uogZVjC3aPWAp cZaT+IYCeCUbAGf1b9Qe0Ps87OSV7rBXKSF0neLNCubokzVPEmhRDz2qYSWnu8OK7sOIbqN0ex1z ++MAFBYS+Lb60Pp0nNRCR1i72xk9+gWVXBqEoJxJUc7cxhgYQEpJeT0N0gPRWhb1P9/WHZgjTwBw Z+orgg8HQIBQBJoZoLSeAqCcSVFcnm/Aty6dqe+va2dJffcRPXv9DffCfkpriwDMHo8zezxec1tK bl46Q+7az2x55nVS339McKeGatYjQo0oOMvzhEb3IVS1YbRiZRCGgTZ4g7XEewTHJObOUEtsxqAk /etFKvk0akTDc3Q8x0JzrQxa0E/P7p6OGQUwHw1xJ/Un61eu0/+cyeo3Hs5qEs0tZFD8WlcQQKiC 6LMN40pApZJbQ/HKNkITm8JtxjQFr2ShuMUCwmhfWVFCqFq4iycgK2UUpIfosLCqR4gOHOwISxeE pqMglGr1bLSOXv0qtf1uri5PIDQDRQtF8YqtsOGLoev9gKz1BzF7nq6PlzM2voEYmtE7SCVbBCL1 wUj0JTyvCAhC4WcQQgPpUcj+gpQSN29jRLeh6H1DqMEwpdulhleujVJzV1ECCKHjugUA3JyL1tOL UPVqbW+JHyQ7ZTUF3H6VS696SZTXSvgfHKsaBnjgxbeQ5T7ys7mqdTe3EaVcXgbAXqjQu/flBiw0 nZE3Pyc37VH4I49duIKUjTCk51C0rmIvWBQXK0SfeqXmYNNzU1ye5/oHr6L3Oww9H8fs2w2AlZ9m dWqKbKLII29/SXD7RDsM4JVsbn19mtWfPkMN6SiGSmktjxl7jIdeO41/aLQpNRtgx3GYnZ1FehXI rYKTR/RuY9feffh8vg2p2CCTk5MSaGuTk5Mbp8q2E7G+vg7A+xcu1HXvHDhQ1zdLx4M8tmcPL+zf 3/g/ebLTtO5P7P3I/xFuyfbKygrpdJqibTObSNT1RdsmnU6zsrLCwMBAA2je9Fgs1rFA7rZYLNa9 SCzLIhwOc/jw4TYXz507h2VZLboW2O/3MzIywvj4eBs8Pj7O0tJSdzibzZJMJhkeHm6DL1++TCQS aVU2xxCPxzeNOR6Pt8Qs5ubm5OLiYt3YqVOnuLawwImzZ+u6E0eOMLZjB8eOHavrhoeHETWr/0k0 gEOHDjExMXHf0MzMDOfPn6/CpmlimuZ9w3fnagBTU1M4jvOvVgbAMIxNM9ytGYYh/wHnSzGjAH8W TQAAAABJRU5ErkJggg== "
+       id="becbunsen-1"
+       x="8"
+       y="469"
+       type="BecBunsen"
+       att_delay="0"
+       att_isOn="true"
+       att_name="becbunsen" />
   </g>
 </svg>
