@@ -1,0 +1,13 @@
+BlocInfo;None;0;120;480;480;0;BlocInfo-0;1;;;false;false;true;t,b,l
+TimeAttack;None;-2.0;0.0;0.0;0.0;0.0;0;0
+Platform_Ice;None;99.0;138.0;192.0;32.0;30.0
+Platform_Ice;None;96.0;184.0;24.0;32.0;0.0
+Platform_Ice;None;269.0;93.0;211.0;32.0;0.0
+Red;None;312.0;128.0;153.0;105.0;0.0;true;3
+MiniRed;None;280.0;128.0;32.0;22.0;0.0;false;1
+MiniRed;None;88.0;216.0;32.0;22.0;0.0;false;1
+Star;None;186.0;184.0;30.0;31.0;0.0
+Star;None;360.0;280.0;30.0;31.0;0.0
+Platform_Ice;None;192.0;376.0;288.0;32.0;0.0
+CircularSaw;None;152.0;368.0;40.0;40.0;-90.0;true
+CircularSaw;None;352.0;336.0;40.0;40.0;180.0;true
