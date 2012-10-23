@@ -1,0 +1,9 @@
+BlocInfo;None;0;120;480;480;0;BlocInfo-0;1;;;false;false;true;t,l
+TimeAttack;None;-2.0;0.0;0.0;0.0;0.0;0;0
+Box_Multitubes;None;0.0;0.0;480.0;72.0;0.0;true;true
+Box_GlassBox;None;264.0;72.0;216.0;216.0;0.0;true;true
+Red;None;256.0;288.0;153.0;105.0;0.0;true;3
+BecBunsen;None;36.0;72.0;20.0;67.0;0.0;true;0
+BecBunsen;None;444.0;288.0;20.0;67.0;0.0;true;0
+BecBunsen;None;240.0;72.0;20.0;67.0;0.0;true;0
+CircularSaw;None;226.0;228.0;40.0;40.0;-90.0;true
