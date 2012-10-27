@@ -1,9 +1,11 @@
 package gamers.associate.Slime.items.custom;
 
+import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.SpriteType;
+import gamers.associate.Slime.game.Sounds;
 
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.instant.CCCallFunc;
@@ -114,7 +116,8 @@ public class Star extends GameItemPhysic {
 	}
 	
 	public void starTaken() {
+		Sounds.playEffect(R.raw.star);
 		Level.currentLevel.setNewBonus();
-		Level.currentLevel.addItemToRemove(this);
+		Level.currentLevel.addItemToRemove(this);		
 	}
 }

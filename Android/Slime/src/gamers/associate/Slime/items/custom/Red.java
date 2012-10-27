@@ -532,7 +532,7 @@ public class Red extends GameItemPhysic implements ISelectable {
 	public void jumpReal() {
 		if (this.state == RedState.PrepareAttack) {
 			GameItem item = Level.currentLevel.getStartItem();
-			Sounds.playEffect(R.raw.slimyjump);
+			Sounds.playEffect(R.raw.slimyjumpa);
 			int dir = this.impulse(item, this, false, this.getMinImpulse(), this.getMaxImpulse());
 			this.animTurn(dir);
 			this.state = RedState.Attack;

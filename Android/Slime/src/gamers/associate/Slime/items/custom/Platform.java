@@ -5,6 +5,8 @@ import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.SpriteType;
+import gamers.associate.Slime.R;
+import gamers.associate.Slime.game.Sounds;
 
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCMoveBy;
@@ -136,7 +138,13 @@ public class Platform extends GameItemPhysic {
 	 */
 	@Override
 	protected void handleContact(ContactInfo item) {		
+		if (this.type == Bump) {
+			Sounds.playEffect(R.raw.platformbump);
+		}else if(this.type == Sticky || this.type == Wall){
+			Sounds.playEffect(R.raw.platformstick);
+		}
 		super.handleContact(item);
+		
 	}
 	
 	public int getType() {

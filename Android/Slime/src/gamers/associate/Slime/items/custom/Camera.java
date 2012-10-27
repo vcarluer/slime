@@ -17,8 +17,10 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
+import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.GameItemPhysic;
@@ -60,6 +62,7 @@ public class Camera extends GameItemPhysic {
 	
 	private CGPoint tmp1;
 	private CGPoint tmp2;
+	private int miniTimer = 0;
 	
 	public Camera(float x, float y, float width, float height, World world,
 			float worldRatio, String targetName, boolean startOn, float fov, float viewDistance,
@@ -208,8 +211,18 @@ public class Camera extends GameItemPhysic {
 			for(Slimy check : Level.currentLevel.aliveList()) {				
 				if (check != null) {				
 					boolean spot = Util.inTriangle(this.getPosition(), v1, v2, check.getPosition());
-					if (spot) {
+					if (spot && miniTimer == 0) {
 						this.spoted = spot;
+						//Sounds.playMusic(R.raw.bipcamera,true);
+						Sounds.playEffect(R.raw.bipcamera);
+						miniTimer++;
+					}else
+					{
+						if(miniTimer==30){
+							miniTimer = 0;
+						}else{
+							miniTimer++;
+						}
 					}
 				}
 			}						

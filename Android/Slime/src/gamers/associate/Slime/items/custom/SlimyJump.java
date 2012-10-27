@@ -101,7 +101,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	
 	private float emitterStartSize;
 	private int numberOfJump = 0;
-	private int jumpSound[] = {R.raw.slimyjumpa, R.raw.slimyjumpb, R.raw.slimyjumpd , R.raw.slimyjumpe, R.raw.slimyjumpg};
+	private int jumpSound[] = {R.raw.slimyjumpa, R.raw.slimyjumpb, R.raw.slimyjumpc , R.raw.slimyjumpd, R.raw.slimyjumpe};
 	
 	
 	public SlimyJump(float x, float y, float width, float height, World world,
@@ -306,7 +306,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 		this.actionSelect = CCRepeatForever.action(animation);
 		this.sprite.runAction(this.actionSelect);
 		// this.auraSprite.runAction(repeat);
-		Sounds.playEffect(R.raw.slimycharging);			
+		//Sounds.playEffect(R.raw.slimycharging);			
 	}
 	
 	public void select(CGPoint gameReference) {
@@ -317,7 +317,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	
 	public void unselect() {
 		if (this.selected) {
-			Sounds.stopEffect(R.raw.slimycharging);
+			//Sounds.stopEffect(R.raw.slimycharging);
 			this.selected = false;	
 			this.stopAura();
 		}
@@ -346,7 +346,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 				this.hasJumped = true;
 				Sounds.playEffect(this.jumpSound[numberOfJump]);
 				this.numberOfJump++;
-				if(this.numberOfJump==4){
+				if(this.numberOfJump==5){
 					this.numberOfJump = 0;
 				}
 				
