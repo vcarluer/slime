@@ -14,7 +14,7 @@ import java.util.Random;
 import org.cocos2d.types.CGPoint;
 
 public abstract class LevelGraphGeneratorBase {
-	protected static boolean debugBlocOn = true;
+	protected static boolean debugBlocOn = false;
 	protected static String forceBlock = "blocsCorridor/b_r_5.slime";
 	
 	protected static final int timeCalcBase = 20;
