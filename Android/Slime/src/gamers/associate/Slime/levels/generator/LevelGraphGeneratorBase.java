@@ -146,8 +146,8 @@ public abstract class LevelGraphGeneratorBase {
 
 	protected void postGenerate() {
 		if (this.currentLevel != null) {
-			int xSize = Math.max(this.rightCount, this.leftCount) + 1;
-			int ySize = Math.max(this.topCount, this.bottomCount) + 1;
+			int xSize = this.maxX - this.minX + 1;
+			int ySize = this.maxY - this.minY + 1;
 			
 			this.currentLevel.setLevelSize(
 					BlocDefinition.BlocWidth * xSize,
@@ -169,34 +169,24 @@ public abstract class LevelGraphGeneratorBase {
 		this.currentLevel.setLevelOrigin(xShift, yShift);		
 	}
 	
-	protected void handlePick(LevelGenNode pick, boolean countDirection) {
-		int x = this.getXOffset();
-		int y = this.getYOffset();
-		if (x < this.minX) this.minX = x;
-		if (x > this.maxX) this.maxX = x;
-		if (y < this.minY) this.minY = y;
-		if (y > this.maxY) this.maxY = y;
-
-		this.blockMap.add(CGPoint.make(x, y));
+	private int currentX;
+	private int currentY;
+	
+	protected void handlePick(LevelGenNode pick, boolean countDirection) {		
+		this.blockMap.add(CGPoint.make(this.currentX, this.currentY));
 		
 		BlocDefinition bloc = pick.getBlocDefinition();
 		if (bloc != null) {
-			bloc.buildLevel(this.currentLevel, x, y);
+			bloc.buildLevel(this.currentLevel, this.currentX, this.currentY);
 		}
 		
 		this.currentComplexity += pick.getComplexity();
 		this.previousPickComplexity = pick.getComplexity();
+		
 		if (countDirection) {
 			this.count(this.lastDirection);
+			this.Forward(this.lastDirection);
 		}
-	}
-	
-	protected int getXOffset() {
-		return this.rightCount - this.leftCount;		
-	}
-	
-	protected int getYOffset() {
-		return this.topCount - this.bottomCount;
 	}
 
 	public int getLastGeneratedComplexity() {
@@ -224,6 +214,30 @@ public abstract class LevelGraphGeneratorBase {
 		this.totalCount++;
 	}
 	
+	protected void Forward(BlocDirection direction) {
+		switch(direction) {
+		case Top:
+			this.currentY++;;
+			break;
+		case Right:
+			this.currentX++;
+			break;
+		case Bottom:
+			this.currentY--;
+			break;
+		case Left:
+			this.currentX--;
+			break;
+		default:
+			break;
+		}
+		
+		if (this.currentX < this.minX) this.minX = this.currentX;
+		if (this.currentX > this.maxX) this.maxX = this.currentX;
+		if (this.currentY < this.minY) this.minY = this.currentY;
+		if (this.currentY > this.maxY) this.maxY = this.currentY;
+	}
+	
 	protected void initCount() {
 		this.topCount = 0;
 		this.rightCount = 0;
@@ -235,6 +249,9 @@ public abstract class LevelGraphGeneratorBase {
 		this.maxX = 0;
 		this.minY = 0;
 		this.maxY = 0;
+		
+		this.currentX = 0;
+		this.currentY = 0;
 	}
 	
 	public int getTopCount() {
