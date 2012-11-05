@@ -117,13 +117,6 @@ public class EndLevelLayer extends CCLayer {
 		this.setIsTouchEnabled(true);
 		currentMenu.setIsTouchEnabled(true);
 		currentMenu.setVisible(true);
-		if (this.slime != null) {
-			this.slime.setVisible(true);
-		}
-		
-		if (this.star != null) {
-			this.star.setVisible(true);
-		}
 		
 		this.scoreLabel.setVisible(true);
 		this.setVisible(true);
@@ -135,11 +128,13 @@ public class EndLevelLayer extends CCLayer {
 	public void disable() {
 		this.setIsTouchEnabled(false);
 		if (this.slime != null) {
-			this.slime.setVisible(false);
+			this.removeChild(this.slime, true);
+			this.slime = null;
 		}
 		
 		if (this.star != null) {
-			this.star.setVisible(false);
+			this.removeChild(this.star, true);
+			this.star = null;
 		}
 		
 		this.scoreLabel.setVisible(false);
@@ -190,11 +185,6 @@ public class EndLevelLayer extends CCLayer {
 	}
 	
 	private void initSlime(String animation, float waitTime, boolean win) {
-		if (this.slime != null) {
-			this.slime.stopAllActions();
-			this.removeChild(this.slime, true);
-		}
-		
 		if (win) {
 			this.slime = SlimeFactory.SlimySuccess.getAnimatedSprite(SlimySuccess.getAnimationName(SlimeFactory.GameInfo.getDifficulty()));			
 		} else {
