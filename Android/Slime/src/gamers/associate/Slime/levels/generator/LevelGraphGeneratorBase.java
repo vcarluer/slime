@@ -169,24 +169,28 @@ public abstract class LevelGraphGeneratorBase {
 		this.currentLevel.setLevelOrigin(xShift, yShift);		
 	}
 	
-	private int currentX;
-	private int currentY;
+	protected int currentX;
+	protected int currentY;
 	
 	protected void handlePick(LevelGenNode pick, boolean countDirection) {		
-		this.blockMap.add(CGPoint.make(this.currentX, this.currentY));
-		
-		BlocDefinition bloc = pick.getBlocDefinition();
-		if (bloc != null) {
-			bloc.buildLevel(this.currentLevel, this.currentX, this.currentY);
-		}
-		
-		this.currentComplexity += pick.getComplexity();
-		this.previousPickComplexity = pick.getComplexity();
+		this.handlePick(pick, this.currentX, this.currentY);
 		
 		if (countDirection) {
 			this.count(this.lastDirection);
 			this.Forward(this.lastDirection);
 		}
+	}
+	
+	protected void handlePick(LevelGenNode pick, int x , int y) {		
+		this.blockMap.add(CGPoint.make(x, y));
+		
+		BlocDefinition bloc = pick.getBlocDefinition();
+		if (bloc != null) {
+			bloc.buildLevel(this.currentLevel, x, y);
+		}
+		
+		this.currentComplexity += pick.getComplexity();
+		this.previousPickComplexity = pick.getComplexity();
 	}
 
 	public int getLastGeneratedComplexity() {

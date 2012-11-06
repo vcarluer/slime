@@ -58,7 +58,7 @@ public class ChangeDifficultyLayer extends CCLayer {
 		spriteBg.setScale(Math.max(scaleW, scaleH));
 		this.addChild(spriteBg, 0);
 		
-		CCMenuItemLabel title = CCMenuItemLabel.item(this.createLabel("RESET TO:"), this, "");
+		CCMenuItemLabel title = CCMenuItemLabel.item(this.createLabel("RESET TO:"), this, ""); // generates a warning in log due to ""
 		title.setAnchorPoint(0, 0.5f);
 		this.easyMenuLabel = this.createMenuLabel(LevelDifficulty.Easy, "selectEasy");
 		this.normalMenuLabel = this.createMenuLabel(LevelDifficulty.Normal, "selectNormal");

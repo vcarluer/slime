@@ -357,6 +357,18 @@ public class LevelGenNode {
 		return connected;
 	}
 	
+	public boolean ConnectedAtLeatTo(List<Integer> list) {
+		boolean connected = false;
+		if (list != null) {
+			for(Integer connector : list) {
+				connected = this.isConnectedTo(connector);
+				if (!connected) break;
+			}
+		}
+		
+		return connected;
+	}
+	
 	public boolean isLevelStartAndExactlyConnectedTo(List<Integer> list) {
 		return this.isLevelStart && this.isExactlyConnectedTo(list);
 	}
@@ -382,7 +394,7 @@ public class LevelGenNode {
 		this.blocDefinition.setStarBlock(isStarBlock);
 	}
 
-	public boolean NoSpecialComeFromAndGoTo(BlocDirection fromDirection,
+	public boolean noSpecialComeFromAndGoTo(BlocDirection fromDirection,
 			BlocDirection toDirection) {
 		List<Integer> fromConnectors = getConnectorsFor(LevelGenNode.getMirror(fromDirection));
 		List<Integer> toConnectors = getConnectorsFor(LevelGenNode.getMirror(toDirection));
@@ -398,5 +410,30 @@ public class LevelGenNode {
 	public boolean isLevelBossAndComeFrom(BlocDirection fromDirection) {
 		List<Integer> fromConnectors = getConnectorsFor(LevelGenNode.getMirror(fromDirection));
 		return this.isBoss && this.isEntryConnectedTo(fromConnectors);
+	}
+	
+	public boolean atLeast(boolean start, boolean exit, boolean boss, boolean top, boolean right, boolean bottom, boolean left) {
+		if (start != this.isLevelStart) return false;
+		if (exit != this.isLevelEnd) return false;
+		if (boss != this.isBoss) return false;
+		
+		List<Integer> connect = new ArrayList<Integer>();
+		if (top) {
+			connect.addAll(getConnectorsFor(LevelGenNode.getMirror(BlocDirection.Top)));
+		}
+		
+		if (right) {
+			connect.addAll(getConnectorsFor(LevelGenNode.getMirror(BlocDirection.Right)));
+		}
+		
+		if (bottom) {
+			connect.addAll(getConnectorsFor(LevelGenNode.getMirror(BlocDirection.Bottom)));
+		}
+		
+		if (left) {
+			connect.addAll(getConnectorsFor(LevelGenNode.getMirror(BlocDirection.Left)));
+		}
+		
+		return this.ConnectedAtLeatTo(connect);
 	}
 }

@@ -18,8 +18,8 @@ import org.cocos2d.transitions.CCTransitionScene;
 public class LevelBuilderGenerator implements ILevelBuilder
 {	
 	private static boolean isDebug =  false;
-	private static int forceDiff = 2;
-	private static int forceLevel = 2;
+	private static int forceDiff = 8;
+	private static int forceLevel = 60;
 	
 	private static int MinimumComplexity = 1;
 	private static int AverageComplexityPerLevel = 1;
@@ -72,9 +72,9 @@ public class LevelBuilderGenerator implements ILevelBuilder
 					
 					if (lvl % 4 == 0) {
 						// this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorRectangle2);
-						this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor2);
+						this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor3);
 					} else {
-						this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor2);
+						this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor3);
 					}					
 				}
 				

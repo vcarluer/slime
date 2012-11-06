@@ -64,7 +64,7 @@ public class LevelGraphGeneratorCorridor2 extends LevelGraphGeneratorCorridor {
 		LevelGenNode pick = null;
 		List<LevelGenNode> selection = new ArrayList<LevelGenNode>();
 		for(LevelGenNode node : this.nodes) {
-			if (node.NoSpecialComeFromAndGoTo(fromDirection, toDirection)) {				
+			if (node.noSpecialComeFromAndGoTo(fromDirection, toDirection)) {				
 				selection.add(node);				
 			}
 		}

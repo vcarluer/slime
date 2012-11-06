@@ -75,6 +75,15 @@ public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {
 	
 	@Override
 	protected void generateInternal(int maxComplexity, BlocDirection constrained, boolean isBoss) {		
+		generateBeforeGP(constrained, isBoss);
+		
+		
+		this.addGamePlay(this.totalCount);
+		
+		this.fillEmptyBlocks();
+	}
+
+	protected void generateBeforeGP(BlocDirection constrained, boolean isBoss) {
 		Log.d(Slime.TAG, "Picking start node with constraint " + String.valueOf(constrained));
 		LevelGenNode pick = this.pickStartConstrained(constrained);
 		Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
@@ -95,10 +104,6 @@ public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {
 		
 		Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
 		this.handlePick(pick, false);
-		
-		this.addGamePlay(this.totalCount);
-		
-		this.fillEmptyBlocks();
 	}
 	
 	@Override

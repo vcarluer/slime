@@ -107,7 +107,7 @@ public class SlimeLoadingLayer extends CCLayer {
 				
 				Sounds.preload();
 				
-				BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorCorridor2);
+				BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorCorridor3);
 				BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle2);
 				BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorTutorial);
 				
