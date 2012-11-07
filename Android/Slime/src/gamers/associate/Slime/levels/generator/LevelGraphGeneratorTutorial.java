@@ -63,30 +63,52 @@ public class LevelGraphGeneratorTutorial extends LevelGraphGeneratorRectangle {
 		case 3: // vertical level
 			this.handleTut(TUT3_1);
 			this.topCount++;
+			this.maxX = 0;
+			this.maxY = 1;
+			this.currentX = 0;
+			this.currentY = 1;
 			this.handleTut(TUT3_2);
 			break;
 		// 4 - no sticky platform + death threat + star
 		case 4: // horizontal level
 			this.handleTut(TUT4_1);
 			this.rightCount++;
+			this.maxX = 1;
+			this.maxY = 0;
+			this.currentX = 1;
+			this.currentY = 0;
 			this.handleTut(TUT4_2);
 			break;
 		// 5 - icy platform + death threat + star
 		case 5: // vertical level down
 			this.handleTut(TUT5_1);
 			this.bottomCount++;
+			this.maxX = 0;
+			this.maxY = 0;
+			this.minY = -1;
+			this.currentX = 0;
+			this.currentY = -1;
 			this.handleTut(TUT5_2);
 			break;
 		// 6 - button + laser + star
 		case 6: // horizontal level
 			this.handleTut(TUT6_1);
 			this.rightCount++;
+			this.maxX = 1;
+			this.maxY = 0;
+			this.minY = 0;
+			this.currentX = 1;
+			this.currentY = 0;
 			this.handleTut(TUT6_2);
 			break;
 		// 7 - Bullet time + death threat + 2 stars
 		case 7: // vertical level
 			this.handleTut(TUT7_1);
 			this.topCount++;
+			this.maxX = 0;
+			this.maxY = 1;
+			this.currentX = 0;
+			this.currentY = 1;
 			this.handleTut(TUT7_2);
 			break;	
 		}			
