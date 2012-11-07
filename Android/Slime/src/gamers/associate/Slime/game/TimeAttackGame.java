@@ -26,6 +26,8 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	private static float adTime = 5.0f; 
 	private static float stepNormal = 1.0f;
 	private static float stepCritic = 1.0f;
+	private static int timeScore = 1000;
+	private static int bonusScore = 10000;
 	private float startTime;
 	private float leftTime;
 	private float criticTime;
@@ -38,6 +40,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	private CCAction criticAction;
 	private int bonusTaken;
 	private boolean adHiddenTimer;
+	
 	
 	public static TimeAttackGame NewGame() {
 		return new TimeAttackGame(0, 0, 0, 0);				
@@ -184,7 +187,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 
 	public int getScore() {		
 		// return (int) Math.round(this.leftTime);
-		return (int) Math.ceil((double)this.leftTime);
+		return (int) Math.ceil((double)this.leftTime * timeScore) + this.bonusTaken * bonusScore;
 	}
 
 	public void selectBegin(CGPoint gameReference) {		
