@@ -64,8 +64,9 @@ public class ChangeDifficultyLayer extends CCLayer {
 		this.normalMenuLabel = this.createMenuLabel(LevelDifficulty.Normal, "selectNormal");
 		this.hardMenuLabel = this.createMenuLabel(LevelDifficulty.Hard, "selectHard");
 		this.extremMenuLabel = this.createMenuLabel(LevelDifficulty.Extrem, "selectExtrem");
-		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);
-		CCMenuItemSprite goHome = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goHome");
+		CCSprite homeSpriteN = CCSprite.sprite("control-home.png", true);
+		CCSprite homeSpriteS = CCSprite.sprite("control-home.png", true);
+		CCMenuItemSprite goHome = CCMenuItemSprite.item(homeSpriteN, homeSpriteS, this, "goHome");
 		goHome.setScale(PauseLayer.Scale);
 		
 		float left = - CCDirector.sharedDirector().winSize().getWidth() / 2 + ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) / 2 ;

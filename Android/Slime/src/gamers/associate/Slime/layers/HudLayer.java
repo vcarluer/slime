@@ -90,8 +90,9 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 		this.gameItemstoRemove = new ArrayList<GameItem>();
 		this.starCounters = new ArrayList<StarCounter>();
 		float pauseScale = PauseLayer.Scale;
-		CCSprite pauseSprite = CCSprite.sprite("control-pause.png", true);
-		CCMenuItemSprite pauseMenu = CCMenuItemSprite.item(pauseSprite, pauseSprite, this, "goPause");
+		CCSprite pauseSpriteN = CCSprite.sprite("control-pause.png", true);
+		CCSprite pauseSpriteS = CCSprite.sprite("control-pause.png", true);
+		CCMenuItemSprite pauseMenu = CCMenuItemSprite.item(pauseSpriteN, pauseSpriteS, this, "goPause");
 		pauseMenu.setScale(pauseScale);
 		
 		float left = - CCDirector.sharedDirector().winSize().getWidth() / 2 + ((MenuSprite.Width * pauseScale) + PauseLayer.PaddingX) / 2 ;

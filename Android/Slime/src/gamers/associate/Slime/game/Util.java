@@ -7,6 +7,7 @@ import static javax.microedition.khronos.opengles.GL10.GL_TEXTURE_COORD_ARRAY;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
 import java.text.DecimalFormat;
 
 import javax.microedition.khronos.opengles.GL10;
@@ -14,7 +15,7 @@ import javax.microedition.khronos.opengles.GL10;
 import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
-import org.cocos2d.utils.FastFloatBuffer;
+import org.cocos2d.utils.BufferProvider;
 
 public class Util {
 	public static void draw(GL10 gl, CGRect rect, float width, float r,
@@ -101,7 +102,7 @@ public class Util {
 //        ByteBuffer vbb = ByteBuffer.allocateDirect(4 * 2 * (segments + 2));
 //        vbb.order(ByteOrder.nativeOrder());
 //        FloatBuffer vertices = vbb.asFloatBuffer();
-        FastFloatBuffer vertices = getVertices(2 * (segments + 2));
+        FloatBuffer vertices = getVertices(2 * (segments + 2));
 
         int additionalSegment = 2;
         
@@ -127,7 +128,7 @@ public class Util {
         gl.glDisableClientState(GL_TEXTURE_COORD_ARRAY);
         gl.glDisableClientState(GL_COLOR_ARRAY);
 
-        gl.glVertexPointer(2, GL_FLOAT, 0, vertices.bytes);
+        gl.glVertexPointer(2, GL_FLOAT, 0, vertices);
         gl.glDrawArrays(GL10.GL_TRIANGLE_FAN, 0, segments + additionalSegment);
 
         // restore default state
@@ -142,7 +143,7 @@ public class Util {
 //        vbb.order(ByteOrder.nativeOrder());
 //        FloatBuffer vertices = vbb.asFloatBuffer();
         int count = 3;
-    	FastFloatBuffer vertices = getVertices(2 * (count));
+    	FloatBuffer vertices = getVertices(2 * (count));
         
         vertices.put(v0.x);
         vertices.put(v0.y);
@@ -160,7 +161,7 @@ public class Util {
         gl.glDisableClientState(GL_TEXTURE_COORD_ARRAY);
         gl.glDisableClientState(GL_COLOR_ARRAY);
 
-        gl.glVertexPointer(2, GL_FLOAT, 0, vertices.bytes);
+        gl.glVertexPointer(2, GL_FLOAT, 0, vertices);
         gl.glDrawArrays(GL10.GL_TRIANGLES, 0, count);
 
         // restore default state
@@ -169,17 +170,17 @@ public class Util {
         gl.glEnable(GL_TEXTURE_2D);	
     }
     
-    private static FastFloatBuffer getVertices(int size) {
+    private static FloatBuffer getVertices(int size) {
 		if(tmpFloatBuf == null || tmpFloatBuf.capacity() < size) {
 	        ByteBuffer vbb = ByteBuffer.allocateDirect(4 * size);
 	        vbb.order(ByteOrder.nativeOrder());
-	        tmpFloatBuf = FastFloatBuffer.createBuffer(vbb);
+	        tmpFloatBuf = vbb.asFloatBuffer();
 		}
 		tmpFloatBuf.rewind();
 		return tmpFloatBuf;
 	}
     
-    private static FastFloatBuffer tmpFloatBuf;
+    private static FloatBuffer tmpFloatBuf;
     
     public static float det(CGPoint u, CGPoint v) {
     	// det(u v) = u.v = uxvy-uyvx

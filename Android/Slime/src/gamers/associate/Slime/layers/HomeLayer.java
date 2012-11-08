@@ -88,8 +88,9 @@ public class HomeLayer extends CCLayer {
 		
 		this.setIsTouchEnabled(true);
 		
-		CCSprite playSprite = CCSprite.sprite("control-play.png", true);
-		CCMenuItemSprite playMenu = CCMenuItemSprite.item(playSprite, playSprite, this, "selectPlay");
+		CCSprite playSpriteNorm = CCSprite.sprite("control-play.png", true);
+		CCSprite playSpriteSel = CCSprite.sprite("control-play.png", true);
+		CCMenuItemSprite playMenu = CCMenuItemSprite.item(playSpriteNorm, playSpriteSel, this, "selectPlay");
 		// playMenu.setScale(SlimeFactory.SGSDensity);
 		/*CCSprite restartSprite = CCSprite.sprite("control-restart.png", true);
 		this.restartMenu = CCMenuItemSprite.item(restartSprite, restartSprite, this, "goRestart");
@@ -157,8 +158,9 @@ public class HomeLayer extends CCLayer {
 		super.onEnter();
 		Sounds.setEffectsDisable(true);
 		
-		CCSprite restartSprite = CCSprite.sprite("control-restart.png", true);
-		CCMenuItemSprite restartItem = CCMenuItemSprite.item(restartSprite, restartSprite, this, "changeDifficulty");
+		CCSprite restartSpriteN = CCSprite.sprite("control-restart.png", true);
+		CCSprite restartSpriteS = CCSprite.sprite("control-restart.png", true);
+		CCMenuItemSprite restartItem = CCMenuItemSprite.item(restartSpriteN, restartSpriteS, this, "changeDifficulty");
 		restartItem.setScale(PauseLayer.Scale);		
 		
 		float left = - CCDirector.sharedDirector().winSize().getWidth() / 2 + ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) / 2 ;
@@ -180,7 +182,7 @@ public class HomeLayer extends CCLayer {
 		this.menuInfo = CCMenu.menu(menuLevelInfo);
 		this.addChild(menuInfo);					*/	
 		this.lblLevel.setPosition(
-				CCDirector.sharedDirector().winSize().width / 2 + restartItem.getPosition().x + restartSprite.getContentSize().width / 2 + this.lblLevel.getContentSize().width / 2 + PauseLayer.PaddingX, 
+				CCDirector.sharedDirector().winSize().width / 2 + restartItem.getPosition().x + restartSpriteN.getContentSize().width / 2 + this.lblLevel.getContentSize().width / 2 + PauseLayer.PaddingX, 
 				CCDirector.sharedDirector().winSize().height / 2 + CCDirector.sharedDirector().winSize().getHeight() / 2 - this.lblLevel.getContentSize().height + PauseLayer.PaddingY
 				);
 		this.lblLevel.setColor(SlimeFactory.ColorSlime);

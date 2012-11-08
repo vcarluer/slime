@@ -82,8 +82,9 @@ public class EndDifficultyGameLayer extends CCLayer {
 		
 		this.addChild(this.unlock, zNormal);		
 				
-		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);
-		CCMenuItemSprite goHome = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goHome");
+		CCSprite homeSpriteN = CCSprite.sprite("control-home.png", true);
+		CCSprite homeSpriteS = CCSprite.sprite("control-home.png", true);
+		CCMenuItemSprite goHome = CCMenuItemSprite.item(homeSpriteN, homeSpriteS, this, "goHome");
 		CCMenu menu = CCMenu.menu(goHome);
 		menu.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().getWidth() / 2,

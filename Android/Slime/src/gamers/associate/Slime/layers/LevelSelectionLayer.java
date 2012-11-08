@@ -42,14 +42,16 @@ public class LevelSelectionLayer extends CCLayer {
 		menuCommand = CCMenu.menu();
 		
 		menuCommand.setPosition((MenuSprite.Width + 5) / 2, CCDirector.sharedDirector().winSize().height - (MenuSprite.Height + 5) / 2);
-		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);
-		CCMenuItemSprite goBackMenu = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goBackEvent");
+		CCSprite homeSpriteN = CCSprite.sprite("control-home.png", true);
+		CCSprite homeSpriteS = CCSprite.sprite("control-home.png", true);
+		CCMenuItemSprite goBackMenu = CCMenuItemSprite.item(homeSpriteN, homeSpriteS, this, "goBackEvent");
 		
 		menuCommand.addChild(goBackMenu);		
 		
 		for(LevelDefinition levelDef : SlimeFactory.LevelBuilder.getNormalLevels()) {
-			CCSprite menuSprite = CCSprite.sprite("control-square-screen.png", true);			
-			CCMenuItemSprite menuItemSprite = CCMenuItemSprite.item(menuSprite, menuSprite, this, "selectLevel");
+			CCSprite menuSpriteN = CCSprite.sprite("control-square-screen.png", true);			
+			CCSprite menuSpriteS = CCSprite.sprite("control-square-screen.png", true);
+			CCMenuItemSprite menuItemSprite = CCMenuItemSprite.item(menuSpriteN, menuSpriteS, this, "selectLevel");
 			menuItemSprite.setScale(1 / bgButtonScale);
 			menuItemSprite.setUserData(levelDef.getId());
 			menuItemSprite.setAnchorPoint(0.5f, 0.5f);

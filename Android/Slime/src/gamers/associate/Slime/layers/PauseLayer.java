@@ -39,16 +39,19 @@ public class PauseLayer extends CCLayer {
 //		
 //		this.scoreMaxLabel = CCMenuItemLabel.item(getMenuLabel(scoreTxt), null, "");
 		
-		CCSprite resumeSprite = CCSprite.sprite("control-play.png", true);
-		CCMenuItemSprite resumeMenu = CCMenuItemSprite.item(resumeSprite, resumeSprite, this, "goResume");
+		CCSprite resumeSpriteN = CCSprite.sprite("control-play.png", true);
+		CCSprite resumeSpriteS = CCSprite.sprite("control-play.png", true);
+		CCMenuItemSprite resumeMenu = CCMenuItemSprite.item(resumeSpriteN, resumeSpriteS, this, "goResume");
 		this.setMenuPos(resumeMenu, 1);
 		
-		CCSprite restartSprite = CCSprite.sprite("control-restart.png", true);
-		CCMenuItemSprite restartMenu = CCMenuItemSprite.item(restartSprite, restartSprite, this, "goRestart");		
+		CCSprite restartSpriteN = CCSprite.sprite("control-restart.png", true);
+		CCSprite restartSpriteS = CCSprite.sprite("control-restart.png", true);
+		CCMenuItemSprite restartMenu = CCMenuItemSprite.item(restartSpriteN, restartSpriteS, this, "goRestart");		
 		this.setMenuPos(restartMenu, 2);
 		
-		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);
-		CCMenuItemSprite homeMenu = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goHome");
+		CCSprite homeSpriteN = CCSprite.sprite("control-home.png", true);
+		CCSprite homeSpriteS = CCSprite.sprite("control-home.png", true);
+		CCMenuItemSprite homeMenu = CCMenuItemSprite.item(homeSpriteN, homeSpriteS, this, "goHome");
 		this.setMenuPos(homeMenu, 3);
 		
 		this.menu = CCMenu.menu(resumeMenu, restartMenu, homeMenu);

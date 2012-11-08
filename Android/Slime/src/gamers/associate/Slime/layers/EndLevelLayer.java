@@ -33,15 +33,18 @@ public class EndLevelLayer extends CCLayer {
 				CCDirector.sharedDirector().winSize().height / 2
 				));
 		
-		CCSprite nextSprite = CCSprite.sprite("control-fastforward.png", true);
-		this.nextMenu = CCMenuItemSprite.item(nextSprite, nextSprite, this, "goNext");
+		CCSprite nextSpriteN = CCSprite.sprite("control-fastforward.png", true);
+		CCSprite nextSpriteS = CCSprite.sprite("control-fastforward.png", true);
+		this.nextMenu = CCMenuItemSprite.item(nextSpriteN, nextSpriteS, this, "goNext");
 		
-		CCSprite restartSprite = CCSprite.sprite("control-restart.png", true);
-		this.restartMenu = CCMenuItemSprite.item(restartSprite, restartSprite, this, "goRestart");
+		CCSprite restartSpriteN = CCSprite.sprite("control-restart.png", true);
+		CCSprite restartSpriteS = CCSprite.sprite("control-restart.png", true);
+		this.restartMenu = CCMenuItemSprite.item(restartSpriteN, restartSpriteS, this, "goRestart");
 		this.restartMenu.setScale(0.5f);
 		
-		CCSprite homeSprite = CCSprite.sprite("control-home.png", true);
-		this.homeMenu = CCMenuItemSprite.item(homeSprite, homeSprite, this, "goHome");
+		CCSprite homeSpriteN = CCSprite.sprite("control-home.png", true);
+		CCSprite homeSpriteS = CCSprite.sprite("control-home.png", true);
+		this.homeMenu = CCMenuItemSprite.item(homeSpriteN, homeSpriteS, this, "goHome");
 		this.homeMenu.setScale(0.5f);
 		
 		this.menu = CCMenu.menu(this.homeMenu, this.nextMenu, this.restartMenu);

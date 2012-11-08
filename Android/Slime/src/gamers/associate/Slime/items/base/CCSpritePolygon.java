@@ -1,18 +1,19 @@
 package gamers.associate.Slime.items.base;
 
 
+import java.nio.FloatBuffer;
+
 import javax.microedition.khronos.opengles.GL10;
 
 import org.cocos2d.config.ccConfig;
 import org.cocos2d.nodes.CCSpriteFrame;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.utils.BufferProvider;
-import org.cocos2d.utils.FastFloatBuffer;
 
 public class CCSpritePolygon extends CCSpriteRepeat {
-	protected FastFloatBuffer vertices;
-	protected FastFloatBuffer texCoords;
-	protected FastFloatBuffer colors;
+	protected FloatBuffer vertices;
+	protected FloatBuffer texCoords;
+	protected FloatBuffer colors;
 	protected CGPoint[] baseArray;
 	
 	/* (non-Javadoc)
@@ -57,13 +58,13 @@ public class CCSpritePolygon extends CCSpriteRepeat {
         this.texCoords.position(0);
         
         // vertex        
-        gl.glVertexPointer(3, GL10.GL_FLOAT, 0 , this.vertices.bytes);
+        gl.glVertexPointer(3, GL10.GL_FLOAT, 0 , this.vertices);
 
         // color        
-        gl.glColorPointer(4, GL10.GL_FLOAT, 0, colors.bytes);
+        gl.glColorPointer(4, GL10.GL_FLOAT, 0, colors);
 
         // tex coords        
-        gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, this.texCoords.bytes);
+        gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, this.texCoords);
 
         // gl.glDrawArrays(GL10.GL_TRIANGLE_STRIP, 0, this.baseArray.length);
         gl.glDrawArrays(GL10.GL_TRIANGLES, 0, this.baseArray.length);
