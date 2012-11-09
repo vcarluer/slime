@@ -40,6 +40,7 @@ import org.cocos2d.types.CGRect;
 import org.cocos2d.types.ccColor3B;
 import org.cocos2d.types.ccGridSize;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.view.MotionEvent;
@@ -67,6 +68,7 @@ public class HomeLayer extends CCLayer {
 	
 	private CCSprite titleSprite;
 	private CCMenu restartMenu;
+	private CCMenu shareMenu;
 	
 	private boolean nextDoNotStopMusic;
 	
@@ -168,6 +170,18 @@ public class HomeLayer extends CCLayer {
 		restartItem.setPosition(left, top);
 		this.restartMenu = CCMenu.menu(restartItem);		
 		this.addChild(this.restartMenu);
+		
+		// share button
+		CCSprite shareSpriteN = CCSprite.sprite("control-restart.png", true);
+		CCSprite shareSpriteS = CCSprite.sprite("control-restart.png", true);
+		CCMenuItemSprite shareItem = CCMenuItemSprite.item(shareSpriteN, shareSpriteS, this, "shareApp");
+		shareItem.setScale(PauseLayer.Scale);		
+		
+		float shareX = - CCDirector.sharedDirector().winSize().getWidth() / 2 +((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) / 2 ;
+		float shareY = - CCDirector.sharedDirector().winSize().getHeight() / 2 + ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY) / 2;
+		shareItem.setPosition(shareX, shareY);
+		this.shareMenu = CCMenu.menu(shareItem);		
+		this.addChild(this.shareMenu);
 		
 		String diff =LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty());		
 		String lvl = String.valueOf(SlimeFactory.GameInfo.getLevelNum());
@@ -304,7 +318,8 @@ public class HomeLayer extends CCLayer {
 		// this.removeChild(this.menuInfo, true);
 		this.removeChild(this.lblLevel, true);
 		// this.removeChild(this.titleSprite, true);
-		this.removeChild(this.restartMenu, true);		
+		this.removeChild(this.restartMenu, true);	
+		this.removeChild(this.shareMenu, true);
 		this.removeChild(this.top, true);
 		// this.removeChild(this.diffSpr, true);
 		
@@ -342,5 +357,29 @@ public class HomeLayer extends CCLayer {
 
 	public void setSpawner(SpawnPortal spawner) {
 		this.spawner = spawner;
+	}
+	
+	public void shareApp(Object sender) {
+		//create the send intent
+		Intent shareIntent = 
+		 new Intent(android.content.Intent.ACTION_SEND);
+
+		//set the type
+		shareIntent.setType("text/plain");
+
+		//add a subject
+		shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, 
+		 "Slime Attack!");
+
+		//build the body of the message to be shared
+		String shareMessage = "Love Slime Attack: http://bit.ly/SVdACw @GamersAssociate";
+
+		//add the message
+		shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, 
+		 shareMessage);
+
+		//start the chooser for sharing
+		SlimeFactory.ContextActivity.startActivity(Intent.createChooser(shareIntent, 
+		 "Share on"));
 	}
 }
