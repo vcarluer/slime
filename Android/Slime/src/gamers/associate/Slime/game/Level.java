@@ -28,7 +28,9 @@ import javax.microedition.khronos.opengles.GL10;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCLabel;
+import org.cocos2d.nodes.CCLabelAtlas;
 import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.opengl.CCBitmapFontAtlas;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.math.Vector2;
@@ -954,7 +956,7 @@ public class Level implements IGameItemHandler {
 		this.hudLayer.hideHudText();
 	}
 	
-	public CCLabel getHudLabel() {
+	public CCBitmapFontAtlas getHudLabel() {
 		return this.hudLayer.getLabel();
 	}
 	

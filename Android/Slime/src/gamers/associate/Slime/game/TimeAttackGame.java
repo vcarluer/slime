@@ -12,6 +12,8 @@ import org.cocos2d.actions.interval.CCFadeIn;
 import org.cocos2d.actions.interval.CCFadeOut;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.nodes.CCLabel;
+import org.cocos2d.nodes.CCLabelAtlas;
+import org.cocos2d.opengl.CCBitmapFontAtlas;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
 
@@ -64,7 +66,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		
 		if (this.level != null) {
 			this.level.hideHudText();
-			CCLabel label = this.level.getHudLabel();
+			CCBitmapFontAtlas label = this.level.getHudLabel();
 			label.setColor(SlimeFactory.ColorSlime);
 			label.stopAllActions();
 			label.setOpacity(255);
@@ -121,7 +123,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 				else {
 					if (this.leftTime > this.criticTime) {						
 						this.isCritic = false;
-						CCLabel label = this.level.getHudLabel();
+						CCBitmapFontAtlas label = this.level.getHudLabel();
 						label.setColor(SlimeFactory.ColorSlime);
 						label.stopAllActions();
 						label.setOpacity(255);
@@ -130,7 +132,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 				
 				if (this.isCritic) {
 					if (this.localRender >= stepCritic) {
-						CCLabel label = this.level.getHudLabel();
+						CCBitmapFontAtlas label = this.level.getHudLabel();
 						float fadeInTime = (stepCritic / 2) - (this.localRender - stepCritic);
 						float fadeOutTime = stepCritic / 2;
 						CCFadeIn in = CCFadeIn.action(fadeInTime);
@@ -260,7 +262,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	}
 
 	public void stop() {
-		CCLabel label = this.level.getHudLabel();
+		CCBitmapFontAtlas label = this.level.getHudLabel();
 		label.setColor(SlimeFactory.ColorSlime);
 		label.stopAllActions();
 		label.setOpacity(255);

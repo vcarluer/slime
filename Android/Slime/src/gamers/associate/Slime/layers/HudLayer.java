@@ -39,7 +39,9 @@ import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
+import org.cocos2d.nodes.CCLabelAtlas;
 import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.opengl.CCBitmapFontAtlas;
 import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
@@ -56,13 +58,13 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 
 	private static String Count_Text = "Hud";
 	
-	private CCLabel countLabel;
+	private CCBitmapFontAtlas countLabel;	
 	private float countX;
 	
 	private CCMenu menu;
 	
-	private CCLabel title;
-	private CCLabel scoreTaken;
+	private CCBitmapFontAtlas title;
+	private CCBitmapFontAtlas scoreTaken;
 	
 	private CGPoint tmp = CGPoint.zero();
 	
@@ -129,16 +131,17 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 		this.starY = CCDirector.sharedDirector().winSize().getHeight() - (starCountHShift + Star.Reference_Height / 2);		
 	}	
 	
-	private static CCLabel getMenuLabel(String text) {
+	private static CCBitmapFontAtlas getMenuLabel(String text) {
 		return getMenuLabel(text, TextHeight);
 	}
 	
-	private static CCLabel getMenuLabel(String text, float size) {
+	private static CCBitmapFontAtlas getMenuLabel(String text, float size) {
 		return getMenuLabel(text, size, ccColor3B.ccWHITE);
 	}
 	
-	private static CCLabel getMenuLabel(String text, float size, ccColor3B color) {
-		CCLabel label =  CCLabel.makeLabel(text.toUpperCase(), "fonts/Slime.ttf", size);
+	private static CCBitmapFontAtlas getMenuLabel(String text, float size, ccColor3B color) {
+		CCBitmapFontAtlas label =  CCBitmapFontAtlas.bitmapFontAtlas("0123456789", "SlimeFont.fnt");
+		label.setScale(size / 64f);
 		label.setColor(color);
 		return label;
 	}
@@ -249,7 +252,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 		}
 	}
 	
-	public CCLabel getLabel() {
+	public CCBitmapFontAtlas getLabel() {
 		return this.countLabel;
 	}
 	
