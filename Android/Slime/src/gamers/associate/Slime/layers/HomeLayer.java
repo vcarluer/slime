@@ -412,15 +412,15 @@ public class HomeLayer extends CCLayer {
 		return menu;
 	}
 	
-	public static void addBkgChangeDiff(CCNode node) {
-		addBkg(node, 1467, 800, "change-difficulty.png");		
+	public static CCSprite addBkgChangeDiff(CCNode node) {
+		return addBkg(node, 1467, 800, "change-difficulty.png");		
 	}
 	
-	public static void addBkgSplash(CCNode node) {
-		addBkg(node, 800, 480, "splash-level.png");
+	public static CCSprite addBkgSplash(CCNode node) {
+		return addBkg(node, 800, 480, "splash-level.png");
 	}
 	
-	public static void addBkg(CCNode node, int w, int h, String sprite) {
+	public static CCSprite addBkg(CCNode node, int w, int h, String sprite) {
 		int originalW = w;		
 		int originalH = h;
 		CCSprite spriteBg = CCSprite.sprite(sprite);
@@ -432,6 +432,7 @@ public class HomeLayer extends CCLayer {
 		float scaleW = sW / originalW;
 		float scaleH = sH / originalH;
 		spriteBg.setScale(Math.max(scaleW, scaleH));
-		node.addChild(spriteBg, 0);
+		node.addChild(spriteBg, -1);
+		return spriteBg;
 	}
 }

@@ -88,7 +88,11 @@ public class GameInformation {
 	}
 	
 	public int getLevelMax() {
-		return this.levelDifficulty * LevelDifficulty.LevelsPerDiff;
+		return this.getLevelMax(this.levelDifficulty);
+	}
+	
+	public int getLevelMax(int difficulty) {
+		return difficulty * LevelDifficulty.LevelsPerDiff;
 	}
 	
 	private void difficultyUp() {

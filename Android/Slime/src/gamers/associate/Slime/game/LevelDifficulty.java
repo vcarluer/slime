@@ -1,5 +1,7 @@
 package gamers.associate.Slime.game;
 
+import org.cocos2d.nodes.CCSprite;
+
 public class LevelDifficulty {
 	public final static int Easy = 1;
 	public final static int Normal = 2;
@@ -36,5 +38,33 @@ public class LevelDifficulty {
 		case Extrem: return "Extrem";
 		default: return "Easy";
 		}
+	}
+	
+	public static CCSprite getSpriteBkg(int diff) {		
+		return CCSprite.sprite(getSpriteBkgPath(diff));
+		
+	}
+	
+	public static String getSpriteBkgPath(int diff) {
+		String fileBase = "";
+		switch (diff) {
+		case LevelDifficulty.Normal:
+			fileBase = "moon-postcard";
+			break;
+		case LevelDifficulty.Hard:
+			fileBase = "disco-postcard";
+			break;
+		case LevelDifficulty.Extrem:
+			fileBase = "hawaii-postcard";
+			break;
+		case LevelDifficulty.Easy:
+		default:
+			fileBase = "mexico-postcard";
+			break;
+		}
+		
+		String fileBg = "bkg/" + fileBase + ".png";
+		return fileBg;
+		
 	}
 }

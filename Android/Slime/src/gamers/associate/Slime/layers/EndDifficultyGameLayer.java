@@ -96,25 +96,7 @@ public class EndDifficultyGameLayer extends CCLayer {
 	@Override
 	public void onEnter() {
 		int endedDifficulty = SlimeFactory.GameInfo.getPreviousDifficulty();
-		String fileBase = "";
-		switch (endedDifficulty) {
-		case LevelDifficulty.Normal:
-			fileBase = "moon-postcard";
-			break;
-		case LevelDifficulty.Hard:
-			fileBase = "disco-postcard";
-			break;
-		case LevelDifficulty.Extrem:
-			fileBase = "hawaii-postcard";
-			break;
-		case LevelDifficulty.Easy:
-		default:
-			fileBase = "mexico-postcard";
-			break;
-		}
-		
-		String fileBg = "bkg/" + fileBase + ".png";
-		this.spriteBg = CCSprite.sprite(fileBg);
+		this.spriteBg = LevelDifficulty.getSpriteBkg(endedDifficulty);
 		this.addSpriteBg(this.spriteBg);
 		
 		String unlockTxt = "";

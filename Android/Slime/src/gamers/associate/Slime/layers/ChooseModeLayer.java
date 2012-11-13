@@ -1,6 +1,7 @@
 package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.levels.LevelHome;
@@ -57,7 +58,7 @@ public class ChooseModeLayer extends CCLayer {
 	}
 	
 	public void chooseStory(Object sender) {
-		CCFadeTransition transition = CCFadeTransition.transition(0.5f, StoryWorldLayer.getScene());
+		CCFadeTransition transition = CCFadeTransition.transition(0.5f, StoryWorldLayer.getScene(LevelDifficulty.Easy));
 		 CCDirector.sharedDirector().replaceScene(transition);
 	}
 	
