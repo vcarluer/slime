@@ -131,27 +131,26 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 				}
 				
 				if (this.isCritic) {
-					if (this.localRender >= stepCritic) {
-						CCBitmapFontAtlas label = this.level.getHudLabel();
+					CCBitmapFontAtlas label = this.level.getHudLabel();
+					if (this.localRender >= stepCritic) {						
 						float fadeInTime = (stepCritic / 2) - (this.localRender - stepCritic);
 						float fadeOutTime = stepCritic / 2;
 						CCFadeIn in = CCFadeIn.action(fadeInTime);
 						CCFadeOut out = CCFadeOut.action(fadeOutTime);
 						CCSequence seq = CCSequence.actions(in, out);
 						this.criticAction = CCRepeatForever.action(seq);
-						label.runAction(this.criticAction);
-						label.setColor(ccColor3B.ccc3( 255,0,0));
-						
-						this.level.setHudText(Util.getFormatTimeCritic(this.leftTime));
+						label.runAction(this.criticAction);						
+												
 						this.localRender = 0;
 						
 						Sounds.playEffect(R.raw.tick);
-					}						
+					}	
+					
+					label.setColor(ccColor3B.ccc3( 255,0,0));
+					this.level.setHudText(Util.getFormatTimeCritic(this.leftTime));
 				}
 				else {
-					if (this.localRender >= stepNormal) {						
-						this.setNormalTime();
-					}						
+					this.setNormalTime();					
 				}														
 			}
 		}
@@ -159,7 +158,6 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	
 	private void setNormalTime() {
 		this.level.setHudText(Util.getFormatTime(this.leftTime));
-		this.localRender = 0;
 	}
 	
 	private void setStartTime() {

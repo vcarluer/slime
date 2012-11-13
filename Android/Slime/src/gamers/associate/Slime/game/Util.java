@@ -16,6 +16,7 @@ import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 import org.cocos2d.utils.BufferProvider;
+import org.cocos2d.utils.CCFormatter;
 
 public class Util {
 	public static void draw(GL10 gl, CGRect rect, float width, float r,
@@ -76,23 +77,27 @@ public class Util {
 	}
 	
 	public static String getFormatTime(float millis) {
-		// float base = Math.round(millis);
-		double base = Math.ceil((double)millis);
-		DecimalFormat df = new DecimalFormat ( ) ; 
-		df.setMaximumFractionDigits ( 0 ) ; //arrondi � 2 chiffres apres la virgules 
-		df.setMinimumFractionDigits ( 0 ) ; 
-		df.setDecimalSeparatorAlwaysShown ( false ) ; 
-		return df.format(base);		
+//		// float base = Math.round(millis);
+//		double base = Math.ceil((double)millis);
+//		DecimalFormat df = new DecimalFormat ( ) ; 
+//		df.setMaximumFractionDigits ( 0 ) ; //arrondi � 2 chiffres apres la virgules 
+//		df.setMinimumFractionDigits ( 0 ) ; 
+//		df.setDecimalSeparatorAlwaysShown ( false ) ; 
+//		return df.format(base);
+		
+		return CCFormatter.format("%d", (int)millis);
 	}
 	
 	public static String getFormatTimeCritic(float millis) {
-		// float base = Math.round(millis);
-		double base = Math.ceil((double)millis);
-		DecimalFormat df = new DecimalFormat ( ) ; 
-		df.setMaximumFractionDigits ( 0 ) ; //arrondi � 2 chiffres apres la virgules 
-		df.setMinimumFractionDigits ( 0 ) ; 
-		df.setDecimalSeparatorAlwaysShown ( false ) ; 
-		return df.format(base);		
+//		// float base = Math.round(millis);
+//		double base = Math.ceil((double)millis);
+//		DecimalFormat df = new DecimalFormat ( ) ; 
+//		df.setMaximumFractionDigits ( 0 ) ; //arrondi � 2 chiffres apres la virgules 
+//		df.setMinimumFractionDigits ( 0 ) ; 
+//		df.setDecimalSeparatorAlwaysShown ( false ) ; 
+//		return df.format(base);
+		
+		return CCFormatter.format("%2.2f", millis);
 	}
 	
 	/** draws a circle given the center, radius and number of segments. */

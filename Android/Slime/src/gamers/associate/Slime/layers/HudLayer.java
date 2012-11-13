@@ -48,6 +48,7 @@ import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
 
 public class HudLayer extends CCLayer implements IGameItemHandler {
+	private static final int countPaddingX = 130;
 	private static final float scoreTakenPadding = 10f;
 	private static final float TextHeight = 60f;
 	private static final float PaddingHCount = TextHeight/2f;
@@ -110,7 +111,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 		this.addChild(this.countLabel);
 		this.countLabel.setPosition(
 				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - 15, 
-				CCDirector.sharedDirector().winSize().getHeight() - 65));
+				CCDirector.sharedDirector().winSize().getHeight() - countPaddingX));
 		
 		this.scoreTaken = getMenuLabel("   ", TextHeight, SlimeFactory.ColorSlime);
 		this.scoreTaken.setAnchorPoint(0, 0);
@@ -236,7 +237,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 	
 	public void setHudStartText(String text) {
 		this.countLabel.setString(text.toUpperCase());
-		this.countX = CCDirector.sharedDirector().winSize().getWidth() - PauseLayer.PaddingX - this.countLabel.getContentSize().width;
+		this.countX = CCDirector.sharedDirector().winSize().getWidth() - PauseLayer.PaddingX - countPaddingX; // this.countLabel.getContentSize().width
 		this.countLabel.setPosition(
 				CGPoint.ccp(this.countX, 
 				CCDirector.sharedDirector().winSize().getHeight() - (starCountHShift + PaddingHCount)));
