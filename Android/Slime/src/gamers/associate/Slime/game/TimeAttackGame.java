@@ -329,9 +329,9 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		if (!SlimeFactory.LevelBuilder.isBoss()) {
 			switch (SlimeFactory.GameInfo.getDifficulty()) {
 				default:
-				case LevelDifficulty.Easy: needed = (int) Math.ceil(SlimeFactory.LevelBuilder.getTotalStar() / 4f); break;
-				case LevelDifficulty.Normal: needed = (int) Math.ceil(SlimeFactory.LevelBuilder.getTotalStar() / 2f); break;
-				case LevelDifficulty.Hard: needed = (int) Math.ceil(SlimeFactory.LevelBuilder.getTotalStar() * 3f / 4f); break;
+				case LevelDifficulty.Easy: needed = (int) FloatMath.ceil(SlimeFactory.LevelBuilder.getTotalStar() / 4f); break;
+				case LevelDifficulty.Normal: needed = (int) FloatMath.ceil(SlimeFactory.LevelBuilder.getTotalStar() / 2f); break;
+				case LevelDifficulty.Hard: needed = (int) FloatMath.ceil(SlimeFactory.LevelBuilder.getTotalStar() * 3f / 4f); break;
 				case LevelDifficulty.Extrem: needed = SlimeFactory.LevelBuilder.getTotalStar(); break;
 			}
 		}		

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
+import android.util.FloatMath;
 import android.util.Log;
 
 import gamers.associate.Slime.Slime;
@@ -50,7 +51,7 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 		}
 		 
 		float totalBlocs = lvlWidth * lvlHeight;
-		int starBlocCountBase = (int) Math.ceil(totalBlocs / 2f);
+		int starBlocCountBase = (int) FloatMath.ceil(totalBlocs / 2f);
 		int starBlocCount = starBlocCountBase - 1; // 2 opposite corner are always picked
 		if (!isBoss) {
 			starBlocCount--;

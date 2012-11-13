@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import android.util.FloatMath;
 import android.util.Log;
 
 import gamers.associate.Slime.Slime;
@@ -143,10 +144,10 @@ public class BlocDefinitionParser extends BlocDefinition {
 		int nbPick = 0;
 		switch (SlimeFactory.GameInfo.getDifficulty()) {
 			default:
-			case LevelDifficulty.Easy: nbPick = (int) Math.ceil(nbHazard / 4f); break;
-			case LevelDifficulty.Normal: nbPick = (int) Math.ceil(nbHazard / 2f); break;
-			case LevelDifficulty.Hard: nbPick = (int) Math.ceil(nbHazard * 3f / 4f); break;
-			case LevelDifficulty.Extrem: nbPick = (int) Math.ceil(nbHazard); break;
+			case LevelDifficulty.Easy: nbPick = (int) FloatMath.ceil(nbHazard / 4f); break;
+			case LevelDifficulty.Normal: nbPick = (int) FloatMath.ceil(nbHazard / 2f); break;
+			case LevelDifficulty.Hard: nbPick = (int) FloatMath.ceil(nbHazard * 3f / 4f); break;
+			case LevelDifficulty.Extrem: nbPick = (int) FloatMath.ceil(nbHazard); break;
 		}				
 		
 		if (nbPick > 0) {
