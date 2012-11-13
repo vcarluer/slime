@@ -91,19 +91,9 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 		this.gameItems = new ArrayList<GameItem>();
 		this.gameItemsToAdd = new ArrayList<GameItem>();
 		this.gameItemstoRemove = new ArrayList<GameItem>();
-		this.starCounters = new ArrayList<StarCounter>();
-		float pauseScale = PauseLayer.Scale;
-		CCSprite pauseSpriteN = CCSprite.sprite("control-pause.png", true);
-		CCSprite pauseSpriteS = CCSprite.sprite("control-pause.png", true);
-		CCMenuItemSprite pauseMenu = CCMenuItemSprite.item(pauseSpriteN, pauseSpriteS, this, "goPause");
-		pauseMenu.setScale(pauseScale);
+		this.starCounters = new ArrayList<StarCounter>();		
 		
-		float left = - CCDirector.sharedDirector().winSize().getWidth() / 2 + ((MenuSprite.Width * pauseScale) + PauseLayer.PaddingX) / 2 ;
-		float top = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((MenuSprite.Height * pauseScale) + PauseLayer.PaddingY) / 2;
-		pauseMenu.setPosition(CGPoint.make(left, top));
-		
-		
-		this.menu = CCMenu.menu(pauseMenu);		
+		this.menu = HomeLayer.getPauseButton(this, "goPause");
 		this.addChild(this.menu);
 		
 		this.countLabel = getMenuLabel(Count_Text);		

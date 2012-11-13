@@ -30,6 +30,7 @@ import org.cocos2d.menus.CCMenuItemLabel;
 import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
+import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.transitions.CCFadeTransition;
@@ -334,15 +335,18 @@ public class HomeLayer extends CCLayer {
 	}
 
 	public void selectPlay(Object sender) {		
-		Vibe.vibrate();
-		Sounds.playEffect(R.raw.menuselect, true);
-		Sounds.stopMusic();
+//		Vibe.vibrate();
+//		Sounds.playEffect(R.raw.menuselect, true);
+//		Sounds.stopMusic();
+//		
+//		if (SlimeFactory.GameInfo.getLevelNum() == 0) {
+//			SlimeFactory.ContextActivity.runIntro();
+//		} else {
+//			SlimeFactory.LevelBuilder.start();
+//		}
 		
-		if (SlimeFactory.GameInfo.getLevelNum() == 0) {
-			SlimeFactory.ContextActivity.runIntro();
-		} else {
-			SlimeFactory.LevelBuilder.start();
-		}
+		CCTransitionScene transition = CCFadeTransition.transition(1.0f, ChooseModeLayer.getScene());
+		CCDirector.sharedDirector().replaceScene(transition);
 	}
 	
 	public void goRestart(Object sender) {
@@ -381,5 +385,53 @@ public class HomeLayer extends CCLayer {
 		//start the chooser for sharing
 		SlimeFactory.ContextActivity.startActivity(Intent.createChooser(shareIntent, 
 		 "Share on"));
+	}
+	
+	public static CCMenu getHomeMenuButton(CCNode target, String targetMethod) {
+		return getMenuButton("control-home.png", target, targetMethod);		
+	}
+	
+	public static CCMenu getBackButton(CCNode target, String targetMethod) {
+		return getMenuButton("control-back.png", target, targetMethod);
+	}
+	
+	public static CCMenu getPauseButton(CCNode target, String targetMethod) {
+		return getMenuButton("control-pause.png", target, targetMethod);
+	}
+	
+	public static CCMenu getMenuButton(String spriteName, CCNode target, String targetMethod) {
+		CCSprite spriteN = CCSprite.sprite(spriteName, true);
+		CCSprite spriteS = CCSprite.sprite(spriteName, true);
+		CCMenuItemSprite go = CCMenuItemSprite.item(spriteN, spriteS, target, targetMethod);
+		go.setScale(PauseLayer.Scale);
+		
+		float left = - CCDirector.sharedDirector().winSize().getWidth() / 2 + ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) / 2 ;
+		float top = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY) / 2;
+		go.setPosition(left, top);
+		CCMenu menu = CCMenu.menu(go);
+		return menu;
+	}
+	
+	public static void addBkgChangeDiff(CCNode node) {
+		addBkg(node, 1467, 800, "change-difficulty.png");		
+	}
+	
+	public static void addBkgSplash(CCNode node) {
+		addBkg(node, 800, 480, "splash-level.png");
+	}
+	
+	public static void addBkg(CCNode node, int w, int h, String sprite) {
+		int originalW = w;		
+		int originalH = h;
+		CCSprite spriteBg = CCSprite.sprite(sprite);
+		spriteBg.setAnchorPoint(0, 0);
+		spriteBg.setPosition(0, 0);
+		float sW = CCDirector.sharedDirector().winSize().width;
+		float sH = CCDirector.sharedDirector().winSize().height;
+		// Scale for full width, no deformation
+		float scaleW = sW / originalW;
+		float scaleH = sH / originalH;
+		spriteBg.setScale(Math.max(scaleW, scaleH));
+		node.addChild(spriteBg, 0);
 	}
 }

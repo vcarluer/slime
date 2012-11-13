@@ -1,26 +1,25 @@
 package gamers.associate.Slime.layers;
 
+import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
-import gamers.associate.Slime.items.custom.MenuSprite;
-import gamers.associate.Slime.levels.LevelHome;
+import gamers.associate.Slime.game.Sounds;
+import gamers.associate.Slime.game.Vibe;
 
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItemLabel;
-import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.transitions.CCFadeTransition;
-import org.cocos2d.transitions.CCSlideInBTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
 
-public class ChangeDifficultyLayer extends CCLayer {
+public class ChooseSurvivalDifficultyLayer extends CCLayer {
 	private static final float menuPadding = 75f;
 	private static final float iconSizeReference = 87f;
 	private static float padding = 25f;
@@ -37,13 +36,13 @@ public class ChangeDifficultyLayer extends CCLayer {
 	public static CCScene getScene() {
 		if (scene == null) {
 			scene = CCScene.node();
-			scene.addChild(new ChangeDifficultyLayer());
+			scene.addChild(new ChooseSurvivalDifficultyLayer());
 		}
 		
 		return scene;
 	}
 	
-	public ChangeDifficultyLayer() {
+	public ChooseSurvivalDifficultyLayer() {
 		tmp = CGPoint.zero();
 		HomeLayer.addBkgChangeDiff(this);
 		
@@ -54,7 +53,7 @@ public class ChangeDifficultyLayer extends CCLayer {
 		this.hardMenuLabel = this.createMenuLabel(LevelDifficulty.Hard, "selectHard");
 		this.extremMenuLabel = this.createMenuLabel(LevelDifficulty.Extrem, "selectExtrem");
 		
-		this.addChild(HomeLayer.getHomeMenuButton(this, "goHome"));
+		this.addChild(HomeLayer.getBackButton(this, "goBack"));
 		
 		this.menu = CCMenu.menu(title, this.easyMenuLabel, this.normalMenuLabel, this.hardMenuLabel, this.extremMenuLabel);
 		this.menu.alignItemsVertically(padding);
@@ -139,16 +138,27 @@ public class ChangeDifficultyLayer extends CCLayer {
 		this.selectLevel(LevelDifficulty.Extrem);
 	}
 	
-	public void goHome(Object sender) {
-		Level currentLevel = Level.get(LevelHome.Id, true);								
-//		CCTransitionScene transition = CCSlideInBTransition.transition(0.5f, currentLevel.getScene());
-		CCFadeTransition transition = CCFadeTransition.transition(0.5f, currentLevel.getScene());
+	public void goBack(Object sender) {
+		CCTransitionScene transition = CCFadeTransition.transition(1.0f, ChooseModeLayer.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
 	}
 	
 	private void selectLevel(int diff) {
 		SlimeFactory.GameInfo.resetDifficulty(diff);
 		SlimeFactory.LevelBuilder.resetAll();
-		this.goHome(this);
+		
+//		CCTransitionScene transition = CCSlideInBTransition.transition(0.5f, currentLevel.getScene());
+		CCFadeTransition transition = CCFadeTransition.transition(0.5f, Level.currentLevel.getScene());
+		CCDirector.sharedDirector().replaceScene(transition);
+		
+		Vibe.vibrate();
+		Sounds.playEffect(R.raw.menuselect, true);
+		Sounds.stopMusic();
+		
+		if (SlimeFactory.GameInfo.getLevelNum() == 0) {
+			SlimeFactory.ContextActivity.runIntro();
+		} else {
+			SlimeFactory.LevelBuilder.start();
+		}
 	}
 }

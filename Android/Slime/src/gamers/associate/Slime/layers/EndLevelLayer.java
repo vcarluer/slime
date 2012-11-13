@@ -223,7 +223,9 @@ public class EndLevelLayer extends CCLayer {
 		this.setStars(0);
 		
 		// Slimy.Anim_Success not used anymore
-		this.initSlime(Slimy.Anim_Success, 0f, true);		
+		this.initSlime(Slimy.Anim_Success, 0f, true);
+		
+		Sounds.playEffect(R.raw.star);
 	}
 	
 	public void setLose() {
