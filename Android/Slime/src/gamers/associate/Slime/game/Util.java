@@ -8,15 +8,15 @@ import static javax.microedition.khronos.opengles.GL10.GL_TEXTURE_COORD_ARRAY;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
-import java.text.DecimalFormat;
 
 import javax.microedition.khronos.opengles.GL10;
 
 import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
-import org.cocos2d.utils.BufferProvider;
 import org.cocos2d.utils.CCFormatter;
+
+import android.util.FloatMath;
 
 public class Util {
 	public static void draw(GL10 gl, CGRect rect, float width, float r,
@@ -77,26 +77,10 @@ public class Util {
 	}
 	
 	public static String getFormatTime(float millis) {
-//		// float base = Math.round(millis);
-//		double base = Math.ceil((double)millis);
-//		DecimalFormat df = new DecimalFormat ( ) ; 
-//		df.setMaximumFractionDigits ( 0 ) ; //arrondi � 2 chiffres apres la virgules 
-//		df.setMinimumFractionDigits ( 0 ) ; 
-//		df.setDecimalSeparatorAlwaysShown ( false ) ; 
-//		return df.format(base);
-		
-		return CCFormatter.format("%d", (int)millis);
+		return CCFormatter.format("%d", (int)FloatMath.ceil(millis));
 	}
 	
 	public static String getFormatTimeCritic(float millis) {
-//		// float base = Math.round(millis);
-//		double base = Math.ceil((double)millis);
-//		DecimalFormat df = new DecimalFormat ( ) ; 
-//		df.setMaximumFractionDigits ( 0 ) ; //arrondi � 2 chiffres apres la virgules 
-//		df.setMinimumFractionDigits ( 0 ) ; 
-//		df.setDecimalSeparatorAlwaysShown ( false ) ; 
-//		return df.format(base);
-		
 		return CCFormatter.format("%2.2f", millis);
 	}
 	
@@ -117,8 +101,8 @@ public class Util {
         final float coef = 2.0f * (float) Math.PI / segments;
         for (int i = 0; i <= segments; i++) {
             float rads = i * coef;
-            float j = (float) (r * Math.cos(rads + a) + center.x);
-            float k = (float) (r * Math.sin(rads + a) + center.y);
+            float j = (float) (r * FloatMath.cos(rads + a) + center.x);
+            float k = (float) (r * FloatMath.sin(rads + a) + center.y);
 
             vertices.put(j);
             vertices.put(k);

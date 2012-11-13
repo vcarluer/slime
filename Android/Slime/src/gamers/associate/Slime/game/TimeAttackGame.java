@@ -118,6 +118,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 				if (!this.isCritic) {
 					if (this.leftTime <= this.criticTime) {						
 						this.isCritic = true;
+						this.localRender = stepCritic;
 					}
 				}
 				else {
@@ -138,7 +139,8 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 						CCFadeIn in = CCFadeIn.action(fadeInTime);
 						CCFadeOut out = CCFadeOut.action(fadeOutTime);
 						CCSequence seq = CCSequence.actions(in, out);
-						this.criticAction = CCRepeatForever.action(seq);
+//						this.criticAction = CCRepeatForever.action(seq);
+						this.criticAction = seq;
 						label.runAction(this.criticAction);						
 												
 						this.localRender = 0;
@@ -188,6 +190,14 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	public int getScore() {		
 		// return (int) Math.round(this.leftTime);
 		return (int) Math.ceil((double)this.leftTime * timeScore) + this.bonusTaken * bonusScore;
+	}
+	
+	public int getBaseScore() {
+		return (int)this.leftTime * timeScore;
+	}
+	
+	public int getBonusScore() {
+		return bonusScore;
 	}
 
 	public void selectBegin(CGPoint gameReference) {		
