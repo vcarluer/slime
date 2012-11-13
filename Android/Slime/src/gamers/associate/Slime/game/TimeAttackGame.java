@@ -4,18 +4,15 @@ import gamers.associate.Slime.R;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.custom.EvacuationPlug;
 
-import java.text.DecimalFormat;
-
 import org.cocos2d.actions.base.CCAction;
-import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCFadeIn;
 import org.cocos2d.actions.interval.CCFadeOut;
 import org.cocos2d.actions.interval.CCSequence;
-import org.cocos2d.nodes.CCLabel;
-import org.cocos2d.nodes.CCLabelAtlas;
 import org.cocos2d.opengl.CCBitmapFontAtlas;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
+
+import android.util.FloatMath;
 
 
 public class TimeAttackGame extends GameItem implements IGamePlay {
@@ -158,12 +155,20 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		}
 	}
 	
+	private int lastNormalTime;
+	
 	private void setNormalTime() {
-		this.level.setHudText(Util.getFormatTime(this.leftTime));
+		int normalTime = (int)FloatMath.ceil(this.leftTime);
+		if (normalTime != lastNormalTime) {
+			this.level.setHudText(Util.getFormatTime(normalTime));
+			this.lastNormalTime = normalTime;
+		}		
 	}
 	
 	private void setStartTime() {
-		this.level.setStartText(Util.getFormatTime(this.leftTime));
+		int normalTime = (int)FloatMath.ceil(this.leftTime);
+		this.level.setStartText(Util.getFormatTime(normalTime));
+		this.lastNormalTime = normalTime;
 		this.localRender = 0;
 	}
 
@@ -189,11 +194,11 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 
 	public int getScore() {		
 		// return (int) Math.round(this.leftTime);
-		return (int) Math.ceil((double)this.leftTime * timeScore) + this.bonusTaken * bonusScore;
+		return this.getBaseScore() + this.bonusTaken * this.getBonusScore();
 	}
 	
 	public int getBaseScore() {
-		return (int)this.leftTime * timeScore;
+		return (int)FloatMath.ceil(this.leftTime * timeScore);
 	}
 	
 	public int getBonusScore() {

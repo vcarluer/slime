@@ -80,6 +80,10 @@ public class Util {
 		return CCFormatter.format("%d", (int)FloatMath.ceil(millis));
 	}
 	
+	public static String getFormatTime(int millis) {
+		return CCFormatter.format("%d", millis);
+	}
+	
 	public static String getFormatTimeCritic(float millis) {
 		return CCFormatter.format("%2.2f", millis);
 	}

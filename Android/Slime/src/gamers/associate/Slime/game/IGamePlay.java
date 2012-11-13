@@ -7,6 +7,8 @@ public interface IGamePlay {
 	void startLevel();
 	void stop();
 	int getScore();
+	int getBaseScore();
+	int getBonusScore();
 	void activateSelection(CGPoint gameReference);
 	void simpleSelect();
 	void selectBegin(CGPoint gameReference);	

@@ -8,6 +8,10 @@ import gamers.associate.Slime.items.custom.Slimy;
 import gamers.associate.Slime.items.custom.SlimySuccess;
 import gamers.associate.Slime.items.custom.Star;
 
+import org.cocos2d.actions.instant.CCCallFunc;
+import org.cocos2d.actions.interval.CCMoveBy;
+import org.cocos2d.actions.interval.CCSequence;
+import org.cocos2d.actions.interval.CCTintTo;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItemLabel;
@@ -15,22 +19,48 @@ import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.opengl.CCBitmapFontAtlas;
 import org.cocos2d.types.CGPoint;
+import org.cocos2d.types.ccColor3B;
 
-public class EndLevelLayer extends CCLayer {			
+import android.view.MotionEvent;
+
+public class EndLevelLayer extends CCLayer {		
+	private static final int scorePosition = 0;	
+	private static final int MenuPosition = scorePosition - 100;
+	private static final int StarCountPosition = scorePosition + 60;
+	private static final int SlimyPosition = StarCountPosition + 100;
+	private static final int labelSize = 60;	
+	private static final int stepScore = 10000;	
 	private CCSprite slime;
 	private CCSprite star;
-	private CCLabel scoreLabel;
+	private CCBitmapFontAtlas starCountLabel;
+	private CCBitmapFontAtlas scoreLabel;
 	private CCMenu menu;	
 	private CCMenuItemSprite nextMenu;
 	private CCMenuItemSprite restartMenu;
 	private CCMenuItemSprite homeMenu;
 	
-	public EndLevelLayer() {						
+	@Override
+	public boolean ccTouchesEnded(MotionEvent event) {
+		this.setScore(this.lastScore);
+		this.setStars(this.targetStars);
+		this.scoreCountEnd = true;
+		return true;
+	}
+
+	public EndLevelLayer() {								
+		
+		this.starCountLabel = getMenuLabel("0 / 0");
+		this.starCountLabel.setPosition(CGPoint.make(
+				CCDirector.sharedDirector().winSize().width / 2,
+				CCDirector.sharedDirector().winSize().height / 2 + StarCountPosition
+				));
+		
 		this.scoreLabel = getMenuLabel("0");
 		this.scoreLabel.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,
-				CCDirector.sharedDirector().winSize().height / 2
+				CCDirector.sharedDirector().winSize().height / 2 + scorePosition
 				));
 		
 		CCSprite nextSpriteN = CCSprite.sprite("control-fastforward.png", true);
@@ -51,9 +81,10 @@ public class EndLevelLayer extends CCLayer {
 		this.menu.alignItemsHorizontally(50);
 		this.menu.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,
-				CCDirector.sharedDirector().winSize().height / 2 - 100
+				CCDirector.sharedDirector().winSize().height / 2 + MenuPosition
 				));				
 
+		this.addChild(this.starCountLabel);
 		this.addChild(this.scoreLabel);
 		this.addChild(this.menu);		
 	}
@@ -91,20 +122,25 @@ public class EndLevelLayer extends CCLayer {
 	}
 	
 	public void setScore(String text) {
-		this.scoreLabel.setString(text.toUpperCase());
-		
-		float starPadding = -10f;
-		float starX = this.scoreLabel.getPosition().x - this.scoreLabel.getContentSize().width / 2 - SlimeFactory.Star.getStarReferenceWidth() / 2 + starPadding;
-		this.star.setPosition(CGPoint.make(
-				starX,
-				this.star.getPosition().y
-				));
+		this.scoreLabel.setString(text.toUpperCase());		
 	}
 	
 	public void setScore(int score) {
 		String text =String.valueOf(score);
 		this.setScore(text);
-	}		
+	}
+	
+	private void setStars(int currentStars) {
+		String text =String.valueOf(currentStars) + " / " + String.valueOf(this.totalStars);		
+		this.starCountLabel.setString(text.toUpperCase());
+		
+		float starPadding = -10f;
+		float starX = this.starCountLabel.getPosition().x - this.starCountLabel.getContentSize().width / 2 - SlimeFactory.Star.getStarReferenceWidth() / 2 + starPadding;
+		this.star.setPosition(CGPoint.make(
+				starX,
+				this.star.getPosition().y
+				));
+	}
 		
 	public void enable() {
 		CCMenu currentMenu = null;
@@ -146,8 +182,9 @@ public class EndLevelLayer extends CCLayer {
 		this.setVisible(false);
 	}
 	
-	private static CCLabel getMenuLabel(String text) {
-		CCLabel label = CCLabel.makeLabel(text.toUpperCase(), "fonts/Slime.ttf", 60.0f);
+	private static CCBitmapFontAtlas getMenuLabel(String text) {
+		CCBitmapFontAtlas label = CCBitmapFontAtlas.bitmapFontAtlas(text.toUpperCase(), "SlimeFont.fnt");
+		label.setScale(labelSize / SlimeFactory.FntSize);
 		label.setColor(SlimeFactory.ColorSlime);
 		return label;
 	}
@@ -162,11 +199,31 @@ public class EndLevelLayer extends CCLayer {
 		this.homeMenu.setVisible(value);
 	}
 	
+	private int lastScore;
+	private int targetScore;
+	private int currentScore;
+	private int totalStars;
+	private int currentStars;
+	private int targetStars;
+	
 	public void setVictory(int score) {
+		this.scoreCountEnd = false;
+		this.lastScore = 0;
+		this.targetScore = 0;
+		this.currentScore = 0;
+
 		this.initStar();
-		this.setScore(score);
+		// this.setScore(score);
+		this.lastScore = score;		
+		this.targetScore = Level.currentLevel.getGamePlay().getBaseScore();
+		this.totalStars = SlimeFactory.LevelBuilder.getTotalStar();
+		this.targetStars = Level.currentLevel.getGamePlay().bonusCount();
+		this.currentStars = 0;
+		this.setScore(0);
+		this.setStars(0);
+		
 		// Slimy.Anim_Success not used anymore
-		this.initSlime(Slimy.Anim_Success, 0f, true);
+		this.initSlime(Slimy.Anim_Success, 0f, true);		
 	}
 	
 	public void setLose() {
@@ -183,7 +240,7 @@ public class EndLevelLayer extends CCLayer {
 				
 		this.star.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,
-				CCDirector.sharedDirector().winSize().height / 2
+				CCDirector.sharedDirector().winSize().height / 2 + StarCountPosition
 				));					
 	}
 	
@@ -198,7 +255,36 @@ public class EndLevelLayer extends CCLayer {
 		this.addChild(this.slime);
 		this.slime.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,
-				CCDirector.sharedDirector().winSize().height / 2 + 100
+				CCDirector.sharedDirector().winSize().height / 2 + SlimyPosition
 				));
 	}
+	
+	private boolean scoreCountEnd;
+	
+	public void tick(float deltaBase) {
+		if (!scoreCountEnd) {
+			if (this.currentScore < this.targetScore) {
+				this.currentScore += (stepScore * deltaBase);
+				if (this.currentScore > this.targetScore) this.currentScore = this.targetScore;
+			}
+			
+			if (this.currentScore == this.targetScore) {
+				if (this.currentStars < this.targetStars) {
+					this.targetScore += Level.currentLevel.getGamePlay().getBonusScore();
+					this.currentStars++;
+					Sounds.playEffect(R.raw.star);
+					CCTintTo tint = CCTintTo.action(0.2f, ccColor3B.ccc3(243, 225, 102));
+					CCTintTo tintBack = CCTintTo.action(0.1f, SlimeFactory.ColorSlime);
+					CCSequence seq = CCSequence.actions(tint, tintBack);
+					this.scoreLabel.runAction(seq);
+				} else {
+					this.currentScore = this.lastScore;
+					this.scoreCountEnd = true;
+				}
+			}
+			
+			this.setScore(this.currentScore);
+			this.setStars(this.currentStars);
+		}		
+	}	
 }

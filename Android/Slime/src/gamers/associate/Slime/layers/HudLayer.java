@@ -142,7 +142,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 	
 	private static CCBitmapFontAtlas getMenuLabel(String text, float size, ccColor3B color) {
 		CCBitmapFontAtlas label =  CCBitmapFontAtlas.bitmapFontAtlas("0123456789", "SlimeFont.fnt");
-		label.setScale(size / 64f);
+		label.setScale(size / SlimeFactory.FntSize);
 		label.setColor(color);
 		return label;
 	}

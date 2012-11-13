@@ -552,6 +552,11 @@ public class Level implements IGameItemHandler {
 		if (this.hudLayer != null) {
 			this.hudLayer.render(deltaBase);
 		}
+		
+		// Handle end level animations
+		if (this.endLevelShown) {
+			this.endLevelLayer.tick(deltaBase);
+		}
 	}
 			
 	public void addItemToRemove(GameItem item) {
