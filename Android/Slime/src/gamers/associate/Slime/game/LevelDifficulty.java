@@ -18,6 +18,16 @@ public class LevelDifficulty {
 		}
 	}
 	
+	public static int getPreviousDifficulty(int diff) {
+		switch (diff) {
+			case Easy: return Easy;
+			case Normal: return Easy;
+			case Hard: return Normal;
+			case Extrem: return Hard;
+			default: return Easy;
+		}
+	}
+	
 	public static String getText(int diff) {
 		switch (diff) {
 		case Easy: return "Easy";

@@ -31,8 +31,8 @@ public class PauseLayer extends CCLayer {
 	private CCSprite arrowSpriteR;
 	private CCSprite arrowSpriteB;
 	private CCSprite arrowSpriteL;
-	private static final float arrowWidth = 75f;
-	private static final float arrowHeight = 69f;
+	public static final float arrowWidth = 75f;
+	public static final float arrowHeight = 69f;
 	
 	public PauseLayer() {
 //		CCMenuItem label = CCMenuItemLabel.item(getMenuLabel("Pause"), this, "");		

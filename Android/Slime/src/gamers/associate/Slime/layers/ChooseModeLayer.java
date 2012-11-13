@@ -57,7 +57,8 @@ public class ChooseModeLayer extends CCLayer {
 	}
 	
 	public void chooseStory(Object sender) {
-		
+		CCFadeTransition transition = CCFadeTransition.transition(0.5f, StoryWorldLayer.getScene());
+		 CCDirector.sharedDirector().replaceScene(transition);
 	}
 	
 	public void chooseSurvival(Object sender) {
@@ -66,8 +67,7 @@ public class ChooseModeLayer extends CCLayer {
 	}
 	
 	public void goHome(Object sender) {
-		Level currentLevel = Level.get(LevelHome.Id, true);								
-//		CCTransitionScene transition = CCSlideInBTransition.transition(0.5f, currentLevel.getScene());
+		Level currentLevel = Level.get(LevelHome.Id, true);
 		CCFadeTransition transition = CCFadeTransition.transition(0.5f, currentLevel.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
 	}

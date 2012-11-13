@@ -46,7 +46,7 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 		tmp = CGPoint.zero();
 		HomeLayer.addBkgChangeDiff(this);
 		
-		CCMenuItemLabel title = CCMenuItemLabel.item(this.createLabel("RESET TO:"), this, ""); // generates a warning in log due to ""
+		CCMenuItemLabel title = CCMenuItemLabel.item(this.createLabel("Difficulty:"), this, ""); // generates a warning in log due to ""
 		title.setAnchorPoint(0, 0.5f);
 		this.easyMenuLabel = this.createMenuLabel(LevelDifficulty.Easy, "selectEasy");
 		this.normalMenuLabel = this.createMenuLabel(LevelDifficulty.Normal, "selectNormal");
