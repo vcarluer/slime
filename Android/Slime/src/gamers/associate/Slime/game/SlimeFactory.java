@@ -55,6 +55,16 @@ import android.app.Activity;
 import com.badlogic.gdx.physics.box2d.World;
 
 public abstract class SlimeFactory {
+	// Debug vars
+	public static boolean IsLevelDebugMode = false;
+	public static boolean IsForceDiffDebug =  false;
+	public static int ForceDiff = 8;
+	public static int ForceLevel = 60;
+	public static boolean IsDebugBlocOn = false;
+	public static String ForceBlockPath = "blocsRectangle/s_tl5.slime";
+	public static boolean IsLevelSelectionOn = false;
+	
+	// end debug ---
 	private static final float SGSDensityBase = 1.5f; // Samsung Galaxy S density
 	public static ccColor3B ColorSlime = ccColor3B.ccc3(0, 170, 54);
 	public static ccColor3B ColorSlimeBorder = ccColor3B.ccc3(0, 62, 8);

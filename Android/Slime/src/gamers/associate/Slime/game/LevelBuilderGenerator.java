@@ -17,9 +17,9 @@ import org.cocos2d.transitions.CCTransitionScene;
 
 public class LevelBuilderGenerator implements ILevelBuilder
 {	
-	private static boolean isDebug =  false;
-	private static int forceDiff = 8;
-	private static int forceLevel = 60;
+	private static boolean isDebug =  SlimeFactory.IsForceDiffDebug;
+	private static int forceDiff = SlimeFactory.ForceDiff;
+	private static int forceLevel = SlimeFactory.ForceLevel;
 	
 	private static int MinimumComplexity = 1;
 	private static int AverageComplexityPerLevel = 1;
