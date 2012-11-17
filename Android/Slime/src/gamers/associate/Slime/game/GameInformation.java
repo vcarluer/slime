@@ -121,6 +121,11 @@ public class GameInformation {
 		this.store();
 	}
 	
+	public void setLevel(int level) {
+		this.setLevelNum(level);
+		this.store();
+	}
+	
 	public void forceLevel(int diff, int level) {
 		this.setLevelDifficulty(diff);
 		this.setLevelNum(level);
@@ -258,7 +263,11 @@ public class GameInformation {
 	}
 
 	public int getMaxLevelDifficulty() {
-		return maxLevelDifficulty;
+		if (SlimeFactory.IsForceMaxSurvival) {
+			return SlimeFactory.MaxSurvival;
+		} else {
+			return maxLevelDifficulty;
+		}		
 	}
 	
 	// for debug

@@ -4,6 +4,7 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.custom.MenuSprite;
+import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelHome;
 
 import org.cocos2d.layers.CCLayer;
@@ -140,7 +141,7 @@ public class ChangeDifficultyLayer extends CCLayer {
 	}
 	
 	public void goHome(Object sender) {
-		Level currentLevel = Level.get(LevelHome.Id, true);								
+		Level currentLevel = Level.get(LevelHome.Id, true, GamePlay.None);								
 //		CCTransitionScene transition = CCSlideInBTransition.transition(0.5f, currentLevel.getScene());
 		CCFadeTransition transition = CCFadeTransition.transition(0.5f, currentLevel.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);

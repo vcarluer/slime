@@ -2,10 +2,12 @@ package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.LevelBuilderGenerator;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.Vibe;
+import gamers.associate.Slime.levels.GamePlay;
 
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
@@ -146,19 +148,14 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 	private void selectLevel(int diff) {
 		SlimeFactory.GameInfo.resetDifficulty(diff);
 		SlimeFactory.LevelBuilder.resetAll();
+		Level level = Level.get(LevelBuilderGenerator.defaultId, true, GamePlay.Survival);
 		
-//		CCTransitionScene transition = CCSlideInBTransition.transition(0.5f, currentLevel.getScene());
-		CCFadeTransition transition = CCFadeTransition.transition(0.5f, Level.currentLevel.getScene());
+		CCFadeTransition transition = CCFadeTransition.transition(0.5f, level.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
 		
 		Vibe.vibrate();
 		Sounds.playEffect(R.raw.menuselect, true);
 		Sounds.stopMusic();
-		
-		if (SlimeFactory.GameInfo.getLevelNum() == 0) {
-			SlimeFactory.ContextActivity.runIntro();
-		} else {
-			SlimeFactory.LevelBuilder.start();
-		}
+
 	}
 }

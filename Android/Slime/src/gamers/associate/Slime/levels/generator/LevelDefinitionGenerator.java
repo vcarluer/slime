@@ -35,7 +35,7 @@ public class LevelDefinitionGenerator extends LevelDefinition {
 	@Override
 	public void buildLevel(Level level) {
 		if (this.currentGenerator != null) {
-			this.currentGenerator.generate(this.getComplexity(), BlocDirection.Left);
+			this.currentGenerator.generate(this.getComplexity(), BlocDirection.Left, this.getGamePlay());
 			this.postBuild(level);
 		}
 	}
@@ -50,7 +50,7 @@ public class LevelDefinitionGenerator extends LevelDefinition {
 
 	public void buildBossLevel(Level level) {
 		if (this.currentGenerator != null) {
-			this.currentGenerator.generate(this.getComplexity(), BlocDirection.Left, true);
+			this.currentGenerator.generate(this.getComplexity(), BlocDirection.Left, true, this.getGamePlay());
 			this.postBuild(level);
 		}
 	}

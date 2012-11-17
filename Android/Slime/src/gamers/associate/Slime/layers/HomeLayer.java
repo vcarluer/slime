@@ -400,14 +400,18 @@ public class HomeLayer extends CCLayer {
 	}
 	
 	public static CCMenu getMenuButton(String spriteName, CCNode target, String targetMethod) {
+		float left = - CCDirector.sharedDirector().winSize().getWidth() / 2 + ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) / 2 ;
+		float top = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY) / 2;
+		return getMenuButton(spriteName, left, top, target, targetMethod);
+	}
+	
+	public static CCMenu getMenuButton(String spriteName, float x, float y, CCNode target, String targetMethod) {
 		CCSprite spriteN = CCSprite.sprite(spriteName, true);
 		CCSprite spriteS = CCSprite.sprite(spriteName, true);
 		CCMenuItemSprite go = CCMenuItemSprite.item(spriteN, spriteS, target, targetMethod);
 		go.setScale(PauseLayer.Scale);
 		
-		float left = - CCDirector.sharedDirector().winSize().getWidth() / 2 + ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) / 2 ;
-		float top = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY) / 2;
-		go.setPosition(left, top);
+		go.setPosition(x, y);
 		CCMenu menu = CCMenu.menu(go);
 		return menu;
 	}

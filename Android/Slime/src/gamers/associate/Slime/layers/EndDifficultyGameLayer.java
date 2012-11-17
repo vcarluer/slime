@@ -9,6 +9,7 @@ import gamers.associate.Slime.items.custom.GateFactory;
 import gamers.associate.Slime.items.custom.SlimyFactory;
 import gamers.associate.Slime.items.custom.SlimySuccess;
 import gamers.associate.Slime.items.custom.Star;
+import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelHome;
 
 import org.cocos2d.actions.instant.CCCallFunc;
@@ -169,7 +170,7 @@ public class EndDifficultyGameLayer extends CCLayer {
 	}
 
 	public void goHome(Object sender) {
-		Level currentLevel = Level.get(LevelHome.Id, true);								
+		Level currentLevel = Level.get(LevelHome.Id, true, GamePlay.None);								
 		CCTransitionScene transition = CCFadeTransition.transition(0.5f, currentLevel.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
 	}

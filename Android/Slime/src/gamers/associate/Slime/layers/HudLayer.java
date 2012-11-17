@@ -1,14 +1,9 @@
 package gamers.associate.Slime.layers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.IGameItemHandler;
 import gamers.associate.Slime.game.IGamePlay;
 import gamers.associate.Slime.game.Level;
-import gamers.associate.Slime.game.LevelDifficulty;
-import gamers.associate.Slime.game.LevelSelection;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.TitleGenerator;
@@ -19,14 +14,13 @@ import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.items.custom.Star;
 import gamers.associate.Slime.items.custom.StarCounter;
 import gamers.associate.Slime.items.custom.StarCounterFactory;
-import gamers.associate.Slime.items.custom.StarCounterType;
-import gamers.associate.Slime.items.custom.StarFactory;
+import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelHome;
 
-import org.cocos2d.actions.UpdateCallback;
-import org.cocos2d.actions.base.CCAction;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.cocos2d.actions.instant.CCCallFunc;
-import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCFadeIn;
 import org.cocos2d.actions.interval.CCFadeOut;
@@ -38,8 +32,6 @@ import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
-import org.cocos2d.nodes.CCLabel;
-import org.cocos2d.nodes.CCLabelAtlas;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.opengl.CCBitmapFontAtlas;
 import org.cocos2d.transitions.CCFadeTransition;
@@ -86,6 +78,10 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 	private List<StarCounter> starCounters;
 	private int counterIdx;
 	
+	private CCMenu selectLevelMenu;
+	
+	private boolean hideCount;
+	
 	public HudLayer() {
 		
 		this.gameItems = new ArrayList<GameItem>();
@@ -119,7 +115,12 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 		this.starsToAdd = new ArrayList<CCSprite>();
 		this.starsToDelete = new ArrayList<CCSprite>();
 		this.starX = CCDirector.sharedDirector().winSize().getWidth() / 2 - Star.Reference_Width - PaddingLeftStar;
-		this.starY = CCDirector.sharedDirector().winSize().getHeight() - (starCountHShift + Star.Reference_Height / 2);		
+		this.starY = CCDirector.sharedDirector().winSize().getHeight() - (starCountHShift + Star.Reference_Height / 2);
+		
+		float recordX = CCDirector.sharedDirector().winSize().getWidth() / 2f - ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) / 2 ;
+		float recordY = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY) / 2;;
+		this.selectLevelMenu = HomeLayer.getMenuButton("control-empty.png", recordX, recordY, this, "recordLvl");
+		this.addChild(this.selectLevelMenu);
 	}	
 	
 	private static CCBitmapFontAtlas getMenuLabel(String text) {
@@ -203,7 +204,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 	}
 
 	public void goBack(Object sender) {
-		Level currentLevel = Level.get(LevelHome.Id, true);							
+		Level currentLevel = Level.get(LevelHome.Id, true, GamePlay.None);							
 		CCTransitionScene transition = CCFadeTransition.transition(0.5f, currentLevel.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
 //		Sounds.playMusic(R.raw.menumusic, true);
@@ -216,13 +217,17 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 	}
 	
 	public void setSlimyCount(int count) {
-		this.countLabel.setVisible(true);		
-		this.countLabel.setString((Count_Text + String.valueOf(count)).toUpperCase());		
+		if (!this.isHideCount()) {
+			this.countLabel.setVisible(true);		
+			this.countLabel.setString((Count_Text + String.valueOf(count)).toUpperCase());
+		}
 	}
 	
 	public void setHudText(String text) {
-		this.countLabel.setVisible(true);
-		this.countLabel.setString(text.toUpperCase());		
+		if (!this.isHideCount()) {
+			this.countLabel.setVisible(true);
+			this.countLabel.setString(text.toUpperCase());
+		}
 	}
 	
 	public void setHudStartText(String text) {
@@ -308,22 +313,29 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 							}							
 						}
 						
-						if (gp != null) {
-							this.scoreTaken.setString("+" + Util.getFormatTime(gp.getExtraBonusPoints()));
+						if (!this.isHideCount()) {
+							if (gp != null) {
+								this.scoreTaken.setString("+" + Util.getFormatTime(gp.getExtraBonusPoints()));
+							}
 						}
+						
 					} else {
-						if (gp != null) {
-							this.scoreTaken.setString("+" + Util.getFormatTime(gp.getNormalBonusPoints()));
-						}						
+						if (!this.isHideCount()) {
+							if (gp != null) {
+								this.scoreTaken.setString("+" + Util.getFormatTime(gp.getNormalBonusPoints()));
+							}						
+						}
 					}
 					
-					this.scoreTaken.setVisible(true);
-					this.scoreTaken.stopAllActions();
-					CCFadeIn fi = CCFadeIn.action(0.1f);
-					CCDelayTime delay = CCDelayTime.action(1.0f);
-					CCFadeOut fade = CCFadeOut.action(0.5f);
-					CCSequence seq = CCSequence.actions(fi, delay, fade);
-					this.scoreTaken.runAction(seq);
+					if (!this.isHideCount()) {
+						this.scoreTaken.setVisible(true);
+						this.scoreTaken.stopAllActions();
+						CCFadeIn fi = CCFadeIn.action(0.1f);
+						CCDelayTime delay = CCDelayTime.action(1.0f);
+						CCFadeOut fade = CCFadeOut.action(0.5f);
+						CCSequence seq = CCSequence.actions(fi, delay, fade);
+						this.scoreTaken.runAction(seq);
+					}
 				}
 			}
 		}		
@@ -440,5 +452,17 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 		this.counterIdx = 0;
 		
 		this.scoreTaken.cleanup();
+	}
+	
+	public void recordLvl(Object sender) {
+	
+	}
+
+	public boolean isHideCount() {
+		return hideCount;
+	}
+
+	public void setHideCount(boolean hideCount) {
+		this.hideCount = hideCount;
 	}
 }

@@ -63,6 +63,10 @@ public abstract class SlimeFactory {
 	public static boolean IsDebugBlocOn = false;
 	public static String ForceBlockPath = "blocsRectangle/s_tl5.slime";
 	public static boolean IsLevelSelectionOn = false;
+	public static final boolean IsForceMaxSurvival = true;
+	public static final int MaxSurvival = LevelDifficulty.Extrem;
+	public static final boolean IsForceMaxWorld = false;
+	public static final int MaxWorld = LevelDifficulty.Extrem; // Should be world here?
 	
 	// end debug ---
 	private static final float SGSDensityBase = 1.5f; // Samsung Galaxy S density

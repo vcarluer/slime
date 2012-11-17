@@ -6,6 +6,7 @@ import gamers.associate.Slime.game.LevelSelection;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.custom.MenuSprite;
+import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelDefinition;
 import gamers.associate.Slime.levels.LevelHome;
 
@@ -92,14 +93,15 @@ public class LevelSelectionLayer extends CCLayer {
 		Sounds.playEffect(R.raw.menuselect);
 		CCMenuItem item = (CCMenuItem)sender;		
 		String levelName = (String)item.getUserData();
-		Level level = Level.get(levelName, true);
+		// levelName should be fixed here
+		Level level = Level.get(levelName, true, GamePlay.TimeAttack);
 		Sounds.pauseMusic();
 		CCDirector.sharedDirector().replaceScene(level.getScene());
 	}
 
 	public void goBackEvent(Object sender) {
 		Sounds.playEffect(R.raw.menuselect);
-		Level level = Level.get(LevelHome.Id, true);		
+		Level level = Level.get(LevelHome.Id, true, GamePlay.None);		
 		CCDirector.sharedDirector().replaceScene(level.getScene());
 	}
 	

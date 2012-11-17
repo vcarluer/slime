@@ -3,6 +3,7 @@ package gamers.associate.Slime.levels.generator;
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.levels.GamePlay;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 	// For now only to right
 	// Complexity = complexity of first line
 	protected void generateInternal(int maxComplexity,
-			BlocDirection constrained, boolean isBoss) {
+			BlocDirection constrained, boolean isBoss, GamePlay gamePlay) {
 		// todo: remove colCount and rowCount => countRight & countTop enough
 		// todo: refactor!
 		int colCount = 0;		

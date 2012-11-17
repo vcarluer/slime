@@ -3,7 +3,9 @@ package gamers.associate.Slime.levels.generator;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.game.SurvivalGame;
 import gamers.associate.Slime.game.TimeAttackGame;
+import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelUtil;
 import gamers.associate.Slime.levels.generator.hardcoded.BlocHardInit;
 
@@ -119,15 +121,15 @@ public abstract class LevelGraphGeneratorBase {
 		return direction;
 	}	
 	
-	public void generate(int maxComplexity) {			
-		this.generate(maxComplexity, null);
+	public void generate(int maxComplexity, GamePlay gamePlay) {			
+		this.generate(maxComplexity, null, gamePlay);
 	}
 	
-	public void generate(int maxComplexity, BlocDirection constrained) {
-		this.generate(maxComplexity, constrained, false);
+	public void generate(int maxComplexity, BlocDirection constrained, GamePlay gamePlay) {
+		this.generate(maxComplexity, constrained, false, gamePlay);
 	}
 	
-	public void generate(int maxComplexity, BlocDirection constrained, boolean isBoss) {
+	public void generate(int maxComplexity, BlocDirection constrained, boolean isBoss, GamePlay gamePlay) {
 		this.initCount();
 		this.currentComplexity = 0;
 		this.previousPickComplexity = 0;		
@@ -137,12 +139,12 @@ public abstract class LevelGraphGeneratorBase {
 		this.lvlHeight = 0;
 			
 		this.computeLevelSize(isBoss);
-		this.generateInternal(maxComplexity, constrained, isBoss);
+		this.generateInternal(maxComplexity, constrained, isBoss, gamePlay);
 		
 		this.postGenerate();		
 	}
 	
-	protected abstract void generateInternal(int maxComplexity, BlocDirection constrained, boolean isBoss);
+	protected abstract void generateInternal(int maxComplexity, BlocDirection constrained, boolean isBoss, GamePlay gamePlay);
 
 	protected void postGenerate() {
 		if (this.currentLevel != null) {
@@ -352,20 +354,27 @@ public abstract class LevelGraphGeneratorBase {
 	
 	protected abstract void initAssets(List<String> assetsList);
 	
-	protected void addGamePlay(int blocCount) {
+	protected void addGamePlay(int blocCount, GamePlay gamePlay) {
 		// Compute total time et critic time here
 		this.currentLevel.removeCurrentGamePlay();
 		
-		TimeAttackGame taGame = TimeAttackGame.NewGame();
-		this.currentLevel.addGamePlay(taGame);
-				
-		int baseTime = timeCalcBase - SlimeFactory.GameInfo.getDifficulty();
-		int secPerBloc = Math.round(timeCalcPerBlock / SlimeFactory.GameInfo.getDifficulty());
-		int totalTime = baseTime + (blocCount) * secPerBloc; 
-		taGame.setStartTime(totalTime);
-		// 10% or other or fix?
-		int critic = timeCritic;
-		taGame.setCriticTime(critic);
+		if (gamePlay == GamePlay.TimeAttack) {
+			TimeAttackGame taGame = TimeAttackGame.NewGame();
+			this.currentLevel.addGamePlay(taGame);
+					
+			int baseTime = timeCalcBase - SlimeFactory.GameInfo.getDifficulty();
+			int secPerBloc = Math.round(timeCalcPerBlock / SlimeFactory.GameInfo.getDifficulty());
+			int totalTime = baseTime + (blocCount) * secPerBloc; 
+			taGame.setStartTime(totalTime);
+			// 10% or other or fix?
+			int critic = timeCritic;
+			taGame.setCriticTime(critic);
+		}
+		
+		if (gamePlay == GamePlay.Survival) {
+			SurvivalGame sGame = SurvivalGame.NewGame();
+			this.currentLevel.addGamePlay(sGame);
+		}
 	}
 	
 	protected abstract void computeLevelSize(boolean isBoss);

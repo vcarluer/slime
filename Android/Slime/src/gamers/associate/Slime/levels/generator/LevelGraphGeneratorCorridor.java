@@ -4,6 +4,7 @@ import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelUtil;
 import gamers.associate.Slime.levels.generator.hardcoded.BlocHardInit;
 
@@ -74,11 +75,11 @@ public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {
 	}
 	
 	@Override
-	protected void generateInternal(int maxComplexity, BlocDirection constrained, boolean isBoss) {		
+	protected void generateInternal(int maxComplexity, BlocDirection constrained, boolean isBoss, GamePlay gamePlay) {		
 		generateBeforeGP(constrained, isBoss);
 		
 		
-		this.addGamePlay(this.totalCount);
+		this.addGamePlay(this.totalCount, gamePlay);
 		
 		this.fillEmptyBlocks();
 	}

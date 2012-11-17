@@ -6,6 +6,7 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.TimeAttackGame;
 import gamers.associate.Slime.game.TitleGenerator;
+import gamers.associate.Slime.levels.GamePlay;
 
 public class LevelGraphGeneratorTutorial extends LevelGraphGeneratorRectangle {
 	private static final String TUT7_TITLE = "The reveleation of the flying monster";
@@ -42,7 +43,7 @@ public class LevelGraphGeneratorTutorial extends LevelGraphGeneratorRectangle {
 		
 	@Override
 	protected void generateInternal(int maxComplexity,
-			BlocDirection constrained, boolean isBoss) {
+			BlocDirection constrained, boolean isBoss, GamePlay gamePlay) {
 						
 		int lvlWidth = 0;
 		int lvlHeight = 0;

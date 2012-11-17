@@ -58,7 +58,7 @@ public class LevelBuilder implements ILevelBuilder {
 		}
 	}
 	
-	public void build(Level level, String levelName) {
+	public void build(Level level, String levelName, GamePlay gamePlay) {
 		LevelDefinition levelDef = levels.get(levelName);
 		build(level, levelDef);
 	}
@@ -83,6 +83,8 @@ public class LevelBuilder implements ILevelBuilder {
 						taGame.setCriticTime(taLevel.getLevelCriticTime());
 					}
 					break;
+				case Survival:
+					
 				default:
 					level.addGamePlay(null);
 					break;
@@ -118,11 +120,6 @@ public class LevelBuilder implements ILevelBuilder {
 	}
 
 	@Override
-	public void start() {
-		// TODO Auto-generated method stub		
-	}
-
-	@Override
 	public void resetAllAndRun() {
 		// TODO Auto-generated method stub
 		
@@ -150,5 +147,17 @@ public class LevelBuilder implements ILevelBuilder {
 	public boolean isBoss() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public void start(GamePlay gamePlay) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void start() {
+		// TODO Auto-generated method stub
+		
 	}
 }

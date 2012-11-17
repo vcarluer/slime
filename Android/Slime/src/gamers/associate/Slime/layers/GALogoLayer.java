@@ -6,6 +6,7 @@ import gamers.associate.Slime.game.LoadingQuoteGenerator;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
+import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelHome;
 import gamers.associate.Slime.levels.generator.BlocInfoParser;
 import gamers.associate.Slime.levels.generator.hardcoded.BlocHardInit;
@@ -249,7 +250,7 @@ public class GALogoLayer extends CCLayer {
 						SpriteSheetFactory.add("success", true, Level.zTop);
 						break;
 					case 17:						
-						currentLevel = Level.get(LevelHome.Id);
+						currentLevel = Level.get(LevelHome.Id, GamePlay.None);
 						unschedule(nextCallback);
 						load();											
 						break;

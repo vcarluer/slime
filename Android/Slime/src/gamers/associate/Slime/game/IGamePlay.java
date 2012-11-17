@@ -1,5 +1,7 @@
 package gamers.associate.Slime.game;
 
+import gamers.associate.Slime.levels.GamePlay;
+
 import org.cocos2d.types.CGPoint;
 
 public interface IGamePlay {	
@@ -9,6 +11,7 @@ public interface IGamePlay {
 	int getScore();
 	int getBaseScore();
 	int getBonusScore();
+	int getBonusScore(int bonusIdx);
 	void activateSelection(CGPoint gameReference);
 	void simpleSelect();
 	void selectBegin(CGPoint gameReference);	
@@ -23,4 +26,5 @@ public interface IGamePlay {
 	float getNormalTimeRatio();
 	float getNormalBonusPoints();
 	float getExtraBonusPoints();
+	GamePlay getType();
 }

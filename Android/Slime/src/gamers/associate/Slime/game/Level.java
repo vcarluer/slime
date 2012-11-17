@@ -14,6 +14,7 @@ import gamers.associate.Slime.layers.EndLevelLayer;
 import gamers.associate.Slime.layers.HudLayer;
 import gamers.associate.Slime.layers.LevelLayer;
 import gamers.associate.Slime.layers.PauseLayer;
+import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelDefinition;
 import gamers.associate.Slime.levels.LevelHome;
 
@@ -215,16 +216,16 @@ public class Level implements IGameItemHandler {
 		isInit = true;				
 	}
 	
-	public static Level get(String levelName) {
-		return get(levelName, false);
+	public static Level get(String levelName, GamePlay gamePlay) {
+		return get(levelName, false, gamePlay);
 	}
 	
-	public static Level get(String levelName, boolean forceReload) {
+	public static Level get(String levelName, boolean forceReload, GamePlay gamePlay) {
 		createSingleton();					
 		
 		// Resume existing level if exists, either reload one
 		if (forceReload || currentLevel.getCurrentLevelName() != levelName) {
-			currentLevel.loadLevel(levelName);
+			currentLevel.loadLevel(levelName, gamePlay);
 		}				
 		
 		return currentLevel;
@@ -283,9 +284,9 @@ public class Level implements IGameItemHandler {
 	}
 	
 	// Must be call before running scene with CCDirector
-	public void loadLevel(String levelName) {
+	public void loadLevel(String levelName, GamePlay gamePlay) {
 		this.preBuild();		
-		SlimeFactory.LevelBuilder.build(this, levelName);						
+		SlimeFactory.LevelBuilder.build(this, levelName, gamePlay);						
 		this.postBuild(levelName);		
 	}
 	
@@ -965,6 +966,10 @@ public class Level implements IGameItemHandler {
 		return this.hudLayer.getLabel();
 	}
 	
+	public void setHideCount(boolean isHide) {
+		this.hudLayer.setHideCount(isHide);
+	}
+	
 	public IGamePlay getGamePlay() {
 		return this.gamePlay;
 	}		
@@ -972,7 +977,7 @@ public class Level implements IGameItemHandler {
 	public void goHome() {
 		// CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
 		// this.loadLevel(LevelBuilder.LevelSelection);
-		this.loadLevel(LevelHome.Id);
+		this.loadLevel(LevelHome.Id, GamePlay.None);
 //		CCTransitionScene transition = CCFadeTransition.transition(0.5f, currentLevel.getScene());
 //		CCDirector.sharedDirector().replaceScene(transition);
 		// Sounds.resumeMusic();
@@ -987,7 +992,7 @@ public class Level implements IGameItemHandler {
 		// this.loadLevel(LevelBuilder.LevelSelection);
 		String next = SlimeFactory.LevelBuilder.getNext(this.currentLevelName);
 		if (next != null) {
-			get(next, true);
+			get(next, true, this.gamePlay.getType());
 		}
 	}
 	

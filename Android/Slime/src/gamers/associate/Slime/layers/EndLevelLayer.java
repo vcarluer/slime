@@ -272,8 +272,8 @@ public class EndLevelLayer extends CCLayer {
 			
 			if (this.currentScore == this.targetScore) {
 				if (this.currentStars < this.targetStars) {
-					this.targetScore += Level.currentLevel.getGamePlay().getBonusScore();
 					this.currentStars++;
+					this.targetScore += Level.currentLevel.getGamePlay().getBonusScore(this.currentStars);					
 					Sounds.playEffect(R.raw.star);
 					CCTintTo tint = CCTintTo.action(0.2f, ccColor3B.ccc3(243, 225, 102));
 					CCTintTo tintBack = CCTintTo.action(0.1f, SlimeFactory.ColorSlime);

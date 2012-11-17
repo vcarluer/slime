@@ -13,6 +13,7 @@ import gamers.associate.Slime.game.IGamePlay;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.TimeAttackGame;
+import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelHome;
 
 public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle {
@@ -30,7 +31,7 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 	
 	@Override
 	protected void generateInternal(int maxComplexity,
-			BlocDirection constrained, boolean isBoss) {
+			BlocDirection constrained, boolean isBoss, GamePlay gamePlay) {
 		
 		int endPos = noBossPos;
 		int bossPos = noBossPos;
@@ -184,7 +185,7 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 		
 		this.topCount--;
 		this.rightCount--;
-		this.addGamePlay(lvlWidth * lvlHeight);					
+		this.addGamePlay(lvlWidth * lvlHeight, gamePlay);					
 	}	
 	
 	private void pickStar(int starBlocCount, List<Integer> allStars,

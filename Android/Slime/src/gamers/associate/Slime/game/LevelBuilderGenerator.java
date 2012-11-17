@@ -1,6 +1,7 @@
 package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.layers.EndDifficultyGameLayer;
+import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.ILevelBuilder;
 import gamers.associate.Slime.levels.LevelDefinition;
 import gamers.associate.Slime.levels.LevelDefinitionParser;
@@ -42,40 +43,51 @@ public class LevelBuilderGenerator implements ILevelBuilder
 		this.levelDef.setId(defaultId);
 	}	
 	
-	public void build(Level level, String id)
+	public void build(Level level, String id, GamePlay gamePlay)
 	{
 		if (id != LevelHome.Id)
 		{			
+			this.levelDef.setGamePlay(gamePlay);
+			if (this.levelDef.getGamePlay() == GamePlay.TimeAttack) {
+				this.gameInfo.setLevel(Integer.valueOf(id));
+			}
+			
 			this.isBoss = (this.gameInfo.getLevelNum() == this.gameInfo.getLevelMax());
 			this.resetTotalStar();
-			if (this.firstBuild && this.levelparser.isStored() && !this.levelDef.isFinished()) {				
+			if (true == false && this.firstBuild && this.levelparser.isStored() && !this.levelDef.isFinished()) {				
 				this.levelparser.buildLevel(level);
 				if (this.isTut()) {
 					SlimeFactory.LevelGeneratorTutorial.setTitle();
 				}
 
 				level.setLevelDefinition(this.levelDef);
-			} else {							
+			} else {
 				if (!isDebug) {
 					this.gameInfo.levelUp();
 				} else {
 					this.gameInfo.forceLevel(forceDiff, forceLevel);					
 				}
 				
-				if (this.isTut()) {
-					this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorTutorial);
-				} else {
-					int lvl = SlimeFactory.GameInfo.getLevelNum();
-					if (SlimeFactory.GameInfo.getDifficulty() == LevelDifficulty.Easy) {
-						lvl -=  LevelGraphGeneratorTutorial.tutorialCount;
-					}
-					
-					if (lvl % 4 == 0) {
-						// this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorRectangle2);
-						this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor3);
+				if (this.levelDef.getGamePlay() == GamePlay.TimeAttack) {
+					if (this.isTut()) {
+						this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorTutorial);
 					} else {
-						this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor3);
-					}					
+						int lvl = SlimeFactory.GameInfo.getLevelNum();
+						if (SlimeFactory.GameInfo.getDifficulty() == LevelDifficulty.Easy) {
+							lvl -=  LevelGraphGeneratorTutorial.tutorialCount;
+						}
+						
+						if (lvl % 4 == 0) {
+							// this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorRectangle2);
+							this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor3);
+						} else {
+							this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor3);
+						}					
+					}
+				}
+				
+				if (this.levelDef.getGamePlay() == GamePlay.Survival) {
+					this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor3);
 				}
 				
 				this.isBoss = (this.gameInfo.getLevelNum() == this.gameInfo.getLevelMax());
@@ -106,6 +118,7 @@ public class LevelBuilderGenerator implements ILevelBuilder
 
 	public String getNext(String paramString)
 	{
+		// Will depend on gameplay
 		String next = null;
 		if (this.gameInfo.getLevelNum() < this.gameInfo.getLevelMax()) {
 			next = defaultId;
@@ -143,7 +156,7 @@ public class LevelBuilderGenerator implements ILevelBuilder
 		if (this.levelparser.isStored()) {
 			this.levelparser.buildLevel(level);			
 		} else {
-			this.build(level, levelDef.getId());			
+			this.build(level, levelDef.getId(), levelDef.getGamePlay());			
 		}
 	}
 	
@@ -155,7 +168,7 @@ public class LevelBuilderGenerator implements ILevelBuilder
 	
 	public void resetAllAndRun() {
 		this.resetAll();
-		Level.get(LevelBuilderGenerator.defaultId, true);
+		Level.get(LevelBuilderGenerator.defaultId, true, this.levelDef.getGamePlay());
 	}
 	
 	public LevelDefinitionParser getParser() {
@@ -166,9 +179,14 @@ public class LevelBuilderGenerator implements ILevelBuilder
 		return this.levelparser.isStored();
 	}
 	
+	public void start(GamePlay gamePlay) {
+		this.firstBuild = true;
+		Level.get(LevelBuilderGenerator.defaultId, true, gamePlay);		
+	}
+	
 	public void start() {
 		this.firstBuild = true;
-		Level.get(LevelBuilderGenerator.defaultId, true);		
+		Level.get(LevelBuilderGenerator.defaultId, true, this.levelDef.getGamePlay());		
 	}
 
 	public int getTotalStar() {

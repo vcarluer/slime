@@ -1,9 +1,13 @@
 package gamers.associate.Slime.layers;
 
+import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.LevelBuilderGenerator;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.custom.MenuSprite;
+import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelHome;
 
 import java.util.HashMap;
@@ -15,6 +19,7 @@ import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.menus.CCMenu;
+import org.cocos2d.menus.CCMenuItem;
 import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
@@ -108,7 +113,7 @@ public class StoryWorldLayer extends CCLayer {
 	}
 
 	public void goBack(Object sender) {
-		Level currentLevel = Level.get(LevelHome.Id, true);
+		Level currentLevel = Level.get(LevelHome.Id, true, GamePlay.None);
 		CCFadeTransition transition = CCFadeTransition.transition(0.5f, currentLevel.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
 	}
@@ -156,6 +161,8 @@ public class StoryWorldLayer extends CCLayer {
 			break;			
 		}
 		
+		SlimeFactory.GameInfo.resetDifficulty(difficulty);
+		
 		this.targetDiffLeft = 0;
 		this.targetDiffRight = 0;
 		this.menuToLeft.setVisible(false);
@@ -182,7 +189,10 @@ public class StoryWorldLayer extends CCLayer {
 		for(int i = 0; i < lvls; i++) {
 			CCSprite spriteN = CCSprite.sprite("control-square-empty.png", true);
 			CCSprite spriteS = CCSprite.sprite("control-square-empty.png", true);
-			CCMenuItemSprite item = CCMenuItemSprite.item(spriteN, spriteS, this, "");
+			CCMenuItemSprite item = CCMenuItemSprite.item(spriteN, spriteS, this, "selectLevel");
+			CCLabel label = CCLabel.makeLabel(String.valueOf(i+1), "fonts/Slime.ttf", 14);
+			item.addChild(label);
+			item.setUserData(i);
 			item.setScale(133 / (CCDirector.sharedDirector().winSize().getWidth() / cols));
 			this.levels.addChild(item);
 		}
@@ -199,5 +209,15 @@ public class StoryWorldLayer extends CCLayer {
 	
 	private void setTitle(String title) {
 		this.title.setString(title.toUpperCase());
+	}
+	
+	public void selectLevel(Object sender) {
+		Sounds.playEffect(R.raw.menuselect);
+		CCMenuItem item = (CCMenuItem)sender;		
+		String levelName = String.valueOf(item.getUserData());
+		// levelName should be fixed here
+		Level level = Level.get(levelName, true, GamePlay.TimeAttack);
+		Sounds.pauseMusic();
+		CCDirector.sharedDirector().replaceScene(level.getScene());
 	}
 }

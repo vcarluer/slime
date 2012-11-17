@@ -3,6 +3,7 @@ package gamers.associate.Slime.game;
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.custom.EvacuationPlug;
+import gamers.associate.Slime.levels.GamePlay;
 
 import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.interval.CCFadeIn;
@@ -20,24 +21,25 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	private static final float TimeRatioNormal = 2.0f;
 	private static final float TimeRatioLow = 0.2f;
 	private static final int bonusTime = 3;
+	
 	private static float defaultTime = 60;
 	private static float defaultCritic = 10;
 	private static float adTime = 5.0f; 
 	private static float stepNormal = 1.0f;
 	private static float stepCritic = 1.0f;
 	private static int timeScore = 1000;
-	private static int bonusScore = 10000;
+	protected static int bonusScore = 10000;
 	private float startTime;
 	private float leftTime;
 	private float criticTime;
 	private boolean isStarted;
 	private boolean isGameOver;
-	private Level level;
+	protected Level level;
 	private float localRender;
 	private float adRender;
 	private boolean isCritic;
 	private CCAction criticAction;
-	private int bonusTaken;
+	protected int bonusTaken;
 	private boolean adHiddenTimer;
 	
 	
@@ -203,6 +205,10 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	
 	public int getBonusScore() {
 		return bonusScore;
+	}
+	
+	public int getBonusScore(int bonusIdx) {
+		return getBonusScore();
 	}
 
 	public void selectBegin(CGPoint gameReference) {		
@@ -379,5 +385,10 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	@Override
 	public float getExtraBonusPoints() {
 		return extraBonusTime;
+	}
+
+	@Override
+	public GamePlay getType() {
+		return GamePlay.TimeAttack;
 	}
 }

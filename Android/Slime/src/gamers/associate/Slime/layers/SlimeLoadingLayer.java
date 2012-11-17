@@ -5,6 +5,7 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
+import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelHome;
 import gamers.associate.Slime.levels.generator.BlocInfoParser;
 
@@ -111,7 +112,7 @@ public class SlimeLoadingLayer extends CCLayer {
 				BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle2);
 				BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorTutorial);
 				
-				currentLevel = Level.get(LevelHome.Id);					
+				currentLevel = Level.get(LevelHome.Id, GamePlay.None);					
 				unschedule(nextCallback);
 				
 //				spriteSheet.removeChild(sprite, true);						
