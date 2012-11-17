@@ -290,7 +290,8 @@ public class GameItemCocos extends GameItem {
 				// Problem: If sprite frame setted here => Shown during 1 frame before animation begins...
 				// sprite = CCSprite.sprite(this.getReferenceFirstFrame());
 				// If a texture for CCSprite is needed here create a dummy transparent texture?
-				sprite = new CCSprite();				
+				sprite = new CCSprite();	
+//				sprite = CCSprite.sprite("empty-01.png"); // Bad size...
 				break;
 			case ANIM_SCALE_DIRECT:
 			case SINGLE_SCALE:

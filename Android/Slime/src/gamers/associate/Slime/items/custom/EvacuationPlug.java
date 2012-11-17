@@ -102,7 +102,7 @@ public class EvacuationPlug extends GameItemPhysic {
 		return Anim_Base;
 	}
 	
-	public void remove() {
+	private void remove() {
 		this.destroyBodyOnly();
 		CCFadeOut fade = CCFadeOut.action(1.0f);
 		CCRotateBy rotate = CCRotateBy.action(0.1f, 30f);
@@ -115,6 +115,21 @@ public class EvacuationPlug extends GameItemPhysic {
 		this.sprite.runAction(seq);		
 	}
 	
+	private boolean isRemoveNextStep;
+	
+	public void removeNextStep() {
+		this.isRemoveNextStep = true;
+	}
+	
+	@Override
+	public void render(float delta) {
+		if (this.isRemoveNextStep) {
+			this.isRemoveNextStep = false;
+			this.remove();
+		}
+		super.render(delta);
+	}
+
 	public void removeEnd() {
 		Level.currentLevel.addItemToRemove(this);
 	}

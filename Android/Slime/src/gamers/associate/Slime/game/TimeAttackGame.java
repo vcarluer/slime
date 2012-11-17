@@ -316,10 +316,10 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 			
 			if (this.bonusTaken >= this.neededBonus()) {
 				if (Level.currentLevel != null && Level.currentLevel.getGoal() != null) {
-					Level.currentLevel.getGoal().setActive(true);
+					Level.currentLevel.getGoal().setActiveNextStep();
 					EvacuationPlug plug = Level.currentLevel.getPlug();
 					if (plug != null) {
-						plug.remove();
+						plug.removeNextStep();
 					}
 				}
 			}

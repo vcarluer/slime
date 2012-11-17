@@ -119,6 +119,23 @@ public class GoalPortal extends GameItemPhysic implements ISelectable {
 		}				
 	}
 	
+	private boolean nextStepActivate;
+	
+	// to not activate during contacts
+	public void setActiveNextStep() {
+		this.nextStepActivate = true;
+	}
+	
+	@Override
+	public void render(float delta) {
+		if (nextStepActivate) {
+			this.nextStepActivate = false;
+			this.setActive(true);
+		}
+		
+		super.render(delta);
+	}
+
 	@Override
 	public void setActive(boolean active) {
 		this.sprite.setVisible(active);

@@ -43,6 +43,13 @@ public class GameInformation {
 		}
 	}
 	
+	public void unlockDifficulty(int levelDifficulty) {
+		if (levelDifficulty > this.maxLevelDifficulty) {
+			this.maxLevelDifficulty = levelDifficulty;
+			this.store();
+		}
+	}
+	
 	private void setLevelDifficulty(int leveldifficulty) {		
 		this.lastScore = 0;
 		this.lastIsHighScore = false;

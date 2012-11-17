@@ -54,6 +54,7 @@ public class LevelBuilderGenerator implements ILevelBuilder
 			
 			this.isBoss = (this.gameInfo.getLevelNum() == this.gameInfo.getLevelMax());
 			this.resetTotalStar();
+			// Re-read pre-generated level
 			if (false == true && this.firstBuild && this.levelparser.isStored() && !this.levelDef.isFinished()) {				
 				this.levelparser.buildLevel(level);
 				if (this.isTut()) {
@@ -100,7 +101,7 @@ public class LevelBuilderGenerator implements ILevelBuilder
 					this.levelDef.buildLevel(level);
 				}
 
-				level.setLevelDefinition(this.levelDef);				
+				level.setLevelDefinition(this.levelDef);
 				this.levelparser.storeLevel(level);
 				
 				this.levelDef.resetAndSave();								
@@ -120,12 +121,18 @@ public class LevelBuilderGenerator implements ILevelBuilder
 	{
 		// Will depend on gameplay
 		String next = null;
-		if (this.gameInfo.getLevelNum() < this.gameInfo.getLevelMax()) {
+		if (this.levelDef.getGamePlay() == GamePlay.Survival) {
 			next = defaultId;
-		} else {
-			this.gameInfo.endDifficulty();
-			CCTransitionScene transition = CCFadeTransition.transition(0.5f, EndDifficultyGameLayer.getScene());
-			CCDirector.sharedDirector().replaceScene(transition);
+		}
+		
+		if (this.levelDef.getGamePlay() == GamePlay.TimeAttack) {
+			if (this.gameInfo.getLevelNum() < this.gameInfo.getLevelMax()) {
+				next = String.valueOf(this.gameInfo.getLevelNum());
+			} else {
+				this.gameInfo.endDifficulty();
+				CCTransitionScene transition = CCFadeTransition.transition(0.5f, EndDifficultyGameLayer.getScene());
+				CCDirector.sharedDirector().replaceScene(transition);
+			}
 		}
 		
 		return next;
@@ -162,8 +169,12 @@ public class LevelBuilderGenerator implements ILevelBuilder
 	
 	public void resetAll() {
 		this.levelDef.resetAllAndSave();
-		this.levelparser.resetStorage();
+		this.resetStoredCache();
 		this.gameInfo.resetDifficulty(this.gameInfo.getDifficulty());			
+	}
+	
+	public void resetStoredCache() {
+		this.levelparser.resetStorage();;
 	}
 	
 	public void resetAllAndRun() {

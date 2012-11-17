@@ -124,7 +124,9 @@ public class PauseLayer extends CCLayer {
 			CCTransitionScene transition = CCFadeTransition.transition(0.5f, SurvivalGameOverLayer.getScene());
 			CCDirector.sharedDirector().replaceScene(transition);
 		} else {
-			Level.currentLevel.goHome();
+//			Level.currentLevel.goHome();
+			CCTransitionScene transition = CCFadeTransition.transition(0.5f, StoryWorldLayer.getScene(SlimeFactory.GameInfo.getDifficulty()));
+			CCDirector.sharedDirector().replaceScene(transition);
 		}		
 	}
 	

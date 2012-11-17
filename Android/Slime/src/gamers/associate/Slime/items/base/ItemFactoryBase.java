@@ -153,7 +153,7 @@ public abstract class ItemFactoryBase<T extends GameItemCocos> {
 	}
 	
 	public CCSprite getAnimatedSprite(String animationName, float waitTime) {
-		CCSprite spr = new CCSprite();		
+		CCSprite spr = CCSprite.sprite("empty-01.png", false);		
 		spr.runAction(this.getAnimation(animationName, waitTime));
 		return spr;
 	}
