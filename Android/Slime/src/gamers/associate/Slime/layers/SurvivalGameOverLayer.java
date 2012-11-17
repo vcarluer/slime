@@ -43,14 +43,14 @@ public class SurvivalGameOverLayer extends CCLayer {
 	}
 	@Override
 	public void onEnter() {
-		this.scoreLabel.setString("Score: " + String.valueOf(Level.currentLevel.getGamePlay().getScore()));
+		this.scoreLabel.setString("Score: " + String.valueOf(SlimeFactory.GameInfo.getCurrentScore()));
 		
 		super.onEnter();
 	}
 	
 	public void goBack(Object sender) {
 		Sounds.playEffect(R.raw.menuselect);
-		CCTransitionScene transition = CCFadeTransition.transition(1.0f, ChooseModeLayer.getScene());
+		CCTransitionScene transition = CCFadeTransition.transition(1.0f, ChooseSurvivalDifficultyLayer.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
 	}
 }

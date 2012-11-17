@@ -26,6 +26,7 @@ public class GameInformation {
 	private int previousTotalScore;
 	private int previousDifficulty;
 	private String lastBgk;
+	private int totalCurrent;
 	
 	public GameInformation() {		
 		this.maxLevelDifficulty = this.levelDifficulty = LevelDifficulty.Easy;
@@ -37,7 +38,8 @@ public class GameInformation {
 		this.lastScore = 0;
 		this.previousDifficulty = this.levelDifficulty;
 		this.levelDifficulty = leveldifficulty;
-		this.setTotalScore(0);
+		this.totalCurrent = 0;
+//		this.setTotalScore(0);
 		if (this.levelDifficulty > this.maxLevelDifficulty) {
 			this.maxLevelDifficulty = this.levelDifficulty;
 		}
@@ -63,6 +65,10 @@ public class GameInformation {
 			this.totalScoreEasy = score;
 			break;
 		}
+	}
+	
+	public int getCurrentScore() {
+		return this.totalCurrent;
 	}
 	
 	private int getScore() {
@@ -252,14 +258,16 @@ public class GameInformation {
 	
 	public void addLevelScore(int score) {
 		this.lastScore = score;
-		this.setTotalScore(this.getDifficultyScore() + score);
-		this.store();
+		this.totalCurrent += score;
+//		this.setTotalScore(this.getDifficultyScore() + score);
+//		this.store();
 	}
 	
 	public void removeLastScore() {
-		this.setTotalScore(this.getDifficultyScore() - this.lastScore);
+		this.totalCurrent -= this.lastScore;
+//		this.setTotalScore(this.getDifficultyScore() - this.lastScore);
 		this.lastScore = 0;
-		this.store();
+//		this.store();
 	}
 
 	public int getMaxLevelDifficulty() {
@@ -303,5 +311,17 @@ public class GameInformation {
 
 	public int getScore(int diff) {
 		return this.getDifficultyScore(diff);
+	}
+	
+	public boolean storeIfBetterScore() {
+		int diff = this.getDifficulty();
+		boolean better = false;
+		if (this.getDifficultyScore(diff) < this.totalCurrent) {
+			this.setTotalScore(this.totalCurrent, diff);
+			this.store();
+			better = true;
+		}
+			
+		return better;
 	}
 }

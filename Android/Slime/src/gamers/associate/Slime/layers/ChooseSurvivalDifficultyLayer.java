@@ -1,5 +1,8 @@
 package gamers.associate.Slime.layers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelBuilderGenerator;
@@ -7,6 +10,7 @@ import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.Vibe;
+import gamers.associate.Slime.items.custom.Star;
 import gamers.associate.Slime.levels.GamePlay;
 
 import org.cocos2d.layers.CCLayer;
@@ -15,6 +19,7 @@ import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItemLabel;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
+import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
@@ -34,6 +39,8 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 	CCMenuItemLabel extremMenuLabel;
 	private CCMenu menu;
 	CGPoint tmp;
+	CGPoint tmp2;
+	List<CCNode> toDestroy;
 	
 	public static CCScene getScene() {
 		if (scene == null) {
@@ -46,9 +53,12 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 	
 	public ChooseSurvivalDifficultyLayer() {
 		tmp = CGPoint.zero();
+		tmp2 = CGPoint.zero();
+		this.toDestroy = new ArrayList<CCNode>();
+		
 		HomeLayer.addBkgChangeDiff(this);
 		
-		CCMenuItemLabel title = CCMenuItemLabel.item(this.createLabel("Difficulty:"), this, ""); // generates a warning in log due to ""
+		CCMenuItemLabel title = CCMenuItemLabel.item(this.createLabel("Survival".toUpperCase()), this, ""); // generates a warning in log due to ""
 		title.setAnchorPoint(0, 0.5f);
 		this.easyMenuLabel = this.createMenuLabel(LevelDifficulty.Easy, "selectEasy");
 		this.normalMenuLabel = this.createMenuLabel(LevelDifficulty.Normal, "selectNormal");
@@ -80,6 +90,11 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 	@Override
 	public void onExit() {
 		SlimeFactory.ContextActivity.hideAd();
+		for(CCNode node : this.toDestroy) {
+			this.removeChild(node, true);
+		}
+		
+		this.toDestroy.clear();
 		super.onExit();
 	}
 
@@ -93,19 +108,27 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 			label.setColor(SlimeFactory.ColorSlimeBorder);
 		}
 		
-		tmp = CGPoint.ccpAdd(this.menu.getPosition(), label.getPosition());
+		tmp = CGPoint.ccpAdd(this.menu.getPosition(), label.getPosition()); // Use Normal as reference not label
+		tmp2 = CGPoint.ccpAdd(this.menu.getPosition(), this.normalMenuLabel.getPosition()); // Use Normal as reference not label
 		CCSprite spr = this.getLevelSprite(diffRef, isEnable);
 		spr.setPosition(tmp.x - iconPadding - (iconSize / 2), tmp.y + (iconSize - 60f));
 		
-		CCSprite star = CCSprite.sprite("star-complete-01.png", true);
-		star.setPosition(label.getPosition().x + label.getContentSize().width + 25, label.getPosition().y);
-		int score = SlimeFactory.GameInfo.getScore(diff); 
-		CCLabel scoreLabel = CCLabel.makeLabel(String.valueOf(score), "fonts/Slime.ttf", 60.0f);
-		scoreLabel.setPosition(label.getPosition().x + label.getContentSize().width + 60, label.getPosition().y);
-		this.addChild(star);
-		this.addChild(scoreLabel);
+		if (isEnable) {
+			CCSprite star = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);
+			star.setPosition(tmp2.x + this.normalMenuLabel.getContentSize().width + iconPadding + (Star.Default_Width / 2), tmp.y); // Use Normal x as reference not label
+			int score = SlimeFactory.GameInfo.getScore(diffRef); 
+			CCLabel scoreLabel = CCLabel.makeLabel(String.valueOf(score).toUpperCase(), "fonts/Slime.ttf", 60.0f);
+			scoreLabel.setPosition(tmp2.x + this.normalMenuLabel.getContentSize().width + iconPadding * 2 + Star.Default_Width, tmp.y); // Use Normal x as reference not label
+			scoreLabel.setAnchorPoint(0, 0.5f);
+			this.addChild(star);
+			this.addChild(scoreLabel);
+			
+			this.toDestroy.add(star);
+			this.toDestroy.add(scoreLabel);
+		}
 		
 		this.addChild(spr);
+		this.toDestroy.add(spr);
 	}
 	
 	public static CCSprite getLevelSprite(int diff, boolean isEnable) {
@@ -157,7 +180,7 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 	
 	private void selectLevel(int diff) {
 		SlimeFactory.GameInfo.resetDifficulty(diff);
-		SlimeFactory.LevelBuilder.resetAll();
+//		SlimeFactory.LevelBuilder.resetAll();
 		Level level = Level.get(LevelBuilderGenerator.defaultId, true, GamePlay.Survival);
 		
 		CCFadeTransition transition = CCFadeTransition.transition(0.5f, level.getScene());

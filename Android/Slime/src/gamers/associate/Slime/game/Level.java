@@ -1080,6 +1080,7 @@ public class Level implements IGameItemHandler {
 	public void showEndLevel() {
 		if (!this.endLevelShown) {
 			if (this.isVictory) {
+				SlimeFactory.GameInfo.storeIfBetterScore();
 				Sounds.playEffect(R.raw.victory);
 				this.showEndLevel(winTxt);
 			}

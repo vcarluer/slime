@@ -24,8 +24,8 @@ public class Star extends GameItemPhysic {
 	public static final float AnimDelay = 0.3f;
 	public static String Anim_Wait = "star";
 	public static String Anim_Fade = "star-fading";	
-	private static float Default_Width = 40f;
-	private static float Default_Height = 40f;
+	public static float Default_Width = 40f;
+	public static float Default_Height = 40f;
 	public static float Reference_Width = 40f;
 	public static float Reference_Height = 40f;	
 	public static String BaseFrameName = "star-01.png";
