@@ -300,4 +300,8 @@ public class GameInformation {
 		this.levelNum = levelNum;
 		this.setLastBkg("");
 	}
+
+	public int getScore(int diff) {
+		return this.getDifficultyScore(diff);
+	}
 }

@@ -22,7 +22,7 @@ import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
 
 public class ChooseSurvivalDifficultyLayer extends CCLayer {
-	private static final float menuPadding = 75f;
+	private static final float menuPadding = 200f;
 	private static final float iconSizeReference = 87f;
 	private static float padding = 25f;
 	private static float iconSize = 70f;
@@ -96,6 +96,15 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 		tmp = CGPoint.ccpAdd(this.menu.getPosition(), label.getPosition());
 		CCSprite spr = this.getLevelSprite(diffRef, isEnable);
 		spr.setPosition(tmp.x - iconPadding - (iconSize / 2), tmp.y + (iconSize - 60f));
+		
+		CCSprite star = CCSprite.sprite("star-complete-01.png", true);
+		star.setPosition(label.getPosition().x + label.getContentSize().width + 25, label.getPosition().y);
+		int score = SlimeFactory.GameInfo.getScore(diff); 
+		CCLabel scoreLabel = CCLabel.makeLabel(String.valueOf(score), "fonts/Slime.ttf", 60.0f);
+		scoreLabel.setPosition(label.getPosition().x + label.getContentSize().width + 60, label.getPosition().y);
+		this.addChild(star);
+		this.addChild(scoreLabel);
+		
 		this.addChild(spr);
 	}
 	
@@ -114,6 +123,7 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 	private CCMenuItemLabel createMenuLabel(int diff, String selector) {
 		CCMenuItemLabel label = CCMenuItemLabel.item(this.createLabel(LevelDifficulty.getText(diff)), this, selector);
 		label.setAnchorPoint(0, 0.5f);
+		
 		return label;
 	}
 	
