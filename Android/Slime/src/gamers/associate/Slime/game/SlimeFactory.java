@@ -47,6 +47,7 @@ import gamers.associate.Slime.levels.generator.LevelGraphGeneratorRectangle2;
 import gamers.associate.Slime.levels.generator.LevelGraphGeneratorTutorial;
 import gamers.associate.Slime.levels.generator.hardcoded.BlocHardInit;
 
+import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.ccColor3B;
 
@@ -270,5 +271,13 @@ public abstract class SlimeFactory {
 	
 	public static void triggerZoneAlertColor(GL10 gl) {
 		gl.glColor4f(1.0f, 0f, 0f, 0.07f);
+	}
+	
+	public static final float getScreenMidX() {
+		return CCDirector.sharedDirector().winSize().getWidth() / 2f;
+	}
+	
+	public static final float getScreenMidY() {
+		return CCDirector.sharedDirector().winSize().getHeight() / 2f;
 	}
 }

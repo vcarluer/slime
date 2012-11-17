@@ -14,6 +14,7 @@ import gamers.associate.Slime.layers.EndLevelLayer;
 import gamers.associate.Slime.layers.HudLayer;
 import gamers.associate.Slime.layers.LevelLayer;
 import gamers.associate.Slime.layers.PauseLayer;
+import gamers.associate.Slime.layers.SurvivalGameOverLayer;
 import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelDefinition;
 import gamers.associate.Slime.levels.LevelHome;
@@ -28,6 +29,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
+import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCLabelAtlas;
 import org.cocos2d.nodes.CCSprite;
@@ -362,7 +364,7 @@ public class Level implements IGameItemHandler {
 		// Set camera right based on screen size
 		this.attachLevelToCamera();
 		
-		this.hudLayer.upudateStarsCount();
+//		this.hudLayer.upudateStarsCount();
 		this.startLevel();
 	}	
 			
@@ -1049,9 +1051,9 @@ public class Level implements IGameItemHandler {
 				slimy.lose();
 			}
 			
-//			if (showEndLevel) {
-//				this.showEndLevel();
-//			}						
+			if (showEndLevel) {
+				this.showEndLevel();
+			}						
 						
 			return true;
 		}
@@ -1083,11 +1085,19 @@ public class Level implements IGameItemHandler {
 			}
 			else {
 				Sounds.playEffect(R.raw.lose);
-				this.showEndLevel(gameOverTxt);
+				if (this.getGamePlay().getType() == GamePlay.Survival) {
+					this.showGameOver();
+				} else {
+					// this.showEndLevel(gameOverTxt);
+				}
 			}
 		}
 	}
 			
+	private void showGameOver() {
+		CCDirector.sharedDirector().replaceScene(SurvivalGameOverLayer.getScene());
+	}
+
 	private void showEndLevel(String text) {
 		if (!this.endLevelShown) {
 			this.enableEndLevelLayer();
