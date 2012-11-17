@@ -119,8 +119,10 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 		
 		float recordX = CCDirector.sharedDirector().winSize().getWidth() / 2f - ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) / 2 ;
 		float recordY = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY) / 2;;
-		this.selectLevelMenu = HomeLayer.getMenuButton("control-empty.png", recordX, recordY, this, "recordLvl");
-		this.addChild(this.selectLevelMenu);
+		if (SlimeFactory.IsLevelSelectionOn) {
+			this.selectLevelMenu = HomeLayer.getMenuButton("control-empty.png", recordX, recordY, this, "recordLvl");
+			this.addChild(this.selectLevelMenu);
+		}
 	}	
 	
 	private static CCBitmapFontAtlas getMenuLabel(String text) {

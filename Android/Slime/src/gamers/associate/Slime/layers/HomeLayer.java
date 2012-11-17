@@ -2,6 +2,7 @@ package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.LevelDifficulty;
+import gamers.associate.Slime.game.Sharer;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.Vibe;
@@ -49,6 +50,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
 public class HomeLayer extends CCLayer {
+	public static final int shareSize = 64;
 	private static HomeLayer layer;	
 	// private CCMenuItemSprite restartMenu;
 	private CCLabel lblLevel;
@@ -175,26 +177,11 @@ public class HomeLayer extends CCLayer {
 //		this.addChild(this.restartMenu);
 		
 		// share button
-		CCSprite shareSpriteN = CCSprite.sprite("share.png");
-		CCSprite shareSpriteS = CCSprite.sprite("share.png");
-		shareSpriteN.setColor(SlimeFactory.ColorSlimeBorder);
-		shareSpriteS.setColor(SlimeFactory.ColorSlimeBorder);
-		CCMenuItemSprite shareItem = CCMenuItemSprite.item(shareSpriteN, shareSpriteS, this, "shareApp");
-	
-		shareScale = 1.0f * SlimeFactory.Density;
-		float shareX = - CCDirector.sharedDirector().winSize().getWidth() / 2 +((64 * shareScale) + PauseLayer.PaddingX) / 2 ;
-		float shareY = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((64 * shareScale) + PauseLayer.PaddingX) / 2;
-		shareItem.setPosition(shareX, shareY);
-		shareItem.setScale(shareScale);
+		shareScale = 1.0f;
+		float shareX = - CCDirector.sharedDirector().winSize().getWidth() / 2 +((shareSize * shareScale) + PauseLayer.PaddingX) / 2 ;
+		float shareY = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((shareSize * shareScale) + PauseLayer.PaddingX) / 2;
 		
-		CCScaleBy scaleBy = CCScaleBy.action(0.3f, 0.3f);
-		CCScaleTo scaleTo = CCScaleTo.action(0.3f, this.shareScale);
-		CCDelayTime delay = CCDelayTime.action(2.0f);
-		CCSequence seq = CCSequence.actions(scaleBy, scaleTo, delay);
-		CCRepeatForever rep = CCRepeatForever.action(seq);
-		shareItem.runAction(rep);
-		
-		this.shareMenu = CCMenu.menu(shareItem);		
+		this.shareMenu = this.getNewShareButton(null, shareScale, shareX, shareY);
 		this.addChild(this.shareMenu);
 		
 		String diff =LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty());		
@@ -382,30 +369,6 @@ public class HomeLayer extends CCLayer {
 		this.spawner = spawner;
 	}
 	
-	public void shareApp(Object sender) {
-		//create the send intent
-		Intent shareIntent = 
-		 new Intent(android.content.Intent.ACTION_SEND);
-
-		//set the type
-		shareIntent.setType("text/plain");
-
-		//add a subject
-		shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, 
-		 "Slime Attack!");
-
-		//build the body of the message to be shared
-		String shareMessage = "Love Slime Attack: http://bit.ly/SVdACw @GamersAssociate";
-
-		//add the message
-		shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, 
-		 shareMessage);
-
-		//start the chooser for sharing
-		SlimeFactory.ContextActivity.startActivity(Intent.createChooser(shareIntent, 
-		 "Share on"));
-	}
-	
 	public static CCMenu getHomeMenuButton(CCNode target, String targetMethod) {
 		return getMenuButton("control-home.png", target, targetMethod);		
 	}
@@ -457,5 +420,32 @@ public class HomeLayer extends CCLayer {
 		spriteBg.setScale(Math.max(scaleW, scaleH));
 		node.addChild(spriteBg, -1);
 		return spriteBg;
+	}
+	
+	public static CCMenu getNewShareButton(String shareMessage, float scale, float shareX, float shareY) {
+		// share button
+		Sharer sharer = new Sharer();
+		if (shareMessage != null && shareMessage != "" ) {
+			sharer.setShareMessage(shareMessage);
+		}
+		
+		CCSprite shareN = CCSprite.sprite("share.png");
+		CCSprite shareS = CCSprite.sprite("share.png");
+		shareN.setColor(SlimeFactory.ColorSlimeBorder);
+		shareS.setColor(SlimeFactory.ColorSlimeBorder);
+		CCMenuItemSprite shareItem = CCMenuItemSprite.item(shareN, shareS, sharer, "shareApp");
+		
+		shareItem.setPosition(shareX, shareY);
+		float baseScale = scale * SlimeFactory.Density;
+		shareItem.setScale(baseScale);
+		
+		CCScaleBy scaleBy = CCScaleBy.action(0.3f, 0.3f);
+		CCScaleTo scaleTo = CCScaleTo.action(0.3f, baseScale);
+		CCDelayTime delay = CCDelayTime.action(2.0f);
+		CCSequence seq = CCSequence.actions(scaleBy, scaleTo, delay);
+		CCRepeatForever rep = CCRepeatForever.action(seq);
+		shareItem.runAction(rep);
+		
+		return CCMenu.menu(shareItem);
 	}
 }

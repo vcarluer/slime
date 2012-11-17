@@ -1,7 +1,8 @@
 package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.R;
-import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.LevelDifficulty;
+import gamers.associate.Slime.game.Sharer;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 
@@ -21,6 +22,7 @@ public class SurvivalGameOverLayer extends CCLayer {
 	private CCLabel gameOverLabel;
 	private CCMenu backMenu;
 	private CCLabel newHighScore;
+	private CCMenu shareMenu;
 	
 	public static CCScene getScene() {
 		if (scene == null) {
@@ -57,6 +59,11 @@ public class SurvivalGameOverLayer extends CCLayer {
 			this.newHighScore.setScale(10);
 			CCScaleTo scaleTo = CCScaleTo.action(0.7f, 1.0f);
 			this.newHighScore.runAction(scaleTo);
+			
+			this.shareMenu = HomeLayer.getNewShareButton(
+					"New high score in Slime Attack survival mode! " + String.valueOf(SlimeFactory.GameInfo.getCurrentScore()) + " in " + LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty()) + " " + Sharer.twitterTag, 
+					1.0f, - this.scoreLabel.getContentSize().width / 2f - 25 - HomeLayer.shareSize / 2f, 0);
+			this.addChild(this.shareMenu);
 		} else {
 			this.newHighScore.setString(" ");
 		}
@@ -64,6 +71,15 @@ public class SurvivalGameOverLayer extends CCLayer {
 		super.onEnter();
 	}
 	
+	@Override
+	public void onExit() {
+		if (this.shareMenu != null) {
+			this.removeChild(this.shareMenu, true);
+			this.shareMenu = null;
+		}
+		super.onExit();
+	}
+
 	public void goBack(Object sender) {
 		Sounds.playEffect(R.raw.menuselect);
 		CCTransitionScene transition = CCFadeTransition.transition(1.0f, ChooseSurvivalDifficultyLayer.getScene());
