@@ -3,6 +3,7 @@ package gamers.associate.Slime.levels;
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.game.SurvivalGame;
 import gamers.associate.Slime.game.TimeAttackGame;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.custom.EvacuationPlug;
@@ -30,6 +31,7 @@ import gamers.associate.Slime.levels.itemdef.RedDef;
 import gamers.associate.Slime.levels.itemdef.SpawnDef;
 import gamers.associate.Slime.levels.itemdef.SpriteDef;
 import gamers.associate.Slime.levels.itemdef.StarDef;
+import gamers.associate.Slime.levels.itemdef.SurvivalDef;
 import gamers.associate.Slime.levels.itemdef.TargetDef;
 import gamers.associate.Slime.levels.itemdef.TeslaCoilDef;
 import gamers.associate.Slime.levels.itemdef.TimeAttackDef;
@@ -138,6 +140,7 @@ public class LevelDefinitionParser extends LevelDefinition
 		this.itemDefinitions.add(new EnergyBallDef());
 		this.itemDefinitions.add(new EnergyBallGunDef());
 		this.itemDefinitions.add(new CameraDef());
+		this.itemDefinitions.add(new SurvivalDef());
 	}
 	
 	private void buildItemTypeMap() {
@@ -232,10 +235,20 @@ public class LevelDefinitionParser extends LevelDefinition
 			infoDef.writeLine(buffWriter);
 			// Second line: TimeAttackGame
 			if (level.getGamePlay() != null) {
-				TimeAttackDef gamePlayDef = (TimeAttackDef) this.typeHandler.get(TimeAttackDef.Handled_TimeAttack);
-				TimeAttackGame gamePlay = (TimeAttackGame) level.getGamePlay();
-				gamePlayDef.setValues(gamePlay);
-				gamePlayDef.writeLine(buffWriter);
+					switch (level.getGamePlay().getType()) {
+					default:
+					case TimeAttack:
+						TimeAttackDef gamePlayDef = (TimeAttackDef) this.typeHandler.get(TimeAttackDef.Handled_TimeAttack);
+						TimeAttackGame gamePlay = (TimeAttackGame) level.getGamePlay();
+						gamePlayDef.setValues(gamePlay);
+						gamePlayDef.writeLine(buffWriter);
+						break;
+					case Survival:
+						SurvivalDef gamePlaySDef = (SurvivalDef) this.typeHandler.get(SurvivalDef.Handled_Survival);
+						SurvivalGame gamePlayS = (SurvivalGame) level.getGamePlay();
+						gamePlaySDef.setValues(gamePlayS);
+						gamePlaySDef.writeLine(buffWriter);
+				}
 			}
 						
 			// Next lines

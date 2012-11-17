@@ -54,7 +54,7 @@ public class LevelBuilderGenerator implements ILevelBuilder
 			
 			this.isBoss = (this.gameInfo.getLevelNum() == this.gameInfo.getLevelMax());
 			this.resetTotalStar();
-			if (true == false && this.firstBuild && this.levelparser.isStored() && !this.levelDef.isFinished()) {				
+			if (this.firstBuild && this.levelparser.isStored() && !this.levelDef.isFinished()) {				
 				this.levelparser.buildLevel(level);
 				if (this.isTut()) {
 					SlimeFactory.LevelGeneratorTutorial.setTitle();

@@ -84,7 +84,9 @@ public class LevelBuilder implements ILevelBuilder {
 					}
 					break;
 				case Survival:
-					
+					SurvivalGame sGame = SurvivalGame.NewGame();
+					level.addGamePlay(sGame);
+					break;
 				default:
 					level.addGamePlay(null);
 					break;
