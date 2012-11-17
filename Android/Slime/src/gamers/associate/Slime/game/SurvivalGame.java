@@ -1,5 +1,6 @@
 package gamers.associate.Slime.game;
 
+import android.util.FloatMath;
 import gamers.associate.Slime.levels.GamePlay;
 
 public class SurvivalGame extends TimeAttackGame {
@@ -39,11 +40,26 @@ public class SurvivalGame extends TimeAttackGame {
 	
 	@Override
 	public int getBonusScore(int bonusIdx) {
+		float score = 0;
 		if (bonusIdx <= Level.currentLevel.getGamePlay().neededBonus()) {
-			return getBonusScore();
+			score = this.getNormalBonus();
 		} else {
-			return ultraBonusScore;
+			score = this.getExtraBonus();
 		}
+		
+		return (int) FloatMath.ceil(score);
+	}
+	
+	private float getExtraDiff() {
+		return 1 + SlimeFactory.GameInfo.getDifficulty() / 10f;
+	}
+	
+	private int getNormalBonus() {
+		return (int) FloatMath.ceil(this.getBonusScore() * this.getExtraDiff());
+	}
+	
+	private int getExtraBonus() {
+		return (int) FloatMath.ceil(ultraBonusScore * this.getExtraDiff());
 	}
 
 	@Override
@@ -56,6 +72,6 @@ public class SurvivalGame extends TimeAttackGame {
 			bonus = needed;
 		}
 		
-		return bonus * TimeAttackGame.bonusScore + sup * ultraBonusScore;
+		return bonus * this.getNormalBonus() + sup * this.getExtraBonus();
 	}
 }
