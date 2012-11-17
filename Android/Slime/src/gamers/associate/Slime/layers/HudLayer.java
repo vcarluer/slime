@@ -148,7 +148,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 		this.starSprite.setAnchorPoint(0, 0f);
 		this.addChild(this.starSprite);				
 				
-		this.setStarsCount();
+		// this.setStarsCount();
 	}
 	
 	private void setStarsCount() {
@@ -201,13 +201,6 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 	@Override
 	public void onExit() {
 		super.onExit();
-	}
-
-	public void goBack(Object sender) {
-		Level currentLevel = Level.get(LevelHome.Id, true, GamePlay.None);							
-		CCTransitionScene transition = CCFadeTransition.transition(0.5f, currentLevel.getScene());
-		CCDirector.sharedDirector().replaceScene(transition);
-//		Sounds.playMusic(R.raw.menumusic, true);
 	}
 	
 	public void goPause(Object sender) {

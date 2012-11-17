@@ -7,6 +7,7 @@ import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.custom.Slimy;
 import gamers.associate.Slime.items.custom.SlimySuccess;
 import gamers.associate.Slime.items.custom.Star;
+import gamers.associate.Slime.levels.GamePlay;
 
 import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCMoveBy;
@@ -20,6 +21,8 @@ import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.opengl.CCBitmapFontAtlas;
+import org.cocos2d.transitions.CCFadeTransition;
+import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
 
@@ -101,7 +104,12 @@ public class EndLevelLayer extends CCLayer {
 
 	public void goHome(Object sender) {
 		Sounds.playEffect(R.raw.menuselect);
-		Level.currentLevel.goHome();
+		if (Level.currentLevel.getGamePlay().getType() == GamePlay.Survival) {
+			CCTransitionScene transition = CCFadeTransition.transition(0.5f, SurvivalGameOverLayer.getScene());
+			CCDirector.sharedDirector().replaceScene(transition);
+		} else {
+			Level.currentLevel.goHome();
+		}
 	}
 	
 	/* (non-Javadoc)

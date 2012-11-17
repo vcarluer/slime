@@ -113,8 +113,8 @@ public class StoryWorldLayer extends CCLayer {
 	}
 
 	public void goBack(Object sender) {
-		Level currentLevel = Level.get(LevelHome.Id, true, GamePlay.None);
-		CCFadeTransition transition = CCFadeTransition.transition(0.5f, currentLevel.getScene());
+		Sounds.playEffect(R.raw.menuselect);
+		CCTransitionScene transition = CCFadeTransition.transition(1.0f, ChooseModeLayer.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
 	}
 	

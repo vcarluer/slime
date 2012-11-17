@@ -20,6 +20,7 @@ import org.cocos2d.actions.interval.CCMoveBy;
 import org.cocos2d.actions.interval.CCMoveTo;
 import org.cocos2d.actions.interval.CCRotateBy;
 import org.cocos2d.actions.interval.CCRotateTo;
+import org.cocos2d.actions.interval.CCScaleBy;
 import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.actions.tile.CCFadeOutDownTiles;
@@ -72,6 +73,7 @@ public class HomeLayer extends CCLayer {
 	private CCMenu shareMenu;
 	
 	private boolean nextDoNotStopMusic;
+	private float shareScale;
 	
 	private CCLayer top;
 	private static boolean firstLoadDone;
@@ -170,17 +172,28 @@ public class HomeLayer extends CCLayer {
 		float top = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY) / 2;
 		restartItem.setPosition(left, top);
 		this.restartMenu = CCMenu.menu(restartItem);		
-		this.addChild(this.restartMenu);
+//		this.addChild(this.restartMenu);
 		
 		// share button
-		CCSprite shareSpriteN = CCSprite.sprite("control-restart.png", true);
-		CCSprite shareSpriteS = CCSprite.sprite("control-restart.png", true);
+		CCSprite shareSpriteN = CCSprite.sprite("share.png");
+		CCSprite shareSpriteS = CCSprite.sprite("share.png");
+		shareSpriteN.setColor(SlimeFactory.ColorSlimeBorder);
+		shareSpriteS.setColor(SlimeFactory.ColorSlimeBorder);
 		CCMenuItemSprite shareItem = CCMenuItemSprite.item(shareSpriteN, shareSpriteS, this, "shareApp");
-		shareItem.setScale(PauseLayer.Scale);		
-		
-		float shareX = - CCDirector.sharedDirector().winSize().getWidth() / 2 +((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) / 2 ;
-		float shareY = - CCDirector.sharedDirector().winSize().getHeight() / 2 + ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY) / 2;
+	
+		shareScale = 1.0f * SlimeFactory.Density;
+		float shareX = - CCDirector.sharedDirector().winSize().getWidth() / 2 +((64 * shareScale) + PauseLayer.PaddingX) / 2 ;
+		float shareY = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((64 * shareScale) + PauseLayer.PaddingX) / 2;
 		shareItem.setPosition(shareX, shareY);
+		shareItem.setScale(shareScale);
+		
+		CCScaleBy scaleBy = CCScaleBy.action(0.3f, 0.3f);
+		CCScaleTo scaleTo = CCScaleTo.action(0.3f, this.shareScale);
+		CCDelayTime delay = CCDelayTime.action(2.0f);
+		CCSequence seq = CCSequence.actions(scaleBy, scaleTo, delay);
+		CCRepeatForever rep = CCRepeatForever.action(seq);
+		shareItem.runAction(rep);
+		
 		this.shareMenu = CCMenu.menu(shareItem);		
 		this.addChild(this.shareMenu);
 		
@@ -201,7 +214,7 @@ public class HomeLayer extends CCLayer {
 				CCDirector.sharedDirector().winSize().height / 2 + CCDirector.sharedDirector().winSize().getHeight() / 2 - this.lblLevel.getContentSize().height + PauseLayer.PaddingY
 				);
 		this.lblLevel.setColor(SlimeFactory.ColorSlime);
-		this.addChild(this.lblLevel);
+//		this.addChild(this.lblLevel);
 		
 		String score = String.valueOf(SlimeFactory.GameInfo.getTotalScore());
 		this.lblScore.setString(score.toUpperCase());
@@ -257,7 +270,6 @@ public class HomeLayer extends CCLayer {
 		
 		Sounds.playMusic(R.raw.menumusic, true);
 		
-		
 		this.temp();
 		
 		SlimeFactory.ContextActivity.hideAd();
@@ -268,39 +280,46 @@ public class HomeLayer extends CCLayer {
 		this.top = CCLayer.node();
 		this.addChild(this.top, 1);
 		this.top.addChild(this.titleSprite);
-		if (!firstLoadDone) {					
-			this.titleSprite.setPosition(CCDirector.sharedDirector().winSize().width / 2, CCDirector.sharedDirector().winSize().height / 2 + 115f);						
-			this.titleSprite.setScale(10f * SlimeFactory.SGSDensity);
-			// CCDelayTime delay = CCDelayTime.action(0.5f);
-			CCScaleTo sc = CCScaleTo.action(0.5f, 1f , 1f);
-			CCDelayTime d2 = CCDelayTime.action(2f);
-			CCCallFunc call = CCCallFunc.action(this, "endTitle");
-			
-			CCSequence act = CCSequence.actions(sc, d2, call);
-			this.titleSprite.runAction(act);
-			firstLoadDone = true;
-		} else {
-			float scale = 0.5f * SlimeFactory.SGSDensity;
-			this.titleSprite.setScale(scale);
-			this.titleSprite.setPosition(
-					CCDirector.sharedDirector().winSize().width - (this.titleSprite.getContentSize().width / 2) * scale - PauseLayer.PaddingX,
-					CCDirector.sharedDirector().winSize().height - (this.titleSprite.getContentSize().height / 2) * scale - PauseLayer.PaddingY
-					);
-			this.actionTitle();
-		}
+//		if (!firstLoadDone) {					
+//			this.titleSprite.setPosition(CCDirector.sharedDirector().winSize().width / 2, CCDirector.sharedDirector().winSize().height / 2 + 115f);						
+//			this.titleSprite.setScale(10f * SlimeFactory.SGSDensity);
+//			// CCDelayTime delay = CCDelayTime.action(0.5f);
+//			CCScaleTo sc = CCScaleTo.action(0.5f, 1f , 1f);
+//			CCDelayTime d2 = CCDelayTime.action(2f);
+//			CCCallFunc call = CCCallFunc.action(this, "endTitle");
+//			
+//			CCSequence act = CCSequence.actions(sc, d2, call);
+//			this.titleSprite.runAction(act);
+//			firstLoadDone = true;
+//		} else {
+//			float scale = 0.5f * SlimeFactory.SGSDensity;
+//			this.titleSprite.setScale(scale);
+//			this.titleSprite.setPosition(
+//					CCDirector.sharedDirector().winSize().width - (this.titleSprite.getContentSize().width / 2) * scale - PauseLayer.PaddingX,
+//					CCDirector.sharedDirector().winSize().height - (this.titleSprite.getContentSize().height / 2) * scale - PauseLayer.PaddingY
+//					);
+//			this.actionTitle();
+//		}
+		
+		this.titleSprite.setPosition(CCDirector.sharedDirector().winSize().width / 2, CCDirector.sharedDirector().winSize().height / 2 + 150f);						
+		this.titleSprite.setScale(10f * SlimeFactory.SGSDensity);
+		CCScaleTo sc = CCScaleTo.action(0.5f, 1f , 1f);
+		this.titleSprite.runAction(sc);
+		
+		this.actionTitle();
 	}
 	
 	public void endTitle() {
 		float scale = 0.5f  * SlimeFactory.SGSDensity;
-		CCMoveTo mt = CCMoveTo.action(0.2f, CGPoint.ccp(
-				CCDirector.sharedDirector().winSize().width - (this.titleSprite.getContentSize().width / 2) * scale - PauseLayer.PaddingX,
-				CCDirector.sharedDirector().winSize().height - (this.titleSprite.getContentSize().height / 2) * scale - PauseLayer.PaddingY
-				));
+//		CCMoveTo mt = CCMoveTo.action(0.2f, CGPoint.ccp(
+//				CCDirector.sharedDirector().winSize().width - (this.titleSprite.getContentSize().width / 2) * scale - PauseLayer.PaddingX,
+//				CCDirector.sharedDirector().winSize().height - (this.titleSprite.getContentSize().height / 2) * scale - PauseLayer.PaddingY
+//				));
 		CCScaleTo sc2 = CCScaleTo.action(0.2f, scale);
-		CCCallFunc call = CCCallFunc.action(this, "actionTitle");
-		CCSequence seq = CCSequence.actions(sc2, call);
-		this.titleSprite.runAction(mt);
-		this.titleSprite.runAction(seq);
+//		CCCallFunc call = CCCallFunc.action(this, "actionTitle");
+//		CCSequence seq = CCSequence.actions(sc2, call);
+//		this.titleSprite.runAction(mt);
+		this.titleSprite.runAction(sc2);
 	}
 	
 	public void actionTitle() {

@@ -115,10 +115,10 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 		
 		if (isEnable) {
 			CCSprite star = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);
-			star.setPosition(tmp2.x + this.normalMenuLabel.getContentSize().width + iconPadding + (Star.Default_Width / 2), tmp.y); // Use Normal x as reference not label
+			star.setPosition(tmp2.x + this.normalMenuLabel.getContentSize().width + padding + (Star.Default_Width / 2), tmp.y); // Use Normal x as reference not label
 			int score = SlimeFactory.GameInfo.getScore(diffRef); 
 			CCLabel scoreLabel = CCLabel.makeLabel(String.valueOf(score).toUpperCase(), "fonts/Slime.ttf", 60.0f);
-			scoreLabel.setPosition(tmp2.x + this.normalMenuLabel.getContentSize().width + iconPadding * 2 + Star.Default_Width, tmp.y); // Use Normal x as reference not label
+			scoreLabel.setPosition(tmp2.x + this.normalMenuLabel.getContentSize().width + padding * 2 + Star.Default_Width, tmp.y); // Use Normal x as reference not label
 			scoreLabel.setAnchorPoint(0, 0.5f);
 			this.addChild(star);
 			this.addChild(scoreLabel);
@@ -174,6 +174,7 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 	}
 	
 	public void goBack(Object sender) {
+		Sounds.playEffect(R.raw.menuselect);
 		CCTransitionScene transition = CCFadeTransition.transition(1.0f, ChooseModeLayer.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
 	}

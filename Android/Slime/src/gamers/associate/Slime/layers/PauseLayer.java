@@ -5,6 +5,7 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.custom.MenuSprite;
+import gamers.associate.Slime.levels.GamePlay;
 
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCFadeIn;
@@ -18,6 +19,8 @@ import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.transitions.CCFadeTransition;
+import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 
 public class PauseLayer extends CCLayer {
@@ -117,7 +120,12 @@ public class PauseLayer extends CCLayer {
 
 	public void goHome(Object sender) {
 		Sounds.playEffect(R.raw.menuselect);
-		Level.currentLevel.goHome();
+		if (Level.currentLevel.getGamePlay().getType() == GamePlay.Survival) {
+			CCTransitionScene transition = CCFadeTransition.transition(0.5f, SurvivalGameOverLayer.getScene());
+			CCDirector.sharedDirector().replaceScene(transition);
+		} else {
+			Level.currentLevel.goHome();
+		}		
 	}
 	
 	/* (non-Javadoc)

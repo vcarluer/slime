@@ -5,6 +5,7 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 
+import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.menus.CCMenu;
@@ -12,12 +13,14 @@ import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
+import org.cocos2d.types.ccColor3B;
 
 public class SurvivalGameOverLayer extends CCLayer {
 	private static CCScene scene;
 	private CCLabel scoreLabel;
 	private CCLabel gameOverLabel;
 	private CCMenu backMenu;
+	private CCLabel newHighScore;
 	
 	public static CCScene getScene() {
 		if (scene == null) {
@@ -31,19 +34,32 @@ public class SurvivalGameOverLayer extends CCLayer {
 	public SurvivalGameOverLayer() {
 		HomeLayer.addBkg(this, 800, 480, "game-over.png");
 		this.backMenu = HomeLayer.getBackButton(this, "goBack");
-		this.scoreLabel = CCLabel.makeLabel("Score: ", "fonts/Slime.ttf", 42 * SlimeFactory.Density);
-		this.gameOverLabel = CCLabel.makeLabel("GameOver!", "fonts/Slime.ttf", 84 * SlimeFactory.Density);
-		this.gameOverLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + 100);
+		this.scoreLabel = CCLabel.makeLabel("Score: ".toUpperCase(), "fonts/Slime.ttf", 42 * SlimeFactory.Density);
+		this.gameOverLabel = CCLabel.makeLabel("Game Over!".toUpperCase(), "fonts/Slime.ttf", 68 * SlimeFactory.Density);
+		this.gameOverLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + 100 * SlimeFactory.Density);
 		this.scoreLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY());
+		this.newHighScore = CCLabel.makeLabel(" ", "fonts/Slime.ttf", 42f* SlimeFactory.Density);
+		this.newHighScore.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() - 100 * SlimeFactory.Density);
+		this.newHighScore.setRotation(-15f);
+		this.newHighScore.setColor(ccColor3B.ccc3(255, 0, 0));
 		
 		this.addChild(this.gameOverLabel);
 		this.addChild(this.scoreLabel);
+		this.addChild(this.newHighScore);
 		
 		this.addChild(this.backMenu);
 	}
 	@Override
 	public void onEnter() {
-		this.scoreLabel.setString("Score: " + String.valueOf(SlimeFactory.GameInfo.getCurrentScore()));
+		this.scoreLabel.setString(("Score: " + String.valueOf(SlimeFactory.GameInfo.getCurrentScore())).toUpperCase());
+		if (SlimeFactory.GameInfo.isLastHighScore()) {
+			this.newHighScore.setString("New high score!".toUpperCase());
+			this.newHighScore.setScale(10);
+			CCScaleTo scaleTo = CCScaleTo.action(0.7f, 1.0f);
+			this.newHighScore.runAction(scaleTo);
+		} else {
+			this.newHighScore.setString(" ");
+		}
 		
 		super.onEnter();
 	}

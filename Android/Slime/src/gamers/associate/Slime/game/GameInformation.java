@@ -27,15 +27,25 @@ public class GameInformation {
 	private int previousDifficulty;
 	private String lastBgk;
 	private int totalCurrent;
+	private boolean lastIsHighScore;
+	private static boolean resetHighScores = SlimeFactory.resetHighScores;
 	
 	public GameInformation() {		
 		this.maxLevelDifficulty = this.levelDifficulty = LevelDifficulty.Easy;
 		this.setLevelNum(0);
 		this.load();
+		if (resetHighScores) {
+			this.totalScoreEasy = 0;
+			this.totalScoreNormal = 0;
+			this.totalScoreHard = 0;
+			this.totalScoreExtrem = 0;
+			this.store();
+		}
 	}
 	
 	private void setLevelDifficulty(int leveldifficulty) {		
 		this.lastScore = 0;
+		this.lastIsHighScore = false;
 		this.previousDifficulty = this.levelDifficulty;
 		this.levelDifficulty = leveldifficulty;
 		this.totalCurrent = 0;
@@ -319,9 +329,14 @@ public class GameInformation {
 		if (this.getDifficultyScore(diff) < this.totalCurrent) {
 			this.setTotalScore(this.totalCurrent, diff);
 			this.store();
-			better = true;
+			better = true;			
 		}
 			
+		this.lastIsHighScore = better;
 		return better;
+	}
+	
+	public boolean isLastHighScore() {
+		return this.lastIsHighScore;
 	}
 }

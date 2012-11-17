@@ -1,8 +1,10 @@
 package gamers.associate.Slime.layers;
 
+import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelHome;
@@ -59,16 +61,19 @@ public class ChooseModeLayer extends CCLayer {
 	}
 	
 	public void chooseStory(Object sender) {
+		Sounds.playEffect(R.raw.menuselect);
 		CCFadeTransition transition = CCFadeTransition.transition(0.5f, StoryWorldLayer.getScene(LevelDifficulty.Easy));
 		 CCDirector.sharedDirector().replaceScene(transition);
 	}
 	
 	public void chooseSurvival(Object sender) {
-		 CCFadeTransition transition = CCFadeTransition.transition(0.5f, ChooseSurvivalDifficultyLayer.getScene());
-		 CCDirector.sharedDirector().replaceScene(transition);
+		Sounds.playEffect(R.raw.menuselect);
+		CCFadeTransition transition = CCFadeTransition.transition(0.5f, ChooseSurvivalDifficultyLayer.getScene());
+		CCDirector.sharedDirector().replaceScene(transition);
 	}
 	
 	public void goHome(Object sender) {
+		Sounds.playEffect(R.raw.menuselect);
 		Level currentLevel = Level.get(LevelHome.Id, true, GamePlay.None);
 		CCFadeTransition transition = CCFadeTransition.transition(0.5f, currentLevel.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);

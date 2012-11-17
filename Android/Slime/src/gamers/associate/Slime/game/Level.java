@@ -364,7 +364,7 @@ public class Level implements IGameItemHandler {
 		// Set camera right based on screen size
 		this.attachLevelToCamera();
 		
-//		this.hudLayer.upudateStarsCount();
+		this.hudLayer.upudateStarsCount();
 		this.startLevel();
 	}	
 			
