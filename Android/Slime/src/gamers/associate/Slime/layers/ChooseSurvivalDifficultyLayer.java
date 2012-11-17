@@ -27,9 +27,9 @@ import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
 
 public class ChooseSurvivalDifficultyLayer extends CCLayer {
-	private static final float menuPadding = 200f;
+	private static final float menuPadding = 320f;
 	private static final float iconSizeReference = 87f;
-	private static float padding = 25f;
+	private static float padding = 150f;
 	private static float iconSize = 70f;
 	private static float iconPadding = 50f;
 	private static CCScene scene;
@@ -67,11 +67,13 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 		
 		this.addChild(HomeLayer.getBackButton(this, "goBack"));
 		
-		this.menu = CCMenu.menu(title, this.easyMenuLabel, this.normalMenuLabel, this.hardMenuLabel, this.extremMenuLabel);
-		this.menu.alignItemsVertically(padding);
+		this.menu = CCMenu.menu(this.easyMenuLabel, this.normalMenuLabel, this.hardMenuLabel, this.extremMenuLabel);
+		//this.menu = CCMenu.menu(this.easyMenuLabel, this.normalMenuLabel);
+		//this.menu.alignItemsVertically(padding);
+		this.menu.alignItemsHorizontally(padding);
 		this.menu.setPosition(CGPoint.make(
-				CCDirector.sharedDirector().winSize().getWidth() / 2 - menuPadding,
-				CCDirector.sharedDirector().winSize().getHeight() / 2
+				(CCDirector.sharedDirector().winSize().getWidth() / 4) + menuPadding ,
+				(CCDirector.sharedDirector().winSize().getHeight() / 10 )*7
 				));
 		this.addChild(this.menu);				
 	}
@@ -115,16 +117,22 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 		
 		if (isEnable) {
 			CCSprite star = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);
-			star.setPosition(tmp2.x + this.normalMenuLabel.getContentSize().width + padding + (Star.Default_Width / 2), tmp.y); // Use Normal x as reference not label
+			//star.setPosition(tmp2.x + this.normalMenuLabel.getContentSize().width + padding + (Star.Default_Width / 2), tmp.y);
+			star.setPosition(tmp.x - iconPadding - (iconSize / 2), tmp.y - iconSize); // Use Normal x as reference not label
 			int score = SlimeFactory.GameInfo.getScore(diffRef); 
 			CCLabel scoreLabel = CCLabel.makeLabel(String.valueOf(score).toUpperCase(), "fonts/Slime.ttf", 60.0f);
-			scoreLabel.setPosition(tmp2.x + this.normalMenuLabel.getContentSize().width + padding * 2 + Star.Default_Width, tmp.y); // Use Normal x as reference not label
+			scoreLabel.setPosition(tmp.x, tmp.y - iconSize); // Use Normal x as reference not label
 			scoreLabel.setAnchorPoint(0, 0.5f);
+			CCLabel levelLabel = CCLabel.makeLabel("10 level in a row!", "fonts/Slime.ttf", 30.0f);
+			levelLabel.setPosition(tmp.x - iconPadding - (iconSize / 2), tmp.y - scoreLabel.getContentSize().height - iconSize); // Use Normal x as reference not label
+			levelLabel.setAnchorPoint(0, 0.5f);			
 			this.addChild(star);
 			this.addChild(scoreLabel);
+			this.addChild(levelLabel);
 			
 			this.toDestroy.add(star);
 			this.toDestroy.add(scoreLabel);
+			this.toDestroy.add(levelLabel);
 		}
 		
 		this.addChild(spr);
@@ -151,7 +159,7 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 	}
 	
 	private CCLabel createLabel(String text) {
-		CCLabel label = CCLabel.makeLabel(text.toUpperCase(), "fonts/Slime.ttf", 60.0f);
+		CCLabel label = CCLabel.makeLabel(text.toUpperCase(), "fonts/Slime.ttf", 40.0f);
 		// label.setColor(ccColor3B.ccc3(32,181,79));
 		label.setColor(ccColor3B.ccWHITE);
 		return label;
