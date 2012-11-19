@@ -85,25 +85,25 @@ public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {
 	}
 
 	protected void generateBeforeGP(BlocDirection constrained, boolean isBoss) {
-		Log.d(Slime.TAG, "Picking start node with constraint " + String.valueOf(constrained));
+		SlimeFactory.Log.d(Slime.TAG, "Picking start node with constraint " + String.valueOf(constrained));
 		LevelGenNode pick = this.pickStartConstrained(constrained);
-		Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
+		SlimeFactory.Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
 		this.handlePick(pick, true);		
 		while (this.totalCount < this.getLvlBlockCount()) {
-			Log.d(Slime.TAG, "Picking next node with constraint " + String.valueOf(constrained));
+			SlimeFactory.Log.d(Slime.TAG, "Picking next node with constraint " + String.valueOf(constrained));
 			pick = this.pickNextConstrained(pick, constrained);
-			Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
+			SlimeFactory.Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
 			this.handlePick(pick, true);	
 		}
 		
-		Log.d(Slime.TAG, "Picking end node");
+		SlimeFactory.Log.d(Slime.TAG, "Picking end node");
 		if (isBoss) {
 			pick = this.pickBoss(pick);
 		} else {
 			pick = this.pickEnd(pick);
 		}
 		
-		Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
+		SlimeFactory.Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
 		this.handlePick(pick, false);
 	}
 	

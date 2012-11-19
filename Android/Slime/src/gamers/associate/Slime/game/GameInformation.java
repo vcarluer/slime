@@ -158,7 +158,7 @@ public class GameInformation {
 	public void store() {
 		BufferedWriter buffWriter = null;
 		try {
-			Log.d(Slime.TAG, "Storing Game Info in " + fileName);
+			SlimeFactory.Log.d(Slime.TAG, "Storing Game Info in " + fileName);
 			FileOutputStream fos = SlimeFactory.ContextActivity.openFileOutput(fileName, Context.MODE_PRIVATE);
 			OutputStreamWriter streamWriter = new OutputStreamWriter(fos);
 			buffWriter = new BufferedWriter(streamWriter);
@@ -178,10 +178,10 @@ public class GameInformation {
 			buffWriter.newLine();
 			buffWriter.write(this.lastBgk);
 		} catch (FileNotFoundException ex) {
-			Log.e(Slime.TAG, "ERROR, file not found " + fileName);
+			SlimeFactory.Log.e(Slime.TAG, "ERROR, file not found " + fileName);
 			ex.printStackTrace();
         } catch (IOException e1) {
-			Log.e(Slime.TAG, "ERROR during opening or write of " + fileName);
+			SlimeFactory.Log.e(Slime.TAG, "ERROR during opening or write of " + fileName);
 			e1.printStackTrace();
         } finally {
         	 //Close the BufferedWriter
@@ -191,7 +191,7 @@ public class GameInformation {
                 	buffWriter.close();
                 }
             } catch (IOException ex) {
-            	Log.e(Slime.TAG, "ERROR during close of " + fileName);
+            	SlimeFactory.Log.e(Slime.TAG, "ERROR during close of " + fileName);
                 ex.printStackTrace();
             }
         }
@@ -202,7 +202,7 @@ public class GameInformation {
 		String fileName = this.fileName;
 		try {
 			if (SlimeFactory.ContextActivity.getFileStreamPath(fileName).exists()) {
-				Log.d(Slime.TAG, "Loading User Info from " + fileName);
+				SlimeFactory.Log.d(Slime.TAG, "Loading User Info from " + fileName);
 				inputStream = SlimeFactory.ContextActivity.openFileInput(fileName);
 				InputStreamReader inputreader = new InputStreamReader(inputStream);
 				BufferedReader buffreader = new BufferedReader(inputreader);
@@ -242,12 +242,12 @@ public class GameInformation {
 								break;
 							}												
 						} catch (Exception e) {
-							Log.e(Slime.TAG, "ERROR during read of " + fileName + " line " + String.valueOf(i));
+							SlimeFactory.Log.e(Slime.TAG, "ERROR during read of " + fileName + " line " + String.valueOf(i));
 							e.printStackTrace();
 						}									
 					}
 				} catch (IOException e) {
-					Log.e(Slime.TAG, "ERROR during read of " + fileName + " line " + String.valueOf(i));
+					SlimeFactory.Log.e(Slime.TAG, "ERROR during read of " + fileName + " line " + String.valueOf(i));
 					e.printStackTrace();
 				} finally {
 					if (buffreader != null) {
@@ -256,7 +256,7 @@ public class GameInformation {
 				}
 			}
 		} catch (IOException e1) {
-			Log.e(Slime.TAG, "ERROR during opening of " + fileName);
+			SlimeFactory.Log.e(Slime.TAG, "ERROR during opening of " + fileName);
 			e1.printStackTrace();
 		}	
 	}

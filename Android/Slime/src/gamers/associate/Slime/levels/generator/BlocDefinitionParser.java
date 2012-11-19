@@ -66,7 +66,7 @@ public class BlocDefinitionParser extends BlocDefinition {
 	public void buildLevel(Level level) {
 		InputStream inputStream;
 		try {
-			Log.d(Slime.TAG, "Loading level from " + this.getResourceName());
+			SlimeFactory.Log.d(Slime.TAG, "Loading level from " + this.getResourceName());
 			if (this.isLocalStorage) {
 				inputStream = SlimeFactory.ContextActivity.openFileInput(this.getResourceName());
 			} else {
@@ -82,13 +82,13 @@ public class BlocDefinitionParser extends BlocDefinition {
 				while (( line = buffreader.readLine()) != null) {
 					try {
 						i++;
-						Log.d(Slime.TAG, line);
+						SlimeFactory.Log.d(Slime.TAG, line);
 						String itemType = this.getItemType(line);
 						if (itemType == StarDef.Handled_Def) {
 							if (this.isStarBlock()) {
 								this.HandleLine(level, line);
 							} else {
-								Log.d(Slime.TAG, "Skipping star line " + String.valueOf(i));
+								SlimeFactory.Log.d(Slime.TAG, "Skipping star line " + String.valueOf(i));
 							}
 						} else {
 							if (this.hazardItemsDef.contains(itemType)) {
@@ -98,14 +98,14 @@ public class BlocDefinitionParser extends BlocDefinition {
 							}
 						}						
 					} catch (Exception e) {
-						Log.e(Slime.TAG, "ERROR during read of " + this.getResourceName() + " line " + String.valueOf(i));
+						SlimeFactory.Log.e(Slime.TAG, "ERROR during read of " + this.getResourceName() + " line " + String.valueOf(i));
 						e.printStackTrace();
 					}										
 				}
 				
 				this.pickHazardLines(level);
 			} catch (IOException e) {
-				Log.e(Slime.TAG, "ERROR during read of " + this.getResourceName() + " line " + String.valueOf(i));
+				SlimeFactory.Log.e(Slime.TAG, "ERROR during read of " + this.getResourceName() + " line " + String.valueOf(i));
 				e.printStackTrace();
 			} finally {
 				if (buffreader != null) {
@@ -113,7 +113,7 @@ public class BlocDefinitionParser extends BlocDefinition {
 				}
 			}
 		} catch (IOException e1) {
-			Log.e(Slime.TAG, "ERROR during opening of " + this.getResourceName());
+			SlimeFactory.Log.e(Slime.TAG, "ERROR during opening of " + this.getResourceName());
 			e1.printStackTrace();
 		}
 		
@@ -133,7 +133,7 @@ public class BlocDefinitionParser extends BlocDefinition {
 				try {
 					this.HandleLine(level, line);					
 				} catch (Exception e) {
-					Log.e(Slime.TAG, "Error during hazard pick");
+					SlimeFactory.Log.e(Slime.TAG, "Error during hazard pick");
 					e.printStackTrace();
 				}
 			}
@@ -165,7 +165,7 @@ public class BlocDefinitionParser extends BlocDefinition {
 				this.pickAndHandle(nbPick, lines, level);
 			}
 		} catch (Exception e) {
-			Log.e(Slime.TAG, "Error during hazard pick");
+			SlimeFactory.Log.e(Slime.TAG, "Error during hazard pick");
 			e.printStackTrace();
 		}		
 	}

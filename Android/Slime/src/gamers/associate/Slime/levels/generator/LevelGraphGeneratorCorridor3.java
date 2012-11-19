@@ -1,11 +1,11 @@
 package gamers.associate.Slime.levels.generator;
 
+import gamers.associate.Slime.Slime;
+import gamers.associate.Slime.game.SlimeFactory;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import gamers.associate.Slime.Slime;
-import android.util.Log;
 
 /* Generates corridor in 2 steps */
 public class LevelGraphGeneratorCorridor3 extends LevelGraphGeneratorCorridor2 {
@@ -31,7 +31,7 @@ public class LevelGraphGeneratorCorridor3 extends LevelGraphGeneratorCorridor2 {
 			LevelGenNode pick = this.pick(nmi.isStart, nmi.isEnd && !isBoss, nmi.isEnd && isBoss, goTop, goRight, goBottom, goLeft);
 			
 			if (pick != null) {
-				Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
+				SlimeFactory.Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
 				this.handlePick(pick, nmi.position.x, nmi.position.y);
 			}
 		}
@@ -39,7 +39,7 @@ public class LevelGraphGeneratorCorridor3 extends LevelGraphGeneratorCorridor2 {
 
 	protected void generateMap(BlocDirection constrained) {
 		this.nodeMap.clear();
-		Log.d(Slime.TAG, "Generating corridor in 2 steps. Step 1: picking map");
+		SlimeFactory.Log.d(Slime.TAG, "Generating corridor in 2 steps. Step 1: picking map");
 		NodeMapInfo nmi = new NodeMapInfo(0, 0);
 		nmi.isStart = true;
 		this.nodeMap.put(nmi.position, nmi);

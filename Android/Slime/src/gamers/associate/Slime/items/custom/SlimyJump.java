@@ -505,7 +505,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 								}								
 							}
 						} catch (Exception ex) {
-							Log.e(Slime.TAG, "Error during read of contact manifold in SlimyJump");
+							SlimeFactory.Log.e(Slime.TAG, "Error during read of contact manifold in SlimyJump");
 						}
 					}
 					

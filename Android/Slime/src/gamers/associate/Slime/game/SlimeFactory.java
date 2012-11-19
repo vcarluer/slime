@@ -69,6 +69,7 @@ public abstract class SlimeFactory {
 	public static final boolean IsForceMaxWorld = false;
 	public static final int MaxWorld = LevelDifficulty.Extrem; // Should be world here?
 	public static final boolean resetHighScores = false;
+	public static final boolean LogOn = true;
 	
 	// end debug ---
 	private static final float SGSDensityBase = 1.5f; // Samsung Galaxy S density
@@ -280,5 +281,19 @@ public abstract class SlimeFactory {
 	
 	public static final float getScreenMidY() {
 		return CCDirector.sharedDirector().winSize().getHeight() / 2f;
+	}
+	
+	public static class Log {
+		public static void d(String tag, String line) {
+			if (LogOn) {
+				android.util.Log.d(Slime.TAG, line);
+			}			
+		}
+		
+		public static void e(String tag, String line) {
+			if (LogOn) {
+				android.util.Log.e(Slime.TAG, line);
+			}			
+		}
 	}
 }

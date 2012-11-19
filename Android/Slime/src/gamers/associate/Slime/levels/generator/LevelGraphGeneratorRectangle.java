@@ -27,16 +27,16 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 		this.rightCount = 0;
 		this.topCount = 0;
 		LevelGenNode pick = null;		
-		Log.d(Slime.TAG, "Picking start node");
+		SlimeFactory.Log.d(Slime.TAG, "Picking start node");
 		pick = this.pickStart();		
-		Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
+		SlimeFactory.Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
 		this.handlePick(pick, false);
 		colCount++;
 		this.rightCount++;
 		while (this.currentComplexity < this.currentMaxComplexity) {
-			Log.d(Slime.TAG, "Picking next ground");
+			SlimeFactory.Log.d(Slime.TAG, "Picking next ground");
 			pick = this.pickNextGround();
-			Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
+			SlimeFactory.Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
 			this.handlePick(pick, false);
 			colCount++;
 			this.rightCount++;
@@ -47,14 +47,14 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 		int rowExit = this.randomGenerator.nextInt(rowCount) + 1;
 		
 		if (rowExit == rowNum) {
-			Log.d(Slime.TAG, "Picking EXIT ground line right corner");
+			SlimeFactory.Log.d(Slime.TAG, "Picking EXIT ground line right corner");
 			pick = this.pickExitGroundRightCorner();
 		} else {
-			Log.d(Slime.TAG, "Picking ground line right corner");
+			SlimeFactory.Log.d(Slime.TAG, "Picking ground line right corner");
 			pick = this.pickGroundRightCorner();
 		}
 		
-		Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
+		SlimeFactory.Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
 		this.handlePick(pick, false);
 		colCount++;		
 		// First line picked
@@ -65,29 +65,29 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 			
 			int colNum = 1;
 			this.rightCount = 0;
-			Log.d(Slime.TAG, "Picking left middle block");
+			SlimeFactory.Log.d(Slime.TAG, "Picking left middle block");
 			pick = this.pickMiddleLeft();
-			Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
+			SlimeFactory.Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
 			this.handlePick(pick, false);
 			colNum++;
 			this.rightCount++;
 			while (colNum < colCount) {
-				Log.d(Slime.TAG, "Picking middle block");
+				SlimeFactory.Log.d(Slime.TAG, "Picking middle block");
 				pick = this.pickMiddle();
-				Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
+				SlimeFactory.Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
 				this.handlePick(pick, false);
 				colNum++;
 				this.rightCount++;
 			}
 			
 			if (rowNum == rowExit) {
-				Log.d(Slime.TAG, "Picking EXIT right middle block");
+				SlimeFactory.Log.d(Slime.TAG, "Picking EXIT right middle block");
 				pick = this.pickExitMiddleRight();
 			} else {
-				Log.d(Slime.TAG, "Picking right middle block");
+				SlimeFactory.Log.d(Slime.TAG, "Picking right middle block");
 				pick = this.pickMiddleRight();
 			}			
-			Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
+			SlimeFactory.Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
 			this.handlePick(pick, false);
 			
 			rowNum++;
@@ -96,29 +96,29 @@ public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 		
 		int colNum = 1;
 		this.rightCount = 0;
-		Log.d(Slime.TAG, "Picking left top block");
+		SlimeFactory.Log.d(Slime.TAG, "Picking left top block");
 		pick = this.pickTopLeft();
-		Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
+		SlimeFactory.Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
 		this.handlePick(pick, false);
 		colNum++;
 		this.rightCount++;
 		while (colNum < colCount) {
-			Log.d(Slime.TAG, "Picking middle block");
+			SlimeFactory.Log.d(Slime.TAG, "Picking middle block");
 			pick = this.pickTopMiddle();
-			Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
+			SlimeFactory.Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
 			this.handlePick(pick, false);
 			colNum++;
 			this.rightCount++;
 		}
 		
 		if (rowNum == rowExit) {
-			Log.d(Slime.TAG, "Picking EXIT right middle block");
+			SlimeFactory.Log.d(Slime.TAG, "Picking EXIT right middle block");
 			pick = this.pickExitTopRight();
 		} else {
-			Log.d(Slime.TAG, "Picking right middle block");
+			SlimeFactory.Log.d(Slime.TAG, "Picking right middle block");
 			pick = this.pickTopRight();
 		}			
-		Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
+		SlimeFactory.Log.d(Slime.TAG, "picked: " + String.valueOf(pick.getId()));
 		this.handlePick(pick, false);
 	}
 

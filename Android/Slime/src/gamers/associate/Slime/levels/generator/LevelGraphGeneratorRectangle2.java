@@ -58,7 +58,7 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 			starBlocCount--;
 		}
 		
-		Log.d(Slime.TAG, "Picking stars: " + String.valueOf(starBlocCount) + " in " + String.valueOf(totalBlocs) + "blocks");
+		SlimeFactory.Log.d(Slime.TAG, "Picking stars: " + String.valueOf(starBlocCount) + " in " + String.valueOf(totalBlocs) + "blocks");
 
 		this.starList.clear();
 		this.allStars.clear();
@@ -73,10 +73,10 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 		}
 		
 		this.starList.add(startStar);
-		Log.d(Slime.TAG, "star inverse of star in " + String.valueOf(startStar));
+		SlimeFactory.Log.d(Slime.TAG, "star inverse of star in " + String.valueOf(startStar));
 		if (!isBoss) {
 			this.starList.add(endStar);
-			Log.d(Slime.TAG, "star inverse of end in " + String.valueOf(endStar));
+			SlimeFactory.Log.d(Slime.TAG, "star inverse of end in " + String.valueOf(endStar));
 		}
 		
 		LevelGenNode pick = null;
@@ -169,10 +169,10 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 				if (pick != null) {					
 					// reset always (previous may have change it)
 					starIdx = row * lvlWidth + col;
-					Log.d(Slime.TAG, "Block star idx: " + String.valueOf(starIdx));
+					SlimeFactory.Log.d(Slime.TAG, "Block star idx: " + String.valueOf(starIdx));
 					pick.setStarBlock(this.starList.contains(starIdx));
 					if (pick.isStarBlock()) {
-						Log.d(Slime.TAG, "Stars in block " + pick.getBlocDefinition().getResourceName());
+						SlimeFactory.Log.d(Slime.TAG, "Stars in block " + pick.getBlocDefinition().getResourceName());
 					}
 					this.handlePick(pick, false);
 				}
@@ -191,7 +191,7 @@ public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle 
 	private void pickStar(int starBlocCount, List<Integer> allStars,
 			HashSet<Integer> starList) {
 		int idx = rand.nextInt(allStars.size());
-		Log.d(Slime.TAG, "star in " + String.valueOf(allStars.get(idx)));
+		SlimeFactory.Log.d(Slime.TAG, "star in " + String.valueOf(allStars.get(idx)));
 		starList.add(allStars.get(idx));
 		allStars.remove(idx);
 		starBlocCount--;

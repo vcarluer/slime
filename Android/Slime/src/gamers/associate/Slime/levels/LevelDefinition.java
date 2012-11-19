@@ -123,7 +123,7 @@ public abstract class LevelDefinition {
 	private void storeUserInfo() {
 		BufferedWriter buffWriter = null;
 		try {
-			Log.d(Slime.TAG, "Storing User Info in " + this.id);
+			SlimeFactory.Log.d(Slime.TAG, "Storing User Info in " + this.id);
 			FileOutputStream fos = SlimeFactory.ContextActivity.openFileOutput(this.id, Context.MODE_PRIVATE);
 			OutputStreamWriter streamWriter = new OutputStreamWriter(fos);
 			buffWriter = new BufferedWriter(streamWriter);
@@ -137,10 +137,10 @@ public abstract class LevelDefinition {
 			buffWriter.newLine();
 			this.storeUserInfoNext(buffWriter);
 		} catch (FileNotFoundException ex) {
-			Log.e(Slime.TAG, "ERROR, file not found " + this.id);
+			SlimeFactory.Log.e(Slime.TAG, "ERROR, file not found " + this.id);
 			ex.printStackTrace();
         } catch (IOException e1) {
-			Log.e(Slime.TAG, "ERROR during opening or write of " + this.id);
+			SlimeFactory.Log.e(Slime.TAG, "ERROR during opening or write of " + this.id);
 			e1.printStackTrace();
         } finally {
         	 //Close the BufferedWriter
@@ -150,7 +150,7 @@ public abstract class LevelDefinition {
                 	buffWriter.close();
                 }
             } catch (IOException ex) {
-            	Log.e(Slime.TAG, "ERROR during close of " + this.id);
+            	SlimeFactory.Log.e(Slime.TAG, "ERROR during close of " + this.id);
                 ex.printStackTrace();
             }
         }
@@ -163,7 +163,7 @@ public abstract class LevelDefinition {
 		java.io.InputStream inputStream;
 		String fileName = this.id;
 		try {			
-			Log.d(Slime.TAG, "Loading User Info from " + fileName);
+			SlimeFactory.Log.d(Slime.TAG, "Loading User Info from " + fileName);
 			inputStream = SlimeFactory.ContextActivity.openFileInput(fileName);
 			InputStreamReader inputreader = new InputStreamReader(inputStream);
 			BufferedReader buffreader = new BufferedReader(inputreader);
@@ -192,12 +192,12 @@ public abstract class LevelDefinition {
 							break;
 						}												
 					} catch (Exception e) {
-						Log.e(Slime.TAG, "ERROR during read of " + fileName + " line " + String.valueOf(i));
+						SlimeFactory.Log.e(Slime.TAG, "ERROR during read of " + fileName + " line " + String.valueOf(i));
 						e.printStackTrace();
 					}									
 				}
 			} catch (IOException e) {
-				Log.e(Slime.TAG, "ERROR during read of " + fileName + " line " + String.valueOf(i));
+				SlimeFactory.Log.e(Slime.TAG, "ERROR during read of " + fileName + " line " + String.valueOf(i));
 				e.printStackTrace();
 			} finally {
 				if (buffreader != null) {
@@ -205,7 +205,7 @@ public abstract class LevelDefinition {
 				}
 			}
 		} catch (IOException e1) {
-			Log.e(Slime.TAG, "ERROR during opening of " + fileName);
+			SlimeFactory.Log.e(Slime.TAG, "ERROR during opening of " + fileName);
 			e1.printStackTrace();
 		}	
 	}

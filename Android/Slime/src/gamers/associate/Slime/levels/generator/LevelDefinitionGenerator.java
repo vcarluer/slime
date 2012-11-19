@@ -61,7 +61,7 @@ public class LevelDefinitionGenerator extends LevelDefinition {
 
 	public void setComplexity(int complexity) {
 		this.complexity = complexity;
-		Log.d(Slime.TAG, "Complexity set: " + this.complexity);
+		SlimeFactory.Log.d(Slime.TAG, "Complexity set: " + this.complexity);
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class LevelDefinitionGenerator extends LevelDefinition {
 			buffWriter.write(String.valueOf(this.complexity));
 			buffWriter.newLine();
 		} catch (IOException e) {
-			Log.e(Slime.TAG, "ERROR during write of complexity " + String.valueOf(this.complexity));
+			SlimeFactory.Log.e(Slime.TAG, "ERROR during write of complexity " + String.valueOf(this.complexity));
 			throw e;
 		}
 	}

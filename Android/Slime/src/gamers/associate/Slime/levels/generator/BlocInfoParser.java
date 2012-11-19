@@ -31,7 +31,7 @@ public class BlocInfoParser {
 				}
 			}			
 		} catch (IOException e) {
-			Log.e(Slime.TAG, "Error during read of Blocs definition in " + Generator.getAssetsBase() + ", number: " + String.valueOf(i));
+			SlimeFactory.Log.e(Slime.TAG, "Error during read of Blocs definition in " + Generator.getAssetsBase() + ", number: " + String.valueOf(i));
 			e.printStackTrace();
 		}
 	}
@@ -40,7 +40,7 @@ public class BlocInfoParser {
 		Generator = generator;
 		InputStream inputStream;
 		try {
-			Log.d(Slime.TAG, "Loading blocInfo from " + resourcePath);			
+			SlimeFactory.Log.d(Slime.TAG, "Loading blocInfo from " + resourcePath);			
 			inputStream = SlimeFactory.ContextActivity.getAssets().open(resourcePath);
 			InputStreamReader inputreader = new InputStreamReader(inputStream);
 			BufferedReader buffreader = new BufferedReader(inputreader);
@@ -55,18 +55,18 @@ public class BlocInfoParser {
 						String[] items = line.split(";", -1);		
 						String itemType = items[0];
 						if (itemType.equals(BlocInfoDef.Handled_Info)) {
-							Log.d(Slime.TAG, line);
+							SlimeFactory.Log.d(Slime.TAG, line);
 							BlocInfoDef blocDef = new BlocInfoDef();
 							blocDef.parse(line);							
 							blocDef.createItem(resourcePath);
 						}
 					} catch (Exception e) {
-						Log.e(Slime.TAG, "ERROR during read of " + resourcePath + " line " + String.valueOf(i));
+						SlimeFactory.Log.e(Slime.TAG, "ERROR during read of " + resourcePath + " line " + String.valueOf(i));
 						e.printStackTrace();
 					}					
 				}
 			} catch (IOException e) {
-				Log.e(Slime.TAG, "ERROR during read of " + resourcePath + " line " + String.valueOf(i));
+				SlimeFactory.Log.e(Slime.TAG, "ERROR during read of " + resourcePath + " line " + String.valueOf(i));
 				e.printStackTrace();
 			} finally {
 				if (buffreader != null) {
@@ -74,7 +74,7 @@ public class BlocInfoParser {
 				}
 			}
 		} catch (IOException e1) {
-			Log.e(Slime.TAG, "ERROR during opening of " + resourcePath);
+			SlimeFactory.Log.e(Slime.TAG, "ERROR during opening of " + resourcePath);
 			e1.printStackTrace();
 		}
 	}

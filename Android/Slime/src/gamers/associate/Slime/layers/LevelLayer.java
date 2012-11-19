@@ -3,6 +3,7 @@ package gamers.associate.Slime.layers;
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.CameraManager;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.SlimeFactory;
 
 import java.util.ArrayList;
 
@@ -112,7 +113,7 @@ public class LevelLayer extends CCLayer {
 			}
 		}
 		catch (Exception ex) {
-			Log.e(Slime.TAG, "ERROR during ccTouchesMoved");
+			SlimeFactory.Log.e(Slime.TAG, "ERROR during ccTouchesMoved");
 		}
 		
 		return CCTouchDispatcher.kEventHandled;
@@ -171,7 +172,7 @@ public class LevelLayer extends CCLayer {
 			}
 		}
 		catch (Exception ex) {
-			Log.e(Slime.TAG, "ERROR during ccTouchesEnded");
+			SlimeFactory.Log.e(Slime.TAG, "ERROR during ccTouchesEnded");
 		}
 		
         return CCTouchDispatcher.kEventHandled;
@@ -221,7 +222,7 @@ public class LevelLayer extends CCLayer {
 			}
 		}
 		catch (Exception ex) {
-			Log.e(Slime.TAG, "ERROR during ccTouchesBegan");
+			SlimeFactory.Log.e(Slime.TAG, "ERROR during ccTouchesBegan");
 		}
 		
 		return CCTouchDispatcher.kEventHandled;		

@@ -2,6 +2,7 @@ package gamers.associate.Slime.levels.itemdef;
 
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.levels.generator.BlocDefinition;
@@ -123,7 +124,7 @@ public abstract class ItemDefinition {
 			this.parseNext(infos, cpt);
 		}
 		catch (Exception ex) {
-			Log.e(Slime.TAG, "BAD FORMAT for item definition " + this.getType());
+			SlimeFactory.Log.e(Slime.TAG, "BAD FORMAT for item definition " + this.getType());
 			throw ex;
 		}
 	}
@@ -232,10 +233,10 @@ public abstract class ItemDefinition {
 			line = this.writeNext(line);
 
 			writer.write(line);
-			Log.d(Slime.TAG, line);
+			SlimeFactory.Log.d(Slime.TAG, line);
 			writer.newLine();
 		} catch (IOException e) {
-			Log.e(Slime.TAG, "ERROR during write of line");
+			SlimeFactory.Log.e(Slime.TAG, "ERROR during write of line");
 			throw e;
 		}
 			

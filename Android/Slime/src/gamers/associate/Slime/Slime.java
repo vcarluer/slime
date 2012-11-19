@@ -89,9 +89,9 @@ public class Slime extends Activity {
         // until the ad is loaded.
         layout.addView(adView);
         
-//        Log.d(Slime.TAG, "mGLSurfaceView isHardwareAccelerated(): " + mGLSurfaceView.isHardwareAccelerated());
-//        Log.d(Slime.TAG, "adView isHardwareAccelerated(): " + adView.isHardwareAccelerated());
-        //Log.d(Slime.TAG, "layout isHardwareAccelerated(): " + layout.isHardwareAccelerated());
+//        SlimeFactory.Log.d(Slime.TAG, "mGLSurfaceView isHardwareAccelerated(): " + mGLSurfaceView.isHardwareAccelerated());
+//        SlimeFactory.Log.d(Slime.TAG, "adView isHardwareAccelerated(): " + adView.isHardwareAccelerated());
+        //SlimeFactory.Log.d(Slime.TAG, "layout isHardwareAccelerated(): " + layout.isHardwareAccelerated());
 
         this.mHandler = new Handler(){
             @Override
@@ -120,7 +120,7 @@ public class Slime extends Activity {
         
         SlimeFactory.ContextActivity = this;
         SlimeFactory.setDensity(this.getResources().getDisplayMetrics().density);
-        Log.d(Slime.TAG, "Density: " + String.valueOf(SlimeFactory.Density));
+        SlimeFactory.Log.d(Slime.TAG, "Density: " + String.valueOf(SlimeFactory.Density));
         
      // attach the OpenGL to a window
         // View glView = findViewById(R.id.glsurface);
