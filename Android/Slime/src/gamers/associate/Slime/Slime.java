@@ -179,7 +179,7 @@ public class Slime extends Activity {
     	this.nextAdInternal();    	
     }
     
-    public void showAd() {
+    public void showAd() {    	
     	this.ad(SHOW_AD);
     }
     
@@ -265,7 +265,10 @@ public class Slime extends Activity {
         // Destroy here, world and game items?
         
      // Destroy the AdView.
-        adView.destroy();        
+        if (AdOn) {
+        	adView.destroy();
+        }
+               
         // No more needed if rotation works:
         /*SpriteSheetFactory.destroy();
         SlimeFactory.destroyAll();*/
