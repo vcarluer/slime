@@ -78,44 +78,13 @@ public class Slime extends Activity {
         RelativeLayout layout = (RelativeLayout) this.findViewById(R.id.mainLayout);        
         layout.addView(this.mGLSurfaceView);
         
-        // Create an ad.
-        adView = new AdView(this, AdSize.BANNER, AdMobPublisherId);
-        FrameLayout.LayoutParams adsParams =new FrameLayout.LayoutParams(
-        		FrameLayout.LayoutParams.FILL_PARENT, FrameLayout.LayoutParams.FILL_PARENT);        
-        adView.setLayoutParams(adsParams);
-        adView.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL); 
-        // Add the AdView to the view hierarchy. The view will have no size
-        // until the ad is loaded.
-        layout.addView(adView);
+        if (AdOn) {
+        	adAdView(layout);
+        }        
         
 //        SlimeFactory.Log.d(Slime.TAG, "mGLSurfaceView isHardwareAccelerated(): " + mGLSurfaceView.isHardwareAccelerated());
 //        SlimeFactory.Log.d(Slime.TAG, "adView isHardwareAccelerated(): " + adView.isHardwareAccelerated());
         //SlimeFactory.Log.d(Slime.TAG, "layout isHardwareAccelerated(): " + layout.isHardwareAccelerated());
-
-        this.mHandler = new Handler(){
-            @Override
-            public void handleMessage(Message msg) {
-	            	switch(msg.what)
-	    	        {
-	    	        case SHOW_AD:	        
-	    	            showAdInternal();
-	    	            break;
-	    	        case HIDE_AD:
-	    	            hideAdInternal();
-	    	            break;
-	    	        case NEXT_AD:
-	    	        	nextAdInternal();
-	    	        	break;
-	    	        case SHOW_NEXT_AD:
-	    	        	showAndNextAdInternal();
-	    	        	break;
-	    	        default:
-	    	            break;
-	    	        }
-			    }
-        };
-
-        this.hideAdInternal();
         
         SlimeFactory.ContextActivity = this;
         SlimeFactory.setDensity(this.getResources().getDisplayMetrics().density);
@@ -143,7 +112,44 @@ public class Slime extends Activity {
 		
 		// Make the Scene active		
 		CCDirector.sharedDirector().runWithScene(this.scene);
-    }    
+    }
+
+	protected void adAdView(RelativeLayout layout) {
+		// Create an ad.
+        adView = new AdView(this, AdSize.BANNER, AdMobPublisherId);
+        FrameLayout.LayoutParams adsParams =new FrameLayout.LayoutParams(
+        		FrameLayout.LayoutParams.FILL_PARENT, FrameLayout.LayoutParams.FILL_PARENT);        
+        adView.setLayoutParams(adsParams);
+        adView.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL); 
+        // Add the AdView to the view hierarchy. The view will have no size
+        // until the ad is loaded.
+        layout.addView(adView);
+        
+        this.mHandler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+	            	switch(msg.what)
+	    	        {
+	    	        case SHOW_AD:	        
+	    	            showAdInternal();
+	    	            break;
+	    	        case HIDE_AD:
+	    	            hideAdInternal();
+	    	            break;
+	    	        case NEXT_AD:
+	    	        	nextAdInternal();
+	    	        	break;
+	    	        case SHOW_NEXT_AD:
+	    	        	showAndNextAdInternal();
+	    	        	break;
+	    	        default:
+	    	            break;
+	    	        }
+			    }
+        };
+
+        this.hideAdInternal();
+	}    
     
     private void showAdInternal() {    	
     	this.adView.setVisibility(View.VISIBLE);    	
