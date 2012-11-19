@@ -1,8 +1,6 @@
 package gamers.associate.Slime.layers;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import android.annotation.SuppressLint;
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelBuilderGenerator;
@@ -12,6 +10,9 @@ import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.Vibe;
 import gamers.associate.Slime.items.custom.Star;
 import gamers.associate.Slime.levels.GamePlay;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
@@ -26,6 +27,7 @@ import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
 
+@SuppressLint("DefaultLocale") 
 public class ChooseSurvivalDifficultyLayer extends CCLayer {
 	private static final float menuPadding = 320f;
 	private static final float iconSizeReference = 87f;
@@ -112,7 +114,7 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 		
 		tmp = CGPoint.ccpAdd(this.menu.getPosition(), label.getPosition()); // Use Normal as reference not label
 		tmp2 = CGPoint.ccpAdd(this.menu.getPosition(), this.normalMenuLabel.getPosition()); // Use Normal as reference not label
-		CCSprite spr = this.getLevelSprite(diffRef, isEnable);
+		CCSprite spr = ChooseSurvivalDifficultyLayer.getLevelSprite(diffRef, isEnable);
 		spr.setPosition(tmp.x - iconPadding - (iconSize / 2), tmp.y + (iconSize - 60f));
 		
 		if (isEnable) {

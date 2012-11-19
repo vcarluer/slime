@@ -1,9 +1,9 @@
 package gamers.associate.Slime.levels.itemdef;
 
+import android.annotation.SuppressLint;
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
-import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.levels.generator.BlocDefinition;
 
@@ -11,9 +11,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import android.util.Log;
-
-public abstract class ItemDefinition {		
+@SuppressLint("DefaultLocale") public abstract class ItemDefinition {		
 	protected static String None = "None";
 	protected static String infoSep = ";";
 	
@@ -27,12 +25,14 @@ public abstract class ItemDefinition {
 	protected String name;
 	
 	protected ArrayList<String> typesHandled;
+	@SuppressWarnings("rawtypes")
 	protected ArrayList<Class> classHandled;	
 	
 	protected float xOffset;
 	protected float yOffset;
 	private String idPre;
 	
+	@SuppressWarnings("rawtypes")
 	public ItemDefinition() {
 		this.typesHandled = new ArrayList<String>();
 		this.classHandled = new ArrayList<Class>();
@@ -215,6 +215,7 @@ public abstract class ItemDefinition {
 		// Override to handle postBuild
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public ArrayList<Class> getClassesHandled() {
 		return this.classHandled;
 	}

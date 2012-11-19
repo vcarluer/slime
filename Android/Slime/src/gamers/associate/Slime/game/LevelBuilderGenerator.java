@@ -7,7 +7,6 @@ import gamers.associate.Slime.levels.LevelDefinition;
 import gamers.associate.Slime.levels.LevelDefinitionParser;
 import gamers.associate.Slime.levels.LevelHome;
 import gamers.associate.Slime.levels.generator.LevelDefinitionGenerator;
-import gamers.associate.Slime.levels.generator.LevelGenNode;
 import gamers.associate.Slime.levels.generator.LevelGraphGeneratorTutorial;
 
 import java.util.ArrayList;

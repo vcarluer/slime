@@ -17,12 +17,14 @@ import org.cocos2d.menus.CCMenuItem;
 import org.cocos2d.menus.CCMenuItemLabel;
 import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
-import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 
+import android.annotation.SuppressLint;
+
+@SuppressLint("DefaultLocale") 
 public class PauseLayer extends CCLayer {
 	private static String scoreTxt = "MAX: ";
 	private CCMenu menu;
@@ -130,24 +132,6 @@ public class PauseLayer extends CCLayer {
 		}		
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.cocos2d.layers.CCLayer#onEnter()
-	 */
-	@Override
-	public void onEnter() {
-		// TODO Auto-generated method stub
-		super.onEnter();		
-	}
-
-	/* (non-Javadoc)
-	 * @see org.cocos2d.layers.CCLayer#onExit()
-	 */
-	@Override
-	public void onExit() {
-		// TODO Auto-generated method stub
-		super.onExit();
-	}
-	
 	public void enable() {
 		this.setIsTouchEnabled(true);
 		this.setVisible(true);
@@ -176,9 +160,5 @@ public class PauseLayer extends CCLayer {
 		this.setIsTouchEnabled(false);
 		this.setVisible(false);
 		this.menu.setIsTouchEnabled(false);
-	}
-	
-	private static CCLabel getMenuLabel(String text) {
-		return CCLabel.makeLabel(text.toUpperCase(), "fonts/Slime.ttf", 60.0f);
 	}
 }

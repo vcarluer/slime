@@ -1,7 +1,5 @@
 package gamers.associate.Slime.game;
 
-import javax.microedition.khronos.opengles.GL10;
-
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.items.custom.BecBunsenFactory;
@@ -39,19 +37,15 @@ import gamers.associate.Slime.items.custom.TeslaCoilFactory;
 import gamers.associate.Slime.items.custom.ThumbnailFactory;
 import gamers.associate.Slime.items.custom.TriggerTimeFactory;
 import gamers.associate.Slime.levels.ILevelBuilder;
-import gamers.associate.Slime.levels.generator.LevelGraphGeneratorCorridor;
-import gamers.associate.Slime.levels.generator.LevelGraphGeneratorCorridor2;
 import gamers.associate.Slime.levels.generator.LevelGraphGeneratorCorridor3;
-import gamers.associate.Slime.levels.generator.LevelGraphGeneratorRectangle;
 import gamers.associate.Slime.levels.generator.LevelGraphGeneratorRectangle2;
 import gamers.associate.Slime.levels.generator.LevelGraphGeneratorTutorial;
-import gamers.associate.Slime.levels.generator.hardcoded.BlocHardInit;
+
+import javax.microedition.khronos.opengles.GL10;
 
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.ccColor3B;
-
-import android.app.Activity;
 
 import com.badlogic.gdx.physics.box2d.World;
 

@@ -1,12 +1,11 @@
 package gamers.associate.Slime.levels.generator;
 
-import java.util.List;
-
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.TimeAttackGame;
-import gamers.associate.Slime.game.TitleGenerator;
 import gamers.associate.Slime.levels.GamePlay;
+
+import java.util.List;
 
 public class LevelGraphGeneratorTutorial extends LevelGraphGeneratorRectangle {
 	private static final String TUT7_TITLE = "The reveleation of the flying monster";
@@ -50,7 +49,6 @@ public class LevelGraphGeneratorTutorial extends LevelGraphGeneratorRectangle {
 		
 		this.rightCount = 0;
 		this.topCount = 0;
-		LevelGenNode pick = null;
 		switch (SlimeFactory.GameInfo.getLevelNum()) {
 		// 1 - Shoot / Go to end
 		case 1:

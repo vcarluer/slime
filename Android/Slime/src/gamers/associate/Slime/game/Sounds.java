@@ -80,18 +80,6 @@ public class Sounds {
 		}
 	}
 	
-	private static void preloadEffectAsSound(int soundId) {		
-		synchronized(soundsMap) {			
-			MediaPlayer mp = soundsMap.get(soundId);
-			if (mp != null)
-				return;
-			
-			mp = MediaPlayer.create(CCDirector.sharedDirector().getActivity(), soundId);
-//			mp.prepareAsync();
-			soundsMap.put(soundId, mp);
-		}
-	}
-	
 	private static void preloadMusic(int soundId) {
 		SoundEngine.sharedEngine().preloadSound(CCDirector.sharedDirector().getActivity(), soundId);
 	}

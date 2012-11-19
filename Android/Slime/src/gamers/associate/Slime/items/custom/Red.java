@@ -1,14 +1,22 @@
 package gamers.associate.Slime.items.custom;
 
+import gamers.associate.Slime.R;
+import gamers.associate.Slime.game.ContactInfo;
+import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.Sounds;
+import gamers.associate.Slime.items.base.GameItem;
+import gamers.associate.Slime.items.base.GameItemPhysic;
+import gamers.associate.Slime.items.base.ISelectable;
+import gamers.associate.Slime.items.base.SpriteSheetFactory;
+import gamers.associate.Slime.items.base.SpriteType;
+
 import java.util.Random;
 
 import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.instant.CCCallFunc;
-import org.cocos2d.actions.instant.CCFlipX;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCDelayTime;
-import org.cocos2d.actions.interval.CCReverseTime;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
@@ -18,21 +26,10 @@ import org.cocos2d.types.CGRect;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Filter;
-import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-
-import gamers.associate.Slime.R;
-import gamers.associate.Slime.game.ContactInfo;
-import gamers.associate.Slime.game.Level;
-import gamers.associate.Slime.game.Sounds;
-import gamers.associate.Slime.items.base.GameItem;
-import gamers.associate.Slime.items.base.GameItemPhysic;
-import gamers.associate.Slime.items.base.ISelectable;
-import gamers.associate.Slime.items.base.SpriteSheetFactory;
 
 public class Red extends GameItemPhysic implements ISelectable {
 	public static final float Default_Width = 153;
@@ -75,8 +72,6 @@ public class Red extends GameItemPhysic implements ISelectable {
 	private float densityNorm = 2.0f;
 	
 	private float currentDir = -1; // Turn left
-	private float nextDir = -1; // Turn left
-//	private Body compressedBody;
 	private Body normalBody;
 	
 	private CCSprite thumbnailSprite;
@@ -85,7 +80,7 @@ public class Red extends GameItemPhysic implements ISelectable {
 			float worldRatio, boolean isBoss) {
 		super(x, y, width, height, world, worldRatio);
 		
-		this.spriteType = spriteType.ANIM_SCALE;
+		this.spriteType = SpriteType.ANIM_SCALE;
 		this.setNoStick(true);
 		this.isBoss = isBoss;
 		
@@ -608,49 +603,44 @@ public class Red extends GameItemPhysic implements ISelectable {
 
 	@Override
 	public boolean trySelect(CGPoint gameReference) {
-		// TODO Auto-generated method stub
+		// NA
 		return false;
 	}
 
 	@Override
 	public boolean canSelect(CGPoint gameReference) {
-		// TODO Auto-generated method stub
+		// NA
 		return false;
 	}
 
 	@Override
 	public void selectionMove(CGPoint gameReference) {
-		// TODO Auto-generated method stub
-		
+		// NA
 	}
 
 	@Override
 	public void selectionStop(CGPoint gameReference) {
-		// TODO Auto-generated method stub
-		
+		// NA
 	}
 
 	@Override
 	public void select() {
-		// TODO Auto-generated method stub
-		
+		// NA		
 	}
 
 	@Override
 	public void select(CGPoint gameReference) {
-		// TODO Auto-generated method stub
-		
+		// NA		
 	}
 
 	@Override
 	public void unselect() {
-		// TODO Auto-generated method stub
-		
+		// NA		
 	}
 
 	@Override
 	public boolean isSelected() {
-		// TODO Auto-generated method stub
+		// NA
 		return false;
 	}
 
@@ -677,7 +667,7 @@ public class Red extends GameItemPhysic implements ISelectable {
 
 	@Override
 	public boolean simpleSelect() {
-		// TODO Auto-generated method stub
+		// NA
 		return false;
 	}
 

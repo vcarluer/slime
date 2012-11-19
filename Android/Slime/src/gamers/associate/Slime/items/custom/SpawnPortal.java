@@ -2,7 +2,6 @@ package gamers.associate.Slime.items.custom;
 
 
 import gamers.associate.Slime.game.SlimeFactory;
-import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.SpriteType;
 

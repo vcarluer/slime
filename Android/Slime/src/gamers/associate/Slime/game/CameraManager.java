@@ -9,7 +9,6 @@ import javax.microedition.khronos.opengles.GL10;
 import org.cocos2d.config.ccMacros;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.nodes.CCDirector;
-import org.cocos2d.nodes.CCParallaxNode;
 import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
@@ -57,7 +56,6 @@ public class CameraManager {
 	private CGPoint centerScreen;
 	private CGPoint currentOpposite;
 	private CGPoint screenPoint;
-	private CGPoint bgPos;
 	
 	private float zoomStart;
 	
@@ -81,7 +79,6 @@ public class CameraManager {
 		this.centerScreen = CGPoint.zero();
 		this.currentOpposite = CGPoint.zero();
 		this.screenPoint = CGPoint.zero();
-		this.bgPos = CGPoint.zero();
 	}
 	
 	protected void tick(float delta) {

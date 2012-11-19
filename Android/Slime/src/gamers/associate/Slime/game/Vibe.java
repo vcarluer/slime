@@ -1,7 +1,5 @@
 package gamers.associate.Slime.game;
 
-import org.cocos2d.nodes.CCDirector;
-
 import android.content.Context;
 import android.os.Vibrator;
 

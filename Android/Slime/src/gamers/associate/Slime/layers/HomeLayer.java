@@ -5,51 +5,32 @@ import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.Sharer;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
-import gamers.associate.Slime.game.Vibe;
 import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.items.custom.SpawnPortal;
 import gamers.associate.Slime.items.custom.Star;
 
-import org.apache.http.conn.ClientConnectionRequest;
 import org.cocos2d.actions.base.CCRepeatForever;
-import org.cocos2d.actions.camera.CCOrbitCamera;
-import org.cocos2d.actions.instant.CCCallFunc;
-import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCDelayTime;
-import org.cocos2d.actions.interval.CCFadeIn;
-import org.cocos2d.actions.interval.CCMoveBy;
-import org.cocos2d.actions.interval.CCMoveTo;
 import org.cocos2d.actions.interval.CCRotateBy;
 import org.cocos2d.actions.interval.CCRotateTo;
 import org.cocos2d.actions.interval.CCScaleBy;
 import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.actions.interval.CCSequence;
-import org.cocos2d.actions.tile.CCFadeOutDownTiles;
-import org.cocos2d.actions.tile.CCFadeOutUpTiles;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
-import org.cocos2d.menus.CCMenuItemLabel;
 import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.transitions.CCFadeTransition;
-import org.cocos2d.transitions.CCSlideInTTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
-import org.cocos2d.types.CGRect;
-import org.cocos2d.types.ccColor3B;
-import org.cocos2d.types.ccGridSize;
 
-import android.content.Intent;
-import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnCompletionListener;
+import android.annotation.SuppressLint;
 import android.view.MotionEvent;
-import android.view.SurfaceHolder;
 
-public class HomeLayer extends CCLayer {
+@SuppressLint("DefaultLocale") public class HomeLayer extends CCLayer {
 	public static final int shareSize = 64;
 	private static HomeLayer layer;	
 	// private CCMenuItemSprite restartMenu;
@@ -147,12 +128,8 @@ public class HomeLayer extends CCLayer {
 		if (this.spawner != null) {
 			this.spawner.spawn();
 		}
-		// TODO: Go to level selection		
-		// return super.ccTouchesEnded(event);
-		// this.selectPlay(this);
-		return true;
-		//CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
-		//return CCTouchDispatcher.kEventHandled;
+		
+		return true;		
 	}
 	
 	private CCMenu menu;
@@ -181,7 +158,7 @@ public class HomeLayer extends CCLayer {
 		float shareX = - CCDirector.sharedDirector().winSize().getWidth() / 2 +((shareSize * shareScale) + PauseLayer.PaddingX) / 2 ;
 		float shareY = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((shareSize * shareScale) + PauseLayer.PaddingX) / 2;
 		
-		this.shareMenu = this.getNewShareButton(null, shareScale, shareX, shareY);
+		this.shareMenu = HomeLayer.getNewShareButton(null, shareScale, shareX, shareY);
 		this.addChild(this.shareMenu);
 		
 		String diff =LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty());		

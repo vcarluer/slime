@@ -21,14 +21,14 @@ public class BlocDefinitionHardCodedAll extends BlocDefinitionHardCoded
 	@Override
 	  protected void initGenNodeInternal(LevelGenNode genNode)
 	  {
-	    genNode.addConnectorsEntry(genNode.getConnectorsFor(BlocDirection.Top));
-	    genNode.addConnectorsEntry(genNode.getConnectorsFor(BlocDirection.Right));
-	    genNode.addConnectorsEntry(genNode.getConnectorsFor(BlocDirection.Bottom));
-	    genNode.addConnectorsEntry(genNode.getConnectorsFor(BlocDirection.Left));
-	    genNode.addConnectorsExit(genNode.getConnectorsFor(BlocDirection.Top));
-	    genNode.addConnectorsExit(genNode.getConnectorsFor(BlocDirection.Right));
-	    genNode.addConnectorsExit(genNode.getConnectorsFor(BlocDirection.Bottom));
-	    genNode.addConnectorsExit(genNode.getConnectorsFor(BlocDirection.Left));
+	    genNode.addConnectorsEntry(LevelGenNode.getConnectorsFor(BlocDirection.Top));
+	    genNode.addConnectorsEntry(LevelGenNode.getConnectorsFor(BlocDirection.Right));
+	    genNode.addConnectorsEntry(LevelGenNode.getConnectorsFor(BlocDirection.Bottom));
+	    genNode.addConnectorsEntry(LevelGenNode.getConnectorsFor(BlocDirection.Left));
+	    genNode.addConnectorsExit(LevelGenNode.getConnectorsFor(BlocDirection.Top));
+	    genNode.addConnectorsExit(LevelGenNode.getConnectorsFor(BlocDirection.Right));
+	    genNode.addConnectorsExit(LevelGenNode.getConnectorsFor(BlocDirection.Bottom));
+	    genNode.addConnectorsExit(LevelGenNode.getConnectorsFor(BlocDirection.Left));
 	    genNode.setId("All");
 	  }
 }

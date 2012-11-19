@@ -8,8 +8,6 @@ import gamers.associate.Slime.levels.GamePlay;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.util.Log;
-
 
 public class LevelGraphGeneratorRectangle extends LevelGraphGeneratorBase {
 	protected static final String BlocsAssetsBase = "blocsRectangle";	

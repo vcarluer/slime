@@ -39,13 +39,9 @@ public class LevelUtil {
 		float sw = CCDirector.sharedDirector().displaySize().width;
 		float sh = CCDirector.sharedDirector().displaySize().height;
 		float siW = CCDirector.sharedDirector().displaySize().width / 2;
-		float siH = CCDirector.sharedDirector().displaySize().height / 2;
-		float mW = siW / 2;
-		float mH = siH / 2;
+		float siH = CCDirector.sharedDirector().displaySize().height / 2;		
 		float w = s.width;
-		float w2 = s.width / 2;
-		float h = s.height;
-		float h2 = s.height / 2;			
+		float h = s.height;			
 		float x = level.getLevelOrigin().x;
 		float y = level.getLevelOrigin().y;
 		float glassWidth = 10f;

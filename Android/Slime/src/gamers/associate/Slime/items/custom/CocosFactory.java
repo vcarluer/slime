@@ -8,11 +8,7 @@ import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.items.base.SpriteType;
 import gamers.associate.Slime.items.base.TextureAnimation;
 
-import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
-import org.cocos2d.actions.interval.CCFadeOut;
-import org.cocos2d.actions.interval.CCScaleTo;
-import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.nodes.CCAnimation;
 
 public class CocosFactory extends GameItemCocosFactory<GameItemCocos> {

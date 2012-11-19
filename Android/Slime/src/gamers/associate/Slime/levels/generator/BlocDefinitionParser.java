@@ -1,19 +1,5 @@
 package gamers.associate.Slime.levels.generator;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
-
-import android.util.FloatMath;
-import android.util.Log;
-
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelDifficulty;
@@ -29,6 +15,18 @@ import gamers.associate.Slime.levels.itemdef.LevelInfoDef;
 import gamers.associate.Slime.levels.itemdef.RedDef;
 import gamers.associate.Slime.levels.itemdef.StarDef;
 import gamers.associate.Slime.levels.itemdef.TeslaCoilDef;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
+
+import android.util.FloatMath;
 
 public class BlocDefinitionParser extends BlocDefinition {
 	private static Random rand = new Random();

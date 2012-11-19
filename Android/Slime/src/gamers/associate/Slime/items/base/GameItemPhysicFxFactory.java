@@ -1,7 +1,6 @@
 package gamers.associate.Slime.items.base;
 
 import gamers.associate.Slime.game.IGameItemHandler;
-import gamers.associate.Slime.game.Level;
 
 import org.cocos2d.nodes.CCNode;
 

@@ -1,5 +1,9 @@
 package gamers.associate.Slime.levels;
 
+import gamers.associate.Slime.Slime;
+import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.SlimeFactory;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -9,11 +13,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 import android.content.Context;
-import android.util.Log;
-
-import gamers.associate.Slime.Slime;
-import gamers.associate.Slime.game.Level;
-import gamers.associate.Slime.game.SlimeFactory;
 
 public abstract class LevelDefinition {
 	private String id;

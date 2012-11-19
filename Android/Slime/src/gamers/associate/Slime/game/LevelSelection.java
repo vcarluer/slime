@@ -2,7 +2,6 @@ package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.layers.LevelSelectionLayer;
 
-import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 
 public class LevelSelection {
@@ -10,7 +9,6 @@ public class LevelSelection {
 	
 	private CCScene scene;	
 	private LevelSelectionLayer selectionLayer;
-	private CCLayer backgroundLayer;
 	private boolean isActivated;
 	
 	public static LevelSelection get()

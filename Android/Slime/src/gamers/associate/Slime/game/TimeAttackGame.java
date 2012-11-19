@@ -24,8 +24,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	
 	private static float defaultTime = 60;
 	private static float defaultCritic = 10;
-	private static float adTime = 5.0f; 
-	private static float stepNormal = 1.0f;
+	private static float adTime = 5.0f;
 	private static float stepCritic = 1.0f;
 	private static int timeScore = 1000;
 	protected static int bonusScore = 10000;

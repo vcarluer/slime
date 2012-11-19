@@ -36,7 +36,7 @@ public class BlocDefinitionHardCodedStart extends BlocDefinitionHardCoded
 	  protected void initGenNodeInternal(LevelGenNode genNode)
 	  {
 	    genNode.setIsLevelStart(true);
-	    genNode.addConnectorsExit(genNode.getConnectorsFor(StartDirection));
+	    genNode.addConnectorsExit(LevelGenNode.getConnectorsFor(StartDirection));
 	    genNode.setId("Start" + String.valueOf(StartDirection));
 	  }
 }

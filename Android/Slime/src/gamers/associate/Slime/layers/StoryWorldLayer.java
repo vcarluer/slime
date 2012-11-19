@@ -2,19 +2,14 @@ package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
-import gamers.associate.Slime.game.LevelBuilderGenerator;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.levels.GamePlay;
-import gamers.associate.Slime.levels.LevelHome;
-
-import java.util.HashMap;
 
 import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCDelayTime;
-import org.cocos2d.actions.interval.CCFadeIn;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
@@ -29,6 +24,10 @@ import org.cocos2d.transitions.CCSlideInLTransition;
 import org.cocos2d.transitions.CCSlideInRTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 
+import android.annotation.SuppressLint;
+import android.util.SparseArray;
+
+@SuppressLint("DefaultLocale") 
 public class StoryWorldLayer extends CCLayer {
 	private static final int fontSize = 60;
 	private static final float transitionTime = 0.5f;
@@ -43,7 +42,7 @@ public class StoryWorldLayer extends CCLayer {
 	
 	private static int paddingTitle = fontSize + 5;
 	
-	private static HashMap<Integer, CCScene> diffScenes = new HashMap<Integer, CCScene>();
+	private static SparseArray<CCScene> diffScenes = new SparseArray<CCScene>();
 	private CCMenu backMenu; 
 	
 	public static CCScene getScene(int difficulty) {

@@ -2,7 +2,6 @@ package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.items.base.ISelectable;
 import gamers.associate.Slime.items.custom.Thumbnail;
-import gamers.associate.Slime.layers.PauseLayer;
 
 import java.util.ArrayList;
 import java.util.HashMap;

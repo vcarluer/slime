@@ -50,9 +50,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 
+@SuppressLint("DefaultLocale")
+@SuppressWarnings("rawtypes")
 public class LevelDefinitionParser extends LevelDefinition
 {
 	private static String SpecialLevel = "Special";
@@ -67,7 +69,7 @@ public class LevelDefinitionParser extends LevelDefinition
 	
 	public LevelDefinitionParser() {		
 	}
-	
+		
 	public LevelDefinitionParser(String resourceName, boolean noUserInfoStore) {		
 		this.noStore = noUserInfoStore;
 		this.gamePlay = GamePlay.ManuallyDefined;
@@ -98,8 +100,6 @@ public class LevelDefinitionParser extends LevelDefinition
 	}
 	
 	protected void defineIgnoredItems() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public LevelDefinitionParser(String resourceName) {

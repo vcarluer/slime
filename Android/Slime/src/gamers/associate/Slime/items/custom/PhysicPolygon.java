@@ -121,11 +121,7 @@ public class PhysicPolygon extends GameItemPhysic {
 	    	}		
 		}
 	}
-	
-	private Vector2[] getWorldPolygonVectors() {		
-		return this.getWorldPolygonVectors(this.getBodyPoints());
-	}
-	
+		
 	private Vector2[] getWorldPolygonVectors(CGPoint[] points) {		
 		Vector2[] vectors = new Vector2[points.length];		
 		for(int i = 0; i < points.length; i++) {

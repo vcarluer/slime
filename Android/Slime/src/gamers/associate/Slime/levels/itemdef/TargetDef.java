@@ -42,7 +42,6 @@ public class TargetDef extends ItemDefinition {
 	}
 
 	@Override
-	protected void setValuesNext(GameItem item) {
-		Target target = (Target)item;
+	protected void setValuesNext(GameItem item) {		
 	}
 }

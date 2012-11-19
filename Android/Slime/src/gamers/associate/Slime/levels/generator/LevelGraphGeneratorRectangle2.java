@@ -1,20 +1,15 @@
 package gamers.associate.Slime.levels.generator;
 
+import gamers.associate.Slime.Slime;
+import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.levels.GamePlay;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
 import android.util.FloatMath;
-import android.util.Log;
-
-import gamers.associate.Slime.Slime;
-import gamers.associate.Slime.game.IGamePlay;
-import gamers.associate.Slime.game.LevelDifficulty;
-import gamers.associate.Slime.game.SlimeFactory;
-import gamers.associate.Slime.game.TimeAttackGame;
-import gamers.associate.Slime.levels.GamePlay;
-import gamers.associate.Slime.levels.LevelHome;
 
 public class LevelGraphGeneratorRectangle2 extends LevelGraphGeneratorRectangle {
 	private static final int noBossPos = -1;	

@@ -1,10 +1,6 @@
 package gamers.associate.Slime.levels.itemdef;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import gamers.associate.Slime.game.Level;
-import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.ITrigerable;
 import gamers.associate.Slime.items.custom.Button;
@@ -15,6 +11,9 @@ import gamers.associate.Slime.levels.generator.BlocDirection;
 import gamers.associate.Slime.levels.generator.BlocInfoParser;
 import gamers.associate.Slime.levels.generator.Connector;
 import gamers.associate.Slime.levels.generator.LevelGenNode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlocInfoDef extends ItemDefinition {
 	public static String Handled_Info = "BlocInfo";

@@ -31,7 +31,6 @@ import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
-import org.cocos2d.nodes.CCLabelAtlas;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.opengl.CCBitmapFontAtlas;
 import org.cocos2d.types.CGPoint;
@@ -43,9 +42,7 @@ import com.badlogic.gdx.physics.box2d.World;
  * @author    vince
  * @uml.dependency   supplier="gamers.associate.Slime.GameItem"
  */
-public class Level implements IGameItemHandler {	
-	private static final float bgRatioY = 0.7f;
-	private static final float bgRatioX = 0.6f;
+public class Level implements IGameItemHandler {
 	public static boolean DebugMode = SlimeFactory.IsLevelDebugMode;
 	public static boolean isInit;	
 	public static float Gravity = -10;
@@ -60,8 +57,7 @@ public class Level implements IGameItemHandler {
 	public static int zFront = 2;
 	public static int zTop = 3;
 	
-	private static String winTxt = "VICTORY";
-	private static String gameOverTxt = "GAME OVER";
+	private static String winTxt = "VICTORY";	
 	
 	private float timeRatio = 2.0f;
 	protected World world;

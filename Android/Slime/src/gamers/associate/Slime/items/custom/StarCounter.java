@@ -1,13 +1,12 @@
 package gamers.associate.Slime.items.custom;
 
+import gamers.associate.Slime.items.base.GameItemCocos;
+import gamers.associate.Slime.items.base.SpriteType;
+
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCScaleBy;
-import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.actions.interval.CCSequence;
-
-import gamers.associate.Slime.items.base.GameItemCocos;
-import gamers.associate.Slime.items.base.SpriteType;
 
 public class StarCounter extends GameItemCocos {
 	public static String Anim_OneCell_Target_Empty = "control-stars-onecell-empty";

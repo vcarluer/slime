@@ -3,7 +3,7 @@ package gamers.associate.Slime.items.custom;
 import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.GameItemCocosFactory;
 
-public class SlimySuccessFactory extends GameItemCocosFactory {
+public class SlimySuccessFactory extends GameItemCocosFactory<GameItemCocos> {
 
 	@Override
 	protected void createAnimList() {

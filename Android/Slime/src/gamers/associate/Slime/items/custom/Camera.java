@@ -1,31 +1,26 @@
 package gamers.associate.Slime.items.custom;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.microedition.khronos.opengles.GL10;
-
-import org.cocos2d.actions.base.CCRepeatForever;
-import org.cocos2d.actions.interval.CCRotateBy;
-import org.cocos2d.actions.interval.CCSequence;
-import org.cocos2d.config.ccMacros;
-import org.cocos2d.types.CGPoint;
-
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.Util;
-import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.ITrigerable;
 import gamers.associate.Slime.items.base.SpriteType;
+
+import java.util.List;
+
+import javax.microedition.khronos.opengles.GL10;
+
+import org.cocos2d.config.ccMacros;
+import org.cocos2d.types.CGPoint;
+
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
 
 public class Camera extends GameItemPhysic {
 	
@@ -48,7 +43,6 @@ public class Camera extends GameItemPhysic {
 	private String targetName;
 	
 	private CGPoint targetPoint;
-	private CGPoint zero;
 	private CGPoint v1;
 	private CGPoint v2;
 	
@@ -96,7 +90,6 @@ public class Camera extends GameItemPhysic {
 		this.referenceSize.height = Reference_Height;
 		
 		this.targetPoint = CGPoint.zero();
-		this.zero = CGPoint.zero();
 		this.v1 = CGPoint.zero();
 		this.v2 = CGPoint.zero();
 		this.tmp1 = CGPoint.zero();

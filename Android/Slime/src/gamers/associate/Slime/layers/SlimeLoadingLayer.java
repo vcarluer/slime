@@ -1,6 +1,6 @@
 package gamers.associate.Slime.layers;
 
-import gamers.associate.Slime.R;
+import android.annotation.SuppressLint;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
@@ -19,7 +19,7 @@ import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 
-public class SlimeLoadingLayer extends CCLayer {		
+@SuppressLint("DefaultLocale") public class SlimeLoadingLayer extends CCLayer {		
 	private static CCScene scene;
 	private Level currentLevel;
 	private CCSprite sprite;
@@ -85,7 +85,6 @@ public class SlimeLoadingLayer extends CCLayer {
 	 */
 	@Override
 	public void onEnter() {
-		// TODO Auto-generated method stub
 		super.onEnter();
 				
 		this.schedule(nextCallback);

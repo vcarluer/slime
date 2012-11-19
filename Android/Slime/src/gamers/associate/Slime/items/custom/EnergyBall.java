@@ -1,7 +1,5 @@
 package gamers.associate.Slime.items.custom;
 
-import javax.microedition.khronos.opengles.GL10;
-
 import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Util;
@@ -9,12 +7,10 @@ import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.IElectrificable;
 import gamers.associate.Slime.items.base.SpriteType;
 
+import javax.microedition.khronos.opengles.GL10;
+
 import org.cocos2d.actions.base.CCRepeatForever;
-import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCAnimate;
-import org.cocos2d.actions.interval.CCMoveTo;
-import org.cocos2d.actions.interval.CCSequence;
-import org.cocos2d.config.ccMacros;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 

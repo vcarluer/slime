@@ -1,12 +1,7 @@
 package gamers.associate.Slime.items.custom;
 
-import org.cocos2d.actions.base.CCRepeatForever;
-import org.cocos2d.actions.interval.CCAnimate;
-import org.cocos2d.nodes.CCSprite;
-
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.base.GameItemPhysicFactory;
-
 
 public class StarFactory extends GameItemPhysicFactory<Star> {	
 

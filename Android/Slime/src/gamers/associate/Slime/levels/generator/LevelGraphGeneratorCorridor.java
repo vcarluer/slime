@@ -1,20 +1,14 @@
 package gamers.associate.Slime.levels.generator;
 
 import gamers.associate.Slime.Slime;
-import gamers.associate.Slime.game.Level;
-import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.levels.GamePlay;
-import gamers.associate.Slime.levels.LevelUtil;
 import gamers.associate.Slime.levels.generator.hardcoded.BlocHardInit;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import org.cocos2d.types.CGPoint;
-
-import android.util.Log;
 
 public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {		
 	protected static final String BlocsAssetsBase = "blocsCorridor";

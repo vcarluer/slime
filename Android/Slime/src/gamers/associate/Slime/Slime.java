@@ -19,7 +19,6 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -191,7 +190,7 @@ public class Slime extends Activity {
     }
     
     private void ad(int actionCode) {
-    	if (this.AdOn) {
+    	if (Slime.AdOn) {
     		Message msg = new Message();
         	msg.what = actionCode;        
             mHandler.sendMessage(msg);
@@ -271,18 +270,7 @@ public class Slime extends Activity {
     // Does not call onDestroy anymore due to android:configChanges="keyboardHidden|orientation" in manifest
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
-		// TODO Auto-generated method stub
 		super.onConfigurationChanged(newConfig);
-		
-		/*this.scene = SlimeLoadingLayer.scene();
-		CCDirector.sharedDirector().replaceScene(this.scene);*/
-		//Level.currentLevel.getCameraManager().setCameraView();
-		
-		// Reinit camera view based on screen size
-		// Not needed, called in Level.get
-		/* if (Level.currentLevel != null) {
-			Level.currentLevel.getCameraManager().setCameraView();
-		}*/
 	}
 
 	/* (non-Javadoc)

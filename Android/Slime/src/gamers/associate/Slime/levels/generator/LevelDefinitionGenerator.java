@@ -1,22 +1,16 @@
 package gamers.associate.Slime.levels.generator;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-
-import org.cocos2d.nodes.CCDirector;
-
-import android.util.Log;
-
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelDefinition;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 public class LevelDefinitionGenerator extends LevelDefinition {
-	private static int DefaultBoss = 20;
 	private int complexity;
-	private int bossComplexity = DefaultBoss;
 	private LevelGraphGeneratorBase currentGenerator;
 	
 	public LevelDefinitionGenerator() {
@@ -40,12 +34,8 @@ public class LevelDefinitionGenerator extends LevelDefinition {
 		}
 	}
 	
-	private void postBuild(Level level) {
-		float w = CCDirector.sharedDirector().winSize().width / 2;
-		float h = CCDirector.sharedDirector().winSize().height / 2;
-		
-		// Complete level here
-		
+	private void postBuild(Level level) {		
+		// Complete level here		
 	}
 
 	public void buildBossLevel(Level level) {

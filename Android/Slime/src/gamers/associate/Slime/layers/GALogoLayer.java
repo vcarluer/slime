@@ -1,5 +1,6 @@
 package gamers.associate.Slime.layers;
 
+import android.annotation.SuppressLint;
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LoadingQuoteGenerator;
@@ -23,24 +24,19 @@ import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.transitions.CCFadeDownTransition;
 import org.cocos2d.transitions.CCFadeTransition;
-import org.cocos2d.transitions.CCShrinkGrowTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
 import org.cocos2d.types.ccColor4B;
 
-public class GALogoLayer extends CCLayer {	
+@SuppressLint("DefaultLocale") public class GALogoLayer extends CCLayer {	
 	private static CCScene scene;	
-	// private long waitLogoSec = 2;
-	// private long onEnterTime;
 	private CCSprite sprite;
 	private float scaleTarget;
 	private static Level currentLevel;
 	private static GALogoLayer logoLayer;
 	private static boolean loaded;
-	private final Object lock = new Object();
 	private CCLabel loadLabel;
 	private long nextBeat;
 	private int step;
@@ -106,10 +102,6 @@ public class GALogoLayer extends CCLayer {
 		this.loadLabel.setColor(ccColor3B.ccBLACK);
 		this.loadLabel.setVisible(false);
 		this.addChild(this.loadLabel);
-		
-		// schedule(nextCallback, waitLogoSec); doesn't work?
-//		schedule(nextCallback);
-//		this.onEnterTime = System.currentTimeMillis();
 	}		
 	
 	@Override
@@ -120,24 +112,10 @@ public class GALogoLayer extends CCLayer {
 	}
 
 	public void endScale() {
-		/*float soundTime = 1.0f;
-		float waitTime = 2.0f;*/
-		Sounds.playEffect(R.raw.ga);		
-		
-		// CCDelayTime delay = CCDelayTime.action(waitTime);
-//		CCDelayTime delay2 = CCDelayTime.action(1f);
-//		CCScaleBy sb = CCScaleBy.action(0.1f, 1.10f);
-//		CCScaleTo st = CCScaleTo.action(0.1f, this.scaleTarget);
-//		CCCallFunc ps = CCCallFunc.action(this, "heartbeat");
-//		// CCCallFunc call = CCCallFunc.action(this, "load");
-//		CCSequence seq = CCSequence.actions(delay2, sb, st, ps);
-//		CCRepeatForever rep = CCRepeatForever.action(seq);
-//		this.sprite.runAction(rep);
+		Sounds.playEffect(R.raw.ga);
 		this.step = 0;
 		this.nextBeat = System.currentTimeMillis() + 1000;
-		this.schedule(nextCallback);		
-//		LoadThread th = new LoadThread();
-//		th.start();
+		this.schedule(nextCallback);
 	}
 	
 	public void heartbeat() {		
@@ -259,71 +237,6 @@ public class GALogoLayer extends CCLayer {
 					step++;
 				}
 			}
-//			spriteSheet.removeChild(sprite, true);						
-			// removeChild(sprite, true);
-			// CCTransitionScene transition = CCTurnOffTilesTransition.transition(1.0f, currentLevel.getScene());
-			
-			/*CCScaleBy sb = CCScaleBy.action(0.1f, 1.10f);
-			CCScaleTo st = CCScaleTo.action(0.1f, scaleTarget);
-			CCCallFunc call = CCCallFunc.action(logoLayer, "load");
-			CCSequence seq = CCSequence.actions(sb, st, call);
-			sprite.runAction(seq);*/
-			
-			/*removeChild(sprite, true);
-			CCTransitionScene transition = CCFadeTransition.transition(1.0f, currentLevel.getScene());
-			CCDirector.sharedDirector().replaceScene(transition);*/			
 		}
 	};
-	
-//	public class LoadThread extends Thread {		  		  
-//		  public LoadThread() {		    
-//		  }
-//		  
-//		  public void run() {
-//			  	SpriteSheetFactory.add("controls", true, SpriteSheetFactory.zDefault);
-//				// SpriteSheetFactory.add("logo", true, SpriteSheetFactory.zDefault);
-//				SpriteSheetFactory.add("decor", true, SpriteSheetFactory.zDefault);
-//				
-//				SpriteSheetFactory.add("items", Level.zFront);								
-//				SpriteSheetFactory.add("slime", Level.zTop);
-//				SpriteSheetFactory.add("red", Level.zTop);
-//				SpriteSheetFactory.add("slimydbz", Level.zFront);
-//				SpriteSheetFactory.add("glasswork", Level.zMid);
-//				SpriteSheetFactory.add("tank", Level.zFront);
-//				SpriteSheetFactory.add("worlds-items", Level.zMid);
-//				
-//				Sounds.preload();
-//				
-//				BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorCorridor);
-//				BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle);
-//				BlocInfoParser.buildAll(SlimeFactory.LevelGeneratorRectangle2);
-//				
-//				synchronized(lock) {
-//					loaded = true;
-//				}
-//		  }
-//		}
-	
-//	public class LoadThread extends Thread {		  		  
-//	  public LoadThread() {		    
-//	  }
-//	  
-//	  public void run() {
-//		while (loaded != true || heartBeating == true) {
-//			try {
-//				Thread.sleep(1000);
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		
-//		try {
-//			Thread.sleep(1000);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		CCDirector.sharedDirector().replaceScene(currentLevel.getScene());
-//	  }
-//	}
 }

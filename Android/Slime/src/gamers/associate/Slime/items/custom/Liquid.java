@@ -3,7 +3,6 @@ package gamers.associate.Slime.items.custom;
 import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.items.base.GameItemPhysic;
-import gamers.associate.Slime.items.base.IBurnable;
 import gamers.associate.Slime.items.base.IDissolvable;
 import gamers.associate.Slime.items.base.SpriteType;
 

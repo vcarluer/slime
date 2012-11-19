@@ -1,7 +1,6 @@
 package gamers.associate.Slime.items.custom;
 
 import gamers.associate.Slime.items.base.GameItemCocosFactory;
-import gamers.associate.Slime.items.base.GameItemFactory;
 import gamers.associate.Slime.items.base.TextureAnimation;
 
 public class TargetFactory extends GameItemCocosFactory<Target> {

@@ -3,17 +3,13 @@ package gamers.associate.Slime.levels;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.custom.BumperAngle;
-import gamers.associate.Slime.items.custom.Camera;
-import gamers.associate.Slime.items.custom.EnergyBallGun;
 import gamers.associate.Slime.items.custom.LaserGun;
 import gamers.associate.Slime.items.custom.LiquidSurface;
 import gamers.associate.Slime.items.custom.Platform;
 import gamers.associate.Slime.items.custom.SpawnPortal;
-import gamers.associate.Slime.items.custom.TeslaCoil;
 import gamers.associate.Slime.layers.HomeLayer;
 
 import org.cocos2d.nodes.CCDirector;
-import org.cocos2d.types.CGSize;
 
 public class LevelHome extends LevelDefinitionHardCoded {
 	public static String Id = "Home";		
@@ -23,11 +19,7 @@ public class LevelHome extends LevelDefinitionHardCoded {
 		level.setLevelSize(
 				CCDirector.sharedDirector().winSize().getWidth() * 2,
 				CCDirector.sharedDirector().winSize().getHeight() * 2);
-		
-		// LevelUtil.createGroundBox(level);
-		// LevelUtil.createLand(level);
-		CGSize s = CGSize.make(level.getLevelWidth(), level.getLevelHeight());
-		
+				
 		SpawnPortal spawnPortal = SlimeFactory.SpawnPortal.createAndMove(
 				level.getLevelWidth() / 2f, 
 				level.getLevelHeight() + 32,

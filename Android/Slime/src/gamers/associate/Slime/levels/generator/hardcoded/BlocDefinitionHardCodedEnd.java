@@ -28,7 +28,7 @@ public class BlocDefinitionHardCodedEnd extends BlocDefinitionHardCoded
   protected void initGenNodeInternal(LevelGenNode genNode)
   {
     genNode.setIsLevelEnd(true);
-    genNode.addConnectorsEntry(genNode.getConnectorsFor(EndDirection));
+    genNode.addConnectorsEntry(LevelGenNode.getConnectorsFor(EndDirection));
     genNode.setId("End" + String.valueOf(EndDirection));
   }
 }

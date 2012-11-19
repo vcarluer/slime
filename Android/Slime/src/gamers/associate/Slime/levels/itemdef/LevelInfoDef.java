@@ -1,18 +1,16 @@
 package gamers.associate.Slime.levels.itemdef;
 
+import android.annotation.SuppressLint;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.levels.LevelUtil;
 
-import org.cocos2d.types.CGPoint;
-
+@SuppressLint("DefaultLocale") 
 public class LevelInfoDef extends ItemDefinition {
 	public static String Handled_Info = "LevelInfo";
 	private static String Dimension_Auto = "Auto";
 	private static String Dimension_Width = "Width";
 	private static String Dimension_Height = "Height";	
-	private static String Dimension_Manual = Level.ManualDimension;
-	
 	private String maxDimension;
 
 	@Override

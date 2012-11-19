@@ -5,7 +5,6 @@ import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Sounds;
-import gamers.associate.Slime.game.Vibe;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.IBurnable;
 import gamers.associate.Slime.items.base.IDissolvable;
@@ -24,12 +23,10 @@ import org.cocos2d.config.ccMacros;
 import org.cocos2d.types.CGPoint;
 
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Filter;
-import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class Slimy extends GameItemPhysic implements IBurnable, IDissolvable, IElectrificable {
 	
@@ -66,7 +63,6 @@ public class Slimy extends GameItemPhysic implements IBurnable, IDissolvable, IE
 	protected Boolean isDying;
 	
 	protected boolean hasLanded;
-	private boolean bodyCategorySwitched;
 	
 	public static String Anim_LastDeath = Anim_Splash;
 	
@@ -229,7 +225,7 @@ public class Slimy extends GameItemPhysic implements IBurnable, IDissolvable, IE
 			this.sprite.runAction(this.waitAction);		
 			
 			CCAnimate animBurn = CCAnimate.action(this.animationList.get(Anim_Burning), false);
-			this.Anim_LastDeath = Anim_Burning;
+			Slimy.Anim_LastDeath = Anim_Burning;
 			CCCallFunc kill = CCCallFunc.action(this, "kill");
 			CCDelayTime deathDelay = CCDelayTime.action(deathDelayTime);
 			CCSequence sequence = CCSequence.actions(animBurn, deathDelay, kill);
@@ -266,7 +262,7 @@ public class Slimy extends GameItemPhysic implements IBurnable, IDissolvable, IE
 				this.sprite.stopAction(this.waitAction);
 			}
 			
-			this.Anim_LastDeath = animation;
+			Slimy.Anim_LastDeath = animation;
 			
 			CCAnimate animSplash = CCAnimate.action(this.animationList.get(animation), false);			
 			CCDelayTime deathDelay = CCDelayTime.action(deathDelayTime);

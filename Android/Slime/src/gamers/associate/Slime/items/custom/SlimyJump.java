@@ -16,27 +16,17 @@ import javax.microedition.khronos.opengles.GL10;
 import org.cocos2d.actions.base.CCAction;
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCAnimate;
-import org.cocos2d.actions.interval.CCIntervalAction;
-import org.cocos2d.actions.interval.CCMoveBy;
-import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.config.ccMacros;
-import org.cocos2d.layers.CCLayer;
-import org.cocos2d.nodes.CCDirector;
-import org.cocos2d.nodes.CCMotionStreak;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.nodes.CCTextureCache;
 import org.cocos2d.opengl.CCDrawingPrimitives;
 import org.cocos2d.particlesystem.CCParticleFire;
-import org.cocos2d.particlesystem.CCParticleMeteor;
 import org.cocos2d.particlesystem.CCParticleSystem;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
-import org.cocos2d.types.ccColor4B;
 import org.cocos2d.types.ccColor4F;
-
-import android.util.Log;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Joint;
@@ -68,12 +58,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	private CGRect selectionRect;
 	
 	private CCSprite thumbnailSprite;	
-	private CCSprite auraSprite;
 	private CCSpriteSheet auraSheet;
-	private CGPoint auraPosition;
-	private static float startAuraScale = 0.35f;
-	private static float endAuraScale = 1.0f;
-	private float auraScale;
 	private CCSprite arrowSprite;
 	private static float arrowScale = 1.5f;
 	private static float arrowAngleShift = -90;
@@ -92,12 +77,9 @@ public class SlimyJump extends Slimy implements ISelectable {
 	private CGPoint selectScreenEnd;
 	private CGPoint absoluteScreenStart;
 	
-	private boolean hasJumped;
-	
 	private float maxContactManifold;
 	
-	private CCParticleSystem emitter;
-	private CCSprite effectLayer = CCSprite.sprite("pf-01.png");
+	private CCParticleSystem emitter;	
 	
 	private float emitterStartSize;
 	private int numberOfJump = 0;
@@ -116,8 +98,6 @@ public class SlimyJump extends Slimy implements ISelectable {
 		this.selectionRect = CGRect.zero();
 		this.selectionRect.size.width = Default_Selection_Width;
 		this.selectionRect.size.height = Default_Selection_Height;
-		this.auraPosition = CGPoint.zero();
-		this.auraScale = endAuraScale - startAuraScale;
 		
 		this.jointStart = CGPoint.zero();
 		this.selectScreenStart = CGPoint.zero();
@@ -125,8 +105,8 @@ public class SlimyJump extends Slimy implements ISelectable {
 		this.absoluteScreenStart = CGPoint.zero();
 		this.maxContactManifold = (this.height / this.worldRatio) * 3;
 		
-		this.MinAuraSize = this.height + 10;
-		this.MaxAuraSize = this.height + 124;
+		SlimyJump.MinAuraSize = this.height + 10;
+		SlimyJump.MaxAuraSize = this.height + 124;
 		this.emitter = CCParticleFire.node();
 		this.emitter.setEmitterMode(CCParticleSystem.kCCPositionTypeRelative);		
 		this.emitter.setTexture(CCTextureCache.sharedTextureCache().addImage("fire.png"));
@@ -148,9 +128,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	}
 	
 	protected void computeTarget(CGPoint gameTouch) {
-		if (this.selected) {
-			float zoom = Level.currentLevel.getCameraManager().getCurrentZoom();
-			
+		if (this.selected) {						
 			if (this.selectStart == null) {
 				this.selectStart = CGPoint.zero();
 				this.computeScreenStart(this.getPosition());
@@ -321,11 +299,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 			this.selected = false;	
 			this.stopAura();
 		}
-	}
-	
-	private boolean isInSlimy(CGPoint gameTarget) {				
-		return CGRect.containsPoint(this.scaledRect, gameTarget);						
-	}		
+	}	
 		
 	public boolean isSelected() {
 		return this.selected;
@@ -334,16 +308,14 @@ public class SlimyJump extends Slimy implements ISelectable {
 	public void selectionStop(CGPoint gameReference) {		
 		if (this.selected && this.isActive()) {
 			this.computeTarget(gameReference);			
-			if (this.getBody() != null) {
-				// this.getBody().setAwake(true);				
+			if (this.getBody() != null) {				
 				if (!this.hasLanded) {
 					this.hasLanded = true;
 					this.waitAnim();
 				}
 				this.getBody().setLinearVelocity(new Vector2(0, 0));
 				Vector2 pos = this.getBody().getPosition();		
-				this.getBody().applyLinearImpulse(this.worldImpulse, pos);				
-				this.hasJumped = true;
+				this.getBody().applyLinearImpulse(this.worldImpulse, pos);
 				Sounds.playEffect(this.jumpSound[numberOfJump]);
 				this.numberOfJump++;
 				if(this.numberOfJump==5){
@@ -684,8 +656,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	}
 
 	@Override
-	public boolean isThumbnailAwaysOn() {
-		// TODO Auto-generated method stub
+	public boolean isThumbnailAwaysOn() {		
 		return false;
 	}
 

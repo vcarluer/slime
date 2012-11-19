@@ -1,12 +1,9 @@
 package gamers.associate.Slime.layers;
 
+import android.annotation.SuppressLint;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
-import gamers.associate.Slime.items.base.SpriteSheetFactory;
-import gamers.associate.Slime.items.custom.Gate;
-import gamers.associate.Slime.items.custom.GateFactory;
-import gamers.associate.Slime.items.custom.SlimyFactory;
 import gamers.associate.Slime.items.custom.SlimySuccess;
 import gamers.associate.Slime.items.custom.Star;
 import gamers.associate.Slime.levels.GamePlay;
@@ -27,7 +24,7 @@ import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 
-public class EndDifficultyGameLayer extends CCLayer {
+@SuppressLint("DefaultLocale") public class EndDifficultyGameLayer extends CCLayer {
 	private static CCScene scene;
 	private CCLabel lblScore;
 	private CCSprite starSprite;

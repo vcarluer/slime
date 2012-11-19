@@ -11,7 +11,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 import android.content.Context;
-import android.util.Log;
 
 public class GameInformation {
 	private int levelNum;
@@ -60,10 +59,6 @@ public class GameInformation {
 		if (this.levelDifficulty > this.maxLevelDifficulty) {
 			this.maxLevelDifficulty = this.levelDifficulty;
 		}
-	}
-	
-	private void setTotalScore(int score) {
-		this.setTotalScore(score, this.levelDifficulty);
 	}
 	
 	private void setTotalScore(int score, int levelDifficulty) {
