@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="12"
+   height="12"
+   id="svg4616"
+   version="1.1"
+   inkscape:version="0.48.1 "
+   sodipodi:docname="star-bronze.svg"
+   inkscape:export-filename="C:\Documents and Settings\clerc.RRC-RA\Bureau\__ Perso2\gamers associate 2\currwork\world-items\star-bronze.png"
+   inkscape:export-xdpi="120"
+   inkscape:export-ydpi="120">
+  <defs
+     id="defs4618">
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3827"
+       id="radialGradient4614"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-0.37757068,-0.69736821,0.47985363,-0.25980344,19.952647,-42.105901)"
+       cx="9.9846277"
+       cy="-42.752815"
+       fx="9.9846277"
+       fy="-42.752815"
+       r="22.724627" />
+    <linearGradient
+       id="linearGradient3827">
+      <stop
+         id="stop3829"
+         offset="0"
+         style="stop-color:#ffffff;stop-opacity:1;" />
+      <stop
+         id="stop3831"
+         offset="1"
+         style="stop-color:#b37532;stop-opacity:1;" />
+    </linearGradient>
+    <radialGradient
+       r="22.724627"
+       fy="-42.752815"
+       fx="9.9846277"
+       cy="-42.752815"
+       cx="9.9846277"
+       gradientTransform="matrix(-0.37757068,-0.69736821,0.47985363,-0.25980344,19.952647,-42.105901)"
+       gradientUnits="userSpaceOnUse"
+       id="radialGradient4639"
+       xlink:href="#linearGradient3827"
+       inkscape:collect="always" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="8.2344827"
+     inkscape:cx="-17.379155"
+     inkscape:cy="-2.234321"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1440"
+     inkscape:window-height="844"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata4621">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-369,-526.09552)">
+    <path
+       sodipodi:type="star"
+       style="color:#000000;fill:url(#radialGradient4639);fill-opacity:1;fill-rule:nonzero;stroke:#915d2a;stroke-width:2.33692241000000010;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3025"
+       sodipodi:sides="5"
+       sodipodi:cx="2.5"
+       sodipodi:cy="-36.003483"
+       sodipodi:r1="12.790502"
+       sodipodi:r2="23.255459"
+       sodipodi:arg1="0.82884906"
+       sodipodi:arg2="1.4571676"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 11.142857,-26.574912 -6.0060516,13.676918 -8.9331198,-11.972055 -14.8634936,-1.485694 8.625615,-12.19547 -3.180093,-14.595128 14.264043,4.43484 12.898088,-7.53459 0.190049,14.936352 11.15155,9.938494 z"
+       transform="matrix(-0.10852894,0.23370426,-0.23370426,-0.10852894,366.84426,528.16378)"
+       inkscape:export-filename="/home/guillaume/Documents/gamers associate/labo break/base/worlds-items/png/star-complete-01.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+  </g>
+</svg>
