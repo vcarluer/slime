@@ -377,4 +377,7 @@ public class Slimy extends GameItemPhysic implements IBurnable, IDissolvable, IE
 	public void removeSlimy() {		
 		Level.currentLevel.addItemToRemove(this);
 	}
+
+	public void detach(GameItemPhysic gameItem) {
+	}
 }

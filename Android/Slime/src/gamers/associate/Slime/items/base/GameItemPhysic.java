@@ -44,12 +44,8 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 	
 	@Override
 	public void destroy() {		
-		if (this.body != null) {
-			this.world.destroyBody(this.body);
-		}
-		
+		this.destroyBody();
 		this.world = null;
-		this.body = null;
 		super.destroy();
 	}
 	
@@ -57,7 +53,7 @@ public abstract class GameItemPhysic extends GameItemPhysicFx {
 		this.isPhysicDisabled = true;
 	}
 	
-	public void destroyBodyOnly() {
+	public void destroyBody() {
 		if (this.body != null) {
 			this.world.destroyBody(this.body);
 		}

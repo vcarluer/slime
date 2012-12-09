@@ -28,6 +28,7 @@ public class GameInformation {
 	private int totalCurrent;
 	private boolean lastIsHighScore;
 	private static boolean resetHighScores = SlimeFactory.resetHighScores;
+	private int worldId;
 	
 	public GameInformation() {		
 		this.maxLevelDifficulty = this.levelDifficulty = LevelDifficulty.Easy;
@@ -340,5 +341,15 @@ public class GameInformation {
 	
 	public boolean isLastHighScore() {
 		return this.lastIsHighScore;
+	}
+
+	public int getWorldId() {
+		// return worldId;
+		// todo: fix me!
+		return this.getDifficulty();
+	}
+
+	public void setWorldId(int worldId) {
+		this.worldId = worldId;
 	}
 }

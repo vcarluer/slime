@@ -2,7 +2,6 @@ package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.layers.EndDifficultyGameLayer;
 import gamers.associate.Slime.levels.GamePlay;
-import gamers.associate.Slime.levels.ILevelBuilder;
 import gamers.associate.Slime.levels.LevelDefinition;
 import gamers.associate.Slime.levels.LevelDefinitionParser;
 import gamers.associate.Slime.levels.LevelHome;
@@ -15,7 +14,7 @@ import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 
-public class LevelBuilderGenerator implements ILevelBuilder
+public class LevelBuilderGenerator extends AbstractLevelBuilder
 {	
 	private static boolean isDebug =  SlimeFactory.IsForceDiffDebug;
 	private static int forceDiff = SlimeFactory.ForceDiff;
@@ -29,13 +28,9 @@ public class LevelBuilderGenerator implements ILevelBuilder
 	private LevelHome home = new LevelHome();
 	private LevelDefinitionGenerator levelDef = new LevelDefinitionGenerator();
 	private LevelDefinitionParser levelparser = new LevelDefinitionParser(fileName, true);
-	private boolean firstBuild;	
-	private GameInformation gameInfo;
-	private int totalStar;
-	private boolean isBoss;
+	private boolean firstBuild;		
 	
-	public LevelBuilderGenerator() {		
-		this.gameInfo = SlimeFactory.GameInfo;
+	public LevelBuilderGenerator() {				
 		this.levelparser.setLocalStorage(true);		
 		this.firstBuild = true;
 		// always default id... Used for reset all
@@ -47,6 +42,8 @@ public class LevelBuilderGenerator implements ILevelBuilder
 		if (id != LevelHome.Id)
 		{			
 			this.levelDef.setGamePlay(gamePlay);
+			level.setLevelDefinition(this.levelDef);
+
 			if (this.levelDef.getGamePlay() == GamePlay.TimeAttack) {
 				this.gameInfo.setLevel(Integer.valueOf(id));
 			}
@@ -100,7 +97,6 @@ public class LevelBuilderGenerator implements ILevelBuilder
 					this.levelDef.buildLevel(level);
 				}
 
-				level.setLevelDefinition(this.levelDef);
 				this.levelparser.storeLevel(level);
 				
 				this.levelDef.resetAndSave();								
@@ -118,7 +114,6 @@ public class LevelBuilderGenerator implements ILevelBuilder
 
 	public String getNext(String paramString)
 	{
-		// Will depend on gameplay
 		String next = null;
 		if (this.levelDef.getGamePlay() == GamePlay.Survival) {
 			next = defaultId;
@@ -166,57 +161,8 @@ public class LevelBuilderGenerator implements ILevelBuilder
 		}
 	}
 	
-	public void resetAll() {
-		this.levelDef.resetAllAndSave();
-		this.resetStoredCache();
-		this.gameInfo.resetDifficulty(this.gameInfo.getDifficulty());			
-	}
-	
-	public void resetStoredCache() {
-		this.levelparser.resetStorage();;
-	}
-	
-	public void resetAllAndRun() {
-		this.resetAll();
-		Level.get(LevelBuilderGenerator.defaultId, true, this.levelDef.getGamePlay());
-	}
-	
-	public LevelDefinitionParser getParser() {
-		return this.levelparser;
-	}
-	
-	public boolean hasBegun() {
-		return this.levelparser.isStored();
-	}
-	
-	public void start(GamePlay gamePlay) {
-		this.firstBuild = true;
-		Level.get(LevelBuilderGenerator.defaultId, true, gamePlay);		
-	}
-	
 	public void start() {
 		this.firstBuild = true;
 		Level.get(LevelBuilderGenerator.defaultId, true, this.levelDef.getGamePlay());		
-	}
-
-	public int getTotalStar() {
-		return this.totalStar;
-	}
-
-	public void addStar() {
-		this.totalStar++;
-	}
-
-	public void resetTotalStar() {
-		this.totalStar = 0;
-	}
-
-	public boolean isBoss() {
-		return isBoss;
-	}
-	
-	private boolean isTut() {
-		return this.gameInfo.getDifficulty() == LevelDifficulty.Easy
-				&& this.gameInfo.getLevelNum() <= LevelGraphGeneratorTutorial.tutorialCount;
-	}
+	}	
 }

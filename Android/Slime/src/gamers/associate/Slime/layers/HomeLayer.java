@@ -30,26 +30,19 @@ import org.cocos2d.types.CGPoint;
 import android.annotation.SuppressLint;
 import android.view.MotionEvent;
 
-@SuppressLint("DefaultLocale") public class HomeLayer extends CCLayer {
+@SuppressLint("DefaultLocale") 
+public class HomeLayer extends CCLayer {
 	public static final int shareSize = 64;
 	private static HomeLayer layer;	
-	// private CCMenuItemSprite restartMenu;
 	private CCLabel lblLevel;
 	private CCLabel lblScore;
 	private CCSprite starSprite;
-	//private CCSprite arrow;
-	private CCMenu menuInfo;
-	//private CCSprite diffSpr;
 	private SpawnPortal spawner;
 	
 	private static float baseShift = 150f; //100f;
 	private static float shiftTitle = baseShift;
 	private static float shiftMenu  = shiftTitle - 150f; // Slime height = 160 / 2 + 20
-	private static float shiftInfo  = shiftMenu - 100f;
-	private static float shiftScore = shiftMenu - 100f; // shiftInfo - 70f;
-	private static float paddingDiff = 50f;
-	
-	private float shiftArrow = -60f;
+	private static float shiftScore = shiftMenu - 100f; // shiftInfo - 70f;	
 	
 	private CCSprite titleSprite;
 	private CCMenu restartMenu;
@@ -59,7 +52,6 @@ import android.view.MotionEvent;
 	private float shareScale;
 	
 	private CCLayer top;
-	private static boolean firstLoadDone;
 	
 	public static HomeLayer get() {
 		if (layer == null) {
@@ -70,21 +62,14 @@ import android.view.MotionEvent;
 	}
 	
 	protected HomeLayer() {
-		super();
-		
-		
+		super();		
 		
 		this.setIsTouchEnabled(true);
 		
 		CCSprite playSpriteNorm = CCSprite.sprite("control-play.png", true);
 		CCSprite playSpriteSel = CCSprite.sprite("control-play.png", true);
 		CCMenuItemSprite playMenu = CCMenuItemSprite.item(playSpriteNorm, playSpriteSel, this, "selectPlay");
-		// playMenu.setScale(SlimeFactory.SGSDensity);
-		/*CCSprite restartSprite = CCSprite.sprite("control-restart.png", true);
-		this.restartMenu = CCMenuItemSprite.item(restartSprite, restartSprite, this, "goRestart");
-		restartMenu.setScale(0.5f);*/			
 		
-		// this.menu = CCMenu.menu(playMenu, this.restartMenu);		
 		this.menu = CCMenu.menu(playMenu);
 		this.menu.alignItemsHorizontally(50);
 		this.menu.setPosition(CGPoint.make(
@@ -108,19 +93,6 @@ import android.view.MotionEvent;
 				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftScore
 				));
 		this.addChild(this.starSprite);				
-		
-		/*this.arrow = CCSprite.sprite("arrow.png");
-		float arrowSize = 50f;
-		float as = arrowSize / 69;
-		this.arrow.setScale(as);
-		this.addChild(this.arrow);*/
-	}
-	
-	public void changeDifficulty(Object sender) {
-		this.nextDoNotStopMusic = true;
-		CCFadeTransition transition = CCFadeTransition.transition(0.5f, ChangeDifficultyLayer.getScene());
-//		CCTransitionScene transition = CCSlideInTTransition.transition(0.5f, ChangeDifficultyLayer.getScene());
-		CCDirector.sharedDirector().replaceScene(transition);
 	}
 
 	@Override
@@ -150,8 +122,7 @@ import android.view.MotionEvent;
 		float left = - CCDirector.sharedDirector().winSize().getWidth() / 2 + ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) / 2 ;
 		float top = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY) / 2;
 		restartItem.setPosition(left, top);
-		this.restartMenu = CCMenu.menu(restartItem);		
-//		this.addChild(this.restartMenu);
+		this.restartMenu = CCMenu.menu(restartItem);
 		
 		// share button
 		shareScale = 1.0f;
@@ -166,19 +137,11 @@ import android.view.MotionEvent;
 		String lvlMax = String.valueOf(SlimeFactory.GameInfo.getLevelMax());
 		String info = diff + " " + lvl + " / " + lvlMax;
 		this.lblLevel = CCLabel.makeLabel(info.toUpperCase().toUpperCase(), "fonts/Slime.ttf", 45f);		
-		/*CCMenuItemLabel menuLevelInfo = CCMenuItemLabel.item(this.lblLevel, this, "changeDifficulty");		
-		menuLevelInfo.setPosition(
-				restartItem.getPosition().x + restartSprite.getContentSize().width / 2 + this.lblLevel.getContentSize().width / 2 + PauseLayer.PaddingX, 
-				CCDirector.sharedDirector().winSize().getHeight() / 2 - this.lblLevel.getContentSize().height + PauseLayer.PaddingY
-				);
-		this.menuInfo = CCMenu.menu(menuLevelInfo);
-		this.addChild(menuInfo);					*/	
 		this.lblLevel.setPosition(
 				CCDirector.sharedDirector().winSize().width / 2 + restartItem.getPosition().x + restartSpriteN.getContentSize().width / 2 + this.lblLevel.getContentSize().width / 2 + PauseLayer.PaddingX, 
 				CCDirector.sharedDirector().winSize().height / 2 + CCDirector.sharedDirector().winSize().getHeight() / 2 - this.lblLevel.getContentSize().height + PauseLayer.PaddingY
 				);
 		this.lblLevel.setColor(SlimeFactory.ColorSlime);
-//		this.addChild(this.lblLevel);
 		
 		String score = String.valueOf(SlimeFactory.GameInfo.getTotalScore());
 		this.lblScore.setString(score.toUpperCase());
@@ -191,47 +154,8 @@ import android.view.MotionEvent;
 				this.starSprite.getPosition().y
 				));
 		
-		/*this.arrow.setPosition(CGPoint.make(
-				CCDirector.sharedDirector().winSize().getWidth() / 2 - (this.lblLevel.getContentSize().width / 2) + this.shiftArrow,
-				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftInfo
-				));				
-		CCMoveBy mb = CCMoveBy.action(0.2f, CGPoint.make(10, 0));
-		CCSequence seq = CCSequence.actions(mb, mb.reverse());
-		CCRepeatForever rep = CCRepeatForever.action(seq);
-		this.arrow.runAction(rep);				
-		
-		this.diffSpr = ChangeDifficultyLayer.getLevelSprite(SlimeFactory.GameInfo.getDifficulty(), true);
-		this.diffSpr.setPosition(CGPoint.make(
-				CCDirector.sharedDirector().winSize().getWidth() / 2 + (133 / 2) + paddingDiff,
-				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftMenu
-				));
-		this.addChild(this.diffSpr);*/
-		
 		this.starSprite.runAction(SlimeFactory.Star.getAnimation(Star.Anim_Wait));
-				
-//		this.titleSprite = CCSprite.sprite("slime-attack.png");
-//		this.addChild(this.titleSprite);
-		
-//		float scale = 0.5f;
-//		this.titleSprite.setScale(scale);
-//		this.titleSprite.setPosition(CGPoint.make(
-//				CCDirector.sharedDirector().winSize().width - (this.titleSprite.getContentSize().width / 2) * scale - PauseLayer.PaddingX,
-//				CCDirector.sharedDirector().winSize().height - (this.titleSprite.getContentSize().height / 2) * scale - PauseLayer.PaddingY
-//				)); // + shiftTitle
-		// this.titleSprite.setAnchorPoint(0, 0);
-//		this.titleSprite.setPosition(
-//				CCDirector.sharedDirector().winSize().width / 2,
-//				CCDirector.sharedDirector().winSize().height / 2 + shiftTitle
-//				);
-//		CCRotateTo r0 = CCRotateTo.action(0, 0);		
-//		CCDelayTime d = CCDelayTime.action(0.5f);
-//		CCRotateBy r1 = CCRotateBy.action(0.3f, 25f);
-//		CCRotateBy r2 = CCRotateBy.action(0.3f, -5f);
-//		CCDelayTime d1 = CCDelayTime.action(0.1f);
-//		CCRotateBy r3 = CCRotateBy.action(0.3f, 5f);		
-//		CCSequence seqTitle = CCSequence.actions(r0, d, r1, r2, d1, r3);
-//		this.titleSprite.runAction(seqTitle);
-		
+			
 		Sounds.playMusic(R.raw.menumusic, true);
 		
 		this.temp();
@@ -244,27 +168,7 @@ import android.view.MotionEvent;
 		this.top = CCLayer.node();
 		this.addChild(this.top, 1);
 		this.top.addChild(this.titleSprite);
-//		if (!firstLoadDone) {					
-//			this.titleSprite.setPosition(CCDirector.sharedDirector().winSize().width / 2, CCDirector.sharedDirector().winSize().height / 2 + 115f);						
-//			this.titleSprite.setScale(10f * SlimeFactory.SGSDensity);
-//			// CCDelayTime delay = CCDelayTime.action(0.5f);
-//			CCScaleTo sc = CCScaleTo.action(0.5f, 1f , 1f);
-//			CCDelayTime d2 = CCDelayTime.action(2f);
-//			CCCallFunc call = CCCallFunc.action(this, "endTitle");
-//			
-//			CCSequence act = CCSequence.actions(sc, d2, call);
-//			this.titleSprite.runAction(act);
-//			firstLoadDone = true;
-//		} else {
-//			float scale = 0.5f * SlimeFactory.SGSDensity;
-//			this.titleSprite.setScale(scale);
-//			this.titleSprite.setPosition(
-//					CCDirector.sharedDirector().winSize().width - (this.titleSprite.getContentSize().width / 2) * scale - PauseLayer.PaddingX,
-//					CCDirector.sharedDirector().winSize().height - (this.titleSprite.getContentSize().height / 2) * scale - PauseLayer.PaddingY
-//					);
-//			this.actionTitle();
-//		}
-		
+
 		this.titleSprite.setPosition(CCDirector.sharedDirector().winSize().width / 2, CCDirector.sharedDirector().winSize().height / 2 + 150f);						
 		this.titleSprite.setScale(10f * SlimeFactory.SGSDensity);
 		CCScaleTo sc = CCScaleTo.action(0.5f, 1f , 1f);
@@ -275,14 +179,7 @@ import android.view.MotionEvent;
 	
 	public void endTitle() {
 		float scale = 0.5f  * SlimeFactory.SGSDensity;
-//		CCMoveTo mt = CCMoveTo.action(0.2f, CGPoint.ccp(
-//				CCDirector.sharedDirector().winSize().width - (this.titleSprite.getContentSize().width / 2) * scale - PauseLayer.PaddingX,
-//				CCDirector.sharedDirector().winSize().height - (this.titleSprite.getContentSize().height / 2) * scale - PauseLayer.PaddingY
-//				));
 		CCScaleTo sc2 = CCScaleTo.action(0.2f, scale);
-//		CCCallFunc call = CCCallFunc.action(this, "actionTitle");
-//		CCSequence seq = CCSequence.actions(sc2, call);
-//		this.titleSprite.runAction(mt);
 		this.titleSprite.runAction(sc2);
 	}
 	
@@ -298,14 +195,11 @@ import android.view.MotionEvent;
 	}
 	
 	@Override
-	public void onExit() {
-		// this.removeChild(this.menuInfo, true);
+	public void onExit() {		
 		this.removeChild(this.lblLevel, true);
-		// this.removeChild(this.titleSprite, true);
 		this.removeChild(this.restartMenu, true);	
 		this.removeChild(this.shareMenu, true);
 		this.removeChild(this.top, true);
-		// this.removeChild(this.diffSpr, true);
 		
 		if (!this.nextDoNotStopMusic) {
 			Sounds.pauseMusic();
@@ -318,24 +212,8 @@ import android.view.MotionEvent;
 	}
 
 	public void selectPlay(Object sender) {		
-//		Vibe.vibrate();
-//		Sounds.playEffect(R.raw.menuselect, true);
-//		Sounds.stopMusic();
-//		
-//		if (SlimeFactory.GameInfo.getLevelNum() == 0) {
-//			SlimeFactory.ContextActivity.runIntro();
-//		} else {
-//			SlimeFactory.LevelBuilder.start();
-//		}
-		
 		CCTransitionScene transition = CCFadeTransition.transition(1.0f, ChooseModeLayer.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
-	}
-	
-	public void goRestart(Object sender) {
-		Sounds.playEffect(R.raw.menuselect, true);		
-		// Sounds.pauseMusic();
-		SlimeFactory.LevelBuilder.resetAllAndRun();
 	}
 
 	public SpawnPortal getSpawner() {

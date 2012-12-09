@@ -51,6 +51,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public abstract class SlimeFactory {
 	// Debug vars
+	public static final boolean LogOn = true;
 	public static boolean IsLevelDebugMode = false;
 	public static boolean IsForceDiffDebug =  false;
 	public static int ForceDiff = 8;
@@ -62,8 +63,7 @@ public abstract class SlimeFactory {
 	public static final int MaxSurvival = LevelDifficulty.Hard;
 	public static final boolean IsForceMaxWorld = false;
 	public static final int MaxWorld = LevelDifficulty.Extrem; // Should be world here?
-	public static final boolean resetHighScores = false;
-	public static final boolean LogOn = true;
+	public static final boolean resetHighScores = false;	
 	
 	// end debug ---
 	private static final float SGSDensityBase = 1.5f; // Samsung Galaxy S density

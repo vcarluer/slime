@@ -102,7 +102,7 @@ public class GoalPortal extends GameItemPhysic implements ISelectable {
 			Slimy slimy = (Slimy) item.getContactWith();
 			if (slimy.isAlive()) {
 				slimy.win();
-				slimy.destroyBodyOnly();			
+				slimy.destroyBody();			
 				
 				if (Level.currentLevel.win(false)) {					
 					CCCallFunc callback = CCCallFunc.action(this, "endAnimDone");

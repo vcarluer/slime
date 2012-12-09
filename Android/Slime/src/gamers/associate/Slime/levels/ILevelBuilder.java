@@ -11,11 +11,7 @@ public interface ILevelBuilder {
 	ArrayList<LevelDefinition> getNormalLevels();
 	void build(Level level, LevelDefinition levelDef);
 	void rebuild(Level level, LevelDefinition levelDef);
-	void resetAll();
-	void resetAllAndRun();
-	boolean hasBegun();
 	void start();
-	void start(GamePlay gamePlay);
 	int getTotalStar();
 	void addStar();
 	void resetTotalStar();

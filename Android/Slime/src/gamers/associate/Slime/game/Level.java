@@ -2,6 +2,7 @@ package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.items.base.GameItem;
+import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.IElectrificable;
 import gamers.associate.Slime.items.base.ISelectable;
 import gamers.associate.Slime.items.base.ITrigerable;
@@ -35,6 +36,8 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.opengl.CCBitmapFontAtlas;
 import org.cocos2d.types.CGPoint;
 
+import android.annotation.SuppressLint;
+
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -42,6 +45,7 @@ import com.badlogic.gdx.physics.box2d.World;
  * @author    vince
  * @uml.dependency   supplier="gamers.associate.Slime.GameItem"
  */
+@SuppressLint("DefaultLocale") 
 public class Level implements IGameItemHandler {
 	public static boolean DebugMode = SlimeFactory.IsLevelDebugMode;
 	public static boolean isInit;	
@@ -64,10 +68,7 @@ public class Level implements IGameItemHandler {
 	protected Vector2 gravity;
 	protected float worldRatio = 32f;
 	protected Hashtable<UUID, GameItem> items;
-	protected ArrayList<ISelectable> selectables;
-	
-	// private static final float bgWidth = 1467f;
-	// private static final float bgHeight = 800f;
+	protected ArrayList<ISelectable> selectables;	
 	
 	public static String ManualDimension = "Manual";
 	private String maxDimension = ManualDimension;
@@ -160,30 +161,14 @@ public class Level implements IGameItemHandler {
 		this.backgroundLayer.setAnchorPoint(0, 0);				
         
 		this.gameLayer = CCLayer.node();
-		// this.gameLayer = CCParallaxNode.node();
 		this.pauseLayer = new PauseLayer();
 		this.endLevelLayer = new EndLevelLayer();				
 		
 		this.gameLayer.addChild(this.backgroundLayer, 0);
 		this.gameLayer.addChild(this.levelLayer, 1);			
 		this.levelOrigin = CGPoint.make(0, 0);
-		this.gameLayer.setAnchorPoint(0, 0);
-		
-		// create a void node, a parent node
-        // CCParallaxNode voidNode = CCParallaxNode.node();
-        
-		// background image is moved at a ratio of 0.4x, 0.5y
-		/*this.gameLayer.addChild(this.backgroundLayer, 0, bgRatioX, bgRatioY, 
-				- CCDirector.sharedDirector().winSize().width / 2, 
-				- CCDirector.sharedDirector().winSize().height / 2); // Magic offset = level origin offset after build
-*/
-        // tiles are moved at a ratio of 2.2x, 1.0y
-        // voidNode.addChild(this.gameLayer, 1, 2.2f, 1.0f, 0, -200);
-		// this.gameLayer.addChild(this.levelLayer, 1, 1, 1, 0, 0);
-		
-		// this.scene.addChild(this.backgroundLayer, -1);
+		this.gameLayer.setAnchorPoint(0, 0);		
 		this.scene.addChild(this.gameLayer, 0);
-        // this.scene.addChild(voidNode, 0);
 		this.isHudEnabled = true;
 		this.scene.addChild(this.hudLayer, this.hudZ);
 		this.scene.addChild(this.pauseLayer, this.hudZ);
@@ -256,15 +241,7 @@ public class Level implements IGameItemHandler {
 		this.hudLayer.attachToFactory();
 	}
 	
-	public void reload() {
-		// currentLevel.loadLevel(this.currentLevelName);
-		
-		// currentLevel.loadLevel(this.levelDefinition);
-		
-		// Set camera right based on screen size
-		// currentLevel.getCameraManager().setCameraView();
-		//this.setStartCamera();
-		
+	public void reload() {		
 		this.preBuild();
 		SlimeFactory.GameInfo.removeLastScore();
 		SlimeFactory.LevelBuilder.rebuild(this, this.levelDefinition);
@@ -405,8 +382,7 @@ public class Level implements IGameItemHandler {
 		this.setIsTouchEnabled(true);
 		this.setIsHudEnabled(true);
 		this.endLevelLayer.setVisible(false);
-		this.levelLayer.reset();		
-		// this.disablePauseLayer();
+		this.levelLayer.reset();
 		
 		this.setLevelOrigin(CGPoint.zero());
 		this.cameraManager.cancelAll();
@@ -462,30 +438,6 @@ public class Level implements IGameItemHandler {
 		this.world = new World(this.gravity, true);
 		this.contactManager = new ContactManager();
 		this.world.setContactListener(this.contactManager);
-		// Main game item spritesheet		
-		/*SpriteSheetFactory.add("labo", Level.zMid);
-		SpriteSheetFactory.add("slime", Level.zFront);*/
-		
-		// Background
-		// CCSpriteSheet spriteSheet = SpriteSheetFactory.getSpriteSheet("decor", true);		
-		// Sprite too big for VM in UbuntuRox		
-		// this.backgroundLayer.addChild(spriteSheet);
-		//this.backgroundLayer.setRotation(-90f);				
-		//this.backgroundLayer.setScale(2.0f);
-		// this.backgroundSprite = CCSprite.sprite(CCSpriteFrameCache.sharedSpriteFrameCache().getSpriteFrame("decor.png"));		
-		
-		/*this.backgroundSprite = CCSprite.sprite("background-level-01.png");
-		this.backgroundSprite.setAnchorPoint(0, 0);
-		this.backgroundLayer.addChild(this.backgroundSprite);*/
-		
-		// spriteSheet.addChild(this.backgroundSprite);				
-		
-		// hud
-//		this.label = CCLabel.makeLabel("Hud !", "DroidSans", 16);		
-//		this.hudLayer.addChild(this.label);
-//		label.setPosition(
-//				CGPoint.ccp(20, 
-//				CCDirector.sharedDirector().winSize().getHeight() - 20));
 		
 		// Items
 		this.attachToFactory();
@@ -597,18 +549,6 @@ public class Level implements IGameItemHandler {
 	}
 		
 	public void setPause(boolean value) {		
-//		if (value) {			
-//			if (!this.isPaused) {
-//				this.levelLayer.pauseSchedulerAndActions();				
-//			}
-//		}
-//		else
-//		{
-//			if (this.isPaused) {
-//				this.levelLayer.resumeSchedulerAndActions();
-//			}
-//		}
-				
 		for(GameItem item : this.items.values()) {
 			item.setPause(value);
 		}
@@ -618,7 +558,6 @@ public class Level implements IGameItemHandler {
 		if (this.gamePlay != null) {
 			this.gamePlay.setPause(this.isPaused);
 		}
-//		this.setIsTouchEnabled(!this.isPaused);
 	}
 	
 	public void togglePause() {
@@ -635,28 +574,6 @@ public class Level implements IGameItemHandler {
 		this.disablePauseLayer();		
 		this.disableEndLevelLayer();
 	}
-	
-		// Test
-		/*if (this.goalPortal.isWon()) {						
-			if (!wonLaunched) {
-				this.label.setString("You win!");
-				CCScaleBy scale = CCScaleBy.action(1, 3);
-				
-				this.label.runAction(CCSequence.actions(scale, scale.reverse(), CCCallFuncN.action(this.levelLayer, "resetWon")));				
-				wonLaunched = true;
-			}
-		}
-	}
-	
-	public void resetWon() {
-		this.goalPortal.setWon(false);
-		this.wonLaunched = false;
-		this.label.setString("Try again");
-	}
-	
-	private Boolean wonLaunched = false;
-	*/
-	// Fin test
 		
 	public World getWorld() {
 		return this.world;
@@ -826,7 +743,6 @@ public class Level implements IGameItemHandler {
 	
 	public void activateSelection(CGPoint gameReference) {
 		if (this.selectedItem != null) {
-			// CGPoint gameTarget = this.cameraManager.getGamePoint(screenTarget);
 			this.selectedItem.selectionStop(gameReference);
 			
 			if (this.selectedItem instanceof GameItem) {
@@ -847,14 +763,12 @@ public class Level implements IGameItemHandler {
 	public void simpleSelect(CGPoint gameReference) {
 		if (this.selectedItem != null) {
 			if (this.isPaused) {
-				// this.cameraManager.centerCameraOn(this.selectedItem.getPosition());
 				if (this.selectedItem instanceof GameItem) {				
 					// Return true if auto or gameplay simpleSelect camera needed
 					if (this.selectedItem.simpleSelect()) {
 						if (this.gamePlay == null) {
 							GameItem center = (GameItem)this.selectedItem;
 							this.cameraManager.moveInterpolateTo(center, 0.3f);
-							// this.cameraManager.zoomInterpolateTo(center, 1.0f, 0.3f);
 						}
 						else {
 							this.gamePlay.simpleSelect();
@@ -973,21 +887,10 @@ public class Level implements IGameItemHandler {
 	}		
 	
 	public void goHome() {
-		// CCDirector.sharedDirector().replaceScene(LevelSelection.get().getScene());
-		// this.loadLevel(LevelBuilder.LevelSelection);
 		this.loadLevel(LevelHome.Id, GamePlay.None);
-//		CCTransitionScene transition = CCFadeTransition.transition(0.5f, currentLevel.getScene());
-//		CCDirector.sharedDirector().replaceScene(transition);
-		// Sounds.resumeMusic();
 	}
 	
 	public void goNext() {
-		// String next = SlimeFactory.LevelBuilder.getNext(this.currentLevelName);		
-//		if (next != null) {
-//			this.loadLevel(next);
-//		}
-		
-		// this.loadLevel(LevelBuilder.LevelSelection);
 		String next = SlimeFactory.LevelBuilder.getNext(this.currentLevelName);
 		if (next != null) {
 			get(next, true, this.gamePlay.getType());
@@ -1085,7 +988,6 @@ public class Level implements IGameItemHandler {
 				if (this.getGamePlay().getType() == GamePlay.Survival) {
 					this.showGameOver();
 				} else {
-					// this.showEndLevel(gameOverTxt);
 				}
 			}
 		}
@@ -1127,7 +1029,6 @@ public class Level implements IGameItemHandler {
 	}
 	
 	public Boolean hasNext() {
-		// return SlimeFactory.LevelBuilder.getNext(this.currentLevelName) != null;
 		return true;
 	}
 	
@@ -1211,25 +1112,10 @@ public class Level implements IGameItemHandler {
 	public void setPaused(boolean isPaused) {
 		this.isPaused = isPaused;
 	}
-
-	public void shiftAll(int xShift, int yShift) {
-		/*for(GameItem item : this.items.values()) {
-			// item.shift(xShift, yShift)
-		}*/
-	}
 	
 	public void setLevelOrigin(CGPoint origin) {
-		this.levelOrigin = origin;
-		// this.gameLayer.setAnchorPoint(this.levelOrigin);
-		// this.gameLayer.setPosition(origin.x, origin.y);
-		/*if (this.backgroundSprite != null) {
-			this.backgroundSprite.setPosition(origin.x, origin.y);
-		}*/
-		
+		this.levelOrigin = origin;				
 		this.backgroundLayer.setPosition(origin.x, origin.y);
-//		this.gameLayer.addChild(this.backgroundLayer, -1, bgRatioX, bgRatioY, 
-//				origin.x, 
-//				origin.y);
 	}
 
 	public String getMaxDimension() {
@@ -1340,5 +1226,15 @@ public class Level implements IGameItemHandler {
 	
 	public List<Slimy> aliveList() {
 		return this.aliveSlimyList;
+	}
+	
+	public void detachSlimies(GameItemPhysic gameItem) {
+		for(Slimy slimy : this.aliveSlimyList) {
+			slimy.detach(gameItem);
+		}
+	}
+
+	public LevelDefinition getLevelDeginition() {
+		return this.levelDefinition;
 	}
 }

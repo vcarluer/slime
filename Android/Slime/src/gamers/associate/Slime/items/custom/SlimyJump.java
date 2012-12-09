@@ -8,6 +8,7 @@ import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.items.base.GameItemCocos;
+import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.ISelectable;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 
@@ -76,6 +77,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	private CGPoint selectScreenStart;
 	private CGPoint selectScreenEnd;
 	private CGPoint absoluteScreenStart;
+	private GameItemPhysic contactWith;
 	
 	private float maxContactManifold;
 	
@@ -328,6 +330,8 @@ public class SlimyJump extends Slimy implements ISelectable {
 				if (this.currentJoint != null) {
 					this.world.destroyJoint(this.currentJoint);
 					this.currentJoint = null;
+					this.currentJointDef = null;
+					this.contactWith = null;
 				}
 			}
 		}		
@@ -541,6 +545,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 						this.currentJoint = this.world.createJoint(this.currentJointDef);
 						
 						this.stickHandled = true;
+						this.contactWith = contact.getContactWith();
 						//this.getBody().setAwake(false);
 					}
 				}
@@ -623,6 +628,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 		
 		this.currentJoint = null;
 		this.currentJointDef = null;
+		this.contactWith = null;
 	}
 
 	public boolean simpleSelect() {
@@ -633,13 +639,10 @@ public class SlimyJump extends Slimy implements ISelectable {
 	 * @see gamers.associate.Slime.items.base.GameItemPhysic#destroyBodyOnly()
 	 */
 	@Override
-	public void destroyBodyOnly() {
-		if (this.currentJoint != null) {
-			this.world.destroyJoint(this.currentJoint);			
-		}
+	public void destroyBody() {
+		detachCurrentJoin();
 		
-		this.currentJoint = null;
-		super.destroyBodyOnly();						
+		super.destroyBody();						
 	}
 
 	/* (non-Javadoc)
@@ -648,11 +651,27 @@ public class SlimyJump extends Slimy implements ISelectable {
 	@Override
 	protected void prekill() {
 		super.prekill();
+		detachCurrentJoin();
+	}
+
+	protected void detachCurrentJoin() {
 		if (this.currentJoint != null) {
 			this.world.destroyJoint(this.currentJoint);			
 		}
 		
 		this.currentJoint = null;
+		this.currentJointDef = null;
+		this.contactWith = null;
+	}
+
+	@Override
+	public void detach(GameItemPhysic gameItem) {
+		super.detach(gameItem);
+		if (this.currentJoint != null) {
+			if (this.contactWith != null && this.contactWith.getId().equals(gameItem.getId())) {
+				this.detachCurrentJoin();
+			}
+		}
 	}
 
 	@Override

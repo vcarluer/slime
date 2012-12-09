@@ -1,7 +1,6 @@
 package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.levels.GamePlay;
-import gamers.associate.Slime.levels.ILevelBuilder;
 import gamers.associate.Slime.levels.ITimeAttackLevel;
 import gamers.associate.Slime.levels.LevelDefinition;
 import gamers.associate.Slime.levels.LevelHome;
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class LevelBuilder implements ILevelBuilder {
+public class LevelBuilder extends AbstractLevelBuilder {
 	public static String LevelSelection = "LevelMenu";
 	public static String LevelExtension =".slime";
 	private static HashMap<String, LevelDefinition> levels;
@@ -60,6 +59,7 @@ public class LevelBuilder implements ILevelBuilder {
 	
 	public void build(Level level, String levelName, GamePlay gamePlay) {
 		LevelDefinition levelDef = levels.get(levelName);
+		levelDef.setGamePlay(gamePlay);
 		build(level, levelDef);
 	}
 	
@@ -109,52 +109,6 @@ public class LevelBuilder implements ILevelBuilder {
 	@Override
 	public void rebuild(Level level, LevelDefinition levelDef) {
 		this.build(level, levelDef);
-	}
-
-	@Override
-	public void resetAll() {
-		// None for now
-	}
-
-	@Override
-	public boolean hasBegun() {		
-		return true;
-	}
-
-	@Override
-	public void resetAllAndRun() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public int getTotalStar() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void addStar() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void resetTotalStar() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean isBoss() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void start(GamePlay gamePlay) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

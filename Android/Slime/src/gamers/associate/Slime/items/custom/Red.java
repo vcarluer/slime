@@ -325,7 +325,7 @@ public class Red extends GameItemPhysic implements ISelectable {
 		Slimy slimy = (Slimy) Level.currentLevel.getStartItem();
 		if (slimy.isAlive() && this.isBoss()) {
 			slimy.win();
-			slimy.destroyBodyOnly();					
+			slimy.destroyBody();					
 		}	
 		
 		boolean go = true;
