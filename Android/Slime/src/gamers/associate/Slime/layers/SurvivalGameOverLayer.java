@@ -22,6 +22,7 @@ public class SurvivalGameOverLayer extends CCLayer {
 	private CCLabel gameOverLabel;
 	private CCMenu backMenu;
 	private CCLabel newHighScore;
+	private CCLabel newUnlock;
 	private CCMenu shareMenu;
 	
 	public static CCScene getScene() {
@@ -41,13 +42,18 @@ public class SurvivalGameOverLayer extends CCLayer {
 		this.gameOverLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + 100 * SlimeFactory.Density);
 		this.scoreLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY());
 		this.newHighScore = CCLabel.makeLabel(" ", "fonts/Slime.ttf", 42f* SlimeFactory.Density);
-		this.newHighScore.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() - 100 * SlimeFactory.Density);
+		this.newHighScore.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() - 90 * SlimeFactory.Density);
 		this.newHighScore.setRotation(-15f);
 		this.newHighScore.setColor(ccColor3B.ccc3(255, 0, 0));
+		
+		this.newUnlock = CCLabel.makeLabel(" ", "fonts/Slime.ttf", 32f* SlimeFactory.Density);
+		this.newUnlock.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + 45 * SlimeFactory.Density);
+		this.newUnlock.setColor(SlimeFactory.ColorSlimeLight);
 		
 		this.addChild(this.gameOverLabel);
 		this.addChild(this.scoreLabel);
 		this.addChild(this.newHighScore);
+		this.addChild(this.newUnlock);
 		
 		this.addChild(this.backMenu);
 	}
@@ -59,14 +65,34 @@ public class SurvivalGameOverLayer extends CCLayer {
 			this.newHighScore.setScale(10);
 			CCScaleTo scaleTo = CCScaleTo.action(0.7f, 1.0f);
 			this.newHighScore.runAction(scaleTo);
-			
-			this.shareMenu = HomeLayer.getNewShareButton(
-					"New high score in Slime Attack survival mode! " + String.valueOf(SlimeFactory.GameInfo.getCurrentScore()) + " in " + LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty()) + " " + Sharer.twitterTag, 
-					1.0f, - this.scoreLabel.getContentSize().width / 2f - 25 - HomeLayer.shareSize / 2f, 0);
-			this.addChild(this.shareMenu);
 		} else {
 			this.newHighScore.setString(" ");
 		}
+		
+		boolean newMode = false;
+		String modeText = "";
+		if (SlimeFactory.GameInfo.consumeNewUnlockSurvival()) {
+			newMode = true;
+			modeText = LevelDifficulty.getText(SlimeFactory.GameInfo.getUnlockedSurvival());
+			this.newUnlock.setString(("New mode unlocked! " + modeText).toUpperCase());
+			this.newUnlock.setScale(10);
+			CCScaleTo scaleTo = CCScaleTo.action(0.3f, 1.0f);
+			this.newUnlock.runAction(scaleTo);
+		} else {
+			this.newUnlock.setString(" ");
+		}
+		
+		if (!newMode) {
+			this.shareMenu = HomeLayer.getNewShareButton(
+					"New high score in Slime Attack survival mode! " + String.valueOf(SlimeFactory.GameInfo.getCurrentScore()) + " in " + LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty()) + " " + Sharer.twitterTag, 
+					1.0f, - this.scoreLabel.getContentSize().width / 2f - 25 - HomeLayer.shareSize / 2f, 0);
+		} else {
+			this.shareMenu = HomeLayer.getNewShareButton(
+					"New mode unlocked in Slime Attack survival mode: " + modeText + "! " + String.valueOf(SlimeFactory.GameInfo.getCurrentScore()) + " in " + LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty()) + " " + Sharer.twitterTag, 
+					1.0f, - this.scoreLabel.getContentSize().width / 2f - 25 - HomeLayer.shareSize / 2f, 0);
+		}
+		
+		this.addChild(this.shareMenu);
 		
 		super.onEnter();
 	}

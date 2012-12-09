@@ -27,4 +27,5 @@ public interface IGamePlay {
 	float getNormalBonusPoints();
 	float getExtraBonusPoints();
 	GamePlay getType();
+	void endMode();
 }

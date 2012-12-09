@@ -54,12 +54,12 @@ public abstract class SlimeFactory {
 	public static final boolean LogOn = true;
 	public static boolean IsLevelDebugMode = false;
 	public static boolean IsForceDiffDebug =  false;
-	public static int ForceDiff = 8;
-	public static int ForceLevel = 60;
+	public static int ForceDiff = 1;
+	public static int ForceLevel = 10;
 	public static boolean IsDebugBlocOn = false;
 	public static String ForceBlockPath = "blocsRectangle/s_tl5.slime";
 	public static boolean IsLevelSelectionOn = false;
-	public static final boolean IsForceMaxSurvival = true;
+	public static final boolean IsForceMaxSurvival = false;
 	public static final int MaxSurvival = LevelDifficulty.Hard;
 	public static final boolean IsForceMaxWorld = false;
 	public static final int MaxWorld = LevelDifficulty.Extrem; // Should be world here?

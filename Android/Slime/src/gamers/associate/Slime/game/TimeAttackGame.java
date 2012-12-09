@@ -401,7 +401,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		}
 	}
 	
-	private void endMode() {
+	public void endMode() {
 		this.isModeStarted = false;
 		this.endModeInternal();
 	}

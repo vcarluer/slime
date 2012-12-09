@@ -37,6 +37,8 @@ public class GameInformation {
 	private int totalCurrentNormal;
 	private int totalCurrentHard;
 	private int totalCurrentExtrem;
+	private boolean newUnlockSurvival;
+	private int newUnlockedDifficulty;
 	
 	public GameInformation() {		
 		this.maxLevelDifficulty = this.levelDifficulty = LevelDifficulty.Easy;
@@ -47,6 +49,7 @@ public class GameInformation {
 			this.totalScoreNormal = 0;
 			this.totalScoreHard = 0;
 			this.totalScoreExtrem = 0;
+			this.maxLevelDifficulty = LevelDifficulty.Easy;
 			this.store();
 		}
 	}
@@ -56,6 +59,26 @@ public class GameInformation {
 			this.maxLevelDifficulty = levelDifficulty;
 			this.store();
 		}
+	}
+	
+	public void unlockNextDifficulty() {
+		int nextDiff = LevelDifficulty.getNextDifficulty(this.levelDifficulty);
+		if (nextDiff > this.maxLevelDifficulty) {
+			this.maxLevelDifficulty = nextDiff;
+			this.newUnlockSurvival = true;
+			this.newUnlockedDifficulty = this.maxLevelDifficulty;
+			this.store();
+		}
+	}
+	
+	public boolean consumeNewUnlockSurvival() {
+		boolean value = this.newUnlockSurvival;
+		this.newUnlockSurvival = false;
+		return value;
+	}
+	
+	public int getUnlockedSurvival() {
+		return this.newUnlockedDifficulty;
 	}
 	
 	private void setLevelDifficulty(int leveldifficulty) {		
@@ -470,6 +493,20 @@ public class GameInformation {
 			case LevelDifficulty.Extrem:
 				this.totalCurrent = this.totalCurrentExtrem;
 				break;
+		}
+	}
+	
+	public boolean canContinueSurvival(int difficulty) {
+		switch (difficulty) {
+			default:
+			case LevelDifficulty.Easy:
+				return !this.survivalGameOverEasy;
+			case LevelDifficulty.Normal:
+				return !this.survivalGameOverNormal;
+			case LevelDifficulty.Hard:
+				return !this.survivalGameOverHard;
+			case LevelDifficulty.Extrem:
+				return !this.survivalGameOverExtrem;
 		}
 	}
 }

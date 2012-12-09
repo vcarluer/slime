@@ -928,7 +928,12 @@ public class Level implements IGameItemHandler {
 			}
 			
 			SlimeFactory.GameInfo.addLevelScore(this.lastScore);
-
+			
+			if (this.getGamePlay().getType() == GamePlay.Survival && SlimeFactory.LevelBuilder.isBoss()) {
+				Level.currentLevel.getGamePlay().endMode();
+				SlimeFactory.GameInfo.unlockNextDifficulty();
+			}
+			
 			if (showEndLevel) {
 				this.showEndLevel();
 			}						
