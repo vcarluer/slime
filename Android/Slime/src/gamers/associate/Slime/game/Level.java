@@ -457,7 +457,7 @@ public class Level implements IGameItemHandler {
 	private Object syncObject = new Object();
 	private float delta = 0f;
 	public void tick(float deltaBase) {
-		if (this.isGameOver && !this.isVictory) {
+		if (this.isGameOver && !this.isVictory && this.levelDefinition.getGamePlay() == GamePlay.TimeAttack) {
 			this.reload();
 		}
 

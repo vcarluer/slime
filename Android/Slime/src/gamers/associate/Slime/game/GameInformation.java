@@ -29,6 +29,14 @@ public class GameInformation {
 	private boolean lastIsHighScore;
 	private static boolean resetHighScores = SlimeFactory.resetHighScores;
 	private int worldId;
+	private boolean survivalGameOverEasy;
+	private boolean survivalGameOverNormal;
+	private boolean survivalGameOverHard;
+	private boolean survivalGameOverExtrem;
+	private int totalCurrentEasy;
+	private int totalCurrentNormal;
+	private int totalCurrentHard;
+	private int totalCurrentExtrem;
 	
 	public GameInformation() {		
 		this.maxLevelDifficulty = this.levelDifficulty = LevelDifficulty.Easy;
@@ -127,10 +135,11 @@ public class GameInformation {
 	
 	public void resetDifficulty(int diff) {
 		this.setLevelDifficulty(diff);
+		this.restoreCurrentScore();
 		this.levelNum = 0;
 		this.store();
 	}
-	
+
 	public void levelUp() {		
 		this.setLevelNum(levelNum + 1);
 		this.lastScore = 0;
@@ -173,6 +182,22 @@ public class GameInformation {
 			buffWriter.write(String.valueOf(this.maxLevelDifficulty));
 			buffWriter.newLine();
 			buffWriter.write(this.lastBgk);
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.survivalGameOverEasy));
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.survivalGameOverNormal));
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.survivalGameOverHard));
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.survivalGameOverExtrem));
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.totalCurrentEasy));
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.totalCurrentNormal));
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.totalCurrentHard));
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.totalCurrentExtrem));
 		} catch (FileNotFoundException ex) {
 			SlimeFactory.Log.e(Slime.TAG, "ERROR, file not found " + fileName);
 			ex.printStackTrace();
@@ -234,6 +259,30 @@ public class GameInformation {
 							case 8:
 								this.lastBgk = line;
 								break;
+							case 9:
+								this.survivalGameOverEasy = Boolean.valueOf(line).booleanValue();
+								break;
+							case 10:
+								this.survivalGameOverNormal = Boolean.valueOf(line).booleanValue();
+								break;
+							case 11:
+								this.survivalGameOverHard = Boolean.valueOf(line).booleanValue();
+								break;
+							case 12:
+								this.survivalGameOverExtrem = Boolean.valueOf(line).booleanValue();
+								break;
+							case 13:
+								this.totalCurrentEasy = Integer.valueOf(line).intValue();
+								break;
+							case 14:
+								this.totalCurrentNormal = Integer.valueOf(line).intValue();
+								break;
+							case 15:
+								this.totalCurrentHard = Integer.valueOf(line).intValue();
+								break;
+							case 16:
+								this.totalCurrentExtrem = Integer.valueOf(line).intValue();
+								break;
 							default:
 								break;
 							}												
@@ -272,8 +321,23 @@ public class GameInformation {
 	public void addLevelScore(int score) {
 		this.lastScore = score;
 		this.totalCurrent += score;
-//		this.setTotalScore(this.getDifficultyScore() + score);
-//		this.store();
+		switch (this.levelDifficulty) {
+			default:
+			case LevelDifficulty.Easy:
+				this.totalCurrentEasy = this.totalCurrent;
+				break;
+			case LevelDifficulty.Normal:
+				this.totalCurrentNormal = this.totalCurrent;
+				break;
+			case LevelDifficulty.Hard:
+				this.totalCurrentHard = this.totalCurrent;
+				break;
+			case LevelDifficulty.Extrem:
+				this.totalCurrentExtrem = this.totalCurrent;
+				break;
+		}
+		
+		this.store();
 	}
 	
 	public void removeLastScore() {
@@ -351,5 +415,61 @@ public class GameInformation {
 
 	public void setWorldId(int worldId) {
 		this.worldId = worldId;
+	}
+
+	public boolean isSurvivalGameOver() {
+		switch (this.levelDifficulty) {
+			default:
+			case LevelDifficulty.Easy:
+				return this.survivalGameOverEasy;
+			case LevelDifficulty.Normal:
+				return this.survivalGameOverNormal;
+			case LevelDifficulty.Hard:
+				return this.survivalGameOverHard;
+			case LevelDifficulty.Extrem:
+				return this.survivalGameOverExtrem;
+		}
+	}
+
+	public void setSurvivalGameOver(boolean survivalGameOver) {
+		switch(this.levelDifficulty) {
+			default:
+			case LevelDifficulty.Easy:
+				this.survivalGameOverEasy = survivalGameOver;
+				this.totalCurrentEasy = 0;
+				break;
+			case LevelDifficulty.Normal:
+				this.survivalGameOverNormal = survivalGameOver;
+				this.totalCurrentNormal = 0;
+				break;
+			case LevelDifficulty.Hard:
+				this.survivalGameOverHard = survivalGameOver;
+				this.totalCurrentHard = 0;
+				break;
+			case LevelDifficulty.Extrem:
+				this.survivalGameOverExtrem = survivalGameOver;
+				this.totalCurrentExtrem = 0;
+				break;
+		}
+		
+		this.store();
+	}
+	
+	private void restoreCurrentScore() {
+		switch (this.levelDifficulty) {
+			default:
+			case LevelDifficulty.Easy:
+				this.totalCurrent = this.totalCurrentEasy;
+				break;
+			case LevelDifficulty.Normal:
+				this.totalCurrent = this.totalCurrentNormal;
+				break;
+			case LevelDifficulty.Hard:
+				this.totalCurrent = this.totalCurrentHard;
+				break;
+			case LevelDifficulty.Extrem:
+				this.totalCurrent = this.totalCurrentExtrem;
+				break;
+		}
 	}
 }

@@ -82,21 +82,7 @@ public class LevelDefinitionParser extends LevelDefinition
 		this.createItemDefinitions();		
 		this.buildItemTypeMap();
 		this.defineIgnoredItems();
-		this.defineIgnoreClasses();
-				
-		if (this.getResourceName() != null) {
-			if (this.getResourceName().toUpperCase().contains(SpecialLevel.toUpperCase())) {
-				this.isSpecial = true;
-			}
-			
-			int lastPeriodPos = this.getResourceName().lastIndexOf('.');
-			if (lastPeriodPos != -1) {
-				this.setId(this.getResourceName().substring(0, lastPeriodPos));
-			}
-			else {
-				this.setId(this.getResourceName());
-			}
-		}		
+		this.defineIgnoreClasses();		
 	}
 	
 	protected void defineIgnoredItems() {
@@ -287,6 +273,10 @@ public class LevelDefinitionParser extends LevelDefinition
 	public boolean isStored() {
 		return SlimeFactory.ContextActivity.getFileStreamPath(this.getResourceName()).exists();
 	}
+	
+	public boolean isStored(String resourcePath) {
+		return SlimeFactory.ContextActivity.getFileStreamPath(resourcePath).exists();
+	}
 
 	public boolean isLocalStorage() {
 		return isLocalStorage;
@@ -306,5 +296,18 @@ public class LevelDefinitionParser extends LevelDefinition
 
 	public void setResourceName(String resourceName) {
 		this.resourceName = resourceName;
+		if (this.getResourceName() != null) {
+			if (this.getResourceName().toUpperCase().contains(SpecialLevel.toUpperCase())) {
+				this.isSpecial = true;
+			}
+			
+			int lastPeriodPos = this.getResourceName().lastIndexOf('.');
+			if (lastPeriodPos != -1) {
+				this.setId(this.getResourceName().substring(0, lastPeriodPos));
+			}
+			else {
+				this.setId(this.getResourceName());
+			}
+		}
 	}
 }

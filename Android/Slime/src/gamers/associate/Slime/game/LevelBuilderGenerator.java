@@ -23,7 +23,8 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 	private static int MinimumComplexity = 1;
 	private static int AverageComplexityPerLevel = 1;
 	public static String defaultId = "Random";
-	private static String fileName = defaultId + ".slime"; 
+	public static String fileExtension = ".slime";
+	private String fileName = defaultId + fileExtension; 
 	private int complexity;
 	private LevelHome home = new LevelHome();
 	private LevelDefinitionGenerator levelDef = new LevelDefinitionGenerator();
@@ -37,13 +38,17 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 		this.levelDef.setId(defaultId);
 	}	
 	
+	private String getRandomFileName(int difficulty) {
+		return defaultId + String.valueOf(difficulty) + fileExtension;
+	}
+	
 	public void build(Level level, String id, GamePlay gamePlay)
 	{
 		if (id != LevelHome.Id)
 		{			
 			this.levelDef.setGamePlay(gamePlay);
-			level.setLevelDefinition(this.levelDef);
-
+			level.setLevelDefinition(this.levelDef);			
+			
 			if (this.levelDef.getGamePlay() == GamePlay.TimeAttack) {
 				this.gameInfo.setLevel(Integer.valueOf(id));
 			}
@@ -51,9 +56,10 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 			this.isBoss = (this.gameInfo.getLevelNum() == this.gameInfo.getLevelMax());
 			this.resetTotalStar();
 			// Re-read pre-generated level
-			if (false == true && this.firstBuild && this.levelparser.isStored() && !this.levelDef.isFinished()) {				
+			if (!this.gameInfo.isSurvivalGameOver() && this.firstBuild && this.levelparser.isStored(this.getRandomFileName(this.gameInfo.getDifficulty())) && !this.levelDef.isFinished()) {				
+				this.levelparser.setResourceName(this.getRandomFileName(this.gameInfo.getDifficulty()));
 				this.levelparser.buildLevel(level);
-				if (this.isTut()) {
+				if (this.levelDef.getGamePlay() == GamePlay.TimeAttack && this.isTut()) {
 					SlimeFactory.LevelGeneratorTutorial.setTitle();
 				}
 
@@ -64,6 +70,8 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 				} else {
 					this.gameInfo.forceLevel(forceDiff, forceLevel);					
 				}
+				
+				this.levelparser.setResourceName(this.getRandomFileName(this.gameInfo.getDifficulty()));
 				
 				if (this.levelDef.getGamePlay() == GamePlay.TimeAttack) {
 					if (this.isTut()) {
@@ -84,6 +92,7 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 				}
 				
 				if (this.levelDef.getGamePlay() == GamePlay.Survival) {
+					this.gameInfo.setSurvivalGameOver(false);
 					this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor3);
 				}
 				
@@ -96,8 +105,10 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 				} else {
 					this.levelDef.buildLevel(level);
 				}
-
-				this.levelparser.storeLevel(level);
+				
+				if (this.levelDef.getGamePlay() == GamePlay.Survival) {
+					this.levelparser.storeLevel(level);
+				}
 				
 				this.levelDef.resetAndSave();								
 			}
@@ -164,5 +175,9 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 	public void start() {
 		this.firstBuild = true;
 		Level.get(LevelBuilderGenerator.defaultId, true, this.levelDef.getGamePlay());		
-	}	
+	}
+	
+	public void setFirstBuild(boolean firstBuild) {
+		this.firstBuild = firstBuild;
+	}
 }

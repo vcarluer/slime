@@ -157,6 +157,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	}
 	
 	private int lastNormalTime;
+	private boolean isModeStarted;
 	
 	private void setNormalTime() {
 		int normalTime = (int)FloatMath.ceil(this.leftTime);
@@ -236,7 +237,8 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	}
 
 	public void startLevel() {
-		this.reset();		
+		this.reset();
+		this.startMode();
 		this.level.getCameraManager().zoomCameraCenterTo(0);
 		this.level.getCameraManager().cancelActions();
 		this.enterGameMode(15.0f);		
@@ -301,8 +303,9 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		}
 	}
 	
-	private void lose() {		
+	protected void lose() {		
 		this.isGameOver = true;
+		this.endMode();
 		if (this.level.lose()) {						
 			this.level.getHudLabel().stopAction(this.criticAction);
 		}			
@@ -389,5 +392,23 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	@Override
 	public GamePlay getType() {
 		return GamePlay.TimeAttack;
+	}
+	
+	private void startMode() {
+		if (!this.isModeStarted) {
+			this.startModeInternal();
+			this.isModeStarted = true;
+		}
+	}
+	
+	private void endMode() {
+		this.isModeStarted = false;
+		this.endModeInternal();
+	}
+
+	protected void endModeInternal() {
+	}
+
+	protected void startModeInternal() {
 	}
 }

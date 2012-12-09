@@ -16,4 +16,5 @@ public interface ILevelBuilder {
 	void addStar();
 	void resetTotalStar();
 	boolean isBoss();
+	void setFirstBuild(boolean firstBuild);
 }

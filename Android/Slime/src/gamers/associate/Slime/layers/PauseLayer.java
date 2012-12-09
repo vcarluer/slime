@@ -123,7 +123,7 @@ public class PauseLayer extends CCLayer {
 	public void goHome(Object sender) {
 		Sounds.playEffect(R.raw.menuselect);
 		if (Level.currentLevel.getGamePlay().getType() == GamePlay.Survival) {
-			CCTransitionScene transition = CCFadeTransition.transition(0.5f, SurvivalGameOverLayer.getScene());
+			CCTransitionScene transition = CCFadeTransition.transition(0.5f, ChooseSurvivalDifficultyLayer.getScene());
 			CCDirector.sharedDirector().replaceScene(transition);
 		} else {
 //			Level.currentLevel.goHome();

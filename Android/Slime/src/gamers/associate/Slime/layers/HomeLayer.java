@@ -1,7 +1,6 @@
 package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.R;
-import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.Sharer;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
@@ -34,7 +33,6 @@ import android.view.MotionEvent;
 public class HomeLayer extends CCLayer {
 	public static final int shareSize = 64;
 	private static HomeLayer layer;	
-	private CCLabel lblLevel;
 	private CCLabel lblScore;
 	private CCSprite starSprite;
 	private SpawnPortal spawner;
@@ -45,7 +43,6 @@ public class HomeLayer extends CCLayer {
 	private static float shiftScore = shiftMenu - 100f; // shiftInfo - 70f;	
 	
 	private CCSprite titleSprite;
-	private CCMenu restartMenu;
 	private CCMenu shareMenu;
 	
 	private boolean nextDoNotStopMusic;
@@ -114,16 +111,6 @@ public class HomeLayer extends CCLayer {
 		super.onEnter();
 		Sounds.setEffectsDisable(true);
 		
-		CCSprite restartSpriteN = CCSprite.sprite("control-restart.png", true);
-		CCSprite restartSpriteS = CCSprite.sprite("control-restart.png", true);
-		CCMenuItemSprite restartItem = CCMenuItemSprite.item(restartSpriteN, restartSpriteS, this, "changeDifficulty");
-		restartItem.setScale(PauseLayer.Scale);		
-		
-		float left = - CCDirector.sharedDirector().winSize().getWidth() / 2 + ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) / 2 ;
-		float top = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY) / 2;
-		restartItem.setPosition(left, top);
-		this.restartMenu = CCMenu.menu(restartItem);
-		
 		// share button
 		shareScale = 1.0f;
 		float shareX = - CCDirector.sharedDirector().winSize().getWidth() / 2 +((shareSize * shareScale) + PauseLayer.PaddingX) / 2 ;
@@ -131,17 +118,6 @@ public class HomeLayer extends CCLayer {
 		
 		this.shareMenu = HomeLayer.getNewShareButton(null, shareScale, shareX, shareY);
 		this.addChild(this.shareMenu);
-		
-		String diff =LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty());		
-		String lvl = String.valueOf(SlimeFactory.GameInfo.getLevelNum());
-		String lvlMax = String.valueOf(SlimeFactory.GameInfo.getLevelMax());
-		String info = diff + " " + lvl + " / " + lvlMax;
-		this.lblLevel = CCLabel.makeLabel(info.toUpperCase().toUpperCase(), "fonts/Slime.ttf", 45f);		
-		this.lblLevel.setPosition(
-				CCDirector.sharedDirector().winSize().width / 2 + restartItem.getPosition().x + restartSpriteN.getContentSize().width / 2 + this.lblLevel.getContentSize().width / 2 + PauseLayer.PaddingX, 
-				CCDirector.sharedDirector().winSize().height / 2 + CCDirector.sharedDirector().winSize().getHeight() / 2 - this.lblLevel.getContentSize().height + PauseLayer.PaddingY
-				);
-		this.lblLevel.setColor(SlimeFactory.ColorSlime);
 		
 		String score = String.valueOf(SlimeFactory.GameInfo.getTotalScore());
 		this.lblScore.setString(score.toUpperCase());
@@ -195,9 +171,7 @@ public class HomeLayer extends CCLayer {
 	}
 	
 	@Override
-	public void onExit() {		
-		this.removeChild(this.lblLevel, true);
-		this.removeChild(this.restartMenu, true);	
+	public void onExit() {
 		this.removeChild(this.shareMenu, true);
 		this.removeChild(this.top, true);
 		
