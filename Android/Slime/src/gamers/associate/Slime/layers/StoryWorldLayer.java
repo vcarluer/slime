@@ -186,9 +186,7 @@ public class StoryWorldLayer extends CCLayer {
 			this.targetDiffRight = LevelDifficulty.getNextDifficulty(difficulty);
 		}
 		
-		this.levels = CCMenu.menu();
-		float margeLeft = 11;
-		this.levels.setPosition(margeLeft, 0);
+		this.levels = CCMenu.menu();			
 		int cols = 5;
 		int lvls = SlimeFactory.GameInfo.getLevelMax(difficulty);
 		int row = (int) Math.ceil(lvls / cols);
@@ -221,7 +219,8 @@ public class StoryWorldLayer extends CCLayer {
 		}
 		
 		this.levels.alignItemsInColumns(colRows);
-		this.levels.setPosition(CCDirector.sharedDirector().winSize().getWidth() / 2, (CCDirector.sharedDirector().winSize().getHeight() / 2) - (MenuSprite.Height * PauseLayer.Scale));
+		float margeLeft = 11;
+		this.levels.setPosition(CCDirector.sharedDirector().winSize().getWidth() / 2 + margeLeft, (CCDirector.sharedDirector().winSize().getHeight() / 2) - (MenuSprite.Height * PauseLayer.Scale));
 		this.addChild(this.levels);
 	}	
 	
