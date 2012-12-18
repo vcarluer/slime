@@ -341,8 +341,11 @@ public class GameInformation {
 		return this.getScore();
 	}
 	
+	private int previousTotalCurrent;
+	
 	public void addLevelScore(int score) {
 		this.lastScore = score;
+		this.setPreviousTotalCurrent(this.totalCurrent);
 		this.totalCurrent += score;
 		switch (this.levelDifficulty) {
 			default:
@@ -411,7 +414,7 @@ public class GameInformation {
 
 	public int getScore(int diff) {
 		return this.getDifficultyScore(diff);
-	}
+	}	
 	
 	public boolean storeIfBetterScore() {
 		int diff = this.getDifficulty();
@@ -508,5 +511,13 @@ public class GameInformation {
 			case LevelDifficulty.Extrem:
 				return !this.survivalGameOverExtrem;
 		}
+	}
+
+	public int getPreviousTotalCurrent() {
+		return previousTotalCurrent;
+	}
+
+	public void setPreviousTotalCurrent(int previousTotalCurrent) {
+		this.previousTotalCurrent = previousTotalCurrent;
 	}
 }

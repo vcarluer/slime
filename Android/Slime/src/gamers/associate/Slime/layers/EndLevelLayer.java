@@ -28,7 +28,8 @@ import android.view.MotionEvent;
 
 @SuppressLint("DefaultLocale") public class EndLevelLayer extends CCLayer {		
 	private static final int scorePosition = 0;	
-	private static final int MenuPosition = scorePosition - 100;
+	private static final int totalScorePosition = - 75;
+	private static final int MenuPosition = scorePosition - 150;
 	private static final int StarCountPosition = scorePosition + 60;
 	private static final int SlimyPosition = StarCountPosition + 100;
 	private static final int labelSize = 60;	
@@ -37,6 +38,7 @@ import android.view.MotionEvent;
 	private CCSprite star;
 	private CCBitmapFontAtlas starCountLabel;
 	private CCBitmapFontAtlas scoreLabel;
+	private CCBitmapFontAtlas totalScoreLabel;
 	private CCMenu menu;	
 	private CCMenuItemSprite nextMenu;
 	private CCMenuItemSprite restartMenu;
@@ -46,6 +48,7 @@ import android.view.MotionEvent;
 	public boolean ccTouchesEnded(MotionEvent event) {
 		this.setScore(this.lastScore);
 		this.setStars(this.targetStars);
+		this.setTotalScore(SlimeFactory.GameInfo.getCurrentScore());
 		this.scoreCountEnd = true;
 		return true;
 	}
@@ -62,6 +65,12 @@ import android.view.MotionEvent;
 		this.scoreLabel.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,
 				CCDirector.sharedDirector().winSize().height / 2 + scorePosition
+				));
+		
+		this.totalScoreLabel = getMenuLabel("0");
+		this.totalScoreLabel.setPosition(CGPoint.make(
+				CCDirector.sharedDirector().winSize().width / 2, 
+				CCDirector.sharedDirector().winSize().height / 2 + totalScorePosition
 				));
 		
 		CCSprite nextSpriteN = CCSprite.sprite("control-fastforward.png", true);
@@ -202,10 +211,11 @@ import android.view.MotionEvent;
 		this.lastScore = score;		
 		this.targetScore = Level.currentLevel.getGamePlay().getBaseScore();
 		this.totalStars = SlimeFactory.LevelBuilder.getTotalStar();
-		this.targetStars = Level.currentLevel.getGamePlay().bonusCount();
+		this.targetStars = Level.currentLevel.getGamePlay().bonusCount();		
 		this.currentStars = 0;
 		this.setScore(0);
 		this.setStars(0);
+		this.setTotalScore(SlimeFactory.GameInfo.getPreviousTotalScore());
 		
 		// Slimy.Anim_Success not used anymore
 		this.initSlime(Slimy.Anim_Success, 0f, true);
@@ -267,11 +277,17 @@ import android.view.MotionEvent;
 				} else {
 					this.currentScore = this.lastScore;
 					this.scoreCountEnd = true;
+					this.setTotalScore(SlimeFactory.GameInfo.getCurrentScore());
 				}
 			}
 			
 			this.setScore(this.currentScore);
 			this.setStars(this.currentStars);
 		}		
+	}
+
+	private void setTotalScore(int score) {
+		String text =String.valueOf(score);
+		this.totalScoreLabel.setString(text.toUpperCase());
 	}	
 }
