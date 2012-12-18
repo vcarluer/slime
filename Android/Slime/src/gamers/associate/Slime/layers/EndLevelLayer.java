@@ -287,7 +287,7 @@ import android.view.MotionEvent;
 	}
 
 	private void setTotalScore(int score) {
-		String text =String.valueOf(score);
+		String text = "Total: " + String.valueOf(score);
 		this.totalScoreLabel.setString(text.toUpperCase());
 	}	
 }
