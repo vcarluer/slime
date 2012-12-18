@@ -2,6 +2,7 @@ package gamers.associate.Slime.levels;
 
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.Rank;
 import gamers.associate.Slime.game.SlimeFactory;
 
 import java.io.BufferedReader;
@@ -25,6 +26,7 @@ public abstract class LevelDefinition {
 	protected boolean isUnlock;
 	protected boolean isFinished;
 	protected boolean isCurrentSelection;
+	private Rank rank;
 	
 	protected LevelDefinition() {
 		this.gamePlay = GamePlay.None;
@@ -134,6 +136,8 @@ public abstract class LevelDefinition {
 			buffWriter.newLine();
 			buffWriter.write(String.valueOf(this.isCurrentSelection));
 			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.getRank()));
+			buffWriter.newLine();
 			this.storeUserInfoNext(buffWriter);
 		} catch (FileNotFoundException ex) {
 			SlimeFactory.Log.e(Slime.TAG, "ERROR, file not found " + this.id);
@@ -185,6 +189,9 @@ public abstract class LevelDefinition {
 							break;
 						case 4:
 							this.isCurrentSelection = Boolean.valueOf(line).booleanValue();
+							break;
+						case 5:
+							this.setRank(Rank.valueOf(line));
 							break;
 						default:
 							this.loadUserInfoNext(line, i);
@@ -271,5 +278,13 @@ public abstract class LevelDefinition {
 	public void resetAllAndSave() {
 		this.resetAll();
 		this.handlePersistancy();
+	}
+
+	public Rank getRank() {
+		return rank;
+	}
+
+	public void setRank(Rank rank) {
+		this.rank = rank;
 	}
 }

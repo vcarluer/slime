@@ -3,10 +3,13 @@ package gamers.associate.Slime.layers;
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelDifficulty;
+import gamers.associate.Slime.game.Rank;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.levels.GamePlay;
+import gamers.associate.Slime.levels.LevelDefinition;
+import gamers.associate.Slime.levels.LevelDefinitionParser;
 
 import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCDelayTime;
@@ -26,6 +29,7 @@ import org.cocos2d.transitions.CCTransitionScene;
 
 import android.annotation.SuppressLint;
 import android.util.SparseArray;
+import android.view.MotionEvent;
 
 @SuppressLint("DefaultLocale") 
 public class StoryWorldLayer extends CCLayer {
@@ -85,6 +89,7 @@ public class StoryWorldLayer extends CCLayer {
 		
 		// Not needed? background enough...
 		this.title.setVisible(false);
+		this.setIsTouchEnabled(true);		
 	}
 	
 	@Override
@@ -182,16 +187,30 @@ public class StoryWorldLayer extends CCLayer {
 		}
 		
 		this.levels = CCMenu.menu();
+		float margeLeft = 11;
+		this.levels.setPosition(margeLeft, 0);
 		int cols = 5;
 		int lvls = SlimeFactory.GameInfo.getLevelMax(difficulty);
 		int row = (int) Math.ceil(lvls / cols);
-		for(int i = 0; i < lvls; i++) {
-			CCSprite spriteN = CCSprite.sprite("control-square-empty.png", true);
-			CCSprite spriteS = CCSprite.sprite("control-square-empty.png", true);
-			CCMenuItemSprite item = CCMenuItemSprite.item(spriteN, spriteS, this, "selectLevel");
-			CCLabel label = CCLabel.makeLabel(String.valueOf(i+1), "fonts/Slime.ttf", 14);
-			item.addChild(label);
-			item.setUserData(i);
+		for(int i = 0; i < lvls; i++) {			
+			LevelDefinition levelDefinition = new LevelDefinitionParser();
+			if (i < 5) {
+				if (i == 0) {
+					levelDefinition.setRank(Rank.Gold);
+				} else  if (i == 1) {
+					levelDefinition.setRank(Rank.Silver);
+				} else  if (i == 2) {
+					levelDefinition.setRank(Rank.Bronze);
+				} else {
+					levelDefinition.setRank(Rank.None);
+				}							
+			} else {
+				levelDefinition.setRank(Rank.Lock);
+			}
+			
+			levelDefinition.setLastScore((int) Math.random() * 100000);
+			levelDefinition.setId(String.valueOf(i + 1));
+			StoryMenuItem item = StoryMenuItem.item(this, "selectLevel", levelDefinition);
 			item.setScale(133 / (CCDirector.sharedDirector().winSize().getWidth() / cols));
 			this.levels.addChild(item);
 		}
@@ -206,14 +225,26 @@ public class StoryWorldLayer extends CCLayer {
 		this.addChild(this.levels);
 	}	
 	
+	@Override
+	public boolean ccTouchesMoved(MotionEvent event) {
+		if (event.getAction() == MotionEvent.ACTION_MOVE) {
+			if (event.getHistorySize() > 0) {
+				float delta = event.getY() - event.getHistoricalY(0);
+				this.levels.setPosition(this.levels.getPosition().x, this.levels.getPosition().y - delta);
+			}			
+		}			    
+
+		return true;
+	}
+
 	private void setTitle(String title) {
 		this.title.setString(title.toUpperCase());
 	}
 	
 	public void selectLevel(Object sender) {
 		Sounds.playEffect(R.raw.menuselect);
-		CCMenuItem item = (CCMenuItem)sender;		
-		String levelName = String.valueOf(item.getUserData());
+		StoryMenuItem item = (StoryMenuItem)sender;		
+		String levelName = String.valueOf(item.getLevelDefinition().getId());
 		// levelName should be fixed here
 		Level level = Level.get(levelName, true, GamePlay.TimeAttack);
 		Sounds.pauseMusic();

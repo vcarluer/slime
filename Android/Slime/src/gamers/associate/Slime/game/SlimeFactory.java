@@ -44,6 +44,7 @@ import gamers.associate.Slime.levels.generator.LevelGraphGeneratorTutorial;
 import javax.microedition.khronos.opengles.GL10;
 
 import org.cocos2d.nodes.CCDirector;
+import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.ccColor3B;
 
@@ -73,7 +74,7 @@ public abstract class SlimeFactory {
 	public static float Density; // surface density
 	public static float SGSDensity; // Samsung Galaxy S reference density ratio (SGS used as a reference for layout...) 
 	public static final float kCGPointEpsilon = 0.00000012f;
-	public static final float FntSize = 64f;
+	public static final float FntSize = 64f;	
 	
 	public static Slime ContextActivity;
 	public static ILevelBuilder LevelBuilder;
@@ -289,5 +290,13 @@ public abstract class SlimeFactory {
 				android.util.Log.e(Slime.TAG, line);
 			}			
 		}
+	}
+	
+	public static CCLabel getLabel(String text, float size) {
+		return CCLabel.makeLabel(text.toUpperCase(), "fonts/Slime.ttf", size);
+	}
+	
+	public static CCLabel getLabel(String text) {
+		return getLabel(text, FntSize);
 	}
 }

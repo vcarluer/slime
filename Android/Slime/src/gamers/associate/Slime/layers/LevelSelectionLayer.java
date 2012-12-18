@@ -49,21 +49,12 @@ public class LevelSelectionLayer extends CCLayer {
 		
 		menuCommand.addChild(goBackMenu);		
 		
-		for(LevelDefinition levelDef : SlimeFactory.LevelBuilder.getNormalLevels()) {
-			CCSprite menuSpriteN = CCSprite.sprite("control-square-screen.png", true);			
-			CCSprite menuSpriteS = CCSprite.sprite("control-square-screen.png", true);
-			CCMenuItemSprite menuItemSprite = CCMenuItemSprite.item(menuSpriteN, menuSpriteS, this, "selectLevel");
-			menuItemSprite.setScale(1 / bgButtonScale);
-			menuItemSprite.setUserData(levelDef.getId());
-			menuItemSprite.setAnchorPoint(0.5f, 0.5f);
-			// CCMenuItemLabel levelItem = CCMenuItemLabel.item(getMenuLabel(levelDef.getId()), this, "selectLevel");			
-			CCLabel levelItem = getMenuLabel(levelDef.getId());
-			levelItem.setAnchorPoint(0.5f, 0.5f);
-			levelItem.setPosition(originalMenuBgCenter, originalMenuBgCenter);
-			menuItemSprite.addChild(levelItem);
-			// levelItem.setUserData(levelDef.getId());
-			
-			menu.addChild(menuItemSprite);
+		for(LevelDefinition levelDef : SlimeFactory.LevelBuilder.getNormalLevels()) {			
+			StoryMenuItem menuItem = StoryMenuItem.item(this, "selectLevel", levelDef);
+			menuItem.setScale(1 / bgButtonScale);
+			menuItem.setUserData(levelDef.getId());
+			menuItem.setAnchorPoint(0.5f, 0.5f);
+			menu.addChild(menuItem);
 		}
 		
 		menu.alignItemsHorizontally(2f);
