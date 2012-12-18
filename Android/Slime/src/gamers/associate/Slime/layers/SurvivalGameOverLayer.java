@@ -16,6 +16,8 @@ import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.ccColor3B;
 
+import android.view.MotionEvent;
+
 public class SurvivalGameOverLayer extends CCLayer {
 	private static CCScene scene;
 	private CCLabel scoreLabel;
@@ -56,7 +58,15 @@ public class SurvivalGameOverLayer extends CCLayer {
 		this.addChild(this.newUnlock);
 		
 		this.addChild(this.backMenu);
+		this.setIsTouchEnabled(true);
 	}
+	
+	@Override
+	public boolean ccTouchesEnded(MotionEvent event) {
+		this.goBack();
+		return true;
+	}
+	
 	@Override
 	public void onEnter() {
 		this.scoreLabel.setString(("Score: " + String.valueOf(SlimeFactory.GameInfo.getCurrentScore())).toUpperCase());
@@ -107,6 +117,10 @@ public class SurvivalGameOverLayer extends CCLayer {
 	}
 
 	public void goBack(Object sender) {
+		goBack();
+	}
+
+	protected void goBack() {
 		Sounds.playEffect(R.raw.menuselect);
 		CCTransitionScene transition = CCFadeTransition.transition(1.0f, ChooseSurvivalDifficultyLayer.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
