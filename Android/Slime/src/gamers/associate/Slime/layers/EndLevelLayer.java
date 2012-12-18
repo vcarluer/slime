@@ -96,6 +96,7 @@ import android.view.MotionEvent;
 
 		this.addChild(this.starCountLabel);
 		this.addChild(this.scoreLabel);
+		this.addChild(this.totalScoreLabel);
 		this.addChild(this.menu);		
 	}
 	
@@ -177,8 +178,12 @@ import android.view.MotionEvent;
 	}
 	
 	private static CCBitmapFontAtlas getMenuLabel(String text) {
+		return getMenuLabel(text, SlimeFactory.FntSize);
+	}
+	
+	private static CCBitmapFontAtlas getMenuLabel(String text, float scale) {
 		CCBitmapFontAtlas label = CCBitmapFontAtlas.bitmapFontAtlas(text.toUpperCase(), "SlimeFont.fnt");
-		label.setScale(labelSize / SlimeFactory.FntSize);
+		label.setScale(labelSize / scale);
 		label.setColor(SlimeFactory.ColorSlime);
 		return label;
 	}
@@ -215,7 +220,7 @@ import android.view.MotionEvent;
 		this.currentStars = 0;
 		this.setScore(0);
 		this.setStars(0);
-		this.setTotalScore(SlimeFactory.GameInfo.getPreviousTotalScore());
+		this.setTotalScore(SlimeFactory.GameInfo.getPreviousTotalCurrent());
 		
 		// Slimy.Anim_Success not used anymore
 		this.initSlime(Slimy.Anim_Success, 0f, true);
@@ -226,6 +231,7 @@ import android.view.MotionEvent;
 	public void setLose() {
 		this.initStar();
 		this.setScore(0);
+		this.setTotalScore(SlimeFactory.GameInfo.getCurrentScore());
 		this.initSlime(Slimy.Anim_LastDeath, 2f, false);
 	}
 	

@@ -158,7 +158,7 @@ public class GameInformation {
 	
 	public void resetDifficulty(int diff) {
 		this.setLevelDifficulty(diff);
-		this.restoreCurrentScore();
+		// this.restoreCurrentScore();
 		this.levelNum = 0;
 		this.store();
 	}
