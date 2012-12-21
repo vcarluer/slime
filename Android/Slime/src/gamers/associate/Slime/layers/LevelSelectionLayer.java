@@ -50,7 +50,7 @@ public class LevelSelectionLayer extends CCLayer {
 		menuCommand.addChild(goBackMenu);		
 		
 		for(LevelDefinition levelDef : SlimeFactory.LevelBuilder.getNormalLevels()) {			
-			StoryMenuItem menuItem = StoryMenuItem.item(this, "selectLevel", levelDef);
+			StoryMenuItem menuItem = StoryMenuItem.item(levelDef);
 			menuItem.setScale(1 / bgButtonScale);
 			menuItem.setUserData(levelDef.getId());
 			menuItem.setAnchorPoint(0.5f, 0.5f);

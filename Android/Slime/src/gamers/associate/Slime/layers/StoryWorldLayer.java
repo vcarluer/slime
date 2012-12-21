@@ -7,7 +7,6 @@ import gamers.associate.Slime.game.Rank;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.custom.MenuSprite;
-import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelDefinition;
 import gamers.associate.Slime.levels.LevelDefinitionParser;
 
@@ -17,10 +16,10 @@ import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.menus.CCMenu;
-import org.cocos2d.menus.CCMenuItem;
 import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
+import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCSlideInLTransition;
@@ -28,8 +27,8 @@ import org.cocos2d.transitions.CCSlideInRTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 
 import android.annotation.SuppressLint;
+import android.util.FloatMath;
 import android.util.SparseArray;
-import android.view.MotionEvent;
 
 @SuppressLint("DefaultLocale") 
 public class StoryWorldLayer extends CCLayer {
@@ -39,7 +38,8 @@ public class StoryWorldLayer extends CCLayer {
 	private CCMenu menuToRight;
 	private CCMenu menuToLeft;
 	private CCSprite bkg;
-	private CCMenu levels;	
+	private CCNode levels;
+	private ScrollerLayer scroller;
 	
 	private int targetDiffLeft;
 	private int targetDiffRight;	
@@ -48,6 +48,7 @@ public class StoryWorldLayer extends CCLayer {
 	
 	private static SparseArray<CCScene> diffScenes = new SparseArray<CCScene>();
 	private CCMenu backMenu; 
+	private int currentDifficulty;
 	
 	public static CCScene getScene(int difficulty) {
 		CCScene scene = diffScenes.get(difficulty);
@@ -61,6 +62,7 @@ public class StoryWorldLayer extends CCLayer {
 	}	
 
 	public StoryWorldLayer(int difficulty) {		
+		this.currentDifficulty = difficulty;
 		backMenu = HomeLayer.getBackButton(this, "goBack");
 		this.addChild(backMenu);
 		
@@ -85,11 +87,13 @@ public class StoryWorldLayer extends CCLayer {
 		this.menuToRight = CCMenu.menu(rightArrow);		
 		this.addChild(this.menuToRight);
 		
+		this.scroller = new ScrollerLayer();
+		this.addChild(this.scroller, Level.zTop);
+		
 		this.setCurrentLevel(difficulty);
 		
 		// Not needed? background enough...
-		this.title.setVisible(false);
-		this.setIsTouchEnabled(true);		
+		this.title.setVisible(false);		
 	}
 	
 	@Override
@@ -186,10 +190,20 @@ public class StoryWorldLayer extends CCLayer {
 			this.targetDiffRight = LevelDifficulty.getNextDifficulty(difficulty);
 		}
 		
-		this.levels = CCMenu.menu();			
+		this.levels = CCNode.node();
+		this.levels.setAnchorPoint(0, 1);
+		this.scroller.setHandled(this.levels);
 		int cols = 5;
 		int lvls = SlimeFactory.GameInfo.getLevelMax(difficulty);
 		int row = (int) Math.ceil(lvls / cols);
+		
+		float width = CCDirector.sharedDirector().winSize().getWidth();
+		float margeOut = 11;		
+		int colSize = (int) (width / cols);
+		int rowSize = colSize;
+		float targetItemSize = StoryMenuItem.SIZE + margeOut * 2;
+		float itemScale = colSize / targetItemSize;
+		
 		for(int i = 0; i < lvls; i++) {			
 			LevelDefinition levelDefinition = new LevelDefinitionParser();
 			if (i < 5) {
@@ -208,45 +222,23 @@ public class StoryWorldLayer extends CCLayer {
 			
 			levelDefinition.setLastScore((int) Math.random() * 100000);
 			levelDefinition.setId(String.valueOf(i + 1));
-			StoryMenuItem item = StoryMenuItem.item(this, "selectLevel", levelDefinition);
-			item.setScale(133 / (CCDirector.sharedDirector().winSize().getWidth() / cols));
-			this.levels.addChild(item);
+			StoryMenuItem item = StoryMenuItem.item(levelDefinition);			
+			
+			int colItem = i % cols;
+			int rowItem = (int) FloatMath.floor(i / cols);
+			float x = colItem * colSize + colSize / 2f;
+			float y = - rowItem * rowSize + rowSize / 2f;
+			item.setPosition(x, y);
+			item.setScale(itemScale);			
+			
+			this.levels.addChild(item);						
 		}
-		
-		int[] colRows = new int[row];
-		for (int i = 0 ; i < row; i++) {
-			colRows[i] = cols;
-		}
-		
-		this.levels.alignItemsInColumns(colRows);
-		float margeLeft = 11;
-		this.levels.setPosition(CCDirector.sharedDirector().winSize().getWidth() / 2 + margeLeft, (CCDirector.sharedDirector().winSize().getHeight() / 2) - (MenuSprite.Height * PauseLayer.Scale));
+				
+		this.levels.setPosition(0, (CCDirector.sharedDirector().winSize().getHeight() / 2) - (MenuSprite.Height * PauseLayer.Scale));
 		this.addChild(this.levels);
-	}	
-	
-	@Override
-	public boolean ccTouchesMoved(MotionEvent event) {
-		if (event.getAction() == MotionEvent.ACTION_MOVE) {
-			if (event.getHistorySize() > 0) {
-				float delta = event.getY() - event.getHistoricalY(0);
-				this.levels.setPosition(this.levels.getPosition().x, this.levels.getPosition().y - delta);
-			}			
-		}			    
-
-		return true;
-	}
+	}		
 
 	private void setTitle(String title) {
 		this.title.setString(title.toUpperCase());
-	}
-	
-	public void selectLevel(Object sender) {
-		Sounds.playEffect(R.raw.menuselect);
-		StoryMenuItem item = (StoryMenuItem)sender;		
-		String levelName = String.valueOf(item.getLevelDefinition().getId());
-		// levelName should be fixed here
-		Level level = Level.get(levelName, true, GamePlay.TimeAttack);
-		Sounds.pauseMusic();
-		CCDirector.sharedDirector().replaceScene(level.getScene());
 	}
 }
