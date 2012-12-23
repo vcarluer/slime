@@ -38,6 +38,7 @@ public class StoryMenuItem extends CCLayer {
 		this.addChild(this.backItem);
 		this.updateItem();
 		this.setContentSize(SIZE, SIZE);
+		this.setIsTouchEnabled(true);
 	}
 	
 	public void updateItem() {
@@ -68,13 +69,13 @@ public class StoryMenuItem extends CCLayer {
 	@Override
 	public boolean ccTouchesEnded(MotionEvent event) {
 		float x = event.getX();
-		float y = event.getY();
+		float y = CCDirector.sharedDirector().winSize().getHeight() - event.getY();
 		float parentX = this.getParent().getPosition().x;
 		float parentY = this.getParent().getPosition().y;
-		float realX = x + parentX;
-		float realY = y + parentY;
-		boolean inrectX = realX < this.getPosition().x + SIZE / 2f && realX > this.getPosition().x - SIZE / 2f;
-		boolean inrectY = realY < this.getPosition().y + SIZE / 2F && realY > this.getPosition().y - SIZE / 2f;
+		float realX = this.getPosition().x + parentX;
+		float realY = this.getPosition().y + parentY;
+		boolean inrectX = x < realX + SIZE / 2f && x > realX - SIZE / 2f;
+		boolean inrectY = y < realY + SIZE / 2F && y > realY - SIZE / 2f;
 		if (inrectX && inrectY) {
 			this.select();
 			return true;
