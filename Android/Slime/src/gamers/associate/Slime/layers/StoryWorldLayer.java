@@ -191,18 +191,26 @@ public class StoryWorldLayer extends CCLayer {
 		}
 		
 		this.levels = CCNode.node();
-		this.levels.setAnchorPoint(0, 1);
+		// this.levels.setAnchorPoint(0, 1);
 		this.scroller.setHandled(this.levels);
 		int cols = 5;
 		int lvls = SlimeFactory.GameInfo.getLevelMax(difficulty);
-		int row = (int) Math.ceil(lvls / cols);
+		int row = (int) FloatMath.ceil(lvls / cols);
 		
-		float width = CCDirector.sharedDirector().winSize().getWidth();
+		float width = CCDirector.sharedDirector().winSize().getWidth() - PauseLayer.arrowWidth * 2;
 		float margeOut = 11;		
 		int colSize = (int) (width / cols);
 		int rowSize = colSize;
 		float targetItemSize = StoryMenuItem.SIZE + margeOut * 2;
-		float itemScale = colSize / targetItemSize;
+		float itemScale = colSize / targetItemSize;				
+		float min = (CCDirector.sharedDirector().winSize().getHeight()) - (MenuSprite.Height * PauseLayer.Scale);
+		float deltascreen = row * rowSize - min;  
+		if (deltascreen < 0) {
+			deltascreen = 0;
+		}
+		float max = min + deltascreen;
+		
+		this.scroller.setLimits(min, max);
 		
 		for(int i = 0; i < lvls; i++) {			
 			LevelDefinition levelDefinition = new LevelDefinitionParser();
@@ -227,14 +235,14 @@ public class StoryWorldLayer extends CCLayer {
 			int colItem = i % cols;
 			int rowItem = (int) FloatMath.floor(i / cols);
 			float x = colItem * colSize + colSize / 2f;
-			float y = - rowItem * rowSize + rowSize / 2f;
+			float y = - (rowItem * rowSize + rowSize / 2f);
 			item.setPosition(x, y);
 			item.setScale(itemScale);			
 			
 			this.levels.addChild(item);						
 		}
 				
-		this.levels.setPosition(0, (CCDirector.sharedDirector().winSize().getHeight() / 2) - (MenuSprite.Height * PauseLayer.Scale));
+		this.levels.setPosition(PauseLayer.arrowWidth * PauseLayer.Scale, min);
 		this.addChild(this.levels);
 	}		
 

@@ -69,8 +69,12 @@ public class StoryMenuItem extends CCLayer {
 	public boolean ccTouchesEnded(MotionEvent event) {
 		float x = event.getX();
 		float y = event.getY();
-		boolean inrectX = x < this.getPosition().x + SIZE / 2f && x > this.getPosition().x - SIZE / 2f;
-		boolean inrectY = y < this.getPosition().y + SIZE / 2F && y > this.getPosition().y - SIZE / 2f;
+		float parentX = this.getParent().getPosition().x;
+		float parentY = this.getParent().getPosition().y;
+		float realX = x + parentX;
+		float realY = y + parentY;
+		boolean inrectX = realX < this.getPosition().x + SIZE / 2f && realX > this.getPosition().x - SIZE / 2f;
+		boolean inrectY = realY < this.getPosition().y + SIZE / 2F && realY > this.getPosition().y - SIZE / 2f;
 		if (inrectX && inrectY) {
 			this.select();
 			return true;
