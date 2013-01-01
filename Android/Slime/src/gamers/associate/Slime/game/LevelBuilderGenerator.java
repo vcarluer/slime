@@ -159,7 +159,8 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 
 	@Override
 	public void build(Level level, LevelDefinition levelDef) {
-		levelDef.buildLevel(level);
+//		this.build(level, levelDef.getId(), levelDef.getGamePlay());
+		this.levelDef.buildLevel(level);
 	}
 	
 	@Override

@@ -75,6 +75,7 @@ public abstract class SlimeFactory {
 	public static float SGSDensity; // Samsung Galaxy S reference density ratio (SGS used as a reference for layout...) 
 	public static final float kCGPointEpsilon = 0.00000012f;
 	public static final float FntSize = 64f;	
+	public static String slimeFileExt = ".slime";
 	
 	public static Slime ContextActivity;
 	public static ILevelBuilder LevelBuilder;

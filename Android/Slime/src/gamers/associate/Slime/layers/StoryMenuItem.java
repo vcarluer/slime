@@ -85,10 +85,8 @@ public class StoryMenuItem extends CCLayer {
 	}
 
 	private void select() {
-		Sounds.playEffect(R.raw.menuselect);			
-		String levelName = String.valueOf(this.levelDefintion.getId());
-		// levelName should be fixed here
-		Level level = Level.get(levelName, true, GamePlay.TimeAttack);
+		Sounds.playEffect(R.raw.menuselect);
+		Level level = Level.get(this.levelDefintion);
 		Sounds.pauseMusic();
 		CCDirector.sharedDirector().replaceScene(level.getScene());
 	}

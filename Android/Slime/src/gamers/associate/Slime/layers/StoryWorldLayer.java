@@ -7,6 +7,7 @@ import gamers.associate.Slime.game.Rank;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.custom.MenuSprite;
+import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelDefinition;
 import gamers.associate.Slime.levels.LevelDefinitionParser;
 
@@ -212,8 +213,11 @@ public class StoryWorldLayer extends CCLayer {
 		
 		this.scroller.setLimits(min, max);
 		
-		for(int i = 0; i < lvls; i++) {			
-			LevelDefinition levelDefinition = new LevelDefinitionParser();
+		for(int i = 0; i < lvls; i++) {
+			String resource = String.valueOf(i + 1) + ".slime";
+			LevelDefinition levelDefinition = new LevelDefinitionParser(resource);
+			levelDefinition.setGamePlay(GamePlay.TimeAttack);
+			
 			if (i < 5) {
 				if (i == 0) {
 					levelDefinition.setRank(Rank.Gold);
@@ -228,8 +232,6 @@ public class StoryWorldLayer extends CCLayer {
 				levelDefinition.setRank(Rank.Lock);
 			}
 			
-			levelDefinition.setLastScore((int) Math.random() * 100000);
-			levelDefinition.setId(String.valueOf(i + 1));
 			StoryMenuItem item = StoryMenuItem.item(levelDefinition);			
 			
 			int colItem = i % cols;
