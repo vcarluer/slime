@@ -77,20 +77,19 @@ public class StoryWorldLayer extends CCLayer {
 		CCSprite spriteN = CCSprite.sprite("arrowl.png");
 		CCSprite spriteS = CCSprite.sprite("arrowl.png");
 		CCMenuItemSprite leftArrow = CCMenuItemSprite.item(spriteN, spriteS, this, "toLeft");
-		leftArrow.setScale(PauseLayer.Scale);
-		leftArrow.setPosition((- CCDirector.sharedDirector().winSize().getWidth() / 2) + ((PauseLayer.arrowWidth * PauseLayer.Scale) / 2), 0);
+		leftArrow.setPosition((- CCDirector.sharedDirector().winSize().getWidth() / 2) + (PauseLayer.arrowWidth  / 2), 0);
 		this.menuToLeft = CCMenu.menu(leftArrow);		
 		this.addChild(this.menuToLeft);		
 		
 		CCSprite spriteRN = CCSprite.sprite("arrow.png");
 		CCSprite spriteRS = CCSprite.sprite("arrow.png");
 		CCMenuItemSprite rightArrow = CCMenuItemSprite.item(spriteRN, spriteRS, this, "toRight");
-		rightArrow.setScale(PauseLayer.Scale);
-		rightArrow.setPosition(CCDirector.sharedDirector().winSize().getWidth() / 2 - (PauseLayer.arrowWidth * PauseLayer.Scale) / 2, 0);
+		rightArrow.setPosition(CCDirector.sharedDirector().winSize().getWidth() / 2 - PauseLayer.arrowWidth / 2, 0);
 		this.menuToRight = CCMenu.menu(rightArrow);		
 		this.addChild(this.menuToRight);
 		
 		this.scroller = new ScrollerLayer();
+		this.scroller.setStoryLayer(this);
 		this.addChild(this.scroller, Level.zTop);
 		
 		// Not needed? background enough...
@@ -129,13 +128,17 @@ public class StoryWorldLayer extends CCLayer {
 	}
 	
 	public void toLeft(Object sender) {
-		CCTransitionScene transition = CCSlideInLTransition.transition(transitionTime, StoryWorldLayer.getScene(this.targetDiffLeft));
-		CCDirector.sharedDirector().replaceScene(transition);
+		if (this.menuToLeft.isTouchEnabled()) {
+			CCTransitionScene transition = CCSlideInLTransition.transition(transitionTime, StoryWorldLayer.getScene(this.targetDiffLeft));
+			CCDirector.sharedDirector().replaceScene(transition);
+		}
 	}
 	
 	public void toRight(Object sender) {
-		CCTransitionScene transition = CCSlideInRTransition.transition(transitionTime, StoryWorldLayer.getScene(this.targetDiffRight));
-		CCDirector.sharedDirector().replaceScene(transition);
+		if (this.menuToRight.isTouchEnabled()) {
+			CCTransitionScene transition = CCSlideInRTransition.transition(transitionTime, StoryWorldLayer.getScene(this.targetDiffRight));
+			CCDirector.sharedDirector().replaceScene(transition);
+		}
 	}
 	
 	private void setCurrentLevel(int page) {

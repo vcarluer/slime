@@ -11,6 +11,7 @@ import org.cocos2d.types.CGPoint;
 import android.view.MotionEvent;
 
 public class ScrollerLayer extends CCLayer {
+	private static final int SLIDE_THREASOLD = 50;
 	private static final int SCROLL_SPEED = 3;
 	private CCNode handled;
 	private boolean hasMoved;
@@ -18,6 +19,7 @@ public class ScrollerLayer extends CCLayer {
 	private float lastDelta;
 	private float minScoll;
 	private float maxScroll;
+	private StoryWorldLayer storyLayer;
 	
 	public ScrollerLayer() {
 		this.setIsTouchEnabled(true);
@@ -26,9 +28,9 @@ public class ScrollerLayer extends CCLayer {
 	
 	@Override
 	public boolean ccTouchesMoved(MotionEvent event) {
-		if (this.handled != null) {
-			if (event.getAction() == MotionEvent.ACTION_MOVE) {
-				if (event.getHistorySize() > 0) {
+		if (event.getAction() == MotionEvent.ACTION_MOVE) {
+			if (event.getHistorySize() > 0) {
+				if (this.handled != null) {
 					this.lastDelta = - (event.getY() - event.getHistoricalY(0)) * (SCROLL_SPEED * SlimeFactory.SGSDensity);
 					if (Math.abs(this.lastDelta) > 5) {
 						this.tmpPoint.x = getHandled().getPosition().x;
@@ -45,11 +47,22 @@ public class ScrollerLayer extends CCLayer {
 						CCMoveTo moveTo = CCMoveTo.action(0, this.tmpPoint);
 						getHandled().runAction(moveTo);
 						this.hasMoved = true;
-					}					
-				}			
-			}			    
-
-			return true;
+					}
+				}
+				
+				float deltaX = event.getX() - event.getHistoricalX(0);
+				if (deltaX < - SLIDE_THREASOLD) {
+					this.storyLayer.toRight(this);
+					this.hasMoved = true;
+					return true;
+				}
+				
+				if (deltaX > SLIDE_THREASOLD) {
+					this.storyLayer.toLeft(this);
+					this.hasMoved = true;
+					return true;
+				}
+			}
 		}
 		
 		return false;
@@ -99,5 +112,13 @@ public class ScrollerLayer extends CCLayer {
 	
 	public boolean hasMoved() {
 		return this.hasMoved;
+	}
+
+	public StoryWorldLayer getStoryLayer() {
+		return storyLayer;
+	}
+
+	public void setStoryLayer(StoryWorldLayer storyLayer) {
+		this.storyLayer = storyLayer;
 	}
 }
