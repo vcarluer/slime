@@ -187,15 +187,18 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 	public void fadeTitle() {
 		CCFadeOut fade = CCFadeOut.action(1f);
 		this.title.runAction(fade);
+		this.currentTitle = null;
 	}
 	
 	public void gameBegin() {
 		this.title.stopAllActions();
 		this.title.setVisible(false);
+		this.currentTitle = null;
 	}
 
 	@Override
 	public void onExit() {
+		this.currentTitle = null;
 		super.onExit();
 	}
 	
@@ -250,27 +253,32 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 		return this.menu;
 	}
 	
-	public void setTitle(String title) {
-		this.title.stopAllActions();
-		this.title.setVisible(true);
-		this.title.setString(title.toUpperCase());
-		// double padding
-		float dPadding = 250f;
-		float scaleRatio = CCDirector.sharedDirector().winSize().width / (this.title.getContentSize().width + dPadding);
-		this.title.setScale(scaleRatio);
-		this.title.setPosition(
-				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
-				CCDirector.sharedDirector().winSize().getHeight() / 2));
-		this.title.setOpacity(255);
-		float moveDistance = 75f;
-		float time = 3f;
-		CCDelayTime delay = CCDelayTime.action(time);
-		CCCallFunc call = CCCallFunc.action(this, "fadeTitle");
-		CCSequence seq = CCSequence.actions(delay, call);
-		this.title.runAction(seq);
-		tmp.set(-moveDistance, 0);
-		CCMoveBy move = CCMoveBy.action(time, tmp);
-		this.title.runAction(move);
+	private String currentTitle;
+	
+	public void setTitle(String titleText) {
+		if (this.currentTitle == null) {
+			this.currentTitle = titleText;
+			this.title.stopAllActions();
+			this.title.setVisible(true);
+			this.title.setString(this.currentTitle.toUpperCase());
+			// double padding
+			float dPadding = 250f;
+			float scaleRatio = CCDirector.sharedDirector().winSize().width / (this.title.getContentSize().width + dPadding);
+			this.title.setScale(scaleRatio);
+			this.title.setPosition(
+					CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
+					CCDirector.sharedDirector().winSize().getHeight() / 2));
+			this.title.setOpacity(255);
+			float moveDistance = 75f;
+			float time = 3f;
+			CCDelayTime delay = CCDelayTime.action(time);
+			CCCallFunc call = CCCallFunc.action(this, "fadeTitle");
+			CCSequence seq = CCSequence.actions(delay, call);
+			this.title.runAction(seq);
+			tmp.set(-moveDistance, 0);
+			CCMoveBy move = CCMoveBy.action(time, tmp);
+			this.title.runAction(move);
+		}
 	}
 	
 	public void starTaken(float x, float y) {
