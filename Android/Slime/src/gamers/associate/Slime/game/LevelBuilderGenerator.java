@@ -165,8 +165,10 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 		level.setLevelDefinition(levelDefToLoad);
 		this.resetTotalStar();
 		
-		if (isTuto || !this.levelDef.buildLevel(level)) {
+		if (isTuto || !levelDefToLoad.buildLevel(level)) {
 			this.levelDef.setId(levelDefToLoad.getId());
+			this.levelDef.setGamePlay(levelDefToLoad.getGamePlay());
+			
 			if (isTuto) {
 				this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorTutorial);				
 			} else {
@@ -185,13 +187,14 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 			if (levelDefToLoad instanceof LevelDefinitionParser) {
 				LevelDefinitionParser parser = (LevelDefinitionParser) levelDefToLoad;
 				parser.storeLevel(level);
+				// To get back level stored if not exist
+				parser.setLocalStorage(true);
 			}
 		}
 	}
 	
 	@Override
-	public void rebuild(Level level, LevelDefinition levelDef) {		
-		this.resetTotalStar();
+	public void rebuild(Level level, LevelDefinition levelDef) {
 		this.build(level, levelDef);
 //		if (this.levelparser.isStored()) {
 //			this.levelparser.buildLevel(level);			

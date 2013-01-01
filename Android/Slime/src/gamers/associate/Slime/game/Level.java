@@ -243,8 +243,12 @@ public class Level implements IGameItemHandler {
 	}
 	
 	public void reload() {		
+		if (this.getGamePlay().getType() == GamePlay.Survival) {
+			SlimeFactory.GameInfo.removeLastScore();
+		}
+		
 		this.preBuild();
-		SlimeFactory.GameInfo.removeLastScore();
+		
 		SlimeFactory.LevelBuilder.rebuild(this, this.levelDefinition);
 		this.postBuild(this.currentLevelName);
 	}

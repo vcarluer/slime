@@ -49,13 +49,19 @@ public abstract class WorldPackage {
 	
 	protected void createLevelList() {
 		for(int i = 0; i < this.levelCount; i++) {
-			LevelDefinition definition = new LevelDefinitionParser(this.getResourceName(i));
-			definition.setNumber(i + 1);
+			int num = i + 1;
+			LevelDefinitionParser definition = new LevelDefinitionParser(this.getResourceName(num));
+			definition.setNumber(num);
 			definition.setGamePlay(GamePlay.TimeAttack);
-			definition.setDifficulty(this.getDifficulty(i));
+			definition.setDifficulty(this.getDifficulty(num));
 			definition.setWorld(this);
+			
 			if (i == 0) {
 				definition.setUnlock(true);
+			}
+			
+			if (num == this.levelCount) {
+				definition.setBoss(true);
 			}
 			
 			this.getLevels().add(definition);
