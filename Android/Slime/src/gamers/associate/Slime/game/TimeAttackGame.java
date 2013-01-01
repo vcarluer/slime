@@ -17,6 +17,7 @@ import android.util.FloatMath;
 
 
 public class TimeAttackGame extends GameItem implements IGamePlay {
+	private static final float ZOOM_BASE = 2.0f * SlimeFactory.SGSDensity;
 	private static final float extraBonusTime = 10f;
 	private static final float TimeRatioNormal = 2.0f;
 	private static final float TimeRatioLow = 0.2f;
@@ -216,7 +217,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 			this.level.getCameraManager().cancelActions();
 			this.level.getCameraManager().moveInterpolateTo(this.level.getSelectedGameItem(), 0.5f);
 			//AMZ replacing 1.0f by SGSDensity 
-			this.level.getCameraManager().zoomInterpolateTo(this.level.getSelectedGameItem(), SlimeFactory.SGSDensity, 0.5f);			
+			this.level.getCameraManager().zoomInterpolateTo(this.level.getSelectedGameItem(), ZOOM_BASE, 0.5f);			
 			//this.level.getCameraManager().follow(this.level.getSelectedGameItem());									
 		}
 		
@@ -248,7 +249,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		if(this.level.getStartItem() != null) {				
 			this.level.getCameraManager().moveInterpolateTo(this.level.getStartItem(), speed);
 			//AMZ replacing 1.0f by SGSDensity  
-			this.level.getCameraManager().zoomInterpolateTo(this.level.getStartItem(), SlimeFactory.SGSDensity, speed);		
+			this.level.getCameraManager().zoomInterpolateTo(this.level.getStartItem(), ZOOM_BASE, speed);		
 			this.level.getCameraManager().follow(this.level.getStartItem());			
 		}
 

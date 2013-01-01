@@ -87,7 +87,7 @@ public class StoryMenuItem extends CCLayer {
 	private void select() {
 		Sounds.playEffect(R.raw.menuselect);
 		if (this.levelDefintion.isUnlock()) {
-			Level level = Level.get(this.levelDefintion);
+			Level level = Level.get(this.levelDefintion, true);
 			Sounds.pauseMusic();
 			CCDirector.sharedDirector().replaceScene(level.getScene());
 		}

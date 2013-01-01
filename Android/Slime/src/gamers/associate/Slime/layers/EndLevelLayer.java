@@ -49,10 +49,13 @@ import android.view.MotionEvent;
 	
 	@Override
 	public boolean ccTouchesEnded(MotionEvent event) {
-		this.setScore(this.lastScore);
-		this.setStars(this.targetStars);
-		this.setTotalScore(true);
-		this.scoreCountEnd = true;
+		if (!scoreCountEnd) {
+			this.setScore(this.lastScore);
+			this.setStars(this.targetStars);
+			this.setTotalScore(true);
+			this.scoreCountEnd = true;
+		}
+		
 		return true;
 	}
 
@@ -337,6 +340,10 @@ import android.view.MotionEvent;
 		}
 		
 		String text = prefix + String.valueOf(score);
+		if (animate) {
+			this.totalScoreLabel.stopAllActions();
+			this.totalScoreLabel.setScale(1);
+		}
 		if (!this.totalScoreLabel.getVisible()) {
 			this.totalScoreLabel.setVisible(true);
 			if (animate) {
@@ -344,12 +351,12 @@ import android.view.MotionEvent;
 				CCScaleTo scale = CCScaleTo.action(0.3f, 1.0f);
 				this.totalScoreLabel.runAction(scale);
 			}
-		}
-		
-		if (score > this.previousTarget && animate) {
-			CCScaleBy scaleBy = CCScaleBy.action(0.3f, 1.5f);
-			CCSequence seq = CCSequence.actions(scaleBy, scaleBy.reverse());
-			this.totalScoreLabel.runAction(seq);
+		} else {
+			if (score > this.previousTarget && animate) {
+				CCScaleBy scaleBy = CCScaleBy.action(0.3f, 1.5f);
+				CCSequence seq = CCSequence.actions(scaleBy, scaleBy.reverse());
+				this.totalScoreLabel.runAction(seq);
+			}
 		}
 		
 		this.totalScoreLabel.setString(text.toUpperCase());

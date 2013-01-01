@@ -194,7 +194,7 @@ public class StoryWorldLayer extends CCLayer {
 		int lvls = world.getLevelCount();
 		int row = (int) FloatMath.ceil(lvls / cols);
 		
-		float width = CCDirector.sharedDirector().winSize().getWidth() - (PauseLayer.arrowWidth + Button.Default_Width);
+		float width = CCDirector.sharedDirector().winSize().getWidth() - (PauseLayer.arrowWidth + (MenuSprite.Width * PauseLayer.Scale));
 		float margeOut = 11;		
 		int colSize = (int) (width / cols);
 		int rowSize = colSize;
@@ -224,7 +224,7 @@ public class StoryWorldLayer extends CCLayer {
 			i++;
 		}
 		
-		this.levels.setPosition(Button.Default_Width * PauseLayer.Scale, min);
+		this.levels.setPosition(MenuSprite.Width * PauseLayer.Scale, min);
 		this.addChild(this.levels);
 	}		
 
