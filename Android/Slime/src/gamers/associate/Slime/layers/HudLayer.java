@@ -257,7 +257,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 	
 	public void setTitle(String titleText) {
 		if (this.currentTitle == null) {
-			this.currentTitle = titleText;
+			this.currentTitle = String.valueOf(Level.currentLevel.getLevelDefinition().getNumber()) + ". " + titleText;
 			this.title.stopAllActions();
 			this.title.setVisible(true);
 			this.title.setString(this.currentTitle.toUpperCase());
