@@ -17,7 +17,7 @@ import android.util.FloatMath;
 
 
 public class TimeAttackGame extends GameItem implements IGamePlay {
-	private static final float ZOOM_BASE = 2.0f * SlimeFactory.SGSDensity;
+	private static final float ZOOM_BASE = 1.0f;
 	private static final float extraBonusTime = 10f;
 	private static final float TimeRatioNormal = 2.0f;
 	private static final float TimeRatioLow = 0.2f;
@@ -41,7 +41,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	private CCAction criticAction;
 	protected int bonusTaken;
 	private boolean adHiddenTimer;
-	
+	private float zoomRatio;
 	
 	public static TimeAttackGame NewGame() {
 		return new TimeAttackGame(0, 0, 0, 0);				
@@ -49,7 +49,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	
 	public TimeAttackGame(float x, float y, float width, float height) {
 		super(x, y, width, height);		
-		
+		this.zoomRatio = SlimeFactory.getWidthRatio() * ZOOM_BASE;
 		this.startTime = defaultTime;
 		this.criticTime = defaultCritic;
 		this.reset();		
@@ -217,7 +217,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 			this.level.getCameraManager().cancelActions();
 			this.level.getCameraManager().moveInterpolateTo(this.level.getSelectedGameItem(), 0.5f);
 			//AMZ replacing 1.0f by SGSDensity 
-			this.level.getCameraManager().zoomInterpolateTo(this.level.getSelectedGameItem(), ZOOM_BASE, 0.5f);			
+			this.level.getCameraManager().zoomInterpolateTo(this.level.getSelectedGameItem(), this.zoomRatio, 0.5f);			
 			//this.level.getCameraManager().follow(this.level.getSelectedGameItem());									
 		}
 		
@@ -249,7 +249,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		if(this.level.getStartItem() != null) {				
 			this.level.getCameraManager().moveInterpolateTo(this.level.getStartItem(), speed);
 			//AMZ replacing 1.0f by SGSDensity  
-			this.level.getCameraManager().zoomInterpolateTo(this.level.getStartItem(), ZOOM_BASE, speed);		
+			this.level.getCameraManager().zoomInterpolateTo(this.level.getStartItem(), this.zoomRatio, speed);		
 			this.level.getCameraManager().follow(this.level.getStartItem());			
 		}
 

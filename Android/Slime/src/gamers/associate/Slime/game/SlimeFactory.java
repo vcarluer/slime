@@ -76,6 +76,8 @@ public abstract class SlimeFactory {
 	public static final float kCGPointEpsilon = 0.00000012f;
 	public static final float FntSize = 64f;	
 	public static String slimeFileExt = ".slime";
+	private static final int SGSWidthBase = 800;
+	private static float WidthRatio;
 	
 	public static Slime ContextActivity;
 	public static ILevelBuilder LevelBuilder;
@@ -306,5 +308,13 @@ public abstract class SlimeFactory {
 	
 	public static CCLabel getLabel(String text) {
 		return getLabel(text, FntSize);
+	}
+	
+	public static float getWidthRatio() {
+		if (WidthRatio == 0) {
+			WidthRatio = CCDirector.sharedDirector().winSize().getWidth() / SGSWidthBase;
+		}
+		
+		return WidthRatio;
 	}
 }
