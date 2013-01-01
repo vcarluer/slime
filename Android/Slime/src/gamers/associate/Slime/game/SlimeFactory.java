@@ -121,8 +121,14 @@ public abstract class SlimeFactory {
 	
 	public static StarCounterFactory StarCounter = new StarCounterFactory(); // Not attached in attach All but in HudLayer	
 	
-	public static PackageManager PackageManager = new PackageManager();
+	public static PackageManager PackageManager;
 		
+	public static void init() {
+		if (PackageManager == null) {
+			PackageManager = new PackageManager();
+		}
+	}
+	
 	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {		
 		// LevelBuilder = new LevelBuilder();
 		GameInfo = new GameInformation();
@@ -131,7 +137,6 @@ public abstract class SlimeFactory {
 		LevelGeneratorCorridor3.attach(level);
 		LevelGeneratorRectangle2.attach(level);
 		LevelGeneratorTutorial.attach(level);
-		
 		
 		Slimy.attach(level, attachNode, attachWorld, attachWorldRatio);
 		SpawnPortal.attach(level, attachNode);

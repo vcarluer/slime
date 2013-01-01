@@ -87,6 +87,7 @@ public class Slime extends Activity {
         //SlimeFactory.Log.d(Slime.TAG, "layout isHardwareAccelerated(): " + layout.isHardwareAccelerated());
         
         SlimeFactory.ContextActivity = this;
+        SlimeFactory.init();
         SlimeFactory.setDensity(this.getResources().getDisplayMetrics().density);
         SlimeFactory.Log.d(Slime.TAG, "Density: " + String.valueOf(SlimeFactory.Density));
         

@@ -6,7 +6,9 @@ import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.Rank;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
+import gamers.associate.Slime.game.WorldPackage;
 import gamers.associate.Slime.items.custom.MenuSprite;
+import gamers.associate.Slime.items.custom.RankFactory;
 import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelDefinition;
 import gamers.associate.Slime.levels.LevelDefinitionParser;
@@ -49,21 +51,21 @@ public class StoryWorldLayer extends CCLayer {
 	
 	private static SparseArray<CCScene> diffScenes = new SparseArray<CCScene>();
 	private CCMenu backMenu; 
-	private int currentDifficulty;
+	private int currentPage;
 	
-	public static CCScene getScene(int difficulty) {
-		CCScene scene = diffScenes.get(difficulty);
+	public static CCScene getScene(int page) {
+		CCScene scene = diffScenes.get(page);
 		if (scene == null) {
 			scene = CCScene.node();			
-			scene.addChild(new StoryWorldLayer(difficulty));
-			diffScenes.put(difficulty, scene);
+			scene.addChild(new StoryWorldLayer(page));
+			diffScenes.put(page, scene);
 		}
 				
 		return scene;
 	}	
 
-	public StoryWorldLayer(int difficulty) {		
-		this.currentDifficulty = difficulty;
+	public StoryWorldLayer(int page) {		
+		this.currentPage = page;
 		backMenu = HomeLayer.getBackButton(this, "goBack");
 		this.addChild(backMenu);
 		
@@ -91,7 +93,7 @@ public class StoryWorldLayer extends CCLayer {
 		this.scroller = new ScrollerLayer();
 		this.addChild(this.scroller, Level.zTop);
 		
-		this.setCurrentLevel(difficulty);
+		this.setCurrentLevel(page);
 		
 		// Not needed? background enough...
 		this.title.setVisible(false);		
@@ -137,40 +139,27 @@ public class StoryWorldLayer extends CCLayer {
 		CCDirector.sharedDirector().replaceScene(transition);
 	}
 	
-	private void setCurrentLevel(int difficulty) {
+	private void setCurrentLevel(int page) {
 		if (bkg != null) {
 			this.removeChild(this.bkg, true);
 		}
 		
+		WorldPackage world = SlimeFactory.PackageManager.getPackage(page);
+		
 		int w = 480;
 		int h = 360;
-		String spritePath = LevelDifficulty.getSpriteBkgPath(difficulty);
+		String spritePath = world.getBackgroundPath();
 		HomeLayer.addBkg(this, w, h, spritePath);
 		boolean hasLeft = false;
 		boolean hasRight = false;
-		switch (difficulty) {
-		default:
-		case LevelDifficulty.Easy:			
-			this.setTitle("To Mexico!");
-			hasRight = true;
-			break;
-		case LevelDifficulty.Normal:
+		this.setTitle(world.getName());
+		if (page > 1) {
 			hasLeft = true;
-			hasRight = true;
-			this.setTitle("To the Moon!");
-			break;
-		case LevelDifficulty.Hard:
-			hasLeft = true;
-			hasRight = true;
-			this.setTitle("To the Disco!");
-			break;
-		case LevelDifficulty.Extrem:
-			hasLeft = true;			
-			this.setTitle("To Hawaii!");
-			break;			
 		}
 		
-		SlimeFactory.GameInfo.resetDifficulty(difficulty);
+		if (page < SlimeFactory.PackageManager.getPackageCount()) {
+			hasRight = true;
+		}
 		
 		this.targetDiffLeft = 0;
 		this.targetDiffRight = 0;
@@ -182,20 +171,20 @@ public class StoryWorldLayer extends CCLayer {
 		if (hasLeft) {
 			this.menuToLeft.setVisible(true);
 			this.menuToLeft.setIsTouchEnabled(true);
-			this.targetDiffLeft = LevelDifficulty.getPreviousDifficulty(difficulty);
+			this.targetDiffLeft = page - 1;
 		}
 		
 		if (hasRight) {
 			this.menuToRight.setVisible(true);
 			this.menuToRight.setIsTouchEnabled(true);
-			this.targetDiffRight = LevelDifficulty.getNextDifficulty(difficulty);
+			this.targetDiffRight = page + 1;
 		}
 		
 		this.levels = CCNode.node();
 		// this.levels.setAnchorPoint(0, 1);
 		this.scroller.setHandled(this.levels);
 		int cols = 5;
-		int lvls = SlimeFactory.GameInfo.getLevelMax(difficulty);
+		int lvls = world.getLevelCount();
 		int row = (int) FloatMath.ceil(lvls / cols);
 		
 		float width = CCDirector.sharedDirector().winSize().getWidth() - PauseLayer.arrowWidth * 2;
@@ -213,26 +202,9 @@ public class StoryWorldLayer extends CCLayer {
 		
 		this.scroller.setLimits(min, max);
 		
-		for(int i = 0; i < lvls; i++) {
-			String resource = String.valueOf(i + 1) + ".slime";
-			LevelDefinition levelDefinition = new LevelDefinitionParser(resource);
-			levelDefinition.setGamePlay(GamePlay.TimeAttack);
-			
-			if (i < 5) {
-				if (i == 0) {
-					levelDefinition.setRank(Rank.Gold);
-				} else  if (i == 1) {
-					levelDefinition.setRank(Rank.Silver);
-				} else  if (i == 2) {
-					levelDefinition.setRank(Rank.Bronze);
-				} else {
-					levelDefinition.setRank(Rank.None);
-				}							
-			} else {
-				levelDefinition.setRank(Rank.Lock);
-			}
-			
-			StoryMenuItem item = StoryMenuItem.item(levelDefinition);			
+		int i = 0;
+		for(LevelDefinition levelDefinition : world.getLevels()) {
+			StoryMenuItem item = StoryMenuItem.item(levelDefinition, i + 1);			
 			
 			int colItem = i % cols;
 			int rowItem = (int) FloatMath.floor(i / cols);
@@ -241,7 +213,8 @@ public class StoryWorldLayer extends CCLayer {
 			item.setPosition(x, y);
 			item.setScale(itemScale);			
 			
-			this.levels.addChild(item);						
+			this.levels.addChild(item);
+			i++;
 		}
 				
 		this.levels.setPosition(PauseLayer.arrowWidth * PauseLayer.Scale, min);

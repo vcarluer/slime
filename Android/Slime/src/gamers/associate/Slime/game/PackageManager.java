@@ -24,4 +24,16 @@ public class PackageManager {
 	public List<WorldPackage> getPackages() {
 		return this.packages;
 	}
+
+	public WorldPackage getPackage(int order) {
+		if (this.packages.size() >= order) {
+			return this.packages.get(order - 1);
+		} else {
+			return null;
+		}
+	}
+
+	public int getPackageCount() {
+		return this.packages.size();
+	}
 }

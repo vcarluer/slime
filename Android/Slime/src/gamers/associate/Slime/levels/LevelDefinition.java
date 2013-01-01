@@ -31,6 +31,7 @@ public abstract class LevelDefinition {
 	protected LevelDefinition() {
 		this.gamePlay = GamePlay.None;
 		this.noStore = this.getNoStore();
+		this.setRank(Rank.Lock);
 	}
 	
 	public boolean isUnlock() {
@@ -39,6 +40,12 @@ public abstract class LevelDefinition {
 
 	public void setUnlock(boolean isUnlock) {
 		this.isUnlock = isUnlock;
+		if (!this.isUnlock) {
+			this.setRank(Rank.Lock);
+		} else {
+			this.setRank(Rank.None);
+		}
+		
 		this.handlePersistancy();
 	}
 	

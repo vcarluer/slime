@@ -1,5 +1,6 @@
 package gamers.associate.Slime.game;
 
+import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelDefinition;
 import gamers.associate.Slime.levels.LevelDefinitionParser;
 
@@ -13,14 +14,18 @@ public abstract class WorldPackage {
 	private int levelCount;
 	private boolean isLock;
 	private int order;
+	private String backgroundPath;
 	
 	public WorldPackage() {
 		this.levels = new ArrayList<LevelDefinition>();
 		this.defineName();
 		this.defineLevelCount();
+		this.defineBackgroundPath();
 		this.createLevelList();
 	}
 	
+	protected abstract void defineBackgroundPath();
+
 	protected abstract void defineName();
 	
 	protected abstract void defineLevelCount();
@@ -44,6 +49,7 @@ public abstract class WorldPackage {
 	protected void createLevelList() {
 		for(int i = 0; i < this.levelCount; i++) {
 			LevelDefinition definition = new LevelDefinitionParser(this.getResourceName(i));
+			definition.setGamePlay(GamePlay.TimeAttack);
 			this.getLevels().add(definition);
 		}
 	}
@@ -66,5 +72,17 @@ public abstract class WorldPackage {
 
 	protected void setOrder(int order) {
 		this.order = order;
+	}
+
+	public String getBackgroundPath() {
+		return backgroundPath;
+	}
+
+	protected void setBackgroundPath(String backgroundPath) {
+		this.backgroundPath = backgroundPath;
+	}
+
+	public int getLevelCount() {
+		return this.levelCount;
 	}
 }

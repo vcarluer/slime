@@ -25,14 +25,16 @@ public class StoryMenuItem extends CCLayer {
 	private CCSprite starItem;	
 	
 	private LevelDefinition levelDefintion;
+	private int number;
 	
 	/** Creates a CCMenuItem with a target/selector */
-    public static StoryMenuItem item(LevelDefinition levelDefinition) {
-        return new StoryMenuItem(levelDefinition);
+    public static StoryMenuItem item(LevelDefinition levelDefinition, int number) {
+        return new StoryMenuItem(levelDefinition, number);
     }
 	
-	public StoryMenuItem(LevelDefinition levelDefinition) {
+	public StoryMenuItem(LevelDefinition levelDefinition, int number) {
 		this.levelDefintion = levelDefinition;
+		this.number = number;
 		
 		this.backItem = CCSprite.sprite("control-square-empty.png", true);
 		this.addChild(this.backItem);
@@ -51,7 +53,7 @@ public class StoryMenuItem extends CCLayer {
 		}
 		
 		if (this.levelDefintion != null) {
-			this.idItem = SlimeFactory.getLabel(this.levelDefintion.getId());
+			this.idItem = SlimeFactory.getLabel(String.valueOf(this.number));
 			this.idItem.setPosition(0, 50 + yshift);											
 			this.starItem = RankFactory.getSprite(this.levelDefintion.getRank());		
 			this.starItem.setPosition(0,  yshift);
