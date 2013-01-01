@@ -411,4 +411,19 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 
 	protected void startModeInternal() {
 	}
+
+	public static Rank getRank(int bonusCount, int totalStar) {
+		int rank = (int) Math.ceil(4 * bonusCount / totalStar);
+		switch(rank) {
+			default:
+			case 1:
+				return Rank.None;
+			case 2:
+				return Rank.Bronze;
+			case 3:
+				return Rank.Silver;
+			case 4:
+				return Rank.Gold;
+		}
+	}
 }

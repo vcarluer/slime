@@ -162,16 +162,18 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 	public void build(Level level, LevelDefinition levelDefToLoad) {
 //		this.build(level, levelDef.getId(), levelDef.getGamePlay());
 		boolean isTuto = this.isTut(levelDefToLoad);
+		level.setLevelDefinition(levelDefToLoad);
+		this.resetTotalStar();
 		
 		if (isTuto || !this.levelDef.buildLevel(level)) {
 			this.levelDef.setId(levelDefToLoad.getId());
 			if (isTuto) {
-				this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorTutorial);
+				this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorTutorial);				
 			} else {
 				this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor3);
 			}
 			
-			this.gameInfo.forceLevel(LevelDifficulty.Easy, levelDefToLoad.getNumber());
+			this.gameInfo.forceLevel(levelDefToLoad.getWorld().getDifficulty(levelDefToLoad.getNumber()), levelDefToLoad.getNumber());
 			this.isBoss = levelDefToLoad.isBoss();
 			
 			if (this.isBoss) {
@@ -183,18 +185,19 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 			if (levelDefToLoad instanceof LevelDefinitionParser) {
 				LevelDefinitionParser parser = (LevelDefinitionParser) levelDefToLoad;
 				parser.storeLevel(level);
-			}			
+			}
 		}
 	}
 	
 	@Override
 	public void rebuild(Level level, LevelDefinition levelDef) {		
 		this.resetTotalStar();
-		if (this.levelparser.isStored()) {
-			this.levelparser.buildLevel(level);			
-		} else {
-			this.build(level, levelDef.getId(), levelDef.getGamePlay());			
-		}
+		this.build(level, levelDef);
+//		if (this.levelparser.isStored()) {
+//			this.levelparser.buildLevel(level);			
+//		} else {
+//			this.build(level, levelDef.getId(), levelDef.getGamePlay());			
+//		}
 	}
 	
 	public void start() {

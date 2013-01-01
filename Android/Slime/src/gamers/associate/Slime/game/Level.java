@@ -18,6 +18,7 @@ import gamers.associate.Slime.layers.PauseLayer;
 import gamers.associate.Slime.layers.SurvivalGameOverLayer;
 import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelDefinition;
+import gamers.associate.Slime.levels.LevelDefinitionParser;
 import gamers.associate.Slime.levels.LevelHome;
 
 import java.util.ArrayList;
@@ -934,7 +935,15 @@ public class Level implements IGameItemHandler {
 			this.isVictory = true;
 			this.endLevel();
 			if (this.levelDefinition != null) {
-				this.levelDefinition.setLastScore(this.lastScore);				
+				this.levelDefinition.setLastScore(this.lastScore);
+				if (this.getGamePlay().getType() == GamePlay.TimeAttack) {
+					this.levelDefinition.setRank(TimeAttackGame.getRank(this.getGamePlay().bonusCount(), SlimeFactory.LevelBuilder.getTotalStar()));
+					LevelDefinition next = SlimeFactory.LevelBuilder.getNext(this.levelDefinition);
+					next.setUnlock(true);
+					next.handlePersistancy();
+				}
+				
+				this.levelDefinition.handlePersistancy();
 			}
 			
 			SlimeFactory.GameInfo.addLevelScore(this.lastScore);
@@ -1249,7 +1258,7 @@ public class Level implements IGameItemHandler {
 		}
 	}
 
-	public LevelDefinition getLevelDeginition() {
+	public LevelDefinition getLevelDefinition() {
 		return this.levelDefinition;
 	}
 }

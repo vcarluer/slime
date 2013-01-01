@@ -7,6 +7,7 @@ import gamers.associate.Slime.game.Rank;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.WorldPackage;
+import gamers.associate.Slime.items.custom.Button;
 import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.items.custom.RankFactory;
 import gamers.associate.Slime.levels.GamePlay;
@@ -50,7 +51,8 @@ public class StoryWorldLayer extends CCLayer {
 	private static int paddingTitle = fontSize + 5;
 	
 	private static SparseArray<CCScene> diffScenes = new SparseArray<CCScene>();
-	private CCMenu backMenu; 
+	private CCMenu backMenu;
+	
 	private int currentPage;
 	
 	public static CCScene getScene(int page) {
@@ -64,7 +66,7 @@ public class StoryWorldLayer extends CCLayer {
 		return scene;
 	}	
 
-	public StoryWorldLayer(int page) {		
+	public StoryWorldLayer(int page) {
 		this.currentPage = page;
 		backMenu = HomeLayer.getBackButton(this, "goBack");
 		this.addChild(backMenu);
@@ -93,8 +95,6 @@ public class StoryWorldLayer extends CCLayer {
 		this.scroller = new ScrollerLayer();
 		this.addChild(this.scroller, Level.zTop);
 		
-		this.setCurrentLevel(page);
-		
 		// Not needed? background enough...
 		this.title.setVisible(false);		
 	}
@@ -107,6 +107,7 @@ public class StoryWorldLayer extends CCLayer {
 		CCCallFunc showBack = CCCallFunc.action(this, "showBackMenu");
 		CCSequence seq = CCSequence.actions(delay, showBack);
 		this.backMenu.runAction(seq);
+		this.setCurrentLevel(this.currentPage);
 		super.onEnter();
 	}
 	
@@ -142,6 +143,11 @@ public class StoryWorldLayer extends CCLayer {
 	private void setCurrentLevel(int page) {
 		if (bkg != null) {
 			this.removeChild(this.bkg, true);
+		}
+		
+		if (this.levels != null) {
+			this.removeChild(this.levels, true);
+			this.levels.removeAllChildren(true);
 		}
 		
 		WorldPackage world = SlimeFactory.PackageManager.getPackage(page);
@@ -188,7 +194,7 @@ public class StoryWorldLayer extends CCLayer {
 		int lvls = world.getLevelCount();
 		int row = (int) FloatMath.ceil(lvls / cols);
 		
-		float width = CCDirector.sharedDirector().winSize().getWidth() - PauseLayer.arrowWidth * 2;
+		float width = CCDirector.sharedDirector().winSize().getWidth() - (PauseLayer.arrowWidth + Button.Default_Width);
 		float margeOut = 11;		
 		int colSize = (int) (width / cols);
 		int rowSize = colSize;
@@ -217,12 +223,13 @@ public class StoryWorldLayer extends CCLayer {
 			this.levels.addChild(item);
 			i++;
 		}
-				
-		this.levels.setPosition(PauseLayer.arrowWidth * PauseLayer.Scale, min);
+		
+		this.levels.setPosition(Button.Default_Width * PauseLayer.Scale, min);
 		this.addChild(this.levels);
 	}		
 
 	private void setTitle(String title) {
 		this.title.setString(title.toUpperCase());
 	}
+
 }

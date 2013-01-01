@@ -33,6 +33,7 @@ public abstract class LevelDefinition {
 	private int number;
 	private int difficulty;
 	private WorldPackage world;
+	private int previousMaxScore;
 	
 	protected LevelDefinition() {
 		this.gamePlay = GamePlay.None;
@@ -51,8 +52,6 @@ public abstract class LevelDefinition {
 		} else {
 			this.setRank(Rank.None);
 		}
-		
-		this.handlePersistancy();
 	}
 	
 	protected boolean getNoStore() {
@@ -122,9 +121,9 @@ public abstract class LevelDefinition {
 	
 	private void setMaxScore(int score) {
 		if (score > this.maxScore) {
+			this.setPreviousMaxScore(this.maxScore);
 			this.maxScore = score;
-			this.isFinished = true;
-			this.handlePersistancy();
+			this.setFinished(true);
 		}
 	}
 	
@@ -193,6 +192,7 @@ public abstract class LevelDefinition {
 						switch(i) {
 						case 1:
 							this.maxScore = Integer.valueOf(line).intValue();
+							this.previousMaxScore = this.maxScore;
 							break;
 						case 2:
 							this.isUnlock = Boolean.valueOf(line).booleanValue();
@@ -246,7 +246,6 @@ public abstract class LevelDefinition {
 	 */
 	public void setFinished(boolean isFinished) {
 		this.isFinished = isFinished;
-		this.handlePersistancy();
 	}
 
 	/**
@@ -331,5 +330,13 @@ public abstract class LevelDefinition {
 
 	public void setWorld(WorldPackage world) {
 		this.world = world;
+	}
+
+	public int getPreviousMaxScore() {
+		return previousMaxScore;
+	}
+
+	public void setPreviousMaxScore(int previousMaxScore) {
+		this.previousMaxScore = previousMaxScore;
 	}
 }

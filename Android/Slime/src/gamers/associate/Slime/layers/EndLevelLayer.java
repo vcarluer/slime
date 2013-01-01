@@ -10,6 +10,8 @@ import gamers.associate.Slime.items.custom.SlimySuccess;
 import gamers.associate.Slime.items.custom.Star;
 import gamers.associate.Slime.levels.GamePlay;
 
+import org.cocos2d.actions.interval.CCScaleBy;
+import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.actions.interval.CCTintTo;
 import org.cocos2d.layers.CCLayer;
@@ -43,12 +45,13 @@ import android.view.MotionEvent;
 	private CCMenuItemSprite nextMenu;
 	private CCMenuItemSprite restartMenu;
 	private CCMenuItemSprite homeMenu;
+	private int previousTarget;
 	
 	@Override
 	public boolean ccTouchesEnded(MotionEvent event) {
 		this.setScore(this.lastScore);
 		this.setStars(this.targetStars);
-		this.setTotalScore(SlimeFactory.GameInfo.getCurrentScore());
+		this.setTotalScore(true);
 		this.scoreCountEnd = true;
 		return true;
 	}
@@ -122,7 +125,8 @@ import android.view.MotionEvent;
 			CCTransitionScene transition = CCFadeTransition.transition(0.5f, ChooseSurvivalDifficultyLayer.getScene());
 			CCDirector.sharedDirector().replaceScene(transition);
 		} else {
-			Level.currentLevel.goHome();
+			CCTransitionScene transition = CCFadeTransition.transition(0.5f, StoryWorldLayer.getScene(SlimeFactory.PackageManager.getCurrentPackage().getOrder()));
+			CCDirector.sharedDirector().replaceScene(transition);
 		}
 	}
 	
@@ -218,9 +222,10 @@ import android.view.MotionEvent;
 		this.totalStars = SlimeFactory.LevelBuilder.getTotalStar();
 		this.targetStars = Level.currentLevel.getGamePlay().bonusCount();		
 		this.currentStars = 0;
+		this.previousTarget = 0;
 		this.setScore(0);
 		this.setStars(0);
-		this.setTotalScore(SlimeFactory.GameInfo.getPreviousTotalCurrent());
+		this.setPreviousTotalScore(false);
 		
 		// Slimy.Anim_Success not used anymore
 		this.initSlime(Slimy.Anim_Success, 0f, true);
@@ -231,7 +236,7 @@ import android.view.MotionEvent;
 	public void setLose() {
 		this.initStar();
 		this.setScore(0);
-		this.setTotalScore(SlimeFactory.GameInfo.getCurrentScore());
+		this.setTotalScore(true);
 		this.initSlime(Slimy.Anim_LastDeath, 2f, false);
 	}
 	
@@ -283,7 +288,7 @@ import android.view.MotionEvent;
 				} else {
 					this.currentScore = this.lastScore;
 					this.scoreCountEnd = true;
-					this.setTotalScore(SlimeFactory.GameInfo.getCurrentScore());
+					this.setTotalScore(true);
 				}
 			}
 			
@@ -292,8 +297,61 @@ import android.view.MotionEvent;
 		}		
 	}
 
-	private void setTotalScore(int score) {
-		String text = "Total: " + String.valueOf(score);
+	private void setTotalScore(boolean animate) {
+		if (Level.currentLevel.getGamePlay().getType() == GamePlay.Survival) {
+			this.setTotalScore(SlimeFactory.GameInfo.getCurrentScore(), animate);
+		}
+		
+		if (Level.currentLevel.getGamePlay().getType() == GamePlay.TimeAttack) {
+			this.setTotalScore(Level.currentLevel.getLevelDefinition().getMaxScore(), animate);
+		}
+	}
+	
+	private void setPreviousTotalScore(boolean animate) {
+		int score = 0;
+		if (Level.currentLevel.getGamePlay().getType() == GamePlay.Survival) {
+			score = SlimeFactory.GameInfo.getPreviousTotalCurrent();
+		}
+		
+		if (Level.currentLevel.getGamePlay().getType() == GamePlay.TimeAttack) {
+			score = Level.currentLevel.getLevelDefinition().getPreviousMaxScore();
+		}
+		
+		if (score > 0) {
+			this.setTotalScore(score, animate);
+		} else {
+			this.totalScoreLabel.setVisible(false);
+		}
+		
+		this.previousTarget = score;
+	}
+	
+	private void setTotalScore(int score, boolean animate) {
+		String prefix = "";
+		if (Level.currentLevel.getGamePlay().getType() == GamePlay.Survival) {
+			prefix = "Total: ";
+		}
+		
+		if (Level.currentLevel.getGamePlay().getType() == GamePlay.TimeAttack) {
+			prefix = "Highest: ";
+		}
+		
+		String text = prefix + String.valueOf(score);
+		if (!this.totalScoreLabel.getVisible()) {
+			this.totalScoreLabel.setVisible(true);
+			if (animate) {
+				this.totalScoreLabel.setScale(10);
+				CCScaleTo scale = CCScaleTo.action(0.3f, 1.0f);
+				this.totalScoreLabel.runAction(scale);
+			}
+		}
+		
+		if (score > this.previousTarget && animate) {
+			CCScaleBy scaleBy = CCScaleBy.action(0.3f, 1.5f);
+			CCSequence seq = CCSequence.actions(scaleBy, scaleBy.reverse());
+			this.totalScoreLabel.runAction(seq);
+		}
+		
 		this.totalScoreLabel.setString(text.toUpperCase());
 	}	
 }

@@ -1,8 +1,6 @@
 package gamers.associate.Slime.levels.itemdef;
 
-import gamers.associate.Slime.game.IGamePlay;
 import gamers.associate.Slime.game.Level;
-import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.custom.EvacuationPlug;
@@ -18,7 +16,7 @@ public class GoalPortalDef extends ItemDefinition {
 		goal.setAngle(this.angle);
 		level.setGoal(goal);
 		
-		if (!(level.getLevelDeginition().getGamePlay() == GamePlay.TimeAttack && SlimeFactory.GameInfo.getDifficulty() == LevelDifficulty.Easy && SlimeFactory.GameInfo.getLevelNum() == 1)) {
+		if (!(level.getLevelDefinition().getGamePlay() == GamePlay.TimeAttack && SlimeFactory.PackageManager.getCurrentPackage().getOrder() == 1 && SlimeFactory.GameInfo.getLevelNum() == 1)) {
 			float evacuationHeight = EvacuationPlug.getHeightFromWidth(this.width);
 			EvacuationPlug plug = SlimeFactory.EvacuationPlug.create(this.getUName(), goal.getPosition().x, goal.getPosition().y, this.width, evacuationHeight);
 			plug.setAngle(this.angle);
