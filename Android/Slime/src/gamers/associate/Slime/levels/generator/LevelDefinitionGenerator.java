@@ -27,11 +27,14 @@ public class LevelDefinitionGenerator extends LevelDefinition {
 	}
 
 	@Override
-	public void buildLevel(Level level) {
+	public boolean buildLevel(Level level) {
 		if (this.currentGenerator != null) {
 			this.currentGenerator.generate(this.getComplexity(), BlocDirection.Left, this.getGamePlay());
 			this.postBuild(level);
+			return true;
 		}
+		
+		return false;
 	}
 	
 	private void postBuild(Level level) {		

@@ -2,6 +2,7 @@ package gamers.associate.Slime.levels;
 
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.Rank;
 import gamers.associate.Slime.game.SlimeFactory;
 
@@ -27,6 +28,9 @@ public abstract class LevelDefinition {
 	protected boolean isFinished;
 	protected boolean isCurrentSelection;
 	private Rank rank;
+	private boolean isBoss;
+	private int number;
+	private int difficulty;
 	
 	protected LevelDefinition() {
 		this.gamePlay = GamePlay.None;
@@ -226,7 +230,7 @@ public abstract class LevelDefinition {
 	protected void loadUserInfoNext(String line, int idx) {		
 	}
 
-	public abstract void buildLevel(Level level);
+	public abstract boolean buildLevel(Level level);
 
 	/**
 	 * @return the isFinished
@@ -293,5 +297,29 @@ public abstract class LevelDefinition {
 
 	public void setRank(Rank rank) {
 		this.rank = rank;
+	}
+
+	public boolean isBoss() {
+		return isBoss;
+	}
+
+	public void setBoss(boolean isBoss) {
+		this.isBoss = isBoss;
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
+	public int getDifficulty() {
+		return difficulty;
+	}
+
+	public void setDifficulty(int difficulty) {
+		this.difficulty = difficulty;
 	}
 }

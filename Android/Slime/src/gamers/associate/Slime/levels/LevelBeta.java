@@ -7,7 +7,7 @@ import gamers.associate.Slime.items.custom.Platform;
 
 public class LevelBeta extends LevelTimeAttack {
 	@Override
-	public void buildLevel(Level level) {
+	public boolean buildLevel(Level level) {
 		// float width = 950;
 		float width = 2950;
 		level.setLevelSize(
@@ -182,6 +182,8 @@ public class LevelBeta extends LevelTimeAttack {
 		
 		// Spawn cannon
 		// level.setSpawnCannon(spawnCannon);
+		
+		return true;
 	}
 
 	@Override

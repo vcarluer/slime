@@ -34,8 +34,6 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 	public LevelBuilderGenerator() {				
 		this.levelparser.setLocalStorage(true);		
 		this.firstBuild = true;
-		// always default id... Used for reset all
-		this.levelDef.setId(defaultId);
 	}	
 	
 	private String getRandomFileName(int difficulty) {
@@ -44,6 +42,9 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 	
 	public void build(Level level, String id, GamePlay gamePlay)
 	{
+		// always default id... Used for reset all
+		this.levelDef.setId(defaultId);
+		
 		if (id != LevelHome.Id)
 		{			
 			this.levelDef.setGamePlay(gamePlay);
@@ -158,9 +159,20 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 	}
 
 	@Override
-	public void build(Level level, LevelDefinition levelDef) {
+	public void build(Level level, LevelDefinition levelDefToLoad) {
 //		this.build(level, levelDef.getId(), levelDef.getGamePlay());
-		this.levelDef.buildLevel(level);
+		if (!this.levelDef.buildLevel(level)) {
+			this.levelDef.setId(levelDefToLoad.getId());
+			this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor3);
+			this.gameInfo.forceLevel(LevelDifficulty.Easy, levelDefToLoad.getNumber());
+			this.isBoss = levelDefToLoad.isBoss();
+			
+			if (this.isBoss) {
+				this.levelDef.buildBossLevel(level);
+			} else {
+				this.levelDef.buildLevel(level);
+			}
+		}
 	}
 	
 	@Override

@@ -144,8 +144,9 @@ public class LevelDefinitionParser extends LevelDefinition
 	}
 	
 	@Override
-	public void buildLevel(Level level) {
+	public boolean buildLevel(Level level) {
 		InputStream inputStream;
+		boolean constructed = true;
 		try {
 			SlimeFactory.Log.d(Slime.TAG, "Loading level from " + this.getResourceName());
 			if (this.isLocalStorage) {
@@ -170,6 +171,7 @@ public class LevelDefinitionParser extends LevelDefinition
 					}					
 				}
 			} catch (IOException e) {
+				constructed = false;
 				SlimeFactory.Log.e(Slime.TAG, "ERROR during read of " + this.getResourceName() + " line " + String.valueOf(i));
 				e.printStackTrace();
 			} finally {
@@ -178,11 +180,13 @@ public class LevelDefinitionParser extends LevelDefinition
 				}
 			}
 		} catch (IOException e1) {
+			constructed = false;
 			SlimeFactory.Log.e(Slime.TAG, "ERROR during opening of " + this.getResourceName());
 			e1.printStackTrace();
 		}
 		
 		this.postBuildItem.postBuild();
+		return constructed;
 	}
 	
 	protected void HandleLine(Level level, String line) throws Exception {

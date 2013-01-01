@@ -25,16 +25,14 @@ public class StoryMenuItem extends CCLayer {
 	private CCSprite starItem;	
 	
 	private LevelDefinition levelDefintion;
-	private int number;
 	
 	/** Creates a CCMenuItem with a target/selector */
-    public static StoryMenuItem item(LevelDefinition levelDefinition, int number) {
-        return new StoryMenuItem(levelDefinition, number);
+    public static StoryMenuItem item(LevelDefinition levelDefinition) {
+        return new StoryMenuItem(levelDefinition);
     }
 	
-	public StoryMenuItem(LevelDefinition levelDefinition, int number) {
+	public StoryMenuItem(LevelDefinition levelDefinition) {
 		this.levelDefintion = levelDefinition;
-		this.number = number;
 		
 		this.backItem = CCSprite.sprite("control-square-empty.png", true);
 		this.addChild(this.backItem);
@@ -53,7 +51,7 @@ public class StoryMenuItem extends CCLayer {
 		}
 		
 		if (this.levelDefintion != null) {
-			this.idItem = SlimeFactory.getLabel(String.valueOf(this.number));
+			this.idItem = SlimeFactory.getLabel(String.valueOf(this.levelDefintion.getNumber()));
 			this.idItem.setPosition(0, 50 + yshift);											
 			this.starItem = RankFactory.getSprite(this.levelDefintion.getRank());		
 			this.starItem.setPosition(0,  yshift);
@@ -88,8 +86,10 @@ public class StoryMenuItem extends CCLayer {
 
 	private void select() {
 		Sounds.playEffect(R.raw.menuselect);
-		Level level = Level.get(this.levelDefintion);
-		Sounds.pauseMusic();
-		CCDirector.sharedDirector().replaceScene(level.getScene());
+		if (this.levelDefintion.isUnlock()) {
+			Level level = Level.get(this.levelDefintion);
+			Sounds.pauseMusic();
+			CCDirector.sharedDirector().replaceScene(level.getScene());
+		}
 	}
 }

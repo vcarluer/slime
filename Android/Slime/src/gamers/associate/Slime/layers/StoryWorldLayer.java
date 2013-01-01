@@ -204,7 +204,7 @@ public class StoryWorldLayer extends CCLayer {
 		
 		int i = 0;
 		for(LevelDefinition levelDefinition : world.getLevels()) {
-			StoryMenuItem item = StoryMenuItem.item(levelDefinition, i + 1);			
+			StoryMenuItem item = StoryMenuItem.item(levelDefinition);			
 			
 			int colItem = i % cols;
 			int rowItem = (int) FloatMath.floor(i / cols);

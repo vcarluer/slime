@@ -15,7 +15,7 @@ public class LevelHome extends LevelDefinitionHardCoded {
 	public static String Id = "Home";		
 	
 	@Override
-	public void buildLevel(Level level) {
+	public boolean buildLevel(Level level) {
 		level.setLevelSize(
 				CCDirector.sharedDirector().winSize().getWidth() * 2,
 				CCDirector.sharedDirector().winSize().getHeight() * 2);
@@ -88,7 +88,9 @@ public class LevelHome extends LevelDefinitionHardCoded {
 		layer.setSpawner(spawnPortal);
 		level.addCustomOverLayer(layer);
 		level.setIsHudEnabled(false);
-		level.setIsTouchEnabled(false);		
+		level.setIsTouchEnabled(false);
+		
+		return true;
 	}
 
 	@Override

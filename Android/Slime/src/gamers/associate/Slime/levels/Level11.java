@@ -5,9 +5,8 @@ import gamers.associate.Slime.game.Level;
 public class Level11 extends LevelTimeAttack {
 	
 	@Override
-	public void buildLevel(Level level) {
-		// TODO Auto-generated method stub
-		
+	public boolean buildLevel(Level level) {
+		return true;
 	}
 
 	@Override

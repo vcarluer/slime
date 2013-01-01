@@ -49,11 +49,19 @@ public abstract class WorldPackage {
 	protected void createLevelList() {
 		for(int i = 0; i < this.levelCount; i++) {
 			LevelDefinition definition = new LevelDefinitionParser(this.getResourceName(i));
+			definition.setNumber(i + 1);
 			definition.setGamePlay(GamePlay.TimeAttack);
+			definition.setDifficulty(this.getDifficulty(i));
+			if (i == 0) {
+				definition.setUnlock(true);
+			}
+			
 			this.getLevels().add(definition);
 		}
 	}
 	
+	protected abstract int getDifficulty(int lvlNumber);
+
 	private String getResourceName(int i) {
 		return this.getName() + LVLSEP + String.valueOf(i) + SlimeFactory.slimeFileExt;
 	}
