@@ -2,20 +2,18 @@ package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
-import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.Rank;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.WorldPackage;
-import gamers.associate.Slime.items.custom.Button;
 import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.items.custom.RankFactory;
-import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelDefinition;
-import gamers.associate.Slime.levels.LevelDefinitionParser;
 
+import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCDelayTime;
+import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
@@ -187,47 +185,66 @@ public class StoryWorldLayer extends CCLayer {
 			this.targetDiffRight = page + 1;
 		}
 		
-		this.levels = CCNode.node();
-		// this.levels.setAnchorPoint(0, 1);
-		this.scroller.setHandled(this.levels);
-		int cols = 5;
-		int lvls = world.getLevelCount();
-		int row = (int) FloatMath.ceil(lvls / cols);
-		
-		float width = CCDirector.sharedDirector().winSize().getWidth() - (PauseLayer.arrowWidth + (MenuSprite.Width * PauseLayer.Scale));
-		float margeOut = 11;		
-		int colSize = (int) (width / cols);
-		int rowSize = colSize;
-		float targetItemSize = StoryMenuItem.SIZE + margeOut * 2;
-		float itemScale = colSize / targetItemSize;				
-		float min = (CCDirector.sharedDirector().winSize().getHeight()) - (MenuSprite.Height * PauseLayer.Scale);
-		float deltascreen = row * rowSize - min;  
-		if (deltascreen < 0) {
-			deltascreen = 0;
-		}
-		float max = min + deltascreen;
-		
-		this.scroller.setLimits(min, max);
-		
-		int i = 0;
-		for(LevelDefinition levelDefinition : world.getLevels()) {
-			StoryMenuItem item = StoryMenuItem.item(levelDefinition);			
+		if (!world.isLock()) {
+			this.levels = CCNode.node();
+			// this.levels.setAnchorPoint(0, 1);
+			this.scroller.setHandled(this.levels);
+			int cols = 5;
+			int lvls = world.getLevelCount();
+			int row = (int) FloatMath.ceil(lvls / cols);
 			
-			int colItem = i % cols;
-			int rowItem = (int) FloatMath.floor(i / cols);
-			float x = colItem * colSize + colSize / 2f;
-			float y = - (rowItem * rowSize + rowSize / 2f);
-			item.setPosition(x, y);
-			item.setScale(itemScale);			
+			float width = CCDirector.sharedDirector().winSize().getWidth() - (PauseLayer.arrowWidth + (MenuSprite.Width * PauseLayer.Scale));
+			float margeOut = 11;		
+			int colSize = (int) (width / cols);
+			int rowSize = colSize;
+			float targetItemSize = StoryMenuItem.SIZE + margeOut * 2;
+			float itemScale = colSize / targetItemSize;				
+			float min = (CCDirector.sharedDirector().winSize().getHeight()) - (MenuSprite.Height * PauseLayer.Scale);
+			float deltascreen = row * rowSize - min;  
+			if (deltascreen < 0) {
+				deltascreen = 0;
+			}
+			float max = min + deltascreen;
 			
-			this.levels.addChild(item);
-			i++;
+			this.scroller.setLimits(min, max);
+			
+			int i = 0;
+			for(LevelDefinition levelDefinition : world.getLevels()) {
+				StoryMenuItem item = StoryMenuItem.item(levelDefinition);			
+				
+				int colItem = i % cols;
+				int rowItem = (int) FloatMath.floor(i / cols);
+				float x = colItem * colSize + colSize / 2f;
+				float y = - (rowItem * rowSize + rowSize / 2f);
+				item.setPosition(x, y);
+				item.setScale(itemScale);			
+				
+				this.levels.addChild(item);
+				i++;
+			}
+			
+			this.levels.setPosition(MenuSprite.Width * PauseLayer.Scale, min);
+			this.addChild(this.levels);
+		} else {
+			if (this.lockWorld != null) {
+				this.lockWorld.stopAllActions();
+				this.removeChild(this.lockWorld, true);
+			}
+			
+			this.lockWorld = RankFactory.getSprite(Rank.Lock);
+			this.lockWorld.setPosition(CCDirector.sharedDirector().winSize().getWidth() / 2, CCDirector.sharedDirector().winSize().getHeight() / 2);
+			this.lockWorld.setScale(3.0f);
+			CCScaleTo scaleTo1 = CCScaleTo.action(0.5f, 5.0f);
+			CCScaleTo scaleTo2 = CCScaleTo.action(0.5f, 3.0f);
+			CCSequence seq = CCSequence.actions(scaleTo1, scaleTo2);
+			CCRepeatForever repeat = CCRepeatForever.action(seq);
+			this.lockWorld.runAction(repeat);
+			this.addChild(this.lockWorld);
 		}
-		
-		this.levels.setPosition(MenuSprite.Width * PauseLayer.Scale, min);
-		this.addChild(this.levels);
 	}		
-
+	
+	private CCSprite lockWorld;
+	
 	private void setTitle(String title) {
 		this.title.setString(title.toUpperCase());
 	}

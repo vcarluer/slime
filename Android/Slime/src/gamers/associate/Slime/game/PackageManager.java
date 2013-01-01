@@ -15,6 +15,7 @@ public class PackageManager {
 	private void initPackageList() {
 		// order is important here for package order field
 		this.addPackage(new LaboratoryPackage());
+		this.addPackage(new MexicoPackage());
 	}
 	
 	private void addPackage(WorldPackage wPackage) {
