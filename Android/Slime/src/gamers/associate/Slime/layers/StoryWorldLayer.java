@@ -145,6 +145,7 @@ public class StoryWorldLayer extends CCLayer {
 		}
 		
 		WorldPackage world = SlimeFactory.PackageManager.getPackage(page);
+		SlimeFactory.PackageManager.setCurrentPackage(world);
 		
 		int w = 480;
 		int h = 360;

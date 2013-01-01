@@ -891,10 +891,20 @@ public class Level implements IGameItemHandler {
 	}
 	
 	public void goNext() {
-		String next = SlimeFactory.LevelBuilder.getNext(this.currentLevelName);
-		if (next != null) {
-			get(next, true, this.gamePlay.getType());
+		if (this.getGamePlay().getType() == GamePlay.Survival) {
+			String next = SlimeFactory.LevelBuilder.getNext(this.currentLevelName);
+			if (next != null) {
+				get(next, true, this.gamePlay.getType());
+			}
 		}
+		
+		if (this.getGamePlay().getType() == GamePlay.TimeAttack) {
+			LevelDefinition levelDef = SlimeFactory.LevelBuilder.getNext(this.levelDefinition);
+			if (levelDef != null) {
+				get(levelDef);
+			}
+		}
+		
 	}
 	
 	public void startLevel() {

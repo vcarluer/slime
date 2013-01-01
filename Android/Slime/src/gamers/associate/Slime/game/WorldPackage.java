@@ -1,5 +1,6 @@
 package gamers.associate.Slime.game;
 
+import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelDefinition;
 import gamers.associate.Slime.levels.LevelDefinitionParser;
@@ -52,6 +53,7 @@ public abstract class WorldPackage {
 			definition.setNumber(i + 1);
 			definition.setGamePlay(GamePlay.TimeAttack);
 			definition.setDifficulty(this.getDifficulty(i));
+			definition.setWorld(this);
 			if (i == 0) {
 				definition.setUnlock(true);
 			}
@@ -92,5 +94,19 @@ public abstract class WorldPackage {
 
 	public int getLevelCount() {
 		return this.levelCount;
+	}
+
+	public LevelDefinition getNext(LevelDefinition levelDefinition) {
+		int nextNumber = levelDefinition.getNumber() + 1;
+		return this.getLevel(nextNumber);
+	}
+
+	private LevelDefinition getLevel(int number) {
+		if (number <= this.levels.size()) {
+			return this.levels.get(number - 1);
+		} else {
+			SlimeFactory.Log.e(Slime.TAG, "Level does not exist: " + this.getName() + " - " + String.valueOf(number));
+			return null;
+		}
 	}
 }

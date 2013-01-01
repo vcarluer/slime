@@ -161,9 +161,16 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 	@Override
 	public void build(Level level, LevelDefinition levelDefToLoad) {
 //		this.build(level, levelDef.getId(), levelDef.getGamePlay());
-		if (!this.levelDef.buildLevel(level)) {
+		boolean isTuto = this.isTut(levelDefToLoad);
+		
+		if (isTuto || !this.levelDef.buildLevel(level)) {
 			this.levelDef.setId(levelDefToLoad.getId());
-			this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor3);
+			if (isTuto) {
+				this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorTutorial);
+			} else {
+				this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor3);
+			}
+			
 			this.gameInfo.forceLevel(LevelDifficulty.Easy, levelDefToLoad.getNumber());
 			this.isBoss = levelDefToLoad.isBoss();
 			
@@ -172,6 +179,11 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 			} else {
 				this.levelDef.buildLevel(level);
 			}
+			
+			if (levelDefToLoad instanceof LevelDefinitionParser) {
+				LevelDefinitionParser parser = (LevelDefinitionParser) levelDefToLoad;
+				parser.storeLevel(level);
+			}			
 		}
 	}
 	
@@ -192,5 +204,11 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 	
 	public void setFirstBuild(boolean firstBuild) {
 		this.firstBuild = firstBuild;
+	}
+
+	@Override
+	public LevelDefinition getNext(LevelDefinition levelDefinition) {
+		WorldPackage world = SlimeFactory.PackageManager.getCurrentPackage();
+		return world.getNext(levelDefinition);
 	}
 }

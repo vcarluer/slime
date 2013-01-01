@@ -5,6 +5,7 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.Rank;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.game.WorldPackage;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -31,6 +32,7 @@ public abstract class LevelDefinition {
 	private boolean isBoss;
 	private int number;
 	private int difficulty;
+	private WorldPackage world;
 	
 	protected LevelDefinition() {
 		this.gamePlay = GamePlay.None;
@@ -265,7 +267,7 @@ public abstract class LevelDefinition {
 	public void resetUserInfo() {
 		this.maxScore = 0;
 		this.isFinished = false;
-		this.isUnlock = false;
+		this.setUnlock(false);
 		this.isCurrentSelection = false;
 		this.resetUserInfoNext();
 	}
@@ -321,5 +323,13 @@ public abstract class LevelDefinition {
 
 	public void setDifficulty(int difficulty) {
 		this.difficulty = difficulty;
+	}
+
+	public WorldPackage getWorld() {
+		return world;
+	}
+
+	public void setWorld(WorldPackage world) {
+		this.world = world;
 	}
 }

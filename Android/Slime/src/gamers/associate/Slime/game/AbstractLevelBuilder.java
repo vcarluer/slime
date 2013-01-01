@@ -1,6 +1,7 @@
 package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.levels.ILevelBuilder;
+import gamers.associate.Slime.levels.LevelDefinition;
 import gamers.associate.Slime.levels.generator.LevelGraphGeneratorTutorial;
 
 public abstract class AbstractLevelBuilder implements ILevelBuilder {
@@ -31,5 +32,11 @@ public abstract class AbstractLevelBuilder implements ILevelBuilder {
 	protected  boolean isTut() {
 		return this.gameInfo.getDifficulty() == LevelDifficulty.Easy
 				&& this.gameInfo.getLevelNum() <= LevelGraphGeneratorTutorial.tutorialCount;
+	}
+	
+	protected  boolean isTut(LevelDefinition definition) {
+		return definition != null && 
+				definition.getNumber() <= LevelGraphGeneratorTutorial.tutorialCount && 
+				definition.getWorld().getOrder() == 1;
 	}
 }	

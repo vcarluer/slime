@@ -17,4 +17,5 @@ public interface ILevelBuilder {
 	void resetTotalStar();
 	boolean isBoss();
 	void setFirstBuild(boolean firstBuild);
+	LevelDefinition getNext(LevelDefinition levelDefinition);
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 public class PackageManager {
 	private List<WorldPackage> packages;
+	private WorldPackage currentPackage;
 	
 	public PackageManager() {
 		this.packages = new ArrayList<WorldPackage>();
@@ -35,5 +36,13 @@ public class PackageManager {
 
 	public int getPackageCount() {
 		return this.packages.size();
+	}
+
+	public WorldPackage getCurrentPackage() {
+		return currentPackage;
+	}
+
+	public void setCurrentPackage(WorldPackage currentPackage) {
+		this.currentPackage = currentPackage;
 	}
 }
