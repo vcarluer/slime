@@ -120,6 +120,8 @@ public abstract class SlimeFactory {
 	public static SlimySuccessFactory SlimySuccess = new SlimySuccessFactory();
 	
 	public static StarCounterFactory StarCounter = new StarCounterFactory(); // Not attached in attach All but in HudLayer	
+	
+	public static PackageManager PackageManager = new PackageManager();
 		
 	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {		
 		// LevelBuilder = new LevelBuilder();
