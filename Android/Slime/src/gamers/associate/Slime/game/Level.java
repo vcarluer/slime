@@ -941,7 +941,10 @@ public class Level implements IGameItemHandler {
 			if (this.levelDefinition != null) {
 				this.levelDefinition.setLastScore(this.lastScore);
 				if (this.getGamePlay().getType() == GamePlay.TimeAttack) {
-					this.levelDefinition.setRank(TimeAttackGame.getRank(this.getGamePlay().bonusCount(), SlimeFactory.LevelBuilder.getTotalStar()));
+					if (this.levelDefinition.getLastScore() == this.levelDefinition.getMaxScore()) {
+						this.levelDefinition.setRank(TimeAttackGame.getRank(this.getGamePlay().bonusCount(), SlimeFactory.LevelBuilder.getTotalStar()));
+					}
+					
 					LevelDefinition next = SlimeFactory.LevelBuilder.getNext(this.levelDefinition);
 					next.setUnlock(true);
 					next.handlePersistancy();

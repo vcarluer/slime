@@ -94,7 +94,7 @@ public class StoryWorldLayer extends CCLayer {
 		this.addChild(this.scroller, Level.zTop);
 		
 		// Not needed? background enough...
-		this.title.setVisible(false);		
+		this.title.setVisible(false);
 	}
 	
 	@Override
@@ -210,7 +210,7 @@ public class StoryWorldLayer extends CCLayer {
 			
 			int i = 0;
 			for(LevelDefinition levelDefinition : world.getLevels()) {
-				StoryMenuItem item = StoryMenuItem.item(levelDefinition);			
+				StoryMenuItem item = StoryMenuItem.item(levelDefinition, this.scroller);			
 				
 				int colItem = i % cols;
 				int rowItem = (int) FloatMath.floor(i / cols);

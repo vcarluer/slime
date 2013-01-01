@@ -25,13 +25,15 @@ public class StoryMenuItem extends CCLayer {
 	private CCSprite starItem;	
 	
 	private LevelDefinition levelDefintion;
+	private ScrollerLayer scroller;
 	
 	/** Creates a CCMenuItem with a target/selector */
-    public static StoryMenuItem item(LevelDefinition levelDefinition) {
-        return new StoryMenuItem(levelDefinition);
+    public static StoryMenuItem item(LevelDefinition levelDefinition, ScrollerLayer scroller) {
+        return new StoryMenuItem(levelDefinition, scroller);
     }
 	
-	public StoryMenuItem(LevelDefinition levelDefinition) {
+	public StoryMenuItem(LevelDefinition levelDefinition, ScrollerLayer scroller) {
+		this.scroller = scroller;
 		this.levelDefintion = levelDefinition;
 		
 		this.backItem = CCSprite.sprite("control-square-empty.png", true);
@@ -68,20 +70,24 @@ public class StoryMenuItem extends CCLayer {
 	
 	@Override
 	public boolean ccTouchesEnded(MotionEvent event) {
-		float x = event.getX();
-		float y = CCDirector.sharedDirector().winSize().getHeight() - event.getY();
-		float parentX = this.getParent().getPosition().x;
-		float parentY = this.getParent().getPosition().y;
-		float realX = this.getPosition().x + parentX;
-		float realY = this.getPosition().y + parentY;
-		boolean inrectX = x < realX + SIZE / 2f && x > realX - SIZE / 2f;
-		boolean inrectY = y < realY + SIZE / 2F && y > realY - SIZE / 2f;
-		if (inrectX && inrectY) {
-			this.select();
-			return true;
-		} else {
-			return false;
+		if (this.scroller == null || !this.scroller.hasMoved()) {
+			float x = event.getX();
+			float y = CCDirector.sharedDirector().winSize().getHeight() - event.getY();
+			float parentX = this.getParent().getPosition().x;
+			float parentY = this.getParent().getPosition().y;
+			float realX = this.getPosition().x + parentX;
+			float realY = this.getPosition().y + parentY;
+			boolean inrectX = x < realX + SIZE / 2f && x > realX - SIZE / 2f;
+			boolean inrectY = y < realY + SIZE / 2F && y > realY - SIZE / 2f;
+			if (inrectX && inrectY) {
+				this.select();
+				return true;
+			} else {
+				return false;
+			}
 		}
+		
+		return false;
 	}
 
 	private void select() {
