@@ -174,20 +174,20 @@ public class LevelDefinitionParser extends LevelDefinition
 		boolean constructed = true;
 		try {
 			SlimeFactory.Log.d(Slime.TAG, "Loading level from " + this.getResourceName());
-			if (SlimeFactory.IsLevelSelectionOn) {
-				if (this.mediaAvailable()) {
-					File file = this.getExternFile();
-					if (file != null) {
-						inputStream = new FileInputStream(file);
-					}					
-				}
+			if (this.isLocalStorage) {
+				inputStream = SlimeFactory.ContextActivity.openFileInput(this.getResourcePath());
 			} else {
-				if (this.isLocalStorage) {
-					inputStream = SlimeFactory.ContextActivity.openFileInput(this.getResourcePath());
+				if (SlimeFactory.IsLevelSelectionOn) {
+					if (this.mediaAvailable()) {
+						File file = this.getExternFile();
+						if (file != null) {
+							inputStream = new FileInputStream(file);
+						}					
+					}
 				} else {
 					inputStream = SlimeFactory.ContextActivity.getAssets().open(this.getResourcePath());
-				}
-			}
+				}				
+			}			
 						
 			InputStreamReader inputreader = new InputStreamReader(inputStream);
 			BufferedReader buffreader = new BufferedReader(inputreader);
@@ -260,8 +260,14 @@ public class LevelDefinitionParser extends LevelDefinition
 	
 	private File getWorldDirectory() {
 		File root = Environment.getExternalStorageDirectory();
-		File dirBase = new File (root.getAbsolutePath() + "/SlimeAttack");									
-		File dir = new File (dirBase.getAbsolutePath() + "/" + this.getWorld().getName());
+		File dirBase = new File (root.getAbsolutePath() + "/SlimeAttack");				
+		File dir = null;
+		if (this.getWorld() != null) {
+			dir = new File (dirBase.getAbsolutePath() + "/" + this.getWorld().getName());
+		} else {
+			dir = dirBase;
+		}
+		
 		return dir;
 	}
 
@@ -309,7 +315,7 @@ public class LevelDefinitionParser extends LevelDefinition
 		try {
 			SlimeFactory.Log.d(Slime.TAG, "Storing level in " + this.getResourceName());
 			FileOutputStream fos = null;
-			if (SlimeFactory.IsLevelSelectionOn) {				
+			if (!this.isLocalStorage && SlimeFactory.IsLevelSelectionOn) {				
 				File file = this.getExternFile();				
 				if (file != null) {
 					fos = new FileOutputStream(file);
@@ -385,11 +391,15 @@ public class LevelDefinitionParser extends LevelDefinition
 	}
 
 	public boolean isStored() {
-		return SlimeFactory.ContextActivity.getFileStreamPath(this.getResourceName()).exists();
+		return this.isStored(this.getResourceName());
 	}
 	
 	public boolean isStored(String resourcePath) {
-		return SlimeFactory.ContextActivity.getFileStreamPath(resourcePath).exists();
+		if (!this.isLocalStorage) {
+			return false;
+		} else {
+			return SlimeFactory.ContextActivity.getFileStreamPath(resourcePath).exists();
+		}		
 	}
 
 	public boolean isLocalStorage() {

@@ -283,7 +283,7 @@ public class Level implements IGameItemHandler {
 	
 	private void setBackground() {						
 		String fileName = "";
-		if (SlimeFactory.GameInfo.getLastBkg() != null && SlimeFactory.GameInfo.getLastBkg() != "") {
+		if (SlimeFactory.GameInfo.getLastBkg() != null && SlimeFactory.GameInfo.getLastBkg().length() > 0) {
 			fileName = SlimeFactory.GameInfo.getLastBkg();
 		} else {
 			// todo list assets in bkg folder instead
