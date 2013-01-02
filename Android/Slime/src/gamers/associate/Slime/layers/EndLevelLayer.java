@@ -5,6 +5,7 @@ import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
+import gamers.associate.Slime.items.custom.RankFactory;
 import gamers.associate.Slime.items.custom.Slimy;
 import gamers.associate.Slime.items.custom.SlimySuccess;
 import gamers.associate.Slime.items.custom.Star;
@@ -29,13 +30,16 @@ import android.annotation.SuppressLint;
 import android.view.MotionEvent;
 
 @SuppressLint("DefaultLocale") public class EndLevelLayer extends CCLayer {		
+	private static final int MARGIN_RANK = 11;
+	private static final float SLIMY_SCALE = 2f;
 	private static final int scorePosition = 0;	
 	private static final int totalScorePosition = - 75;
 	private static final int MenuPosition = scorePosition - 150;
 	private static final int StarCountPosition = scorePosition + 60;
 	private static final int SlimyPosition = StarCountPosition + 100;
 	private static final int labelSize = 60;	
-	private static final int stepScore = 10000;	
+	private static final int stepScore = 10000;
+	private static final float STAR_SCALE = 1.5f;	
 	private CCSprite slime;
 	private CCSprite star;
 	private CCBitmapFontAtlas starCountLabel;
@@ -46,6 +50,7 @@ import android.view.MotionEvent;
 	private CCMenuItemSprite restartMenu;
 	private CCMenuItemSprite homeMenu;
 	private int previousTarget;
+	private CCSprite rankStar;
 	
 	@Override
 	public boolean ccTouchesEnded(MotionEvent event) {
@@ -260,15 +265,18 @@ import android.view.MotionEvent;
 			this.slime = SlimeFactory.SlimySuccess.getAnimatedSprite(SlimySuccess.getAnimationName(SlimeFactory.GameInfo.getDifficulty()));			
 		} else {
 			this.slime = SlimeFactory.Slimy.getAnimatedSprite(animation, waitTime);
-			this.slime.setScale(2f);
+			this.slime.setScale(SLIMY_SCALE);
 		}				
 		
 		this.addChild(this.slime);
-		this.slime.setPosition(CGPoint.make(
+		this.slimyPos = CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,
 				CCDirector.sharedDirector().winSize().height / 2 + SlimyPosition
-				));
+				);
+		this.slime.setPosition(this.slimyPos);
 	}
+	
+	private CGPoint slimyPos;
 	
 	private boolean scoreCountEnd;
 	
@@ -343,7 +351,21 @@ import android.view.MotionEvent;
 		if (animate) {
 			this.totalScoreLabel.stopAllActions();
 			this.totalScoreLabel.setScale(1);
+			if (this.rankStar != null) {
+				this.rankStar.stopAllActions();
+				this.removeChild(this.rankStar, true);				
+			}
+			
+			this.rankStar = RankFactory.getSprite(Level.currentLevel.getLevelDefinition().getRank());
+			this.rankStar.setScale(10);
+			CCScaleTo scaleTo = CCScaleTo.action(0.3f, STAR_SCALE);
+			this.rankStar.runAction(scaleTo);
+			
+			CGPoint pos = CGPoint.make(this.slimyPos.x + (Slimy.AnimSuccess_Width * SLIMY_SCALE) / 2 + MARGIN_RANK + (Star.Default_Width * STAR_SCALE) / 2, this.slimyPos.y);
+			this.rankStar.setPosition(pos);
+			this.addChild(this.rankStar);
 		}
+
 		if (!this.totalScoreLabel.getVisible()) {
 			this.totalScoreLabel.setVisible(true);
 			if (animate) {

@@ -51,6 +51,7 @@ public class Slimy extends GameItemPhysic implements IBurnable, IDissolvable, IE
 	public static float Default_Height = 26f;
 	protected static float Default_Body_Width = 20f; //16f
 	protected static float Default_Body_Height = 23f; //23f
+	public static float AnimSuccess_Width = 88f;
 	
 	private static float Reference_Width = 32f;
 	private static float Reference_Height = 35f;
