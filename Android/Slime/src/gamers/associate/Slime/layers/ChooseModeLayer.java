@@ -38,36 +38,14 @@ public class ChooseModeLayer extends CCLayer {
 	
 	public ChooseModeLayer() {
 		HomeLayer.addBkgSplash(this);
-		this.storyLabel = CCMenuItemLabel.item(this.createLabel("Story"), this, "chooseStory");
-		this.survivalLabel = CCMenuItemLabel.item(this.createLabel("Survival"), this, "chooseSurvival");
+		StoryModeItemLayer story = new StoryModeItemLayer();
+		story.setPosition(0, 0);
+		this.addChild(story);
+		SurvivalModeItemLayer survival = new SurvivalModeItemLayer();
+		survival.setPosition(CCDirector.sharedDirector().winSize().width / 2f, 0);
+		this.addChild(survival);
 		
-		this.menu = CCMenu.menu(this.storyLabel, this.survivalLabel);
-		this.menu.alignItemsVertically(padding);
-		this.menu.setPosition(CGPoint.make(
-				CCDirector.sharedDirector().winSize().getWidth() / 2,
-				CCDirector.sharedDirector().winSize().getHeight() / 2
-				));
-		this.addChild(this.menu);		
 		this.addChild(HomeLayer.getHomeMenuButton(this, "goHome"));
-	}
-	
-	private CCLabel createLabel(String text) {
-		CCLabel label = CCLabel.makeLabel(text.toUpperCase(), "fonts/Slime.ttf", 90.0f);
-		// label.setColor(ccColor3B.ccc3(32,181,79));
-		label.setColor(SlimeFactory.ColorSlime);
-		return label;
-	}
-	
-	public void chooseStory(Object sender) {
-		Sounds.playEffect(R.raw.menuselect);
-		CCFadeTransition transition = CCFadeTransition.transition(0.5f, StoryWorldLayer.getScene(1));
-		 CCDirector.sharedDirector().replaceScene(transition);
-	}
-	
-	public void chooseSurvival(Object sender) {
-		Sounds.playEffect(R.raw.menuselect);
-		CCFadeTransition transition = CCFadeTransition.transition(0.5f, ChooseSurvivalDifficultyLayer.getScene());
-		CCDirector.sharedDirector().replaceScene(transition);
 	}
 	
 	public void goHome(Object sender) {

@@ -92,9 +92,6 @@ public class StoryWorldLayer extends CCLayer {
 		this.scroller = new ScrollerLayer();
 		this.scroller.setStoryLayer(this);
 		this.addChild(this.scroller, Level.zTop);
-		
-		// Not needed? background enough...
-//		this.title.setVisible(false);
 	}
 	
 	@Override
