@@ -1,13 +1,10 @@
 package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.R;
-import gamers.associate.Slime.game.LevelDifficulty;
-import gamers.associate.Slime.game.PackageManager;
 import gamers.associate.Slime.game.Sharer;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 
-import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.menus.CCMenu;
@@ -21,10 +18,12 @@ import android.view.MotionEvent;
 
 public class TimeAttackGameOverLayer extends CCLayer {
 	private static CCScene scene;
+	private CCLabel congratLabel;
 	private CCLabel endLabel;
 	private CCLabel gameOverLabel;
 	private CCMenu backMenu;	
 	private CCMenu shareMenu;
+	private float yEndRelative;
 	
 	public static CCScene getScene() {
 		if (scene == null) {
@@ -38,12 +37,17 @@ public class TimeAttackGameOverLayer extends CCLayer {
 	public TimeAttackGameOverLayer() {
 		HomeLayer.addBkg(this, 800, 480, "game-over.png");
 		this.backMenu = HomeLayer.getBackButton(this, "goBack");
-		this.endLabel = CCLabel.makeLabel("Congratulations !!!".toUpperCase(), "fonts/Slime.ttf", 42 * SlimeFactory.Density);
+		this.congratLabel = CCLabel.makeLabel("Congratulations!!!".toUpperCase(), "fonts/Slime.ttf", 42 * SlimeFactory.Density);
+		this.endLabel = CCLabel.makeLabel("World".toUpperCase(), "fonts/Slime.ttf", 28 * SlimeFactory.Density);
 		this.gameOverLabel = CCLabel.makeLabel("Game Over!".toUpperCase(), "fonts/Slime.ttf", 68 * SlimeFactory.Density);
 		this.gameOverLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + 100 * SlimeFactory.Density);
-		this.endLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY());
+		this.congratLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY());
+		this.yEndRelative = - (42 + 11) * SlimeFactory.SGSDensity;
+		this.endLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + this.yEndRelative);
+		this.endLabel.setColor(ccColor3B.ccc3(255, 0, 0));
 		
 		this.addChild(this.gameOverLabel);
+		this.addChild(this.congratLabel);
 		this.addChild(this.endLabel);
 		
 		this.addChild(this.backMenu);
@@ -58,11 +62,11 @@ public class TimeAttackGameOverLayer extends CCLayer {
 	
 	@Override
 	public void onEnter() {
-		this.endLabel.setString(("Congratulations !!! You have finished world " + SlimeFactory.PackageManager.getCurrentPackage().getName()).toUpperCase());						
+		this.endLabel.setString(("World " + SlimeFactory.PackageManager.getCurrentPackage().getName() + " finished").toUpperCase());
 				
 		this.shareMenu = HomeLayer.getNewShareButton(
 				"World " + SlimeFactory.PackageManager.getCurrentPackage().getName() + " finished in story mode !"+  " " + Sharer.twitterTag, 
-				1.0f, - this.endLabel.getContentSize().width / 2f - 25 - HomeLayer.shareSizeW / 2f, 0);
+				1.0f, 0, this.yEndRelative - 28 * SlimeFactory.Density - HomeLayer.shareSizeH / 2f);
 		
 		this.addChild(this.shareMenu);
 		

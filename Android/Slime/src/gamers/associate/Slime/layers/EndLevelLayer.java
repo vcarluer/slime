@@ -3,8 +3,10 @@ package gamers.associate.Slime.layers;
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.Rank;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
+import gamers.associate.Slime.game.TimeAttackGame;
 import gamers.associate.Slime.items.custom.RankFactory;
 import gamers.associate.Slime.items.custom.Slimy;
 import gamers.associate.Slime.items.custom.SlimySuccess;
@@ -112,7 +114,7 @@ import android.view.MotionEvent;
 	}
 	
 	public void goNext(Object sender) {
-		Sounds.playEffect(R.raw.menuselect);
+		Sounds.playEffect(R.raw.menuselect);		
 		
 		if (Level.currentLevel.getGamePlay().getType() == GamePlay.Survival && SlimeFactory.LevelBuilder.isBoss()) {
 			CCTransitionScene transition = CCFadeTransition.transition(0.5f, SurvivalGameOverLayer.getScene());
@@ -364,7 +366,8 @@ import android.view.MotionEvent;
 			this.totalScoreLabel.stopAllActions();
 			this.totalScoreLabel.setScale(1);			
 			
-			this.rankStar = RankFactory.getSprite(Level.currentLevel.getLevelDefinition().getRank());
+			Rank rank = TimeAttackGame.getRank(Level.currentLevel.getGamePlay().bonusCount(), SlimeFactory.LevelBuilder.getTotalStar());
+			this.rankStar = RankFactory.getSprite(rank);
 			this.rankStar.setScale(10);
 			CCScaleTo scaleTo = CCScaleTo.action(0.3f, STAR_SCALE);
 			this.rankStar.runAction(scaleTo);

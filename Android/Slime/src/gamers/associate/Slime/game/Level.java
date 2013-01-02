@@ -946,8 +946,10 @@ public class Level implements IGameItemHandler {
 					}
 					
 					LevelDefinition next = SlimeFactory.LevelBuilder.getNext(this.levelDefinition);
-					next.setUnlock(true);
-					next.handlePersistancy();
+					if (next != null) {
+						next.setUnlock(true);
+						next.handlePersistancy();
+					}					
 				}
 				
 				this.levelDefinition.handlePersistancy();
