@@ -117,9 +117,16 @@ import android.view.MotionEvent;
 		if (Level.currentLevel.getGamePlay().getType() == GamePlay.Survival && SlimeFactory.LevelBuilder.isBoss()) {
 			CCTransitionScene transition = CCFadeTransition.transition(0.5f, SurvivalGameOverLayer.getScene());
 			CCDirector.sharedDirector().replaceScene(transition);
-		} else {
-			Level.currentLevel.goNext();
+			return;
 		}
+		
+		if (Level.currentLevel.getGamePlay().getType() == GamePlay.TimeAttack && SlimeFactory.LevelBuilder.isBoss()) {
+			CCTransitionScene transition = CCFadeTransition.transition(0.5f, TimeAttackGameOverLayer.getScene());
+			CCDirector.sharedDirector().replaceScene(transition);
+			return;
+		} 
+				
+		Level.currentLevel.goNext();		
 	}
 	
 	public void goRestart(Object sender) {

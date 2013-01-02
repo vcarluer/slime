@@ -167,7 +167,8 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 		level.setTitle(TitleGenerator.generateNewTitle());
 		
 		this.gameInfo.forceLevel(levelDefToLoad.getWorld().getDifficulty(levelDefToLoad.getNumber()), levelDefToLoad.getNumber());
-		
+		this.isBoss = levelDefToLoad.isBoss();
+
 		if (isTuto || !levelDefToLoad.buildLevel(level)) {
 			this.levelDef.setId(levelDefToLoad.getId());
 			this.levelDef.setGamePlay(levelDefToLoad.getGamePlay());
@@ -177,9 +178,7 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 				level.setTitle(null);
 			} else {
 				this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor3);
-			}
-			
-			this.isBoss = levelDefToLoad.isBoss();
+			}			
 			
 			if (this.isBoss) {
 				this.levelDef.buildBossLevel(level);
