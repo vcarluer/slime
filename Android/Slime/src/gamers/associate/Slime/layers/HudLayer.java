@@ -75,6 +75,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 	private int counterIdx;
 	
 	private CCMenu selectLevelMenu;
+	private CCMenu rebuildLevelMenu;
 	
 	private boolean hideCount;
 	
@@ -112,12 +113,15 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 		this.starsToDelete = new ArrayList<CCSprite>();
 		this.starX = CCDirector.sharedDirector().winSize().getWidth() / 2 - Star.Reference_Width - PaddingLeftStar;
 		this.starY = CCDirector.sharedDirector().winSize().getHeight() - (starCountHShift + Star.Reference_Height / 2);
-		
-		float recordX = CCDirector.sharedDirector().winSize().getWidth() / 2f - ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) / 2 ;
-		float recordY = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY) / 2;;
+				
 		if (SlimeFactory.IsLevelSelectionOn) {
+			float recordX = CCDirector.sharedDirector().winSize().getWidth() / 2f - ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) / 2 ;
+			float recordY = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY) / 2;;
+			float rebuildX = recordX - ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX);
 			this.selectLevelMenu = HomeLayer.getMenuButton("control-empty.png", recordX, recordY, this, "recordLvl");
+			this.rebuildLevelMenu = HomeLayer.getMenuButton("control-restart.png", rebuildX, recordY, this, "rebuildLvl");
 			this.addChild(this.selectLevelMenu);
+			this.addChild(this.rebuildLevelMenu);
 		}
 	}	
 	
@@ -457,11 +461,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 		this.counterIdx = 0;
 		
 		this.scoreTaken.cleanup();
-	}
-	
-	public void recordLvl(Object sender) {
-	
-	}
+	}		
 
 	public boolean isHideCount() {
 		return hideCount;
@@ -469,5 +469,15 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 
 	public void setHideCount(boolean hideCount) {
 		this.hideCount = hideCount;
+	}
+	
+	public void rebuildLvl(Object sender) {
+		Sounds.playEffect(R.raw.menuselect);
+		Level.currentLevel.getLevelDefinition().setInvalidated(true);
+		Level.currentLevel.reload();
+	}
+	
+	public void recordLvl(Object sender) {
+		
 	}
 }

@@ -175,7 +175,8 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 			this.gameInfo.forceLevel(levelDefToLoad.getWorld().getDifficulty(levelDefToLoad.getNumber()), levelDefToLoad.getNumber());
 			this.isBoss = levelDefToLoad.isBoss();
 
-			if (isTuto || !levelDefToLoad.buildLevel(level)) {
+			if (isTuto || levelDefToLoad.isInvalidated() || !levelDefToLoad.buildLevel(level)) {
+				levelDefToLoad.setInvalidated(false);
 				this.levelDef.setId(levelDefToLoad.getId());
 				this.levelDef.setGamePlay(levelDefToLoad.getGamePlay());
 				

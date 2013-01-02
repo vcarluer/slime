@@ -34,6 +34,8 @@ public abstract class LevelDefinition {
 	private int difficulty;
 	private WorldPackage world;
 	private int previousMaxScore;
+	// for level generation pick
+	private boolean isInvalidated;
 	
 	protected LevelDefinition() {
 		this.gamePlay = GamePlay.None;
@@ -352,5 +354,13 @@ public abstract class LevelDefinition {
 
 	public void setPreviousMaxScore(int previousMaxScore) {
 		this.previousMaxScore = previousMaxScore;
+	}
+
+	public boolean isInvalidated() {
+		return isInvalidated;
+	}
+
+	public void setInvalidated(boolean isInvalidated) {
+		this.isInvalidated = isInvalidated;
 	}
 }

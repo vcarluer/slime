@@ -59,7 +59,7 @@ public abstract class SlimeFactory {
 	public static int ForceLevel = 10;
 	public static boolean IsDebugBlocOn = false;
 	public static String ForceBlockPath = "blocsRectangle/s_tl5.slime";
-	public static boolean IsLevelSelectionOn = false;
+	public static boolean IsLevelSelectionOn = true;
 	public static final boolean IsForceMaxSurvival = false;
 	public static final int MaxSurvival = LevelDifficulty.Hard;
 	public static final boolean IsForceMaxWorld = false;
