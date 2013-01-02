@@ -321,8 +321,14 @@ public abstract class LevelDefinition {
 		return rank;
 	}
 
-	public void setRank(Rank rank) {
-		this.rank = rank;
+	public void setRank(Rank rank) {		
+		this.rank = rank;			
+	}
+	
+	public void upgradeRank(Rank rank) {
+		if (this.rank == null || rank.index() > this.rank.index()) {
+			this.setRank(rank);
+		}
 	}
 
 	public boolean isBoss() {
