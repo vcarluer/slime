@@ -18,21 +18,27 @@ public abstract class ModeItemLayer extends CCLayer {
 	
 	private float width;
 	private float height;
+	
+	private float padding;
 
 	public ModeItemLayer() {
 		CCSprite canvas = CCSprite.sprite(this.getBackgroundPath());
-		float padding = 11f;
-		float scaleX = (CCDirector.sharedDirector().winSize().width / 2f) / WIDTH;
-		float scaleY = CCDirector.sharedDirector().winSize().height / HEIGHT;
+		this.padding = 50f * SlimeFactory.SGSDensity;
+		float screenScaleX = (CCDirector.sharedDirector().winSize().width / 2f) / WIDTH;
+		float screenScaleY = (CCDirector.sharedDirector().winSize().height) / HEIGHT;
+		float scaleX = ((CCDirector.sharedDirector().winSize().width / 2f) - this.padding * 2) / WIDTH;
+//		float scaleY = (CCDirector.sharedDirector().winSize().height - this.padding * 2) / HEIGHT;
+		float scaleY = scaleX;
 		canvas.setAnchorPoint(0, 0);
 		canvas.setScaleX(scaleX);
 		canvas.setScaleY(scaleY);
 		this.width = WIDTH * scaleX;
 		this.height = HEIGHT * scaleY;
+		canvas.setPosition(padding, padding);
 		
 		this.addChild(canvas);
 		CCLabel label = SlimeFactory.getLabel(this.getTitle());
-		label.setPosition(this.width / 2f, this.height / 2f);
+		label.setPosition(WIDTH * screenScaleX / 2f, HEIGHT * screenScaleY / 2f);
 		this.addChild(label);
 		this.setIsTouchEnabled(true);
 	}
@@ -47,8 +53,8 @@ public abstract class ModeItemLayer extends CCLayer {
 		float y = CCDirector.sharedDirector().winSize().getHeight() - event.getY();
 		float parentX = this.getParent().getPosition().x;
 		float parentY = this.getParent().getPosition().y;
-		float realX = this.getPosition().x + parentX + this.width / 2f;
-		float realY = this.getPosition().y + parentY + this.height / 2f;
+		float realX = this.getPosition().x + parentX + this.width / 2f + this.padding;
+		float realY = this.getPosition().y + parentY + this.height / 2f + this.padding;
 		boolean inrectX = x < realX + this.width / 2f && x > realX - this.height / 2f;
 		boolean inrectY = y < realY + this.width / 2F && y > realY - this.height / 2f;
 		if (inrectX && inrectY) {

@@ -9,6 +9,9 @@ import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelHome;
 
+import org.cocos2d.actions.interval.CCDelayTime;
+import org.cocos2d.actions.interval.CCMoveTo;
+import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.menus.CCMenu;
@@ -27,6 +30,9 @@ public class ChooseModeLayer extends CCLayer {
 	
 	private static float padding = 50f;
 	
+	private StoryModeItemLayer story;
+	private SurvivalModeItemLayer survival;
+	
 	public static CCScene getScene() {
 		if (scene == null) {
 			scene = CCScene.node();
@@ -38,16 +44,32 @@ public class ChooseModeLayer extends CCLayer {
 	
 	public ChooseModeLayer() {
 		HomeLayer.addBkgSplash(this);
-		StoryModeItemLayer story = new StoryModeItemLayer();
-		story.setPosition(0, 0);
-		this.addChild(story);
-		SurvivalModeItemLayer survival = new SurvivalModeItemLayer();
-		survival.setPosition(CCDirector.sharedDirector().winSize().width / 2f, 0);
-		this.addChild(survival);
+		this.story = new StoryModeItemLayer();
+		
+		this.addChild(this.story);
+		this.survival = new SurvivalModeItemLayer();
+		
+		this.addChild(this.survival);
 		
 		this.addChild(HomeLayer.getHomeMenuButton(this, "goHome"));
 	}
 	
+	@Override
+	public void onEnter() {
+		this.story.setPosition(0, CCDirector.sharedDirector().winSize().height);
+		this.moveToZeroY(0f, this.story);
+		this.survival.setPosition(CCDirector.sharedDirector().winSize().width / 2f, CCDirector.sharedDirector().winSize().height);
+		this.moveToZeroY(0.3f, this.survival);
+		super.onEnter();
+	}
+
+	private void moveToZeroY(float delayTime, CCLayer layer) {
+		CCDelayTime delay = CCDelayTime.action(0.4f + delayTime);
+		CCMoveTo moveTo = CCMoveTo.action(0.5f, CGPoint.make(layer.getPosition().x, 0));
+		CCSequence seq = CCSequence.actions(delay, moveTo);
+		layer.runAction(seq);
+	}
+
 	public void goHome(Object sender) {
 		Sounds.playEffect(R.raw.menuselect);
 		Level currentLevel = Level.get(LevelHome.Id, true, GamePlay.None);
