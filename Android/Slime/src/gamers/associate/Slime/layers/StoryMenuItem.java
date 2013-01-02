@@ -49,14 +49,11 @@ public class StoryMenuItem extends CCLayer {
 	}
 	
 	public void defineNewScale(float s) {
-//		this.setScale(0);
 		this.setScale(s);
 		float baseX = this.getPosition().x;
 		this.setPosition(- SIZE * this.getScale(), this.getPosition().y);
 		this.setAnchorPoint(0, 0);
 		CCDelayTime delay = CCDelayTime.action(0.4f + ((this.levelDefintion.getNumber() - 1) % StoryWorldLayer.COLS) * (2 / StoryWorldLayer.COLS));
-//		CCDelayTime delay = CCDelayTime.action(0.4f + this.levelDefintion.getNumber() * (2 / this.levelDefintion.getWorld().getLevelCount()));
-//		CCScaleTo actionTo = CCScaleTo.action(0.5f, s);
 		CCMoveTo actionTo = CCMoveTo.action(0.3f, CGPoint.make(baseX, this.getPosition().y));		
 		
 		CCSequence seq = CCSequence.actions(delay,  actionTo);
