@@ -55,9 +55,7 @@ public abstract class WorldPackage {
 			definition.setGamePlay(GamePlay.TimeAttack);
 			definition.setDifficulty(this.getDifficulty(num));
 			definition.setWorld(this);
-			// fixme, only for temp generation
-			// To get back level stored if not exist
-			definition.setLocalStorage(true);
+
 			if (i == 0) {
 				definition.setUnlock(true);
 			}

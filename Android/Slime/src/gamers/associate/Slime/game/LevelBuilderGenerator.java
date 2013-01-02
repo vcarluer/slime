@@ -194,10 +194,8 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 				}
 				
 				if (levelDefToLoad instanceof LevelDefinitionParser) {
-					LevelDefinitionParser parser = (LevelDefinitionParser) levelDefToLoad;
+					LevelDefinitionParser parser = (LevelDefinitionParser) levelDefToLoad;					
 					parser.storeLevel(level);
-					// To get back level stored if not exist
-					parser.setLocalStorage(true);
 				}
 			}
 		}	

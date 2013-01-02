@@ -15,6 +15,8 @@ import gamers.associate.Slime.items.custom.Star;
 import gamers.associate.Slime.items.custom.StarCounter;
 import gamers.associate.Slime.items.custom.StarCounterFactory;
 import gamers.associate.Slime.levels.GamePlay;
+import gamers.associate.Slime.levels.LevelDefinition;
+import gamers.associate.Slime.levels.LevelDefinitionParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -478,6 +480,10 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 	}
 	
 	public void recordLvl(Object sender) {
-		
+		LevelDefinition levelDef = Level.currentLevel.getLevelDefinition();
+		if (levelDef instanceof LevelDefinitionParser) {
+			LevelDefinitionParser parser = (LevelDefinitionParser) levelDef;
+			parser.dumpLevel();
+		}
 	}
 }

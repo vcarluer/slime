@@ -39,11 +39,14 @@ import gamers.associate.Slime.levels.itemdef.TriggerTimeDef;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,11 +55,12 @@ import java.util.Set;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Environment;
 
 @SuppressLint("DefaultLocale")
 @SuppressWarnings("rawtypes")
 public class LevelDefinitionParser extends LevelDefinition
-{
+{	
 	private static String SpecialLevel = "Special";
 	private String resourceName;	
 	private ArrayList<ItemDefinition> itemDefinitions;
@@ -143,17 +147,48 @@ public class LevelDefinitionParser extends LevelDefinition
 		}
 	}
 	
+	private boolean mediaAvailable() {
+		boolean mExternalStorageAvailable = false;
+		boolean mExternalStorageWriteable = false;
+		String state = Environment.getExternalStorageState();
+
+		if (Environment.MEDIA_MOUNTED.equals(state)) {
+		    // We can read and write the media
+		    mExternalStorageAvailable = mExternalStorageWriteable = true;
+		} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+		    // We can only read the media
+		    mExternalStorageAvailable = true;
+		    mExternalStorageWriteable = false;
+		} else {
+		    // Something else is wrong. It may be one of many other states, but all we need
+		    //  to know is we can neither read nor write
+		    mExternalStorageAvailable = mExternalStorageWriteable = false;
+		}
+		
+		return mExternalStorageAvailable && mExternalStorageWriteable;
+	}
+	
 	@Override
 	public boolean buildLevel(Level level) {
-		InputStream inputStream;
+		InputStream inputStream = null;
 		boolean constructed = true;
 		try {
 			SlimeFactory.Log.d(Slime.TAG, "Loading level from " + this.getResourceName());
-			if (this.isLocalStorage) {
-				inputStream = SlimeFactory.ContextActivity.openFileInput(this.getResourceName());
+			if (SlimeFactory.IsLevelSelectionOn) {
+				if (this.mediaAvailable()) {
+					File file = this.getExternFile();
+					if (file != null) {
+						inputStream = new FileInputStream(file);
+					}					
+				}
 			} else {
-				inputStream = SlimeFactory.ContextActivity.getAssets().open(this.getResourceName());
-			}			
+				if (this.isLocalStorage) {
+					inputStream = SlimeFactory.ContextActivity.openFileInput(this.getResourcePath());
+				} else {
+					inputStream = SlimeFactory.ContextActivity.getAssets().open(this.getResourcePath());
+				}
+			}
+						
 			InputStreamReader inputreader = new InputStreamReader(inputStream);
 			BufferedReader buffreader = new BufferedReader(inputreader);
 			String line;		
@@ -212,11 +247,77 @@ public class LevelDefinitionParser extends LevelDefinition
 		return itemType;
 	}
 	
+	private File getExternFile() {
+		if (this.mediaAvailable() && this.getGamePlay() == GamePlay.TimeAttack) {			
+			File dir = this.getWorldDirectory();
+			dir.mkdirs();
+			File file = new File(dir, this.getResourceName());
+			return file;
+		}
+		
+		return null;
+	}
+	
+	private File getWorldDirectory() {
+		File root = Environment.getExternalStorageDirectory();
+		File dirBase = new File (root.getAbsolutePath() + "/SlimeAttack");									
+		File dir = new File (dirBase.getAbsolutePath() + "/" + this.getWorld().getName());
+		return dir;
+	}
+
+	private File getDumpFile() {
+		if (this.mediaAvailable() && this.getGamePlay() == GamePlay.TimeAttack) {				
+			File dirWorld = this.getWorldDirectory();
+			File dir = new File(dirWorld.getAbsolutePath() + "/Dump");
+			dir.mkdirs();
+			File file = new File(dir, this.getResourceName());
+			return file;
+		}
+		
+		return null;
+	}
+	
+	public void dumpLevel() {
+		if (SlimeFactory.IsLevelSelectionOn && this.getGamePlay() == GamePlay.TimeAttack) {
+			File fileIn = this.getExternFile();
+			File fileOut = this.getDumpFile();
+			try {
+				this.copy(fileIn, fileOut);
+			} catch (IOException e) {
+				SlimeFactory.Log.e(Slime.TAG, "ERROR, can not dump file " + this.getResourceName());
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void copy(File src, File dst) throws IOException {
+	    InputStream in = new FileInputStream(src);
+	    OutputStream out = new FileOutputStream(dst);
+
+	    // Transfer bytes from in to out
+	    byte[] buf = new byte[1024];
+	    int len;
+	    while ((len = in.read(buf)) > 0) {
+	        out.write(buf, 0, len);
+	    }
+	    in.close();
+	    out.close();
+	}
+	
 	public void storeLevel(Level level) {
 		BufferedWriter buffWriter = null;
 		try {
 			SlimeFactory.Log.d(Slime.TAG, "Storing level in " + this.getResourceName());
-			FileOutputStream fos = SlimeFactory.ContextActivity.openFileOutput(this.getResourceName(), Context.MODE_PRIVATE);
+			FileOutputStream fos = null;
+			if (SlimeFactory.IsLevelSelectionOn) {				
+				File file = this.getExternFile();				
+				if (file != null) {
+					fos = new FileOutputStream(file);
+				}				
+			} else {
+				fos = SlimeFactory.ContextActivity.openFileOutput(this.getResourcePath(), Context.MODE_PRIVATE);
+			}
+			
 			OutputStreamWriter streamWriter = new OutputStreamWriter(fos);
 			buffWriter = new BufferedWriter(streamWriter);
 			// First line: LevelInfo
@@ -272,6 +373,15 @@ public class LevelDefinitionParser extends LevelDefinition
                 ex.printStackTrace();
             }
         }
+	}
+
+	private String getResourcePath() {
+		if (this.getWorld() != null) {
+			return this.getWorld().getName() + "/" + this.getResourceName();
+		} else {
+			return this.getResourceName();
+		}
+		
 	}
 
 	public boolean isStored() {
