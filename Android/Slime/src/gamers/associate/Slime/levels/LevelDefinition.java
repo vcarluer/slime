@@ -241,7 +241,11 @@ public abstract class LevelDefinition {
 					}
 				}  else {
 					SlimeFactory.Log.d(Slime.TAG, "No need to load User Info from " + fileName);
-					this.setUnlock(false);
+					if (SlimeFactory.unlockAll) {
+						this.setUnlock(true);
+					} else {
+						this.setUnlock(false);
+					}					
 				}				
 			}			
 		} catch (IOException e1) {

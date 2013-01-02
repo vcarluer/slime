@@ -129,9 +129,9 @@ public class PauseLayer extends CCLayer {
 			CCDirector.sharedDirector().replaceScene(transition);
 		} else {
 //			Level.currentLevel.goHome();
-			CCTransitionScene transition = CCFadeTransition.transition(0.5f, StoryWorldLayer.getScene(SlimeFactory.GameInfo.getDifficulty()));
+			CCTransitionScene transition = CCFadeTransition.transition(0.5f, StoryWorldLayer.getScene(SlimeFactory.PackageManager.getCurrentPackage().getOrder()));
 			CCDirector.sharedDirector().replaceScene(transition);
-		}		
+		}
 	}
 	
 	public void enable() {

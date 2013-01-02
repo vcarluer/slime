@@ -60,7 +60,7 @@ public class ChooseModeLayer extends CCLayer {
 	
 	public void chooseStory(Object sender) {
 		Sounds.playEffect(R.raw.menuselect);
-		CCFadeTransition transition = CCFadeTransition.transition(0.5f, StoryWorldLayer.getScene(LevelDifficulty.Easy));
+		CCFadeTransition transition = CCFadeTransition.transition(0.5f, StoryWorldLayer.getScene(1));
 		 CCDirector.sharedDirector().replaceScene(transition);
 	}
 	

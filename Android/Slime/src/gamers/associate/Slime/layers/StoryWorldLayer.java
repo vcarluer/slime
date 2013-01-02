@@ -43,8 +43,8 @@ public class StoryWorldLayer extends CCLayer {
 	private CCNode levels;
 	private ScrollerLayer scroller;
 	
-	private int targetDiffLeft;
-	private int targetDiffRight;	
+	private int targetPageLeft;
+	private int targetPageRight;	
 	
 	private static int paddingTitle = fontSize + 5;
 	
@@ -129,14 +129,14 @@ public class StoryWorldLayer extends CCLayer {
 	
 	public void toLeft(Object sender) {
 		if (this.menuToLeft.isTouchEnabled()) {
-			CCTransitionScene transition = CCSlideInLTransition.transition(transitionTime, StoryWorldLayer.getScene(this.targetDiffLeft));
+			CCTransitionScene transition = CCSlideInLTransition.transition(transitionTime, StoryWorldLayer.getScene(this.targetPageLeft));
 			CCDirector.sharedDirector().replaceScene(transition);
 		}
 	}
 	
 	public void toRight(Object sender) {
 		if (this.menuToRight.isTouchEnabled()) {
-			CCTransitionScene transition = CCSlideInRTransition.transition(transitionTime, StoryWorldLayer.getScene(this.targetDiffRight));
+			CCTransitionScene transition = CCSlideInRTransition.transition(transitionTime, StoryWorldLayer.getScene(this.targetPageRight));
 			CCDirector.sharedDirector().replaceScene(transition);
 		}
 	}
@@ -169,8 +169,8 @@ public class StoryWorldLayer extends CCLayer {
 			hasRight = true;
 		}
 		
-		this.targetDiffLeft = 0;
-		this.targetDiffRight = 0;
+		this.targetPageLeft = 0;
+		this.targetPageRight = 0;
 		this.menuToLeft.setVisible(false);
 		this.menuToLeft.setIsTouchEnabled(false);
 		this.menuToRight.setVisible(false);
@@ -179,13 +179,13 @@ public class StoryWorldLayer extends CCLayer {
 		if (hasLeft) {
 			this.menuToLeft.setVisible(true);
 			this.menuToLeft.setIsTouchEnabled(true);
-			this.targetDiffLeft = page - 1;
+			this.targetPageLeft = page - 1;
 		}
 		
 		if (hasRight) {
 			this.menuToRight.setVisible(true);
 			this.menuToRight.setIsTouchEnabled(true);
-			this.targetDiffRight = page + 1;
+			this.targetPageRight = page + 1;
 		}
 		
 		if (!world.isLock()) {

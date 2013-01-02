@@ -3,6 +3,7 @@ package gamers.associate.Slime.layers;
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.Rank;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
@@ -116,7 +117,9 @@ import android.view.MotionEvent;
 	public void goNext(Object sender) {
 		Sounds.playEffect(R.raw.menuselect);		
 		
-		if (Level.currentLevel.getGamePlay().getType() == GamePlay.Survival && SlimeFactory.LevelBuilder.isBoss()) {
+		if (Level.currentLevel.getGamePlay().getType() == GamePlay.Survival && 
+				SlimeFactory.LevelBuilder.isBoss() &&
+				SlimeFactory.GameInfo.getDifficulty() != LevelDifficulty.Extrem) {
 			CCTransitionScene transition = CCFadeTransition.transition(0.5f, SurvivalGameOverLayer.getScene());
 			CCDirector.sharedDirector().replaceScene(transition);
 			return;
