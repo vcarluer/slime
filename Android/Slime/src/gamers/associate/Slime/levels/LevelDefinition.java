@@ -185,59 +185,64 @@ public abstract class LevelDefinition {
 			if (SlimeFactory.clearLevelInfo) {
 				SlimeFactory.ContextActivity.deleteFile(fileName);
 			} else {
-				SlimeFactory.Log.d(Slime.TAG, "Loading User Info from " + fileName);
-				inputStream = SlimeFactory.ContextActivity.openFileInput(fileName);
-				InputStreamReader inputreader = new InputStreamReader(inputStream);
-				BufferedReader buffreader = new BufferedReader(inputreader);
-				String line;		
-				
-				int i = 0;
-				try {
-					while (( line = buffreader.readLine()) != null) {
-						try {
-							i++;
-							switch(i) {
-							case 1:
-								this.maxScore = Integer.valueOf(line).intValue();
-								this.previousMaxScore = this.maxScore;
-								break;
-							case 2:
-								if (SlimeFactory.unlockAll) {
-									this.isUnlock = true;
-								} else {
-									this.isUnlock = Boolean.valueOf(line).booleanValue();
-								}								
-								break;
-							case 3:
-								this.isFinished = Boolean.valueOf(line).booleanValue();
-								break;
-							case 4:
-								this.isCurrentSelection = Boolean.valueOf(line).booleanValue();
-								break;
-							case 5:
-								this.setRank(Rank.valueOf(line));
-								if (SlimeFactory.unlockAll && this.rank == Rank.Lock) {
-									this.setRank(Rank.None);
-								}
+				if (SlimeFactory.ContextActivity.getFileStreamPath(fileName).exists()) {
+					SlimeFactory.Log.d(Slime.TAG, "Loading User Info from " + fileName);
+					inputStream = SlimeFactory.ContextActivity.openFileInput(fileName);
+					InputStreamReader inputreader = new InputStreamReader(inputStream);
+					BufferedReader buffreader = new BufferedReader(inputreader);
+					String line;		
+					
+					int i = 0;
+					try {
+						while (( line = buffreader.readLine()) != null) {
+							try {
+								i++;
+								switch(i) {
+								case 1:
+									this.maxScore = Integer.valueOf(line).intValue();
+									this.previousMaxScore = this.maxScore;
+									break;
+								case 2:
+									if (SlimeFactory.unlockAll) {
+										this.isUnlock = true;
+									} else {
+										this.isUnlock = Boolean.valueOf(line).booleanValue();
+									}								
+									break;
+								case 3:
+									this.isFinished = Boolean.valueOf(line).booleanValue();
+									break;
+								case 4:
+									this.isCurrentSelection = Boolean.valueOf(line).booleanValue();
+									break;
+								case 5:
+									this.setRank(Rank.valueOf(line));
+									if (SlimeFactory.unlockAll && this.rank == Rank.Lock) {
+										this.setRank(Rank.None);
+									}
 
-								break;
-							default:
-								this.loadUserInfoNext(line, i);
-								break;
-							}												
-						} catch (Exception e) {
-							SlimeFactory.Log.e(Slime.TAG, "ERROR during read of " + fileName + " line " + String.valueOf(i));
-							e.printStackTrace();
-						}									
+									break;
+								default:
+									this.loadUserInfoNext(line, i);
+									break;
+								}												
+							} catch (Exception e) {
+								SlimeFactory.Log.e(Slime.TAG, "ERROR during read of " + fileName + " line " + String.valueOf(i));
+								e.printStackTrace();
+							}									
+						}
+					} catch (IOException e) {
+						SlimeFactory.Log.e(Slime.TAG, "ERROR during read of " + fileName + " line " + String.valueOf(i));
+						e.printStackTrace();
+					} finally {
+						if (buffreader != null) {
+							buffreader.close();
+						}
 					}
-				} catch (IOException e) {
-					SlimeFactory.Log.e(Slime.TAG, "ERROR during read of " + fileName + " line " + String.valueOf(i));
-					e.printStackTrace();
-				} finally {
-					if (buffreader != null) {
-						buffreader.close();
-					}
-				}
+				}  else {
+					SlimeFactory.Log.d(Slime.TAG, "No need to load User Info from " + fileName);
+					this.setUnlock(false);
+				}				
 			}			
 		} catch (IOException e1) {
 			SlimeFactory.Log.e(Slime.TAG, "ERROR during opening of " + fileName);
