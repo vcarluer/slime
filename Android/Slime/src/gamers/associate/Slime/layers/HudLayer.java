@@ -137,8 +137,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 	
 	@Override
 	public void onEnter() {		
-		super.onEnter();
-		this.setTitle(TitleGenerator.generateNewTitle());				
+		super.onEnter();				
 		this.starSprite = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);			
 		this.starSprite.setPosition(this.starX, this.starY);
 		this.starSprite.setAnchorPoint(0, 0f);
@@ -256,28 +255,32 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 	private String currentTitle;
 	
 	public void setTitle(String titleText) {
-		if (this.currentTitle == null) {
-			this.currentTitle = String.valueOf(Level.currentLevel.getLevelDefinition().getNumber()) + ". " + titleText;
-			this.title.stopAllActions();
-			this.title.setVisible(true);
-			this.title.setString(this.currentTitle.toUpperCase());
-			// double padding
-			float dPadding = 250f;
-			float scaleRatio = CCDirector.sharedDirector().winSize().width / (this.title.getContentSize().width + dPadding);
-			this.title.setScale(scaleRatio);
-			this.title.setPosition(
-					CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
-					CCDirector.sharedDirector().winSize().getHeight() / 2));
-			this.title.setOpacity(255);
-			float moveDistance = 75f;
-			float time = 3f;
-			CCDelayTime delay = CCDelayTime.action(time);
-			CCCallFunc call = CCCallFunc.action(this, "fadeTitle");
-			CCSequence seq = CCSequence.actions(delay, call);
-			this.title.runAction(seq);
-			tmp.set(-moveDistance, 0);
-			CCMoveBy move = CCMoveBy.action(time, tmp);
-			this.title.runAction(move);
+		if (titleText == null) {
+			this.currentTitle = null;
+		} else {
+			if (this.currentTitle == null) {
+				this.currentTitle = String.valueOf(Level.currentLevel.getLevelDefinition().getNumber()) + ". " + titleText;
+				this.title.stopAllActions();
+				this.title.setVisible(true);
+				this.title.setString(this.currentTitle.toUpperCase());
+				// double padding
+				float dPadding = 250f;
+				float scaleRatio = CCDirector.sharedDirector().winSize().width / (this.title.getContentSize().width + dPadding);
+				this.title.setScale(scaleRatio);
+				this.title.setPosition(
+						CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
+						CCDirector.sharedDirector().winSize().getHeight() / 2));
+				this.title.setOpacity(255);
+				float moveDistance = 75f;
+				float time = 3f;
+				CCDelayTime delay = CCDelayTime.action(time);
+				CCCallFunc call = CCCallFunc.action(this, "fadeTitle");
+				CCSequence seq = CCSequence.actions(delay, call);
+				this.title.runAction(seq);
+				tmp.set(-moveDistance, 0);
+				CCMoveBy move = CCMoveBy.action(time, tmp);
+				this.title.runAction(move);
+			}
 		}
 	}
 	

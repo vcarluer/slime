@@ -1,5 +1,7 @@
 package gamers.associate.Slime.game;
 
+import android.util.FloatMath;
+
 
 public class LaboratoryPackage extends WorldPackage {
 	private static final String BKG_MOON_POSTCARD_PNG = "bkg/moon-postcard.png";
@@ -23,7 +25,7 @@ public class LaboratoryPackage extends WorldPackage {
 
 	@Override
 	protected int getDifficulty(int lvlNumber) {
-		int diff = (int) Math.ceil(4 * lvlNumber / levelCount);
+		int diff = (int) FloatMath.ceil(4f * (float)lvlNumber / (float)levelCount);
 		switch(diff) {
 			default:
 			case 1:

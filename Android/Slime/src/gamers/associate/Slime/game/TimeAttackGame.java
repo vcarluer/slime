@@ -414,7 +414,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	}
 
 	public static Rank getRank(int bonusCount, int totalStar) {
-		int rank = (int) Math.ceil(4 * bonusCount / totalStar);
+		int rank = (int) FloatMath.ceil(4f * (float)bonusCount / (float)totalStar);
 		switch(rank) {
 			default:
 			case 1:
