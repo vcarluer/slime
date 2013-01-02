@@ -48,7 +48,7 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 		if (id != LevelHome.Id)
 		{			
 			this.levelDef.setGamePlay(gamePlay);
-			level.setLevelDefinition(this.levelDef);			
+			level.setLevelDefinition(this.levelDef);	
 			
 			if (this.levelDef.getGamePlay() == GamePlay.TimeAttack) {
 				this.gameInfo.setLevel(Integer.valueOf(id));
@@ -63,7 +63,8 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 				if (this.levelDef.getGamePlay() == GamePlay.TimeAttack && this.isTut()) {
 					SlimeFactory.LevelGeneratorTutorial.setTitle();
 				}
-
+				
+				level.setTitle(TitleGenerator.generateNewTitle());
 				level.setLevelDefinition(this.levelDef);
 			} else {
 				if (!isDebug) {
@@ -111,6 +112,7 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 					this.levelparser.storeLevel(level);
 				}
 				
+				level.setTitle(TitleGenerator.generateNewTitle());
 				this.levelDef.resetAndSave();								
 			}
 			

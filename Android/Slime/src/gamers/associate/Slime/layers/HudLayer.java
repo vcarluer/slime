@@ -260,7 +260,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 			this.currentTitle = null;
 		} else {
 			if (this.currentTitle == null) {
-				if (Level.currentLevel.getGamePlay().getType() == GamePlay.TimeAttack) {
+				if (Level.currentLevel.getLevelDefinition().getGamePlay() == GamePlay.TimeAttack) {
 					this.currentTitle = String.valueOf(Level.currentLevel.getLevelDefinition().getNumber()) + ". " + titleText;
 				} else {
 					this.currentTitle = titleText;
@@ -277,7 +277,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 						CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
 						CCDirector.sharedDirector().winSize().getHeight() / 2));
 				this.title.setOpacity(255);
-				float moveDistance = 75f;
+				float moveDistance =  CCDirector.sharedDirector().winSize().getWidth() / 2 - (this.title.getContentSize().width * scaleRatio) / 2f;
 				float time = 3f;
 				CCDelayTime delay = CCDelayTime.action(time);
 				CCCallFunc call = CCCallFunc.action(this, "fadeTitle");
