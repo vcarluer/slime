@@ -31,7 +31,9 @@ import android.view.MotionEvent;
 
 @SuppressLint("DefaultLocale") 
 public class HomeLayer extends CCLayer {
-	public static final int shareSize = 64;
+	public static final int shareSizeW = 127;
+	public static final int shareSizeH = 70;
+	public static float shareScale = 0.7f;
 	private static HomeLayer layer;	
 	private CCLabel lblScore;
 	private CCSprite starSprite;
@@ -46,7 +48,6 @@ public class HomeLayer extends CCLayer {
 	private CCMenu shareMenu;
 	
 	private boolean nextDoNotStopMusic;
-	private float shareScale;
 	
 	private CCLayer top;
 	
@@ -111,12 +112,11 @@ public class HomeLayer extends CCLayer {
 		super.onEnter();
 		Sounds.setEffectsDisable(true);
 		
-		// share button
-		shareScale = 1.0f;
-		float shareX = - CCDirector.sharedDirector().winSize().getWidth() / 2 +((shareSize * shareScale) + PauseLayer.PaddingX) / 2 ;
-		float shareY = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((shareSize * shareScale) + PauseLayer.PaddingX) / 2;
+		// share button		
+		float shareX = - CCDirector.sharedDirector().winSize().getWidth() / 2 +((shareSizeW * shareScale * SlimeFactory.Density) + PauseLayer.PaddingX) / 2 ;
+		float shareY = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((shareSizeH * shareScale * SlimeFactory.Density) + PauseLayer.PaddingY) / 2;
 		
-		this.shareMenu = HomeLayer.getNewShareButton(null, shareScale, shareX, shareY);
+		this.shareMenu = HomeLayer.getNewShareButton(null, 1.0f, shareX, shareY);
 		this.addChild(this.shareMenu);
 		
 		String score = String.valueOf(SlimeFactory.GameInfo.getTotalScore());
@@ -258,14 +258,14 @@ public class HomeLayer extends CCLayer {
 			sharer.setShareMessage(shareMessage);
 		}
 		
-		CCSprite shareN = CCSprite.sprite("share.png");
-		CCSprite shareS = CCSprite.sprite("share.png");
-		shareN.setColor(SlimeFactory.ColorSlimeBorder);
-		shareS.setColor(SlimeFactory.ColorSlimeBorder);
+		CCSprite shareN = CCSprite.sprite("control-share.png");
+		CCSprite shareS = CCSprite.sprite("control-share.png");
+//		shareN.setColor(SlimeFactory.ColorSlimeBorder);
+//		shareS.setColor(SlimeFactory.ColorSlimeBorder);
 		CCMenuItemSprite shareItem = CCMenuItemSprite.item(shareN, shareS, sharer, "shareApp");
 		
 		shareItem.setPosition(shareX, shareY);
-		float baseScale = scale * SlimeFactory.Density;
+		float baseScale = scale * shareScale * SlimeFactory.Density;
 		shareItem.setScale(baseScale);
 		
 		CCScaleBy scaleBy = CCScaleBy.action(0.3f, 0.3f);

@@ -238,6 +238,11 @@ import android.view.MotionEvent;
 		// Slimy.Anim_Success not used anymore
 		this.initSlime(Slimy.Anim_Success, 0f, true);
 		
+		if (this.rankStar != null) {
+			this.rankStar.stopAllActions();
+			this.removeChild(this.rankStar, true);				
+		}
+		
 		Sounds.playEffect(R.raw.star);
 	}
 	
@@ -350,11 +355,7 @@ import android.view.MotionEvent;
 		String text = prefix + String.valueOf(score);
 		if (animate) {
 			this.totalScoreLabel.stopAllActions();
-			this.totalScoreLabel.setScale(1);
-			if (this.rankStar != null) {
-				this.rankStar.stopAllActions();
-				this.removeChild(this.rankStar, true);				
-			}
+			this.totalScoreLabel.setScale(1);			
 			
 			this.rankStar = RankFactory.getSprite(Level.currentLevel.getLevelDefinition().getRank());
 			this.rankStar.setScale(10);

@@ -95,11 +95,11 @@ public class SurvivalGameOverLayer extends CCLayer {
 		if (!newMode) {
 			this.shareMenu = HomeLayer.getNewShareButton(
 					"New high score in Slime Attack survival mode! " + String.valueOf(SlimeFactory.GameInfo.getCurrentScore()) + " in " + LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty()) + " " + Sharer.twitterTag, 
-					1.0f, - this.scoreLabel.getContentSize().width / 2f - 25 - HomeLayer.shareSize / 2f, 0);
+					1.0f, - this.scoreLabel.getContentSize().width / 2f - 25 - HomeLayer.shareSizeW / 2f, 0);
 		} else {
 			this.shareMenu = HomeLayer.getNewShareButton(
 					"New mode unlocked in Slime Attack survival mode: " + modeText + "! " + String.valueOf(SlimeFactory.GameInfo.getCurrentScore()) + " in " + LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty()) + " " + Sharer.twitterTag, 
-					1.0f, - this.scoreLabel.getContentSize().width / 2f - 25 - HomeLayer.shareSize / 2f, 0);
+					1.0f, - this.scoreLabel.getContentSize().width / 2f - 25 - HomeLayer.shareSizeW / 2f, 0);
 		}
 		
 		this.addChild(this.shareMenu);
