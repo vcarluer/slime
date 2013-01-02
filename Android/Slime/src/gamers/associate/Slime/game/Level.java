@@ -1270,4 +1270,8 @@ public class Level implements IGameItemHandler {
 	public LevelDefinition getLevelDefinition() {
 		return this.levelDefinition;
 	}
+
+	public PauseLayer getPauseLayer() {
+		return this.pauseLayer;
+	}
 }

@@ -181,13 +181,18 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 
 	public void activateSelection(CGPoint gameReference) {
 		if (!this.isPaused && !this.isGameOver) {
-			this.isStarted = true;			
+			this.setIsStarted(true);			
 			this.level.addItemToRemove(this.level.getHelpItem());
 			this.setNormalTime();
 			this.level.getCameraManager().follow(this.level.getSelectedGameItem());	
 			this.level.setTimeRatio(TimeRatioNormal);
 			// this.level.desactivateCameraMoveAndZoomByUser();						
 		}
+	}
+
+	private void setIsStarted(boolean value) {
+		this.isStarted = value;		
+		Level.currentLevel.getPauseLayer().gameStarted(this.isStarted);
 	}
 
 	@Override
@@ -289,7 +294,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		label.setOpacity(255);
 		this.level.setTimeRatio(TimeRatioNormal);
 		this.setNormalTime();
-		this.isStarted = false;
+		this.setIsStarted(false);
 		
 		SlimeFactory.ContextActivity.showAndNextAd();
 	}

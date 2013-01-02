@@ -162,49 +162,59 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 
 	@Override
 	public void build(Level level, LevelDefinition levelDefToLoad) {
-//		this.build(level, levelDef.getId(), levelDef.getGamePlay());
-		boolean isTuto = this.isTut(levelDefToLoad);
-		level.setLevelDefinition(levelDefToLoad);
-		this.resetTotalStar();
-		level.setTitle(TitleGenerator.generateNewTitle());
-		
-		this.gameInfo.forceLevel(levelDefToLoad.getWorld().getDifficulty(levelDefToLoad.getNumber()), levelDefToLoad.getNumber());
-		this.isBoss = levelDefToLoad.isBoss();
-
-		if (isTuto || !levelDefToLoad.buildLevel(level)) {
-			this.levelDef.setId(levelDefToLoad.getId());
-			this.levelDef.setGamePlay(levelDefToLoad.getGamePlay());
-			
-			if (isTuto) {
-				this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorTutorial);	
-				level.setTitle(null);
-			} else {
-				this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor3);
-			}			
-			
-			if (this.isBoss) {
-				this.levelDef.buildBossLevel(level);
-			} else {
-				this.levelDef.buildLevel(level);
-			}
-			
-			if (levelDefToLoad instanceof LevelDefinitionParser) {
-				LevelDefinitionParser parser = (LevelDefinitionParser) levelDefToLoad;
-				parser.storeLevel(level);
-				// To get back level stored if not exist
-				parser.setLocalStorage(true);
-			}
+		if (levelDefToLoad.getGamePlay() == GamePlay.Survival) {
+			this.build(level, levelDef.getId(), levelDef.getGamePlay());
 		}
+		
+		if (levelDefToLoad.getGamePlay() == GamePlay.TimeAttack) {
+			boolean isTuto = this.isTut(levelDefToLoad);
+			level.setLevelDefinition(levelDefToLoad);
+			this.resetTotalStar();
+			level.setTitle(TitleGenerator.generateNewTitle());
+			
+			this.gameInfo.forceLevel(levelDefToLoad.getWorld().getDifficulty(levelDefToLoad.getNumber()), levelDefToLoad.getNumber());
+			this.isBoss = levelDefToLoad.isBoss();
+
+			if (isTuto || !levelDefToLoad.buildLevel(level)) {
+				this.levelDef.setId(levelDefToLoad.getId());
+				this.levelDef.setGamePlay(levelDefToLoad.getGamePlay());
+				
+				if (isTuto) {
+					this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorTutorial);	
+					level.setTitle(null);
+				} else {
+					this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor3);
+				}			
+				
+				if (this.isBoss) {
+					this.levelDef.buildBossLevel(level);
+				} else {
+					this.levelDef.buildLevel(level);
+				}
+				
+				if (levelDefToLoad instanceof LevelDefinitionParser) {
+					LevelDefinitionParser parser = (LevelDefinitionParser) levelDefToLoad;
+					parser.storeLevel(level);
+					// To get back level stored if not exist
+					parser.setLocalStorage(true);
+				}
+			}
+		}	
 	}
 	
 	@Override
 	public void rebuild(Level level, LevelDefinition levelDef) {
-		this.build(level, levelDef);
-//		if (this.levelparser.isStored()) {
-//			this.levelparser.buildLevel(level);			
-//		} else {
-//			this.build(level, levelDef.getId(), levelDef.getGamePlay());			
-//		}
+		if (levelDef.getGamePlay() == GamePlay.TimeAttack) {
+			this.build(level, levelDef);
+		}
+		
+		if (levelDef.getGamePlay() == GamePlay.Survival) {
+			if (this.levelparser.isStored()) {
+				this.levelparser.buildLevel(level);	
+			} else {
+				this.build(level, levelDef.getId(), levelDef.getGamePlay());			
+			}
+		}
 	}
 	
 	public void start() {

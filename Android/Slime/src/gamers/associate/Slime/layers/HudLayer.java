@@ -143,7 +143,6 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 		this.starSprite.setPosition(this.starX, this.starY);
 		this.starSprite.setAnchorPoint(0, 0f);
 		this.addChild(this.starSprite);
-		
 		// this.setStarsCount();
 	}
 	

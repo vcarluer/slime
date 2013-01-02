@@ -38,6 +38,8 @@ public class PauseLayer extends CCLayer {
 	private CCSprite arrowSpriteL;
 	public static final float arrowWidth = 75f;
 	public static final float arrowHeight = 69f;
+	private CCMenuItemSprite restartMenu;
+	private CCMenuItemSprite homeMenu;
 	
 	public PauseLayer() {
 //		CCMenuItem label = CCMenuItemLabel.item(getMenuLabel("Pause"), this, "");		
@@ -51,12 +53,12 @@ public class PauseLayer extends CCLayer {
 		
 		CCSprite restartSpriteN = CCSprite.sprite("control-restart.png", true);
 		CCSprite restartSpriteS = CCSprite.sprite("control-restart.png", true);
-		CCMenuItemSprite restartMenu = CCMenuItemSprite.item(restartSpriteN, restartSpriteS, this, "goRestart");		
+		restartMenu = CCMenuItemSprite.item(restartSpriteN, restartSpriteS, this, "goRestart");		
 		this.setMenuPos(restartMenu, 2);
 		
 		CCSprite homeSpriteN = CCSprite.sprite("control-home.png", true);
 		CCSprite homeSpriteS = CCSprite.sprite("control-home.png", true);
-		CCMenuItemSprite homeMenu = CCMenuItemSprite.item(homeSpriteN, homeSpriteS, this, "goHome");
+		homeMenu = CCMenuItemSprite.item(homeSpriteN, homeSpriteS, this, "goHome");
 		this.setMenuPos(homeMenu, 3);
 		
 		this.menu = CCMenu.menu(resumeMenu, restartMenu, homeMenu);
@@ -151,6 +153,39 @@ public class PauseLayer extends CCLayer {
 		arrow.runAction(repeat);
 	}
 	
+	@Override
+	public void onEnter() {		
+		super.onEnter();
+		if (Level.currentLevel.getLevelDefinition().getGamePlay() == GamePlay.Survival) {
+			this.restartMenu.setIsEnabled(false);
+			this.restartMenu.setVisible(false);
+			if (Level.currentLevel.getGamePlay().isStarted()) {
+				this.homeMenu.setIsEnabled(false);
+				this.homeMenu.setVisible(false);
+			}
+		} else {
+			this.restartMenu.setIsEnabled(true);
+			this.restartMenu.setVisible(true);
+			this.homeMenu.setIsEnabled(true);
+			this.homeMenu.setVisible(true);
+		}
+	}
+	
+	public void gameStarted(boolean started) {
+		if (Level.currentLevel.getLevelDefinition().getGamePlay() == GamePlay.Survival) {			
+			if (started) {
+				this.homeMenu.setIsEnabled(false);
+				this.homeMenu.setVisible(false);
+			} else {
+				this.homeMenu.setIsEnabled(true);
+				this.homeMenu.setVisible(true);
+			}
+		} else {			
+			this.homeMenu.setIsEnabled(true);
+			this.homeMenu.setVisible(true);
+		}
+	}
+
 	public void disable() {		
 		this.arrowSpriteT.stopAllActions();
 		this.arrowSpriteR.stopAllActions();
