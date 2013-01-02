@@ -14,6 +14,7 @@ import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.items.custom.Star;
 import gamers.associate.Slime.items.custom.StarCounter;
 import gamers.associate.Slime.items.custom.StarCounterFactory;
+import gamers.associate.Slime.levels.GamePlay;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -259,7 +260,12 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 			this.currentTitle = null;
 		} else {
 			if (this.currentTitle == null) {
-				this.currentTitle = String.valueOf(Level.currentLevel.getLevelDefinition().getNumber()) + ". " + titleText;
+				if (Level.currentLevel.getGamePlay().getType() == GamePlay.TimeAttack) {
+					this.currentTitle = String.valueOf(Level.currentLevel.getLevelDefinition().getNumber()) + ". " + titleText;
+				} else {
+					this.currentTitle = titleText;
+				}
+				
 				this.title.stopAllActions();
 				this.title.setVisible(true);
 				this.title.setString(this.currentTitle.toUpperCase());
