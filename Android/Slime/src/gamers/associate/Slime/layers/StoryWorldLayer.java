@@ -34,6 +34,7 @@ import android.util.SparseArray;
 
 @SuppressLint("DefaultLocale") 
 public class StoryWorldLayer extends CCLayer {
+	public static final int COLS = 5;
 	private static final int fontSize = 60;
 	private static final float transitionTime = 0.5f;
 	private CCLabel title;
@@ -147,8 +148,8 @@ public class StoryWorldLayer extends CCLayer {
 		}
 		
 		if (this.levels != null) {
-			this.removeChild(this.levels, true);
 			this.levels.removeAllChildren(true);
+			this.removeChild(this.levels, true);
 		}
 		
 		WorldPackage world = SlimeFactory.PackageManager.getPackage(page);
@@ -157,7 +158,7 @@ public class StoryWorldLayer extends CCLayer {
 		int w = 480;
 		int h = 360;
 		String spritePath = world.getBackgroundPath();
-		HomeLayer.addBkg(this, w, h, spritePath);
+		this.bkg = HomeLayer.addBkg(this, w, h, spritePath);
 		boolean hasLeft = false;
 		boolean hasRight = false;
 		this.setTitle(world.getName());
@@ -192,7 +193,7 @@ public class StoryWorldLayer extends CCLayer {
 			this.levels = CCNode.node();
 			// this.levels.setAnchorPoint(0, 1);
 			this.scroller.setHandled(this.levels);
-			int cols = 5;
+			int cols = COLS;
 			int lvls = world.getLevelCount();
 			int row = (int) FloatMath.ceil(lvls / cols);
 			
@@ -220,7 +221,7 @@ public class StoryWorldLayer extends CCLayer {
 				float x = colItem * colSize + colSize / 2f;
 				float y = - (rowItem * rowSize + rowSize / 2f);
 				item.setPosition(x, y);
-				item.setScale(itemScale);			
+				item.defineNewScale(itemScale);			
 				
 				this.levels.addChild(item);
 				i++;

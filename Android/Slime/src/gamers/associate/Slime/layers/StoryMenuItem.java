@@ -8,11 +8,16 @@ import gamers.associate.Slime.items.custom.RankFactory;
 import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelDefinition;
 
+import org.cocos2d.actions.interval.CCDelayTime;
+import org.cocos2d.actions.interval.CCMoveTo;
+import org.cocos2d.actions.interval.CCScaleTo;
+import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenuItem;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.types.CGPoint;
 
 import android.view.MotionEvent;
 
@@ -43,6 +48,21 @@ public class StoryMenuItem extends CCLayer {
 		this.setIsTouchEnabled(true);
 	}
 	
+	public void defineNewScale(float s) {
+//		this.setScale(0);
+		this.setScale(s);
+		float baseX = this.getPosition().x;
+		this.setPosition(- SIZE * this.getScale(), this.getPosition().y);
+		this.setAnchorPoint(0, 0);
+		CCDelayTime delay = CCDelayTime.action(0.4f + ((this.levelDefintion.getNumber() - 1) % StoryWorldLayer.COLS) * (2 / StoryWorldLayer.COLS));
+//		CCDelayTime delay = CCDelayTime.action(0.4f + this.levelDefintion.getNumber() * (2 / this.levelDefintion.getWorld().getLevelCount()));
+//		CCScaleTo actionTo = CCScaleTo.action(0.5f, s);
+		CCMoveTo actionTo = CCMoveTo.action(0.3f, CGPoint.make(baseX, this.getPosition().y));		
+		
+		CCSequence seq = CCSequence.actions(delay,  actionTo);
+		this.runAction(seq);
+	}
+
 	public void updateItem() {
 		if (this.idItem != null) {
 			this.removeChild(this.idItem, true);			
