@@ -15,6 +15,7 @@ import gamers.associate.Slime.levels.GamePlay;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.cocos2d.layers.CCColorLayer;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.menus.CCMenu;
@@ -30,7 +31,8 @@ import org.cocos2d.types.ccColor3B;
 
 @SuppressLint("DefaultLocale") 
 public class ChooseSurvivalDifficultyLayer extends CCLayer {
-	private static CCScene scene;	
+	private static CCScene scene;
+	private CCLabel title;
 	
 	public static CCScene getScene() {
 		if (scene == null) {
@@ -44,18 +46,31 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 	public ChooseSurvivalDifficultyLayer() {		
 		HomeLayer.addBkgChangeDiff(this);				
 		this.addChild(HomeLayer.getBackButton(this, "goBack"), Level.zTop);
+		this.title = SlimeFactory.getLabel("Survival");
+		this.title.setPosition(CCDirector.sharedDirector().winSize().getWidth() / 2, CCDirector.sharedDirector().winSize().getHeight() - PauseLayer.PaddingY - SlimeFactory.FntSize / 2f);
+		this.addChild(this.title, Level.zTop);
+
 		float width = CCDirector.sharedDirector().winSize().width;
-		this.addSurvivalItem("btn-easy", LevelDifficulty.Easy, 0, 0);
-		this.addSurvivalItem("btn-normal", LevelDifficulty.Normal, width / 4, 0);
-		this.addSurvivalItem("btn-hard", LevelDifficulty.Hard, width / 2, 0);
-		this.addSurvivalItem("btn-extreme", LevelDifficulty.Extrem, width * 3 / 4, 0);
+		this.addSurvivalItem("btn-easy", LevelDifficulty.Easy, 0, 0, 0, false);
+		this.addSurvivalItem("btn-normal", LevelDifficulty.Normal, width / 4, 0, 0.3f, true);
+		this.addSurvivalItem("btn-hard", LevelDifficulty.Hard, width / 2, 0, 0.6f, false);
+		this.addSurvivalItem("btn-extreme", LevelDifficulty.Extrem, width * 3 / 4, 0, 0.9f, true);
 	}
 	
-	private void addSurvivalItem(String bkgBase, int diff, float x, float y) {
+	private void addSurvivalItem(String bkgBase, int diff, float x, float y, float delayTime, boolean bottom) {
 		float colorHeight = MenuSprite.Height * PauseLayer.Scale + PauseLayer.PaddingY;
+		CCColorLayer colorLayer = CCColorLayer.node(SlimeFactory.getColorLight(200), CCDirector.sharedDirector().winSize().width, colorHeight);
+		colorLayer.setPosition(0, CCDirector.sharedDirector().winSize().height - colorHeight);
+		this.addChild(colorLayer, Level.zFront);
+		
 		float referenceHeight = CCDirector.sharedDirector().winSize().height - colorHeight;
 		SurvivalItemLayer item = new SurvivalItemLayer(bkgBase, diff, referenceHeight);
-		item.setPosition(x, y);
+		item.setPosition(x, 0);
+		if (bottom) {
+			SlimeFactory.moveToZeroYFromBottom(delayTime, item);
+		} else {			
+			SlimeFactory.moveToZeroY(delayTime, item);
+		}
 		this.addChild(item);
 	}
 	

@@ -1,5 +1,7 @@
 package gamers.associate.Slime.layers;
 
+import gamers.associate.Slime.game.SlimeFactory;
+
 import org.cocos2d.nodes.CCDirector;
 
 
@@ -20,4 +22,11 @@ public abstract class ModeItemLayer extends CanvasItemLayer {
 		this.labelY = HEIGHT * this.screenScaleY / 2f;
 		this.labelX = this.width / 2 + this.getPadding(PADDINGBASE);		
 	}
+
+	@Override
+	protected float getFontSize() {
+		return SlimeFactory.FntSize;
+	}
+	
+	
 }

@@ -39,6 +39,10 @@ public class GameInformation {
 	private int totalCurrentExtrem;
 	private boolean newUnlockSurvival;
 	private int newUnlockedDifficulty;
+	private int easyInARow;
+	private int normalInARow;
+	private int hardInARow;
+	private int extremInARow;
 	
 	public GameInformation() {		
 		this.maxLevelDifficulty = this.levelDifficulty = LevelDifficulty.Easy;
@@ -519,5 +523,45 @@ public class GameInformation {
 
 	public void setPreviousTotalCurrent(int previousTotalCurrent) {
 		this.previousTotalCurrent = previousTotalCurrent;
+	}
+	
+	public void setInARow(int score) {
+		switch (this.levelDifficulty) {
+		default:
+		case LevelDifficulty.Easy:
+			if (score > this.easyInARow) {
+				this.easyInARow = score;
+			}			
+			break;
+		case LevelDifficulty.Normal:
+			if (score > this.normalInARow) {
+				this.normalInARow = score;
+			}	
+			break;
+		case LevelDifficulty.Hard:
+			if (score > this.hardInARow) {
+				this.hardInARow = score;
+			}	
+			break;
+		case LevelDifficulty.Extrem:
+			if (score > this.extremInARow) {
+				this.extremInARow = score;
+			}	
+			break;
+		}
+	}
+	
+	public int getInARow(int diff) {
+		switch (diff) {
+		default:
+		case LevelDifficulty.Easy:			
+			return this.easyInARow;
+		case LevelDifficulty.Normal:
+			return this.normalInARow;	
+		case LevelDifficulty.Hard:
+			return this.hardInARow;	
+		case LevelDifficulty.Extrem:
+			return this.extremInARow;	
+		}
 	}
 }

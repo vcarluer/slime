@@ -7,12 +7,14 @@ import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.Vibe;
+import gamers.associate.Slime.items.custom.Star;
 import gamers.associate.Slime.levels.GamePlay;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.cocos2d.layers.CCScene;
+import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.transitions.CCFadeTransition;
@@ -30,6 +32,7 @@ public class SurvivalItemLayer extends CanvasItemLayer {
 	private static float iconSize = 70f;
 	private static final float iconSizeReference = 87f;
 	private static final float paddingSprite = - 11;
+	private static final float paddingInfo = 28;
 	
 	private List<CCNode> toDestroy;
 	
@@ -44,18 +47,36 @@ public class SurvivalItemLayer extends CanvasItemLayer {
 	
 	@Override
 	public void onEnter() {
-		super.onEnter();
+		super.onEnter();		
+		
 		this.diffSprite = getLevelSprite(this.levelDiff, this.isUnlocked);
-		diffSprite.setPosition(this.labelX 
-				- this.label.getContentSize().width / 2 
-				- this.diffSprite.getContentSize().width / 2 
-				+ paddingSprite, 
-				this.labelY);
+		this.labelY -= this.diffSprite.getContentSize().height / 2f - paddingSprite;
+		this.labelX = this.width / 2f + this.paddingX;
+		this.label.setPosition(this.labelX, this.labelY);
+		
+		diffSprite.setPosition(this.labelX, 
+				this.labelY + this.label.getContentSize().height / 2 
+				+ this.diffSprite.getContentSize().height / 2 
+				+ paddingSprite);
 		this.addChild(this.diffSprite);
 		
+		CCSprite star = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);
+		star.setPosition(this.labelX, this.labelY - this.getFontSize() / 2 - paddingSprite - star.getContentSize().height / 2);
+		this.addChild(star);
+		int score = SlimeFactory.GameInfo.getScore(this.levelDiff);
+		CCLabel scoreLabel = SlimeFactory.getLabel(String.valueOf(score), this.getFontSize());
+		scoreLabel.setPosition(this.labelX, star.getPosition().y - star.getContentSize().height / 2 - paddingSprite - this.getFontSize() / 2);
+		this.addChild(scoreLabel);
+		
+		float size = 20f;
+		CCLabel levelLabel = CCLabel.makeLabel("10 level in a row!", "fonts/Slime.ttf", size);
+		levelLabel.setPosition(this.labelX, scoreLabel.getPosition().y - this.getFontSize() / 2 - paddingInfo - size / 2);
+		this.addChild(levelLabel);
+		
+		this.toDestroy.add(star);
 		this.toDestroy.add(this.diffSprite);
-//		this.toDestroy.add(scoreLabel);
-//		this.toDestroy.add(levelLabel);
+		this.toDestroy.add(scoreLabel);
+		this.toDestroy.add(levelLabel);
 		
 		SlimeFactory.ContextActivity.showAndNextAd();				
 	}
@@ -141,4 +162,8 @@ public class SurvivalItemLayer extends CanvasItemLayer {
 		return this.title;
 	}
 
+	@Override
+	protected float getFontSize() {
+		return 42f;
+	}
 }

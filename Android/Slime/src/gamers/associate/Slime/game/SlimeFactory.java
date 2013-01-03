@@ -43,9 +43,14 @@ import gamers.associate.Slime.levels.generator.LevelGraphGeneratorTutorial;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import org.cocos2d.actions.interval.CCDelayTime;
+import org.cocos2d.actions.interval.CCMoveTo;
+import org.cocos2d.actions.interval.CCSequence;
+import org.cocos2d.layers.CCLayer;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCNode;
+import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
 import org.cocos2d.types.ccColor4B;
 
@@ -65,7 +70,7 @@ public abstract class SlimeFactory {
 	public static final int MaxSurvival = LevelDifficulty.Hard;
 	public static final boolean IsForceMaxWorld = false;
 	public static final int MaxWorld = LevelDifficulty.Extrem; // Should be world here?
-	public static final boolean resetHighScores = false;	
+	public static final boolean resetHighScores = true;	
 	public static final boolean clearLevelInfo = false; // Run with this = true and then relaunch with false
 	public static final boolean unlockAll = false;
 	
@@ -323,5 +328,21 @@ public abstract class SlimeFactory {
 	
 	public static ccColor4B getColorLight(int alpha) {
 		return ccColor4B.ccc4(178, 229, 194, alpha);
+	}
+	
+	public static void moveToZeroY(float delayTime, CCLayer layer) {
+		layer.setPosition(layer.getPosition().x, CCDirector.sharedDirector().winSize().height);
+		CCDelayTime delay = CCDelayTime.action(0.4f + delayTime);
+		CCMoveTo moveTo = CCMoveTo.action(0.5f, CGPoint.make(layer.getPosition().x, 0));
+		CCSequence seq = CCSequence.actions(delay, moveTo);
+		layer.runAction(seq);
+	}
+	
+	public static void moveToZeroYFromBottom(float delayTime, CCLayer layer) {
+		layer.setPosition(layer.getPosition().x, - CCDirector.sharedDirector().winSize().height);
+		CCDelayTime delay = CCDelayTime.action(0.4f + delayTime);
+		CCMoveTo moveTo = CCMoveTo.action(0.5f, CGPoint.make(layer.getPosition().x, 0));
+		CCSequence seq = CCSequence.actions(delay, moveTo);
+		layer.runAction(seq);
 	}
 }

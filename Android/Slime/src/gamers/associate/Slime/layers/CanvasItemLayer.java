@@ -48,12 +48,14 @@ public abstract class CanvasItemLayer extends CCLayer {
 			this.paddingX = (referenceWidth - this.width) / 2f;
 		}								
 		
-		this.label = SlimeFactory.getLabel(" ");
+		this.label = SlimeFactory.getLabel(" ", this.getFontSize());
 		this.defineLabelPosition();
 		this.label.setPosition(this.labelX, this.labelY);
 		this.addChild(this.label);
 		this.setIsTouchEnabled(true);
 	}
+
+	protected abstract float getFontSize();
 
 	@Override
 	public void onEnter() {
