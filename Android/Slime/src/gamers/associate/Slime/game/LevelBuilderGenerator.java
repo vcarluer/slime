@@ -57,7 +57,7 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 			this.isBoss = (this.gameInfo.getLevelNum() == this.gameInfo.getLevelMax());
 			this.resetTotalStar();
 			// Re-read pre-generated level
-			if (canResume()) {				
+			if (canResume()) { // gamePlay == GamePlay.Survival && SlimeFactory.GameInfo.canContinueSurvival() && 				
 				this.levelparser.setResourceName(this.getRandomFileName(this.gameInfo.getDifficulty()));
 				this.levelparser.buildLevel(level);
 				if (this.levelDef.getGamePlay() == GamePlay.TimeAttack && this.isTut()) {
@@ -129,6 +129,12 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 
 	public boolean canResume() {
 		return !this.gameInfo.isSurvivalGameOver() && this.firstBuild && this.levelparser.isStored(this.getRandomFileName(this.gameInfo.getDifficulty())) && !this.levelDef.isFinished();
+	}
+	
+	public boolean canResume(int diff) {
+		// first build?
+		//  && !this.levelDef.isFinished() ?
+		return !this.gameInfo.isSurvivalGameOver(diff) && this.levelparser.isStored(this.getRandomFileName(this.gameInfo.getDifficulty())); 
 	}
 
 	public String getNext(String paramString)
@@ -219,11 +225,6 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 				this.build(level, levelDef.getId(), levelDef.getGamePlay());			
 			}
 		}
-	}
-	
-	public void start() {
-		this.firstBuild = true;
-		Level.get(LevelBuilderGenerator.defaultId, true, this.levelDef.getGamePlay());		
 	}
 	
 	public void setFirstBuild(boolean firstBuild) {

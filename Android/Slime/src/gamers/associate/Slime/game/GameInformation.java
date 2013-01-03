@@ -46,6 +46,10 @@ public class GameInformation {
 	
 	public GameInformation() {		
 		this.maxLevelDifficulty = this.levelDifficulty = LevelDifficulty.Easy;
+		this.survivalGameOverEasy = true;
+		this.survivalGameOverNormal = true;
+		this.survivalGameOverHard = true;
+		this.survivalGameOverExtrem = true;
 		this.setLevelNum(0);
 		this.load();
 		if (resetHighScores) {
@@ -468,7 +472,11 @@ public class GameInformation {
 	}
 
 	public boolean isSurvivalGameOver() {
-		switch (this.levelDifficulty) {
+		return this.isSurvivalGameOver(this.levelDifficulty);
+	}
+	
+	public boolean isSurvivalGameOver(int diff) {
+		switch (diff) {
 			default:
 			case LevelDifficulty.Easy:
 				return this.survivalGameOverEasy;
@@ -521,6 +529,10 @@ public class GameInformation {
 				this.totalCurrent = this.totalCurrentExtrem;
 				break;
 		}
+	}
+	
+	public boolean canContinueSurvival() {
+		return this.canContinueSurvival(this.levelDifficulty);
 	}
 	
 	public boolean canContinueSurvival(int difficulty) {

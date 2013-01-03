@@ -107,12 +107,20 @@ public class StoryMenuItem extends CCLayer {
 		return false;
 	}
 
-	private void select() {
-		Sounds.playEffect(R.raw.menuselect);
+	private void select() {		
 		if (this.levelDefintion.isUnlock()) {
-			Level level = Level.get(this.levelDefintion, true);
-			Sounds.pauseMusic();
-			CCDirector.sharedDirector().replaceScene(level.getScene());
+			Sounds.playEffect(R.raw.menuselect);
+			if (this.levelDefintion.getNumber() == 1) {
+				SlimeFactory.ContextActivity.runIntro(this);
+			} else {
+				this.runLevel();
+			}
 		}
+	}
+	
+	public void runLevel() {							
+		Level level = Level.get(this.levelDefintion, true);
+		Sounds.pauseMusic();
+		CCDirector.sharedDirector().replaceScene(level.getScene());
 	}
 }

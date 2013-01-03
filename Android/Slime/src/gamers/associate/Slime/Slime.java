@@ -5,6 +5,7 @@ import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.layers.GALogoLayer;
+import gamers.associate.Slime.layers.StoryMenuItem;
 import gamers.associate.Slime.levels.LevelHome;
 
 import org.cocos2d.layers.CCScene;
@@ -63,6 +64,7 @@ public class Slime extends Activity {
 	private AdView adView;	
 	
 	private Handler mHandler;
+	private StoryMenuItem storyMenuItemAfterIntro;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -232,7 +234,9 @@ public class Slime extends Activity {
         
         if (this.startLevel) {
         	this.startLevel = false;
-        	SlimeFactory.LevelBuilder.start();
+        	if (this.storyMenuItemAfterIntro != null) {
+        		this.storyMenuItemAfterIntro.runLevel();
+        	}
         } else {
         	if (Level.currentLevel != null) {
             	// No automatic unpause
@@ -327,7 +331,8 @@ public class Slime extends Activity {
 		return super.onKeyUp(keyCode, event);
 	}
 	
-	public void runIntro() {
+	public void runIntro(StoryMenuItem menuItem) {
+		this.storyMenuItemAfterIntro = menuItem;
 		Intent i = new Intent(this, SlimeIntro.class);
 		int currentDifficulty = SlimeFactory.GameInfo.getDifficulty();
 		i.putExtra(SlimeIntro.INTRO_CHOICE, currentDifficulty);

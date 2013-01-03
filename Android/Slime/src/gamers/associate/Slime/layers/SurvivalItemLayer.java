@@ -18,11 +18,13 @@ import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.transitions.CCFadeTransition;
+import org.cocos2d.types.ccColor3B;
 
 public class SurvivalItemLayer extends CanvasItemLayer {
 	private static final String GREY = "-grey";
 	private static final String BKGEXT = ".png";
 	protected static final float fontSize = 32f;
+	protected static final float fontSizeInfo = 20f;
 	private boolean isUnlocked;
 	private String title;
 	private String baseBackground;
@@ -50,6 +52,10 @@ public class SurvivalItemLayer extends CanvasItemLayer {
 		this.labelY -= this.diffSprite.getContentSize().height / 2f - paddingSprite;
 		this.labelX = this.width / 2f + this.paddingX;
 		this.label.setPosition(this.labelX, this.labelY);
+		
+		this.inProgress = SlimeFactory.getLabel("In progress", fontSizeInfo);
+		this.inProgress.setColor(ccColor3B.ccc3(255, 0, 0));
+		this.addChild(this.inProgress);
 	}
 	
 	@Override
@@ -71,8 +77,7 @@ public class SurvivalItemLayer extends CanvasItemLayer {
 		CCLabel scoreLabel = SlimeFactory.getLabel(String.valueOf(score), this.getFontSize());
 		scoreLabel.setPosition(this.labelX, star.getPosition().y - star.getContentSize().height / 2 - paddingSprite - this.getFontSize() / 2);
 		this.addChild(scoreLabel);
-		
-		float size = 20f;
+				
 		int inARow = SlimeFactory.GameInfo.getInARow(this.levelDiff);		
 		String endPhrase = "";
 		if (inARow < 2) {
@@ -81,10 +86,13 @@ public class SurvivalItemLayer extends CanvasItemLayer {
 			endPhrase = " levels in a row!";			
 		}
 		
-		CCLabel levelLabel = CCLabel.makeLabel(String.valueOf(inARow) + endPhrase, "fonts/Slime.ttf", size);
+		CCLabel levelLabel = CCLabel.makeLabel(String.valueOf(inARow) + endPhrase, "fonts/Slime.ttf", fontSizeInfo);
 
-		levelLabel.setPosition(this.labelX, scoreLabel.getPosition().y - this.getFontSize() / 2 - paddingInfo - size / 2);
+		levelLabel.setPosition(this.labelX, scoreLabel.getPosition().y - this.getFontSize() / 2 - paddingInfo - fontSizeInfo / 2);
 		this.addChild(levelLabel);
+		
+		this.inProgress.setPosition(this.labelX, levelLabel.getPosition().y - fontSizeInfo / 2 - paddingInfo - fontSizeInfo / 2);
+		this.inProgress.setVisible(SlimeFactory.GameInfo.canContinueSurvival(this.levelDiff));
 		
 		this.toDestroy.add(star);
 		this.toDestroy.add(this.diffSprite);
@@ -158,7 +166,6 @@ public class SurvivalItemLayer extends CanvasItemLayer {
 		CCFadeTransition transition = CCFadeTransition.transition(0.5f, level.getScene());
 		
 		Vibe.vibrate();
-		Sounds.playEffect(R.raw.menuselect, true);
 		Sounds.stopMusic();
 		
 		return transition;
