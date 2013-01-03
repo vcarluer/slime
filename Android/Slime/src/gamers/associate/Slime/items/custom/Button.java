@@ -28,7 +28,7 @@ public class Button extends GameItemPhysic {
 	public static String Anim_Countdown = "button-state-countdown2";	
 	private static float Only_Once = -1f;
 	public static float Default_Width = 30f;
-	private static float Default_Height = 16f;
+	public static float Default_Height = 16f;
 	private static float Reference_Width = 30f;
 	private static float Reference_Height = 16f;
 	

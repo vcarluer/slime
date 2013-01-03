@@ -47,6 +47,7 @@ import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.types.ccColor3B;
+import org.cocos2d.types.ccColor4B;
 
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -318,5 +319,9 @@ public abstract class SlimeFactory {
 		}
 		
 		return WidthRatio;
+	}
+	
+	public static ccColor4B getColorLight(int alpha) {
+		return ccColor4B.ccc4(178, 229, 194, alpha);
 	}
 }

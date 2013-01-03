@@ -6,6 +6,7 @@ import gamers.associate.Slime.game.Rank;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.WorldPackage;
+import gamers.associate.Slime.items.custom.Button;
 import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.items.custom.RankFactory;
 import gamers.associate.Slime.levels.LevelDefinition;
@@ -15,6 +16,7 @@ import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.actions.interval.CCSequence;
+import org.cocos2d.layers.CCColorLayer;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.menus.CCMenu;
@@ -27,6 +29,7 @@ import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCSlideInLTransition;
 import org.cocos2d.transitions.CCSlideInRTransition;
 import org.cocos2d.transitions.CCTransitionScene;
+import org.cocos2d.types.ccColor4B;
 
 import android.annotation.SuppressLint;
 import android.util.FloatMath;
@@ -68,12 +71,16 @@ public class StoryWorldLayer extends CCLayer {
 	public StoryWorldLayer(int page) {
 		this.currentPage = page;
 		backMenu = HomeLayer.getBackButton(this, "goBack");
-		this.addChild(backMenu);
+		this.addChild(backMenu, Level.zTop);
 		
 		this.title = CCLabel.makeLabel("World".toUpperCase(), "fonts/Slime.ttf", fontSize);
-		this.title.setColor(SlimeFactory.ColorSlime);
-		this.title.setPosition(CCDirector.sharedDirector().winSize().getWidth() / 2, CCDirector.sharedDirector().winSize().getHeight() - paddingTitle);
-		this.addChild(this.title);
+		this.title.setPosition(CCDirector.sharedDirector().winSize().getWidth() / 2, CCDirector.sharedDirector().winSize().getHeight() - PauseLayer.PaddingY - fontSize / 2f);
+		this.addChild(this.title, Level.zTop);
+		float colorHeight = MenuSprite.Height * PauseLayer.Scale + PauseLayer.PaddingY;
+//		ccColor4B.ccc4(255, 255, 255, 200)
+		CCColorLayer colorLayer = CCColorLayer.node(SlimeFactory.getColorLight(200), CCDirector.sharedDirector().winSize().width, colorHeight);
+		colorLayer.setPosition(0, CCDirector.sharedDirector().winSize().height - colorHeight);
+		this.addChild(colorLayer, Level.zFront);
 		
 		CCSprite spriteN = CCSprite.sprite("arrowl.png");
 		CCSprite spriteS = CCSprite.sprite("arrowl.png");
@@ -194,7 +201,7 @@ public class StoryWorldLayer extends CCLayer {
 			int lvls = world.getLevelCount();
 			int row = (int) FloatMath.ceil(lvls / cols);
 			
-			float width = CCDirector.sharedDirector().winSize().getWidth() - (PauseLayer.arrowWidth + (MenuSprite.Width * PauseLayer.Scale));
+			float width = CCDirector.sharedDirector().winSize().getWidth() - PauseLayer.arrowWidth * 2;
 			float margeOut = 11;		
 			int colSize = (int) (width / cols);
 			int rowSize = colSize;
@@ -224,7 +231,7 @@ public class StoryWorldLayer extends CCLayer {
 				i++;
 			}
 			
-			this.levels.setPosition(MenuSprite.Width * PauseLayer.Scale, min);
+			this.levels.setPosition(PauseLayer.arrowWidth, min);
 			this.addChild(this.levels);
 		} else {
 			if (this.lockWorld != null) {
