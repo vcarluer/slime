@@ -70,7 +70,7 @@ public abstract class SlimeFactory {
 	public static final int MaxSurvival = LevelDifficulty.Hard;
 	public static final boolean IsForceMaxWorld = false;
 	public static final int MaxWorld = LevelDifficulty.Extrem; // Should be world here?
-	public static final boolean resetHighScores = true;	
+	public static final boolean resetHighScores = false;	
 	public static final boolean clearLevelInfo = false; // Run with this = true and then relaunch with false
 	public static final boolean unlockAll = false;
 	

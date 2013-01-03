@@ -949,12 +949,13 @@ public class Level implements IGameItemHandler {
 						next.setUnlock(true);
 						next.handlePersistancy();
 					}					
+				} else {
+					SlimeFactory.GameInfo.addLevelScore(this.lastScore);
+					SlimeFactory.GameInfo.setInARow();
 				}
 				
 				this.levelDefinition.handlePersistancy();
-			}
-			
-			SlimeFactory.GameInfo.addLevelScore(this.lastScore);
+			}						
 			
 			if (this.getGamePlay().getType() == GamePlay.Survival && SlimeFactory.LevelBuilder.isBoss()) {
 				Level.currentLevel.getGamePlay().endMode();
@@ -980,6 +981,10 @@ public class Level implements IGameItemHandler {
 			ArrayList<Slimy> toLose = new ArrayList<Slimy>(this.aliveSlimyList);
 			for(Slimy slimy : toLose) {
 				slimy.lose();
+			}
+			
+			if (this.getGamePlay().getType() == GamePlay.Survival) {
+				SlimeFactory.GameInfo.setInARow();
 			}
 			
 			if (showEndLevel) {
@@ -1017,7 +1022,7 @@ public class Level implements IGameItemHandler {
 			}
 			else {
 				Sounds.playEffect(R.raw.lose);
-				if (this.getGamePlay().getType() == GamePlay.Survival) {
+				if (this.getGamePlay().getType() == GamePlay.Survival) {					
 					this.showGameOver();
 				} else {
 				}

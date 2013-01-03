@@ -268,7 +268,7 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 				if (Level.currentLevel.getLevelDefinition().getGamePlay() == GamePlay.TimeAttack) {
 					this.currentTitle = String.valueOf(Level.currentLevel.getLevelDefinition().getNumber()) + ". " + titleText;
 				} else {
-					this.currentTitle = titleText;
+					this.currentTitle = String.valueOf(SlimeFactory.GameInfo.getLevelNum()) + ". " + titleText;
 				}
 				
 				this.title.stopAllActions();

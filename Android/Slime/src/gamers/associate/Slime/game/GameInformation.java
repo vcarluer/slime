@@ -225,6 +225,14 @@ public class GameInformation {
 			buffWriter.write(String.valueOf(this.totalCurrentHard));
 			buffWriter.newLine();
 			buffWriter.write(String.valueOf(this.totalCurrentExtrem));
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.easyInARow));
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.normalInARow));
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.hardInARow));
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.extremInARow));
 		} catch (FileNotFoundException ex) {
 			SlimeFactory.Log.e(Slime.TAG, "ERROR, file not found " + fileName);
 			ex.printStackTrace();
@@ -309,6 +317,18 @@ public class GameInformation {
 								break;
 							case 16:
 								this.totalCurrentExtrem = Integer.valueOf(line).intValue();
+								break;
+							case 17:
+								this.easyInARow = Integer.valueOf(line).intValue();
+								break;
+							case 18:
+								this.normalInARow = Integer.valueOf(line).intValue();
+								break;
+							case 19:
+								this.hardInARow = Integer.valueOf(line).intValue();
+								break;
+							case 20:
+								this.extremInARow = Integer.valueOf(line).intValue();
 								break;
 							default:
 								break;
@@ -525,7 +545,8 @@ public class GameInformation {
 		this.previousTotalCurrent = previousTotalCurrent;
 	}
 	
-	public void setInARow(int score) {
+	public void setInARow() {
+		int score = this.levelNum;
 		switch (this.levelDifficulty) {
 		default:
 		case LevelDifficulty.Easy:
@@ -549,6 +570,8 @@ public class GameInformation {
 			}	
 			break;
 		}
+		
+		this.store();
 	}
 	
 	public int getInARow(int diff) {

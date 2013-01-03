@@ -57,14 +57,15 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 			this.isBoss = (this.gameInfo.getLevelNum() == this.gameInfo.getLevelMax());
 			this.resetTotalStar();
 			// Re-read pre-generated level
-			if (!this.gameInfo.isSurvivalGameOver() && this.firstBuild && this.levelparser.isStored(this.getRandomFileName(this.gameInfo.getDifficulty())) && !this.levelDef.isFinished()) {				
+			if (canResume()) {				
 				this.levelparser.setResourceName(this.getRandomFileName(this.gameInfo.getDifficulty()));
 				this.levelparser.buildLevel(level);
 				if (this.levelDef.getGamePlay() == GamePlay.TimeAttack && this.isTut()) {
 					SlimeFactory.LevelGeneratorTutorial.setTitle();
+				} else {
+					level.setTitle(TitleGenerator.generateNewTitle());
 				}
-				
-				level.setTitle(TitleGenerator.generateNewTitle());
+								
 				level.setLevelDefinition(this.levelDef);
 			} else {
 				if (!isDebug) {
@@ -124,6 +125,10 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 			level.setLevelDefinition(this.home);
 			level.addGamePlay(null);
 		}
+	}
+
+	public boolean canResume() {
+		return !this.gameInfo.isSurvivalGameOver() && this.firstBuild && this.levelparser.isStored(this.getRandomFileName(this.gameInfo.getDifficulty())) && !this.levelDef.isFinished();
 	}
 
 	public String getNext(String paramString)

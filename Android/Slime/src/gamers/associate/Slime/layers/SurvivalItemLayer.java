@@ -28,6 +28,7 @@ public class SurvivalItemLayer extends CanvasItemLayer {
 	private String baseBackground;
 	private int levelDiff;
 	private CCSprite diffSprite;
+	private CCLabel inProgress;
 	
 	private static float iconSize = 70f;
 	private static final float iconSizeReference = 87f;
@@ -43,16 +44,19 @@ public class SurvivalItemLayer extends CanvasItemLayer {
 		this.isUnlocked = this.levelDiff <= SlimeFactory.GameInfo.getMaxLevelDifficulty();
 		this.title = LevelDifficulty.getText(this.levelDiff);
 		this.baseBackground = baseBackground;
-	}
-	
-	@Override
-	public void onEnter() {
-		super.onEnter();		
 		
+		// override label position
 		this.diffSprite = getLevelSprite(this.levelDiff, this.isUnlocked);
 		this.labelY -= this.diffSprite.getContentSize().height / 2f - paddingSprite;
 		this.labelX = this.width / 2f + this.paddingX;
 		this.label.setPosition(this.labelX, this.labelY);
+	}
+	
+	@Override
+	public void onEnter() {
+		super.onEnter();
+
+		this.diffSprite = getLevelSprite(this.levelDiff, this.isUnlocked);				
 		
 		diffSprite.setPosition(this.labelX, 
 				this.labelY + this.label.getContentSize().height / 2 
@@ -69,14 +73,23 @@ public class SurvivalItemLayer extends CanvasItemLayer {
 		this.addChild(scoreLabel);
 		
 		float size = 20f;
-		CCLabel levelLabel = CCLabel.makeLabel("10 level in a row!", "fonts/Slime.ttf", size);
+		int inARow = SlimeFactory.GameInfo.getInARow(this.levelDiff);		
+		String endPhrase = "";
+		if (inARow < 2) {
+			endPhrase = " level in a row!";			
+		} else {
+			endPhrase = " levels in a row!";			
+		}
+		
+		CCLabel levelLabel = CCLabel.makeLabel(String.valueOf(inARow) + endPhrase, "fonts/Slime.ttf", size);
+
 		levelLabel.setPosition(this.labelX, scoreLabel.getPosition().y - this.getFontSize() / 2 - paddingInfo - size / 2);
 		this.addChild(levelLabel);
 		
 		this.toDestroy.add(star);
 		this.toDestroy.add(this.diffSprite);
 		this.toDestroy.add(scoreLabel);
-		this.toDestroy.add(levelLabel);
+		this.toDestroy.add(levelLabel);		
 		
 		SlimeFactory.ContextActivity.showAndNextAd();				
 	}
