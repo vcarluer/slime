@@ -196,7 +196,10 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	}
 
 	@Override
-	public void setPause(boolean value) {		
+	public void setPause(boolean value) {
+		if (value == true) {
+			this.hasPaused = true;
+		}
 		super.setPause(value);
 	}
 
@@ -219,10 +222,13 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 
 	public void selectBegin(CGPoint gameReference) {		
 		if (!this.isStarted && !this.isPaused && !this.isGameOver) {
-			this.level.getCameraManager().cancelActions();
+			this.level.getCameraManager().cancelActions();			
 			this.level.getCameraManager().moveInterpolateTo(this.level.getSelectedGameItem(), 0.5f);
 			//AMZ replacing 1.0f by SGSDensity 
-			this.level.getCameraManager().zoomInterpolateTo(this.level.getSelectedGameItem(), this.zoomRatio, 0.5f);			
+			if(!this.hasPaused) {
+				this.level.getCameraManager().zoomInterpolateTo(this.level.getSelectedGameItem(), this.zoomRatio, 0.5f);
+			}
+						
 			//this.level.getCameraManager().follow(this.level.getSelectedGameItem());									
 		}
 		
@@ -247,20 +253,26 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		this.startMode();
 		this.level.getCameraManager().zoomCameraCenterTo(0);
 		this.level.getCameraManager().cancelActions();
+		this.hasPaused = false;
 		this.enterGameMode(15.0f);		
 	}
+	
+	private boolean hasPaused;
 	
 	private void enterGameMode(float speed) {
 		if(this.level.getStartItem() != null) {				
 			this.level.getCameraManager().moveInterpolateTo(this.level.getStartItem(), speed);
 			//AMZ replacing 1.0f by SGSDensity  
-			this.level.getCameraManager().zoomInterpolateTo(this.level.getStartItem(), this.zoomRatio, speed);		
+			if (!this.hasPaused) {
+				this.level.getCameraManager().zoomInterpolateTo(this.level.getStartItem(), this.zoomRatio, speed);
+			}
+					
 			this.level.getCameraManager().follow(this.level.getStartItem());			
 		}
 
 		this.level.desactivateCameraMoveAndZoomByUser();
+		
 		this.level.setTimeRatio(TimeRatioNormal);
-//		this.level.activateCameraMoveAndZoomByUser();
 	}
 	
 	public void setStartTime(int startTime) {
