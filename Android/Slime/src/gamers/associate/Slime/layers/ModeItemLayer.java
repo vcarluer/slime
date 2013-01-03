@@ -13,19 +13,23 @@ import org.cocos2d.nodes.CCSprite;
 import android.view.MotionEvent;
 
 public abstract class ModeItemLayer extends CCLayer {
-	private static final int HEIGHT = 533;
-	private static final int WIDTH = 215;
+	protected static final int HEIGHT = 533;
+	protected static final int WIDTH = 215;
 	
 	private float width;
 	private float height;
+	protected float screenScaleX;
+	protected float screenScaleY;
 	
 	private float padding;
+	protected float labelY;
+	protected float labelX;
 
 	public ModeItemLayer() {
 		CCSprite canvas = CCSprite.sprite(this.getBackgroundPath());
 		this.padding = 50f * SlimeFactory.SGSDensity;
-		float screenScaleX = (CCDirector.sharedDirector().winSize().width / 2f) / WIDTH;
-		float screenScaleY = (CCDirector.sharedDirector().winSize().height) / HEIGHT;
+		this.screenScaleX = (CCDirector.sharedDirector().winSize().width / 2f) / WIDTH;
+		this.screenScaleY = (CCDirector.sharedDirector().winSize().height) / HEIGHT;
 		float scaleX = ((CCDirector.sharedDirector().winSize().width / 2f) - this.padding * 2) / WIDTH;
 //		float scaleY = (CCDirector.sharedDirector().winSize().height - this.padding * 2) / HEIGHT;
 		float scaleY = scaleX;
@@ -38,7 +42,9 @@ public abstract class ModeItemLayer extends CCLayer {
 		
 		this.addChild(canvas);
 		CCLabel label = SlimeFactory.getLabel(this.getTitle());
-		label.setPosition(WIDTH * screenScaleX / 2f, HEIGHT * screenScaleY / 2f);
+		this.labelY = HEIGHT * this.screenScaleY / 2f;
+		this.labelX = WIDTH * this.screenScaleX / 2f;
+		label.setPosition(this.labelX, this.labelY);
 		this.addChild(label);
 		this.setIsTouchEnabled(true);
 	}

@@ -102,6 +102,14 @@ import org.cocos2d.types.ccColor4B;
 		this.loadLabel.setColor(ccColor3B.ccBLACK);
 		this.loadLabel.setVisible(false);
 		this.addChild(this.loadLabel);
+		
+		CCLabel lbl = CCLabel.makeLabel("Loading...".toUpperCase(), "fonts/Slime.ttf", 15f);
+		lbl.setColor(ccColor3B.ccBLACK);
+		this.addChild(lbl);
+		lbl.setPosition(CGPoint.make(
+				PauseLayer.PaddingX + lbl.getContentSize().width / 2,
+				PauseLayer.PaddingY + lbl.getContentSize().height / 2
+				));
 	}		
 	
 	@Override

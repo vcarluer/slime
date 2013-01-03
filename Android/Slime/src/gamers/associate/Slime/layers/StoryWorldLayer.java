@@ -217,13 +217,19 @@ public class StoryWorldLayer extends CCLayer {
 			this.scroller.setLimits(min, max);
 			
 			int i = 0;
+			float currentLevel = min;
 			for(LevelDefinition levelDefinition : world.getLevels()) {
 				StoryMenuItem item = StoryMenuItem.item(levelDefinition, this.scroller);			
 				
 				int colItem = i % cols;
 				int rowItem = (int) FloatMath.floor(i / cols);
 				float x = colItem * colSize + colSize / 2f;
+				if (levelDefinition.isUnlock()) {
+					currentLevel = min + (rowItem * rowSize);
+				}
+				
 				float y = - (rowItem * rowSize + rowSize / 2f);
+				
 				item.setPosition(x, y);
 				item.defineNewScale(itemScale);			
 				
@@ -231,7 +237,7 @@ public class StoryWorldLayer extends CCLayer {
 				i++;
 			}
 			
-			this.levels.setPosition(PauseLayer.arrowWidth, min);
+			this.levels.setPosition(PauseLayer.arrowWidth, currentLevel);
 			this.addChild(this.levels);
 		} else {
 			if (this.lockWorld != null) {

@@ -101,6 +101,19 @@ public abstract class WorldPackage {
 	public int getLevelCount() {
 		return this.levelCount;
 	}
+	
+	public int getUnlockLevelCount() {
+		int unlocked = 0;
+		for(LevelDefinition level : this.levels) {
+			if (!level.isUnlock()) {
+				break;
+			}
+			
+			unlocked++;
+		}
+		
+		return unlocked;
+	}
 
 	public LevelDefinition getNext(LevelDefinition levelDefinition) {
 		int nextNumber = levelDefinition.getNumber() + 1;

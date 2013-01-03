@@ -35,14 +35,12 @@ public class HomeLayer extends CCLayer {
 	public static final int shareSizeH = 70;
 	public static float shareScale = 0.7f;
 	private static HomeLayer layer;	
-	private CCLabel lblScore;
-	private CCSprite starSprite;
+	
 	private SpawnPortal spawner;
 	
 	private static float baseShift = 150f; //100f;
 	private static float shiftTitle = baseShift;
 	private static float shiftMenu  = shiftTitle - 150f; // Slime height = 160 / 2 + 20
-	private static float shiftScore = shiftMenu - 100f; // shiftInfo - 70f;	
 	
 	private CCSprite titleSprite;
 	private CCMenu shareMenu;
@@ -75,22 +73,7 @@ public class HomeLayer extends CCLayer {
 				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftMenu
 				));			
 				
-		this.addChild(this.menu);
-					
-				
-		this.lblScore = CCLabel.makeLabel("0".toUpperCase(), "fonts/Slime.ttf", 60.0f);
-		this.lblScore.setPosition(CGPoint.make(
-				CCDirector.sharedDirector().winSize().getWidth() / 2,
-				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftScore
-				));
-		this.addChild(this.lblScore);
-				
-		this.starSprite = CCSprite.sprite("star-01.png", true); // SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);		
-		this.starSprite.setPosition(CGPoint.make(
-				CCDirector.sharedDirector().winSize().getWidth() / 2,
-				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftScore
-				));
-		this.addChild(this.starSprite);				
+		this.addChild(this.menu);		
 	}
 
 	@Override
@@ -119,19 +102,6 @@ public class HomeLayer extends CCLayer {
 		this.shareMenu = HomeLayer.getNewShareButton(null, 1.0f, shareX, shareY);
 		this.addChild(this.shareMenu);
 		
-		String score = String.valueOf(SlimeFactory.GameInfo.getTotalScore());
-		this.lblScore.setString(score.toUpperCase());
-		this.lblScore.setColor(SlimeFactory.ColorSlime);		
-		
-		float starPadding = -10f;
-		float starX = this.lblScore.getPosition().x - this.lblScore.getContentSize().width / 2 - SlimeFactory.Star.getStarReferenceWidth() / 2 + starPadding;
-		this.starSprite.setPosition(CGPoint.make(
-				starX,
-				this.starSprite.getPosition().y
-				));
-		
-		this.starSprite.runAction(SlimeFactory.Star.getAnimation(Star.Anim_Wait));
-			
 		Sounds.playMusic(R.raw.menumusic, true);
 		
 		this.temp();
