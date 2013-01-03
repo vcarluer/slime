@@ -102,7 +102,7 @@ public abstract class CanvasItemLayer extends CCLayer {
 		}
 	}
 
-	private void select() {
+	public void select() {
 		Sounds.playEffect(R.raw.menuselect);
 		CCScene transition = this.getTransition();
 		CCDirector.sharedDirector().replaceScene(transition);

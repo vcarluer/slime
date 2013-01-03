@@ -396,5 +396,20 @@ import android.view.MotionEvent;
 		}
 		
 		this.totalScoreLabel.setString(text.toUpperCase());
+	}
+
+	@Override
+	public void onEnter() {
+		if (Level.currentLevel.getGamePlay() != null) {
+			if (Level.currentLevel.getGamePlay().getType() == GamePlay.Survival) {
+				this.restartMenu.setIsEnabled(false);
+				this.restartMenu.setVisible(false);
+			} else {
+				this.restartMenu.setIsEnabled(true);
+				this.restartMenu.setVisible(true);
+			}
+		}		
+
+		super.onEnter();
 	}	
 }

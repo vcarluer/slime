@@ -26,6 +26,7 @@ public class SurvivalGameOverLayer extends CCLayer {
 	private CCLabel newHighScore;
 	private CCLabel newUnlock;
 	private CCMenu shareMenu;
+	private CCMenu restartMenu;
 	
 	public static CCScene getScene() {
 		if (scene == null) {
@@ -52,10 +53,19 @@ public class SurvivalGameOverLayer extends CCLayer {
 		this.newUnlock.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + 45 * SlimeFactory.Density);
 		this.newUnlock.setColor(SlimeFactory.ColorSlimeLight);
 		
+		this.restartMenu = HomeLayer.getMenuButton(
+				"control-restart.png", 
+				0, 
+				50 * SlimeFactory.Density, 
+				this, 
+				"restart");
+		// this.restartMenu.setScale(2.0f);		
+		
 		this.addChild(this.gameOverLabel);
 		this.addChild(this.scoreLabel);
 		this.addChild(this.newHighScore);
 		this.addChild(this.newUnlock);
+		this.addChild(this.restartMenu);
 		
 		this.addChild(this.backMenu);
 		this.setIsTouchEnabled(true);
@@ -124,5 +134,11 @@ public class SurvivalGameOverLayer extends CCLayer {
 		Sounds.playEffect(R.raw.menuselect);
 		CCTransitionScene transition = CCFadeTransition.transition(1.0f, ChooseSurvivalDifficultyLayer.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
+	}
+	
+	public void restart(Object sender) {
+		if (SlimeFactory.GameInfo.getCurrentSurvival() != null) {
+			SlimeFactory.GameInfo.getCurrentSurvival().select();
+		}
 	}
 }

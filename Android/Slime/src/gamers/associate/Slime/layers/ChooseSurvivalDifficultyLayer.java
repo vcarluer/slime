@@ -33,7 +33,7 @@ import org.cocos2d.types.ccColor3B;
 public class ChooseSurvivalDifficultyLayer extends CCLayer {
 	private static CCScene scene;
 	private CCLabel title;
-	private List<SurvivalItemLayer> items;
+	private List<SurvivalItemLayer> items;	
 	
 	public static CCScene getScene() {
 		if (scene == null) {

@@ -1,6 +1,7 @@
 package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.Slime;
+import gamers.associate.Slime.layers.SurvivalItemLayer;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -43,13 +44,15 @@ public class GameInformation {
 	private int normalInARow;
 	private int hardInARow;
 	private int extremInARow;
+	private SurvivalItemLayer currentSurvival;
 	
 	public GameInformation() {		
-		this.maxLevelDifficulty = this.levelDifficulty = LevelDifficulty.Easy;
 		this.survivalGameOverEasy = true;
 		this.survivalGameOverNormal = true;
 		this.survivalGameOverHard = true;
 		this.survivalGameOverExtrem = true;
+
+		this.maxLevelDifficulty = this.levelDifficulty = LevelDifficulty.Easy;		
 		this.setLevelNum(0);
 		this.load();
 		if (resetHighScores) {
@@ -58,6 +61,10 @@ public class GameInformation {
 			this.totalScoreHard = 0;
 			this.totalScoreExtrem = 0;
 			this.maxLevelDifficulty = LevelDifficulty.Easy;
+			this.survivalGameOverEasy = true;
+			this.survivalGameOverNormal = true;
+			this.survivalGameOverHard = true;
+			this.survivalGameOverExtrem = true;
 			this.store();
 		}
 	}
@@ -598,5 +605,13 @@ public class GameInformation {
 		case LevelDifficulty.Extrem:
 			return this.extremInARow;	
 		}
+	}
+
+	public SurvivalItemLayer getCurrentSurvival() {
+		return currentSurvival;
+	}
+
+	public void setCurrentSurvival(SurvivalItemLayer currentSurvival) {
+		this.currentSurvival = currentSurvival;
 	}
 }

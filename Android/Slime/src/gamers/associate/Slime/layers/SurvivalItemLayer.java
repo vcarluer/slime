@@ -167,7 +167,8 @@ public class SurvivalItemLayer extends CanvasItemLayer {
 		
 		Vibe.vibrate();
 		Sounds.stopMusic();
-		
+		SlimeFactory.GameInfo.setCurrentSurvival(this);
+
 		return transition;
 	}
 
