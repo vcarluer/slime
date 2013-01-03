@@ -112,12 +112,6 @@ public class LevelBuilder extends AbstractLevelBuilder {
 	}
 
 	@Override
-	public void setFirstBuild(boolean firstBuild) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public LevelDefinition getNext(LevelDefinition levelDefinition) {
 		// TODO Auto-generated method stub
 		return null;

@@ -84,11 +84,10 @@ public class SurvivalGame extends TimeAttackGame {
 	@Override
 	protected void startModeInternal() {
 		SlimeFactory.GameInfo.setSurvivalGameOver(false);
-		SlimeFactory.LevelBuilder.setFirstBuild(true);
 	}
 	
 	@Override
 	protected void endModeInternal() {
-		SlimeFactory.GameInfo.setSurvivalGameOver(true);
+		
 	}
 }

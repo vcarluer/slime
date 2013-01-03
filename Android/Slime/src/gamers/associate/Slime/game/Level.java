@@ -952,6 +952,7 @@ public class Level implements IGameItemHandler {
 				} else {
 					SlimeFactory.GameInfo.addLevelScore(this.lastScore);
 					SlimeFactory.GameInfo.setInARow();
+					SlimeFactory.GameInfo.levelUp();
 				}
 				
 				this.levelDefinition.handlePersistancy();
@@ -984,7 +985,7 @@ public class Level implements IGameItemHandler {
 			}
 			
 			if (this.getGamePlay().getType() == GamePlay.Survival) {
-				SlimeFactory.GameInfo.setInARow();
+				SlimeFactory.GameInfo.setInARowLose();
 			}
 			
 			if (showEndLevel) {

@@ -1,6 +1,5 @@
 package gamers.associate.Slime.layers;
 
-import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelBuilderGenerator;
 import gamers.associate.Slime.game.LevelDifficulty;
@@ -20,7 +19,7 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.types.ccColor3B;
 
-public class SurvivalItemLayer extends CanvasItemLayer {
+public class SurvivalItemLayer extends CanvasItemLayer {	
 	private static final String GREY = "-grey";
 	private static final String BKGEXT = ".png";
 	protected static final float fontSize = 32f;
@@ -160,7 +159,12 @@ public class SurvivalItemLayer extends CanvasItemLayer {
 
 	@Override
 	protected CCScene getTransition() {
-		SlimeFactory.GameInfo.resetDifficulty(this.levelDiff);
+		if (!SlimeFactory.GameInfo.canContinueSurvival(this.levelDiff)) {
+			SlimeFactory.GameInfo.resetDifficulty(this.levelDiff);
+		} else {
+			SlimeFactory.GameInfo.setDifficulty(this.levelDiff);
+		}
+		
 		Level level = Level.get(LevelBuilderGenerator.defaultId, true, GamePlay.Survival);
 		
 		CCFadeTransition transition = CCFadeTransition.transition(0.5f, level.getScene());
@@ -186,5 +190,12 @@ public class SurvivalItemLayer extends CanvasItemLayer {
 	@Override
 	protected float getFontSize() {
 		return 42f;
+	}
+	
+	@Override
+	public void select() {
+		if (this.isUnlocked) {
+			super.select();
+		}		
 	}
 }

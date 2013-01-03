@@ -65,6 +65,10 @@ public class GameInformation {
 			this.survivalGameOverNormal = true;
 			this.survivalGameOverHard = true;
 			this.survivalGameOverExtrem = true;
+			this.easyInARow = 0;
+			this.normalInARow = 0;
+			this.hardInARow = 0;
+			this.extremInARow = 0;
 			this.store();
 		}
 	}
@@ -106,6 +110,11 @@ public class GameInformation {
 		if (this.levelDifficulty > this.maxLevelDifficulty) {
 			this.maxLevelDifficulty = this.levelDifficulty;
 		}
+	}
+	
+	public void setDifficulty(int levelDifficulty) {
+		this.setLevelDifficulty(levelDifficulty);
+		this.store();
 	}
 	
 	private void setTotalScore(int score, int levelDifficulty) {
@@ -181,9 +190,10 @@ public class GameInformation {
 	public void levelUp() {		
 		this.setLevelNum(levelNum + 1);
 		this.lastScore = 0;
-		if (this.levelNum > this.getLevelMax()) {
+		if (this.levelNum > this.getLevelMax() && this.levelDifficulty != LevelDifficulty.Extrem) {
 			this.difficultyUp();
 		}
+
 		this.store();
 	}
 	
@@ -564,8 +574,16 @@ public class GameInformation {
 		this.previousTotalCurrent = previousTotalCurrent;
 	}
 	
+	public void setInARowLose() {
+		int score = this.levelNum - 1;
+		this.setInARow(score);
+	}
 	public void setInARow() {
 		int score = this.levelNum;
+		this.setInARow(score);
+	}
+	
+	private void setInARow(int score) {		
 		switch (this.levelDifficulty) {
 		default:
 		case LevelDifficulty.Easy:

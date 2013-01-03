@@ -312,7 +312,8 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	protected void lose() {		
 		this.isGameOver = true;
 		this.endMode();
-		if (this.level.lose()) {						
+		SlimeFactory.GameInfo.setSurvivalGameOver(true);
+		if (this.level.lose()) {			
 			this.level.getHudLabel().stopAction(this.criticAction);
 		}			
 	}

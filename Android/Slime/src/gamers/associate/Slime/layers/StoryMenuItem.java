@@ -29,7 +29,7 @@ public class StoryMenuItem extends CCLayer {
 	private CCLabel idItem;
 	private CCSprite starItem;	
 	
-	private LevelDefinition levelDefintion;
+	private LevelDefinition levelDefinition;
 	private ScrollerLayer scroller;
 	
 	/** Creates a CCMenuItem with a target/selector */
@@ -39,7 +39,7 @@ public class StoryMenuItem extends CCLayer {
 	
 	public StoryMenuItem(LevelDefinition levelDefinition, ScrollerLayer scroller) {
 		this.scroller = scroller;
-		this.levelDefintion = levelDefinition;
+		this.levelDefinition = levelDefinition;
 		
 		this.backItem = CCSprite.sprite("control-square-empty.png", true);
 		this.addChild(this.backItem);
@@ -53,7 +53,7 @@ public class StoryMenuItem extends CCLayer {
 		float baseX = this.getPosition().x;
 		this.setPosition(- SIZE * this.getScale(), this.getPosition().y);
 		this.setAnchorPoint(0, 0);
-		CCDelayTime delay = CCDelayTime.action(0.4f + ((this.levelDefintion.getNumber() - 1) % StoryWorldLayer.COLS) * (2 / StoryWorldLayer.COLS));
+		CCDelayTime delay = CCDelayTime.action(0.4f + ((this.levelDefinition.getNumber() - 1) % StoryWorldLayer.COLS) * (2 / StoryWorldLayer.COLS));
 		CCMoveTo actionTo = CCMoveTo.action(0.3f, CGPoint.make(baseX, this.getPosition().y));		
 		
 		CCSequence seq = CCSequence.actions(delay,  actionTo);
@@ -69,10 +69,10 @@ public class StoryMenuItem extends CCLayer {
 			this.removeChild(this.starItem, true);
 		}
 		
-		if (this.levelDefintion != null) {
-			this.idItem = SlimeFactory.getLabel(String.valueOf(this.levelDefintion.getNumber()));
+		if (this.levelDefinition != null) {
+			this.idItem = SlimeFactory.getLabel(String.valueOf(this.levelDefinition.getNumber()));
 			this.idItem.setPosition(0, 50 + yshift);											
-			this.starItem = RankFactory.getSprite(this.levelDefintion.getRank());		
+			this.starItem = RankFactory.getSprite(this.levelDefinition.getRank());		
 			this.starItem.setPosition(0,  yshift);
 			this.starItem.setScale(scaleStar);
 					
@@ -82,7 +82,7 @@ public class StoryMenuItem extends CCLayer {
 	}
 	
 	public LevelDefinition getLevelDefinition() {
-		return this.levelDefintion;
+		return this.levelDefinition;
 	}
 	
 	@Override
@@ -108,9 +108,9 @@ public class StoryMenuItem extends CCLayer {
 	}
 
 	private void select() {		
-		if (this.levelDefintion.isUnlock()) {
+		if (this.levelDefinition.isUnlock()) {
 			Sounds.playEffect(R.raw.menuselect);
-			if (this.levelDefintion.getNumber() == 1) {
+			if (this.levelDefinition.getNumber() == 1) {
 				SlimeFactory.ContextActivity.runIntro(this);
 			} else {
 				this.runLevel();
@@ -119,7 +119,7 @@ public class StoryMenuItem extends CCLayer {
 	}
 	
 	public void runLevel() {							
-		Level level = Level.get(this.levelDefintion, true);
+		Level level = Level.get(this.levelDefinition, true);
 		Sounds.pauseMusic();
 		CCDirector.sharedDirector().replaceScene(level.getScene());
 	}

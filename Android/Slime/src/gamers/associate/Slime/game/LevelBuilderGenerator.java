@@ -1,18 +1,12 @@
 package gamers.associate.Slime.game;
 
-import gamers.associate.Slime.layers.EndDifficultyGameLayer;
 import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelDefinition;
 import gamers.associate.Slime.levels.LevelDefinitionParser;
 import gamers.associate.Slime.levels.LevelHome;
 import gamers.associate.Slime.levels.generator.LevelDefinitionGenerator;
-import gamers.associate.Slime.levels.generator.LevelGraphGeneratorTutorial;
 
 import java.util.ArrayList;
-
-import org.cocos2d.nodes.CCDirector;
-import org.cocos2d.transitions.CCFadeTransition;
-import org.cocos2d.transitions.CCTransitionScene;
 
 public class LevelBuilderGenerator extends AbstractLevelBuilder
 {	
@@ -28,96 +22,56 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 	private int complexity;
 	private LevelHome home = new LevelHome();
 	private LevelDefinitionGenerator levelDef = new LevelDefinitionGenerator();
-	private LevelDefinitionParser levelparser = new LevelDefinitionParser(fileName, true);
-	private boolean firstBuild;		
+	private LevelDefinitionParser levelparser = new LevelDefinitionParser(fileName, true);		
 	
 	public LevelBuilderGenerator() {				
 		this.levelparser.setLocalStorage(true);		
-		this.firstBuild = true;
 	}	
 	
 	private String getRandomFileName(int difficulty) {
 		return defaultId + String.valueOf(difficulty) + fileExtension;
 	}
-	
+		
 	public void build(Level level, String id, GamePlay gamePlay)
 	{
+		// this one is only call for survival and home! Bad design powa. Juste ensure it here
+		if (gamePlay == GamePlay.TimeAttack) return;
+
 		// always default id... Used for reset all
 		this.levelDef.setId(defaultId);
 		
 		if (id != LevelHome.Id)
 		{			
 			this.levelDef.setGamePlay(gamePlay);
-			level.setLevelDefinition(this.levelDef);	
-			
-			if (this.levelDef.getGamePlay() == GamePlay.TimeAttack) {
-				this.gameInfo.setLevel(Integer.valueOf(id));
-			}
+			level.setLevelDefinition(this.levelDef);			
 			
 			this.isBoss = (this.gameInfo.getLevelNum() == this.gameInfo.getLevelMax());
 			this.resetTotalStar();
-			// Re-read pre-generated level
-			if (canResume()) { // gamePlay == GamePlay.Survival && SlimeFactory.GameInfo.canContinueSurvival() && 				
-				this.levelparser.setResourceName(this.getRandomFileName(this.gameInfo.getDifficulty()));
-				this.levelparser.buildLevel(level);
-				if (this.levelDef.getGamePlay() == GamePlay.TimeAttack && this.isTut()) {
-					SlimeFactory.LevelGeneratorTutorial.setTitle();
-				} else {
-					level.setTitle(TitleGenerator.generateNewTitle());
-				}
-								
-				level.setLevelDefinition(this.levelDef);
-			} else {
-				if (!isDebug) {
-					this.gameInfo.levelUp();
-				} else {
-					this.gameInfo.forceLevel(forceDiff, forceLevel);					
-				}
-				
-				this.levelparser.setResourceName(this.getRandomFileName(this.gameInfo.getDifficulty()));
-				
-				if (this.levelDef.getGamePlay() == GamePlay.TimeAttack) {
-					if (this.isTut()) {
-						this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorTutorial);
-					} else {
-						int lvl = SlimeFactory.GameInfo.getLevelNum();
-						if (SlimeFactory.GameInfo.getDifficulty() == LevelDifficulty.Easy) {
-							lvl -=  LevelGraphGeneratorTutorial.tutorialCount;
-						}
-						
-						if (lvl % 4 == 0) {
-							// this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorRectangle2);
-							this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor3);
-						} else {
-							this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor3);
-						}					
-					}
-				}
-				
-				if (this.levelDef.getGamePlay() == GamePlay.Survival) {
-					this.gameInfo.setSurvivalGameOver(false);
-					this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor3);
-				}
-				
-				this.isBoss = (this.gameInfo.getLevelNum() == this.gameInfo.getLevelMax());
-								
-				this.complexity = this.computeComplexity();
-				this.levelDef.setComplexity(this.complexity);
-				if (this.isBoss) {
-					this.levelDef.buildBossLevel(level);
-				} else {
-					this.levelDef.buildLevel(level);
-				}
-				
-				if (this.levelDef.getGamePlay() == GamePlay.Survival) {
-					this.levelparser.storeLevel(level);
-				}
-				
-				level.setTitle(TitleGenerator.generateNewTitle());
-				this.levelDef.resetAndSave();								
-			}
 			
-			this.firstBuild = false;
+			if (!isDebug) {
+				if (SlimeFactory.GameInfo.getLevelNum() == 0) {
+					SlimeFactory.GameInfo.setLevel(1);
+				}
+			} else {
+				this.gameInfo.forceLevel(forceDiff, forceLevel);					
+			}						
+			
+			this.levelparser.setResourceName(this.getRandomFileName(this.gameInfo.getDifficulty()));
+						
+			this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor3);
+			
+			this.isBoss = (this.gameInfo.getLevelNum() == this.gameInfo.getLevelMax());
+							
+			this.complexity = this.computeComplexity();
+			this.levelDef.setComplexity(this.complexity);
+			if (this.isBoss) {
+				this.levelDef.buildBossLevel(level);
+			} else {
+				this.levelDef.buildLevel(level);
+			}
+									
+			level.setTitle(TitleGenerator.generateNewTitle());
+			this.levelDef.resetAndSave();
 		}
 		else
 		{
@@ -127,32 +81,11 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 		}
 	}
 
-	public boolean canResume() {
-		return !this.gameInfo.isSurvivalGameOver() && this.firstBuild && this.levelparser.isStored(this.getRandomFileName(this.gameInfo.getDifficulty())) && !this.levelDef.isFinished();
-	}
-	
-	public boolean canResume(int diff) {
-		// first build?
-		//  && !this.levelDef.isFinished() ?
-		return !this.gameInfo.isSurvivalGameOver(diff) && this.levelparser.isStored(this.getRandomFileName(this.gameInfo.getDifficulty())); 
-	}
-
+	// only survival here
 	public String getNext(String paramString)
 	{
-		String next = null;
-		if (this.levelDef.getGamePlay() == GamePlay.Survival) {
-			next = defaultId;
-		}
-		
-		if (this.levelDef.getGamePlay() == GamePlay.TimeAttack) {
-			if (this.gameInfo.getLevelNum() < this.gameInfo.getLevelMax()) {
-				next = String.valueOf(this.gameInfo.getLevelNum());
-			} else {
-				this.gameInfo.endDifficulty();
-				CCTransitionScene transition = CCFadeTransition.transition(0.5f, EndDifficultyGameLayer.getScene());
-				CCDirector.sharedDirector().replaceScene(transition);
-			}
-		}
+		String next = null;		
+		next = defaultId;		
 		
 		return next;
 	}
@@ -218,19 +151,12 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 			this.build(level, levelDef);
 		}
 		
-		if (levelDef.getGamePlay() == GamePlay.Survival) {
-			if (this.levelparser.isStored()) {
-				this.levelparser.buildLevel(level);	
-			} else {
-				this.build(level, levelDef.getId(), levelDef.getGamePlay());			
-			}
+		if (levelDef.getGamePlay() == GamePlay.Survival) {			
+			this.build(level, levelDef.getId(), levelDef.getGamePlay());			
 		}
 	}
 	
-	public void setFirstBuild(boolean firstBuild) {
-		this.firstBuild = firstBuild;
-	}
-
+	// only time attack
 	@Override
 	public LevelDefinition getNext(LevelDefinition levelDefinition) {
 		WorldPackage world = SlimeFactory.PackageManager.getCurrentPackage();
