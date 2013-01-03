@@ -57,6 +57,7 @@ public class Level implements IGameItemHandler {
 	
 	public static Level currentLevel; 
 	
+	public static int zUnder = -1;
 	public static int zBack = 0;
 	public static int zMid = 1;
 	public static int zFront = 2;

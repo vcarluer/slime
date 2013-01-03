@@ -59,5 +59,5 @@ public class SurvivalModeItemLayer extends ModeItemLayer {
 	@Override
 	protected CCScene getTransition() {
 		return CCFadeTransition.transition(0.5f, ChooseSurvivalDifficultyLayer.getScene());
-	}
+	}	
 }

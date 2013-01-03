@@ -5,6 +5,7 @@ import gamers.associate.Slime.game.WorldPackage;
 import gamers.associate.Slime.items.custom.Star;
 
 import org.cocos2d.layers.CCScene;
+import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.types.CGPoint;
@@ -60,6 +61,5 @@ public class StoryModeItemLayer extends ModeItemLayer {
 	@Override
 	protected CCScene getTransition() {
 		return CCFadeTransition.transition(0.5f, StoryWorldLayer.getScene(1));
-	}
-
+	}	
 }
