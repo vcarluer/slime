@@ -403,11 +403,11 @@ public abstract class LevelGraphGeneratorBase {
 		}
 		
 		tmp = tmp * lgMax;
-		if (this.currentLevel.getGamePlay().getType() == GamePlay.TimeAttack) {
+		if (this.currentLevel.getLevelDefinition().getGamePlay() == GamePlay.TimeAttack) {
 			tmp = tmp / SlimeFactory.PackageManager.getCurrentPackage().getLevelCount();
 		}
 		
-		if (this.currentLevel.getGamePlay().getType() == GamePlay.Survival) {
+		if (this.currentLevel.getLevelDefinition().getGamePlay() == GamePlay.Survival) {
 			tmp = tmp / SlimeFactory.GameInfo.getLevelMax();
 		}
 		

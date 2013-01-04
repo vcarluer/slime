@@ -106,11 +106,11 @@ public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {
 		this.lvlHeight = 1;
 		if (!isBoss) {
 			int lgMax = 0;
-			if (this.currentLevel.getGamePlay().getType() == GamePlay.Survival) {
+			if (this.currentLevel.getLevelDefinition().getGamePlay() == GamePlay.Survival) {
 				lgMax = this.getRatioDiff((maxWidth + 1) * (maxAddHeight + 1)) - 1;
 			}
 
-			if (this.currentLevel.getGamePlay().getType() == GamePlay.TimeAttack) {
+			if (this.currentLevel.getLevelDefinition().getGamePlay() == GamePlay.TimeAttack) {
 				lgMax = (maxWidth + 1) * (maxAddHeight + 1) - 1;
 			}
 			
