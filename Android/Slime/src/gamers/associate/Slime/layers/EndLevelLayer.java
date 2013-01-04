@@ -279,7 +279,9 @@ import android.view.MotionEvent;
 	
 	private void initSlime(String animation, float waitTime, boolean win) {
 		if (win) {
-			this.slime = SlimeFactory.SlimySuccess.getAnimatedSprite(SlimySuccess.getAnimationName(SlimeFactory.GameInfo.getDifficulty()));			
+			// this.slime = SlimeFactory.SlimySuccess.getAnimatedSprite(SlimySuccess.getAnimationName(SlimeFactory.GameInfo.getDifficulty()));			
+			this.slime = SlimeFactory.Slimy.getAnimatedSprite(Slimy.Anim_Success);
+			this.slime.setScale(SLIMY_SCALE);
 		} else {
 			this.slime = SlimeFactory.Slimy.getAnimatedSprite(animation, waitTime);
 			this.slime.setScale(SLIMY_SCALE);
