@@ -105,7 +105,15 @@ public class LevelGraphGeneratorCorridor extends LevelGraphGeneratorBase {
 	protected void computeLevelSize(boolean isBoss) {
 		this.lvlHeight = 1;
 		if (!isBoss) {
-			int lgMax = this.getRatioDiff((maxWidth + 1) * (maxAddHeight + 1)) - 1;
+			int lgMax = 0;
+			if (this.currentLevel.getGamePlay().getType() == GamePlay.Survival) {
+				lgMax = this.getRatioDiff((maxWidth + 1) * (maxAddHeight + 1)) - 1;
+			}
+
+			if (this.currentLevel.getGamePlay().getType() == GamePlay.TimeAttack) {
+				lgMax = (maxWidth + 1) * (maxAddHeight + 1) - 1;
+			}
+			
 			this.computeLevelWidth(lgMax);
 		} else {
 			this.lvlWidth = SlimeFactory.GameInfo.getDifficulty() + 1;

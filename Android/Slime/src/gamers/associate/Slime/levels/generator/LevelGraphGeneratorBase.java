@@ -398,13 +398,19 @@ public abstract class LevelGraphGeneratorBase {
 	
 	protected void computeLevelWidth(int lgMax) {
 		float tmp = SlimeFactory.GameInfo.getLevelNum();
-		if (SlimeFactory.GameInfo.getDifficulty() == LevelDifficulty.Easy) {
+		if (this.currentLevel.getGamePlay().getType() == GamePlay.TimeAttack && SlimeFactory.GameInfo.getDifficulty() == LevelDifficulty.Easy) {
 			tmp -=  LevelGraphGeneratorTutorial.tutorialCount;
 		}
 		
 		tmp = tmp * lgMax;
+		if (this.currentLevel.getGamePlay().getType() == GamePlay.TimeAttack) {
+			tmp = tmp / SlimeFactory.PackageManager.getCurrentPackage().getLevelCount();
+		}
 		
-		tmp = tmp / SlimeFactory.GameInfo.getLevelMax();
+		if (this.currentLevel.getGamePlay().getType() == GamePlay.Survival) {
+			tmp = tmp / SlimeFactory.GameInfo.getLevelMax();
+		}
+		
 		lvlWidth = Math.round(tmp);
 	}
 }
