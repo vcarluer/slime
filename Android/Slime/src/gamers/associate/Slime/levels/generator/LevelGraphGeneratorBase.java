@@ -398,7 +398,7 @@ public abstract class LevelGraphGeneratorBase {
 	
 	protected void computeLevelWidth(int lgMax) {
 		float tmp = SlimeFactory.GameInfo.getLevelNum();
-		if (this.currentLevel.getGamePlay().getType() == GamePlay.TimeAttack && SlimeFactory.GameInfo.getDifficulty() == LevelDifficulty.Easy) {
+		if (this.currentLevel.getLevelDefinition().getGamePlay() == GamePlay.TimeAttack && SlimeFactory.GameInfo.getDifficulty() == LevelDifficulty.Easy) {
 			tmp -=  LevelGraphGeneratorTutorial.tutorialCount;
 		}
 		
