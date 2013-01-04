@@ -282,7 +282,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 		// this.auraSprite.setVisible(true);
 		this.arrowSprite.setVisible(true);
 		// CCAnimate animation = CCAnimate.action(this.animationList.get(Anim_Dbz_Aura), false);
-		CCAnimate animation = CCAnimate.action(this.animationList.get(Anim_Electrified_Short), false);
+		CCAnimate animation = CCAnimate.action(this.animationList.get(Anim_Buzz), false);
 		this.actionSelect = CCRepeatForever.action(animation);
 		this.sprite.runAction(this.actionSelect);
 		// this.auraSprite.runAction(repeat);

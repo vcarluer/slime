@@ -220,8 +220,9 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		return getBonusScore();
 	}
 
-	public void selectBegin(CGPoint gameReference) {		
+	public void selectBegin(CGPoint gameReference) {
 		if (!this.isStarted && !this.isPaused && !this.isGameOver) {
+//			this.level.desactivateCameraMoveAndZoomByUser();
 			this.level.getCameraManager().cancelActions();			
 			this.level.getCameraManager().moveInterpolateTo(this.level.getSelectedGameItem(), 0.5f);
 			//AMZ replacing 1.0f by SGSDensity 
@@ -415,13 +416,14 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	
 	private void startMode() {
 		if (!this.isModeStarted) {
+//			this.level.activateCameraZoomByUser();
 			this.startModeInternal();
 			this.isModeStarted = true;
 		}
 	}
 	
 	public void endMode() {
-		this.isModeStarted = false;
+		this.isModeStarted = false;		
 		this.endModeInternal();
 	}
 

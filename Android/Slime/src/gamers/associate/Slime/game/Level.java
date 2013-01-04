@@ -1091,6 +1091,10 @@ public class Level implements IGameItemHandler {
 		}
 	}
 	
+	public void activateCameraZoomByUser() {
+		this.levelLayer.setZoomCameraActivated(true);
+	}
+	
 	public void activateCameraMoveAndZoomByUser() {
 		this.levelLayer.setMoveCameraActivated(true);
 		this.levelLayer.setZoomCameraActivated(true);

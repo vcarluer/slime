@@ -8,6 +8,7 @@ import gamers.associate.Slime.game.Rank;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.TimeAttackGame;
+import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.items.custom.RankFactory;
 import gamers.associate.Slime.items.custom.Slimy;
 import gamers.associate.Slime.items.custom.SlimySuccess;
@@ -18,6 +19,7 @@ import org.cocos2d.actions.interval.CCScaleBy;
 import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.actions.interval.CCTintTo;
+import org.cocos2d.layers.CCColorLayer;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItemSprite;
@@ -28,6 +30,7 @@ import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
+import org.cocos2d.types.ccColor4B;
 
 import android.annotation.SuppressLint;
 import android.view.MotionEvent;
@@ -42,9 +45,11 @@ import android.view.MotionEvent;
 	private static final int SlimyPosition = StarCountPosition + 100;
 	private static final int labelSize = 60;	
 	private static final int stepScore = 10000;
-	private static final float STAR_SCALE = 1.5f;	
+	private static final float STAR_SCALE = 1.5f;
+	private static final float paddingSquare = 25;	
 	private CCSprite slime;
 	private CCSprite star;
+	private CCSprite square;
 	private CCBitmapFontAtlas starCountLabel;
 	private CCBitmapFontAtlas scoreLabel;
 	private CCBitmapFontAtlas totalScoreLabel;
@@ -106,7 +111,20 @@ import android.view.MotionEvent;
 		this.menu.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().width / 2,
 				CCDirector.sharedDirector().winSize().height / 2 + MenuPosition
-				));				
+				));
+		
+		// this.square = CCSprite.sprite("control-square-empty.png", true);
+		// float scaleX = (CCDirector.sharedDirector().winSize().width - (paddingSquare * SlimeFactory.SGSDensity) * 2) / MenuSprite.SquareEmptyWidth;
+//		float scaleY = (CCDirector.sharedDirector().winSize().height - (paddingSquare * SlimeFactory.SGSDensity) * 2) / MenuSprite.SquareEmptyHeight;
+//		float scaleX = scaleY;
+//		this.square.setScaleX(scaleX);
+//		this.square.setScaleY(scaleY);
+//		this.square.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY());
+//		this.addChild(this.square, Level.zUnder);
+		float pad = paddingSquare * SlimeFactory.SGSDensity;
+		CCColorLayer color = CCColorLayer.node(SlimeFactory.getColorLight(75), CCDirector.sharedDirector().winSize().width - pad * 2, CCDirector.sharedDirector().winSize().height - pad * 2);
+		color.setPosition(pad, pad);
+		this.addChild(color, Level.zUnder);
 
 		this.addChild(this.starCountLabel);
 		this.addChild(this.scoreLabel);
