@@ -433,10 +433,10 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 
 	public static Rank getRank(int bonusCount, int totalStar) {
 		int rank = 0;
-		if (totalStar == 0) {
+		if (totalStar == 0 || bonusCount == totalStar) {
 			rank = 4;
 		} else {
-			rank = (int) FloatMath.ceil(4f * (float)bonusCount / (float)totalStar);			
+			rank = (int) FloatMath.ceil(3f * (float)bonusCount / (float)totalStar);			
 		}		
 
 		switch(rank) {
