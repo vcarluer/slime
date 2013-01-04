@@ -282,7 +282,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 		// this.auraSprite.setVisible(true);
 		this.arrowSprite.setVisible(true);
 		// CCAnimate animation = CCAnimate.action(this.animationList.get(Anim_Dbz_Aura), false);
-		CCAnimate animation = CCAnimate.action(this.animationList.get(Anim_Buzz), false);
+		CCAnimate animation = CCAnimate.action(this.animationList.get(Anim_Electrified_Short), false);
 		this.actionSelect = CCRepeatForever.action(animation);
 		this.sprite.runAction(this.actionSelect);
 		// this.auraSprite.runAction(repeat);
@@ -316,7 +316,10 @@ public class SlimyJump extends Slimy implements ISelectable {
 					this.waitAnim();
 				}
 				this.getBody().setLinearVelocity(new Vector2(0, 0));
-				Vector2 pos = this.getBody().getPosition();		
+				float radians = (float)Math.atan2(this.worldImpulse.x, this.worldImpulse.y);
+				float degrees = ccMacros.CC_RADIANS_TO_DEGREES(radians);
+				this.setAngle(degrees);
+				Vector2 pos = this.getBody().getPosition();
 				this.getBody().applyLinearImpulse(this.worldImpulse, pos);
 				Sounds.playEffect(this.jumpSound[numberOfJump]);
 				this.numberOfJump++;
@@ -333,6 +336,14 @@ public class SlimyJump extends Slimy implements ISelectable {
 					this.currentJointDef = null;
 					this.contactWith = null;
 				}
+				
+				if (this.currentAction != null) {
+					this.sprite.stopAction(this.currentAction);
+				}
+				
+				CCAnimate animate = CCAnimate.action(this.animationList.get(Anim_Falling), false);
+				this.currentAction = animate;
+				this.sprite.runAction(this.currentAction);
 			}
 		}		
 	}		

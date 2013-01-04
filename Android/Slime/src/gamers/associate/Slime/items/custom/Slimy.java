@@ -35,6 +35,7 @@ public class Slimy extends GameItemPhysic implements IBurnable, IDissolvable, IE
 	public static String Anim_Buzz = "buzz";
 	public static String Anim_Dissolve = "dissolve";
 	public static String Anim_Electrified = "electrified";	
+	public static String Anim_Electrified_Short = "electrified";
 	public static String Anim_Falling = "falling";
 	public static String Anim_Landing_H = "landing-h";
 	public static String Anim_Landing_V = "landing-v";
