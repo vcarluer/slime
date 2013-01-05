@@ -75,6 +75,7 @@ public abstract class SlimeFactory {
 	public static final boolean resetHighScores = false; // Run with this = true and then relaunch with false
 	public static final boolean clearLevelInfo = false; // Run with this = true and then relaunch with false
 	public static final boolean unlockAll = false;
+	public static final boolean resetAchievements = false;
 	
 	// end debug ---
 	private static final float SGSDensityBase = 1.5f; // Samsung Galaxy S density

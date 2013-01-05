@@ -123,7 +123,12 @@ public abstract class Achievement {
 								i++;
 								switch(i) {
 								case 1:
-									this.setAchieved(Boolean.valueOf(line).booleanValue());
+									if (!SlimeFactory.resetAchievements) {
+										this.setAchieved(Boolean.valueOf(line).booleanValue());
+									} else {
+										this.setAchieved(false);
+									}
+									
 									break;
 								default:
 									break;

@@ -45,8 +45,6 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 		{			
 			this.levelDef.setGamePlay(gamePlay);
 			level.setLevelDefinition(this.levelDef);			
-			
-			this.isBoss = (this.gameInfo.getLevelNum() == this.gameInfo.getLevelMax());
 			this.resetTotalStar();
 			
 			if (!isDebug) {
@@ -62,7 +60,7 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 			this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorCorridor3);
 			
 			this.isBoss = (this.gameInfo.getLevelNum() == this.gameInfo.getLevelMax());
-			AchievementStatistics.isBoss = true;
+			AchievementStatistics.isBoss = this.isBoss;
 							
 			this.complexity = this.computeComplexity();
 			this.levelDef.setComplexity(this.complexity);
@@ -114,14 +112,14 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 		
 		if (levelDefToLoad.getGamePlay() == GamePlay.TimeAttack) {
 			boolean isTuto = this.isTut(levelDefToLoad);
-			AchievementStatistics.isTuto = true;
+			AchievementStatistics.isTuto = isTuto;
 			level.setLevelDefinition(levelDefToLoad);
 			this.resetTotalStar();
 			level.setTitle(TitleGenerator.generateNewTitle());
 			
 			this.gameInfo.forceLevel(levelDefToLoad.getWorld().getDifficulty(levelDefToLoad.getNumber()), levelDefToLoad.getNumber());
 			this.isBoss = levelDefToLoad.isBoss();
-			AchievementStatistics.isBoss = true;
+			AchievementStatistics.isBoss = this.isBoss;
 
 			if (isTuto || levelDefToLoad.isInvalidated() || !levelDefToLoad.buildLevel(level)) {
 				levelDefToLoad.setInvalidated(false);
