@@ -14,6 +14,7 @@ import gamers.associate.Slime.layers.BackgoundLayer;
 import gamers.associate.Slime.layers.EndLevelLayer;
 import gamers.associate.Slime.layers.HudLayer;
 import gamers.associate.Slime.layers.LevelLayer;
+import gamers.associate.Slime.layers.MessageLayer;
 import gamers.associate.Slime.layers.PauseLayer;
 import gamers.associate.Slime.layers.SurvivalGameOverLayer;
 import gamers.associate.Slime.levels.GamePlay;
@@ -97,6 +98,7 @@ public class Level implements IGameItemHandler {
 	protected int customZ = 2;
 	protected int hudZ = 1;
 	protected boolean isHudEnabled;
+	protected MessageLayer messageLayer;
 	
 	protected CCLabel label;
 	
@@ -165,6 +167,7 @@ public class Level implements IGameItemHandler {
 		this.gameLayer = CCLayer.node();
 		this.pauseLayer = new PauseLayer();
 		this.endLevelLayer = new EndLevelLayer();				
+		this.messageLayer = MessageLayer.get();
 		
 		this.gameLayer.addChild(this.backgroundLayer, 0);
 		this.gameLayer.addChild(this.levelLayer, 1);			
@@ -175,6 +178,7 @@ public class Level implements IGameItemHandler {
 		this.scene.addChild(this.hudLayer, this.hudZ);
 		this.scene.addChild(this.pauseLayer, this.hudZ);
 		this.scene.addChild(this.endLevelLayer, this.hudZ);	
+		this.scene.addChild(this.messageLayer, zTop);
 				
 		this.items = new Hashtable<UUID, GameItem>();				
 		this.selectables = new ArrayList<ISelectable>();
@@ -966,6 +970,8 @@ public class Level implements IGameItemHandler {
 			if (showEndLevel) {
 				this.showEndLevel();
 			}						
+			
+			MessageLayer.get().show("Win!!!");
 						
 			return true;
 		}
