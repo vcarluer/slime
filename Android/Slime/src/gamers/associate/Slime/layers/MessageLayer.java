@@ -7,6 +7,7 @@ import java.util.Queue;
 
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.items.custom.MenuSprite;
 
 import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCDelayTime;
@@ -64,8 +65,8 @@ public class MessageLayer extends CCLayer {
 		this.message.setColor(SlimeFactory.ColorSlime);
 		this.addChild(this.message);
 		
-		this.basePos = CGPoint.make(0, - this.height);
-		this.hidePos = CGPoint.zero();
+		this.basePos = CGPoint.make(- this.width, CCDirector.sharedDirector().winSize().getHeight() - ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY));
+		this.hidePos = CGPoint.make(0, CCDirector.sharedDirector().winSize().getHeight() - ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY));
 		this.setPosition(basePos);
 	}
 	
@@ -91,12 +92,20 @@ public class MessageLayer extends CCLayer {
 				this.removeChild(this.colored, true);
 			}
 			
-			this.colored = CCColorLayer.node(SlimeFactory.getColorLight(230), messageWidth + this.messageX, this.height);
+			this.width = messageWidth + this.messageX;
+			this.colored = CCColorLayer.node(SlimeFactory.getColorLight(230), this.width, this.height);
 			this.addChild(colored, Level.zUnder);
 			
-			CCMoveTo moveTo = CCMoveTo.action(0.5f, this.hidePos);
+			float yPos = 
+					CCDirector.sharedDirector().winSize().getHeight() - ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY) - this.height - PauseLayer.PaddingY;
+			
+			this.basePos = CGPoint.make(0, yPos);
+			this.hidePos = CGPoint.make(- this.width, yPos);
+			
+			this.setPosition(this.hidePos);
+			CCMoveTo moveTo = CCMoveTo.action(0.5f, this.basePos);
 			CCDelayTime delay = CCDelayTime.action(5);
-			CCMoveTo moveBack = CCMoveTo.action(0.5f, basePos);
+			CCMoveTo moveBack = CCMoveTo.action(0.5f, hidePos);
 			CCCallFunc call = CCCallFunc.action(this, "endShow");
 			CCSequence seq = CCSequence.actions(moveTo, delay, moveBack, call);
 			this.runAction(seq);

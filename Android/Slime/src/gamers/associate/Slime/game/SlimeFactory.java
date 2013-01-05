@@ -337,6 +337,10 @@ public abstract class SlimeFactory {
 		return ccColor4B.ccc4(178, 229, 194, alpha);
 	}
 	
+	public static ccColor4B getColorBorder(int alpha) {
+		return ccColor4B.ccc4(0, 62, 8, alpha);
+	}
+	
 	public static void moveToZeroY(float delayTime, CCLayer layer) {
 		layer.setPosition(layer.getPosition().x, CCDirector.sharedDirector().winSize().height);
 		CCDelayTime delay = CCDelayTime.action(0.4f + delayTime);

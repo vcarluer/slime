@@ -29,7 +29,6 @@ public class AchievementManager {
 	}
 	
 	public void handleEndLevelAchievements() {
-		int key = 0;
 		for(Achievement ach : this.achievements.values()) {
 			   if (ach.isEndLevel()) {
 				ach.test();
@@ -40,5 +39,14 @@ public class AchievementManager {
 	@SuppressWarnings("rawtypes")
 	public void test(Class achievementClass) {
 		this.achievements.get(achievementClass).test();
+	}
+
+	@SuppressWarnings("rawtypes")
+	public HashMap<Class, Achievement> getAchievementsMap() {
+		return this.achievements;
+	}
+
+	public int getAchievementsCount() {
+		return this.achievements.size();
 	}
 }

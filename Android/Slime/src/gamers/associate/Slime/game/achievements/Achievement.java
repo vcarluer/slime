@@ -41,6 +41,7 @@ public abstract class Achievement {
 	public void test() {
 		if (this.testInternal()) {
 			MessageLayer.get().show(this.getName());
+			this.achieved = true;
 		}
 	}
 
