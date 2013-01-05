@@ -4,7 +4,7 @@ import android.util.FloatMath;
 
 
 public class LaboratoryPackage extends WorldPackage {
-	private static final String BKG_MOON_POSTCARD_PNG = "bkg/moon-postcard.png";
+	private static final String BKG_MOON_POSTCARD_PNG = "bkg/lab-postcard.png";
 	private static final String LABORATORY = "Laboratory";
 	private static final int levelCount = 80;
 
