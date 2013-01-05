@@ -8,6 +8,7 @@ import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.game.achievements.AchievementStatistics;
+import gamers.associate.Slime.game.achievements.SupermanAch;
 import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.ISelectable;
@@ -322,6 +323,8 @@ public class SlimyJump extends Slimy implements ISelectable {
 				this.setAngle(degrees);
 				Vector2 pos = this.getBody().getPosition();
 				this.getBody().applyLinearImpulse(this.worldImpulse, pos);
+				AchievementStatistics.slimyJumpCount++;
+				SlimeFactory.AchievementManager.test(SupermanAch.class);
 				Sounds.playEffect(this.jumpSound[numberOfJump]);
 				this.numberOfJump++;
 				if(this.numberOfJump==5){

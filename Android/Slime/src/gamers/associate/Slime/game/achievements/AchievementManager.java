@@ -1,39 +1,43 @@
 package gamers.associate.Slime.game.achievements;
 
 
-import android.util.SparseArray;
+import java.util.HashMap;
 
 public class AchievementManager {
-	private SparseArray<Achievement> achievements;
+	@SuppressWarnings("rawtypes")
+	private HashMap<Class, Achievement> achievements;
 	
 	
+	@SuppressWarnings("rawtypes")
 	public AchievementManager() {
-		this.achievements = new SparseArray<Achievement>();
+		this.achievements = new HashMap<Class, Achievement>();
 		this.initAchievements();
 	}
 	
 	private void initAchievements() {
 		this.add(new LikeABirdAch());
+		this.add(new SupermanAch());
 	}
 
-	public Achievement get(Integer code) {
-		return this.achievements.get(code);
+	@SuppressWarnings("rawtypes")
+	public Achievement get(Class achievementClass) {
+		return this.achievements.get(achievementClass);
 	}
 	
 	public void add(Achievement achievement) {
-		this.achievements.append(achievement.getCode(), achievement);
+		this.achievements.put(achievement.getClass(), achievement);
 	}
 	
 	public void handleEndLevelAchievements() {
 		int key = 0;
-		for(int i = 0; i < this.achievements.size(); i++) {
-		   key = this.achievements.keyAt(i);
-		   // get the object by the key.
-		   Achievement ach = this.achievements.get(key);
-		   
-		   if (ach.isEndLevel()) {
+		for(Achievement ach : this.achievements.values()) {
+			   if (ach.isEndLevel()) {
 				ach.test();
 			}
 		}
+	}
+	
+	public void test(Class achievementClass) {
+		this.achievements.get(achievementClass).test();
 	}
 }
