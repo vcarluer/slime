@@ -12,7 +12,8 @@ public class AchievementInfoLayer extends CCLayer {
 	private static final float titleSize = 32;
 	private static final float descriptionSize = 22;
 	private static final float padding = 5;
-	public static final float rowSize = titleSize + descriptionSize + padding;
+	private static final float extPadding = 5f;
+	public static final float rowSize = titleSize + descriptionSize + padding + extPadding * 2;
 	private Achievement info;
 	private CCSprite unlockSprite;
 	private CCLabel title;

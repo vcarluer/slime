@@ -1,6 +1,7 @@
 package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.R;
+import gamers.associate.Slime.game.achievements.AchievementStatistics;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.IElectrificable;
@@ -971,6 +972,8 @@ public class Level implements IGameItemHandler {
 				this.showEndLevel();
 			}						
 			
+			AchievementStatistics.winLeftTime = this.getGamePlay().getLeftTime();
+			AchievementStatistics.consecutiveWin++;
 			SlimeFactory.AchievementManager.handleEndLevelAchievements();
 			return true;
 		}
@@ -980,6 +983,7 @@ public class Level implements IGameItemHandler {
 	
 	public boolean lose(boolean showEndLevel) {
 		if (this.gamePlay != null && !this.isGameOver) {
+			AchievementStatistics.consecutiveWin = 0;
 			this.lastScore = 0;
 			this.isVictory = false;
 			this.endLevel();

@@ -28,4 +28,5 @@ public interface IGamePlay {
 	float getExtraBonusPoints();
 	GamePlay getType();
 	void endMode();
+	float getLeftTime();
 }

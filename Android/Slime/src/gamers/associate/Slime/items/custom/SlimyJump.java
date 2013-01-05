@@ -88,6 +88,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	private float emitterStartSize;
 	private int numberOfJump = 0;
 	private int jumpSound[] = {R.raw.slimyjumpa, R.raw.slimyjumpb, R.raw.slimyjumpc , R.raw.slimyjumpd, R.raw.slimyjumpe};
+	private long selectStartTime;
 	
 	
 	public SlimyJump(float x, float y, float width, float height, World world,
@@ -287,6 +288,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 		CCAnimate animation = CCAnimate.action(this.animationList.get(Anim_Buzz), false);
 		this.actionSelect = CCRepeatForever.action(animation);
 		this.sprite.runAction(this.actionSelect);
+		this.selectStartTime = System.currentTimeMillis();
 		// this.auraSprite.runAction(repeat);
 		//Sounds.playEffect(R.raw.slimycharging);			
 	}
@@ -325,6 +327,11 @@ public class SlimyJump extends Slimy implements ISelectable {
 				this.getBody().applyLinearImpulse(this.worldImpulse, pos);
 				AchievementStatistics.slimyJumpCount++;
 				SlimeFactory.AchievementManager.test(SupermanAch.class);
+				long shotTime = System.currentTimeMillis() - this.selectStartTime;
+				AchievementStatistics.shotTime = shotTime;
+				if (!this.isLanded) {
+					AchievementStatistics.shotInAir++;
+				}
 				Sounds.playEffect(this.jumpSound[numberOfJump]);
 				this.numberOfJump++;
 				if(this.numberOfJump==5){
@@ -471,6 +478,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 		
 		if (this.isLanded && !contact.getContactWith().isIsAllSensor() && !this.isDead && !this.isDying) {
 			AchievementStatistics.slimyLandCount++;
+			AchievementStatistics.shotInAir = 0;
 		}
 		
 		if (this.isLanded 

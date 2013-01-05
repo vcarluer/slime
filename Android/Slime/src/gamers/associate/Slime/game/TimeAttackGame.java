@@ -82,8 +82,8 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		return this.isGameOver;
 	}
 	
-	public String getLeftTime() {
-		return Util.getFormatTime(this.leftTime);
+	public float getLeftTime() {
+		return this.leftTime;
 	}				
 
 	/* (non-Javadoc)
@@ -111,7 +111,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 			if (this.leftTime <= 0) {
 				this.leftTime = 0;
 				this.lose();
-			}			
+			}
 			
 			if (!this.isGameOver) {				
 				
