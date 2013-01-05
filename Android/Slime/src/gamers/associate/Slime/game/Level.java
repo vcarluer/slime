@@ -971,9 +971,7 @@ public class Level implements IGameItemHandler {
 				this.showEndLevel();
 			}						
 			
-			MessageLayer.get().show("Win!!!");
-			MessageLayer.get().show("Win again!!!");
-						
+			SlimeFactory.AchievementManager.handleEndLevelAchievements();
 			return true;
 		}
 		

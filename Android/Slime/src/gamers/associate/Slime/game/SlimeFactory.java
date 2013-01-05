@@ -1,6 +1,7 @@
 package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.Slime;
+import gamers.associate.Slime.game.achievements.AchievementManager;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.items.custom.BecBunsenFactory;
 import gamers.associate.Slime.items.custom.BoxFactory;
@@ -133,10 +134,15 @@ public abstract class SlimeFactory {
 	public static StarCounterFactory StarCounter = new StarCounterFactory(); // Not attached in attach All but in HudLayer	
 	
 	public static PackageManager PackageManager;
+	public static AchievementManager AchievementManager;
 		
 	public static void init() {
 		if (PackageManager == null) {
 			PackageManager = new PackageManager();
+		}
+		
+		if (AchievementManager == null) {
+			AchievementManager = new AchievementManager();
 		}
 	}
 	
