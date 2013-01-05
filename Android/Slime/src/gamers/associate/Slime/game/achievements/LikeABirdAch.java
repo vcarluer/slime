@@ -1,5 +1,6 @@
 package gamers.associate.Slime.game.achievements;
 
+
 public class LikeABirdAch extends Achievement {
 
 	public static final int Code = 0;
@@ -7,7 +8,11 @@ public class LikeABirdAch extends Achievement {
 	private static final String description = "Finish a level without touching the ground";
 
 	public LikeABirdAch() {
-		super(Code, name, description);
+		super(Code, name, description, true);
 	}
 
+	@Override
+	protected boolean testInternal() {
+		return AchievementStatistics.slimyLandCount == 0;
+	}
 }

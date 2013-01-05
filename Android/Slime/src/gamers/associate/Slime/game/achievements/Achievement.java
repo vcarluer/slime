@@ -1,15 +1,19 @@
 package gamers.associate.Slime.game.achievements;
 
-public class Achievement {
+import gamers.associate.Slime.layers.MessageLayer;
+
+public abstract class Achievement {
 	private int code;
 	private String name;
 	private String description;
 	private boolean achieved;
+	private boolean isEndLevel;
 	
-	public Achievement(int code, String name, String description) {
+	public Achievement(int code, String name, String description, boolean endLevel) {
 		this.setCode(code);
 		this.setName(name);
 		this.setDescription(description);
+		this.setEndLevel(endLevel);
 	}
 
 	public String getName() {
@@ -42,5 +46,21 @@ public class Achievement {
 
 	public void setAchieved(boolean achieved) {
 		this.achieved = achieved;
+	}
+	
+	public void test() {
+		if (this.testInternal()) {
+			MessageLayer.get().show(this.getName());
+		}
+	}
+
+	protected abstract boolean testInternal();
+
+	public boolean isEndLevel() {
+		return isEndLevel;
+	}
+
+	public void setEndLevel(boolean isEndLevel) {
+		this.isEndLevel = isEndLevel;
 	}
 }
