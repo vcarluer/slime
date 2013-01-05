@@ -19,7 +19,7 @@ public class ScrollerLayer extends CCLayer {
 	private float lastDelta;
 	private float minScoll;
 	private float maxScroll;
-	private StoryWorldLayer storyLayer;
+	private IScrollable storyLayer;
 	
 	public ScrollerLayer() {
 		this.setIsTouchEnabled(true);
@@ -114,11 +114,11 @@ public class ScrollerLayer extends CCLayer {
 		return this.hasMoved;
 	}
 
-	public StoryWorldLayer getStoryLayer() {
+	public IScrollable getStoryLayer() {
 		return storyLayer;
 	}
 
-	public void setStoryLayer(StoryWorldLayer storyLayer) {
+	public void setStoryLayer(IScrollable storyLayer) {
 		this.storyLayer = storyLayer;
 	}
 }

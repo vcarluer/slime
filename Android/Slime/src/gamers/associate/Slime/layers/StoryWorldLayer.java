@@ -36,7 +36,7 @@ import android.util.FloatMath;
 import android.util.SparseArray;
 
 @SuppressLint("DefaultLocale") 
-public class StoryWorldLayer extends CCLayer {
+public class StoryWorldLayer extends CCLayer implements IScrollable {
 	public static final int COLS = 5;
 	private static final int fontSize = 60;
 	private static final float transitionTime = 0.5f;

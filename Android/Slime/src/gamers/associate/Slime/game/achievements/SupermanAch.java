@@ -7,7 +7,6 @@ public class SupermanAch extends Achievement {
 
 	public SupermanAch() {
 		super(name, description, false);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

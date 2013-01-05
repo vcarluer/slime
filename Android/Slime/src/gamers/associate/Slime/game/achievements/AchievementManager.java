@@ -37,6 +37,7 @@ public class AchievementManager {
 		}
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public void test(Class achievementClass) {
 		this.achievements.get(achievementClass).test();
 	}

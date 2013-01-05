@@ -1,12 +1,15 @@
 package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.R;
+import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Sharer;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.items.custom.SpawnPortal;
 import gamers.associate.Slime.items.custom.Star;
+import gamers.associate.Slime.levels.GamePlay;
+import gamers.associate.Slime.levels.LevelHome;
 
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCDelayTime;
@@ -44,6 +47,8 @@ public class HomeLayer extends CCLayer {
 	
 	private CCSprite titleSprite;
 	private CCMenu shareMenu;
+	private CCMenu achievementMenu;
+	private CCLabel achievementLabel;
 	
 	private boolean nextDoNotStopMusic;
 	
@@ -73,7 +78,21 @@ public class HomeLayer extends CCLayer {
 				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftMenu
 				));			
 				
-		this.addChild(this.menu);		
+		this.addChild(this.menu);
+		
+		float scaleX = 1.0f;
+		CCSprite achSprNorm = CCSprite.sprite("control-stop.png", true);
+		achSprNorm.setScaleX(scaleX);
+		CCSprite achSprSel = CCSprite.sprite("control-stop.png", true);
+		achSprSel.setScaleX(scaleX);
+		CCMenuItemSprite achMenu = CCMenuItemSprite.item(achSprNorm, achSprSel, this, "selectAchievements");
+		this.achievementMenu = CCMenu.menu(achMenu);
+		
+		float achX = CCDirector.sharedDirector().winSize().getWidth() - (achSprNorm.getContentSize().width * scaleX) / 2f - PauseLayer.PaddingX;
+		float scaleY = 1.0f;
+		float achY = CCDirector.sharedDirector().winSize().getHeight() - PauseLayer.PaddingY * SlimeFactory.SGSDensity - (achSprNorm.getContentSize().height * scaleY) / 2f;
+		this.achievementMenu.setPosition(achX, achY);
+		this.addChild(this.achievementMenu);
 	}
 
 	@Override
@@ -205,6 +224,10 @@ public class HomeLayer extends CCLayer {
 		return addBkg(node, 800, 480, "splash-level.png");
 	}
 	
+	public static CCSprite addBkgGameOver(CCNode node) {
+		return addBkg(node, 800, 480, "game-over.png");
+	}
+	
 	public static CCSprite addBkg(CCNode node, int w, int h, String sprite) {
 		int originalW = w;		
 		int originalH = h;
@@ -246,5 +269,11 @@ public class HomeLayer extends CCLayer {
 		shareItem.runAction(rep);
 		
 		return CCMenu.menu(shareItem);
+	}
+	
+	public void selectAchievements(Object sender) {
+		Sounds.playEffect(R.raw.menuselect);
+		CCFadeTransition transition = CCFadeTransition.transition(0.5f, AchievementsLayer.getScene());
+		CCDirector.sharedDirector().replaceScene(transition);
 	}
 }

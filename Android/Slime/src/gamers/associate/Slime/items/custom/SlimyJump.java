@@ -330,7 +330,6 @@ public class SlimyJump extends Slimy implements ISelectable {
 				if(this.numberOfJump==5){
 					this.numberOfJump = 0;
 				}
-				
 
 				this.isLanded = false;
 				this.stickHandled = false;
