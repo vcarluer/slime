@@ -33,6 +33,9 @@ public class MessageLayer extends CCLayer {
 	private CCSprite icon;
 	private float iconWidth;
 	private static float fntSize = 42;
+	private CCColorLayer colored;
+	private float messageWidthSizeBase;
+	private float messageX;
 	
 	public static MessageLayer get() {
 		if (layer == null) {
@@ -46,8 +49,6 @@ public class MessageLayer extends CCLayer {
 		this.messages = new LinkedList<MessageInfo>();
 		this.width = CCDirector.sharedDirector().winSize().width / 3;
 		this.height = this.width * heightRatio;
-		CCColorLayer colored = CCColorLayer.node(SlimeFactory.getColorLight(230),this.width, this.height);
-		this.addChild(colored, Level.zUnder);
 		
 		this.icon = CCSprite.sprite("world-items/star-lock.png");
 		float iconScale = this.height / this.icon.getContentSize().height;
@@ -57,7 +58,9 @@ public class MessageLayer extends CCLayer {
 		this.addChild(this.icon);
 		
 		this.message = SlimeFactory.getLabel(" ", fntSize);
-		this.message.setPosition(iconWidth + paddingX * 2, this.height / 2f);
+		this.messageX = iconWidth + paddingX * 2;
+		this.messageWidthSizeBase = this.width - this.messageX;
+		this.message.setPosition(messageX, this.height / 2f);
 		this.message.setColor(SlimeFactory.ColorSlime);
 		this.addChild(this.message);
 		
@@ -78,6 +81,19 @@ public class MessageLayer extends CCLayer {
 			this.isShowing = true;
 			this.message.setString(info.getText().toUpperCase());
 			this.message.setPosition(this.iconWidth + this.message.getContentSize().width / 2f + paddingX * 2, this.height / 2f);
+			
+			float messageWidth = this.messageWidthSizeBase;
+			if (messageWidth < this.message.getContentSize().width) {
+				messageWidth = this.message.getContentSize().width + paddingX;
+			}
+			
+			if (this.colored != null) {
+				this.removeChild(this.colored, true);
+			}
+			
+			this.colored = CCColorLayer.node(SlimeFactory.getColorLight(230), messageWidth + this.messageX, this.height);
+			this.addChild(colored, Level.zUnder);
+			
 			CCMoveTo moveTo = CCMoveTo.action(0.5f, this.hidePos);
 			CCDelayTime delay = CCDelayTime.action(5);
 			CCMoveTo moveBack = CCMoveTo.action(0.5f, basePos);
