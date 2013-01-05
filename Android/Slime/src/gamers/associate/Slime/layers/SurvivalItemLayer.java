@@ -54,6 +54,7 @@ public class SurvivalItemLayer extends CanvasItemLayer {
 		
 		this.inProgress = SlimeFactory.getLabel("In progress", fontSizeInfo);
 		this.inProgress.setColor(ccColor3B.ccc3(255, 0, 0));
+		this.inProgress.setVisible(false);
 		this.addChild(this.inProgress);
 	}
 	
