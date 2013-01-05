@@ -80,6 +80,7 @@ public class SpawnCannon extends GameItemPhysic {
     		
     		FixtureDef fixtureDef = new FixtureDef();
     		fixtureDef.isSensor = true;
+    		this.IsAllSensor = true;
     		fixtureDef.shape = staticBox;	
     		fixtureDef.density = 1.0f;
     		fixtureDef.friction = 1.0f;

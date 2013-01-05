@@ -129,6 +129,7 @@ public class LaserBeam extends GameItemPhysic {
 			fixtureDef.friction = 0.0f;
     		fixtureDef.restitution = 0f;
     		fixtureDef.isSensor = true;
+    		this.IsAllSensor = true;
     		
     		fixtureDef.filter.categoryBits = GameItemPhysic.Category_InGame;
     		this.body.createFixture(fixtureDef);

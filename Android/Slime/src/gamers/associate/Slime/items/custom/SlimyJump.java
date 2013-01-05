@@ -466,6 +466,11 @@ public class SlimyJump extends Slimy implements ISelectable {
 	
 	public void land(ContactInfo contact) {	
 		this.land();
+		
+		if (this.isLanded && !contact.getContactWith().isIsAllSensor() && !this.isDead && !this.isDying) {
+			AchievementStatistics.slimyLandCount++;
+		}
+		
 		if (this.isLanded 
 				&& !this.stickHandled 
 				&& !contact.getContactWith().isIsAllSensor()

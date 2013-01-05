@@ -182,9 +182,8 @@ public class Slimy extends GameItemPhysic implements IBurnable, IDissolvable, IE
 		if (!this.isLanded && !this.isDead && this.sprite != null && !this.isDying && this.isActive()) {
 			if (!this.hasLanded) {
 				this.hasLanded = true;
-				AchievementStatistics.slimyLandCount++;
 				this.waitAnim();
-			}
+			}			
 			
 			if (this.currentAction != null) {
 				this.sprite.stopAction(this.currentAction);
