@@ -34,18 +34,27 @@ public class SurvivalModeItemLayer extends ModeItemLayer {
 	}
 	@Override
 	public void onEnter() {
-		String score = String.valueOf(SlimeFactory.GameInfo.getTotalScore());
-		this.lblScore.setString(score.toUpperCase());
-		this.lblScore.setColor(SlimeFactory.ColorSlimeLight);		
+		int sc = SlimeFactory.GameInfo.getTotalScore();
+		if (sc > 0) {
+			this.lblScore.setVisible(true);
+			this.starSprite.setVisible(true);
+			String score = String.valueOf(sc);
+			this.lblScore.setString(score.toUpperCase());
+			this.lblScore.setColor(SlimeFactory.ColorSlimeLight);		
+			
+			float starPadding = -10f;
+			float starX = this.lblScore.getPosition().x - this.lblScore.getContentSize().width / 2 - SlimeFactory.Star.getStarReferenceWidth() / 2 + starPadding;
+			this.starSprite.setPosition(CGPoint.make(
+					starX,
+					this.starSprite.getPosition().y
+					));
+			
+			this.starSprite.runAction(SlimeFactory.Star.getAnimation(Star.Anim_Wait));
+		} else {
+			this.lblScore.setVisible(false);
+			this.starSprite.setVisible(false);
+		}
 		
-		float starPadding = -10f;
-		float starX = this.lblScore.getPosition().x - this.lblScore.getContentSize().width / 2 - SlimeFactory.Star.getStarReferenceWidth() / 2 + starPadding;
-		this.starSprite.setPosition(CGPoint.make(
-				starX,
-				this.starSprite.getPosition().y
-				));
-		
-		this.starSprite.runAction(SlimeFactory.Star.getAnimation(Star.Anim_Wait));
 		super.onEnter();
 	}
 	@Override

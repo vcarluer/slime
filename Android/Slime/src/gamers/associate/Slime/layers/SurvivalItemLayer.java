@@ -68,58 +68,47 @@ public class SurvivalItemLayer extends CanvasItemLayer {
 				+ this.diffSprite.getContentSize().height / 2 
 				+ paddingSprite);
 		this.addChild(this.diffSprite);
-		
-		CCSprite star = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);
-		star.setPosition(this.labelX, this.labelY - this.getFontSize() / 2 - paddingSprite - star.getContentSize().height / 2);
-		this.addChild(star);
-		int score = SlimeFactory.GameInfo.getScore(this.levelDiff);
-		CCLabel scoreLabel = SlimeFactory.getLabel(String.valueOf(score), this.getFontSize());
-		scoreLabel.setPosition(this.labelX, star.getPosition().y - star.getContentSize().height / 2 - paddingSprite - this.getFontSize() / 2);
-		this.addChild(scoreLabel);
-				
-		int inARow = SlimeFactory.GameInfo.getInARow(this.levelDiff);		
-		String endPhrase = "";
-		if (inARow < 2) {
-			endPhrase = " level in a row!";			
-		} else {
-			endPhrase = " levels in a row!";			
-		}
-		
-		CCLabel levelLabel = CCLabel.makeLabel(String.valueOf(inARow) + endPhrase, "fonts/Slime.ttf", fontSizeInfo);
-
-		levelLabel.setPosition(this.labelX, scoreLabel.getPosition().y - this.getFontSize() / 2 - paddingInfo - fontSizeInfo / 2);
-		this.addChild(levelLabel);
-		
-		this.inProgress.setPosition(this.labelX, levelLabel.getPosition().y - fontSizeInfo / 2 - paddingInfo - fontSizeInfo / 2);
-		this.inProgress.setVisible(SlimeFactory.GameInfo.canContinueSurvival(this.levelDiff));
-		
-		this.toDestroy.add(star);
 		this.toDestroy.add(this.diffSprite);
-		this.toDestroy.add(scoreLabel);
-		this.toDestroy.add(levelLabel);		
+		
+		int score = SlimeFactory.GameInfo.getScore(this.levelDiff);
+		if (score > 0) {
+			CCSprite star = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);
+			float starY = this.labelY - this.getFontSize() / 2 - paddingSprite - star.getContentSize().height / 2;
+			if (starY > this.height * (2f / 3f)) {
+				starY = this.height * (2f / 3f);
+			}
+			
+			star.setPosition(this.labelX, starY);
+			this.addChild(star);
+			this.toDestroy.add(star);
+			
+			CCLabel scoreLabel = SlimeFactory.getLabel(String.valueOf(score), this.getFontSize());
+			scoreLabel.setPosition(this.labelX, star.getPosition().y - star.getContentSize().height / 2 - paddingSprite - this.getFontSize() / 2);
+			this.addChild(scoreLabel);
+			this.toDestroy.add(scoreLabel);
+			
+			int inARow = SlimeFactory.GameInfo.getInARow(this.levelDiff);	
+			if (inARow > 0) {
+				String endPhrase = "";
+				if (inARow < 2) {
+					endPhrase = " level in a row!";			
+				} else {
+					endPhrase = " levels in a row!";			
+				}
+				
+				CCLabel levelLabel = CCLabel.makeLabel(String.valueOf(inARow) + endPhrase, "fonts/Slime.ttf", fontSizeInfo);
+
+				levelLabel.setPosition(this.labelX, scoreLabel.getPosition().y - this.getFontSize() / 2 - paddingInfo - fontSizeInfo / 2);
+				this.addChild(levelLabel);
+				this.toDestroy.add(levelLabel);
+				
+				this.inProgress.setPosition(this.labelX, levelLabel.getPosition().y - fontSizeInfo / 2 - paddingInfo - fontSizeInfo / 2);
+				this.inProgress.setVisible(SlimeFactory.GameInfo.canContinueSurvival(this.levelDiff));
+			}
+		}
 		
 		SlimeFactory.ContextActivity.showAndNextAd();				
 	}
-	
-//	if (isEnable) {
-//		CCSprite star = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);
-//		//star.setPosition(tmp2.x + this.normalMenuLabel.getContentSize().width + padding + (Star.Default_Width / 2), tmp.y);
-//		star.setPosition(tmp.x - iconPadding - (iconSize / 2), tmp.y - iconSize); // Use Normal x as reference not label
-//		int score = SlimeFactory.GameInfo.getScore(diffRef); 
-//		CCLabel scoreLabel = CCLabel.makeLabel(String.valueOf(score).toUpperCase(), "fonts/Slime.ttf", 60.0f);
-//		scoreLabel.setPosition(tmp.x, tmp.y - iconSize); // Use Normal x as reference not label
-//		scoreLabel.setAnchorPoint(0, 0.5f);
-//		CCLabel levelLabel = CCLabel.makeLabel("10 level in a row!", "fonts/Slime.ttf", 30.0f);
-//		levelLabel.setPosition(tmp.x - iconPadding - (iconSize / 2), tmp.y - scoreLabel.getContentSize().height - iconSize); // Use Normal x as reference not label
-//		levelLabel.setAnchorPoint(0, 0.5f);			
-//		this.addChild(star);
-//		this.addChild(scoreLabel);
-//		this.addChild(levelLabel);
-//		
-//		this.toDestroy.add(star);
-//		this.toDestroy.add(scoreLabel);
-//		this.toDestroy.add(levelLabel);
-//	}
 	
 	@Override
 	public void onExit() {

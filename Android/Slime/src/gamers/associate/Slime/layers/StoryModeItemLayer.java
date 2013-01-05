@@ -44,9 +44,15 @@ public class StoryModeItemLayer extends ModeItemLayer {
 			totalAd = (int) FloatMath.floor(totalAd / (float)size);
 		}
 		
-		String score = String.valueOf(totalAd) + "%";
-		this.lblScore.setString(score.toUpperCase());
-		this.lblScore.setColor(SlimeFactory.ColorSlimeLight);
+		if (totalAd > 0) {
+			this.lblScore.setVisible(true);
+			String score = String.valueOf(totalAd) + "%";
+			this.lblScore.setString(score.toUpperCase());
+			this.lblScore.setColor(SlimeFactory.ColorSlimeLight);
+		} else {
+			this.lblScore.setVisible(false);
+		}
+		
 		super.onEnter();
 	}
 	
