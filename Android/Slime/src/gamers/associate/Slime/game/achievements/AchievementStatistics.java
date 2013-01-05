@@ -14,7 +14,6 @@ public class AchievementStatistics {
 	// reseted here
 	public static int landCount;
 	public static int shotCount;
-	
 	public static float winLeftTime;
 	public static long shotTime;
 	public static int shotInAir;

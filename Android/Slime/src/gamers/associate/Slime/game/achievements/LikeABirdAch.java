@@ -12,6 +12,6 @@ public class LikeABirdAch extends Achievement {
 
 	@Override
 	protected boolean testInternal() {
-		return AchievementStatistics.landCount == 0;
+		return !AchievementStatistics.isTuto && AchievementStatistics.landCount == 0;
 	}
 }
