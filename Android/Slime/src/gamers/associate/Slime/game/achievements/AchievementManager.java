@@ -17,6 +17,7 @@ public class AchievementManager {
 	private void initAchievements() {
 		this.add(new LikeABirdAch());
 		this.add(new SupermanAch());
+		this.add(new RobinHoodAch());
 	}
 
 	@SuppressWarnings("rawtypes")
