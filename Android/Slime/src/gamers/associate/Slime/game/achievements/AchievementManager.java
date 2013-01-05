@@ -1,16 +1,20 @@
 package gamers.associate.Slime.game.achievements;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class AchievementManager {
 	@SuppressWarnings("rawtypes")
 	private HashMap<Class, Achievement> achievements;
+	private List<Achievement> orderedAchievements;
 	
 	
 	@SuppressWarnings("rawtypes")
 	public AchievementManager() {
 		this.achievements = new HashMap<Class, Achievement>();
+		this.orderedAchievements = new ArrayList<Achievement>();
 		this.initAchievements();
 	}
 	
@@ -27,6 +31,7 @@ public class AchievementManager {
 	
 	public void add(Achievement achievement) {
 		this.achievements.put(achievement.getClass(), achievement);
+		this.orderedAchievements.add(achievement);
 	}
 	
 	public void handleEndLevelAchievements() {
@@ -43,11 +48,11 @@ public class AchievementManager {
 	}
 
 	@SuppressWarnings("rawtypes")
-	public HashMap<Class, Achievement> getAchievementsMap() {
-		return this.achievements;
+	public List<Achievement> getAchievementsList() {
+		return this.orderedAchievements;
 	}
 
 	public int getAchievementsCount() {
-		return this.achievements.size();
+		return this.orderedAchievements.size();
 	}
 }

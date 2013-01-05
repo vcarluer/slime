@@ -11,7 +11,7 @@ public class SupermanAch extends Achievement {
 
 	@Override
 	protected boolean testInternal() {
-		return AchievementStatistics.slimyLandCount == 0 && AchievementStatistics.slimyJumpCount == 1;
+		return AchievementStatistics.landCount == 0 && AchievementStatistics.shotCount == 1;
 	}
 
 }

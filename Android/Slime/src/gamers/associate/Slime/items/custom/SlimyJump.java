@@ -325,7 +325,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 				this.setAngle(degrees);
 				Vector2 pos = this.getBody().getPosition();
 				this.getBody().applyLinearImpulse(this.worldImpulse, pos);
-				AchievementStatistics.slimyJumpCount++;
+				AchievementStatistics.shotCount++;
 				SlimeFactory.AchievementManager.test(SupermanAch.class);
 				long shotTime = System.currentTimeMillis() - this.selectStartTime;
 				AchievementStatistics.shotTime = shotTime;
@@ -477,7 +477,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 		this.land();
 		
 		if (this.isLanded && !contact.getContactWith().isIsAllSensor() && !this.isDead && !this.isDying) {
-			AchievementStatistics.slimyLandCount++;
+			AchievementStatistics.landCount++;
 			AchievementStatistics.shotInAir = 0;
 		}
 		

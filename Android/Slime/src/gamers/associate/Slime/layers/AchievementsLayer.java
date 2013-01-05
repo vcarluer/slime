@@ -12,6 +12,9 @@ import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelHome;
 
+import org.cocos2d.actions.interval.CCDelayTime;
+import org.cocos2d.actions.interval.CCMoveTo;
+import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCColorLayer;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
@@ -20,6 +23,7 @@ import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
+import org.cocos2d.types.CGPoint;
 
 public class AchievementsLayer extends CCLayer  implements IScrollable {
 	private static final float fontSize = 60;
@@ -80,17 +84,22 @@ public class AchievementsLayer extends CCLayer  implements IScrollable {
 		float rowSize = AchievementInfoLayer.rowSize + padding;
 		this.minScroller = (CCDirector.sharedDirector().winSize().getHeight()) - (MenuSprite.Height * PauseLayer.Scale) - rowSize / 2;
 		float achW = CCDirector.sharedDirector().winSize().width - padding * 2;
-		for(Achievement ach : SlimeFactory.AchievementManager.getAchievementsMap().values()) {
+		for(Achievement ach : SlimeFactory.AchievementManager.getAchievementsList()) {
 			AchievementInfoLayer achLayer = new AchievementInfoLayer(ach, achW);
-			
-			achLayer.setPosition(padding, - (i * rowSize + rowSize / 2f));
+			float yPos = - (i * rowSize + rowSize / 2f);
+			achLayer.setPosition(- achW, yPos);
+			CCDelayTime delay = CCDelayTime.action(0.5f);
+			CGPoint target = CGPoint.make(padding, yPos);
+			CCMoveTo moveTo = CCMoveTo.action((0.3f + (i % 4) * 2f) / 10f, target);
+			CCSequence seq = CCSequence.actions(delay, moveTo);
+			achLayer.runAction(seq);
 			this.achNode.addChild(achLayer);
 			i++;
 		}
 		
 		this.achNode.setPosition(0, this.minScroller);
 		
-		float max = this.minScroller - SlimeFactory.AchievementManager.getAchievementsCount() * rowSize;
+		float max = SlimeFactory.AchievementManager.getAchievementsCount() * rowSize  - rowSize / 2;
 		if (max < 0) {
 			max = 0;
 		}

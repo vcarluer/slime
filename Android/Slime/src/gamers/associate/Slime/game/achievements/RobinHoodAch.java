@@ -7,11 +7,10 @@ public class RobinHoodAch extends Achievement {
 
 	public RobinHoodAch() {
 		super(name, description, true);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	protected boolean testInternal() {
-		return !AchievementStatistics.isTuto && AchievementStatistics.slimyJumpCount <= 3;
+		return !AchievementStatistics.isTuto && AchievementStatistics.shotCount <= 3;
 	}
 }

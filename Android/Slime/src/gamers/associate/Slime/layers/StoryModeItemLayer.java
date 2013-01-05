@@ -2,6 +2,7 @@ package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.WorldPackage;
+import gamers.associate.Slime.game.achievements.AchievementStatistics;
 import gamers.associate.Slime.items.custom.Star;
 
 import org.cocos2d.layers.CCScene;
@@ -66,6 +67,8 @@ public class StoryModeItemLayer extends ModeItemLayer {
 	}
 	@Override
 	protected CCScene getTransition() {
+		AchievementStatistics.isModeStory = true;
+		AchievementStatistics.isModeSurvival = false;
 		return CCFadeTransition.transition(0.5f, StoryWorldLayer.getScene(1));
 	}	
 }

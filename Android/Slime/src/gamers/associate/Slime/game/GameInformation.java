@@ -1,6 +1,7 @@
 package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.Slime;
+import gamers.associate.Slime.game.achievements.AchievementStatistics;
 import gamers.associate.Slime.layers.SurvivalItemLayer;
 
 import java.io.BufferedReader;
@@ -76,6 +77,7 @@ public class GameInformation {
 	public void unlockDifficulty(int levelDifficulty) {
 		if (levelDifficulty > this.maxLevelDifficulty) {
 			this.maxLevelDifficulty = levelDifficulty;
+			AchievementStatistics.unlockDifficulty = this.maxLevelDifficulty;
 			this.store();
 		}
 	}
@@ -84,6 +86,7 @@ public class GameInformation {
 		int nextDiff = LevelDifficulty.getNextDifficulty(this.levelDifficulty);
 		if (nextDiff > this.maxLevelDifficulty) {
 			this.maxLevelDifficulty = nextDiff;
+			AchievementStatistics.unlockDifficulty = this.maxLevelDifficulty;
 			this.newUnlockSurvival = true;
 			this.newUnlockedDifficulty = this.maxLevelDifficulty;
 			this.store();
@@ -100,11 +103,12 @@ public class GameInformation {
 		return this.newUnlockedDifficulty;
 	}
 	
-	private void setLevelDifficulty(int leveldifficulty) {		
+	private void setLevelDifficulty(int leveldifficulty) {
+		AchievementStatistics.levelDiff = leveldifficulty;
 		this.lastScore = 0;
 		this.lastIsHighScore = false;
 		this.previousDifficulty = this.levelDifficulty;
-		this.levelDifficulty = leveldifficulty;
+//		this.levelDifficulty = leveldifficulty;
 		this.totalCurrent = 0;
 //		this.setTotalScore(0);
 		if (this.levelDifficulty > this.maxLevelDifficulty) {
@@ -454,6 +458,7 @@ public class GameInformation {
 	
 	private void setLevelNum(int levelNum) {
 		this.levelNum = levelNum;
+		AchievementStatistics.levelNum = levelNum;
 		this.setLastBkg("");
 	}
 
@@ -580,7 +585,7 @@ public class GameInformation {
 	}
 	public void setInARow() {
 		int score = this.levelNum;
-		this.setInARow(score);
+		this.setInARow(score); 
 	}
 	
 	private void setInARow(int score) {		
@@ -608,6 +613,7 @@ public class GameInformation {
 			break;
 		}
 		
+		AchievementStatistics.inARow = score;
 		this.store();
 	}
 	

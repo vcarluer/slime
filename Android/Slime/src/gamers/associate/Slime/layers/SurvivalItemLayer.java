@@ -6,6 +6,7 @@ import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.Vibe;
+import gamers.associate.Slime.game.achievements.AchievementStatistics;
 import gamers.associate.Slime.items.custom.Star;
 import gamers.associate.Slime.levels.GamePlay;
 
@@ -154,7 +155,7 @@ public class SurvivalItemLayer extends CanvasItemLayer {
 		} else {
 			SlimeFactory.GameInfo.setDifficulty(this.levelDiff);
 		}
-		
+		 
 		Level level = Level.get(LevelBuilderGenerator.defaultId, true, GamePlay.Survival);
 		
 		CCFadeTransition transition = CCFadeTransition.transition(0.5f, level.getScene());
