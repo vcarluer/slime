@@ -19,6 +19,7 @@ import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.transitions.CCFadeTransition;
+import org.cocos2d.transitions.CCTransitionScene;
 
 public class AchievementsLayer extends CCLayer  implements IScrollable {
 	private static final float fontSize = 60;
@@ -41,7 +42,7 @@ public class AchievementsLayer extends CCLayer  implements IScrollable {
 		this.achNode = CCNode.node();
 		this.addChild(this.achNode);
 		HomeLayer.addBkgSplash(this);
-		this.addChild(HomeLayer.getHomeMenuButton(this, "goHome"), Level.zTop);
+		this.addChild(HomeLayer.getBackButton(this, "goBack"), Level.zTop);
 		
 		this.title = SlimeFactory.getLabel("Achievements", fontSize);
 		this.title.setPosition(CCDirector.sharedDirector().winSize().getWidth() / 2, CCDirector.sharedDirector().winSize().getHeight() - PauseLayer.PaddingY - fontSize / 2f);
@@ -57,10 +58,9 @@ public class AchievementsLayer extends CCLayer  implements IScrollable {
 		this.addChild(this.scroller, Level.zTop);
 	}
 	
-	public void goHome(Object sender) {
+	public void goBack(Object sender) {
 		Sounds.playEffect(R.raw.menuselect);
-		Level currentLevel = Level.get(LevelHome.Id, true, GamePlay.None);
-		CCFadeTransition transition = CCFadeTransition.transition(0.5f, currentLevel.getScene());
+		CCTransitionScene transition = CCFadeTransition.transition(1.0f, ChooseModeLayer.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
 	}
 

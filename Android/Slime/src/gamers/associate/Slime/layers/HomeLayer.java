@@ -79,20 +79,6 @@ public class HomeLayer extends CCLayer {
 				));			
 				
 		this.addChild(this.menu);
-		
-		float scaleX = 1.0f;
-		CCSprite achSprNorm = CCSprite.sprite("control-stop.png", true);
-		achSprNorm.setScaleX(scaleX);
-		CCSprite achSprSel = CCSprite.sprite("control-stop.png", true);
-		achSprSel.setScaleX(scaleX);
-		CCMenuItemSprite achMenu = CCMenuItemSprite.item(achSprNorm, achSprSel, this, "selectAchievements");
-		this.achievementMenu = CCMenu.menu(achMenu);
-		
-		float achX = CCDirector.sharedDirector().winSize().getWidth() - (achSprNorm.getContentSize().width * scaleX) / 2f - PauseLayer.PaddingX;
-		float scaleY = 1.0f;
-		float achY = CCDirector.sharedDirector().winSize().getHeight() - PauseLayer.PaddingY * SlimeFactory.SGSDensity - (achSprNorm.getContentSize().height * scaleY) / 2f;
-		this.achievementMenu.setPosition(achX, achY);
-		this.addChild(this.achievementMenu);
 	}
 
 	@Override
@@ -269,11 +255,5 @@ public class HomeLayer extends CCLayer {
 		shareItem.runAction(rep);
 		
 		return CCMenu.menu(shareItem);
-	}
-	
-	public void selectAchievements(Object sender) {
-		Sounds.playEffect(R.raw.menuselect);
-		CCFadeTransition transition = CCFadeTransition.transition(0.5f, AchievementsLayer.getScene());
-		CCDirector.sharedDirector().replaceScene(transition);
 	}
 }

@@ -356,4 +356,12 @@ public abstract class SlimeFactory {
 		CCSequence seq = CCSequence.actions(delay, moveTo);
 		layer.runAction(seq);
 	}
+	
+	public static void moveToBottom(float delayTime, CCLayer layer, float height) {
+		layer.setPosition(layer.getPosition().x, - height);
+		CCDelayTime delay = CCDelayTime.action(0.4f + delayTime);
+		CCMoveTo moveTo = CCMoveTo.action(0.5f, CGPoint.make(layer.getPosition().x, height));
+		CCSequence seq = CCSequence.actions(delay, moveTo);
+		layer.runAction(seq);
+	}
 }

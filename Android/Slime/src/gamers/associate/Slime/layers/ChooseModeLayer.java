@@ -1,32 +1,26 @@
 package gamers.associate.Slime.layers;
 
-import android.annotation.SuppressLint;
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
-import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelHome;
 
-import org.cocos2d.actions.interval.CCDelayTime;
-import org.cocos2d.actions.interval.CCMoveTo;
-import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
-import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItemLabel;
 import org.cocos2d.nodes.CCDirector;
-import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.transitions.CCFadeTransition;
-import org.cocos2d.types.CGPoint;
+
+import android.annotation.SuppressLint;
 
 @SuppressLint("DefaultLocale") 
 public class ChooseModeLayer extends CCLayer {
 	private static CCScene scene;
 	private CCMenuItemLabel storyLabel;
 	private CCMenuItemLabel survivalLabel;
-	private CCMenu menu;
+	private AchievementItemLayer achievementItem;
 	
 	private static float padding = 50f;
 	
@@ -45,11 +39,11 @@ public class ChooseModeLayer extends CCLayer {
 	public ChooseModeLayer() {
 		HomeLayer.addBkgSplash(this);
 		this.story = new StoryModeItemLayer();
-		
 		this.addChild(this.story);
 		this.survival = new SurvivalModeItemLayer();
-		
 		this.addChild(this.survival);
+		this.achievementItem = new AchievementItemLayer();
+		this.addChild(this.achievementItem);
 		
 		this.addChild(HomeLayer.getHomeMenuButton(this, "goHome"));
 	}
