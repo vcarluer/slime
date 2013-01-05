@@ -46,7 +46,7 @@ public class AchievementItemLayer extends CCLayer {
 	
 	@Override
 	public void onEnter() {
-		SlimeFactory.moveToBottom(0.6f, this, targetHeight);
+		SlimeFactory.moveToZeroFromBottom(0.6f, this, targetHeight);
 		super.onEnter();
 	}
 
