@@ -16,10 +16,12 @@ import org.cocos2d.layers.CCColorLayer;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
+import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.CGPoint;
 
 public class MessageLayer extends CCLayer {
 	private static final float heightRatio = 1 / 5f;
+	private static final float paddingX = 10;
 	private CCLabel message;
 	private CGPoint hidePos;
 	private float width;
@@ -28,6 +30,9 @@ public class MessageLayer extends CCLayer {
 	private static MessageLayer layer;
 	private Queue<MessageInfo> messages;
 	private boolean isShowing;
+	private CCSprite icon;
+	private float iconWidth;
+	private static float fntSize = 42;
 	
 	public static MessageLayer get() {
 		if (layer == null) {
@@ -43,8 +48,16 @@ public class MessageLayer extends CCLayer {
 		this.height = this.width * heightRatio;
 		CCColorLayer colored = CCColorLayer.node(SlimeFactory.getColorLight(230),this.width, this.height);
 		this.addChild(colored, Level.zUnder);
-		this.message = SlimeFactory.getLabel(" ");
-		this.message.setPosition(this.width / 2f, this.height / 2f);
+		
+		this.icon = CCSprite.sprite("world-items/star-lock.png");
+		float iconScale = this.height / this.icon.getContentSize().height;
+		this.icon.setScale(iconScale);
+		this.iconWidth = this.icon.getContentSize().width * iconScale;
+		this.icon.setPosition(this.iconWidth / 2f + paddingX, this.height / 2f);
+		this.addChild(this.icon);
+		
+		this.message = SlimeFactory.getLabel(" ", fntSize);
+		this.message.setPosition(iconWidth + paddingX * 2, this.height / 2f);
 		this.message.setColor(SlimeFactory.ColorSlime);
 		this.addChild(this.message);
 		
@@ -64,6 +77,7 @@ public class MessageLayer extends CCLayer {
 			MessageInfo info = this.messages.poll();
 			this.isShowing = true;
 			this.message.setString(info.getText().toUpperCase());
+			this.message.setPosition(this.iconWidth + this.message.getContentSize().width / 2f + paddingX * 2, this.height / 2f);
 			CCMoveTo moveTo = CCMoveTo.action(0.5f, this.hidePos);
 			CCDelayTime delay = CCDelayTime.action(5);
 			CCMoveTo moveBack = CCMoveTo.action(0.5f, basePos);

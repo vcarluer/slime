@@ -972,6 +972,7 @@ public class Level implements IGameItemHandler {
 			}						
 			
 			MessageLayer.get().show("Win!!!");
+			MessageLayer.get().show("Win again!!!");
 						
 			return true;
 		}
