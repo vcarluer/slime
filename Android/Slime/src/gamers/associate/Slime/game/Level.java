@@ -965,6 +965,7 @@ public class Level implements IGameItemHandler {
 			
 			if (this.getGamePlay().getType() == GamePlay.Survival && SlimeFactory.LevelBuilder.isBoss()) {
 				Level.currentLevel.getGamePlay().endMode();
+				AchievementStatistics.finishedDifficulty = SlimeFactory.GameInfo.getDifficulty();
 				SlimeFactory.GameInfo.unlockNextDifficulty();
 			}
 			

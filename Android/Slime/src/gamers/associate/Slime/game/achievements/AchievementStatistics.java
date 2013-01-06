@@ -10,6 +10,10 @@ public class AchievementStatistics {
 	public static int consecutiveWin;
 	public static boolean isBoss;
 	public static boolean isTuto;
+	public static int totalStar;
+	public static int neededBonus;
+	public static float startTime;
+	public static float leftTime;
 	
 	// reseted here
 	public static int landCount;
@@ -18,6 +22,15 @@ public class AchievementStatistics {
 	public static long shotTime;
 	public static int shotInAir;
 	public static int unlockDifficulty;
+	public static boolean enterCriticZone;
+	public static boolean exitCriticZone;
+	public static boolean electrified;
+	public static boolean dissolved;
+	public static boolean sliced;
+	public static boolean splashed;
+	public static boolean burned;
+	public static boolean isLanded;
+	public static int finishedDifficulty;
 	
 	public static void initAll() {
 		landCount = 0;
@@ -26,5 +39,14 @@ public class AchievementStatistics {
 		shotTime = 0;
 		shotInAir = 0;
 		unlockDifficulty = 0;
+		enterCriticZone = false;
+		exitCriticZone = false;
+		electrified = false;
+		dissolved = false;
+		sliced = false;
+		splashed = false;
+		burned = false;
+		isLanded = false;
+		finishedDifficulty = 0;
 	}
 }

@@ -1,5 +1,6 @@
 package gamers.associate.Slime.game;
 
+import gamers.associate.Slime.game.achievements.AchievementStatistics;
 import gamers.associate.Slime.levels.ILevelBuilder;
 import gamers.associate.Slime.levels.LevelDefinition;
 import gamers.associate.Slime.levels.generator.LevelGraphGeneratorTutorial;
@@ -19,10 +20,12 @@ public abstract class AbstractLevelBuilder implements ILevelBuilder {
 
 	public void addStar() {
 		this.totalStar++;
+		AchievementStatistics.totalStar = this.totalStar;
 	}
 
 	public void resetTotalStar() {
 		this.totalStar = 0;
+		AchievementStatistics.totalStar = this.totalStar;
 	}
 
 	public boolean isBoss() {

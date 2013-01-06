@@ -8,6 +8,7 @@ import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.game.achievements.AchievementStatistics;
+import gamers.associate.Slime.game.achievements.CallMeMax;
 import gamers.associate.Slime.game.achievements.CarabinAch;
 import gamers.associate.Slime.game.achievements.SupermanAch;
 import gamers.associate.Slime.items.base.GameItemCocos;
@@ -339,8 +340,10 @@ public class SlimyJump extends Slimy implements ISelectable {
 				if(this.numberOfJump==5){
 					this.numberOfJump = 0;
 				}
-
+				
+				SlimeFactory.AchievementManager.test(CallMeMax.class);
 				this.isLanded = false;
+				AchievementStatistics.isLanded = false;
 				this.stickHandled = false;
 				if (this.currentJoint != null) {
 					this.world.destroyJoint(this.currentJoint);
@@ -480,6 +483,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 		
 		if (this.isLanded && !contact.getContactWith().isIsAllSensor() && !this.isDead && !this.isDying) {
 			AchievementStatistics.landCount++;
+			AchievementStatistics.isLanded = true;
 			AchievementStatistics.shotInAir = 0;
 		}
 		

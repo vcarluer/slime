@@ -214,6 +214,7 @@ public class Slimy extends GameItemPhysic implements IBurnable, IDissolvable, IE
 	
 	public void burn() {
 		if (!this.isDead && !this.isDying) {
+			AchievementStatistics.burned = true;
 			if (this.currentAction != null) {				
 				this.sprite.stopAction(this.currentAction);				
 			}
@@ -241,18 +242,22 @@ public class Slimy extends GameItemPhysic implements IBurnable, IDissolvable, IE
 	}
 	
 	public void splash() {
+		AchievementStatistics.splashed = true;
 		this.killInAction(Anim_Splash);			
 	}
 	
 	public void slice() {
+		AchievementStatistics.sliced = true;
 		this.killInAction(Anim_Sliced);
 	}
 	
 	public void electrify() {
+		AchievementStatistics.electrified = true;
 		this.killInAction(Anim_Electrified);
 	}
 	
 	public void dissolve() {
+		AchievementStatistics.dissolved = true;
 		this.killInAction(Anim_Dissolve);
 	}
 	

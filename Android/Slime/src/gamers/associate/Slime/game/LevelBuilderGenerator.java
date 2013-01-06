@@ -69,6 +69,8 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 			} else {
 				this.levelDef.buildLevel(level);
 			}
+			
+			AchievementStatistics.neededBonus = Level.currentLevel.getGamePlay().neededBonus();
 									
 			level.setTitle(TitleGenerator.generateNewTitle());
 			this.levelDef.resetAndSave();
@@ -144,6 +146,8 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 					parser.storeLevel(level);
 				}
 			}
+			
+			AchievementStatistics.neededBonus = Level.currentLevel.getGamePlay().neededBonus();
 		}	
 	}
 	

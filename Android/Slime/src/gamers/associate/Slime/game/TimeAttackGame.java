@@ -113,16 +113,20 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 				this.lose();
 			}
 			
+			AchievementStatistics.leftTime = this.leftTime;
+			
 			if (!this.isGameOver) {				
 				
 				if (!this.isCritic) {
 					if (this.leftTime <= this.criticTime) {						
 						this.isCritic = true;
 						this.localRender = stepCritic;
+						AchievementStatistics.enterCriticZone = true;
 					}
 				}
 				else {
-					if (this.leftTime > this.criticTime) {						
+					if (this.leftTime > this.criticTime) {
+						AchievementStatistics.exitCriticZone = true;
 						this.isCritic = false;
 						CCBitmapFontAtlas label = this.level.getHudLabel();
 						label.setColor(SlimeFactory.ColorSlime);
@@ -279,10 +283,14 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	
 	public void setStartTime(int startTime) {
 		this.startTime = (float) startTime;
+		AchievementStatistics.startTime = this.startTime;
+		AchievementStatistics.leftTime = this.startTime;
 	}
 	
 	public void setStartTime(float startTime) {
 		this.startTime = startTime;
+		AchievementStatistics.startTime = this.startTime;
+		AchievementStatistics.leftTime = this.startTime;
 	}
 	
 	public float getStartTime() {

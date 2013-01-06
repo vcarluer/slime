@@ -23,6 +23,11 @@ public class AchievementManager {
 		this.add(new SupermanAch());
 		this.add(new RobinHoodAch());
 		this.add(new CarabinAch());
+		this.add(new GreenArrowAch());
+		this.add(new DefuserAch());
+		this.add(new FlameOnAch());
+		this.add(new CallMeMax());
+		this.add(new LiveLong());
 	}
 
 	@SuppressWarnings("rawtypes")
