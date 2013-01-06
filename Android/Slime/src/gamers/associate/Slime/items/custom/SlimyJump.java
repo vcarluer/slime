@@ -8,6 +8,7 @@ import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.game.achievements.AchievementStatistics;
+import gamers.associate.Slime.game.achievements.CarabinAch;
 import gamers.associate.Slime.game.achievements.SupermanAch;
 import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.GameItemPhysic;
@@ -326,6 +327,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 				Vector2 pos = this.getBody().getPosition();
 				this.getBody().applyLinearImpulse(this.worldImpulse, pos);
 				AchievementStatistics.shotCount++;
+				SlimeFactory.AchievementManager.test(CarabinAch.class);
 				SlimeFactory.AchievementManager.test(SupermanAch.class);
 				long shotTime = System.currentTimeMillis() - this.selectStartTime;
 				AchievementStatistics.shotTime = shotTime;

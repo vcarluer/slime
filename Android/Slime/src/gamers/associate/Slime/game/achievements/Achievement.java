@@ -26,6 +26,9 @@ public abstract class Achievement {
 		this.setEndLevel(endLevel);
 		
 		this.load();
+		if (SlimeFactory.resetAchievements) {
+			this.store();
+		}
 	}
 
 	public String getName() {

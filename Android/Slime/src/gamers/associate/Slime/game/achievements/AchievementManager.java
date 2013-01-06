@@ -22,6 +22,7 @@ public class AchievementManager {
 		this.add(new LikeABirdAch());
 		this.add(new SupermanAch());
 		this.add(new RobinHoodAch());
+		this.add(new CarabinAch());
 	}
 
 	@SuppressWarnings("rawtypes")
