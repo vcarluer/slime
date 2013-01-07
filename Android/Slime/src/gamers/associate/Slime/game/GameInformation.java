@@ -77,12 +77,12 @@ public class GameInformation {
 	public void unlockDifficulty(int levelDifficulty) {
 		if (levelDifficulty > this.maxLevelDifficulty) {
 			this.maxLevelDifficulty = levelDifficulty;
-			AchievementStatistics.unlockDifficulty = this.maxLevelDifficulty;
+			AchievementStatistics.unlockDifficulty = this.maxLevelDifficulty;			
 			this.store();
 		}
 	}
 	
-	public void unlockNextDifficulty() {
+	public void unlockNextDifficultySurvival() {
 		int nextDiff = LevelDifficulty.getNextDifficulty(this.levelDifficulty);
 		if (nextDiff > this.maxLevelDifficulty) {
 			this.maxLevelDifficulty = nextDiff;
@@ -108,11 +108,12 @@ public class GameInformation {
 		this.lastScore = 0;
 		this.lastIsHighScore = false;
 		this.previousDifficulty = this.levelDifficulty;
-//		this.levelDifficulty = leveldifficulty;
+		this.levelDifficulty = leveldifficulty;
 		this.totalCurrent = 0;
 //		this.setTotalScore(0);
 		if (this.levelDifficulty > this.maxLevelDifficulty) {
 			this.maxLevelDifficulty = this.levelDifficulty;
+			AchievementStatistics.unlockDifficulty = this.maxLevelDifficulty;
 		}
 	}
 	

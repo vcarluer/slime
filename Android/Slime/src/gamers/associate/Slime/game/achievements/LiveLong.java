@@ -13,7 +13,7 @@ public class LiveLong extends Achievement {
 
 	@Override
 	protected boolean testInternal() {
-		return AchievementStatistics.isModeSurvival && AchievementStatistics.finishedDifficulty == LevelDifficulty.Easy;
+		return AchievementStatistics.isModeSurvival && AchievementStatistics.finishedSurvivalDifficulty == LevelDifficulty.Easy;
 	}
 
 }

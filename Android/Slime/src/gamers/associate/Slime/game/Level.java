@@ -950,29 +950,31 @@ public class Level implements IGameItemHandler {
 					this.levelDefinition.upgradeRank(TimeAttackGame.getRank(this.getGamePlay().bonusCount(), SlimeFactory.LevelBuilder.getTotalStar()));					
 					
 					LevelDefinition next = SlimeFactory.LevelBuilder.getNext(this.levelDefinition);
+					int diff = next.getWorld().getDifficulty(next.getNumber());
+					SlimeFactory.GameInfo.unlockDifficulty(diff);
 					if (next != null) {
 						next.setUnlock(true);
 						next.handlePersistancy();
 					}					
 				} else {
 					SlimeFactory.GameInfo.addLevelScore(this.lastScore);
+					if (SlimeFactory.LevelBuilder.isBoss()) {
+						AchievementStatistics.finishedSurvivalDifficulty = SlimeFactory.GameInfo.getDifficulty();
+						SlimeFactory.GameInfo.unlockNextDifficultySurvival();
+					}
+					
 					SlimeFactory.GameInfo.setInARow();
 					SlimeFactory.GameInfo.levelUp();
 				}
 				
 				this.levelDefinition.handlePersistancy();
-			}						
-			
-			if (this.getGamePlay().getType() == GamePlay.Survival && SlimeFactory.LevelBuilder.isBoss()) {
-				Level.currentLevel.getGamePlay().endMode();
-				AchievementStatistics.finishedDifficulty = SlimeFactory.GameInfo.getDifficulty();
-				SlimeFactory.GameInfo.unlockNextDifficulty();
 			}
 			
 			if (showEndLevel) {
 				this.showEndLevel();
 			}						
 			
+			Level.currentLevel.getGamePlay().endMode();
 			AchievementStatistics.winLeftTime = this.getGamePlay().getLeftTime();
 			AchievementStatistics.consecutiveWin++;
 			SlimeFactory.AchievementManager.handleEndLevelAchievements();

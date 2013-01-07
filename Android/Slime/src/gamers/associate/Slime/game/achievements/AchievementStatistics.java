@@ -30,7 +30,7 @@ public class AchievementStatistics {
 	public static boolean splashed;
 	public static boolean burned;
 	public static boolean isLanded;
-	public static int finishedDifficulty;
+	public static int finishedSurvivalDifficulty;
 	
 	public static void initAll() {
 		landCount = 0;
@@ -47,6 +47,6 @@ public class AchievementStatistics {
 		splashed = false;
 		burned = false;
 		isLanded = false;
-		finishedDifficulty = 0;
+		finishedSurvivalDifficulty = 0;
 	}
 }
