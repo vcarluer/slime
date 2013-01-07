@@ -15,7 +15,7 @@ import android.util.FloatMath;
 
 public class StoryModeItemLayer extends ModeItemLayer {
 	private static final String STORY = "Story";
-	private static final String WORLD_ITEMS_BTN_HARD_PNG = "world-items/btn-hard.png";
+	private static final String WORLD_ITEMS_BTN_HARD_PNG = "world-items/button-story.png";
 	private static float shiftScore = - 75f;
 	
 	private CCLabel lblScore;

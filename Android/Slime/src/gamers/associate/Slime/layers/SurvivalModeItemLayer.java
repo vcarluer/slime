@@ -13,7 +13,7 @@ import org.cocos2d.types.CGPoint;
 
 public class SurvivalModeItemLayer extends ModeItemLayer {
 	private static final String SURVIVAL = "Survival";
-	private static final String WORLD_ITEMS_BTN_EXTREME_PNG = "world-items/btn-extreme.png";
+	private static final String WORLD_ITEMS_BTN_EXTREME_PNG = "world-items/button-survival.png";
 	private CCLabel lblScore;
 	private CCSprite starSprite;
 	private static float shiftScore = - 75f; // shiftInfo - 70f;	

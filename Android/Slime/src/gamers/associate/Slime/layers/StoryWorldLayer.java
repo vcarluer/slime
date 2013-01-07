@@ -159,8 +159,8 @@ public class StoryWorldLayer extends CCLayer implements IScrollable {
 		WorldPackage world = SlimeFactory.PackageManager.getPackage(page);
 		SlimeFactory.PackageManager.setCurrentPackage(world);
 		
-		int w = 480;
-		int h = 360;
+		int w = 800;
+		int h = 600;
 		String spritePath = world.getBackgroundPath();
 		this.bkg = HomeLayer.addBkg(this, w, h, spritePath);
 		boolean hasLeft = false;
