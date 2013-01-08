@@ -103,6 +103,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 		super(x, y, width, height, world, worldRatio);
 		
 		this.jumpLength = CGPoint.getZero();
+		this.jumpPosition = CGPoint.getZero();
 		this.powa = Default_Powa;
 		this.target = CGPoint.getZero();
 		this.targetImpulse = new Vector2();
