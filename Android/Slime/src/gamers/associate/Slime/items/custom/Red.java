@@ -324,6 +324,9 @@ public class Red extends GameItemPhysic implements ISelectable, IDissolvable {
 		this.deadAnim();
 		this.swithBodyCategory();
 		Level.currentLevel.getGamePlay().setNewBonus();
+		if (this.isBoss) {
+			AchievementStatistics.bossKilled = true;
+		}
 	}
 	
 	private void deadAnim() {		

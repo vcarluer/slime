@@ -33,6 +33,8 @@ import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 import org.cocos2d.types.ccColor4F;
 
+import android.util.FloatMath;
+
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Joint;
 import com.badlogic.gdx.physics.box2d.World;
@@ -91,12 +93,16 @@ public class SlimyJump extends Slimy implements ISelectable {
 	private int numberOfJump = 0;
 	private int jumpSound[] = {R.raw.slimyjumpa, R.raw.slimyjumpb, R.raw.slimyjumpc , R.raw.slimyjumpd, R.raw.slimyjumpe};
 	private long selectStartTime;
+	private long jumpStartTime;
+	private CGPoint jumpPosition;
+	private CGPoint jumpLength;
 	
 	
 	public SlimyJump(float x, float y, float width, float height, World world,
 			float worldRatio) {
 		super(x, y, width, height, world, worldRatio);
 		
+		this.jumpLength = CGPoint.getZero();
 		this.powa = Default_Powa;
 		this.target = CGPoint.getZero();
 		this.targetImpulse = new Vector2();
@@ -330,11 +336,15 @@ public class SlimyJump extends Slimy implements ISelectable {
 				AchievementStatistics.shotCount++;
 				SlimeFactory.AchievementManager.test(CarabinAch.class);
 				SlimeFactory.AchievementManager.test(SupermanAch.class);
-				long shotTime = System.currentTimeMillis() - this.selectStartTime;
-				AchievementStatistics.shotTime = shotTime;
+				AchievementStatistics.shotTime = System.currentTimeMillis();
+				long shotSpeed = AchievementStatistics.shotTime - this.selectStartTime;
+				AchievementStatistics.shotSpeed = shotSpeed;
 				if (!this.isLanded) {
 					AchievementStatistics.shotInAir++;
 				}
+				
+				this.jumpStartTime = System.currentTimeMillis();
+				this.jumpPosition = this.getPosition();
 				Sounds.playEffect(this.jumpSound[numberOfJump]);
 				this.numberOfJump++;
 				if(this.numberOfJump==5){
@@ -369,6 +379,11 @@ public class SlimyJump extends Slimy implements ISelectable {
 	@Override
 	public void render(float delta) {
 		super.render(delta);
+		if (this.getBody() != null) {
+			AchievementStatistics.currentSpeed = (this.getBody().getLinearVelocity().len() * Level.currentLevel.getWorlRatio()) / delta;
+			AchievementStatistics.currentRotation = ccMacros.CC_RADIANS_TO_DEGREES(this.getBody().getAngularVelocity()) / delta;
+		}
+		
 		if (this.isSelected()) {			
 			/*this.auraPosition.x = this.getPosition().x;
 			this.auraPosition.y = this.getPosition().y - this.height / 2;
@@ -485,6 +500,21 @@ public class SlimyJump extends Slimy implements ISelectable {
 			AchievementStatistics.landCount++;
 			AchievementStatistics.isLanded = true;
 			AchievementStatistics.shotInAir = 0;
+			long jumpLong = System.currentTimeMillis() - this.jumpStartTime;
+			if (jumpLong > 0) {
+				AchievementStatistics.jumpTime = jumpLong;
+			}
+			
+			if (this.jumpPosition.x != 0 && this.jumpPosition.y != 0) {
+				this.jumpLength.x = this.getPosition().x - this.jumpPosition.x;
+				this.jumpLength.y = this.getPosition().y - this.jumpPosition.y;
+				float dot = this.jumpLength.x * this.jumpLength.x + this.jumpLength.y * this.jumpLength.y;;
+				dot = FloatMath.sqrt(dot);
+				
+				AchievementStatistics.jumpDistance = dot;
+				this.jumpPosition.x = 0;
+				this.jumpPosition.y = 0;
+			}
 		}
 		
 		if (this.isLanded 

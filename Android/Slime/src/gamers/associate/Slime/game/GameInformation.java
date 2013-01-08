@@ -57,9 +57,7 @@ public class GameInformation {
 		this.maxLevelDifficulty = this.levelDifficulty = LevelDifficulty.Easy;		
 		this.setLevelNum(0);
 		this.load();
-		if (SlimeFactory.unlockAll) {
-			this.setStory1Finished(true);
-		}
+		
 		if (resetHighScores) {
 			this.totalScoreEasy = 0;
 			this.totalScoreNormal = 0;
@@ -76,6 +74,10 @@ public class GameInformation {
 			this.extremInARow = 0;
 			this.setStory1Finished(false);
 			this.store();
+		}
+		
+		if (SlimeFactory.unlockAll) {
+			this.setStory1Finished(true);
 		}
 	}
 	

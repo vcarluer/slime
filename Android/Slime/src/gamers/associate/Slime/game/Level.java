@@ -947,7 +947,9 @@ public class Level implements IGameItemHandler {
 			if (this.levelDefinition != null) {
 				this.levelDefinition.setLastScore(this.lastScore);
 				if (this.getGamePlay().getType() == GamePlay.TimeAttack) {					
-					this.levelDefinition.upgradeRank(TimeAttackGame.getRank(this.getGamePlay().bonusCount(), SlimeFactory.LevelBuilder.getTotalStar()));					
+					Rank rank = TimeAttackGame.getRank(this.getGamePlay().bonusCount(), SlimeFactory.LevelBuilder.getTotalStar());
+					AchievementStatistics.setLastRank(rank);
+					this.levelDefinition.upgradeRank(rank);					
 					
 					LevelDefinition next = SlimeFactory.LevelBuilder.getNext(this.levelDefinition);
 					int diff = next.getWorld().getDifficulty(next.getNumber());

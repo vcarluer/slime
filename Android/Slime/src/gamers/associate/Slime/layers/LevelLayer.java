@@ -4,6 +4,7 @@ import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.CameraManager;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
+import gamers.associate.Slime.game.achievements.AchievementStatistics;
 
 import java.util.ArrayList;
 
@@ -165,6 +166,7 @@ public class LevelLayer extends CCLayer {
 					this.isZoomAction = false;
 					this.lastDistance = 0f;
 					this.lastZoomDelta = 0f;
+					AchievementStatistics.zoomChanged = true;
 				}
 				
 				this.touchList.remove(touch);

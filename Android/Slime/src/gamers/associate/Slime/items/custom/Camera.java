@@ -203,9 +203,8 @@ public class Camera extends GameItemPhysic {
 			this.spoted = false;
 			for(Slimy check : Level.currentLevel.aliveList()) {				
 				if (check != null) {				
-					boolean spot = Util.inTriangle(this.getPosition(), v1, v2, check.getPosition());
-					if (spot && miniTimer == 0) {
-						this.spoted = spot;
+					this.spoted = Util.inTriangle(this.getPosition(), v1, v2, check.getPosition());
+					if (this.spoted && miniTimer == 0) {
 						//Sounds.playMusic(R.raw.bipcamera,true);
 						Sounds.playEffect(R.raw.bipcamera);
 						miniTimer++;

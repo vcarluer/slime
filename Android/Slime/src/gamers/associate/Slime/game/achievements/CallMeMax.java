@@ -11,7 +11,7 @@ public class CallMeMax extends Achievement {
 
 	@Override
 	protected boolean testInternal() {
-		return AchievementStatistics.shotTime >= 5000 && !AchievementStatistics.isLanded;
+		return AchievementStatistics.shotSpeed >= 5000 && !AchievementStatistics.isLanded;
 	}
 
 }

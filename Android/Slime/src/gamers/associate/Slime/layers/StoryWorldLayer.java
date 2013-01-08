@@ -237,7 +237,11 @@ public class StoryWorldLayer extends CCLayer implements IScrollable {
 				i++;
 			}
 			
-			this.levels.setPosition(PauseLayer.arrowWidth, currentLevel);
+			float start = currentLevel;
+			if (currentLevel > max) {
+				start = max;
+			}
+			this.levels.setPosition(PauseLayer.arrowWidth, start);
 			this.addChild(this.levels);
 		} else {
 			if (this.lockWorld != null) {
