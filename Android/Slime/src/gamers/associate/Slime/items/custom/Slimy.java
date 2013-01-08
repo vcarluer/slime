@@ -7,6 +7,7 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.achievements.AchievementStatistics;
+import gamers.associate.Slime.game.achievements.FlameOnAch;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.IBurnable;
 import gamers.associate.Slime.items.base.IDissolvable;
@@ -215,6 +216,8 @@ public class Slimy extends GameItemPhysic implements IBurnable, IDissolvable, IE
 	public void burn() {
 		if (!this.isDead && !this.isDying) {
 			AchievementStatistics.burned = true;
+			SlimeFactory.AchievementManager.test(FlameOnAch.class);
+			
 			if (this.currentAction != null) {				
 				this.sprite.stopAction(this.currentAction);				
 			}
