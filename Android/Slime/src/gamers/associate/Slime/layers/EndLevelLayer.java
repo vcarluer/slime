@@ -422,9 +422,17 @@ import android.view.MotionEvent;
 	public void onEnter() {
 		if (Level.currentLevel.getGamePlay() != null) {
 			if (Level.currentLevel.getGamePlay().getType() == GamePlay.Survival) {
+				if (SlimeFactory.LevelBuilder.isBoss() &&
+						SlimeFactory.GameInfo.getDifficulty() != LevelDifficulty.Extrem) {
+					this.homeMenu.setIsEnabled(false);
+					this.homeMenu.setVisible(false);
+				}
+				
 				this.restartMenu.setIsEnabled(false);
 				this.restartMenu.setVisible(false);
 			} else {
+				this.homeMenu.setIsEnabled(true);
+				this.homeMenu.setVisible(true);
 				this.restartMenu.setIsEnabled(true);
 				this.restartMenu.setVisible(true);
 			}

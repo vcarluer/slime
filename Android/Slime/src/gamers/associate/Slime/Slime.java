@@ -12,11 +12,13 @@ import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.opengl.CCGLSurfaceView;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.AudioManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -208,6 +210,7 @@ public class Slime extends Activity {
     
     @Override
     public void onStart() {
+    	this.hideButtons();
         super.onStart(); 
     }
 
@@ -230,7 +233,8 @@ public class Slime extends Activity {
     public void onResume() {
         super.onResume();
 
-        CCDirector.sharedDirector().onResume();        
+        CCDirector.sharedDirector().onResume();  
+        this.hideButtons();
         
         if (this.startLevel) {
         	this.startLevel = false;
@@ -343,5 +347,11 @@ public class Slime extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		this.startLevel = true;					
+	}
+	
+	@SuppressLint("NewApi") private void hideButtons() {
+		if (Build.VERSION.SDK_INT >= 14) {
+			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
+		}
 	}
 }

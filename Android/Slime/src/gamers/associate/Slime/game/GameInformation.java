@@ -46,6 +46,7 @@ public class GameInformation {
 	private int hardInARow;
 	private int extremInARow;
 	private SurvivalItemLayer currentSurvival;
+	private boolean story1Finished; // Bad place but quick
 	
 	public GameInformation() {		
 		this.survivalGameOverEasy = true;
@@ -56,6 +57,9 @@ public class GameInformation {
 		this.maxLevelDifficulty = this.levelDifficulty = LevelDifficulty.Easy;		
 		this.setLevelNum(0);
 		this.load();
+		if (SlimeFactory.unlockAll) {
+			this.setStory1Finished(true);
+		}
 		if (resetHighScores) {
 			this.totalScoreEasy = 0;
 			this.totalScoreNormal = 0;
@@ -70,6 +74,7 @@ public class GameInformation {
 			this.normalInARow = 0;
 			this.hardInARow = 0;
 			this.extremInARow = 0;
+			this.setStory1Finished(false);
 			this.store();
 		}
 	}
@@ -259,6 +264,8 @@ public class GameInformation {
 			buffWriter.write(String.valueOf(this.hardInARow));
 			buffWriter.newLine();
 			buffWriter.write(String.valueOf(this.extremInARow));
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.isStory1Finished()));
 		} catch (FileNotFoundException ex) {
 			SlimeFactory.Log.e(Slime.TAG, "ERROR, file not found " + fileName);
 			ex.printStackTrace();
@@ -355,6 +362,9 @@ public class GameInformation {
 								break;
 							case 20:
 								this.extremInARow = Integer.valueOf(line).intValue();
+								break;
+							case 21:
+								this.setStory1Finished(Boolean.valueOf(line).booleanValue());
 								break;
 							default:
 								break;
@@ -638,5 +648,14 @@ public class GameInformation {
 
 	public void setCurrentSurvival(SurvivalItemLayer currentSurvival) {
 		this.currentSurvival = currentSurvival;
+	}
+
+	public boolean isStory1Finished() {
+		return story1Finished;
+	}
+
+	public void setStory1Finished(boolean story1Finished) {
+		this.story1Finished = story1Finished;
+		this.store();
 	}
 }

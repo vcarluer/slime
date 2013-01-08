@@ -955,12 +955,17 @@ public class Level implements IGameItemHandler {
 					if (next != null) {
 						next.setUnlock(true);
 						next.handlePersistancy();
-					}					
+					}
+					
+					if (this.levelDefinition.isBoss()) {
+						SlimeFactory.GameInfo.setStory1Finished(true);
+					}
 				} else {
 					SlimeFactory.GameInfo.addLevelScore(this.lastScore);
 					if (SlimeFactory.LevelBuilder.isBoss()) {
 						AchievementStatistics.finishedSurvivalDifficulty = SlimeFactory.GameInfo.getDifficulty();
 						SlimeFactory.GameInfo.unlockNextDifficultySurvival();
+						SlimeFactory.GameInfo.setSurvivalGameOver(true);
 					}
 					
 					SlimeFactory.GameInfo.setInARow();
@@ -1065,7 +1070,6 @@ public class Level implements IGameItemHandler {
 			
 			if (this.levelDefinition != null) {				
 				this.endLevelLayer.setNextEnabled(this.levelDefinition.getMaxScore() > 0);
-				this.endLevelLayer.setHomeEnabled(true);
 			}
 			
 			this.setIsHudEnabled(false);

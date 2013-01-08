@@ -42,7 +42,11 @@ public class StoryModeItemLayer extends ModeItemLayer {
 		}
 		
 		if (size > 0) {
-			totalAd = (int) FloatMath.floor(totalAd / (float)size);
+			totalAd = (int) FloatMath.floor(totalAd / (float)size) - 1;
+			// hack
+			if (SlimeFactory.GameInfo.isStory1Finished()) {
+				totalAd++;
+			}
 		}
 		
 		if (totalAd > 0) {

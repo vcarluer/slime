@@ -65,9 +65,14 @@ public class MessageLayer extends CCLayer {
 		this.message.setColor(SlimeFactory.ColorSlime);
 		this.addChild(this.message);
 		
-		this.basePos = CGPoint.make(- this.width, CCDirector.sharedDirector().winSize().getHeight() - ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY));
-		this.hidePos = CGPoint.make(0, CCDirector.sharedDirector().winSize().getHeight() - ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY));
-		this.setPosition(basePos);
+		float messageWidth = this.messageWidthSizeBase;
+		this.width = messageWidth + this.messageX;
+		
+		float yPos = 
+				CCDirector.sharedDirector().winSize().getHeight() - ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY) - this.height - PauseLayer.PaddingY;
+		this.basePos = CGPoint.make(0, yPos);
+		this.hidePos = CGPoint.make(-this.width, yPos);
+		this.setPosition(hidePos);
 	}
 	
 	public void show(String text) {
@@ -110,6 +115,12 @@ public class MessageLayer extends CCLayer {
 			CCSequence seq = CCSequence.actions(moveTo, delay, moveBack, call);
 			this.runAction(seq);
 		}
+	}
+	
+	@Override
+	public void onExit() {
+		this.setPosition(this.hidePos);
+		super.onExit();
 	}
 	
 	public void endShow() {

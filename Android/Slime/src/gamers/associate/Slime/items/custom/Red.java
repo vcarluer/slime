@@ -34,6 +34,7 @@ import com.badlogic.gdx.physics.box2d.World;
 public class Red extends GameItemPhysic implements ISelectable {
 	public static final float Default_Width = 153;
 	public static final float Default_Height = 105f;
+	public static final int BossLife = 5;
 	
 	protected static float Default_Body_Width = 153f;
 	protected static float Default_Body_Height = 105f;
@@ -232,7 +233,8 @@ public class Red extends GameItemPhysic implements ISelectable {
 			switch (this.state) {			
 			case Attack:
 				if (this.isBoss()) {
-					slimy.splash();
+					// slimy.splash();
+					this.contact(slimy);
 				} else {
 					this.contact(slimy);
 				}
@@ -243,6 +245,8 @@ public class Red extends GameItemPhysic implements ISelectable {
 				break;
 			case PrepareAttack:
 				if (!this.isBoss()) {
+					this.contact(slimy);
+				} else {
 					this.contact(slimy);
 				}
 

@@ -32,7 +32,12 @@ public class RedDef extends ItemDefinition {
 	@Override
 	public void createItem(Level level) {
 		Red red = SlimeFactory.Red.createBL(this.getUName(), this.getX(), this.getY(), this.width, this.height, this.isBoss);
-		red.setLife(this.life);
+		if (this.isBoss) {
+			red.setLife(this.life);
+		} else {
+			red.setLife(Red.BossLife);
+		}
+		
 	}
 
 	@Override

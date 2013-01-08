@@ -63,7 +63,7 @@ public abstract class SlimeFactory {
 	public static boolean IsLevelSelectionOn = true;
 
 	public static boolean IsLevelDebugMode = false;
-	public static boolean IsForceDiffDebug =  false;
+	public static boolean IsForceDiffDebug =  true;
 	public static int ForceDiff = 1;
 	public static int ForceLevel = 10;
 	public static boolean IsDebugBlocOn = false;
@@ -72,10 +72,10 @@ public abstract class SlimeFactory {
 	public static final int MaxSurvival = LevelDifficulty.Hard;
 	public static final boolean IsForceMaxWorld = false;
 	public static final int MaxWorld = LevelDifficulty.Extrem;
-	public static final boolean resetHighScores = false; // Run with this = true and then relaunch with false
-	public static final boolean clearLevelInfo = false; // Run with this = true and then relaunch with false
+	public static final boolean resetHighScores = true; // Run with this = true and then relaunch with false
+	public static final boolean clearLevelInfo = true; // Run with this = true and then relaunch with false
 	public static final boolean unlockAll = false;
-	public static final boolean resetAchievements = false;
+	public static final boolean resetAchievements = true;
 	
 	// end debug ---
 	private static final float SGSDensityBase = 1.5f; // Samsung Galaxy S density

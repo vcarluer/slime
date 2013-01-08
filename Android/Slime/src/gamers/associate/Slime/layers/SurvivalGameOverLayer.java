@@ -5,6 +5,7 @@ import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.Sharer;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
+import gamers.associate.Slime.items.custom.MenuSprite;
 
 import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.layers.CCLayer;
@@ -53,10 +54,12 @@ public class SurvivalGameOverLayer extends CCLayer {
 		this.newUnlock.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + 45 * SlimeFactory.Density);
 		this.newUnlock.setColor(SlimeFactory.ColorSlimeLight);
 		
+		float left = - CCDirector.sharedDirector().winSize().getWidth() / 2 + ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) + ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) / 2 ;
+		float top = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY) / 2;
 		this.restartMenu = HomeLayer.getMenuButton(
 				"control-restart.png", 
-				0, 
-				50 * SlimeFactory.Density, 
+				left, 
+				top, 
 				this, 
 				"restart");
 		// this.restartMenu.setScale(2.0f);		
