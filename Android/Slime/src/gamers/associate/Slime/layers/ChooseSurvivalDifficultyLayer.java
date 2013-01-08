@@ -33,7 +33,11 @@ import org.cocos2d.types.ccColor3B;
 public class ChooseSurvivalDifficultyLayer extends CCLayer {
 	private static CCScene scene;
 	private CCLabel title;
-	private List<SurvivalItemLayer> items;	
+	private List<SurvivalItemLayer> items;
+	private SurvivalItemLayer easyItem;
+	private SurvivalItemLayer normalItem;
+	private SurvivalItemLayer hardItem;
+	private SurvivalItemLayer extremItem;	
 	
 	public static CCScene getScene() {
 		if (scene == null) {
@@ -44,22 +48,16 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 		return scene;
 	}
 	
-	public ChooseSurvivalDifficultyLayer() {
+	protected ChooseSurvivalDifficultyLayer() {
 		this.items = new ArrayList<SurvivalItemLayer>();
 		HomeLayer.addBkgChangeDiff(this);				
 		this.addChild(HomeLayer.getBackButton(this, "goBack"), Level.zTop);
 		this.title = SlimeFactory.getLabel("Survival");
 		this.title.setPosition(CCDirector.sharedDirector().winSize().getWidth() / 2, CCDirector.sharedDirector().winSize().getHeight() - PauseLayer.PaddingY - SlimeFactory.FntSize / 2f);
 		this.addChild(this.title, Level.zTop);
-
-		float width = CCDirector.sharedDirector().winSize().width;
-		this.addSurvivalItem("btn-easy", LevelDifficulty.Easy, 0, 0);
-		this.addSurvivalItem("btn-normal", LevelDifficulty.Normal, width / 4, 0);
-		this.addSurvivalItem("btn-hard", LevelDifficulty.Hard, width / 2, 0);
-		this.addSurvivalItem("btn-extreme", LevelDifficulty.Extrem, width * 3 / 4, 0);
 	}
 	
-	private void addSurvivalItem(String bkgBase, int diff, float x, float y) {
+	private SurvivalItemLayer addSurvivalItem(String bkgBase, int diff, float x, float y) {
 		float colorHeight = MenuSprite.Height * PauseLayer.Scale + PauseLayer.PaddingY;
 		CCColorLayer colorLayer = CCColorLayer.node(SlimeFactory.getColorLight(200), CCDirector.sharedDirector().winSize().width, colorHeight);
 		colorLayer.setPosition(0, CCDirector.sharedDirector().winSize().height - colorHeight);
@@ -71,10 +69,17 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 		
 		this.items.add(item);
 		this.addChild(item);
+		return item;
 	}
 	
 	@Override
-	public void onEnter() {						
+	public void onEnter() {	
+		float width = CCDirector.sharedDirector().winSize().width;
+		this.easyItem = this.addSurvivalItem("btn-easy", LevelDifficulty.Easy, 0, 0);
+		this.normalItem = this.addSurvivalItem("btn-normal", LevelDifficulty.Normal, width / 4, 0);
+		this.hardItem = this.addSurvivalItem("btn-hard", LevelDifficulty.Hard, width / 2, 0);
+		this.extremItem = this.addSurvivalItem("btn-extreme", LevelDifficulty.Extrem, width * 3 / 4, 0);
+		
 		SlimeFactory.ContextActivity.showAndNextAd();
 		float delayTime = 0f;
 		int i = 0;
@@ -93,6 +98,15 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 		super.onEnter();
 	}
 	
+	@Override
+	public void onExit() {
+		this.removeChild(this.easyItem, true);
+		this.removeChild(this.normalItem, true);
+		this.removeChild(this.hardItem, true);
+		this.removeChild(this.extremItem, true);
+		super.onExit();
+	}
+
 	public void goBack(Object sender) {
 		Sounds.playEffect(R.raw.menuselect);
 		CCTransitionScene transition = CCFadeTransition.transition(1.0f, ChooseModeLayer.getScene());

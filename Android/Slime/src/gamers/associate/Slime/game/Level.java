@@ -1069,7 +1069,7 @@ public class Level implements IGameItemHandler {
 			}
 			
 			if (this.levelDefinition != null) {				
-				this.endLevelLayer.setNextEnabled(this.levelDefinition.getMaxScore() > 0);
+				this.endLevelLayer.setNextEnabled(true);
 			}
 			
 			this.setIsHudEnabled(false);

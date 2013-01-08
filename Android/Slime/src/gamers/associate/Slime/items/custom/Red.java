@@ -6,6 +6,7 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.GameItemPhysic;
+import gamers.associate.Slime.items.base.IDissolvable;
 import gamers.associate.Slime.items.base.ISelectable;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
 import gamers.associate.Slime.items.base.SpriteType;
@@ -31,7 +32,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class Red extends GameItemPhysic implements ISelectable {
+public class Red extends GameItemPhysic implements ISelectable, IDissolvable {
 	public static final float Default_Width = 153;
 	public static final float Default_Height = 105f;
 	public static final int BossLife = 5;
@@ -283,7 +284,7 @@ public class Red extends GameItemPhysic implements ISelectable {
 		// Sounds.playEffect(R.raw.slimyland);
 	}
 
-	private void hit() {
+	public void hit() {
 		long hitTime = System.currentTimeMillis();
 		if ((hitTime - this.lastHitTime) / 1000 > minTimeBeforeHit) {
 			this.sprite.stopAction(this.currentAction);
@@ -323,7 +324,7 @@ public class Red extends GameItemPhysic implements ISelectable {
 		this.deadAnim();
 		this.swithBodyCategory();
 		Level.currentLevel.getGamePlay().setNewBonus();
-	}	
+	}
 	
 	private void deadAnim() {		
 		Slimy slimy = (Slimy) Level.currentLevel.getStartItem();
@@ -683,5 +684,10 @@ public class Red extends GameItemPhysic implements ISelectable {
 	@Override
 	public boolean isThumbnailActive() {
 		return this.isBoss;
+	}
+
+	@Override
+	public void dissolve() {
+		this.goToDeadState();
 	}
 }
