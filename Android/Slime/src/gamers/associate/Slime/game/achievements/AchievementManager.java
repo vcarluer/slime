@@ -40,10 +40,12 @@ public class AchievementManager {
 		this.orderedAchievements.add(achievement);
 	}
 	
-	public void handleEndLevelAchievements() {
+	public void handleEndLevelAchievements(boolean lose) {
 		for(Achievement ach : this.achievements.values()) {
-			   if (ach.isEndLevel()) {
-				ach.test();
+			if (ach.isLose() == lose) {
+				if (ach.isEndLevel()) {
+					ach.test();
+				}
 			}
 		}
 	}

@@ -19,6 +19,12 @@ public abstract class Achievement {
 	private String description;
 	private boolean achieved;
 	private boolean isEndLevel;
+	private boolean lose;
+	
+	public Achievement(String name, String description, boolean endLevel, boolean lose) {
+		this(name, description, endLevel);
+		this.setLose(lose);
+	}
 	
 	public Achievement(String name, String description, boolean endLevel) {
 		this.setName(name);
@@ -162,5 +168,13 @@ public abstract class Achievement {
 			SlimeFactory.Log.e(Slime.TAG, "ERROR during opening of " + fileName);
 			e1.printStackTrace();
 		}	
+	}
+
+	public boolean isLose() {
+		return lose;
+	}
+
+	public void setLose(boolean lose) {
+		this.lose = lose;
 	}
 }

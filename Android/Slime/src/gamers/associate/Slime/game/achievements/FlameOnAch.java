@@ -6,7 +6,7 @@ public class FlameOnAch extends Achievement {
 	private static final String description = "Die by fire";
 
 	public FlameOnAch() {
-		super(name, description, true);
+		super(name, description, true, true);
 	}
 
 	@Override

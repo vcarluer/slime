@@ -977,7 +977,7 @@ public class Level implements IGameItemHandler {
 			Level.currentLevel.getGamePlay().endMode();
 			AchievementStatistics.winLeftTime = this.getGamePlay().getLeftTime();
 			AchievementStatistics.consecutiveWin++;
-			SlimeFactory.AchievementManager.handleEndLevelAchievements();
+			SlimeFactory.AchievementManager.handleEndLevelAchievements(false);
 			return true;
 		}
 		
@@ -1004,6 +1004,7 @@ public class Level implements IGameItemHandler {
 				this.showEndLevel();
 			}						
 						
+			SlimeFactory.AchievementManager.handleEndLevelAchievements(true);
 			return true;
 		}
 		
