@@ -26,8 +26,9 @@ public class AchievementManager {
 		this.add(new GreenArrowAch());
 		this.add(new DefuserAch());
 		this.add(new FlameOnAch());
-		this.add(new CallMeMax());
-		this.add(new LiveLong());
+		this.add(new CallMeMaxAch());
+		this.add(new LiveLongAch());
+		this.add(new GoldenBoyAch());
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -40,7 +41,7 @@ public class AchievementManager {
 		this.orderedAchievements.add(achievement);
 	}
 	
-	public void handleEndLevelAchievements(boolean lose) {
+	public void handleEndLevelAchievements(boolean lose) {		
 		for(Achievement ach : this.achievements.values()) {
 			if (ach.isLose() == lose) {
 				if (ach.isEndLevel()) {

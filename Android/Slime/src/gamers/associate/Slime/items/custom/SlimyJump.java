@@ -8,7 +8,7 @@ import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.game.achievements.AchievementStatistics;
-import gamers.associate.Slime.game.achievements.CallMeMax;
+import gamers.associate.Slime.game.achievements.CallMeMaxAch;
 import gamers.associate.Slime.game.achievements.CarabinAch;
 import gamers.associate.Slime.game.achievements.SupermanAch;
 import gamers.associate.Slime.items.base.GameItemCocos;
@@ -352,7 +352,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 					this.numberOfJump = 0;
 				}
 				
-				SlimeFactory.AchievementManager.test(CallMeMax.class);
+				SlimeFactory.AchievementManager.test(CallMeMaxAch.class);
 				this.isLanded = false;
 				AchievementStatistics.isLanded = false;
 				this.stickHandled = false;
