@@ -28,7 +28,22 @@ public class AchievementManager {
 		this.add(new FlameOnAch());
 		this.add(new CallMeMaxAch());
 		this.add(new LiveLongAch());
+		this.add(new NormalSlimeAch());
+		this.add(new AreYouSeriousAch());		
+		this.add(new YipikayeAch());		
 		this.add(new GoldenBoyAch());
+		this.add(new GoldFeverAch());		
+		this.add(new SilverSurferAch());
+		this.add(new BronzeAgeAch());
+		this.add(new JustNeededAch());
+		this.add(new DontStopAch());
+		this.add(new SonicBoomAch());
+		this.add(new GreenFlashAch());
+		this.add(new PrisonBreakAch());
+		this.add(new KeepDiggingAch());
+		this.add(new MonteCristoAch());
+		this.add(new MasterEvasionAch());		
+		this.add(new HardcoreAch());
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -51,12 +66,22 @@ public class AchievementManager {
 		}
 	}
 	
+	public int getAchievedCount() {
+		int count = 0;
+		for(Achievement ach : this.achievements.values()) {
+			if (ach.isAchieved()) {
+				count++;
+			}
+		}
+		
+		return count;
+	}
+	
 	@SuppressWarnings("rawtypes")
 	public void test(Class achievementClass) {
 		this.achievements.get(achievementClass).test();
 	}
 
-	@SuppressWarnings("rawtypes")
 	public List<Achievement> getAchievementsList() {
 		return this.orderedAchievements;
 	}

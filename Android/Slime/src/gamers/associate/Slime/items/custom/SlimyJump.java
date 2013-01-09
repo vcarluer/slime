@@ -10,6 +10,9 @@ import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.game.achievements.AchievementStatistics;
 import gamers.associate.Slime.game.achievements.CallMeMaxAch;
 import gamers.associate.Slime.game.achievements.CarabinAch;
+import gamers.associate.Slime.game.achievements.DontStopAch;
+import gamers.associate.Slime.game.achievements.GreenFlashAch;
+import gamers.associate.Slime.game.achievements.SonicBoomAch;
 import gamers.associate.Slime.game.achievements.SupermanAch;
 import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.GameItemPhysic;
@@ -342,6 +345,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 				AchievementStatistics.shotSpeed = shotSpeed;
 				if (!this.isLanded) {
 					AchievementStatistics.shotInAir++;
+					SlimeFactory.AchievementManager.test(DontStopAch.class);
 				}
 				
 				this.jumpStartTime = System.currentTimeMillis();
@@ -381,8 +385,13 @@ public class SlimyJump extends Slimy implements ISelectable {
 	public void render(float delta) {
 		super.render(delta);
 		if (this.getBody() != null) {
-			AchievementStatistics.currentSpeed = (this.getBody().getLinearVelocity().len() * Level.currentLevel.getWorlRatio()) / delta;
+			AchievementStatistics.currentSpeed = this.getBody().getLinearVelocity().len() * Level.currentLevel.getWorlRatio();
 			AchievementStatistics.currentRotation = ccMacros.CC_RADIANS_TO_DEGREES(this.getBody().getAngularVelocity()) / delta;
+			SlimeFactory.Log.d(Slime.TAG, "Rotation speed: " + String.valueOf(AchievementStatistics.currentRotation));
+			SlimeFactory.Log.d(Slime.TAG, "Speed: " + String.valueOf(AchievementStatistics.currentSpeed));
+			
+			SlimeFactory.AchievementManager.test(SonicBoomAch.class);
+			SlimeFactory.AchievementManager.test(GreenFlashAch.class);
 		}
 		
 		if (this.isSelected()) {			
