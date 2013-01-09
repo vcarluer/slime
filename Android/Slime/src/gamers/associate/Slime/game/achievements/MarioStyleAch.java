@@ -7,7 +7,7 @@ public class MarioStyleAch extends Achievement {
 	private static final String description = "Kill a mini red monster";
 
 	public MarioStyleAch() {
-		super(name, description, true);
+		super(name, description, false, false);
 	}
 
 	@Override
