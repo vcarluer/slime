@@ -36,11 +36,12 @@ public class AchievementStatistics {
 	public static Rank lastRank;
 	public static float currentSpeed;
 	public static float currentRotation;
-	public static long jumpTime;
+	public static long jumpDuration;
 	public static float jumpDistance;
 	public static long shotTime;
 	public static boolean zoomChanged;
 	public static boolean bossKilled;
+	public static long lastJumpStartTime;
 	
 	public static void initAll() {
 		landCount = 0;
@@ -61,11 +62,12 @@ public class AchievementStatistics {
 		lastRank = Rank.None;
 		currentSpeed = 0f;
 		currentRotation = 0f;
-		jumpTime = 0;
+		jumpDuration = 0;
 		jumpDistance = 0f;
 		shotTime = 0;
 		zoomChanged = false;
 		bossKilled = false;
+		lastJumpStartTime = 0;
 	}
 
 	public static void setLastRank(Rank rank) {

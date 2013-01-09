@@ -7,7 +7,11 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.achievements.AchievementStatistics;
+import gamers.associate.Slime.game.achievements.DividedAch;
 import gamers.associate.Slime.game.achievements.FlameOnAch;
+import gamers.associate.Slime.game.achievements.MotherShipAch;
+import gamers.associate.Slime.game.achievements.RoxedElectronAch;
+import gamers.associate.Slime.game.achievements.SquishAch;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.IBurnable;
 import gamers.associate.Slime.items.base.IDissolvable;
@@ -246,21 +250,25 @@ public class Slimy extends GameItemPhysic implements IBurnable, IDissolvable, IE
 	
 	public void splash() {
 		AchievementStatistics.splashed = true;
+		SlimeFactory.AchievementManager.test(SquishAch.class);
 		this.killInAction(Anim_Splash);			
 	}
 	
 	public void slice() {
 		AchievementStatistics.sliced = true;
+		SlimeFactory.AchievementManager.test(DividedAch.class);
 		this.killInAction(Anim_Sliced);
 	}
 	
 	public void electrify() {
 		AchievementStatistics.electrified = true;
+		SlimeFactory.AchievementManager.test(RoxedElectronAch.class);
 		this.killInAction(Anim_Electrified);
 	}
 	
-	public void dissolve() {
+	public void dissolve() {	
 		AchievementStatistics.dissolved = true;
+		SlimeFactory.AchievementManager.test(MotherShipAch.class);
 		this.killInAction(Anim_Dissolve);
 	}
 	

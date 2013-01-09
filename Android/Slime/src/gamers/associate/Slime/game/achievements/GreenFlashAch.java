@@ -11,6 +11,6 @@ public class GreenFlashAch extends Achievement {
 
 	@Override
 	protected boolean testInternal() {
-		return AchievementStatistics.currentSpeed > 10; // How much?
+		return AchievementStatistics.currentSpeed > 1000; // How much?
 	}
 }

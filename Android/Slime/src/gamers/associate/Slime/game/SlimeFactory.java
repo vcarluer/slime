@@ -76,6 +76,7 @@ public abstract class SlimeFactory {
 	public static final boolean clearLevelInfo = false; // Run with this = true and then relaunch with false
 	public static final boolean unlockAll = false;
 	public static final boolean resetAchievements = false;
+	public static final boolean debugSpeed = false;
 	
 	// end debug ---
 	private static final float SGSDensityBase = 1.5f; // Samsung Galaxy S density
@@ -135,7 +136,7 @@ public abstract class SlimeFactory {
 	public static StarCounterFactory StarCounter = new StarCounterFactory(); // Not attached in attach All but in HudLayer	
 	
 	public static PackageManager PackageManager;
-	public static AchievementManager AchievementManager;
+	public static AchievementManager AchievementManager;	
 		
 	public static void init() {
 		if (PackageManager == null) {

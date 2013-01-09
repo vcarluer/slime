@@ -5,6 +5,7 @@ import gamers.associate.Slime.game.CameraManager;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.achievements.AchievementStatistics;
+import gamers.associate.Slime.game.achievements.PuppetMasterAch;
 
 import java.util.ArrayList;
 
@@ -167,6 +168,7 @@ public class LevelLayer extends CCLayer {
 					this.lastDistance = 0f;
 					this.lastZoomDelta = 0f;
 					AchievementStatistics.zoomChanged = true;
+					SlimeFactory.AchievementManager.test(PuppetMasterAch.class);
 				}
 				
 				this.touchList.remove(touch);

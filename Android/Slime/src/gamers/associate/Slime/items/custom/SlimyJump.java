@@ -12,6 +12,9 @@ import gamers.associate.Slime.game.achievements.CallMeMaxAch;
 import gamers.associate.Slime.game.achievements.CarabinAch;
 import gamers.associate.Slime.game.achievements.DontStopAch;
 import gamers.associate.Slime.game.achievements.GreenFlashAch;
+import gamers.associate.Slime.game.achievements.GreenSquidAch;
+import gamers.associate.Slime.game.achievements.LuckyLukeAch;
+import gamers.associate.Slime.game.achievements.SniperAch;
 import gamers.associate.Slime.game.achievements.SonicBoomAch;
 import gamers.associate.Slime.game.achievements.SupermanAch;
 import gamers.associate.Slime.items.base.GameItemCocos;
@@ -96,7 +99,6 @@ public class SlimyJump extends Slimy implements ISelectable {
 	private int numberOfJump = 0;
 	private int jumpSound[] = {R.raw.slimyjumpa, R.raw.slimyjumpb, R.raw.slimyjumpc , R.raw.slimyjumpd, R.raw.slimyjumpe};
 	private long selectStartTime;
-	private long jumpStartTime;
 	private CGPoint jumpPosition;
 	private CGPoint jumpLength;
 	
@@ -337,18 +339,23 @@ public class SlimyJump extends Slimy implements ISelectable {
 				this.setAngle(degrees);
 				Vector2 pos = this.getBody().getPosition();
 				this.getBody().applyLinearImpulse(this.worldImpulse, pos);
+				
 				AchievementStatistics.shotCount++;
 				SlimeFactory.AchievementManager.test(CarabinAch.class);
 				SlimeFactory.AchievementManager.test(SupermanAch.class);
 				AchievementStatistics.shotTime = System.currentTimeMillis();
+				AchievementStatistics.lastJumpStartTime = AchievementStatistics.shotTime;
 				long shotSpeed = AchievementStatistics.shotTime - this.selectStartTime;
 				AchievementStatistics.shotSpeed = shotSpeed;
+				
+				SlimeFactory.AchievementManager.test(GreenSquidAch.class);
+				SlimeFactory.AchievementManager.test(LuckyLukeAch.class);
+				
 				if (!this.isLanded) {
 					AchievementStatistics.shotInAir++;
 					SlimeFactory.AchievementManager.test(DontStopAch.class);
-				}
-				
-				this.jumpStartTime = System.currentTimeMillis();
+				}				
+				 								
 				this.jumpPosition = this.getPosition();
 				Sounds.playEffect(this.jumpSound[numberOfJump]);
 				this.numberOfJump++;
@@ -387,8 +394,10 @@ public class SlimyJump extends Slimy implements ISelectable {
 		if (this.getBody() != null) {
 			AchievementStatistics.currentSpeed = this.getBody().getLinearVelocity().len() * Level.currentLevel.getWorlRatio();
 			AchievementStatistics.currentRotation = ccMacros.CC_RADIANS_TO_DEGREES(this.getBody().getAngularVelocity()) / delta;
-			SlimeFactory.Log.d(Slime.TAG, "Rotation speed: " + String.valueOf(AchievementStatistics.currentRotation));
-			SlimeFactory.Log.d(Slime.TAG, "Speed: " + String.valueOf(AchievementStatistics.currentSpeed));
+			if (SlimeFactory.debugSpeed) {
+				SlimeFactory.Log.d(Slime.TAG, "Rotation speed: " + String.valueOf(AchievementStatistics.currentRotation));
+				SlimeFactory.Log.d(Slime.TAG, "Speed: " + String.valueOf(AchievementStatistics.currentSpeed));
+			}			
 			
 			SlimeFactory.AchievementManager.test(SonicBoomAch.class);
 			SlimeFactory.AchievementManager.test(GreenFlashAch.class);
@@ -510,10 +519,12 @@ public class SlimyJump extends Slimy implements ISelectable {
 			AchievementStatistics.landCount++;
 			AchievementStatistics.isLanded = true;
 			AchievementStatistics.shotInAir = 0;
-			long jumpLong = System.currentTimeMillis() - this.jumpStartTime;
-			if (jumpLong > 0) {
-				AchievementStatistics.jumpTime = jumpLong;
-			}
+			if (AchievementStatistics.shotTime > 0) {
+				long jumpLong = System.currentTimeMillis() - AchievementStatistics.shotTime;
+				if (jumpLong > 0) {
+					AchievementStatistics.jumpDuration = jumpLong;
+				}
+			}			
 			
 			if (this.jumpPosition.x != 0 && this.jumpPosition.y != 0) {
 				this.jumpLength.x = this.getPosition().x - this.jumpPosition.x;
@@ -524,6 +535,8 @@ public class SlimyJump extends Slimy implements ISelectable {
 				AchievementStatistics.jumpDistance = dot;
 				this.jumpPosition.x = 0;
 				this.jumpPosition.y = 0;
+				
+				SlimeFactory.AchievementManager.test(SniperAch.class);
 			}
 		}
 		

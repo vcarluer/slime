@@ -26,6 +26,10 @@ public class AchievementManager {
 		this.add(new GreenArrowAch());
 		this.add(new DefuserAch());
 		this.add(new FlameOnAch());
+		this.add(new DividedAch());
+		this.add(new RoxedElectronAch());
+		this.add(new SquishAch());
+		this.add(new MotherShipAch());				
 		this.add(new CallMeMaxAch());
 		this.add(new LiveLongAch());
 		this.add(new NormalSlimeAch());
@@ -44,6 +48,18 @@ public class AchievementManager {
 		this.add(new MonteCristoAch());
 		this.add(new MasterEvasionAch());		
 		this.add(new HardcoreAch());
+		this.add(new GreenSquidAch());		
+		this.add(new LuckyLukeAch());	
+		this.add(new SniperAch());		
+		this.add(new TheDoctorAch());		
+		this.add(new RedAlertAch());
+		this.add(new DontPushAch());
+		this.add(new PuppetMasterAch());
+		this.add(new NaniAch());
+		this.add(new TheImmortalAch());
+		this.add(new UnlockNormalAch());
+		this.add(new UnlockHardAch());
+		this.add(new UnlockExtremAch());
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -58,8 +74,8 @@ public class AchievementManager {
 	
 	public void handleEndLevelAchievements(boolean lose) {		
 		for(Achievement ach : this.achievements.values()) {
-			if (ach.isLose() == lose) {
-				if (ach.isEndLevel()) {
+			if (ach.isEndLevel()) {
+				if (ach.isLose() == lose) {				
 					ach.test();
 				}
 			}

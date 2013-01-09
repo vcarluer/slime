@@ -11,7 +11,7 @@ public class DefuserAch extends Achievement {
 
 	@Override
 	protected boolean testInternal() {
-		return !AchievementStatistics.isTuto && AchievementStatistics.winLeftTime <= 1.0f && AchievementStatistics.isModeStory;
+		return AchievementStatistics.isModeStory && !AchievementStatistics.isTuto && AchievementStatistics.winLeftTime <= 1.0f;
 	}
 
 }
