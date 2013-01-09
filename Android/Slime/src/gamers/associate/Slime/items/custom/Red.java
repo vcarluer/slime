@@ -327,6 +327,8 @@ public class Red extends GameItemPhysic implements ISelectable, IDissolvable {
 		Level.currentLevel.getGamePlay().setNewBonus();
 		if (this.isBoss) {
 			AchievementStatistics.bossKilled = true;
+		} else {
+			AchievementStatistics.miniRedKilled = true;
 		}
 	}
 	

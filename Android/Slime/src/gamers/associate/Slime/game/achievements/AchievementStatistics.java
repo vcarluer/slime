@@ -42,6 +42,7 @@ public class AchievementStatistics {
 	public static boolean zoomChanged;
 	public static boolean bossKilled;
 	public static long lastJumpStartTime;
+	public static boolean miniRedKilled;
 	
 	public static void initAll() {
 		landCount = 0;
@@ -68,6 +69,7 @@ public class AchievementStatistics {
 		zoomChanged = false;
 		bossKilled = false;
 		lastJumpStartTime = 0;
+		miniRedKilled = false;
 	}
 
 	public static void setLastRank(Rank rank) {

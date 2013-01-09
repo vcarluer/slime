@@ -5,7 +5,7 @@ import gamers.associate.Slime.game.WorldPackage;
 
 public class KeepDiggingAch extends Achievement {
 
-	private static final String name = "Keep digging for your great escape";
+	private static final String name = "Keep digging slime!";
 	private static final String description = "Finish 40 story levels";
 
 	public KeepDiggingAch() {

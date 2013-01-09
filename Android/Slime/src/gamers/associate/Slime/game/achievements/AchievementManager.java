@@ -60,6 +60,7 @@ public class AchievementManager {
 		this.add(new UnlockNormalAch());
 		this.add(new UnlockHardAch());
 		this.add(new UnlockExtremAch());
+		this.add(new MarioStyleAch());
 	}
 
 	@SuppressWarnings("rawtypes")
