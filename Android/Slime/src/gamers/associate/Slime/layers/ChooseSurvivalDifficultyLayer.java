@@ -38,6 +38,7 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 	private SurvivalItemLayer normalItem;
 	private SurvivalItemLayer hardItem;
 	private SurvivalItemLayer extremItem;	
+	private float colorHeight;
 	
 	public static CCScene getScene() {
 		if (scene == null) {
@@ -52,18 +53,25 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 		this.items = new ArrayList<SurvivalItemLayer>();
 		HomeLayer.addBkgChangeDiff(this);				
 		this.addChild(HomeLayer.getBackButton(this, "goBack"), Level.zTop);
-		this.title = SlimeFactory.getLabel("Survival");
-		this.title.setPosition(CCDirector.sharedDirector().winSize().getWidth() / 2, CCDirector.sharedDirector().winSize().getHeight() - PauseLayer.PaddingY - SlimeFactory.FntSize / 2f);
-		this.addChild(this.title, Level.zTop);
-	}
-	
-	private SurvivalItemLayer addSurvivalItem(String bkgBase, int diff, float x, float y) {
-		float colorHeight = MenuSprite.Height * PauseLayer.Scale + PauseLayer.PaddingY;
+		
+		this.colorHeight = MenuSprite.Height * PauseLayer.Scale + PauseLayer.PaddingY;
 		CCColorLayer colorLayer = CCColorLayer.node(SlimeFactory.getColorLight(200), CCDirector.sharedDirector().winSize().width, colorHeight);
 		colorLayer.setPosition(0, CCDirector.sharedDirector().winSize().height - colorHeight);
 		this.addChild(colorLayer, Level.zFront);
 		
-		float referenceHeight = CCDirector.sharedDirector().winSize().height - colorHeight;
+		this.title = SlimeFactory.getLabel("Survival");
+		this.title.setPosition(CCDirector.sharedDirector().winSize().getWidth() / 2, CCDirector.sharedDirector().winSize().getHeight() - PauseLayer.PaddingY - SlimeFactory.FntSize / 2f);
+		this.addChild(this.title, Level.zTop);
+		
+		float width = CCDirector.sharedDirector().winSize().width;
+		this.easyItem = this.addSurvivalItem("btn-easy", LevelDifficulty.Easy, 0, 0);
+		this.normalItem = this.addSurvivalItem("btn-normal", LevelDifficulty.Normal, width / 4, 0);
+		this.hardItem = this.addSurvivalItem("btn-hard", LevelDifficulty.Hard, width / 2, 0);
+		this.extremItem = this.addSurvivalItem("btn-extreme", LevelDifficulty.Extrem, width * 3 / 4, 0);
+	}
+	
+	private SurvivalItemLayer addSurvivalItem(String bkgBase, int diff, float x, float y) {
+		float referenceHeight = CCDirector.sharedDirector().winSize().height - this.colorHeight;
 		SurvivalItemLayer item = new SurvivalItemLayer(bkgBase, diff, referenceHeight);
 		item.setPosition(x, 0);		
 		
@@ -73,13 +81,7 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 	}
 	
 	@Override
-	public void onEnter() {	
-		float width = CCDirector.sharedDirector().winSize().width;
-		this.easyItem = this.addSurvivalItem("btn-easy", LevelDifficulty.Easy, 0, 0);
-		this.normalItem = this.addSurvivalItem("btn-normal", LevelDifficulty.Normal, width / 4, 0);
-		this.hardItem = this.addSurvivalItem("btn-hard", LevelDifficulty.Hard, width / 2, 0);
-		this.extremItem = this.addSurvivalItem("btn-extreme", LevelDifficulty.Extrem, width * 3 / 4, 0);
-		
+	public void onEnter() {					
 		SlimeFactory.ContextActivity.showAndNextAd();
 		float delayTime = 0f;
 		int i = 0;
@@ -100,10 +102,6 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 	
 	@Override
 	public void onExit() {
-		this.removeChild(this.easyItem, true);
-		this.removeChild(this.normalItem, true);
-		this.removeChild(this.hardItem, true);
-		this.removeChild(this.extremItem, true);
 		super.onExit();
 	}
 
