@@ -735,7 +735,10 @@ public class SlimyJump extends Slimy implements ISelectable {
 	}
 
 	protected void detachCurrentJoin() {
-		if (this.currentJoint != null) {
+		if (this.getBody() != null &&
+				this.currentJoint != null &&
+				this.contactWith != null && 
+				this.contactWith.getBody() != null) {
 			this.world.destroyJoint(this.currentJoint);			
 		}
 		
@@ -747,7 +750,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	@Override
 	public void detach(GameItemPhysic gameItem) {
 		super.detach(gameItem);
-		if (this.currentJoint != null) {
+		if (this.currentJoint != null && gameItem != null) {
 			if (this.contactWith != null && this.contactWith.getId().equals(gameItem.getId())) {
 				this.detachCurrentJoin();
 			}
