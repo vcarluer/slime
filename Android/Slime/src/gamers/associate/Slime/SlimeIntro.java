@@ -37,24 +37,25 @@ public class SlimeIntro extends Activity {
         videos = (VideoView) this.findViewById(R.id.videointroview);
 		
         // get bundle parameter here
-        Bundle introInfo = this.getIntent().getExtras();
-        int introChoice = introInfo.getInt(SlimeIntro.INTRO_CHOICE);
-        int resourceNum = 0;
-        switch(introChoice) {
-        	case LevelDifficulty.Normal:
-        		resourceNum = R.raw.bmoon;
-        		break;
-        	case LevelDifficulty.Hard:
-        		resourceNum = R.raw.cdisco;
-        		break;
-        	case LevelDifficulty.Extrem:
-        		resourceNum = R.raw.dhawaii;
-        		break;
-        	case LevelDifficulty.Easy:
-        	default:
-    			resourceNum	= R.raw.asombrero;
-    			break;
-        }
+//        Bundle introInfo = this.getIntent().getExtras();
+//        int introChoice = introInfo.getInt(SlimeIntro.INTRO_CHOICE);
+//        int resourceNum = 0;
+//        switch(introChoice) {
+//        	case LevelDifficulty.Normal:
+//        		resourceNum = R.raw.bmoon;
+//        		break;
+//        	case LevelDifficulty.Hard:
+//        		resourceNum = R.raw.cdisco;
+//        		break;
+//        	case LevelDifficulty.Extrem:
+//        		resourceNum = R.raw.dhawaii;
+//        		break;
+//        	case LevelDifficulty.Easy:
+//        	default:
+//    			resourceNum	= R.raw.asombrero;
+//    			break;
+//        }
+        int resourceNum = R.raw.intro;
         
         String  str= "android.resource://gamers.associate.Slime/"+resourceNum;
 
