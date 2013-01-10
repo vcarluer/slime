@@ -92,8 +92,8 @@ public abstract class CanvasItemLayer extends CCLayer {
 		float parentY = this.getParent().getPosition().y;
 		float realX = this.getPosition().x + parentX + this.width / 2f + this.paddingX;
 		float realY = this.getPosition().y + parentY + this.height / 2f + this.paddingY;
-		boolean inrectX = x < realX + this.width / 2f && x > realX - this.height / 2f;
-		boolean inrectY = y < realY + this.width / 2F && y > realY - this.height / 2f;
+		boolean inrectX = x < realX + this.width / 2f && x > realX - this.width / 2f;
+		boolean inrectY = y < realY + this.height / 2F && y > realY - this.height / 2f;
 		if (inrectX && inrectY) {
 			this.select();
 			return true;
