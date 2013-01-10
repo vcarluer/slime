@@ -103,6 +103,7 @@ public class EvacuationPlug extends GameItemPhysic {
 	}
 	
 	private void remove() {
+		Level.currentLevel.detachSlimies(this);
 		this.destroyBody();
 		CCFadeOut fade = CCFadeOut.action(1.0f);
 		CCRotateBy rotate = CCRotateBy.action(0.1f, 30f);
@@ -113,12 +114,6 @@ public class EvacuationPlug extends GameItemPhysic {
 		this.sprite.runAction(fade);
 		this.sprite.runAction(rotate);
 		this.sprite.runAction(seq);		
-	}
-	
-	@Override
-	public void destroyBody() {
-		Level.currentLevel.detachSlimies(this);
-		super.destroyBody();
 	}
 
 	private boolean isRemoveNextStep;

@@ -1,5 +1,6 @@
 package gamers.associate.Slime.game;
 
+import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.achievements.AchievementStatistics;
 import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelDefinition;
@@ -35,6 +36,7 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 		
 	public void build(Level level, String id, GamePlay gamePlay)
 	{
+		SlimeFactory.Log.d(Slime.TAG, "build(Level level, String id, GamePlay gamePlay) start");
 		// this one is only call for survival and home! Bad design powa. Juste ensure it here
 		if (gamePlay == GamePlay.TimeAttack) return;
 
@@ -81,6 +83,8 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 			level.setLevelDefinition(this.home);
 			level.addGamePlay(null);
 		}
+		
+		SlimeFactory.Log.d(Slime.TAG, "build(Level level, String id, GamePlay gamePlay) start");
 	}
 
 	// only survival here
@@ -108,6 +112,7 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 
 	@Override
 	public void build(Level level, LevelDefinition levelDefToLoad) {
+		SlimeFactory.Log.d(Slime.TAG, "build(Level level, LevelDefinition levelDefToLoad) start");
 		if (levelDefToLoad.getGamePlay() == GamePlay.Survival) {
 			this.build(level, levelDef.getId(), levelDef.getGamePlay());
 		}
@@ -149,6 +154,8 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 			
 			AchievementStatistics.neededBonus = Level.currentLevel.getGamePlay().neededBonus();
 		}	
+		
+		SlimeFactory.Log.d(Slime.TAG, "build(Level level, LevelDefinition levelDefToLoad) end");
 	}
 	
 	@Override

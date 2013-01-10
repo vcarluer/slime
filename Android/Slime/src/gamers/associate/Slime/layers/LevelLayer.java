@@ -50,6 +50,7 @@ public class LevelLayer extends CCLayer {
 	
 	@Override
 	public void onEnter() {
+		SlimeFactory.Log.d(Slime.TAG, "LevelLayer.onEnter() start");
 		super.onEnter();		
 		// start ticking (for physics simulation)
 		schedule(tickCallback);
@@ -60,15 +61,20 @@ public class LevelLayer extends CCLayer {
 //			this.level.getCameraManager().zoomInterpolateTo(this.level.getStartItem(), 1.0f, 1.0f);
 //			this.level.getCameraManager().follow(this.level.getStartItem());
 //		}
+		
+		SlimeFactory.Log.d(Slime.TAG, "LevelLayer.onEnter() end");
 	}
 
 	@Override
 	public void onExit() {
+		SlimeFactory.Log.d(Slime.TAG, "LevelLayer.onExit() start");
 		super.onExit();
 		
 		// stop ticking (for physics simulation)			
 		unschedule(tickCallback);
 		this.level.desactivate();
+		
+		SlimeFactory.Log.d(Slime.TAG, "LevelLayer.onExit() end");
 	}
 		
 	public synchronized void tick(float delta) {

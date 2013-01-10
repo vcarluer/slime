@@ -1,6 +1,7 @@
 package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.R;
+import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.achievements.AchievementStatistics;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.GameItemPhysic;
@@ -248,6 +249,7 @@ public class Level implements IGameItemHandler {
 	}
 	
 	public void reload() {		
+		SlimeFactory.Log.d(Slime.TAG, "reload() start");
 		if (this.getGamePlay().getType() == GamePlay.Survival) {
 			SlimeFactory.GameInfo.removeLastScore();
 		}
@@ -256,6 +258,8 @@ public class Level implements IGameItemHandler {
 		
 		SlimeFactory.LevelBuilder.rebuild(this, this.levelDefinition);
 		this.postBuild(this.currentLevelName);
+		
+		SlimeFactory.Log.d(Slime.TAG, "reload() end");
 	}
 	
 	public void attachLevelToCamera() {
@@ -270,16 +274,20 @@ public class Level implements IGameItemHandler {
 	
 	// Must be call before running scene with CCDirector
 	public void loadLevel(String levelName, GamePlay gamePlay) {
+		SlimeFactory.Log.d(Slime.TAG, "loadLevel(String levelName, GamePlay gamePlay) start");
 		this.preBuild();		
 		SlimeFactory.LevelBuilder.build(this, levelName, gamePlay);						
 		this.postBuild(levelName);		
+		SlimeFactory.Log.d(Slime.TAG, "loadLevel(String levelName, GamePlay gamePlay) end");
 	}
 	
 	// Must be call before running scene with CCDirector
 	public void loadLevel(LevelDefinition levelDef) {
+		SlimeFactory.Log.d(Slime.TAG, "loadLevel(LevelDefinition levelDef) start");
 		this.preBuild();
 		SlimeFactory.LevelBuilder.build(this, levelDef);						
 		this.postBuild(levelDef.getId());				
+		SlimeFactory.Log.d(Slime.TAG, "loadLevel(LevelDefinition levelDef) end");
 	}
 	
 	private void preBuild() {
@@ -337,6 +345,7 @@ public class Level implements IGameItemHandler {
 	}
 
 	private void postBuild(String levelName) {
+		SlimeFactory.Log.d(Slime.TAG, "postBuild(String levelName) start");
 		if (levelName == LevelHome.Id) {
 			this.setBackgroundFrom(HomeBkg);
 		} else {
@@ -349,26 +358,33 @@ public class Level implements IGameItemHandler {
 		
 		this.hudLayer.upudateStarsCount();
 		this.startLevel();
-	}	
-			
-	public void resetLevel() {				
-		this.isPhysicDisabled = false;
-		this.currentLevelName = "";
 		
-		for (GameItem item : this.items.values()) {
+		SlimeFactory.Log.d(Slime.TAG, "postBuild(String levelName) end");
+	}
+			
+	public void resetLevel() {		
+		SlimeFactory.Log.d(Slime.TAG, "resetLevel() start");
+		this.isPhysicDisabled = false;
+		this.currentLevelName = "";		
+		int i = 1;
+		for (GameItem item : this.items.values()) {			
+			SlimeFactory.Log.d(Slime.TAG, String.valueOf(i) + " - " + item.getName() + " - " + item.getClass().toString());
 			item.destroy();
+			i++;
 		}
 		
 		for (GameItem item : this.itemsToAdd) {
 			item.destroy();
 		}
-		
+
 		for (GameItem item : this.itemsToRemove) {
 			item.destroy();
 		}
 		
 		this.gamePlay = null;
+
 		this.goal = null;
+
 		this.plug = null;
 		
 		this.electrificables.clear();
@@ -377,7 +393,7 @@ public class Level implements IGameItemHandler {
 		this.aliveSlimyList.clear();
 		this.slimyList.clear();
 		this.isGameOver = false;
-		this.lastScore = 0;		
+		this.lastScore = 0;
 		this.isVictory = false;
 		this.endLevelShown = false;
 		
@@ -387,7 +403,7 @@ public class Level implements IGameItemHandler {
 		this.itemsToRemove.clear();
 		this.startItem = null;
 		this.thumbnailManager.reset();
-		
+
 		this.removeCustomOverLayer();
 		this.setIsTouchEnabled(true);
 		this.setIsHudEnabled(true);
@@ -396,10 +412,9 @@ public class Level implements IGameItemHandler {
 		
 		this.setLevelOrigin(CGPoint.zero());
 		this.cameraManager.cancelAll();
-		
 		this.hudLayer.resetLevel();
-		
 		this.resume();
+		SlimeFactory.Log.d(Slime.TAG, "resetLevel() end");
 	}
 	
 	public void disablePauseLayer() {

@@ -146,7 +146,7 @@ import java.util.ArrayList;
 		this.parseAndCreate(line, level, 0, 0, "");
 	}
 	
-	public void parseAndCreate(String line, Level level, float xOffset, float yOffset, String idPre) throws Exception {				
+	public void parseAndCreate(String line, Level level, float xOffset, float yOffset, String idPre) throws Exception {						
 		this.parse(line);
 		this.setOffset(xOffset, yOffset);
 		this.setIdPre(idPre);

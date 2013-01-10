@@ -71,6 +71,7 @@ public class Slime extends Activity {
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+    	SlimeFactory.Log.d(Slime.TAG, "Slime.onCreate");
         super.onCreate(savedInstanceState);
      // set the window status, no tile, full screen and don't sleep
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -210,12 +211,14 @@ public class Slime extends Activity {
     
     @Override
     public void onStart() {
+    	SlimeFactory.Log.d(Slime.TAG, "Slime.onStart");
     	this.hideButtons();
         super.onStart(); 
     }
 
     @Override
     public void onPause() {
+    	SlimeFactory.Log.d(Slime.TAG, "Slime.onPause");
         super.onPause();
 
         if (Level.currentLevel != null) {
@@ -231,6 +234,7 @@ public class Slime extends Activity {
 
     @Override
     public void onResume() {
+    	SlimeFactory.Log.d(Slime.TAG, "Slime.onResume");
         super.onResume();
 
         CCDirector.sharedDirector().onResume();  
@@ -257,6 +261,7 @@ public class Slime extends Activity {
 
     @Override
     public void onDestroy() {
+    	SlimeFactory.Log.d(Slime.TAG, "Slime.onDestroy");
         super.onDestroy();
                 
         CCDirector.sharedDirector().end();

@@ -370,12 +370,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 				this.isLanded = false;
 				AchievementStatistics.isLanded = false;
 				this.stickHandled = false;
-				if (this.currentJoint != null) {
-					this.world.destroyJoint(this.currentJoint);
-					this.currentJoint = null;
-					this.currentJointDef = null;
-					this.contactWith = null;
-				}
+				this.detachCurrentJoin();
 				
 				if (this.currentAction != null) {
 					this.sprite.stopAction(this.currentAction);
@@ -690,15 +685,13 @@ public class SlimyJump extends Slimy implements ISelectable {
 	 */
 	@Override
 	public void destroy() {
-//		if (this.currentJoint != null) {
-//			this.world.destroyJoint(this.currentJoint);
-//			this.currentJoint = null;
-//			this.currentJointDef = null;
-//		}
-		/*this.auraSheet.removeChild(this.auraSprite, true);
-		this.auraSheet.removeChild(this.arrowSprite, true);*/
+		SlimeFactory.Log.d(Slime.TAG, "SlimyJump.destroy() start");
+		SlimeFactory.Log.d(Slime.TAG, "remove emitter start");
 		Level.currentLevel.getLevelLayer().removeChild(this.emitter, true);
+		SlimeFactory.Log.d(Slime.TAG, "remove emitter end");
 		super.destroy();
+		
+		SlimeFactory.Log.d(Slime.TAG, "SlimyJump.destroy() end");
 	}
 	
 	private void stopAura() {
@@ -730,16 +723,6 @@ public class SlimyJump extends Slimy implements ISelectable {
 
 	public boolean simpleSelect() {
 		return true;
-	}
-
-	/* (non-Javadoc)
-	 * @see gamers.associate.Slime.items.base.GameItemPhysic#destroyBodyOnly()
-	 */
-	@Override
-	public void destroyBody() {
-		detachCurrentJoin();
-		
-		super.destroyBody();						
 	}
 
 	/* (non-Javadoc)

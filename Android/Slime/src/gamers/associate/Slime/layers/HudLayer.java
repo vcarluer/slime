@@ -204,6 +204,10 @@ public class HudLayer extends CCLayer implements IGameItemHandler {
 	@Override
 	public void onExit() {
 		this.currentTitle = null;
+		if (this.starSprite != null) {
+			this.removeChild(this.starSprite, true);
+			this.starSprite = null;
+		}
 		super.onExit();
 	}
 	
