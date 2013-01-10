@@ -47,7 +47,6 @@ public class AchievementManager {
 		this.add(new KeepDiggingAch());
 		this.add(new MonteCristoAch());
 		this.add(new MasterEvasionAch());		
-		this.add(new HardcoreAch());
 		this.add(new GreenSquidAch());		
 		this.add(new LuckyLukeAch());	
 		this.add(new SniperAch());		
@@ -63,6 +62,7 @@ public class AchievementManager {
 		this.add(new MarioStyleAch());
 		this.add(new TimeOutAch());
 		this.add(new PushButtonAch());
+		this.add(new HardcoreAch());
 	}
 
 	@SuppressWarnings("rawtypes")
