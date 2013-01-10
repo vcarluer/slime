@@ -159,8 +159,8 @@ public class PauseLayer extends CCLayer {
 		if (Level.currentLevel.getLevelDefinition().getGamePlay() == GamePlay.Survival) {
 			this.restartMenu.setIsEnabled(false);
 			this.restartMenu.setVisible(false);
-			this.homeMenu.setIsEnabled(false);
-			this.homeMenu.setVisible(false);
+			this.homeMenu.setIsEnabled(true);
+			this.homeMenu.setVisible(true);
 		} else {
 			this.restartMenu.setIsEnabled(true);
 			this.restartMenu.setVisible(true);
@@ -171,8 +171,8 @@ public class PauseLayer extends CCLayer {
 	
 	public void gameStarted(boolean started) {
 		if (Level.currentLevel.getLevelDefinition().getGamePlay() == GamePlay.Survival) {			
-			this.homeMenu.setIsEnabled(false);
-			this.homeMenu.setVisible(false);			
+			this.homeMenu.setIsEnabled(!started);
+			this.homeMenu.setVisible(!started);			
 		} else {			
 			this.homeMenu.setIsEnabled(true);
 			this.homeMenu.setVisible(true);
