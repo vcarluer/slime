@@ -20,7 +20,6 @@ import gamers.associate.Slime.layers.PauseLayer;
 import gamers.associate.Slime.layers.SurvivalGameOverLayer;
 import gamers.associate.Slime.levels.GamePlay;
 import gamers.associate.Slime.levels.LevelDefinition;
-import gamers.associate.Slime.levels.LevelDefinitionParser;
 import gamers.associate.Slime.levels.LevelHome;
 
 import java.util.ArrayList;
@@ -952,9 +951,9 @@ public class Level implements IGameItemHandler {
 					this.levelDefinition.upgradeRank(rank);					
 					
 					LevelDefinition next = SlimeFactory.LevelBuilder.getNext(this.levelDefinition);
-					int diff = next.getWorld().getDifficulty(next.getNumber());
-					SlimeFactory.GameInfo.unlockDifficulty(diff);
 					if (next != null) {
+						int diff = next.getWorld().getDifficulty(next.getNumber());
+						SlimeFactory.GameInfo.unlockDifficulty(diff);
 						next.setUnlock(true);
 						next.handlePersistancy();
 					}
@@ -974,6 +973,13 @@ public class Level implements IGameItemHandler {
 					SlimeFactory.GameInfo.levelUp();
 				}
 				
+				Level.currentLevel.getGamePlay().endMode();
+				AchievementStatistics.winLeftTime = this.getGamePlay().getLeftTime();
+				if (!AchievementStatistics.isTuto) {
+					AchievementStatistics.consecutiveNoTutoWin++;
+				}
+				
+				SlimeFactory.AchievementManager.handleEndLevelAchievements(false);
 				this.levelDefinition.handlePersistancy();
 			}
 			
@@ -981,10 +987,7 @@ public class Level implements IGameItemHandler {
 				this.showEndLevel();
 			}						
 			
-			Level.currentLevel.getGamePlay().endMode();
-			AchievementStatistics.winLeftTime = this.getGamePlay().getLeftTime();
-			AchievementStatistics.consecutiveWin++;
-			SlimeFactory.AchievementManager.handleEndLevelAchievements(false);
+			
 			return true;
 		}
 		
@@ -993,7 +996,7 @@ public class Level implements IGameItemHandler {
 	
 	public boolean lose(boolean showEndLevel) {
 		if (this.gamePlay != null && !this.isGameOver) {
-			AchievementStatistics.consecutiveWin = 0;
+			AchievementStatistics.consecutiveNoTutoWin = 0;
 			this.lastScore = 0;
 			this.isVictory = false;
 			this.endLevel();
@@ -1217,7 +1220,7 @@ public class Level implements IGameItemHandler {
 	}
 
 	public void setNewBonus() {
-		if (this.gamePlay != null) {
+		if (this.gamePlay != null && !this.gamePlay.isGameOver()) {
 			this.gamePlay.setNewBonus();
 		}
 	}

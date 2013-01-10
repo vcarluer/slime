@@ -11,7 +11,7 @@ public class DividedAch extends Achievement {
 
 	@Override
 	protected boolean testInternal() {
-		return AchievementStatistics.sliced;
+		return AchievementStatistics.isMode() && AchievementStatistics.sliced;
 	}
 
 }

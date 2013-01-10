@@ -101,6 +101,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	private long selectStartTime;
 	private CGPoint jumpPosition;
 	private CGPoint jumpLength;
+	private boolean cancelNextRotationStat;
 	
 	
 	public SlimyJump(float x, float y, float width, float height, World world,
@@ -350,13 +351,15 @@ public class SlimyJump extends Slimy implements ISelectable {
 				
 				SlimeFactory.AchievementManager.test(GreenSquidAch.class);
 				SlimeFactory.AchievementManager.test(LuckyLukeAch.class);
+				this.cancelNextRotationStat = true;
 				
 				if (!this.isLanded) {
 					AchievementStatistics.shotInAir++;
 					SlimeFactory.AchievementManager.test(DontStopAch.class);
 				}				
 				 								
-				this.jumpPosition = this.getPosition();
+				this.jumpPosition.x = this.getPosition().x;
+				this.jumpPosition.y = this.getPosition().y;
 				Sounds.playEffect(this.jumpSound[numberOfJump]);
 				this.numberOfJump++;
 				if(this.numberOfJump==5){
@@ -393,14 +396,19 @@ public class SlimyJump extends Slimy implements ISelectable {
 		super.render(delta);
 		if (this.getBody() != null) {
 			AchievementStatistics.currentSpeed = this.getBody().getLinearVelocity().len() * Level.currentLevel.getWorlRatio();
-			AchievementStatistics.currentRotation = ccMacros.CC_RADIANS_TO_DEGREES(this.getBody().getAngularVelocity()) / delta;
+			
+			if (this.cancelNextRotationStat) {
+				this.cancelNextRotationStat = false;
+			} else {
+				AchievementStatistics.currentRotation = this.getBody().getAngularVelocity();
+				SlimeFactory.AchievementManager.test(SonicBoomAch.class);
+			}
+			
+			SlimeFactory.AchievementManager.test(GreenFlashAch.class);
 			if (SlimeFactory.debugSpeed) {
 				SlimeFactory.Log.d(Slime.TAG, "Rotation speed: " + String.valueOf(AchievementStatistics.currentRotation));
 				SlimeFactory.Log.d(Slime.TAG, "Speed: " + String.valueOf(AchievementStatistics.currentSpeed));
 			}			
-			
-			SlimeFactory.AchievementManager.test(SonicBoomAch.class);
-			SlimeFactory.AchievementManager.test(GreenFlashAch.class);
 		}
 		
 		if (this.isSelected()) {			
@@ -533,6 +541,9 @@ public class SlimyJump extends Slimy implements ISelectable {
 				dot = FloatMath.sqrt(dot);
 				
 				AchievementStatistics.jumpDistance = dot;
+				if (SlimeFactory.debugSpeed) {
+					SlimeFactory.Log.d(Slime.TAG, "Jump distance: " + String.valueOf(AchievementStatistics.jumpDistance));
+				}
 				this.jumpPosition.x = 0;
 				this.jumpPosition.y = 0;
 				
@@ -638,7 +649,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 			}
 		}				
 	}
-
+	
 	public CCSprite getThumbail() {
 		if (this.thumbnailSprite == null) {
 			this.thumbnailSprite = CCSprite.sprite(thumbSprite, true);			

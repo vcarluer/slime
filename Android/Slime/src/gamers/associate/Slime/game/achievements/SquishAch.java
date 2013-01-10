@@ -11,7 +11,7 @@ public class SquishAch extends Achievement {
 
 	@Override
 	protected boolean testInternal() {
-		return AchievementStatistics.splashed;
+		return AchievementStatistics.isMode() && AchievementStatistics.splashed && AchievementStatistics.leftTime > 0;
 	}
 
 }

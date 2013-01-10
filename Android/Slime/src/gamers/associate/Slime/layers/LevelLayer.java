@@ -168,7 +168,6 @@ public class LevelLayer extends CCLayer {
 					this.lastDistance = 0f;
 					this.lastZoomDelta = 0f;
 					AchievementStatistics.zoomChanged = true;
-					SlimeFactory.AchievementManager.test(PuppetMasterAch.class);
 				}
 				
 				this.touchList.remove(touch);

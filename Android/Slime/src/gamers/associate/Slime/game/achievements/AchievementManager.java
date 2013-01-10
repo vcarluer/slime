@@ -61,6 +61,8 @@ public class AchievementManager {
 		this.add(new UnlockHardAch());
 		this.add(new UnlockExtremAch());
 		this.add(new MarioStyleAch());
+		this.add(new TimeOutAch());
+		this.add(new PushButtonAch());
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -74,7 +76,7 @@ public class AchievementManager {
 	}
 	
 	public void handleEndLevelAchievements(boolean lose) {		
-		for(Achievement ach : this.achievements.values()) {
+		for(Achievement ach : this.orderedAchievements) {
 			if (ach.isEndLevel()) {
 				if (ach.isLose() == lose) {				
 					ach.test();

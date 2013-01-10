@@ -9,7 +9,7 @@ public class AchievementStatistics {
 	public static int levelDiff;
 	public static int inARow;
 	public static int levelNum;
-	public static int consecutiveWin;
+	public static int consecutiveNoTutoWin;
 	public static boolean isBoss;
 	public static boolean isTuto;
 	public static int totalStar;
@@ -43,6 +43,8 @@ public class AchievementStatistics {
 	public static boolean bossKilled;
 	public static long lastJumpStartTime;
 	public static boolean miniRedKilled;
+	public static int bonusTaken;
+	public static boolean buttonPushed;
 	
 	public static void initAll() {
 		landCount = 0;
@@ -70,6 +72,12 @@ public class AchievementStatistics {
 		bossKilled = false;
 		lastJumpStartTime = 0;
 		miniRedKilled = false;
+		bonusTaken = 0;
+		buttonPushed = false;
+	}
+	
+	public static boolean isMode() {
+		return isModeStory || isModeSurvival;
 	}
 
 	public static void setLastRank(Rank rank) {

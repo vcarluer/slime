@@ -74,8 +74,10 @@ public abstract class SlimeFactory {
 	public static final int MaxWorld = LevelDifficulty.Extrem;
 	public static final boolean resetHighScores = false; // Run with this = true and then relaunch with false
 	public static final boolean clearLevelInfo = false; // Run with this = true and then relaunch with false
-	public static final boolean unlockAll = false;
-	public static final boolean resetAchievements = false;
+	public static final boolean unlockAll = true;
+	public static final boolean unlockAllAchievement = true;
+	public static final boolean noUnlockHardcoreGamer = true;
+	public static final boolean resetAchievements = false; // if true can not unlock allachievements
 	public static final boolean debugSpeed = false;
 	
 	// end debug ---

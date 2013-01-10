@@ -19,6 +19,7 @@ public interface IGamePlay {
 	boolean isGameOver();
 	void setNewAliveSlimyCount(int count);
 	void setNewBonus();
+	void setNewBonusTime();
 	void setPause(boolean value);
 	boolean isStarted();
 	int bonusCount();

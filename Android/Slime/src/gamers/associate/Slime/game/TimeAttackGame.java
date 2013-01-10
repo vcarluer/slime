@@ -108,10 +108,11 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 
 		if (this.isStarted && !this.isGameOver) {			
 			this.leftTime -= deltaReal;
-			this.localRender += deltaReal;											
+			this.localRender += deltaReal;
 			
 			if (this.leftTime <= 0) {
 				this.leftTime = 0;
+				AchievementStatistics.leftTime = this.leftTime;
 				this.lose();
 			}
 			
@@ -124,13 +125,11 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 						this.isCritic = true;
 						this.localRender = stepCritic;
 						AchievementStatistics.enterCriticZone = true;
-						SlimeFactory.AchievementManager.test(RedAlertAch.class);
 					}
 				}
 				else {
 					if (this.leftTime > this.criticTime) {
 						AchievementStatistics.exitCriticZone = true;
-						SlimeFactory.AchievementManager.test(DontPushAch.class);
 						this.isCritic = false;
 						CCBitmapFontAtlas label = this.level.getHudLabel();
 						label.setColor(SlimeFactory.ColorSlime);
@@ -344,10 +343,17 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		}			
 	}
 
+	public void setNewBonusTime() {
+		if (!this.isGameOver) {
+			this.leftTime += bonusTime;
+		}
+	}
+	
 	public void setNewBonus() {
 		if (!this.isGameOver) {
 			this.leftTime += bonusTime;
 			this.bonusTaken++;
+			AchievementStatistics.bonusTaken = this.bonusTaken;
 			
 			if (this.bonusTaken >= this.neededBonus()) {
 				if (Level.currentLevel != null && Level.currentLevel.getGoal() != null) {

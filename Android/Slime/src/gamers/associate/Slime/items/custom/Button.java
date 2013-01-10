@@ -3,7 +3,10 @@ package gamers.associate.Slime.items.custom;
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
+import gamers.associate.Slime.game.achievements.AchievementStatistics;
+import gamers.associate.Slime.game.achievements.PushButtonAch;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.ITrigerable;
 import gamers.associate.Slime.items.base.SpriteType;
@@ -135,6 +138,8 @@ public class Button extends GameItemPhysic {
 	protected void handleContact(ContactInfo item) {
 		if (this.isEnabled) 
 		{
+			AchievementStatistics.buttonPushed = true;
+			SlimeFactory.AchievementManager.test(PushButtonAch.class);
 			this.isOn = !this.isOn;
 			this.waitAnim();
 			this.isEnabled = false;

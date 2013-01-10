@@ -11,7 +11,7 @@ public class FlameOnAch extends Achievement {
 
 	@Override
 	protected boolean testInternal() {
-		return AchievementStatistics.burned;
+		return AchievementStatistics.isMode() && AchievementStatistics.burned;
 	}
 
 }

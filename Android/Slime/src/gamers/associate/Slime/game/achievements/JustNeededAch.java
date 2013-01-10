@@ -13,7 +13,7 @@ public class JustNeededAch extends Achievement {
 	@Override
 	protected boolean testInternal() {
 		return !AchievementStatistics.isTuto &&
-			(AchievementStatistics.startTime - AchievementStatistics.leftTime) <= 5f && 
-			AchievementStatistics.totalStar == AchievementStatistics.neededBonus;
+			(AchievementStatistics.startTime - AchievementStatistics.leftTime) <= 5 && 
+			AchievementStatistics.bonusTaken == AchievementStatistics.neededBonus;
 	}
 }

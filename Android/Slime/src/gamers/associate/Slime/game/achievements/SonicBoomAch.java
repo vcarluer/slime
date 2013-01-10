@@ -11,6 +11,6 @@ public class SonicBoomAch extends Achievement {
 
 	@Override
 	protected boolean testInternal() {
-		return AchievementStatistics.currentRotation > 50000; // How much?
+		return AchievementStatistics.isMode() && Math.abs(AchievementStatistics.currentRotation) > 50; // How much?
 	}
 }

@@ -12,6 +12,6 @@ public class TheImmortalAch extends Achievement {
 
 	@Override
 	protected boolean testInternal() {
-		return !AchievementStatistics.isTuto && AchievementStatistics.isModeStory && AchievementStatistics.consecutiveWin >= 5;
+		return !AchievementStatistics.isTuto && AchievementStatistics.isModeStory && AchievementStatistics.consecutiveNoTutoWin >= 5;
 	}
 }

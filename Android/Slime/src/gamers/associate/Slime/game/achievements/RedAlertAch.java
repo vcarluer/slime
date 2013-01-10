@@ -6,7 +6,7 @@ public class RedAlertAch extends Achievement {
 	private static final String description = "Enter critic zone";
 
 	public RedAlertAch() {
-		super(name, description, false);
+		super(name, description, true);
 	}
 
 	@Override

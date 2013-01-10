@@ -6,7 +6,7 @@ public class DontPushAch extends Achievement {
 	private static final String description = "Exit critic zone";
 
 	public DontPushAch() {
-		super(name, description, false);
+		super(name, description, true);
 	}
 
 	@Override

@@ -6,7 +6,7 @@ public class PuppetMasterAch extends Achievement {
 	private static final String description = "Change zoom to play";
 
 	public PuppetMasterAch() {
-		super(name, description, false);
+		super(name, description, true);
 	}
 
 	@Override

@@ -32,7 +32,8 @@ public abstract class Achievement {
 		this.setEndLevel(endLevel);
 		
 		this.load();
-		if (SlimeFactory.resetAchievements) {
+		
+		if (SlimeFactory.resetAchievements || SlimeFactory.unlockAllAchievement) {
 			this.store();
 		}
 	}
@@ -133,7 +134,11 @@ public abstract class Achievement {
 								switch(i) {
 								case 1:
 									if (!SlimeFactory.resetAchievements) {
-										this.setAchieved(Boolean.valueOf(line).booleanValue());
+										if (SlimeFactory.unlockAllAchievement) {
+											this.setAchieved(true);
+										} else {
+											this.setAchieved(Boolean.valueOf(line).booleanValue());
+										}										
 									} else {
 										this.setAchieved(false);
 									}

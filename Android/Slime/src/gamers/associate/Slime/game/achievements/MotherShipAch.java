@@ -11,7 +11,7 @@ public class MotherShipAch extends Achievement {
 
 	@Override
 	protected boolean testInternal() {
-		return AchievementStatistics.dissolved;
+		return AchievementStatistics.isMode() && AchievementStatistics.dissolved;
 	}
 
 }

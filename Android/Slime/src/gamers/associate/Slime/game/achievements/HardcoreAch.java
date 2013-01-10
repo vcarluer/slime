@@ -13,7 +13,15 @@ public class HardcoreAch extends Achievement {
 
 	@Override
 	protected boolean testInternal() {
-		return SlimeFactory.AchievementManager.getAchievedCount() == SlimeFactory.AchievementManager.getAchievementsCount();
+		return (SlimeFactory.AchievementManager.getAchievedCount() + 1) == SlimeFactory.AchievementManager.getAchievementsCount();
+	}
+
+	@Override
+	protected void load() {
+		super.load();
+		if (SlimeFactory.unlockAllAchievement && SlimeFactory.noUnlockHardcoreGamer) {
+			this.setAchieved(false);
+		}
 	}
 
 }
