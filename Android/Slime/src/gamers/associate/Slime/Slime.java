@@ -65,7 +65,7 @@ public class Slime extends Activity {
 	
 	private AdView adView;	
 	
-	private static Handler mHandler;
+	private Handler mHandler;
 	private StoryMenuItem storyMenuItemAfterIntro;
 	
 	/** Called when the activity is first created. */
@@ -131,7 +131,7 @@ public class Slime extends Activity {
         // until the ad is loaded.
         layout.addView(adView);
         
-        mHandler = new Handler(){
+        this.mHandler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
 	            	switch(msg.what)

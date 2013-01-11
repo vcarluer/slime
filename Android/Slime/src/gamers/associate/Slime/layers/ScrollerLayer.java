@@ -2,7 +2,6 @@ package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.game.SlimeFactory;
 
-import org.cocos2d.actions.ease.CCEaseIn;
 import org.cocos2d.actions.ease.CCEaseOut;
 import org.cocos2d.actions.interval.CCMoveTo;
 import org.cocos2d.layers.CCLayer;

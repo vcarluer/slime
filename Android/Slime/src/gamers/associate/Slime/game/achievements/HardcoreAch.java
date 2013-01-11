@@ -16,6 +16,7 @@ public class HardcoreAch extends Achievement {
 		return (SlimeFactory.AchievementManager.getAchievedCount() + 1) == SlimeFactory.AchievementManager.getAchievementsCount();
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	protected void load() {
 		super.load();

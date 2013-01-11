@@ -26,6 +26,7 @@ public abstract class Achievement {
 		this.setLose(lose);
 	}
 	
+	@SuppressWarnings("unused")
 	public Achievement(String name, String description, boolean endLevel) {
 		this.setName(name);
 		this.setDescription(description);

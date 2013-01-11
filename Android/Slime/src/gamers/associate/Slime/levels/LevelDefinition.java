@@ -2,7 +2,6 @@ package gamers.associate.Slime.levels;
 
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
-import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.Rank;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.WorldPackage;

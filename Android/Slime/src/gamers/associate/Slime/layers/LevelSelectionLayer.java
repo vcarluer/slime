@@ -1,6 +1,5 @@
 package gamers.associate.Slime.layers;
 
-import android.annotation.SuppressLint;
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelSelection;
@@ -16,9 +15,9 @@ import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItem;
 import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
-import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.types.ccColor3B;
+
+import android.annotation.SuppressLint;
 
 @SuppressLint("DefaultLocale") public class LevelSelectionLayer extends CCLayer {
 	private CCMenu menu;
@@ -94,11 +93,5 @@ import org.cocos2d.types.ccColor3B;
 		Sounds.playEffect(R.raw.menuselect);
 		Level level = Level.get(LevelHome.Id, true, GamePlay.None);		
 		CCDirector.sharedDirector().replaceScene(level.getScene());
-	}
-	
-	private static CCLabel getMenuLabel(String text) {
-		CCLabel label = CCLabel.makeLabel(text.toUpperCase(), "fonts/Slime.ttf", 30.0f * bgButtonScale);
-		label.setColor(ccColor3B.ccBLACK);
-		return label;
 	}
 }
