@@ -137,9 +137,8 @@ public class Platform extends GameItemPhysic {
 	protected void handleContact(ContactInfo item) {		
 		if (this.type == Bump) {
 			Sounds.playEffect(R.raw.platformbump);
-		}else if(this.type == Sticky || this.type == Wall){
-			Sounds.playEffect(R.raw.platformstick);
 		}
+		
 		super.handleContact(item);
 		
 	}
