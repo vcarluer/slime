@@ -1308,9 +1308,21 @@ public class Level implements IGameItemHandler {
 	}
 	
 	public void detachSlimies(GameItemPhysic gameItem) {
+		SlimeFactory.Log.d(Slime.TAG, "detachSlimies gameItem start");
 		for(Slimy slimy : this.aliveSlimyList) {
 			slimy.detach(gameItem);
 		}
+		
+		SlimeFactory.Log.d(Slime.TAG, "detachSlimies gameItem end");
+	}
+	
+	public void detachSlimies() {
+		SlimeFactory.Log.d(Slime.TAG, "detachSlimies start");
+		for(Slimy slimy : this.aliveSlimyList) {
+			slimy.detach();
+		}
+		
+		SlimeFactory.Log.d(Slime.TAG, "detachSlimies end");
 	}
 
 	public LevelDefinition getLevelDefinition() {

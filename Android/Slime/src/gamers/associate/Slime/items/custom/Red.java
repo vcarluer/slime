@@ -338,6 +338,7 @@ public class Red extends GameItemPhysic implements ISelectable, IDissolvable {
 	private void deadAnim() {		
 		Slimy slimy = (Slimy) Level.currentLevel.getStartItem();
 		if (slimy.isAlive() && this.isBoss()) {
+			Level.currentLevel.detachSlimies();
 			slimy.win();
 			slimy.destroyBody();					
 		}	

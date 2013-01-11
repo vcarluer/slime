@@ -1,6 +1,8 @@
 package gamers.associate.Slime.items.custom;
 
+import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.base.GameItemPhysic;
 import gamers.associate.Slime.items.base.SpriteType;
 
@@ -103,8 +105,11 @@ public class EvacuationPlug extends GameItemPhysic {
 	}
 	
 	private void remove() {
+		SlimeFactory.Log.d(Slime.TAG, "EvacuationPlug.remove() start");
 		Level.currentLevel.detachSlimies(this);
+		SlimeFactory.Log.d(Slime.TAG, "destroybody start");
 		this.destroyBody();
+		SlimeFactory.Log.d(Slime.TAG, "destroybody end");
 		CCFadeOut fade = CCFadeOut.action(1.0f);
 		CCRotateBy rotate = CCRotateBy.action(0.1f, 30f);
 		CCMoveBy move = CCMoveBy.action(1.0f, CGPoint.make(0, -75f));
@@ -114,6 +119,8 @@ public class EvacuationPlug extends GameItemPhysic {
 		this.sprite.runAction(fade);
 		this.sprite.runAction(rotate);
 		this.sprite.runAction(seq);		
+		
+		SlimeFactory.Log.d(Slime.TAG, "EvacuationPlug.remove() end");
 	}
 
 	private boolean isRemoveNextStep;

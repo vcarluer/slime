@@ -400,4 +400,7 @@ public class Slimy extends GameItemPhysic implements IBurnable, IDissolvable, IE
 
 	public void detach(GameItemPhysic gameItem) {
 	}
+	
+	public void detach() {
+	}
 }

@@ -2,8 +2,10 @@ package gamers.associate.Slime.items.custom;
 
 
 import gamers.associate.Slime.R;
+import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.ContactInfo;
 import gamers.associate.Slime.game.Level;
+import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.GameItemCocos;
 import gamers.associate.Slime.items.base.GameItemPhysic;
@@ -95,13 +97,15 @@ public class GoalPortal extends GameItemPhysic implements ISelectable {
 	 * @see gamers.associate.Slime.items.base.GameItemPhysic#handleContact(gamers.associate.Slime.items.base.GameItemPhysic)
 	 */
 	@Override
-	protected void handleContact(ContactInfo item) {		
+	protected void handleContact(ContactInfo item) {	
+		SlimeFactory.Log.d(Slime.TAG, "GoalPortal.handleContact(...) start");
 		super.handleContact(item);
 		
 		if (this.isActive && item.getContactWith() instanceof Slimy) {
 			Slimy slimy = (Slimy) item.getContactWith();
 			if (slimy.isAlive()) {
-				slimy.win();
+				Level.currentLevel.detachSlimies();
+				slimy.win();							
 				slimy.destroyBody();			
 				
 				if (Level.currentLevel.win(false)) {					
@@ -116,7 +120,9 @@ public class GoalPortal extends GameItemPhysic implements ISelectable {
 				
 				this.applyOtherPortalEnterAction(slimy);
 			}
-		}				
+		}
+		
+		SlimeFactory.Log.d(Slime.TAG, "GoalPortal.handleContact(...) end");
 	}
 	
 	private boolean nextStepActivate;

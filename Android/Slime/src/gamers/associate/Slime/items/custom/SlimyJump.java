@@ -735,25 +735,37 @@ public class SlimyJump extends Slimy implements ISelectable {
 	}
 
 	protected void detachCurrentJoin() {
+		SlimeFactory.Log.d(Slime.TAG, "SlimyJump.detachCurrentJoin() start");
 		if (this.getBody() != null &&
 				this.currentJoint != null &&
 				this.contactWith != null && 
 				this.contactWith.getBody() != null) {
+			SlimeFactory.Log.d(Slime.TAG, "destroying joint");
 			this.world.destroyJoint(this.currentJoint);			
 		}
 		
 		this.currentJoint = null;
 		this.currentJointDef = null;
 		this.contactWith = null;
+		
+		SlimeFactory.Log.d(Slime.TAG, "SlimyJump.detachCurrentJoin() end");
 	}
 
 	@Override
-	public void detach(GameItemPhysic gameItem) {
+	public void detach(GameItemPhysic gameItem) {		
 		super.detach(gameItem);
 		if (this.currentJoint != null && gameItem != null) {
-			if (this.contactWith != null && this.contactWith.getId().equals(gameItem.getId())) {
+			if (this.contactWith != null && this.contactWith.getId().equals(gameItem.getId())) {				
 				this.detachCurrentJoin();
 			}
+		}				
+	}
+	
+	@Override
+	public void detach() {
+		super.detach();
+		if (this.currentJoint != null) {
+			this.detachCurrentJoin();			
 		}
 	}
 
