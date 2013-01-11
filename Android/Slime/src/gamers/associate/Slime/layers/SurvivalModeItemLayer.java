@@ -1,17 +1,17 @@
 package gamers.associate.Slime.layers;
 
+import android.annotation.SuppressLint;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.achievements.AchievementStatistics;
 import gamers.associate.Slime.items.custom.Star;
 
 import org.cocos2d.layers.CCScene;
-import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.types.CGPoint;
 
-public class SurvivalModeItemLayer extends ModeItemLayer {
+@SuppressLint("DefaultLocale") public class SurvivalModeItemLayer extends ModeItemLayer {
 	private static final String SURVIVAL = "Survival";
 	private static final String WORLD_ITEMS_BTN_EXTREME_PNG = "world-items/button-survival.png";
 	private CCLabel lblScore;

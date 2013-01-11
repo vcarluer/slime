@@ -1,6 +1,5 @@
 package gamers.associate.Slime;
 
-import gamers.associate.Slime.game.LevelDifficulty;
 import android.app.Activity;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;

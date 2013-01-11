@@ -2,8 +2,6 @@ package gamers.associate.Slime.game;
 
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.achievements.AchievementStatistics;
-import gamers.associate.Slime.game.achievements.DontPushAch;
-import gamers.associate.Slime.game.achievements.RedAlertAch;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.custom.EvacuationPlug;
 import gamers.associate.Slime.levels.GamePlay;

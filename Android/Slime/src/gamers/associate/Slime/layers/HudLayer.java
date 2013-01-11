@@ -1,12 +1,12 @@
 package gamers.associate.Slime.layers;
 
+import android.annotation.SuppressLint;
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.IGameItemHandler;
 import gamers.associate.Slime.game.IGamePlay;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
-import gamers.associate.Slime.game.TitleGenerator;
 import gamers.associate.Slime.game.Util;
 import gamers.associate.Slime.items.base.GameItem;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
@@ -37,7 +37,7 @@ import org.cocos2d.opengl.CCBitmapFontAtlas;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
 
-public class HudLayer extends CCLayer implements IGameItemHandler {
+@SuppressLint("DefaultLocale") public class HudLayer extends CCLayer implements IGameItemHandler {
 	private static final int countPaddingX = 130;
 	private static final float scoreTakenPadding = 10f;
 	private static final float TextHeight = 60f;

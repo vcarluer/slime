@@ -9,7 +9,6 @@ import gamers.associate.Slime.levels.LevelHome;
 
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
-import org.cocos2d.menus.CCMenuItemLabel;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.transitions.CCFadeTransition;
 
@@ -18,11 +17,7 @@ import android.annotation.SuppressLint;
 @SuppressLint("DefaultLocale") 
 public class ChooseModeLayer extends CCLayer {
 	private static CCScene scene;
-	private CCMenuItemLabel storyLabel;
-	private CCMenuItemLabel survivalLabel;
 	private AchievementItemLayer achievementItem;
-	
-	private static float padding = 50f;
 	
 	private StoryModeItemLayer story;
 	private SurvivalModeItemLayer survival;

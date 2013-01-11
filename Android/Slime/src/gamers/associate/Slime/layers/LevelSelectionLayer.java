@@ -1,5 +1,6 @@
 package gamers.associate.Slime.layers;
 
+import android.annotation.SuppressLint;
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelSelection;
@@ -19,12 +20,11 @@ import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.ccColor3B;
 
-public class LevelSelectionLayer extends CCLayer {
+@SuppressLint("DefaultLocale") public class LevelSelectionLayer extends CCLayer {
 	private CCMenu menu;
 	private CCMenu menuCommand;
 	
 	private static float bgButtonScale = 2;
-	private static float originalMenuBgCenter = 82.5f;
 	private LevelSelection levelSelection;
 	
 	public LevelSelectionLayer(LevelSelection selection) {

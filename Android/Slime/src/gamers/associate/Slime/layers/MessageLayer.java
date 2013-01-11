@@ -1,13 +1,12 @@
 package gamers.associate.Slime.layers;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-
+import android.annotation.SuppressLint;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.items.custom.MenuSprite;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCDelayTime;
@@ -81,7 +80,7 @@ public class MessageLayer extends CCLayer {
 		this.showNext();
 	}
 	
-	private void showNext() {
+	@SuppressLint("DefaultLocale") private void showNext() {
 		if (!this.isShowing && this.messages.size() > 0) {
 			MessageInfo info = this.messages.poll();
 			this.isShowing = true;

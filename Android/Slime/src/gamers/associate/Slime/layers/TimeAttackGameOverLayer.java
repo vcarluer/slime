@@ -14,9 +14,10 @@ import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.ccColor3B;
 
+import android.annotation.SuppressLint;
 import android.view.MotionEvent;
 
-public class TimeAttackGameOverLayer extends CCLayer {
+@SuppressLint("DefaultLocale") public class TimeAttackGameOverLayer extends CCLayer {
 	private static CCScene scene;
 	private CCLabel congratLabel;
 	private CCLabel endLabel;

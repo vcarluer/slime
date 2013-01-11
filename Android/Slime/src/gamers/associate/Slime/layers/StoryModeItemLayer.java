@@ -3,17 +3,16 @@ package gamers.associate.Slime.layers;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.WorldPackage;
 import gamers.associate.Slime.game.achievements.AchievementStatistics;
-import gamers.associate.Slime.items.custom.Star;
 
 import org.cocos2d.layers.CCScene;
-import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.types.CGPoint;
 
+import android.annotation.SuppressLint;
 import android.util.FloatMath;
 
-public class StoryModeItemLayer extends ModeItemLayer {
+@SuppressLint("DefaultLocale") public class StoryModeItemLayer extends ModeItemLayer {
 	private static final String STORY = "Story";
 	private static final String WORLD_ITEMS_BTN_HARD_PNG = "world-items/button-story.png";
 	private static float shiftScore = - 75f;

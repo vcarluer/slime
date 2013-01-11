@@ -1,15 +1,11 @@
 package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.R;
-import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Sharer;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.items.custom.SpawnPortal;
-import gamers.associate.Slime.items.custom.Star;
-import gamers.associate.Slime.levels.GamePlay;
-import gamers.associate.Slime.levels.LevelHome;
 
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCDelayTime;
@@ -22,7 +18,6 @@ import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
-import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.transitions.CCFadeTransition;
@@ -47,9 +42,6 @@ public class HomeLayer extends CCLayer {
 	
 	private CCSprite titleSprite;
 	private CCMenu shareMenu;
-	private CCMenu achievementMenu;
-	private CCLabel achievementLabel;
-	
 	private boolean nextDoNotStopMusic;
 	
 	private CCLayer top;

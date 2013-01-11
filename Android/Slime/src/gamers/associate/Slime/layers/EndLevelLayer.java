@@ -1,17 +1,14 @@
 package gamers.associate.Slime.layers;
 
 import gamers.associate.Slime.R;
-import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.Rank;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.TimeAttackGame;
-import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.items.custom.RankFactory;
 import gamers.associate.Slime.items.custom.Slimy;
-import gamers.associate.Slime.items.custom.SlimySuccess;
 import gamers.associate.Slime.items.custom.Star;
 import gamers.associate.Slime.levels.GamePlay;
 
@@ -30,7 +27,6 @@ import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
-import org.cocos2d.types.ccColor4B;
 
 import android.annotation.SuppressLint;
 import android.view.MotionEvent;
@@ -49,7 +45,6 @@ import android.view.MotionEvent;
 	private static final float paddingSquare = 25;	
 	private CCSprite slime;
 	private CCSprite star;
-	private CCSprite square;
 	private CCBitmapFontAtlas starCountLabel;
 	private CCBitmapFontAtlas scoreLabel;
 	private CCBitmapFontAtlas totalScoreLabel;

@@ -1,5 +1,6 @@
 package gamers.associate.Slime.levels.generator;
 
+import android.annotation.SuppressLint;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
@@ -15,7 +16,7 @@ import java.util.Random;
 
 import org.cocos2d.types.CGPoint;
 
-public abstract class LevelGraphGeneratorBase {
+@SuppressLint("DefaultLocale") public abstract class LevelGraphGeneratorBase {
 	protected static boolean debugBlocOn = SlimeFactory.IsDebugBlocOn;
 	protected static String forceBlock = SlimeFactory.ForceBlockPath;
 	

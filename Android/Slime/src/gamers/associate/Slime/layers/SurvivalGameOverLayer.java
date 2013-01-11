@@ -17,9 +17,10 @@ import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.ccColor3B;
 
+import android.annotation.SuppressLint;
 import android.view.MotionEvent;
 
-public class SurvivalGameOverLayer extends CCLayer {
+@SuppressLint("DefaultLocale") public class SurvivalGameOverLayer extends CCLayer {
 	private static CCScene scene;
 	private CCLabel scoreLabel;
 	private CCLabel gameOverLabel;

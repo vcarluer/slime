@@ -1,12 +1,12 @@
 package gamers.associate.Slime.layers;
 
+import android.annotation.SuppressLint;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelBuilderGenerator;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.Vibe;
-import gamers.associate.Slime.game.achievements.AchievementStatistics;
 import gamers.associate.Slime.items.custom.Star;
 import gamers.associate.Slime.levels.GamePlay;
 
@@ -20,7 +20,7 @@ import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.types.ccColor3B;
 
-public class SurvivalItemLayer extends CanvasItemLayer {	
+@SuppressLint("DefaultLocale") public class SurvivalItemLayer extends CanvasItemLayer {	
 	private static final String GREY = "-grey";
 	private static final String BKGEXT = ".png";
 	protected static final float fontSize = 32f;

@@ -30,7 +30,6 @@ public class GameInformation {
 	private int totalCurrent;
 	private boolean lastIsHighScore;
 	private static boolean resetHighScores = SlimeFactory.resetHighScores;
-	private int worldId;
 	private boolean survivalGameOverEasy;
 	private boolean survivalGameOverNormal;
 	private boolean survivalGameOverHard;
@@ -496,16 +495,6 @@ public class GameInformation {
 		return this.lastIsHighScore;
 	}
 
-	public int getWorldId() {
-		// return worldId;
-		// todo: fix me!
-		return this.getDifficulty();
-	}
-
-	public void setWorldId(int worldId) {
-		this.worldId = worldId;
-	}
-
 	public boolean isSurvivalGameOver() {
 		return this.isSurvivalGameOver(this.levelDifficulty);
 	}
@@ -546,24 +535,6 @@ public class GameInformation {
 		}
 		
 		this.store();
-	}
-	
-	private void restoreCurrentScore() {
-		switch (this.levelDifficulty) {
-			default:
-			case LevelDifficulty.Easy:
-				this.totalCurrent = this.totalCurrentEasy;
-				break;
-			case LevelDifficulty.Normal:
-				this.totalCurrent = this.totalCurrentNormal;
-				break;
-			case LevelDifficulty.Hard:
-				this.totalCurrent = this.totalCurrentHard;
-				break;
-			case LevelDifficulty.Extrem:
-				this.totalCurrent = this.totalCurrentExtrem;
-				break;
-		}
 	}
 	
 	public boolean canContinueSurvival() {

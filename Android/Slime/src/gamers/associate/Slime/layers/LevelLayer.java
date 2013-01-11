@@ -5,7 +5,6 @@ import gamers.associate.Slime.game.CameraManager;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.achievements.AchievementStatistics;
-import gamers.associate.Slime.game.achievements.PuppetMasterAch;
 
 import java.util.ArrayList;
 

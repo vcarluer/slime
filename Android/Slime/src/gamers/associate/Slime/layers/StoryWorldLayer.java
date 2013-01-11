@@ -6,7 +6,6 @@ import gamers.associate.Slime.game.Rank;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.game.WorldPackage;
-import gamers.associate.Slime.items.custom.Button;
 import gamers.associate.Slime.items.custom.MenuSprite;
 import gamers.associate.Slime.items.custom.RankFactory;
 import gamers.associate.Slime.levels.LevelDefinition;
@@ -29,7 +28,6 @@ import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCSlideInLTransition;
 import org.cocos2d.transitions.CCSlideInRTransition;
 import org.cocos2d.transitions.CCTransitionScene;
-import org.cocos2d.types.ccColor4B;
 
 import android.annotation.SuppressLint;
 import android.util.FloatMath;
@@ -49,8 +47,6 @@ public class StoryWorldLayer extends CCLayer implements IScrollable {
 	
 	private int targetPageLeft;
 	private int targetPageRight;	
-	
-	private static int paddingTitle = fontSize + 5;
 	
 	private static SparseArray<CCScene> diffScenes = new SparseArray<CCScene>();
 	private CCMenu backMenu;

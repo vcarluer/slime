@@ -55,9 +55,10 @@ import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor3B;
 import org.cocos2d.types.ccColor4B;
 
+import android.annotation.SuppressLint;
 import com.badlogic.gdx.physics.box2d.World;
 
-public abstract class SlimeFactory {
+@SuppressLint("DefaultLocale") public abstract class SlimeFactory {
 	// Debug vars
 	public static final boolean LogOn = true;
 	public static boolean IsLevelSelectionOn = true;
