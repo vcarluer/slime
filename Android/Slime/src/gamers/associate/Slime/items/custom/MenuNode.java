@@ -164,7 +164,7 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 			CCCallFunc callback = CCCallFunc.action(this, "endEnterAnimDone");
 			CCSequence sequence = CCSequence.actions(rotate, callback);
 			selection.getSprite().runAction(sequence);
-			Sounds.playEffect(R.raw.getrupee);
+//			Sounds.playEffect(R.raw.getrupee);
 		}
 		else {
 			this.endEnterAnimDone();
@@ -228,7 +228,7 @@ public class MenuNode extends GameItemCocos implements ISelectable {
 			if (isUnlock = true) {
 				CCFadeIn fadeIn = CCFadeIn.action(2.0f);
 				this.getSprite().runAction(fadeIn);
-				Sounds.playEffect(R.raw.key);
+//				Sounds.playEffect(R.raw.key);
 			}
 		}
 	}

@@ -27,18 +27,14 @@ public class Sounds {
 		preloadEffect(R.raw.victory);
 		preloadEffect(R.raw.slimyfire);
 		preloadEffect(R.raw.lose);
-		preloadEffect(R.raw.slimyselect);
 		preloadEffect(R.raw.portalgoal);
 		preloadEffect(R.raw.tick);
 		preloadEffect(R.raw.slimyland);
 		preloadEffect(R.raw.bump);
 		preloadEffect(R.raw.slimydeath);
-		preloadEffect(R.raw.key);
-		preloadEffect(R.raw.getrupee);
 		preloadEffect(R.raw.slimyswitch);
 		preloadEffect(R.raw.star);
 		preloadEffect(R.raw.platformbump);
-		preloadEffect(R.raw.platformstick);
 		preloadEffect(R.raw.bipcamera);
 		
 	}		
