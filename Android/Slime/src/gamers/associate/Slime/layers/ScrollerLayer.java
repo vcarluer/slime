@@ -12,7 +12,7 @@ import android.view.MotionEvent;
 
 public class ScrollerLayer extends CCLayer {
 	private static final int SLIDE_THREASOLD = 50;
-	private static final int SCROLL_SPEED = 2;
+	private static final int SCROLL_SPEED = 3;
 	private CCNode handled;
 	private boolean hasMoved;
 	private CGPoint tmpPoint;
@@ -80,33 +80,34 @@ public class ScrollerLayer extends CCLayer {
 
 	@Override
 	public boolean ccTouchesEnded(MotionEvent event) {
-		final float distanceTimeFactor = 0.5f;
-		float gestureTime = (System.currentTimeMillis() - this.startTouch) / 1000f;
-		if (gestureTime > 0) {
-			float gestureDistance = this.startY - event.getY();
-			float gestureVelocity = gestureDistance / gestureTime;
-			
-			this.tmpPoint.x =getHandled().getPosition().x;
-			this.tmpPoint.y = getHandled().getPosition().y + (gestureVelocity * distanceTimeFactor);
-			if (this.tmpPoint.y > this.maxScroll) {
-				this.tmpPoint.y = this.maxScroll;
-			}
-			
-			if (this.tmpPoint.y < this.minScoll) {
-				this.tmpPoint.y = this.minScoll;
-			}
-				
-			CCMoveTo moveTo = CCMoveTo.action(distanceTimeFactor, this.tmpPoint);
-			CCEaseOut ease = CCEaseOut.action(moveTo, 10.0f);
-			getHandled().stopAllActions();
-			getHandled().runAction(ease);			
-			
-			this.hasMoved = false;
-			return true;
-		}
-		
-		this.hasMoved = false;
-		return false;
+//		final float distanceTimeFactor = 0.5f;
+//		float gestureTime = (System.currentTimeMillis() - this.startTouch) / 1000f;
+//		if (gestureTime > 0) {
+//			float gestureDistance = this.startY - event.getY();
+//			float gestureVelocity = gestureDistance / gestureTime;
+//			
+//			this.tmpPoint.x =getHandled().getPosition().x;
+//			this.tmpPoint.y = getHandled().getPosition().y + (gestureVelocity * distanceTimeFactor);
+//			if (this.tmpPoint.y > this.maxScroll) {
+//				this.tmpPoint.y = this.maxScroll;
+//			}
+//			
+//			if (this.tmpPoint.y < this.minScoll) {
+//				this.tmpPoint.y = this.minScoll;
+//			}
+//				
+//			CCMoveTo moveTo = CCMoveTo.action(distanceTimeFactor, this.tmpPoint);
+//			CCEaseOut ease = CCEaseOut.action(moveTo, 10.0f);
+//			getHandled().stopAllActions();
+//			getHandled().runAction(ease);			
+//			
+//			this.hasMoved = false;
+//			return true;
+//		}
+//		
+//		this.hasMoved = false;
+//		return false;
+		return true;
 		
 	}
 	
