@@ -35,7 +35,6 @@ public class Sounds {
 		preloadEffect(R.raw.slimyswitch);
 		preloadEffect(R.raw.star);
 		preloadEffect(R.raw.platformbump);
-		preloadEffect(R.raw.platformstick);
 		preloadEffect(R.raw.bipcamera);
 		
 	}		
