@@ -1,9 +1,11 @@
 package gamers.associate.Slime;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -82,6 +84,24 @@ public class SlimeIntro extends Activity {
         videos.start();
 	}
 	
+	@Override
+	protected void onResume() {
+		this.hideButtons();
+		super.onResume();
+	}
+
+	@Override
+	protected void onStart() {
+		this.hideButtons();
+		super.onStart();
+	}
+	
+	@SuppressLint("NewApi") private void hideButtons() {
+		if (Build.VERSION.SDK_INT >= 14) {
+			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
+		}
+	}
+
 	private void end() {
 		videos.stopPlayback();
 		videos.clearFocus();

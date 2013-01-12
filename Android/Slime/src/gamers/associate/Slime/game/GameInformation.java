@@ -44,6 +44,10 @@ public class GameInformation {
 	private int normalInARow;
 	private int hardInARow;
 	private int extremInARow;
+	private int currentEasyInARow;
+	private int currentNormalInARow;
+	private int currentHardInARow;
+	private int currentExtremInARow;
 	private SurvivalItemLayer currentSurvival;
 	private boolean story1Finished; // Bad place but quick
 	
@@ -71,7 +75,7 @@ public class GameInformation {
 			this.normalInARow = 0;
 			this.hardInARow = 0;
 			this.extremInARow = 0;
-			this.setStory1Finished(false);
+			this.story1Finished = false;
 			this.store();
 		}
 		
@@ -267,6 +271,15 @@ public class GameInformation {
 			buffWriter.write(String.valueOf(this.extremInARow));
 			buffWriter.newLine();
 			buffWriter.write(String.valueOf(this.isStory1Finished()));
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.currentEasyInARow));
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.currentNormalInARow));
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.currentHardInARow));
+			buffWriter.newLine();
+			buffWriter.write(String.valueOf(this.currentExtremInARow));
+			
 		} catch (FileNotFoundException ex) {
 			SlimeFactory.Log.e(Slime.TAG, "ERROR, file not found " + fileName);
 			ex.printStackTrace();
@@ -365,7 +378,19 @@ public class GameInformation {
 								this.extremInARow = Integer.valueOf(line).intValue();
 								break;
 							case 21:
-								this.setStory1Finished(Boolean.valueOf(line).booleanValue());
+								this.story1Finished = Boolean.valueOf(line).booleanValue();
+								break;
+							case 22:
+								this.currentEasyInARow = Integer.valueOf(line).intValue();
+								break;
+							case 23:
+								this.currentNormalInARow = Integer.valueOf(line).intValue();
+								break;
+							case 24:
+								this.currentHardInARow = Integer.valueOf(line).intValue();
+								break;
+							case 25:
+								this.currentExtremInARow = Integer.valueOf(line).intValue();
 								break;
 							default:
 								break;
@@ -565,11 +590,35 @@ public class GameInformation {
 	
 	public void setInARowLose() {
 		int score = this.levelNum - 1;
+		this.setCurrentInARow(0);
 		this.setInARow(score);
+		this.store();
 	}
 	public void setInARow() {
 		int score = this.levelNum;
-		this.setInARow(score); 
+		this.setCurrentInARow(score);
+		this.setInARow(score);
+		this.store();		
+	}
+	
+	private void setCurrentInARow(int score) {		
+		switch (this.levelDifficulty) {
+		default:
+		case LevelDifficulty.Easy:
+			this.currentEasyInARow = score;		
+			break;
+		case LevelDifficulty.Normal:
+			this.currentNormalInARow = score;
+			break;
+		case LevelDifficulty.Hard:
+			this.currentHardInARow = score;
+			break;
+		case LevelDifficulty.Extrem:
+			this.currentExtremInARow = score;
+			break;
+		}
+		
+		AchievementStatistics.inARow = score;
 	}
 	
 	private void setInARow(int score) {		
@@ -598,7 +647,6 @@ public class GameInformation {
 		}
 		
 		AchievementStatistics.inARow = score;
-		this.store();
 	}
 	
 	public int getInARow(int diff) {
@@ -612,6 +660,20 @@ public class GameInformation {
 			return this.hardInARow;	
 		case LevelDifficulty.Extrem:
 			return this.extremInARow;	
+		}
+	}
+	
+	public int getCurrentInARow(int diff) {
+		switch (diff) {
+		default:
+		case LevelDifficulty.Easy:			
+			return this.currentEasyInARow;
+		case LevelDifficulty.Normal:
+			return this.currentNormalInARow;	
+		case LevelDifficulty.Hard:
+			return this.currentHardInARow;	
+		case LevelDifficulty.Extrem:
+			return this.currentExtremInARow;
 		}
 	}
 

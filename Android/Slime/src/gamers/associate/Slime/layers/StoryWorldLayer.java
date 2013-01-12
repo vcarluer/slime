@@ -99,6 +99,7 @@ public class StoryWorldLayer extends CCLayer implements IScrollable {
 	
 	@Override
 	public void onEnter() {
+		SlimeFactory.playMenuMusic();
 		this.backMenu.setVisible(false);
 		this.backMenu.setIsTouchEnabled(false);
 		CCDelayTime delay = CCDelayTime.action(transitionTime);

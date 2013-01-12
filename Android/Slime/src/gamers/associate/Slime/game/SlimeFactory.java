@@ -1,5 +1,6 @@
 package gamers.associate.Slime.game;
 
+import gamers.associate.Slime.R;
 import gamers.associate.Slime.Slime;
 import gamers.associate.Slime.game.achievements.AchievementManager;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
@@ -368,5 +369,9 @@ import com.badlogic.gdx.physics.box2d.World;
 		CCMoveTo moveTo = CCMoveTo.action(0.5f, CGPoint.make(layer.getPosition().x, 0));
 		CCSequence seq = CCSequence.actions(delay, moveTo);
 		layer.runAction(seq);
+	}
+
+	public static void playMenuMusic() {
+		Sounds.playMusic(R.raw.menumusic, true);
 	}
 }

@@ -31,6 +31,7 @@ import org.cocos2d.types.ccColor3B;
 	private int levelDiff;
 	private CCSprite diffSprite;
 	private CCLabel inProgress;
+	private CCLabel inProgressLevel;
 	
 	private static float iconSize = 70f;
 	private static final float iconSizeReference = 87f;
@@ -57,6 +58,11 @@ import org.cocos2d.types.ccColor3B;
 		this.inProgress.setColor(ccColor3B.ccc3(255, 0, 0));
 		this.inProgress.setVisible(false);
 		this.addChild(this.inProgress);
+		
+		this.inProgressLevel = SlimeFactory.getLabel("Level x", fontSizeInfo);
+		this.inProgressLevel.setColor(ccColor3B.ccc3(255, 0, 0));
+		this.inProgressLevel.setVisible(false);
+		this.addChild(this.inProgressLevel);
 	}
 	
 	@Override
@@ -104,8 +110,17 @@ import org.cocos2d.types.ccColor3B;
 				this.addChild(levelLabel);
 				this.toDestroy.add(levelLabel);
 				
-				this.inProgress.setPosition(this.labelX, levelLabel.getPosition().y - fontSizeInfo / 2 - paddingInfo - fontSizeInfo / 2);
-				this.inProgress.setVisible(SlimeFactory.GameInfo.canContinueSurvival(this.levelDiff));
+				boolean canContinue = SlimeFactory.GameInfo.canContinueSurvival(this.levelDiff);
+				if (canContinue) {
+					this.inProgress.setPosition(this.labelX, levelLabel.getPosition().y - fontSizeInfo / 2 - paddingInfo - fontSizeInfo / 2);
+					String currentLevel = "LEVEL " + String.valueOf(SlimeFactory.GameInfo.getCurrentInARow(this.levelDiff) + 1);
+					this.inProgressLevel.setString(currentLevel);
+					this.inProgressLevel.setPosition(this.labelX, this.inProgress.getPosition().y - fontSizeInfo / 2 - paddingInfo - fontSizeInfo / 2);
+				}
+				
+				this.inProgress.setVisible(canContinue);
+				this.inProgressLevel.setVisible(canContinue);
+				
 			}
 		}
 		
@@ -154,6 +169,7 @@ import org.cocos2d.types.ccColor3B;
 			SlimeFactory.GameInfo.resetDifficulty(this.levelDiff);
 		} else {
 			SlimeFactory.GameInfo.setDifficulty(this.levelDiff);
+			SlimeFactory.GameInfo.setLevel(SlimeFactory.GameInfo.getCurrentInARow(this.levelDiff) + 1);
 		}
 		 
 		Level level = Level.get(LevelBuilderGenerator.defaultId, true, GamePlay.Survival);

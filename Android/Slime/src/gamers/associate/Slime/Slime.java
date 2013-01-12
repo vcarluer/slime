@@ -67,6 +67,7 @@ public class Slime extends Activity {
 	
 	private Handler mHandler;
 	private StoryMenuItem storyMenuItemAfterIntro;
+	private static boolean needMusicResume;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -221,12 +222,11 @@ public class Slime extends Activity {
     	SlimeFactory.Log.d(Slime.TAG, "Slime.onPause");
         super.onPause();
 
+        needMusicResume = Sounds.isMusicPlaying;
+    	Sounds.stopMusic();
+        
         if (Level.currentLevel != null) {
         	Level.currentLevel.setPause(true);
-        	
-        	if (Level.currentLevel.getCurrentLevelName() == LevelHome.Id) {
-            	Sounds.pauseMusic();
-        	}
         }                
         
         CCDirector.sharedDirector().onPause();
@@ -244,13 +244,18 @@ public class Slime extends Activity {
         	this.startLevel = false;
         	if (this.storyMenuItemAfterIntro != null) {
         		this.storyMenuItemAfterIntro.runLevel();
+        		this.storyMenuItemAfterIntro = null;
         	}
         } else {
+        	
+        	if (needMusicResume && Level.currentLevel != null && (!Level.currentLevel.getActivated() || Level.currentLevel.getCurrentLevelName() == LevelHome.Id)) {
+        		SlimeFactory.playMenuMusic();
+        	}
+        	
         	if (Level.currentLevel != null) {
             	// No automatic unpause
             	if (Level.currentLevel.getCurrentLevelName() == LevelHome.Id) {
             		Level.currentLevel.setPause(false);
-            		Sounds.resumeMusic();
             	} else {
             		// to put the hud back in pause
             		Level.currentLevel.enablePauseLayer();
@@ -341,6 +346,7 @@ public class Slime extends Activity {
 	}
 	
 	public void runIntro(StoryMenuItem menuItem) {
+		Sounds.stopMusic();
 		this.storyMenuItemAfterIntro = menuItem;
 		Intent i = new Intent(this, SlimeIntro.class);
 		int currentDifficulty = SlimeFactory.GameInfo.getDifficulty();

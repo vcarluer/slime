@@ -105,6 +105,7 @@ public class StoryMenuItem extends CCLayer {
 	}
 
 	private void select() {		
+		Sounds.stopMusic();
 		if (this.levelDefinition.isUnlock()) {
 			Sounds.playEffect(R.raw.menuselect);
 			if (this.levelDefinition.getNumber() == 1) {
