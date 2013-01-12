@@ -10,19 +10,18 @@ import org.cocos2d.types.CGPoint;
 
 import android.view.MotionEvent;
 
-public class ScrollerLayer extends CCLayer {
+public class CopyOfScrollerLayer extends CCLayer {
 	private static final int SLIDE_THREASOLD = 50;
 	private static final int SCROLL_SPEED = 3;
 	private CCNode handled;
 	private boolean hasMoved;
 	private CGPoint tmpPoint;
+	private float lastDelta;
 	private float minScoll;
 	private float maxScroll;
 	private IScrollable storyLayer;
-	private float previousY;
-	private long lastTouch;
 	
-	public ScrollerLayer() {
+	public CopyOfScrollerLayer() {
 		this.setIsTouchEnabled(true);
 		this.tmpPoint = CGPoint.zero();
 	}
@@ -32,20 +31,10 @@ public class ScrollerLayer extends CCLayer {
 		if (event.getAction() == MotionEvent.ACTION_MOVE) {
 			if (event.getHistorySize() > 0) {
 				if (this.handled != null) {
-					this.lastTouch = System.currentTimeMillis();
-					float cumulativeY = 0;
-					for(int pos = 0; pos < event.getHistorySize(); pos++) {
-						float histY = event.getHistoricalY(pos);
-						if (this.previousY > - 1) {
-							cumulativeY += this.previousY - histY;
-						}
-						
-						this.previousY = histY;
-					}
-					
-					if (Math.abs(cumulativeY) > 5) {
+					this.lastDelta = - (event.getY() - event.getHistoricalY(0)) * (SCROLL_SPEED * SlimeFactory.SGSDensity);
+					if (Math.abs(this.lastDelta) > 5) {
 						this.tmpPoint.x = getHandled().getPosition().x;
-						this.tmpPoint.y = getHandled().getPosition().y + cumulativeY;
+						this.tmpPoint.y = getHandled().getPosition().y + this.lastDelta;
 						if (this.tmpPoint.y > this.maxScroll) {
 							this.tmpPoint.y = this.maxScroll;
 						}
@@ -58,6 +47,8 @@ public class ScrollerLayer extends CCLayer {
 						CCMoveTo moveTo = CCMoveTo.action(0, this.tmpPoint);
 						getHandled().runAction(moveTo);
 						this.hasMoved = true;
+						
+						this.startY = event.getY();
 					}
 				}
 				
@@ -89,10 +80,6 @@ public class ScrollerLayer extends CCLayer {
 
 	@Override
 	public boolean ccTouchesEnded(MotionEvent event) {
-//		float gestureTime = (System.currentTimeMillis() - this.lastTouch) / 1000f;
-//		float gestureDistance = this.previousY - event.getY();
-//		float gestureVelocity = gestureDistance / gestureTime;
-		
 //		final float distanceTimeFactor = 0.5f;
 //		float gestureTime = (System.currentTimeMillis() - this.startTouch) / 1000f;
 //		if (gestureTime > 0) {
@@ -124,11 +111,14 @@ public class ScrollerLayer extends CCLayer {
 		
 	}
 	
+	private long startTouch;
+	private float startY;
+	
 	@Override
 	public boolean ccTouchesBegan(MotionEvent event) {
 		this.hasMoved = false;
-		this.lastTouch = System.currentTimeMillis();
-		this.previousY = event.getY();
+		this.startTouch = System.currentTimeMillis();
+		this.startY = event.getY();
 		return true;
 	}
 
