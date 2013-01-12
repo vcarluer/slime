@@ -75,7 +75,7 @@ public class GameInformation {
 			this.normalInARow = 0;
 			this.hardInARow = 0;
 			this.extremInARow = 0;
-			this.setStory1Finished(false);
+			this.story1Finished = false;
 			this.store();
 		}
 		
@@ -378,7 +378,7 @@ public class GameInformation {
 								this.extremInARow = Integer.valueOf(line).intValue();
 								break;
 							case 21:
-								this.setStory1Finished(Boolean.valueOf(line).booleanValue());
+								this.story1Finished = Boolean.valueOf(line).booleanValue();
 								break;
 							case 22:
 								this.currentEasyInARow = Integer.valueOf(line).intValue();
@@ -592,11 +592,13 @@ public class GameInformation {
 		int score = this.levelNum - 1;
 		this.setCurrentInARow(0);
 		this.setInARow(score);
+		this.store();
 	}
 	public void setInARow() {
 		int score = this.levelNum;
 		this.setCurrentInARow(score);
-		this.setInARow(score); 
+		this.setInARow(score);
+		this.store();		
 	}
 	
 	private void setCurrentInARow(int score) {		
@@ -617,7 +619,6 @@ public class GameInformation {
 		}
 		
 		AchievementStatistics.inARow = score;
-		this.store();
 	}
 	
 	private void setInARow(int score) {		
@@ -646,7 +647,6 @@ public class GameInformation {
 		}
 		
 		AchievementStatistics.inARow = score;
-		this.store();
 	}
 	
 	public int getInARow(int diff) {
@@ -673,7 +673,7 @@ public class GameInformation {
 		case LevelDifficulty.Hard:
 			return this.currentHardInARow;	
 		case LevelDifficulty.Extrem:
-			return this.currentExtremInARow;	
+			return this.currentExtremInARow;
 		}
 	}
 
