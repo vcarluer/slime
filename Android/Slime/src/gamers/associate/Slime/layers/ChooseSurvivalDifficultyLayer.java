@@ -84,6 +84,8 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer {
 			delayTime += 0.3f;
 		}
 		
+		SlimeFactory.playMenuMusic();
+		
 		super.onEnter();
 	}
 	

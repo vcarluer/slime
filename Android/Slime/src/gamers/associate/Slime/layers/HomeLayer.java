@@ -42,7 +42,6 @@ public class HomeLayer extends CCLayer {
 	
 	private CCSprite titleSprite;
 	private CCMenu shareMenu;
-	private boolean nextDoNotStopMusic;
 	
 	private CCLayer top;
 	
@@ -99,7 +98,7 @@ public class HomeLayer extends CCLayer {
 		this.shareMenu = HomeLayer.getNewShareButton(null, 1.0f, shareX, shareY);
 		this.addChild(this.shareMenu);
 		
-		Sounds.playMusic(R.raw.menumusic, true);
+		SlimeFactory.playMenuMusic();
 		
 		this.temp();
 		
@@ -141,13 +140,6 @@ public class HomeLayer extends CCLayer {
 	public void onExit() {
 		this.removeChild(this.shareMenu, true);
 		this.removeChild(this.top, true);
-		
-		if (!this.nextDoNotStopMusic) {
-			Sounds.pauseMusic();
-		} else {
-			this.nextDoNotStopMusic = false;
-		}
-		
 		Sounds.setEffectsDisable(false);
 		super.onExit();
 	}

@@ -54,26 +54,30 @@ public class Sounds {
 	
 	// < 5 sec
 	public static void playEffect(int soundId, boolean force) {
-		if (!disableEffects || force) {
-			synchronized(soundsMap) {
-				MediaPlayer mp = soundsMap.get(soundId);
-				if (mp != null) {
-					mp.start();
-				}
-				else {
-					SoundEngine.sharedEngine().playEffect(CCDirector.sharedDirector().getActivity(), soundId);
-				}
-			}
-		}		
+//		if (!disableEffects || force) {
+//			synchronized(soundsMap) {
+//				MediaPlayer mp = soundsMap.get(soundId);
+//				if (mp != null) {
+//					mp.start();
+//				}
+//				else {
+//					SoundEngine.sharedEngine().playEffect(CCDirector.sharedDirector().getActivity(), soundId);
+//				}
+//			}
+//		}	
+		
+		if (!disableEffects) {
+			SoundEngine.sharedEngine().playEffect(CCDirector.sharedDirector().getActivity(), soundId);
+		}
 	}
 	
 	public static void stopEffect(int soundId) {
-		synchronized(soundsMap) {
+//		synchronized(soundsMap) {
 			//MediaPlayer mp = soundsMap.get(soundId);
 			//if (mp != null) {
 				SoundEngine.sharedEngine().stopEffect(CCDirector.sharedDirector().getActivity(), soundId);
 			//}
-		}
+//		}
 	}
 	
 	private static void preloadMusic(int soundId) {
@@ -104,15 +108,17 @@ public class Sounds {
 	}
 	
 	public static void stopMusic() {
-		if (lastSndId == -1)
-			return;
+//		if (lastSndId == -1)
+//			return;
+//		
+//		MediaPlayer mp = null;
+//		synchronized(soundsMap) {
+//			mp = soundsMap.get(lastSndId);
+//			if (mp == null)
+//				return;
+//		}
+//		mp.stop();
 		
-		MediaPlayer mp = null;
-		synchronized(soundsMap) {
-			mp = soundsMap.get(lastSndId);
-			if (mp == null)
-				return;
-		}
-		mp.stop();		
+		SoundEngine.sharedEngine().pauseSound();
 	}
 }

@@ -97,9 +97,9 @@ public class SlimeIntro extends Activity {
 	}
 	
 	@SuppressLint("NewApi") private void hideButtons() {
-		if (Build.VERSION.SDK_INT >= 14) {
-			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
-		}
+//		if (Build.VERSION.SDK_INT >= 14) {
+//			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
+//		}
 	}
 
 	private void end() {
