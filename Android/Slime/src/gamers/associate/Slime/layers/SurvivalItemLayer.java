@@ -113,7 +113,7 @@ import org.cocos2d.types.ccColor3B;
 				boolean canContinue = SlimeFactory.GameInfo.canContinueSurvival(this.levelDiff);
 				if (canContinue) {
 					this.inProgress.setPosition(this.labelX, levelLabel.getPosition().y - fontSizeInfo / 2 - paddingInfo - fontSizeInfo / 2);
-					String currentLevel = "LEVEL " + String.valueOf(SlimeFactory.GameInfo.getCurrentInARow(this.levelDiff));
+					String currentLevel = "LEVEL " + String.valueOf(SlimeFactory.GameInfo.getCurrentInARow(this.levelDiff) + 1);
 					this.inProgressLevel.setString(currentLevel);
 					this.inProgressLevel.setPosition(this.labelX, this.inProgress.getPosition().y - fontSizeInfo / 2 - paddingInfo - fontSizeInfo / 2);
 				}
