@@ -89,7 +89,7 @@ import android.view.MotionEvent;
 
 	protected void goBack() {
 		Sounds.playEffect(R.raw.menuselect);
-		CCTransitionScene transition = CCFadeTransition.transition(1.0f, StoryWorldLayer.getScene(SlimeFactory.PackageManager.getCurrentPackage().getOrder()));
+		CCTransitionScene transition = CCFadeTransition.transition(1.0f, CreditLayer.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
 	}
 }
