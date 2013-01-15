@@ -375,4 +375,8 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static void playMenuMusic() {
 		Sounds.playMusic(R.raw.menumusic, true);
 	}
+
+	public static void PlayCreditMusic() {
+		Sounds.playMusic(R.raw.slimy_credits, true);
+	}
 }

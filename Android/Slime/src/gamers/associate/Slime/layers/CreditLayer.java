@@ -71,7 +71,7 @@ public class CreditLayer extends CCLayer implements IBackableLayer {
 	@Override
 	public void onEnter() {
 		Sounds.stopMusic();
-		Sounds.playMusic(R.raw.slimy_credits, true);
+		SlimeFactory.PlayCreditMusic();
 		this.setCreditText();
 		this.autoScroll();
 		super.onEnter();

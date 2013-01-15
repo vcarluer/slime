@@ -4,6 +4,7 @@ import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
 import gamers.associate.Slime.items.base.SpriteSheetFactory;
+import gamers.associate.Slime.layers.CreditLayer;
 import gamers.associate.Slime.layers.GALogoLayer;
 import gamers.associate.Slime.layers.StoryMenuItem;
 import gamers.associate.Slime.levels.LevelHome;
@@ -250,7 +251,12 @@ public class Slime extends Activity {
         } else {
         	
         	if (needMusicResume && Level.currentLevel != null && (!Level.currentLevel.getActivated() || Level.currentLevel.getCurrentLevelName() == LevelHome.Id)) {
-        		SlimeFactory.playMenuMusic();
+        		CCScene scene = CCDirector.sharedDirector().getRunningScene();
+        		if (scene != null && scene.getChildren().size() > 0 && (scene.getChildren().get(0) instanceof CreditLayer)) {
+        			SlimeFactory.PlayCreditMusic();
+        		} else {
+        			SlimeFactory.playMenuMusic();
+        		}
         	}
         	
         	if (Level.currentLevel != null) {
