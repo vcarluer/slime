@@ -29,20 +29,24 @@ import org.cocos2d.types.ccColor4B;
 import android.view.MotionEvent;
 
 public class CreditLayer extends CCLayer {
+	private static final String SLIMY = "Slimy";
 	private static final float ScrollTime = 33f * 2f;
 	private static final float CategoryFnt = 42f;
-	private static final float paddingCategory = 10f;
+	private static final float paddingCategory = 13f;
 	private static final float NameFnt = 31f;
 	private static final float paddingName = 5f;
 	private static final float paddingEndCategory = 30f;
+	private static final float disclaimerFnt = 15f;
 	private static String vcr = "Vincent Carluer";
 	private static String amz = "Antonio Munoz";
 	private static String gcc = "Guillaume Clerc";
 	private static String mbn = "Mihran Bodromian";
 	private static CCScene scene;
 	private List<CreditInfo> infos;
+	private List<String> infosDisclaimer;
 	private CGPoint endPos;
 	private Random random;
+	private int lastPick;
 	
 	public static CCScene getScene() {
 		if (scene == null) {
@@ -136,15 +140,33 @@ public class CreditLayer extends CCLayer {
 			idx++;
 		}
 		
-		currentY -= NameFnt / 2f + CCDirector.sharedDirector().winSize().height;
+		int i = 0;
+		for(String info : this.infosDisclaimer) {
+			if (i > 0) {
+				currentY -= disclaimerFnt + paddingName;
+			}
+			
+			CCLabel nameLabel = SlimeFactory.getLabel(info, disclaimerFnt);
+			nameLabel.setColor(SlimeFactory.ColorSlimeLight);
+			nameLabel.setPosition(currentX, currentY);
+			this.addChild(nameLabel, Level.zFront);
+			i++;
+		}
+		
+		currentY -= disclaimerFnt / 2f + CCDirector.sharedDirector().winSize().height;
 		this.endPos = CGPoint.make(0, - currentY);
 	}
 
+	
 	private void addRandomAnimation(float currentY) {
 		
-		int rand = random.nextInt(4);
+		this.lastPick++;
+		if (this.lastPick > 3) {
+			this.lastPick = 0;
+		}
+		
 		int diff = 0;
-		switch (rand) {
+		switch (this.lastPick) {
 			default:	
 			case 0:
 				diff = LevelDifficulty.Easy;
@@ -159,6 +181,7 @@ public class CreditLayer extends CCLayer {
 				diff = LevelDifficulty.Extrem;
 				break;
 		}
+	
 		CCSprite slime = SlimeFactory.SlimySuccess.getAnimatedSprite(SlimySuccess.getAnimationName(diff));
 		float spriteScale = 1.5f;
 		slime.setScale(spriteScale);
@@ -175,6 +198,8 @@ public class CreditLayer extends CCLayer {
 	// Credits
 	private void setCreditInfo() {
 		this.infos = new ArrayList<CreditInfo>();
+		this.infosDisclaimer = new ArrayList<String>();
+		this.lastPick = -1;
 		// Main
 		this.addInfo("Game Design", vcr, amz, gcc);
 		this.addInfo("Project Lead", vcr);
@@ -183,6 +208,7 @@ public class CreditLayer extends CCLayer {
 		this.addInfo("Lead Tool engineer", amz);
 		this.addInfo("Audio Lead", mbn);
 		this.addInfo("Level Design", vcr, amz);
+		this.addInfo("Lead Character", SLIMY);
 		// specific
 		// graph
 		this.addInfo("Character Design", gcc);
@@ -202,8 +228,14 @@ public class CreditLayer extends CCLayer {
 		this.addInfo("Beta Test", this.getBetaTesters());
 		this.addInfo("Thank you", "Our families", "cocos2d-android team", "libgdx team", "Google", "You!");
 		this.addInfo("Gamers Associate 2013", vcr, gcc, amz, mbn);
+		this.addInfoDisclaimer("No green slime were harmed in the making of this game");
+		this.addInfoDisclaimer("We can not speak about red slime under the Civil agreement 1337-42");
 	}
 	
+	private void addInfoDisclaimer(String info) {
+		this.infosDisclaimer.add(info);
+	}
+
 	private String[] getBetaTesters() {
 		return new String[] { 
 				"Rafi Leylekian", 

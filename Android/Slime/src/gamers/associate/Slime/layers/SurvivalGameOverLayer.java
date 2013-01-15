@@ -83,6 +83,7 @@ import android.view.MotionEvent;
 	
 	@Override
 	public void onEnter() {
+		SlimeFactory.playMenuMusic();
 		this.scoreLabel.setString(("Score: " + String.valueOf(SlimeFactory.GameInfo.getCurrentScore())).toUpperCase());
 		if (SlimeFactory.GameInfo.isLastHighScore()) {
 			this.newHighScore.setString("New high score!".toUpperCase());

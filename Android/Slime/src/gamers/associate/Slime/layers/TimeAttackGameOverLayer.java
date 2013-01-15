@@ -63,6 +63,7 @@ import android.view.MotionEvent;
 	
 	@Override
 	public void onEnter() {
+		SlimeFactory.playMenuMusic();
 		this.endLabel.setString(("World " + SlimeFactory.PackageManager.getCurrentPackage().getName() + " finished").toUpperCase());
 				
 		this.shareMenu = HomeLayer.getNewShareButton(
