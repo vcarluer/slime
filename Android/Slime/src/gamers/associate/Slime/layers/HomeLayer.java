@@ -1,6 +1,5 @@
 package gamers.associate.Slime.layers;
 
-import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Sharer;
 import gamers.associate.Slime.game.SlimeFactory;
 import gamers.associate.Slime.game.Sounds;
@@ -45,6 +44,8 @@ public class HomeLayer extends CCLayer {
 	
 	private CCLayer top;
 	
+	private CCMenu creditMenu;
+	
 	public static HomeLayer get() {
 		if (layer == null) {
 			layer = new HomeLayer();
@@ -70,6 +71,16 @@ public class HomeLayer extends CCLayer {
 				));			
 				
 		this.addChild(this.menu);
+		
+		CCSprite creditNorm = CCSprite.sprite("ga128.png");
+		CCSprite creditSel = CCSprite.sprite("ga128.png");
+		CCMenuItemSprite creditSprite = CCMenuItemSprite.item(creditNorm, creditSel, this, "showCredit");
+		float creditScale = 0.5f;
+		creditSprite.setScale(creditScale);
+		this.creditMenu = CCMenu.menu(creditSprite);
+		
+		this.creditMenu.setPosition(CCDirector.sharedDirector().winSize().getWidth() - (64 * creditScale) - PauseLayer.PaddingX, CCDirector.sharedDirector().winSize().getHeight() - (64 * creditScale) - PauseLayer.PaddingY);
+		this.addChild(this.creditMenu);
 	}
 
 	@Override
@@ -146,6 +157,11 @@ public class HomeLayer extends CCLayer {
 
 	public void selectPlay(Object sender) {		
 		CCTransitionScene transition = CCFadeTransition.transition(1.0f, ChooseModeLayer.getScene());
+		CCDirector.sharedDirector().replaceScene(transition);
+	}
+	
+	public void showCredit(Object sender) {
+		CCTransitionScene transition = CCFadeTransition.transition(1.0f, CreditLayer.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
 	}
 

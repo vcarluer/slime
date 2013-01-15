@@ -17,6 +17,7 @@ public class Sounds {
 	
 	public static void preload() {		
 		preloadMusic(R.raw.menumusic);
+		preloadMusic(R.raw.slimy_credits);
 		preloadEffect(R.raw.menuselect);
 		preloadEffect(R.raw.slimycharging);
 		preloadEffect(R.raw.slimyjumpa);

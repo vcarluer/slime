@@ -32,19 +32,20 @@ public final class R {
         public static final int menuselect=0x7f040007;
         public static final int platformbump=0x7f040008;
         public static final int portalgoal=0x7f040009;
-        public static final int slimycharging=0x7f04000a;
-        public static final int slimydeath=0x7f04000b;
-        public static final int slimyfire=0x7f04000c;
-        public static final int slimyjumpa=0x7f04000d;
-        public static final int slimyjumpb=0x7f04000e;
-        public static final int slimyjumpc=0x7f04000f;
-        public static final int slimyjumpd=0x7f040010;
-        public static final int slimyjumpe=0x7f040011;
-        public static final int slimyland=0x7f040012;
-        public static final int slimyswitch=0x7f040013;
-        public static final int star=0x7f040014;
-        public static final int tick=0x7f040015;
-        public static final int victory=0x7f040016;
+        public static final int slimy_credits=0x7f04000a;
+        public static final int slimycharging=0x7f04000b;
+        public static final int slimydeath=0x7f04000c;
+        public static final int slimyfire=0x7f04000d;
+        public static final int slimyjumpa=0x7f04000e;
+        public static final int slimyjumpb=0x7f04000f;
+        public static final int slimyjumpc=0x7f040010;
+        public static final int slimyjumpd=0x7f040011;
+        public static final int slimyjumpe=0x7f040012;
+        public static final int slimyland=0x7f040013;
+        public static final int slimyswitch=0x7f040014;
+        public static final int star=0x7f040015;
+        public static final int tick=0x7f040016;
+        public static final int victory=0x7f040017;
     }
     public static final class string {
         public static final int app_name=0x7f050000;
