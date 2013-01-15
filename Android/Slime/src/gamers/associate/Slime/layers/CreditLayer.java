@@ -160,8 +160,9 @@ public class CreditLayer extends CCLayer {
 				break;
 		}
 		CCSprite slime = SlimeFactory.SlimySuccess.getAnimatedSprite(SlimySuccess.getAnimationName(diff));
-		slime.setScale(1.5f);
-		float x = random.nextInt((int) (CCDirector.sharedDirector().winSize().width / 4f - slime.getContentSize().width)) + slime.getContentSize().width / 2f;
+		float spriteScale = 1.5f;
+		slime.setScale(spriteScale);
+		float x = random.nextInt((int) (CCDirector.sharedDirector().winSize().width / 4f - (slime.getContentSize().width * spriteScale))) + (slime.getContentSize().width * spriteScale) / 2f;
 		int inv = random.nextInt(2);
 		if (inv == 1) {
 			x = CCDirector.sharedDirector().winSize().width - x;
