@@ -29,12 +29,12 @@ import org.cocos2d.types.ccColor4B;
 import android.view.MotionEvent;
 
 public class CreditLayer extends CCLayer {
-	private static final float ScrollTime = 33f;
+	private static final float ScrollTime = 33f * 2f;
 	private static final float CategoryFnt = 42f;
 	private static final float paddingCategory = 10f;
 	private static final float NameFnt = 31f;
 	private static final float paddingName = 5f;
-	private static final float paddingEndCategory = 20f;
+	private static final float paddingEndCategory = 30f;
 	private static String vcr = "Vincent Carluer";
 	private static String amz = "Antonio Munoz";
 	private static String gcc = "Guillaume Clerc";
@@ -98,12 +98,6 @@ public class CreditLayer extends CCLayer {
 		CCFadeTransition transition = CCFadeTransition.transition(0.5f, currentLevel.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
 	}
-
-	private void setCreditInfo() {
-		this.infos = new ArrayList<CreditInfo>();
-		this.addInfo("Game design", vcr, amz, gcc);
-		
-	}
 	
 	private void addInfo(String category, String... names) {
 		CreditInfo info = new CreditInfo(category, names);
@@ -114,12 +108,15 @@ public class CreditLayer extends CCLayer {
 		this.removeAllChildren(true);
 		float currentY = - CategoryFnt / 2f;
 		float currentX = CCDirector.sharedDirector().winSize().width / 2f;
+		int idx = 0;
 		for(CreditInfo info : this.infos) {
 			CCLabel cat = SlimeFactory.getLabel(info.getCategory(), CategoryFnt);
 			cat.setColor(SlimeFactory.ColorSlime);
 			cat.setPosition(currentX, currentY);
 			this.addChild(cat, Level.zFront);
-			this.addRandomAnimation(currentY);
+			if (idx % 3 == 0) {
+				this.addRandomAnimation(currentY);
+			}
 			
 			currentY -= CategoryFnt / 2f + paddingCategory + NameFnt / 2f;
 			int i = 0;
@@ -135,7 +132,8 @@ public class CreditLayer extends CCLayer {
 				i++;
 			}
 			
-			currentY -= NameFnt / 2f + paddingEndCategory - CategoryFnt / 2f;
+			currentY -= NameFnt / 2f + paddingEndCategory + CategoryFnt / 2f;
+			idx++;
 		}
 		
 		currentY -= NameFnt / 2f + CCDirector.sharedDirector().winSize().height;
@@ -162,9 +160,54 @@ public class CreditLayer extends CCLayer {
 				break;
 		}
 		CCSprite slime = SlimeFactory.SlimySuccess.getAnimatedSprite(SlimySuccess.getAnimationName(diff));
-		slime.setScale(2.0f);
-		float x = random.nextInt((int) (CCDirector.sharedDirector().winSize().width - slime.getContentSize().width)) + slime.getContentSize().width / 2f;
+		slime.setScale(1.5f);
+		float x = random.nextInt((int) (CCDirector.sharedDirector().winSize().width / 4f - slime.getContentSize().width)) + slime.getContentSize().width / 2f;
+		int inv = random.nextInt(2);
+		if (inv == 1) {
+			x = CCDirector.sharedDirector().winSize().width - x;
+		}
+		
 		slime.setPosition(x, currentY);
 		this.addChild(slime, Level.zMid);
+	}
+	
+	// Credits
+	private void setCreditInfo() {
+		this.infos = new ArrayList<CreditInfo>();
+		// Main
+		this.addInfo("Game Design", vcr, amz, gcc);
+		this.addInfo("Project Lead", vcr);
+		this.addInfo("Art Director", gcc);
+		this.addInfo("Lead Engineer", vcr);
+		this.addInfo("Lead Tool engineer", amz);
+		this.addInfo("Audio Lead", mbn);
+		this.addInfo("Level Design", vcr, amz);
+		// specific
+		// graph
+		this.addInfo("Character Design", gcc);
+		this.addInfo("Animation", gcc);
+		this.addInfo("UI Design", vcr);
+		this.addInfo("Cinematics Director", gcc);
+		this.addInfo("Texture artist", gcc);
+		// sound
+		this.addInfo("Sound Design", mbn, amz);
+		this.addInfo("Music Composer", mbn);
+		this.addInfo("Audio Engineering", mbn);
+		// market
+		this.addInfo("Community Manager", amz);
+		this.addInfo("Go to market", amz, vcr);
+		this.addInfo("Producer", "None! we are indy");
+		// other
+		this.addInfo("Beta Test", this.getBetaTesters());
+		this.addInfo("Thank you", "Our families", "cocos2d-android team", "libgdx team", "Google", "You!");
+		this.addInfo("Gamers Associate 2013", vcr, gcc, amz, mbn);
+	}
+	
+	private String[] getBetaTesters() {
+		return new String[] { 
+				"Rafi Leylekian", 
+				"Mathieu Carluer", 
+				"Jeremie Devauchelle" 
+				};
 	}
 }
