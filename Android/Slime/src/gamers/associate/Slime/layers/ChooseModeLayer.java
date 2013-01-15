@@ -1,5 +1,6 @@
 package gamers.associate.Slime.layers;
 
+import gamers.associate.Slime.IBackableLayer;
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
@@ -15,7 +16,7 @@ import org.cocos2d.transitions.CCFadeTransition;
 import android.annotation.SuppressLint;
 
 @SuppressLint("DefaultLocale") 
-public class ChooseModeLayer extends CCLayer {
+public class ChooseModeLayer extends CCLayer implements IBackableLayer {
 	private static CCScene scene;
 	private AchievementItemLayer achievementItem;
 	
@@ -57,5 +58,10 @@ public class ChooseModeLayer extends CCLayer {
 		Level currentLevel = Level.get(LevelHome.Id, true, GamePlay.None);
 		CCFadeTransition transition = CCFadeTransition.transition(0.5f, currentLevel.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
+	}
+
+	@Override
+	public void goBack() {
+		this.goHome(this);
 	}
 }

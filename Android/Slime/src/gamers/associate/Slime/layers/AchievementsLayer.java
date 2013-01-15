@@ -1,5 +1,6 @@
 package gamers.associate.Slime.layers;
 
+import gamers.associate.Slime.IBackableLayer;
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.SlimeFactory;
@@ -20,7 +21,7 @@ import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 
-public class AchievementsLayer extends CCLayer  implements IScrollable {
+public class AchievementsLayer extends CCLayer  implements IScrollable, IBackableLayer {
 	private static final float fontSize = 60;
 	private static CCScene scene;
 	private CCLabel title;
@@ -106,5 +107,10 @@ public class AchievementsLayer extends CCLayer  implements IScrollable {
 	public void onExit() {
 		this.achNode.removeAllChildren(true);
 		super.onExit();
+	}
+
+	@Override
+	public void goBack() {
+		this.goBack(this);
 	}
 }

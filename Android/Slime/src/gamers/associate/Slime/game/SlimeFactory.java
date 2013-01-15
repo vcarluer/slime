@@ -93,6 +93,7 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static final float FntSize = 64f;	
 	public static String slimeFileExt = ".slime";
 	private static final int SGSWidthBase = 800;
+	public static final int BackableLayer = 555;
 	private static float WidthRatio;
 	
 	public static Slime ContextActivity;

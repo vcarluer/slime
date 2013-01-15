@@ -1,5 +1,6 @@
 package gamers.associate.Slime.layers;
 
+import gamers.associate.Slime.IBackableLayer;
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Sharer;
 import gamers.associate.Slime.game.SlimeFactory;
@@ -17,7 +18,7 @@ import org.cocos2d.types.ccColor3B;
 import android.annotation.SuppressLint;
 import android.view.MotionEvent;
 
-@SuppressLint("DefaultLocale") public class TimeAttackGameOverLayer extends CCLayer {
+@SuppressLint("DefaultLocale") public class TimeAttackGameOverLayer extends CCLayer implements IBackableLayer {
 	private static CCScene scene;
 	private CCLabel congratLabel;
 	private CCLabel endLabel;
@@ -88,7 +89,7 @@ import android.view.MotionEvent;
 		goBack();
 	}
 
-	protected void goBack() {
+	public void goBack() {
 		Sounds.playEffect(R.raw.menuselect);
 		CCTransitionScene transition = CCFadeTransition.transition(1.0f, CreditLayer.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);

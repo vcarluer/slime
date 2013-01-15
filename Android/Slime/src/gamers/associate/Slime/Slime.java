@@ -10,6 +10,7 @@ import gamers.associate.Slime.levels.LevelHome;
 
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
+import org.cocos2d.nodes.CCNode;
 import org.cocos2d.opengl.CCGLSurfaceView;
 
 import android.annotation.SuppressLint;
@@ -336,6 +337,16 @@ public class Slime extends Activity {
 				return true;
 			}			
 			
+			CCScene scene = CCDirector.sharedDirector().getRunningScene();
+			if (scene.getChildren().size() > 0) {
+				// Must always be the first layer
+				CCNode firstNode = scene.getChildren().get(0);
+				if (firstNode instanceof IBackableLayer) {
+					IBackableLayer backable = (IBackableLayer) firstNode;
+					backable.goBack();
+				}
+						
+			}
 			/*if (LevelSelection.get() != null && LevelSelection.get().getActivated()) {
 				Sounds.playEffect(R.raw.menuselect);
 				LevelSelection.get().goBack();

@@ -1,5 +1,6 @@
 package gamers.associate.Slime.layers;
 
+import gamers.associate.Slime.IBackableLayer;
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.Rank;
@@ -34,7 +35,7 @@ import android.util.FloatMath;
 import android.util.SparseArray;
 
 @SuppressLint("DefaultLocale") 
-public class StoryWorldLayer extends CCLayer implements IScrollable {
+public class StoryWorldLayer extends CCLayer implements IScrollable, IBackableLayer {
 	public static final int COLS = 5;
 	private static final int fontSize = 60;
 	private static final float transitionTime = 0.5f;
@@ -262,6 +263,11 @@ public class StoryWorldLayer extends CCLayer implements IScrollable {
 	
 	private void setTitle(String title) {
 		this.title.setString(title.toUpperCase());
+	}
+
+	@Override
+	public void goBack() {
+		this.goBack(this);
 	}
 
 }

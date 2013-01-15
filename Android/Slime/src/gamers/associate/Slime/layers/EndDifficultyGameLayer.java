@@ -1,6 +1,7 @@
 package gamers.associate.Slime.layers;
 
 import android.annotation.SuppressLint;
+import gamers.associate.Slime.IBackableLayer;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.SlimeFactory;
@@ -24,7 +25,7 @@ import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 
-@SuppressLint("DefaultLocale") public class EndDifficultyGameLayer extends CCLayer {
+@SuppressLint("DefaultLocale") public class EndDifficultyGameLayer extends CCLayer implements IBackableLayer {
 	private static CCScene scene;
 	private CCLabel lblScore;
 	private CCSprite starSprite;
@@ -170,5 +171,10 @@ import org.cocos2d.types.CGPoint;
 		Level currentLevel = Level.get(LevelHome.Id, true, GamePlay.None);								
 		CCTransitionScene transition = CCFadeTransition.transition(0.5f, currentLevel.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
+	}
+
+	@Override
+	public void goBack() {
+		this.goHome(this);
 	}
 }

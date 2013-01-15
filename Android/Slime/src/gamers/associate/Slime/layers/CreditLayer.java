@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import gamers.associate.Slime.IBackableLayer;
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.Level;
 import gamers.associate.Slime.game.LevelDifficulty;
@@ -28,7 +29,7 @@ import org.cocos2d.types.ccColor4B;
 
 import android.view.MotionEvent;
 
-public class CreditLayer extends CCLayer {
+public class CreditLayer extends CCLayer implements IBackableLayer {
 	private static final String SLIMY = "Slimy";
 	private static final float ScrollTime = 33f * 2f;
 	private static final float CategoryFnt = 42f;
@@ -242,5 +243,10 @@ public class CreditLayer extends CCLayer {
 				"Mathieu Carluer", 
 				"Jeremie Devauchelle" 
 				};
+	}
+
+	@Override
+	public void goBack() {
+		this.goHome();
 	}
 }

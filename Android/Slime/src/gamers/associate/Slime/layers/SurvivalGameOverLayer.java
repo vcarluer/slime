@@ -1,5 +1,6 @@
 package gamers.associate.Slime.layers;
 
+import gamers.associate.Slime.IBackableLayer;
 import gamers.associate.Slime.R;
 import gamers.associate.Slime.game.LevelDifficulty;
 import gamers.associate.Slime.game.Sharer;
@@ -20,7 +21,7 @@ import org.cocos2d.types.ccColor3B;
 import android.annotation.SuppressLint;
 import android.view.MotionEvent;
 
-@SuppressLint("DefaultLocale") public class SurvivalGameOverLayer extends CCLayer {
+@SuppressLint("DefaultLocale") public class SurvivalGameOverLayer extends CCLayer implements IBackableLayer {
 	private static CCScene scene;
 	private CCLabel scoreLabel;
 	private CCLabel gameOverLabel;
@@ -135,7 +136,7 @@ import android.view.MotionEvent;
 		goBack();
 	}
 
-	protected void goBack() {
+	public void goBack() {
 		Sounds.playEffect(R.raw.menuselect);
 		CCTransitionScene transition = CCFadeTransition.transition(1.0f, ChooseSurvivalDifficultyLayer.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
