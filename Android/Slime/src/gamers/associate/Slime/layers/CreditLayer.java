@@ -238,7 +238,7 @@ public class CreditLayer extends CCLayer {
 
 	private String[] getBetaTesters() {
 		return new String[] { 
-				"Rafi Leylekian", 
+				"Raffi Leylekian", 
 				"Mathieu Carluer", 
 				"Jeremie Devauchelle" 
 				};
