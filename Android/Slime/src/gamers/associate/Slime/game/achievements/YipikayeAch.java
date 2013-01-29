@@ -4,7 +4,7 @@ import gamers.associate.Slime.game.LevelDifficulty;
 
 public class YipikayeAch extends Achievement {
 
-	private static final String name = "Yipikaye!";
+	private static final String name = "Yipikayay!";
 	private static final String description = "Finish survival in hard";
 
 	public YipikayeAch() {

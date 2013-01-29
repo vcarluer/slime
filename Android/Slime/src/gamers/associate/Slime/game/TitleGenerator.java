@@ -144,7 +144,7 @@ public class TitleGenerator {
 		noun[118]="Catacombs";
 		noun[119]="Silence";
 		noun[120]="Leviathan";
-		noun[121]="Parhelion";
+		noun[121]="Perihelion";
 		noun[122]="Device";
 		noun[123]="Dreadnaught";
 		noun[124]="Dolmen";
@@ -299,7 +299,7 @@ public class TitleGenerator {
 		noun2[126]="Hurricane";
 		noun2[127]="Maelstrom";
 		noun2[128]="Tubes";
-		noun2[129]="Aeroplane";
+		noun2[129]="Airplane";
 		noun2[130]="Vaults";
 		noun2[131]="Labyrinth";
 		noun2[132]="Mazes";
@@ -449,7 +449,7 @@ public class TitleGenerator {
 		entity[122]="Linguist";
 		entity[123]="Champion";
 		entity[124]="Exile";
-		entity[125]="Luthier";
+		entity[125]="Luther";
 		entity[126]="Entomologist";
 		entity[127]="Nymphs";
 
@@ -527,7 +527,7 @@ public class TitleGenerator {
 		noun_final[62]="Sirius";
 		noun_final[63]="Mercury";
 		noun_final[64]="Phobos";
-		noun_final[65]="Deimos";
+		noun_final[65]="Daimyos";
 		noun_final[66]="Titan";
 		noun_final[67]="Callisto";
 		noun_final[68]="Ganymede";
@@ -556,7 +556,7 @@ public class TitleGenerator {
 		noun_final[91]="Armageddon";
 		noun_final[92]="the Aether";
 		noun_final[93]="Darkness";
-		noun_final[94]="Metaluna";
+		noun_final[94]="Petaluma";
 		noun_final[95]="Dread";
 		noun_final[96]="the Enigmascope";
 		noun_final[97]="the Morning";
@@ -748,7 +748,7 @@ public class TitleGenerator {
 		adjective[149]="Benevolent";
 		adjective[150]="Fire Breathing";
 		adjective[151]="Flaming";
-		adjective[152]="Dextrous";
+		adjective[152]="Dexterous";
 		adjective[153]="Agile";
 		adjective[154]="Haunted";
 		adjective[155]="Gaseous";
@@ -775,7 +775,7 @@ public class TitleGenerator {
 		adjective[176]="Skeletal";
 		adjective[177]="Titanic";
 		adjective[178]="Untimely";
-		adjective[179]="Unforseen";
+		adjective[179]="Unforeseen";
 		adjective[180]="Immense";
 		adjective[181]="Hydraulic";
 		adjective[182]="Immovable";
@@ -1035,7 +1035,7 @@ public class TitleGenerator {
 		possessive[15]="Krenkel's";
 		possessive[16]="Bok's";
 		possessive[17]="Zeno's";
-		possessive[18]="The Venusian";
+		possessive[18]="The Venusians";
 		possessive[19]="Secord's";
 		possessive[20]="Jupiter's";
 		possessive[21]="Saturn's";
@@ -1045,8 +1045,8 @@ public class TitleGenerator {
 		possessive[25]="The Technocrat's";
 		possessive[26]="Motter's";
 		possessive[27]="Pluto's";
-		possessive[28]="Gallegher's";
-		possessive[29]="Bisson's";
+		possessive[28]="Gallagher’s";
+		possessive[29]="Bison’s";
 		possessive[30]="Hamilton's";
 		possessive[31]="Leinster's";
 		possessive[32]="Weinbaum's";
@@ -1060,11 +1060,11 @@ public class TitleGenerator {
 		possessive[40]="Findriddy's";
 		possessive[41]="Jameson's";
 		possessive[42]="Evanston's";
-		possessive[43]="Kuttner's";
+		possessive[43]="Kushner’s";
 		possessive[44]="Pohl's";
 		possessive[45]="Dargo's";
 		possessive[46]="Rigel's";
-		possessive[47]="Swyney's";
+		possessive[47]="Sweeney’s";
 		possessive[48]="Rotwang's";
 		possessive[49]="Cabal's";
 		possessive[50]="Exeter's";

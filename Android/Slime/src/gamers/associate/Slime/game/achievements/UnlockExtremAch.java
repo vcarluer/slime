@@ -5,8 +5,8 @@ import gamers.associate.Slime.game.LevelDifficulty;
 
 public class UnlockExtremAch extends Achievement {
 
-	private static final String name = "Extrem mode unlocked";
-	private static final String description = "Unlock extrem mode";
+	private static final String name = "Extreme mode unlocked";
+	private static final String description = "Unlock extreme mode";
 
 	public UnlockExtremAch() {
 		super(name, description, true);

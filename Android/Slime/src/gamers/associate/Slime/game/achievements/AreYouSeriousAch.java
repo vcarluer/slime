@@ -5,7 +5,7 @@ import gamers.associate.Slime.game.LevelDifficulty;
 public class AreYouSeriousAch extends Achievement {
 
 	private static final String name = "Are you serious?";
-	private static final String description = "More than 80 level in extrem";
+	private static final String description = "More than 80 level in extreme";
 
 	public AreYouSeriousAch() {
 		super(name, description, true);
