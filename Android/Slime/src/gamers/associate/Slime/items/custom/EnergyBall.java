@@ -107,7 +107,7 @@ public class EnergyBall extends GameItemPhysic {
 			elect.electrify();
 		}
 		
-		if (!(item.getContactWith() instanceof EnergyBall) && !(item.getContactWith() instanceof EnergyBallGun)) {
+		if (!(item.getContactWith() instanceof EnergyBall) && !(item.getContactWith() instanceof EnergyBallGun) && !(item.getContactWith().isIsAllSensor())) {
 			this.removeMe();
 		}
 		

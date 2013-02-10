@@ -116,7 +116,7 @@ import org.cocos2d.types.ccColor3B;
 		this.starX = CCDirector.sharedDirector().winSize().getWidth() / 2 - Star.Reference_Width - PaddingLeftStar;
 		this.starY = CCDirector.sharedDirector().winSize().getHeight() - (starCountHShift + Star.Reference_Height / 2);
 				
-		if (SlimeFactory.IsLevelSelectionOn) {
+		if (SlimeFactory.IsLevelSelectionOn && SlimeFactory.IsLevelSelectionShowButtons) {
 			float recordX = CCDirector.sharedDirector().winSize().getWidth() / 2f - ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) / 2 ;
 			float recordY = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY) / 2;;
 			float rebuildX = recordX - ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX);
