@@ -70,7 +70,7 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static int ForceDiff = 8;
 	public static int ForceLevel = 1;
 	public static boolean IsDebugBlocOn = true;
-	public static String ForceBlockPath = "blocsRectangle/s_bl_10.slime";	
+	public static String ForceBlockPath = "blocsRectangle/s_tl_6.slime";	
 	public static final boolean IsForceMaxSurvival = false;
 	public static final int MaxSurvival = LevelDifficulty.Hard;
 	public static final boolean IsForceMaxWorld = false;
