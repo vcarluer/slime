@@ -66,11 +66,11 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static boolean IsLevelSelectionShowButtons = true;
 
 	public static boolean IsLevelDebugMode = false;
-	public static boolean IsForceDiffDebug =  true;
+	public static boolean IsForceDiffDebug =  false;
 	public static int ForceDiff = 8;
 	public static int ForceLevel = 1;
-	public static boolean IsDebugBlocOn = true;
-	public static String ForceBlockPath = "blocsRectangle/s_tl_10.slime";	
+	public static boolean IsDebugBlocOn = false;
+	public static String ForceBlockPath = "blocsRectangle/s_ml_1.slime";	
 	public static final boolean IsForceMaxSurvival = false;
 	public static final int MaxSurvival = LevelDifficulty.Hard;
 	public static final boolean IsForceMaxWorld = false;
