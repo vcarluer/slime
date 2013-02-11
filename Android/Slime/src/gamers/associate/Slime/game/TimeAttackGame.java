@@ -41,7 +41,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	private boolean isCritic;
 	private CCAction criticAction;
 	protected int bonusTaken;
-	private boolean adHiddenTimer;
+	protected boolean adHiddenTimer;
 	private float zoomRatio;
 	
 	public static TimeAttackGame NewGame() {
