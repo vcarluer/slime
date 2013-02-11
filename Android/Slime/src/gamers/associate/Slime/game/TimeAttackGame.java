@@ -65,6 +65,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		this.adRender = 0;
 		
 		if (this.level != null) {
+			this.level.setHideCount(false);
 			this.level.hideHudText();
 			CCBitmapFontAtlas label = this.level.getHudLabel();
 			label.setColor(SlimeFactory.ColorSlime);
