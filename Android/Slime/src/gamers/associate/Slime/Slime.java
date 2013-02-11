@@ -32,9 +32,9 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
-import com.google.ads.AdRequest;
-import com.google.ads.AdSize;
-import com.google.ads.AdView;
+//import com.google.ads.AdRequest;
+//import com.google.ads.AdSize;
+//import com.google.ads.AdView;
 
 /**
  * @uml.dependency   supplier="gamers.associate.Slime.LevelLayer"
@@ -65,7 +65,7 @@ public class Slime extends Activity {
 	private AudioManager audio;
 	private boolean startLevel;
 	
-	private AdView adView;	
+//	private AdView adView;	
 	
 	private Handler mHandler;
 	private StoryMenuItem storyMenuItemAfterIntro;
@@ -124,63 +124,63 @@ public class Slime extends Activity {
     }
 
 	protected void adAdView(RelativeLayout layout) {
-		// Create an ad.
-        adView = new AdView(this, AdSize.BANNER, AdMobPublisherId);
-        FrameLayout.LayoutParams adsParams =new FrameLayout.LayoutParams(
-        		FrameLayout.LayoutParams.FILL_PARENT, FrameLayout.LayoutParams.FILL_PARENT);        
-        adView.setLayoutParams(adsParams);
-        adView.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL); 
-        // Add the AdView to the view hierarchy. The view will have no size
-        // until the ad is loaded.
-        layout.addView(adView);
-        
-        this.mHandler = new Handler(){
-            @Override
-            public void handleMessage(Message msg) {
-	            	switch(msg.what)
-	    	        {
-	    	        case SHOW_AD:	        
-	    	            showAdInternal();
-	    	            break;
-	    	        case HIDE_AD:
-	    	            hideAdInternal();
-	    	            break;
-	    	        case NEXT_AD:
-	    	        	nextAdInternal();
-	    	        	break;
-	    	        case SHOW_NEXT_AD:
-	    	        	showAndNextAdInternal();
-	    	        	break;
-	    	        default:
-	    	            break;
-	    	        }
-			    }
-        };
-
-        this.hideAdInternal();
+//		// Create an ad.
+//        adView = new AdView(this, AdSize.BANNER, AdMobPublisherId);
+//        FrameLayout.LayoutParams adsParams =new FrameLayout.LayoutParams(
+//        		FrameLayout.LayoutParams.FILL_PARENT, FrameLayout.LayoutParams.FILL_PARENT);        
+//        adView.setLayoutParams(adsParams);
+//        adView.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL); 
+//        // Add the AdView to the view hierarchy. The view will have no size
+//        // until the ad is loaded.
+//        layout.addView(adView);
+//        
+//        this.mHandler = new Handler(){
+//            @Override
+//            public void handleMessage(Message msg) {
+//	            	switch(msg.what)
+//	    	        {
+//	    	        case SHOW_AD:	        
+//	    	            showAdInternal();
+//	    	            break;
+//	    	        case HIDE_AD:
+//	    	            hideAdInternal();
+//	    	            break;
+//	    	        case NEXT_AD:
+//	    	        	nextAdInternal();
+//	    	        	break;
+//	    	        case SHOW_NEXT_AD:
+//	    	        	showAndNextAdInternal();
+//	    	        	break;
+//	    	        default:
+//	    	            break;
+//	    	        }
+//			    }
+//        };
+//
+//        this.hideAdInternal();
 	}    
     
     private void showAdInternal() {    	
-    	this.adView.setVisibility(View.VISIBLE);    	
+//    	this.adView.setVisibility(View.VISIBLE);    	
     }
     
     private void hideAdInternal() {    	
-    	this.adView.setVisibility(View.GONE);    	
+//    	this.adView.setVisibility(View.GONE);    	
     }
     
     private void nextAdInternal() {
-    	// Create an ad request.
-        AdRequest adRequest = new AdRequest();
-        if (AdTest) {
-        	adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
-        	adRequest.addTestDevice(SGS_VCR);
-        	adRequest.addTestDevice(SGN_AMZ);
-        	adRequest.addTestDevice(SGS_CMZ);
-        }
-        // Fill out ad request.       
-
-        // Start loading the ad in the background.        
-        this.adView.loadAd(adRequest);
+//    	// Create an ad request.
+//        AdRequest adRequest = new AdRequest();
+//        if (AdTest) {
+//        	adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
+//        	adRequest.addTestDevice(SGS_VCR);
+//        	adRequest.addTestDevice(SGN_AMZ);
+//        	adRequest.addTestDevice(SGS_CMZ);
+//        }
+//        // Fill out ad request.       
+//
+//        // Start loading the ad in the background.        
+//        this.adView.loadAd(adRequest);
     }
     
     private void showAndNextAdInternal() {
@@ -292,7 +292,7 @@ public class Slime extends Activity {
         
      // Destroy the AdView.
         if (AdOn) {
-        	adView.destroy();
+//        	adView.destroy();
         }
                
         // No more needed if rotation works:
