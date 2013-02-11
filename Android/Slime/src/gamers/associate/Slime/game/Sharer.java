@@ -5,7 +5,7 @@ import org.cocos2d.nodes.CCNode;
 import android.content.Intent;
 
 public class Sharer extends CCNode {
-	public static String twitterTag = "http://bit.ly/SVdACw @GamersAssociate";
+	public static String twitterTag = "http://www.slimeattack.com @GamersAssociate"; // "http://bit.ly/SVdACw @GamersAssociate"
 	public static String DefaultMessage = "Love Slime Attack: " + twitterTag;
 	
 	private String shareMessage;

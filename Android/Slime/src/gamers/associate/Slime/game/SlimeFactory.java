@@ -60,7 +60,7 @@ import android.annotation.SuppressLint;
 import com.badlogic.gdx.physics.box2d.World;
 
 @SuppressLint("DefaultLocale") public abstract class SlimeFactory {
-	// Debug vars
+	// Debug vars	
 	public static final boolean LogOn = true;
 	public static boolean IsLevelSelectionOn = true;
 	public static boolean IsLevelSelectionShowButtons = false;
@@ -82,6 +82,7 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static final boolean noUnlockHardcoreGamer = false;
 	public static final boolean resetAchievements = false; // if true can not unlock allachievements
 	public static final boolean debugSpeed = false;
+	public static final boolean isBeta = true;
 	
 	// end debug ---
 	private static final float SGSDensityBase = 1.5f; // Samsung Galaxy S density

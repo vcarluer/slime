@@ -17,11 +17,13 @@ import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
+import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
+import org.cocos2d.types.ccColor3B;
 
 import android.annotation.SuppressLint;
 import android.view.MotionEvent;
@@ -38,6 +40,7 @@ public class HomeLayer extends CCLayer {
 	private static float baseShift = 150f; //100f;
 	private static float shiftTitle = baseShift;
 	private static float shiftMenu  = shiftTitle - 150f; // Slime height = 160 / 2 + 20
+	private static float shiftBeta = shiftMenu - 150f;
 	
 	private CCSprite titleSprite;
 	private CCMenu shareMenu;
@@ -45,6 +48,8 @@ public class HomeLayer extends CCLayer {
 	private CCLayer top;
 	
 	private CCMenu creditMenu;
+	
+	private CCLabel betaLabel;
 	
 	public static HomeLayer get() {
 		if (layer == null) {
@@ -81,6 +86,16 @@ public class HomeLayer extends CCLayer {
 		
 		this.creditMenu.setPosition(CCDirector.sharedDirector().winSize().getWidth() - (64 * creditScale) - PauseLayer.PaddingX, CCDirector.sharedDirector().winSize().getHeight() - (64 * creditScale) - PauseLayer.PaddingY);
 		this.addChild(this.creditMenu);
+		
+		if (SlimeFactory.isBeta) {
+			this.betaLabel = SlimeFactory.getLabel("BETA 130211", 42f);
+			this.betaLabel.setColor(ccColor3B.ccRED);
+			this.betaLabel.setPosition(CGPoint.make(
+					CCDirector.sharedDirector().winSize().getWidth() / 2,
+					CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftBeta
+					));	
+			this.addChild(this.betaLabel);
+		}		
 	}
 
 	@Override
