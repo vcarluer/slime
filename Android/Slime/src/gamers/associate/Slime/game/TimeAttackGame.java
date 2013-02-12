@@ -113,6 +113,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 				this.leftTime = 0;
 				AchievementStatistics.leftTime = this.leftTime;
 				this.lose();
+				this.level.timesUp();
 			}
 			
 			AchievementStatistics.leftTime = this.leftTime;
@@ -339,7 +340,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		SlimeFactory.GameInfo.setSurvivalGameOver(true);
 		if (this.level.lose()) {			
 			this.level.getHudLabel().stopAction(this.criticAction);
-		}			
+		}
 	}
 
 	public void setNewBonusTime() {

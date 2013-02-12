@@ -1332,4 +1332,8 @@ public class Level implements IGameItemHandler {
 	public PauseLayer getPauseLayer() {
 		return this.pauseLayer;
 	}
+	
+	public void timesUp() {
+		this.hudLayer.timesup();
+	}
 }

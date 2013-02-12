@@ -88,7 +88,7 @@ public class HomeLayer extends CCLayer {
 		this.addChild(this.creditMenu);
 		
 		if (SlimeFactory.isBeta) {
-			this.betaLabel = SlimeFactory.getLabel("BETA 130211", 42f);
+			this.betaLabel = SlimeFactory.getLabel("BETA 1302", 42f);
 			this.betaLabel.setColor(ccColor3B.ccRED);
 			this.betaLabel.setPosition(CGPoint.make(
 					CCDirector.sharedDirector().winSize().getWidth() / 2,

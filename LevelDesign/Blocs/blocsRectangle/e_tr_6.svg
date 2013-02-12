@@ -191,7 +191,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1978,9 +1978,9 @@
        x="89.22718"
        y="321.3107"
        type="Trigger_Time"
-       att_target="target"
+       att_target="bec"
        att_interval="2"
-       att_name="bec" />
+       att_name="None" />
     <image
        width="64"
        height="64"

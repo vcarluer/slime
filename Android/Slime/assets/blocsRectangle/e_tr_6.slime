@@ -20,5 +20,5 @@ Sprite;None;59.0;263.0;20.0;33.0;0.0;tank;tank-tube-filled;1
 Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 58.73486,336.94077 20.03027,-9.3e-4 -0.10734,-32.7529 -19.80671,-0.11207;false;true;true
 BecBunsen;bec;59.0;196.0;20.0;67.0;180.0;true;0
 BecBunsen;bec;117.0;196.0;20.0;67.0;180.0;true;1
-Trigger_Time;bec;89.0;263.0;16.0;16.0;0.0;target;2
+Trigger_Time;None;89.0;263.0;16.0;16.0;0.0;bec;2
 CircularSaw;None;240.0;72.0;64.0;64.0;-90.0;true
