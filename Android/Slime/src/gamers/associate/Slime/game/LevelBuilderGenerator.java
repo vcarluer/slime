@@ -124,7 +124,7 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 			this.resetTotalStar();
 			level.setTitle(TitleGenerator.generateNewTitle());
 			
-			this.gameInfo.forceLevel(levelDefToLoad.getWorld().getDifficulty(levelDefToLoad.getNumber()), levelDefToLoad.getNumber());
+			this.gameInfo.forceLevel(levelDefToLoad.getDifficulty(), levelDefToLoad.getNumber());
 			this.isBoss = levelDefToLoad.isBoss();
 			AchievementStatistics.isBoss = this.isBoss;
 

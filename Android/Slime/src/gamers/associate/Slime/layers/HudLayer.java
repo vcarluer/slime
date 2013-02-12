@@ -130,7 +130,9 @@ import org.cocos2d.types.ccColor3B;
 			this.addChild(this.rebuildLevelMenu);
 		}
 		
-		this.timesup = SlimeFactory.getLabel(TIME_S_UP);
+		this.timesup = SlimeFactory.getLabel(TIME_S_UP, 63f);
+		this.timesup.setColor(SlimeFactory.ColorSlime);
+		this.timesup.setPosition(CCDirector.sharedDirector().winSize().getWidth() / 2f, CCDirector.sharedDirector().winSize().getHeight() / 2);
 		this.addChild(this.timesup);
 		this.timesup.setVisible(false);
 	}	
@@ -157,6 +159,8 @@ import org.cocos2d.types.ccColor3B;
 		this.starSprite.setPosition(this.starX, this.starY);
 		this.starSprite.setAnchorPoint(0, 0f);
 		this.addChild(this.starSprite);
+		CCFadeOut fadeOut = CCFadeOut.action(0);
+		this.timesup.runAction(fadeOut);
 		// this.setStarsCount();
 	}
 	
@@ -502,10 +506,11 @@ import org.cocos2d.types.ccColor3B;
 	}
 	
 	public void timesup() {
-		CCFadeOut fadeOut = CCFadeOut.action(1.0f);
+		this.timesup.setVisible(true);
+		CCFadeIn fadeIn = CCFadeIn.action(1.0f);
 		CCDelayTime delay = CCDelayTime.action(1.0f);
-		CCFadeIn fadeIn = CCFadeIn.action(0.3f);
-		CCSequence seq = CCSequence.actions(fadeOut, fadeIn);
+		CCFadeOut fadeOut = CCFadeOut.action(0.3f);
+		CCSequence seq = CCSequence.actions(fadeIn, delay, fadeOut);
 		this.timesup.runAction(seq);
 	}
 	

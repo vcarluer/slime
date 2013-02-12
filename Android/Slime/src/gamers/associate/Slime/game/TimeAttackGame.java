@@ -112,7 +112,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 			if (this.leftTime <= 0) {
 				this.leftTime = 0;
 				AchievementStatistics.leftTime = this.leftTime;
-				this.lose();
+				this.level.killAllSlimies();
 				this.level.timesUp();
 			}
 			

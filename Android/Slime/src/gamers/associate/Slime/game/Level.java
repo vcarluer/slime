@@ -1336,4 +1336,10 @@ public class Level implements IGameItemHandler {
 	public void timesUp() {
 		this.hudLayer.timesup();
 	}
+	
+	public void killAllSlimies() {
+		for(Slimy slimy : this.aliveSlimyList) {
+			slimy.splash();
+		}
+	}
 }
