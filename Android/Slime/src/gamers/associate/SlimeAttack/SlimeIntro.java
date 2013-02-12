@@ -1,9 +1,5 @@
 package gamers.associate.SlimeAttack;
 
-import gamers.associate.SlimeAttack.R;
-import gamers.associate.SlimeAttack.R.id;
-import gamers.associate.SlimeAttack.R.layout;
-import gamers.associate.SlimeAttack.R.raw;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.media.MediaPlayer;
@@ -37,7 +33,7 @@ public class SlimeIntro extends Activity {
         videos = (VideoView) this.findViewById(R.id.videointroview);
         int resourceNum = R.raw.intro;
         
-        String  str= "android.resource://gamers.associate.Slime/"+resourceNum;
+        String  str= "android.resource://gamers.associate.SlimeAttack/"+resourceNum;
 
         Uri uri=Uri.parse(str);
         
