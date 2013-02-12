@@ -15,8 +15,8 @@ Platform_Bumper;None;96.0;88.0;99.0;32.0;0.0
 Platform_NoSticky_Corner;None;64.0;88.0;32.0;32.0;90.0
 Platform_Bumper;None;-16.0;200.0;192.0;32.0;90.0
 Platform_NoSticky_End;None;64.0;312.0;32.0;32.0;-90.0
-Liquid;None;96.0;120.0;96.0;128.0;0.0
-LiquidSurface;None;96.0;248.0;96.0;16.0;0.0
+Liquid;None;96.0;120.0;99.0;128.0;0.0
+LiquidSurface;None;96.0;248.0;99.0;16.0;0.0
 BecBunsen;None;72.0;344.0;20.0;67.0;0.0;true;0
 Bumper_Angle;None;227.0;88.0;48.0;48.0;0.0
 BecBunsen;None;410.0;131.0;32.0;107.0;-90.0;true;0
