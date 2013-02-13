@@ -146,7 +146,7 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 					this.levelDef.buildLevel(level);
 				}
 				
-				if (levelDefToLoad instanceof LevelDefinitionParser) {
+				if (!isTuto && levelDefToLoad instanceof LevelDefinitionParser) {
 					LevelDefinitionParser parser = (LevelDefinitionParser) levelDefToLoad;					
 					parser.storeLevel(level);
 				}
