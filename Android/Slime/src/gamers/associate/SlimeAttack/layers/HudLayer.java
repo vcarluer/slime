@@ -504,6 +504,8 @@ import android.annotation.SuppressLint;
 			LevelDefinitionParser parser = (LevelDefinitionParser) levelDef;
 			parser.dumpLevel();
 		}
+		
+		Level.currentLevel.goNext();
 	}
 	
 	public void timesup() {

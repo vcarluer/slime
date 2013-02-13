@@ -62,9 +62,9 @@ import com.badlogic.gdx.physics.box2d.World;
 
 @SuppressLint("DefaultLocale") public abstract class SlimeFactory {
 	// Debug vars	
-	public static final boolean LogOn = true;
-	public static boolean IsLevelSelectionOn = true;
-	public static boolean IsLevelSelectionShowButtons = true;
+	public static final boolean LogOn = false;
+	public static boolean IsLevelSelectionOn = false;
+	public static boolean IsLevelSelectionShowButtons = false;
 
 	public static boolean IsLevelDebugMode = false;
 	public static boolean IsForceDiffDebug =  false;

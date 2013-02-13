@@ -527,7 +527,7 @@ public class TitleGenerator {
 		noun_final[62]="Sirius";
 		noun_final[63]="Mercury";
 		noun_final[64]="Phobos";
-		noun_final[65]="Daimyos";
+		noun_final[65]="Deimos";
 		noun_final[66]="Titan";
 		noun_final[67]="Callisto";
 		noun_final[68]="Ganymede";
