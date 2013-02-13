@@ -250,7 +250,6 @@ public class LevelDefinitionParser extends LevelDefinition
 	private File getExternFile() {
 		if (this.mediaAvailable() && this.getGamePlay() == GamePlay.TimeAttack) {			
 			File dir = this.getWorldDirectory();
-			dir.mkdirs();
 			File file = new File(dir, this.getResourceName());
 			return file;
 		}
@@ -260,7 +259,7 @@ public class LevelDefinitionParser extends LevelDefinition
 	
 	private File getWorldDirectory() {
 		File root = Environment.getExternalStorageDirectory();
-		File dirBase = new File (root.getAbsolutePath() + "/SlimeAttack");				
+		File dirBase = new File (root.getAbsolutePath() + "/SlimeAttack");			
 		File dir = null;
 		if (this.getWorld() != null) {
 			dir = new File (dirBase.getAbsolutePath() + "/" + this.getWorld().getName());
@@ -268,6 +267,7 @@ public class LevelDefinitionParser extends LevelDefinition
 			dir = dirBase;
 		}
 		
+		dir.mkdirs();
 		return dir;
 	}
 
@@ -275,7 +275,11 @@ public class LevelDefinitionParser extends LevelDefinition
 		if (this.mediaAvailable() && this.getGamePlay() == GamePlay.TimeAttack) {				
 			File dirWorld = this.getWorldDirectory();
 			File dir = new File(dirWorld.getAbsolutePath() + "/Dump");
-			dir.mkdirs();
+			boolean done = dir.mkdirs();
+			if (!done) {
+				SlimeFactory.Log.d(SlimeAttack.TAG, "Can not create directory " + dir.getAbsolutePath());
+			}
+			
 			File file = new File(dir, this.getResourceName());
 			return file;
 		}
