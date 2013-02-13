@@ -255,7 +255,7 @@ public class SlimeAttack extends Activity {
         	if (needMusicResume && Level.currentLevel != null && (!Level.currentLevel.getActivated() || Level.currentLevel.getCurrentLevelName() == LevelHome.Id)) {
         		CCScene scene = CCDirector.sharedDirector().getRunningScene();
         		if (scene != null && scene.getChildren().size() > 0 && (scene.getChildren().get(0) instanceof CreditLayer)) {
-        			SlimeFactory.PlayCreditMusic();
+        			SlimeFactory.playCreditMusic();
         		} else {
         			SlimeFactory.playMenuMusic();
         		}
