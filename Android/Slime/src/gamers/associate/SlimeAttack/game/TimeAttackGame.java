@@ -279,7 +279,13 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		
 		List<CGPoint> points = SlimeFactory.PathFinder.pathFinding();
 		if (points.size() > 1) {
-			points.set(0, this.level.getGoal().getPosition());
+			if (this.level.getGoal() != null) {
+				points.set(0, this.level.getGoal().getPosition());
+			} else {
+				if (this.level.getBoss() != null) {
+					points.set(0, this.level.getBoss().getPosition());
+				}
+			}
 		}
 		
 		points.set(points.size() - 1, this.level.getStartItem().getPosition());
