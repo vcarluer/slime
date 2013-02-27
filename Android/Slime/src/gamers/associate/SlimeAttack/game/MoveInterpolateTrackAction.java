@@ -20,6 +20,12 @@ public class MoveInterpolateTrackAction extends CameraAction {
 		this.currentIndex = 0;
 		this.currentPoint = points.get(this.currentIndex);
 		this.pointAction = CGPoint.zero();
+		this.getManager().centerCameraOn(this.currentPoint);
+		if (this.points.size() > 1) {
+			this.currentIndex++;
+		}
+		
+		this.currentPoint = points.get(this.currentIndex);
 	}
 
 	@Override
@@ -57,6 +63,7 @@ public class MoveInterpolateTrackAction extends CameraAction {
 			} else {
 				this.currentIndex++;
 				this.currentPoint = this.points.get(this.currentIndex);
+				this.elapsedTimeAction = 0;
 			}			
 		}
 		

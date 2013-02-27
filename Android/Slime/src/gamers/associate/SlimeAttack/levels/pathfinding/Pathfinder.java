@@ -41,7 +41,7 @@ public class Pathfinder {
 			Node current = getLowestNodeIn(openNodes);
 			if(current == null) break;
 			if(current.equals(end)) return reconstructPath(current);
-			System.out.println(current.x + ", " + current.y);
+//			System.out.println(current.x + ", " + current.y);
 			
 			openNodes.remove(current);
 			closedNodes.add(current);

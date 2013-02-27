@@ -1,5 +1,7 @@
 package gamers.associate.SlimeAttack.levels.pathfinding;
 
+import gamers.associate.SlimeAttack.SlimeAttack;
+import gamers.associate.SlimeAttack.game.SlimeFactory;
 import gamers.associate.SlimeAttack.items.base.GameItem;
 import gamers.associate.SlimeAttack.levels.generator.BlocDefinition;
 
@@ -21,6 +23,7 @@ public class LevelPathFinder {
 	
 	public LevelPathFinder() {
 		this.wallPlatforms = new ArrayList<GameItem>();
+		Pathfinder.canCutCorners = true;
 	}
 	
 	public void reset() {
@@ -48,16 +51,19 @@ public class LevelPathFinder {
 	}
 	
 	private Node getStartNode() {
+		SlimeFactory.Log.d(SlimeAttack.TAG, "Start node");
 		return getNodeFrom(this.startItem);
 	}
 	
 	private Node getGoalNode() {		
+		SlimeFactory.Log.d(SlimeAttack.TAG, "Goal node");
 		return getNodeFrom(this.goal);
 	}
 	
 	private Node getNodeFrom(GameItem item) {
-		int i = getIdxIFrom(item.getPosition().x);
-		int j = getIdxJFrom(item.getPosition().y);
+		int i = getIdxIFrom(item.getPosition().x) + 1;
+		int j = getIdxJFrom(item.getPosition().y) + 1;
+		SlimeFactory.Log.d(SlimeAttack.TAG, "i, j: " + String.valueOf(i) + ", " + String.valueOf(j));
 		Node node = new Node(i, j);
 		
 		return node;
@@ -65,20 +71,20 @@ public class LevelPathFinder {
 	}
 	
 	private int getIdxIFrom(float length) {
-		return (int) FloatMath.ceil(length / BlocSizeW);
+		return (int) FloatMath.floor(length / BlocSizeW);
 	}
 	
 	private int getIdxJFrom(float length) {
-		// Level height added to handle negative coordinates... Arg. No way to have minimul y in level for now.
-		return (int) FloatMath.ceil((length + this.levelSize.height) / BlocSizeH);
+		// Level height added to handle negative coordinates... Arg. No way to have minimum y in level for now.
+		return (int) FloatMath.floor((length + this.levelSize.height) / BlocSizeH);
 	}
 	
 	private int getArrayWidth() {
-		return getIdxIFrom(this.levelSize.width);
+		return getIdxIFrom(this.levelSize.width) + 2;
 	}
 	
 	private int getArrayHeight() {
-		return getIdxJFrom(this.levelSize.height);
+		return getIdxJFrom(this.levelSize.height) + 2;
 	}
 	
 	private boolean[][] getWallArray() {
@@ -86,9 +92,19 @@ public class LevelPathFinder {
 		int sizeJ = this.getArrayHeight();
 		boolean[][] walls = new boolean[sizeI][sizeJ];
 		
+		for(int i = 0; i < sizeI; i++) {
+			walls[i][0] = true;
+			walls[i][sizeJ - 1] = true;
+		}
+		
+		for(int j = 0; j < sizeJ; j++) {
+			walls[0][j] = true;
+			walls[sizeI - 1][j] = true;
+		}
+		
 		for(GameItem wall : this.wallPlatforms) {
-			int i = this.getIdxIFrom(wall.getPosition().x);
-			int j = this.getIdxJFrom(wall.getPosition().y);
+			int i = this.getIdxIFrom(wall.getPosition().x) + 1;
+			int j = this.getIdxJFrom(wall.getPosition().y) + 1;
 			walls[i][j] = true;
 		}
 		
@@ -97,12 +113,86 @@ public class LevelPathFinder {
 	
 	public List<CGPoint> pathFinding() {
 		List<CGPoint> points = new ArrayList<CGPoint>();
-		List<Node> nodes = Pathfinder.generate(getStartNode(), getGoalNode(), getWallArray());		
+		Node start = getStartNode();
+		Node goal = getGoalNode();
+		boolean[][] walls = getWallArray();
+		
+		if (SlimeFactory.debugPathfinding) {
+			this.debugPathfindingBefore(goal, start, walls);
+		}
+		
+		List<Node> nodes = Pathfinder.generate(goal, start, walls);
+		
+		if (SlimeFactory.debugPathfinding) {
+			this.debugPathfindingAfter(goal, start, walls, nodes);
+		}
+		
 		for(Node node : nodes) {
-			CGPoint point = CGPoint.make(node.x * BlocSizeW + BlocSizeW / 2f, node.y * BlocSizeH - this.levelSize.height + BlocSizeH / 2f);
+			CGPoint point = CGPoint.make((node.x - 1) * BlocSizeW + BlocSizeW / 2f, (node.y - 1) * BlocSizeH - this.levelSize.height);
 			points.add(point);
 		}
 		
 		return points;
+	}
+
+	private void debugPathfindingBefore(Node start, Node finish, boolean[][] mapWalls) {
+		StringBuilder builder = new StringBuilder();
+		for(int i = 0; i < mapWalls.length; i++) {
+			for(int j = 0; j < mapWalls[i].length; j++) {
+				if (mapWalls[i][j]) {
+					builder.append("W");
+				} else {
+					if (start.x == i && start.y == j) {
+						builder.append("S");
+					} else {
+						if (finish.x == i && finish.y == j) {
+							builder.append("G");
+						} else {
+							builder.append("X");
+						}
+					}
+				}
+			}
+			
+			builder.append("\n");
+		}
+		
+		SlimeFactory.Log.d(SlimeAttack.TAG, builder.toString());
+	}
+	
+	private void debugPathfindingAfter(Node start, Node finish, boolean[][] mapWalls, List<Node> solution) {
+		StringBuilder builder = new StringBuilder();
+		for(int i = 0; i < mapWalls.length; i++) {
+			for(int j = 0; j < mapWalls[i].length; j++) {
+				if (mapWalls[i][j]) {
+					builder.append("W");
+				} else {
+					if (start.x == i && start.y == j) {
+						builder.append("S");
+					} else {
+						if (finish.x == i && finish.y == j) {
+							builder.append("G");
+						} else {
+							boolean found = false;
+							for(Node node : solution) {
+								if (node.x == i && node.y == j) {
+									builder.append("T");
+									found = true;
+									break;
+								}
+							}
+							
+							if (!found) {
+								builder.append("X");
+							}
+						}
+					}
+				}
+			}
+			
+			builder.append("\n");
+		}
+		
+		SlimeFactory.Log.d(SlimeAttack.TAG, builder.toString());
 	}
 }
