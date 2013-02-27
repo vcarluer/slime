@@ -12,7 +12,7 @@ import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.types.CGPoint;
 
 @SuppressLint("DefaultLocale") public class SurvivalModeItemLayer extends ModeItemLayer {
-	private static final String SURVIVAL = "Survival";
+	private static final String SURVIVAL = "SURVIVAL";
 	private static final String WORLD_ITEMS_BTN_EXTREME_PNG = "world-items/button-survival.png";
 	private CCLabel lblScore;
 	private CCSprite starSprite;
@@ -60,7 +60,7 @@ import org.cocos2d.types.CGPoint;
 	}
 	@Override
 	protected String getTitle() {
-		return SURVIVAL;
+		return SURVIVAL.toUpperCase();
 	}
 	@Override
 	protected String getBackgroundPath() {

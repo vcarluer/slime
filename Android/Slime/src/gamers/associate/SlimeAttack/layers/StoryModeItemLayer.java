@@ -13,7 +13,7 @@ import android.annotation.SuppressLint;
 import android.util.FloatMath;
 
 @SuppressLint("DefaultLocale") public class StoryModeItemLayer extends ModeItemLayer {
-	private static final String STORY = "Story";
+	private static final String STORY = "STORY";
 	private static final String WORLD_ITEMS_BTN_HARD_PNG = "world-items/button-story.png";
 	private static float shiftScore = - 75f;
 	
@@ -62,7 +62,7 @@ import android.util.FloatMath;
 	
 	@Override
 	protected String getTitle() {
-		return STORY;
+		return STORY.toUpperCase();
 	}
 	@Override
 	protected String getBackgroundPath() {

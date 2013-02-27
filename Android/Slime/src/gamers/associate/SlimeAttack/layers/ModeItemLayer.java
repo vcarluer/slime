@@ -25,7 +25,7 @@ public abstract class ModeItemLayer extends CanvasItemLayer {
 
 	@Override
 	protected float getFontSize() {
-		return SlimeFactory.FntSize;
+		return 53f * SlimeFactory.SGSDensity;
 	}
 	
 	

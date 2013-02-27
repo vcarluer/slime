@@ -45,7 +45,7 @@ import org.cocos2d.types.ccColor3B;
 		this.toDestroy = new ArrayList<CCNode>();		
 		this.levelDiff = levelDiff;
 		this.isUnlocked = this.levelDiff <= SlimeFactory.GameInfo.getMaxLevelDifficulty();
-		this.title = LevelDifficulty.getText(this.levelDiff);
+		this.title = LevelDifficulty.getText(this.levelDiff).toUpperCase();;
 		this.baseBackground = baseBackground;
 		
 		// override label position
@@ -104,6 +104,7 @@ import org.cocos2d.types.ccColor3B;
 					endPhrase = " levels in a row!";			
 				}
 				
+				endPhrase = endPhrase.toUpperCase();
 				CCLabel levelLabel = CCLabel.makeLabel(String.valueOf(inARow) + endPhrase, "fonts/Slime.ttf", fontSizeInfo);
 
 				levelLabel.setPosition(this.labelX, scoreLabel.getPosition().y - this.getFontSize() / 2 - paddingInfo - fontSizeInfo / 2);
@@ -191,7 +192,7 @@ import org.cocos2d.types.ccColor3B;
 
 	@Override
 	protected String getTitle() {
-		return this.title;
+		return this.title.toUpperCase();
 	}
 
 	@Override
