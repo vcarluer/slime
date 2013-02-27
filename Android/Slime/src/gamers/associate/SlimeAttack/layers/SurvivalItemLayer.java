@@ -55,12 +55,12 @@ import org.cocos2d.types.ccColor3B;
 		this.label.setPosition(this.labelX, this.labelY);
 		
 		this.inProgress = SlimeFactory.getLabel("In progress", fontSizeInfo);
-		this.inProgress.setColor(ccColor3B.ccc3(255, 0, 0));
+		this.inProgress.setColor(SlimeFactory.ColorSlimeGold);
 		this.inProgress.setVisible(false);
 		this.addChild(this.inProgress);
 		
 		this.inProgressLevel = SlimeFactory.getLabel("Level x", fontSizeInfo);
-		this.inProgressLevel.setColor(ccColor3B.ccc3(255, 0, 0));
+		this.inProgressLevel.setColor(SlimeFactory.ColorSlimeGold);
 		this.inProgressLevel.setVisible(false);
 		this.addChild(this.inProgressLevel);
 	}

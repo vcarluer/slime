@@ -49,6 +49,9 @@ import android.annotation.SuppressLint;
 	private static final int starCountHShift = 35;
 	private static final float starCountBarHeight = 30f;
 	private static final float starCountBarWidthMax = 200f;
+	private static final ccColor3B startColor = ccColor3B.ccBLACK;
+	private static final ccColor3B fullColor = ccColor3B.ccYELLOW;
+	private static final ccColor3B goalColor = ccColor3B.ccGREEN;
 
 	private static String Count_Text = "Hud";
 	
@@ -159,6 +162,8 @@ import android.annotation.SuppressLint;
 		this.starSprite = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);			
 		this.starSprite.setPosition(this.starX, this.starY);
 		this.starSprite.setAnchorPoint(0, 0f);
+		this.starSprite.setColor(startColor);
+		this.starSprite.setOpacity(150);
 		this.addChild(this.starSprite);
 		CCFadeOut fadeOut = CCFadeOut.action(0);
 		this.timesup.runAction(fadeOut);
@@ -198,7 +203,7 @@ import android.annotation.SuppressLint;
 		}
 	}
 	
-	public void upudateStarsCount() {
+	public void updateStarsCount() {
 		this.setStarsCount();
 	}
 	
@@ -333,6 +338,10 @@ import android.annotation.SuppressLint;
 					this.counterIdx++;
 					
 					IGamePlay gp = Level.currentLevel.getGamePlay();
+					if (this.counterIdx == gp.neededBonus()) {
+						this.starSprite.setColor(goalColor);
+					}
+					
 					// Extra bonus anim
 					if (this.counterIdx == this.starCounters.size()) {							
 						for(StarCounter counter: this.starCounters) {
@@ -346,6 +355,8 @@ import android.annotation.SuppressLint;
 								this.scoreTaken.setString("+" + Util.getFormatTime(gp.getExtraBonusPoints()));
 							}
 						}
+						
+						this.starSprite.setColor(fullColor);
 						
 					} else {
 						if (!this.isHideCount()) {
@@ -482,6 +493,10 @@ import android.annotation.SuppressLint;
 		this.scoreTaken.cleanup();
 		
 		this.hideTimesUp();
+		
+		if (this.starSprite != null) {
+			this.starSprite.setColor(startColor);
+		}		
 	}		
 
 	public boolean isHideCount() {

@@ -347,7 +347,7 @@ public class Level implements IGameItemHandler {
 		// Set camera right based on screen size
 		this.attachLevelToCamera();
 		
-		this.hudLayer.upudateStarsCount();
+		this.hudLayer.updateStarsCount();
 		this.startLevel();
 		
 		SlimeFactory.Log.d(SlimeAttack.TAG, "postBuild(String levelName) end");

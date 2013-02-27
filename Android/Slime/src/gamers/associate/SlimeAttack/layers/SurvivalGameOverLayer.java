@@ -49,7 +49,7 @@ import android.view.MotionEvent;
 		this.newHighScore = CCLabel.makeLabel(" ", "fonts/Slime.ttf", 42f* SlimeFactory.Density);
 		this.newHighScore.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() - 90 * SlimeFactory.Density);
 		this.newHighScore.setRotation(-15f);
-		this.newHighScore.setColor(ccColor3B.ccc3(255, 0, 0));
+		this.newHighScore.setColor(SlimeFactory.ColorSlimeGold);
 		
 		this.newUnlock = CCLabel.makeLabel(" ", "fonts/Slime.ttf", 32f* SlimeFactory.Density);
 		this.newUnlock.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + 45 * SlimeFactory.Density);

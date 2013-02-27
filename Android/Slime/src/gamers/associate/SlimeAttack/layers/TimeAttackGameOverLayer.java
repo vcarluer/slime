@@ -45,7 +45,7 @@ import android.view.MotionEvent;
 		this.congratLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY());
 		this.yEndRelative = - (42 + 11) * SlimeFactory.SGSDensity;
 		this.endLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + this.yEndRelative);
-		this.endLabel.setColor(ccColor3B.ccc3(255, 0, 0));
+		this.endLabel.setColor(SlimeFactory.ColorSlimeGold);
 		
 		this.addChild(this.gameOverLabel);
 		this.addChild(this.congratLabel);

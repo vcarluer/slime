@@ -116,10 +116,12 @@ import android.view.MotionEvent;
 //		this.square.setScaleY(scaleY);
 //		this.square.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY());
 //		this.addChild(this.square, Level.zUnder);
-		float pad = paddingSquare * SlimeFactory.SGSDensity;
-		CCColorLayer color = CCColorLayer.node(SlimeFactory.getColorLight(75), CCDirector.sharedDirector().winSize().width - pad * 2, CCDirector.sharedDirector().winSize().height - pad * 2);
-		color.setPosition(pad, pad);
-		this.addChild(color, Level.zUnder);
+		
+//		// Color layer
+//		float pad = paddingSquare * SlimeFactory.SGSDensity;
+//		CCColorLayer color = CCColorLayer.node(SlimeFactory.getColorLight(75), CCDirector.sharedDirector().winSize().width - pad * 2, CCDirector.sharedDirector().winSize().height - pad * 2);
+//		color.setPosition(pad, pad);
+//		this.addChild(color, Level.zUnder);
 
 		this.addChild(this.starCountLabel);
 		this.addChild(this.scoreLabel);

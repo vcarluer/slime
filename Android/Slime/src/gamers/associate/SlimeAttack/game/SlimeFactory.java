@@ -92,6 +92,7 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static ccColor3B ColorSlime = ccColor3B.ccc3(0, 170, 54);
 	public static ccColor3B ColorSlimeBorder = ccColor3B.ccc3(0, 62, 8);
 	public static ccColor3B ColorSlimeLight = ccColor3B.ccc3(178, 229, 194); // 178, 229, 194
+	public static ccColor3B ColorSlimeGold = ccColor3B.ccc3(242, 217, 74);
 	public static float Density; // surface density
 	public static float SGSDensity; // Samsung Galaxy S reference density ratio (SGS used as a reference for layout...) 
 	public static final float kCGPointEpsilon = 0.00000012f;
