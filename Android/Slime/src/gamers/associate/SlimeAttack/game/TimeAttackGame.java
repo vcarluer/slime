@@ -260,23 +260,26 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	public void startLevel() {
 		this.reset();
 		this.startMode();
-		this.level.getCameraManager().zoomCameraCenterTo(0);
+//		this.level.getCameraManager().zoomCameraCenterTo(0);
 		this.level.getCameraManager().cancelActions();
 		this.hasPaused = false;
+		this.level.getCameraManager().zoomCameraTo(this.zoomRatio);
+		this.level.getCameraManager().centerCameraOn(this.level.getGoal().getPosition());
+		
 		this.enterGameMode(15.0f);		
 	}
 	
 	private boolean hasPaused;
 	
 	private void enterGameMode(float speed) {
-		if(this.level.getStartItem() != null) {				
+		if(this.level.getStartItem() != null) {			
 			this.level.getCameraManager().moveInterpolateTo(this.level.getStartItem(), speed);
-			//AMZ replacing 1.0f by SGSDensity  
-			if (!this.hasPaused) {
-				this.level.getCameraManager().zoomInterpolateTo(this.level.getStartItem(), this.zoomRatio, speed);
-			}
+//			//AMZ replacing 1.0f by SGSDensity  
+//			if (!this.hasPaused) {
+//				this.level.getCameraManager().zoomInterpolateTo(this.level.getStartItem(), this.zoomRatio, speed);
+//			}
 					
-			this.level.getCameraManager().follow(this.level.getStartItem());			
+//			this.level.getCameraManager().follow(this.level.getStartItem());			
 		}
 
 		this.level.desactivateCameraMoveAndZoomByUser();
@@ -401,7 +404,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	@Override
 	protected void resume() {
 		super.resume();
-		this.enterGameMode(0.5f);
+		this.enterGameMode(0.3f);
 	}
 
 	@Override
