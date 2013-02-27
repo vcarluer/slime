@@ -258,9 +258,9 @@ public class GameItemCocos extends GameItem {
 	@Override
 	protected void pause() {
 		super.pause();
-		if (this.sprite != null) {
-			this.sprite.pauseSchedulerAndActions();
-		}
+//		if (this.sprite != null) {
+//			this.sprite.pauseSchedulerAndActions();
+//		}
 	}
 
 	/* (non-Javadoc)
@@ -269,9 +269,9 @@ public class GameItemCocos extends GameItem {
 	@Override
 	protected void resume() {		
 		super.resume();
-		if (this.sprite != null) {
-			this.sprite.resumeSchedulerAndActions();
-		}
+//		if (this.sprite != null) {
+//			this.sprite.resumeSchedulerAndActions();
+//		}
 	}
 	
 	@Override

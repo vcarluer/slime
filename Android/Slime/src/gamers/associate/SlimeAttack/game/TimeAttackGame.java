@@ -234,7 +234,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		if (!this.isStarted && !this.isPaused && !this.isGameOver) {
 //			this.level.desactivateCameraMoveAndZoomByUser();
 			this.level.getCameraManager().cancelActions();			
-			this.level.getCameraManager().moveInterpolateTo(this.level.getSelectedGameItem(), 0.5f);
+			this.level.getCameraManager().moveInterpolateTo(this.level.getSelectedGameItem(), 0.5f, true);
 			//AMZ replacing 1.0f by SGSDensity 
 			if(!this.hasPaused) {
 				this.level.getCameraManager().zoomInterpolateTo(this.level.getSelectedGameItem(), this.zoomRatio, 0.5f);
@@ -421,7 +421,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		this.enterGameMode();
 		
 		if(this.level.getStartItem() != null) {			
-			this.level.getCameraManager().moveInterpolateTo(this.level.getStartItem(), 0.3f);
+			this.level.getCameraManager().moveInterpolateTo(this.level.getStartItem(), 0.3f, true);
 		}
 	}
 

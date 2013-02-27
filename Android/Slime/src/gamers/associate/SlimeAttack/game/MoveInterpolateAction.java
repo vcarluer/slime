@@ -8,11 +8,13 @@ import gamers.associate.SlimeAttack.items.base.GameItem;
 public class MoveInterpolateAction extends CameraAction {
 
 	private CGPoint pointAction;	
+	private boolean followAtEnd;
 	
-	public MoveInterpolateAction(CameraManager manager, float time, GameItem target) {
+	public MoveInterpolateAction(CameraManager manager, float time, GameItem target, boolean followAtEnd) {
 		super(manager, time);
 		this.pointAction = CGPoint.zero();		
 		this.setTargetAction(target);
+		this.followAtEnd = followAtEnd;
 	}
 
 	@Override
@@ -31,4 +33,12 @@ public class MoveInterpolateAction extends CameraAction {
 		this.getManager().centerCameraOn(this.pointAction);		
 	}
 
+	@Override
+	protected void handleEnding() {
+		super.handleEnding();
+		
+		if(this.followAtEnd && Level.currentLevel.getStartItem() != null) {
+			Level.currentLevel.getCameraManager().follow(Level.currentLevel.getStartItem());
+		}
+	}
 }

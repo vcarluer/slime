@@ -30,11 +30,15 @@ public abstract class CameraAction {
 		this.elapsedTimeAction += delta;		
 		if (elapsedTimeAction >= this.targetTimeAction) {
 			this.isEnded = true;
+			this.handleEnding();			
 		}
 		
 		return this.isEnded;
 	}
 	
+	protected void handleEnding() {
+	}
+
 	protected abstract void actionInternal(float delta);
 	
 	protected void setTargetAction(GameItem target) {

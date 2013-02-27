@@ -791,7 +791,7 @@ public class Level implements IGameItemHandler {
 					if (this.selectedItem.simpleSelect()) {
 						if (this.gamePlay == null) {
 							GameItem center = (GameItem)this.selectedItem;
-							this.cameraManager.moveInterpolateTo(center, 0.3f);
+							this.cameraManager.moveInterpolateTo(center, 0.3f, false);
 						}
 						else {
 							this.gamePlay.simpleSelect();

@@ -504,8 +504,8 @@ public class CameraManager {
 		this.actions.clear();
 	}
 	
-	public void moveInterpolateTo(GameItem target, float time) {						
-		this.addAction(new MoveInterpolateAction(this, time, target));
+	public void moveInterpolateTo(GameItem target, float time, boolean followAtEnd) {						
+		this.addAction(new MoveInterpolateAction(this, time, target, followAtEnd));
 	}
 	
 	public void moveInterpolateTrackTo(List<CGPoint> points, float time, boolean resumeAtEnd) {						

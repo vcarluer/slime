@@ -90,7 +90,7 @@ public class Thumbnail extends GameItemCocos implements ISelectable {
 	public void selectionStop(CGPoint gameReference) {
 		if (this.isSelected) {
 			if (this.target instanceof GameItem) {
-				Level.currentLevel.getCameraManager().moveInterpolateTo((GameItem)this.target, 0.3f);
+				Level.currentLevel.getCameraManager().moveInterpolateTo((GameItem)this.target, 0.3f, false);
 			}
 		}
 	}
