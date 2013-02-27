@@ -5,11 +5,11 @@ import gamers.associate.SlimeAttack.items.base.GameItem;
 public abstract class CameraAction {
 	private GameItem targetAction;
 	private float targetValue;
-	private float elapsedTimeAction;
-	private float targetTimeAction;	
+	protected float elapsedTimeAction;
+	protected float targetTimeAction;	
 	private CameraManager cameraManager;
-	private float interpolation;
-	private boolean isEnded;
+	protected float interpolation;
+	protected boolean isEnded;
 	
 	public CameraAction(CameraManager manager, float time) {		
 		this.cameraManager = manager;

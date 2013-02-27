@@ -3,6 +3,7 @@ package gamers.associate.SlimeAttack.game;
 import gamers.associate.SlimeAttack.items.base.GameItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -505,6 +506,10 @@ public class CameraManager {
 	
 	public void moveInterpolateTo(GameItem target, float time) {						
 		this.addAction(new MoveInterpolateAction(this, time, target));
+	}
+	
+	public void moveInterpolateTrackTo(List<CGPoint> points, float time) {						
+		this.addAction(new MoveInterpolateTrackAction(this, time, points));
 	}
 	
 	public CGRect getVirtualCamera() {

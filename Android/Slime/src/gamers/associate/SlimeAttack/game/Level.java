@@ -38,6 +38,7 @@ import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.opengl.CCBitmapFontAtlas;
 import org.cocos2d.types.CGPoint;
+import org.cocos2d.types.CGSize;
 
 import android.annotation.SuppressLint;
 
@@ -696,6 +697,7 @@ public class Level implements IGameItemHandler {
 		this.levelWidth = width;
 		this.levelHeight = height;	
 		this.fixBgSize();
+		SlimeFactory.PathFinder.setLevelSize(CGSize.make(this.getLevelWidth(), this.getLevelHeight()));
 	} 
 	
 	private void fixBgSize() {
@@ -863,6 +865,7 @@ public class Level implements IGameItemHandler {
 	
 	public void setStartItem(GameItem start) {
 		this.startItem = start;
+		SlimeFactory.PathFinder.setStartItem(start);
 	}
 	
 	public Vector2 getGravity() {
@@ -1251,6 +1254,7 @@ public class Level implements IGameItemHandler {
 	
 	public void setGoal(GoalPortal goal) {
 		this.goal = goal;
+		SlimeFactory.PathFinder.setGoal(goal);
 	}
 	
 	public EvacuationPlug getPlug() {

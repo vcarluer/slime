@@ -1,5 +1,7 @@
 package gamers.associate.SlimeAttack.game;
 
+import java.util.List;
+
 import gamers.associate.SlimeAttack.R;
 import gamers.associate.SlimeAttack.game.achievements.AchievementStatistics;
 import gamers.associate.SlimeAttack.items.base.GameItem;
@@ -267,22 +269,16 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		this.level.getCameraManager().centerCameraOn(this.level.getGoal().getPosition());
 		this.level.pause();
 		this.level.animateHudPlay(true);
-		this.enterGameMode(15.0f);		
+		
+		List<CGPoint> points = SlimeFactory.PathFinder.pathFinding();
+		this.level.getCameraManager().moveInterpolateTrackTo(points, 5f);
+		
+		this.enterGameMode();		
 	}
 	
 	private boolean hasPaused;
 	
-	private void enterGameMode(float speed) {
-		if(this.level.getStartItem() != null) {			
-			this.level.getCameraManager().moveInterpolateTo(this.level.getStartItem(), speed);			
-//			//AMZ replacing 1.0f by SGSDensity  
-//			if (!this.hasPaused) {
-//				this.level.getCameraManager().zoomInterpolateTo(this.level.getStartItem(), this.zoomRatio, speed);
-//			}
-					
-//			this.level.getCameraManager().follow(this.level.getStartItem());			
-		}		
-				
+	private void enterGameMode() {				
 		this.level.setTimeRatio(TimeRatioNormal);
 	}
 	
@@ -404,7 +400,11 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	protected void resume() {
 		super.resume();
 		this.level.desactivateCameraMoveAndZoomByUser();
-		this.enterGameMode(0.3f);
+		this.enterGameMode();
+		
+		if(this.level.getStartItem() != null) {			
+			this.level.getCameraManager().moveInterpolateTo(this.level.getStartItem(), 0.3f);
+		}
 	}
 
 	@Override

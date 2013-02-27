@@ -171,8 +171,7 @@ public class LevelDefinitionParser extends LevelDefinition
 	@Override
 	public boolean buildLevel(Level level) {
 		InputStream inputStream = null;
-		boolean constructed = true;
-		SlimeFactory.PathFinder.reset();
+		boolean constructed = true;		
 		try {
 			SlimeFactory.Log.d(SlimeAttack.TAG, "Loading level from " + this.getResourceName());
 			if (this.isLocalStorage) {

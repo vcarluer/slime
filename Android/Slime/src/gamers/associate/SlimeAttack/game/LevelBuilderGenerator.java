@@ -40,6 +40,7 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 		// this one is only call for survival and home! Bad design powa. Juste ensure it here
 		if (gamePlay == GamePlay.TimeAttack) return;
 
+		SlimeFactory.PathFinder.reset();
 		// always default id... Used for reset all
 		this.levelDef.setId(defaultId);
 		
@@ -111,13 +112,14 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 	}
 
 	@Override
-	public void build(Level level, LevelDefinition levelDefToLoad) {
+	public void build(Level level, LevelDefinition levelDefToLoad) {		
 		SlimeFactory.Log.d(SlimeAttack.TAG, "build(Level level, LevelDefinition levelDefToLoad) start");
 		if (levelDefToLoad.getGamePlay() == GamePlay.Survival) {
 			this.build(level, levelDef.getId(), levelDef.getGamePlay());
 		}
 		
 		if (levelDefToLoad.getGamePlay() == GamePlay.TimeAttack) {
+			SlimeFactory.PathFinder.reset();
 			boolean isTuto = this.isTut(levelDefToLoad);
 			AchievementStatistics.isTuto = isTuto;
 			level.setLevelDefinition(levelDefToLoad);

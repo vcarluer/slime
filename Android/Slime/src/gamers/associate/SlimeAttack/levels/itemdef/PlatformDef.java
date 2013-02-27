@@ -38,11 +38,7 @@ public class PlatformDef extends ItemDefinition {
 		}
 		
 		if (this.itemType.toUpperCase().equals(Handled_Wall.toUpperCase())) {
-			Platform wall = SlimeFactory.Platform.createWallBL(this.getUName(), this.getX(), this.getY(), this.width, this.height);
-			wall.setAngle(this.angle);
-			if (this.name == BlocDefinitionFill.IDFILL) {
-				SlimeFactory.PathFinder.addWall(wall);
-			}
+			SlimeFactory.Platform.createWallBL(this.getUName(), this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);			
 		}
 		
 		if (this.itemType.toUpperCase().equals(Handled_Corner.toUpperCase())) {

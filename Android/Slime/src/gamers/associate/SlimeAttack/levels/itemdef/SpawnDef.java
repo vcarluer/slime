@@ -11,7 +11,8 @@ public class SpawnDef extends ItemDefinition {
 	@Override
 	public void createItem(Level level) {
 		// todo: Create and use createBL. Change getIsBL too.
-		level.setStartItem(SlimeFactory.Slimy.createJump(this.getUName(), this.getX() + this.width / 2, this.getY() + this.height / 2, 1.0f));
+		SlimyJump slimy = SlimeFactory.Slimy.createJump(this.getUName(), this.getX() + this.width / 2, this.getY() + this.height / 2, 1.0f);
+		level.setStartItem(slimy);		
 	}
 
 	@Override

@@ -42,7 +42,7 @@ import gamers.associate.SlimeAttack.levels.ILevelBuilder;
 import gamers.associate.SlimeAttack.levels.generator.LevelGraphGeneratorCorridor3;
 import gamers.associate.SlimeAttack.levels.generator.LevelGraphGeneratorRectangle2;
 import gamers.associate.SlimeAttack.levels.generator.LevelGraphGeneratorTutorial;
-import gamers.associate.SlimeAttack.levels.generator.LevelPathFinder;
+import gamers.associate.SlimeAttack.levels.pathfinding.LevelPathFinder;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -77,9 +77,9 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static final int MaxSurvival = LevelDifficulty.Hard;
 	public static final boolean IsForceMaxWorld = false;
 	public static final int MaxWorld = LevelDifficulty.Extrem;
-	public static final boolean resetHighScores = true; // Run with this = true and then relaunch with false
-	public static final boolean clearLevelInfo = true; // Run with this = true and then relaunch with false
-	public static final boolean unlockAll = false;
+	public static final boolean resetHighScores = false; // Run with this = true and then relaunch with false
+	public static final boolean clearLevelInfo = false; // Run with this = true and then relaunch with false
+	public static final boolean unlockAll = true;
 	public static final boolean unlockAllAchievement = false;
 	public static final boolean noUnlockHardcoreGamer = false;
 	public static final boolean resetAchievements = false; // if true can not unlock allachievements

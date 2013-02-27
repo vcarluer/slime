@@ -1,7 +1,10 @@
 package gamers.associate.SlimeAttack.levels.itemdef;
 
+import org.cocos2d.types.CGSize;
+
 import android.annotation.SuppressLint;
 import gamers.associate.SlimeAttack.game.Level;
+import gamers.associate.SlimeAttack.game.SlimeFactory;
 import gamers.associate.SlimeAttack.items.base.GameItem;
 import gamers.associate.SlimeAttack.levels.LevelUtil;
 
@@ -56,7 +59,7 @@ public class LevelInfoDef extends ItemDefinition {
 		
 		level.setLevelOrigin(this.x, this.y);
 		level.setMaxDimension(this.maxDimension);
-		LevelUtil.createGroundBox(level);
+		LevelUtil.createGroundBox(level);				
 	}
 
 	@Override

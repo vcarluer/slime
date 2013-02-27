@@ -1,7 +1,9 @@
 package gamers.associate.SlimeAttack.items.custom;
 
+import gamers.associate.SlimeAttack.game.SlimeFactory;
 import gamers.associate.SlimeAttack.items.base.GameItemPhysicFactory;
 import gamers.associate.SlimeAttack.items.base.TextureAnimation;
+import gamers.associate.SlimeAttack.levels.generator.hardcoded.BlocDefinitionFill;
 
 public class PlatformFactory extends GameItemPhysicFactory<Platform>{
 	
@@ -71,7 +73,12 @@ public class PlatformFactory extends GameItemPhysicFactory<Platform>{
 	}
 	
 	public Platform createWallBL(String name, float x, float y, float width, float height) {
-		return this.create(name, x + width / 2, y + height / 2, width, height, Platform.Wall);
+		Platform wall = this.create(name, x + width / 2, y + height / 2, width, height, Platform.Wall);
+		if (name.contains(BlocDefinitionFill.IDFILL)) {
+			SlimeFactory.PathFinder.addWall(wall);
+		}
+		
+		return wall;
 	}
 	
 	public Platform createCornerBL(String name, float x, float y, float width, float height) {
