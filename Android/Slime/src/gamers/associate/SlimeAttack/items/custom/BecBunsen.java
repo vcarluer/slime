@@ -80,34 +80,26 @@ public class BecBunsen extends GameItemPhysic implements ITrigerable {
 
 	@Override
 	protected void initBody() {
-		// Physic body
-		BodyDef bodyDef = new BodyDef();		
-		bodyDef.type = BodyType.StaticBody;
-		
 		CGPoint spawnPoint = new CGPoint();
 		spawnPoint.x = this.position.x;
 		spawnPoint.y = this.position.y;
+		
+		// Physic body Base
+		BodyDef bodyDefBase = new BodyDef();		
+		bodyDefBase.type = BodyType.StaticBody;		
 				
-		bodyDef.position.set(spawnPoint.x/worldRatio, spawnPoint.y/worldRatio);
+		bodyDefBase.position.set(spawnPoint.x/worldRatio, spawnPoint.y/worldRatio);
 		
-		// Define another box shape for our dynamic body.
+		// Base
 		PolygonShape dynamicBoxBase = new PolygonShape();
-		Vector2 center = new Vector2();
-		center.x = 0;
-		center.y = ( - this.height / 2f + this.base_height / 2f) / this.worldRatio;
-		dynamicBoxBase.setAsBox(this.base_width / this.worldRatio / 2, this.base_height / this.worldRatio / 2, center, 0f);						
-		
-		// Define another box shape for our dynamic body.
-		PolygonShape dynamicBoxFire = new PolygonShape();
-		Vector2 center2 = new Vector2();
-		center2.x = 0;
-		center2.y = ( - this.height / 2f + this.base_height + this.fire_height / 2f) / this.worldRatio;
-		dynamicBoxFire.setAsBox(this.fire_width / this.worldRatio / 2f, this.fire_height / this.worldRatio / 2f, center2, 0f);
-		
+		Vector2 centerBase = new Vector2();
+		centerBase.x = 0;
+		centerBase.y = ( - this.height / 2f + this.base_height / 2f) / this.worldRatio;
+		dynamicBoxBase.setAsBox(this.base_width / this.worldRatio / 2, this.base_height / this.worldRatio / 2, centerBase, 0f);						
+				
 		synchronized (world) {
     		// Define the dynamic body fixture and set mass so it's dynamic.
-    		this.body = world.createBody(bodyDef);
-    		this.body.setUserData(this);
+    		this.body = world.createBody(bodyDefBase);
     		
     		FixtureDef fixtureDefBase = new FixtureDef();
     		fixtureDefBase.shape = dynamicBoxBase;	    		
@@ -116,13 +108,33 @@ public class BecBunsen extends GameItemPhysic implements ITrigerable {
     		fixtureDefBase.restitution = 0f;       		    	
     		fixtureDefBase.filter.categoryBits = GameItemPhysic.Category_InGame;
     		
+    		this.body.createFixture(fixtureDefBase);    		
+    	}
+		
+		// Physic body flame
+		BodyDef bodyDefFlame = new BodyDef();		
+		bodyDefFlame.type = BodyType.StaticBody;
+				
+		bodyDefFlame.position.set(spawnPoint.x/worldRatio, spawnPoint.y/worldRatio);
+				
+		// Flame
+		PolygonShape dynamicBoxFire = new PolygonShape();
+		Vector2 centerFlame = new Vector2();
+		centerFlame.x = 0;
+		centerFlame.y = ( - this.height / 2f + this.base_height + this.fire_height / 2f) / this.worldRatio;
+		dynamicBoxFire.setAsBox(this.fire_width / this.worldRatio / 2f, this.fire_height / this.worldRatio / 2f, centerFlame, 0f);
+		
+		synchronized (world) {
+    		// Define the dynamic body fixture and set mass so it's dynamic.
+    		this.body = world.createBody(bodyDefFlame);
+    		this.body.setUserData(this);
+    		
     		FixtureDef fixtureDefFire = new FixtureDef();
     		fixtureDefFire.shape = dynamicBoxFire;    		  
     		fixtureDefFire.isSensor = true;
     		fixtureDefFire.filter.categoryBits = GameItemPhysic.Category_InGame;
     		    		
-    		this.body.createFixture(fixtureDefFire);
-    		this.body.createFixture(fixtureDefBase);    		
+    		this.body.createFixture(fixtureDefFire);	
     	}
 	}
 

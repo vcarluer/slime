@@ -4,6 +4,7 @@ import gamers.associate.SlimeAttack.R;
 import gamers.associate.SlimeAttack.game.Level;
 import gamers.associate.SlimeAttack.game.SlimeFactory;
 import gamers.associate.SlimeAttack.game.Sounds;
+import gamers.associate.SlimeAttack.game.achievements.AchievementStatistics;
 import gamers.associate.SlimeAttack.levels.GamePlay;
 import gamers.associate.SlimeAttack.levels.LevelHome;
 
@@ -49,6 +50,9 @@ public class ChooseModeLayer extends CCLayer implements IBackableLayer {
 		SlimeFactory.moveToZeroY(0f, this.story);
 		this.survival.setPosition(CCDirector.sharedDirector().winSize().width / 2f, 0);
 		SlimeFactory.moveToZeroY(0.3f, this.survival);
+		
+		AchievementStatistics.isModeStory = false;
+		AchievementStatistics.isModeSurvival = false;
 		super.onEnter();
 	}	
 

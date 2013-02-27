@@ -20,7 +20,7 @@ public class SilverSurferAch extends Achievement {
 			WorldPackage world = SlimeFactory.PackageManager.getCurrentPackage();
 			int consecutive = 0;
 			for(LevelDefinition def : world.getLevels()) {
-				if (def.getRank() == Rank.Silver) {
+				if (def.getRank() == Rank.Silver || def.getRank() == Rank.Gold) {
 					consecutive++;
 				} else {
 					consecutive = 0;

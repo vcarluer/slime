@@ -14,13 +14,13 @@ public class ContactManager implements ContactListener {
 		if (contact.getFixtureA() != null && contact.getFixtureB() != null) {
 			Object oA = contact.getFixtureA().getBody().getUserData();
 			Object oB = contact.getFixtureB().getBody().getUserData();
-			if (oA instanceof GameItemPhysic)
+			if (oA != null && oA instanceof GameItemPhysic)
 			{
 				GameItemPhysic item = (GameItemPhysic)oA;
 				item.addContact(oB, contact.getWorldManifold());
 			}
 			
-			if (oB instanceof GameItemPhysic)
+			if (oB != null && oB instanceof GameItemPhysic)
 			{
 				GameItemPhysic item = (GameItemPhysic)oB;
 				item.addContact(oA, contact.getWorldManifold());

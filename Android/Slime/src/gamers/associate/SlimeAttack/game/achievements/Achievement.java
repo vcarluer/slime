@@ -14,7 +14,7 @@ import java.io.OutputStreamWriter;
 
 import android.content.Context;
 
-public abstract class Achievement {
+public abstract class Achievement implements Comparable<Achievement> {
 	private String name;
 	private String description;
 	private boolean achieved;
@@ -183,4 +183,8 @@ public abstract class Achievement {
 	public void setLose(boolean lose) {
 		this.lose = lose;
 	}
+	
+	public int compareTo(Achievement otherAchievement) {
+        return this.name.compareTo(otherAchievement.name);
+    }
 }

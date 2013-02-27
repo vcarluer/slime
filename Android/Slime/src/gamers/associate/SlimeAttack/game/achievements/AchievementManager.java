@@ -2,6 +2,7 @@ package gamers.associate.SlimeAttack.game.achievements;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -63,6 +64,8 @@ public class AchievementManager {
 		this.add(new TimeOutAch());
 		this.add(new PushButtonAch());
 		this.add(new HardcoreAch());
+		
+		Collections.sort(this.orderedAchievements);
 	}
 
 	@SuppressWarnings("rawtypes")
