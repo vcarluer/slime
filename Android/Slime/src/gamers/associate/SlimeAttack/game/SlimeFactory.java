@@ -85,7 +85,7 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static final boolean resetAchievements = false; // if true can not unlock allachievements
 	public static final boolean debugSpeed = false;
 	public static final boolean isBeta = false;
-	public static final boolean debugPathfinding = false;
+	public static final boolean debugPathfinding = true;
 	
 	// end debug ---
 	private static final float SGSDensityBase = 1.5f; // Samsung Galaxy S density
