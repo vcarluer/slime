@@ -37,6 +37,7 @@ import org.cocos2d.particlesystem.CCParticleFire;
 import org.cocos2d.particlesystem.CCParticleSystem;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
+import org.cocos2d.types.ccColor3B;
 import org.cocos2d.types.ccColor4F;
 
 import android.util.FloatMath;
@@ -236,6 +237,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 				CCDrawingPrimitives.ccDrawCircle(gl, this.getPosition(), 50, ccMacros.CC_DEGREES_TO_RADIANS(90), 50, true);						
 			}
 			
+			this.getScaledRect();
 			if (this.scaledRect != null && this.isActive()) {			
 				// Drawing selection rectangle
 				Util.draw(gl, this.scaledRect, 2.0f, 0, 1, 0, 1);
@@ -259,6 +261,13 @@ public class SlimyJump extends Slimy implements ISelectable {
 				CGRect spriteRect = CGRect.make(this.getPosition().x - this.width / 2, this.getPosition().y - this.height / 2, this.width, this.height);
 				Util.draw(gl, spriteRect, 2.0f, 0, 0, 1, 1);
 				
+			}
+		} else {
+			this.getScaledRect();
+			if (this.scaledRect != null && this.isActivePaused()) {			
+				// Drawing selection rectangle
+				// ColorSlimeLight = ccColor3B.ccc3(178, 229, 194);
+				Util.draw(gl, this.scaledRect, 2.0f, 179f / 255f, 229f / 255f, 194f / 255f, 0.7f);
 			}
 		}
 	}

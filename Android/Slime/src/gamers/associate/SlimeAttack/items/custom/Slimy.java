@@ -359,8 +359,9 @@ public class Slimy extends GameItemPhysic implements IBurnable, IDissolvable, IE
 	@Override
 	protected void runReferenceAction() {
 		this.waitAnim();
-		this.fadeIn();
-		this.spawn();
+		this.spawnBody();
+//		this.fadeIn();
+//		this.spawn();
 	}
 
 	/* (non-Javadoc)
