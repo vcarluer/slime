@@ -225,7 +225,7 @@ public class CreditLayer extends CCLayer implements IBackableLayer {
 		this.addInfo("Producer", "None! we are indy");
 		// other
 		this.addInfo("Beta Test", this.getBetaTesters());
-		this.addInfo("Thank you", "Our families", "cocos2d-android team", "libgdx team", "Google", "You!");
+		this.addInfo("Thank you", "Our families", "cocos2d-android team", "libgdx team", "Google", "webomator for titles", "You!");
 		this.addInfo("Gamers Associate 2013", vcr, gcc, amz, mbn);
 		this.addInfoDisclaimer("No green slime were harmed in the making of this game");
 		this.addInfoDisclaimer("We can not speak about red slime under the Civil agreement 1337-42");
