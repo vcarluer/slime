@@ -4,6 +4,7 @@ import gamers.associate.SlimeAttack.game.Level;
 import gamers.associate.SlimeAttack.game.SlimeFactory;
 import gamers.associate.SlimeAttack.items.base.GameItem;
 import gamers.associate.SlimeAttack.items.custom.Platform;
+import gamers.associate.SlimeAttack.levels.generator.hardcoded.BlocDefinitionFill;
 
 public class PlatformDef extends ItemDefinition {
 	private static String Handled_Platform = "Platform";
@@ -37,7 +38,11 @@ public class PlatformDef extends ItemDefinition {
 		}
 		
 		if (this.itemType.toUpperCase().equals(Handled_Wall.toUpperCase())) {
-			SlimeFactory.Platform.createWallBL(this.getUName(), this.getX(), this.getY(), this.width, this.height).setAngle(this.angle);
+			Platform wall = SlimeFactory.Platform.createWallBL(this.getUName(), this.getX(), this.getY(), this.width, this.height);
+			wall.setAngle(this.angle);
+			if (this.name == BlocDefinitionFill.IDFILL) {
+				SlimeFactory.PathFinder.addWall(wall);
+			}
 		}
 		
 		if (this.itemType.toUpperCase().equals(Handled_Corner.toUpperCase())) {

@@ -7,7 +7,7 @@ import gamers.associate.SlimeAttack.levels.generator.LevelGenNode;
 
 public class BlocDefinitionFill extends BlocDefinitionHardCoded {
 
-	private static final String IDFILL = "Fill";
+	public static final String IDFILL = "Fill";
 
 	@Override
 	protected int getInitComplexity() {		

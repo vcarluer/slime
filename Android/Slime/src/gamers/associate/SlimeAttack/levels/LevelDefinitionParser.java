@@ -172,6 +172,7 @@ public class LevelDefinitionParser extends LevelDefinition
 	public boolean buildLevel(Level level) {
 		InputStream inputStream = null;
 		boolean constructed = true;
+		SlimeFactory.PathFinder.reset();
 		try {
 			SlimeFactory.Log.d(SlimeAttack.TAG, "Loading level from " + this.getResourceName());
 			if (this.isLocalStorage) {
@@ -223,7 +224,7 @@ public class LevelDefinitionParser extends LevelDefinition
 		this.postBuildItem.postBuild();
 		return constructed;
 	}
-	
+
 	protected void HandleLine(Level level, String line) throws Exception {
 		ItemDefinition itemDef = this.getItemDef(line);
 		if (itemDef != null) {

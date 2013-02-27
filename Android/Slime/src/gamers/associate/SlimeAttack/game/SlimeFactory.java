@@ -42,6 +42,7 @@ import gamers.associate.SlimeAttack.levels.ILevelBuilder;
 import gamers.associate.SlimeAttack.levels.generator.LevelGraphGeneratorCorridor3;
 import gamers.associate.SlimeAttack.levels.generator.LevelGraphGeneratorRectangle2;
 import gamers.associate.SlimeAttack.levels.generator.LevelGraphGeneratorTutorial;
+import gamers.associate.SlimeAttack.levels.generator.LevelPathFinder;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -145,6 +146,8 @@ import com.badlogic.gdx.physics.box2d.World;
 	
 	public static PackageManager PackageManager;
 	public static AchievementManager AchievementManager;	
+	
+	public static LevelPathFinder PathFinder = new LevelPathFinder();
 		
 	public static void init() {
 		if (PackageManager == null) {
