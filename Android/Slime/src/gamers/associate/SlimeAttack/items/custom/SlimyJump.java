@@ -264,7 +264,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	}
 	
 	public boolean trySelect(CGPoint gameReference) {
-		if (this.canSelect(gameReference)) {			
+		if (this.canSelect(gameReference)) {
 			this.select();
 			this.computeTarget(gameReference);			
 		} 
@@ -285,7 +285,11 @@ public class SlimyJump extends Slimy implements ISelectable {
 //			else {
 //				can = true;
 //			}
-		}
+		} else {
+			if (this.isActivePaused()) {
+				return CGRect.containsPoint(this.getScaledRect(), gameReference);
+			}
+		}		
 		
 		if (!can && this.isDying) {			
 			this.getSprite().stopAllActions();
@@ -295,6 +299,16 @@ public class SlimyJump extends Slimy implements ISelectable {
 		return can;
 	}
 	
+	private CGRect getScaledRect() {
+		float zoom = Level.currentLevel.getCameraManager().getCurrentZoom();
+		
+		if (zoom != 0) {			
+			Util.getScaledRect(this.getSelectionRect(), this.width, this.height, zoom, this.scaledRect);
+		}
+		
+		return this.scaledRect;
+	}
+
 	public void select() {		
 		this.selected = true;
 		// this.auraSprite.setVisible(true);
@@ -309,6 +323,10 @@ public class SlimyJump extends Slimy implements ISelectable {
 	}
 	
 	public void select(CGPoint gameReference) {
+		if (Level.currentLevel.isPaused()) {
+			Level.currentLevel.resume();
+		}		
+		
 		this.computeScreenStart(gameReference);
 		this.select();
 		this.computeTarget(gameReference);
@@ -498,8 +516,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 //			
 //			this.scaledRect.set(targX1, targY1, scaledW, scaledH);
 			
-			//Todo: Compute only on canSelect?
-			Util.getScaledRect(this.getSelectionRect(), this.width, this.height, zoom, this.scaledRect);
+			//Todo: Compute only on canSelect?			
 		}
 	}
 	
@@ -661,6 +678,10 @@ public class SlimyJump extends Slimy implements ISelectable {
 	@Override
 	public boolean isActive() {
 		return !this.isDead && !this.isDisabled && !this.isDying && !this.isPaused;
+	}
+	
+	private boolean isActivePaused() {
+		return !this.isDead && !this.isDisabled && !this.isDying && this.isPaused;
 	}
 
 	/* (non-Javadoc)

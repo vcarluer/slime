@@ -8,8 +8,11 @@ import gamers.associate.SlimeAttack.items.custom.MenuSprite;
 import gamers.associate.SlimeAttack.levels.GamePlay;
 
 import org.cocos2d.actions.base.CCRepeatForever;
+import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCFadeIn;
 import org.cocos2d.actions.interval.CCFadeOut;
+import org.cocos2d.actions.interval.CCScaleBy;
+import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
@@ -40,6 +43,7 @@ public class PauseLayer extends CCLayer {
 	public static final float arrowHeight = 69f;
 	private CCMenuItemSprite restartMenu;
 	private CCMenuItemSprite homeMenu;
+	private CCMenuItemSprite resumeMenu;
 	
 	public PauseLayer() {
 //		CCMenuItem label = CCMenuItemLabel.item(getMenuLabel("Pause"), this, "");		
@@ -48,8 +52,8 @@ public class PauseLayer extends CCLayer {
 		
 		CCSprite resumeSpriteN = CCSprite.sprite("control-play.png", true);
 		CCSprite resumeSpriteS = CCSprite.sprite("control-play.png", true);
-		CCMenuItemSprite resumeMenu = CCMenuItemSprite.item(resumeSpriteN, resumeSpriteS, this, "goResume");
-		this.setMenuPos(resumeMenu, 1);
+		this.resumeMenu = CCMenuItemSprite.item(resumeSpriteN, resumeSpriteS, this, "goResume");
+		this.setMenuPos(this.resumeMenu, 1);
 		
 		CCSprite restartSpriteN = CCSprite.sprite("control-restart.png", true);
 		CCSprite restartSpriteS = CCSprite.sprite("control-restart.png", true);
@@ -188,5 +192,20 @@ public class PauseLayer extends CCLayer {
 		this.setIsTouchEnabled(false);
 		this.setVisible(false);
 		this.menu.setIsTouchEnabled(false);
+	}
+
+	public void animatePlay(boolean isAnimated) {
+		this.resumeMenu.stopAllActions();
+		float baseScale = Scale;
+		this.resumeMenu.setScale(baseScale);
+		if (isAnimated) {						
+			
+			CCScaleBy scaleBy = CCScaleBy.action(0.3f, 0.3f);
+			CCScaleTo scaleTo = CCScaleTo.action(0.3f, baseScale);
+			CCDelayTime delay = CCDelayTime.action(2.0f);
+			CCSequence seq = CCSequence.actions(scaleBy, scaleTo, delay);
+			CCRepeatForever rep = CCRepeatForever.action(seq);
+			this.resumeMenu.runAction(rep);
+		}
 	}
 }

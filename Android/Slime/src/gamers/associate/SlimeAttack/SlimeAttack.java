@@ -1,8 +1,5 @@
 package gamers.associate.SlimeAttack;
 
-import gamers.associate.SlimeAttack.R;
-import gamers.associate.SlimeAttack.R.id;
-import gamers.associate.SlimeAttack.R.layout;
 import gamers.associate.SlimeAttack.game.Level;
 import gamers.associate.SlimeAttack.game.SlimeFactory;
 import gamers.associate.SlimeAttack.game.Sounds;

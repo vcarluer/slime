@@ -237,7 +237,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 			if(!this.hasPaused) {
 				this.level.getCameraManager().zoomInterpolateTo(this.level.getSelectedGameItem(), this.zoomRatio, 0.5f);
 			}
-						
+								
 			//this.level.getCameraManager().follow(this.level.getSelectedGameItem());			
 		}
 		
@@ -266,6 +266,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		this.level.getCameraManager().zoomCameraTo(this.zoomRatio);
 		this.level.getCameraManager().centerCameraOn(this.level.getGoal().getPosition());
 		this.level.pause();
+		this.level.animateHudPlay(true);
 		this.enterGameMode(15.0f);		
 	}
 	
@@ -273,7 +274,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	
 	private void enterGameMode(float speed) {
 		if(this.level.getStartItem() != null) {			
-			this.level.getCameraManager().moveInterpolateTo(this.level.getStartItem(), speed);
+			this.level.getCameraManager().moveInterpolateTo(this.level.getStartItem(), speed);			
 //			//AMZ replacing 1.0f by SGSDensity  
 //			if (!this.hasPaused) {
 //				this.level.getCameraManager().zoomInterpolateTo(this.level.getStartItem(), this.zoomRatio, speed);
@@ -281,7 +282,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 					
 //			this.level.getCameraManager().follow(this.level.getStartItem());			
 		}		
-		
+				
 		this.level.setTimeRatio(TimeRatioNormal);
 	}
 	

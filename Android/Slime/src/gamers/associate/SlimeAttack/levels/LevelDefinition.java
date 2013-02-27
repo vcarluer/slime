@@ -177,7 +177,6 @@ public abstract class LevelDefinition {
 	protected void storeUserInfoNext(BufferedWriter buffWriter)  throws IOException {		
 	}
 
-	@SuppressWarnings("unused")
 	private void loadUserInfo() {
 		java.io.InputStream inputStream;		
 		String fileName = this.id;

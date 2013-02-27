@@ -418,6 +418,7 @@ public class Level implements IGameItemHandler {
 	}
 	
 	public void disablePauseLayer() {
+		this.animateHudPlay(false);
 		this.pauseLayer.disable();		
 		if (this.hudLayer != null) {
 			this.hudLayer.getMenu().setVisible(true);
@@ -599,7 +600,7 @@ public class Level implements IGameItemHandler {
 	}
 	
 	public void resume() {
-		this.setPause(false);
+		this.setPause(false);		
 		this.disablePauseLayer();		
 		this.disableEndLevelLayer();
 	}
@@ -1345,5 +1346,9 @@ public class Level implements IGameItemHandler {
 		for(Slimy slimy : this.aliveSlimyList) {
 			slimy.splash();
 		}
+	}
+
+	public void animateHudPlay(boolean isAnimated) {
+		this.pauseLayer.animatePlay(isAnimated);
 	}
 }
