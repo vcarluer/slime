@@ -190,7 +190,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	public void activateSelection(CGPoint gameReference) {
 		if (!this.isPaused && !this.isGameOver) {
 			this.setIsStarted(true);			
-			this.level.addItemToRemove(this.level.getHelpItem());
+//			this.level.addItemToRemove(this.level.getHelpItem());
 			this.setNormalTime();
 			this.level.getCameraManager().follow(this.level.getSelectedGameItem());	
 			this.level.setTimeRatio(TimeRatioNormal);
