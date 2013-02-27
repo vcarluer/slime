@@ -238,13 +238,13 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 				this.level.getCameraManager().zoomInterpolateTo(this.level.getSelectedGameItem(), this.zoomRatio, 0.5f);
 			}
 						
-			//this.level.getCameraManager().follow(this.level.getSelectedGameItem());									
+			//this.level.getCameraManager().follow(this.level.getSelectedGameItem());			
 		}
 		
 		if (!this.adHiddenTimer) {
 			SlimeFactory.ContextActivity.hideAd();
 			this.adHiddenTimer = true;
-		}
+		}		
 		
 		// todo: Slow down animation? http://cocos2d-central.com/topic/1049-changing-speed-of-an-action-after-its-started/
 		this.level.setTimeRatio(TimeRatioLow);
@@ -265,7 +265,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		this.hasPaused = false;
 		this.level.getCameraManager().zoomCameraTo(this.zoomRatio);
 		this.level.getCameraManager().centerCameraOn(this.level.getGoal().getPosition());
-		
+		this.level.pause();
 		this.enterGameMode(15.0f);		
 	}
 	
@@ -280,9 +280,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 //			}
 					
 //			this.level.getCameraManager().follow(this.level.getStartItem());			
-		}
-
-		this.level.desactivateCameraMoveAndZoomByUser();
+		}		
 		
 		this.level.setTimeRatio(TimeRatioNormal);
 	}
@@ -404,6 +402,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	@Override
 	protected void resume() {
 		super.resume();
+		this.level.desactivateCameraMoveAndZoomByUser();
 		this.enterGameMode(0.3f);
 	}
 

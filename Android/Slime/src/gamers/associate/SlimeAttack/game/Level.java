@@ -573,7 +573,11 @@ public class Level implements IGameItemHandler {
 		return this.itemsToAdd;
 	}
 		
-	public void setPause(boolean value) {		
+	public void setPause(boolean value) {	
+		for(GameItem item : this.itemsToAdd) {
+			item.setPause(value);
+		}
+		
 		for(GameItem item : this.items.values()) {
 			item.setPause(value);
 		}
