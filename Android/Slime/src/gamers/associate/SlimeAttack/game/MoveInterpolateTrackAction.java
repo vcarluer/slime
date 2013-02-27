@@ -13,8 +13,9 @@ public class MoveInterpolateTrackAction extends CameraAction {
 	private CGPoint currentPoint;
 	private int currentIndex;
 	private CGPoint pointAction;
+	private boolean resumeAtEnd;
 	
-	public MoveInterpolateTrackAction(CameraManager manager, float timeBetweenPoints, List<CGPoint> points) {
+	public MoveInterpolateTrackAction(CameraManager manager, float timeBetweenPoints, List<CGPoint> points, boolean resumeAtEnd) {
 		super(manager, timeBetweenPoints);
 		this.points = points;				
 		this.currentIndex = 0;
@@ -26,6 +27,8 @@ public class MoveInterpolateTrackAction extends CameraAction {
 		}
 		
 		this.currentPoint = points.get(this.currentIndex);
+		
+		this.resumeAtEnd = resumeAtEnd;
 	}
 
 	@Override
@@ -60,6 +63,13 @@ public class MoveInterpolateTrackAction extends CameraAction {
 		if (elapsedTimeAction >= this.targetTimeAction) {
 			if (this.currentIndex == this.points.size() - 1) {
 				this.isEnded = true;
+				if (this.resumeAtEnd) {
+					Level.currentLevel.resume();
+					if(Level.currentLevel.getStartItem() != null) {
+						Level.currentLevel.getCameraManager().follow(Level.currentLevel.getStartItem());
+					}
+				}
+				
 			} else {
 				this.currentIndex++;
 				this.currentPoint = this.points.get(this.currentIndex);

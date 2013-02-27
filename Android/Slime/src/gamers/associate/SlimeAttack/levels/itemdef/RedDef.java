@@ -34,6 +34,7 @@ public class RedDef extends ItemDefinition {
 		Red red = SlimeFactory.Red.createBL(this.getUName(), this.getX(), this.getY(), this.width, this.height, this.isBoss);
 		if (this.isBoss) {
 			red.setLife(Red.BossLife);
+			Level.currentLevel.setBoss(red);
 		} else {
 			red.setLife(this.life);
 		}

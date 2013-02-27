@@ -508,8 +508,8 @@ public class CameraManager {
 		this.addAction(new MoveInterpolateAction(this, time, target));
 	}
 	
-	public void moveInterpolateTrackTo(List<CGPoint> points, float time) {						
-		this.addAction(new MoveInterpolateTrackAction(this, time, points));
+	public void moveInterpolateTrackTo(List<CGPoint> points, float time, boolean resumeAtEnd) {						
+		this.addAction(new MoveInterpolateTrackAction(this, time, points, resumeAtEnd));
 	}
 	
 	public CGRect getVirtualCamera() {

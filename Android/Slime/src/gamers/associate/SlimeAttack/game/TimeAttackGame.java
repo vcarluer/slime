@@ -266,7 +266,14 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		this.level.getCameraManager().cancelActions();
 		this.hasPaused = false;
 		this.level.getCameraManager().zoomCameraTo(this.zoomRatio);
-		this.level.getCameraManager().centerCameraOn(this.level.getGoal().getPosition());
+		if (this.level.getGoal() != null) {
+			this.level.getCameraManager().centerCameraOn(this.level.getGoal().getPosition());
+		} else {
+			if (this.level.getBoss() != null) {
+				this.level.getCameraManager().centerCameraOn(this.level.getBoss().getPosition());
+			}
+		}
+		
 		this.level.pause();
 		this.level.animateHudPlay(true);
 		
@@ -276,7 +283,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		}
 		
 		points.set(points.size() - 1, this.level.getStartItem().getPosition());
-		this.level.getCameraManager().moveInterpolateTrackTo(points, 3f);
+		this.level.getCameraManager().moveInterpolateTrackTo(points, 3f, true);
 		
 		this.enterGameMode();		
 	}

@@ -158,6 +158,8 @@ public class Level implements IGameItemHandler {
 	
 	private List<GameItem> tempList;
 	
+	private GameItem boss;
+	
 	public Level() {
 		this.randomGen = new Random();
 		this.scene = CCScene.node();
@@ -414,6 +416,7 @@ public class Level implements IGameItemHandler {
 		this.setLevelOrigin(CGPoint.zero());
 		this.cameraManager.cancelAll();
 		this.hudLayer.resetLevel();
+		this.boss = null;
 		this.resume();
 		SlimeFactory.Log.d(SlimeAttack.TAG, "resetLevel() end");
 	}
@@ -1354,5 +1357,14 @@ public class Level implements IGameItemHandler {
 
 	public void animateHudPlay(boolean isAnimated) {
 		this.pauseLayer.animatePlay(isAnimated);
+	}
+
+	public GameItem getBoss() {
+		return boss;
+	}
+
+	public void setBoss(GameItem boss) {
+		this.boss = boss;
+		SlimeFactory.PathFinder.setGoal(boss);
 	}
 }
