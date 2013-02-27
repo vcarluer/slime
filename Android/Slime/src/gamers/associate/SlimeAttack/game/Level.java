@@ -303,7 +303,7 @@ public class Level implements IGameItemHandler {
 			fileName = SlimeFactory.GameInfo.getLastBkg();
 		} else {
 			// todo list assets in bkg folder instead
-			int choice = this.randomGen.nextInt(7);
+			int choice = this.randomGen.nextInt(3);
 			
 			switch (choice) {
 			default:
@@ -311,21 +311,9 @@ public class Level implements IGameItemHandler {
 				fileName = "background-level-01.png";
 				break;
 			case 1:
-				fileName = "background-world00-01.png";
-				break;
-			case 2:
-				fileName = "world00-01.png";
-				break;
-			case 3:
-				fileName = "splash-level-01.png";
-				break;
-			case 4:
-				fileName = "background-world01-01.png";
-				break;
-			case 5:
 				fileName = "background-level-02-01.png";
 				break;
-			case 6:
+			case 2:
 				fileName = "background-level-03-01.png";
 				break;
 			}
@@ -1365,6 +1353,6 @@ public class Level implements IGameItemHandler {
 
 	public void setBoss(GameItem boss) {
 		this.boss = boss;
-		SlimeFactory.PathFinder.setGoal(boss);
+		SlimeFactory.PathFinder.setGoal(goal);
 	}
 }
