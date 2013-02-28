@@ -45,6 +45,21 @@ public class MessageLayer extends CCLayer {
 		return layer;
 	}
 	
+	@Override
+	public void onEnter() {	
+		super.onEnter();
+		this.isShowing = false;
+		this.showNext();
+	}
+	
+	@Override
+	public void onExit() {
+		this.setPosition(this.hidePos);
+		this.isShowing = false;
+		this.stopAllActions();
+		super.onExit();
+	}
+
 	protected MessageLayer() {
 		this.messages = new LinkedList<MessageInfo>();
 		this.width = CCDirector.sharedDirector().winSize().width / 3;
@@ -114,13 +129,7 @@ public class MessageLayer extends CCLayer {
 			CCSequence seq = CCSequence.actions(moveTo, delay, moveBack, call);
 			this.runAction(seq);
 		}
-	}
-	
-	@Override
-	public void onExit() {
-		this.setPosition(this.hidePos);
-		super.onExit();
-	}
+	}	
 	
 	public void endShow() {
 		this.isShowing = false;
