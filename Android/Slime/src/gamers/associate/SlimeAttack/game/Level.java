@@ -1353,6 +1353,6 @@ public class Level implements IGameItemHandler {
 
 	public void setBoss(GameItem boss) {
 		this.boss = boss;
-		SlimeFactory.PathFinder.setGoal(goal);
+		SlimeFactory.PathFinder.setGoal(this.boss);
 	}
 }

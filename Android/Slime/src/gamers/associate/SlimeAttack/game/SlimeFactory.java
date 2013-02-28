@@ -79,7 +79,7 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static final int MaxWorld = LevelDifficulty.Extrem;
 	public static final boolean resetHighScores = false; // Run with this = true and then relaunch with false
 	public static final boolean clearLevelInfo = false; // Run with this = true and then relaunch with false
-	public static final boolean unlockAll = false;
+	public static final boolean unlockAll = true;
 	public static final boolean unlockAllAchievement = false;
 	public static final boolean noUnlockHardcoreGamer = false;
 	public static final boolean resetAchievements = false; // if true can not unlock allachievements

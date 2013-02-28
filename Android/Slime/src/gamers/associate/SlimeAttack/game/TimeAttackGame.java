@@ -277,7 +277,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		this.level.pause();
 		this.level.animateHudPlay(true);
 		
-		List<CGPoint> points = SlimeFactory.PathFinder.pathFinding();
+		List<CGPoint> points = SlimeFactory.PathFinder.pathFinding();		
 		if (points.size() > 1) {
 			if (this.level.getGoal() != null) {
 				points.set(0, this.level.getGoal().getPosition());
@@ -286,10 +286,14 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 					points.set(0, this.level.getBoss().getPosition());
 				}
 			}
+			
+			points.set(points.size() - 1, this.level.getStartItem().getPosition());
+			this.level.getCameraManager().moveInterpolateTrackTo(points, 3f, true);
+		} else {
+			// Tutorial levels with 1 bloc
+			this.level.resume();
+			this.level.getCameraManager().follow(this.level.getStartItem());
 		}
-		
-		points.set(points.size() - 1, this.level.getStartItem().getPosition());
-		this.level.getCameraManager().moveInterpolateTrackTo(points, 3f, true);
 		
 		this.enterGameMode();		
 	}
