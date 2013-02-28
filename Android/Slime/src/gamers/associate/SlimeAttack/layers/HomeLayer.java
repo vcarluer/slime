@@ -197,18 +197,42 @@ public class HomeLayer extends CCLayer {
 	}
 	
 	public static CCMenu getPauseButton(CCNode target, String targetMethod) {
-		return getMenuButton("control-pause.png", target, targetMethod);
+		return getMenuButton("control-pause-look.png", target, targetMethod, false);
+	}
+	
+	public static CCMenu getMuteOnButton(CCNode target, String targetMethod) {
+		return getMenuButton("control-sound-on.png", target, targetMethod, false);
+	}
+	
+	public static CCMenu getMuteOffButton(CCNode target, String targetMethod) {
+		return getMenuButton("control-sound-off.png", target, targetMethod, false);
 	}
 	
 	public static CCMenu getMenuButton(String spriteName, CCNode target, String targetMethod) {
+		return getMenuButton(spriteName, target, targetMethod, true);
+	}
+	
+	public static CCMenu getMenuButton(String spriteName, CCNode target, String targetMethod, boolean isFrame) {
 		float left = - CCDirector.sharedDirector().winSize().getWidth() / 2 + ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) / 2 ;
 		float top = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY) / 2;
-		return getMenuButton(spriteName, left, top, target, targetMethod);
+		return getMenuButton(spriteName, left, top, target, targetMethod, isFrame);
 	}
 	
 	public static CCMenu getMenuButton(String spriteName, float x, float y, CCNode target, String targetMethod) {
-		CCSprite spriteN = CCSprite.sprite(spriteName, true);
-		CCSprite spriteS = CCSprite.sprite(spriteName, true);
+		return getMenuButton(spriteName, x, y, target, targetMethod, true);
+	}
+	
+	public static CCMenu getMenuButton(String spriteName, float x, float y, CCNode target, String targetMethod, boolean isFrame) {
+		CCSprite spriteN = null;
+		CCSprite spriteS = null;
+		if (!isFrame) {
+			spriteN = CCSprite.sprite(spriteName);
+			spriteS = CCSprite.sprite(spriteName);
+		} else {
+			spriteN = CCSprite.sprite(spriteName, true);
+			spriteS = CCSprite.sprite(spriteName, true);
+		}
+		
 		CCMenuItemSprite go = CCMenuItemSprite.item(spriteN, spriteS, target, targetMethod);
 		go.setScale(PauseLayer.Scale);
 		

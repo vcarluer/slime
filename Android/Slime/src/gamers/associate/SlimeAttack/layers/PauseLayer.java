@@ -19,6 +19,7 @@ import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItem;
 import org.cocos2d.menus.CCMenuItemLabel;
 import org.cocos2d.menus.CCMenuItemSprite;
+import org.cocos2d.menus.CCMenuItemToggle;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.transitions.CCFadeTransition;
@@ -44,6 +45,7 @@ public class PauseLayer extends CCLayer {
 	private CCMenuItemSprite restartMenu;
 	private CCMenuItemSprite homeMenu;
 	private CCMenuItemSprite resumeMenu;
+	private CCMenuItemToggle muteMenu;	
 	
 	public PauseLayer() {
 //		CCMenuItem label = CCMenuItemLabel.item(getMenuLabel("Pause"), this, "");		
@@ -62,10 +64,20 @@ public class PauseLayer extends CCLayer {
 		
 		CCSprite homeSpriteN = CCSprite.sprite("control-home.png", true);
 		CCSprite homeSpriteS = CCSprite.sprite("control-home.png", true);
-		homeMenu = CCMenuItemSprite.item(homeSpriteN, homeSpriteS, this, "goHome");
+		homeMenu = CCMenuItemSprite.item(homeSpriteN, homeSpriteS, this, "goHome");		
 		this.setMenuPos(homeMenu, 3);
 		
-		this.menu = CCMenu.menu(resumeMenu, restartMenu, homeMenu);
+		CCSprite muteOnSpriteN = CCSprite.sprite("control-sound-on.png");
+		CCSprite muteOnSpriteS = CCSprite.sprite("control-sound-on.png");
+		CCMenuItemSprite muteOn = CCMenuItemSprite.item(muteOnSpriteN, muteOnSpriteS);
+		CCSprite muteOffSpriteN = CCSprite.sprite("control-sound-off.png");
+		CCSprite muteOffSpriteS = CCSprite.sprite("control-sound-off.png");
+		CCMenuItemSprite muteOff = CCMenuItemSprite.item(muteOffSpriteN, muteOffSpriteS);
+		
+		muteMenu = CCMenuItemToggle.item(this, "toggleMute", muteOn, muteOff);		
+		this.setMenuPosRight(muteMenu, 1);
+				
+		this.menu = CCMenu.menu(resumeMenu, restartMenu, homeMenu, muteMenu);
 		// this.menu.alignItemsHorizontally();				
 		
 		this.addChild(this.menu);
@@ -98,6 +110,14 @@ public class PauseLayer extends CCLayer {
 		menuItem.setScale(Scale);
 		
 		float left = - CCDirector.sharedDirector().winSize().getWidth() / 2 + ((MenuSprite.Width * Scale) + PaddingX) / 2 + (MenuSprite.Width * Scale + PaddingX) * (count - 1);
+		float top = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((MenuSprite.Height * Scale) + PaddingY) / 2;
+		menuItem.setPosition(CGPoint.make(left, top));
+	}
+	
+	private void setMenuPosRight(CCMenuItem menuItem, int count) {
+		menuItem.setScale(Scale);
+		
+		float left = CCDirector.sharedDirector().winSize().getWidth() / 2 - ((MenuSprite.Width * Scale) + PaddingX) / 2 - (MenuSprite.Width * Scale + PaddingX) * (count - 1);
 		float top = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((MenuSprite.Height * Scale) + PaddingY) / 2;
 		menuItem.setPosition(CGPoint.make(left, top));
 	}
@@ -139,6 +159,10 @@ public class PauseLayer extends CCLayer {
 		}
 	}
 	
+	public void toggleMute(Object sender) {
+		Sounds.toggleMute();
+	}
+	
 	public void enable() {
 		this.setIsTouchEnabled(true);
 		this.setVisible(true);
@@ -171,6 +195,10 @@ public class PauseLayer extends CCLayer {
 			this.restartMenu.setVisible(true);
 			this.homeMenu.setIsEnabled(true);
 			this.homeMenu.setVisible(true);
+		}
+		
+		if (Sounds.isMute()) {
+			this.muteMenu.setSelectedIndex(1);
 		}
 	}
 	

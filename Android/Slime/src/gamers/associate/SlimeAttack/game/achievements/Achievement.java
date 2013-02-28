@@ -163,7 +163,7 @@ public abstract class Achievement implements Comparable<Achievement> {
 					}
 				}  else {
 					SlimeFactory.Log.d(SlimeAttack.TAG, "No need to load User Info from " + fileName);
-					if (SlimeFactory.unlockAll) {
+					if (SlimeFactory.unlockAllAchievement) {
 						this.setAchieved(true);
 					} else {
 						this.setAchieved(false);

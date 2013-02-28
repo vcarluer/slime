@@ -116,4 +116,16 @@ public class Sounds {
 		
 		SoundEngine.sharedEngine().pauseSound();
 	}
+	
+	public static void toggleMute() {
+		if (SoundEngine.sharedEngine().isMute()) {
+			SoundEngine.sharedEngine().mute();
+		} else {
+			SoundEngine.sharedEngine().unmute();
+		}
+	}
+	
+	public static boolean isMute() {
+		return SoundEngine.sharedEngine().isMute();
+	}
 }
