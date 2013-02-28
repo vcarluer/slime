@@ -371,8 +371,8 @@ public class SlimyJump extends Slimy implements ISelectable {
 				AchievementStatistics.shotCount++;
 				SlimeFactory.AchievementManager.test(CarabinAch.class);
 				SlimeFactory.AchievementManager.test(SupermanAch.class);
-				AchievementStatistics.shotTime = System.currentTimeMillis();
 				AchievementStatistics.lastJumpStartTime = AchievementStatistics.shotTime;
+				AchievementStatistics.shotTime = System.currentTimeMillis();				
 				long shotSpeed = AchievementStatistics.shotTime - this.selectStartTime;
 				AchievementStatistics.shotSpeed = shotSpeed;
 				
