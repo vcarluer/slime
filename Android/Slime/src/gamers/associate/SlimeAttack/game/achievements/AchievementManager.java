@@ -35,11 +35,11 @@ public class AchievementManager {
 		this.add(new LiveLongAch());
 		this.add(new NormalSlimeAch());
 		this.add(new AreYouSeriousAch());		
-		this.add(new YipikayeAch());		
-		this.add(new GoldenBoyAch());
-		this.add(new GoldFeverAch());		
-		this.add(new SilverSurferAch());
+		this.add(new YipikayeAch());				
+		this.add(new GoldFeverAch());	
 		this.add(new BronzeAgeAch());
+		this.add(new SilverSurferAch());	
+		this.add(new GoldenBoyAch());
 		this.add(new JustNeededAch());
 		this.add(new DontStopAch());
 		this.add(new SonicBoomAch());
@@ -79,7 +79,7 @@ public class AchievementManager {
 	}
 	
 	public void handleEndLevelAchievements(boolean lose) {		
-		for(Achievement ach : this.orderedAchievements) {
+		for(Achievement ach : this.achievements.values()) {
 			if (ach.isEndLevel()) {
 				if (ach.isLose() == lose) {				
 					ach.test();
