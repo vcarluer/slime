@@ -381,4 +381,9 @@ public class SlimeAttack extends Activity {
 			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
 		}
 	}
+
+	public int getCurrentMusicVolume() {
+		AudioManager audMgr = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
+		return audMgr.getStreamVolume(AudioManager.STREAM_MUSIC);
+	}
 }

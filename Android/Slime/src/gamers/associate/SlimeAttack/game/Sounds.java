@@ -119,13 +119,18 @@ public class Sounds {
 	
 	public static void toggleMute() {
 		if (SoundEngine.sharedEngine().isMute()) {
-			SoundEngine.sharedEngine().mute();
-		} else {
 			SoundEngine.sharedEngine().unmute();
+		} else {
+			SoundEngine.sharedEngine().mute();
 		}
 	}
 	
 	public static boolean isMute() {
 		return SoundEngine.sharedEngine().isMute();
+	}
+
+	public static void setVolume(int soundVolume) {
+		SoundEngine.sharedEngine().setEffectsVolume((float) soundVolume);
+		SoundEngine.sharedEngine().setSoundVolume((float) soundVolume);
 	}
 }
