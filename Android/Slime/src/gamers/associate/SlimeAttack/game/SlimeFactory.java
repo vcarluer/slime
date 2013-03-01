@@ -391,4 +391,13 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static void playCreditMusic() {
 		Sounds.playMusic(R.raw.slimy_credits, true);
 	}
+	
+	public static void toggleMute() {					
+		Sounds.toggleMute();
+		if (!Sounds.isMute()) {
+			// Force sound volume with current Android volume
+			int soundVolume = ContextActivity.getCurrentMusicVolume();
+			Sounds.setVolume(soundVolume);
+		}
+	}
 }
