@@ -74,7 +74,7 @@ public class PauseLayer extends CCLayer {
 		CCSprite muteOffSpriteS = CCSprite.sprite("control-sound-off.png");
 		CCMenuItemSprite muteOff = CCMenuItemSprite.item(muteOffSpriteN, muteOffSpriteS);
 		
-		muteMenu = CCMenuItemToggle.item(this, "toggleMute", muteOn, muteOff);		
+		muteMenu = HomeLayer.getMuteItemButton(this, "toggleMute");		
 		this.setMenuPosRight(muteMenu, 1);
 				
 		this.menu = CCMenu.menu(resumeMenu, restartMenu, homeMenu, muteMenu);
@@ -160,7 +160,7 @@ public class PauseLayer extends CCLayer {
 	}
 	
 	public void toggleMute(Object sender) {
-		Sounds.toggleMute();
+		SlimeFactory.toggleMute();
 	}
 	
 	public void enable() {

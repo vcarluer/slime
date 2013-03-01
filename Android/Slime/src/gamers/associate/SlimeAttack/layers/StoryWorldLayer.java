@@ -95,6 +95,13 @@ public class StoryWorldLayer extends CCLayer implements IScrollable, IBackableLa
 		this.scroller = new ScrollerLayer();
 		this.scroller.setStoryLayer(this);
 		this.addChild(this.scroller, Level.zTop);
+		
+		CCMenu muteMenu = HomeLayer.getMuteButton(this, "toggleMute");
+		this.addChild(muteMenu, Level.zTop);
+	}
+	
+	public void toggleMute(Object sender) {
+		SlimeFactory.toggleMute();
 	}
 	
 	@Override

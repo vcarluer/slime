@@ -10,6 +10,7 @@ import gamers.associate.SlimeAttack.levels.LevelHome;
 
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
+import org.cocos2d.menus.CCMenu;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.transitions.CCFadeTransition;
 
@@ -42,6 +43,13 @@ public class ChooseModeLayer extends CCLayer implements IBackableLayer {
 		this.addChild(this.achievementItem);
 		
 		this.addChild(HomeLayer.getHomeMenuButton(this, "goHome"));
+
+		CCMenu muteMenu = HomeLayer.getMuteButton(this, "toggleMute");
+		this.addChild(muteMenu);
+	}
+	
+	public void toggleMute(Object sender) {
+		SlimeFactory.toggleMute();
 	}
 	
 	@Override

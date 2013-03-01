@@ -13,6 +13,7 @@ import java.util.List;
 import org.cocos2d.layers.CCColorLayer;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
+import org.cocos2d.menus.CCMenu;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.transitions.CCFadeTransition;
@@ -55,6 +56,13 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer implements IBackableL
 		this.addSurvivalItem("btn-normal", LevelDifficulty.Normal, width / 4, 0);
 		this.addSurvivalItem("btn-hard", LevelDifficulty.Hard, width / 2, 0);
 		this.addSurvivalItem("btn-extreme", LevelDifficulty.Extrem, width * 3 / 4, 0);
+		
+		CCMenu muteMenu = HomeLayer.getMuteButton(this, "toggleMute");
+		this.addChild(muteMenu, Level.zTop);
+	}
+	
+	public void toggleMute(Object sender) {
+		SlimeFactory.toggleMute();
 	}
 	
 	private SurvivalItemLayer addSurvivalItem(String bkgBase, int diff, float x, float y) {

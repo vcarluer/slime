@@ -15,7 +15,9 @@ import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
+import org.cocos2d.menus.CCMenuItem;
 import org.cocos2d.menus.CCMenuItemSprite;
+import org.cocos2d.menus.CCMenuItemToggle;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCNode;
@@ -95,7 +97,14 @@ public class HomeLayer extends CCLayer {
 					CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftBeta
 					));	
 			this.addChild(this.betaLabel);
-		}		
+		}
+		
+		CCMenu muteMenu = getMuteButtonBottom(this, "toggleMute");
+		this.addChild(muteMenu);
+	}
+	
+	public void toggleMute(Object sender) {
+		SlimeFactory.toggleMute();
 	}
 
 	@Override
@@ -200,12 +209,46 @@ public class HomeLayer extends CCLayer {
 		return getMenuButton("control-pause-look.png", target, targetMethod, false);
 	}
 	
-	public static CCMenu getMuteOnButton(CCNode target, String targetMethod) {
-		return getMenuButton("control-sound-on.png", target, targetMethod, false);
+	public static CCMenu getMuteButton(CCNode target, String targetMEthod) {
+		CCMenuItemToggle menuItem = getMuteItemButton(target, targetMEthod);
+		setMenuPosRight(menuItem, 1);
+		CCMenu menu = CCMenu.menu(menuItem);
+		return menu;
 	}
 	
-	public static CCMenu getMuteOffButton(CCNode target, String targetMethod) {
-		return getMenuButton("control-sound-off.png", target, targetMethod, false);
+	public static CCMenu getMuteButtonBottom(CCNode target, String targetMEthod) {
+		CCMenuItemToggle menuItem = getMuteItemButton(target, targetMEthod);
+		setMenuPosBottomRight(menuItem, 1);
+		CCMenu menu = CCMenu.menu(menuItem);
+		return menu;
+	}
+	
+	public static CCMenuItemToggle getMuteItemButton(CCNode target, String targetMEthod) {
+		CCSprite muteOnSpriteN = CCSprite.sprite("control-sound-on.png");
+		CCSprite muteOnSpriteS = CCSprite.sprite("control-sound-on.png");
+		CCMenuItemSprite muteOn = CCMenuItemSprite.item(muteOnSpriteN, muteOnSpriteS);
+		CCSprite muteOffSpriteN = CCSprite.sprite("control-sound-off.png");
+		CCSprite muteOffSpriteS = CCSprite.sprite("control-sound-off.png");
+		CCMenuItemSprite muteOff = CCMenuItemSprite.item(muteOffSpriteN, muteOffSpriteS);
+		
+		CCMenuItemToggle muteMenu = CCMenuItemToggle.item(target, targetMEthod, muteOn, muteOff);
+		return muteMenu;
+	}
+	
+	public static void setMenuPosRight(CCMenuItem menuItem, int count) {
+		menuItem.setScale(PauseLayer.Scale);
+		
+		float left = CCDirector.sharedDirector().winSize().getWidth() / 2 - ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) / 2 - (MenuSprite.Width * PauseLayer.Scale + PauseLayer.PaddingX) * (count - 1);
+		float top = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY) / 2;
+		menuItem.setPosition(CGPoint.make(left, top));
+	}
+	
+	public static void setMenuPosBottomRight(CCMenuItem menuItem, int count) {
+		menuItem.setScale(PauseLayer.Scale);
+		
+		float left = CCDirector.sharedDirector().winSize().getWidth() / 2 - ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) / 2 - (MenuSprite.Width * PauseLayer.Scale + PauseLayer.PaddingX) * (count - 1);
+		float top = - CCDirector.sharedDirector().winSize().getHeight() / 2 + ((MenuSprite.Height * PauseLayer.Scale) + PauseLayer.PaddingY) / 2;
+		menuItem.setPosition(CGPoint.make(left, top));
 	}
 	
 	public static CCMenu getMenuButton(String spriteName, CCNode target, String targetMethod) {

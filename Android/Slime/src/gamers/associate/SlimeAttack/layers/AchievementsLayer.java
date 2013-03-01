@@ -13,6 +13,7 @@ import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCColorLayer;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
+import org.cocos2d.menus.CCMenu;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCNode;
@@ -55,6 +56,13 @@ public class AchievementsLayer extends CCLayer  implements IScrollable, IBackabl
 		this.scroller.setStoryLayer(this);
 		this.scroller.setHandled(this.achNode);
 		this.addChild(this.scroller, Level.zTop);
+		
+		CCMenu muteMenu = HomeLayer.getMuteButton(this, "toggleMute");
+		this.addChild(muteMenu, Level.zTop);
+	}
+	
+	public void toggleMute(Object sender) {
+		SlimeFactory.toggleMute();
 	}
 	
 	public void goBack(Object sender) {
