@@ -41,10 +41,10 @@ import android.annotation.SuppressLint;
 
 @SuppressLint("DefaultLocale") public class HudLayer extends CCLayer implements IGameItemHandler {
 	private static final String TIME_S_UP = "TIME'S UP";
-	private static final int countPaddingX = 130;
+	private static final int countPaddingX = 5;
 	private static final float scoreTakenPadding = 10f;
 	private static final float TextHeight = 60f;
-	private static final float PaddingHCount = TextHeight/2f;
+	private static final float BonusHeight = 30f;
 	private static final float PaddingLeftStar = 25f;
 	private static final int starCountHShift = 35;
 	private static final float starCountBarHeight = 30f;
@@ -53,7 +53,7 @@ import android.annotation.SuppressLint;
 	private static final ccColor3B fullColor = ccColor3B.ccYELLOW;
 	private static final ccColor3B goalColor = ccColor3B.ccGREEN;
 
-	private static String Count_Text = "Hud";
+	private static String Count_Text = "5,42";
 	
 	private CCBitmapFontAtlas countLabel;	
 	private float countX;
@@ -88,6 +88,7 @@ import android.annotation.SuppressLint;
 	private boolean hideCount;
 	
 	private CCLabel timesup;
+	private CCBitmapFontAtlas referenceLabel; // For sizing
 	
 	public HudLayer() {
 		
@@ -100,14 +101,16 @@ import android.annotation.SuppressLint;
 		this.addChild(this.menu);
 		
 		this.countLabel = getMenuLabel(Count_Text);		
-		this.countLabel.setAnchorPoint(0, 0);
+		this.referenceLabel = getMenuLabel(Count_Text);		
+		this.countLabel.setAnchorPoint(0, 0.5f);
 		this.addChild(this.countLabel);
+		// Position overrided in SetHudStartText
 		this.countLabel.setPosition(
-				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - 15, 
-				CCDirector.sharedDirector().winSize().getHeight() - countPaddingX));
+				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - this.referenceLabel.getContentSize().width - countPaddingX, 
+				CCDirector.sharedDirector().winSize().getHeight() - starCountHShift));
 		
-		this.scoreTaken = getMenuLabel("   ", TextHeight, SlimeFactory.ColorSlime);
-		this.scoreTaken.setAnchorPoint(0, 0);
+		this.scoreTaken = getMenuLabel("   ", BonusHeight, SlimeFactory.ColorSlime);
+		this.scoreTaken.setAnchorPoint(0, 0.5f);
 		this.addChild(this.scoreTaken);
 				
 		this.hideSlimyCount();
@@ -150,7 +153,7 @@ import android.annotation.SuppressLint;
 	}
 	
 	private static CCBitmapFontAtlas getMenuLabel(String text, float size, ccColor3B color) {
-		CCBitmapFontAtlas label =  CCBitmapFontAtlas.bitmapFontAtlas("0123456789", "SlimeFont.fnt");
+		CCBitmapFontAtlas label =  CCBitmapFontAtlas.bitmapFontAtlas(text, "SlimeFont.fnt");
 		label.setScale(size / SlimeFactory.FntSize);
 		label.setColor(color);
 		return label;
@@ -189,7 +192,7 @@ import android.annotation.SuppressLint;
 					SlimeFactory.StarCounter.create(xPos, yPos, w, starCountBarHeight, i + 1, gp.neededBonus(), SlimeFactory.LevelBuilder.getTotalStar());
 				}
 				
-				this.scoreTaken.setPosition(xPosBase - (w / 2f) + totalW  + scoreTakenPadding, CCDirector.sharedDirector().winSize().getHeight() - (starCountHShift + PaddingHCount));				
+				this.scoreTaken.setPosition(xPosBase - (w / 2f) + totalW  + scoreTakenPadding, CCDirector.sharedDirector().winSize().getHeight() - starCountHShift);				
 				activate = true;
 			}			
 		}
@@ -251,10 +254,10 @@ import android.annotation.SuppressLint;
 	
 	public void setHudStartText(String text) {
 		this.countLabel.setString(text.toUpperCase());
-		this.countX = CCDirector.sharedDirector().winSize().getWidth() - PauseLayer.PaddingX - countPaddingX; // this.countLabel.getContentSize().width
+		this.countX = CCDirector.sharedDirector().winSize().getWidth() - countPaddingX - this.referenceLabel.getContentSize().width;
 		this.countLabel.setPosition(
 				CGPoint.ccp(this.countX, 
-				CCDirector.sharedDirector().winSize().getHeight() - (starCountHShift + PaddingHCount)));
+				CCDirector.sharedDirector().winSize().getHeight() - starCountHShift));
 	}
 	
 	public void hideHudText() {
