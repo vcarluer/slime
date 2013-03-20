@@ -1,8 +1,5 @@
 package gamers.associate.SlimeAttack.layers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.cocos2d.actions.ease.CCEaseSineOut;
 import org.cocos2d.actions.interval.CCMoveTo;
 import org.cocos2d.layers.CCLayer;
@@ -14,7 +11,7 @@ import android.view.MotionEvent;
 public class ScrollerLayer extends CCLayer {
 	private static final int DefaultMinYDistance = 5;
 	private static final float frictionBase = 2000f;
-	private static final int flingCaptureTime = 200;
+	private static final int flingCaptureTime = 50;
 	private static final int SLIDE_THREASOLD = 50;
 	private int minYDistance;
 	private CCNode handled;
@@ -32,6 +29,7 @@ public class ScrollerLayer extends CCLayer {
 	private float ym2;
 	private float ym1;
 	private float yPrevious;
+	private float xPrevious;
 	
 	public ScrollerLayer(int minimumYDistance) {
 		this.minYDistance = minimumYDistance;
@@ -49,28 +47,18 @@ public class ScrollerLayer extends CCLayer {
 	}
 
 	@Override
-	public void onExit() {
-//		this.touchInfos.clear();		
+	public void onExit() {		
 		super.onExit();
 	}
 
 	@Override
 	public boolean ccTouchesMoved(MotionEvent event) {
 		if (event.getAction() == MotionEvent.ACTION_MOVE) {
-			if (event.getHistorySize() > 0) {
+//			if (event.getHistorySize() > 0) {
 				if (this.handled != null) {
 					this.tmpPoint.x = getHandled().getPositionRef().x;
 					
-					float cumulativeDeltaY = 0;
-					float previousY = this.yPrevious;
-					for(int pos = 0; pos < event.getHistorySize(); pos++) {
-						float histY = event.getHistoricalY(pos);
-						if (previousY > - 1) {
-							cumulativeDeltaY += previousY - histY;
-						}
-						
-						previousY = histY;
-					}
+					float cumulativeDeltaY = this.yPrevious - event.getY();
 					
 					if (Math.abs(cumulativeDeltaY) > this.minYDistance) {
 						
@@ -92,14 +80,15 @@ public class ScrollerLayer extends CCLayer {
 				
 				this.yPrevious = event.getY();
 				long time = System.currentTimeMillis();
-				if (time - timem1 > 100) {
+				if (time - timem1 > flingCaptureTime) {
 					timem2 = timem1;
 					ym2 = ym1;
 					timem1 = time;
 					ym1 = this.yPrevious;
 				}
 				
-				float deltaX = event.getX() - event.getHistoricalX(0);
+				float deltaX = event.getX() - this.xPrevious;
+				this.xPrevious = event.getX();
 				if (deltaX < - SLIDE_THREASOLD) {
 					this.storyLayer.toRight(this);
 					this.hasMoved = true;
@@ -111,7 +100,7 @@ public class ScrollerLayer extends CCLayer {
 					this.hasMoved = true;
 					return true;
 				}
-			}
+//			}
 		}
 		
 		return false;
@@ -128,7 +117,7 @@ public class ScrollerLayer extends CCLayer {
 	@Override
 	public boolean ccTouchesEnded(MotionEvent event) {
 		long time = System.currentTimeMillis();
-		if (time - timem1 > 100) {
+		if (time - timem1 > flingCaptureTime) {
 			timem2 = timem1;
 			ym2 = ym1;
 		}
@@ -203,6 +192,7 @@ public class ScrollerLayer extends CCLayer {
 		this.hasMoved = false;
 		
 		getHandled().stopAllActions();
+		this.xPrevious = event.getX();
 		this.yPrevious = event.getY();
 		this.ym1 = this.yPrevious;
 		this.timem1 = System.currentTimeMillis();
