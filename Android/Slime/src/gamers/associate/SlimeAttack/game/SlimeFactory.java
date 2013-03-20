@@ -82,7 +82,7 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static final boolean unlockAll = true; // Unlock all levels and modes
 	public static final boolean unlockAllAchievement = false;
 	public static final boolean noUnlockHardcoreGamer = false;
-	public static final boolean resetAchievements = true; // if true can not unlock allachievements
+	public static final boolean resetAchievements = false; // if true can not unlock allachievements
 	public static final boolean debugSpeed = false;
 	public static final boolean isBeta = false;
 	public static final boolean debugPathfinding = false;

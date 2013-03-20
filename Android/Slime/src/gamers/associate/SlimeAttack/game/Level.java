@@ -303,24 +303,15 @@ public class Level implements IGameItemHandler {
 			fileName = SlimeFactory.GameInfo.getLastBkg();
 		} else {
 			// todo list assets in bkg folder instead
-			int choice = this.randomGen.nextInt(3);
+			int choice1 = this.randomGen.nextInt(8) + 1;
+			int choice2 = this.randomGen.nextInt(2) + 1;
 			
-			switch (choice) {
-			default:
-			case 0:
-				fileName = "background-level-01.png";
-				break;
-			case 1:
-				fileName = "background-level-02-01.png";
-				break;
-			case 2:
-				fileName = "background-level-03-01.png";
-				break;
-			}
+			fileName = "background-level-0" + String.valueOf(choice1) + "-" + String.valueOf(choice2) + ".png"; 			
 			
 			SlimeFactory.GameInfo.setLastBkgandSave(fileName);
 		}		
-		
+				
+		SlimeFactory.Log.d(SlimeAttack.TAG, "Background: " + fileName);
 		this.setBackgroundFrom(fileName);
 	}
 	
