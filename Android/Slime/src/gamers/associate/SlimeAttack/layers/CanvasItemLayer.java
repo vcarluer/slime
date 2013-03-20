@@ -88,10 +88,10 @@ public abstract class CanvasItemLayer extends CCLayer {
 	public boolean ccTouchesEnded(MotionEvent event) {
 		float x = event.getX();
 		float y = CCDirector.sharedDirector().winSize().getHeight() - event.getY();
-		float parentX = this.getParent().getPosition().x;
-		float parentY = this.getParent().getPosition().y;
-		float realX = this.getPosition().x + parentX + this.width / 2f + this.paddingX;
-		float realY = this.getPosition().y + parentY + this.height / 2f + this.paddingY;
+		float parentX = this.getParent().getPositionRef().x;
+		float parentY = this.getParent().getPositionRef().y;
+		float realX = this.getPositionRef().x + parentX + this.width / 2f + this.paddingX;
+		float realY = this.getPositionRef().y + parentY + this.height / 2f + this.paddingY;
 		boolean inrectX = x < realX + this.width / 2f && x > realX - this.width / 2f;
 		boolean inrectY = y < realY + this.height / 2F && y > realY - this.height / 2f;
 		if (inrectX && inrectY) {

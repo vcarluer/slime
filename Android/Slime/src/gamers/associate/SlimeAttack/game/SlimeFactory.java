@@ -361,25 +361,25 @@ import com.badlogic.gdx.physics.box2d.World;
 	}
 	
 	public static void moveToZeroY(float delayTime, CCLayer layer) {
-		layer.setPosition(layer.getPosition().x, CCDirector.sharedDirector().winSize().height);
+		layer.setPosition(layer.getPositionRef().x, CCDirector.sharedDirector().winSize().height);
 		CCDelayTime delay = CCDelayTime.action(0.4f + delayTime);
-		CCMoveTo moveTo = CCMoveTo.action(0.5f, CGPoint.make(layer.getPosition().x, 0));
+		CCMoveTo moveTo = CCMoveTo.action(0.5f, CGPoint.make(layer.getPositionRef().x, 0));
 		CCSequence seq = CCSequence.actions(delay, moveTo);
 		layer.runAction(seq);
 	}
 	
 	public static void moveToZeroYFromBottom(float delayTime, CCLayer layer) {
-		layer.setPosition(layer.getPosition().x, - CCDirector.sharedDirector().winSize().height);
+		layer.setPosition(layer.getPositionRef().x, - CCDirector.sharedDirector().winSize().height);
 		CCDelayTime delay = CCDelayTime.action(0.4f + delayTime);
-		CCMoveTo moveTo = CCMoveTo.action(0.5f, CGPoint.make(layer.getPosition().x, 0));
+		CCMoveTo moveTo = CCMoveTo.action(0.5f, CGPoint.make(layer.getPositionRef().x, 0));
 		CCSequence seq = CCSequence.actions(delay, moveTo);
 		layer.runAction(seq);
 	}
 	
 	public static void moveToZeroFromBottom(float delayTime, CCLayer layer, float height) {
-		layer.setPosition(layer.getPosition().x, - height);
+		layer.setPosition(layer.getPositionRef().x, - height);
 		CCDelayTime delay = CCDelayTime.action(0.4f + delayTime);
-		CCMoveTo moveTo = CCMoveTo.action(0.5f, CGPoint.make(layer.getPosition().x, 0));
+		CCMoveTo moveTo = CCMoveTo.action(0.5f, CGPoint.make(layer.getPositionRef().x, 0));
 		CCSequence seq = CCSequence.actions(delay, moveTo);
 		layer.runAction(seq);
 	}

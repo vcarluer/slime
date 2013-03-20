@@ -47,11 +47,11 @@ public class StoryMenuItem extends CCLayer {
 	
 	public void defineNewScale(float s) {
 		this.setScale(s);
-		float baseX = this.getPosition().x;
-		this.setPosition(- SIZE * this.getScale(), this.getPosition().y);
+		float baseX = this.getPositionRef().x;
+		this.setPosition(- SIZE * this.getScale(), this.getPositionRef().y);
 		this.setAnchorPoint(0, 0);
 		CCDelayTime delay = CCDelayTime.action(0.4f + ((this.levelDefinition.getNumber() - 1) % StoryWorldLayer.COLS) * (2 / StoryWorldLayer.COLS));
-		CCMoveTo actionTo = CCMoveTo.action(0.3f, CGPoint.make(baseX, this.getPosition().y));		
+		CCMoveTo actionTo = CCMoveTo.action(0.3f, CGPoint.make(baseX, this.getPositionRef().y));		
 		
 		CCSequence seq = CCSequence.actions(delay,  actionTo);
 		this.runAction(seq);
@@ -87,10 +87,10 @@ public class StoryMenuItem extends CCLayer {
 		if (this.scroller == null || !this.scroller.hasMoved()) {
 			float x = event.getX();
 			float y = CCDirector.sharedDirector().winSize().getHeight() - event.getY();
-			float parentX = this.getParent().getPosition().x;
-			float parentY = this.getParent().getPosition().y;
-			float realX = this.getPosition().x + parentX;
-			float realY = this.getPosition().y + parentY;
+			float parentX = this.getParent().getPositionRef().x;
+			float parentY = this.getParent().getPositionRef().y;
+			float realX = this.getPositionRef().x + parentX;
+			float realY = this.getPositionRef().y + parentY;
 			boolean inrectX = x < realX + SIZE / 2f && x > realX - SIZE / 2f;
 			boolean inrectY = y < realY + SIZE / 2F && y > realY - SIZE / 2f;
 			if (inrectX && inrectY) {

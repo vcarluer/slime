@@ -305,8 +305,8 @@ public class CameraManager {
 	public CGPoint getGamePoint(CGPoint screenPoint) {		
 		float scale = this.gameLayer.getScale();
 		CGPoint gamePoint = CGPoint.zero();
-		gamePoint.x =  (screenPoint.x - this.gameLayer.getPosition().x) / scale; 
-		gamePoint.y = (screenPoint.y - this.gameLayer.getPosition().y) / scale;
+		gamePoint.x =  (screenPoint.x - this.gameLayer.getPositionRef().x) / scale; 
+		gamePoint.y = (screenPoint.y - this.gameLayer.getPositionRef().y) / scale;
 		
 		return gamePoint;
 	}

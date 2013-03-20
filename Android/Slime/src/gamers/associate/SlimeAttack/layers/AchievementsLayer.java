@@ -52,7 +52,7 @@ public class AchievementsLayer extends CCLayer  implements IScrollable, IBackabl
 		colorLayer.setPosition(0, CCDirector.sharedDirector().winSize().height - colorHeight);
 		this.addChild(colorLayer, Level.zFront);
 		
-		this.scroller = new ScrollerLayer();
+		this.scroller = new ScrollerLayer(0);
 		this.scroller.setStoryLayer(this);
 		this.scroller.setHandled(this.achNode);
 		this.addChild(this.scroller, Level.zTop);

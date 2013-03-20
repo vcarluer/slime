@@ -28,8 +28,8 @@ import org.cocos2d.types.CGPoint;
 				
 		this.starSprite = CCSprite.sprite("star-01.png", true); // SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);		
 		this.starSprite.setPosition(CGPoint.make(
-				this.lblScore.getPosition().x,
-				this.lblScore.getPosition().y
+				this.lblScore.getPositionRef().x,
+				this.lblScore.getPositionRef().y
 				));
 		this.addChild(this.starSprite);
 	}
@@ -44,10 +44,10 @@ import org.cocos2d.types.CGPoint;
 			this.lblScore.setColor(SlimeFactory.ColorSlimeLight);		
 			
 			float starPadding = -10f;
-			float starX = this.lblScore.getPosition().x - this.lblScore.getContentSize().width / 2 - SlimeFactory.Star.getStarReferenceWidth() / 2 + starPadding;
+			float starX = this.lblScore.getPositionRef().x - this.lblScore.getContentSize().width / 2 - SlimeFactory.Star.getStarReferenceWidth() / 2 + starPadding;
 			this.starSprite.setPosition(CGPoint.make(
 					starX,
-					this.starSprite.getPosition().y
+					this.starSprite.getPositionRef().y
 					));
 			
 			this.starSprite.runAction(SlimeFactory.Star.getAnimation(Star.Anim_Wait));

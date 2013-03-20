@@ -179,10 +179,10 @@ import android.view.MotionEvent;
 		this.starCountLabel.setString(text.toUpperCase());
 		
 		float starPadding = -10f;
-		float starX = this.starCountLabel.getPosition().x - this.starCountLabel.getContentSize().width / 2 - SlimeFactory.Star.getStarReferenceWidth() / 2 + starPadding;
+		float starX = this.starCountLabel.getPositionRef().x - this.starCountLabel.getContentSize().width / 2 - SlimeFactory.Star.getStarReferenceWidth() / 2 + starPadding;
 		this.star.setPosition(CGPoint.make(
 				starX,
-				this.star.getPosition().y
+				this.star.getPositionRef().y
 				));
 	}
 		

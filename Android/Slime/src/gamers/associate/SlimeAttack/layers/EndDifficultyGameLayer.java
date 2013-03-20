@@ -115,10 +115,10 @@ import org.cocos2d.types.CGPoint;
 		String score = String.valueOf(SlimeFactory.GameInfo.getPreviousTotalScore());
 		this.lblScore.setString(score.toUpperCase());
 		float starPadding = -10f;
-		float starX = this.lblScore.getPosition().x - this.lblScore.getContentSize().width / 2 - SlimeFactory.Star.getStarReferenceWidth() / 2 + starPadding;
+		float starX = this.lblScore.getPositionRef().x - this.lblScore.getContentSize().width / 2 - SlimeFactory.Star.getStarReferenceWidth() / 2 + starPadding;
 		this.starSprite.setPosition(CGPoint.make(
 				starX,
-				this.starSprite.getPosition().y
+				this.starSprite.getPositionRef().y
 				));
 		
 		SlimeFactory.ContextActivity.showAndNextAd();

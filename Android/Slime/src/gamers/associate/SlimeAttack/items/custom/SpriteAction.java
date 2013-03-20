@@ -53,8 +53,8 @@ public class SpriteAction {
 	public void apply(CCSprite sprite) {
 		this.sprite = sprite;
 		if (this.sprite != null) {
-			this.originalX = sprite.getPosition().x;
-			this.originalY = sprite.getPosition().y;
+			this.originalX = sprite.getPositionRef().x;
+			this.originalY = sprite.getPositionRef().y;
 		}
 				
 		if (this.sprite != null && this.actionCode != noActionReserved) {

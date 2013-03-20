@@ -91,7 +91,7 @@ import org.cocos2d.types.ccColor3B;
 			this.toDestroy.add(star);
 			
 			CCLabel scoreLabel = SlimeFactory.getLabel(String.valueOf(score), this.getFontSize());
-			scoreLabel.setPosition(this.labelX, star.getPosition().y - star.getContentSize().height / 2 - paddingSprite - this.getFontSize() / 2);
+			scoreLabel.setPosition(this.labelX, star.getPositionRef().y - star.getContentSize().height / 2 - paddingSprite - this.getFontSize() / 2);
 			this.addChild(scoreLabel);
 			this.toDestroy.add(scoreLabel);
 			
@@ -107,16 +107,16 @@ import org.cocos2d.types.ccColor3B;
 				endPhrase = endPhrase.toUpperCase();
 				CCLabel levelLabel = CCLabel.makeLabel(String.valueOf(inARow) + endPhrase, "fonts/Slime.ttf", fontSizeInfo);
 
-				levelLabel.setPosition(this.labelX, scoreLabel.getPosition().y - this.getFontSize() / 2 - paddingInfo - fontSizeInfo / 2);
+				levelLabel.setPosition(this.labelX, scoreLabel.getPositionRef().y - this.getFontSize() / 2 - paddingInfo - fontSizeInfo / 2);
 				this.addChild(levelLabel);
 				this.toDestroy.add(levelLabel);
 				
 				boolean canContinue = SlimeFactory.GameInfo.canContinueSurvival(this.levelDiff);
 				if (canContinue) {
-					this.inProgress.setPosition(this.labelX, levelLabel.getPosition().y - fontSizeInfo / 2 - paddingInfo - fontSizeInfo / 2);
+					this.inProgress.setPosition(this.labelX, levelLabel.getPositionRef().y - fontSizeInfo / 2 - paddingInfo - fontSizeInfo / 2);
 					String currentLevel = "LEVEL " + String.valueOf(SlimeFactory.GameInfo.getCurrentInARow(this.levelDiff) + 1);
 					this.inProgressLevel.setString(currentLevel);
-					this.inProgressLevel.setPosition(this.labelX, this.inProgress.getPosition().y - fontSizeInfo / 2 - paddingInfo - fontSizeInfo / 2);
+					this.inProgressLevel.setPosition(this.labelX, this.inProgress.getPositionRef().y - fontSizeInfo / 2 - paddingInfo - fontSizeInfo / 2);
 				}
 				
 				this.inProgress.setVisible(canContinue);
