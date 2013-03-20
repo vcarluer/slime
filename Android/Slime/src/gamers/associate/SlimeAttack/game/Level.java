@@ -578,9 +578,14 @@ public class Level implements IGameItemHandler {
 	}
 	
 	public void pause() {
+		this.pause(false);
+	}
+	
+	public void pause(boolean hideTitle) {
 		this.setPause(true);
 		this.hudLayer.setVisible(false);
 		this.enablePauseLayer();
+		if (hideTitle) this.pauseLayer.hideTitle();
 	}
 	
 	public void resume() {

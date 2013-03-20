@@ -46,6 +46,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	protected boolean adHiddenTimer;
 	private float zoomRatio;
 	private boolean travelingDone;
+	private long gameStartTime;
 	
 	public static TimeAttackGame NewGame() {
 		return new TimeAttackGame(0, 0, 0, 0);				
@@ -261,6 +262,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	}
 
 	public void startLevel() {
+		this.gameStartTime = System.currentTimeMillis();
 		this.reset();
 		this.startMode();
 //		this.level.getCameraManager().zoomCameraCenterTo(0);
@@ -511,5 +513,9 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 
 	public void setTravelingDone(boolean travelingDone) {
 		this.travelingDone = travelingDone;
+	}
+	
+	public long startTime() {
+		return this.gameStartTime;
 	}
 }

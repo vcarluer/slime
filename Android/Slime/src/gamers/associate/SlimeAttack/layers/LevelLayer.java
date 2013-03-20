@@ -79,13 +79,26 @@ public class LevelLayer extends CCLayer {
 	public synchronized void tick(float delta) {
     	this.level.tick(delta);
     }
+	
+	private boolean checkTime(MotionEvent event, String eventName) {
+		long time = System.currentTimeMillis();
+		long startTime = this.level.getGamePlay().startTime();
+		if (time < this.level.getGamePlay().startTime()) {
+			SlimeFactory.Log.d(SlimeAttack.TAG, eventName + " event (" + String.valueOf(time) + ") before game start time (" + String.valueOf(startTime) + ")");
+			return false;
+		} else {
+			return true;
+		}
+	}
 
 	/* (non-Javadoc)
 	 * @see org.cocos2d.layers.CCLayer#ccTouchesMoved(android.view.MotionEvent)
 	 */
 	@Override
 	public boolean ccTouchesMoved(MotionEvent event) {
-		try { 						
+		try { 	
+			if (!this.checkTime(event, "ccTouchesMoved")) return true;
+			
 			for (int i = 0; i < event.getPointerCount(); i++) {			 
 			TouchInfo touch = this.getTouch(event, i);
 			if (touch != null) { 
@@ -131,6 +144,8 @@ public class LevelLayer extends CCLayer {
 	@Override
 	public boolean ccTouchesEnded(MotionEvent event) {
 		try {		
+			if (!this.checkTime(event, "ccTouchesEnded")) return true;
+			
 			TouchInfo touch = this.getTouch(event);
 			if (touch != null) {
 				/*if (!touch.isMoving()) {*/
@@ -191,6 +206,8 @@ public class LevelLayer extends CCLayer {
 	@Override
 	public boolean ccTouchesBegan(MotionEvent event) {	
 		try {
+			if (!this.checkTime(event, "ccTouchesBegan")) return true;
+			
 			int pid = this.getPId(event);		
 			TouchInfo touch = new TouchInfo(pid);		
 			touch.getMoveBeganAt().x = event.getX(touch.getPointerId());

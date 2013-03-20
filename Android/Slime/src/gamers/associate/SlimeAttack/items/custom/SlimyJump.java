@@ -384,7 +384,8 @@ public class SlimyJump extends Slimy implements ISelectable {
 					AchievementStatistics.shotInAir++;
 					SlimeFactory.AchievementManager.test(DontStopAch.class);
 				}				
-				 								
+				 				
+				SlimeFactory.Log.d(SlimeAttack.TAG, "Computing jump position " + String.valueOf(this.getPosition().x) + "," + String.valueOf(this.getPosition().y));
 				this.jumpPosition.x = this.getPosition().x;
 				this.jumpPosition.y = this.getPosition().y;
 				Sounds.playEffect(this.jumpSound[numberOfJump]);
@@ -562,15 +563,16 @@ public class SlimyJump extends Slimy implements ISelectable {
 				dot = FloatMath.sqrt(dot);
 				
 				AchievementStatistics.jumpDistance = dot;
-				if (SlimeFactory.debugSpeed) {
+				if (SlimeFactory.debugDistance) {
 					SlimeFactory.Log.d(SlimeAttack.TAG, "Jump distance: " + String.valueOf(AchievementStatistics.jumpDistance));
 				}
-				this.jumpPosition.x = 0;
-				this.jumpPosition.y = 0;
 				
 				SlimeFactory.AchievementManager.test(SniperAch.class);
 			}
 		}
+		
+		this.jumpPosition.x = 0;
+		this.jumpPosition.y = 0;
 		
 		if (this.isLanded 
 				&& !this.stickHandled 
@@ -761,6 +763,8 @@ public class SlimyJump extends Slimy implements ISelectable {
 	@Override
 	protected void prekill() {
 		super.prekill();
+		this.jumpPosition.x = 0;
+		this.jumpPosition.y = 0;
 		detachCurrentJoin();
 	}
 

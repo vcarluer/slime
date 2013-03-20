@@ -133,6 +133,10 @@ public class PauseLayer extends CCLayer {
 	}
 	
 	public void gameBegin() {
+		this.hideTitle();
+	}
+	
+	public void hideTitle() {
 		this.title.stopAllActions();
 		this.title.setVisible(false);
 		this.currentTitle = null;

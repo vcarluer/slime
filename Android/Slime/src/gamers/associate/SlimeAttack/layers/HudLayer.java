@@ -212,7 +212,7 @@ import android.annotation.SuppressLint;
 	
 	public void goPause(Object sender) {
 		Sounds.playEffect(R.raw.menuselect);		
-		Level.currentLevel.pause();		
+		Level.currentLevel.pause(true);		
 		SlimeFactory.ContextActivity.showAndNextAd();
 	}
 	
