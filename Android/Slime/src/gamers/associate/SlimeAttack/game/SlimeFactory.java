@@ -160,10 +160,6 @@ import com.badlogic.gdx.physics.box2d.World;
 		if (AchievementManager == null) {
 			AchievementManager = new AchievementManager();
 		}
-		
-		// Needed to init volume values for unmute not to bug
-		int soundVolume = ContextActivity.getCurrentMusicVolume();
-		Sounds.setVolume(soundVolume);
 	}
 	
 	public static void attachAll(Level level, CCNode attachNode, World attachWorld, float attachWorldRatio) {		
@@ -393,12 +389,8 @@ import com.badlogic.gdx.physics.box2d.World;
 		Sounds.playMusic(R.raw.slimy_credits, true);
 	}
 	
-	public static void toggleMute() {					
-		Sounds.toggleMute();
-		if (!Sounds.isMute()) {
-			// Force sound volume with current Android volume
-			int soundVolume = ContextActivity.getCurrentMusicVolume();
-			Sounds.setVolume(soundVolume);
-		}
+	public static void toggleMute() {		
+		int soundVolume = ContextActivity.getCurrentMusicVolume();
+		Sounds.toggleMute(soundVolume);
 	}
 }

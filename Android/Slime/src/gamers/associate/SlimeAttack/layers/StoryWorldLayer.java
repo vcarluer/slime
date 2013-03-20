@@ -53,6 +53,8 @@ public class StoryWorldLayer extends CCLayer implements IScrollable, IBackableLa
 	
 	private int currentPage;
 	
+	private CCMenu muteMenu;
+	
 	public static CCScene getScene(int page) {
 		CCScene scene = diffScenes.get(page);
 		if (scene == null) {
@@ -96,7 +98,7 @@ public class StoryWorldLayer extends CCLayer implements IScrollable, IBackableLa
 		this.scroller.setStoryLayer(this);
 		this.addChild(this.scroller, Level.zTop);
 		
-		CCMenu muteMenu = HomeLayer.getMuteButton(this, "toggleMute");
+		muteMenu = HomeLayer.getMuteButton(this, "toggleMute");
 		this.addChild(muteMenu, Level.zTop);
 	}
 	
@@ -114,6 +116,8 @@ public class StoryWorldLayer extends CCLayer implements IScrollable, IBackableLa
 		CCSequence seq = CCSequence.actions(delay, showBack);
 		this.backMenu.runAction(seq);
 		this.setCurrentLevel(this.currentPage);
+		
+		HomeLayer.handleMuteState(this.muteMenu);
 		super.onEnter();
 	}
 	

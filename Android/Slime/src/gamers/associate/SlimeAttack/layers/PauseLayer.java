@@ -274,9 +274,7 @@ public class PauseLayer extends CCLayer {
 			this.homeMenu.setVisible(true);
 		}
 		
-		if (Sounds.isMute()) {
-			this.muteMenu.setSelectedIndex(1);
-		}
+		HomeLayer.handleMuteState(this.muteMenu);
 	}
 	
 	public void gameStarted(boolean started) {

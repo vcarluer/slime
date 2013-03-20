@@ -27,6 +27,7 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer implements IBackableL
 	private CCLabel title;
 	private List<SurvivalItemLayer> items;	
 	private float colorHeight;
+	private CCMenu muteMenu;
 	
 	public static CCScene getScene() {
 		if (scene == null) {
@@ -57,7 +58,7 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer implements IBackableL
 		this.addSurvivalItem("btn-hard", LevelDifficulty.Hard, width / 2, 0);
 		this.addSurvivalItem("btn-extreme", LevelDifficulty.Extrem, width * 3 / 4, 0);
 		
-		CCMenu muteMenu = HomeLayer.getMuteButton(this, "toggleMute");
+		muteMenu = HomeLayer.getMuteButton(this, "toggleMute");
 		this.addChild(muteMenu, Level.zTop);
 	}
 	
@@ -77,6 +78,8 @@ public class ChooseSurvivalDifficultyLayer extends CCLayer implements IBackableL
 	
 	@Override
 	public void onEnter() {					
+		HomeLayer.handleMuteState(this.muteMenu);
+		
 		SlimeFactory.ContextActivity.showAndNextAd();
 		float delayTime = 0f;
 		int i = 0;

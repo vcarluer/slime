@@ -28,6 +28,7 @@ public class AchievementsLayer extends CCLayer  implements IScrollable, IBackabl
 	private ScrollerLayer scroller;
 	private CCNode achNode;
 	private float minScroller;
+	private CCMenu muteMenu;
 	
 	public static CCScene getScene() {
 		if (scene == null) {
@@ -57,7 +58,7 @@ public class AchievementsLayer extends CCLayer  implements IScrollable, IBackabl
 		this.scroller.setHandled(this.achNode);
 		this.addChild(this.scroller, Level.zTop);
 		
-		CCMenu muteMenu = HomeLayer.getMuteButton(this, "toggleMute");
+		muteMenu = HomeLayer.getMuteButton(this, "toggleMute");
 		this.addChild(muteMenu, Level.zTop);
 	}
 	
@@ -82,6 +83,8 @@ public class AchievementsLayer extends CCLayer  implements IScrollable, IBackabl
 	@Override
 	public void onEnter() {
 		super.onEnter();
+		HomeLayer.handleMuteState(this.muteMenu);
+		
 		int i = 0;
 		int padding = 10;
 		float rowSize = AchievementInfoLayer.rowSize + padding;

@@ -1,6 +1,7 @@
 package gamers.associate.SlimeAttack.game;
 
 import gamers.associate.SlimeAttack.R;
+import gamers.associate.SlimeAttack.levels.LevelHome;
 
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.sound.SoundEngine;
@@ -62,7 +63,7 @@ public class Sounds {
 //			}
 //		}	
 		
-		if (!disableEffects) {
+		if (!disableEffects || force) {
 			SoundEngine.sharedEngine().playEffect(CCDirector.sharedDirector().getActivity(), soundId);
 		}
 	}
@@ -82,8 +83,10 @@ public class Sounds {
 	
 	// > 5 sec
 	public static void playMusic(int soundId, boolean loop) {
-		SoundEngine.sharedEngine().playSound(CCDirector.sharedDirector().getActivity(), soundId, loop);
-		isMusicPlaying = true;
+		if (!isMute) {
+			SoundEngine.sharedEngine().playSound(CCDirector.sharedDirector().getActivity(), soundId, loop);
+			isMusicPlaying = true;
+		}
 	}
 	
 	public static void destroy() {
@@ -98,8 +101,10 @@ public class Sounds {
 	}
 	
 	public static void resumeMusic() {
-		SoundEngine.sharedEngine().resumeSound();
-		isMusicPlaying = true;
+		if (!isMute) {			
+			SoundEngine.sharedEngine().resumeSound();
+			isMusicPlaying = true;
+		}
 	}
 	
 	public static void stopMusic() {
@@ -117,20 +122,23 @@ public class Sounds {
 		SoundEngine.sharedEngine().pauseSound();
 	}
 	
-	public static void toggleMute() {
-		if (SoundEngine.sharedEngine().isMute()) {
-			SoundEngine.sharedEngine().unmute();
+	private static boolean isMute;
+	
+	public static void toggleMute(int soundVolume) {
+		if (isMute) {
+			SoundEngine.sharedEngine().setEffectsVolume((float) soundVolume);
+			if (Level.currentLevel != null && (!Level.currentLevel.getActivated() || Level.currentLevel.getCurrentLevelName() == LevelHome.Id)) {
+				resumeMusic();
+			}
 		} else {
-			SoundEngine.sharedEngine().mute();
+			SoundEngine.sharedEngine().setEffectsVolume(0f);
+			pauseMusic();
 		}
+		
+		isMute = !isMute;
 	}
 	
 	public static boolean isMute() {
-		return SoundEngine.sharedEngine().isMute();
-	}
-
-	public static void setVolume(int soundVolume) {
-		SoundEngine.sharedEngine().setEffectsVolume((float) soundVolume);
-		SoundEngine.sharedEngine().setSoundVolume((float) soundVolume);
+		return isMute;
 	}
 }

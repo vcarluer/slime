@@ -1,5 +1,6 @@
 package gamers.associate.SlimeAttack.layers;
 
+import gamers.associate.SlimeAttack.R;
 import gamers.associate.SlimeAttack.game.Sharer;
 import gamers.associate.SlimeAttack.game.SlimeFactory;
 import gamers.associate.SlimeAttack.game.Sounds;
@@ -52,6 +53,7 @@ public class HomeLayer extends CCLayer {
 	private CCMenu creditMenu;
 	
 	private CCLabel betaLabel;
+	private CCMenu muteMenu;
 	
 	public static HomeLayer get() {
 		if (layer == null) {
@@ -99,7 +101,7 @@ public class HomeLayer extends CCLayer {
 			this.addChild(this.betaLabel);
 		}
 		
-		CCMenu muteMenu = getMuteButtonBottom(this, "toggleMute");
+		muteMenu = getMuteButtonBottom(this, "toggleMute");
 		this.addChild(muteMenu);
 	}
 	
@@ -134,6 +136,8 @@ public class HomeLayer extends CCLayer {
 		this.addChild(this.shareMenu);
 		
 		SlimeFactory.playMenuMusic();
+		
+		handleMuteState(this.muteMenu);
 		
 		this.temp();
 		
@@ -180,6 +184,7 @@ public class HomeLayer extends CCLayer {
 	}
 
 	public void selectPlay(Object sender) {		
+		Sounds.playEffect(R.raw.menuselect, true);
 		CCTransitionScene transition = CCFadeTransition.transition(1.0f, ChooseModeLayer.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
 	}
@@ -221,6 +226,27 @@ public class HomeLayer extends CCLayer {
 		setMenuPosBottomRight(menuItem, 1);
 		CCMenu menu = CCMenu.menu(menuItem);
 		return menu;
+	}
+	
+	public static void handleMuteState(CCMenu muteMenu) {
+		if (muteMenu != null && muteMenu.getChildren().size() > 0 && muteMenu.getChildren().get(0) instanceof CCMenuItemToggle) {
+			CCMenuItemToggle itemToggle = null;
+			if (Sounds.isMute()) {				
+				itemToggle = (CCMenuItemToggle)muteMenu.getChildren().get(0);
+			} else {
+				itemToggle = (CCMenuItemToggle)muteMenu.getChildren().get(0);
+			}
+			
+			handleMuteState(itemToggle);
+		}
+	}
+	
+	public static void handleMuteState(CCMenuItemToggle itemToggle) {
+		if (Sounds.isMute()) {				
+			itemToggle.setSelectedIndex(1);
+		} else {
+			itemToggle.setSelectedIndex(0);
+		}
 	}
 	
 	public static CCMenuItemToggle getMuteItemButton(CCNode target, String targetMEthod) {

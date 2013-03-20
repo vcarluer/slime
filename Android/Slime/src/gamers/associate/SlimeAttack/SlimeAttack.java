@@ -249,7 +249,7 @@ public class SlimeAttack extends Activity {
         	}
         } else {
         	
-        	if (needMusicResume && Level.currentLevel != null && (!Level.currentLevel.getActivated() || Level.currentLevel.getCurrentLevelName() == LevelHome.Id)) {
+        	if (!Sounds.isMute() && needMusicResume && Level.currentLevel != null && (!Level.currentLevel.getActivated() || Level.currentLevel.getCurrentLevelName() == LevelHome.Id)) {
         		CCScene scene = CCDirector.sharedDirector().getRunningScene();
         		if (scene != null && scene.getChildren().size() > 0 && (scene.getChildren().get(0) instanceof CreditLayer)) {
         			SlimeFactory.playCreditMusic();

@@ -23,6 +23,7 @@ public class ChooseModeLayer extends CCLayer implements IBackableLayer {
 	
 	private StoryModeItemLayer story;
 	private SurvivalModeItemLayer survival;
+	private CCMenu muteMenu;
 	
 	public static CCScene getScene() {
 		if (scene == null) {
@@ -44,7 +45,7 @@ public class ChooseModeLayer extends CCLayer implements IBackableLayer {
 		
 		this.addChild(HomeLayer.getHomeMenuButton(this, "goHome"));
 
-		CCMenu muteMenu = HomeLayer.getMuteButton(this, "toggleMute");
+		muteMenu = HomeLayer.getMuteButton(this, "toggleMute");
 		this.addChild(muteMenu);
 	}
 	
@@ -61,6 +62,9 @@ public class ChooseModeLayer extends CCLayer implements IBackableLayer {
 		
 		AchievementStatistics.isModeStory = false;
 		AchievementStatistics.isModeSurvival = false;
+		
+		HomeLayer.handleMuteState(this.muteMenu);
+		
 		super.onEnter();
 	}	
 
