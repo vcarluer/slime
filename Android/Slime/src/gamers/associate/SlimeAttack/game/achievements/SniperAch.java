@@ -11,6 +11,6 @@ public class SniperAch extends Achievement {
 
 	@Override
 	protected boolean testInternal() {
-		return AchievementStatistics.isMode() && AchievementStatistics.jumpDistance > 1300;
+		return AchievementStatistics.isMode() && AchievementStatistics.jumpDistance > 1200;
 	}
 }
