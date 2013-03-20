@@ -169,6 +169,8 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 		if (levelDef.getGamePlay() == GamePlay.Survival) {			
 			this.build(level, levelDef.getId(), levelDef.getGamePlay());			
 		}
+		
+		level.getGamePlay().setTravelingDone(true);
 	}
 	
 	// only time attack

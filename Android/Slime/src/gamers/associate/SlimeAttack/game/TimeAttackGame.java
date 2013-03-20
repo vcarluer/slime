@@ -45,6 +45,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 	protected int bonusTaken;
 	protected boolean adHiddenTimer;
 	private float zoomRatio;
+	private boolean travelingDone;
 	
 	public static TimeAttackGame NewGame() {
 		return new TimeAttackGame(0, 0, 0, 0);				
@@ -266,32 +267,37 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 		this.level.getCameraManager().cancelActions();
 		this.hasPaused = false;
 		this.level.getCameraManager().zoomCameraTo(this.zoomRatio);
-		if (this.level.getGoal() != null) {
-			this.level.getCameraManager().centerCameraOn(this.level.getGoal().getPosition());
-		} else {
-			if (this.level.getBoss() != null) {
-				this.level.getCameraManager().centerCameraOn(this.level.getBoss().getPosition());
-			}
-		}
 		
-		this.level.pause();
-		this.level.animateHudPlay(true);
-		
-		List<CGPoint> points = SlimeFactory.PathFinder.pathFinding();		
-		if (points.size() > 1) {
+		if (!this.isTravelingDone()) {
 			if (this.level.getGoal() != null) {
-				points.set(0, this.level.getGoal().getPosition());
+				this.level.getCameraManager().centerCameraOn(this.level.getGoal().getPosition());
 			} else {
 				if (this.level.getBoss() != null) {
-					points.set(0, this.level.getBoss().getPosition());
+					this.level.getCameraManager().centerCameraOn(this.level.getBoss().getPosition());
 				}
 			}
 			
-			points.set(points.size() - 1, this.level.getStartItem().getPosition());
-			this.level.getCameraManager().moveInterpolateTrackTo(points, 3f, true);
+			this.level.pause();
+			this.level.animateHudPlay(true);
+			
+			List<CGPoint> points = SlimeFactory.PathFinder.pathFinding();		
+			if (points.size() > 1) {
+				if (this.level.getGoal() != null) {
+					points.set(0, this.level.getGoal().getPosition());
+				} else {
+					if (this.level.getBoss() != null) {
+						points.set(0, this.level.getBoss().getPosition());
+					}
+				}
+				
+				points.set(points.size() - 1, this.level.getStartItem().getPosition());
+				this.level.getCameraManager().moveInterpolateTrackTo(points, 3f, true);
+			} else {
+				// Tutorial levels with 1 bloc
+				this.level.resume();
+				this.level.getCameraManager().follow(this.level.getStartItem());
+			}
 		} else {
-			// Tutorial levels with 1 bloc
-			this.level.resume();
 			this.level.getCameraManager().follow(this.level.getStartItem());
 		}
 		
@@ -497,5 +503,13 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 			case 4:
 				return Rank.Gold;
 		}
+	}
+
+	public boolean isTravelingDone() {
+		return travelingDone;
+	}
+
+	public void setTravelingDone(boolean travelingDone) {
+		this.travelingDone = travelingDone;
 	}
 }

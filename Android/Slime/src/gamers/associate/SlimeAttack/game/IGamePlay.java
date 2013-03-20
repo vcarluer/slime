@@ -30,4 +30,5 @@ public interface IGamePlay {
 	GamePlay getType();
 	void endMode();
 	float getLeftTime();
+	void setTravelingDone(boolean done);
 }
