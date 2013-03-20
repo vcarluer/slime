@@ -60,10 +60,7 @@ import android.annotation.SuppressLint;
 	
 	private CCMenu menu;
 	
-	private CCBitmapFontAtlas title;
-	private CCBitmapFontAtlas scoreTaken;
-	
-	private CGPoint tmp = CGPoint.zero();
+	private CCBitmapFontAtlas scoreTaken;	
 	
 	private CCSprite starSprite;
 	
@@ -113,13 +110,7 @@ import android.annotation.SuppressLint;
 		this.scoreTaken.setAnchorPoint(0, 0.5f);
 		this.addChild(this.scoreTaken);
 				
-		this.hideSlimyCount();
-		
-		this.title = getMenuLabel(" ", 45f, SlimeFactory.ColorSlimeBorder);
-		this.title.setPosition(
-				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
-				CCDirector.sharedDirector().winSize().getHeight() / 2));
-		this.addChild(this.title);		
+		this.hideSlimyCount();	
 		
 		this.starsTaken = new ArrayList<CCSprite>();
 		this.starsToAdd = new ArrayList<CCSprite>();
@@ -209,22 +200,9 @@ import android.annotation.SuppressLint;
 	public void updateStarsCount() {
 		this.setStarsCount();
 	}
-	
-	public void fadeTitle() {
-		CCFadeOut fade = CCFadeOut.action(1f);
-		this.title.runAction(fade);
-		this.currentTitle = null;
-	}
-	
-	public void gameBegin() {
-		this.title.stopAllActions();
-		this.title.setVisible(false);
-		this.currentTitle = null;
-	}
 
 	@Override
-	public void onExit() {
-		this.currentTitle = null;
+	public void onExit() {		
 		if (this.starSprite != null) {
 			this.removeChild(this.starSprite, true);
 			this.starSprite = null;
@@ -281,44 +259,7 @@ import android.annotation.SuppressLint;
 	
 	public CCMenu getMenu() {
 		return this.menu;
-	}
-	
-	private String currentTitle;
-	
-	public void setTitle(String titleText) {
-		if (titleText == null) {
-			this.currentTitle = null;
-		} else {
-			if (this.currentTitle == null) {
-				if (Level.currentLevel.getLevelDefinition().getGamePlay() == GamePlay.TimeAttack) {
-					this.currentTitle = String.valueOf(Level.currentLevel.getLevelDefinition().getNumber()) + ". " + titleText;
-				} else {
-					this.currentTitle = String.valueOf(SlimeFactory.GameInfo.getLevelNum()) + ". " + titleText;
-				}
-				
-				this.title.stopAllActions();
-				this.title.setVisible(true);
-				this.title.setString(this.currentTitle.toUpperCase());
-				// double padding
-				float dPadding = 250f;
-				float scaleRatio = CCDirector.sharedDirector().winSize().width / (this.title.getContentSize().width + dPadding);
-				this.title.setScale(scaleRatio);
-				this.title.setPosition(
-						CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
-						CCDirector.sharedDirector().winSize().getHeight() / 2));
-				this.title.setOpacity(255);
-				float moveDistance =  CCDirector.sharedDirector().winSize().getWidth() / 2 - (this.title.getContentSize().width * scaleRatio) / 2f;
-				float time = 3f;
-				CCDelayTime delay = CCDelayTime.action(time);
-				CCCallFunc call = CCCallFunc.action(this, "fadeTitle");
-				CCSequence seq = CCSequence.actions(delay, call);
-				this.title.runAction(seq);
-				tmp.set(-moveDistance, 0);
-				CCMoveBy move = CCMoveBy.action(time, tmp);
-				this.title.runAction(move);
-			}
-		}
-	}
+	}		
 	
 	public void starTaken(float x, float y) {
 		CCSprite star = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait, Star.BaseFrameName); // Anim_Fade

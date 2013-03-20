@@ -8,9 +8,11 @@ import gamers.associate.SlimeAttack.items.custom.MenuSprite;
 import gamers.associate.SlimeAttack.levels.GamePlay;
 
 import org.cocos2d.actions.base.CCRepeatForever;
+import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCFadeIn;
 import org.cocos2d.actions.interval.CCFadeOut;
+import org.cocos2d.actions.interval.CCMoveBy;
 import org.cocos2d.actions.interval.CCScaleBy;
 import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.actions.interval.CCSequence;
@@ -22,9 +24,11 @@ import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.menus.CCMenuItemToggle;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.opengl.CCBitmapFontAtlas;
 import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
+import org.cocos2d.types.ccColor3B;
 
 import android.annotation.SuppressLint;
 
@@ -46,6 +50,9 @@ public class PauseLayer extends CCLayer {
 	private CCMenuItemSprite homeMenu;
 	private CCMenuItemSprite resumeMenu;
 	private CCMenuItemToggle muteMenu;	
+	private CCBitmapFontAtlas title;
+	private String currentTitle;
+	private CGPoint tmp = CGPoint.zero();
 	
 	public PauseLayer() {
 //		CCMenuItem label = CCMenuItemLabel.item(getMenuLabel("Pause"), this, "");		
@@ -104,6 +111,72 @@ public class PauseLayer extends CCLayer {
 		this.addChild(this.arrowSpriteR);
 		this.addChild(this.arrowSpriteB);
 		this.addChild(this.arrowSpriteL);
+		
+		this.title = getMenuLabel(" ", 45f, SlimeFactory.ColorSlimeBorder);
+		this.title.setPosition(
+				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
+				CCDirector.sharedDirector().winSize().getHeight() / 2));
+		this.addChild(this.title);	
+	}
+	
+	private static CCBitmapFontAtlas getMenuLabel(String text, float size, ccColor3B color) {
+		CCBitmapFontAtlas label =  CCBitmapFontAtlas.bitmapFontAtlas(text, "SlimeFont.fnt");
+		label.setScale(size / SlimeFactory.FntSize);
+		label.setColor(color);
+		return label;
+	}
+	
+	public void fadeTitle() {
+		CCFadeOut fade = CCFadeOut.action(1f);
+		this.title.runAction(fade);
+		this.currentTitle = null;
+	}
+	
+	public void gameBegin() {
+		this.title.stopAllActions();
+		this.title.setVisible(false);
+		this.currentTitle = null;
+	}
+	
+	@Override
+	public void onExit() {
+		this.currentTitle = null;
+		super.onExit();
+	}
+
+	public void setTitle(String titleText) {
+		if (titleText == null) {
+			this.currentTitle = null;
+		} else {
+			if (this.currentTitle == null) {
+				if (Level.currentLevel.getLevelDefinition().getGamePlay() == GamePlay.TimeAttack) {
+					this.currentTitle = String.valueOf(Level.currentLevel.getLevelDefinition().getNumber()) + ". " + titleText;
+				} else {
+					this.currentTitle = String.valueOf(SlimeFactory.GameInfo.getLevelNum()) + ". " + titleText;
+				}
+				
+				this.title.stopAllActions();
+				this.title.setVisible(true);
+				this.title.setString(this.currentTitle.toUpperCase());
+				// double padding
+				float dPadding = 250f;
+				float scaleRatio = CCDirector.sharedDirector().winSize().width / (this.title.getContentSize().width + dPadding);
+				this.title.setScale(scaleRatio);
+				this.title.setPosition(
+						CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
+						CCDirector.sharedDirector().winSize().getHeight() / 2));
+				this.title.setOpacity(255);
+				float moveDistance =  CCDirector.sharedDirector().winSize().getWidth() / 2 - (this.title.getContentSize().width * scaleRatio) / 2f;
+				float time = 3f;
+				CCDelayTime delay = CCDelayTime.action(time);
+				CCCallFunc call = CCCallFunc.action(this, "fadeTitle");
+				CCSequence seq = CCSequence.actions(delay, call);
+				this.title.runAction(seq);
+				tmp.set(-moveDistance, 0);
+				CCMoveBy move = CCMoveBy.action(time, tmp);
+				this.title.runAction(move);
+			}
+		}
 	}
 	
 	private void setMenuPos(CCMenuItem menuItem, int count) {

@@ -772,7 +772,7 @@ public class Level implements IGameItemHandler {
 			}
 			
 			this.unselectCurrent();			
-			this.hudLayer.gameBegin();
+			this.pauseLayer.gameBegin();
 		}
 	}
 	
@@ -1254,7 +1254,7 @@ public class Level implements IGameItemHandler {
 	}
 	
 	public void setTitle(String title) {
-		this.hudLayer.setTitle(title);
+		this.pauseLayer.setTitle(title);
 	}
 
 	public GameItem getHelpItem() {
