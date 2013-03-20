@@ -484,7 +484,7 @@ public class GameInformation {
 		return this.lastBgk;
 	}
 	
-	private void setLastBkg(String lastBkg) {
+	public void setLastBkg(String lastBkg) {
 		this.lastBgk = lastBkg;
 	}
 	
@@ -496,7 +496,6 @@ public class GameInformation {
 	private void setLevelNum(int levelNum) {
 		this.levelNum = levelNum;
 		AchievementStatistics.levelNum = levelNum;
-		this.setLastBkg("");
 	}
 
 	public int getScore(int diff) {

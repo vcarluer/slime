@@ -922,6 +922,7 @@ public class Level implements IGameItemHandler {
 			}
 		}
 		
+		SlimeFactory.GameInfo.setLastBkg("");
 	}
 	
 	public void startLevel() {
