@@ -126,16 +126,18 @@ public class Sounds {
 	
 	public static void toggleMute(int soundVolume) {
 		if (isMute) {
+			isMute = false;
 			SoundEngine.sharedEngine().setEffectsVolume((float) soundVolume);
 			if (Level.currentLevel != null && (!Level.currentLevel.getActivated() || Level.currentLevel.getCurrentLevelName() == LevelHome.Id)) {
 				resumeMusic();
 			}
 		} else {
+			isMute = true;
 			SoundEngine.sharedEngine().setEffectsVolume(0f);
 			pauseMusic();
 		}
 		
-		isMute = !isMute;
+		
 	}
 	
 	public static boolean isMute() {
