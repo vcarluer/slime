@@ -396,6 +396,9 @@ public class Level implements IGameItemHandler {
 		this.cameraManager.cancelAll();
 		this.hudLayer.resetLevel();
 		this.boss = null;
+		
+		Sounds.stopEffect(R.raw.victory);
+		
 		this.resume();
 		SlimeFactory.Log.d(SlimeAttack.TAG, "resetLevel() end");
 	}

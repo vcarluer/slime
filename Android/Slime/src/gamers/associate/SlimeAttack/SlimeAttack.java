@@ -230,6 +230,7 @@ public class SlimeAttack extends Activity {
         	Level.currentLevel.setPause(true);
         }                
         
+        Sounds.stopEffect(R.raw.victory);
         CCDirector.sharedDirector().onPause();
     }
 

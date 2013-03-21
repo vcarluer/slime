@@ -300,6 +300,9 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 				this.level.getCameraManager().follow(this.level.getStartItem());
 			}
 		} else {
+			//  Beurk.. If not camera don't follow while shooting. Maybe this.level.desactivateCameraMoveAndZoomByUser(); but no time to look at
+			this.level.pause();
+			this.level.resume();
 			this.level.getCameraManager().follow(this.level.getStartItem());
 		}
 		
