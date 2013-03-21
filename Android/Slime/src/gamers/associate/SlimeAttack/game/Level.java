@@ -975,15 +975,15 @@ public class Level implements IGameItemHandler {
 						SlimeFactory.GameInfo.setStory1Finished(true);
 					}
 				} else {
+					SlimeFactory.GameInfo.setInARow();
 					SlimeFactory.GameInfo.addLevelScore(this.lastScore);
 					if (SlimeFactory.LevelBuilder.isBoss()) {
 						AchievementStatistics.finishedSurvivalDifficulty = SlimeFactory.GameInfo.getDifficulty();
 						SlimeFactory.GameInfo.unlockNextDifficultySurvival();
 						SlimeFactory.GameInfo.setSurvivalGameOver(true);
+					} else {
+						SlimeFactory.GameInfo.levelUp();
 					}
-					
-					SlimeFactory.GameInfo.setInARow();
-					SlimeFactory.GameInfo.levelUp();
 				}
 				
 				Level.currentLevel.getGamePlay().endMode();

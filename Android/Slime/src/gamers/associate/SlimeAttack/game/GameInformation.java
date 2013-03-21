@@ -119,8 +119,8 @@ public class GameInformation {
 		this.lastIsHighScore = false;
 		this.previousDifficulty = this.levelDifficulty;
 		this.levelDifficulty = leveldifficulty;
-		this.totalCurrent = 0;
-//		this.setTotalScore(0);
+		this.totalCurrent = this.getCurrentScore(leveldifficulty);
+//		this.setPreviousTotalCurrent(this.totalCurrent);
 		if (this.levelDifficulty > this.maxLevelDifficulty) {
 			this.maxLevelDifficulty = this.levelDifficulty;
 			AchievementStatistics.unlockDifficulty = this.maxLevelDifficulty;
@@ -205,9 +205,9 @@ public class GameInformation {
 	public void levelUp() {		
 		this.setLevelNum(levelNum + 1);
 		this.lastScore = 0;
-		if (this.levelNum > this.getLevelMax() && this.levelDifficulty != LevelDifficulty.Extrem) {
-			this.difficultyUp();
-		}
+//		if (this.levelNum > this.getLevelMax() && this.levelDifficulty != LevelDifficulty.Extrem) {
+//			this.difficultyUp();
+//		}
 
 		this.store();
 	}
@@ -452,6 +452,20 @@ public class GameInformation {
 		this.store();
 	}
 	
+	public int getCurrentScore(int difficulty) {
+		switch (difficulty) {
+		default:
+		case LevelDifficulty.Easy:
+			return this.totalCurrentEasy;
+		case LevelDifficulty.Normal:
+			return this.totalCurrentNormal;
+		case LevelDifficulty.Hard:
+			return this.totalCurrentHard;
+		case LevelDifficulty.Extrem:
+			return this.totalCurrentExtrem;
+	}
+	}
+	
 	public void removeLastScore() {
 		this.totalCurrent -= this.lastScore;
 //		this.setTotalScore(this.getDifficultyScore() - this.lastScore);
@@ -542,19 +556,19 @@ public class GameInformation {
 			default:
 			case LevelDifficulty.Easy:
 				this.survivalGameOverEasy = survivalGameOver;
-				this.totalCurrentEasy = 0;
+				if (survivalGameOver) this.totalCurrentEasy = 0;
 				break;
 			case LevelDifficulty.Normal:
 				this.survivalGameOverNormal = survivalGameOver;
-				this.totalCurrentNormal = 0;
+				if (survivalGameOver) this.totalCurrentNormal = 0;
 				break;
 			case LevelDifficulty.Hard:
 				this.survivalGameOverHard = survivalGameOver;
-				this.totalCurrentHard = 0;
+				if (survivalGameOver) this.totalCurrentHard = 0;
 				break;
 			case LevelDifficulty.Extrem:
 				this.survivalGameOverExtrem = survivalGameOver;
-				this.totalCurrentExtrem = 0;
+				if (survivalGameOver) this.totalCurrentExtrem = 0;
 				break;
 		}
 		

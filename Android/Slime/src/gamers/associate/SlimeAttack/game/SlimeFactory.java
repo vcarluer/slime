@@ -63,14 +63,14 @@ import com.badlogic.gdx.physics.box2d.World;
 
 @SuppressLint("DefaultLocale") public abstract class SlimeFactory {
 	// Debug vars	
-	public static final boolean LogOn = true;
+	public static final boolean LogOn = false;
 	public static boolean IsLevelSelectionOn = false;
 	public static boolean IsLevelSelectionShowButtons = false;
 
 	public static boolean IsLevelDebugMode = false;
 	public static boolean IsForceDiffDebug =  false;
-	public static int ForceDiff = 8;
-	public static int ForceLevel = 1;
+	public static int ForceDiff = 1;
+	public static int ForceLevel = 10;
 	public static boolean IsDebugBlocOn = false;
 	public static String ForceBlockPath = "blocsRectangle/e_tr_10.slime";	
 	public static final boolean IsForceMaxSurvival = false;
@@ -79,12 +79,12 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static final int MaxWorld = LevelDifficulty.Extrem;
 	public static final boolean resetHighScores = false; // Run with this = true and then relaunch with false
 	public static final boolean clearLevelInfo = false; // Run with this = true and then relaunch with false
-	public static final boolean unlockAll = true; // Unlock all levels and modes
+	public static final boolean unlockAll = false; // Unlock all levels and modes
 	public static final boolean unlockAllAchievement = false;
 	public static final boolean noUnlockHardcoreGamer = false;
-	public static final boolean resetAchievements = true; // if true can not unlock allachievements
+	public static final boolean resetAchievements = false; // if true can not unlock allachievements
 	public static final boolean debugSpeed = false;
-	public static final boolean debugDistance = true;
+	public static final boolean debugDistance = false;
 	public static final boolean isBeta = false;
 	public static final boolean debugPathfinding = false;
 	

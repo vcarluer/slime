@@ -132,12 +132,14 @@ import android.view.MotionEvent;
 	public void goNext(Object sender) {
 		Sounds.playEffect(R.raw.menuselect);		
 		
-		if (Level.currentLevel.getGamePlay().getType() == GamePlay.Survival && 
-				SlimeFactory.LevelBuilder.isBoss() &&
-				SlimeFactory.GameInfo.getDifficulty() != LevelDifficulty.Extrem) {
-			CCTransitionScene transition = CCFadeTransition.transition(0.5f, SurvivalGameOverLayer.getScene());
-			CCDirector.sharedDirector().replaceScene(transition);
-			return;
+		if (Level.currentLevel.getGamePlay().getType() == GamePlay.Survival) {
+			if (SlimeFactory.LevelBuilder.isBoss()) {
+				if (SlimeFactory.GameInfo.getDifficulty() != LevelDifficulty.Extrem) {
+					CCTransitionScene transition = CCFadeTransition.transition(0.5f, SurvivalGameOverLayer.getScene());
+					CCDirector.sharedDirector().replaceScene(transition);
+					return;
+				}
+			}
 		}
 		
 		if (Level.currentLevel.getGamePlay().getType() == GamePlay.TimeAttack && SlimeFactory.LevelBuilder.isBoss()) {
