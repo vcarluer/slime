@@ -2,7 +2,7 @@ package gamers.associate.SlimeAttack.game.achievements;
 
 public class PuppetMasterAch extends Achievement {
 
-	private static final String name = "Puppet Master";
+	private static final String name = "Master of Puppets";
 	private static final String description = "Change zoom to play";
 
 	public PuppetMasterAch() {
