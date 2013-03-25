@@ -3,7 +3,7 @@ package gamers.associate.SlimeAttack.game.achievements;
 public class DefuserAch extends Achievement {
 
 	private static final String name = "Diffuser";
-	private static final String description = "Less than 1 second remaining in Story";
+	private static final String description = "Finish with 1 second remaining in Story";
 
 	public DefuserAch() {
 		super(name, description, true);

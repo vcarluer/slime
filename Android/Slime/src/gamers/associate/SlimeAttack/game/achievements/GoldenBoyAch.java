@@ -8,7 +8,7 @@ import gamers.associate.SlimeAttack.levels.LevelDefinition;
 public class GoldenBoyAch extends Achievement {
 
 	private static final String name = "Golden boy";
-	private static final String description = "5 levels in a row with gold";
+	private static final String description = "5 consecutive levels in gold";
 
 	public GoldenBoyAch() {
 		super(name, description, true);

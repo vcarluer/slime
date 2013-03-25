@@ -3,7 +3,7 @@ package gamers.associate.SlimeAttack.game.achievements;
 public class CarabinAch extends Achievement {
 
 	private static final String name = "Carrabin";
-	private static final String description = "Make Slimy jump 50 times in a level";
+	private static final String description = "Jump 50 times in a level";
 
 	public CarabinAch() {
 		super(name, description, false);

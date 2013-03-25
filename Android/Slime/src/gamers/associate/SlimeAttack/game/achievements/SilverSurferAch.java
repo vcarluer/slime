@@ -8,7 +8,7 @@ import gamers.associate.SlimeAttack.levels.LevelDefinition;
 public class SilverSurferAch extends Achievement {
 
 	private static final String name = "Silver surfer";
-	private static final String description = "5 levels in a row with silver";
+	private static final String description = "5 consecutive levels in silver";
 
 	public SilverSurferAch() {
 		super(name, description, true);
