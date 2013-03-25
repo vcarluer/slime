@@ -1,20 +1,25 @@
-BlocInfo;None;0;120;480;480;0;BlocInfo-0;1;;;false;true;false;b
+BlocInfo;None;0;120;480;480;0;BlocInfo-0;1;;;false;false;false;b,t
 TimeAttack;None;-2.0;0.0;0.0;0.0;0.0;0;0
-Platform_NoSticky;None;32.0;448.0;201.0;32.0;180.0
-Sprite;None;201.0;368.0;80.0;80.0;180.0;tank;tank-evacuation;1
-Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 250.70229,152.29571 -17.98895,0.37489 -5.98264,6.38858 0.0429,8.16637 -0.82001,5.90563 -0.0447,5.48523 L 224,184 l -16.11575,38.52023 -1.71834,1.77638 0.0977,7.31781 74.0819,0.14597 -0.29325,-8.10386 -6.36155,-5.82275 -15.07824,-33.81779 -1.53799,-5.24464 -0.0639,-5.84817 -1.45921,-5.84861 -0.0598,-7.93219;false;true;true
-GoalPortal;None;206.0;352.0;75.0;16.0;180.0
-Platform_NoSticky;None;240.0;208.0;448.0;32.0;90.0
-Platform_NoSticky;None;-208.0;208.0;448.0;32.0;90.0
-Star;None;66.0;248.0;30.0;31.0;0.0
-BecBunsen;becbunsen;56.0;144.0;20.0;67.0;90.0;true;0
-Platform_NoSticky;None;251.0;448.0;197.0;32.0;180.0
-Platform_Wall;None;233.0;448.0;18.0;32.0;0.0
-Sprite;None;327.0;54.0;32.0;16.0;-135.0;arrows;arrow-green;1;2;0;None;1;true;true;0;false;0
-Sprite;None;287.0;93.0;32.0;16.0;-135.0;arrows;arrow-green;1;2;0;None;1;true;true;0.25;false;0
-Sprite;None;248.0;133.0;32.0;16.0;-135.0;arrows;arrow-green;1;2;0;None;1;true;true;0.5;false;0
-Sprite;None;208.0;172.0;32.0;16.0;-135.0;arrows;arrow-green;1;2;0;None;1;true;true;0.75;false;0
-Sprite;None;134.0;289.0;32.0;16.0;-30.0;arrows;arrow-green;1;2;0;None;1;true;true;1;false;0
-Sprite;None;183.0;317.0;32.0;16.0;-30.0;arrows;arrow-green;1;2;0;None;1;true;true;1.25;false;0
-Platform_NoSticky_Corner;None;0.0;448.0;32.0;32.0;180.0
-Platform_NoSticky_Corner;None;448.0;448.0;32.0;32.0;-90.0
+Platform_NoSticky;None;32.0;0.0;120.0;32.0;180.0
+Platform_NoSticky;None;88.0;240.0;448.0;32.0;90.0
+Platform_NoSticky;None;-56.0;240.0;448.0;32.0;90.0
+Star;None;226.0;256.0;30.0;31.0;0.0
+BecBunsen;becbunsen;109.0;96.0;20.0;67.0;-90.0;true;0
+Sprite;None;224.0;128.0;32.0;16.0;-90.0;arrows;arrow-green;1;2;0;None;1;true;true;0;false;0
+Sprite;None;224.0;184.0;32.0;16.0;-90.0;arrows;arrow-green;1;2;0;None;1;true;true;0.25;false;0
+Sprite;None;224.0;240.0;32.0;16.0;-90.0;arrows;arrow-green;1;2;0;None;1;true;true;0.5;false;0
+Sprite;None;224.0;296.0;32.0;16.0;-90.0;arrows;arrow-green;1;2;0;None;1;true;true;0.75;false;0
+Platform_NoSticky_Corner;None;0.0;0.0;32.0;32.0;180.0
+Platform_NoSticky_Corner;None;448.0;0.0;32.0;32.0;-90.0
+Platform_NoSticky_Corner;None;152.0;0.0;32.0;32.0;0.0
+Platform_NoSticky;None;328.0;0.0;120.0;32.0;180.0
+Platform_NoSticky_Corner;None;296.0;0.0;32.0;32.0;90.0
+BecBunsen;becbunsen;109.0;336.0;20.0;67.0;-90.0;true;0
+BecBunsen;becbunsen;109.0;216.0;20.0;67.0;-90.0;true;0
+Sprite;None;343.0;52.0;107.0;128.0;-45.0;items;teleporter;1
+Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 404.20363,567.58305 74.87212,-75.66266 -3.75149,-2.34345 -13.62641,2.88724 -2.16557,-1.91886 -3.13758,2.94023 -3.41158,-3.73964 -51.24353,50.92438 4.21918,4.24746 -3.32086,3.39666 1.69496,2.08556 -2.35172,12.76216;false;true;true
+Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 331.34638,464.43385 3.02201,2.75019 3.52743,0.80444 2.04777,-1.95047 2.04917,1.89313 38.29549,-38.23397 -2.08631,-1.93546 1.35445,-1.81698 -0.43805,-3.14302 -1.62598,-1.67208 0.84526,-0.8456 -3.68101,-3.66829 -46.09452,46.48596 2.02322,2.02606;false;true;true
+Sprite;camera-mount;329.0;287.0;34.0;36.0;-90.0;;camera-mount;1
+Camera;Camera;336.0;295.0;56.0;25.0;0.0;target;true;0;0;3;45
+CircularSaw;circularsaw;328.0;416.0;40.0;40.0;90.0;true
+Box_Bottle;None;16.0;32.0;48.0;72.0;0.0;false;true
