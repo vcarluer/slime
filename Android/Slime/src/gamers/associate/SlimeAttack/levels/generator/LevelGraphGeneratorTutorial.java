@@ -16,6 +16,7 @@ public class LevelGraphGeneratorTutorial extends LevelGraphGeneratorRectangle {
 	private static final String TUT2_TITLE = "The golden star of the forbidden doorway";
 	private static final String TUT1_TITLE = "The incredible exit tube";
 	private static final String BLOCS_TUTORIAL = "blocsTutorial";
+	private static final String TUT7_3 = "tut7-3";
 	private static final String TUT7_2 = "tut7-2";
 	private static final String TUT7_1 = "tut7-1";
 	private static final String TUT6_2 = "tut6-2";
@@ -105,10 +106,14 @@ public class LevelGraphGeneratorTutorial extends LevelGraphGeneratorRectangle {
 			this.handleTut(TUT7_1);
 			this.topCount++;
 			this.maxX = 0;
-			this.maxY = 1;
+			this.maxY = 2;
 			this.currentX = 0;
 			this.currentY = 1;
 			this.handleTut(TUT7_2);
+			this.topCount++;
+			this.currentX = 0;
+			this.currentY = 2;
+			this.handleTut(TUT7_3);
 			break;	
 		}			
 		

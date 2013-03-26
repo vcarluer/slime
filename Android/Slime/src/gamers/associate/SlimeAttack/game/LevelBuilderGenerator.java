@@ -148,8 +148,11 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 					this.levelDef.buildLevel(level);
 				}
 				
-				if (!isTuto && levelDefToLoad instanceof LevelDefinitionParser) {
+				if ((!isTuto || SlimeFactory.IsLevelSelectionOn) && levelDefToLoad instanceof LevelDefinitionParser) {
 					LevelDefinitionParser parser = (LevelDefinitionParser) levelDefToLoad;					
+					if (SlimeFactory.IsLevelSelectionOn) {
+						parser.setLocalStorage(false);
+					}
 					parser.storeLevel(level);
 				}
 			}

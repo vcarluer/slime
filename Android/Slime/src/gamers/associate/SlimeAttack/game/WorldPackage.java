@@ -55,6 +55,10 @@ public abstract class WorldPackage {
 			definition.setGamePlay(GamePlay.TimeAttack);
 			definition.setDifficulty(this.getDifficulty(num));
 			definition.setWorld(this);
+			
+			if (SlimeFactory.IsLevelSelectionOn) {
+				definition.setLocalStorage(false);
+			}
 
 			if (i == 0) {
 				definition.setUnlock(true);

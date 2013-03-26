@@ -5,10 +5,10 @@ Platform_NoSticky;None;88.0;240.0;448.0;32.0;90.0
 Platform_NoSticky;None;-56.0;240.0;448.0;32.0;90.0
 Star;None;226.0;256.0;30.0;31.0;0.0
 BecBunsen;becbunsen;109.0;96.0;20.0;67.0;-90.0;true;0
-Sprite;None;224.0;128.0;32.0;16.0;-90.0;arrows;arrow-green;1;2;0;None;1;true;true;0;false;0
-Sprite;None;224.0;184.0;32.0;16.0;-90.0;arrows;arrow-green;1;2;0;None;1;true;true;0.25;false;0
-Sprite;None;224.0;240.0;32.0;16.0;-90.0;arrows;arrow-green;1;2;0;None;1;true;true;0.5;false;0
-Sprite;None;224.0;296.0;32.0;16.0;-90.0;arrows;arrow-green;1;2;0;None;1;true;true;0.75;false;0
+Sprite;None;224.0;182.0;32.0;16.0;-90.0;arrows;arrow-green;1;2;0;None;1;true;true;0;false;0
+Sprite;None;224.0;238.0;32.0;16.0;-90.0;arrows;arrow-green;1;2;0;None;1;true;true;0.25;false;0
+Sprite;None;224.0;294.0;32.0;16.0;-90.0;arrows;arrow-green;1;2;0;None;1;true;true;0.5;false;0
+Sprite;None;224.0;350.0;32.0;16.0;-90.0;arrows;arrow-green;1;2;0;None;1;true;true;0.75;false;0
 Platform_NoSticky_Corner;None;0.0;0.0;32.0;32.0;180.0
 Platform_NoSticky_Corner;None;448.0;0.0;32.0;32.0;-90.0
 Platform_NoSticky_Corner;None;152.0;0.0;32.0;32.0;0.0
@@ -16,6 +16,7 @@ Platform_NoSticky;None;328.0;0.0;120.0;32.0;180.0
 Platform_NoSticky_Corner;None;296.0;0.0;32.0;32.0;90.0
 BecBunsen;becbunsen;109.0;336.0;20.0;67.0;-90.0;true;0
 BecBunsen;becbunsen;109.0;216.0;20.0;67.0;-90.0;true;0
+Sprite;None;4.0;94.0;152.0;248.0;0.0;;gestures_tap;1;4;50;None;1;false;true;1;true;0
 Sprite;None;343.0;52.0;107.0;128.0;-45.0;items;teleporter;1
 Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 404.20363,567.58305 74.87212,-75.66266 -3.75149,-2.34345 -13.62641,2.88724 -2.16557,-1.91886 -3.13758,2.94023 -3.41158,-3.73964 -51.24353,50.92438 4.21918,4.24746 -3.32086,3.39666 1.69496,2.08556 -2.35172,12.76216;false;true;true
 Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 331.34638,464.43385 3.02201,2.75019 3.52743,0.80444 2.04777,-1.95047 2.04917,1.89313 38.29549,-38.23397 -2.08631,-1.93546 1.35445,-1.81698 -0.43805,-3.14302 -1.62598,-1.67208 0.84526,-0.8456 -3.68101,-3.66829 -46.09452,46.48596 2.02322,2.02606;false;true;true
