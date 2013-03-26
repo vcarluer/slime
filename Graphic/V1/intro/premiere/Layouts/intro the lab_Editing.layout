@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PremiereData Version="3">
+	<HiddenDockingViews Version="1">
+		<Pane Index="0" ObjectRef="7"/>
+		<Pane Index="1" ObjectRef="10"/>
+		<Pane Index="2" ObjectRef="13"/>
+		<Pane Index="3" ObjectRef="16"/>
+		<Pane Index="4" ObjectRef="19"/>
+		<Pane Index="5" ObjectRef="22"/>
+		<Pane Index="6" ObjectRef="25"/>
+		<Pane Index="7" ObjectRef="28"/>
+		<Pane Index="8" ObjectRef="31"/>
+		<Pane Index="9" ObjectRef="34"/>
+		<Pane Index="10" ObjectRef="37"/>
+	</HiddenDockingViews>
+	<PaneCount>3</PaneCount>
+	<PaneHeader.Visibility>false</PaneHeader.Visibility>
+	<DockingLayout.Properties ObjectRef="1"/>
+	<DockingLayout.SelectedPaneID>7a290eda-ba1e-4791-8319-f4c08be7a511</DockingLayout.SelectedPaneID>
+	<MainFrame Version="1">
+		<Pane Index="0" ObjectRef="2"/>
+		<Pane Index="1" ObjectRef="5"/>
+		<Pane Index="2" ObjectRef="6"/>
+	</MainFrame>
+	<MainFrameWindowState>0</MainFrameWindowState>
+	<PaneWindowCount>0</PaneWindowCount>
+	<MainFramePaneContainerClientRect>0,0,1670,914</MainFramePaneContainerClientRect>
+	<MainFrameWindowRect>-1,-1,1681,987</MainFrameWindowRect>
+	<ApplicationType>4</ApplicationType>
+	<DockingLayoutName>Editing</DockingLayoutName>
+	<PropertyMap ObjectID="1" ClassID="438d29fd-1954-48e2-9df3-5f96126af53a" Version="1">
+	</PropertyMap>
+	<Pane_14 ObjectID="2" ClassID="e72d4c59-e6a3-465a-8690-1a74ecc5a0ee" Version="3">
+		<PaneType>0</PaneType>
+		<Docked>true</Docked>
+		<SplitType>9</SplitType>
+		<SplitPaneID> </SplitPaneID>
+		<CurrentViewID>4164a4c2-d3f7-4c46-9a1c-7993ad9eda49</CurrentViewID>
+		<PaneSize>0,0,1670,119</PaneSize>
+		<PaneRect>0,795,1670,914</PaneRect>
+		<PaneRestoreID> </PaneRestoreID>
+		<PaneID>9571c477-97ca-49c6-9e6a-5205e5d8d228</PaneID>
+		<PaneWindowRect>5,845,1675,964</PaneWindowRect>
+		<Pane Version="1">
+			<DockingView Index="0" ObjectRef="3"/>
+		</Pane>
+		<Expanded>true</Expanded>
+	</Pane_14>
+	<DockingView_12 ObjectID="3" ClassID="28470661-8177-4ddd-b59f-17915f9e2b67" Version="1">
+		<DockingView.Properties ObjectRef="4"/>
+		<DockingViewVisible>true</DockingViewVisible>
+		<DockingViewWindowType>Timelines</DockingViewWindowType>
+		<DockingViewTabID>DockingTab #1: 4550d808-618a-416e-83a2-879a8f240c56@[18:265:0]</DockingViewTabID>
+		<DockingViewName>My Project</DockingViewName>
+		<DockingParticipantID>Timeline</DockingParticipantID>
+		<DockingViewID>4164a4c2-d3f7-4c46-9a1c-7993ad9eda49</DockingViewID>
+	</DockingView_12>
+	<PropertyMap ObjectID="4" ClassID="438d29fd-1954-48e2-9df3-5f96126af53a" Version="1">
+		<Properties Version="1">
+			<Sequence.ID>1</Sequence.ID>
+		</Properties>
+	</PropertyMap>
+	<Pane_15 ObjectID="5" ClassID="e72d4c59-e6a3-465a-8690-1a74ecc5a0ee" Version="3">
+		<PaneType>2</PaneType>
+		<Docked>true</Docked>
+		<SplitType>9</SplitType>
+		<SplitPaneID> </SplitPaneID>
+		<CurrentViewID>910bbe56-15b6-40c8-82f1-eb71eaa89799</CurrentViewID>
+		<PaneSize>0,0,229,795</PaneSize>
+		<PaneRect>1441,0,1670,795</PaneRect>
+		<PaneRestoreID> </PaneRestoreID>
+		<PaneID>76671689-4e94-4927-97c7-3456f1b8c4d6</PaneID>
+		<PaneWindowRect>1446,50,1675,845</PaneWindowRect>
+		<Expanded>true</Expanded>
+	</Pane_15>
+	<Pane_16 ObjectID="6" ClassID="e72d4c59-e6a3-465a-8690-1a74ecc5a0ee" Version="3">
+		<PaneType>3</PaneType>
+		<Docked>true</Docked>
+		<SplitType>9</SplitType>
+		<SplitPaneID> </SplitPaneID>
+		<CurrentViewID>7557c16c-2a4f-474d-8277-4ac8d94449c6</CurrentViewID>
+		<PaneSize>0,0,1441,795</PaneSize>
+		<PaneRect>0,0,1441,795</PaneRect>
+		<PaneRestoreID> </PaneRestoreID>
+		<PaneID>7a290eda-ba1e-4791-8319-f4c08be7a511</PaneID>
+		<PaneWindowRect>5,50,1446,845</PaneWindowRect>
+		<Expanded>true</Expanded>
+	</Pane_16>
+	<Pane_17 ObjectID="7" ClassID="e72d4c59-e6a3-465a-8690-1a74ecc5a0ee" Version="3">
+		<PaneType>0</PaneType>
+		<Docked>false</Docked>
+		<SplitType>9</SplitType>
+		<SplitPaneID> </SplitPaneID>
+		<CurrentViewID></CurrentViewID>
+		<PaneSize>0,0,525,350</PaneSize>
+		<PaneRect>0,0,525,350</PaneRect>
+		<PaneRestoreID> </PaneRestoreID>
+		<PaneID>84c777f4-f399-4627-b0d3-f850ffc1f89b</PaneID>
+		<PaneWindowRect>400,150,925,500</PaneWindowRect>
+		<Pane Version="1">
+			<DockingView Index="0" ObjectRef="8"/>
+		</Pane>
+		<Expanded>true</Expanded>
+	</Pane_17>
+	<DockingView_13 ObjectID="8" ClassID="28470661-8177-4ddd-b59f-17915f9e2b67" Version="1">
+		<DockingView.Properties ObjectRef="9"/>
+		<DockingViewVisible>true</DockingViewVisible>
+		<DockingViewWindowType>Source Monitors</DockingViewWindowType>
+		<DockingViewTabID>DockingTab #6: e7abc595-85a0-40dd-b605-dcea5e14ff3b@[1315:735:0]</DockingViewTabID>
+		<DockingViewName>Preview - DoorSlam.wav</DockingViewName>
+		<DockingParticipantID>Monitor</DockingParticipantID>
+		<DockingViewID>68e1a040-35b0-4877-b843-caff5f36a3ee</DockingViewID>
+	</DockingView_13>
+	<PropertyMap ObjectID="9" ClassID="438d29fd-1954-48e2-9df3-5f96126af53a" Version="1">
+	</PropertyMap>
+	<Pane_18 ObjectID="10" ClassID="e72d4c59-e6a3-465a-8690-1a74ecc5a0ee" Version="3">
+		<PaneType>0</PaneType>
+		<Docked>false</Docked>
+		<SplitType>9</SplitType>
+		<SplitPaneID> </SplitPaneID>
+		<CurrentViewID></CurrentViewID>
+		<PaneSize>0,0,525,350</PaneSize>
+		<PaneRect>0,0,525,350</PaneRect>
+		<PaneRestoreID> </PaneRestoreID>
+		<PaneID>dbf79075-b7dc-4e6d-91b9-c5f19cb317c2</PaneID>
+		<PaneWindowRect>400,150,925,500</PaneWindowRect>
+		<Pane Version="1">
+			<DockingView Index="0" ObjectRef="11"/>
+		</Pane>
+		<Expanded>true</Expanded>
+	</Pane_18>
+	<DockingView_14 ObjectID="11" ClassID="28470661-8177-4ddd-b59f-17915f9e2b67" Version="1">
+		<DockingView.Properties ObjectRef="12"/>
+		<DockingViewVisible>true</DockingViewVisible>
+		<DockingViewWindowType>Source Monitors</DockingViewWindowType>
+		<DockingViewTabID>DockingTab #7: d2d00869-3cd5-4222-9e67-ad2bdc2540ad@[2398:485:0]</DockingViewTabID>
+		<DockingViewName>Preview - intro no sound long.mp4</DockingViewName>
+		<DockingParticipantID>Monitor</DockingParticipantID>
+		<DockingViewID>204e2d65-a780-4bb3-a00c-c14f0cd362d0</DockingViewID>
+	</DockingView_14>
+	<PropertyMap ObjectID="12" ClassID="438d29fd-1954-48e2-9df3-5f96126af53a" Version="1">
+	</PropertyMap>
+	<Pane_19 ObjectID="13" ClassID="e72d4c59-e6a3-465a-8690-1a74ecc5a0ee" Version="3">
+		<PaneType>0</PaneType>
+		<Docked>false</Docked>
+		<SplitType>9</SplitType>
+		<SplitPaneID> </SplitPaneID>
+		<CurrentViewID></CurrentViewID>
+		<PaneSize>0,0,525,350</PaneSize>
+		<PaneRect>0,0,525,350</PaneRect>
+		<PaneRestoreID> </PaneRestoreID>
+		<PaneID>549a18fb-cd7d-450d-9198-36ab76003454</PaneID>
+		<PaneWindowRect>400,150,925,500</PaneWindowRect>
+		<Pane Version="1">
+			<DockingView Index="0" ObjectRef="14"/>
+		</Pane>
+		<Expanded>true</Expanded>
+	</Pane_19>
+	<DockingView_15 ObjectID="14" ClassID="28470661-8177-4ddd-b59f-17915f9e2b67" Version="1">
+		<DockingView.Properties ObjectRef="15"/>
+		<DockingViewVisible>true</DockingViewVisible>
+		<DockingViewWindowType>Source Monitors</DockingViewWindowType>
+		<DockingViewTabID>DockingTab #6: 135e9ee6-04bb-486d-8d60-302b0c2d177b@[2101:969:0]</DockingViewTabID>
+		<DockingViewName>Preview - DoorSqueak.wav</DockingViewName>
+		<DockingParticipantID>Monitor</DockingParticipantID>
+		<DockingViewID>6214ddbb-45dc-4249-993a-01afd68fc590</DockingViewID>
+	</DockingView_15>
+	<PropertyMap ObjectID="15" ClassID="438d29fd-1954-48e2-9df3-5f96126af53a" Version="1">
+	</PropertyMap>
+	<Pane_20 ObjectID="16" ClassID="e72d4c59-e6a3-465a-8690-1a74ecc5a0ee" Version="3">
+		<PaneType>0</PaneType>
+		<Docked>false</Docked>
+		<SplitType>9</SplitType>
+		<SplitPaneID> </SplitPaneID>
+		<CurrentViewID></CurrentViewID>
+		<PaneSize>0,0,525,350</PaneSize>
+		<PaneRect>0,0,525,350</PaneRect>
+		<PaneRestoreID> </PaneRestoreID>
+		<PaneID>708aedc7-c491-43aa-860f-deef47ab537c</PaneID>
+		<PaneWindowRect>400,150,925,500</PaneWindowRect>
+		<Pane Version="1">
+			<DockingView Index="0" ObjectRef="17"/>
+		</Pane>
+		<Expanded>true</Expanded>
+	</Pane_20>
+	<DockingView_16 ObjectID="17" ClassID="28470661-8177-4ddd-b59f-17915f9e2b67" Version="1">
+		<DockingView.Properties ObjectRef="18"/>
+		<DockingViewVisible>true</DockingViewVisible>
+		<DockingViewWindowType>Source Monitors</DockingViewWindowType>
+		<DockingViewTabID>DockingTab #4: 4dd48ce9-1bbb-49bf-9555-fed85c1e8dd8@[924:0:0]</DockingViewTabID>
+		<DockingViewName>Preview - intro no sound long.mp4</DockingViewName>
+		<DockingParticipantID>Monitor</DockingParticipantID>
+		<DockingViewID>133cb400-dacf-43dc-9662-ef678ff6b975</DockingViewID>
+	</DockingView_16>
+	<PropertyMap ObjectID="18" ClassID="438d29fd-1954-48e2-9df3-5f96126af53a" Version="1">
+	</PropertyMap>
+	<Pane_21 ObjectID="19" ClassID="e72d4c59-e6a3-465a-8690-1a74ecc5a0ee" Version="3">
+		<PaneType>0</PaneType>
+		<Docked>false</Docked>
+		<SplitType>9</SplitType>
+		<SplitPaneID> </SplitPaneID>
+		<CurrentViewID></CurrentViewID>
+		<PaneSize>0,0,525,350</PaneSize>
+		<PaneRect>0,0,525,350</PaneRect>
+		<PaneRestoreID> </PaneRestoreID>
+		<PaneID>92cb403c-6157-4a7d-873c-710eb5008309</PaneID>
+		<PaneWindowRect>400,150,925,500</PaneWindowRect>
+		<Pane Version="1">
+			<DockingView Index="0" ObjectRef="20"/>
+		</Pane>
+		<Expanded>true</Expanded>
+	</Pane_21>
+	<DockingView_17 ObjectID="20" ClassID="28470661-8177-4ddd-b59f-17915f9e2b67" Version="1">
+		<DockingView.Properties ObjectRef="21"/>
+		<DockingViewVisible>true</DockingViewVisible>
+		<DockingViewWindowType>Source Monitors</DockingViewWindowType>
+		<DockingViewTabID>DockingTab #7: 7d64d2e0-3f7e-4bb8-9ceb-78bad1686a7c@[3933:844:0]</DockingViewTabID>
+		<DockingViewName>Preview - ClockTick.wav</DockingViewName>
+		<DockingParticipantID>Monitor</DockingParticipantID>
+		<DockingViewID>f690aa93-f2a1-401c-ab2f-2e361cf59cb4</DockingViewID>
+	</DockingView_17>
+	<PropertyMap ObjectID="21" ClassID="438d29fd-1954-48e2-9df3-5f96126af53a" Version="1">
+	</PropertyMap>
+	<Pane_22 ObjectID="22" ClassID="e72d4c59-e6a3-465a-8690-1a74ecc5a0ee" Version="3">
+		<PaneType>0</PaneType>
+		<Docked>false</Docked>
+		<SplitType>9</SplitType>
+		<SplitPaneID> </SplitPaneID>
+		<CurrentViewID></CurrentViewID>
+		<PaneSize>0,0,525,350</PaneSize>
+		<PaneRect>0,0,525,350</PaneRect>
+		<PaneRestoreID> </PaneRestoreID>
+		<PaneID>53c0ecdf-2620-4872-955f-339c8db7479b</PaneID>
+		<PaneWindowRect>400,150,925,500</PaneWindowRect>
+		<Pane Version="1">
+			<DockingView Index="0" ObjectRef="23"/>
+		</Pane>
+		<Expanded>true</Expanded>
+	</Pane_22>
+	<DockingView_18 ObjectID="23" ClassID="28470661-8177-4ddd-b59f-17915f9e2b67" Version="1">
+		<DockingView.Properties ObjectRef="24"/>
+		<DockingViewVisible>true</DockingViewVisible>
+		<DockingViewWindowType>Source Monitors</DockingViewWindowType>
+		<DockingViewTabID>DockingTab #6: 49903597-e8c9-41ea-b5ab-07f402552e7c@[3928:531:0]</DockingViewTabID>
+		<DockingViewName>Preview - 81 Medium traffic.wma</DockingViewName>
+		<DockingParticipantID>Monitor</DockingParticipantID>
+		<DockingViewID>42f24286-592b-4817-aa92-28a728cc6c92</DockingViewID>
+	</DockingView_18>
+	<PropertyMap ObjectID="24" ClassID="438d29fd-1954-48e2-9df3-5f96126af53a" Version="1">
+	</PropertyMap>
+	<Pane_23 ObjectID="25" ClassID="e72d4c59-e6a3-465a-8690-1a74ecc5a0ee" Version="3">
+		<PaneType>0</PaneType>
+		<Docked>false</Docked>
+		<SplitType>9</SplitType>
+		<SplitPaneID> </SplitPaneID>
+		<CurrentViewID></CurrentViewID>
+		<PaneSize>0,0,525,350</PaneSize>
+		<PaneRect>0,0,525,350</PaneRect>
+		<PaneRestoreID> </PaneRestoreID>
+		<PaneID>f5994a06-03b5-41f2-89da-5ed1e145d802</PaneID>
+		<PaneWindowRect>400,150,925,500</PaneWindowRect>
+		<Pane Version="1">
+			<DockingView Index="0" ObjectRef="26"/>
+		</Pane>
+		<Expanded>true</Expanded>
+	</Pane_23>
+	<DockingView_19 ObjectID="26" ClassID="28470661-8177-4ddd-b59f-17915f9e2b67" Version="1">
+		<DockingView.Properties ObjectRef="27"/>
+		<DockingViewVisible>true</DockingViewVisible>
+		<DockingViewWindowType>Source Monitors</DockingViewWindowType>
+		<DockingViewTabID>DockingTab #5: d8d0282a-80d9-46af-b978-fd3faefab857@[390:188:0]</DockingViewTabID>
+		<DockingViewName>Preview - intro no sound.mp4</DockingViewName>
+		<DockingParticipantID>Monitor</DockingParticipantID>
+		<DockingViewID>a6d5e505-e494-46eb-8908-f88811d88495</DockingViewID>
+	</DockingView_19>
+	<PropertyMap ObjectID="27" ClassID="438d29fd-1954-48e2-9df3-5f96126af53a" Version="1">
+	</PropertyMap>
+	<Pane_24 ObjectID="28" ClassID="e72d4c59-e6a3-465a-8690-1a74ecc5a0ee" Version="3">
+		<PaneType>0</PaneType>
+		<Docked>false</Docked>
+		<SplitType>9</SplitType>
+		<SplitPaneID> </SplitPaneID>
+		<CurrentViewID></CurrentViewID>
+		<PaneSize>0,0,266,381</PaneSize>
+		<PaneRect>0,0,266,381</PaneRect>
+		<PaneRestoreID> </PaneRestoreID>
+		<PaneID>b0a29e33-9481-4404-861c-99f6a684d716</PaneID>
+		<PaneWindowRect>418,45,684,426</PaneWindowRect>
+		<Pane Version="1">
+			<DockingView Index="0" ObjectRef="29"/>
+		</Pane>
+		<Expanded>true</Expanded>
+	</Pane_24>
+	<DockingView_20 ObjectID="29" ClassID="28470661-8177-4ddd-b59f-17915f9e2b67" Version="1">
+		<DockingView.Properties ObjectRef="30"/>
+		<DockingViewVisible>true</DockingViewVisible>
+		<DockingViewWindowType>Effect Controls</DockingViewWindowType>
+		<DockingViewTabID>DockingTab #7: c8a4180a-824b-45ed-b1e5-aa97c4dd96be@[147:434:0]</DockingViewTabID>
+		<DockingViewName>Properties</DockingViewName>
+		<DockingParticipantID>Effect Controls</DockingParticipantID>
+		<DockingViewID>d71cbf98-8ffe-4f40-a610-21078e9d4c0a</DockingViewID>
+	</DockingView_20>
+	<PropertyMap ObjectID="30" ClassID="438d29fd-1954-48e2-9df3-5f96126af53a" Version="1">
+	</PropertyMap>
+	<Pane_25 ObjectID="31" ClassID="e72d4c59-e6a3-465a-8690-1a74ecc5a0ee" Version="3">
+		<PaneType>0</PaneType>
+		<Docked>false</Docked>
+		<SplitType>9</SplitType>
+		<SplitPaneID> </SplitPaneID>
+		<CurrentViewID></CurrentViewID>
+		<PaneSize>0,0,222,381</PaneSize>
+		<PaneRect>0,0,222,381</PaneRect>
+		<PaneRestoreID> </PaneRestoreID>
+		<PaneID>cd429d54-03f8-44c3-8153-9029313f08d5</PaneID>
+		<PaneWindowRect>526,49,748,430</PaneWindowRect>
+		<Pane Version="1">
+			<DockingView Index="0" ObjectRef="32"/>
+		</Pane>
+		<Expanded>true</Expanded>
+	</Pane_25>
+	<DockingView_21 ObjectID="32" ClassID="28470661-8177-4ddd-b59f-17915f9e2b67" Version="1">
+		<DockingView.Properties ObjectRef="33"/>
+		<DockingViewVisible>true</DockingViewVisible>
+		<DockingViewWindowType>History</DockingViewWindowType>
+		<DockingViewTabID>DockingTab #38: f1189944-94d9-425c-9cb2-ddb9c866f170@[95:103:0]</DockingViewTabID>
+		<DockingViewName>History</DockingViewName>
+		<DockingParticipantID>History</DockingParticipantID>
+		<DockingViewID>18e78872-6be8-431d-a044-5bafdedb7572</DockingViewID>
+	</DockingView_21>
+	<PropertyMap ObjectID="33" ClassID="438d29fd-1954-48e2-9df3-5f96126af53a" Version="1">
+	</PropertyMap>
+	<Pane_26 ObjectID="34" ClassID="e72d4c59-e6a3-465a-8690-1a74ecc5a0ee" Version="3">
+		<PaneType>0</PaneType>
+		<Docked>false</Docked>
+		<SplitType>9</SplitType>
+		<SplitPaneID> </SplitPaneID>
+		<CurrentViewID></CurrentViewID>
+		<PaneSize>0,0,258,348</PaneSize>
+		<PaneRect>0,0,258,348</PaneRect>
+		<PaneRestoreID> </PaneRestoreID>
+		<PaneID>4e6c745d-0011-4680-98ab-286c64d33e5c</PaneID>
+		<PaneWindowRect>384,159,642,507</PaneWindowRect>
+		<Pane Version="1">
+			<DockingView Index="0" ObjectRef="35"/>
+		</Pane>
+		<Expanded>true</Expanded>
+	</Pane_26>
+	<DockingView_22 ObjectID="35" ClassID="28470661-8177-4ddd-b59f-17915f9e2b67" Version="1">
+		<DockingView.Properties ObjectRef="36"/>
+		<DockingViewVisible>true</DockingViewVisible>
+		<DockingViewWindowType>How To</DockingViewWindowType>
+		<DockingViewTabID>DockingTab #000005: caba7e8a-2b20-457c-825b-8f6cf59d3752@[97:147:0]</DockingViewTabID>
+		<DockingViewName>How To</DockingViewName>
+		<DockingParticipantID>How To</DockingParticipantID>
+		<DockingViewID>d8e1e371-0380-4b49-91d0-7261b33f7a15</DockingViewID>
+	</DockingView_22>
+	<PropertyMap ObjectID="36" ClassID="438d29fd-1954-48e2-9df3-5f96126af53a" Version="1">
+	</PropertyMap>
+	<Pane_27 ObjectID="37" ClassID="e72d4c59-e6a3-465a-8690-1a74ecc5a0ee" Version="3">
+		<PaneType>0</PaneType>
+		<Docked>true</Docked>
+		<SplitType>9</SplitType>
+		<SplitPaneID> </SplitPaneID>
+		<CurrentViewID></CurrentViewID>
+		<PaneSize>0,0,259,234</PaneSize>
+		<PaneRect>0,0,259,234</PaneRect>
+		<PaneRestoreID>5db87f06-0e2d-419e-b858-9761c9e06d69</PaneRestoreID>
+		<PaneID>6e475e07-0b05-46f8-92da-c7d378e354d1</PaneID>
+		<PaneWindowRect>172,264,431,498</PaneWindowRect>
+		<Pane Version="1">
+			<DockingView Index="0" ObjectRef="38"/>
+		</Pane>
+		<Expanded>true</Expanded>
+	</Pane_27>
+	<DockingView_23 ObjectID="38" ClassID="28470661-8177-4ddd-b59f-17915f9e2b67" Version="1">
+		<DockingView.Properties ObjectRef="39"/>
+		<DockingViewVisible>true</DockingViewVisible>
+		<DockingViewWindowType>Effects</DockingViewWindowType>
+		<DockingViewTabID>DockingTab #9: 368b7876-6fda-4709-bc6c-e6ee120b2c8c@[19:392:0]</DockingViewTabID>
+		<DockingViewName>Effects and Transitions</DockingViewName>
+		<DockingParticipantID>Effects</DockingParticipantID>
+		<DockingViewID>1db385c7-afdc-4e3a-9ff9-b3af7b40815b</DockingViewID>
+	</DockingView_23>
+	<PropertyMap ObjectID="39" ClassID="438d29fd-1954-48e2-9df3-5f96126af53a" Version="1">
+	</PropertyMap>
+</PremiereData>
