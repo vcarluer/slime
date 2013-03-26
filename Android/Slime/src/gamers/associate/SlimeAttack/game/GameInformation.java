@@ -1,7 +1,9 @@
 package gamers.associate.SlimeAttack.game;
 
 import gamers.associate.SlimeAttack.SlimeAttack;
+import gamers.associate.SlimeAttack.game.achievements.AchievementManager;
 import gamers.associate.SlimeAttack.game.achievements.AchievementStatistics;
+import gamers.associate.SlimeAttack.game.achievements.NoMoreTrainingAch;
 import gamers.associate.SlimeAttack.layers.SurvivalItemLayer;
 
 import java.io.BufferedReader;
@@ -510,6 +512,7 @@ public class GameInformation {
 	private void setLevelNum(int levelNum) {
 		this.levelNum = levelNum;
 		AchievementStatistics.levelNum = levelNum;
+		SlimeFactory.AchievementManager.test(NoMoreTrainingAch.class);
 	}
 
 	public int getScore(int diff) {
