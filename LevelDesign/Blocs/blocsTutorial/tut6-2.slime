@@ -1,4 +1,5 @@
 BlocInfo;None;0;120;480;480;0;BlocInfo-0;5;;;false;true;false;l
+Target;target;144.0;264.0;16.0;16.0;0.0
 TimeAttack;None;-2.0;0.0;0.0;0.0;0.0;2;1
 Sprite;None;321.0;229.0;80.0;80.0;-90.0;tank;tank-evacuation;1
 Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 401.23138,340.08521 -0.37489,-17.98895 -6.38858,-5.98264 -8.16637,0.0429 -5.90563,-0.82001 -5.48523,-0.0447 -5.38359,-1.90889 -38.52023,-16.11575 -1.77638,-1.71834 -7.31781,0.0977 -0.14597,74.0819 8.10386,-0.29325 5.82275,-6.36155 33.81779,-15.07824 5.24464,-1.53799 5.84817,-0.0639 5.84861,-1.45921 7.93219,-0.0598;false;true;true
@@ -7,22 +8,29 @@ Sprite;None;432.0;1.0;30.0;129.0;0.0;tank;tank-bottom;1
 Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;M 435.71372,599.86764 455.41913,600 l 0.2247,-117.77063 5.1484,-3.2234 -0.0601,-4.77163 -5.1459,-3.62704 -19.6735,0.085 -3.92141,3.21139 -0.0184,5.06784 3.9096,3.41926;false;true;true
 Sprite;None;401.0;129.0;80.0;152.0;0.0;tank;tank-main;1
 Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 411.42409,360.60558 0.18298,94.97583 6.6518,7.41333 17.91309,0.24565 0.17031,7.31853 19.95666,0.0876 -0.18953,-6.75251 17.00321,-0.17723 7.41617,-7.75072 0.18532,-95.91428 -5.76794,-7.20067 L 456,352 l -0.31893,-25.01746 -5.78529,-5.72258 -48.91585,-0.005 0.0543,20.46094 35.12259,0.0986 -0.17044,10.69312 -17.87711,0.0919;false;true;true
-LaserGun;lasergun;167.0;440.0;65.0;15.0;-90.0;target;true
-Target;target;192.0;56.0;16.0;16.0;0.0
-Button;None;114.0;152.0;30.0;16.0;0.0;lasergun;3
+Button;None;97.0;199.0;30.0;16.0;-90.0;lasergun;3
 Star;None;274.0;104.0;30.0;31.0;0.0
 Platform;None;336.0;312.0;144.0;32.0;0.0
 Platform_End;None;304.0;312.0;32.0;32.0;180.0
+LaserGun;lasergun;262.0;319.0;65.0;15.0;-24.0;target;true
 Box_Multitubes;None;336.0;344.0;144.0;72.0;0.0;true;true
 Box_Tube;None;360.0;64.0;18.0;72.0;0.0;false;true
 Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 72,200 88,-24 24,-56 -168,0;false;true;false
-Box_GlassBox;None;48.0;0.0;432.0;64.0;0.0;true;true
-Platform_Wall;None;0.0;0.0;48.0;64.0;0.0
-Sprite;None;144.0;184.0;32.0;16.0;-53.0;arrows;arrow-green;1;2;0;None;1;true;true;0;false;0
-Sprite;None;188.0;190.0;32.0;16.0;22.0;arrows;arrow-green;1;2;0;None;1;true;true;0.25;false;0
+Box_GlassBox;None;248.0;0.0;232.0;64.0;0.0;true;true
+Platform_Wall;None;0.0;0.0;8.0;64.0;0.0
+Sprite;None;156.0;302.0;32.0;16.0;52.0;arrows;arrow-green;1;2;0;None;1;true;true;0;false;0
+Sprite;None;195.0;238.0;32.0;16.0;52.0;arrows;arrow-green;1;2;0;None;1;true;true;0.25;false;0
 Sprite;None;277.0;146.0;32.0;16.0;-79.0;arrows;arrow-green;1;2;0;None;1;true;true;0.75;false;0
 Sprite;None;288.0;201.0;32.0;16.0;-79.0;arrows;arrow-green;1;2;0;None;1;true;true;1;false;0
-Sprite;None;103.0;178.0;32.0;16.0;61.0;arrows;arrow-green;1;2;0;None;1;true;true;1.25;false;0
-Sprite;None;232.0;153.0;32.0;16.0;56.0;arrows;arrow-green;1;2;0;None;1;true;true;0.5;false;0
-Sprite;None;58.0;195.0;32.0;16.0;16.0;arrows;arrow-green;1;2;0;None;1;true;true;1;false;0
-Box_GlassBox;None;0.0;64.0;192.0;88.0;0.0;true;true
+Sprite;None;62.0;197.0;32.0;16.0;16.0;arrows;arrow-green;1;2;0;None;1;true;true;1.25;false;0
+Sprite;None;240.0;167.0;32.0;16.0;56.0;arrows;arrow-green;1;2;0;None;1;true;true;0.5;false;0
+Sprite;None;8.0;200.0;32.0;16.0;1.0;arrows;arrow-green;1;2;0;None;1;true;true;1;false;0
+Box_GlassBox;None;0.0;64.0;120.0;88.0;0.0;true;true
+Platform;None;60.0;156.0;152.0;32.0;90.0
+Platform_End;None;120.0;248.0;32.0;32.0;-90.0
+Liquid;None;8.0;0.0;208.0;48.0;0.0
+LiquidSurface;None;8.0;48.0;208.0;16.0;0.0
+Platform_Corner;None;120.0;64.0;32.0;32.0;90.0
+Platform;None;152.0;64.0;64.0;32.0;180.0
+Platform_Corner;None;216.0;64.0;32.0;32.0;-90.0
+Platform;None;200.0;16.0;64.0;32.0;90.0
