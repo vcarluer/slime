@@ -31,7 +31,7 @@ public class SlimeIntro extends Activity {
 	protected void runVideo() {
 		setContentView(R.layout.videointro);
         videos = (VideoView) this.findViewById(R.id.videointroview);
-        int resourceNum = R.raw.intro;
+        int resourceNum = R.raw.introlab;
         
         String  str= "android.resource://gamers.associate.SlimeAttack/"+resourceNum;
 
