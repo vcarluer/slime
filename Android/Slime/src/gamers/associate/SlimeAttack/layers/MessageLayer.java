@@ -65,7 +65,7 @@ public class MessageLayer extends CCLayer {
 		this.width = CCDirector.sharedDirector().winSize().width / 3;
 		this.height = this.width * heightRatio;
 		
-		this.icon = CCSprite.sprite("world-items/star-lock.png");
+		this.icon = CCSprite.sprite("world-items/star-unlock.png");
 		float iconScale = this.height / this.icon.getContentSize().height;
 		this.icon.setScale(iconScale);
 		this.iconWidth = this.icon.getContentSize().width * iconScale;

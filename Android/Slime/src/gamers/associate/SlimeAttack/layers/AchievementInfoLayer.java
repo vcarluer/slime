@@ -43,7 +43,7 @@ public class AchievementInfoLayer extends CCLayer {
 		
 		String spriteName = "";
 		if (info.isAchieved()) {
-			spriteName = "world-items/star-gold.png";
+			spriteName = "world-items/star-unlock.png";
 		} else {
 			spriteName = "world-items/star-lock.png";
 		}
