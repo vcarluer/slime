@@ -279,8 +279,8 @@ public class PauseLayer extends CCLayer {
 	
 	public void gameStarted(boolean started) {
 		if (Level.currentLevel.getLevelDefinition().getGamePlay() == GamePlay.Survival) {			
-			this.homeMenu.setIsEnabled(!started);
-			this.homeMenu.setVisible(!started);			
+			this.homeMenu.setIsEnabled(true); // !started
+			this.homeMenu.setVisible(true); // !started
 		} else {			
 			this.homeMenu.setIsEnabled(true);
 			this.homeMenu.setVisible(true);
