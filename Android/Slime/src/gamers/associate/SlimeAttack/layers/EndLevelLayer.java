@@ -219,7 +219,7 @@ import android.view.MotionEvent;
 	}
 	
 	private static CCBitmapFontAtlas getMenuLabel(String text) {
-		return getMenuLabel(text, SlimeFactory.FntSize);
+		return getMenuLabel(text, labelSize);
 	}
 	
 	private static CCBitmapFontAtlas getMenuLabel(String text, float scale) {
@@ -436,8 +436,9 @@ import android.view.MotionEvent;
 				this.restartMenu.setVisible(true);
 			}
 		}		
+				
+		super.onEnter();
 		
 		this.setScale(SlimeFactory.getHeightRatio());
-		super.onEnter();
 	}	
 }

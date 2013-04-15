@@ -77,7 +77,7 @@ import android.view.MotionEvent;
 	
 	@Override
 	public boolean ccTouchesEnded(MotionEvent event) {
-		this.goBack();
+		// this.goBack();
 		return true;
 	}
 	
