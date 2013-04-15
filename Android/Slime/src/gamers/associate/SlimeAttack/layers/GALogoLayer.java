@@ -42,7 +42,7 @@ import android.annotation.SuppressLint;
 	private long nextBeat;
 	private int step;
 	private static boolean heartBeating;
-	
+	private static float LabelSize = 15f * SlimeFactory.SGSDensity;
 	public static CCScene scene() {
 		if (scene == null) {
 			scene = CCScene.node();
@@ -58,7 +58,7 @@ import android.annotation.SuppressLint;
 		return scene;
 	}
 	
-	protected GALogoLayer() {		
+	protected GALogoLayer() {	
 	}
 
 	/* (non-Javadoc)
@@ -97,14 +97,14 @@ import android.annotation.SuppressLint;
 		CCSequence seq = CCSequence.actions(scaleTo, delay,  call);
 		this.sprite.runAction(seq);
 		
-		this.loadLabel = CCLabel.makeLabel(LoadingQuoteGenerator.NewQuote().toUpperCase(), "fonts/Slime.ttf", 15f);		
+		this.loadLabel = CCLabel.makeLabel(LoadingQuoteGenerator.NewQuote().toUpperCase(), "fonts/Slime.ttf", LabelSize);		
 		this.loadLabel.setPosition(CCDirector.sharedDirector().winSize().width - this.loadLabel.getContentSize().width - PauseLayer.PaddingX, PauseLayer.PaddingY);
 		this.loadLabel.setAnchorPoint(0, 0);
 		this.loadLabel.setColor(ccColor3B.ccBLACK);
 		this.loadLabel.setVisible(false);
 		this.addChild(this.loadLabel);
 		
-		CCLabel lbl = CCLabel.makeLabel("Loading...".toUpperCase(), "fonts/Slime.ttf", 15f);
+		CCLabel lbl = CCLabel.makeLabel("Loading...".toUpperCase(), "fonts/Slime.ttf", LabelSize);
 		lbl.setColor(ccColor3B.ccBLACK);
 		this.addChild(lbl);
 		lbl.setPosition(CGPoint.make(

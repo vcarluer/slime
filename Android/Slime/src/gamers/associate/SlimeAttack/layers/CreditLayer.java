@@ -30,12 +30,12 @@ import android.view.MotionEvent;
 public class CreditLayer extends CCLayer implements IBackableLayer {
 	private static final String SLIMY = "Slimy";
 	private static final float ScrollTime = 33f * 2f;
-	private static final float CategoryFnt = 42f;
+	private static final float CategoryFnt = 42f * SlimeFactory.SGSDensity;
 	private static final float paddingCategory = 13f;
-	private static final float NameFnt = 31f;
+	private static final float NameFnt = 31f * SlimeFactory.SGSDensity;
 	private static final float paddingName = 5f;
 	private static final float paddingEndCategory = 30f;
-	private static final float disclaimerFnt = 15f;
+	private static final float disclaimerFnt = 15f * SlimeFactory.SGSDensity;
 	private static String vcr = "Vincent Carluer";
 	private static String amz = "Antonio Munoz";
 	private static String gcc = "Guillaume Clerc";
@@ -182,7 +182,7 @@ public class CreditLayer extends CCLayer implements IBackableLayer {
 		}
 	
 		CCSprite slime = SlimeFactory.SlimySuccess.getAnimatedSprite(SlimySuccess.getAnimationName(diff));
-		float spriteScale = 1.5f;
+		float spriteScale = 1.5f * SlimeFactory.SGSDensity;
 		slime.setScale(spriteScale);
 		float x = random.nextInt((int) (CCDirector.sharedDirector().winSize().width / 4f - (slime.getContentSize().width * spriteScale))) + (slime.getContentSize().width * spriteScale) / 2f;
 		int inv = random.nextInt(2);
@@ -239,7 +239,8 @@ public class CreditLayer extends CCLayer implements IBackableLayer {
 		return new String[] { 
 				"Raffi Leylekian", 
 				"Mathieu Carluer", 
-				"Jeremie Devauchelle" 
+				"Jeremie Devauchelle",
+				"Kroustine la tartine masquée"
 				};
 	}
 

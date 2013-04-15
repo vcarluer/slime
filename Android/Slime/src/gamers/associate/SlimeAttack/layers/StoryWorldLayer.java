@@ -36,7 +36,7 @@ import android.util.SparseArray;
 @SuppressLint("DefaultLocale") 
 public class StoryWorldLayer extends CCLayer implements IScrollable, IBackableLayer {
 	public static final int COLS = 5;
-	private static final int fontSize = 60;
+	private static final float fontSize = 60 * SlimeFactory.SGSDensity;
 	private static final float transitionTime = 0.5f;
 	private CCLabel title;
 	private CCMenu menuToRight;

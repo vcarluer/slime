@@ -71,20 +71,20 @@ public class HomeLayer extends CCLayer {
 		CCSprite playSpriteNorm = CCSprite.sprite("control-play.png", true);
 		CCSprite playSpriteSel = CCSprite.sprite("control-play.png", true);
 		CCMenuItemSprite playMenu = CCMenuItemSprite.item(playSpriteNorm, playSpriteSel, this, "selectPlay");
-		
+		playMenu.setScale(SlimeFactory.SGSDensity);
 		this.menu = CCMenu.menu(playMenu);
 		this.menu.alignItemsHorizontally(50);
 		this.menu.setPosition(CGPoint.make(
 				CCDirector.sharedDirector().winSize().getWidth() / 2,
 				CCDirector.sharedDirector().winSize().getHeight() / 2 + shiftMenu
 				));			
-				
+		
 		this.addChild(this.menu);
 		
 		CCSprite creditNorm = CCSprite.sprite("ga128.png");
 		CCSprite creditSel = CCSprite.sprite("ga128.png");
 		CCMenuItemSprite creditSprite = CCMenuItemSprite.item(creditNorm, creditSel, this, "showCredit");
-		float creditScale = 0.5f;
+		float creditScale = 0.5f * SlimeFactory.SGSDensity;
 		creditSprite.setScale(creditScale);
 		this.creditMenu = CCMenu.menu(creditSprite);
 		
@@ -150,7 +150,7 @@ public class HomeLayer extends CCLayer {
 		this.addChild(this.top, 1);
 		this.top.addChild(this.titleSprite);
 
-		this.titleSprite.setPosition(CCDirector.sharedDirector().winSize().width / 2, CCDirector.sharedDirector().winSize().height / 2 + 150f);						
+		this.titleSprite.setPosition(CCDirector.sharedDirector().winSize().width / 2, CCDirector.sharedDirector().winSize().height / 2 + 150f * SlimeFactory.SGSDensity);						
 		this.titleSprite.setScale(10f * SlimeFactory.SGSDensity);
 		CCScaleTo sc = CCScaleTo.action(0.5f, 1f , 1f);
 		this.titleSprite.runAction(sc);
@@ -352,7 +352,7 @@ public class HomeLayer extends CCLayer {
 		CCMenuItemSprite shareItem = CCMenuItemSprite.item(shareN, shareS, sharer, "shareApp");
 		
 		shareItem.setPosition(shareX, shareY);
-		float baseScale = scale * shareScale * SlimeFactory.Density;
+		float baseScale = scale * shareScale * SlimeFactory.SGSDensity;
 		shareItem.setScale(baseScale);
 		
 		CCScaleBy scaleBy = CCScaleBy.action(0.3f, 0.3f);

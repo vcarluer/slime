@@ -58,6 +58,7 @@ public class GameInformation {
 		this.survivalGameOverNormal = true;
 		this.survivalGameOverHard = true;
 		this.survivalGameOverExtrem = true;
+		this.lastBgk = "";
 
 		this.maxLevelDifficulty = this.levelDifficulty = LevelDifficulty.Easy;		
 		this.setLevelNum(0);

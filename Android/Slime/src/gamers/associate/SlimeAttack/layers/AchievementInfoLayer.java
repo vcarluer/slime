@@ -9,8 +9,8 @@ import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
 
 public class AchievementInfoLayer extends CCLayer {
-	private static final float titleSize = 32;
-	private static final float descriptionSize = 22;
+	private static final float titleSize = 32 * SlimeFactory.SGSDensity;
+	private static final float descriptionSize = 22 * SlimeFactory.SGSDensity;
 	private static final float padding = 5;
 	private static final float extPadding = 5f;
 	public static final float rowSize = titleSize + descriptionSize + padding + extPadding * 2;

@@ -23,8 +23,8 @@ import org.cocos2d.types.ccColor3B;
 @SuppressLint("DefaultLocale") public class SurvivalItemLayer extends CanvasItemLayer {	
 	private static final String GREY = "-grey";
 	private static final String BKGEXT = ".png";
-	protected static final float fontSize = 32f;
-	protected static final float fontSizeInfo = 20f;
+	protected static final float fontSize = 32f * SlimeFactory.SGSDensity;
+	protected static final float fontSizeInfo = 20f * SlimeFactory.SGSDensity;
 	private boolean isUnlocked;
 	private String title;
 	private String baseBackground;
@@ -146,7 +146,7 @@ import org.cocos2d.types.ccColor3B;
 		}
 		String diffTxt = LevelDifficulty.getText(diff).toLowerCase();
 		CCSprite spr = CCSprite.sprite("mode-" + diffTxt + suf + "-01.png");
-		spr.setScale(iconSize / iconSizeReference);
+		spr.setScale((iconSize / iconSizeReference) * SlimeFactory.SGSDensity);
 		
 		return spr;
 	}
@@ -197,7 +197,7 @@ import org.cocos2d.types.ccColor3B;
 
 	@Override
 	protected float getFontSize() {
-		return 42f;
+		return 40f * SlimeFactory.SGSDensity;
 	}
 	
 	@Override

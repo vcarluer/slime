@@ -25,7 +25,7 @@ public class AchievementItemLayer extends CCLayer {
 	private CGPoint pos;
 	
 	public AchievementItemLayer() {
-		this.title = SlimeFactory.getLabel("Achievements", 42f);
+		this.title = SlimeFactory.getLabel("Achievements", 42f * SlimeFactory.SGSDensity);
 		this.pos = CGPoint.make(CCDirector.sharedDirector().winSize().width / 2f, targetHeight / 2f);
 		this.title.setPosition(this.pos);
 		

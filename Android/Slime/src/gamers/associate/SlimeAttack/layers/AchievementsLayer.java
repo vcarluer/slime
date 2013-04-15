@@ -22,7 +22,7 @@ import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 
 public class AchievementsLayer extends CCLayer  implements IScrollable, IBackableLayer {
-	private static final float fontSize = 60;
+	private static final float fontSize = 60 * SlimeFactory.SGSDensity;
 	private static CCScene scene;
 	private CCLabel title;
 	private ScrollerLayer scroller;

@@ -89,7 +89,7 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static final boolean debugPathfinding = false;
 	
 	// end debug ---
-	private static final float SGSDensityBase = 1.5f; // Samsung Galaxy S density
+	public static final float SGSDensityBase = 1.5f; // Samsung Galaxy S density
 	public static ccColor3B ColorSlime = ccColor3B.ccc3(0, 170, 54);
 	public static ccColor3B ColorSlimeBorder = ccColor3B.ccc3(0, 62, 8);
 	public static ccColor3B ColorSlimeLight = ccColor3B.ccc3(178, 229, 194); // 178, 229, 194
@@ -97,7 +97,7 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static float Density; // surface density
 	public static float SGSDensity; // Samsung Galaxy S reference density ratio (SGS used as a reference for layout...) 
 	public static final float kCGPointEpsilon = 0.00000012f;
-	public static final float FntSize = 64f;	
+	public static float FntSize = 64f;	
 	public static String slimeFileExt = ".slime";
 	private static final int SGSWidthBase = 800;
 	public static final int BackableLayer = 555;
@@ -301,6 +301,7 @@ import com.badlogic.gdx.physics.box2d.World;
 		}
 				
 		SGSDensity = Density / SGSDensityBase;
+		FntSize = 64f * SGSDensity;
 	}
 	
 	public static void triggerZoneColor(GL10 gl) {
