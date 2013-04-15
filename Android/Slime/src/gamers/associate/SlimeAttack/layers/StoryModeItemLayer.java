@@ -20,7 +20,7 @@ import android.util.FloatMath;
 	private CCLabel lblScore;
 	
 	public StoryModeItemLayer() {
-		this.lblScore = CCLabel.makeLabel("0%".toUpperCase(), "fonts/Slime.ttf", 60.0f * SlimeFactory.SGSDensity);
+		this.lblScore = CCLabel.makeLabel("0%".toUpperCase(), "fonts/Slime.ttf", 60.0f * SlimeFactory.getWidthRatio());
 		this.lblScore.setPosition(CGPoint.make(
 				this.labelX,
 				this.labelY + shiftScore

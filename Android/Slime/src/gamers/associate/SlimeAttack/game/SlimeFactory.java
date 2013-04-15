@@ -100,8 +100,10 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static float FntSize = 64f;	
 	public static String slimeFileExt = ".slime";
 	private static final int SGSWidthBase = 800;
+	private static final int SGSHeightBase = 480;
 	public static final int BackableLayer = 555;
 	private static float WidthRatio;
+	private static float HeightRatio;
 	
 	public static SlimeAttack ContextActivity;
 	public static ILevelBuilder LevelBuilder;
@@ -348,6 +350,14 @@ import com.badlogic.gdx.physics.box2d.World;
 		}
 		
 		return WidthRatio;
+	}
+	
+	public static float getHeightRatio() {
+		if (HeightRatio == 0) {
+			HeightRatio = CCDirector.sharedDirector().winSize().getHeight() / SGSHeightBase;
+		}
+		
+		return HeightRatio;
 	}
 	
 	public static ccColor4B getColorLight(int alpha) {

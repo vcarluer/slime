@@ -71,7 +71,7 @@ public class HomeLayer extends CCLayer {
 		CCSprite playSpriteNorm = CCSprite.sprite("control-play.png", true);
 		CCSprite playSpriteSel = CCSprite.sprite("control-play.png", true);
 		CCMenuItemSprite playMenu = CCMenuItemSprite.item(playSpriteNorm, playSpriteSel, this, "selectPlay");
-		playMenu.setScale(SlimeFactory.SGSDensity);
+		playMenu.setScale(SlimeFactory.getHeightRatio());
 		this.menu = CCMenu.menu(playMenu);
 		this.menu.alignItemsHorizontally(50);
 		this.menu.setPosition(CGPoint.make(
@@ -84,7 +84,7 @@ public class HomeLayer extends CCLayer {
 		CCSprite creditNorm = CCSprite.sprite("ga128.png");
 		CCSprite creditSel = CCSprite.sprite("ga128.png");
 		CCMenuItemSprite creditSprite = CCMenuItemSprite.item(creditNorm, creditSel, this, "showCredit");
-		float creditScale = 0.5f * SlimeFactory.SGSDensity;
+		float creditScale = 0.5f * SlimeFactory.getHeightRatio();
 		creditSprite.setScale(creditScale);
 		this.creditMenu = CCMenu.menu(creditSprite);
 		
@@ -129,10 +129,10 @@ public class HomeLayer extends CCLayer {
 		Sounds.setEffectsDisable(true);
 		
 		// share button		
-		float shareX = - CCDirector.sharedDirector().winSize().getWidth() / 2 +((shareSizeW * shareScale * SlimeFactory.Density) + PauseLayer.PaddingX) / 2 ;
-		float shareY = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((shareSizeH * shareScale * SlimeFactory.Density) + PauseLayer.PaddingY) / 2;
+		float shareX = - CCDirector.sharedDirector().winSize().getWidth() / 2 +((shareSizeW * shareScale * SlimeFactory.SGSDensity) + PauseLayer.PaddingX) / 2 ;
+		float shareY = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((shareSizeH * shareScale * SlimeFactory.SGSDensity) + PauseLayer.PaddingY) / 2;
 		
-		this.shareMenu = HomeLayer.getNewShareButton(null, 1.0f, shareX, shareY);
+		this.shareMenu = HomeLayer.getNewShareButton(null, 1.0f, shareX, shareY);		
 		this.addChild(this.shareMenu);
 		
 		SlimeFactory.playMenuMusic();
@@ -150,9 +150,9 @@ public class HomeLayer extends CCLayer {
 		this.addChild(this.top, 1);
 		this.top.addChild(this.titleSprite);
 
-		this.titleSprite.setPosition(CCDirector.sharedDirector().winSize().width / 2, CCDirector.sharedDirector().winSize().height / 2 + 150f * SlimeFactory.SGSDensity);						
-		this.titleSprite.setScale(10f * SlimeFactory.SGSDensity);
-		CCScaleTo sc = CCScaleTo.action(0.5f, 1f , 1f);
+		this.titleSprite.setPosition(CCDirector.sharedDirector().winSize().width / 2, CCDirector.sharedDirector().winSize().height / 2 + 150f * SlimeFactory.getHeightRatio());						
+		this.titleSprite.setScale(10f * SlimeFactory.getHeightRatio());
+		CCScaleTo sc = CCScaleTo.action(0.5f, SlimeFactory.getHeightRatio() , SlimeFactory.getHeightRatio());
 		this.titleSprite.runAction(sc);
 		
 		this.actionTitle();

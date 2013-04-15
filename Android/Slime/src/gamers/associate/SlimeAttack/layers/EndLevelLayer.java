@@ -436,7 +436,8 @@ import android.view.MotionEvent;
 				this.restartMenu.setVisible(true);
 			}
 		}		
-
+		
+		this.setScale(SlimeFactory.getHeightRatio());
 		super.onEnter();
 	}	
 }

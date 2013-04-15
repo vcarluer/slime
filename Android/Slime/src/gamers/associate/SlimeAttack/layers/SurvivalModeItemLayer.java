@@ -19,7 +19,7 @@ import org.cocos2d.types.CGPoint;
 	private static float shiftScore = - 75f; // shiftInfo - 70f;	
 	
 	public SurvivalModeItemLayer() {
-		this.lblScore = CCLabel.makeLabel("0".toUpperCase(), "fonts/Slime.ttf", 60.0f);
+		this.lblScore = CCLabel.makeLabel("0".toUpperCase(), "fonts/Slime.ttf", 60.0f * SlimeFactory.getWidthRatio());
 		this.lblScore.setPosition(CGPoint.make(
 				this.labelX,
 				this.labelY + shiftScore

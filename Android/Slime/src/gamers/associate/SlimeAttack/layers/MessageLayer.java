@@ -32,7 +32,7 @@ public class MessageLayer extends CCLayer {
 	private boolean isShowing;
 	private CCSprite icon;
 	private float iconWidth;
-	private static float fntSize = 42;
+	private static float fntSize = 42 * SlimeFactory.SGSDensity;
 	private CCColorLayer colored;
 	private float messageWidthSizeBase;
 	private float messageX;

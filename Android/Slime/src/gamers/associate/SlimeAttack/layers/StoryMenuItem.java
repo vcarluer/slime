@@ -108,11 +108,11 @@ public class StoryMenuItem extends CCLayer {
 		Sounds.stopMusic();
 		if (this.levelDefinition.isUnlock()) {
 			Sounds.playEffect(R.raw.menuselect);
-			if (this.levelDefinition.getNumber() == 1) {
-				SlimeFactory.ContextActivity.runIntro(this);
-			} else {
+//			if (this.levelDefinition.getNumber() == 1) {
+//				SlimeFactory.ContextActivity.runIntro(this);
+//			} else {
 				this.runLevel();
-			}
+//			}
 		}
 	}
 	

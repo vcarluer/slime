@@ -23,8 +23,8 @@ import org.cocos2d.types.ccColor3B;
 @SuppressLint("DefaultLocale") public class SurvivalItemLayer extends CanvasItemLayer {	
 	private static final String GREY = "-grey";
 	private static final String BKGEXT = ".png";
-	protected static final float fontSize = 32f * SlimeFactory.SGSDensity;
-	protected static final float fontSizeInfo = 20f * SlimeFactory.SGSDensity;
+	protected static final float fontSize = 32f * SlimeFactory.getWidthRatio();
+	protected static final float fontSizeInfo = 17f * SlimeFactory.getWidthRatio();
 	private boolean isUnlocked;
 	private String title;
 	private String baseBackground;
@@ -33,10 +33,10 @@ import org.cocos2d.types.ccColor3B;
 	private CCLabel inProgress;
 	private CCLabel inProgressLevel;
 	
-	private static float iconSize = 70f;
+	private static float iconSize = 70f * SlimeFactory.getWidthRatio();
 	private static final float iconSizeReference = 87f;
-	private static final float paddingSprite = - 11;
-	private static final float paddingInfo = 28;
+	private static final float paddingSprite = 11;
+	private static final float paddingInfo = 3 * fontSize / 4f;
 	
 	private List<CCNode> toDestroy;
 	
@@ -50,7 +50,7 @@ import org.cocos2d.types.ccColor3B;
 		
 		// override label position
 		this.diffSprite = getLevelSprite(this.levelDiff, this.isUnlocked);
-		this.labelY -= this.diffSprite.getContentSize().height / 2f - paddingSprite;
+		this.labelY -= this.diffSprite.getContentSize().height * SlimeFactory.getWidthRatio() + paddingSprite;
 		this.labelX = this.width / 2f + this.paddingX;
 		this.label.setPosition(this.labelX, this.labelY);
 		
@@ -73,7 +73,7 @@ import org.cocos2d.types.ccColor3B;
 		
 		diffSprite.setPosition(this.labelX, 
 				this.labelY + this.label.getContentSize().height / 2 
-				+ this.diffSprite.getContentSize().height / 2 
+				+ (this.diffSprite.getContentSize().height * SlimeFactory.getWidthRatio()) / 2 
 				+ paddingSprite);
 		this.addChild(this.diffSprite);
 		this.toDestroy.add(this.diffSprite);
@@ -81,7 +81,8 @@ import org.cocos2d.types.ccColor3B;
 		int score = SlimeFactory.GameInfo.getScore(this.levelDiff);
 		if (score > 0) {
 			CCSprite star = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);
-			float starY = this.labelY - this.getFontSize() / 2 - paddingSprite - star.getContentSize().height / 2;
+			star.setScale(SlimeFactory.getWidthRatio());
+			float starY = this.labelY - this.getFontSize() / 2 - paddingSprite - (star.getContentSize().height * SlimeFactory.getWidthRatio()) / 2;
 			if (starY > this.height * (2f / 3f)) {
 				starY = this.height * (2f / 3f);
 			}
@@ -91,7 +92,7 @@ import org.cocos2d.types.ccColor3B;
 			this.toDestroy.add(star);
 			
 			CCLabel scoreLabel = SlimeFactory.getLabel(String.valueOf(score), this.getFontSize());
-			scoreLabel.setPosition(this.labelX, star.getPositionRef().y - star.getContentSize().height / 2 - paddingSprite - this.getFontSize() / 2);
+			scoreLabel.setPosition(this.labelX, star.getPositionRef().y - (star.getContentSize().height * SlimeFactory.getWidthRatio()) / 2 - paddingSprite - this.getFontSize() / 2);
 			this.addChild(scoreLabel);
 			this.toDestroy.add(scoreLabel);
 			
@@ -146,7 +147,7 @@ import org.cocos2d.types.ccColor3B;
 		}
 		String diffTxt = LevelDifficulty.getText(diff).toLowerCase();
 		CCSprite spr = CCSprite.sprite("mode-" + diffTxt + suf + "-01.png");
-		spr.setScale((iconSize / iconSizeReference) * SlimeFactory.SGSDensity);
+		spr.setScale(iconSize / iconSizeReference);
 		
 		return spr;
 	}
@@ -187,7 +188,7 @@ import org.cocos2d.types.ccColor3B;
 	@Override
 	protected void defineLabelPosition() {				
 		this.labelX = this.width / 2f;
-		this.labelY = this.height - fontSize / 2f;
+		this.labelY = this.height - this.label.getContentSize().height / 2f;
 	}
 
 	@Override
@@ -197,7 +198,7 @@ import org.cocos2d.types.ccColor3B;
 
 	@Override
 	protected float getFontSize() {
-		return 40f * SlimeFactory.SGSDensity;
+		return fontSize;
 	}
 	
 	@Override

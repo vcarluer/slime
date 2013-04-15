@@ -320,10 +320,10 @@ public class Level implements IGameItemHandler {
 			this.backgroundLayer.removeChild(this.backgroundSprite, true);
 		}	
 
-		this.backgroundSprite = CCSprite.sprite(backgroundPath + fileName);
-		this.backgroundSprite.setAnchorPoint(0, 0);
-		this.fixBgSize();
-		this.backgroundLayer.addChild(this.backgroundSprite);
+//		this.backgroundSprite = CCSprite.sprite(backgroundPath + fileName);
+//		this.backgroundSprite.setAnchorPoint(0, 0);
+//		this.fixBgSize();
+//		this.backgroundLayer.addChild(this.backgroundSprite);
 	}
 
 	private void postBuild(String levelName) {
