@@ -17,7 +17,7 @@ public class AchievementItemLayer extends CCLayer {
 	private CCMenu achievementMenu;
 	private static final float sprWidth = 267f;
 	private static final float sprHeight = 108f;
-	private static final float targetHeight = 50f;
+	private static final float targetHeight = 50f * SlimeFactory.getWidthRatio();
 	private float height;
 	private float scale;
 	private float width;
@@ -25,7 +25,7 @@ public class AchievementItemLayer extends CCLayer {
 	private CGPoint pos;
 	
 	public AchievementItemLayer() {
-		this.title = SlimeFactory.getLabel("Achievements", 42f * SlimeFactory.SGSDensity);
+		this.title = SlimeFactory.getLabel("Achievements", 42f * SlimeFactory.getWidthRatio());
 		this.pos = CGPoint.make(CCDirector.sharedDirector().winSize().width / 2f, targetHeight / 2f);
 		this.title.setPosition(this.pos);
 		

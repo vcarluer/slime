@@ -6,7 +6,7 @@ import org.cocos2d.nodes.CCDirector;
 
 
 public abstract class ModeItemLayer extends CanvasItemLayer {	
-	private static final float PADDINGBASE = 75f;
+	private static final float PADDINGBASE = 75f * SlimeFactory.getWidthRatio();
 	protected float screenScaleX;
 	protected float screenScaleY;	
 	

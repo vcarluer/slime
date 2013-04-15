@@ -81,16 +81,18 @@ public class StoryWorldLayer extends CCLayer implements IScrollable, IBackableLa
 		this.addChild(colorLayer, Level.zFront);
 		
 		CCSprite spriteN = CCSprite.sprite("arrowl.png");
-		CCSprite spriteS = CCSprite.sprite("arrowl.png");
+		CCSprite spriteS = CCSprite.sprite("arrowl.png");		
 		CCMenuItemSprite leftArrow = CCMenuItemSprite.item(spriteN, spriteS, this, "toLeft");
-		leftArrow.setPosition((- CCDirector.sharedDirector().winSize().getWidth() / 2) + (PauseLayer.arrowWidth  / 2), 0);
+		leftArrow.setScale(SlimeFactory.SGSDensity);
+		leftArrow.setPosition((- CCDirector.sharedDirector().winSize().getWidth() / 2) + (PauseLayer.arrowWidth * SlimeFactory.SGSDensity  / 2), 0);
 		this.menuToLeft = CCMenu.menu(leftArrow);		
 		this.addChild(this.menuToLeft);		
 		
 		CCSprite spriteRN = CCSprite.sprite("arrow.png");
 		CCSprite spriteRS = CCSprite.sprite("arrow.png");
 		CCMenuItemSprite rightArrow = CCMenuItemSprite.item(spriteRN, spriteRS, this, "toRight");
-		rightArrow.setPosition(CCDirector.sharedDirector().winSize().getWidth() / 2 - PauseLayer.arrowWidth / 2, 0);
+		rightArrow.setScale(SlimeFactory.SGSDensity);
+		rightArrow.setPosition(CCDirector.sharedDirector().winSize().getWidth() / 2 - PauseLayer.arrowWidth * SlimeFactory.SGSDensity / 2, 0);
 		this.menuToRight = CCMenu.menu(rightArrow);		
 		this.addChild(this.menuToRight);
 		
@@ -209,8 +211,8 @@ public class StoryWorldLayer extends CCLayer implements IScrollable, IBackableLa
 			int lvls = world.getLevelCount();
 			int row = (int) FloatMath.ceil(lvls / cols);
 			
-			float width = CCDirector.sharedDirector().winSize().getWidth() - PauseLayer.arrowWidth * 2;
-			float margeOut = 11;		
+			float width = CCDirector.sharedDirector().winSize().getWidth() - (PauseLayer.arrowWidth * SlimeFactory.SGSDensity) * 2;
+			float margeOut = 11 * SlimeFactory.getWidthRatio();		
 			int colSize = (int) (width / cols);
 			int rowSize = colSize;
 			float targetItemSize = StoryMenuItem.SIZE + margeOut * 2;
@@ -249,7 +251,7 @@ public class StoryWorldLayer extends CCLayer implements IScrollable, IBackableLa
 			if (currentLevel > max) {
 				start = max;
 			}
-			this.levels.setPosition(PauseLayer.arrowWidth, start);
+			this.levels.setPosition(PauseLayer.arrowWidth * SlimeFactory.SGSDensity, start);
 			this.addChild(this.levels);
 		} else {
 			if (this.lockWorld != null) {

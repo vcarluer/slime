@@ -14,16 +14,16 @@ import android.util.FloatMath;
 
 @SuppressLint("DefaultLocale") public class StoryModeItemLayer extends ModeItemLayer {
 	private static final String STORY = "STORY";
-	private static final String WORLD_ITEMS_BTN_HARD_PNG = "world-items/button-story.png";
-	private static float shiftScore = - 75f;
+	private static final String WORLD_ITEMS_BTN_HARD_PNG = "world-items/button-story.png";	
 	
 	private CCLabel lblScore;
 	
 	public StoryModeItemLayer() {
-		this.lblScore = CCLabel.makeLabel("0%".toUpperCase(), "fonts/Slime.ttf", 60.0f * SlimeFactory.getWidthRatio());
+		float fntSize = 60.0f * SlimeFactory.getWidthRatio();
+		this.lblScore = CCLabel.makeLabel("0%".toUpperCase(), "fonts/Slime.ttf", fntSize);
 		this.lblScore.setPosition(CGPoint.make(
 				this.labelX,
-				this.labelY + shiftScore
+				this.labelY + fntSize * -1.1f
 				));
 		this.addChild(this.lblScore);
 	}

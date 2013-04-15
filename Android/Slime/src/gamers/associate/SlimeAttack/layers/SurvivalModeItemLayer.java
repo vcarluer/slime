@@ -15,18 +15,19 @@ import org.cocos2d.types.CGPoint;
 	private static final String SURVIVAL = "SURVIVAL";
 	private static final String WORLD_ITEMS_BTN_EXTREME_PNG = "world-items/button-survival.png";
 	private CCLabel lblScore;
-	private CCSprite starSprite;
-	private static float shiftScore = - 75f; // shiftInfo - 70f;	
+	private CCSprite starSprite;	
 	
 	public SurvivalModeItemLayer() {
-		this.lblScore = CCLabel.makeLabel("0".toUpperCase(), "fonts/Slime.ttf", 60.0f * SlimeFactory.getWidthRatio());
+		float fntSize = 60.0f * SlimeFactory.getWidthRatio();
+		this.lblScore = CCLabel.makeLabel("0".toUpperCase(), "fonts/Slime.ttf", fntSize);
 		this.lblScore.setPosition(CGPoint.make(
 				this.labelX,
-				this.labelY + shiftScore
+				this.labelY + fntSize * - 1.1f
 				));
 		this.addChild(this.lblScore);
 				
-		this.starSprite = CCSprite.sprite("star-01.png", true); // SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);		
+		this.starSprite = CCSprite.sprite("star-01.png", true); // SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);
+		this.starSprite.setScale(SlimeFactory.getWidthRatio());
 		this.starSprite.setPosition(CGPoint.make(
 				this.lblScore.getPositionRef().x,
 				this.lblScore.getPositionRef().y
@@ -44,7 +45,7 @@ import org.cocos2d.types.CGPoint;
 			this.lblScore.setColor(SlimeFactory.ColorSlimeLight);		
 			
 			float starPadding = -10f;
-			float starX = this.lblScore.getPositionRef().x - this.lblScore.getContentSize().width / 2 - SlimeFactory.Star.getStarReferenceWidth() / 2 + starPadding;
+			float starX = this.lblScore.getPositionRef().x - this.lblScore.getContentSize().width / 2 - (SlimeFactory.Star.getStarReferenceWidth() * SlimeFactory.getWidthRatio()) / 2 + starPadding;
 			this.starSprite.setPosition(CGPoint.make(
 					starX,
 					this.starSprite.getPositionRef().y
