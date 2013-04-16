@@ -265,7 +265,7 @@ import android.annotation.SuppressLint;
 	public void starTaken(float x, float y) {
 		CCSprite star = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait, Star.BaseFrameName); // Anim_Fade
 		star.setPosition(x, y);
-		star.setScale(1 / Level.currentLevel.getCameraManager().getCurrentZoom());
+		star.setScale(Level.currentLevel.getCameraManager().getCurrentZoom());
 		synchronized(this.sync) {
 			this.starsToAdd.add(star);
 		}		
@@ -339,7 +339,7 @@ import android.annotation.SuppressLint;
 				CCMoveTo moveTo = CCMoveTo.action(Star.AnimDelay, CGPoint.make(this.starX + (Star.Reference_Width * SlimeFactory.getWidthRatio()) / 2f, this.starY + (Star.Reference_Height * SlimeFactory.getWidthRatio()) / 2f));
 				CCCallFunc endMove = CCCallFunc.action(this, "endMoveStar");		
 				CCSequence seq = CCSequence.actions(moveTo, endMove);
-				CCScaleTo scale = CCScaleTo.action(Star.AnimDelay - 0.1f, 1.0f);		
+				CCScaleTo scale = CCScaleTo.action(Star.AnimDelay - 0.1f, SlimeFactory.getWidthRatio());		
 				star.runAction(seq);
 				star.runAction(scale);
 			}

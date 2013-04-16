@@ -352,7 +352,7 @@ public class HomeLayer extends CCLayer {
 		CCMenuItemSprite shareItem = CCMenuItemSprite.item(shareN, shareS, sharer, "shareApp");
 		
 		shareItem.setPosition(shareX, shareY);
-		float baseScale = scale * shareScale * SlimeFactory.SGSDensity;
+		float baseScale = getShareScale(scale);
 		shareItem.setScale(baseScale);
 		
 		CCScaleBy scaleBy = CCScaleBy.action(0.3f, 0.3f);
@@ -363,5 +363,9 @@ public class HomeLayer extends CCLayer {
 		shareItem.runAction(rep);
 		
 		return CCMenu.menu(shareItem);
+	}
+	
+	public static float getShareScale(float scale) {
+		return scale * shareScale * SlimeFactory.SGSDensity;
 	}
 }

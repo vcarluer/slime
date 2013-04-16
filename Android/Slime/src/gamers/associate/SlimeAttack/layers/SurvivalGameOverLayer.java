@@ -21,6 +21,7 @@ import android.annotation.SuppressLint;
 import android.view.MotionEvent;
 
 @SuppressLint("DefaultLocale") public class SurvivalGameOverLayer extends CCLayer implements IBackableLayer {
+	private static final float SharePadding = 25f * SlimeFactory.getWidthRatio(); 
 	private static CCScene scene;
 	private CCLabel scoreLabel;
 	private CCLabel gameOverLabel;
@@ -42,17 +43,17 @@ import android.view.MotionEvent;
 	public SurvivalGameOverLayer() {
 		HomeLayer.addBkg(this, 800, 480, "game-over.png");
 		this.backMenu = HomeLayer.getBackButton(this, "goBack");
-		this.scoreLabel = CCLabel.makeLabel("Score: ".toUpperCase(), "fonts/Slime.ttf", 42 * SlimeFactory.Density);
-		this.gameOverLabel = CCLabel.makeLabel("Game Over!".toUpperCase(), "fonts/Slime.ttf", 68 * SlimeFactory.Density);
-		this.gameOverLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + 100 * SlimeFactory.Density);
+		this.scoreLabel = CCLabel.makeLabel("Score: ".toUpperCase(), "fonts/Slime.ttf", 42 * SlimeFactory.getWidthRatio());
+		this.gameOverLabel = CCLabel.makeLabel("Game Over!".toUpperCase(), "fonts/Slime.ttf", 68 * SlimeFactory.getWidthRatio());
+		this.gameOverLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + 100 * SlimeFactory.getWidthRatio());
 		this.scoreLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY());
-		this.newHighScore = CCLabel.makeLabel(" ", "fonts/Slime.ttf", 42f* SlimeFactory.Density);
-		this.newHighScore.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() - 90 * SlimeFactory.Density);
+		this.newHighScore = CCLabel.makeLabel(" ", "fonts/Slime.ttf", 42f* SlimeFactory.getWidthRatio());
+		this.newHighScore.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() - 90 * SlimeFactory.getWidthRatio());
 		this.newHighScore.setRotation(-15f);
 		this.newHighScore.setColor(SlimeFactory.ColorSlimeGold);
 		
-		this.newUnlock = CCLabel.makeLabel(" ", "fonts/Slime.ttf", 32f* SlimeFactory.Density);
-		this.newUnlock.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + 45 * SlimeFactory.Density);
+		this.newUnlock = CCLabel.makeLabel(" ", "fonts/Slime.ttf", 32f* SlimeFactory.getWidthRatio());
+		this.newUnlock.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + 45 * SlimeFactory.getWidthRatio());
 		this.newUnlock.setColor(SlimeFactory.ColorSlimeLight);
 		
 		float left = - CCDirector.sharedDirector().winSize().getWidth() / 2 + ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) + ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) / 2 ;
@@ -110,11 +111,11 @@ import android.view.MotionEvent;
 		if (!newMode) {
 			this.shareMenu = HomeLayer.getNewShareButton(
 					"New high score in Slime Attack survival mode! " + String.valueOf(SlimeFactory.GameInfo.getCurrentScore()) + " in " + LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty()) + " " + Sharer.twitterTag, 
-					1.0f, - this.scoreLabel.getContentSize().width / 2f - 25 - HomeLayer.shareSizeW / 2f, 0);
+					1.0f, - this.scoreLabel.getContentSize().width / 2f - SharePadding - (HomeLayer.shareSizeW * HomeLayer.getShareScale(1.0f)) / 2f, 0);
 		} else {
 			this.shareMenu = HomeLayer.getNewShareButton(
 					"New mode unlocked in Slime Attack survival mode: " + modeText + "! " + String.valueOf(SlimeFactory.GameInfo.getCurrentScore()) + " in " + LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty()) + " " + Sharer.twitterTag, 
-					1.0f, - this.scoreLabel.getContentSize().width / 2f - 25 - HomeLayer.shareSizeW / 2f, 0);
+					1.0f, - this.scoreLabel.getContentSize().width / 2f - SharePadding - (HomeLayer.shareSizeW * HomeLayer.getShareScale(1.0f)) / 2f, 0);
 		}
 		
 		this.addChild(this.shareMenu);
