@@ -40,6 +40,7 @@ public class CreditLayer extends CCLayer implements IBackableLayer {
 	private static String amz = "Antonio Munoz";
 	private static String gcc = "Guillaume Clerc";
 	private static String mbn = "Mihran Bodromian";
+	private static String kmd = "Kevin MacLeod";
 	private static CCScene scene;
 	private List<CreditInfo> infos;
 	private List<String> infosDisclaimer;
@@ -217,7 +218,7 @@ public class CreditLayer extends CCLayer implements IBackableLayer {
 		this.addInfo("Texture artist", gcc);
 		// sound
 		this.addInfo("Sound Design", mbn, amz);
-		this.addInfo("Music Composer", mbn);
+		this.addInfo("Music Composer", mbn, kmd);
 		this.addInfo("Audio Engineering", mbn);
 		// market
 		this.addInfo("Community Manager", amz);
