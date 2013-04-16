@@ -1,7 +1,6 @@
 package gamers.associate.SlimeAttack.game;
 
 import gamers.associate.SlimeAttack.SlimeAttack;
-import gamers.associate.SlimeAttack.game.achievements.AchievementManager;
 import gamers.associate.SlimeAttack.game.achievements.AchievementStatistics;
 import gamers.associate.SlimeAttack.game.achievements.NoMoreTrainingAch;
 import gamers.associate.SlimeAttack.layers.SurvivalItemLayer;

@@ -4,7 +4,6 @@ import gamers.associate.SlimeAttack.game.Level;
 import gamers.associate.SlimeAttack.game.SlimeFactory;
 import gamers.associate.SlimeAttack.items.base.GameItem;
 import gamers.associate.SlimeAttack.items.custom.Platform;
-import gamers.associate.SlimeAttack.levels.generator.hardcoded.BlocDefinitionFill;
 
 public class PlatformDef extends ItemDefinition {
 	private static String Handled_Platform = "Platform";

@@ -37,7 +37,6 @@ import org.cocos2d.particlesystem.CCParticleFire;
 import org.cocos2d.particlesystem.CCParticleSystem;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
-import org.cocos2d.types.ccColor3B;
 import org.cocos2d.types.ccColor4F;
 
 import android.util.FloatMath;

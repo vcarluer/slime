@@ -13,7 +13,6 @@ import gamers.associate.SlimeAttack.items.custom.MenuSprite;
 import gamers.associate.SlimeAttack.items.custom.Star;
 import gamers.associate.SlimeAttack.items.custom.StarCounter;
 import gamers.associate.SlimeAttack.items.custom.StarCounterFactory;
-import gamers.associate.SlimeAttack.levels.GamePlay;
 import gamers.associate.SlimeAttack.levels.LevelDefinition;
 import gamers.associate.SlimeAttack.levels.LevelDefinitionParser;
 
@@ -24,7 +23,6 @@ import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCFadeIn;
 import org.cocos2d.actions.interval.CCFadeOut;
-import org.cocos2d.actions.interval.CCMoveBy;
 import org.cocos2d.actions.interval.CCMoveTo;
 import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.actions.interval.CCSequence;

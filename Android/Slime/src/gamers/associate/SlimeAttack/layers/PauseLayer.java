@@ -54,11 +54,7 @@ public class PauseLayer extends CCLayer {
 	private String currentTitle;
 	private CGPoint tmp = CGPoint.zero();
 	
-	public PauseLayer() {
-//		CCMenuItem label = CCMenuItemLabel.item(getMenuLabel("Pause"), this, "");		
-//		
-//		this.scoreMaxLabel = CCMenuItemLabel.item(getMenuLabel(scoreTxt), null, "");
-		
+	public PauseLayer() {		
 		CCSprite resumeSpriteN = CCSprite.sprite("control-play.png", true);
 		CCSprite resumeSpriteS = CCSprite.sprite("control-play.png", true);
 		this.resumeMenu = CCMenuItemSprite.item(resumeSpriteN, resumeSpriteS, this, "goResume");
@@ -73,14 +69,7 @@ public class PauseLayer extends CCLayer {
 		CCSprite homeSpriteS = CCSprite.sprite("control-home.png", true);
 		homeMenu = CCMenuItemSprite.item(homeSpriteN, homeSpriteS, this, "goHome");		
 		this.setMenuPos(homeMenu, 3);
-		
-		CCSprite muteOnSpriteN = CCSprite.sprite("control-sound-on.png");
-		CCSprite muteOnSpriteS = CCSprite.sprite("control-sound-on.png");
-		CCMenuItemSprite muteOn = CCMenuItemSprite.item(muteOnSpriteN, muteOnSpriteS);
-		CCSprite muteOffSpriteN = CCSprite.sprite("control-sound-off.png");
-		CCSprite muteOffSpriteS = CCSprite.sprite("control-sound-off.png");
-		CCMenuItemSprite muteOff = CCMenuItemSprite.item(muteOffSpriteN, muteOffSpriteS);
-		
+				
 		muteMenu = HomeLayer.getMuteItemButton(this, "toggleMute");		
 		this.setMenuPosRight(muteMenu, 1);
 				

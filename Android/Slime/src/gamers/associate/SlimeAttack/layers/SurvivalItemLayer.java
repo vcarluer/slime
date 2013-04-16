@@ -1,6 +1,5 @@
 package gamers.associate.SlimeAttack.layers;
 
-import android.annotation.SuppressLint;
 import gamers.associate.SlimeAttack.game.Level;
 import gamers.associate.SlimeAttack.game.LevelBuilderGenerator;
 import gamers.associate.SlimeAttack.game.LevelDifficulty;
@@ -18,7 +17,8 @@ import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.transitions.CCFadeTransition;
-import org.cocos2d.types.ccColor3B;
+
+import android.annotation.SuppressLint;
 
 @SuppressLint("DefaultLocale") public class SurvivalItemLayer extends CanvasItemLayer {	
 	private static final String GREY = "-grey";

@@ -1,12 +1,9 @@
 package gamers.associate.SlimeAttack.levels.itemdef;
 
-import org.cocos2d.types.CGSize;
-
-import android.annotation.SuppressLint;
 import gamers.associate.SlimeAttack.game.Level;
-import gamers.associate.SlimeAttack.game.SlimeFactory;
 import gamers.associate.SlimeAttack.items.base.GameItem;
 import gamers.associate.SlimeAttack.levels.LevelUtil;
+import android.annotation.SuppressLint;
 
 @SuppressLint("DefaultLocale") 
 public class LevelInfoDef extends ItemDefinition {

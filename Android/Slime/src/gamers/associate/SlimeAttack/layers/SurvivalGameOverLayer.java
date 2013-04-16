@@ -15,7 +15,6 @@ import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.transitions.CCFadeTransition;
 import org.cocos2d.transitions.CCTransitionScene;
-import org.cocos2d.types.ccColor3B;
 
 import android.annotation.SuppressLint;
 import android.view.MotionEvent;

@@ -16,7 +16,6 @@ import org.cocos2d.actions.interval.CCScaleBy;
 import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.actions.interval.CCTintTo;
-import org.cocos2d.layers.CCColorLayer;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItemSprite;
@@ -44,8 +43,7 @@ import android.view.MotionEvent;
 	private static final int SlimyPosition = StarCountPosition + SlimyDeltaPosition;
 	private static final int labelSize = 60;	
 	private static final int stepScore = 10000;
-	private static final float STAR_SCALE = 1.5f;
-	private static final float paddingSquare = 25;	
+	private static final float STAR_SCALE = 1.5f;	
 	private CCSprite slime;
 	private CCSprite star;
 	private CCBitmapFontAtlas starCountLabel;
@@ -120,12 +118,6 @@ import android.view.MotionEvent;
 		square.setPosition(this.scoreLabel.getPositionRef());
 		this.addChild(square, Level.zUnder);
 		
-//		// Color layer
-//		float pad = paddingSquare * SlimeFactory.SGSDensity;
-//		CCColorLayer color = CCColorLayer.node(SlimeFactory.getColorLight(75), CCDirector.sharedDirector().winSize().width - pad * 2, CCDirector.sharedDirector().winSize().height - pad * 2);
-//		color.setPosition(pad, pad);
-//		this.addChild(color, Level.zUnder);
-
 		this.addChild(this.starCountLabel);
 		this.addChild(this.scoreLabel);
 		this.addChild(this.totalScoreLabel);

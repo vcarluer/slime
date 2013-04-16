@@ -5,8 +5,6 @@ import java.util.List;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
 
-import gamers.associate.SlimeAttack.items.base.GameItem;
-
 public class MoveInterpolateTrackAction extends CameraAction {
 
 	private List<CGPoint> points;	
