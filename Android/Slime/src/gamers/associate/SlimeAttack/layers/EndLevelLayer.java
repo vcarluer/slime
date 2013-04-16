@@ -32,13 +32,16 @@ import android.annotation.SuppressLint;
 import android.view.MotionEvent;
 
 @SuppressLint("DefaultLocale") public class EndLevelLayer extends CCLayer {		
+	private static final int SquareReferenceHeight = 480;
 	private static final int MARGIN_RANK = 11;
 	private static final float SLIMY_SCALE = 2f;
 	private static final int scorePosition = 0;	
 	private static final int totalScorePosition = - 75;
-	private static final int MenuPosition = scorePosition - 150;
+	private static final int MenuDeltaPosition = - 75;
+	private static final int MenuPosition = totalScorePosition + MenuDeltaPosition;
 	private static final int StarCountPosition = scorePosition + 60;
-	private static final int SlimyPosition = StarCountPosition + 100;
+	private static final int SlimyDeltaPosition = 100;
+	private static final int SlimyPosition = StarCountPosition + SlimyDeltaPosition;
 	private static final int labelSize = 60;	
 	private static final int stepScore = 10000;
 	private static final float STAR_SCALE = 1.5f;
@@ -108,14 +111,14 @@ import android.view.MotionEvent;
 				CCDirector.sharedDirector().winSize().height / 2 + MenuPosition
 				));
 		
-		// this.square = CCSprite.sprite("control-square-empty.png", true);
-		// float scaleX = (CCDirector.sharedDirector().winSize().width - (paddingSquare * SlimeFactory.SGSDensity) * 2) / MenuSprite.SquareEmptyWidth;
-//		float scaleY = (CCDirector.sharedDirector().winSize().height - (paddingSquare * SlimeFactory.SGSDensity) * 2) / MenuSprite.SquareEmptyHeight;
-//		float scaleX = scaleY;
-//		this.square.setScaleX(scaleX);
-//		this.square.setScaleY(scaleY);
-//		this.square.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY());
-//		this.addChild(this.square, Level.zUnder);
+		CCSprite square = CCSprite.sprite("square-empty.png");
+		float startY = SlimyDeltaPosition / 2 + this.starCountLabel.getPositionRef().y + this.starCountLabel.getContentSizeRef().height / 2f;
+		float endY = MenuDeltaPosition / 2 + this.totalScoreLabel.getPositionRef().y - this.totalScoreLabel.getContentSizeRef().height / 2f;
+		float squareH = startY - endY;		
+		float scale = squareH / SquareReferenceHeight;
+		square.setScale(scale);		
+		square.setPosition(this.scoreLabel.getPositionRef());
+		this.addChild(square, Level.zUnder);
 		
 //		// Color layer
 //		float pad = paddingSquare * SlimeFactory.SGSDensity;
@@ -225,7 +228,7 @@ import android.view.MotionEvent;
 	private static CCBitmapFontAtlas getMenuLabel(String text, float scale) {
 		CCBitmapFontAtlas label = CCBitmapFontAtlas.bitmapFontAtlas(text.toUpperCase(), "SlimeFont.fnt");
 		label.setScale(labelSize / scale);
-		label.setColor(SlimeFactory.ColorSlime);
+		label.setColor(ccColor3B.ccWHITE);
 		return label;
 	}
 	
@@ -329,7 +332,7 @@ import android.view.MotionEvent;
 					this.targetScore += Level.currentLevel.getGamePlay().getBonusScore(this.currentStars);					
 					Sounds.playEffect(R.raw.star);
 					CCTintTo tint = CCTintTo.action(0.2f, ccColor3B.ccc3(243, 225, 102));
-					CCTintTo tintBack = CCTintTo.action(0.1f, SlimeFactory.ColorSlime);
+					CCTintTo tintBack = CCTintTo.action(0.1f, ccColor3B.ccWHITE);
 					CCSequence seq = CCSequence.actions(tint, tintBack);
 					this.scoreLabel.runAction(seq);
 				} else {

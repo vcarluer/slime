@@ -98,14 +98,18 @@ public class PauseLayer extends CCLayer {
 		this.arrowSpriteT = CCSprite.sprite("arrow.png");
 		this.arrowSpriteT.setPosition(middleX, top);
 		this.arrowSpriteT.setRotation(-90);
+		this.arrowSpriteT.setScale(SlimeFactory.SGSDensity);
 		this.arrowSpriteR = CCSprite.sprite("arrow.png");
 		this.arrowSpriteR.setPosition(right, middleY);		
+		this.arrowSpriteR.setScale(SlimeFactory.SGSDensity);
 		this.arrowSpriteB = CCSprite.sprite("arrow.png");
 		this.arrowSpriteB.setPosition(middleX, bottom);
 		this.arrowSpriteB.setRotation(90);
+		this.arrowSpriteB.setScale(SlimeFactory.SGSDensity);
 		this.arrowSpriteL = CCSprite.sprite("arrow.png");
 		this.arrowSpriteL.setPosition(left, middleY);
 		this.arrowSpriteL.setRotation(180);
+		this.arrowSpriteL.setScale(SlimeFactory.SGSDensity);
 		
 		this.addChild(this.arrowSpriteT);
 		this.addChild(this.arrowSpriteR);

@@ -41,14 +41,14 @@ import android.annotation.SuppressLint;
 
 @SuppressLint("DefaultLocale") public class HudLayer extends CCLayer implements IGameItemHandler {
 	private static final String TIME_S_UP = "TIME'S UP";
-	private static final int countPaddingX = 5;
-	private static final float scoreTakenPadding = 10f;
-	private static final float TextHeight = 60f * SlimeFactory.SGSDensity;
-	private static final float BonusHeight = 30f;
-	private static final float PaddingLeftStar = 25f;
-	private static final int starCountHShift = 35;
-	private static final float starCountBarHeight = 30f * SlimeFactory.SGSDensity;
-	private static final float starCountBarWidthMax = 200f;
+	private static final int countPaddingX = (int) (5 * SlimeFactory.getWidthRatio());
+	private static final float scoreTakenPadding = 10f * SlimeFactory.getWidthRatio();
+	private static final float TextHeight = 60f * SlimeFactory.getWidthRatio();
+	private static final float BonusHeight = 30f * SlimeFactory.getWidthRatio();
+	private static final float PaddingLeftStar = 25f * SlimeFactory.getWidthRatio();
+	private static final int starCountHShift = (int) (35 * SlimeFactory.getWidthRatio());
+	private static final float starCountBarHeight = 30f * SlimeFactory.getWidthRatio();
+	private static final float starCountBarWidthMax = 200f * SlimeFactory.getWidthRatio();
 	private static final ccColor3B startColor = ccColor3B.ccBLACK;
 	private static final ccColor3B fullColor = ccColor3B.ccYELLOW;
 	private static final ccColor3B goalColor = ccColor3B.ccGREEN;
@@ -103,7 +103,7 @@ import android.annotation.SuppressLint;
 		this.addChild(this.countLabel);
 		// Position overrided in SetHudStartText
 		this.countLabel.setPosition(
-				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - this.referenceLabel.getContentSize().width - countPaddingX, 
+				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - (this.referenceLabel.getContentSize().width) - countPaddingX, 
 				CCDirector.sharedDirector().winSize().getHeight() - starCountHShift));
 		
 		this.scoreTaken = getMenuLabel("   ", BonusHeight, SlimeFactory.ColorSlime);
@@ -115,8 +115,8 @@ import android.annotation.SuppressLint;
 		this.starsTaken = new ArrayList<CCSprite>();
 		this.starsToAdd = new ArrayList<CCSprite>();
 		this.starsToDelete = new ArrayList<CCSprite>();
-		this.starX = CCDirector.sharedDirector().winSize().getWidth() / 2 - Star.Reference_Width - PaddingLeftStar;
-		this.starY = CCDirector.sharedDirector().winSize().getHeight() - (starCountHShift + Star.Reference_Height / 2);
+		this.starX = CCDirector.sharedDirector().winSize().getWidth() / 2 - (Star.Reference_Width * SlimeFactory.getWidthRatio()) - PaddingLeftStar;
+		this.starY = CCDirector.sharedDirector().winSize().getHeight() - (starCountHShift + (Star.Reference_Height * SlimeFactory.getWidthRatio()) / 2);
 				
 		if (SlimeFactory.IsLevelSelectionOn && SlimeFactory.IsLevelSelectionShowButtons) {
 			float recordX = CCDirector.sharedDirector().winSize().getWidth() / 2f - ((MenuSprite.Width * PauseLayer.Scale) + PauseLayer.PaddingX) / 2 ;
@@ -158,7 +158,7 @@ import android.annotation.SuppressLint;
 		this.starSprite.setAnchorPoint(0, 0f);
 		this.starSprite.setColor(startColor);
 		this.starSprite.setOpacity(150);
-		this.starSprite.setScale(SlimeFactory.SGSDensity);
+		this.starSprite.setScale(SlimeFactory.getWidthRatio());
 		this.addChild(this.starSprite);
 		CCFadeOut fadeOut = CCFadeOut.action(0);
 		this.timesup.runAction(fadeOut);
@@ -172,7 +172,7 @@ import android.annotation.SuppressLint;
 			if (gp != null) {				
 				float xPosBase = CCDirector.sharedDirector().winSize().getWidth() / 2;
 				float yPos = CCDirector.sharedDirector().winSize().getHeight() - starCountHShift;
-				float w = starCountBarHeight * StarCounter.Default_Width / StarCounter.Default_Height * SlimeFactory.SGSDensity;
+				float w = starCountBarHeight * StarCounter.Default_Width / StarCounter.Default_Height * SlimeFactory.getWidthRatio();
 				float totalW = w * SlimeFactory.LevelBuilder.getTotalStar();
 				if (totalW > starCountBarWidthMax) {
 					w = starCountBarWidthMax / SlimeFactory.LevelBuilder.getTotalStar();
@@ -233,7 +233,7 @@ import android.annotation.SuppressLint;
 	
 	public void setHudStartText(String text) {
 		this.countLabel.setString(text.toUpperCase());
-		this.countX = CCDirector.sharedDirector().winSize().getWidth() - countPaddingX - this.referenceLabel.getContentSize().width;
+		this.countX = CCDirector.sharedDirector().winSize().getWidth() - countPaddingX - (this.referenceLabel.getContentSize().width);
 		this.countLabel.setPosition(
 				CGPoint.ccp(this.countX, 
 				CCDirector.sharedDirector().winSize().getHeight() - starCountHShift));
@@ -336,7 +336,7 @@ import android.annotation.SuppressLint;
 			for(CCSprite star : this.starsToAdd) {
 				this.starsTaken.add(star);
 				this.addChild(star);
-				CCMoveTo moveTo = CCMoveTo.action(Star.AnimDelay, CGPoint.make(this.starX + Star.Reference_Width / 2f, this.starY + Star.Reference_Height / 2f));
+				CCMoveTo moveTo = CCMoveTo.action(Star.AnimDelay, CGPoint.make(this.starX + (Star.Reference_Width * SlimeFactory.getWidthRatio()) / 2f, this.starY + (Star.Reference_Height * SlimeFactory.getWidthRatio()) / 2f));
 				CCCallFunc endMove = CCCallFunc.action(this, "endMoveStar");		
 				CCSequence seq = CCSequence.actions(moveTo, endMove);
 				CCScaleTo scale = CCScaleTo.action(Star.AnimDelay - 0.1f, 1.0f);		

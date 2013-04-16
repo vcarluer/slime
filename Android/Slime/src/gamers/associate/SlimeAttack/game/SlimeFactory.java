@@ -98,6 +98,7 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static float SGSDensity; // Samsung Galaxy S reference density ratio (SGS used as a reference for layout...) 
 	public static final float kCGPointEpsilon = 0.00000012f;
 	public static float FntSize = 64f;	
+	public static final float FntSizeBase = 64f;
 	public static String slimeFileExt = ".slime";
 	private static final int SGSWidthBase = 800;
 	private static final int SGSHeightBase = 480;

@@ -19,68 +19,86 @@ public class SlimeIntro extends Activity {
 	private VideoView videos;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        
-        runVideo();
+		try {
+			super.onCreate(savedInstanceState);
+			
+			requestWindowFeature(Window.FEATURE_NO_TITLE);
+	        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+	        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+	        
+	        runVideo();
+		} catch(Exception ex) {
+		}
 	}
 
 	protected void runVideo() {
-		setContentView(R.layout.videointro);
-        videos = (VideoView) this.findViewById(R.id.videointroview);
-        int resourceNum = R.raw.introlab;
-        
-        String  str= "android.resource://gamers.associate.SlimeAttack/"+resourceNum;
-
-        Uri uri=Uri.parse(str);
-        
-		videos.setVideoURI(uri);
-		
-		videos.setOnCompletionListener(new OnCompletionListener() {
+		try	{
+			setContentView(R.layout.videointro);
+	        videos = (VideoView) this.findViewById(R.id.videointroview);
+	        int resourceNum = R.raw.introlab;
+	        
+	        String  str= "android.resource://gamers.associate.SlimeAttack/"+resourceNum;
+	
+	        Uri uri=Uri.parse(str);
+	        
+			videos.setVideoURI(uri);
 			
-			@Override
-			public void onCompletion(MediaPlayer mp) {			
-				end();
-			}
-		});
-		
-		videos.setOnTouchListener(new OnTouchListener() {
-			
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				end();
-				return true;
-			}
-		});
+			videos.setOnCompletionListener(new OnCompletionListener() {
 				
-        videos.start();
+				@Override
+				public void onCompletion(MediaPlayer mp) {			
+					end();
+				}
+			});
+			
+			videos.setOnTouchListener(new OnTouchListener() {
+				
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					end();
+					return true;
+				}
+			});
+					
+			videos.start();
+		} catch(Exception ex) {
+		}
 	}
 	
 	@Override
 	protected void onResume() {
-		this.hideButtons();
-		this.runVideo();
-		super.onResume();
+		try	{
+			this.hideButtons();
+			this.runVideo();
+			super.onResume();
+		} catch(Exception ex) {
+		}		
 	}
 
 	@Override
 	protected void onStart() {
-		this.hideButtons();
-		super.onStart();
+		try	{
+			this.hideButtons();
+			super.onStart();
+		} catch(Exception ex) {
+		}
 	}
 	
 	@SuppressLint("NewApi") private void hideButtons() {
-		if (Build.VERSION.SDK_INT >= 14) {
-			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
+		try	{
+			if (Build.VERSION.SDK_INT >= 14) {
+				getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
+			}
+		} catch(Exception ex) {
 		}
 	}
 
 	private void end() {
-		videos.stopPlayback();
-		videos.clearFocus();
-		finish();
+		try {
+			videos.stopPlayback();
+			videos.clearFocus();
+			finish();
+		} catch(Exception ex) {
+		}
 	}
 }
