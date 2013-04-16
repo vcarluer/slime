@@ -101,7 +101,7 @@ import android.annotation.SuppressLint;
 		this.addChild(this.countLabel);
 		// Position overrided in SetHudStartText
 		this.countLabel.setPosition(
-				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - (this.referenceLabel.getContentSize().width) - countPaddingX, 
+				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - (this.referenceLabel.getContentSizeRef().width) - countPaddingX, 
 				CCDirector.sharedDirector().winSize().getHeight() - starCountHShift));
 		
 		this.scoreTaken = getMenuLabel("   ", BonusHeight, SlimeFactory.ColorSlime);
@@ -231,7 +231,7 @@ import android.annotation.SuppressLint;
 	
 	public void setHudStartText(String text) {
 		this.countLabel.setString(text.toUpperCase());
-		this.countX = CCDirector.sharedDirector().winSize().getWidth() - countPaddingX - (this.referenceLabel.getContentSize().width);
+		this.countX = CCDirector.sharedDirector().winSize().getWidth() - countPaddingX - (this.referenceLabel.getContentSizeRef().width);
 		this.countLabel.setPosition(
 				CGPoint.ccp(this.countX, 
 				CCDirector.sharedDirector().winSize().getHeight() - starCountHShift));

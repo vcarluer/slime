@@ -49,15 +49,15 @@ public class AchievementInfoLayer extends CCLayer {
 		}
 		
 		this.unlockSprite = CCSprite.sprite(spriteName);
-		this.unlockSprite.setScale(rowSize / this.unlockSprite.getContentSize().height);
-		this.unlockSprite.setPosition((this.unlockSprite.getContentSize().width * this.unlockSprite.getScaleX()) / 2f, 
-				(this.unlockSprite.getContentSize().height * this.unlockSprite.getScaleY()) / 2f);
+		this.unlockSprite.setScale(rowSize / this.unlockSprite.getContentSizeRef().height);
+		this.unlockSprite.setPosition((this.unlockSprite.getContentSizeRef().width * this.unlockSprite.getScaleX()) / 2f, 
+				(this.unlockSprite.getContentSizeRef().height * this.unlockSprite.getScaleY()) / 2f);
 		this.addChild(this.unlockSprite);
 		
-		this.title.setPosition((this.unlockSprite.getContentSize().width * this.unlockSprite.getScaleX()) + padding + this.title.getContentSize().width / 2f, 
+		this.title.setPosition((this.unlockSprite.getContentSizeRef().width * this.unlockSprite.getScaleX()) + padding + this.title.getContentSizeRef().width / 2f, 
 				this.height / 2f + titleSize / 2f);
 		
-		this.description.setPosition((this.unlockSprite.getContentSize().width * this.unlockSprite.getScaleX()) + padding + this.description.getContentSize().width / 2f, 
+		this.description.setPosition((this.unlockSprite.getContentSizeRef().width * this.unlockSprite.getScaleX()) + padding + this.description.getContentSizeRef().width / 2f, 
 				this.height / 2f - descriptionSize / 2f - padding);
 	}
 

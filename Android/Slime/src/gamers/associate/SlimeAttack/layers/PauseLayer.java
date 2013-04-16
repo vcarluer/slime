@@ -157,13 +157,13 @@ public class PauseLayer extends CCLayer {
 				this.title.setString(this.currentTitle.toUpperCase());
 				// double padding
 				float dPadding = 250f;
-				float scaleRatio = CCDirector.sharedDirector().winSize().width / (this.title.getContentSize().width + dPadding);
+				float scaleRatio = CCDirector.sharedDirector().winSize().width / (this.title.getContentSizeRef().width + dPadding);
 				this.title.setScale(scaleRatio);
 				this.title.setPosition(
 						CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
 						CCDirector.sharedDirector().winSize().getHeight() / 2));
 				this.title.setOpacity(255);
-				float moveDistance =  CCDirector.sharedDirector().winSize().getWidth() / 2 - (this.title.getContentSize().width * scaleRatio) / 2f;
+				float moveDistance =  CCDirector.sharedDirector().winSize().getWidth() / 2 - (this.title.getContentSizeRef().width * scaleRatio) / 2f;
 				float time = 3f;
 				CCDelayTime delay = CCDelayTime.action(time);
 				CCCallFunc call = CCCallFunc.action(this, "fadeTitle");

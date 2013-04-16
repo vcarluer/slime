@@ -110,11 +110,11 @@ import android.view.MotionEvent;
 		if (!newMode) {
 			this.shareMenu = HomeLayer.getNewShareButton(
 					"New high score in Slime Attack survival mode! " + String.valueOf(SlimeFactory.GameInfo.getCurrentScore()) + " in " + LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty()) + " " + Sharer.twitterTag, 
-					1.0f, - this.scoreLabel.getContentSize().width / 2f - SharePadding - (HomeLayer.shareSizeW * HomeLayer.getShareScale(1.0f)) / 2f, 0);
+					1.0f, - this.scoreLabel.getContentSizeRef().width / 2f - SharePadding - (HomeLayer.shareSizeW * HomeLayer.getShareScale(1.0f)) / 2f, 0);
 		} else {
 			this.shareMenu = HomeLayer.getNewShareButton(
 					"New mode unlocked in Slime Attack survival mode: " + modeText + "! " + String.valueOf(SlimeFactory.GameInfo.getCurrentScore()) + " in " + LevelDifficulty.getText(SlimeFactory.GameInfo.getDifficulty()) + " " + Sharer.twitterTag, 
-					1.0f, - this.scoreLabel.getContentSize().width / 2f - SharePadding - (HomeLayer.shareSizeW * HomeLayer.getShareScale(1.0f)) / 2f, 0);
+					1.0f, - this.scoreLabel.getContentSizeRef().width / 2f - SharePadding - (HomeLayer.shareSizeW * HomeLayer.getShareScale(1.0f)) / 2f, 0);
 		}
 		
 		this.addChild(this.shareMenu);

@@ -45,7 +45,7 @@ import org.cocos2d.types.CGPoint;
 			this.lblScore.setColor(SlimeFactory.ColorSlimeLight);		
 			
 			float starPadding = -10f;
-			float starX = this.lblScore.getPositionRef().x - this.lblScore.getContentSize().width / 2 - (SlimeFactory.Star.getStarReferenceWidth() * SlimeFactory.getWidthRatio()) / 2 + starPadding;
+			float starX = this.lblScore.getPositionRef().x - this.lblScore.getContentSizeRef().width / 2 - (SlimeFactory.Star.getStarReferenceWidth() * SlimeFactory.getWidthRatio()) / 2 + starPadding;
 			this.starSprite.setPosition(CGPoint.make(
 					starX,
 					this.starSprite.getPositionRef().y

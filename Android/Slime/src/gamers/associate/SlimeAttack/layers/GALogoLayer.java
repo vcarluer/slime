@@ -98,7 +98,7 @@ import android.annotation.SuppressLint;
 		this.sprite.runAction(seq);
 		
 		this.loadLabel = CCLabel.makeLabel(LoadingQuoteGenerator.NewQuote().toUpperCase(), "fonts/Slime.ttf", LabelSize);		
-		this.loadLabel.setPosition(CCDirector.sharedDirector().winSize().width - this.loadLabel.getContentSize().width - PauseLayer.PaddingX, PauseLayer.PaddingY);
+		this.loadLabel.setPosition(CCDirector.sharedDirector().winSize().width - this.loadLabel.getContentSizeRef().width - PauseLayer.PaddingX, PauseLayer.PaddingY);
 		this.loadLabel.setAnchorPoint(0, 0);
 		this.loadLabel.setColor(ccColor3B.ccBLACK);
 		this.loadLabel.setVisible(false);
@@ -108,8 +108,8 @@ import android.annotation.SuppressLint;
 		lbl.setColor(ccColor3B.ccBLACK);
 		this.addChild(lbl);
 		lbl.setPosition(CGPoint.make(
-				PauseLayer.PaddingX + lbl.getContentSize().width / 2,
-				PauseLayer.PaddingY + lbl.getContentSize().height / 2
+				PauseLayer.PaddingX + lbl.getContentSizeRef().width / 2,
+				PauseLayer.PaddingY + lbl.getContentSizeRef().height / 2
 				));
 	}		
 	
@@ -131,7 +131,7 @@ import android.annotation.SuppressLint;
 		if (!loaded) {
 			this.loadLabel.setVisible(true);
 			this.loadLabel.setString(LoadingQuoteGenerator.NewQuote().toUpperCase());
-			this.loadLabel.setPosition(CCDirector.sharedDirector().winSize().width - this.loadLabel.getContentSize().width - PauseLayer.PaddingX, PauseLayer.PaddingY);
+			this.loadLabel.setPosition(CCDirector.sharedDirector().winSize().width - this.loadLabel.getContentSizeRef().width - PauseLayer.PaddingX, PauseLayer.PaddingY);
 			Sounds.playEffect(R.raw.heartbeat);
 			
 			heartBeating = true;

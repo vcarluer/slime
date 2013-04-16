@@ -50,7 +50,7 @@ import android.annotation.SuppressLint;
 		
 		// override label position
 		this.diffSprite = getLevelSprite(this.levelDiff, this.isUnlocked);
-		this.labelY -= this.diffSprite.getContentSize().height * SlimeFactory.getWidthRatio() + paddingSprite;
+		this.labelY -= this.diffSprite.getContentSizeRef().height * SlimeFactory.getWidthRatio() + paddingSprite;
 		this.labelX = this.width / 2f + this.paddingX;
 		this.label.setPosition(this.labelX, this.labelY);
 		
@@ -72,8 +72,8 @@ import android.annotation.SuppressLint;
 		this.diffSprite = getLevelSprite(this.levelDiff, this.isUnlocked);				
 		
 		diffSprite.setPosition(this.labelX, 
-				this.labelY + this.label.getContentSize().height / 2 
-				+ (this.diffSprite.getContentSize().height * SlimeFactory.getWidthRatio()) / 2 
+				this.labelY + this.label.getContentSizeRef().height / 2 
+				+ (this.diffSprite.getContentSizeRef().height * SlimeFactory.getWidthRatio()) / 2 
 				+ paddingSprite);
 		this.addChild(this.diffSprite);
 		this.toDestroy.add(this.diffSprite);
@@ -82,7 +82,7 @@ import android.annotation.SuppressLint;
 		if (score > 0) {
 			CCSprite star = SlimeFactory.Star.getAnimatedSprite(Star.Anim_Wait);
 			star.setScale(SlimeFactory.getWidthRatio());
-			float starY = this.labelY - this.getFontSize() / 2 - paddingSprite - (star.getContentSize().height * SlimeFactory.getWidthRatio()) / 2;
+			float starY = this.labelY - this.getFontSize() / 2 - paddingSprite - (star.getContentSizeRef().height * SlimeFactory.getWidthRatio()) / 2;
 			if (starY > this.height * (2f / 3f)) {
 				starY = this.height * (2f / 3f);
 			}
@@ -92,7 +92,7 @@ import android.annotation.SuppressLint;
 			this.toDestroy.add(star);
 			
 			CCLabel scoreLabel = SlimeFactory.getLabel(String.valueOf(score), this.getFontSize());
-			scoreLabel.setPosition(this.labelX, star.getPositionRef().y - (star.getContentSize().height * SlimeFactory.getWidthRatio()) / 2 - paddingSprite - this.getFontSize() / 2);
+			scoreLabel.setPosition(this.labelX, star.getPositionRef().y - (star.getContentSizeRef().height * SlimeFactory.getWidthRatio()) / 2 - paddingSprite - this.getFontSize() / 2);
 			this.addChild(scoreLabel);
 			this.toDestroy.add(scoreLabel);
 			
@@ -188,7 +188,7 @@ import android.annotation.SuppressLint;
 	@Override
 	protected void defineLabelPosition() {				
 		this.labelX = this.width / 2f;
-		this.labelY = this.height - this.label.getContentSize().height / 2f;
+		this.labelY = this.height - this.label.getContentSizeRef().height / 2f;
 	}
 
 	@Override

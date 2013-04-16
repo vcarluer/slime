@@ -29,7 +29,7 @@ public class AchievementItemLayer extends CCLayer {
 		this.pos = CGPoint.make(CCDirector.sharedDirector().winSize().width / 2f, targetHeight / 2f);
 		this.title.setPosition(this.pos);
 		
-		this.width = this.title.getContentSize().width + padding * 2f;
+		this.width = this.title.getContentSizeRef().width + padding * 2f;
 		this.scale = this.width / sprWidth;
 		this.height = sprHeight * this.scale;
 		CCSprite spriteNorm = CCSprite.sprite("world-items/btn-achievements.png");

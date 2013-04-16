@@ -66,9 +66,9 @@ public class MessageLayer extends CCLayer {
 		this.height = this.width * heightRatio;
 		
 		this.icon = CCSprite.sprite("world-items/star-unlock.png");
-		float iconScale = this.height / this.icon.getContentSize().height;
+		float iconScale = this.height / this.icon.getContentSizeRef().height;
 		this.icon.setScale(iconScale);
-		this.iconWidth = this.icon.getContentSize().width * iconScale;
+		this.iconWidth = this.icon.getContentSizeRef().width * iconScale;
 		this.icon.setPosition(this.iconWidth / 2f + paddingX, this.height / 2f);
 		this.addChild(this.icon);
 		
@@ -100,11 +100,11 @@ public class MessageLayer extends CCLayer {
 			MessageInfo info = this.messages.poll();
 			this.isShowing = true;
 			this.message.setString(info.getText().toUpperCase());
-			this.message.setPosition(this.iconWidth + this.message.getContentSize().width / 2f + paddingX * 2, this.height / 2f);
+			this.message.setPosition(this.iconWidth + this.message.getContentSizeRef().width / 2f + paddingX * 2, this.height / 2f);
 			
 			float messageWidth = this.messageWidthSizeBase;
-			if (messageWidth < this.message.getContentSize().width) {
-				messageWidth = this.message.getContentSize().width + paddingX;
+			if (messageWidth < this.message.getContentSizeRef().width) {
+				messageWidth = this.message.getContentSizeRef().width + paddingX;
 			}
 			
 			if (this.colored != null) {

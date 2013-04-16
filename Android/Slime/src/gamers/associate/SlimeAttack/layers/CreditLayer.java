@@ -184,7 +184,7 @@ public class CreditLayer extends CCLayer implements IBackableLayer {
 		CCSprite slime = SlimeFactory.SlimySuccess.getAnimatedSprite(SlimySuccess.getAnimationName(diff));
 		float spriteScale = 1.5f * SlimeFactory.SGSDensity;
 		slime.setScale(spriteScale);
-		float x = random.nextInt((int) (CCDirector.sharedDirector().winSize().width / 4f - (slime.getContentSize().width * spriteScale))) + (slime.getContentSize().width * spriteScale) / 2f;
+		float x = random.nextInt((int) (CCDirector.sharedDirector().winSize().width / 4f - (slime.getContentSizeRef().width * spriteScale))) + (slime.getContentSizeRef().width * spriteScale) / 2f;
 		int inv = random.nextInt(2);
 		if (inv == 1) {
 			x = CCDirector.sharedDirector().winSize().width - x;
