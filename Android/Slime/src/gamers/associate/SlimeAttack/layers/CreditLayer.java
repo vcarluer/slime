@@ -240,7 +240,12 @@ public class CreditLayer extends CCLayer implements IBackableLayer {
 				"Raffi Leylekian", 
 				"Mathieu Carluer", 
 				"Jeremie Devauchelle",
-				"Kroustine la tartine masquée"
+				"Etienne Large",
+				"Akentarun",
+				"Kroustine la tartine masquee",
+				"Fenrhir",
+				"Paul Verveine",
+				"PrinceGITS"
 				};
 	}
 
