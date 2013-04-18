@@ -36,11 +36,11 @@
 		<SplitType>9</SplitType>
 		<SplitPaneID> </SplitPaneID>
 		<CurrentViewID>4164a4c2-d3f7-4c46-9a1c-7993ad9eda49</CurrentViewID>
-		<PaneSize>0,0,1670,119</PaneSize>
-		<PaneRect>0,795,1670,914</PaneRect>
+		<PaneSize>0,0,1670,338</PaneSize>
+		<PaneRect>0,576,1670,914</PaneRect>
 		<PaneRestoreID> </PaneRestoreID>
 		<PaneID>9571c477-97ca-49c6-9e6a-5205e5d8d228</PaneID>
-		<PaneWindowRect>5,845,1675,964</PaneWindowRect>
+		<PaneWindowRect>5,626,1675,964</PaneWindowRect>
 		<Pane Version="1">
 			<DockingView Index="0" ObjectRef="3"/>
 		</Pane>
@@ -50,7 +50,7 @@
 		<DockingView.Properties ObjectRef="4"/>
 		<DockingViewVisible>true</DockingViewVisible>
 		<DockingViewWindowType>Timelines</DockingViewWindowType>
-		<DockingViewTabID>DockingTab #1: 4550d808-618a-416e-83a2-879a8f240c56@[18:265:0]</DockingViewTabID>
+		<DockingViewTabID>DockingTab #1: 20d170f2-c3bb-41e4-ae1a-7a18ad1b0bdd@[45:344:0]</DockingViewTabID>
 		<DockingViewName>My Project</DockingViewName>
 		<DockingParticipantID>Timeline</DockingParticipantID>
 		<DockingViewID>4164a4c2-d3f7-4c46-9a1c-7993ad9eda49</DockingViewID>
@@ -65,12 +65,12 @@
 		<Docked>true</Docked>
 		<SplitType>9</SplitType>
 		<SplitPaneID> </SplitPaneID>
-		<CurrentViewID>910bbe56-15b6-40c8-82f1-eb71eaa89799</CurrentViewID>
-		<PaneSize>0,0,229,795</PaneSize>
-		<PaneRect>1441,0,1670,795</PaneRect>
+		<CurrentViewID>4a7bb34d-6b6a-4ace-b228-34a85fd016e7</CurrentViewID>
+		<PaneSize>0,0,771,576</PaneSize>
+		<PaneRect>899,0,1670,576</PaneRect>
 		<PaneRestoreID> </PaneRestoreID>
 		<PaneID>76671689-4e94-4927-97c7-3456f1b8c4d6</PaneID>
-		<PaneWindowRect>1446,50,1675,845</PaneWindowRect>
+		<PaneWindowRect>904,50,1675,626</PaneWindowRect>
 		<Expanded>true</Expanded>
 	</Pane_15>
 	<Pane_16 ObjectID="6" ClassID="e72d4c59-e6a3-465a-8690-1a74ecc5a0ee" Version="3">
@@ -78,12 +78,12 @@
 		<Docked>true</Docked>
 		<SplitType>9</SplitType>
 		<SplitPaneID> </SplitPaneID>
-		<CurrentViewID>7557c16c-2a4f-474d-8277-4ac8d94449c6</CurrentViewID>
-		<PaneSize>0,0,1441,795</PaneSize>
-		<PaneRect>0,0,1441,795</PaneRect>
+		<CurrentViewID>fdda1096-198e-437a-9c87-2dea997df7e1</CurrentViewID>
+		<PaneSize>0,0,899,576</PaneSize>
+		<PaneRect>0,0,899,576</PaneRect>
 		<PaneRestoreID> </PaneRestoreID>
 		<PaneID>7a290eda-ba1e-4791-8319-f4c08be7a511</PaneID>
-		<PaneWindowRect>5,50,1446,845</PaneWindowRect>
+		<PaneWindowRect>5,50,904,626</PaneWindowRect>
 		<Expanded>true</Expanded>
 	</Pane_16>
 	<Pane_17 ObjectID="7" ClassID="e72d4c59-e6a3-465a-8690-1a74ecc5a0ee" Version="3">
