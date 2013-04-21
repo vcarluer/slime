@@ -65,6 +65,7 @@ public class AchievementManager {
 		this.add(new PushButtonAch());
 		this.add(new HardcoreAch());
 		this.add(new NoMoreTrainingAch());
+		this.add(new BulletTimeAch());
 		
 		Collections.sort(this.orderedAchievements);
 	}

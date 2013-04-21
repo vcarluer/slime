@@ -8,6 +8,7 @@ import gamers.associate.SlimeAttack.game.SlimeFactory;
 import gamers.associate.SlimeAttack.game.Sounds;
 import gamers.associate.SlimeAttack.game.Util;
 import gamers.associate.SlimeAttack.game.achievements.AchievementStatistics;
+import gamers.associate.SlimeAttack.game.achievements.BulletTimeAch;
 import gamers.associate.SlimeAttack.game.achievements.CallMeMaxAch;
 import gamers.associate.SlimeAttack.game.achievements.CarabinAch;
 import gamers.associate.SlimeAttack.game.achievements.DontStopAch;
@@ -393,6 +394,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 					this.numberOfJump = 0;
 				}
 				
+				SlimeFactory.AchievementManager.test(BulletTimeAch.class);
 				SlimeFactory.AchievementManager.test(CallMeMaxAch.class);
 				this.isLanded = false;
 				AchievementStatistics.isLanded = false;
