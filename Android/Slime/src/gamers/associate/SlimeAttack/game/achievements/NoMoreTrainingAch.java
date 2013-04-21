@@ -10,7 +10,7 @@ public class NoMoreTrainingAch extends Achievement {
 	
 	@Override
 	protected boolean testInternal() {
-		return AchievementStatistics.levelNum == 8;
+		return AchievementStatistics.isModeStory && AchievementStatistics.levelNum == 8;
 	}
 
 }
