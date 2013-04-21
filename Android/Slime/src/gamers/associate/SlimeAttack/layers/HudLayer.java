@@ -53,8 +53,7 @@ import android.annotation.SuppressLint;
 
 	private static String Count_Text = "5,42";
 	
-	private CCBitmapFontAtlas countLabel;	
-	private float countX;
+	private CCBitmapFontAtlas countLabel;
 	
 	private CCMenu menu;
 	

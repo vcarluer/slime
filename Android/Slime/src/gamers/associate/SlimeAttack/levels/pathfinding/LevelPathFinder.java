@@ -23,8 +23,6 @@ public class LevelPathFinder {
 	private static int BlocSizeH = BlocDefinition.Default_Bloc_Height;
 	private static float sw;
 	private static float sh;
-	private static float sw2;
-	private static float sh2;
 	
 	public LevelPathFinder() {
 		this.wallPlatforms = new ArrayList<GameItem>();
@@ -127,8 +125,6 @@ public class LevelPathFinder {
 	public List<CGPoint> pathFinding() {
 		sw = CCDirector.sharedDirector().displaySize().width;
 		sh = CCDirector.sharedDirector().displaySize().height;
-		sw2 = CCDirector.sharedDirector().displaySize().width / 2f;
-		sh2 = CCDirector.sharedDirector().displaySize().height / 2f;
 		
 		List<CGPoint> points = new ArrayList<CGPoint>();
 		Node start = getStartNode();
