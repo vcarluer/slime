@@ -63,9 +63,9 @@ import com.badlogic.gdx.physics.box2d.World;
 
 @SuppressLint("DefaultLocale") public abstract class SlimeFactory {
 	// Debug vars	
-	public static final boolean LogOn = false;
-	public static boolean IsLevelSelectionOn = false;
-	public static boolean IsLevelSelectionShowButtons = false;
+	public static final boolean LogOn = true;
+	public static boolean IsLevelSelectionOn = true;
+	public static boolean IsLevelSelectionShowButtons = true;
 
 	public static boolean IsLevelDebugMode = false;
 	public static boolean IsForceDiffDebug =  false;
@@ -86,7 +86,7 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static final boolean debugSpeed = false;
 	public static final boolean debugDistance = false;
 	public static final boolean isBeta = false;
-	public static final boolean debugPathfinding = false;
+	public static final boolean debugPathfinding = true;
 	
 	// end debug ---
 	public static final float SGSDensityBase = 1.5f; // Samsung Galaxy S density

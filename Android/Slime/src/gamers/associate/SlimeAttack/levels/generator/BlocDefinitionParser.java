@@ -146,13 +146,17 @@ public class BlocDefinitionParser extends BlocDefinition {
 		}
 		float nbHazard = this.hazardLines.size();
 		int nbPick = 0;
-		switch (SlimeFactory.GameInfo.getDifficulty()) {
+		if (SlimeFactory.LevelBuilder.isTutorial()) {
+			nbPick = (int) nbHazard;
+		} else {
+			switch (SlimeFactory.GameInfo.getDifficulty()) {
 			default:
 			case LevelDifficulty.Easy: nbPick = (int) FloatMath.ceil(nbHazard / 4f); break;
 			case LevelDifficulty.Normal: nbPick = (int) FloatMath.ceil(nbHazard / 2f); break;
 			case LevelDifficulty.Hard: nbPick = (int) FloatMath.ceil(nbHazard * 3f / 4f); break;
 			case LevelDifficulty.Extrem: nbPick = (int) FloatMath.ceil(nbHazard); break;
-		}				
+		}
+		}					
 		
 		if (nbPick > 0) {
 			this.pickAndHandle(nbPick, this.hazardLines, level);

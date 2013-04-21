@@ -116,4 +116,10 @@ public class LevelBuilder extends AbstractLevelBuilder {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public boolean isTutorial() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

@@ -16,4 +16,5 @@ public interface ILevelBuilder {
 	void resetTotalStar();
 	boolean isBoss();
 	LevelDefinition getNext(LevelDefinition levelDefinition);
+	boolean isTutorial();
 }

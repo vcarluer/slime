@@ -23,6 +23,8 @@ public class LevelGraphGeneratorTutorial extends LevelGraphGeneratorRectangle {
 	private static final String TUT6_1 = "tut6-1";
 	private static final String TUT5_2 = "tut5-2";
 	private static final String TUT5_1 = "tut5-1";
+	private static final String TUT4_4 = "tut4-4";
+	private static final String TUT4_3 = "tut4-3";
 	private static final String TUT4_2 = "tut4-2";
 	private static final String TUT4_1 = "tut4-1";
 	private static final String TUT3_2 = "tut3-2";
@@ -72,12 +74,27 @@ public class LevelGraphGeneratorTutorial extends LevelGraphGeneratorRectangle {
 		// 4 - no sticky platform + death threat + star
 		case 4: // horizontal level
 			this.handleTut(TUT4_1);
+			this.bottomCount++;
+			this.maxX = 0;
+			this.maxY = 0;
+			this.minY = -1;
+			this.currentX = 0;
+			this.currentY = -1;
+			this.handleTut(TUT4_2);
 			this.rightCount++;
 			this.maxX = 1;
 			this.maxY = 0;
+			this.minY = -1;
+			this.currentX = 1;
+			this.currentY = -1;
+			this.handleTut(TUT4_3);
+			this.topCount++;
+			this.maxX = 1;
+			this.maxY = 0;
+			this.minY = -1;
 			this.currentX = 1;
 			this.currentY = 0;
-			this.handleTut(TUT4_2);
+			this.handleTut(TUT4_4);
 			break;
 		// 5 - icy platform + death threat + star
 		case 5: // vertical level down

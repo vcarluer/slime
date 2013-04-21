@@ -24,7 +24,8 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 	private int complexity;
 	private LevelHome home = new LevelHome();
 	private LevelDefinitionGenerator levelDef = new LevelDefinitionGenerator();
-	private LevelDefinitionParser levelparser = new LevelDefinitionParser(fileName, true);		
+	private LevelDefinitionParser levelparser = new LevelDefinitionParser(fileName, true);
+	private boolean isTutorial;
 	
 	public LevelBuilderGenerator() {				
 		this.levelparser.setLocalStorage(true);		
@@ -120,8 +121,8 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 		
 		if (levelDefToLoad.getGamePlay() == GamePlay.TimeAttack) {
 			SlimeFactory.PathFinder.reset();
-			boolean isTuto = this.isTut(levelDefToLoad);
-			AchievementStatistics.isTuto = isTuto;
+			this.isTutorial = this.isTut(levelDefToLoad);
+			AchievementStatistics.isTuto = this.isTutorial;
 			level.setLevelDefinition(levelDefToLoad);
 			this.resetTotalStar();
 			level.setTitle(TitleGenerator.generateNewTitle());
@@ -130,12 +131,12 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 			this.isBoss = levelDefToLoad.isBoss();
 			AchievementStatistics.isBoss = this.isBoss;
 
-			if (isTuto || levelDefToLoad.isInvalidated() || !levelDefToLoad.buildLevel(level)) {
+			if (this.isTutorial || levelDefToLoad.isInvalidated() || !levelDefToLoad.buildLevel(level)) {
 				levelDefToLoad.setInvalidated(false);
 				this.levelDef.setId(levelDefToLoad.getId());
 				this.levelDef.setGamePlay(levelDefToLoad.getGamePlay());
 				
-				if (isTuto) {
+				if (this.isTutorial) {
 					this.levelDef.setLevelGenerator(SlimeFactory.LevelGeneratorTutorial);	
 					level.setTitle(null);
 				} else {
@@ -148,7 +149,7 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 					this.levelDef.buildLevel(level);
 				}
 				
-				if ((!isTuto || SlimeFactory.IsLevelSelectionOn) && levelDefToLoad instanceof LevelDefinitionParser) {
+				if ((!this.isTutorial || SlimeFactory.IsLevelSelectionOn) && levelDefToLoad instanceof LevelDefinitionParser) {
 					LevelDefinitionParser parser = (LevelDefinitionParser) levelDefToLoad;					
 					if (SlimeFactory.IsLevelSelectionOn) {
 						parser.setLocalStorage(false);
@@ -181,5 +182,10 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 	public LevelDefinition getNext(LevelDefinition levelDefinition) {
 		WorldPackage world = SlimeFactory.PackageManager.getCurrentPackage();
 		return world.getNext(levelDefinition);
+	}
+
+	@Override
+	public boolean isTutorial() {
+		return this.isTutorial;
 	}
 }

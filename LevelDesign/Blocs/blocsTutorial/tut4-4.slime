@@ -1,0 +1,27 @@
+BlocInfo;None;0;120;480;480;0;BlocInfo-0;5;;;false;true;false;b
+TimeAttack;None;-2.0;0.0;0.0;0.0;0.0;2;1
+Sprite;None;338.0;165.0;80.0;80.0;180.0;tank;tank-evacuation;1
+Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 387.15092,355.22114 -17.98895,0.37489 -5.98264,6.38858 0.0429,8.16637 -0.82001,5.90563 -0.0447,5.48523 -1.90889,5.38359 -16.11575,38.52023 -1.71834,1.77638 0.0977,7.31781 74.0819,0.14597 -0.29325,-8.10386 -6.36155,-5.82275 -15.07824,-33.81779 -1.53799,-5.24464 -0.0639,-5.84817 L 392,370 l -0.0598,-7.93219;false;true;true
+GoalPortal;None;343.0;149.0;75.0;16.0;180.0
+Platform_NoSticky;None;-52.0;84.0;136.0;32.0;90.0
+Sprite;None;368.0;54.0;32.0;16.0;-90.0;arrows;arrow-green;1;2;0;None;1;true;true;0;false;0
+Sprite;None;368.0;110.0;32.0;16.0;-90.0;arrows;arrow-green;1;2;0;None;1;true;true;0.25;false;0
+Platform_NoSticky_Corner;None;0.0;448.0;32.0;32.0;180.0
+Platform_T;None;0.0;168.0;32.0;32.0;90.0
+Platform_NoSticky;None;-108.0;308.0;248.0;32.0;90.0
+Platform_NoSticky;None;192.0;288.0;256.0;32.0;180.0
+Platform_NoSticky;None;32.0;448.0;416.0;32.0;180.0
+Platform_NoSticky_Corner;None;448.0;448.0;32.0;32.0;-90.0
+Platform_NoSticky;None;400.0;368.0;128.0;32.0;-90.0
+Sprite;None;364.0;244.0;30.0;236.0;0.0;tank;tank-bottom;1
+Polygon;None;0.0;0.0;0.0;0.0;0.0;120.0;480.0;m 368.42667,355.71844 19.69984,0.24133 0.22464,-214.72404 5.14695,-5.87703 -0.0601,-8.69983 -5.14444,-6.61297 -19.66795,0.15492 -3.9203,5.85514 -0.0184,9.23987 3.90851,6.23415;false;true;true
+Box_Bottle;None;184.0;320.0;48.0;72.0;0.0;false;true
+Box_Bottle;None;288.0;320.0;48.0;72.0;0.0;false;true
+Platform_NoSticky;None;320.0;128.0;288.0;32.0;-90.0
+Platform_T;None;448.0;288.0;32.0;32.0;-90.0
+Platform_NoSticky_Corner;None;160.0;288.0;32.0;32.0;180.0
+Platform_NoSticky;None;32.0;168.0;128.0;32.0;180.0
+Platform_NoSticky_Corner;None;160.0;168.0;32.0;32.0;0.0
+Platform_NoSticky;None;132.0;228.0;88.0;32.0;-90.0
+Box_Multitubes;None;32.0;200.0;128.0;72.0;0.0;true;true
+Platform_NoSticky_Corner;None;0.0;0.0;32.0;32.0;0.0
