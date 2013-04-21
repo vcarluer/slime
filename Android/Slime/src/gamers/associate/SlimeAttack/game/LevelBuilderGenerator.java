@@ -39,6 +39,7 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 	{
 		SlimeFactory.Log.d(SlimeAttack.TAG, "build(Level level, String id, GamePlay gamePlay) start");
 		// this one is only call for survival and home! Bad design powa. Juste ensure it here
+		this.isTutorial = false;
 		if (gamePlay == GamePlay.TimeAttack) return;
 
 		SlimeFactory.PathFinder.reset();
@@ -115,6 +116,8 @@ public class LevelBuilderGenerator extends AbstractLevelBuilder
 	@Override
 	public void build(Level level, LevelDefinition levelDefToLoad) {		
 		SlimeFactory.Log.d(SlimeAttack.TAG, "build(Level level, LevelDefinition levelDefToLoad) start");
+		this.isTutorial = false;
+		this.isBoss = false;
 		if (levelDefToLoad.getGamePlay() == GamePlay.Survival) {
 			this.build(level, levelDef.getId(), levelDef.getGamePlay());
 		}
