@@ -39,7 +39,7 @@ import android.annotation.SuppressLint;
 
 @SuppressLint("DefaultLocale") public class HudLayer extends CCLayer implements IGameItemHandler {
 	private static final String TIME_S_UP = "TIME'S UP";
-	private static final int countPaddingX = (int) (5 * SlimeFactory.getWidthRatio());
+	private static final int countPadding = (int) (5 * SlimeFactory.SGSDensity);
 	private static final float scoreTakenPadding = 10f * SlimeFactory.getWidthRatio();
 	private static final float TextHeight = 60f * SlimeFactory.getWidthRatio();
 	private static final float BonusHeight = 30f * SlimeFactory.getWidthRatio();
@@ -95,14 +95,14 @@ import android.annotation.SuppressLint;
 		this.menu = HomeLayer.getPauseButton(this, "goPause");
 		this.addChild(this.menu);
 		
-		this.countLabel = getMenuLabel(Count_Text);		
-		this.referenceLabel = getMenuLabel(Count_Text);		
+		this.countLabel = getMenuLabel(Count_Text);
 		this.countLabel.setAnchorPoint(0, 0.5f);
+		this.referenceLabel = getMenuLabel(Count_Text);		
 		this.addChild(this.countLabel);
 		// Position overrided in SetHudStartText
 		this.countLabel.setPosition(
-				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - (this.referenceLabel.getContentSizeRef().width) - countPaddingX, 
-				CCDirector.sharedDirector().winSize().getHeight() - starCountHShift));
+				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - countPadding - this.referenceLabel.getContentSizeRef().width * this.referenceLabel.getScale(), 
+				CCDirector.sharedDirector().winSize().getHeight() - countPadding - (this.referenceLabel.getContentSizeRef().height * this.referenceLabel.getScale()) / 2));
 		
 		this.scoreTaken = getMenuLabel("   ", BonusHeight, SlimeFactory.ColorSlime);
 		this.scoreTaken.setAnchorPoint(0, 0.5f);
@@ -231,10 +231,6 @@ import android.annotation.SuppressLint;
 	
 	public void setHudStartText(String text) {
 		this.countLabel.setString(text.toUpperCase());
-		this.countX = CCDirector.sharedDirector().winSize().getWidth() - countPaddingX - (this.referenceLabel.getContentSizeRef().width);
-		this.countLabel.setPosition(
-				CGPoint.ccp(this.countX, 
-				CCDirector.sharedDirector().winSize().getHeight() - starCountHShift));
 	}
 	
 	public void hideHudText() {
