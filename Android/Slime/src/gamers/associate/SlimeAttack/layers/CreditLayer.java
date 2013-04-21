@@ -243,6 +243,7 @@ public class CreditLayer extends CCLayer implements IBackableLayer {
 				"Jeremie Devauchelle",
 				"Etienne Large",
 				"Akentarun",
+				"Seta",
 				"Kroustine la tartine masquee",
 				"Fenrhir",
 				"Paul Verveine",

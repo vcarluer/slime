@@ -8,6 +8,7 @@ import gamers.associate.SlimeAttack.levels.generator.BlocDefinition;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGSize;
 
@@ -20,10 +21,14 @@ public class LevelPathFinder {
 	private GameItem goal;
 	private static int BlocSizeW = BlocDefinition.Default_Bloc_Width;
 	private static int BlocSizeH = BlocDefinition.Default_Bloc_Height;
+	private static float sw;
+	private static float sh;
+	private static float sw2;
+	private static float sh2;
 	
 	public LevelPathFinder() {
 		this.wallPlatforms = new ArrayList<GameItem>();
-		Pathfinder.canCutCorners = true;
+		Pathfinder.canCutCorners = true;	
 	}
 	
 	public void reset() {
@@ -70,21 +75,29 @@ public class LevelPathFinder {
 		
 	}
 	
+	private float levelPathWidth() {
+		return this.levelSize.width - sw;
+	}
+	
+	private float levelPathHeight() {
+		return this.levelSize.height - sh;
+	}
+	
 	private int getIdxIFrom(float length) {
 		return (int) FloatMath.floor(length / BlocSizeW);
 	}
 	
 	private int getIdxJFrom(float length) {
 		// Level height added to handle negative coordinates... Arg. No way to have minimum y in level for now.
-		return (int) FloatMath.floor((length + this.levelSize.height) / BlocSizeH);
+		return (int) FloatMath.floor((length + levelPathHeight()) / BlocSizeH);
 	}
 	
 	private int getArrayWidth() {
-		return getIdxIFrom(this.levelSize.width) + 2;
+		return getIdxIFrom(levelPathWidth()) + 2;
 	}
 	
 	private int getArrayHeight() {
-		return getIdxJFrom(this.levelSize.height) + 2;
+		return getIdxJFrom(levelPathHeight()) + 2;
 	}
 	
 	private boolean[][] getWallArray() {
@@ -112,6 +125,11 @@ public class LevelPathFinder {
 	}
 	
 	public List<CGPoint> pathFinding() {
+		sw = CCDirector.sharedDirector().displaySize().width;
+		sh = CCDirector.sharedDirector().displaySize().height;
+		sw2 = CCDirector.sharedDirector().displaySize().width / 2f;
+		sh2 = CCDirector.sharedDirector().displaySize().height / 2f;
+		
 		List<CGPoint> points = new ArrayList<CGPoint>();
 		Node start = getStartNode();
 		Node goal = getGoalNode();
@@ -128,7 +146,7 @@ public class LevelPathFinder {
 		}
 		
 		for(Node node : nodes) {
-			CGPoint point = CGPoint.make((node.x - 1) * BlocSizeW + BlocSizeW / 2f, (node.y - 1) * BlocSizeH - this.levelSize.height);
+			CGPoint point = CGPoint.make((node.x - 1) * BlocSizeW + BlocSizeW / 2f, (node.y - 1) * BlocSizeH + BlocSizeH / 2f - levelPathHeight());
 			points.add(point);
 		}
 		
@@ -137,8 +155,8 @@ public class LevelPathFinder {
 
 	private void debugPathfindingBefore(Node start, Node finish, boolean[][] mapWalls) {
 		StringBuilder builder = new StringBuilder();
-		for(int i = 0; i < mapWalls.length; i++) {
-			for(int j = 0; j < mapWalls[i].length; j++) {
+		for(int j = mapWalls[0].length - 1; j >=0 ; j--) {
+			for(int i = 0; i < mapWalls.length; i++) {			
 				if (mapWalls[i][j]) {
 					builder.append("W");
 				} else {
@@ -162,8 +180,8 @@ public class LevelPathFinder {
 	
 	private void debugPathfindingAfter(Node start, Node finish, boolean[][] mapWalls, List<Node> solution) {
 		StringBuilder builder = new StringBuilder();
-		for(int i = 0; i < mapWalls.length; i++) {
-			for(int j = 0; j < mapWalls[i].length; j++) {
+		for(int j = mapWalls[0].length - 1; j >=0 ; j--) {
+			for(int i = 0; i < mapWalls.length; i++) {			
 				if (mapWalls[i][j]) {
 					builder.append("W");
 				} else {

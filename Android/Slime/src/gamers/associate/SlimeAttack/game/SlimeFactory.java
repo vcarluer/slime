@@ -63,7 +63,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 @SuppressLint("DefaultLocale") public abstract class SlimeFactory {
 	// Debug vars	
-	public static final boolean LogOn = true;
+	public static final boolean LogOn = false;
 	public static boolean IsLevelSelectionOn = false;
 	public static boolean IsLevelSelectionShowButtons = false;
 
@@ -82,11 +82,11 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static final boolean unlockAll = false; // Unlock all levels and modes
 	public static final boolean unlockAllAchievement = false;
 	public static final boolean noUnlockHardcoreGamer = false;
-	public static final boolean resetAchievements = true; // if true can not unlock allachievements
+	public static final boolean resetAchievements = false; // if true can not unlock allachievements
 	public static final boolean debugSpeed = false;
 	public static final boolean debugDistance = false;
 	public static final boolean isBeta = false;
-	public static final boolean debugPathfinding = true;
+	public static final boolean debugPathfinding = false;
 	
 	// end debug ---
 	public static final float SGSDensityBase = 1.5f; // Samsung Galaxy S density
