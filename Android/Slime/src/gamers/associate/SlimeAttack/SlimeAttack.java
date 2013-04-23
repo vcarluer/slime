@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -386,5 +387,12 @@ public class SlimeAttack extends Activity {
 	public int getCurrentMusicVolume() {
 		AudioManager audMgr = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
 		return audMgr.getStreamVolume(AudioManager.STREAM_MUSIC);
+	}
+	
+	public void buyGame() {
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		String marketId = "gamers.associate.SlimeAttack";		
+		intent.setData(Uri.parse("market://details?id=" + marketId));
+		startActivity(intent);
 	}
 }

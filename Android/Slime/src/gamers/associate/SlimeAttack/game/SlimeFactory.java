@@ -89,6 +89,9 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static final boolean debugPathfinding = false;
 	
 	// end debug ---
+	public static boolean LiteVersion = true;
+	public static final int LiteStoryMaxLevel = 2;
+		
 	public static final float SGSDensityBase = 1.5f; // Samsung Galaxy S density
 	public static ccColor3B ColorSlime = ccColor3B.ccc3(0, 170, 54);
 	public static ccColor3B ColorSlimeBorder = ccColor3B.ccc3(0, 62, 8);
@@ -102,7 +105,7 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static String slimeFileExt = ".slime";
 	private static final int SGSWidthBase = 800;
 	private static final int SGSHeightBase = 480;
-	public static final int BackableLayer = 555;
+	public static final int BackableLayer = 555;	
 	private static float WidthRatio;
 	private static float HeightRatio;
 	

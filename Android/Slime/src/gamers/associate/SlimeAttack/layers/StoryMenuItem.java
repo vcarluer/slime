@@ -5,6 +5,7 @@ import gamers.associate.SlimeAttack.game.Level;
 import gamers.associate.SlimeAttack.game.SlimeFactory;
 import gamers.associate.SlimeAttack.game.Sounds;
 import gamers.associate.SlimeAttack.items.custom.RankFactory;
+import gamers.associate.SlimeAttack.levels.GamePlay;
 import gamers.associate.SlimeAttack.levels.LevelDefinition;
 
 import org.cocos2d.actions.interval.CCDelayTime;
@@ -14,6 +15,8 @@ import org.cocos2d.layers.CCLayer;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.transitions.CCFadeTransition;
+import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 
 import android.view.MotionEvent;
@@ -111,6 +114,11 @@ public class StoryMenuItem extends CCLayer {
 			if (this.levelDefinition.getNumber() == 1) {
 				SlimeFactory.ContextActivity.runIntro(this);
 			} else {
+				if (SlimeFactory.LiteVersion && this.levelDefinition.getNumber() > SlimeFactory.LiteStoryMaxLevel) {
+					CCTransitionScene transition = CCFadeTransition.transition(0.5f, LiteTimeAttackGameOverLayer.getScene());
+					CCDirector.sharedDirector().replaceScene(transition);
+					return;
+				}
 				this.runLevel();
 			}
 		}

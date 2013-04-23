@@ -142,7 +142,15 @@ import android.view.MotionEvent;
 			CCDirector.sharedDirector().replaceScene(transition);
 			return;
 		} 
-				
+		
+		if (SlimeFactory.LiteVersion && 
+				Level.currentLevel.getGamePlay().getType() == GamePlay.TimeAttack && 
+				Level.currentLevel.getLevelDefinition().getNumber() >= SlimeFactory.LiteStoryMaxLevel) {
+			CCTransitionScene transition = CCFadeTransition.transition(0.5f, LiteTimeAttackGameOverLayer.getScene());
+			CCDirector.sharedDirector().replaceScene(transition);
+			return;
+		}
+		
 		Level.currentLevel.goNext();		
 	}
 	
