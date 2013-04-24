@@ -89,8 +89,12 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static final boolean debugPathfinding = false;
 	
 	// end debug ---
-	public static boolean LiteVersion = true;
-	public static final int LiteStoryMaxLevel = 2;
+	public static boolean LiteVersion = false;
+	public static final int LiteStoryMaxLevel = 15;
+	public static final int LiteSurvivalMaxDiff = LevelDifficulty.Easy;
+	public static final int LiteMarketSize = 96;
+	public static final String LiteStory = "STORY";
+	public static final String LiteSurvival = "SURVIVAL";
 		
 	public static final float SGSDensityBase = 1.5f; // Samsung Galaxy S density
 	public static ccColor3B ColorSlime = ccColor3B.ccc3(0, 170, 54);

@@ -37,11 +37,13 @@ import android.view.MotionEvent;
 	public TimeAttackGameOverLayer() {
 		HomeLayer.addBkg(this, 800, 480, "game-over.png");
 		this.backMenu = HomeLayer.getBackButton(this, "goBack");
-		this.congratLabel = CCLabel.makeLabel("Congratulations!!!".toUpperCase(), "fonts/Slime.ttf", 42 * SlimeFactory.getWidthRatio());
-		this.endLabel = CCLabel.makeLabel("World".toUpperCase(), "fonts/Slime.ttf", 28 * SlimeFactory.getWidthRatio());
 		this.gameOverLabel = CCLabel.makeLabel("Game Over!".toUpperCase(), "fonts/Slime.ttf", 68 * SlimeFactory.getWidthRatio());
 		this.gameOverLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + 100 * SlimeFactory.getWidthRatio());
+		
+		this.congratLabel = CCLabel.makeLabel("Congratulations!!!".toUpperCase(), "fonts/Slime.ttf", 42 * SlimeFactory.getWidthRatio());
 		this.congratLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY());
+		
+		this.endLabel = CCLabel.makeLabel("World".toUpperCase(), "fonts/Slime.ttf", 28 * SlimeFactory.getWidthRatio());				
 		this.yEndRelative = - (42 + 11) * SlimeFactory.getWidthRatio();
 		this.endLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + this.yEndRelative);
 		this.endLabel.setColor(SlimeFactory.ColorSlimeGold);

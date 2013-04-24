@@ -129,10 +129,16 @@ import android.view.MotionEvent;
 		
 		if (Level.currentLevel.getGamePlay().getType() == GamePlay.Survival) {
 			if (SlimeFactory.LevelBuilder.isBoss()) {
-				if (SlimeFactory.GameInfo.getDifficulty() != LevelDifficulty.Extrem) {
-					CCTransitionScene transition = CCFadeTransition.transition(0.5f, SurvivalGameOverLayer.getScene());
+				if (SlimeFactory.LiteVersion) {
+					CCTransitionScene transition = CCFadeTransition.transition(0.5f, LiteTimeAttackGameOverLayer.getScene(SlimeFactory.LiteSurvival));
 					CCDirector.sharedDirector().replaceScene(transition);
 					return;
+				} else {					
+					if (SlimeFactory.GameInfo.getDifficulty() != LevelDifficulty.Extrem) {
+						CCTransitionScene transition = CCFadeTransition.transition(0.5f, SurvivalGameOverLayer.getScene());
+						CCDirector.sharedDirector().replaceScene(transition);
+						return;
+					}
 				}
 			}
 		}
@@ -146,7 +152,7 @@ import android.view.MotionEvent;
 		if (SlimeFactory.LiteVersion && 
 				Level.currentLevel.getGamePlay().getType() == GamePlay.TimeAttack && 
 				Level.currentLevel.getLevelDefinition().getNumber() >= SlimeFactory.LiteStoryMaxLevel) {
-			CCTransitionScene transition = CCFadeTransition.transition(0.5f, LiteTimeAttackGameOverLayer.getScene());
+			CCTransitionScene transition = CCFadeTransition.transition(0.5f, LiteTimeAttackGameOverLayer.getScene(SlimeFactory.LiteStory));
 			CCDirector.sharedDirector().replaceScene(transition);
 			return;
 		}

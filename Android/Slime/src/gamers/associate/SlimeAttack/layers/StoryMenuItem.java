@@ -2,6 +2,7 @@ package gamers.associate.SlimeAttack.layers;
 
 import gamers.associate.SlimeAttack.R;
 import gamers.associate.SlimeAttack.game.Level;
+import gamers.associate.SlimeAttack.game.Rank;
 import gamers.associate.SlimeAttack.game.SlimeFactory;
 import gamers.associate.SlimeAttack.game.Sounds;
 import gamers.associate.SlimeAttack.items.custom.RankFactory;
@@ -23,11 +24,14 @@ import android.view.MotionEvent;
 
 public class StoryMenuItem extends CCLayer {
 	public static final int SIZE = 165;
-	private static final float scaleStar = 1.5f;
+	private static final float scaleStar = 1.5f; // 40 * 1.5 = 60
+	private static final float targetSize = 60;
 	private static final float yshift = - 35;
+	
 	private CCSprite backItem; 
 	private CCLabel idItem;
 	private CCSprite starItem;	
+	private CCSprite marketItem;
 	
 	private LevelDefinition levelDefinition;
 	private ScrollerLayer scroller;
@@ -69,15 +73,29 @@ public class StoryMenuItem extends CCLayer {
 			this.removeChild(this.starItem, true);
 		}
 		
+		if (this.marketItem != null) {
+			this.removeChild(this.marketItem, true);
+		}
+		
 		if (this.levelDefinition != null) {
 			this.idItem = SlimeFactory.getLabel(String.valueOf(this.levelDefinition.getNumber()));
-			this.idItem.setPosition(0, 50 + yshift);											
-			this.starItem = RankFactory.getSprite(this.levelDefinition.getRank());		
-			this.starItem.setPosition(0,  yshift);
-			this.starItem.setScale(scaleStar);
+			this.idItem.setPosition(0, 50 + yshift);	
+			if (SlimeFactory.LiteVersion && 
+					this.levelDefinition.getNumber() > SlimeFactory.LiteStoryMaxLevel &&
+					this.levelDefinition.getRank() != Rank.Lock) {
+				this.marketItem = CCSprite.sprite("playstore.png");
+				this.marketItem.setPosition(0,  yshift);
+				this.marketItem.setScale(targetSize / SlimeFactory.LiteMarketSize);
+				this.addChild(this.marketItem);
+			} else {			
+				this.starItem = RankFactory.getSprite(this.levelDefinition.getRank());		
+				this.starItem.setPosition(0,  yshift);
+				this.starItem.setScale(scaleStar);
+				this.addChild(this.starItem);
+			}
 					
 			this.addChild(this.idItem);
-			this.addChild(this.starItem);
+			
 		}
 	}
 	
@@ -115,7 +133,7 @@ public class StoryMenuItem extends CCLayer {
 				SlimeFactory.ContextActivity.runIntro(this);
 			} else {
 				if (SlimeFactory.LiteVersion && this.levelDefinition.getNumber() > SlimeFactory.LiteStoryMaxLevel) {
-					CCTransitionScene transition = CCFadeTransition.transition(0.5f, LiteTimeAttackGameOverLayer.getScene());
+					CCTransitionScene transition = CCFadeTransition.transition(0.5f, LiteTimeAttackGameOverLayer.getScene(SlimeFactory.LiteStory));
 					CCDirector.sharedDirector().replaceScene(transition);
 					return;
 				}

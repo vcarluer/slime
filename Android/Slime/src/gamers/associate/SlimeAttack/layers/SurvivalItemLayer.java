@@ -13,10 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.cocos2d.layers.CCScene;
+import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.transitions.CCFadeTransition;
+import org.cocos2d.transitions.CCTransitionScene;
 
 import android.annotation.SuppressLint;
 
@@ -32,6 +34,7 @@ import android.annotation.SuppressLint;
 	private CCSprite diffSprite;
 	private CCLabel inProgress;
 	private CCLabel inProgressLevel;
+	private CCSprite marketSprite;
 	
 	private static float iconSize = 70f * SlimeFactory.getWidthRatio();
 	private static final float iconSizeReference = 87f;
@@ -61,8 +64,8 @@ import android.annotation.SuppressLint;
 		
 		this.inProgressLevel = SlimeFactory.getLabel("Level x", fontSizeInfo);
 		this.inProgressLevel.setColor(SlimeFactory.ColorSlimeGold);
-		this.inProgressLevel.setVisible(false);
-		this.addChild(this.inProgressLevel);
+		this.inProgressLevel.setVisible(false);				
+		this.addChild(this.inProgressLevel);				
 	}
 	
 	@Override
@@ -77,6 +80,19 @@ import android.annotation.SuppressLint;
 				+ paddingSprite);
 		this.addChild(this.diffSprite);
 		this.toDestroy.add(this.diffSprite);
+		
+		if (this.isUnlocked && SlimeFactory.LiteVersion) {
+			if (this.levelDiff > SlimeFactory.LiteSurvivalMaxDiff) {
+				if (this.marketSprite != null) {
+					this.removeChild(this.marketSprite, true);
+				}
+				
+				this.marketSprite = CCSprite.sprite("playstore.png");
+				this.marketSprite.setScale(1.5f);
+				this.marketSprite.setPosition(this.width / 2f + (this.paddingX), this.height / 2f);
+				this.addChild(this.marketSprite);
+			}									
+		}
 		
 		int score = SlimeFactory.GameInfo.getScore(this.levelDiff);
 		if (score > 0) {
@@ -167,6 +183,11 @@ import android.annotation.SuppressLint;
 
 	@Override
 	protected CCScene getTransition() {
+		if (SlimeFactory.LiteVersion && this.levelDiff > SlimeFactory.LiteSurvivalMaxDiff) {
+			CCTransitionScene transition = CCFadeTransition.transition(0.5f, LiteTimeAttackGameOverLayer.getScene(SlimeFactory.LiteSurvival));				
+			return transition;
+		}
+		
 		if (!SlimeFactory.GameInfo.canContinueSurvival(this.levelDiff)) {
 			SlimeFactory.GameInfo.resetDifficulty(this.levelDiff);
 		} else {
