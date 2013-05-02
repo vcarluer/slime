@@ -90,7 +90,7 @@ import com.badlogic.gdx.physics.box2d.World;
 	
 	// end debug ---
 	public static boolean LiteVersion = true;
-	public static final int LiteStoryMaxLevel = 5;
+	public static final int LiteStoryMaxLevel = 13;
 	public static final int LiteSurvivalMaxDiff = LevelDifficulty.Easy;
 	public static final int LiteMarketSize = 96;
 	public static final String LiteStory = "STORY";

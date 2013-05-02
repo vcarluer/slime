@@ -70,8 +70,9 @@ import android.annotation.SuppressLint;
 	
 	@Override
 	public void onEnter() {
-		super.onEnter();
-
+		this.isUnlocked = this.levelDiff <= SlimeFactory.GameInfo.getMaxLevelDifficulty();		
+		super.onEnter();		
+		
 		this.diffSprite = getLevelSprite(this.levelDiff, this.isUnlocked);				
 		
 		diffSprite.setPosition(this.labelX, 
@@ -184,7 +185,7 @@ import android.annotation.SuppressLint;
 	@Override
 	protected CCScene getTransition() {
 		if (SlimeFactory.LiteVersion && this.levelDiff > SlimeFactory.LiteSurvivalMaxDiff) {
-			CCTransitionScene transition = CCFadeTransition.transition(0.5f, LiteTimeAttackGameOverLayer.getScene(SlimeFactory.LiteSurvival));				
+			CCTransitionScene transition = CCFadeTransition.transition(0.5f, LiteGameOverLayer.getScene(SlimeFactory.LiteSurvival));				
 			return transition;
 		}
 		

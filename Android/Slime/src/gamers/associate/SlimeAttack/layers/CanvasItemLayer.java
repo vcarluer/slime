@@ -59,15 +59,17 @@ public abstract class CanvasItemLayer extends CCLayer {
 
 	@Override
 	public void onEnter() {
-		if (this.canvas == null) {
-			this.canvas = CCSprite.sprite(this.getBackgroundPath());
-			canvas.setAnchorPoint(0, 0);
-			canvas.setScaleX(this.scaleX);
-			canvas.setScaleY(this.scaleY);			
-			canvas.setPosition(paddingX, paddingY);
-			
-			this.addChild(canvas, Level.zUnder);
+		if (this.canvas != null) {
+			this.removeChild(this.canvas, true);
 		}
+		
+		this.canvas = CCSprite.sprite(this.getBackgroundPath());
+		canvas.setAnchorPoint(0, 0);
+		canvas.setScaleX(this.scaleX);
+		canvas.setScaleY(this.scaleY);			
+		canvas.setPosition(paddingX, paddingY);
+		
+		this.addChild(canvas, Level.zUnder);	
 		
 		this.label.setString(this.getTitle());
 		

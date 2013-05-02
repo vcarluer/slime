@@ -27,7 +27,7 @@ import org.cocos2d.types.ccColor3B;
 import android.annotation.SuppressLint;
 import android.view.MotionEvent;
 
-@SuppressLint("DefaultLocale") public class LiteTimeAttackGameOverLayer extends CCLayer implements IBackableLayer {
+@SuppressLint("DefaultLocale") public class LiteGameOverLayer extends CCLayer implements IBackableLayer {
 	private static CCScene scene;	
 	private static int basePaddingMark = 85;
 	private static int basePaddingCongrat = 100;
@@ -35,7 +35,6 @@ import android.view.MotionEvent;
 	private CCLabel congratLabel;
 	private CCLabel mark1;
 	private CCLabel mark2;
-	private CCLabel mark3;
 	
 	private CCMenu backMenu;	
 	private CCMenu buyTheGameMenu;
@@ -45,18 +44,18 @@ import android.view.MotionEvent;
 	public static CCScene getScene(String mode) {
 		if (scene == null) {
 			scene = CCScene.node();
-			scene.addChild(new LiteTimeAttackGameOverLayer(mode));
+			scene.addChild(new LiteGameOverLayer(mode));
 		}
 		
 		return scene;
 	}
 	
-	public LiteTimeAttackGameOverLayer(String mode) {
+	public LiteGameOverLayer(String mode) {
 		HomeLayer.addBkg(this, 800, 480, "game-over.png");
 		this.backMenu = HomeLayer.getBackButton(this, "goBack");
 				
-		this.gameOverLabel = CCLabel.makeLabel(("Lite " + mode + " Over").toUpperCase(), "fonts/Slime.ttf", 68 * SlimeFactory.getWidthRatio());
-		this.gameOverLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + (basePaddingCongrat + 68) * SlimeFactory.getWidthRatio());
+		this.gameOverLabel = CCLabel.makeLabel(("Lite " + mode + " Over").toUpperCase(), "fonts/Slime.ttf", 58 * SlimeFactory.getWidthRatio());
+		this.gameOverLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + (basePaddingCongrat + 58) * SlimeFactory.getWidthRatio());
 		
 		this.congratLabel = CCLabel.makeLabel("Congratulations!".toUpperCase(), "fonts/Slime.ttf", 42 * SlimeFactory.getWidthRatio());		
 		this.congratLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + basePaddingCongrat* SlimeFactory.getWidthRatio());
@@ -73,23 +72,18 @@ import android.view.MotionEvent;
 		this.buyTheGameMenu.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY());
 		
 		this.mark1 = CCLabel.makeLabel("80 fun and challenging levels".toUpperCase(), "fonts/Slime.ttf", 32f * SlimeFactory.getWidthRatio());		
-		this.mark1.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() - basePaddingMark* SlimeFactory.getWidthRatio());
+		this.mark1.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() - (basePaddingMark + 42)* SlimeFactory.getWidthRatio());
 		this.mark1.setColor(SlimeFactory.ColorSlimeGold);
 		
 		this.mark2 = CCLabel.makeLabel("Full survival mode".toUpperCase(), "fonts/Slime.ttf", 32f * SlimeFactory.getWidthRatio());		
-		this.mark2.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() - (basePaddingMark + 42)* SlimeFactory.getWidthRatio());
-		this.mark2.setColor(SlimeFactory.ColorSlimeGold);
-		
-		this.mark3 = CCLabel.makeLabel("Best platform game in zone 51".toUpperCase(), "fonts/Slime.ttf", 32f * SlimeFactory.getWidthRatio());		
-		this.mark3.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() - (basePaddingMark + 84)* SlimeFactory.getWidthRatio());
-		this.mark3.setColor(SlimeFactory.ColorSlimeGold);		
+		this.mark2.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() - (basePaddingMark + 84)* SlimeFactory.getWidthRatio());
+		this.mark2.setColor(SlimeFactory.ColorSlimeGold);	
 				
 		this.addChild(this.gameOverLabel);
 		this.addChild(this.congratLabel);		
 		this.addChild(this.buyTheGameMenu);
 		this.addChild(this.mark1);
 		this.addChild(this.mark2);
-		this.addChild(this.mark3);
 		
 		this.addChild(this.backMenu);
 		this.setIsTouchEnabled(true);

@@ -133,7 +133,7 @@ public class StoryMenuItem extends CCLayer {
 				SlimeFactory.ContextActivity.runIntro(this);
 			} else {
 				if (SlimeFactory.LiteVersion && this.levelDefinition.getNumber() > SlimeFactory.LiteStoryMaxLevel) {
-					CCTransitionScene transition = CCFadeTransition.transition(0.5f, LiteTimeAttackGameOverLayer.getScene(SlimeFactory.LiteStory));
+					CCTransitionScene transition = CCFadeTransition.transition(0.5f, LiteGameOverLayer.getScene(SlimeFactory.LiteStory));
 					CCDirector.sharedDirector().replaceScene(transition);
 					return;
 				}
