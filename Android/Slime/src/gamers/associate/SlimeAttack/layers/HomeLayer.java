@@ -91,21 +91,24 @@ public class HomeLayer extends CCLayer {
 		float creditScale = 0.5f * SlimeFactory.getHeightRatio();
 		creditSprite.setScale(creditScale);
 		
+		float heightMenu = 64 * creditScale;
 		if (SlimeFactory.LiteVersion) {
 			CCSprite spriteN = CCSprite.sprite("playstore.png");
 			CCSprite spriteS = CCSprite.sprite("playstore.png");
 			this.buyTheGameImage = CCMenuItemSprite.item(spriteN, spriteS, this, "buyFullGame");
 			this.buyTheGameImage.setScale((64f / SlimeFactory.LiteMarketSize) * SlimeFactory.getWidthRatio());		
 			
+			float padding = 10f * SlimeFactory.SGSDensity;
+			heightMenu = heightMenu * 2 +  padding;
 			this.creditMenu = CCMenu.menu(creditSprite, buyTheGameImage);
-			this.creditMenu.alignItemsVertically(10f * SlimeFactory.SGSDensity);
+			this.creditMenu.alignItemsVertically(padding);
 		} else {
 			this.creditMenu = CCMenu.menu(creditSprite);
 		}				
 				
 		this.creditMenu.setPosition(
 				CCDirector.sharedDirector().winSize().getWidth() - (64 * creditScale) - PauseLayer.PaddingX, 
-				CCDirector.sharedDirector().winSize().getHeight() - ((64 * creditScale) * 2 + 10f * SlimeFactory.SGSDensity) - PauseLayer.PaddingY);
+				CCDirector.sharedDirector().winSize().getHeight() - heightMenu - PauseLayer.PaddingY);
 		this.addChild(this.creditMenu);
 		
 		if (SlimeFactory.isBeta) {

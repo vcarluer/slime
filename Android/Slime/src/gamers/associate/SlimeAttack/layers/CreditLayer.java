@@ -220,9 +220,8 @@ public class CreditLayer extends CCLayer implements IBackableLayer {
 		this.addInfo("Sound Design", mbn, amz);
 		this.addInfo("Music Composer", mbn, kmd);
 		this.addInfo("Audio Engineering", mbn);
-		// market
-		this.addInfo("Community Manager", amz);
-		this.addInfo("Go to market", amz, vcr);
+		// market		
+		this.addInfo("Go to market", vcr);
 		this.addInfo("Producer", "None! we are indie");
 		// other
 		this.addInfo("Beta Test", this.getBetaTesters());

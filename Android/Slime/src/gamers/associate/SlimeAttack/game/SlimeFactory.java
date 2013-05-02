@@ -82,14 +82,14 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static final boolean unlockAll = false; // Unlock all levels and modes
 	public static final boolean unlockAllAchievement = false;
 	public static final boolean noUnlockHardcoreGamer = false;
-	public static final boolean resetAchievements = true; // if true can not unlock allachievements
+	public static final boolean resetAchievements = false; // if true can not unlock allachievements
 	public static final boolean debugSpeed = false;
 	public static final boolean debugDistance = false;
 	public static final boolean isBeta = false;
 	public static final boolean debugPathfinding = false;
 	
 	// end debug ---
-	public static boolean LiteVersion = true;
+	public static boolean LiteVersion = false;
 	public static final int LiteStoryMaxLevel = 13;
 	public static final int LiteSurvivalMaxDiff = 0;
 	public static final int LiteMarketSize = 96;
