@@ -68,7 +68,7 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static boolean IsLevelSelectionShowButtons = false;
 
 	public static boolean IsLevelDebugMode = false;
-	public static boolean IsForceDiffDebug =  true;
+	public static boolean IsForceDiffDebug =  false;
 	public static int ForceDiff = 1;
 	public static int ForceLevel = 10;
 	public static boolean IsDebugBlocOn = false;
@@ -89,7 +89,7 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static final boolean debugPathfinding = false;
 	
 	// end debug ---
-	public static boolean LiteVersion = false;
+	public static boolean LiteVersion = true;
 	public static final int LiteStoryMaxLevel = 13;
 	public static final int LiteSurvivalMaxDiff = 0;
 	public static final int LiteMarketSize = 96;

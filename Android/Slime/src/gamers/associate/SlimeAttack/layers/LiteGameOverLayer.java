@@ -61,8 +61,8 @@ import android.view.MotionEvent;
 			goTitle = "Lite " + mode + " Over";
 		}
 		
-		this.gameOverLabel = CCLabel.makeLabel(goTitle.toUpperCase(), "fonts/Slime.ttf", 58 * SlimeFactory.getWidthRatio());
-		this.gameOverLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + (basePaddingCongrat + 58) * SlimeFactory.getWidthRatio());
+		this.gameOverLabel = CCLabel.makeLabel(goTitle.toUpperCase(), "fonts/Slime.ttf", 52 * SlimeFactory.getWidthRatio());
+		this.gameOverLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + (basePaddingCongrat + 52) * SlimeFactory.getWidthRatio());
 		
 		String congLabel = " ";
 		if (!mode.equals(SlimeFactory.LiteSurvival)) {			

@@ -78,7 +78,7 @@ public class StoryMenuItem extends CCLayer {
 		}
 		
 		if (this.levelDefinition != null) {
-			this.idItem = SlimeFactory.getLabel(String.valueOf(this.levelDefinition.getNumber()), 38*SlimeFactory.getWidthRatio());
+			this.idItem = SlimeFactory.getLabel(String.valueOf(this.levelDefinition.getNumber()), 32*SlimeFactory.getWidthRatio());
 			this.idItem.setPosition(0, 50 + yshift);	
 			if (SlimeFactory.LiteVersion && 
 					this.levelDefinition.getNumber() > SlimeFactory.LiteStoryMaxLevel &&
