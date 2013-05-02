@@ -223,7 +223,7 @@ public class CreditLayer extends CCLayer implements IBackableLayer {
 		// market
 		this.addInfo("Community Manager", amz);
 		this.addInfo("Go to market", amz, vcr);
-		this.addInfo("Producer", "None! we are indy");
+		this.addInfo("Producer", "None! we are indie");
 		// other
 		this.addInfo("Beta Test", this.getBetaTesters());
 		this.addInfo("Thank you", "Our families", "cocos2d-android team", "libgdx team", "Google", "webomator", "You!");
