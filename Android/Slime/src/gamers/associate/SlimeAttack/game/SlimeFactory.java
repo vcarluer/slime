@@ -68,7 +68,7 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static boolean IsLevelSelectionShowButtons = false;
 
 	public static boolean IsLevelDebugMode = false;
-	public static boolean IsForceDiffDebug =  false;
+	public static boolean IsForceDiffDebug =  true;
 	public static int ForceDiff = 1;
 	public static int ForceLevel = 10;
 	public static boolean IsDebugBlocOn = false;
@@ -311,7 +311,7 @@ import com.badlogic.gdx.physics.box2d.World;
 		}
 				
 		SGSDensity = Density / SGSDensityBase;
-		FntSize = 64f * SGSDensity;
+		FntSize = 64f * getWidthRatio();
 	}
 	
 	public static void triggerZoneColor(GL10 gl) {

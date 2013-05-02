@@ -22,7 +22,6 @@ import org.cocos2d.transitions.CCTransitionScene;
 import org.cocos2d.types.CGPoint;
 
 public class AchievementsLayer extends CCLayer  implements IScrollable, IBackableLayer {
-	private static final float fontSize = 60 * SlimeFactory.SGSDensity;
 	private static CCScene scene;
 	private CCLabel title;
 	private ScrollerLayer scroller;
@@ -45,8 +44,8 @@ public class AchievementsLayer extends CCLayer  implements IScrollable, IBackabl
 		HomeLayer.addBkgSplash(this);
 		this.addChild(HomeLayer.getBackButton(this, "goBack"), Level.zTop);
 		
-		this.title = SlimeFactory.getLabel("Achievements", fontSize);
-		this.title.setPosition(CCDirector.sharedDirector().winSize().getWidth() / 2, CCDirector.sharedDirector().winSize().getHeight() - PauseLayer.PaddingY - fontSize / 2f);
+		this.title = SlimeFactory.getLabel("Achievements");
+		this.title.setPosition(CCDirector.sharedDirector().winSize().getWidth() / 2, CCDirector.sharedDirector().winSize().getHeight() - PauseLayer.PaddingY - SlimeFactory.FntSize / 2f);
 		this.addChild(this.title, Level.zTop);
 		float colorHeight = MenuSprite.Height * PauseLayer.Scale + PauseLayer.PaddingY;
 		CCColorLayer colorLayer = CCColorLayer.node(SlimeFactory.getColorLight(200), CCDirector.sharedDirector().winSize().width, colorHeight);

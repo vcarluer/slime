@@ -95,9 +95,7 @@ public class SlimeAttack extends Activity {
         //SlimeFactory.Log.d(Slime.TAG, "layout isHardwareAccelerated(): " + layout.isHardwareAccelerated());
         
         SlimeFactory.ContextActivity = this;
-        SlimeFactory.init();
-        SlimeFactory.setDensity(this.getResources().getDisplayMetrics().density);
-        SlimeFactory.Log.d(SlimeAttack.TAG, "Density: " + String.valueOf(SlimeFactory.Density));
+        SlimeFactory.init();        
         
      // attach the OpenGL to a window
         // View glView = findViewById(R.id.glsurface);
@@ -112,6 +110,9 @@ public class SlimeAttack extends Activity {
 		
 		// frames per second
 		CCDirector.sharedDirector().setAnimationInterval(1.0f / 60);
+		
+		SlimeFactory.setDensity(this.getResources().getDisplayMetrics().density);
+        SlimeFactory.Log.d(SlimeAttack.TAG, "Density: " + String.valueOf(SlimeFactory.Density));
 		
 		// First scene after start
 		// Needed, not overriden by ccdirector resume?		

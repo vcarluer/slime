@@ -153,8 +153,8 @@ public class HomeLayer extends CCLayer {
 		Sounds.setEffectsDisable(true);
 		
 		// share button		
-		float shareX = - CCDirector.sharedDirector().winSize().getWidth() / 2 +((shareSizeW * shareScale * SlimeFactory.SGSDensity) + PauseLayer.PaddingX) / 2 ;
-		float shareY = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((shareSizeH * shareScale * SlimeFactory.SGSDensity) + PauseLayer.PaddingY) / 2;
+		float shareX = - CCDirector.sharedDirector().winSize().getWidth() / 2 +((shareSizeW * shareScale * SlimeFactory.getWidthRatio()) + PauseLayer.PaddingX) / 2 ;
+		float shareY = CCDirector.sharedDirector().winSize().getHeight() / 2 - ((shareSizeH * shareScale * SlimeFactory.getWidthRatio()) + PauseLayer.PaddingY) / 2;
 		
 		this.shareMenu = HomeLayer.getNewShareButton(null, 1.0f, shareX, shareY);		
 		this.addChild(this.shareMenu);
@@ -185,12 +185,6 @@ public class HomeLayer extends CCLayer {
 		this.titleSprite.runAction(sc);
 		
 		this.actionTitle();
-	}
-	
-	public void endTitle() {
-		float scale = 0.5f  * SlimeFactory.SGSDensity;
-		CCScaleTo sc2 = CCScaleTo.action(0.2f, scale);
-		this.titleSprite.runAction(sc2);
 	}
 	
 	public void actionTitle() {
@@ -395,6 +389,6 @@ public class HomeLayer extends CCLayer {
 	}
 	
 	public static float getShareScale(float scale) {
-		return scale * shareScale * SlimeFactory.SGSDensity;
+		return scale * shareScale * SlimeFactory.getWidthRatio();
 	}
 }

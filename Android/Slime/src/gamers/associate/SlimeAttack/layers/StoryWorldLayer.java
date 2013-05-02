@@ -36,7 +36,6 @@ import android.util.SparseArray;
 @SuppressLint("DefaultLocale") 
 public class StoryWorldLayer extends CCLayer implements IScrollable, IBackableLayer {
 	public static final int COLS = 5;
-	private static final float fontSize = 60 * SlimeFactory.SGSDensity;
 	private static final float transitionTime = 0.5f;
 	private CCLabel title;
 	private CCMenu menuToRight;
@@ -71,8 +70,8 @@ public class StoryWorldLayer extends CCLayer implements IScrollable, IBackableLa
 		backMenu = HomeLayer.getBackButton(this, "goBack");
 		this.addChild(backMenu, Level.zTop);
 		
-		this.title = CCLabel.makeLabel("World".toUpperCase(), "fonts/Slime.ttf", fontSize);
-		this.title.setPosition(CCDirector.sharedDirector().winSize().getWidth() / 2, CCDirector.sharedDirector().winSize().getHeight() - PauseLayer.PaddingY - fontSize / 2f);
+		this.title = SlimeFactory.getLabel("World");
+		this.title.setPosition(CCDirector.sharedDirector().winSize().getWidth() / 2, CCDirector.sharedDirector().winSize().getHeight() - PauseLayer.PaddingY - SlimeFactory.FntSize / 2f);
 		this.addChild(this.title, Level.zTop);
 		float colorHeight = MenuSprite.Height * PauseLayer.Scale + PauseLayer.PaddingY;
 //		ccColor4B.ccc4(255, 255, 255, 200)
