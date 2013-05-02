@@ -103,6 +103,8 @@ public class SlimyJump extends Slimy implements ISelectable {
 	private CGPoint jumpPosition;
 	private CGPoint jumpLength;
 	private boolean cancelNextRotationStat;
+	private long shotTime;
+	private boolean wasLanded;
 	
 	
 	public SlimyJump(float x, float y, float width, float height, World world,
@@ -371,8 +373,9 @@ public class SlimyJump extends Slimy implements ISelectable {
 				AchievementStatistics.shotCount++;
 				SlimeFactory.AchievementManager.test(CarabinAch.class);
 				SlimeFactory.AchievementManager.test(SupermanAch.class);
-				AchievementStatistics.lastJumpStartTime = AchievementStatistics.shotTime;
-				AchievementStatistics.shotTime = System.currentTimeMillis();				
+				AchievementStatistics.lastJumpStartTime = AchievementStatistics.shotTime;						
+				this.shotTime = System.currentTimeMillis();
+				AchievementStatistics.shotTime = this.shotTime;
 				long shotSpeed = AchievementStatistics.shotTime - this.selectStartTime;
 				AchievementStatistics.shotSpeed = shotSpeed;
 				
@@ -396,6 +399,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 				
 				SlimeFactory.AchievementManager.test(BulletTimeAch.class);
 				SlimeFactory.AchievementManager.test(CallMeMaxAch.class);
+				this.wasLanded = this.isLanded;
 				this.isLanded = false;
 				AchievementStatistics.isLanded = false;
 				this.stickHandled = false;
@@ -546,12 +550,14 @@ public class SlimyJump extends Slimy implements ISelectable {
 	public void land(ContactInfo contact) {	
 		this.land();
 		
+		long jumpLong = System.currentTimeMillis() - this.shotTime;
+		boolean limitJump = this.wasLanded && jumpLong < 30;
+		
 		if (this.isLanded && !contact.getContactWith().isIsAllSensor() && !this.isDead && !this.isDying) {
 			AchievementStatistics.landCount++;
 			AchievementStatistics.isLanded = true;
 			AchievementStatistics.shotInAir = 0;
-			if (AchievementStatistics.shotTime > 0) {
-				long jumpLong = System.currentTimeMillis() - AchievementStatistics.shotTime;
+			if (AchievementStatistics.shotTime > 0) {				
 				if (jumpLong > 0) {
 					AchievementStatistics.jumpDuration = jumpLong;
 				}
@@ -574,12 +580,13 @@ public class SlimyJump extends Slimy implements ISelectable {
 		
 		this.jumpPosition.x = 0;
 		this.jumpPosition.y = 0;
-		
+				
 		if (this.isLanded 
 				&& !this.stickHandled 
 				&& !contact.getContactWith().isIsAllSensor()
 				&& !this.isDead
 				&& !this.isDying
+				&& !limitJump
 				&& this.currentJoint == null
 				&& this.getBody() != null) {
 			
