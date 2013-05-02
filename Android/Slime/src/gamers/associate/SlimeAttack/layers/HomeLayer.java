@@ -17,6 +17,7 @@ import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItem;
+import org.cocos2d.menus.CCMenuItemLabel;
 import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.menus.CCMenuItemToggle;
 import org.cocos2d.nodes.CCDirector;
@@ -55,6 +56,9 @@ public class HomeLayer extends CCLayer {
 	private CCLabel betaLabel;
 	private CCMenu muteMenu;
 	
+	private CCMenu buyTheGameMenu;
+	private CCMenuItemSprite buyTheGameImage;
+	
 	public static HomeLayer get() {
 		if (layer == null) {
 			layer = new HomeLayer();
@@ -86,9 +90,22 @@ public class HomeLayer extends CCLayer {
 		CCMenuItemSprite creditSprite = CCMenuItemSprite.item(creditNorm, creditSel, this, "showCredit");
 		float creditScale = 0.5f * SlimeFactory.getHeightRatio();
 		creditSprite.setScale(creditScale);
-		this.creditMenu = CCMenu.menu(creditSprite);
 		
-		this.creditMenu.setPosition(CCDirector.sharedDirector().winSize().getWidth() - (64 * creditScale) - PauseLayer.PaddingX, CCDirector.sharedDirector().winSize().getHeight() - (64 * creditScale) - PauseLayer.PaddingY);
+		if (SlimeFactory.LiteVersion) {
+			CCSprite spriteN = CCSprite.sprite("playstore.png");
+			CCSprite spriteS = CCSprite.sprite("playstore.png");
+			this.buyTheGameImage = CCMenuItemSprite.item(spriteN, spriteS, this, "buyFullGame");
+			this.buyTheGameImage.setScale((64f / SlimeFactory.LiteMarketSize) * SlimeFactory.getWidthRatio());		
+			
+			this.creditMenu = CCMenu.menu(creditSprite, buyTheGameImage);
+			this.creditMenu.alignItemsVertically(10f * SlimeFactory.SGSDensity);
+		} else {
+			this.creditMenu = CCMenu.menu(creditSprite);
+		}				
+				
+		this.creditMenu.setPosition(
+				CCDirector.sharedDirector().winSize().getWidth() - (64 * creditScale) - PauseLayer.PaddingX, 
+				CCDirector.sharedDirector().winSize().getHeight() - ((64 * creditScale) * 2 + 10f * SlimeFactory.SGSDensity) - PauseLayer.PaddingY);
 		this.addChild(this.creditMenu);
 		
 		if (SlimeFactory.isBeta) {
@@ -103,6 +120,10 @@ public class HomeLayer extends CCLayer {
 		
 		muteMenu = getMuteButtonBottom(this, "toggleMute");
 		this.addChild(muteMenu);
+	}
+	
+	public void buyFullGame(Object sender) {
+		SlimeFactory.ContextActivity.buyGame();
 	}
 	
 	public void toggleMute(Object sender) {
