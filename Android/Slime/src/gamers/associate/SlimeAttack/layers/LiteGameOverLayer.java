@@ -53,11 +53,23 @@ import android.view.MotionEvent;
 	public LiteGameOverLayer(String mode) {
 		HomeLayer.addBkg(this, 800, 480, "game-over.png");
 		this.backMenu = HomeLayer.getBackButton(this, "goBack");
-				
-		this.gameOverLabel = CCLabel.makeLabel(("Lite " + mode + " Over").toUpperCase(), "fonts/Slime.ttf", 58 * SlimeFactory.getWidthRatio());
+		
+		String goTitle = " ";
+		if (mode.equals(SlimeFactory.LiteSurvival)) {
+			goTitle = "Unlock " + mode + " mode";
+		} else {
+			goTitle = "Lite " + mode + " Over";
+		}
+		
+		this.gameOverLabel = CCLabel.makeLabel(goTitle.toUpperCase(), "fonts/Slime.ttf", 58 * SlimeFactory.getWidthRatio());
 		this.gameOverLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + (basePaddingCongrat + 58) * SlimeFactory.getWidthRatio());
 		
-		this.congratLabel = CCLabel.makeLabel("Congratulations!".toUpperCase(), "fonts/Slime.ttf", 42 * SlimeFactory.getWidthRatio());		
+		String congLabel = " ";
+		if (!mode.equals(SlimeFactory.LiteSurvival)) {			
+			congLabel = "Congratulations!";
+		}
+		
+		this.congratLabel = CCLabel.makeLabel(congLabel.toUpperCase(), "fonts/Slime.ttf", 42 * SlimeFactory.getWidthRatio());		
 		this.congratLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + basePaddingCongrat* SlimeFactory.getWidthRatio());
 		
 		CCLabel label = CCLabel.makeLabel("Touch here to Buy the full game".toUpperCase(), "fonts/Slime.ttf", 32f* SlimeFactory.getWidthRatio());
@@ -75,7 +87,7 @@ import android.view.MotionEvent;
 		this.mark1.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() - (basePaddingMark + 42)* SlimeFactory.getWidthRatio());
 		this.mark1.setColor(SlimeFactory.ColorSlimeGold);
 		
-		this.mark2 = CCLabel.makeLabel("Full survival mode".toUpperCase(), "fonts/Slime.ttf", 32f * SlimeFactory.getWidthRatio());		
+		this.mark2 = CCLabel.makeLabel("Survival mode with unlimited and random levels".toUpperCase(), "fonts/Slime.ttf", 20f * SlimeFactory.getWidthRatio());		
 		this.mark2.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() - (basePaddingMark + 84)* SlimeFactory.getWidthRatio());
 		this.mark2.setColor(SlimeFactory.ColorSlimeGold);	
 				
