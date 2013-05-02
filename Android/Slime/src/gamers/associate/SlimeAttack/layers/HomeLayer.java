@@ -169,7 +169,12 @@ public class HomeLayer extends CCLayer {
 	}
 	
 	public void temp() {
-		this.titleSprite = CCSprite.sprite("slime-attack.png");
+		if (SlimeFactory.LiteVersion) {
+			this.titleSprite = CCSprite.sprite("slime-attack-lite.png");
+		} else {
+			this.titleSprite = CCSprite.sprite("slime-attack.png");
+		}
+		
 		this.top = CCLayer.node();
 		this.addChild(this.top, 1);
 		this.top.addChild(this.titleSprite);
