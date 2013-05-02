@@ -16,9 +16,9 @@
    version="1.1"
    inkscape:version="0.48.2 r9819"
    sodipodi:docname="slime-attack-lite.svg"
-   inkscape:export-filename="/home/guillaume/Documents/gamers associate/labo break/base/screen/slime-attack.png"
-   inkscape:export-xdpi="240"
-   inkscape:export-ydpi="240">
+   inkscape:export-filename="C:\Users\vcarluer\GamersAssociate\Slime\Graphic\V1\screen\slime-attack-lite.png"
+   inkscape:export-xdpi="119.88"
+   inkscape:export-ydpi="119.88">
   <defs
      id="defs4">
     <linearGradient
@@ -881,7 +881,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1043,7 +1043,7 @@
     </g>
     <text
        xml:space="preserve"
-       style="font-size:25.81471252000000000px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;opacity:0.90000000000000002;fill:#ffffff;fill-opacity:0.78431374;stroke:#003e08;font-family:Slime;-inkscape-font-specification:Slime Bold Italic;stroke-opacity:0.78431373999999998"
+       style="font-size:25.81471252000000000px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;opacity:0.90000000000000002;fill:#ffffff;fill-opacity:0.72850680000000001;stroke:#003e08;font-family:Slime;-inkscape-font-specification:Slime Bold Italic;stroke-opacity:0.76923078"
        x="379.3714"
        y="544.4563"
        id="text3241"
@@ -1053,6 +1053,6 @@
          id="tspan3243"
          x="379.3714"
          y="544.4563"
-         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffffff;fill-opacity:0.78431374;font-family:Slime;-inkscape-font-specification:Slime;stroke:#003e08;stroke-opacity:0.78431373999999998">LITE</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffffff;fill-opacity:0.72850680000000001;font-family:Slime;-inkscape-font-specification:Slime;stroke:#003e08;stroke-opacity:0.76923078">LITE</tspan></text>
   </g>
 </svg>
