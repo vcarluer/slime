@@ -53,7 +53,7 @@ public class MoveInterpolateTrackAction extends CameraAction {
 			compareDelta = remainingTime;
 		}				
 		
-		this.interpolation = delta / remainingTime;
+		this.interpolation = compareDelta / remainingTime;
 		
 		this.actionInternal(compareDelta);
 		

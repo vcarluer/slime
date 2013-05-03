@@ -207,7 +207,7 @@ public class PauseLayer extends CCLayer {
 	
 	public void goResume(Object sender) {
 		Sounds.playEffect(R.raw.menuselect);
-		Level.currentLevel.getCameraManager().cancelActions();
+		Level.currentLevel.getCameraManager().cancelAll();
 		Level.currentLevel.resume();
 		SlimeFactory.ContextActivity.hideAd();
 	}
