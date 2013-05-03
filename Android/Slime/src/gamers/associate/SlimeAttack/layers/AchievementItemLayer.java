@@ -2,6 +2,7 @@ package gamers.associate.SlimeAttack.layers;
 
 import gamers.associate.SlimeAttack.game.SlimeFactory;
 import gamers.associate.SlimeAttack.game.Sounds;
+import gamers.associate.SlimeAttackLite.R;
 
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
@@ -50,7 +51,7 @@ public class AchievementItemLayer extends CCLayer {
 	}
 
 	public void selectAchievements(Object sender) {
-		Sounds.playEffect(gamers.associate.SlimeAttack.R.raw.menuselect);
+		Sounds.playEffect(R.raw.menuselect);
 		CCFadeTransition transition = CCFadeTransition.transition(0.5f, AchievementsLayer.getScene());
 		CCDirector.sharedDirector().replaceScene(transition);
 	}

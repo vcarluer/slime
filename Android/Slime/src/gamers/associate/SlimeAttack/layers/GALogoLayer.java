@@ -1,6 +1,6 @@
 package gamers.associate.SlimeAttack.layers;
 
-import gamers.associate.SlimeAttack.R;
+import gamers.associate.SlimeAttackLite.R;
 import gamers.associate.SlimeAttack.game.Level;
 import gamers.associate.SlimeAttack.game.LoadingQuoteGenerator;
 import gamers.associate.SlimeAttack.game.SlimeFactory;

@@ -1,6 +1,6 @@
 package gamers.associate.SlimeAttack.game;
 
-import gamers.associate.SlimeAttack.R;
+import gamers.associate.SlimeAttackLite.R;
 import gamers.associate.SlimeAttack.SlimeAttack;
 import gamers.associate.SlimeAttack.game.achievements.AchievementStatistics;
 import gamers.associate.SlimeAttack.items.base.GameItem;

@@ -1,7 +1,7 @@
 package gamers.associate.SlimeAttack.items.custom;
 
 
-import gamers.associate.SlimeAttack.R;
+import gamers.associate.SlimeAttackLite.R;
 import gamers.associate.SlimeAttack.game.ContactInfo;
 import gamers.associate.SlimeAttack.game.Level;
 import gamers.associate.SlimeAttack.game.SlimeFactory;

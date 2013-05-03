@@ -1,6 +1,6 @@
 package gamers.associate.SlimeAttack.game;
 
-import gamers.associate.SlimeAttack.R;
+import gamers.associate.SlimeAttackLite.R;
 import gamers.associate.SlimeAttack.levels.LevelHome;
 
 import org.cocos2d.nodes.CCDirector;

@@ -13,6 +13,7 @@ import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.VideoView;
+import gamers.associate.SlimeAttackLite.R;
 
 public class SlimeIntro extends Activity {
 	public static final String INTRO_CHOICE = "IntroChoice";

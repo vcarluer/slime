@@ -9,6 +9,7 @@ import gamers.associate.SlimeAttack.layers.GALogoLayer;
 import gamers.associate.SlimeAttack.layers.IBackableLayer;
 import gamers.associate.SlimeAttack.layers.StoryMenuItem;
 import gamers.associate.SlimeAttack.levels.LevelHome;
+import gamers.associate.SlimeAttackLite.R;
 
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;

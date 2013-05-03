@@ -1,6 +1,6 @@
 package gamers.associate.SlimeAttack.game;
 
-import gamers.associate.SlimeAttack.R;
+import gamers.associate.SlimeAttackLite.R;
 import gamers.associate.SlimeAttack.SlimeAttack;
 import gamers.associate.SlimeAttack.game.achievements.AchievementManager;
 import gamers.associate.SlimeAttack.items.base.SpriteSheetFactory;
@@ -89,7 +89,7 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static final boolean debugPathfinding = false;
 	
 	// end debug ---
-	public static boolean LiteVersion = false;
+	public static boolean LiteVersion = true;
 	public static final int LiteStoryMaxLevel = 13;
 	public static final int LiteSurvivalMaxDiff = 0;
 	public static final int LiteMarketSize = 96;

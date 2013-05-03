@@ -1,6 +1,6 @@
 package gamers.associate.SlimeAttack.layers;
 
-import gamers.associate.SlimeAttack.R;
+import gamers.associate.SlimeAttackLite.R;
 import gamers.associate.SlimeAttack.game.IGameItemHandler;
 import gamers.associate.SlimeAttack.game.IGamePlay;
 import gamers.associate.SlimeAttack.game.Level;

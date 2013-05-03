@@ -2,7 +2,7 @@ package gamers.associate.SlimeAttack.game;
 
 import java.util.List;
 
-import gamers.associate.SlimeAttack.R;
+import gamers.associate.SlimeAttackLite.R;
 import gamers.associate.SlimeAttack.game.achievements.AchievementStatistics;
 import gamers.associate.SlimeAttack.items.base.GameItem;
 import gamers.associate.SlimeAttack.items.custom.EvacuationPlug;
