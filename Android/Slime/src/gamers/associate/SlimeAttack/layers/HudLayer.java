@@ -142,7 +142,7 @@ import android.annotation.SuppressLint;
 			this.addChild(this.rebuildLevelMenu);
 		}
 		
-		this.timesup = SlimeFactory.getLabel(TIME_S_UP, 63f);
+		this.timesup = SlimeFactory.getLabel(TIME_S_UP, 63f * SlimeFactory.getWidthRatio());
 		this.timesup.setColor(SlimeFactory.ColorSlime);
 		this.timesup.setPosition(CCDirector.sharedDirector().winSize().getWidth() / 2f, CCDirector.sharedDirector().winSize().getHeight() / 2);
 		this.addChild(this.timesup);
@@ -241,9 +241,18 @@ import android.annotation.SuppressLint;
 	
 	public void setHudText(String text) {
 		if (!this.isHideCount()) {
-			this.countLabel.setVisible(true);
+			if (!this.countLabel.getVisible()) {
+				this.countLabel.setVisible(true);
+			}			
+			
 			this.countLabel.setString(text.toUpperCase());
-			this.timerBack.setVisible(true);
+			
+			if (!this.timerBack.getVisible()) {
+				this.timerBack.setOpacity(0);
+				CCFadeIn fi = CCFadeIn.action(0.5f);				
+				this.timerBack.runAction(fi);
+				this.timerBack.setVisible(true);
+			}			
 		}
 	}
 	

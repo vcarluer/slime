@@ -105,7 +105,7 @@ public class PauseLayer extends CCLayer {
 		this.addChild(this.arrowSpriteB);
 		this.addChild(this.arrowSpriteL);
 		
-		this.title = getMenuLabel(" ", 45f, SlimeFactory.ColorSlimeBorder);
+		this.title = getMenuLabel(" ", 45f * SlimeFactory.getWidthRatio(), SlimeFactory.ColorSlimeBorder);
 		this.title.setPosition(
 				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() / 2, 
 				CCDirector.sharedDirector().winSize().getHeight() / 2));

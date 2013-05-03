@@ -19,8 +19,8 @@
    sodipodi:docname="square-empty-timer.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    inkscape:export-filename="C:\Users\vcarluer\GamersAssociate\Slime\Graphic\V1\png\controls\square-empty-timer.png"
-   inkscape:export-xdpi="117.39"
-   inkscape:export-ydpi="117.39">
+   inkscape:export-xdpi="117.27273"
+   inkscape:export-ydpi="117.27273">
   <defs
      id="defs4">
     <linearGradient
@@ -538,7 +538,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
