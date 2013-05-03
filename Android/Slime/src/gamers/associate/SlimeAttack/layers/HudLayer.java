@@ -41,12 +41,14 @@ import android.annotation.SuppressLint;
 	private static final String TIME_S_UP = "TIME'S UP";
 	private static final int countPadding = (int) (5 * SlimeFactory.SGSDensity);
 	private static final float scoreTakenPadding = 10f * SlimeFactory.getWidthRatio();
-	private static final float TextHeight = 60f * SlimeFactory.getWidthRatio();
+	private static final float TextHeight = 55f * SlimeFactory.getWidthRatio();
 	private static final float BonusHeight = 30f * SlimeFactory.getWidthRatio();
 	private static final float PaddingLeftStar = 25f * SlimeFactory.getWidthRatio();
 	private static final int starCountHShift = (int) (35 * SlimeFactory.getWidthRatio());
 	private static final float starCountBarHeight = 30f * SlimeFactory.getWidthRatio();
 	private static final float starCountBarWidthMax = 200f * SlimeFactory.getWidthRatio();
+	private static final float countBackPaddingX = 12 * SlimeFactory.getWidthRatio();
+	private static final float countBackPaddingY = 9 * SlimeFactory.getWidthRatio();
 	private static final ccColor3B startColor = ccColor3B.ccBLACK;
 	private static final ccColor3B fullColor = ccColor3B.ccYELLOW;
 	private static final ccColor3B goalColor = ccColor3B.ccGREEN;
@@ -84,6 +86,11 @@ import android.annotation.SuppressLint;
 	private CCLabel timesup;
 	private CCBitmapFontAtlas referenceLabel; // For sizing
 	
+	private CCSprite timerBack;
+	private float timerBackY;
+	private float countLabelX;
+		
+	
 	public HudLayer() {
 		
 		this.gameItems = new ArrayList<GameItem>();
@@ -94,14 +101,24 @@ import android.annotation.SuppressLint;
 		this.menu = HomeLayer.getPauseButton(this, "goPause");
 		this.addChild(this.menu);
 		
+		this.timerBack = CCSprite.sprite("square-empty-timer.png");
+		float timerBackScale = 0.6f * SlimeFactory.getWidthRatio();
+		this.timerBack.setScale(timerBackScale);
+		this.timerBack.setAnchorPoint(1, 1);
+		this.timerBack.setPosition(CCDirector.sharedDirector().winSize().width, CCDirector.sharedDirector().winSize().height);
+		this.timerBack.setVisible(false);
+		this.addChild(this.timerBack);		
 		this.countLabel = getMenuLabel(Count_Text);
 		this.countLabel.setAnchorPoint(0, 0.5f);
 		this.referenceLabel = getMenuLabel(Count_Text);		
 		this.addChild(this.countLabel);
 		// Position overrided in SetHudStartText
+		this.timerBackY = this.timerBack.getPositionRef().y - ((this.timerBack.getContentSizeRef().height / 2) + countBackPaddingY) * timerBackScale;		
+		this.countLabelX = this.timerBack.getPositionRef().x - ((this.timerBack.getContentSizeRef().width) - countBackPaddingX) * timerBackScale;
+		
 		this.countLabel.setPosition(
-				CGPoint.ccp(CCDirector.sharedDirector().winSize().getWidth() - countPadding - this.referenceLabel.getContentSizeRef().width * this.referenceLabel.getScale(), 
-				CCDirector.sharedDirector().winSize().getHeight() - countPadding - (this.referenceLabel.getContentSizeRef().height * this.referenceLabel.getScale()) / 2));
+				this.countLabelX, 
+				timerBackY);		
 		
 		this.scoreTaken = getMenuLabel("   ", BonusHeight, SlimeFactory.ColorSlime);
 		this.scoreTaken.setAnchorPoint(0, 0.5f);
@@ -125,7 +142,7 @@ import android.annotation.SuppressLint;
 			this.addChild(this.rebuildLevelMenu);
 		}
 		
-		this.timesup = SlimeFactory.getLabel(TIME_S_UP, 63f);
+		this.timesup = SlimeFactory.getLabel(TIME_S_UP, 63f * SlimeFactory.getWidthRatio());
 		this.timesup.setColor(SlimeFactory.ColorSlime);
 		this.timesup.setPosition(CCDirector.sharedDirector().winSize().getWidth() / 2f, CCDirector.sharedDirector().winSize().getHeight() / 2);
 		this.addChild(this.timesup);
@@ -142,7 +159,7 @@ import android.annotation.SuppressLint;
 	
 	private static CCBitmapFontAtlas getMenuLabel(String text, float size, ccColor3B color) {
 		CCBitmapFontAtlas label =  CCBitmapFontAtlas.bitmapFontAtlas(text, "SlimeFont.fnt");
-		label.setScale(size / SlimeFactory.FntSize);
+		label.setScale(size / SlimeFactory.FntSizeBase);
 		label.setColor(color);
 		return label;
 	}
@@ -218,13 +235,24 @@ import android.annotation.SuppressLint;
 		if (!this.isHideCount()) {
 			this.countLabel.setVisible(true);		
 			this.countLabel.setString((Count_Text + String.valueOf(count)).toUpperCase());
+			this.timerBack.setVisible(true);
 		}
 	}
 	
 	public void setHudText(String text) {
 		if (!this.isHideCount()) {
-			this.countLabel.setVisible(true);
+			if (!this.countLabel.getVisible()) {
+				this.countLabel.setVisible(true);
+			}			
+			
 			this.countLabel.setString(text.toUpperCase());
+			
+			if (!this.timerBack.getVisible()) {
+				this.timerBack.setOpacity(0);
+				CCFadeIn fi = CCFadeIn.action(0.5f);				
+				this.timerBack.runAction(fi);
+				this.timerBack.setVisible(true);
+			}			
 		}
 	}
 	
@@ -237,6 +265,10 @@ import android.annotation.SuppressLint;
 			this.countLabel.setVisible(false);
 		}
 		
+		if (this.timerBack != null) {
+			this.timerBack.setVisible(false);
+		}
+		
 		if (this.scoreTaken != null) {
 			this.scoreTaken.setVisible(false);
 		}
@@ -247,8 +279,7 @@ import android.annotation.SuppressLint;
 	}
 	
 	public void hideSlimyCount() {
-		this.countLabel.setVisible(false);
-		this.scoreTaken.setVisible(false);
+		this.hideHudText();
 	}
 	
 	public CCMenu getMenu() {
@@ -434,7 +465,7 @@ import android.annotation.SuppressLint;
 		
 		if (this.starSprite != null) {
 			this.starSprite.setColor(startColor);
-		}		
+		}
 	}		
 
 	public boolean isHideCount() {

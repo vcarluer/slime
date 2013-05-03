@@ -72,7 +72,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 			this.level.setHideCount(false);
 			this.level.hideHudText();
 			CCBitmapFontAtlas label = this.level.getHudLabel();
-			label.setColor(SlimeFactory.ColorSlime);
+			label.setColor(ccColor3B.ccWHITE);
 			label.stopAllActions();
 			label.setOpacity(255);
 			this.setStartTime();
@@ -136,7 +136,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 						AchievementStatistics.exitCriticZone = true;
 						this.isCritic = false;
 						CCBitmapFontAtlas label = this.level.getHudLabel();
-						label.setColor(SlimeFactory.ColorSlime);
+						label.setColor(ccColor3B.ccWHITE);
 						label.stopAllActions();
 						label.setOpacity(255);
 					}
@@ -159,7 +159,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 						Sounds.playEffect(R.raw.tick);
 					}	
 					
-					label.setColor(ccColor3B.ccc3( 255,0,0));
+					label.setColor(ccColor3B.ccRED);
 					this.level.setHudText(Util.getFormatTimeCritic(this.leftTime));
 				}
 				else {
@@ -345,7 +345,7 @@ public class TimeAttackGame extends GameItem implements IGamePlay {
 
 	public void stop() {
 		CCBitmapFontAtlas label = this.level.getHudLabel();
-		label.setColor(SlimeFactory.ColorSlime);
+		label.setColor(ccColor3B.ccWHITE);
 		label.stopAllActions();
 		label.setOpacity(255);
 		this.level.setTimeRatio(TimeRatioNormal);
