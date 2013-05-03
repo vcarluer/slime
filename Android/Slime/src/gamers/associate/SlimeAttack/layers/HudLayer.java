@@ -41,7 +41,7 @@ import android.annotation.SuppressLint;
 	private static final String TIME_S_UP = "TIME'S UP";
 	private static final int countPadding = (int) (5 * SlimeFactory.SGSDensity);
 	private static final float scoreTakenPadding = 10f * SlimeFactory.getWidthRatio();
-	private static final float TextHeight = 60f * SlimeFactory.getWidthRatio();
+	private static final float TextHeight = 75f * SlimeFactory.getWidthRatio();
 	private static final float BonusHeight = 30f * SlimeFactory.getWidthRatio();
 	private static final float PaddingLeftStar = 25f * SlimeFactory.getWidthRatio();
 	private static final int starCountHShift = (int) (35 * SlimeFactory.getWidthRatio());
@@ -142,7 +142,7 @@ import android.annotation.SuppressLint;
 	
 	private static CCBitmapFontAtlas getMenuLabel(String text, float size, ccColor3B color) {
 		CCBitmapFontAtlas label =  CCBitmapFontAtlas.bitmapFontAtlas(text, "SlimeFont.fnt");
-		label.setScale(size / SlimeFactory.FntSize);
+		label.setScale(size / SlimeFactory.FntSizeBase);
 		label.setColor(color);
 		return label;
 	}
