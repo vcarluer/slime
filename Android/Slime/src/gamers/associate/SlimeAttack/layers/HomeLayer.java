@@ -17,7 +17,6 @@ import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItem;
-import org.cocos2d.menus.CCMenuItemLabel;
 import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.menus.CCMenuItemToggle;
 import org.cocos2d.nodes.CCDirector;
@@ -56,7 +55,6 @@ public class HomeLayer extends CCLayer {
 	private CCLabel betaLabel;
 	private CCMenu muteMenu;
 	
-	private CCMenu buyTheGameMenu;
 	private CCMenuItemSprite buyTheGameImage;
 	
 	public static HomeLayer get() {

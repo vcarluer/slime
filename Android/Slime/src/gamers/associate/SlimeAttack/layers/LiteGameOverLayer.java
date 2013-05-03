@@ -1,20 +1,17 @@
 package gamers.associate.SlimeAttack.layers;
 
 import gamers.associate.SlimeAttack.R;
-import gamers.associate.SlimeAttack.game.Sharer;
 import gamers.associate.SlimeAttack.game.SlimeFactory;
 import gamers.associate.SlimeAttack.game.Sounds;
 
 import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.interval.CCDelayTime;
-import org.cocos2d.actions.interval.CCMoveTo;
 import org.cocos2d.actions.interval.CCScaleBy;
 import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.menus.CCMenu;
-import org.cocos2d.menus.CCMenuItem;
 import org.cocos2d.menus.CCMenuItemLabel;
 import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
@@ -29,7 +26,7 @@ import android.view.MotionEvent;
 
 @SuppressLint("DefaultLocale") public class LiteGameOverLayer extends CCLayer implements IBackableLayer {
 	private static CCScene scene;	
-	private static int basePaddingMark = 85;
+	private static int basePaddingMark = 65;
 	private static int basePaddingCongrat = 100;
 	private CCLabel gameOverLabel;
 	private CCLabel congratLabel;
@@ -72,7 +69,7 @@ import android.view.MotionEvent;
 		this.congratLabel = CCLabel.makeLabel(congLabel.toUpperCase(), "fonts/Slime.ttf", 42 * SlimeFactory.getWidthRatio());		
 		this.congratLabel.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() + basePaddingCongrat* SlimeFactory.getWidthRatio());
 		
-		CCLabel label = CCLabel.makeLabel("Touch here to Buy the full game".toUpperCase(), "fonts/Slime.ttf", 32f* SlimeFactory.getWidthRatio());
+		CCLabel label = CCLabel.makeLabel("Buy the full game".toUpperCase(), "fonts/Slime.ttf", 42f* SlimeFactory.getWidthRatio());
 		this.buyTheGameButton = CCMenuItemLabel.item(label, this, "buyFullGame");		
 		this.buyTheGameButton.setColor(ccColor3B.ccWHITE);	
 		CCSprite spriteN = CCSprite.sprite("playstore.png");
@@ -83,12 +80,12 @@ import android.view.MotionEvent;
 		this.buyTheGameMenu.alignItemsHorizontally(10 * SlimeFactory.getWidthRatio());
 		this.buyTheGameMenu.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY());
 		
-		this.mark1 = CCLabel.makeLabel("80 fun and challenging levels".toUpperCase(), "fonts/Slime.ttf", 32f * SlimeFactory.getWidthRatio());		
-		this.mark1.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() - (basePaddingMark + 42)* SlimeFactory.getWidthRatio());
+		this.mark1 = CCLabel.makeLabel("80 fun levels".toUpperCase(), "fonts/Slime.ttf", 37f * SlimeFactory.getWidthRatio());		
+		this.mark1.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() - (basePaddingMark + 47)* SlimeFactory.getWidthRatio());
 		this.mark1.setColor(SlimeFactory.ColorSlimeGold);
 		
-		this.mark2 = CCLabel.makeLabel("Survival mode with unlimited and random levels".toUpperCase(), "fonts/Slime.ttf", 20f * SlimeFactory.getWidthRatio());		
-		this.mark2.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() - (basePaddingMark + 84)* SlimeFactory.getWidthRatio());
+		this.mark2 = CCLabel.makeLabel("Survival mode challenge".toUpperCase(), "fonts/Slime.ttf", 37f * SlimeFactory.getWidthRatio());		
+		this.mark2.setPosition(SlimeFactory.getScreenMidX(), SlimeFactory.getScreenMidY() - (basePaddingMark + 94)* SlimeFactory.getWidthRatio());
 		this.mark2.setColor(SlimeFactory.ColorSlimeGold);	
 				
 		this.addChild(this.gameOverLabel);

@@ -89,7 +89,7 @@ import com.badlogic.gdx.physics.box2d.World;
 	public static final boolean debugPathfinding = false;
 	
 	// end debug ---
-	public static boolean LiteVersion = true;
+	public static boolean LiteVersion = false;
 	public static final int LiteStoryMaxLevel = 13;
 	public static final int LiteSurvivalMaxDiff = 0;
 	public static final int LiteMarketSize = 96;

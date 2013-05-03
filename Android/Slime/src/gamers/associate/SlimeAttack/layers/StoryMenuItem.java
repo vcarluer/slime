@@ -6,7 +6,6 @@ import gamers.associate.SlimeAttack.game.Rank;
 import gamers.associate.SlimeAttack.game.SlimeFactory;
 import gamers.associate.SlimeAttack.game.Sounds;
 import gamers.associate.SlimeAttack.items.custom.RankFactory;
-import gamers.associate.SlimeAttack.levels.GamePlay;
 import gamers.associate.SlimeAttack.levels.LevelDefinition;
 
 import org.cocos2d.actions.interval.CCDelayTime;
@@ -78,7 +77,7 @@ public class StoryMenuItem extends CCLayer {
 		}
 		
 		if (this.levelDefinition != null) {
-			this.idItem = SlimeFactory.getLabel(String.valueOf(this.levelDefinition.getNumber()), 32*SlimeFactory.getWidthRatio());
+			this.idItem = SlimeFactory.getLabel(String.valueOf(this.levelDefinition.getNumber()), 52f);
 			this.idItem.setPosition(0, 50 + yshift);	
 			if (SlimeFactory.LiteVersion && 
 					this.levelDefinition.getNumber() > SlimeFactory.LiteStoryMaxLevel &&
