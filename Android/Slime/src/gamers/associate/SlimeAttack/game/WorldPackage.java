@@ -4,6 +4,8 @@ import gamers.associate.SlimeAttack.SlimeAttack;
 import gamers.associate.SlimeAttack.levels.GamePlay;
 import gamers.associate.SlimeAttack.levels.LevelDefinition;
 import gamers.associate.SlimeAttack.levels.LevelDefinitionParser;
+import gamers.associate.SlimeAttack.levels.LevelDefinitionParserPreBuild;
+import gamers.associate.SlimeAttack.levels.generator.LevelGraphGeneratorTutorial;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +52,7 @@ public abstract class WorldPackage {
 	protected void createLevelList() {
 		for(int i = 0; i < this.levelCount; i++) {
 			int num = i + 1;
-			LevelDefinitionParser definition = new LevelDefinitionParser(this.getResourceName(num));
+			LevelDefinitionParser definition = new LevelDefinitionParserPreBuild(this.getResourceName(num));
 			definition.setNumber(num);
 			definition.setGamePlay(GamePlay.TimeAttack);
 			definition.setDifficulty(this.getDifficulty(num));
@@ -60,7 +62,7 @@ public abstract class WorldPackage {
 				definition.setLocalStorage(false);
 			}
 
-			if (i == 0) {
+			if (i < LevelGraphGeneratorTutorial.tutorialCount) {
 				definition.setUnlock(true);
 			}
 			
