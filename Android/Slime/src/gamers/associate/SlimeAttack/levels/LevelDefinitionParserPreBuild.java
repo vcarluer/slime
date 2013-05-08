@@ -1,10 +1,10 @@
 package gamers.associate.SlimeAttack.levels;
 
 import gamers.associate.SlimeAttack.game.Level;
-import gamers.associate.SlimeAttack.levels.itemdef.ItemDefinition;
 import gamers.associate.SlimeAttack.levels.itemdef.LevelInfoDef;
 import gamers.associate.SlimeAttack.levels.itemdef.LevelInfoDefPreBuild;
 
+// Class to debug problem with levels dump for story mode: use Nexus 7 dimension for ground glass box
 public class LevelDefinitionParserPreBuild extends LevelDefinitionParser {
 	public static float widthCorrection = 1280;
 	public static float heightCorrection = 736;

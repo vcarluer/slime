@@ -4,7 +4,8 @@ import gamers.associate.SlimeAttack.game.Level;
 import gamers.associate.SlimeAttack.levels.LevelDefinitionParserPreBuild;
 
 public class LevelInfoDefPreBuild extends LevelInfoDef {
-
+	// For class LevelDefinitionParserPreBuild
+	
 	public LevelInfoDefPreBuild() {
 	}
 
