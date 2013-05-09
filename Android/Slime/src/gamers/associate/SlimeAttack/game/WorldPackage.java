@@ -62,7 +62,7 @@ public abstract class WorldPackage {
 				definition.setLocalStorage(false);
 			}
 
-			if (i < LevelGraphGeneratorTutorial.tutorialCount) {
+			if (i == 0) {
 				definition.setUnlock(true);
 			}
 			
