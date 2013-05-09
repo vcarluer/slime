@@ -11,7 +11,7 @@ public class BulletTimeAch extends Achievement {
 
 	@Override
 	protected boolean testInternal() {
-		return AchievementStatistics.shotSpeed >= 700;
+		return AchievementStatistics.shotSpeed >= 700 && !AchievementStatistics.isLanded;
 	}
 
 }
