@@ -7,6 +7,7 @@ import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.types.CGSize;
 
 public class LevelUtil {
+	public static final String GroundBoxGlass = "GBG";
 	public static float LAND_HEIGHT = 64f;	
 	
 	public static void createGroundBox(Level level) {					
@@ -47,15 +48,15 @@ public class LevelUtil {
 		float glassWidth = 10f;
 		
 		// up
-		SlimeFactory.Platform.createWallBL("GBG", -glassWidth + x, h + y, w + 2 * glassWidth, glassWidth);
+		SlimeFactory.Platform.createWallBL(GroundBoxGlass, -glassWidth + x, h + y, w + 2 * glassWidth, glassWidth);
 		//right
-		SlimeFactory.Platform.createWallBL("GBG", w + x, y, glassWidth, h);
+		SlimeFactory.Platform.createWallBL(GroundBoxGlass, w + x, y, glassWidth, h);
 		// bottom
-		SlimeFactory.Platform.createWallBL("GBG", -glassWidth + x, -glassWidth + y, w + 2 * glassWidth, glassWidth);
+		SlimeFactory.Platform.createWallBL(GroundBoxGlass, -glassWidth + x, -glassWidth + y, w + 2 * glassWidth, glassWidth);
 		// left
-		SlimeFactory.Platform.createWallBL("GBG", -glassWidth + x, y, glassWidth, h);
+		SlimeFactory.Platform.createWallBL(GroundBoxGlass, -glassWidth + x, y, glassWidth, h);
 		// Ground
-		SlimeFactory.Platform.createWallBL("GBG", -siW + x, -siH + y, w + sw, siH - glassWidth);
+		SlimeFactory.Platform.createWallBL(GroundBoxGlass, -siW + x, -siH + y, w + sw, siH - glassWidth);
 				
 		level.setLevelOrigin(level.getLevelOrigin().x - siW, level.getLevelOrigin().y - siH);
 		level.setLevelSize(w + sw, h + sh);

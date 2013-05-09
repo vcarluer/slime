@@ -70,6 +70,7 @@ public class LevelDefinitionParser extends LevelDefinition
 	protected boolean isLocalStorage;
 	protected Set<Class> ignoredClasses;
 	protected Set<String> ignoredItems;
+	protected Set<String> ignoredItemsNames;
 	
 	public LevelDefinitionParser() {		
 	}
@@ -83,13 +84,18 @@ public class LevelDefinitionParser extends LevelDefinition
 		this.classHandler = new HashMap<Class, ItemDefinition>();
 		this.ignoredClasses = new HashSet<Class>();
 		this.ignoredItems = new HashSet<String>();
+		this.ignoredItemsNames = new HashSet<String>();
 		this.createItemDefinitions();		
 		this.buildItemTypeMap();
 		this.defineIgnoredItems();
+		this.defineIgnoredItemsNames();
 		this.defineIgnoreClasses();		
 	}
 	
 	protected void defineIgnoredItems() {
+	}
+	
+	protected void defineIgnoredItemsNames() {
 	}
 
 	public LevelDefinitionParser(String resourceName) {
@@ -103,7 +109,7 @@ public class LevelDefinitionParser extends LevelDefinition
 
 	protected void createItemDefinitions() {
 		this.itemDefinitions.add(new PlatformDef());
-		this.itemDefinitions.add(new LevelInfoDef());
+		this.itemDefinitions.add(getLevelInfoDef());
 		this.itemDefinitions.add(new TimeAttackDef());
 		this.itemDefinitions.add(new GoalPortalDef());
 		this.itemDefinitions.add(new SpawnDef());
@@ -131,6 +137,10 @@ public class LevelDefinitionParser extends LevelDefinition
 		this.itemDefinitions.add(new EnergyBallGunDef());
 		this.itemDefinitions.add(new CameraDef());
 		this.itemDefinitions.add(new SurvivalDef());
+	}
+
+	protected LevelInfoDef getLevelInfoDef() {
+		return new LevelInfoDef();
 	}
 	
 	private void buildItemTypeMap() {
@@ -233,7 +243,8 @@ public class LevelDefinitionParser extends LevelDefinition
 	
 	protected ItemDefinition getItemDef(String line) {			
 		String itemType = this.getItemType(line);
-		if (!this.ignoredItems.contains(itemType)) {
+		String itemName = this.getItemName(line);
+		if (!this.ignoredItems.contains(itemType) && !this.ignoredItemsNames.contains(itemName)) {
 			return this.typeHandler.get(itemType);
 		} else {
 			SlimeFactory.Log.d(SlimeAttack.TAG, "Item " + itemType + " ignored");
@@ -245,6 +256,16 @@ public class LevelDefinitionParser extends LevelDefinition
 		String[] items = line.split(";", -1);		
 		String itemType = items[0];
 		return itemType;
+	}
+	
+	protected String getItemName(String line) {
+		String[] items = line.split(";", -1);
+		String name = "";
+		if (items.length > 1) {
+			name = items[1];
+		}
+		
+		return name;
 	}
 	
 	private File getExternFile() {
