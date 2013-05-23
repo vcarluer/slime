@@ -1,0 +1,133 @@
+body {
+	margin:0;padding:0;
+	font-family: 'Noto Sans', Verdana, Geneva, sans-serif;
+}
+html, body {
+  height: 100%;
+        background:#5c4383 url(../img/slimeAttack-background.png) no-repeat center center fixed;
+        -webkit-background-size: cover; /*for webKit*/
+        -moz-background-size: cover; /*Mozilla*/
+        -o-background-size: cover; /*opera*/
+        background-size: cover; /*generic*/
+}
+#logo {
+	width:100%;
+	text-align:center;
+	margin-bottom:20px;
+}
+#menu {
+	width:100%;
+	text-align:center;
+    color: #fff;  
+	text-shadow: 1px 1px 0 rgba(47, 37, 73, 0.5);
+}
+#menu ul {
+	width:300px;
+	display:block;
+	margin:auto;
+	border-top:1px solid #fff;
+}
+#menu ul li {
+	display:inline-block;
+	margin-right:6px;
+	list-style-type:none;
+}
+#menu ul li a {
+	color:#fff;
+	text-decoration:none;
+	font-family: 'Sigmar One';
+}
+#menu ul li a.selected {
+	color:#0e8935;
+}
+#getIt {
+	position:fixed;
+	bottom:5%;
+	left:10%;
+	z-index:10000;
+}
+section {
+	margin: auto;
+	text-align:center;
+}
+section header h2 {
+	font-family: 'Sigmar One';
+	color:#fff;
+	text-shadow: 2px 2px 0 rgba(47, 37, 73, 0.5);
+	text-align:left;
+	margin-left:25%;
+}
+article {
+	margin-left:20%;
+	margin-right:20%;
+	text-align:left;
+}
+img.floatLeft {
+	float:left;
+	margin-right:10px;
+}
+img.floatRight{
+	float:right;
+	margin-left:10px;
+}
+.embeddedVideo {	
+	position:relative;
+	padding:10px;
+	width:420px;
+	height:315px;
+	margin-left:auto;
+	margin-right:auto;
+	border-radius:10px;
+    background: #FFF;  	
+	background: rgba(255,255,255,.5);  
+	border: 1px solid #ccc; 
+}
+.embeddedVideo iframe,
+.embeddedVideo object,
+.embeddedVideo embed {
+	position: absolute;
+	top:3%;
+	left:3%;
+	width: 94%;
+	height: 94%	;
+	border:0;
+}
+@media (max-width: 480px) {
+	#menu ul {
+		width:200px;
+	}
+	.slideshow {
+		width:280px;
+		height:168px;
+	}
+	#logo img {
+		height:100px;
+	}
+	article {
+		margin-left:2%;
+		margin-right:2%;
+	}
+	.embeddedVideo {	
+		width:220px;
+		height:165px;
+	}	
+}
+@media (min-width: 481px) and (max-width:767px) {
+	.slideshow {
+		width:360px;
+		height:216px;
+	}
+	#logo img {
+		max-height:110px;
+	}	
+	article {
+		margin-left:10%;
+		margin-right:10%;
+	}	
+	.embeddedVideo {	
+		width:360px;
+		height:275px;
+	}		
+}
+@media (min-width: 768px) {
+}
