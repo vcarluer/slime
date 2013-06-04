@@ -1,0 +1,143 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="AlsoSpachZarathustra8Bits_data" version="1.3.0" audacityversion="2.0.0" sel0="0.0000000000" sel1="108.7529931973" vpos="0" h="0.0000000000" zoom="10.7666015625" rate="44100.0">
+	<tags>
+		<tag name="TITLE" value="Also Sprach Zarathustra 8 bit"/>
+		<tag name="ARTIST" value="Richard Strauss 8 bit remix by Vincent Carluer"/>
+		<tag name="COMMENTS" value="Based on http://www.laurasmidiheaven.com/00-MIDI/2/000000000240/Also%20sprach%20Zarathustra"/>
+	</tags>
+	<wavetrack name="000000000240" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="4796007">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000406.au" len="68104" min="-0.044586" max="0.044586" rms="0.013052"/>
+				</waveblock>
+				<waveblock start="68104">
+					<pcmaliasblockfile summaryfile="e00006ac.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="262144" aliaslen="262144" aliaschannel="0" min="-0.048309" max="0.050659" rms="0.022537"/>
+				</waveblock>
+				<waveblock start="330248">
+					<pcmaliasblockfile summaryfile="e0000dc8.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="524288" aliaslen="262144" aliaschannel="0" min="-0.064423" max="0.058563" rms="0.021263"/>
+				</waveblock>
+				<waveblock start="592392">
+					<pcmaliasblockfile summaryfile="e0000fe4.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="786432" aliaslen="262144" aliaschannel="0" min="-0.066772" max="0.064484" rms="0.027956"/>
+				</waveblock>
+				<waveblock start="854536">
+					<pcmaliasblockfile summaryfile="e0000d79.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="1048576" aliaslen="262144" aliaschannel="0" min="-0.460876" max="0.369781" rms="0.065519"/>
+				</waveblock>
+				<waveblock start="1116680">
+					<pcmaliasblockfile summaryfile="e0000243.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="1310720" aliaslen="262144" aliaschannel="0" min="-0.54071" max="0.374023" rms="0.095897"/>
+				</waveblock>
+				<waveblock start="1378824">
+					<pcmaliasblockfile summaryfile="e0000779.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="1572864" aliaslen="262144" aliaschannel="0" min="-0.129974" max="0.141693" rms="0.025965"/>
+				</waveblock>
+				<waveblock start="1640968">
+					<pcmaliasblockfile summaryfile="e0000096.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="1835008" aliaslen="262144" aliaschannel="0" min="-0.05069" max="0.050598" rms="0.022727"/>
+				</waveblock>
+				<waveblock start="1903112">
+					<pcmaliasblockfile summaryfile="e00008a1.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="2097152" aliaslen="262144" aliaschannel="0" min="-0.521484" max="0.456726" rms="0.114586"/>
+				</waveblock>
+				<waveblock start="2165256">
+					<pcmaliasblockfile summaryfile="e0000581.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="2359296" aliaslen="262144" aliaschannel="0" min="-0.483032" max="0.312866" rms="0.044752"/>
+				</waveblock>
+				<waveblock start="2427400">
+					<pcmaliasblockfile summaryfile="e0000a69.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="2621440" aliaslen="262144" aliaschannel="0" min="-0.115479" max="0.129333" rms="0.024217"/>
+				</waveblock>
+				<waveblock start="2689544">
+					<pcmaliasblockfile summaryfile="e000016a.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="2883584" aliaslen="262144" aliaschannel="0" min="-0.46991" max="0.367065" rms="0.058683"/>
+				</waveblock>
+				<waveblock start="2951688">
+					<pcmaliasblockfile summaryfile="e0000a3d.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="3145728" aliaslen="262144" aliaschannel="0" min="-0.545105" max="0.493042" rms="0.127842"/>
+				</waveblock>
+				<waveblock start="3213832">
+					<pcmaliasblockfile summaryfile="e0000145.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="3407872" aliaslen="262144" aliaschannel="0" min="-0.766052" max="0.869598" rms="0.193959"/>
+				</waveblock>
+				<waveblock start="3475976">
+					<pcmaliasblockfile summaryfile="e0000e99.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="3670016" aliaslen="262144" aliaschannel="0" min="-0.817474" max="0.800323" rms="0.199692"/>
+				</waveblock>
+				<waveblock start="3738120">
+					<pcmaliasblockfile summaryfile="e0000292.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="3932160" aliaslen="262144" aliaschannel="0" min="-0.999969" max="0.999969" rms="0.246768"/>
+				</waveblock>
+				<waveblock start="4000264">
+					<pcmaliasblockfile summaryfile="e0000127.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="4194304" aliaslen="262144" aliaschannel="0" min="-0.999969" max="0.999969" rms="0.248123"/>
+				</waveblock>
+				<waveblock start="4262408">
+					<pcmaliasblockfile summaryfile="e00002c9.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="4456448" aliaslen="262144" aliaschannel="0" min="-0.988403" max="0.873322" rms="0.125447"/>
+				</waveblock>
+				<waveblock start="4524552">
+					<pcmaliasblockfile summaryfile="e0000710.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="4718592" aliaslen="262144" aliaschannel="0" min="-0.182434" max="0.227173" rms="0.014351"/>
+				</waveblock>
+				<waveblock start="4786696">
+					<simpleblockfile filename="e00001b8.au" len="9311" min="-0.000549" max="0.000458" rms="0.00011"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="000000000240" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="4796007">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000362.au" len="68104" min="-0.126312" max="0.101349" rms="0.03061"/>
+				</waveblock>
+				<waveblock start="68104">
+					<pcmaliasblockfile summaryfile="e0000cae.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="262144" aliaslen="262144" aliaschannel="1" min="-0.131805" max="0.139648" rms="0.051819"/>
+				</waveblock>
+				<waveblock start="330248">
+					<pcmaliasblockfile summaryfile="e00000e1.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="524288" aliaslen="262144" aliaschannel="1" min="-0.141479" max="0.148712" rms="0.048429"/>
+				</waveblock>
+				<waveblock start="592392">
+					<pcmaliasblockfile summaryfile="e0000b21.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="786432" aliaslen="262144" aliaschannel="1" min="-0.15451" max="0.156647" rms="0.055493"/>
+				</waveblock>
+				<waveblock start="854536">
+					<pcmaliasblockfile summaryfile="e0000a7c.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="1048576" aliaslen="262144" aliaschannel="1" min="-0.684143" max="0.505066" rms="0.093981"/>
+				</waveblock>
+				<waveblock start="1116680">
+					<pcmaliasblockfile summaryfile="e0000223.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="1310720" aliaslen="262144" aliaschannel="1" min="-0.76947" max="0.515106" rms="0.126007"/>
+				</waveblock>
+				<waveblock start="1378824">
+					<pcmaliasblockfile summaryfile="e00001db.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="1572864" aliaslen="262144" aliaschannel="1" min="-0.200989" max="0.197113" rms="0.047068"/>
+				</waveblock>
+				<waveblock start="1640968">
+					<pcmaliasblockfile summaryfile="e0000f28.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="1835008" aliaslen="262144" aliaschannel="1" min="-0.144073" max="0.136261" rms="0.047008"/>
+				</waveblock>
+				<waveblock start="1903112">
+					<pcmaliasblockfile summaryfile="e000086b.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="2097152" aliaslen="262144" aliaschannel="1" min="-0.669006" max="0.542633" rms="0.137673"/>
+				</waveblock>
+				<waveblock start="2165256">
+					<pcmaliasblockfile summaryfile="e0000d91.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="2359296" aliaslen="262144" aliaschannel="1" min="-0.678528" max="0.385193" rms="0.066376"/>
+				</waveblock>
+				<waveblock start="2427400">
+					<pcmaliasblockfile summaryfile="e0000607.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="2621440" aliaslen="262144" aliaschannel="1" min="-0.183777" max="0.159485" rms="0.04807"/>
+				</waveblock>
+				<waveblock start="2689544">
+					<pcmaliasblockfile summaryfile="e0000cca.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="2883584" aliaslen="262144" aliaschannel="1" min="-0.622528" max="0.475861" rms="0.086649"/>
+				</waveblock>
+				<waveblock start="2951688">
+					<pcmaliasblockfile summaryfile="e000087a.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="3145728" aliaslen="262144" aliaschannel="1" min="-0.672852" max="0.703766" rms="0.179162"/>
+				</waveblock>
+				<waveblock start="3213832">
+					<pcmaliasblockfile summaryfile="e0000c52.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="3407872" aliaslen="262144" aliaschannel="1" min="-0.994812" max="0.913666" rms="0.224311"/>
+				</waveblock>
+				<waveblock start="3475976">
+					<pcmaliasblockfile summaryfile="e0000fa8.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="3670016" aliaslen="262144" aliaschannel="1" min="-0.859406" max="0.836578" rms="0.206658"/>
+				</waveblock>
+				<waveblock start="3738120">
+					<pcmaliasblockfile summaryfile="e0000648.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="3932160" aliaslen="262144" aliaschannel="1" min="-0.999969" max="0.999969" rms="0.334421"/>
+				</waveblock>
+				<waveblock start="4000264">
+					<pcmaliasblockfile summaryfile="e00000c5.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="4194304" aliaslen="262144" aliaschannel="1" min="-0.999969" max="0.999969" rms="0.322548"/>
+				</waveblock>
+				<waveblock start="4262408">
+					<pcmaliasblockfile summaryfile="e0000d69.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="4456448" aliaslen="262144" aliaschannel="1" min="-0.999969" max="0.989838" rms="0.169502"/>
+				</waveblock>
+				<waveblock start="4524552">
+					<pcmaliasblockfile summaryfile="e00005a3.auf" aliasfile="C:\Users\vcarluer\Downloads\000000000240.WAV" aliasstart="4718592" aliaslen="262144" aliaschannel="1" min="-0.275421" max="0.331665" rms="0.029641"/>
+				</waveblock>
+				<waveblock start="4786696">
+					<simpleblockfile filename="e000031e.au" len="9311" min="-0.009613" max="0.008362" rms="0.001995"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>
