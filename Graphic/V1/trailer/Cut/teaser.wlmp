@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project name="teaser" themeId="0" version="65538" templateID="SimpleProjectTemplate">
   <MediaItems>
-    <MediaItem id="3" filePath="C:\Users\vcarluer\GamersAssociate\Slime\Graphic\V1\trailer\Cut\trailer-intro.mp4" arWidth="480" arHeight="360" duration="8.3670000000000009" songTitle="" songArtist="" songAlbum="" />
+    <MediaItem id="2" filePath="C:\Users\vcarluer\GamersAssociate\Slime\Graphic\V1\trailer\Cut\raw\Power Breaks Intro 2 (original version).mp3" arWidth="0" arHeight="0" duration="37.407325" songTitle="" songArtist="" songAlbum="" />
     <MediaItem id="4" filePath="C:\Users\vcarluer\GamersAssociate\Slime\Graphic\V1\trailer\Cut\trailer-intro-with-logo.mp4" arWidth="480" arHeight="360" duration="11" songTitle="" songArtist="" songAlbum="" />
     <MediaItem id="5" filePath="C:\Users\vcarluer\GamersAssociate\Slime\Graphic\V1\trailer\Cut\raw\video_mai_27_2013_1.mp4" arWidth="400" arHeight="240" duration="573.79999999999995" songTitle="" songArtist="" songAlbum="" />
     <MediaItem id="6" filePath="C:\Users\vcarluer\GamersAssociate\Slime\Graphic\V1\trailer\Cut\2.trailer-oh.mp4" arWidth="480" arHeight="360" duration="2.367" songTitle="" songArtist="" songAlbum="" />
@@ -69,6 +69,14 @@
         <BoundPropertyFloat Name="Volume" Value="1" />
       </BoundProperties>
     </VideoClip>
+    <AudioClip extentID="7" gapBefore="3.2083332240581512" mediaItemID="2" inTime="0" outTime="0" speed="1">
+      <Effects />
+      <Transitions />
+      <BoundProperties>
+        <BoundPropertyBool Name="Mute" Value="false" />
+        <BoundPropertyFloat Name="Volume" Value="1" />
+      </BoundProperties>
+    </AudioClip>
     <TitleClip extentID="60" gapBefore="0" duration="3">
       <Effects />
       <Transitions />
@@ -590,7 +598,9 @@
       <Effects />
       <Transitions />
       <BoundProperties />
-      <ExtentRefs />
+      <ExtentRefs>
+        <ExtentRef id="7" />
+      </ExtentRefs>
     </ExtentSelector>
     <ExtentSelector extentID="3" gapBefore="0" primaryTrack="false">
       <Effects />
@@ -621,7 +631,7 @@
     <BoundPropertyFloatSet Name="AspectRatio">
       <BoundPropertyFloatElement Value="1.3333332538604736" />
     </BoundPropertyFloatSet>
-    <BoundPropertyFloat Name="SoundTrackMix" Value="0" />
+    <BoundPropertyFloat Name="SoundTrackMix" Value="0.5" />
   </BoundProperties>
   <ThemeOperationLog themeID="0">
     <MonolithicThemeOperations />
