@@ -49,6 +49,7 @@ html, body {
 section {
 	margin: auto;
 	text-align:center;
+	padding-bottom:60px;
 }
 section header h2 {
 	font-family: 'Sigmar One';
@@ -61,6 +62,12 @@ article {
 	margin-left:20%;
 	margin-right:20%;
 	text-align:left;
+}
+article a {
+	color:#fff;
+}
+a img {
+	border:0;
 }
 img.floatLeft {
 	float:left;
@@ -109,8 +116,15 @@ img.floatRight{
 	}
 	.embeddedVideo {	
 		width:220px;
-		height:165px;
+		height:165px;	
 	}	
+	#getIt {
+	bottom:0;
+	left:5%;	
+	}
+	#getIt img{
+		width:75%;
+	}
 }
 @media (min-width: 481px) and (max-width:767px) {
 	.slideshow {
