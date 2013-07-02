@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+	<title>slime attack</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link href='http://fonts.googleapis.com/css?family=Noto+Sans:400normal' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Sigmar+One:400normal' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="slideshow/slideshow.css"/>
+	<link rel="stylesheet" href="css/style.css"/>
+	<!--[if lt IE 9]><script src="js/html5shiv.js"></script><![endif]-->
+	<script src="js/jquery-1.9.1.min.js"></script> 	
+	<script src="js/ga.js"></script>
+	<script src="slideshow/slideshow.min.js"></script>
+	<script> 
+$(document).ready(function(){
+	$(".slideshow").slideShow();
+	$("section:gt(0)").css("display","none");
+	$("#menu ul li a").click(function() {
+		$("#menu ul li a.selected").removeClass("selected");
+		var $this = $(this);
+		$this.addClass("selected");
+		var target = $this.prop("href").split("#")[1];
+		$("#" + target).fadeIn().siblings("section").hide();
+	}).first().addClass("selected");
+}); 
+	</script>
+</head>
+<body>
+	<header id="logo">
+		<img src="img/slime-attack.png" alt="Slime Attack !"/>
+		<nav id="menu">
+			<ul>	
+				<li><a href="#screens">Screenshots</a></li>
+				<li><a href="#trailer">Trailer</a></li>
+				<li><a href="#about">About</a></li>
+			</ul>
+		</nav>		
+	</header>
+	<aside id="getIt">
+		<!--<a href="#"><img src="img/get-it-on-play.png" alt="Get it on Google Play"/></a>-->
+	</aside>
+	<section id="screens">
+		<div class="slideshow" >
+			<div class="slideShowContainer">
+				<div class="slider">
+					<figure class="slide">
+						<img src="img/5.jpg"/>
+						<figcaption class="tooltip">The fastest slime ever !</figcaption>
+					</figure>
+					<figure class="slide">
+						<img src="img/10.jpg"/>
+						<figcaption class="tooltip">80+ fun and exciting levels !</figcaption>
+					</figure>
+					<figure class="slide">
+						<img src="img/12.jpg"/>
+						<figcaption class="tooltip">"Best game evar. LOL (/^.^/)" <em>My little sister</em></figcaption>
+					</figure>
+					<figure class="slide">
+						<img src="img/15.jpg"/>
+						<figcaption class="tooltip">"I don't understand this game." <em>My grumpy grampa</em></figcaption>
+					</figure>
+				</div>
+			</div>
+		</div>			
+	</section>
+	<section id="trailer">
+		<header>
+			<h2>Trailer</h2>			
+		</header>
+		<article>
+			<div class="embeddedVideo">
+				<iframe width="480" height="360" src="http://www.youtube.com/embed/muEV2G83xFU" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</article>
+	</section>	
+	<section id="about">
+		<header>
+			<h2>About</h2>
+		</header>
+		<article>
+			<img src="img/slime-attack-icon.png" class="floatLeft" alt="slime attack icon"/>
+			<p><em>Slime Attack !</em> is a fast puzzle-platformer game for Android</p>
+			<p><img src="img/ratedF.png" class="floatRight" alt="rated F for FUN"/></p>
+			<p>Help Slimy, trapped at night in an awful laboratory to meet its dream : escape to Mexico !</p>
+			<p>80 challenging levels in Story Mode ! Infinite number of levels in Survival Mode !</p>
+			<p>Available soon!</p>
+			<p>Created by <a href="http://www.gamersassociate.com">Gamers Associate</a></p>
+			<!--<p><a href="#">Purchase the full game</a> or  <a href="#">Try out the Lite version</a></p>-->
+		</article>
+	</section>
+</body>
+</html>

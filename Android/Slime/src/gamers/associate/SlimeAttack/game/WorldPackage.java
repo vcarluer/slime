@@ -5,7 +5,6 @@ import gamers.associate.SlimeAttack.levels.GamePlay;
 import gamers.associate.SlimeAttack.levels.LevelDefinition;
 import gamers.associate.SlimeAttack.levels.LevelDefinitionParser;
 import gamers.associate.SlimeAttack.levels.LevelDefinitionParserPreBuild;
-import gamers.associate.SlimeAttack.levels.generator.LevelGraphGeneratorTutorial;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,0 +1,134 @@
+body {
+	margin:0;padding:0;
+	background-color:#f5f5f5;
+	font-family: 'Noto Sans', Verdana, Geneva, sans-serif;
+	font-size:.9em;
+	color:#0D0101;
+}	
+#headerWrapper {
+	background-color:#fff;
+	position:fixed;
+	height:80px;
+	width:100%;
+	z-index:999;
+	margin:0;
+	padding:0;	
+	top:0;
+	border-bottom:1px solid #ccc;
+	box-shadow: 1px 0 6px #555;
+}
+header {
+	position:relative;
+	width:768px;
+	margin:auto;
+}
+header nav {
+	float:right;
+	margin-right:50px;
+	margin-top:40px;
+}
+header nav ul {
+	list-style-type:none;
+	float:right;
+}
+header nav ul li {
+	width:80px; 
+	float:left
+}
+header nav ul li a {
+	color:#444;
+	text-decoration:none;
+	font-weight:bold;
+}
+header nav ul li a:hover {
+	color:#550406;
+}
+#container {
+	position:relative;
+	top:110px;
+	width:768px;
+	margin:auto;
+}
+section h1 {
+	width:20%;
+	display:block;
+	float:left;
+	text-align:right;
+	font-family: 'Roboto Condensed';
+	text-transform:uppercase;
+	color:#550406;
+}
+article h2 {
+	font-family: 'Roboto Condensed';
+	margin-top:8px;
+	color:#444;
+}
+article {
+	width:75%;
+	margin-left:25%;
+	padding:10px;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+	border-bottom:1px solid #444;
+	border-bottom:1px solid rgba(68,68,68,.5);
+}
+a {
+	color:#550406;
+}
+a img {
+	border:0;
+}
+img.floatLeft {
+	float:left;
+	margin-right:10px;
+}
+img.floatRight{
+	float:right;
+	margin-left:10px;
+}
+img.boxed {
+	display:block;
+	margin:0 auto;
+	border-top:1px solid black;
+	border-radius:10px;
+	box-shadow: 3px 3px 6px #555;
+}
+@media (max-width: 767px) {
+	section h1 {
+		float:none;
+		width:100%;
+		text-align:left;
+	}
+	article {
+		width:100%;
+		margin-left:0;
+	}
+	header nav {
+		float:none;
+		position:absolute;;
+		margin-top:-20px; 
+		width:100%;	
+	}	
+	#headerWrapper {
+		height:120px;	
+	}
+	#container {
+		top:160px;
+	}	
+}
+@media (max-width: 480px) {
+	header , #container {
+		width:320px;
+	}
+	img {
+		max-width:320px;
+	}
+}
+@media (min-width: 481px) and (max-width:767px) {
+	header,	#container {
+		width:480px;
+	}
+	img {
+		max-width:480px;
+	}
+}
