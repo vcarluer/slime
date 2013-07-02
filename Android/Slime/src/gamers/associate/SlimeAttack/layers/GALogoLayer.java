@@ -189,7 +189,7 @@ import android.annotation.SuppressLint;
 						SpriteSheetFactory.add("controls", true, SpriteSheetFactory.zDefault);
 						break;
 					case 1:
-						SpriteSheetFactory.add("decor", true, SpriteSheetFactory.zDefault);
+						// Nothing here
 						break;
 					case 2:					
 						SpriteSheetFactory.add("items", Level.zFront);
@@ -201,7 +201,7 @@ import android.annotation.SuppressLint;
 						SpriteSheetFactory.add("red", Level.zTop);
 						break;
 					case 5:
-						SpriteSheetFactory.add("slimydbz", Level.zFront);
+						// Nothing here
 						break;
 					case 6:
 						SpriteSheetFactory.add("glasswork", Level.zMid);
