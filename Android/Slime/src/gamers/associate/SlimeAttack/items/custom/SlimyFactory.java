@@ -32,7 +32,6 @@ public class SlimyFactory extends GameItemPhysicFactory<Slimy> {
 		this.createAnim(Slimy.Anim_Teleport, 7);
 		this.createAnim(Slimy.Anim_Wait_H, 5);
 		this.createAnim(Slimy.Anim_Wait_V, 5);
-		this.createAnim(SlimyJump.Anim_Dbz_Aura, 3, 0.1f);
 		
 	}
 	
