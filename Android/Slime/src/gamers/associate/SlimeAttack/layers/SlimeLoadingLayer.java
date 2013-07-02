@@ -100,6 +100,7 @@ import org.cocos2d.types.CGPoint;
 				SpriteSheetFactory.add("items", Level.zFront);								
 				SpriteSheetFactory.add("slime", Level.zTop);
 				SpriteSheetFactory.add("red", Level.zTop);
+				SpriteSheetFactory.add("slimydbz", Level.zFront);
 				SpriteSheetFactory.add("glasswork", Level.zMid);
 				SpriteSheetFactory.add("tank", Level.zFront);
 				SpriteSheetFactory.add("worlds-items", Level.zMid);

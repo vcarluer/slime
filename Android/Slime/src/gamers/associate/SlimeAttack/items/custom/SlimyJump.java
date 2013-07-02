@@ -704,6 +704,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	@Override
 	protected void postSpriteInit() {		
 		super.postSpriteInit();
+		this.auraSheet = SpriteSheetFactory.getSpriteSheet("slimydbz");		
 		this.arrowSprite = CCSprite.sprite(GameItemCocos.getAnimFirstFrame(Anim_Arrow));
 		this.arrowSprite.setVisible(false);		
 		this.auraSheet.addChild(this.arrowSprite);					

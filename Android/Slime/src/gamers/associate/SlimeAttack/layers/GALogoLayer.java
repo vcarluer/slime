@@ -201,7 +201,7 @@ import android.annotation.SuppressLint;
 						SpriteSheetFactory.add("red", Level.zTop);
 						break;
 					case 5:
-						// Nothing here
+						SpriteSheetFactory.add("slimydbz", Level.zFront);
 						break;
 					case 6:
 						SpriteSheetFactory.add("glasswork", Level.zMid);
