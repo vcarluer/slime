@@ -39,7 +39,6 @@ import android.annotation.SuppressLint;
 
 @SuppressLint("DefaultLocale") public class HudLayer extends CCLayer implements IGameItemHandler {
 	private static final String TIME_S_UP = "TIME'S UP";
-	private static final int countPadding = (int) (5 * SlimeFactory.SGSDensity);
 	private static final float scoreTakenPadding = 10f * SlimeFactory.getWidthRatio();
 	private static final float TextHeight = 55f * SlimeFactory.getWidthRatio();
 	private static final float BonusHeight = 30f * SlimeFactory.getWidthRatio();
@@ -84,8 +83,7 @@ import android.annotation.SuppressLint;
 	private boolean hideCount;
 	
 	private CCLabel timesup;
-	private CCBitmapFontAtlas referenceLabel; // For sizing
-	
+		
 	private CCSprite timerBack;
 	private float timerBackY;
 	private float countLabelX;
@@ -109,8 +107,7 @@ import android.annotation.SuppressLint;
 		this.timerBack.setVisible(false);
 		this.addChild(this.timerBack);		
 		this.countLabel = getMenuLabel(Count_Text);
-		this.countLabel.setAnchorPoint(0, 0.5f);
-		this.referenceLabel = getMenuLabel(Count_Text);		
+		this.countLabel.setAnchorPoint(0, 0.5f);				
 		this.addChild(this.countLabel);
 		// Position overrided in SetHudStartText
 		this.timerBackY = this.timerBack.getPositionRef().y - ((this.timerBack.getContentSizeRef().height / 2) + countBackPaddingY) * timerBackScale;		
