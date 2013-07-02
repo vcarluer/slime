@@ -24,7 +24,6 @@ public class LevelBuilder extends AbstractLevelBuilder {
 		// add(new LevelBeta());		
 				
 		// Bad menu is more level
-		// add(new LevelDefinitionParser("test.slime", context));
 		// add(new LevelDefinitionParser("Level0.slime", context));
 		// add(new LevelDefinitionParser("LevelPoly.slime", context));
 		// add(new LevelDefinitionParser("LevelSaw.slime", context));

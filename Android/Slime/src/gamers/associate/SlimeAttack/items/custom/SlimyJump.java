@@ -51,8 +51,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 
 	private static final int Shoot_Circle = 50; // in dps
 	private static final int AuraScaleDown = 5;
-	public static String thumbSprite = "wait-v-01.png";
-	public static String Anim_Dbz_Aura = "aura";
+	public static String thumbSprite = "wait-v-01.png";	
 	public static String Anim_Arrow = "greenarrow";
 	
 	public static float Default_Powa = 4.5f; // in dps
@@ -322,15 +321,11 @@ public class SlimyJump extends Slimy implements ISelectable {
 
 	public void select() {		
 		this.selected = true;
-		// this.auraSprite.setVisible(true);
 		this.arrowSprite.setVisible(true);
-		// CCAnimate animation = CCAnimate.action(this.animationList.get(Anim_Dbz_Aura), false);
 		CCAnimate animation = CCAnimate.action(this.animationList.get(Anim_Buzz), false);
 		this.actionSelect = CCRepeatForever.action(animation);
 		this.sprite.runAction(this.actionSelect);
-		this.selectStartTime = System.currentTimeMillis();
-		// this.auraSprite.runAction(repeat);
-		//Sounds.playEffect(R.raw.slimycharging);			
+		this.selectStartTime = System.currentTimeMillis();		
 	}
 	
 	public void select(CGPoint gameReference) {
@@ -710,11 +705,6 @@ public class SlimyJump extends Slimy implements ISelectable {
 	protected void postSpriteInit() {		
 		super.postSpriteInit();
 		this.auraSheet = SpriteSheetFactory.getSpriteSheet("slimydbz");		
-		/*this.auraSprite = CCSprite.sprite(GameItemCocos.getAnimFirstFrame(Anim_Dbz_Aura));
-		this.auraSprite.setVisible(false);
-		this.auraSprite.setAnchorPoint(0.5f, 0f);
-		this.auraSheet.addChild(this.auraSprite);*/
-		
 		this.arrowSprite = CCSprite.sprite(GameItemCocos.getAnimFirstFrame(Anim_Arrow));
 		this.arrowSprite.setVisible(false);		
 		this.auraSheet.addChild(this.arrowSprite);					
@@ -736,9 +726,7 @@ public class SlimyJump extends Slimy implements ISelectable {
 	
 	private void stopAura() {
 		this.sprite.stopAction(this.actionSelect);
-		/*this.auraSprite.setVisible(false);
-		this.auraSprite.stopAllActions();
-		*/
+		
 		this.arrowSprite.setVisible(false);
 	}
 
