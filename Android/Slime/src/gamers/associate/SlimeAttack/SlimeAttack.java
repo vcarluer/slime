@@ -346,7 +346,8 @@ public class SlimeAttack extends Activity {
 			}			
 			
 			CCScene scene = CCDirector.sharedDirector().getRunningScene();
-			if (scene.getChildren().size() > 0) {
+			
+			if (scene != null && scene.getChildren() != null && scene.getChildren().size() > 0) {
 				// Must always be the first layer
 				CCNode firstNode = scene.getChildren().get(0);
 				if (firstNode instanceof IBackableLayer) {
