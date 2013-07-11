@@ -31,7 +31,7 @@ public abstract class CanvasItemLayer extends CCLayer {
 	protected float scaleY;
 	
 	public CanvasItemLayer(float padding, float numberPerPage, boolean fitInHeight, float referenceHeight) {
-		this.paddingX = this.getPadding(padding);		
+		this.paddingX = padding;		
 		this.paddingY = this.paddingX;
 		this.scaleX = ((CCDirector.sharedDirector().winSize().width / numberPerPage) - this.paddingX * 2) / WIDTH;
 //		float scaleY = (CCDirector.sharedDirector().winSize().height - this.padding * 2) / HEIGHT;
@@ -74,10 +74,6 @@ public abstract class CanvasItemLayer extends CCLayer {
 		this.label.setString(this.getTitle());
 		
 		super.onEnter();
-	}
-
-	protected float getPadding(float paddingBase) {
-		return paddingBase * SlimeFactory.SGSDensity;
 	}
 
 	protected abstract void defineLabelPosition();

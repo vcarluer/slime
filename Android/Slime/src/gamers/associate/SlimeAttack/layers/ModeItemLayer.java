@@ -20,7 +20,7 @@ public abstract class ModeItemLayer extends CanvasItemLayer {
 		this.screenScaleY = (CCDirector.sharedDirector().winSize().height) / HEIGHT;
 				
 		this.labelY = HEIGHT * this.screenScaleY / 2f;
-		this.labelX = this.width / 2 + this.getPadding(PADDINGBASE);		
+		this.labelX = this.width / 2 + PADDINGBASE;		
 	}
 
 	@Override
