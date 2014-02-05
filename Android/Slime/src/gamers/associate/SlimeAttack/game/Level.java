@@ -1061,7 +1061,7 @@ public class Level implements IGameItemHandler {
 				this.showEndLevel(winTxt);
 			}
 			else {
-				Sounds.playEffect(R.raw.lose);
+				// Sounds.playEffect(R.raw.lose);
 				if (this.getGamePlay().getType() == GamePlay.Survival) {					
 					this.showGameOver();
 				} else {
