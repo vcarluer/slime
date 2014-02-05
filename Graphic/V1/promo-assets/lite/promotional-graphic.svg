@@ -14,9 +14,9 @@
    height="120"
    id="svg3588"
    version="1.1"
-   inkscape:version="0.48.3.1 r9886"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="promotional-graphic.svg"
-   inkscape:export-filename="/home/guillaume/Documents/gamers associate/labo break/promo/lite/promotional-graphic.png"
+   inkscape:export-filename="C:\ga\slime\Graphic\V1\promo-assets\lite\promotional-graphic.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -1095,10 +1095,10 @@
      showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:window-width="1280"
-     inkscape:window-height="776"
-     inkscape:window-x="0"
-     inkscape:window-y="24"
+     inkscape:window-width="1593"
+     inkscape:window-height="1028"
+     inkscape:window-x="79"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1">
     <sodipodi:guide
        orientation="1,0"
@@ -1614,16 +1614,16 @@
      inkscape:label="Lite">
     <text
        xml:space="preserve"
-       style="font-size:17.72675514000000163px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Slime;-inkscape-font-specification:Slime Bold Italic;opacity:0.9"
-       x="147.58054"
-       y="94.863449"
+       style="font-size:17.6896553px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;opacity:0.9;fill:#ffffff;fill-opacity:0.72850683;stroke:#003e08;stroke-width:0.68525475;stroke-opacity:0.7692308;font-family:Slime;-inkscape-font-specification:Slime Bold Italic"
+       x="126.4877"
+       y="123.84801"
        id="text3241"
        sodipodi:linespacing="125%"
-       transform="scale(0.84699516,1.1806443)"><tspan
+       transform="scale(1.0490252,0.95326595)"><tspan
          sodipodi:role="line"
          id="tspan3243"
-         x="147.58054"
-         y="94.863449"
-         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffffff;font-family:Liberation Sans;-inkscape-font-specification:Liberation Sans Bold Italic">LITE</tspan></text>
+         x="126.4877"
+         y="123.84801"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffffff;fill-opacity:0.72850683;stroke:#003e08;stroke-width:0.68525475;stroke-opacity:0.7692308;font-family:Slime;-inkscape-font-specification:Slime">LITE</tspan></text>
   </g>
 </svg>

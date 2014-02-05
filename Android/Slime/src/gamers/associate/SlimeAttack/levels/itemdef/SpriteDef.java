@@ -8,6 +8,7 @@ import gamers.associate.SlimeAttack.items.custom.SpriteAction;
 
 public class SpriteDef extends ItemDefinition {
 	private static String Handled_Def = "Sprite";
+	private static String gestureHelp = "gestures_tap";
 	private String plist;
 	private String frame;
 	private int count;
@@ -27,9 +28,14 @@ public class SpriteDef extends ItemDefinition {
 			SpriteAction action = new SpriteAction(
 					this.actionCode, this.actionValue, this.actionValue2, this.actionTime, this.inverse, this.repeat, 
 					this.originalDelay, this.resetPosition, this.delayBefore);
+			if (this.frame.equals(gestureHelp)) {
+				action.setDelayAfter(1.5f);
+				action.setEndActionFadeOut(0.5f);
+			}
+			
 			GameItem item = SlimeFactory.Sprite.createBL(this.getUName(), this.getX(), this.getY(), this.width, this.height, this.plist, this.frame, this.count, action);
 			item.setAngle(this.angle);
-			if (this.frame.equals("gestures_tap")) {
+			if (this.frame.equals(gestureHelp)) {
 				level.setHelpItem(item);
 			}			
 		} else {

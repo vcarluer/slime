@@ -5,6 +5,7 @@ import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.instant.CCCallFunc;
 import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCFadeIn;
+import org.cocos2d.actions.interval.CCFadeOut;
 import org.cocos2d.actions.interval.CCIntervalAction;
 import org.cocos2d.actions.interval.CCMoveBy;
 import org.cocos2d.actions.interval.CCMoveTo;
@@ -34,6 +35,8 @@ public class SpriteAction {
 	private boolean resetPosition;
 	private float delayBefore;
 	private CCSprite sprite;
+	private float delayAfter;
+	private float endActionFadeOut;
 	
 	private float originalX;
 	private float originalY;
@@ -108,30 +111,52 @@ public class SpriteAction {
 				action = CCRotateBy.action(this.actionTime, this.actionValue);
 			}						
 					
-			if (action != null) {								
-				CCIntervalAction actionT1 = action;
+			if (action != null) {	
+				// set alpha at start of loop							
+				CCFadeIn fadeIn = CCFadeIn.action(0);
+				CCIntervalAction actionT0 = CCSequence.actions(fadeIn, action);
+				
+				// Loop inverse
+				CCIntervalAction actionT1 = actionT0;
 				if (this.inverse) {
-					actionT1 = CCSequence.actions(action, action.reverse());
+					actionT1 = CCSequence.actions(actionT0, actionT0.reverse());
 				}
 				
+				// Reset position
 				CCIntervalAction actionT2 = actionT1;
 				if (this.resetPosition) {
 					CCMoveTo mt = CCMoveTo.action(0, CGPoint.ccp(this.originalX, this.originalY));
-					actionT2 = CCSequence.actions(actionT1, mt);
+					actionT2 = CCSequence.actions(mt, actionT1);
 				}
 				
+				// delay before
 				CCIntervalAction actionT3 = actionT2;
 				if (this.delayBefore > 0) {
 					CCDelayTime delay = CCDelayTime.action(this.delayBefore);
 					actionT3 = CCSequence.actions(delay, actionT2);
 				}
 				
-				CCAction actionT4 = actionT3;
-				if (this.repeat) {
-					actionT4 = CCRepeatForever.action(actionT3);
+				// Fade out
+				CCIntervalAction actionT4 = actionT3;
+				if (this.endActionFadeOut > 0) {
+					CCFadeOut fade = CCFadeOut.action(this.endActionFadeOut);
+					actionT4 = CCSequence.actions(actionT3, fade);
 				}
 				
-				sprite.runAction(actionT4);
+				// Delay after
+				CCIntervalAction actionT5 = actionT4;
+				if (this.delayAfter > 0) {
+					CCDelayTime delay = CCDelayTime.action(this.delayAfter);
+					actionT5 = CCSequence.actions(actionT4, delay);
+				}
+				
+				// Repeat
+				CCAction actionT6 = actionT5;
+				if (this.repeat) {
+					actionT6 = CCRepeatForever.action(actionT5);
+				}
+				
+				sprite.runAction(actionT6);
 			}
 		}		
 	}
@@ -170,5 +195,21 @@ public class SpriteAction {
 	
 	public float getDelayBefore() {
 		return this.delayBefore;
+	}
+	
+	public float getDelayAfter() {
+		return delayAfter;
+	}
+
+	public void setDelayAfter(float delayAfter) {
+		this.delayAfter = delayAfter;
+	}
+
+	public float getEndActionFadeOut() {
+		return endActionFadeOut;
+	}
+
+	public void setEndActionFadeOut(float endActionFadeOut) {
+		this.endActionFadeOut = endActionFadeOut;
 	}
 }
