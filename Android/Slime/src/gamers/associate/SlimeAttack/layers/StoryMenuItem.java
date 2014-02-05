@@ -82,7 +82,7 @@ public class StoryMenuItem extends CCLayer {
 			if (SlimeFactory.LiteVersion && 
 					this.levelDefinition.getNumber() > SlimeFactory.LiteStoryMaxLevel &&
 					this.levelDefinition.getRank() != Rank.Lock) {
-				this.marketItem = CCSprite.sprite("playstore.png");
+				this.marketItem = CCSprite.sprite("market_samsungapps.png");
 				this.marketItem.setPosition(0,  yshift);
 				this.marketItem.setScale(targetSize / SlimeFactory.LiteMarketSize);
 				this.addChild(this.marketItem);

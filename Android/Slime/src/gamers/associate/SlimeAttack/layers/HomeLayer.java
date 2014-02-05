@@ -91,8 +91,8 @@ public class HomeLayer extends CCLayer {
 		
 		float heightMenu = 64 * creditScale;
 		if (SlimeFactory.LiteVersion) {
-			CCSprite spriteN = CCSprite.sprite("playstore.png");
-			CCSprite spriteS = CCSprite.sprite("playstore.png");
+			CCSprite spriteN = CCSprite.sprite("market_samsungapps.png");
+			CCSprite spriteS = CCSprite.sprite("market_samsungapps.png");
 			this.buyTheGameImage = CCMenuItemSprite.item(spriteN, spriteS, this, "buyFullGame");
 			this.buyTheGameImage.setScale((64f / SlimeFactory.LiteMarketSize) * SlimeFactory.getWidthRatio());		
 			

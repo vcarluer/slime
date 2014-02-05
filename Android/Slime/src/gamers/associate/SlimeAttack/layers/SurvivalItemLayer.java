@@ -87,7 +87,7 @@ import android.annotation.SuppressLint;
 					this.removeChild(this.marketSprite, true);
 				}
 				
-				this.marketSprite = CCSprite.sprite("playstore.png");
+				this.marketSprite = CCSprite.sprite("market_samsungapps.png");
 				this.marketSprite.setScale(1.5f);
 				this.marketSprite.setPosition(this.width / 2f + (this.paddingX), this.height / 2f);
 				this.addChild(this.marketSprite);

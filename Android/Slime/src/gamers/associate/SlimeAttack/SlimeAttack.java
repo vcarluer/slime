@@ -393,9 +393,10 @@ public class SlimeAttack extends Activity {
 	}
 	
 	public void buyGame() {
-		Intent intent = new Intent(Intent.ACTION_VIEW);
+		Intent intent = new Intent();
 		String marketId = "gamers.associate.SlimeAttack";		
-		intent.setData(Uri.parse("market://details?id=" + marketId));
+		intent.setData(Uri.parse("samsungapps://ProductDetail/" + marketId));
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
 		startActivity(intent);
 	}
 }
