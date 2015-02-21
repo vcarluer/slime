@@ -14,7 +14,7 @@
    height="70"
    id="svg2"
    sodipodi:version="0.32"
-   inkscape:version="0.48.1 "
+   inkscape:version="0.48.5 r10040"
    version="1.0"
    sodipodi:docname="control-sound-off.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
@@ -272,16 +272,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="8.0000004"
-     inkscape:cx="25.101557"
-     inkscape:cy="10.177196"
+     inkscape:zoom="4.0000002"
+     inkscape:cx="23.476609"
+     inkscape:cy="31.504409"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1440"
-     inkscape:window-height="844"
-     inkscape:window-x="-4"
-     inkscape:window-y="-4"
+     inkscape:window-width="1680"
+     inkscape:window-height="988"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -297,7 +297,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -377,8 +377,8 @@
     </g>
     <path
        id="path3817"
-       transform="translate(4.0625705,-35.781278)"
        style="fill:none;stroke:#003e08;stroke-width:3.6;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none;opacity:0.80000000000000004"
-       d="M 39.624998,57.875001 61.499997,34.062502 m 4.616171,11.202217 c 0,8.990421 -7.288176,16.278597 -16.278597,16.278597 -8.990421,0 -16.278597,-7.288176 -16.278597,-16.278597 0,-8.990421 7.288176,-16.278598 16.278597,-16.278598 8.990421,0 16.278597,7.288177 16.278597,16.278598 z" />
+       d="M 39.624998,57.875001 61.499997,34.062502 m 4.616171,11.202217 c 0,8.990421 -7.288176,16.278597 -16.278597,16.278597 -8.990421,0 -16.278597,-7.288176 -16.278597,-16.278597 0,-8.990421 7.288176,-16.278598 16.278597,-16.278598 8.990421,0 16.278597,7.288177 16.278597,16.278598 z"
+       transform="translate(4.0625705,-35.781278)" />
   </g>
 </svg>

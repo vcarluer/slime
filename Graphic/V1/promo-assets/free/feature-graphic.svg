@@ -16,7 +16,7 @@
    version="1.1"
    inkscape:version="0.48.5 r10040"
    sodipodi:docname="feature-graphic.svg"
-   inkscape:export-filename="C:\ga\slime\Graphic\V1\promo-assets\lite\feature-graphic.png"
+   inkscape:export-filename="C:\dev\Slime\Graphic\V1\promo-assets\free\feature-graphic.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -1585,7 +1585,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -2632,7 +2632,7 @@
          id="tspan3243-5"
          x="735.41382"
          y="1038.915"
-         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffffff;fill-opacity:0.72850683;stroke:#003e08;stroke-width:3.05316091;stroke-opacity:0.7692308;font-family:Slime;-inkscape-font-specification:Slime">LITE</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffffff;fill-opacity:0.72850683;stroke:#003e08;stroke-width:3.05316091;stroke-opacity:0.7692308;font-family:Slime;-inkscape-font-specification:Slime">FREE</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
